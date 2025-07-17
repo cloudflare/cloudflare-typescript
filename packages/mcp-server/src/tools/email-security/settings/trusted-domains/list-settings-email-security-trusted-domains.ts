@@ -47,6 +47,9 @@ export const tool: Tool = {
         type: 'integer',
         description: 'The page number of paginated results.',
       },
+      pattern: {
+        type: 'string',
+      },
       per_page: {
         type: 'integer',
         description: 'The number of results per page.',

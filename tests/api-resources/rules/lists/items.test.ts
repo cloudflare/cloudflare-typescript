@@ -30,7 +30,7 @@ describe('resource items', () => {
         {
           asn: 5567,
           comment: 'Private IP address',
-          hostname: { url_hostname: 'example.com' },
+          hostname: { url_hostname: 'example.com', exclude_exact_hostname: true },
           ip: '10.0.0.1',
           redirect: {
             source_url: 'example.com/arch',
@@ -67,7 +67,7 @@ describe('resource items', () => {
         {
           asn: 5567,
           comment: 'Private IP address',
-          hostname: { url_hostname: 'example.com' },
+          hostname: { url_hostname: 'example.com', exclude_exact_hostname: true },
           ip: '10.0.0.1',
           redirect: {
             source_url: 'example.com/arch',

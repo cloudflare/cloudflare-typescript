@@ -31,7 +31,28 @@ export const tool: Tool = {
         description: 'Name of the script, used in URLs and route configuration.',
       },
       metadata: {
-        $ref: '#/$defs/worker_metadata',
+        type: 'object',
+        description: 'JSON encoded metadata about the uploaded parts and Worker configuration.',
+        properties: {
+          body_part: {
+            type: 'string',
+            description:
+              'Name of the uploaded file that contains the Worker script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.',
+          },
+          main_module: {
+            type: 'string',
+            description:
+              'Name of the uploaded file that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.',
+          },
+        },
+      },
+      files: {
+        type: 'array',
+        description:
+          'An array of modules (often JavaScript files) comprising a Worker script. At least one module must be present and referenced in the metadata as `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are: `application/javascript+module`, `text/javascript+module`, `application/javascript`, `text/javascript`, `application/wasm`, `text/plain`, `application/octet-stream`, `application/source-map`.',
+        items: {
+          type: 'string',
+        },
       },
       'CF-WORKER-BODY-PART': {
         type: 'string',
@@ -47,24 +68,6 @@ export const tool: Tool = {
       },
     },
     required: ['account_id', 'script_name', 'metadata'],
-    $defs: {
-      worker_metadata: {
-        type: 'object',
-        description: 'JSON encoded metadata about the uploaded parts and Worker configuration.',
-        properties: {
-          body_part: {
-            type: 'string',
-            description:
-              'Name of the part in the multipart request that contains the script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.',
-          },
-          main_module: {
-            type: 'string',
-            description:
-              'Name of the part in the multipart request that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.',
-          },
-        },
-      },
-    },
   },
 };
 

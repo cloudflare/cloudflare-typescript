@@ -2708,7 +2708,7 @@ export const tool: Tool = {
                 protocol: {
                   type: 'string',
                   description: 'The communication protocol your application secures.',
-                  enum: ['SSH'],
+                  enum: ['RDP'],
                 },
                 target_attributes: {
                   type: 'object',
@@ -3758,6 +3758,25 @@ export const tool: Tool = {
           },
           {
             $ref: '#/$defs/service_token_rule',
+          },
+          {
+            type: 'object',
+            title: 'Linked App Token',
+            description:
+              'Matches OAuth 2.0 access tokens issued by the specified Access OIDC SaaS application. Only compatible with non_identity and bypass decisions.',
+            properties: {
+              linked_app_token: {
+                type: 'object',
+                properties: {
+                  app_uid: {
+                    type: 'string',
+                    description: 'The ID of an Access OIDC SaaS application',
+                  },
+                },
+                required: ['app_uid'],
+              },
+            },
+            required: ['linked_app_token'],
           },
         ],
         description: 'Matches an Access group.',

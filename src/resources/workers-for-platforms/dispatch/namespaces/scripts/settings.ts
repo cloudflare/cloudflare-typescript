@@ -124,11 +124,6 @@ export interface SettingEditResponse {
   logpush?: boolean;
 
   /**
-   * Migrations to apply for Durable Objects associated with this Worker.
-   */
-  migrations?: WorkersAPI.SingleStepMigration | SettingEditResponse.WorkersMultipleStepMigrations;
-
-  /**
    * Observability settings for the Worker.
    */
   observability?: SettingEditResponse.Observability;
@@ -625,24 +620,6 @@ export namespace SettingEditResponse {
     cpu_ms?: number;
   }
 
-  export interface WorkersMultipleStepMigrations {
-    /**
-     * Tag to set as the latest migration tag.
-     */
-    new_tag?: string;
-
-    /**
-     * Tag used to verify against the latest migration tag for this Worker. If they
-     * don't match, the upload is rejected.
-     */
-    old_tag?: string;
-
-    /**
-     * Migrations to apply in order.
-     */
-    steps?: Array<WorkersAPI.MigrationStep>;
-  }
-
   /**
    * Observability settings for the Worker.
    */
@@ -755,11 +732,6 @@ export interface SettingGetResponse {
    * Whether Logpush is turned on for the Worker.
    */
   logpush?: boolean;
-
-  /**
-   * Migrations to apply for Durable Objects associated with this Worker.
-   */
-  migrations?: WorkersAPI.SingleStepMigration | SettingGetResponse.WorkersMultipleStepMigrations;
 
   /**
    * Observability settings for the Worker.
@@ -1256,24 +1228,6 @@ export namespace SettingGetResponse {
      * The amount of CPU time this Worker can use in milliseconds.
      */
     cpu_ms?: number;
-  }
-
-  export interface WorkersMultipleStepMigrations {
-    /**
-     * Tag to set as the latest migration tag.
-     */
-    new_tag?: string;
-
-    /**
-     * Tag used to verify against the latest migration tag for this Worker. If they
-     * don't match, the upload is rejected.
-     */
-    old_tag?: string;
-
-    /**
-     * Migrations to apply in order.
-     */
-    steps?: Array<WorkersAPI.MigrationStep>;
   }
 
   /**

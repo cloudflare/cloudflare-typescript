@@ -540,8 +540,8 @@ The following tools are available in this MCP server.
 
 ### Resource `argo.smart_routing`:
 
-- `edit_argo_smart_routing` (`write`): Updates enablement of Argo Smart Routing.
-- `get_argo_smart_routing` (`read`): Get Argo Smart Routing setting
+- `edit_argo_smart_routing` (`write`): Configures the value of the Argo Smart Routing enablement setting.
+- `get_argo_smart_routing` (`read`): Retrieves the value of Argo Smart Routing enablement setting.
 
 ### Resource `argo.tiered_caching`:
 
@@ -1605,8 +1605,28 @@ The following tools are available in this MCP server.
 
 ### Resource `brand_protection`:
 
-- `submit_brand_protection` (`write`): Submit suspicious URL for scanning.
-- `url_info_brand_protection` (`read`): Gets phishing details about a URL.
+- `submit_brand_protection` (`write`): Return new URL submissions
+- `url_info_brand_protection` (`read`): Return submitted URLs based on ID
+
+### Resource `brand_protection.queries`:
+
+- `create_brand_protection_queries` (`write`): Return a success message after creating new saved string queries
+- `delete_brand_protection_queries` (`write`): Return a success message after deleting saved string queries by ID
+
+### Resource `brand_protection.matches`:
+
+- `download_brand_protection_matches` (`read`): Return matches as CSV for string queries based on ID
+- `get_brand_protection_matches` (`read`): Return matches for string queries based on ID
+
+### Resource `brand_protection.logos`:
+
+- `create_brand_protection_logos` (`write`): Return new saved logo queries created from image files
+- `delete_brand_protection_logos` (`write`): Return a success message after deleting saved logo queries by ID
+
+### Resource `brand_protection.logo_matches`:
+
+- `download_brand_protection_logo_matches` (`read`): Return matches as CSV for logo queries based on ID
+- `get_brand_protection_logo_matches` (`read`): Return matches for logo queries based on ID
 
 ### Resource `diagnostics.traceroutes`:
 
@@ -2016,7 +2036,7 @@ The following tools are available in this MCP server.
 
 ### Resource `rules.lists`:
 
-- `create_rules_lists` (`write`): Creates a new list of the specified type.
+- `create_rules_lists` (`write`): Creates a new list of the specified kind.
 - `update_rules_lists` (`write`): Updates the description of a list.
 - `list_rules_lists` (`read`): Fetches all lists in the account.
 - `delete_rules_lists` (`write`): Deletes a specific list and all its items.
@@ -2847,13 +2867,15 @@ The following tools are available in this MCP server.
 
 ### Resource `zero_trust.dlp.entries.predefined`:
 
-- `create_entries_dlp_zero_trust_predefined` (`write`): This will update an existing predefined entry
+- `create_entries_dlp_zero_trust_predefined` (`write`): Predefined entries can't be created, this will update an existing predefined entry
+  This is needed for our generated terraform API
 - `update_entries_dlp_zero_trust_predefined` (`write`): Updates a DLP entry.
 - `delete_entries_dlp_zero_trust_predefined` (`write`): This is a no-op as predefined entires can't be deleted but is needed for our generated terraform API
 
 ### Resource `zero_trust.dlp.entries.integration`:
 
-- `create_entries_dlp_zero_trust_integration` (`write`): This will update an existing integration entry
+- `create_entries_dlp_zero_trust_integration` (`write`): Integration entries can't be created, this will update an existing integration entry
+  This is needed for our generated terraform API
 - `update_entries_dlp_zero_trust_integration` (`write`): Updates a DLP entry.
 - `delete_entries_dlp_zero_trust_integration` (`write`): This is a no-op as integration entires can't be deleted but is needed for our generated terraform API
 
@@ -3200,7 +3222,7 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.search`:
 
-- `global_radar_search` (`read`): Searches for locations, autonomous systems, reports, and bots.
+- `global_radar_search` (`read`): Searches for locations, autonomous systems, reports, bots, certificate logs, and certificate authorities.
 
 ### Resource `radar.verified_bots.top`:
 

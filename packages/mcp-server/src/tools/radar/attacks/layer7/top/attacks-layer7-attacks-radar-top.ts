@@ -89,12 +89,6 @@ export const tool: Tool = {
           type: 'string',
         },
       },
-      magnitude: {
-        type: 'string',
-        description:
-          'Deprecated parameter. Future support includes only attack magnitude defined by total mitigated requests (MITIGATED_REQUESTS).',
-        enum: ['AFFECTED_ZONES', 'MITIGATED_REQUESTS'],
-      },
       mitigationProduct: {
         type: 'array',
         description: 'Filters the results by layer 7 mitigation product.',

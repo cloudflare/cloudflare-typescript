@@ -7,7 +7,8 @@ import { path } from '../../../../internal/utils/path';
 
 export class Integration extends APIResource {
   /**
-   * This will update an existing integration entry
+   * Integration entries can't be created, this will update an existing integration
+   * entry This is needed for our generated terraform API
    *
    * @example
    * ```ts

@@ -292,7 +292,7 @@ export type RecordResponsesV4PagePaginationArray = V4PagePaginationArray<RecordR
 
 export interface ARecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -361,7 +361,7 @@ export namespace ARecord {
 
 export interface ARecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -430,7 +430,7 @@ export namespace ARecordParam {
 
 export interface AAAARecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -499,7 +499,7 @@ export namespace AAAARecord {
 
 export interface AAAARecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -632,7 +632,7 @@ export namespace BatchPatch {
     id: string;
 
     /**
-     * DNS record name (or @ for the zone apex) in Punycode.
+     * Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -871,7 +871,7 @@ export namespace BatchPatchParam {
     id: string;
 
     /**
-     * DNS record name (or @ for the zone apex) in Punycode.
+     * Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -1110,7 +1110,7 @@ export namespace BatchPut {
     id: string;
 
     /**
-     * DNS record name (or @ for the zone apex) in Punycode.
+     * Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -1349,7 +1349,7 @@ export namespace BatchPutParam {
     id: string;
 
     /**
-     * DNS record name (or @ for the zone apex) in Punycode.
+     * Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -1524,7 +1524,7 @@ export namespace BatchPutParam {
 
 export interface CAARecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -1618,7 +1618,7 @@ export namespace CAARecord {
 
 export interface CAARecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -1707,7 +1707,7 @@ export namespace CAARecordParam {
 
 export interface CERTRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -1806,7 +1806,7 @@ export namespace CERTRecord {
 
 export interface CERTRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -1900,7 +1900,7 @@ export namespace CERTRecordParam {
 
 export interface CNAMERecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -1977,7 +1977,7 @@ export namespace CNAMERecord {
 
 export interface CNAMERecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -2054,7 +2054,7 @@ export namespace CNAMERecordParam {
 
 export interface DNSKEYRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -2153,7 +2153,7 @@ export namespace DNSKEYRecord {
 
 export interface DNSKEYRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -2247,7 +2247,7 @@ export namespace DNSKEYRecordParam {
 
 export interface DSRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -2346,7 +2346,7 @@ export namespace DSRecord {
 
 export interface DSRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -2440,7 +2440,7 @@ export namespace DSRecordParam {
 
 export interface HTTPSRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -2534,7 +2534,7 @@ export namespace HTTPSRecord {
 
 export interface HTTPSRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -2623,7 +2623,7 @@ export namespace HTTPSRecordParam {
 
 export interface LOCRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -2762,7 +2762,7 @@ export namespace LOCRecord {
 
 export interface LOCRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -2896,7 +2896,7 @@ export namespace LOCRecordParam {
 
 export interface MXRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -2971,7 +2971,7 @@ export namespace MXRecord {
 
 export interface MXRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -3046,7 +3046,7 @@ export namespace MXRecordParam {
 
 export interface NAPTRRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -3155,7 +3155,7 @@ export namespace NAPTRRecord {
 
 export interface NAPTRRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -3259,7 +3259,7 @@ export namespace NAPTRRecordParam {
 
 export interface NSRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -3328,7 +3328,7 @@ export namespace NSRecord {
 
 export interface NSRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -3397,7 +3397,7 @@ export namespace NSRecordParam {
 
 export interface PTRRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -3466,7 +3466,7 @@ export namespace PTRRecord {
 
 export interface PTRRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -3559,7 +3559,7 @@ export type Record =
 export namespace Record {
   export interface Openpgpkey {
     /**
-     * DNS record name (or @ for the zone apex) in Punycode.
+     * Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -3869,7 +3869,7 @@ export namespace RecordResponse {
     modified_on: string;
 
     /**
-     * DNS record name (or @ for the zone apex) in Punycode.
+     * Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -4510,7 +4510,7 @@ export type RecordTagsParam = string;
 
 export interface SMIMEARecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -4609,7 +4609,7 @@ export namespace SMIMEARecord {
 
 export interface SMIMEARecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -4703,7 +4703,7 @@ export namespace SMIMEARecordParam {
 
 export interface SRVRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -4804,7 +4804,7 @@ export namespace SRVRecord {
 
 export interface SRVRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -4899,7 +4899,7 @@ export namespace SRVRecordParam {
 
 export interface SSHFPRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -4993,7 +4993,7 @@ export namespace SSHFPRecord {
 
 export interface SSHFPRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -5082,7 +5082,7 @@ export namespace SSHFPRecordParam {
 
 export interface SVCBRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -5176,7 +5176,7 @@ export namespace SVCBRecord {
 
 export interface SVCBRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -5265,7 +5265,7 @@ export namespace SVCBRecordParam {
 
 export interface TLSARecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -5364,7 +5364,7 @@ export namespace TLSARecord {
 
 export interface TLSARecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -5472,7 +5472,7 @@ export type TTLParam = number | 1;
 
 export interface TXTRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -5546,7 +5546,7 @@ export namespace TXTRecord {
 
 export interface TXTRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -5620,7 +5620,7 @@ export namespace TXTRecordParam {
 
 export interface URIRecord {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -5715,7 +5715,7 @@ export namespace URIRecord {
 
 export interface URIRecordParam {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Complete DNS record name, including the zone name, in Punycode.
    */
   name: string;
 
@@ -5880,7 +5880,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -5955,7 +5955,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6030,7 +6030,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6113,7 +6113,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6194,7 +6194,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6269,7 +6269,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6345,7 +6345,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6420,7 +6420,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6500,7 +6500,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6595,7 +6595,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6695,7 +6695,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6795,7 +6795,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6895,7 +6895,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -6990,7 +6990,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -7130,7 +7130,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -7240,7 +7240,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -7340,7 +7340,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -7441,7 +7441,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -7536,7 +7536,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -7631,7 +7631,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -7731,7 +7731,7 @@ export declare namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -7852,7 +7852,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -7927,7 +7927,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8002,7 +8002,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8085,7 +8085,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8166,7 +8166,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8241,7 +8241,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8317,7 +8317,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8392,7 +8392,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8472,7 +8472,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8567,7 +8567,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8667,7 +8667,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8767,7 +8767,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8867,7 +8867,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -8962,7 +8962,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -9102,7 +9102,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -9212,7 +9212,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -9312,7 +9312,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -9413,7 +9413,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -9508,7 +9508,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -9603,7 +9603,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -9703,7 +9703,7 @@ export declare namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10074,7 +10074,7 @@ export namespace RecordBatchParams {
 
   export interface DNSRecordsOpenpgpkeyRecord {
     /**
-     * DNS record name (or @ for the zone apex) in Punycode.
+     * Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10173,7 +10173,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10248,7 +10248,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10323,7 +10323,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10406,7 +10406,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10487,7 +10487,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10562,7 +10562,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10638,7 +10638,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10713,7 +10713,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10793,7 +10793,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10888,7 +10888,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -10988,7 +10988,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -11088,7 +11088,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -11188,7 +11188,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -11283,7 +11283,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -11423,7 +11423,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -11533,7 +11533,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -11633,7 +11633,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -11734,7 +11734,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -11829,7 +11829,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -11924,7 +11924,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 
@@ -12024,7 +12024,7 @@ export declare namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     * Body param: Complete DNS record name, including the zone name, in Punycode.
      */
     name: string;
 

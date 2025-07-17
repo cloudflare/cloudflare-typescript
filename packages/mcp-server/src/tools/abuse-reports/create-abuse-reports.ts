@@ -29,7 +29,7 @@ export const tool: Tool = {
           },
           report_type: {
             type: 'string',
-            description: 'The abuse report type',
+            description: 'The abuse report type.',
             enum: [
               'abuse_dmca',
               'abuse_trademark',
@@ -43,7 +43,6 @@ export const tool: Tool = {
           },
           act: {
             type: 'string',
-            description: 'The abuse report type',
             enum: [
               'abuse_dmca',
               'abuse_trademark',
@@ -54,25 +53,6 @@ export const tool: Tool = {
               'abuse_registrar_whois',
               'abuse_ncsei',
             ],
-          },
-          email: {
-            type: 'string',
-            description:
-              'A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          email2: {
-            type: 'string',
-            description: 'Should match the value provided in `email`',
-          },
-          name: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          urls: {
-            type: 'string',
-            description:
-              'A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           address1: {
             type: 'string',
@@ -87,12 +67,63 @@ export const tool: Tool = {
           agree: {
             type: 'string',
             description: 'Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports',
-            enum: [0, 1],
+            enum: [1],
           },
           city: {
             type: 'string',
             description:
               'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+          },
+          country: {
+            type: 'string',
+            description:
+              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).\n',
+          },
+          email: {
+            type: 'string',
+            description:
+              'A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+          },
+          email2: {
+            type: 'string',
+            description: 'Should match the value provided in `email`',
+          },
+          host_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send'],
+          },
+          name: {
+            type: 'string',
+            description:
+              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+          },
+          original_work: {
+            type: 'string',
+            description:
+              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).\n',
+          },
+          owner_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send'],
+          },
+          signature: {
+            type: 'string',
+            description:
+              "Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports",
+          },
+          state: {
+            type: 'string',
+            description:
+              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+          },
+          urls: {
+            type: 'string',
+            description:
+              'A list of valid URLs separated by ‘\\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           comments: {
             type: 'string',
@@ -103,53 +134,6 @@ export const tool: Tool = {
             description:
               'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
-          country: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          destination_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          host_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          justification: {
-            type: 'string',
-            description:
-              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters',
-          },
-          ncmec_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ncsei_subject_representation: {
-            type: 'boolean',
-            description: 'If the submitter is the target of NCSEI in the URLs of the abuse report.',
-          },
-          original_work: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          owner_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ports_protocols: {
-            type: 'string',
-            description:
-              'A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.',
-          },
           reported_country: {
             type: 'string',
             description: 'Text containing 2 characters',
@@ -157,21 +141,6 @@ export const tool: Tool = {
           reported_user_agent: {
             type: 'string',
             description: 'Text not exceeding 255 characters',
-          },
-          signature: {
-            type: 'string',
-            description:
-              "Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports",
-          },
-          source_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          state: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           tele: {
             type: 'string',
@@ -182,20 +151,26 @@ export const tool: Tool = {
             type: 'string',
             description: 'Text not exceeding 255 characters',
           },
-          trademark_number: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_office: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_symbol: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
         },
-        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
+        required: [
+          'account_id',
+          'report_type',
+          'act',
+          'address1',
+          'agent_name',
+          'agree',
+          'city',
+          'country',
+          'email',
+          'email2',
+          'host_notification',
+          'name',
+          'original_work',
+          'owner_notification',
+          'signature',
+          'state',
+          'urls',
+        ],
       },
       {
         type: 'object',
@@ -205,7 +180,7 @@ export const tool: Tool = {
           },
           report_type: {
             type: 'string',
-            description: 'The abuse report type',
+            description: 'The abuse report type.',
             enum: [
               'abuse_dmca',
               'abuse_trademark',
@@ -219,10 +194,9 @@ export const tool: Tool = {
           },
           act: {
             type: 'string',
-            description: 'The abuse report type',
             enum: [
-              'abuse_dmca',
               'abuse_trademark',
+              'abuse_dmca',
               'abuse_general',
               'abuse_phishing',
               'abuse_children',
@@ -240,77 +214,18 @@ export const tool: Tool = {
             type: 'string',
             description: 'Should match the value provided in `email`',
           },
-          name: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          urls: {
-            type: 'string',
-            description:
-              'A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          address1: {
-            type: 'string',
-            description:
-              'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agent_name: {
-            type: 'string',
-            description:
-              'The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agree: {
-            type: 'string',
-            description: 'Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports',
-            enum: [0, 1],
-          },
-          city: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          comments: {
-            type: 'string',
-            description: 'Any additional comments about the infringement not exceeding 2000 characters',
-          },
-          company: {
-            type: 'string',
-            description:
-              'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          country: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          destination_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
           host_notification: {
             type: 'string',
             description:
               'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
+            enum: ['send'],
           },
           justification: {
             type: 'string',
             description:
-              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters',
+              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters.\n',
           },
-          ncmec_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ncsei_subject_representation: {
-            type: 'boolean',
-            description: 'If the submitter is the target of NCSEI in the URLs of the abuse report.',
-          },
-          original_work: {
+          name: {
             type: 'string',
             description:
               'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
@@ -319,44 +234,7 @@ export const tool: Tool = {
             type: 'string',
             description:
               'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ports_protocols: {
-            type: 'string',
-            description:
-              'A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.',
-          },
-          reported_country: {
-            type: 'string',
-            description: 'Text containing 2 characters',
-          },
-          reported_user_agent: {
-            type: 'string',
-            description: 'Text not exceeding 255 characters',
-          },
-          signature: {
-            type: 'string',
-            description:
-              "Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports",
-          },
-          source_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          state: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          tele: {
-            type: 'string',
-            description:
-              'Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          title: {
-            type: 'string',
-            description: 'Text not exceeding 255 characters',
+            enum: ['send'],
           },
           trademark_number: {
             type: 'string',
@@ -370,8 +248,53 @@ export const tool: Tool = {
             type: 'string',
             description: 'Text not exceeding 1000 characters',
           },
+          urls: {
+            type: 'string',
+            description:
+              'A list of valid URLs separated by ‘\\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+          },
+          comments: {
+            type: 'string',
+            description: 'Any additional comments about the infringement not exceeding 2000 characters',
+          },
+          company: {
+            type: 'string',
+            description:
+              'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+          },
+          reported_country: {
+            type: 'string',
+            description: 'Text containing 2 characters',
+          },
+          reported_user_agent: {
+            type: 'string',
+            description: 'Text not exceeding 255 characters',
+          },
+          tele: {
+            type: 'string',
+            description:
+              'Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+          },
+          title: {
+            type: 'string',
+            description: 'Text not exceeding 255 characters',
+          },
         },
-        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
+        required: [
+          'account_id',
+          'report_type',
+          'act',
+          'email',
+          'email2',
+          'host_notification',
+          'justification',
+          'name',
+          'owner_notification',
+          'trademark_number',
+          'trademark_office',
+          'trademark_symbol',
+          'urls',
+        ],
       },
       {
         type: 'object',
@@ -381,7 +304,7 @@ export const tool: Tool = {
           },
           report_type: {
             type: 'string',
-            description: 'The abuse report type',
+            description: 'The abuse report type.',
             enum: [
               'abuse_dmca',
               'abuse_trademark',
@@ -395,11 +318,10 @@ export const tool: Tool = {
           },
           act: {
             type: 'string',
-            description: 'The abuse report type',
             enum: [
+              'abuse_general',
               'abuse_dmca',
               'abuse_trademark',
-              'abuse_general',
               'abuse_phishing',
               'abuse_children',
               'abuse_threat',
@@ -416,35 +338,32 @@ export const tool: Tool = {
             type: 'string',
             description: 'Should match the value provided in `email`',
           },
+          host_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon'],
+          },
+          justification: {
+            type: 'string',
+            description:
+              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters.\n',
+          },
           name: {
             type: 'string',
             description:
               'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
+          owner_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon', 'none'],
+          },
           urls: {
             type: 'string',
             description:
-              'A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          address1: {
-            type: 'string',
-            description:
-              'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agent_name: {
-            type: 'string',
-            description:
-              'The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agree: {
-            type: 'string',
-            description: 'Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports',
-            enum: [0, 1],
-          },
-          city: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+              'A list of valid URLs separated by ‘\\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           comments: {
             type: 'string',
@@ -455,47 +374,10 @@ export const tool: Tool = {
             description:
               'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
-          country: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
           destination_ips: {
             type: 'string',
             description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          host_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          justification: {
-            type: 'string',
-            description:
-              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters',
-          },
-          ncmec_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ncsei_subject_representation: {
-            type: 'boolean',
-            description: 'If the submitter is the target of NCSEI in the URLs of the abuse report.',
-          },
-          original_work: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          owner_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
+              'A list of IP addresses separated by ‘\\n’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique.',
           },
           ports_protocols: {
             type: 'string',
@@ -510,20 +392,10 @@ export const tool: Tool = {
             type: 'string',
             description: 'Text not exceeding 255 characters',
           },
-          signature: {
-            type: 'string',
-            description:
-              "Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports",
-          },
           source_ips: {
             type: 'string',
             description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          state: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+              'A list of IP addresses separated by ‘\\n’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique.',
           },
           tele: {
             type: 'string',
@@ -534,20 +406,19 @@ export const tool: Tool = {
             type: 'string',
             description: 'Text not exceeding 255 characters',
           },
-          trademark_number: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_office: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_symbol: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
         },
-        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
+        required: [
+          'account_id',
+          'report_type',
+          'act',
+          'email',
+          'email2',
+          'host_notification',
+          'justification',
+          'name',
+          'owner_notification',
+          'urls',
+        ],
       },
       {
         type: 'object',
@@ -557,7 +428,7 @@ export const tool: Tool = {
           },
           report_type: {
             type: 'string',
-            description: 'The abuse report type',
+            description: 'The abuse report type.',
             enum: [
               'abuse_dmca',
               'abuse_trademark',
@@ -571,12 +442,11 @@ export const tool: Tool = {
           },
           act: {
             type: 'string',
-            description: 'The abuse report type',
             enum: [
+              'abuse_phishing',
               'abuse_dmca',
               'abuse_trademark',
               'abuse_general',
-              'abuse_phishing',
               'abuse_children',
               'abuse_threat',
               'abuse_registrar_whois',
@@ -592,35 +462,32 @@ export const tool: Tool = {
             type: 'string',
             description: 'Should match the value provided in `email`',
           },
+          host_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon'],
+          },
+          justification: {
+            type: 'string',
+            description:
+              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters.\n',
+          },
           name: {
             type: 'string',
             description:
               'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
+          owner_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon'],
+          },
           urls: {
             type: 'string',
             description:
-              'A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          address1: {
-            type: 'string',
-            description:
-              'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agent_name: {
-            type: 'string',
-            description:
-              'The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agree: {
-            type: 'string',
-            description: 'Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports',
-            enum: [0, 1],
-          },
-          city: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+              'A list of valid URLs separated by ‘\\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           comments: {
             type: 'string',
@@ -631,52 +498,10 @@ export const tool: Tool = {
             description:
               'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
-          country: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          destination_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          host_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          justification: {
-            type: 'string',
-            description:
-              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters',
-          },
-          ncmec_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ncsei_subject_representation: {
-            type: 'boolean',
-            description: 'If the submitter is the target of NCSEI in the URLs of the abuse report.',
-          },
           original_work: {
             type: 'string',
             description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          owner_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ports_protocols: {
-            type: 'string',
-            description:
-              'A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.',
+              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).\n',
           },
           reported_country: {
             type: 'string',
@@ -685,21 +510,6 @@ export const tool: Tool = {
           reported_user_agent: {
             type: 'string',
             description: 'Text not exceeding 255 characters',
-          },
-          signature: {
-            type: 'string',
-            description:
-              "Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports",
-          },
-          source_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          state: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           tele: {
             type: 'string',
@@ -710,20 +520,19 @@ export const tool: Tool = {
             type: 'string',
             description: 'Text not exceeding 255 characters',
           },
-          trademark_number: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_office: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_symbol: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
         },
-        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
+        required: [
+          'account_id',
+          'report_type',
+          'act',
+          'email',
+          'email2',
+          'host_notification',
+          'justification',
+          'name',
+          'owner_notification',
+          'urls',
+        ],
       },
       {
         type: 'object',
@@ -733,7 +542,7 @@ export const tool: Tool = {
           },
           report_type: {
             type: 'string',
-            description: 'The abuse report type',
+            description: 'The abuse report type.',
             enum: [
               'abuse_dmca',
               'abuse_trademark',
@@ -747,13 +556,12 @@ export const tool: Tool = {
           },
           act: {
             type: 'string',
-            description: 'The abuse report type',
             enum: [
+              'abuse_children',
               'abuse_dmca',
               'abuse_trademark',
               'abuse_general',
               'abuse_phishing',
-              'abuse_children',
               'abuse_threat',
               'abuse_registrar_whois',
               'abuse_ncsei',
@@ -768,35 +576,38 @@ export const tool: Tool = {
             type: 'string',
             description: 'Should match the value provided in `email`',
           },
+          host_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon'],
+          },
+          justification: {
+            type: 'string',
+            description:
+              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters.\n',
+          },
           name: {
             type: 'string',
             description:
               'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
+          ncmec_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon'],
+          },
+          owner_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon', 'none'],
+          },
           urls: {
             type: 'string',
             description:
-              'A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          address1: {
-            type: 'string',
-            description:
-              'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agent_name: {
-            type: 'string',
-            description:
-              'The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agree: {
-            type: 'string',
-            description: 'Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports',
-            enum: [0, 1],
-          },
-          city: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+              'A list of valid URLs separated by ‘\\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           comments: {
             type: 'string',
@@ -810,49 +621,7 @@ export const tool: Tool = {
           country: {
             type: 'string',
             description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          destination_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          host_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          justification: {
-            type: 'string',
-            description:
-              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters',
-          },
-          ncmec_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ncsei_subject_representation: {
-            type: 'boolean',
-            description: 'If the submitter is the target of NCSEI in the URLs of the abuse report.',
-          },
-          original_work: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          owner_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ports_protocols: {
-            type: 'string',
-            description:
-              'A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.',
+              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).\n',
           },
           reported_country: {
             type: 'string',
@@ -861,21 +630,6 @@ export const tool: Tool = {
           reported_user_agent: {
             type: 'string',
             description: 'Text not exceeding 255 characters',
-          },
-          signature: {
-            type: 'string',
-            description:
-              "Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports",
-          },
-          source_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          state: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           tele: {
             type: 'string',
@@ -886,20 +640,20 @@ export const tool: Tool = {
             type: 'string',
             description: 'Text not exceeding 255 characters',
           },
-          trademark_number: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_office: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_symbol: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
         },
-        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
+        required: [
+          'account_id',
+          'report_type',
+          'act',
+          'email',
+          'email2',
+          'host_notification',
+          'justification',
+          'name',
+          'ncmec_notification',
+          'owner_notification',
+          'urls',
+        ],
       },
       {
         type: 'object',
@@ -909,7 +663,7 @@ export const tool: Tool = {
           },
           report_type: {
             type: 'string',
-            description: 'The abuse report type',
+            description: 'The abuse report type.',
             enum: [
               'abuse_dmca',
               'abuse_trademark',
@@ -923,14 +677,13 @@ export const tool: Tool = {
           },
           act: {
             type: 'string',
-            description: 'The abuse report type',
             enum: [
+              'abuse_threat',
               'abuse_dmca',
               'abuse_trademark',
               'abuse_general',
               'abuse_phishing',
               'abuse_children',
-              'abuse_threat',
               'abuse_registrar_whois',
               'abuse_ncsei',
             ],
@@ -944,35 +697,32 @@ export const tool: Tool = {
             type: 'string',
             description: 'Should match the value provided in `email`',
           },
+          host_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon'],
+          },
+          justification: {
+            type: 'string',
+            description:
+              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters.\n',
+          },
           name: {
             type: 'string',
             description:
               'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
+          owner_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon'],
+          },
           urls: {
             type: 'string',
             description:
-              'A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          address1: {
-            type: 'string',
-            description:
-              'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agent_name: {
-            type: 'string',
-            description:
-              'The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agree: {
-            type: 'string',
-            description: 'Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports',
-            enum: [0, 1],
-          },
-          city: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+              'A list of valid URLs separated by ‘\\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           comments: {
             type: 'string',
@@ -983,53 +733,6 @@ export const tool: Tool = {
             description:
               'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
-          country: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          destination_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          host_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          justification: {
-            type: 'string',
-            description:
-              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters',
-          },
-          ncmec_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ncsei_subject_representation: {
-            type: 'boolean',
-            description: 'If the submitter is the target of NCSEI in the URLs of the abuse report.',
-          },
-          original_work: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          owner_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ports_protocols: {
-            type: 'string',
-            description:
-              'A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.',
-          },
           reported_country: {
             type: 'string',
             description: 'Text containing 2 characters',
@@ -1037,21 +740,6 @@ export const tool: Tool = {
           reported_user_agent: {
             type: 'string',
             description: 'Text not exceeding 255 characters',
-          },
-          signature: {
-            type: 'string',
-            description:
-              "Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports",
-          },
-          source_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          state: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           tele: {
             type: 'string',
@@ -1062,20 +750,19 @@ export const tool: Tool = {
             type: 'string',
             description: 'Text not exceeding 255 characters',
           },
-          trademark_number: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_office: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_symbol: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
         },
-        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
+        required: [
+          'account_id',
+          'report_type',
+          'act',
+          'email',
+          'email2',
+          'host_notification',
+          'justification',
+          'name',
+          'owner_notification',
+          'urls',
+        ],
       },
       {
         type: 'object',
@@ -1085,7 +772,7 @@ export const tool: Tool = {
           },
           report_type: {
             type: 'string',
-            description: 'The abuse report type',
+            description: 'The abuse report type.',
             enum: [
               'abuse_dmca',
               'abuse_trademark',
@@ -1099,15 +786,14 @@ export const tool: Tool = {
           },
           act: {
             type: 'string',
-            description: 'The abuse report type',
             enum: [
+              'abuse_registrar_whois',
               'abuse_dmca',
               'abuse_trademark',
               'abuse_general',
               'abuse_phishing',
               'abuse_children',
               'abuse_threat',
-              'abuse_registrar_whois',
               'abuse_ncsei',
             ],
           },
@@ -1125,30 +811,16 @@ export const tool: Tool = {
             description:
               'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
+          owner_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon', 'none'],
+          },
           urls: {
             type: 'string',
             description:
-              'A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          address1: {
-            type: 'string',
-            description:
-              'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agent_name: {
-            type: 'string',
-            description:
-              'The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agree: {
-            type: 'string',
-            description: 'Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports',
-            enum: [0, 1],
-          },
-          city: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+              'A list of valid URLs separated by ‘\\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           comments: {
             type: 'string',
@@ -1159,53 +831,6 @@ export const tool: Tool = {
             description:
               'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
-          country: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          destination_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          host_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          justification: {
-            type: 'string',
-            description:
-              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters',
-          },
-          ncmec_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ncsei_subject_representation: {
-            type: 'boolean',
-            description: 'If the submitter is the target of NCSEI in the URLs of the abuse report.',
-          },
-          original_work: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          owner_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ports_protocols: {
-            type: 'string',
-            description:
-              'A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.',
-          },
           reported_country: {
             type: 'string',
             description: 'Text containing 2 characters',
@@ -1213,21 +838,6 @@ export const tool: Tool = {
           reported_user_agent: {
             type: 'string',
             description: 'Text not exceeding 255 characters',
-          },
-          signature: {
-            type: 'string',
-            description:
-              "Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports",
-          },
-          source_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          state: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           tele: {
             type: 'string',
@@ -1238,20 +848,17 @@ export const tool: Tool = {
             type: 'string',
             description: 'Text not exceeding 255 characters',
           },
-          trademark_number: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_office: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_symbol: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
         },
-        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
+        required: [
+          'account_id',
+          'report_type',
+          'act',
+          'email',
+          'email2',
+          'name',
+          'owner_notification',
+          'urls',
+        ],
       },
       {
         type: 'object',
@@ -1261,7 +868,7 @@ export const tool: Tool = {
           },
           report_type: {
             type: 'string',
-            description: 'The abuse report type',
+            description: 'The abuse report type.',
             enum: [
               'abuse_dmca',
               'abuse_trademark',
@@ -1275,8 +882,8 @@ export const tool: Tool = {
           },
           act: {
             type: 'string',
-            description: 'The abuse report type',
             enum: [
+              'abuse_ncsei',
               'abuse_dmca',
               'abuse_trademark',
               'abuse_general',
@@ -1284,7 +891,6 @@ export const tool: Tool = {
               'abuse_children',
               'abuse_threat',
               'abuse_registrar_whois',
-              'abuse_ncsei',
             ],
           },
           email: {
@@ -1296,35 +902,31 @@ export const tool: Tool = {
             type: 'string',
             description: 'Should match the value provided in `email`',
           },
+          host_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon'],
+          },
           name: {
             type: 'string',
             description:
               'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
+          ncsei_subject_representation: {
+            type: 'boolean',
+            description: 'If the submitter is the target of NCSEI in the URLs of the abuse report.',
+          },
+          owner_notification: {
+            type: 'string',
+            description:
+              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
+            enum: ['send', 'send-anon', 'none'],
+          },
           urls: {
             type: 'string',
             description:
-              'A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          address1: {
-            type: 'string',
-            description:
-              'Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agent_name: {
-            type: 'string',
-            description:
-              'The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          agree: {
-            type: 'string',
-            description: 'Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports',
-            enum: [0, 1],
-          },
-          city: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
+              'A list of valid URLs separated by ‘\\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           comments: {
             type: 'string',
@@ -1338,49 +940,7 @@ export const tool: Tool = {
           country: {
             type: 'string',
             description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          destination_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          host_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          justification: {
-            type: 'string',
-            description:
-              'A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters',
-          },
-          ncmec_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ncsei_subject_representation: {
-            type: 'boolean',
-            description: 'If the submitter is the target of NCSEI in the URLs of the abuse report.',
-          },
-          original_work: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
-          },
-          owner_notification: {
-            type: 'string',
-            description:
-              'Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.',
-            enum: ['send', 'send-anon', 'none'],
-          },
-          ports_protocols: {
-            type: 'string',
-            description:
-              'A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.',
+              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).\n',
           },
           reported_country: {
             type: 'string',
@@ -1389,21 +949,6 @@ export const tool: Tool = {
           reported_user_agent: {
             type: 'string',
             description: 'Text not exceeding 255 characters',
-          },
-          signature: {
-            type: 'string',
-            description:
-              "Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports",
-          },
-          source_ips: {
-            type: 'string',
-            description:
-              'A list of IP addresses separated by ‘\n’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique',
-          },
-          state: {
-            type: 'string',
-            description:
-              'Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).',
           },
           tele: {
             type: 'string',
@@ -1414,20 +959,19 @@ export const tool: Tool = {
             type: 'string',
             description: 'Text not exceeding 255 characters',
           },
-          trademark_number: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_office: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
-          trademark_symbol: {
-            type: 'string',
-            description: 'Text not exceeding 1000 characters',
-          },
         },
-        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
+        required: [
+          'account_id',
+          'report_type',
+          'act',
+          'email',
+          'email2',
+          'host_notification',
+          'name',
+          'ncsei_subject_representation',
+          'owner_notification',
+          'urls',
+        ],
       },
     ],
   },

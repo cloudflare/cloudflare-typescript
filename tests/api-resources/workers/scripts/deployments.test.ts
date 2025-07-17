@@ -13,7 +13,7 @@ describe('resource deployments', () => {
     const responsePromise = client.workers.scripts.deployments.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       strategy: 'percentage',
-      versions: [{ percentage: 100, version_id: 'bcf48806-b317-4351-9ee7-36e7d557d4de' }],
+      versions: [{ percentage: 100, version_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,7 +28,7 @@ describe('resource deployments', () => {
     const response = await client.workers.scripts.deployments.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       strategy: 'percentage',
-      versions: [{ percentage: 100, version_id: 'bcf48806-b317-4351-9ee7-36e7d557d4de' }],
+      versions: [{ percentage: 100, version_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }],
       force: true,
       annotations: { 'workers/message': 'Deploy bug fix.' },
     });

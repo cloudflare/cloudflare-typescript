@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -69,6 +69,7 @@ describe('resource scripts', () => {
         ],
         usage_model: 'standard',
       },
+      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
     });
   });
 

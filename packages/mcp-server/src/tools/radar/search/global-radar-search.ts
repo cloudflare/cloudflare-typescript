@@ -18,20 +18,20 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'global_radar_search',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nSearches for locations, autonomous systems, reports, and bots.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'object',\n      properties: {\n        search: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              code: {\n                type: 'string'\n              },\n              name: {\n                type: 'string'\n              },\n              type: {\n                type: 'string'\n              }\n            },\n            required: [              'code',\n              'name',\n              'type'\n            ]\n          }\n        }\n      },\n      required: [        'search'\n      ]\n    },\n    success: {\n      type: 'boolean'\n    }\n  },\n  required: [    'result',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nSearches for locations, autonomous systems, reports, bots, certificate logs, and certificate authorities.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'object',\n      properties: {\n        search: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              code: {\n                type: 'string'\n              },\n              name: {\n                type: 'string'\n              },\n              type: {\n                type: 'string'\n              }\n            },\n            required: [              'code',\n              'name',\n              'type'\n            ]\n          }\n        }\n      },\n      required: [        'search'\n      ]\n    },\n    success: {\n      type: 'boolean'\n    }\n  },\n  required: [    'result',\n    'success'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       query: {
         type: 'string',
-        description: 'Search for locations, autonomous systems and reports.',
+        description: 'String used to perform the search operation.',
       },
       exclude: {
         type: 'array',
         description: 'Search types excluded from results.',
         items: {
           type: 'string',
-          enum: ['ASNS', 'BOTS', 'LOCATIONS', 'NOTEBOOKS', 'SPECIAL_EVENTS'],
+          enum: ['ASNS', 'BOTS', 'CERTIFICATE_AUTHORITIES', 'CERTIFICATE_LOGS', 'LOCATIONS', 'NOTEBOOKS'],
         },
       },
       format: {
@@ -44,7 +44,7 @@ export const tool: Tool = {
         description: 'Search types included in results.',
         items: {
           type: 'string',
-          enum: ['ASNS', 'BOTS', 'LOCATIONS', 'NOTEBOOKS', 'SPECIAL_EVENTS'],
+          enum: ['ASNS', 'BOTS', 'CERTIFICATE_AUTHORITIES', 'CERTIFICATE_LOGS', 'LOCATIONS', 'NOTEBOOKS'],
         },
       },
       limit: {

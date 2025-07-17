@@ -125,7 +125,7 @@ export class Cache extends APIResource {
    * @example
    * ```ts
    * const response = await client.cache.purge({
-   *   zone_id: 'zone_id',
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    * });
    * ```
    */
@@ -140,9 +140,6 @@ export class Cache extends APIResource {
 }
 
 export interface CachePurgeResponse {
-  /**
-   * Identifier.
-   */
   id: string;
 }
 

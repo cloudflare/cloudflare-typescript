@@ -54,6 +54,7 @@ describe('resource blockSenders', () => {
       direction: 'asc',
       order: 'pattern',
       page: 1,
+      pattern: 'pattern',
       pattern_type: 'EMAIL',
       per_page: 1,
       search: 'search',

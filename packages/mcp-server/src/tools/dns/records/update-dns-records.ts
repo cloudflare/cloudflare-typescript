@@ -34,7 +34,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -96,7 +96,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -158,7 +158,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -225,7 +225,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -292,7 +292,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -354,7 +354,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -416,7 +416,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -478,7 +478,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -541,7 +541,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -618,7 +618,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -698,7 +698,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -778,7 +778,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -858,7 +858,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -934,7 +934,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -1048,7 +1048,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -1136,7 +1136,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -1216,7 +1216,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -1297,7 +1297,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -1373,7 +1373,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -1449,7 +1449,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',
@@ -1529,7 +1529,7 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
-            description: 'DNS record name (or @ for the zone apex) in Punycode.',
+            description: 'Complete DNS record name, including the zone name, in Punycode.',
           },
           ttl: {
             $ref: '#/$defs/ttl',

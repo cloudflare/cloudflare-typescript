@@ -38,6 +38,14 @@ export const tool: Tool = {
       metadata: {
         $ref: '#/$defs/worker_metadata',
       },
+      files: {
+        type: 'array',
+        description:
+          'An array of modules (often JavaScript files) comprising a Worker script. At least one module must be present and referenced in the metadata as `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are: `application/javascript+module`, `text/javascript+module`, `application/javascript`, `text/javascript`, `application/wasm`, `text/plain`, `application/octet-stream`, `application/source-map`.',
+        items: {
+          type: 'string',
+        },
+      },
       'CF-WORKER-BODY-PART': {
         type: 'string',
       },
