@@ -30,6 +30,7 @@ export const tool: Tool = {
         description: 'Setting name',
       },
     },
+    required: ['zone_id', 'setting_id'],
   },
 };
 

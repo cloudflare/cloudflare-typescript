@@ -107,6 +107,7 @@ export const tool: Tool = {
           'Time to live (TTL) of the DNS entry for the IP address returned by this load balancer. This only applies to gray-clouded (unproxied) load balancers.',
       },
     },
+    required: ['zone_id', 'default_pools', 'fallback_pool', 'name'],
     $defs: {
       default_pools: {
         type: 'string',
@@ -123,7 +124,6 @@ export const tool: Tool = {
               'Extends zero-downtime failover of requests to healthy origins from alternate pools, when no healthy alternate exists in the same pool, according to the failover order defined by traffic and origin steering. When set false (the default) zero-downtime failover will only occur between origins within the same pool. See `session_affinity_attributes` for control over when sessions are broken or reassigned.',
           },
         },
-        required: [],
       },
       location_strategy: {
         type: 'object',
@@ -143,7 +143,6 @@ export const tool: Tool = {
             enum: ['always', 'never', 'proximity', 'geo'],
           },
         },
-        required: [],
       },
       random_steering: {
         type: 'object',
@@ -161,7 +160,6 @@ export const tool: Tool = {
               'A mapping of pool IDs to custom weights. The weight is relative to other pools in the load balancer.',
           },
         },
-        required: [],
       },
       rules: {
         type: 'object',
@@ -198,7 +196,6 @@ export const tool: Tool = {
                 description: 'The http status code to respond with.',
               },
             },
-            required: [],
           },
           name: {
             type: 'string',
@@ -265,7 +262,6 @@ export const tool: Tool = {
                   'Time to live (TTL) of the DNS entry for the IP address returned by this load balancer. This only applies to gray-clouded (unproxied) load balancers.',
               },
             },
-            required: [],
           },
           priority: {
             type: 'integer',
@@ -278,7 +274,6 @@ export const tool: Tool = {
               "If this rule's condition is true, this causes rule evaluation to stop after processing this rule.",
           },
         },
-        required: [],
       },
       session_affinity: {
         type: 'string',
@@ -328,7 +323,6 @@ export const tool: Tool = {
             enum: ['none', 'temporary', 'sticky'],
           },
         },
-        required: [],
       },
       steering_policy: {
         type: 'string',

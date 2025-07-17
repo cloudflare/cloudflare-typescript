@@ -177,6 +177,7 @@ export const tool: Tool = {
         },
       },
     },
+    required: ['account_id', 'entries', 'name'],
     $defs: {
       pattern: {
         type: 'object',

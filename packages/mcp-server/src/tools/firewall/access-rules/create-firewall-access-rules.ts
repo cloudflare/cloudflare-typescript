@@ -58,6 +58,7 @@ export const tool: Tool = {
         description: 'An informative summary of the rule, typically used as a reminder or explanation.',
       },
     },
+    required: ['configuration', 'mode'],
     $defs: {
       access_rule_ip_configuration: {
         type: 'object',
@@ -75,7 +76,6 @@ export const tool: Tool = {
               'The IP address to match. This address will be compared to the IP address of incoming requests.',
           },
         },
-        required: [],
       },
       ipv6_configuration: {
         type: 'object',
@@ -92,7 +92,6 @@ export const tool: Tool = {
             description: 'The IPv6 address to match.',
           },
         },
-        required: [],
       },
       access_rule_cidr_configuration: {
         type: 'object',
@@ -110,7 +109,6 @@ export const tool: Tool = {
               'The IP address range to match. You can only use prefix lengths `/16` and `/24` for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.',
           },
         },
-        required: [],
       },
       asn_configuration: {
         type: 'object',
@@ -127,7 +125,6 @@ export const tool: Tool = {
             description: 'The AS number to match.',
           },
         },
-        required: [],
       },
       country_configuration: {
         type: 'object',
@@ -145,7 +142,6 @@ export const tool: Tool = {
               'The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).',
           },
         },
-        required: [],
       },
     },
   },

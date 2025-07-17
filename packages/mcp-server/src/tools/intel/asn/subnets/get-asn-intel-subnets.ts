@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'get_asn_intel_subnets',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGet ASN Subnets.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    asn: {\n      $ref: '#/$defs/asn'\n    },\n    count: {\n      type: 'number',\n      description: 'Total results returned based on your search parameters.'\n    },\n    ip_count_total: {\n      type: 'integer'\n    },\n    page: {\n      type: 'number',\n      description: 'Current page within paginated list of results.'\n    },\n    per_page: {\n      type: 'number',\n      description: 'Number of results per page of results.'\n    },\n    subnets: {\n      type: 'array',\n      items: {\n        type: 'string'\n      }\n    }\n  },\n  required: [],\n  $defs: {\n    asn: {\n      type: 'integer'\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGet ASN Subnets.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    asn: {\n      $ref: '#/$defs/asn'\n    },\n    count: {\n      type: 'number',\n      description: 'Total results returned based on your search parameters.'\n    },\n    ip_count_total: {\n      type: 'integer'\n    },\n    page: {\n      type: 'number',\n      description: 'Current page within paginated list of results.'\n    },\n    per_page: {\n      type: 'number',\n      description: 'Number of results per page of results.'\n    },\n    subnets: {\n      type: 'array',\n      items: {\n        type: 'string'\n      }\n    }\n  },\n  $defs: {\n    asn: {\n      type: 'integer'\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -36,6 +36,7 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
+    required: ['account_id', 'asn'],
     $defs: {
       asn: {
         type: 'integer',

@@ -63,7 +63,6 @@ export const tool: Tool = {
                     'The regular expression to use for matching cookie names in the\nrequest. Refer to [Bypass Cache on Cookie\nsetting](https://developers.cloudflare.com/rules/page-rules/reference/additional-reference/#bypass-cache-on-cookie-setting)\nto learn about limited regular expression support.\n',
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -80,7 +79,6 @@ export const tool: Tool = {
                   enum: ['on', 'off'],
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -98,7 +96,6 @@ export const tool: Tool = {
                   enum: ['on', 'off'],
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -133,7 +130,6 @@ export const tool: Tool = {
                           },
                         },
                       },
-                      required: [],
                     },
                     header: {
                       type: 'object',
@@ -163,7 +159,6 @@ export const tool: Tool = {
                           },
                         },
                       },
-                      required: [],
                     },
                     host: {
                       type: 'object',
@@ -175,7 +170,6 @@ export const tool: Tool = {
                             'Whether to include the Host header in the HTTP request sent\nto the origin.\n',
                         },
                       },
-                      required: [],
                     },
                     query_string: {
                       type: 'object',
@@ -217,7 +211,6 @@ export const tool: Tool = {
                           description: 'Include all query string parameters.',
                         },
                       },
-                      required: [],
                     },
                     user: {
                       type: 'object',
@@ -239,13 +232,10 @@ export const tool: Tool = {
                             'Includes the first language code contained in the\n`Accept-Language` header sent by the client.\n',
                         },
                       },
-                      required: [],
                     },
                   },
-                  required: [],
                 },
               },
-              required: [],
             },
             {
               $ref: '#/$defs/cache_level',
@@ -265,7 +255,6 @@ export const tool: Tool = {
                   description: 'The regular expression to use for matching cookie names in the\nrequest.\n',
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -283,7 +272,6 @@ export const tool: Tool = {
                     'A JSON object containing status codes and their corresponding TTLs.\nEach key-value pair in the cache TTL by status cache rule has the\nfollowing syntax\n- `status_code`: An integer value such as 200 or 500. status_code\n  matches the exact status code from the origin web server. Valid\n  status codes are between 100-999.\n- `status_code_range`: Integer values for from and to.\n  status_code_range matches any status code from the origin web\n  server within the specified range.\n- `value`: An integer value that defines the duration an asset is\n  valid in seconds or one of the following strings: no-store\n  (equivalent to -1), no-cache (equivalent to 0).\n',
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -296,7 +284,6 @@ export const tool: Tool = {
                   enum: ['disable_apps'],
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -309,7 +296,6 @@ export const tool: Tool = {
                   enum: ['disable_performance'],
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -322,7 +308,6 @@ export const tool: Tool = {
                   enum: ['disable_security'],
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -334,7 +319,6 @@ export const tool: Tool = {
                   enum: ['disable_zaraz'],
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -350,7 +334,6 @@ export const tool: Tool = {
                   type: 'integer',
                 },
               },
-              required: [],
             },
             {
               $ref: '#/$defs/email_obfuscation',
@@ -371,7 +354,6 @@ export const tool: Tool = {
                   enum: ['on', 'off'],
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -398,10 +380,8 @@ export const tool: Tool = {
                         "The URL to redirect the request to.\nNotes: ${num} refers to the position of '*' in the constraint value.",
                     },
                   },
-                  required: [],
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -417,7 +397,6 @@ export const tool: Tool = {
                   description: 'The hostname to use in the `Host` header',
                 },
               },
-              required: [],
             },
             {
               $ref: '#/$defs/ip_geolocation',
@@ -448,7 +427,6 @@ export const tool: Tool = {
                   description: 'The origin address you want to override with.\n',
                 },
               },
-              required: [],
             },
             {
               type: 'object',
@@ -466,7 +444,6 @@ export const tool: Tool = {
                   enum: ['on', 'off'],
                 },
               },
-              required: [],
             },
             {
               $ref: '#/$defs/response_buffering',
@@ -510,6 +487,7 @@ export const tool: Tool = {
         enum: ['active', 'disabled'],
       },
     },
+    required: ['zone_id', 'pagerule_id', 'actions', 'targets'],
     $defs: {
       always_use_https: {
         type: 'object',
@@ -521,7 +499,6 @@ export const tool: Tool = {
             enum: ['always_use_https'],
           },
         },
-        required: [],
       },
       automatic_https_rewrites: {
         type: 'object',
@@ -538,7 +515,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       browser_cache_ttl: {
         type: 'object',
@@ -555,7 +531,6 @@ export const tool: Tool = {
               'The number of seconds to cache resources for. The API prohibits\nsetting this to 0 for non-Enterprise domains.\n',
           },
         },
-        required: [],
       },
       browser_check: {
         type: 'object',
@@ -573,7 +548,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       cache_level: {
         type: 'object',
@@ -591,7 +565,6 @@ export const tool: Tool = {
             enum: ['bypass', 'basic', 'simplified', 'aggressive', 'cache_everything'],
           },
         },
-        required: [],
       },
       email_obfuscation: {
         type: 'object',
@@ -608,7 +581,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       ip_geolocation: {
         type: 'object',
@@ -626,7 +598,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       mirage: {
         type: 'object',
@@ -644,7 +615,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       opportunistic_encryption: {
         type: 'object',
@@ -662,7 +632,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       origin_error_page_pass_thru: {
         type: 'object',
@@ -680,7 +649,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       polish: {
         type: 'object',
@@ -697,7 +665,6 @@ export const tool: Tool = {
             enum: ['off', 'lossless', 'lossy'],
           },
         },
-        required: [],
       },
       response_buffering: {
         type: 'object',
@@ -715,7 +682,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       rocket_loader: {
         type: 'object',
@@ -732,7 +698,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       security_level: {
         type: 'object',
@@ -748,7 +713,6 @@ export const tool: Tool = {
             enum: ['off', 'essentially_off', 'low', 'medium', 'high', 'under_attack'],
           },
         },
-        required: [],
       },
       sort_query_string_for_cache: {
         type: 'object',
@@ -766,7 +730,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       ssl: {
         type: 'object',
@@ -784,7 +747,6 @@ export const tool: Tool = {
             enum: ['off', 'flexible', 'full', 'strict', 'origin_pull'],
           },
         },
-        required: [],
       },
       true_client_ip_header: {
         type: 'object',
@@ -801,7 +763,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       waf: {
         type: 'object',
@@ -819,7 +780,6 @@ export const tool: Tool = {
             enum: ['on', 'off'],
           },
         },
-        required: [],
       },
       target: {
         type: 'object',
@@ -849,7 +809,6 @@ export const tool: Tool = {
             enum: ['url'],
           },
         },
-        required: [],
       },
     },
   },

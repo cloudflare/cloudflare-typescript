@@ -90,6 +90,7 @@ export const tool: Tool = {
           "The protocol to use for the health check. Currently supported protocols are 'HTTP', 'HTTPS' and 'TCP'.",
       },
     },
+    required: ['zone_id', 'healthcheck_id', 'address', 'name'],
     $defs: {
       check_region: {
         type: 'string',
@@ -157,7 +158,6 @@ export const tool: Tool = {
               'Port number to connect to for the health check. Defaults to 80 if type is HTTP or 443 if type is HTTPS.',
           },
         },
-        required: [],
       },
       tcp_configuration: {
         type: 'object',
@@ -173,7 +173,6 @@ export const tool: Tool = {
             description: 'Port number to connect to for the health check. Defaults to 80.',
           },
         },
-        required: [],
       },
     },
   },

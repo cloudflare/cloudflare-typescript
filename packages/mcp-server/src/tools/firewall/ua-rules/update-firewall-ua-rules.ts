@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_firewall_ua_rules',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates an existing User Agent Blocking rule.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    result: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'The unique identifier of the User Agent Blocking rule.'\n        },\n        configuration: {\n          type: 'object',\n          description: 'The configuration object for the current rule.',\n          properties: {\n            target: {\n              type: 'string',\n              description: 'The configuration target for this rule. You must set the target to `ua` for User Agent Blocking rules.'\n            },\n            value: {\n              type: 'string',\n              description: 'The exact user agent string to match. This value will be compared to the received `User-Agent` HTTP header value.'\n            }\n          },\n          required: []\n        },\n        description: {\n          type: 'string',\n          description: 'An informative summary of the rule.'\n        },\n        mode: {\n          type: 'string',\n          description: 'The action to apply to a matched request.',\n          enum: [            'block',\n            'challenge',\n            'js_challenge',\n            'managed_challenge'\n          ]\n        },\n        paused: {\n          type: 'boolean',\n          description: 'When true, indicates that the rule is currently paused.'\n        }\n      },\n      required: []\n    },\n    success: {\n      type: 'string',\n      description: 'Defines whether the API call was successful.',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          },\n          required: []\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates an existing User Agent Blocking rule.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    result: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'The unique identifier of the User Agent Blocking rule.'\n        },\n        configuration: {\n          type: 'object',\n          description: 'The configuration object for the current rule.',\n          properties: {\n            target: {\n              type: 'string',\n              description: 'The configuration target for this rule. You must set the target to `ua` for User Agent Blocking rules.'\n            },\n            value: {\n              type: 'string',\n              description: 'The exact user agent string to match. This value will be compared to the received `User-Agent` HTTP header value.'\n            }\n          }\n        },\n        description: {\n          type: 'string',\n          description: 'An informative summary of the rule.'\n        },\n        mode: {\n          type: 'string',\n          description: 'The action to apply to a matched request.',\n          enum: [            'block',\n            'challenge',\n            'js_challenge',\n            'managed_challenge'\n          ]\n        },\n        paused: {\n          type: 'boolean',\n          description: 'When true, indicates that the rule is currently paused.'\n        }\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Defines whether the API call was successful.',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -71,6 +71,7 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
+    required: ['zone_id', 'ua_rule_id', 'configuration', 'mode'],
     $defs: {
       access_rule_ip_configuration: {
         type: 'object',
@@ -88,7 +89,6 @@ export const tool: Tool = {
               'The IP address to match. This address will be compared to the IP address of incoming requests.',
           },
         },
-        required: [],
       },
       ipv6_configuration: {
         type: 'object',
@@ -105,7 +105,6 @@ export const tool: Tool = {
             description: 'The IPv6 address to match.',
           },
         },
-        required: [],
       },
       access_rule_cidr_configuration: {
         type: 'object',
@@ -123,7 +122,6 @@ export const tool: Tool = {
               'The IP address range to match. You can only use prefix lengths `/16` and `/24` for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.',
           },
         },
-        required: [],
       },
       asn_configuration: {
         type: 'object',
@@ -140,7 +138,6 @@ export const tool: Tool = {
             description: 'The AS number to match.',
           },
         },
-        required: [],
       },
       country_configuration: {
         type: 'object',
@@ -158,7 +155,6 @@ export const tool: Tool = {
               'The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).',
           },
         },
-        required: [],
       },
     },
   },

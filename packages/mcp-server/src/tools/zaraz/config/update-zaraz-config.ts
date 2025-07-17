@@ -141,7 +141,6 @@ export const tool: Tool = {
             description: 'Session expiration time (seconds).',
           },
         },
-        required: [],
       },
       consent: {
         type: 'object',
@@ -203,6 +202,16 @@ export const tool: Tool = {
         description: 'Single Page Application support enabled.',
       },
     },
+    required: [
+      'zone_id',
+      'dataLayer',
+      'debugKey',
+      'settings',
+      'tools',
+      'triggers',
+      'variables',
+      'zarazVersion',
+    ],
     $defs: {
       button_text_translation: {
         type: 'object',

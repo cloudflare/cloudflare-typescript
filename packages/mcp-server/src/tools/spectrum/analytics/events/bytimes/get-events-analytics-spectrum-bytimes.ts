@@ -81,6 +81,7 @@ export const tool: Tool = {
         format: 'date-time',
       },
     },
+    required: ['zone_id', 'time_delta'],
     $defs: {
       dimension: {
         type: 'string',

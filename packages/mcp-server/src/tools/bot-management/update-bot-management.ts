@@ -49,6 +49,7 @@ export const tool: Tool = {
             description: 'Whether to enable Bot Fight Mode.',
           },
         },
+        required: ['zone_id'],
       },
       {
         type: 'object',
@@ -93,6 +94,7 @@ export const tool: Tool = {
             enum: ['allow', 'block'],
           },
         },
+        required: ['zone_id'],
       },
       {
         type: 'object',
@@ -142,6 +144,7 @@ export const tool: Tool = {
             enum: ['allow', 'block'],
           },
         },
+        required: ['zone_id'],
       },
       {
         type: 'object',
@@ -177,6 +180,7 @@ export const tool: Tool = {
               'Whether to disable tracking the highest bot score for a session in the Bot Management cookie.',
           },
         },
+        required: ['zone_id'],
       },
     ],
   },

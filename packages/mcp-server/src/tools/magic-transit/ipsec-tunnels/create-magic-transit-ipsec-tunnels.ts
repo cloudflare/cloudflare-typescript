@@ -81,7 +81,6 @@ export const tool: Tool = {
                       'The saved health check target. Setting the value to the empty string indicates that the calculated default value will be used.',
                   },
                 },
-                required: [],
               },
               {
                 type: 'string',
@@ -94,7 +93,6 @@ export const tool: Tool = {
             $ref: '#/$defs/health_check_type',
           },
         },
-        required: [],
       },
       psk: {
         type: 'string',
@@ -109,6 +107,7 @@ export const tool: Tool = {
         type: 'boolean',
       },
     },
+    required: ['account_id', 'cloudflare_endpoint', 'interface_address', 'name'],
     $defs: {
       health_check_rate: {
         type: 'string',

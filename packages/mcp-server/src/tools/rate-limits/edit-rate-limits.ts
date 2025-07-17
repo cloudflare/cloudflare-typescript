@@ -55,7 +55,6 @@ export const tool: Tool = {
                   'The content type of the body. Must be one of the following: `text/plain`, `text/xml`, or `application/json`.',
               },
             },
-            required: [],
           },
           timeout: {
             type: 'number',
@@ -63,7 +62,6 @@ export const tool: Tool = {
               'The time in seconds during which Cloudflare will perform the mitigation action. Must be an integer value greater than or equal to the period.\nNotes: If "mode" is "challenge", "managed_challenge", or "js_challenge", Cloudflare will use the zone\'s Challenge Passage time and you should not provide this value.',
           },
         },
-        required: [],
       },
       match: {
         type: 'object',
@@ -89,7 +87,6 @@ export const tool: Tool = {
                   description: 'The value of the response header, which must match exactly.',
                 },
               },
-              required: [],
             },
           },
           request: {
@@ -120,7 +117,6 @@ export const tool: Tool = {
                   'The URL pattern to match, composed of a host and a path such as `example.org/path*`. Normalization is applied before the pattern is matched. `*` wildcards are expanded to match applicable traffic. Query strings are not matched. Set the value to `*` to match all traffic to your zone.',
               },
             },
-            required: [],
           },
           response: {
             type: 'object',
@@ -131,10 +127,8 @@ export const tool: Tool = {
                   'When true, only the uncached traffic served from your origin servers will count towards rate limiting. In this case, any cached traffic served by Cloudflare will not count towards rate limiting. This field is optional.\nNotes: This field is deprecated. Instead, use response headers and set "origin_traffic" to "false" to avoid legacy behaviour interacting with the "response_headers" property.',
               },
             },
-            required: [],
           },
         },
-        required: [],
       },
       period: {
         type: 'number',
@@ -147,6 +141,7 @@ export const tool: Tool = {
           'The threshold that will trigger the configured mitigation action. Configure this value along with the `period` property to establish a threshold per period.',
       },
     },
+    required: ['zone_id', 'rate_limit_id', 'action', 'match', 'period', 'threshold'],
   },
 };
 

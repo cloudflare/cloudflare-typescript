@@ -71,13 +71,13 @@ export const tool: Tool = {
             description: 'The unique identifier for the watermark profile.',
           },
         },
-        required: [],
       },
       'Upload-Creator': {
         type: 'string',
         description: 'A user-defined identifier for the media creator.',
       },
     },
+    required: ['account_id', 'url'],
     $defs: {
       allowed_origins: {
         type: 'string',

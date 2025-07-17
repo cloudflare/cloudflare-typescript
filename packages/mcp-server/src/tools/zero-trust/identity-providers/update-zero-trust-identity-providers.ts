@@ -70,7 +70,6 @@ export const tool: Tool = {
                 description: 'Should Cloudflare try to load groups from your account',
               },
             },
-            required: [],
           },
           name: {
             type: 'string',
@@ -91,6 +90,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -132,7 +132,6 @@ export const tool: Tool = {
                 description: 'The claim name for email in the id_token response.',
               },
             },
-            required: [],
           },
           name: {
             type: 'string',
@@ -153,6 +152,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -183,6 +183,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -213,6 +214,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -246,7 +248,6 @@ export const tool: Tool = {
                 description: 'The claim name for email in the id_token response.',
               },
             },
-            required: [],
           },
           name: {
             type: 'string',
@@ -267,6 +268,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -304,7 +306,6 @@ export const tool: Tool = {
                 description: 'The claim name for email in the id_token response.',
               },
             },
-            required: [],
           },
           name: {
             type: 'string',
@@ -325,6 +326,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -355,6 +357,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -411,7 +414,6 @@ export const tool: Tool = {
                 description: 'The token_endpoint URL of your IdP',
               },
             },
-            required: [],
           },
           name: {
             type: 'string',
@@ -432,6 +434,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -473,7 +476,6 @@ export const tool: Tool = {
                 description: 'Your okta account url',
               },
             },
-            required: [],
           },
           name: {
             type: 'string',
@@ -494,6 +496,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -531,7 +534,6 @@ export const tool: Tool = {
                 description: 'Your OneLogin account url',
               },
             },
-            required: [],
           },
           name: {
             type: 'string',
@@ -552,6 +554,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -589,7 +592,6 @@ export const tool: Tool = {
                 description: 'Your PingOne environment identifier',
               },
             },
-            required: [],
           },
           name: {
             type: 'string',
@@ -610,6 +612,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -651,7 +654,6 @@ export const tool: Tool = {
                       description: 'header that will be added on the request to the origin',
                     },
                   },
-                  required: [],
                 },
               },
               idp_public_certs: {
@@ -675,7 +677,6 @@ export const tool: Tool = {
                 description: 'URL to send the SAML authentication requests to',
               },
             },
-            required: [],
           },
           name: {
             type: 'string',
@@ -696,6 +697,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -726,6 +728,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
       {
         type: 'object',
@@ -743,7 +746,6 @@ export const tool: Tool = {
                 type: 'string',
               },
             },
-            required: [],
           },
           name: {
             type: 'string',
@@ -764,6 +766,7 @@ export const tool: Tool = {
             $ref: '#/$defs/identity_provider_scim_config',
           },
         },
+        required: ['identity_provider_id', 'config', 'name', 'type'],
       },
     ],
     $defs: {
@@ -823,7 +826,6 @@ export const tool: Tool = {
               "A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.",
           },
         },
-        required: [],
       },
       generic_oauth_config: {
         type: 'object',
@@ -837,7 +839,6 @@ export const tool: Tool = {
             description: 'Your OAuth Client Secret',
           },
         },
-        required: [],
       },
     },
   },

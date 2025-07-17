@@ -162,10 +162,8 @@ export const tool: Tool = {
                               description: 'Name of the outbound worker.',
                             },
                           },
-                          required: [],
                         },
                       },
-                      required: [],
                     },
                   },
                   required: ['name', 'namespace', 'type'],
@@ -582,7 +580,6 @@ export const tool: Tool = {
                 description: 'The amount of CPU time this Worker can use in milliseconds.',
               },
             },
-            required: [],
           },
           logpush: {
             type: 'boolean',
@@ -613,7 +610,6 @@ export const tool: Tool = {
                     },
                   },
                 },
-                required: [],
               },
             ],
             description: 'Migrations to apply for Durable Objects associated with this Worker.\n',
@@ -667,7 +663,6 @@ export const tool: Tool = {
                 enum: ['smart'],
               },
             },
-            required: [],
           },
           tags: {
             type: 'array',
@@ -690,9 +685,9 @@ export const tool: Tool = {
             enum: ['standard'],
           },
         },
-        required: [],
       },
     },
+    required: ['account_id', 'script_name'],
     $defs: {
       single_step_migration: {
         type: 'object',
@@ -741,7 +736,6 @@ export const tool: Tool = {
                   type: 'string',
                 },
               },
-              required: [],
             },
           },
           transferred_classes: {
@@ -761,11 +755,9 @@ export const tool: Tool = {
                   type: 'string',
                 },
               },
-              required: [],
             },
           },
         },
-        required: [],
       },
       migration_step: {
         type: 'object',
@@ -804,7 +796,6 @@ export const tool: Tool = {
                   type: 'string',
                 },
               },
-              required: [],
             },
           },
           transferred_classes: {
@@ -824,11 +815,9 @@ export const tool: Tool = {
                   type: 'string',
                 },
               },
-              required: [],
             },
           },
         },
-        required: [],
       },
       consumer_script: {
         type: 'object',

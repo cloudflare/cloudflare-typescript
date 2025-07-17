@@ -29,6 +29,7 @@ export const tool: Tool = {
         type: 'string',
       },
     },
+    required: ['zone_id', 'waiting_room_id'],
   },
 };
 

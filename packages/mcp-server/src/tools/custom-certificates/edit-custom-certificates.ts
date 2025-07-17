@@ -49,6 +49,7 @@ export const tool: Tool = {
         description: "The zone's private key.",
       },
     },
+    required: ['zone_id', 'custom_certificate_id'],
     $defs: {
       bundle_method: {
         type: 'string',
@@ -66,7 +67,6 @@ export const tool: Tool = {
             enum: ['us', 'eu', 'highest_security'],
           },
         },
-        required: [],
       },
     },
   },

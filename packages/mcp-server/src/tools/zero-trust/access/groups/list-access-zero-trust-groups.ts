@@ -37,6 +37,7 @@ export const tool: Tool = {
         description: 'Search for groups by other listed query parameters.',
       },
     },
+    required: [],
   },
 };
 

@@ -116,7 +116,6 @@ export const tool: Tool = {
                         "The URI of the destination. Public destinations' URIs can include a domain and path with [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).\n",
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'object',
@@ -154,7 +153,6 @@ export const tool: Tool = {
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
                     },
                   },
-                  required: [],
                 },
               ],
               description:
@@ -209,7 +207,6 @@ export const tool: Tool = {
                         'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'string',
@@ -259,7 +256,6 @@ export const tool: Tool = {
                         'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
                     },
                   },
-                  required: [],
                 },
               ],
               description: 'A JSON that links a reusable policy to an application.',
@@ -424,6 +420,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['app_id', 'domain', 'type'],
       },
       {
         type: 'object',
@@ -492,7 +489,6 @@ export const tool: Tool = {
                         'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'string',
@@ -542,7 +538,6 @@ export const tool: Tool = {
                         'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
                     },
                   },
-                  required: [],
                 },
               ],
               description: 'A JSON that links a reusable policy to an application.',
@@ -689,6 +684,7 @@ export const tool: Tool = {
             $ref: '#/$defs/application_type',
           },
         },
+        required: ['app_id'],
       },
       {
         type: 'object',
@@ -800,7 +796,6 @@ export const tool: Tool = {
                         "The URI of the destination. Public destinations' URIs can include a domain and path with [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).\n",
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'object',
@@ -838,7 +833,6 @@ export const tool: Tool = {
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
                     },
                   },
-                  required: [],
                 },
               ],
               description:
@@ -893,7 +887,6 @@ export const tool: Tool = {
                         'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'string',
@@ -943,7 +936,6 @@ export const tool: Tool = {
                         'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
                     },
                   },
-                  required: [],
                 },
               ],
               description: 'A JSON that links a reusable policy to an application.',
@@ -1108,6 +1100,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['app_id', 'domain', 'type'],
       },
       {
         type: 'object',
@@ -1219,7 +1212,6 @@ export const tool: Tool = {
                         "The URI of the destination. Public destinations' URIs can include a domain and path with [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).\n",
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'object',
@@ -1257,7 +1249,6 @@ export const tool: Tool = {
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
                     },
                   },
-                  required: [],
                 },
               ],
               description:
@@ -1312,7 +1303,6 @@ export const tool: Tool = {
                         'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'string',
@@ -1362,7 +1352,6 @@ export const tool: Tool = {
                         'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
                     },
                   },
-                  required: [],
                 },
               ],
               description: 'A JSON that links a reusable policy to an application.',
@@ -1527,6 +1516,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['app_id', 'domain', 'type'],
       },
       {
         type: 'object',
@@ -1627,7 +1617,6 @@ export const tool: Tool = {
                 description: 'The title shown on the landing page.',
               },
             },
-            required: [],
           },
           policies: {
             type: 'array',
@@ -1649,7 +1638,6 @@ export const tool: Tool = {
                         'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'string',
@@ -1699,7 +1687,6 @@ export const tool: Tool = {
                         'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
                     },
                   },
-                  required: [],
                 },
               ],
               description: 'A JSON that links a reusable policy to an application.',
@@ -1833,6 +1820,7 @@ export const tool: Tool = {
             description: 'Determines when to skip the App Launcher landing page.',
           },
         },
+        required: ['app_id', 'type'],
       },
       {
         type: 'object',
@@ -1919,7 +1907,6 @@ export const tool: Tool = {
                 description: 'The title shown on the landing page.',
               },
             },
-            required: [],
           },
           policies: {
             type: 'array',
@@ -1941,7 +1928,6 @@ export const tool: Tool = {
                         'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'string',
@@ -1991,7 +1977,6 @@ export const tool: Tool = {
                         'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
                     },
                   },
-                  required: [],
                 },
               ],
               description: 'A JSON that links a reusable policy to an application.',
@@ -2125,6 +2110,7 @@ export const tool: Tool = {
             description: 'Determines when to skip the App Launcher landing page.',
           },
         },
+        required: ['app_id', 'type'],
       },
       {
         type: 'object',
@@ -2211,7 +2197,6 @@ export const tool: Tool = {
                 description: 'The title shown on the landing page.',
               },
             },
-            required: [],
           },
           policies: {
             type: 'array',
@@ -2233,7 +2218,6 @@ export const tool: Tool = {
                         'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'string',
@@ -2283,7 +2267,6 @@ export const tool: Tool = {
                         'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
                     },
                   },
-                  required: [],
                 },
               ],
               description: 'A JSON that links a reusable policy to an application.',
@@ -2417,6 +2400,7 @@ export const tool: Tool = {
             description: 'Determines when to skip the App Launcher landing page.',
           },
         },
+        required: ['app_id', 'type'],
       },
       {
         type: 'object',
@@ -2579,6 +2563,7 @@ export const tool: Tool = {
             $ref: '#/$defs/application_type',
           },
         },
+        required: ['app_id'],
       },
       {
         type: 'object',
@@ -2674,7 +2659,6 @@ export const tool: Tool = {
                       required: ['usernames'],
                     },
                   },
-                  required: [],
                 },
                 exclude: {
                   type: 'array',
@@ -2697,6 +2681,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['app_id', 'target_criteria', 'type'],
       },
       {
         type: 'object',
@@ -2818,7 +2803,6 @@ export const tool: Tool = {
                         "The URI of the destination. Public destinations' URIs can include a domain and path with [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).\n",
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'object',
@@ -2856,7 +2840,6 @@ export const tool: Tool = {
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
                     },
                   },
-                  required: [],
                 },
               ],
               description:
@@ -2911,7 +2894,6 @@ export const tool: Tool = {
                         'The order of execution for this policy. Must be unique for each policy within an app.\n',
                     },
                   },
-                  required: [],
                 },
                 {
                   type: 'string',
@@ -2961,7 +2943,6 @@ export const tool: Tool = {
                         'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
                     },
                   },
-                  required: [],
                 },
               ],
               description: 'A JSON that links a reusable policy to an application.',
@@ -3126,6 +3107,7 @@ export const tool: Tool = {
             },
           },
         },
+        required: ['app_id', 'domain', 'target_criteria', 'type'],
       },
     ],
     $defs: {
@@ -3200,7 +3182,6 @@ export const tool: Tool = {
             description: 'The maximum number of seconds the results of a preflight request can be cached.',
           },
         },
-        required: [],
       },
       allowed_headers: {
         type: 'string',
@@ -3349,7 +3330,6 @@ export const tool: Tool = {
                 description: 'Whether or not this mapping applies to update (PATCH/PUT) operations.',
               },
             },
-            required: [],
           },
           strictness: {
             type: 'string',
@@ -3436,14 +3416,11 @@ export const tool: Tool = {
                             description: 'The name of the IdP provided attribute.',
                           },
                         },
-                        required: [],
                       },
                     },
                   },
-                  required: [],
                 },
               },
-              required: [],
             },
           },
           default_relay_state: {
@@ -3485,7 +3462,6 @@ export const tool: Tool = {
             format: 'date-time',
           },
         },
-        required: [],
       },
       saas_app_name_id_format: {
         type: 'string',
@@ -3558,10 +3534,8 @@ export const tool: Tool = {
                       description: 'A mapping from IdP ID to claim name.',
                     },
                   },
-                  required: [],
                 },
               },
-              required: [],
             },
           },
           grant_types: {
@@ -3594,7 +3568,6 @@ export const tool: Tool = {
                 description: 'If an ID Token should be returned from the OIDC Authorization endpoint',
               },
             },
-            required: [],
           },
           public_key: {
             type: 'string',
@@ -3617,7 +3590,6 @@ export const tool: Tool = {
                   'How long a refresh token will be valid for after creation. Valid units are m,h,d. Must be longer than 1m.',
               },
             },
-            required: [],
           },
           scopes: {
             type: 'array',
@@ -3633,7 +3605,6 @@ export const tool: Tool = {
             format: 'date-time',
           },
         },
-        required: [],
       },
       decision: {
         type: 'string',
@@ -3818,7 +3789,6 @@ export const tool: Tool = {
             type: 'object',
             description: 'An empty object which matches on all service tokens.',
             properties: {},
-            required: [],
           },
         },
         required: ['any_valid_service_token'],
@@ -3872,7 +3842,6 @@ export const tool: Tool = {
           certificate: {
             type: 'object',
             properties: {},
-            required: [],
           },
         },
         required: ['certificate'],
@@ -3976,7 +3945,6 @@ export const tool: Tool = {
             type: 'object',
             description: 'An empty object which matches on all users.',
             properties: {},
-            required: [],
           },
         },
         required: ['everyone'],

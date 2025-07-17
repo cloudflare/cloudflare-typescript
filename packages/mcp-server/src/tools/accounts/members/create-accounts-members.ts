@@ -46,6 +46,7 @@ export const tool: Tool = {
             enum: ['accepted', 'pending'],
           },
         },
+        required: ['account_id', 'email', 'roles'],
       },
       {
         type: 'object',
@@ -114,6 +115,7 @@ export const tool: Tool = {
             enum: ['accepted', 'pending'],
           },
         },
+        required: ['account_id', 'email', 'policies'],
       },
     ],
   },

@@ -60,6 +60,7 @@ export const tool: Tool = {
         },
       },
     },
+    required: ['account_id', 'name'],
     $defs: {
       endpoint: {
         type: 'object',
@@ -79,7 +80,6 @@ export const tool: Tool = {
             $ref: '#/$defs/ipv6_endpoint',
           },
         },
-        required: [],
       },
       doh_endpoint: {
         type: 'object',
@@ -102,7 +102,6 @@ export const tool: Tool = {
               'True if the endpoint requires [user identity](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/agentless/dns/dns-over-https/#filter-doh-requests-by-user) authentication.',
           },
         },
-        required: [],
       },
       ip_network: {
         type: 'object',
@@ -130,7 +129,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       ipv4_endpoint: {
         type: 'object',
@@ -140,7 +138,6 @@ export const tool: Tool = {
             description: 'True if the endpoint is enabled for this location.',
           },
         },
-        required: [],
       },
       ipv6_endpoint: {
         type: 'object',
@@ -158,7 +155,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       ipv6_network: {
         type: 'object',

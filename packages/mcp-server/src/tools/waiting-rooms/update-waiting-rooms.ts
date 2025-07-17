@@ -180,6 +180,7 @@ export const tool: Tool = {
         enum: ['off', 'invisible', 'visible_non_interactive', 'visible_managed'],
       },
     },
+    required: ['zone_id', 'waiting_room_id', 'host', 'name', 'new_users_per_minute', 'total_active_users'],
     $defs: {
       additional_routes: {
         type: 'object',
@@ -195,7 +196,6 @@ export const tool: Tool = {
               'Sets the path within the host to enable the waiting room on. The waiting room will be enabled for all subpaths as well. If there are two waiting rooms on the same subpath, the waiting room for the most specific path will be chosen. Wildcards and query parameters are not supported.',
           },
         },
-        required: [],
       },
       cookie_attributes: {
         type: 'object',
@@ -215,7 +215,6 @@ export const tool: Tool = {
             enum: ['auto', 'always', 'never'],
           },
         },
-        required: [],
       },
     },
   },

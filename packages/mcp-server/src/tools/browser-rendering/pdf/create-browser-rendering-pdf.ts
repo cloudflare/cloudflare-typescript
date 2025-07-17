@@ -53,7 +53,6 @@ export const tool: Tool = {
               type: 'string',
             },
           },
-          required: [],
         },
       },
       addStyleTag: {
@@ -70,7 +69,6 @@ export const tool: Tool = {
               type: 'string',
             },
           },
-          required: [],
         },
       },
       allowRequestPattern: {
@@ -211,7 +209,6 @@ export const tool: Tool = {
             ],
           },
         },
-        required: [],
       },
       html: {
         type: 'string',
@@ -299,7 +296,6 @@ export const tool: Tool = {
                 ],
               },
             },
-            required: [],
           },
           omitBackground: {
             type: 'boolean',
@@ -345,7 +341,6 @@ export const tool: Tool = {
             description: 'Sets the width of paper. Can be a number or string with unit.',
           },
         },
-        required: [],
       },
       rejectRequestPattern: {
         type: 'array',
@@ -447,6 +442,7 @@ export const tool: Tool = {
         description: 'Waits for a specified timeout before continuing.',
       },
     },
+    required: ['account_id'],
   },
 };
 

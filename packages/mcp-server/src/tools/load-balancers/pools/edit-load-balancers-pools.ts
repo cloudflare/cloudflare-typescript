@@ -92,6 +92,7 @@ export const tool: Tool = {
         },
       },
     },
+    required: ['account_id', 'pool_id'],
     $defs: {
       check_region: {
         type: 'string',
@@ -141,7 +142,6 @@ export const tool: Tool = {
             enum: ['hash'],
           },
         },
-        required: [],
       },
       notification_filter: {
         type: 'object',
@@ -155,7 +155,6 @@ export const tool: Tool = {
             $ref: '#/$defs/filter_options',
           },
         },
-        required: [],
       },
       filter_options: {
         type: 'object',
@@ -171,7 +170,6 @@ export const tool: Tool = {
               'If present, send notifications only for this health status (e.g. false for only DOWN events). Use null to reset (all events).',
           },
         },
-        required: [],
       },
       origin_steering: {
         type: 'object',
@@ -185,7 +183,6 @@ export const tool: Tool = {
             enum: ['random', 'hash', 'least_outstanding_requests', 'least_connections'],
           },
         },
-        required: [],
       },
       origin: {
         type: 'object',
@@ -229,7 +226,6 @@ export const tool: Tool = {
               'The weight of this origin relative to other origins in the pool. Based on the configured weight the total traffic is distributed among origins within the pool.\n- `origin_steering.policy="least_outstanding_requests"`: Use weight to scale the origin\'s outstanding requests.\n- `origin_steering.policy="least_connections"`: Use weight to scale the origin\'s open connections.',
           },
         },
-        required: [],
       },
       header: {
         type: 'object',
@@ -245,7 +241,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       host: {
         type: 'string',

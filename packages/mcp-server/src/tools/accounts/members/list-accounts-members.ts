@@ -50,6 +50,7 @@ export const tool: Tool = {
         enum: ['accepted', 'pending', 'rejected'],
       },
     },
+    required: ['account_id'],
   },
 };
 

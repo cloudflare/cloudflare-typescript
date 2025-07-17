@@ -29,6 +29,7 @@ export const tool: Tool = {
         description: 'API UUID.',
       },
     },
+    required: ['account_id', 'rule_id'],
   },
 };
 

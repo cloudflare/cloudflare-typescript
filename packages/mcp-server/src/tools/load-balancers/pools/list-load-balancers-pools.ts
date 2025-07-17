@@ -30,6 +30,7 @@ export const tool: Tool = {
         description: 'The ID of the Monitor to use for checking the health of origins within this pool.',
       },
     },
+    required: ['account_id'],
   },
 };
 

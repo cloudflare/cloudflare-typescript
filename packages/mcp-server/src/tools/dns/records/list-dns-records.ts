@@ -53,7 +53,6 @@ export const tool: Tool = {
             description: 'Prefix of the DNS record comment. Comment filters are case-insensitive.\n',
           },
         },
-        required: [],
       },
       content: {
         type: 'object',
@@ -75,7 +74,6 @@ export const tool: Tool = {
             description: 'Prefix of the DNS record content. Content filters are case-insensitive.\n',
           },
         },
-        required: [],
       },
       direction: {
         $ref: '#/$defs/sort_direction',
@@ -106,7 +104,6 @@ export const tool: Tool = {
             description: 'Prefix of the DNS record name. Name filters are case-insensitive.\n',
           },
         },
-        required: [],
       },
       order: {
         type: 'string',
@@ -164,7 +161,6 @@ export const tool: Tool = {
               'A tag and value, of the form `<tag-name>:<tag-value>`. The API will only return DNS records that have a tag named `<tag-name>` whose value starts with `<tag-value>`. Tag filters are case-insensitive.\n',
           },
         },
-        required: [],
       },
       tag_match: {
         type: 'string',
@@ -200,6 +196,7 @@ export const tool: Tool = {
         ],
       },
     },
+    required: ['zone_id'],
     $defs: {
       sort_direction: {
         type: 'string',

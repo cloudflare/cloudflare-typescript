@@ -142,7 +142,6 @@ export const tool: Tool = {
                         'Timeout for completing a TLS handshake to your origin server, if you have chosen to connect Tunnel to an HTTPS server.',
                     },
                   },
-                  required: [],
                 },
                 path: {
                   type: 'string',
@@ -241,7 +240,6 @@ export const tool: Tool = {
                   'Timeout for completing a TLS handshake to your origin server, if you have chosen to connect Tunnel to an HTTPS server.',
               },
             },
-            required: [],
           },
           'warp-routing': {
             type: 'object',
@@ -252,12 +250,11 @@ export const tool: Tool = {
                 type: 'boolean',
               },
             },
-            required: [],
           },
         },
-        required: [],
       },
     },
+    required: ['account_id', 'tunnel_id'],
   },
 };
 

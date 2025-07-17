@@ -62,6 +62,7 @@ export const tool: Tool = {
         description: 'Specifies whether the video is `vod` or `live`.',
       },
     },
+    required: ['account_id'],
   },
 };
 

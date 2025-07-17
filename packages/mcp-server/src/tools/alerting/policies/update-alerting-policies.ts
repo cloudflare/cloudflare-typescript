@@ -127,6 +127,7 @@ export const tool: Tool = {
         description: 'Name of the policy.',
       },
     },
+    required: ['account_id', 'policy_id'],
     $defs: {
       policy_filter: {
         type: 'object',
@@ -435,7 +436,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       mechanism: {
         type: 'object',
@@ -452,7 +452,6 @@ export const tool: Tool = {
                   description: 'The email address',
                 },
               },
-              required: [],
             },
           },
           pagerduty: {
@@ -465,7 +464,6 @@ export const tool: Tool = {
                   description: 'UUID',
                 },
               },
-              required: [],
             },
           },
           webhooks: {
@@ -478,11 +476,9 @@ export const tool: Tool = {
                   description: 'UUID',
                 },
               },
-              required: [],
             },
           },
         },
-        required: [],
       },
     },
   },

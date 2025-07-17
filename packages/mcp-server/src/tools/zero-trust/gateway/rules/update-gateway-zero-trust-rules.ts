@@ -118,6 +118,7 @@ export const tool: Tool = {
         description: 'The wirefilter expression used for traffic matching.',
       },
     },
+    required: ['account_id', 'rule_id', 'action', 'name'],
     $defs: {
       gateway_filter: {
         type: 'string',
@@ -146,7 +147,6 @@ export const tool: Tool = {
                 description: 'Enable to turn on SSH command logging.',
               },
             },
-            required: [],
           },
           biso_admin_controls: {
             type: 'object',
@@ -214,7 +214,6 @@ export const tool: Tool = {
                 enum: ['v1', 'v2'],
               },
             },
-            required: [],
           },
           block_page: {
             type: 'object',
@@ -258,7 +257,6 @@ export const tool: Tool = {
                 description: 'Set to true to enable session enforcement.',
               },
             },
-            required: [],
           },
           dns_resolvers: {
             type: 'object',
@@ -278,7 +276,6 @@ export const tool: Tool = {
                 },
               },
             },
-            required: [],
           },
           egress: {
             type: 'object',
@@ -299,7 +296,6 @@ export const tool: Tool = {
                 description: 'The IPv6 range to be used for egress.',
               },
             },
-            required: [],
           },
           ignore_cname_category_matches: {
             type: 'boolean',
@@ -333,7 +329,6 @@ export const tool: Tool = {
                 description: 'A port number to use for TCP/UDP overrides.',
               },
             },
-            required: [],
           },
           notification_settings: {
             type: 'object',
@@ -358,7 +353,6 @@ export const tool: Tool = {
                   'Optional URL to direct users to additional information. If not set, the notification will open a block page.',
               },
             },
-            required: [],
           },
           override_host: {
             type: 'string',
@@ -381,7 +375,6 @@ export const tool: Tool = {
                 description: 'Set to true to enable DLP payload logging for this rule.',
               },
             },
-            required: [],
           },
           quarantine: {
             type: 'object',
@@ -410,7 +403,6 @@ export const tool: Tool = {
                 },
               },
             },
-            required: [],
           },
           redirect: {
             type: 'object',
@@ -448,7 +440,6 @@ export const tool: Tool = {
                 description: "The internal DNS view identifier that's passed to the internal DNS service.",
               },
             },
-            required: [],
           },
           resolve_dns_through_cloudflare: {
             type: 'boolean',
@@ -466,10 +457,8 @@ export const tool: Tool = {
                 enum: ['pass_through', 'block', 'error'],
               },
             },
-            required: [],
           },
         },
-        required: [],
       },
       dns_resolver_settings_v4: {
         type: 'object',
@@ -565,7 +554,6 @@ export const tool: Tool = {
               'The time intervals when the rule will be active on Wednesdays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Wednesdays.',
           },
         },
-        required: [],
       },
     },
   },

@@ -59,6 +59,7 @@ export const tool: Tool = {
         enum: [0, 1],
       },
     },
+    required: ['zone_id'],
   },
 };
 

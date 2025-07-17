@@ -30,6 +30,7 @@ export const tool: Tool = {
         description: 'Scan UUID.',
       },
     },
+    required: ['account_id', 'scan_id'],
   },
 };
 

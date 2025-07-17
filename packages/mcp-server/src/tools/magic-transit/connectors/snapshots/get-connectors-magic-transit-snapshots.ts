@@ -32,6 +32,7 @@ export const tool: Tool = {
         type: 'number',
       },
     },
+    required: ['account_id', 'connector_id', 'snapshot_t'],
   },
 };
 

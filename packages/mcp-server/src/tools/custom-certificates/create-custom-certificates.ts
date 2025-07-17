@@ -51,6 +51,7 @@ export const tool: Tool = {
         enum: ['legacy_custom', 'sni_custom'],
       },
     },
+    required: ['zone_id', 'certificate', 'private_key'],
     $defs: {
       bundle_method: {
         type: 'string',
@@ -68,7 +69,6 @@ export const tool: Tool = {
             enum: ['us', 'eu', 'highest_security'],
           },
         },
-        required: [],
       },
     },
   },

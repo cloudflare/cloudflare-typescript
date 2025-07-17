@@ -106,7 +106,6 @@ export const tool: Tool = {
                 enum: ['on', 'off'],
               },
             },
-            required: [],
           },
           type: {
             $ref: '#/$defs/domain_validation_type',
@@ -116,7 +115,6 @@ export const tool: Tool = {
             description: 'Indicates whether the certificate covers a wildcard.',
           },
         },
-        required: [],
       },
       custom_metadata: {
         type: 'object',
@@ -124,6 +122,7 @@ export const tool: Tool = {
           'Unique key/value metadata for this hostname. These are per-hostname (customer) settings.',
       },
     },
+    required: ['zone_id', 'hostname', 'ssl'],
     $defs: {
       bundle_method: {
         type: 'string',

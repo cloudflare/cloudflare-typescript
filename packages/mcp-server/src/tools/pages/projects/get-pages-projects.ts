@@ -30,6 +30,7 @@ export const tool: Tool = {
         description: 'Name of the project.',
       },
     },
+    required: ['account_id', 'project_name'],
   },
 };
 

@@ -120,7 +120,6 @@ export const tool: Tool = {
                 enum: ['on', 'off'],
               },
             },
-            required: [],
           },
           type: {
             $ref: '#/$defs/domain_validation_type',
@@ -130,9 +129,9 @@ export const tool: Tool = {
             description: 'Indicates whether the certificate covers a wildcard.',
           },
         },
-        required: [],
       },
     },
+    required: ['zone_id', 'custom_hostname_id'],
     $defs: {
       bundle_method: {
         type: 'string',

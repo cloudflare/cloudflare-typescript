@@ -30,6 +30,7 @@ export const tool: Tool = {
         description: 'The UUID of the policy',
       },
     },
+    required: ['account_id', 'policy_id'],
   },
 };
 

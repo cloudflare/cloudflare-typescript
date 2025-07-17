@@ -28,6 +28,7 @@ export const tool: Tool = {
         $ref: '#/$defs/gateway_configuration_settings',
       },
     },
+    required: ['account_id'],
     $defs: {
       gateway_configuration_settings: {
         type: 'object',
@@ -79,7 +80,6 @@ export const tool: Tool = {
                 description: 'Enable filtering via hosts for egress policies.',
               },
             },
-            required: [],
           },
           protocol_detection: {
             $ref: '#/$defs/protocol_detection',
@@ -98,13 +98,11 @@ export const tool: Tool = {
                 enum: ['allow', 'block'],
               },
             },
-            required: [],
           },
           tls_decrypt: {
             $ref: '#/$defs/tls_settings',
           },
         },
-        required: [],
       },
       activity_log_settings: {
         type: 'object',
@@ -115,7 +113,6 @@ export const tool: Tool = {
             description: 'Enable activity logging.',
           },
         },
-        required: [],
       },
       anti_virus_settings: {
         type: 'object',
@@ -137,7 +134,6 @@ export const tool: Tool = {
             $ref: '#/$defs/notification_settings',
           },
         },
-        required: [],
       },
       notification_settings: {
         type: 'object',
@@ -162,7 +158,6 @@ export const tool: Tool = {
               'Optional URL to direct users to additional information. If not set, the notification will open a block page.',
           },
         },
-        required: [],
       },
       block_page_settings: {
         type: 'object',
@@ -230,7 +225,6 @@ export const tool: Tool = {
             description: 'If mode is redirect_uri: URI to which the user should be redirected.',
           },
         },
-        required: [],
       },
       body_scanning_settings: {
         type: 'object',
@@ -241,7 +235,6 @@ export const tool: Tool = {
             description: 'Set the inspection mode to either `deep` or `shallow`.',
           },
         },
-        required: [],
       },
       browser_isolation_settings: {
         type: 'object',
@@ -256,7 +249,6 @@ export const tool: Tool = {
             description: 'Enable Clientless Browser Isolation.',
           },
         },
-        required: [],
       },
       custom_certificate_settings: {
         type: 'object',
@@ -300,7 +292,6 @@ export const tool: Tool = {
             description: 'Account tag of account that shared this setting',
           },
         },
-        required: [],
       },
       fips_settings: {
         type: 'object',
@@ -311,7 +302,6 @@ export const tool: Tool = {
             description: 'Enable only cipher suites and TLS versions compliant with FIPS 140-2.',
           },
         },
-        required: [],
       },
       protocol_detection: {
         type: 'object',
@@ -322,7 +312,6 @@ export const tool: Tool = {
             description: 'Enable detecting protocol on initial bytes of client traffic.',
           },
         },
-        required: [],
       },
       tls_settings: {
         type: 'object',
@@ -333,7 +322,6 @@ export const tool: Tool = {
             description: 'Enable inspecting encrypted HTTP traffic.',
           },
         },
-        required: [],
       },
     },
   },

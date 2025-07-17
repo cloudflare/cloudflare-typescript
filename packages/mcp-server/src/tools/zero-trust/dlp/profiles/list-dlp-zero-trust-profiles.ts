@@ -29,6 +29,7 @@ export const tool: Tool = {
         description: 'Return all profiles, including those that current account does not have access to.',
       },
     },
+    required: ['account_id'],
   },
 };
 

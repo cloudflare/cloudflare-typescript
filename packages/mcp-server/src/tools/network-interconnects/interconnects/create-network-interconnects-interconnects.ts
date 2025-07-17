@@ -42,6 +42,7 @@ export const tool: Tool = {
             type: 'string',
           },
         },
+        required: ['account_id', 'account', 'slot_id', 'type'],
       },
       {
         type: 'object',
@@ -66,6 +67,7 @@ export const tool: Tool = {
             type: 'string',
           },
         },
+        required: ['account_id', 'account', 'bandwidth', 'pairing_key', 'type'],
       },
     ],
     properties: {

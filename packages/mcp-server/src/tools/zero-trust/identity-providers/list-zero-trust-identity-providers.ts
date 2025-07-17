@@ -34,6 +34,7 @@ export const tool: Tool = {
           'Indicates to Access to only retrieve identity providers that have the System for Cross-Domain Identity Management (SCIM) enabled.',
       },
     },
+    required: [],
   },
 };
 

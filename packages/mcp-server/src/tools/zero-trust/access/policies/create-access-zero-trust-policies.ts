@@ -87,6 +87,7 @@ export const tool: Tool = {
           'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
       },
     },
+    required: ['account_id', 'decision', 'include', 'name'],
     $defs: {
       decision: {
         type: 'string',
@@ -271,7 +272,6 @@ export const tool: Tool = {
             type: 'object',
             description: 'An empty object which matches on all service tokens.',
             properties: {},
-            required: [],
           },
         },
         required: ['any_valid_service_token'],
@@ -325,7 +325,6 @@ export const tool: Tool = {
           certificate: {
             type: 'object',
             properties: {},
-            required: [],
           },
         },
         required: ['certificate'],
@@ -429,7 +428,6 @@ export const tool: Tool = {
             type: 'object',
             description: 'An empty object which matches on all users.',
             properties: {},
-            required: [],
           },
         },
         required: ['everyone'],

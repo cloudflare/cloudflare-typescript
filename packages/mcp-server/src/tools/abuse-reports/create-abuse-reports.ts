@@ -195,6 +195,7 @@ export const tool: Tool = {
             description: 'Text not exceeding 1000 characters',
           },
         },
+        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
       },
       {
         type: 'object',
@@ -370,6 +371,7 @@ export const tool: Tool = {
             description: 'Text not exceeding 1000 characters',
           },
         },
+        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
       },
       {
         type: 'object',
@@ -545,6 +547,7 @@ export const tool: Tool = {
             description: 'Text not exceeding 1000 characters',
           },
         },
+        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
       },
       {
         type: 'object',
@@ -720,6 +723,7 @@ export const tool: Tool = {
             description: 'Text not exceeding 1000 characters',
           },
         },
+        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
       },
       {
         type: 'object',
@@ -895,6 +899,7 @@ export const tool: Tool = {
             description: 'Text not exceeding 1000 characters',
           },
         },
+        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
       },
       {
         type: 'object',
@@ -1070,6 +1075,7 @@ export const tool: Tool = {
             description: 'Text not exceeding 1000 characters',
           },
         },
+        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
       },
       {
         type: 'object',
@@ -1245,6 +1251,7 @@ export const tool: Tool = {
             description: 'Text not exceeding 1000 characters',
           },
         },
+        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
       },
       {
         type: 'object',
@@ -1420,6 +1427,7 @@ export const tool: Tool = {
             description: 'Text not exceeding 1000 characters',
           },
         },
+        required: ['account_id', 'report_type', 'act', 'email', 'email2', 'name', 'urls'],
       },
     ],
   },

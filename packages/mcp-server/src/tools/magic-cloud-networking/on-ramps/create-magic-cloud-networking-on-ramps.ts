@@ -78,6 +78,14 @@ export const tool: Tool = {
         type: 'string',
       },
     },
+    required: [
+      'account_id',
+      'cloud_type',
+      'install_routes_in_cloud',
+      'install_routes_in_magic_wan',
+      'name',
+      'type',
+    ],
   },
 };
 

@@ -30,6 +30,7 @@ export const tool: Tool = {
         description: 'The unique identifier of a notification policy',
       },
     },
+    required: ['account_id', 'policy_id'],
   },
 };
 
