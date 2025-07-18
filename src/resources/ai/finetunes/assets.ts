@@ -17,27 +17,15 @@ export class Assets extends APIResource {
     options?: RequestOptions,
   ): APIPromise<AssetCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(
-        path`/accounts/${account_id}/ai/finetunes/${finetuneID}/finetune-assets`,
-        multipartFormRequestOptions({ body, ...options }, this._client),
-      ) as APIPromise<{ result: AssetCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.post(
+      path`/accounts/${account_id}/ai/finetunes/${finetuneID}/finetune-assets`,
+      multipartFormRequestOptions({ body, ...options }, this._client),
+    );
   }
 }
 
 export interface AssetCreateResponse {
-  id: string;
-
-  bucket_name: string;
-
-  created_at: string;
-
-  file_name: string;
-
-  finetune_id: string;
-
-  modified_at: string;
+  success: boolean;
 }
 
 export interface AssetCreateParams {
