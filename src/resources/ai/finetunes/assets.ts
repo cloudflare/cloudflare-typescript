@@ -13,27 +13,15 @@ export class Assets extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<AssetCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(
-        `/accounts/${account_id}/ai/finetunes/${finetuneId}/finetune-assets`,
-        Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: AssetCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.post(
+      `/accounts/${account_id}/ai/finetunes/${finetuneId}/finetune-assets`,
+      Core.multipartFormRequestOptions({ body, ...options }),
+    );
   }
 }
 
 export interface AssetCreateResponse {
-  id: string;
-
-  bucket_name: string;
-
-  created_at: string;
-
-  file_name: string;
-
-  finetune_id: string;
-
-  modified_at: string;
+  success: boolean;
 }
 
 export interface AssetCreateParams {
