@@ -72,6 +72,7 @@ describe('resource allowPolicies', () => {
       is_trusted_sender: true,
       order: 'pattern',
       page: 1,
+      pattern: 'pattern',
       pattern_type: 'EMAIL',
       per_page: 1,
       search: 'search',

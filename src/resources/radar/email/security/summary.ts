@@ -262,7 +262,7 @@ export namespace SummaryARCResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -359,7 +359,7 @@ export namespace SummaryDKIMResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -456,7 +456,7 @@ export namespace SummaryDMARCResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -553,7 +553,7 @@ export namespace SummaryMaliciousResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -662,7 +662,7 @@ export namespace SummarySpamResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -771,7 +771,7 @@ export namespace SummarySPFResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -868,7 +868,7 @@ export namespace SummarySpoofResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -977,7 +977,7 @@ export namespace SummaryThreatCategoryResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -1096,7 +1096,7 @@ export namespace SummaryTLSVersionResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 

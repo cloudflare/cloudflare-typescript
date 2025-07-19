@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource brandProtection', () => {
   test('submit: only required params', async () => {
-    const responsePromise = client.brandProtection.submit({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.brandProtection.submit({ account_id: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,16 +22,11 @@ describe('resource brandProtection', () => {
   });
 
   test('submit: required and optional params', async () => {
-    const response = await client.brandProtection.submit({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      url: 'https://www.cloudflare.com',
-    });
+    const response = await client.brandProtection.submit({ account_id: 'x' });
   });
 
   test('urlInfo: only required params', async () => {
-    const responsePromise = client.brandProtection.urlInfo({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.brandProtection.urlInfo({ account_id: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,10 +37,6 @@ describe('resource brandProtection', () => {
   });
 
   test('urlInfo: required and optional params', async () => {
-    const response = await client.brandProtection.urlInfo({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      url: ['string'],
-      url_id: [0],
-    });
+    const response = await client.brandProtection.urlInfo({ account_id: 'x' });
   });
 });

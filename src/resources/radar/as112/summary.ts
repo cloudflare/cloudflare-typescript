@@ -182,7 +182,7 @@ export namespace SummaryDNSSECResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -291,7 +291,7 @@ export namespace SummaryEdnsResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -400,7 +400,7 @@ export namespace SummaryIPVersionResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -509,7 +509,7 @@ export namespace SummaryProtocolResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -628,7 +628,7 @@ export namespace SummaryQueryTypeResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -725,7 +725,7 @@ export namespace SummaryResponseCodesResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 

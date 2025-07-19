@@ -401,6 +401,11 @@ export interface TrustedDomainListParams extends V4PagePaginationArrayParams {
   order?: 'pattern' | 'created_at';
 
   /**
+   * Query param:
+   */
+  pattern?: string;
+
+  /**
    * Query param: Allows searching in multiple properties of a record simultaneously.
    * This parameter is intended for human users, not automation. Its exact behavior
    * is intentionally left unspecified and is subject to change in the future.
