@@ -1,46 +1,51 @@
 #!/usr/bin/env -S npm run tsn -T
 
-/*
- * Generate an API token: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
- * (Not Global API Key!)
+/**
+ * Create a Worker with a Version and Deployment
+ * 
+ * Docs
+ * - https://developers.cloudflare.com/workers/configuration/versions-and-deployments/
+ * - https://developers.cloudflare.com/workers/platform/infrastructure-as-code/
+ * 
+ * Generate an API token:
+ *   https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
+ *   (Not Global API Key!)
  *
- * Find your account id: https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/
+ * Find your account id:
+ *   https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/
+ * 
+ * Find your workers.dev subdomain:
+ *   https://developers.cloudflare.com/workers/configuration/routing/workers-dev/
  *
  * Set these environment variables:
- * - CLOUDFLARE_API_TOKEN
- * - CLOUDFLARE_ACCOUNT_ID
- *
- * ### Workers for Platforms ###
- *
- * For uploading a User Worker to a dispatch namespace:
- * https://developers.cloudflare.com/cloudflare-for-platforms/workers-for-platforms/
- *
- * Define a "dispatchNamespaceName" variable and change the entire "const script = " line to the following:
- * "const script = await client.workersForPlatforms.dispatch.namespaces.scripts.update(dispatchNamespaceName, scriptName, {"
+ *   - CLOUDFLARE_API_TOKEN
+ *   - CLOUDFLARE_ACCOUNT_ID
+ *   - CLOUDFLARE_SUBDOMAIN
  */
 
 import Cloudflare from 'cloudflare';
-import { toFile } from 'cloudflare/index';
 
 const apiToken = process.env['CLOUDFLARE_API_TOKEN'] ?? '';
 if (!apiToken) {
-  throw new Error('Please set envar CLOUDFLARE_ACCOUNT_ID');
+  throw new Error('Please set envar CLOUDFLARE_API_TOKEN');
 }
 
 const accountID = process.env['CLOUDFLARE_ACCOUNT_ID'] ?? '';
 if (!accountID) {
-  throw new Error('Please set envar CLOUDFLARE_API_TOKEN');
+  throw new Error('Please set envar CLOUDFLARE_ACCOUNT_ID');
 }
 
+const subdomain = process.env['CLOUDFLARE_SUBDOMAIN'] ?? '';
+
 const client = new Cloudflare({
-  apiToken: apiToken,
+  apiToken,
 });
 
 async function main() {
-  const scriptName = 'my-hello-world-script';
-  const scriptFileName = `${scriptName}.mjs`;
+  const workerName = 'my-hello-world-worker';
+  const scriptFileName = `${workerName}.mjs`;
 
-  // Workers Scripts prefer Module Syntax
+  // Workers Scripts use ES Module Syntax
   // https://blog.cloudflare.com/workers-javascript-modules/
   const scriptContent = `
     export default {
@@ -50,37 +55,65 @@ async function main() {
     };
   `;
 
-  try {
-    // https://developers.cloudflare.com/api/resources/workers/subresources/scripts/methods/update/
-    const script = await client.workers.scripts.update(scriptName, {
-      account_id: accountID,
-      // https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/
-      metadata: {
-        main_module: scriptFileName,
-        bindings: [
-          {
-            type: 'plain_text',
-            name: 'MESSAGE',
-            text: 'Hello World!',
-          },
-        ],
+  /**
+   * Create a Worker and set non-versioned settings like observability
+   */
+  const worker = await client.workers.create(workerName, {
+    account_id: accountID,
+    subdomain: {
+      enabled: subdomain ? true : false,
+    },
+    observability: {
+      enabled: true,
+    },
+  });
+
+  /**
+   * Create the first version of the Worker
+   * This is where code and bindings are defined and can be different between versions
+   */
+  const version = await client.workers.versions.create(worker.id, {
+    account_id: accountID,
+    main_module: scriptFileName,
+    compatibility_date: new Date().toISOString().split('T')[0],
+    bindings: [
+      {
+        type: 'plain_text',
+        name: 'MESSAGE',
+        text: 'Hello World!',
       },
-      files: {
-        // Add main_module file
-        [scriptFileName]: await toFile(Buffer.from(scriptContent), scriptFileName, {
-          type: 'application/javascript+module',
-        }),
-        // Can add other files, such as more modules or source maps
-        // [sourceMapFileName]: await toFile(Buffer.from(sourceMapContent), sourceMapFileName, {
-        //   type: 'application/source-map',
-        // }),
+    ],
+    modules: [
+      {
+        name: scriptFileName,
+        content_type: 'application/javascript+module',
+        content_base64: Buffer.from(scriptContent).toString('base64'),
       },
-    });
-    console.log('Script Upload success!');
-    console.log(JSON.stringify(script, null, 2));
-  } catch (error) {
-    console.error('Script Upload failure!');
-    console.error(error);
+    ],
+  });
+
+  /**
+   * Create a deployment and point all traffic to the version we created
+   * Triggers that hit fetch() in the Worker (ie. HTTP requests from workers.dev, routes, and custom domains)
+   * split requests between one or multiple versions by deployments
+   */
+  const deployment = await client.workers.scripts.deployments.create(worker.name, {
+    account_id: accountID,
+    strategy: 'percentage',
+    versions: [
+      {
+        percentage: 100,
+        version_id: version.id,
+      },
+    ],
+  });
+
+  console.log(JSON.stringify(deployment, null, 2));
+  if (subdomain) {
+    console.log(`${workerName} is live at: ${workerName}.${subdomain}.workers.dev`);
+  }
+  else {
+    console.log('Setup a route, custom domain, or workers.dev subdomain to access this Worker.');
   }
 }
 
