@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.6.0 (2025-07-19)
+
+Full Changelog: [v4.5.0...v4.6.0](https://github.com/cloudflare/cloudflare-typescript/compare/v4.5.0...v4.6.0)
+
+### Features
+
+* **api:** api update ([7a42645](https://github.com/cloudflare/cloudflare-typescript/commit/7a42645614501881c1ee25ca585b6266c5848854))
+* **api:** api update ([059dc1e](https://github.com/cloudflare/cloudflare-typescript/commit/059dc1ef33f1a435002aa3302490b8ec458d653f))
+* **api:** api update ([4050818](https://github.com/cloudflare/cloudflare-typescript/commit/4050818dba45a26ce01ef84d1a3ebf4ee1fb3624))
+* **api:** api update ([d07e22f](https://github.com/cloudflare/cloudflare-typescript/commit/d07e22f7c1bab6a9eed16343cdec97d61e39ed7b))
+
 ## 4.5.0 (2025-07-16)
 
 Full Changelog: [v4.4.1...v4.5.0](https://github.com/cloudflare/cloudflare-typescript/compare/v4.4.1...v4.5.0)
