@@ -179,43 +179,43 @@ export interface ListsList {
   /**
    * The unique ID of the list.
    */
-  id?: string;
+  id: string;
 
   /**
    * The RFC 3339 timestamp of when the list was created.
    */
-  created_on?: string;
-
-  /**
-   * An informative summary of the list.
-   */
-  description?: string;
+  created_on: string;
 
   /**
    * The type of the list. Each type supports specific list items (IP addresses,
    * ASNs, hostnames or redirects).
    */
-  kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
+  kind: 'ip' | 'redirect' | 'hostname' | 'asn';
 
   /**
    * The RFC 3339 timestamp of when the list was last modified.
    */
-  modified_on?: string;
+  modified_on: string;
 
   /**
    * An informative name for the list. Use this name in filter and rule expressions.
    */
-  name?: string;
+  name: string;
 
   /**
    * The number of items in the list.
    */
-  num_items?: number;
+  num_items: number;
 
   /**
-   * The number of [filters](/operations/filters-list-filters) referencing the list.
+   * The number of [filters](/api/resources/filters/) referencing the list.
    */
-  num_referencing_filters?: number;
+  num_referencing_filters: number;
+
+  /**
+   * An informative summary of the list.
+   */
+  description?: string;
 }
 
 /**
@@ -260,136 +260,136 @@ export interface ListCreateResponse {
   /**
    * The unique ID of the list.
    */
-  id?: string;
+  id: string;
 
   /**
    * The RFC 3339 timestamp of when the list was created.
    */
-  created_on?: string;
-
-  /**
-   * An informative summary of the list.
-   */
-  description?: string;
+  created_on: string;
 
   /**
    * The type of the list. Each type supports specific list items (IP addresses,
    * ASNs, hostnames or redirects).
    */
-  kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
+  kind: 'ip' | 'redirect' | 'hostname' | 'asn';
 
   /**
    * The RFC 3339 timestamp of when the list was last modified.
    */
-  modified_on?: string;
+  modified_on: string;
 
   /**
    * An informative name for the list. Use this name in filter and rule expressions.
    */
-  name?: string;
+  name: string;
 
   /**
    * The number of items in the list.
    */
-  num_items?: number;
+  num_items: number;
 
   /**
-   * The number of [filters](/operations/filters-list-filters) referencing the list.
+   * The number of [filters](/api/resources/filters/) referencing the list.
    */
-  num_referencing_filters?: number;
+  num_referencing_filters: number;
+
+  /**
+   * An informative summary of the list.
+   */
+  description?: string;
 }
 
 export interface ListUpdateResponse {
   /**
    * The unique ID of the list.
    */
-  id?: string;
+  id: string;
 
   /**
    * The RFC 3339 timestamp of when the list was created.
    */
-  created_on?: string;
-
-  /**
-   * An informative summary of the list.
-   */
-  description?: string;
+  created_on: string;
 
   /**
    * The type of the list. Each type supports specific list items (IP addresses,
    * ASNs, hostnames or redirects).
    */
-  kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
+  kind: 'ip' | 'redirect' | 'hostname' | 'asn';
 
   /**
    * The RFC 3339 timestamp of when the list was last modified.
    */
-  modified_on?: string;
+  modified_on: string;
 
   /**
    * An informative name for the list. Use this name in filter and rule expressions.
    */
-  name?: string;
+  name: string;
 
   /**
    * The number of items in the list.
    */
-  num_items?: number;
+  num_items: number;
 
   /**
-   * The number of [filters](/operations/filters-list-filters) referencing the list.
+   * The number of [filters](/api/resources/filters/) referencing the list.
    */
-  num_referencing_filters?: number;
+  num_referencing_filters: number;
+
+  /**
+   * An informative summary of the list.
+   */
+  description?: string;
 }
 
 export interface ListDeleteResponse {
   /**
    * The unique ID of the list.
    */
-  id?: string;
+  id: string;
 }
 
 export interface ListGetResponse {
   /**
    * The unique ID of the list.
    */
-  id?: string;
+  id: string;
 
   /**
    * The RFC 3339 timestamp of when the list was created.
    */
-  created_on?: string;
-
-  /**
-   * An informative summary of the list.
-   */
-  description?: string;
+  created_on: string;
 
   /**
    * The type of the list. Each type supports specific list items (IP addresses,
    * ASNs, hostnames or redirects).
    */
-  kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
+  kind: 'ip' | 'redirect' | 'hostname' | 'asn';
 
   /**
    * The RFC 3339 timestamp of when the list was last modified.
    */
-  modified_on?: string;
+  modified_on: string;
 
   /**
    * An informative name for the list. Use this name in filter and rule expressions.
    */
-  name?: string;
+  name: string;
 
   /**
    * The number of items in the list.
    */
-  num_items?: number;
+  num_items: number;
 
   /**
-   * The number of [filters](/operations/filters-list-filters) referencing the list.
+   * The number of [filters](/api/resources/filters/) referencing the list.
    */
-  num_referencing_filters?: number;
+  num_referencing_filters: number;
+
+  /**
+   * An informative summary of the list.
+   */
+  description?: string;
 }
 
 export interface ListCreateParams {

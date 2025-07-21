@@ -13,7 +13,7 @@ describe('resource items', () => {
   test('create: only required params', async () => {
     const responsePromise = client.rules.lists.items.create('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{}],
+      body: [{ ip: '10.0.0.1' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,30 +27,14 @@ describe('resource items', () => {
   test('create: required and optional params', async () => {
     const response = await client.rules.lists.items.create('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [
-        {
-          asn: 5567,
-          comment: 'Private IP address',
-          hostname: { url_hostname: 'example.com', exclude_exact_hostname: true },
-          ip: '10.0.0.1',
-          redirect: {
-            source_url: 'example.com/arch',
-            target_url: 'https://archlinux.org/',
-            include_subdomains: true,
-            preserve_path_suffix: true,
-            preserve_query_string: true,
-            status_code: 301,
-            subpath_matching: true,
-          },
-        },
-      ],
+      body: [{ ip: '10.0.0.1', comment: 'Private IP address' }],
     });
   });
 
   test('update: only required params', async () => {
     const responsePromise = client.rules.lists.items.update('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{}],
+      body: [{ ip: '10.0.0.1' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,23 +48,7 @@ describe('resource items', () => {
   test('update: required and optional params', async () => {
     const response = await client.rules.lists.items.update('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [
-        {
-          asn: 5567,
-          comment: 'Private IP address',
-          hostname: { url_hostname: 'example.com', exclude_exact_hostname: true },
-          ip: '10.0.0.1',
-          redirect: {
-            source_url: 'example.com/arch',
-            target_url: 'https://archlinux.org/',
-            include_subdomains: true,
-            preserve_path_suffix: true,
-            preserve_query_string: true,
-            status_code: 301,
-            subpath_matching: true,
-          },
-        },
-      ],
+      body: [{ ip: '10.0.0.1', comment: 'Private IP address' }],
     });
   });
 

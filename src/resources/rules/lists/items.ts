@@ -18,7 +18,7 @@ export class Items extends APIResource {
    *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{}],
+   *     body: [{ ip: '10.0.0.1' }],
    *   },
    * );
    * ```
@@ -50,7 +50,7 @@ export class Items extends APIResource {
    *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{}],
+   *     body: [{ ip: '10.0.0.1' }],
    *   },
    * );
    * ```
@@ -164,21 +164,21 @@ export interface ListItem {
   /**
    * The unique operation ID of the asynchronous action.
    */
-  operation_id?: string;
+  operation_id: string;
 }
 
 export interface ItemCreateResponse {
   /**
    * The unique operation ID of the asynchronous action.
    */
-  operation_id?: string;
+  operation_id: string;
 }
 
 export interface ItemUpdateResponse {
   /**
    * The unique operation ID of the asynchronous action.
    */
-  operation_id?: string;
+  operation_id: string;
 }
 
 export interface ItemListResponse {
@@ -228,7 +228,7 @@ export interface ItemDeleteResponse {
   /**
    * The unique operation ID of the asynchronous action.
    */
-  operation_id?: string;
+  operation_id: string;
 }
 
 export interface ItemGetResponse {
@@ -283,36 +283,62 @@ export interface ItemCreateParams {
   /**
    * Body param:
    */
-  body: Array<ItemCreateParams.Body>;
+  body: Array<
+    | ItemCreateParams.UnionMember0
+    | ItemCreateParams.UnionMember1
+    | ItemCreateParams.UnionMember2
+    | ItemCreateParams.UnionMember3
+  >;
 }
 
 export namespace ItemCreateParams {
-  export interface Body {
+  export interface UnionMember0 {
     /**
-     * Defines a non-negative 32 bit integer.
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
      */
-    asn?: number;
+    ip: string;
 
     /**
      * Defines an informative summary of the list item.
      */
     comment?: string;
+  }
 
+  export interface UnionMember1 {
+    /**
+     * The definition of the redirect.
+     */
+    redirect: ListsAPI.RedirectParam;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface UnionMember2 {
     /**
      * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
      * 0 to 9, wildcards (\*), and the hyphen (-).
      */
-    hostname?: ListsAPI.HostnameParam;
+    hostname: ListsAPI.HostnameParam;
 
     /**
-     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
+     * Defines an informative summary of the list item.
      */
-    ip?: string;
+    comment?: string;
+  }
+
+  export interface UnionMember3 {
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn: number;
 
     /**
-     * The definition of the redirect.
+     * Defines an informative summary of the list item.
      */
-    redirect?: ListsAPI.RedirectParam;
+    comment?: string;
   }
 }
 
@@ -325,36 +351,62 @@ export interface ItemUpdateParams {
   /**
    * Body param:
    */
-  body: Array<ItemUpdateParams.Body>;
+  body: Array<
+    | ItemUpdateParams.UnionMember0
+    | ItemUpdateParams.UnionMember1
+    | ItemUpdateParams.UnionMember2
+    | ItemUpdateParams.UnionMember3
+  >;
 }
 
 export namespace ItemUpdateParams {
-  export interface Body {
+  export interface UnionMember0 {
     /**
-     * Defines a non-negative 32 bit integer.
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
      */
-    asn?: number;
+    ip: string;
 
     /**
      * Defines an informative summary of the list item.
      */
     comment?: string;
+  }
 
+  export interface UnionMember1 {
+    /**
+     * The definition of the redirect.
+     */
+    redirect: ListsAPI.RedirectParam;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface UnionMember2 {
     /**
      * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
      * 0 to 9, wildcards (\*), and the hyphen (-).
      */
-    hostname?: ListsAPI.HostnameParam;
+    hostname: ListsAPI.HostnameParam;
 
     /**
-     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
+     * Defines an informative summary of the list item.
      */
-    ip?: string;
+    comment?: string;
+  }
+
+  export interface UnionMember3 {
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn: number;
 
     /**
-     * The definition of the redirect.
+     * Defines an informative summary of the list item.
      */
-    redirect?: ListsAPI.RedirectParam;
+    comment?: string;
   }
 }
 
