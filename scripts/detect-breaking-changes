@@ -682,7 +682,6 @@ TEST_PATHS=(
 	tests/api-resources/cloudforce-one/threat-events/tags.test.ts
 	tests/api-resources/cloudforce-one/threat-events/event-tags.test.ts
 	tests/api-resources/cloudforce-one/threat-events/target-industries.test.ts
-	tests/api-resources/cloudforce-one/threat-events/insights.test.ts
 	tests/api-resources/ai-gateway/ai-gateway.test.ts
 	tests/api-resources/ai-gateway/evaluation-types.test.ts
 	tests/api-resources/ai-gateway/logs.test.ts
