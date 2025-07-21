@@ -170,6 +170,8 @@ describe('resource threatEvents', () => {
       event: 'An attacker registered the domain domain.com',
       indicator: 'domain2.com',
       indicatorType: 'sha256',
+      insight: 'new insight',
+      raw: { data: { foo: 'bar' }, source: 'example.com', tlp: 'amber' },
       targetCountry: 'US',
       targetIndustry: 'Insurance',
       tlp: 'amber',
