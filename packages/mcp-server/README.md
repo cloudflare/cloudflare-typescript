@@ -3850,13 +3850,6 @@ The following tools are available in this MCP server.
 
 - `list_threat_events_cloudforce_one_target_industries` (`read`): Lists all target industries
 
-### Resource `cloudforce_one.threat_events.insights`:
-
-- `create_threat_events_cloudforce_one_insights` (`write`): Adds an insight to an event
-- `delete_threat_events_cloudforce_one_insights` (`write`): Deletes an event insight
-- `edit_threat_events_cloudforce_one_insights` (`write`): Updates an event insight
-- `get_threat_events_cloudforce_one_insights` (`read`): Reads an event insight
-
 ### Resource `ai_gateway`:
 
 - `create_ai_gateway` (`write`): Create a new Gateway

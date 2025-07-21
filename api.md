@@ -8000,20 +8000,6 @@ Methods:
 
 ### Insights
 
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightCreateResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightDeleteResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightEditResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightGetResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/create">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">create</a>(eventID, { ...params }) -> InsightCreateResponse</code>
-- <code title="delete /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">delete</a>(insightID, { ...params }) -> InsightDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">edit</a>(insightID, { ...params }) -> InsightEditResponse</code>
-- <code title="get /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">get</a>(insightID, { ...params }) -> InsightGetResponse</code>
-
 # AIGateway
 
 Types:

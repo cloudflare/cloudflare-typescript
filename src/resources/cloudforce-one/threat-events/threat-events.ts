@@ -32,17 +32,7 @@ import {
 import * as IndicatorTypesAPI from './indicator-types';
 import { IndicatorTypeListParams, IndicatorTypeListResponse, IndicatorTypes } from './indicator-types';
 import * as InsightsAPI from './insights';
-import {
-  InsightCreateParams,
-  InsightCreateResponse,
-  InsightDeleteParams,
-  InsightDeleteResponse,
-  InsightEditParams,
-  InsightEditResponse,
-  InsightGetParams,
-  InsightGetResponse,
-  Insights,
-} from './insights';
+import { Insights } from './insights';
 import * as RawAPI from './raw';
 import { Raw as RawAPIRaw, RawEditParams, RawEditResponse, RawGetParams, RawGetResponse } from './raw';
 import * as RelateAPI from './relate';
@@ -727,6 +717,16 @@ export interface ThreatEventEditParams {
   /**
    * Body param:
    */
+  insight?: string;
+
+  /**
+   * Body param:
+   */
+  raw?: ThreatEventEditParams.Raw;
+
+  /**
+   * Body param:
+   */
   targetCountry?: string;
 
   /**
@@ -738,6 +738,16 @@ export interface ThreatEventEditParams {
    * Body param:
    */
   tlp?: string;
+}
+
+export namespace ThreatEventEditParams {
+  export interface Raw {
+    data?: { [key: string]: unknown } | null;
+
+    source?: string;
+
+    tlp?: string;
+  }
 }
 
 export interface ThreatEventGetParams {
@@ -864,15 +874,5 @@ export declare namespace ThreatEvents {
     type TargetIndustryListParams as TargetIndustryListParams,
   };
 
-  export {
-    Insights as Insights,
-    type InsightCreateResponse as InsightCreateResponse,
-    type InsightDeleteResponse as InsightDeleteResponse,
-    type InsightEditResponse as InsightEditResponse,
-    type InsightGetResponse as InsightGetResponse,
-    type InsightCreateParams as InsightCreateParams,
-    type InsightDeleteParams as InsightDeleteParams,
-    type InsightEditParams as InsightEditParams,
-    type InsightGetParams as InsightGetParams,
-  };
+  export { Insights as Insights };
 }

@@ -52,6 +52,23 @@ export const tool: Tool = {
       indicatorType: {
         type: 'string',
       },
+      insight: {
+        type: 'string',
+      },
+      raw: {
+        type: 'object',
+        properties: {
+          data: {
+            type: 'object',
+          },
+          source: {
+            type: 'string',
+          },
+          tlp: {
+            type: 'string',
+          },
+        },
+      },
       targetCountry: {
         type: 'string',
       },
