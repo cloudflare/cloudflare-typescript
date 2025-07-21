@@ -9,8 +9,12 @@ import * as DeploymentsAPI from './deployments';
 import {
   DeploymentCreateParams,
   DeploymentCreateResponse,
+  DeploymentDeleteParams,
+  DeploymentDeleteResponse,
   DeploymentGetParams,
   DeploymentGetResponse,
+  DeploymentListParams,
+  DeploymentListResponse,
   Deployments,
 } from './deployments';
 import * as SchedulesAPI from './schedules';
@@ -1298,8 +1302,12 @@ export declare namespace Scripts {
   export {
     Deployments as Deployments,
     type DeploymentCreateResponse as DeploymentCreateResponse,
+    type DeploymentListResponse as DeploymentListResponse,
+    type DeploymentDeleteResponse as DeploymentDeleteResponse,
     type DeploymentGetResponse as DeploymentGetResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentListParams as DeploymentListParams,
+    type DeploymentDeleteParams as DeploymentDeleteParams,
     type DeploymentGetParams as DeploymentGetParams,
   };
 
