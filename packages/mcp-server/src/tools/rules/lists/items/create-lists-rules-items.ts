@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_lists_rules_items',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nAppends new items to the list.\n\nThis operation is asynchronous. To get current the operation status, invoke the `Get bulk operation status` endpoint with the returned `operation_id`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    result: {\n      type: 'object',\n      properties: {\n        operation_id: {\n          type: 'string',\n          description: 'The unique operation ID of the asynchronous action.'\n        }\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Defines whether the API call was successful.',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nAppends new items to the list.\n\nThis operation is asynchronous. To get current the operation status, invoke the `Get bulk operation status` endpoint with the returned `operation_id`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    result: {\n      type: 'object',\n      properties: {\n        operation_id: {\n          type: 'string',\n          description: 'The unique operation ID of the asynchronous action.'\n        }\n      },\n      required: [        'operation_id'\n      ]\n    },\n    success: {\n      type: 'string',\n      description: 'Defines whether the API call was successful.',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -33,27 +33,62 @@ export const tool: Tool = {
       body: {
         type: 'array',
         items: {
-          type: 'object',
-          properties: {
-            asn: {
-              type: 'integer',
-              description: 'Defines a non-negative 32 bit integer.',
+          anyOf: [
+            {
+              type: 'object',
+              properties: {
+                ip: {
+                  type: 'string',
+                  description: 'An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.',
+                },
+                comment: {
+                  type: 'string',
+                  description: 'Defines an informative summary of the list item.',
+                },
+              },
+              required: ['ip'],
             },
-            comment: {
-              type: 'string',
-              description: 'Defines an informative summary of the list item.',
+            {
+              type: 'object',
+              properties: {
+                redirect: {
+                  $ref: '#/$defs/redirect',
+                },
+                comment: {
+                  type: 'string',
+                  description: 'Defines an informative summary of the list item.',
+                },
+              },
+              required: ['redirect'],
             },
-            hostname: {
-              $ref: '#/$defs/hostname',
+            {
+              type: 'object',
+              properties: {
+                hostname: {
+                  $ref: '#/$defs/hostname',
+                },
+                comment: {
+                  type: 'string',
+                  description: 'Defines an informative summary of the list item.',
+                },
+              },
+              required: ['hostname'],
             },
-            ip: {
-              type: 'string',
-              description: 'An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.',
+            {
+              type: 'object',
+              properties: {
+                asn: {
+                  type: 'integer',
+                  description: 'Defines a non-negative 32 bit integer.',
+                },
+                comment: {
+                  type: 'string',
+                  description: 'Defines an informative summary of the list item.',
+                },
+              },
+              required: ['asn'],
             },
-            redirect: {
-              $ref: '#/$defs/redirect',
-            },
-          },
+          ],
         },
       },
       jq_filter: {
@@ -65,22 +100,6 @@ export const tool: Tool = {
     },
     required: ['account_id', 'list_id', 'body'],
     $defs: {
-      hostname: {
-        type: 'object',
-        description:
-          'Valid characters for hostnames are ASCII(7) letters from a to z, the digits from 0 to 9, wildcards (*), and the hyphen (-).',
-        properties: {
-          url_hostname: {
-            type: 'string',
-          },
-          exclude_exact_hostname: {
-            type: 'boolean',
-            description:
-              'Only applies to wildcard hostnames (e.g., *.example.com). When true (default), only subdomains are blocked. When false, both the root domain and subdomains are blocked.',
-          },
-        },
-        required: ['url_hostname'],
-      },
       redirect: {
         type: 'object',
         description: 'The definition of the redirect.',
@@ -109,6 +128,22 @@ export const tool: Tool = {
           },
         },
         required: ['source_url', 'target_url'],
+      },
+      hostname: {
+        type: 'object',
+        description:
+          'Valid characters for hostnames are ASCII(7) letters from a to z, the digits from 0 to 9, wildcards (*), and the hyphen (-).',
+        properties: {
+          url_hostname: {
+            type: 'string',
+          },
+          exclude_exact_hostname: {
+            type: 'boolean',
+            description:
+              'Only applies to wildcard hostnames (e.g., *.example.com). When true (default), only subdomains are blocked. When false, both the root domain and subdomains are blocked.',
+          },
+        },
+        required: ['url_hostname'],
       },
     },
   },
