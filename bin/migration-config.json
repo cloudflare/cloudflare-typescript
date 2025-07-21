@@ -643,6 +643,80 @@
       ]
     },
     {
+      "base": "workers.scripts.deployments",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workers.scripts.deployments",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "workers.scripts.versions",
       "name": "get",
       "params": [

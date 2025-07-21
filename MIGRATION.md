@@ -264,6 +264,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.workers.scripts.settings.edit()`
 - `client.workers.scripts.settings.get()`
 - `client.workers.scripts.deployments.create()`
+- `client.workers.scripts.deployments.list()`
+- `client.workers.scripts.deployments.delete()`
 - `client.workers.scripts.deployments.get()`
 - `client.workers.scripts.versions.create()`
 - `client.workers.scripts.versions.list()`

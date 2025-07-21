@@ -1252,7 +1252,9 @@ The following tools are available in this MCP server.
 ### Resource `workers.scripts.deployments`:
 
 - `create_scripts_workers_deployments` (`write`): Deployments configure how [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions) are deployed to traffic. A deployment can consist of one or two versions of a Worker.
-- `get_scripts_workers_deployments` (`read`): List of Worker Deployments. The first deployment in the list is the latest deployment actively serving traffic.
+- `list_scripts_workers_deployments` (`read`): List of Worker Deployments. The first deployment in the list is the latest deployment actively serving traffic.
+- `delete_scripts_workers_deployments` (`write`): Delete a Worker Deployment. The latest deployment, which is actively serving traffic, cannot be deleted. All other deployments can be deleted.
+- `get_scripts_workers_deployments` (`read`): Get information about a Worker Deployment.
 
 ### Resource `workers.scripts.versions`:
 

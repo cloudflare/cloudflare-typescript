@@ -444,6 +444,8 @@ import get_scripts_workers_content from './workers/scripts/content/get-scripts-w
 import edit_scripts_workers_settings from './workers/scripts/settings/edit-scripts-workers-settings';
 import get_scripts_workers_settings from './workers/scripts/settings/get-scripts-workers-settings';
 import create_scripts_workers_deployments from './workers/scripts/deployments/create-scripts-workers-deployments';
+import list_scripts_workers_deployments from './workers/scripts/deployments/list-scripts-workers-deployments';
+import delete_scripts_workers_deployments from './workers/scripts/deployments/delete-scripts-workers-deployments';
 import get_scripts_workers_deployments from './workers/scripts/deployments/get-scripts-workers-deployments';
 import create_scripts_workers_versions from './workers/scripts/versions/create-scripts-workers-versions';
 import list_scripts_workers_versions from './workers/scripts/versions/list-scripts-workers-versions';
@@ -2231,6 +2233,8 @@ addEndpoint(get_scripts_workers_content);
 addEndpoint(edit_scripts_workers_settings);
 addEndpoint(get_scripts_workers_settings);
 addEndpoint(create_scripts_workers_deployments);
+addEndpoint(list_scripts_workers_deployments);
+addEndpoint(delete_scripts_workers_deployments);
 addEndpoint(get_scripts_workers_deployments);
 addEndpoint(create_scripts_workers_versions);
 addEndpoint(list_scripts_workers_versions);
