@@ -52,22 +52,79 @@ export class Deployments extends APIResource {
    *
    * @example
    * ```ts
-   * const deployment =
-   *   await client.workers.scripts.deployments.get(
+   * const deployments =
+   *   await client.workers.scripts.deployments.list(
    *     'this-is_my_script-01',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
-  get(
+  list(
     scriptName: string,
-    params: DeploymentGetParams,
+    params: DeploymentListParams,
     options?: RequestOptions,
-  ): APIPromise<DeploymentGetResponse> {
+  ): APIPromise<DeploymentListResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`,
+        options,
+      ) as APIPromise<{ result: DeploymentListResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Delete a Worker Deployment. The latest deployment, which is actively serving
+   * traffic, cannot be deleted. All other deployments can be deleted.
+   *
+   * @example
+   * ```ts
+   * const deployment =
+   *   await client.workers.scripts.deployments.delete(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       script_name: 'this-is_my_script-01',
+   *     },
+   *   );
+   * ```
+   */
+  delete(
+    deploymentID: string,
+    params: DeploymentDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<DeploymentDeleteResponse> {
+    const { account_id, script_name } = params;
+    return this._client.delete(
+      path`/accounts/${account_id}/workers/scripts/${script_name}/deployments/${deploymentID}`,
+      options,
+    );
+  }
+
+  /**
+   * Get information about a Worker Deployment.
+   *
+   * @example
+   * ```ts
+   * const deployment =
+   *   await client.workers.scripts.deployments.get(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       script_name: 'this-is_my_script-01',
+   *     },
+   *   );
+   * ```
+   */
+  get(
+    deploymentID: string,
+    params: DeploymentGetParams,
+    options?: RequestOptions,
+  ): APIPromise<DeploymentGetResponse> {
+    const { account_id, script_name } = params;
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/workers/scripts/${script_name}/deployments/${deploymentID}`,
         options,
       ) as APIPromise<{ result: DeploymentGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -105,11 +162,11 @@ export namespace DeploymentCreateResponse {
   }
 }
 
-export interface DeploymentGetResponse {
-  deployments: Array<DeploymentGetResponse.Deployment>;
+export interface DeploymentListResponse {
+  deployments: Array<DeploymentListResponse.Deployment>;
 }
 
-export namespace DeploymentGetResponse {
+export namespace DeploymentListResponse {
   export interface Deployment {
     id: string;
 
@@ -139,6 +196,82 @@ export namespace DeploymentGetResponse {
        */
       'workers/message'?: string;
     }
+  }
+}
+
+export interface DeploymentDeleteResponse {
+  errors: Array<DeploymentDeleteResponse.Error>;
+
+  messages: Array<DeploymentDeleteResponse.Message>;
+
+  /**
+   * Whether the API call was successful.
+   */
+  success: true;
+}
+
+export namespace DeploymentDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
+export interface DeploymentGetResponse {
+  id: string;
+
+  created_on: string;
+
+  source: string;
+
+  strategy: 'percentage';
+
+  versions: Array<DeploymentGetResponse.Version>;
+
+  annotations?: DeploymentGetResponse.Annotations;
+
+  author_email?: string;
+}
+
+export namespace DeploymentGetResponse {
+  export interface Version {
+    percentage: number;
+
+    version_id: string;
+  }
+
+  export interface Annotations {
+    /**
+     * Human-readable message about the deployment. Truncated to 100 bytes.
+     */
+    'workers/message'?: string;
   }
 }
 
@@ -186,18 +319,46 @@ export namespace DeploymentCreateParams {
   }
 }
 
-export interface DeploymentGetParams {
+export interface DeploymentListParams {
   /**
    * Identifier.
    */
   account_id: string;
 }
 
+export interface DeploymentDeleteParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Name of the script, used in URLs and route configuration.
+   */
+  script_name: string;
+}
+
+export interface DeploymentGetParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Name of the script, used in URLs and route configuration.
+   */
+  script_name: string;
+}
+
 export declare namespace Deployments {
   export {
     type DeploymentCreateResponse as DeploymentCreateResponse,
+    type DeploymentListResponse as DeploymentListResponse,
+    type DeploymentDeleteResponse as DeploymentDeleteResponse,
     type DeploymentGetResponse as DeploymentGetResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentListParams as DeploymentListParams,
+    type DeploymentDeleteParams as DeploymentDeleteParams,
     type DeploymentGetParams as DeploymentGetParams,
   };
 }
