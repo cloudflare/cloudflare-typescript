@@ -10,15 +10,7 @@ export class AbuseReports extends APIResource {
    * Submit the Abuse Report of a particular type
    */
   create(
-    reportType:
-      | 'abuse_dmca'
-      | 'abuse_trademark'
-      | 'abuse_general'
-      | 'abuse_phishing'
-      | 'abuse_children'
-      | 'abuse_threat'
-      | 'abuse_registrar_whois'
-      | 'abuse_ncsei',
+    reportType: string,
     params: AbuseReportCreateParams,
     options?: RequestOptions,
   ): APIPromise<AbuseReportCreateResponse> {
@@ -55,17 +47,9 @@ export declare namespace AbuseReportCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The abuse report type.
      */
-    act:
-      | 'abuse_dmca'
-      | 'abuse_trademark'
-      | 'abuse_general'
-      | 'abuse_phishing'
-      | 'abuse_children'
-      | 'abuse_threat'
-      | 'abuse_registrar_whois'
-      | 'abuse_ncsei';
+    act: 'abuse_dmca';
 
     /**
      * Body param: Text not exceeding 100 characters. This field may be released by
@@ -204,17 +188,9 @@ export declare namespace AbuseReportCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The abuse report type.
      */
-    act:
-      | 'abuse_trademark'
-      | 'abuse_dmca'
-      | 'abuse_general'
-      | 'abuse_phishing'
-      | 'abuse_children'
-      | 'abuse_threat'
-      | 'abuse_registrar_whois'
-      | 'abuse_ncsei';
+    act: 'abuse_trademark';
 
     /**
      * Body param: A valid email of the abuse reporter. This field may be released by
@@ -320,17 +296,9 @@ export declare namespace AbuseReportCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The abuse report type.
      */
-    act:
-      | 'abuse_general'
-      | 'abuse_dmca'
-      | 'abuse_trademark'
-      | 'abuse_phishing'
-      | 'abuse_children'
-      | 'abuse_threat'
-      | 'abuse_registrar_whois'
-      | 'abuse_ncsei';
+    act: 'abuse_general';
 
     /**
      * Body param: A valid email of the abuse reporter. This field may be released by
@@ -443,17 +411,9 @@ export declare namespace AbuseReportCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The abuse report type.
      */
-    act:
-      | 'abuse_phishing'
-      | 'abuse_dmca'
-      | 'abuse_trademark'
-      | 'abuse_general'
-      | 'abuse_children'
-      | 'abuse_threat'
-      | 'abuse_registrar_whois'
-      | 'abuse_ncsei';
+    act: 'abuse_phishing';
 
     /**
      * Body param: A valid email of the abuse reporter. This field may be released by
@@ -551,17 +511,9 @@ export declare namespace AbuseReportCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The abuse report type.
      */
-    act:
-      | 'abuse_children'
-      | 'abuse_dmca'
-      | 'abuse_trademark'
-      | 'abuse_general'
-      | 'abuse_phishing'
-      | 'abuse_threat'
-      | 'abuse_registrar_whois'
-      | 'abuse_ncsei';
+    act: 'abuse_children';
 
     /**
      * Body param: A valid email of the abuse reporter. This field may be released by
@@ -665,17 +617,9 @@ export declare namespace AbuseReportCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The abuse report type.
      */
-    act:
-      | 'abuse_threat'
-      | 'abuse_dmca'
-      | 'abuse_trademark'
-      | 'abuse_general'
-      | 'abuse_phishing'
-      | 'abuse_children'
-      | 'abuse_registrar_whois'
-      | 'abuse_ncsei';
+    act: 'abuse_threat';
 
     /**
      * Body param: A valid email of the abuse reporter. This field may be released by
@@ -766,17 +710,9 @@ export declare namespace AbuseReportCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The abuse report type.
      */
-    act:
-      | 'abuse_registrar_whois'
-      | 'abuse_dmca'
-      | 'abuse_trademark'
-      | 'abuse_general'
-      | 'abuse_phishing'
-      | 'abuse_children'
-      | 'abuse_threat'
-      | 'abuse_ncsei';
+    act: 'abuse_registrar_whois';
 
     /**
      * Body param: A valid email of the abuse reporter. This field may be released by
@@ -854,17 +790,9 @@ export declare namespace AbuseReportCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The abuse report type.
      */
-    act:
-      | 'abuse_ncsei'
-      | 'abuse_dmca'
-      | 'abuse_trademark'
-      | 'abuse_general'
-      | 'abuse_phishing'
-      | 'abuse_children'
-      | 'abuse_threat'
-      | 'abuse_registrar_whois';
+    act: 'abuse_ncsei';
 
     /**
      * Body param: A valid email of the abuse reporter. This field may be released by
