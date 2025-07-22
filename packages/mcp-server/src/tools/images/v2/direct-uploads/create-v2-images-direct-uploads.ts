@@ -31,6 +31,10 @@ export const tool: Tool = {
         description:
           'Optional Image Custom ID. Up to 1024 chars. Can include any number of subpaths, and utf8 characters. Cannot start nor end with a / (forward slash). Cannot be a UUID.',
       },
+      creator: {
+        type: 'string',
+        description: 'Can set the creator field with an internal user ID.',
+      },
       expiry: {
         type: 'string',
         description:
