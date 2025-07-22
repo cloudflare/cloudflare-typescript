@@ -72,8 +72,8 @@ describe('resource bgpPrefixes', () => {
       {
         account_id: '258def64c72dae45f3e4c8516e2111f2',
         asn_prepend_count: 2,
+        auto_advertise_withdraw: true,
         on_demand: { advertised: true },
-        withdraw_if_no_route: true,
       },
     );
   });
