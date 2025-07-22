@@ -1634,6 +1634,11 @@ The following tools are available in this MCP server.
 
 - `create_diagnostics_traceroutes` (`write`): Run traceroutes from Cloudflare colos.
 
+### Resource `diagnostics.endpoint-healthchecks`:
+
+- `create_diagnostics_endpoint_healthchecks` (`write`): Create Endpoint Health Check.
+- `list_diagnostics_endpoint_healthchecks` (`read`): List Endpoint Health Checks.
+
 ### Resource `images.v1`:
 
 - `create_images_v1` (`write`): Upload an image with up to 10 Megabytes using a single HTTP POST (multipart/form-data) request.

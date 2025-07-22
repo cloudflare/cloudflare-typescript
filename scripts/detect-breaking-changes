@@ -259,6 +259,7 @@ TEST_PATHS=(
 	tests/api-resources/brand-protection/logo-matches.test.ts
 	tests/api-resources/diagnostics/diagnostics.test.ts
 	tests/api-resources/diagnostics/traceroutes.test.ts
+	tests/api-resources/diagnostics/endpoint-healthchecks.test.ts
 	tests/api-resources/images/images.test.ts
 	tests/api-resources/images/v1/v1.test.ts
 	tests/api-resources/images/v1/keys.test.ts

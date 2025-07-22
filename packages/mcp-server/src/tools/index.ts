@@ -621,6 +621,8 @@ import delete_brand_protection_logos from './brand-protection/logos/delete-brand
 import download_brand_protection_logo_matches from './brand-protection/logo-matches/download-brand-protection-logo-matches';
 import get_brand_protection_logo_matches from './brand-protection/logo-matches/get-brand-protection-logo-matches';
 import create_diagnostics_traceroutes from './diagnostics/traceroutes/create-diagnostics-traceroutes';
+import create_diagnostics_endpoint_healthchecks from './diagnostics/endpoint-healthchecks/create-diagnostics-endpoint-healthchecks';
+import list_diagnostics_endpoint_healthchecks from './diagnostics/endpoint-healthchecks/list-diagnostics-endpoint-healthchecks';
 import create_images_v1 from './images/v1/create-images-v1';
 import list_images_v1 from './images/v1/list-images-v1';
 import delete_images_v1 from './images/v1/delete-images-v1';
@@ -2410,6 +2412,8 @@ addEndpoint(delete_brand_protection_logos);
 addEndpoint(download_brand_protection_logo_matches);
 addEndpoint(get_brand_protection_logo_matches);
 addEndpoint(create_diagnostics_traceroutes);
+addEndpoint(create_diagnostics_endpoint_healthchecks);
+addEndpoint(list_diagnostics_endpoint_healthchecks);
 addEndpoint(create_images_v1);
 addEndpoint(list_images_v1);
 addEndpoint(delete_images_v1);
