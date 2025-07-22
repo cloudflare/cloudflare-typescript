@@ -31,7 +31,7 @@ export const tool: Tool = {
       action: {
         type: 'string',
         description:
-          'The action to preform when the associated traffic, identity, and device posture expressions are either absent or evaluate to `true`.',
+          'The action to perform when the associated traffic, identity, and device posture expressions are either absent or evaluate to `true`.',
         enum: [
           'on',
           'off',
