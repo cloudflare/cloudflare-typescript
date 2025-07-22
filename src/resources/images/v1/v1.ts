@@ -152,6 +152,11 @@ export interface Image {
   id?: string;
 
   /**
+   * Can set the creator field with an internal user ID.
+   */
+  creator?: string | null;
+
+  /**
    * Image file name.
    */
   filename?: string;
@@ -197,6 +202,11 @@ export interface V1CreateParams {
   id?: string;
 
   /**
+   * Body param: Can set the creator field with an internal user ID.
+   */
+  creator?: string;
+
+  /**
    * Body param: An image binary data. Only needed when type is uploading a file.
    */
   file?: Core.Uploadable;
@@ -225,6 +235,12 @@ export interface V1ListParams extends V4PagePaginationParams {
    * Path param: Account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Query param: Internal user ID set within the creator field. Setting to empty
+   * string "" will return images where creator field is not set
+   */
+  creator?: string | null;
 }
 
 export interface V1DeleteParams {
@@ -239,6 +255,11 @@ export interface V1EditParams {
    * Path param: Account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Body param: Can set the creator field with an internal user ID.
+   */
+  creator?: string;
 
   /**
    * Body param: User modifiable key-value store. Can be used for keeping references

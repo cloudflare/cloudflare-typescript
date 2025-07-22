@@ -25,6 +25,7 @@ describe('resource v2', () => {
     const response = await client.images.v2.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       continuation_token: 'continuation_token',
+      creator: 'creator',
       per_page: 10,
       sort_order: 'asc',
     });
