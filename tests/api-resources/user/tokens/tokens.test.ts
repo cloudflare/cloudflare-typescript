@@ -20,7 +20,7 @@ describe('resource tokens', () => {
             { id: 'c8fed203ed3043cba015a93ad1616f1f' },
             { id: '82e64a83756745bbbb1c9c2701bf816b' },
           ],
-          resources: { object: 'bar', string: 'bar' },
+          resources: { foo: 'string' },
         },
       ],
     });
@@ -44,7 +44,7 @@ describe('resource tokens', () => {
             { id: 'c8fed203ed3043cba015a93ad1616f1f', meta: { key: 'key', value: 'value' } },
             { id: '82e64a83756745bbbb1c9c2701bf816b', meta: { key: 'key', value: 'value' } },
           ],
-          resources: { object: 'bar', string: 'bar' },
+          resources: { foo: 'string' },
         },
       ],
       condition: {
@@ -69,7 +69,7 @@ describe('resource tokens', () => {
             { id: 'c8fed203ed3043cba015a93ad1616f1f' },
             { id: '82e64a83756745bbbb1c9c2701bf816b' },
           ],
-          resources: { object: 'bar', string: 'bar' },
+          resources: { foo: 'string' },
         },
       ],
     });
@@ -93,7 +93,7 @@ describe('resource tokens', () => {
             { id: 'c8fed203ed3043cba015a93ad1616f1f', meta: { key: 'key', value: 'value' } },
             { id: '82e64a83756745bbbb1c9c2701bf816b', meta: { key: 'key', value: 'value' } },
           ],
-          resources: { object: 'bar', string: 'bar' },
+          resources: { foo: 'string' },
         },
       ],
       condition: {
