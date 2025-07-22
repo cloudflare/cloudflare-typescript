@@ -12,19 +12,20 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'delete',
   httpPath: '/zones/{zone_id}/snippets/snippet_rules',
-  operationId: 'zone-snippets-snippet-rules-delete',
+  operationId: 'deleteZoneSnippetRules',
 };
 
 export const tool: Tool = {
   name: 'delete_snippets_rules',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nDelete All Rules\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nDeletes all snippet rules belonging to the zone.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'Response',\n  description: 'A response object.',\n  properties: {\n    errors: {\n      type: 'array',\n      title: 'Errors',\n      description: 'A list of error messages.',\n      items: {\n        type: 'object',\n        title: 'Message',\n        description: 'A message.',\n        properties: {\n          message: {\n            type: 'string',\n            title: 'Description',\n            description: 'A text description of this message.'\n          },\n          code: {\n            type: 'integer',\n            title: 'Code',\n            description: 'A unique code for this message.'\n          }\n        },\n        required: [          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      title: 'Messages',\n      description: 'A list of warning messages.',\n      items: {\n        type: 'object',\n        title: 'Message',\n        description: 'A message.',\n        properties: {\n          message: {\n            type: 'string',\n            title: 'Description',\n            description: 'A text description of this message.'\n          },\n          code: {\n            type: 'integer',\n            title: 'Code',\n            description: 'A unique code for this message.'\n          }\n        },\n        required: [          'message'\n        ]\n      }\n    },\n    result: {\n      type: 'array',\n      title: 'Result',\n      description: 'A result.',\n      items: {\n        type: 'object',\n        title: 'Snippet Rule',\n        description: 'A snippet rule.',\n        properties: {\n          id: {\n            type: 'string',\n            title: 'ID',\n            description: 'The unique ID of the rule.'\n          },\n          expression: {\n            type: 'string',\n            title: 'Expression',\n            description: 'The expression defining which traffic will match the rule.'\n          },\n          last_updated: {\n            type: 'string',\n            title: 'Last Updated',\n            description: 'The timestamp of when the rule was last modified.',\n            format: 'date-time'\n          },\n          snippet_name: {\n            type: 'string',\n            title: 'Snippet Name',\n            description: 'The identifying name of the snippet.'\n          },\n          description: {\n            type: 'string',\n            title: 'Description',\n            description: 'An informative description of the rule.'\n          },\n          enabled: {\n            type: 'boolean',\n            title: 'Enabled',\n            description: 'Whether the rule should be executed.'\n          }\n        },\n        required: [          'id',\n          'expression',\n          'last_updated',\n          'snippet_name'\n        ]\n      }\n    },\n    success: {\n      type: 'string',\n      title: 'Success',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        title: 'Zone ID',
+        description: 'The unique ID of the zone.',
       },
       jq_filter: {
         type: 'string',
@@ -39,7 +40,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.snippets.rules.delete(body)));
+  const response = await client.snippets.rules.delete(body).asResponse();
+  return asTextContentResult(await maybeFilter(args, await response.json()));
 };
 
 export default { metadata, tool, handler };

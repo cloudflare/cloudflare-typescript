@@ -12,19 +12,30 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'get',
   httpPath: '/zones/{zone_id}/snippets',
-  operationId: 'zone-snippets',
+  operationId: 'listZoneSnippets',
 };
 
 export const tool: Tool = {
   name: 'list_snippets',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nAll Snippets\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful',\n      enum: [        true\n      ]\n    },\n    result: {\n      type: 'array',\n      description: 'List of all zone snippets',\n      items: {\n        $ref: '#/$defs/snippet'\n      }\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    snippet: {\n      type: 'object',\n      description: 'Snippet Information',\n      properties: {\n        created_on: {\n          type: 'string',\n          description: 'Creation time of the snippet'\n        },\n        modified_on: {\n          type: 'string',\n          description: 'Modification time of the snippet'\n        },\n        snippet_name: {\n          type: 'string',\n          description: 'Snippet identifying name'\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nFetches all snippets belonging to the zone.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'Response',\n  description: 'A response object.',\n  properties: {\n    errors: {\n      type: 'array',\n      title: 'Errors',\n      description: 'A list of error messages.',\n      items: {\n        type: 'object',\n        title: 'Message',\n        description: 'A message.',\n        properties: {\n          message: {\n            type: 'string',\n            title: 'Description',\n            description: 'A text description of this message.'\n          },\n          code: {\n            type: 'integer',\n            title: 'Code',\n            description: 'A unique code for this message.'\n          }\n        },\n        required: [          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      title: 'Messages',\n      description: 'A list of warning messages.',\n      items: {\n        type: 'object',\n        title: 'Message',\n        description: 'A message.',\n        properties: {\n          message: {\n            type: 'string',\n            title: 'Description',\n            description: 'A text description of this message.'\n          },\n          code: {\n            type: 'integer',\n            title: 'Code',\n            description: 'A unique code for this message.'\n          }\n        },\n        required: [          'message'\n        ]\n      }\n    },\n    result: {\n      type: 'array',\n      title: 'Snippets',\n      description: 'A list of snippets.',\n      items: {\n        type: 'object',\n        title: 'Snippet',\n        description: 'A snippet object.',\n        properties: {\n          created_on: {\n            type: 'string',\n            title: 'Created On',\n            description: 'The timestamp of when the snippet was created.',\n            format: 'date-time'\n          },\n          snippet_name: {\n            type: 'string',\n            title: 'Snippet Name',\n            description: 'The identifying name of the snippet.'\n          },\n          modified_on: {\n            type: 'string',\n            title: 'Modified On',\n            description: 'The timestamp of when the snippet was last modified.',\n            format: 'date-time'\n          }\n        },\n        required: [          'created_on',\n          'snippet_name'\n        ]\n      }\n    },\n    success: {\n      type: 'string',\n      title: 'Success',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result_info: {\n      type: 'object',\n      title: 'Result Info',\n      description: 'Additional information to navigate the results.',\n      properties: {\n        count: {\n          type: 'integer',\n          title: 'Count',\n          description: 'The number of results in the current page.'\n        },\n        page: {\n          type: 'integer',\n          title: 'Page',\n          description: 'The current page number.'\n        },\n        per_page: {\n          type: 'integer',\n          title: 'Per Page',\n          description: 'The number of results to return per page.'\n        },\n        total_count: {\n          type: 'integer',\n          title: 'Total Count',\n          description: 'The total number of results.'\n        },\n        total_pages: {\n          type: 'integer',\n          title: 'Total Pages',\n          description: 'The total number of pages.'\n        }\n      },\n      required: [        'count',\n        'page',\n        'per_page',\n        'total_count',\n        'total_pages'\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        title: 'Zone ID',
+        description: 'The unique ID of the zone.',
+      },
+      page: {
+        type: 'integer',
+        title: 'Page',
+        description: 'The current page number.',
+      },
+      per_page: {
+        type: 'integer',
+        title: 'Per Page',
+        description: 'The number of results to return per page.',
       },
       jq_filter: {
         type: 'string',

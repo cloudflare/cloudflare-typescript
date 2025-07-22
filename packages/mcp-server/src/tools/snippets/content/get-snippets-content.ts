@@ -11,23 +11,25 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'get',
   httpPath: '/zones/{zone_id}/snippets/{snippet_name}/content',
-  operationId: 'zone-snippets-snippet-content',
+  operationId: 'getZoneSnippetContent',
 };
 
 export const tool: Tool = {
   name: 'get_snippets_content',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nSnippet Content\n\n# Response Schema\n```json\n{\n  type: 'string'\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nFetches the content of a snippet belonging to the zone.\n\n# Response Schema\n```json\n{\n  type: 'string'\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        title: 'Zone ID',
+        description: 'The unique ID of the zone.',
       },
       snippet_name: {
         type: 'string',
-        description: 'Snippet identifying name',
+        title: 'Snippet Name',
+        description: 'The identifying name of the snippet.',
       },
       jq_filter: {
         type: 'string',

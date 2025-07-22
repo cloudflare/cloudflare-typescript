@@ -3709,20 +3709,20 @@ The following tools are available in this MCP server.
 
 ### Resource `snippets`:
 
-- `update_snippets` (`write`): Put Snippet
-- `list_snippets` (`read`): All Snippets
-- `delete_snippets` (`write`): Delete Snippet
-- `get_snippets` (`read`): Snippet
+- `update_snippets` (`write`): Creates or updates a snippet belonging to the zone.
+- `list_snippets` (`read`): Fetches all snippets belonging to the zone.
+- `delete_snippets` (`write`): Deletes a snippet belonging to the zone.
+- `get_snippets` (`read`): Fetches a snippet belonging to the zone.
 
 ### Resource `snippets.content`:
 
-- `get_snippets_content` (`read`): Snippet Content
+- `get_snippets_content` (`read`): Fetches the content of a snippet belonging to the zone.
 
 ### Resource `snippets.rules`:
 
-- `update_snippets_rules` (`write`): Put Rules
-- `list_snippets_rules` (`read`): Rules
-- `delete_snippets_rules` (`write`): Delete All Rules
+- `update_snippets_rules` (`write`): Updates all snippet rules belonging to the zone.
+- `list_snippets_rules` (`read`): Fetches all snippet rules belonging to the zone.
+- `delete_snippets_rules` (`write`): Deletes all snippet rules belonging to the zone.
 
 ### Resource `calls.sfu`:
 
