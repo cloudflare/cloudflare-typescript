@@ -1,50 +1,28 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
-import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Rules extends APIResource {
   /**
-   * Put Rules
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const ruleUpdateResponse of client.snippets.rules.update(
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * Updates all snippet rules belonging to the zone.
    */
   update(
     params: RuleUpdateParams,
     options?: RequestOptions,
   ): PagePromise<RuleUpdateResponsesSinglePage, RuleUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id, body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/snippets/snippet_rules`,
       SinglePage<RuleUpdateResponse>,
-      { body, method: 'put', ...options },
+      { body: body, method: 'put', ...options },
     );
   }
 
   /**
-   * Rules
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const ruleListResponse of client.snippets.rules.list(
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * Fetches all snippet rules belonging to the zone.
    */
   list(
     params: RuleListParams,
@@ -59,18 +37,18 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Delete All Rules
-   *
-   * @example
-   * ```ts
-   * const rule = await client.snippets.rules.delete({
-   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * });
-   * ```
+   * Deletes all snippet rules belonging to the zone.
    */
-  delete(params: RuleDeleteParams, options?: RequestOptions): APIPromise<RuleDeleteResponse> {
+  delete(
+    params: RuleDeleteParams,
+    options?: RequestOptions,
+  ): PagePromise<RuleDeleteResponsesSinglePage, RuleDeleteResponse> {
     const { zone_id } = params;
-    return this._client.delete(path`/zones/${zone_id}/snippets/snippet_rules`, options);
+    return this._client.getAPIList(
+      path`/zones/${zone_id}/snippets/snippet_rules`,
+      SinglePage<RuleDeleteResponse>,
+      { method: 'delete', ...options },
+    );
   }
 }
 
@@ -78,80 +56,162 @@ export type RuleUpdateResponsesSinglePage = SinglePage<RuleUpdateResponse>;
 
 export type RuleListResponsesSinglePage = SinglePage<RuleListResponse>;
 
+export type RuleDeleteResponsesSinglePage = SinglePage<RuleDeleteResponse>;
+
+/**
+ * A snippet rule.
+ */
 export interface RuleUpdateResponse {
-  description?: string;
-
-  enabled?: boolean;
-
-  expression?: string;
+  /**
+   * The unique ID of the rule.
+   */
+  id: string;
 
   /**
-   * Snippet identifying name
+   * The expression defining which traffic will match the rule.
    */
-  snippet_name?: string;
+  expression: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The identifying name of the snippet.
+   */
+  snippet_name: string;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 }
 
+/**
+ * A snippet rule.
+ */
 export interface RuleListResponse {
+  /**
+   * The unique ID of the rule.
+   */
+  id: string;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The identifying name of the snippet.
+   */
+  snippet_name: string;
+
+  /**
+   * An informative description of the rule.
+   */
   description?: string;
 
-  enabled?: boolean;
-
-  expression?: string;
-
   /**
-   * Snippet identifying name
+   * Whether the rule should be executed.
    */
-  snippet_name?: string;
+  enabled?: boolean;
 }
 
+/**
+ * A snippet rule.
+ */
 export interface RuleDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
+  /**
+   * The unique ID of the rule.
+   */
+  id: string;
 
   /**
-   * Whether the API call was successful
+   * The expression defining which traffic will match the rule.
    */
-  success: true;
+  expression: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The identifying name of the snippet.
+   */
+  snippet_name: string;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
 }
 
 export interface RuleUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: The unique ID of the zone.
    */
   zone_id: string;
 
   /**
-   * Body param: List of snippet rules
+   * Body param: A list of snippet rules.
    */
-  rules?: Array<RuleUpdateParams.Rule>;
+  body: Array<RuleUpdateParams.Body>;
 }
 
 export namespace RuleUpdateParams {
-  export interface Rule {
-    description?: string;
-
-    enabled?: boolean;
-
-    expression?: string;
+  /**
+   * A snippet rule.
+   */
+  export interface Body {
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression: string;
 
     /**
-     * Snippet identifying name
+     * The identifying name of the snippet.
      */
-    snippet_name?: string;
+    snippet_name: string;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
   }
 }
 
 export interface RuleListParams {
   /**
-   * Identifier
+   * The unique ID of the zone.
    */
   zone_id: string;
 }
 
 export interface RuleDeleteParams {
   /**
-   * Identifier
+   * The unique ID of the zone.
    */
   zone_id: string;
 }
@@ -163,6 +223,7 @@ export declare namespace Rules {
     type RuleDeleteResponse as RuleDeleteResponse,
     type RuleUpdateResponsesSinglePage as RuleUpdateResponsesSinglePage,
     type RuleListResponsesSinglePage as RuleListResponsesSinglePage,
+    type RuleDeleteResponsesSinglePage as RuleDeleteResponsesSinglePage,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,

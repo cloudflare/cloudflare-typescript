@@ -12,40 +12,63 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'put',
   httpPath: '/zones/{zone_id}/snippets/snippet_rules',
-  operationId: 'zone-snippets-snippet-rules-put',
+  operationId: 'updateZoneSnippetRules',
 };
 
 export const tool: Tool = {
   name: 'update_snippets_rules',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nPut Rules\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful',\n      enum: [        true\n      ]\n    },\n    result: {\n      type: 'array',\n      description: 'List of snippet rules',\n      items: {\n        type: 'object',\n        properties: {\n          description: {\n            type: 'string'\n          },\n          enabled: {\n            type: 'boolean'\n          },\n          expression: {\n            type: 'string'\n          },\n          snippet_name: {\n            type: 'string',\n            description: 'Snippet identifying name'\n          }\n        }\n      }\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates all snippet rules belonging to the zone.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'Response',\n  description: 'A response object.',\n  properties: {\n    errors: {\n      type: 'array',\n      title: 'Errors',\n      description: 'A list of error messages.',\n      items: {\n        type: 'object',\n        title: 'Message',\n        description: 'A message.',\n        properties: {\n          message: {\n            type: 'string',\n            title: 'Description',\n            description: 'A text description of this message.'\n          },\n          code: {\n            type: 'integer',\n            title: 'Code',\n            description: 'A unique code for this message.'\n          }\n        },\n        required: [          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      title: 'Messages',\n      description: 'A list of warning messages.',\n      items: {\n        type: 'object',\n        title: 'Message',\n        description: 'A message.',\n        properties: {\n          message: {\n            type: 'string',\n            title: 'Description',\n            description: 'A text description of this message.'\n          },\n          code: {\n            type: 'integer',\n            title: 'Code',\n            description: 'A unique code for this message.'\n          }\n        },\n        required: [          'message'\n        ]\n      }\n    },\n    result: {\n      type: 'array',\n      title: 'Result',\n      description: 'A result.',\n      items: {\n        type: 'object',\n        title: 'Snippet Rule',\n        description: 'A snippet rule.',\n        properties: {\n          id: {\n            type: 'string',\n            title: 'ID',\n            description: 'The unique ID of the rule.'\n          },\n          expression: {\n            type: 'string',\n            title: 'Expression',\n            description: 'The expression defining which traffic will match the rule.'\n          },\n          last_updated: {\n            type: 'string',\n            title: 'Last Updated',\n            description: 'The timestamp of when the rule was last modified.',\n            format: 'date-time'\n          },\n          snippet_name: {\n            type: 'string',\n            title: 'Snippet Name',\n            description: 'The identifying name of the snippet.'\n          },\n          description: {\n            type: 'string',\n            title: 'Description',\n            description: 'An informative description of the rule.'\n          },\n          enabled: {\n            type: 'boolean',\n            title: 'Enabled',\n            description: 'Whether the rule should be executed.'\n          }\n        },\n        required: [          'id',\n          'expression',\n          'last_updated',\n          'snippet_name'\n        ]\n      }\n    },\n    success: {\n      type: 'string',\n      title: 'Success',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        title: 'Zone ID',
+        description: 'The unique ID of the zone.',
       },
-      rules: {
+      body: {
         type: 'array',
-        description: 'List of snippet rules',
+        title: 'Snippet Rules',
+        description: 'A list of snippet rules.',
         items: {
           type: 'object',
+          title: 'Snippet Rule',
+          description: 'A snippet rule.',
           properties: {
-            description: {
+            id: {
               type: 'string',
-            },
-            enabled: {
-              type: 'boolean',
+              title: 'ID',
+              description: 'The unique ID of the rule.',
             },
             expression: {
               type: 'string',
+              title: 'Expression',
+              description: 'The expression defining which traffic will match the rule.',
+            },
+            last_updated: {
+              type: 'string',
+              title: 'Last Updated',
+              description: 'The timestamp of when the rule was last modified.',
+              format: 'date-time',
             },
             snippet_name: {
               type: 'string',
-              description: 'Snippet identifying name',
+              title: 'Snippet Name',
+              description: 'The identifying name of the snippet.',
+            },
+            description: {
+              type: 'string',
+              title: 'Description',
+              description: 'An informative description of the rule.',
+            },
+            enabled: {
+              type: 'boolean',
+              title: 'Enabled',
+              description: 'Whether the rule should be executed.',
             },
           },
+          required: ['id', 'expression', 'last_updated', 'snippet_name'],
         },
       },
       jq_filter: {
@@ -55,7 +78,7 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
-    required: ['zone_id'],
+    required: ['zone_id', 'body'],
   },
 };
 

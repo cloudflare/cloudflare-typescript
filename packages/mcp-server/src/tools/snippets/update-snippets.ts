@@ -12,36 +12,48 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'put',
   httpPath: '/zones/{zone_id}/snippets/{snippet_name}',
-  operationId: 'zone-snippets-snippet-put',
+  operationId: 'updateZoneSnippet',
 };
 
 export const tool: Tool = {
   name: 'update_snippets',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nPut Snippet\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful',\n      enum: [        true\n      ]\n    },\n    result: {\n      $ref: '#/$defs/snippet'\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    snippet: {\n      type: 'object',\n      description: 'Snippet Information',\n      properties: {\n        created_on: {\n          type: 'string',\n          description: 'Creation time of the snippet'\n        },\n        modified_on: {\n          type: 'string',\n          description: 'Modification time of the snippet'\n        },\n        snippet_name: {\n          type: 'string',\n          description: 'Snippet identifying name'\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates or updates a snippet belonging to the zone.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'Response',\n  description: 'A response object.',\n  properties: {\n    errors: {\n      type: 'array',\n      title: 'Errors',\n      description: 'A list of error messages.',\n      items: {\n        type: 'object',\n        title: 'Message',\n        description: 'A message.',\n        properties: {\n          message: {\n            type: 'string',\n            title: 'Description',\n            description: 'A text description of this message.'\n          },\n          code: {\n            type: 'integer',\n            title: 'Code',\n            description: 'A unique code for this message.'\n          }\n        },\n        required: [          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      title: 'Messages',\n      description: 'A list of warning messages.',\n      items: {\n        type: 'object',\n        title: 'Message',\n        description: 'A message.',\n        properties: {\n          message: {\n            type: 'string',\n            title: 'Description',\n            description: 'A text description of this message.'\n          },\n          code: {\n            type: 'integer',\n            title: 'Code',\n            description: 'A unique code for this message.'\n          }\n        },\n        required: [          'message'\n        ]\n      }\n    },\n    result: {\n      type: 'object',\n      title: 'Result',\n      description: 'A result.',\n      properties: {\n        created_on: {\n          type: 'string',\n          title: 'Created On',\n          description: 'The timestamp of when the snippet was created.',\n          format: 'date-time'\n        },\n        snippet_name: {\n          type: 'string',\n          title: 'Snippet Name',\n          description: 'The identifying name of the snippet.'\n        },\n        modified_on: {\n          type: 'string',\n          title: 'Modified On',\n          description: 'The timestamp of when the snippet was last modified.',\n          format: 'date-time'\n        }\n      },\n      required: [        'created_on',\n        'snippet_name'\n      ]\n    },\n    success: {\n      type: 'string',\n      title: 'Success',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       zone_id: {
         type: 'string',
-        description: 'Identifier',
+        title: 'Zone ID',
+        description: 'The unique ID of the zone.',
       },
       snippet_name: {
         type: 'string',
-        description: 'Snippet identifying name',
+        title: 'Snippet Name',
+        description: 'The identifying name of the snippet.',
       },
       files: {
-        type: 'string',
-        description: 'Content files of uploaded snippet',
+        type: 'array',
+        title: 'Files',
+        description: 'The list of files belonging to the snippet.',
+        items: {
+          type: 'string',
+          title: 'File',
+          description: 'A file belonging to the snippet.',
+        },
       },
       metadata: {
         type: 'object',
+        title: 'Metadata',
+        description: 'Metadata about the snippet.',
         properties: {
           main_module: {
             type: 'string',
-            description: 'Main module name of uploaded snippet',
+            title: 'Main Module',
+            description: 'Name of the file that contains the main module of the snippet.',
           },
         },
+        required: ['main_module'],
       },
       jq_filter: {
         type: 'string',
@@ -50,7 +62,7 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
-    required: ['zone_id', 'snippet_name'],
+    required: ['zone_id', 'snippet_name', 'files', 'metadata'],
   },
 };
 

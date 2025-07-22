@@ -1049,6 +1049,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.zaraz.update()`
 - `client.zaraz.history.update()`
 - `client.zaraz.publish.create()`
+- `client.snippets.rules.update()`
 - `client.iam.userGroups.members.create()`
 - `client.iam.userGroups.members.update()`
 - `client.cloudConnector.rules.update()`

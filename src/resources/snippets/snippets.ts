@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import * as ContentAPI from './content';
 import { Content, ContentGetParams } from './content';
 import * as RulesAPI from './rules';
 import {
   RuleDeleteParams,
   RuleDeleteResponse,
+  RuleDeleteResponsesSinglePage,
   RuleListParams,
   RuleListResponse,
   RuleListResponsesSinglePage,
@@ -17,7 +17,8 @@ import {
   Rules,
 } from './rules';
 import { APIPromise } from '../../core/api-promise';
-import { PagePromise, SinglePage } from '../../core/pagination';
+import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
+import { type Uploadable } from '../../core/uploads';
 import { RequestOptions } from '../../internal/request-options';
 import { multipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
@@ -27,161 +28,183 @@ export class Snippets extends APIResource {
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
 
   /**
-   * Put Snippet
-   *
-   * @example
-   * ```ts
-   * const snippet = await client.snippets.update(
-   *   'snippet_name_01',
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
+   * Creates or updates a snippet belonging to the zone.
    */
-  update(snippetName: string, params: SnippetUpdateParams, options?: RequestOptions): APIPromise<Snippet> {
+  update(
+    snippetName: string,
+    params: SnippetUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<SnippetUpdateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(
         path`/zones/${zone_id}/snippets/${snippetName}`,
         multipartFormRequestOptions({ body, ...options }, this._client),
-      ) as APIPromise<{ result: Snippet }>
+      ) as APIPromise<{ result: SnippetUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * All Snippets
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const snippet of client.snippets.list({
-   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * })) {
-   *   // ...
-   * }
-   * ```
+   * Fetches all snippets belonging to the zone.
    */
-  list(params: SnippetListParams, options?: RequestOptions): PagePromise<SnippetsSinglePage, Snippet> {
-    const { zone_id } = params;
-    return this._client.getAPIList(path`/zones/${zone_id}/snippets`, SinglePage<Snippet>, options);
+  list(
+    params: SnippetListParams,
+    options?: RequestOptions,
+  ): PagePromise<SnippetListResponsesV4PagePaginationArray, SnippetListResponse> {
+    const { zone_id, ...query } = params;
+    return this._client.getAPIList(
+      path`/zones/${zone_id}/snippets`,
+      V4PagePaginationArray<SnippetListResponse>,
+      { query, ...options },
+    );
   }
 
   /**
-   * Delete Snippet
-   *
-   * @example
-   * ```ts
-   * const snippet = await client.snippets.delete(
-   *   'snippet_name_01',
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
+   * Deletes a snippet belonging to the zone.
    */
   delete(
     snippetName: string,
     params: SnippetDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<SnippetDeleteResponse> {
+  ): APIPromise<SnippetDeleteResponse | null> {
     const { zone_id } = params;
-    return this._client.delete(path`/zones/${zone_id}/snippets/${snippetName}`, options);
+    return (
+      this._client.delete(path`/zones/${zone_id}/snippets/${snippetName}`, options) as APIPromise<{
+        result: SnippetDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Snippet
-   *
-   * @example
-   * ```ts
-   * const snippet = await client.snippets.get(
-   *   'snippet_name_01',
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
+   * Fetches a snippet belonging to the zone.
    */
-  get(snippetName: string, params: SnippetGetParams, options?: RequestOptions): APIPromise<Snippet> {
+  get(
+    snippetName: string,
+    params: SnippetGetParams,
+    options?: RequestOptions,
+  ): APIPromise<SnippetGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/snippets/${snippetName}`, options) as APIPromise<{
-        result: Snippet;
+        result: SnippetGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type SnippetsSinglePage = SinglePage<Snippet>;
+export type SnippetListResponsesV4PagePaginationArray = V4PagePaginationArray<SnippetListResponse>;
 
 /**
- * Snippet Information
+ * A result.
  */
-export interface Snippet {
+export interface SnippetUpdateResponse {
   /**
-   * Creation time of the snippet
+   * The timestamp of when the snippet was created.
    */
-  created_on?: string;
+  created_on: string;
 
   /**
-   * Modification time of the snippet
+   * The identifying name of the snippet.
+   */
+  snippet_name: string;
+
+  /**
+   * The timestamp of when the snippet was last modified.
    */
   modified_on?: string;
-
-  /**
-   * Snippet identifying name
-   */
-  snippet_name?: string;
 }
 
-export interface SnippetDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
+/**
+ * A snippet object.
+ */
+export interface SnippetListResponse {
+  /**
+   * The timestamp of when the snippet was created.
+   */
+  created_on: string;
 
   /**
-   * Whether the API call was successful
+   * The identifying name of the snippet.
    */
-  success: true;
+  snippet_name: string;
+
+  /**
+   * The timestamp of when the snippet was last modified.
+   */
+  modified_on?: string;
+}
+
+/**
+ * A result.
+ */
+export type SnippetDeleteResponse = string | null;
+
+/**
+ * A result.
+ */
+export interface SnippetGetResponse {
+  /**
+   * The timestamp of when the snippet was created.
+   */
+  created_on: string;
+
+  /**
+   * The identifying name of the snippet.
+   */
+  snippet_name: string;
+
+  /**
+   * The timestamp of when the snippet was last modified.
+   */
+  modified_on?: string;
 }
 
 export interface SnippetUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: The unique ID of the zone.
    */
   zone_id: string;
 
   /**
-   * Body param: Content files of uploaded snippet
+   * Body param: The list of files belonging to the snippet.
    */
-  files?: string;
+  files: Array<Uploadable>;
 
   /**
-   * Body param:
+   * Body param: Metadata about the snippet.
    */
-  metadata?: SnippetUpdateParams.Metadata;
+  metadata: SnippetUpdateParams.Metadata;
 }
 
 export namespace SnippetUpdateParams {
+  /**
+   * Metadata about the snippet.
+   */
   export interface Metadata {
     /**
-     * Main module name of uploaded snippet
+     * Name of the file that contains the main module of the snippet.
      */
-    main_module?: string;
+    main_module: string;
   }
 }
 
-export interface SnippetListParams {
+export interface SnippetListParams extends V4PagePaginationArrayParams {
   /**
-   * Identifier
+   * Path param: The unique ID of the zone.
    */
   zone_id: string;
 }
 
 export interface SnippetDeleteParams {
   /**
-   * Identifier
+   * The unique ID of the zone.
    */
   zone_id: string;
 }
 
 export interface SnippetGetParams {
   /**
-   * Identifier
+   * The unique ID of the zone.
    */
   zone_id: string;
 }
@@ -191,9 +214,11 @@ Snippets.Rules = Rules;
 
 export declare namespace Snippets {
   export {
-    type Snippet as Snippet,
+    type SnippetUpdateResponse as SnippetUpdateResponse,
+    type SnippetListResponse as SnippetListResponse,
     type SnippetDeleteResponse as SnippetDeleteResponse,
-    type SnippetsSinglePage as SnippetsSinglePage,
+    type SnippetGetResponse as SnippetGetResponse,
+    type SnippetListResponsesV4PagePaginationArray as SnippetListResponsesV4PagePaginationArray,
     type SnippetUpdateParams as SnippetUpdateParams,
     type SnippetListParams as SnippetListParams,
     type SnippetDeleteParams as SnippetDeleteParams,
@@ -209,6 +234,7 @@ export declare namespace Snippets {
     type RuleDeleteResponse as RuleDeleteResponse,
     type RuleUpdateResponsesSinglePage as RuleUpdateResponsesSinglePage,
     type RuleListResponsesSinglePage as RuleListResponsesSinglePage,
+    type RuleDeleteResponsesSinglePage as RuleDeleteResponsesSinglePage,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
