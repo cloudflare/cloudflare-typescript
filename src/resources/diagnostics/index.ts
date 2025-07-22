@@ -2,6 +2,14 @@
 
 export { Diagnostics } from './diagnostics';
 export {
+  EndpointHealthchecks,
+  type EndpointHealthcheck,
+  type EndpointHealthcheckCreateResponse,
+  type EndpointHealthcheckListResponse,
+  type EndpointHealthcheckCreateParams,
+  type EndpointHealthcheckListParams,
+} from './endpoint-healthchecks';
+export {
   TraceroutesSinglePage,
   Traceroutes,
   type Traceroute,

@@ -3018,6 +3018,19 @@ Methods:
 
 - <code title="post /accounts/{account_id}/diagnostics/traceroute">client.diagnostics.traceroutes.<a href="./src/resources/diagnostics/traceroutes.ts">create</a>({ ...params }) -> TraceroutesSinglePage</code>
 
+## EndpointHealthchecks
+
+Types:
+
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheck</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckCreateResponse</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/diagnostics/endpoint-healthchecks">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">create</a>({ ...params }) -> EndpointHealthcheckCreateResponse</code>
+- <code title="get /accounts/{account_id}/diagnostics/endpoint-healthchecks">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">list</a>({ ...params }) -> EndpointHealthcheckListResponse</code>
+
 # Images
 
 ## V1
