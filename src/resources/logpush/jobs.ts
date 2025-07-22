@@ -375,7 +375,7 @@ export interface LogpushJob {
    * minimum file size; this means that log files may be much smaller than this batch
    * size.
    */
-  max_upload_bytes?: 0 | unknown | null;
+  max_upload_bytes?: 0 | number | null;
 
   /**
    * The maximum interval in seconds for log batches. This setting must be between 30
@@ -383,7 +383,7 @@ export interface LogpushJob {
    * a minimum interval for log batches; this means that log files may be sent in
    * shorter intervals than this.
    */
-  max_upload_interval_seconds?: 0 | unknown | null;
+  max_upload_interval_seconds?: 0 | number | null;
 
   /**
    * The maximum number of log lines per batch. This setting must be between 1000 and
@@ -391,7 +391,7 @@ export interface LogpushJob {
    * number of log lines per batch; this means that log files may contain many fewer
    * lines than this.
    */
-  max_upload_records?: 0 | unknown | null;
+  max_upload_records?: 0 | number | null;
 
   /**
    * Optional human readable job name. Not unique. Cloudflare suggests that you set
@@ -660,7 +660,7 @@ export interface JobCreateParams {
    * cannot set a minimum file size; this means that log files may be much smaller
    * than this batch size.
    */
-  max_upload_bytes?: 0 | unknown | null;
+  max_upload_bytes?: 0 | number | null;
 
   /**
    * Body param: The maximum interval in seconds for log batches. This setting must
@@ -668,7 +668,7 @@ export interface JobCreateParams {
    * cannot specify a minimum interval for log batches; this means that log files may
    * be sent in shorter intervals than this.
    */
-  max_upload_interval_seconds?: 0 | unknown | null;
+  max_upload_interval_seconds?: 0 | number | null;
 
   /**
    * Body param: The maximum number of log lines per batch. This setting must be
@@ -676,7 +676,7 @@ export interface JobCreateParams {
    * specify a minimum number of log lines per batch; this means that log files may
    * contain many fewer lines than this.
    */
-  max_upload_records?: 0 | unknown | null;
+  max_upload_records?: 0 | number | null;
 
   /**
    * Body param: Optional human readable job name. Not unique. Cloudflare suggests
@@ -759,7 +759,7 @@ export interface JobUpdateParams {
    * cannot set a minimum file size; this means that log files may be much smaller
    * than this batch size.
    */
-  max_upload_bytes?: 0 | unknown | null;
+  max_upload_bytes?: 0 | number | null;
 
   /**
    * Body param: The maximum interval in seconds for log batches. This setting must
@@ -767,7 +767,7 @@ export interface JobUpdateParams {
    * cannot specify a minimum interval for log batches; this means that log files may
    * be sent in shorter intervals than this.
    */
-  max_upload_interval_seconds?: 0 | unknown | null;
+  max_upload_interval_seconds?: 0 | number | null;
 
   /**
    * Body param: The maximum number of log lines per batch. This setting must be
@@ -775,7 +775,7 @@ export interface JobUpdateParams {
    * specify a minimum number of log lines per batch; this means that log files may
    * contain many fewer lines than this.
    */
-  max_upload_records?: 0 | unknown | null;
+  max_upload_records?: 0 | number | null;
 
   /**
    * Body param: Optional human readable job name. Not unique. Cloudflare suggests
