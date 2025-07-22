@@ -67,10 +67,12 @@ export const tool: Tool = {
         anyOf: [
           {
             type: 'string',
+            description:
+              'The maximum uncompressed file size of a batch of logs. This setting value must be between `5 MB` and `1 GB`, or `0` to disable it. Note that you cannot set a minimum file size; this means that log files may be much smaller than this batch size.',
             enum: [0],
           },
           {
-            type: 'object',
+            type: 'integer',
           },
         ],
         description:
@@ -80,10 +82,12 @@ export const tool: Tool = {
         anyOf: [
           {
             type: 'string',
+            description:
+              'The maximum interval in seconds for log batches. This setting must be between 30 and 300 seconds (5 minutes), or `0` to disable it. Note that you cannot specify a minimum interval for log batches; this means that log files may be sent in shorter intervals than this.',
             enum: [0],
           },
           {
-            type: 'object',
+            type: 'integer',
           },
         ],
         description:
@@ -93,10 +97,12 @@ export const tool: Tool = {
         anyOf: [
           {
             type: 'string',
+            description:
+              'The maximum number of log lines per batch. This setting must be between 1000 and 1,000,000 lines, or `0` to disable it. Note that you cannot specify a minimum number of log lines per batch; this means that log files may contain many fewer lines than this.',
             enum: [0],
           },
           {
-            type: 'object',
+            type: 'integer',
           },
         ],
         description:
