@@ -270,7 +270,7 @@ export interface GatewayRule {
   id?: string;
 
   /**
-   * The action to preform when the associated traffic, identity, and device posture
+   * The action to perform when the associated traffic, identity, and device posture
    * expressions are either absent or evaluate to `true`.
    */
   action?:
@@ -432,7 +432,7 @@ export interface RuleSetting {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: { [key: string]: string } | null;
+  add_headers?: { [key: string]: Array<string> } | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
@@ -861,7 +861,7 @@ export interface RuleSettingParam {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: { [key: string]: string } | null;
+  add_headers?: { [key: string]: Array<string> } | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
@@ -1423,7 +1423,7 @@ export interface RuleCreateParams {
   account_id: string;
 
   /**
-   * Body param: The action to preform when the associated traffic, identity, and
+   * Body param: The action to perform when the associated traffic, identity, and
    * device posture expressions are either absent or evaluate to `true`.
    */
   action:
@@ -1545,7 +1545,7 @@ export interface RuleUpdateParams {
   account_id: string;
 
   /**
-   * Body param: The action to preform when the associated traffic, identity, and
+   * Body param: The action to perform when the associated traffic, identity, and
    * device posture expressions are either absent or evaluate to `true`.
    */
   action:
