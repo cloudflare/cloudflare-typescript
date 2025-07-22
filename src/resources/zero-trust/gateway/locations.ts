@@ -340,7 +340,7 @@ export interface Location {
    * location, if this field is absent or set with null, the endpoints configuration
    * remains unchanged.
    */
-  endpoints?: Endpoint;
+  endpoints?: Endpoint | null;
 
   /**
    * IPV6 destination ip assigned to this location. DNS requests sent to this IP will
@@ -422,7 +422,7 @@ export interface LocationCreateParams {
    * updating a location, if this field is absent or set with null, the endpoints
    * configuration remains unchanged.
    */
-  endpoints?: EndpointParam;
+  endpoints?: EndpointParam | null;
 
   /**
    * Body param: A list of network ranges that requests from this location would
@@ -476,7 +476,7 @@ export interface LocationUpdateParams {
    * updating a location, if this field is absent or set with null, the endpoints
    * configuration remains unchanged.
    */
-  endpoints?: EndpointParam;
+  endpoints?: EndpointParam | null;
 
   /**
    * Body param: A list of network ranges that requests from this location would
