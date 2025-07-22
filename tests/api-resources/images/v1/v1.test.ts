@@ -26,6 +26,7 @@ describe('resource v1', () => {
     const response = await client.images.v1.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'id',
+      creator: 'creator',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       metadata: {},
       requireSignedURLs: true,
@@ -47,6 +48,7 @@ describe('resource v1', () => {
   test('list: required and optional params', async () => {
     const response = await client.images.v1.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      creator: 'creator',
       page: 1,
       per_page: 10,
     });
@@ -87,6 +89,7 @@ describe('resource v1', () => {
   test('edit: required and optional params', async () => {
     const response = await client.images.v1.edit('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      creator: 'creator',
       metadata: {},
       requireSignedURLs: true,
     });
