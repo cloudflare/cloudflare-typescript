@@ -4828,7 +4828,7 @@ export namespace SetCacheSettingsRule {
       /**
        * Determines which browser ttl mode to use.
        */
-      mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
+      mode: 'respect_origin' | 'bypass_by_default' | 'override_origin' | 'bypass';
 
       /**
        * The TTL (in seconds) if you choose override_origin mode.
@@ -5344,7 +5344,7 @@ export namespace SetCacheSettingsRuleParam {
       /**
        * Determines which browser ttl mode to use.
        */
-      mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
+      mode: 'respect_origin' | 'bypass_by_default' | 'override_origin' | 'bypass';
 
       /**
        * The TTL (in seconds) if you choose override_origin mode.
@@ -6274,6 +6274,12 @@ export namespace SkipRule {
    */
   export interface ActionParameters {
     /**
+     * A phase to skip the execution of. This property is only compatible with
+     * products.
+     */
+    phase?: 'current';
+
+    /**
      * A list of phases to skip the execution of. This option is incompatible with the
      * rulesets option.
      */
@@ -6427,6 +6433,12 @@ export namespace SkipRuleParam {
    * The parameters configuring the rule's action.
    */
   export interface ActionParameters {
+    /**
+     * A phase to skip the execution of. This property is only compatible with
+     * products.
+     */
+    phase?: 'current';
+
     /**
      * A list of phases to skip the execution of. This option is incompatible with the
      * rulesets option.
@@ -10360,6 +10372,12 @@ export declare namespace RuleCreateParams {
      */
     export interface ActionParameters {
       /**
+       * A phase to skip the execution of. This property is only compatible with
+       * products.
+       */
+      phase?: 'current';
+
+      /**
        * A list of phases to skip the execution of. This option is incompatible with the
        * rulesets option.
        */
@@ -10646,7 +10664,7 @@ export declare namespace RuleCreateParams {
         /**
          * Determines which browser ttl mode to use.
          */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
+        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin' | 'bypass';
 
         /**
          * The TTL (in seconds) if you choose override_origin mode.
@@ -14502,6 +14520,12 @@ export declare namespace RuleEditParams {
      */
     export interface ActionParameters {
       /**
+       * A phase to skip the execution of. This property is only compatible with
+       * products.
+       */
+      phase?: 'current';
+
+      /**
        * A list of phases to skip the execution of. This option is incompatible with the
        * rulesets option.
        */
@@ -14788,7 +14812,7 @@ export declare namespace RuleEditParams {
         /**
          * Determines which browser ttl mode to use.
          */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
+        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin' | 'bypass';
 
         /**
          * The TTL (in seconds) if you choose override_origin mode.
