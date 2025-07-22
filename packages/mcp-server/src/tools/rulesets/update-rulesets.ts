@@ -2496,6 +2496,13 @@ export const tool: Tool = {
             title: 'Action parameters',
             description: "The parameters configuring the rule's action.",
             properties: {
+              phase: {
+                type: 'string',
+                title: 'Phase',
+                description:
+                  'A phase to skip the execution of. This property is only compatible with products.',
+                enum: ['current'],
+              },
               phases: {
                 type: 'array',
                 title: 'Phases',
@@ -2705,7 +2712,7 @@ export const tool: Tool = {
                     type: 'string',
                     title: 'Mode',
                     description: 'Determines which browser ttl mode to use.',
-                    enum: ['respect_origin', 'bypass_by_default', 'override_origin'],
+                    enum: ['respect_origin', 'bypass_by_default', 'override_origin', 'bypass'],
                   },
                   default: {
                     type: 'integer',
