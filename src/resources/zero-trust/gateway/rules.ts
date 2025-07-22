@@ -447,7 +447,7 @@ export interface RuleSetting {
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSetting.BISOAdminControls | null;
+  biso_admin_controls?: RuleSetting.BISOAdminControls;
 
   /**
    * Custom block page settings. If missing/null, blocking will use the the account
@@ -876,7 +876,7 @@ export interface RuleSettingParam {
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSettingParam.BISOAdminControls | null;
+  biso_admin_controls?: RuleSettingParam.BISOAdminControls;
 
   /**
    * Custom block page settings. If missing/null, blocking will use the the account
