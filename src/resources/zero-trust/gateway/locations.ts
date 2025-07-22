@@ -136,7 +136,7 @@ export interface DOHEndpoint {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPNetwork>;
+  networks?: Array<IPNetwork> | null;
 
   /**
    * True if the endpoint requires
@@ -157,7 +157,7 @@ export interface DOHEndpointParam {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPNetworkParam>;
+  networks?: Array<IPNetworkParam> | null;
 
   /**
    * True if the endpoint requires
@@ -178,7 +178,7 @@ export interface DOTEndpoint {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPNetwork>;
+  networks?: Array<IPNetwork> | null;
 }
 
 export interface DOTEndpointParam {
@@ -192,7 +192,7 @@ export interface DOTEndpointParam {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPNetworkParam>;
+  networks?: Array<IPNetworkParam> | null;
 }
 
 /**
@@ -264,7 +264,7 @@ export interface IPV6Endpoint {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPV6Network>;
+  networks?: Array<IPV6Network> | null;
 }
 
 export interface IPV6EndpointParam {
@@ -278,7 +278,7 @@ export interface IPV6EndpointParam {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPV6NetworkParam>;
+  networks?: Array<IPV6NetworkParam> | null;
 }
 
 export interface IPV6Network {
@@ -364,7 +364,7 @@ export interface Location {
    * A non-empty list is only effective if the ipv4 endpoint is enabled for this
    * location.
    */
-  networks?: Array<Location.Network>;
+  networks?: Array<Location.Network> | null;
 
   updated_at?: string;
 }
@@ -422,7 +422,7 @@ export interface LocationCreateParams {
    * originate from. A non-empty list is only effective if the ipv4 endpoint is
    * enabled for this location.
    */
-  networks?: Array<LocationCreateParams.Network>;
+  networks?: Array<LocationCreateParams.Network> | null;
 }
 
 export namespace LocationCreateParams {
@@ -476,7 +476,7 @@ export interface LocationUpdateParams {
    * originate from. A non-empty list is only effective if the ipv4 endpoint is
    * enabled for this location.
    */
-  networks?: Array<LocationUpdateParams.Network>;
+  networks?: Array<LocationUpdateParams.Network> | null;
 }
 
 export namespace LocationUpdateParams {
