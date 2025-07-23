@@ -208,13 +208,13 @@ export interface DOTEndpointParam {
  * remains unchanged.
  */
 export interface Endpoint {
-  doh?: DOHEndpoint;
+  doh: DOHEndpoint;
 
-  dot?: DOTEndpoint;
+  dot: DOTEndpoint;
 
-  ipv4?: IPV4Endpoint;
+  ipv4: IPV4Endpoint;
 
-  ipv6?: IPV6Endpoint;
+  ipv6: IPV6Endpoint;
 }
 
 /**
@@ -223,13 +223,13 @@ export interface Endpoint {
  * remains unchanged.
  */
 export interface EndpointParam {
-  doh?: DOHEndpointParam;
+  doh: DOHEndpointParam;
 
-  dot?: DOTEndpointParam;
+  dot: DOTEndpointParam;
 
-  ipv4?: IPV4EndpointParam;
+  ipv4: IPV4EndpointParam;
 
-  ipv6?: IPV6EndpointParam;
+  ipv6: IPV6EndpointParam;
 }
 
 export interface IPNetwork {
