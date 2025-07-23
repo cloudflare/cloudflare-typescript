@@ -174,11 +174,6 @@ export namespace InterconnectCreateResponse {
     type: string;
 
     owner?: string;
-
-    /**
-     * Bandwidth structure as visible through the customer-facing API.
-     */
-    speed?: '50M' | '100M' | '200M' | '300M' | '400M' | '500M' | '1G' | '2G' | '5G' | '10G' | '20G' | '50G';
   }
 }
 
@@ -231,11 +226,6 @@ export namespace InterconnectListResponse {
     type: string;
 
     owner?: string;
-
-    /**
-     * Bandwidth structure as visible through the customer-facing API.
-     */
-    speed?: '50M' | '100M' | '200M' | '300M' | '400M' | '500M' | '1G' | '2G' | '5G' | '10G' | '20G' | '50G';
   }
 }
 
@@ -283,11 +273,6 @@ export namespace InterconnectGetResponse {
     type: string;
 
     owner?: string;
-
-    /**
-     * Bandwidth structure as visible through the customer-facing API.
-     */
-    speed?: '50M' | '100M' | '200M' | '300M' | '400M' | '500M' | '1G' | '2G' | '5G' | '10G' | '20G' | '50G';
   }
 }
 
