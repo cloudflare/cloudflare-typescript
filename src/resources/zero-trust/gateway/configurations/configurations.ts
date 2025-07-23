@@ -232,6 +232,11 @@ export interface BlockPageSettings {
    * If mode is redirect_uri: URI to which the user should be redirected.
    */
   target_uri?: string;
+
+  /**
+   * Version number of the setting
+   */
+  version?: number;
 }
 
 /**
@@ -412,6 +417,11 @@ export interface ExtendedEmailMatching {
    * Account tag of account that shared this setting
    */
   source_account?: string;
+
+  /**
+   * Version number of the setting
+   */
+  version?: number;
 }
 
 /**
