@@ -224,6 +224,10 @@ export const tool: Tool = {
             type: 'string',
             description: 'If mode is redirect_uri: URI to which the user should be redirected.',
           },
+          version: {
+            type: 'integer',
+            description: 'Version number of the setting',
+          },
         },
       },
       body_scanning_settings: {
@@ -290,6 +294,10 @@ export const tool: Tool = {
           source_account: {
             type: 'string',
             description: 'Account tag of account that shared this setting',
+          },
+          version: {
+            type: 'integer',
+            description: 'Version number of the setting',
           },
         },
       },
