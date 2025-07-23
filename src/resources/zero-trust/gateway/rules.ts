@@ -265,15 +265,10 @@ export type GatewayFilterParam = 'http' | 'dns' | 'l4' | 'egress' | 'dns_resolve
 
 export interface GatewayRule {
   /**
-   * The API resource UUID.
-   */
-  id?: string;
-
-  /**
    * The action to perform when the associated traffic, identity, and device posture
    * expressions are either absent or evaluate to `true`.
    */
-  action?:
+  action:
     | 'on'
     | 'off'
     | 'allow'
@@ -290,6 +285,41 @@ export interface GatewayRule {
     | 'resolve'
     | 'quarantine'
     | 'redirect';
+
+  /**
+   * True if the rule is enabled.
+   */
+  enabled: boolean;
+
+  /**
+   * The protocol or layer to evaluate the traffic, identity, and device posture
+   * expressions.
+   */
+  filters: Array<GatewayFilter>;
+
+  /**
+   * The name of the rule.
+   */
+  name: string;
+
+  /**
+   * Precedence sets the order of your rules. Lower values indicate higher
+   * precedence. At each processing phase, applicable rules are evaluated in
+   * ascending order of this value. Refer to
+   * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
+   * docs on how to manage precedence via Terraform.
+   */
+  precedence: number;
+
+  /**
+   * The wirefilter expression used for traffic matching.
+   */
+  traffic: string;
+
+  /**
+   * The API resource UUID.
+   */
+  id?: string;
 
   created_at?: string;
 
@@ -309,11 +339,6 @@ export interface GatewayRule {
   device_posture?: string;
 
   /**
-   * True if the rule is enabled.
-   */
-  enabled?: boolean;
-
-  /**
    * The expiration time stamp and default duration of a DNS policy. Takes precedence
    * over the policy's `schedule` configuration, if any.
    *
@@ -322,34 +347,14 @@ export interface GatewayRule {
   expiration?: GatewayRule.Expiration | null;
 
   /**
-   * The protocol or layer to evaluate the traffic, identity, and device posture
-   * expressions.
-   */
-  filters?: Array<GatewayFilter>;
-
-  /**
    * The wirefilter expression used for identity matching.
    */
   identity?: string;
 
   /**
-   * The name of the rule.
-   */
-  name?: string;
-
-  /**
    * The rule cannot be shared via the Orgs API
    */
   not_sharable?: boolean;
-
-  /**
-   * Precedence sets the order of your rules. Lower values indicate higher
-   * precedence. At each processing phase, applicable rules are evaluated in
-   * ascending order of this value. Refer to
-   * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
-   * docs on how to manage precedence via Terraform.
-   */
-  precedence?: number;
 
   /**
    * The rule was shared via the Orgs API and cannot be edited by the current account
@@ -371,11 +376,6 @@ export interface GatewayRule {
    * account tag of account that created the rule
    */
   source_account?: string;
-
-  /**
-   * The wirefilter expression used for traffic matching.
-   */
-  traffic?: string;
 
   updated_at?: string;
 
