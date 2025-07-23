@@ -5,9 +5,15 @@ export {
   EndpointHealthchecks,
   type EndpointHealthcheck,
   type EndpointHealthcheckCreateResponse,
+  type EndpointHealthcheckUpdateResponse,
   type EndpointHealthcheckListResponse,
+  type EndpointHealthcheckDeleteResponse,
+  type EndpointHealthcheckGetResponse,
   type EndpointHealthcheckCreateParams,
+  type EndpointHealthcheckUpdateParams,
   type EndpointHealthcheckListParams,
+  type EndpointHealthcheckDeleteParams,
+  type EndpointHealthcheckGetParams,
 } from './endpoint-healthchecks';
 export {
   TraceroutesSinglePage,

@@ -6,8 +6,14 @@ import {
   EndpointHealthcheck,
   EndpointHealthcheckCreateParams,
   EndpointHealthcheckCreateResponse,
+  EndpointHealthcheckDeleteParams,
+  EndpointHealthcheckDeleteResponse,
+  EndpointHealthcheckGetParams,
+  EndpointHealthcheckGetResponse,
   EndpointHealthcheckListParams,
   EndpointHealthcheckListResponse,
+  EndpointHealthcheckUpdateParams,
+  EndpointHealthcheckUpdateResponse,
   EndpointHealthchecks,
 } from './endpoint-healthchecks';
 import * as TraceroutesAPI from './traceroutes';
@@ -35,8 +41,14 @@ export declare namespace Diagnostics {
     EndpointHealthchecks as EndpointHealthchecks,
     type EndpointHealthcheck as EndpointHealthcheck,
     type EndpointHealthcheckCreateResponse as EndpointHealthcheckCreateResponse,
+    type EndpointHealthcheckUpdateResponse as EndpointHealthcheckUpdateResponse,
     type EndpointHealthcheckListResponse as EndpointHealthcheckListResponse,
+    type EndpointHealthcheckDeleteResponse as EndpointHealthcheckDeleteResponse,
+    type EndpointHealthcheckGetResponse as EndpointHealthcheckGetResponse,
     type EndpointHealthcheckCreateParams as EndpointHealthcheckCreateParams,
+    type EndpointHealthcheckUpdateParams as EndpointHealthcheckUpdateParams,
     type EndpointHealthcheckListParams as EndpointHealthcheckListParams,
+    type EndpointHealthcheckDeleteParams as EndpointHealthcheckDeleteParams,
+    type EndpointHealthcheckGetParams as EndpointHealthcheckGetParams,
   };
 }
