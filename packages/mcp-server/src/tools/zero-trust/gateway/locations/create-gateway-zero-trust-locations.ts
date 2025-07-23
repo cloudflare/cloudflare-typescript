@@ -80,6 +80,7 @@ export const tool: Tool = {
             $ref: '#/$defs/ipv6_endpoint',
           },
         },
+        required: ['doh', 'dot', 'ipv4', 'ipv6'],
       },
       doh_endpoint: {
         type: 'object',
