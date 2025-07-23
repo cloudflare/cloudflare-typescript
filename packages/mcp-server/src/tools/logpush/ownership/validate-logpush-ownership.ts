@@ -47,6 +47,7 @@ export const tool: Tool = {
     },
     required: ['destination_conf', 'ownership_challenge'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

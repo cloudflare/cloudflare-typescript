@@ -46,6 +46,9 @@ export const tool: Tool = {
     },
     required: ['zone_id', 'account_id', 'address_map_id', 'body'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

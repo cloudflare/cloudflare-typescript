@@ -60,6 +60,7 @@ export const tool: Tool = {
     },
     required: ['account_id', 'prefix_id', 'bgp_prefix_id'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

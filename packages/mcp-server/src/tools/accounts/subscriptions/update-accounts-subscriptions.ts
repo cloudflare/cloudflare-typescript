@@ -98,6 +98,9 @@ export const tool: Tool = {
       },
     },
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

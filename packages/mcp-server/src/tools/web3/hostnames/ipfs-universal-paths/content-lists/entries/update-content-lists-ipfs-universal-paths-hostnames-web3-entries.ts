@@ -57,6 +57,9 @@ export const tool: Tool = {
     },
     required: ['zone_id', 'identifier', 'content_list_entry_identifier', 'content', 'type'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

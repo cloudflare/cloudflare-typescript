@@ -40,6 +40,7 @@ export const tool: Tool = {
     },
     required: ['invite_id', 'status'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

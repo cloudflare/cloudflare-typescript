@@ -37,6 +37,9 @@ export const tool: Tool = {
     },
     required: ['zone_id', 'load_balancer_id'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

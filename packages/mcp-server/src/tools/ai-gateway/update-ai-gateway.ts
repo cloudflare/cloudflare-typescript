@@ -82,6 +82,9 @@ export const tool: Tool = {
       'rate_limiting_technique',
     ],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

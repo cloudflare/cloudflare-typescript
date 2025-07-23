@@ -47,6 +47,7 @@ export const tool: Tool = {
     },
     required: ['path_account_id', 'share_id'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

@@ -92,6 +92,9 @@ export const tool: Tool = {
     },
     required: ['dnssec'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

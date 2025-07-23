@@ -157,6 +157,9 @@ export const tool: Tool = {
     },
     required: ['http_protocol'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

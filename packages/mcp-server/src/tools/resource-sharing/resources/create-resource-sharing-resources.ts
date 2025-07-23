@@ -56,6 +56,7 @@ export const tool: Tool = {
     },
     required: ['account_id', 'share_id', 'meta', 'resource_account_id', 'resource_id', 'resource_type'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

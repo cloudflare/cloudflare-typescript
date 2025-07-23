@@ -48,6 +48,9 @@ export const tool: Tool = {
     },
     required: ['account_id', 'dispatch_namespace', 'script_name', 'secret_name'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

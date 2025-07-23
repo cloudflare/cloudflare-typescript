@@ -49,6 +49,7 @@ export const tool: Tool = {
     },
     required: ['account_id', 'is_regex', 'pattern', 'pattern_type'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

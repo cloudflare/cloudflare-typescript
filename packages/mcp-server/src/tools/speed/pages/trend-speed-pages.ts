@@ -87,6 +87,9 @@ export const tool: Tool = {
     },
     required: ['zone_id', 'url', 'deviceType', 'metrics', 'region', 'start', 'tz'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

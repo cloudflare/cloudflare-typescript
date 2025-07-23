@@ -40,6 +40,9 @@ export const tool: Tool = {
     },
     required: ['bot_slug'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

@@ -90,6 +90,9 @@ export const tool: Tool = {
     },
     required: ['account_id', 'rule_id', 'action', 'conditions', 'enabled', 'name'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

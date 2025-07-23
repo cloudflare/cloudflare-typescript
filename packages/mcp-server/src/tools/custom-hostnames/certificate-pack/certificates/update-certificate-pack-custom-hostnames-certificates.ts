@@ -56,6 +56,9 @@ export const tool: Tool = {
       'custom_key',
     ],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
