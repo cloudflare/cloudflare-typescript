@@ -1637,7 +1637,10 @@ The following tools are available in this MCP server.
 ### Resource `diagnostics.endpoint-healthchecks`:
 
 - `create_diagnostics_endpoint_healthchecks` (`write`): Create Endpoint Health Check.
+- `update_diagnostics_endpoint_healthchecks` (`write`): Update a Endpoint Health Check.
 - `list_diagnostics_endpoint_healthchecks` (`read`): List Endpoint Health Checks.
+- `delete_diagnostics_endpoint_healthchecks` (`write`): Delete Endpoint Health Check.
+- `get_diagnostics_endpoint_healthchecks` (`read`): Get a single Endpoint Health Check.
 
 ### Resource `images.v1`:
 
