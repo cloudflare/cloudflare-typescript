@@ -95,6 +95,9 @@ export const tool: Tool = {
     },
     required: ['account_id', 'cni', 'id', 'account', 'cust_ip', 'interconnect', 'magic', 'p2p_ip'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

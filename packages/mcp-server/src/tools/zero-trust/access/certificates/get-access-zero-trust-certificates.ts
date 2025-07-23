@@ -42,6 +42,9 @@ export const tool: Tool = {
     },
     required: ['certificate_id'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

@@ -171,6 +171,9 @@ export const tool: Tool = {
     },
     required: ['account_id', 'pipeline_name', 'destination', 'name', 'source'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

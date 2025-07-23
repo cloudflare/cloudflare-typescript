@@ -52,6 +52,7 @@ export const tool: Tool = {
     },
     required: ['account_id', 'live_input_identifier', 'streamKey', 'url'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

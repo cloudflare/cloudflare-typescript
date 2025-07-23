@@ -38,6 +38,9 @@ export const tool: Tool = {
     },
     required: ['account_id', 'live_input_identifier'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

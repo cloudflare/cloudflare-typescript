@@ -110,6 +110,7 @@ export const tool: Tool = {
     },
     required: ['zone_id', 'managed_request_headers', 'managed_response_headers'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

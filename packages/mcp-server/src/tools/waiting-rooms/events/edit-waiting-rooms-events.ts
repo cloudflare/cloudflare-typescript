@@ -116,6 +116,7 @@ export const tool: Tool = {
     },
     required: ['zone_id', 'waiting_room_id', 'event_id', 'event_end_time', 'event_start_time', 'name'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

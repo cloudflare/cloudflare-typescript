@@ -42,6 +42,7 @@ export const tool: Tool = {
     },
     required: ['account_id', 'project_name'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

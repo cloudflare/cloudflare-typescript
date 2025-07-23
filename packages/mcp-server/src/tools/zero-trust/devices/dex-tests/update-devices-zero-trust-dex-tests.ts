@@ -97,6 +97,9 @@ export const tool: Tool = {
     },
     required: ['account_id', 'dex_test_id', 'data', 'enabled', 'interval', 'name'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

@@ -47,6 +47,9 @@ export const tool: Tool = {
     },
     required: ['ruleset_id', 'ruleset_version'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

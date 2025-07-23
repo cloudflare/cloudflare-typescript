@@ -50,6 +50,9 @@ export const tool: Tool = {
     },
     required: ['zone_id', 'ray_id'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {

@@ -831,6 +831,7 @@ export const tool: Tool = {
       },
     ],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
