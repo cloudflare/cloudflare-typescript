@@ -60,6 +60,9 @@ export const tool: Tool = {
         description: 'The beginning of the search date range.\nDefaults to `now - 30 days`.',
         format: 'date-time',
       },
+      status: {
+        type: 'string',
+      },
       submission_id: {
         type: 'string',
       },

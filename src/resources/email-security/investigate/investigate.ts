@@ -181,7 +181,6 @@ export namespace InvestigateListResponse {
 
     allowlisted_pattern_type?:
       | 'quarantine_release'
-      | 'blocked_sender'
       | 'acceptable_sender'
       | 'allowed_sender'
       | 'allowed_recipient'
@@ -195,7 +194,6 @@ export namespace InvestigateListResponse {
 
     whitelisted_pattern_type?:
       | 'quarantine_release'
-      | 'blocked_sender'
       | 'acceptable_sender'
       | 'allowed_sender'
       | 'allowed_recipient'
@@ -303,7 +301,6 @@ export namespace InvestigateGetResponse {
 
     allowlisted_pattern_type?:
       | 'quarantine_release'
-      | 'blocked_sender'
       | 'acceptable_sender'
       | 'allowed_sender'
       | 'allowed_recipient'
@@ -317,7 +314,6 @@ export namespace InvestigateGetResponse {
 
     whitelisted_pattern_type?:
       | 'quarantine_release'
-      | 'blocked_sender'
       | 'acceptable_sender'
       | 'allowed_sender'
       | 'allowed_recipient'
