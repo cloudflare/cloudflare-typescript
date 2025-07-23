@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { BinaryStorage } from './binary-storage';
 export { CloudforceOne } from './cloudforce-one';
 export {
   ListItemsSinglePage,
