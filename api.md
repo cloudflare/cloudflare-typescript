@@ -7791,6 +7791,8 @@ Methods:
 - <code title="delete /accounts/{account_id}/cloudforce-one/scans/config/{config_id}">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">delete</a>(configID, { ...params }) -> ConfigDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/cloudforce-one/scans/config/{config_id}">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">edit</a>(configID, { ...params }) -> ConfigEditResponse</code>
 
+## BinaryStorage
+
 ## Requests
 
 Types:
