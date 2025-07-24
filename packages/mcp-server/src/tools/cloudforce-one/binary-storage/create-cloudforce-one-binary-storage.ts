@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_cloudforce_one_binary_storage',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nPosts a file to BinDB\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    accountIds: {\n      type: 'array',\n      items: {\n        type: 'string'\n      }\n    },\n    content_type: {\n      type: 'string'\n    },\n    filenames: {\n      type: 'array',\n      items: {\n        type: 'string'\n      }\n    },\n    first_seen: {\n      type: 'number'\n    },\n    is_private: {\n      type: 'boolean'\n    },\n    md5: {\n      type: 'string'\n    },\n    sha1: {\n      type: 'string'\n    },\n    sha256: {\n      type: 'string'\n    }\n  },\n  required: [    'accountIds',\n    'content_type',\n    'filenames',\n    'first_seen',\n    'is_private',\n    'md5',\n    'sha1',\n    'sha256'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nPosts a file to BinDB\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    content_type: {\n      type: 'string'\n    },\n    md5: {\n      type: 'string'\n    },\n    sha1: {\n      type: 'string'\n    },\n    sha256: {\n      type: 'string'\n    }\n  },\n  required: [    'content_type',\n    'md5',\n    'sha1',\n    'sha256'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
