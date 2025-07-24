@@ -7793,15 +7793,6 @@ Methods:
 
 ## BinaryStorage
 
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/binary-storage.ts">BinaryStorageCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/cloudforce-one/binary">client.cloudforceOne.binaryStorage.<a href="./src/resources/cloudforce-one/binary-storage.ts">create</a>({ ...params }) -> BinaryStorageCreateResponse</code>
-- <code title="get /accounts/{account_id}/cloudforce-one/binary/{hash}">client.cloudforceOne.binaryStorage.<a href="./src/resources/cloudforce-one/binary-storage.ts">get</a>(hash, { ...params }) -> void</code>
-
 ## Requests
 
 Types:

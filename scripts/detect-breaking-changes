@@ -666,7 +666,6 @@ TEST_PATHS=(
 	tests/api-resources/cloudforce-one/scans/scans.test.ts
 	tests/api-resources/cloudforce-one/scans/results.test.ts
 	tests/api-resources/cloudforce-one/scans/config.test.ts
-	tests/api-resources/cloudforce-one/binary-storage.test.ts
 	tests/api-resources/cloudforce-one/requests/requests.test.ts
 	tests/api-resources/cloudforce-one/requests/message.test.ts
 	tests/api-resources/cloudforce-one/requests/priority.test.ts
