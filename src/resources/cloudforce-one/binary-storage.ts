@@ -47,15 +47,7 @@ export class BinaryStorage extends APIResource {
 }
 
 export interface BinaryStorageCreateResponse {
-  accountIds: Array<string>;
-
   content_type: string;
-
-  filenames: Array<string>;
-
-  first_seen: number;
-
-  is_private: boolean;
 
   md5: string;
 
