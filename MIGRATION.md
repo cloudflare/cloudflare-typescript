@@ -833,6 +833,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.cloudforceOne.scans.results.get()`
 - `client.cloudforceOne.scans.config.delete()`
 - `client.cloudforceOne.scans.config.edit()`
+- `client.cloudforceOne.binaryStorage.get()`
 - `client.cloudforceOne.requests.update()`
 - `client.cloudforceOne.requests.delete()`
 - `client.cloudforceOne.requests.get()`

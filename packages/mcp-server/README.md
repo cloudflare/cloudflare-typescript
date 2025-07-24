@@ -3759,6 +3759,11 @@ The following tools are available in this MCP server.
 - `delete_scans_cloudforce_one_config` (`write`): Delete a Scan Config
 - `edit_scans_cloudforce_one_config` (`write`): Update an existing Scan Config
 
+### Resource `cloudforce_one.binary_storage`:
+
+- `create_cloudforce_one_binary_storage` (`write`): Posts a file to BinDB
+- `get_cloudforce_one_binary_storage` (`read`): Posts a file to BinDB
+
 ### Resource `cloudforce_one.requests`:
 
 - `create_cloudforce_one_requests` (`write`): Creating a request adds the request into the Cloudforce One queue for analysis. In addition to the content, a short title, type, priority, and releasability should be provided. If one is not provided, a default will be assigned.
