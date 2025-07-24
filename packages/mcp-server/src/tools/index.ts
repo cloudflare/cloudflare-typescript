@@ -1601,8 +1601,6 @@ import create_scans_cloudforce_one_config from './cloudforce-one/scans/config/cr
 import list_scans_cloudforce_one_config from './cloudforce-one/scans/config/list-scans-cloudforce-one-config';
 import delete_scans_cloudforce_one_config from './cloudforce-one/scans/config/delete-scans-cloudforce-one-config';
 import edit_scans_cloudforce_one_config from './cloudforce-one/scans/config/edit-scans-cloudforce-one-config';
-import create_cloudforce_one_binary_storage from './cloudforce-one/binary-storage/create-cloudforce-one-binary-storage';
-import get_cloudforce_one_binary_storage from './cloudforce-one/binary-storage/get-cloudforce-one-binary-storage';
 import create_cloudforce_one_requests from './cloudforce-one/requests/create-cloudforce-one-requests';
 import update_cloudforce_one_requests from './cloudforce-one/requests/update-cloudforce-one-requests';
 import list_cloudforce_one_requests from './cloudforce-one/requests/list-cloudforce-one-requests';
@@ -3397,8 +3395,6 @@ addEndpoint(create_scans_cloudforce_one_config);
 addEndpoint(list_scans_cloudforce_one_config);
 addEndpoint(delete_scans_cloudforce_one_config);
 addEndpoint(edit_scans_cloudforce_one_config);
-addEndpoint(create_cloudforce_one_binary_storage);
-addEndpoint(get_cloudforce_one_binary_storage);
 addEndpoint(create_cloudforce_one_requests);
 addEndpoint(update_cloudforce_one_requests);
 addEndpoint(list_cloudforce_one_requests);
