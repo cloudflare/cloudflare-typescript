@@ -74,10 +74,10 @@ export class ThreatEvents extends APIResource {
   insights: InsightsAPI.Insights = new InsightsAPI.Insights(this._client);
 
   /**
-   * Events must be created in a client-specific dataset, which means the `datasetId`
-   * parameter must be defined. To create a dataset, see the
+   * To create a dataset, see the
    * [`Create Dataset`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/create/)
-   * endpoint.
+   * endpoint. When `datasetId` parameter is unspecified, it will be created in a
+   * default dataset named `Cloudforce One Threat Events`.
    *
    * @example
    * ```ts
@@ -102,8 +102,9 @@ export class ThreatEvents extends APIResource {
   }
 
   /**
-   * The `datasetId` must be defined (to list existing datasets (and their IDs), use
-   * the
+   * When `datasetId` is unspecified, events will be listed from the
+   * `Cloudforce One Threat Events` dataset. To list existing datasets (and their
+   * IDs), use the
    * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
    * endpoint). Also, must provide query parameters.
    *
