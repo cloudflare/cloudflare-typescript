@@ -10,7 +10,7 @@ import { path } from '../../internal/utils/path';
 
 export class BinaryStorage extends APIResource {
   /**
-   * Posts a file to BinDB
+   * Posts a file to Binary Storage
    *
    * @example
    * ```ts
@@ -33,7 +33,7 @@ export class BinaryStorage extends APIResource {
   }
 
   /**
-   * Posts a file to BinDB
+   * Retrieves a file from Binary Storage
    *
    * @example
    * ```ts
