@@ -93,7 +93,7 @@ export interface ActivityLogSettings {
   /**
    * Enable activity logging.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 }
 
 /**
@@ -103,7 +103,7 @@ export interface ActivityLogSettingsParam {
   /**
    * Enable activity logging.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 }
 
 /**
@@ -113,17 +113,17 @@ export interface AntiVirusSettings {
   /**
    * Enable anti-virus scanning on downloads.
    */
-  enabled_download_phase?: boolean;
+  enabled_download_phase?: boolean | null;
 
   /**
    * Enable anti-virus scanning on uploads.
    */
-  enabled_upload_phase?: boolean;
+  enabled_upload_phase?: boolean | null;
 
   /**
    * Block requests for files that cannot be scanned.
    */
-  fail_closed?: boolean;
+  fail_closed?: boolean | null;
 
   /**
    * Configure a message to display on the user's device when an antivirus search is
@@ -139,17 +139,17 @@ export interface AntiVirusSettingsParam {
   /**
    * Enable anti-virus scanning on downloads.
    */
-  enabled_download_phase?: boolean;
+  enabled_download_phase?: boolean | null;
 
   /**
    * Enable anti-virus scanning on uploads.
    */
-  enabled_upload_phase?: boolean;
+  enabled_upload_phase?: boolean | null;
 
   /**
    * Block requests for files that cannot be scanned.
    */
-  fail_closed?: boolean;
+  fail_closed?: boolean | null;
 
   /**
    * Configure a message to display on the user's device when an antivirus search is
@@ -163,14 +163,20 @@ export interface AntiVirusSettingsParam {
  */
 export interface BlockPageSettings {
   /**
+   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   */
+  enabled: boolean | null;
+
+  /**
+   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
+   * a customer-provided URI.
+   */
+  mode: 'customized_block_page' | 'redirect_uri';
+
+  /**
    * If mode is customized_block_page: block page background color in #rrggbb format.
    */
   background_color?: string;
-
-  /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-   */
-  enabled?: boolean;
 
   /**
    * If mode is customized_block_page: block page footer text.
@@ -205,12 +211,6 @@ export interface BlockPageSettings {
   mailto_subject?: string;
 
   /**
-   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
-   * a customer-provided URI.
-   */
-  mode?: 'customized_block_page' | 'redirect_uri';
-
-  /**
    * If mode is customized_block_page: block page title.
    */
   name?: string;
@@ -219,12 +219,12 @@ export interface BlockPageSettings {
    * This setting was shared via the Orgs API and cannot be edited by the current
    * account
    */
-  read_only?: boolean;
+  read_only?: boolean | null;
 
   /**
    * Account tag of account that shared this setting
    */
-  source_account?: string;
+  source_account?: string | null;
 
   /**
    * If mode is customized_block_page: suppress detailed info at the bottom of the
@@ -240,7 +240,7 @@ export interface BlockPageSettings {
   /**
    * Version number of the setting
    */
-  version?: number;
+  version?: number | null;
 }
 
 /**
@@ -248,14 +248,20 @@ export interface BlockPageSettings {
  */
 export interface BlockPageSettingsParam {
   /**
+   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   */
+  enabled: boolean | null;
+
+  /**
+   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
+   * a customer-provided URI.
+   */
+  mode: 'customized_block_page' | 'redirect_uri';
+
+  /**
    * If mode is customized_block_page: block page background color in #rrggbb format.
    */
   background_color?: string;
-
-  /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-   */
-  enabled?: boolean;
 
   /**
    * If mode is customized_block_page: block page footer text.
@@ -288,12 +294,6 @@ export interface BlockPageSettingsParam {
    * page.
    */
   mailto_subject?: string;
-
-  /**
-   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
-   * a customer-provided URI.
-   */
-  mode?: 'customized_block_page' | 'redirect_uri';
 
   /**
    * If mode is customized_block_page: block page title.
@@ -319,7 +319,7 @@ export interface BodyScanningSettings {
   /**
    * Set the inspection mode to either `deep` or `shallow`.
    */
-  inspection_mode?: string;
+  inspection_mode?: 'deep' | 'shallow';
 }
 
 /**
@@ -329,7 +329,7 @@ export interface BodyScanningSettingsParam {
   /**
    * Set the inspection mode to either `deep` or `shallow`.
    */
-  inspection_mode?: string;
+  inspection_mode?: 'deep' | 'shallow';
 }
 
 /**
@@ -370,7 +370,7 @@ export interface CustomCertificateSettings {
   /**
    * Enable use of custom certificate authority for signing Gateway traffic.
    */
-  enabled: boolean;
+  enabled: boolean | null;
 
   /**
    * UUID of certificate (ID from MTLS certificate store).
@@ -393,7 +393,7 @@ export interface CustomCertificateSettingsParam {
   /**
    * Enable use of custom certificate authority for signing Gateway traffic.
    */
-  enabled: boolean;
+  enabled: boolean | null;
 
   /**
    * UUID of certificate (ID from MTLS certificate store).
@@ -409,23 +409,23 @@ export interface ExtendedEmailMatching {
    * Enable matching all variants of user emails (with + or . modifiers) used as
    * criteria in Firewall policies.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 
   /**
    * This setting was shared via the Orgs API and cannot be edited by the current
    * account
    */
-  read_only?: boolean;
+  read_only?: boolean | null;
 
   /**
    * Account tag of account that shared this setting
    */
-  source_account?: string;
+  source_account?: string | null;
 
   /**
    * Version number of the setting
    */
-  version?: number;
+  version?: number | null;
 }
 
 /**
@@ -436,7 +436,7 @@ export interface ExtendedEmailMatchingParam {
    * Enable matching all variants of user emails (with + or . modifiers) used as
    * criteria in Firewall policies.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 }
 
 /**
@@ -516,6 +516,11 @@ export interface GatewayConfigurationSettings {
   host_selector?: GatewayConfigurationSettings.HostSelector | null;
 
   /**
+   * Setting to define inspection settings
+   */
+  inspection?: GatewayConfigurationSettings.Inspection | null;
+
+  /**
    * Protocol Detection settings.
    */
   protocol_detection?: ProtocolDetection | null;
@@ -552,7 +557,22 @@ export namespace GatewayConfigurationSettings {
     /**
      * Enable filtering via hosts for egress policies.
      */
-    enabled?: boolean;
+    enabled?: boolean | null;
+  }
+
+  /**
+   * Setting to define inspection settings
+   */
+  export interface Inspection {
+    /**
+     * Defines the mode of inspection the proxy will use.
+     *
+     * - static: Gateway will use static inspection to inspect HTTP on TCP(80). If TLS
+     *   decryption is on, Gateway will inspect HTTPS traffic on TCP(443) & UDP(443).
+     * - dynamic: Gateway will use protocol detection to dynamically inspect HTTP and
+     *   HTTPS traffic on any port. TLS decryption must be on to inspect HTTPS traffic.
+     */
+    mode?: 'static' | 'dynamic';
   }
 
   /**
@@ -562,7 +582,7 @@ export namespace GatewayConfigurationSettings {
     /**
      * Enable sandbox.
      */
-    enabled?: boolean;
+    enabled?: boolean | null;
 
     /**
      * Action to take when the file cannot be scanned.
@@ -628,6 +648,11 @@ export interface GatewayConfigurationSettingsParam {
   host_selector?: GatewayConfigurationSettingsParam.HostSelector | null;
 
   /**
+   * Setting to define inspection settings
+   */
+  inspection?: GatewayConfigurationSettingsParam.Inspection | null;
+
+  /**
    * Protocol Detection settings.
    */
   protocol_detection?: ProtocolDetectionParam | null;
@@ -664,7 +689,22 @@ export namespace GatewayConfigurationSettingsParam {
     /**
      * Enable filtering via hosts for egress policies.
      */
-    enabled?: boolean;
+    enabled?: boolean | null;
+  }
+
+  /**
+   * Setting to define inspection settings
+   */
+  export interface Inspection {
+    /**
+     * Defines the mode of inspection the proxy will use.
+     *
+     * - static: Gateway will use static inspection to inspect HTTP on TCP(80). If TLS
+     *   decryption is on, Gateway will inspect HTTPS traffic on TCP(443) & UDP(443).
+     * - dynamic: Gateway will use protocol detection to dynamically inspect HTTP and
+     *   HTTPS traffic on any port. TLS decryption must be on to inspect HTTPS traffic.
+     */
+    mode?: 'static' | 'dynamic';
   }
 
   /**
@@ -674,7 +714,7 @@ export namespace GatewayConfigurationSettingsParam {
     /**
      * Enable sandbox.
      */
-    enabled?: boolean;
+    enabled?: boolean | null;
 
     /**
      * Action to take when the file cannot be scanned.
@@ -744,7 +784,7 @@ export interface ProtocolDetection {
   /**
    * Enable detecting protocol on initial bytes of client traffic.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 }
 
 /**
@@ -754,7 +794,7 @@ export interface ProtocolDetectionParam {
   /**
    * Enable detecting protocol on initial bytes of client traffic.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 }
 
 /**
