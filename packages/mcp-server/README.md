@@ -3761,8 +3761,8 @@ The following tools are available in this MCP server.
 
 ### Resource `cloudforce_one.binary_storage`:
 
-- `create_cloudforce_one_binary_storage` (`write`): Posts a file to BinDB
-- `get_cloudforce_one_binary_storage` (`read`): Posts a file to BinDB
+- `create_cloudforce_one_binary_storage` (`write`): Posts a file to Binary Storage
+- `get_cloudforce_one_binary_storage` (`read`): Retrieves a file from Binary Storage
 
 ### Resource `cloudforce_one.requests`:
 
