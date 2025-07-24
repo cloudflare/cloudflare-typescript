@@ -81,6 +81,18 @@ export const tool: Tool = {
               },
             },
           },
+          inspection: {
+            type: 'object',
+            description: 'Setting to define inspection settings',
+            properties: {
+              mode: {
+                type: 'string',
+                description:
+                  'Defines the mode of inspection the proxy will use.\n- static: Gateway will use static inspection to inspect HTTP on TCP(80). If TLS decryption is on, Gateway will inspect HTTPS traffic on TCP(443) & UDP(443).\n- dynamic: Gateway will use protocol detection to dynamically inspect HTTP and HTTPS traffic on any port. TLS decryption must be on to inspect HTTPS traffic.',
+                enum: ['static', 'dynamic'],
+              },
+            },
+          },
           protocol_detection: {
             $ref: '#/$defs/protocol_detection',
           },
@@ -163,13 +175,19 @@ export const tool: Tool = {
         type: 'object',
         description: 'Block page layout settings.',
         properties: {
-          background_color: {
-            type: 'string',
-            description: 'If mode is customized_block_page: block page background color in #rrggbb format.',
-          },
           enabled: {
             type: 'boolean',
             description: 'Enable only cipher suites and TLS versions compliant with FIPS 140-2.',
+          },
+          mode: {
+            type: 'string',
+            description:
+              'Controls whether the user is redirected to a Cloudflare-hosted block page or to a customer-provided URI.',
+            enum: ['customized_block_page', 'redirect_uri'],
+          },
+          background_color: {
+            type: 'string',
+            description: 'If mode is customized_block_page: block page background color in #rrggbb format.',
           },
           footer_text: {
             type: 'string',
@@ -195,12 +213,6 @@ export const tool: Tool = {
           mailto_subject: {
             type: 'string',
             description: 'If mode is customized_block_page: subject line for emails created from block page.',
-          },
-          mode: {
-            type: 'string',
-            description:
-              'Controls whether the user is redirected to a Cloudflare-hosted block page or to a customer-provided URI.',
-            enum: ['customized_block_page', 'redirect_uri'],
           },
           name: {
             type: 'string',
@@ -229,6 +241,7 @@ export const tool: Tool = {
             description: 'Version number of the setting',
           },
         },
+        required: ['enabled', 'mode'],
       },
       body_scanning_settings: {
         type: 'object',
@@ -237,6 +250,7 @@ export const tool: Tool = {
           inspection_mode: {
             type: 'string',
             description: 'Set the inspection mode to either `deep` or `shallow`.',
+            enum: ['deep', 'shallow'],
           },
         },
       },
