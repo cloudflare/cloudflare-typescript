@@ -2,7 +2,12 @@
 
 import { APIResource } from '../../resource';
 import * as BinaryStorageAPI from './binary-storage';
-import { BinaryStorage } from './binary-storage';
+import {
+  BinaryStorage,
+  BinaryStorageCreateParams,
+  BinaryStorageCreateResponse,
+  BinaryStorageGetParams,
+} from './binary-storage';
 import * as RequestsAPI from './requests/requests';
 import {
   Item,
@@ -60,7 +65,12 @@ CloudforceOne.ThreatEvents = ThreatEvents;
 export declare namespace CloudforceOne {
   export { Scans as Scans };
 
-  export { BinaryStorage as BinaryStorage };
+  export {
+    BinaryStorage as BinaryStorage,
+    type BinaryStorageCreateResponse as BinaryStorageCreateResponse,
+    type BinaryStorageCreateParams as BinaryStorageCreateParams,
+    type BinaryStorageGetParams as BinaryStorageGetParams,
+  };
 
   export {
     Requests as Requests,
