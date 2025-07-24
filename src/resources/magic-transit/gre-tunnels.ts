@@ -242,6 +242,14 @@ export interface GRETunnelCreateResponse {
   health_check?: GRETunnelCreateResponse.HealthCheck;
 
   /**
+   * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+   * address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
+
+  /**
    * The date and time the tunnel was last modified.
    */
   modified_on?: string;
@@ -369,6 +377,14 @@ export namespace GRETunnelUpdateResponse {
     health_check?: ModifiedGRETunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -493,6 +509,14 @@ export namespace GRETunnelListResponse {
     description?: string;
 
     health_check?: GRETunnel.HealthCheck;
+
+    /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
 
     /**
      * The date and time the tunnel was last modified.
@@ -623,6 +647,14 @@ export namespace GRETunnelDeleteResponse {
     health_check?: DeletedGRETunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -751,6 +783,14 @@ export namespace GRETunnelBulkUpdateResponse {
     health_check?: ModifiedGRETunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -877,6 +917,14 @@ export namespace GRETunnelGetResponse {
     health_check?: GRETunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -997,6 +1045,14 @@ export interface GRETunnelCreateParams {
   health_check?: GRETunnelCreateParams.HealthCheck;
 
   /**
+   * Body param: A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space
+   * with the address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
+
+  /**
    * Body param: Maximum Transmission Unit (MTU) in bytes for the GRE tunnel. The
    * minimum value is 576.
    */
@@ -1108,6 +1164,14 @@ export interface GRETunnelUpdateParams {
    * Body param:
    */
   health_check?: GRETunnelUpdateParams.HealthCheck;
+
+  /**
+   * Body param: A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space
+   * with the address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
 
   /**
    * Body param: Maximum Transmission Unit (MTU) in bytes for the GRE tunnel. The

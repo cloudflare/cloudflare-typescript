@@ -298,6 +298,14 @@ export interface IPSECTunnelCreateResponse {
   health_check?: IPSECTunnelCreateResponse.HealthCheck;
 
   /**
+   * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+   * address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
+
+  /**
    * The date and time the tunnel was last modified.
    */
   modified_on?: string;
@@ -431,6 +439,14 @@ export namespace IPSECTunnelUpdateResponse {
     health_check?: ModifiedIPSECTunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -561,6 +577,14 @@ export namespace IPSECTunnelListResponse {
     description?: string;
 
     health_check?: IPSECTunnel.HealthCheck;
+
+    /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
 
     /**
      * The date and time the tunnel was last modified.
@@ -697,6 +721,14 @@ export namespace IPSECTunnelDeleteResponse {
     health_check?: DeletedIPSECTunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -831,6 +863,14 @@ export namespace IPSECTunnelBulkUpdateResponse {
     health_check?: ModifiedIPSECTunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -961,6 +1001,14 @@ export namespace IPSECTunnelGetResponse {
     description?: string;
 
     health_check?: IPSECTunnel.HealthCheck;
+
+    /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
 
     /**
      * The date and time the tunnel was last modified.
@@ -1100,6 +1148,14 @@ export interface IPSECTunnelCreateParams {
   health_check?: IPSECTunnelCreateParams.HealthCheck;
 
   /**
+   * Body param: A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space
+   * with the address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
+
+  /**
    * Body param: A randomly generated or provided string for use in the IPsec tunnel.
    */
   psk?: string;
@@ -1211,6 +1267,14 @@ export interface IPSECTunnelUpdateParams {
    * Body param:
    */
   health_check?: IPSECTunnelUpdateParams.HealthCheck;
+
+  /**
+   * Body param: A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space
+   * with the address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
 
   /**
    * Body param: A randomly generated or provided string for use in the IPsec tunnel.
