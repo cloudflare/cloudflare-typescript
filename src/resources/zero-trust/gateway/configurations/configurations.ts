@@ -159,20 +159,14 @@ export interface AntiVirusSettingsParam {
  */
 export interface BlockPageSettings {
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-   */
-  enabled: boolean | null;
-
-  /**
-   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
-   * a customer-provided URI.
-   */
-  mode: 'customized_block_page' | 'redirect_uri';
-
-  /**
    * If mode is customized_block_page: block page background color in #rrggbb format.
    */
   background_color?: string;
+
+  /**
+   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   */
+  enabled?: boolean | null;
 
   /**
    * If mode is customized_block_page: block page footer text.
@@ -205,6 +199,12 @@ export interface BlockPageSettings {
    * page.
    */
   mailto_subject?: string;
+
+  /**
+   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
+   * a customer-provided URI.
+   */
+  mode?: 'customized_block_page' | 'redirect_uri';
 
   /**
    * If mode is customized_block_page: block page title.
@@ -244,20 +244,14 @@ export interface BlockPageSettings {
  */
 export interface BlockPageSettingsParam {
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-   */
-  enabled: boolean | null;
-
-  /**
-   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
-   * a customer-provided URI.
-   */
-  mode: 'customized_block_page' | 'redirect_uri';
-
-  /**
    * If mode is customized_block_page: block page background color in #rrggbb format.
    */
   background_color?: string;
+
+  /**
+   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   */
+  enabled?: boolean | null;
 
   /**
    * If mode is customized_block_page: block page footer text.
@@ -290,6 +284,12 @@ export interface BlockPageSettingsParam {
    * page.
    */
   mailto_subject?: string;
+
+  /**
+   * Controls whether the user is redirected to a Cloudflare-hosted block page or to
+   * a customer-provided URI.
+   */
+  mode?: 'customized_block_page' | 'redirect_uri';
 
   /**
    * If mode is customized_block_page: block page title.
