@@ -464,7 +464,7 @@ export interface RuleSetting {
    * The text describing why this block occurred, displayed on the custom block page
    * (if enabled).
    */
-  block_reason?: string;
+  block_reason?: string | null;
 
   /**
    * Set by children MSP accounts to bypass their parent's rules.
@@ -893,7 +893,7 @@ export interface RuleSettingParam {
    * The text describing why this block occurred, displayed on the custom block page
    * (if enabled).
    */
-  block_reason?: string;
+  block_reason?: string | null;
 
   /**
    * Set by children MSP accounts to bypass their parent's rules.
