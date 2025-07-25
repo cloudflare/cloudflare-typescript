@@ -71,49 +71,7 @@ export class Workers extends APIResource {
   observability: ObservabilityAPI.Observability = new ObservabilityAPI.Observability(this._client);
 }
 
-export interface MigrationStep {
-  /**
-   * A list of classes to delete Durable Object namespaces from.
-   */
-  deleted_classes?: Array<string>;
-
-  /**
-   * A list of classes to create Durable Object namespaces from.
-   */
-  new_classes?: Array<string>;
-
-  /**
-   * A list of classes to create Durable Object namespaces with SQLite from.
-   */
-  new_sqlite_classes?: Array<string>;
-
-  /**
-   * A list of classes with Durable Object namespaces that were renamed.
-   */
-  renamed_classes?: Array<MigrationStep.RenamedClass>;
-
-  /**
-   * A list of transfers for Durable Object namespaces from a different Worker and
-   * class to a class defined in this Worker.
-   */
-  transferred_classes?: Array<MigrationStep.TransferredClass>;
-}
-
-export namespace MigrationStep {
-  export interface RenamedClass {
-    from?: string;
-
-    to?: string;
-  }
-
-  export interface TransferredClass {
-    from?: string;
-
-    from_script?: string;
-
-    to?: string;
-  }
-}
+export interface MigrationStep {}
 
 export interface MigrationStepParam {
   /**
@@ -162,60 +120,7 @@ export namespace MigrationStepParam {
 /**
  * A single set of migrations to apply.
  */
-export interface SingleStepMigration {
-  /**
-   * A list of classes to delete Durable Object namespaces from.
-   */
-  deleted_classes?: Array<string>;
-
-  /**
-   * A list of classes to create Durable Object namespaces from.
-   */
-  new_classes?: Array<string>;
-
-  /**
-   * A list of classes to create Durable Object namespaces with SQLite from.
-   */
-  new_sqlite_classes?: Array<string>;
-
-  /**
-   * Tag to set as the latest migration tag.
-   */
-  new_tag?: string;
-
-  /**
-   * Tag used to verify against the latest migration tag for this Worker. If they
-   * don't match, the upload is rejected.
-   */
-  old_tag?: string;
-
-  /**
-   * A list of classes with Durable Object namespaces that were renamed.
-   */
-  renamed_classes?: Array<SingleStepMigration.RenamedClass>;
-
-  /**
-   * A list of transfers for Durable Object namespaces from a different Worker and
-   * class to a class defined in this Worker.
-   */
-  transferred_classes?: Array<SingleStepMigration.TransferredClass>;
-}
-
-export namespace SingleStepMigration {
-  export interface RenamedClass {
-    from?: string;
-
-    to?: string;
-  }
-
-  export interface TransferredClass {
-    from?: string;
-
-    from_script?: string;
-
-    to?: string;
-  }
-}
+export interface SingleStepMigration {}
 
 /**
  * A single set of migrations to apply.
