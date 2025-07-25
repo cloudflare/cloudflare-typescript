@@ -48,6 +48,17 @@ export const tool: Tool = {
         type: 'integer',
         description: 'Number of objects to return per page',
       },
+      scopes: {
+        type: 'array',
+        description: 'Only secrets with the given scopes will be returned',
+        items: {
+          type: 'array',
+          description: 'The list of services that can use this secret.',
+          items: {
+            type: 'string',
+          },
+        },
+      },
       search: {
         type: 'string',
         description: 'Search secrets using a filter string, filtering across name and comment',
