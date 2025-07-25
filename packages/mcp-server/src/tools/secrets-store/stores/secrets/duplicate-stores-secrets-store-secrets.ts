@@ -38,6 +38,17 @@ export const tool: Tool = {
         type: 'string',
         description: 'The name of the secret',
       },
+      scopes: {
+        type: 'array',
+        description: 'The list of services that can use this secret.',
+        items: {
+          type: 'string',
+        },
+      },
+      comment: {
+        type: 'string',
+        description: 'Freeform text describing the secret',
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',
@@ -45,7 +56,7 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
-    required: ['account_id', 'store_id', 'secret_id', 'name'],
+    required: ['account_id', 'store_id', 'secret_id', 'name', 'scopes'],
   },
   annotations: {},
 };
