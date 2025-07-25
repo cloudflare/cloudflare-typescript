@@ -175,19 +175,13 @@ export const tool: Tool = {
         type: 'object',
         description: 'Block page layout settings.',
         properties: {
-          enabled: {
-            type: 'boolean',
-            description: 'Enable only cipher suites and TLS versions compliant with FIPS 140-2.',
-          },
-          mode: {
-            type: 'string',
-            description:
-              'Controls whether the user is redirected to a Cloudflare-hosted block page or to a customer-provided URI.',
-            enum: ['customized_block_page', 'redirect_uri'],
-          },
           background_color: {
             type: 'string',
             description: 'If mode is customized_block_page: block page background color in #rrggbb format.',
+          },
+          enabled: {
+            type: 'boolean',
+            description: 'Enable only cipher suites and TLS versions compliant with FIPS 140-2.',
           },
           footer_text: {
             type: 'string',
@@ -213,6 +207,12 @@ export const tool: Tool = {
           mailto_subject: {
             type: 'string',
             description: 'If mode is customized_block_page: subject line for emails created from block page.',
+          },
+          mode: {
+            type: 'string',
+            description:
+              'Controls whether the user is redirected to a Cloudflare-hosted block page or to a customer-provided URI.',
+            enum: ['customized_block_page', 'redirect_uri'],
           },
           name: {
             type: 'string',
@@ -241,7 +241,6 @@ export const tool: Tool = {
             description: 'Version number of the setting',
           },
         },
-        required: ['enabled', 'mode'],
       },
       body_scanning_settings: {
         type: 'object',
