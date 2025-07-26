@@ -265,15 +265,10 @@ export type GatewayFilterParam = 'http' | 'dns' | 'l4' | 'egress' | 'dns_resolve
 
 export interface GatewayRule {
   /**
-   * The API resource UUID.
-   */
-  id?: string;
-
-  /**
-   * The action to preform when the associated traffic, identity, and device posture
+   * The action to perform when the associated traffic, identity, and device posture
    * expressions are either absent or evaluate to `true`.
    */
-  action?:
+  action:
     | 'on'
     | 'off'
     | 'allow'
@@ -290,6 +285,41 @@ export interface GatewayRule {
     | 'resolve'
     | 'quarantine'
     | 'redirect';
+
+  /**
+   * True if the rule is enabled.
+   */
+  enabled: boolean;
+
+  /**
+   * The protocol or layer to evaluate the traffic, identity, and device posture
+   * expressions.
+   */
+  filters: Array<GatewayFilter>;
+
+  /**
+   * The name of the rule.
+   */
+  name: string;
+
+  /**
+   * Precedence sets the order of your rules. Lower values indicate higher
+   * precedence. At each processing phase, applicable rules are evaluated in
+   * ascending order of this value. Refer to
+   * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
+   * docs on how to manage precedence via Terraform.
+   */
+  precedence: number;
+
+  /**
+   * The wirefilter expression used for traffic matching.
+   */
+  traffic: string;
+
+  /**
+   * The API resource UUID.
+   */
+  id?: string;
 
   created_at?: string;
 
@@ -309,11 +339,6 @@ export interface GatewayRule {
   device_posture?: string;
 
   /**
-   * True if the rule is enabled.
-   */
-  enabled?: boolean;
-
-  /**
    * The expiration time stamp and default duration of a DNS policy. Takes precedence
    * over the policy's `schedule` configuration, if any.
    *
@@ -322,29 +347,19 @@ export interface GatewayRule {
   expiration?: GatewayRule.Expiration | null;
 
   /**
-   * The protocol or layer to evaluate the traffic, identity, and device posture
-   * expressions.
-   */
-  filters?: Array<GatewayFilter>;
-
-  /**
    * The wirefilter expression used for identity matching.
    */
   identity?: string;
 
   /**
-   * The name of the rule.
+   * The rule cannot be shared via the Orgs API
    */
-  name?: string;
+  not_sharable?: boolean;
 
   /**
-   * Precedence sets the order of your rules. Lower values indicate higher
-   * precedence. At each processing phase, applicable rules are evaluated in
-   * ascending order of this value. Refer to
-   * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
-   * docs on how to manage precedence via Terraform.
+   * The rule was shared via the Orgs API and cannot be edited by the current account
    */
-  precedence?: number;
+  read_only?: boolean;
 
   /**
    * Additional settings that modify the rule's action.
@@ -358,9 +373,9 @@ export interface GatewayRule {
   schedule?: Schedule | null;
 
   /**
-   * The wirefilter expression used for traffic matching.
+   * account tag of account that created the rule
    */
-  traffic?: string;
+  source_account?: string;
 
   updated_at?: string;
 
@@ -417,7 +432,7 @@ export interface RuleSetting {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: { [key: string]: string } | null;
+  add_headers?: { [key: string]: Array<string> } | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
@@ -432,7 +447,7 @@ export interface RuleSetting {
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSetting.BISOAdminControls | null;
+  biso_admin_controls?: RuleSetting.BISOAdminControls;
 
   /**
    * Custom block page settings. If missing/null, blocking will use the the account
@@ -449,7 +464,7 @@ export interface RuleSetting {
    * The text describing why this block occurred, displayed on the custom block page
    * (if enabled).
    */
-  block_reason?: string;
+  block_reason?: string | null;
 
   /**
    * Set by children MSP accounts to bypass their parent's rules.
@@ -846,7 +861,7 @@ export interface RuleSettingParam {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: { [key: string]: string } | null;
+  add_headers?: { [key: string]: Array<string> } | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
@@ -861,7 +876,7 @@ export interface RuleSettingParam {
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSettingParam.BISOAdminControls | null;
+  biso_admin_controls?: RuleSettingParam.BISOAdminControls;
 
   /**
    * Custom block page settings. If missing/null, blocking will use the the account
@@ -878,7 +893,7 @@ export interface RuleSettingParam {
    * The text describing why this block occurred, displayed on the custom block page
    * (if enabled).
    */
-  block_reason?: string;
+  block_reason?: string | null;
 
   /**
    * Set by children MSP accounts to bypass their parent's rules.
@@ -1408,7 +1423,7 @@ export interface RuleCreateParams {
   account_id: string;
 
   /**
-   * Body param: The action to preform when the associated traffic, identity, and
+   * Body param: The action to perform when the associated traffic, identity, and
    * device posture expressions are either absent or evaluate to `true`.
    */
   action:
@@ -1530,7 +1545,7 @@ export interface RuleUpdateParams {
   account_id: string;
 
   /**
-   * Body param: The action to preform when the associated traffic, identity, and
+   * Body param: The action to perform when the associated traffic, identity, and
    * device posture expressions are either absent or evaluate to `true`.
    */
   action:

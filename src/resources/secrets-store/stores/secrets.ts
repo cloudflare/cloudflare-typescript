@@ -18,7 +18,7 @@ export class Secrets extends APIResource {
    *     body: [
    *       {
    *         name: 'MY_API_KEY',
-   *         scopes: ['workers'],
+   *         scopes: ['workers', 'ai_gateway'],
    *         value: 'api-token-secret-123',
    *       },
    *     ],
@@ -135,6 +135,7 @@ export class Secrets extends APIResource {
    *     {
    *       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
    *       name: 'MY_API_KEY',
+   *       scopes: ['workers', 'ai_gateway'],
    *     },
    *   );
    * ```
@@ -163,10 +164,7 @@ export class Secrets extends APIResource {
    *   await client.secretsStore.stores.secrets.edit(
    *     '023e105f4ecef8ad9ca31a8372d0c353',
    *     '3fd85f74b32742f1bff64a85009dda07',
-   *     {
-   *       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
-   *       name: 'MY_API_KEY',
-   *     },
+   *     { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
@@ -486,6 +484,11 @@ export namespace SecretCreateParams {
      * provide this value, it is only used to create/modify secrets.
      */
     value: string;
+
+    /**
+     * Freeform text describing the secret
+     */
+    comment?: string;
   }
 }
 
@@ -504,6 +507,11 @@ export interface SecretListParams extends V4PagePaginationArrayParams {
    * Query param: Order secrets by values in the given field
    */
   order?: 'name' | 'comment' | 'created' | 'modified' | 'status';
+
+  /**
+   * Query param: Only secrets with the given scopes will be returned
+   */
+  scopes?: Array<Array<string>>;
 
   /**
    * Query param: Search secrets using a filter string, filtering across name and
@@ -536,6 +544,16 @@ export interface SecretDuplicateParams {
    * Body param: The name of the secret
    */
   name: string;
+
+  /**
+   * Body param: The list of services that can use this secret.
+   */
+  scopes: Array<string>;
+
+  /**
+   * Body param: Freeform text describing the secret
+   */
+  comment?: string;
 }
 
 export interface SecretEditParams {
@@ -545,20 +563,14 @@ export interface SecretEditParams {
   account_id: string;
 
   /**
-   * Body param: The name of the secret
+   * Body param: Freeform text describing the secret
    */
-  name: string;
+  comment?: string;
 
   /**
    * Body param: The list of services that can use this secret.
    */
   scopes?: Array<string>;
-
-  /**
-   * Body param: The value of the secret. Note that this is 'write only' - no API
-   * reponse will provide this value, it is only used to create/modify secrets.
-   */
-  value?: string;
 }
 
 export interface SecretGetParams {

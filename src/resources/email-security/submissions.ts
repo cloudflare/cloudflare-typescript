@@ -130,6 +130,11 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
+  status?: string;
+
+  /**
+   * Query param:
+   */
   submission_id?: string;
 
   /**

@@ -139,6 +139,14 @@ export interface BGPPrefix {
    */
   asn_prepend_count?: number;
 
+  /**
+   * Determines if Cloudflare advertises a BYOIP BGP prefix even when there is no
+   * matching BGP prefix in the Magic routing table. When true, Cloudflare will
+   * automatically withdraw the BGP prefix when there are no matching BGP routes, and
+   * will resume advertising when there is at least one matching BGP route.
+   */
+  auto_advertise_withdraw?: boolean;
+
   bgp_signal_opts?: BGPPrefix.BGPSignalOpts;
 
   /**
@@ -151,13 +159,6 @@ export interface BGPPrefix {
   modified_at?: string;
 
   on_demand?: BGPPrefix.OnDemand;
-
-  /**
-   * Controls whether the BGP prefix is automatically withdrawn when prefix is
-   * withdrawn from Magic routing table (for Magic Transit customers using Direct
-   * CNI)
-   */
-  withdraw_if_no_route?: boolean;
 }
 
 export namespace BGPPrefix {
@@ -234,16 +235,18 @@ export interface BGPPrefixEditParams {
   asn_prepend_count?: number;
 
   /**
+   * Body param: Determines if Cloudflare advertises a BYOIP BGP prefix even when
+   * there is no matching BGP prefix in the Magic routing table. When true,
+   * Cloudflare will automatically withdraw the BGP prefix when there are no matching
+   * BGP routes, and will resume advertising when there is at least one matching BGP
+   * route.
+   */
+  auto_advertise_withdraw?: boolean;
+
+  /**
    * Body param:
    */
   on_demand?: BGPPrefixEditParams.OnDemand;
-
-  /**
-   * Body param: Controls whether the BGP prefix is automatically withdrawn when
-   * prefix is withdrawn from Magic routing table (for Magic Transit customers using
-   * Direct CNI)
-   */
-  withdraw_if_no_route?: boolean;
 }
 
 export namespace BGPPrefixEditParams {

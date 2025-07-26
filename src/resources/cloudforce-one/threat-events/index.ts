@@ -47,17 +47,7 @@ export {
   type IndicatorTypeListResponse,
   type IndicatorTypeListParams,
 } from './indicator-types';
-export {
-  Insights,
-  type InsightCreateResponse,
-  type InsightDeleteResponse,
-  type InsightEditResponse,
-  type InsightGetResponse,
-  type InsightCreateParams,
-  type InsightDeleteParams,
-  type InsightEditParams,
-  type InsightGetParams,
-} from './insights';
+export { Insights } from './insights';
 export { Raw, type RawEditResponse, type RawGetResponse, type RawEditParams, type RawGetParams } from './raw';
 export { Relate, type RelateDeleteResponse, type RelateDeleteParams } from './relate';
 export { Tags, type TagCreateResponse, type TagCreateParams } from './tags';

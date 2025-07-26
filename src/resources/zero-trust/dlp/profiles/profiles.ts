@@ -78,8 +78,8 @@ export class Profiles extends APIResource {
 export class ProfilesSinglePage extends SinglePage<Profile> {}
 
 /**
- * Scan the context of predefined entries to only return matches surrounded by
- * keywords.
+ * @deprecated Scan the context of predefined entries to only return matches
+ * surrounded by keywords.
  */
 export interface ContextAwareness {
   /**
@@ -95,8 +95,8 @@ export interface ContextAwareness {
 }
 
 /**
- * Scan the context of predefined entries to only return matches surrounded by
- * keywords.
+ * @deprecated Scan the context of predefined entries to only return matches
+ * surrounded by keywords.
  */
 export interface ContextAwarenessParam {
   /**
@@ -124,12 +124,6 @@ export namespace Profile {
      * Related DLP policies will trigger when the match count exceeds the number set.
      */
     allowed_match_count: number;
-
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    context_awareness: ProfilesAPI.ContextAwareness;
 
     /**
      * When the profile was created.
@@ -162,6 +156,12 @@ export namespace Profile {
     ai_context_enabled?: boolean;
 
     confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
+
+    /**
+     * @deprecated Scan the context of predefined entries to only return matches
+     * surrounded by keywords.
+     */
+    context_awareness?: ProfilesAPI.ContextAwareness;
 
     /**
      * The description of the profile.
@@ -317,8 +317,8 @@ export namespace Profile {
     confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
     /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
+     * @deprecated Scan the context of predefined entries to only return matches
+     * surrounded by keywords.
      */
     context_awareness?: ProfilesAPI.ContextAwareness;
 

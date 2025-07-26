@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource brandProtection', () => {
-  test('submit: only required params', async () => {
-    const responsePromise = client.brandProtection.submit({ account_id: 'x' });
+describe('resource logos', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.brandProtection.logos.create({ account_id: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,12 +21,18 @@ describe('resource brandProtection', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('submit: required and optional params', async () => {
-    const response = await client.brandProtection.submit({ account_id: 'x' });
+  test('create: required and optional params', async () => {
+    const response = await client.brandProtection.logos.create({
+      account_id: 'x',
+      match_type: 'match_type',
+      tag: 'tag',
+      threshold: 0,
+      image: await toFile(Buffer.from('# my file contents'), 'README.md'),
+    });
   });
 
-  test('urlInfo: only required params', async () => {
-    const responsePromise = client.brandProtection.urlInfo({ account_id: 'x' });
+  test('delete: only required params', async () => {
+    const responsePromise = client.brandProtection.logos.delete('x', { account_id: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,7 +42,7 @@ describe('resource brandProtection', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('urlInfo: required and optional params', async () => {
-    const response = await client.brandProtection.urlInfo({ account_id: 'x' });
+  test('delete: required and optional params', async () => {
+    const response = await client.brandProtection.logos.delete('x', { account_id: 'x' });
   });
 });

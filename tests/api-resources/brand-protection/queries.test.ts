@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource brandProtection', () => {
-  test('submit: only required params', async () => {
-    const responsePromise = client.brandProtection.submit({ account_id: 'x' });
+describe('resource queries', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.brandProtection.queries.create({ account_id: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,12 +21,22 @@ describe('resource brandProtection', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('submit: required and optional params', async () => {
-    const response = await client.brandProtection.submit({ account_id: 'x' });
+  test('create: required and optional params', async () => {
+    const response = await client.brandProtection.queries.create({
+      account_id: 'x',
+      id: 'id',
+      query_scan: true,
+      query_tag: 'tag',
+      max_time: '2019-12-27T18:11:19.117Z',
+      min_time: '2019-12-27T18:11:19.117Z',
+      body_scan: true,
+      string_matches: {},
+      body_tag: 'tag',
+    });
   });
 
-  test('urlInfo: only required params', async () => {
-    const responsePromise = client.brandProtection.urlInfo({ account_id: 'x' });
+  test('delete: only required params', async () => {
+    const responsePromise = client.brandProtection.queries.delete({ account_id: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,7 +46,12 @@ describe('resource brandProtection', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('urlInfo: required and optional params', async () => {
-    const response = await client.brandProtection.urlInfo({ account_id: 'x' });
+  test('delete: required and optional params', async () => {
+    const response = await client.brandProtection.queries.delete({
+      account_id: 'x',
+      id: 'id',
+      scan: true,
+      tag: 'tag',
+    });
   });
 });

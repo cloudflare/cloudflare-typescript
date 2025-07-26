@@ -5,7 +5,7 @@ import * as Core from '../../core';
 
 export class SmartRouting extends APIResource {
   /**
-   * Updates enablement of Argo Smart Routing.
+   * Configures the value of the Argo Smart Routing enablement setting.
    *
    * @example
    * ```ts
@@ -28,7 +28,7 @@ export class SmartRouting extends APIResource {
   }
 
   /**
-   * Get Argo Smart Routing setting
+   * Retrieves the value of Argo Smart Routing enablement setting.
    *
    * @example
    * ```ts
@@ -50,13 +50,13 @@ export class SmartRouting extends APIResource {
   }
 }
 
-export type SmartRoutingEditResponse = unknown | string | null;
+export type SmartRoutingEditResponse = unknown;
 
-export type SmartRoutingGetResponse = unknown | string | null;
+export type SmartRoutingGetResponse = unknown;
 
 export interface SmartRoutingEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Specifies the zone associated with the API call.
    */
   zone_id: string;
 
@@ -68,7 +68,7 @@ export interface SmartRoutingEditParams {
 
 export interface SmartRoutingGetParams {
   /**
-   * Identifier
+   * Specifies the zone associated with the API call.
    */
   zone_id: string;
 }

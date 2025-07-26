@@ -34,6 +34,7 @@ describe('resource submissions', () => {
       query: 'query',
       requested_disposition: 'MALICIOUS',
       start: '2019-12-27T18:11:19.117Z',
+      status: 'status',
       submission_id: 'submission_id',
       type: 'TEAM',
     });

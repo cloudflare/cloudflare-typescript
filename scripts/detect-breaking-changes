@@ -253,8 +253,13 @@ TEST_PATHS=(
 	tests/api-resources/billing/billing.test.ts
 	tests/api-resources/billing/profiles.test.ts
 	tests/api-resources/brand-protection/brand-protection.test.ts
+	tests/api-resources/brand-protection/queries.test.ts
+	tests/api-resources/brand-protection/matches.test.ts
+	tests/api-resources/brand-protection/logos.test.ts
+	tests/api-resources/brand-protection/logo-matches.test.ts
 	tests/api-resources/diagnostics/diagnostics.test.ts
 	tests/api-resources/diagnostics/traceroutes.test.ts
+	tests/api-resources/diagnostics/endpoint-healthchecks.test.ts
 	tests/api-resources/images/images.test.ts
 	tests/api-resources/images/v1/v1.test.ts
 	tests/api-resources/images/v1/keys.test.ts
@@ -661,6 +666,7 @@ TEST_PATHS=(
 	tests/api-resources/cloudforce-one/scans/scans.test.ts
 	tests/api-resources/cloudforce-one/scans/results.test.ts
 	tests/api-resources/cloudforce-one/scans/config.test.ts
+	tests/api-resources/cloudforce-one/binary-storage.test.ts
 	tests/api-resources/cloudforce-one/requests/requests.test.ts
 	tests/api-resources/cloudforce-one/requests/message.test.ts
 	tests/api-resources/cloudforce-one/requests/priority.test.ts
@@ -678,7 +684,6 @@ TEST_PATHS=(
 	tests/api-resources/cloudforce-one/threat-events/tags.test.ts
 	tests/api-resources/cloudforce-one/threat-events/event-tags.test.ts
 	tests/api-resources/cloudforce-one/threat-events/target-industries.test.ts
-	tests/api-resources/cloudforce-one/threat-events/insights.test.ts
 	tests/api-resources/ai-gateway/ai-gateway.test.ts
 	tests/api-resources/ai-gateway/evaluation-types.test.ts
 	tests/api-resources/ai-gateway/logs.test.ts

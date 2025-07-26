@@ -54,6 +54,12 @@ export interface V2ListParams {
   continuation_token?: string | null;
 
   /**
+   * Query param: Internal user ID set within the creator field. Setting to empty
+   * string "" will return images where creator field is not set
+   */
+  creator?: string | null;
+
+  /**
    * Query param: Number of items per page.
    */
   per_page?: number;

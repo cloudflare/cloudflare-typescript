@@ -2118,14 +2118,17 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/workers/scripts/deployments.ts">Deployment</a></code>
 - <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentCreateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentListResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentDeleteResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/workers/scripts/{script_name}/deployments">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">create</a>(scriptName, { ...params }) -> DeploymentCreateResponse</code>
-- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/deployments">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">get</a>(scriptName, { ...params }) -> DeploymentGetResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/deployments">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">list</a>(scriptName, { ...params }) -> DeploymentListResponse</code>
+- <code title="delete /accounts/{account_id}/workers/scripts/{script_name}/deployments/{deployment_id}">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">delete</a>(scriptName, deploymentId, { ...params }) -> DeploymentDeleteResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/deployments/{deployment_id}">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">get</a>(scriptName, deploymentId, { ...params }) -> DeploymentGetResponse</code>
 
 ### Versions
 
@@ -2952,23 +2955,56 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/brand-protection/brand-protection.ts">Info</a></code>
-- <code><a href="./src/resources/brand-protection/brand-protection.ts">RuleMatch</a></code>
-- <code><a href="./src/resources/brand-protection/brand-protection.ts">ScanStatus</a></code>
 - <code><a href="./src/resources/brand-protection/brand-protection.ts">Submit</a></code>
-- <code><a href="./src/resources/brand-protection/brand-protection.ts">URLInfoModelResults</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">BrandProtectionSubmitResponse</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">BrandProtectionURLInfoResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/brand-protection/submit">client.brandProtection.<a href="./src/resources/brand-protection/brand-protection.ts">submit</a>({ ...params }) -> Submit</code>
-- <code title="get /accounts/{account_id}/brand-protection/url-info">client.brandProtection.<a href="./src/resources/brand-protection/brand-protection.ts">urlInfo</a>({ ...params }) -> Info</code>
+- <code title="post /accounts/{account_id}/brand-protection/submit">client.brandProtection.<a href="./src/resources/brand-protection/brand-protection.ts">submit</a>({ ...params }) -> BrandProtectionSubmitResponse</code>
+- <code title="get /accounts/{account_id}/brand-protection/url-info">client.brandProtection.<a href="./src/resources/brand-protection/brand-protection.ts">urlInfo</a>({ ...params }) -> BrandProtectionURLInfoResponsesSinglePage</code>
 
 ## Queries
 
+Methods:
+
+- <code title="post /accounts/{account_id}/brand-protection/queries">client.brandProtection.queries.<a href="./src/resources/brand-protection/queries.ts">create</a>({ ...params }) -> void</code>
+- <code title="delete /accounts/{account_id}/brand-protection/queries">client.brandProtection.queries.<a href="./src/resources/brand-protection/queries.ts">delete</a>({ ...params }) -> void</code>
+
 ## Matches
+
+Types:
+
+- <code><a href="./src/resources/brand-protection/matches.ts">MatchDownloadResponse</a></code>
+- <code><a href="./src/resources/brand-protection/matches.ts">MatchGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/brand-protection/matches/download">client.brandProtection.matches.<a href="./src/resources/brand-protection/matches.ts">download</a>({ ...params }) -> MatchDownloadResponse</code>
+- <code title="get /accounts/{account_id}/brand-protection/matches">client.brandProtection.matches.<a href="./src/resources/brand-protection/matches.ts">get</a>({ ...params }) -> MatchGetResponse</code>
 
 ## Logos
 
+Types:
+
+- <code><a href="./src/resources/brand-protection/logos.ts">LogoCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/brand-protection/logos">client.brandProtection.logos.<a href="./src/resources/brand-protection/logos.ts">create</a>({ ...params }) -> LogoCreateResponse</code>
+- <code title="delete /accounts/{account_id}/brand-protection/logos/{logo_id}">client.brandProtection.logos.<a href="./src/resources/brand-protection/logos.ts">delete</a>(logoId, { ...params }) -> void</code>
+
 ## LogoMatches
+
+Types:
+
+- <code><a href="./src/resources/brand-protection/logo-matches.ts">LogoMatchDownloadResponse</a></code>
+- <code><a href="./src/resources/brand-protection/logo-matches.ts">LogoMatchGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/brand-protection/logo-matches/download">client.brandProtection.logoMatches.<a href="./src/resources/brand-protection/logo-matches.ts">download</a>({ ...params }) -> LogoMatchDownloadResponse</code>
+- <code title="get /accounts/{account_id}/brand-protection/logo-matches">client.brandProtection.logoMatches.<a href="./src/resources/brand-protection/logo-matches.ts">get</a>({ ...params }) -> LogoMatchGetResponse</code>
 
 # Diagnostics
 
@@ -2981,6 +3017,25 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/diagnostics/traceroute">client.diagnostics.traceroutes.<a href="./src/resources/diagnostics/traceroutes.ts">create</a>({ ...params }) -> TraceroutesSinglePage</code>
+
+## EndpointHealthchecks
+
+Types:
+
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheck</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckCreateResponse</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckUpdateResponse</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckListResponse</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckDeleteResponse</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/diagnostics/endpoint-healthchecks">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">create</a>({ ...params }) -> EndpointHealthcheckCreateResponse</code>
+- <code title="put /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">update</a>(id, { ...params }) -> EndpointHealthcheckUpdateResponse</code>
+- <code title="get /accounts/{account_id}/diagnostics/endpoint-healthchecks">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">list</a>({ ...params }) -> EndpointHealthcheckListResponse</code>
+- <code title="delete /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">delete</a>(id, { ...params }) -> EndpointHealthcheckDeleteResponse</code>
+- <code title="get /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">get</a>(id, { ...params }) -> EndpointHealthcheckGetResponse</code>
 
 # Images
 
@@ -7635,15 +7690,17 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/snippets/snippets.ts">Snippet</a></code>
+- <code><a href="./src/resources/snippets/snippets.ts">SnippetUpdateResponse</a></code>
+- <code><a href="./src/resources/snippets/snippets.ts">SnippetListResponse</a></code>
 - <code><a href="./src/resources/snippets/snippets.ts">SnippetDeleteResponse</a></code>
+- <code><a href="./src/resources/snippets/snippets.ts">SnippetGetResponse</a></code>
 
 Methods:
 
-- <code title="put /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">update</a>(snippetName, { ...params }) -> Snippet</code>
-- <code title="get /zones/{zone_id}/snippets">client.snippets.<a href="./src/resources/snippets/snippets.ts">list</a>({ ...params }) -> SnippetsSinglePage</code>
-- <code title="delete /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">delete</a>(snippetName, { ...params }) -> SnippetDeleteResponse</code>
-- <code title="get /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">get</a>(snippetName, { ...params }) -> Snippet</code>
+- <code title="put /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">update</a>(snippetName, { ...params }) -> SnippetUpdateResponse</code>
+- <code title="get /zones/{zone_id}/snippets">client.snippets.<a href="./src/resources/snippets/snippets.ts">list</a>({ ...params }) -> SnippetListResponsesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">delete</a>(snippetName, { ...params }) -> SnippetDeleteResponse | null</code>
+- <code title="get /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">get</a>(snippetName, { ...params }) -> SnippetGetResponse</code>
 
 ## Content
 
@@ -7661,9 +7718,9 @@ Types:
 
 Methods:
 
-- <code title="put /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">update</a>({ ...params }) -> RuleUpdateResponsesSinglePage</code>
+- <code title="put /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">update</a>([ ...body ]) -> RuleUpdateResponsesSinglePage</code>
 - <code title="get /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">list</a>({ ...params }) -> RuleListResponsesSinglePage</code>
-- <code title="delete /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">delete</a>({ ...params }) -> RuleDeleteResponse</code>
+- <code title="delete /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">delete</a>({ ...params }) -> RuleDeleteResponsesSinglePage</code>
 
 # Calls
 
@@ -7733,6 +7790,17 @@ Methods:
 - <code title="get /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">list</a>({ ...params }) -> ConfigListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/cloudforce-one/scans/config/{config_id}">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">delete</a>(configId, { ...params }) -> ConfigDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/cloudforce-one/scans/config/{config_id}">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">edit</a>(configId, { ...params }) -> ConfigEditResponse</code>
+
+## BinaryStorage
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/binary-storage.ts">BinaryStorageCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/binary">client.cloudforceOne.binaryStorage.<a href="./src/resources/cloudforce-one/binary-storage.ts">create</a>({ ...params }) -> BinaryStorageCreateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/binary/{hash}">client.cloudforceOne.binaryStorage.<a href="./src/resources/cloudforce-one/binary-storage.ts">get</a>(hash, { ...params }) -> void</code>
 
 ## Requests
 
@@ -7967,20 +8035,6 @@ Methods:
 - <code title="get /accounts/{account_id}/cloudforce-one/events/targetIndustries">client.cloudforceOne.threatEvents.targetIndustries.<a href="./src/resources/cloudforce-one/threat-events/target-industries.ts">list</a>({ ...params }) -> TargetIndustryListResponse</code>
 
 ### Insights
-
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightCreateResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightDeleteResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightEditResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/insights.ts">InsightGetResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/create">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">create</a>(eventId, { ...params }) -> InsightCreateResponse</code>
-- <code title="delete /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">delete</a>(eventId, insightId, { ...params }) -> InsightDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">edit</a>(eventId, insightId, { ...params }) -> InsightEditResponse</code>
-- <code title="get /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}">client.cloudforceOne.threatEvents.insights.<a href="./src/resources/cloudforce-one/threat-events/insights.ts">get</a>(eventId, insightId, { ...params }) -> InsightGetResponse</code>
 
 # AIGateway
 

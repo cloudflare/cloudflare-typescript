@@ -29,6 +29,7 @@ describe('resource directUploads', () => {
     const response = await client.images.v2.directUploads.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'this/is/my-customid',
+      creator: 'creator',
       expiry: '2021-01-02T02:20:00Z',
       metadata: {},
       requireSignedURLs: true,
