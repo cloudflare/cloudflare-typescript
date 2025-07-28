@@ -38,12 +38,41 @@ export class BulkOperations extends APIResource {
 }
 
 export type BulkOperationGetResponse =
-  | BulkOperationGetResponse.UnionMember0
-  | BulkOperationGetResponse.UnionMember1
-  | BulkOperationGetResponse.UnionMember2;
+  | BulkOperationGetResponse.ListsPendingOrRunningBulkOperation
+  | BulkOperationGetResponse.ListsCompletedBulkOperation
+  | BulkOperationGetResponse.ListsFailedBulkOperation;
 
 export namespace BulkOperationGetResponse {
-  export interface UnionMember0 {
+  export interface ListsPendingOrRunningBulkOperation {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    id: string;
+
+    /**
+     * The current status of the asynchronous operation.
+     */
+    status: 'pending' | 'running';
+  }
+
+  export interface ListsCompletedBulkOperation {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the operation was completed.
+     */
+    completed: string;
+
+    /**
+     * The current status of the asynchronous operation.
+     */
+    status: 'completed';
+  }
+
+  export interface ListsFailedBulkOperation {
     /**
      * The unique operation ID of the asynchronous action.
      */
@@ -63,35 +92,6 @@ export namespace BulkOperationGetResponse {
      * The current status of the asynchronous operation.
      */
     status: 'failed';
-  }
-
-  export interface UnionMember1 {
-    /**
-     * The unique operation ID of the asynchronous action.
-     */
-    id: string;
-
-    /**
-     * The current status of the asynchronous operation.
-     */
-    status: 'pending' | 'running';
-  }
-
-  export interface UnionMember2 {
-    /**
-     * The unique operation ID of the asynchronous action.
-     */
-    id: string;
-
-    /**
-     * The RFC 3339 timestamp of when the operation was completed.
-     */
-    completed: string;
-
-    /**
-     * The current status of the asynchronous operation.
-     */
-    status: 'completed';
   }
 }
 
