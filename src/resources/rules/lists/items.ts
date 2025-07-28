@@ -181,48 +181,7 @@ export interface ItemUpdateResponse {
   operation_id: string;
 }
 
-export interface ItemListResponse {
-  /**
-   * The unique ID of the list.
-   */
-  id?: string;
-
-  /**
-   * Defines a non-negative 32 bit integer.
-   */
-  asn?: number;
-
-  /**
-   * Defines an informative summary of the list item.
-   */
-  comment?: string;
-
-  /**
-   * The RFC 3339 timestamp of when the item was created.
-   */
-  created_on?: string;
-
-  /**
-   * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-   * 0 to 9, wildcards (\*), and the hyphen (-).
-   */
-  hostname?: ListsAPI.Hostname;
-
-  /**
-   * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
-   */
-  ip?: string;
-
-  /**
-   * The RFC 3339 timestamp of when the item was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * The definition of the redirect.
-   */
-  redirect?: ListsAPI.Redirect;
-}
+export type ItemListResponse = unknown;
 
 export interface ItemDeleteResponse {
   /**
@@ -231,48 +190,7 @@ export interface ItemDeleteResponse {
   operation_id: string;
 }
 
-export interface ItemGetResponse {
-  /**
-   * The unique ID of the list.
-   */
-  id?: string;
-
-  /**
-   * Defines a non-negative 32 bit integer.
-   */
-  asn?: number;
-
-  /**
-   * Defines an informative summary of the list item.
-   */
-  comment?: string;
-
-  /**
-   * The RFC 3339 timestamp of when the item was created.
-   */
-  created_on?: string;
-
-  /**
-   * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-   * 0 to 9, wildcards (\*), and the hyphen (-).
-   */
-  hostname?: ListsAPI.Hostname;
-
-  /**
-   * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
-   */
-  ip?: string;
-
-  /**
-   * The RFC 3339 timestamp of when the item was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * The definition of the redirect.
-   */
-  redirect?: ListsAPI.Redirect;
-}
+export type ItemGetResponse = unknown;
 
 export interface ItemCreateParams {
   /**
@@ -284,15 +202,15 @@ export interface ItemCreateParams {
    * Body param:
    */
   body: Array<
-    | ItemCreateParams.UnionMember0
-    | ItemCreateParams.UnionMember1
-    | ItemCreateParams.UnionMember2
-    | ItemCreateParams.UnionMember3
+    | ItemCreateParams.ListsListItemIPComment
+    | ItemCreateParams.ListsListItemRedirectComment
+    | ItemCreateParams.ListsListItemHostnameComment
+    | ItemCreateParams.ListsListItemASNComment
   >;
 }
 
 export namespace ItemCreateParams {
-  export interface UnionMember0 {
+  export interface ListsListItemIPComment {
     /**
      * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
      */
@@ -304,7 +222,7 @@ export namespace ItemCreateParams {
     comment?: string;
   }
 
-  export interface UnionMember1 {
+  export interface ListsListItemRedirectComment {
     /**
      * The definition of the redirect.
      */
@@ -316,7 +234,7 @@ export namespace ItemCreateParams {
     comment?: string;
   }
 
-  export interface UnionMember2 {
+  export interface ListsListItemHostnameComment {
     /**
      * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
      * 0 to 9, wildcards (\*), and the hyphen (-).
@@ -329,7 +247,7 @@ export namespace ItemCreateParams {
     comment?: string;
   }
 
-  export interface UnionMember3 {
+  export interface ListsListItemASNComment {
     /**
      * Defines a non-negative 32 bit integer.
      */
@@ -352,15 +270,15 @@ export interface ItemUpdateParams {
    * Body param:
    */
   body: Array<
-    | ItemUpdateParams.UnionMember0
-    | ItemUpdateParams.UnionMember1
-    | ItemUpdateParams.UnionMember2
-    | ItemUpdateParams.UnionMember3
+    | ItemUpdateParams.ListsListItemIPComment
+    | ItemUpdateParams.ListsListItemRedirectComment
+    | ItemUpdateParams.ListsListItemHostnameComment
+    | ItemUpdateParams.ListsListItemASNComment
   >;
 }
 
 export namespace ItemUpdateParams {
-  export interface UnionMember0 {
+  export interface ListsListItemIPComment {
     /**
      * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
      */
@@ -372,7 +290,7 @@ export namespace ItemUpdateParams {
     comment?: string;
   }
 
-  export interface UnionMember1 {
+  export interface ListsListItemRedirectComment {
     /**
      * The definition of the redirect.
      */
@@ -384,7 +302,7 @@ export namespace ItemUpdateParams {
     comment?: string;
   }
 
-  export interface UnionMember2 {
+  export interface ListsListItemHostnameComment {
     /**
      * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
      * 0 to 9, wildcards (\*), and the hyphen (-).
@@ -397,7 +315,7 @@ export namespace ItemUpdateParams {
     comment?: string;
   }
 
-  export interface UnionMember3 {
+  export interface ListsListItemASNComment {
     /**
      * Defines a non-negative 32 bit integer.
      */
