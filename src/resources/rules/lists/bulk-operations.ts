@@ -36,12 +36,12 @@ export class BulkOperations extends APIResource {
 }
 
 export type BulkOperationGetResponse =
-  | BulkOperationGetResponse.ListsPendingOrRunningBulkOperation
-  | BulkOperationGetResponse.ListsCompletedBulkOperation
-  | BulkOperationGetResponse.ListsFailedBulkOperation;
+  | BulkOperationGetResponse.ListsBulkOperationPendingOrRunning
+  | BulkOperationGetResponse.ListsBulkOperationCompleted
+  | BulkOperationGetResponse.ListsBulkOperationFailed;
 
 export namespace BulkOperationGetResponse {
-  export interface ListsPendingOrRunningBulkOperation {
+  export interface ListsBulkOperationPendingOrRunning {
     /**
      * The unique operation ID of the asynchronous action.
      */
@@ -53,7 +53,7 @@ export namespace BulkOperationGetResponse {
     status: 'pending' | 'running';
   }
 
-  export interface ListsCompletedBulkOperation {
+  export interface ListsBulkOperationCompleted {
     /**
      * The unique operation ID of the asynchronous action.
      */
@@ -70,7 +70,7 @@ export namespace BulkOperationGetResponse {
     status: 'completed';
   }
 
-  export interface ListsFailedBulkOperation {
+  export interface ListsBulkOperationFailed {
     /**
      * The unique operation ID of the asynchronous action.
      */
