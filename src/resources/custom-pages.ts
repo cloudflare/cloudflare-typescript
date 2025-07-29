@@ -14,7 +14,7 @@ export class CustomPages extends APIResource {
    * @example
    * ```ts
    * const customPage = await client.customPages.update(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   'ratelimit_block',
    *   {
    *     state: 'default',
    *     url: 'http://www.example.com',
@@ -24,10 +24,17 @@ export class CustomPages extends APIResource {
    * ```
    */
   update(
-    identifier: string,
+    identifier:
+      | 'waf_block'
+      | 'ip_block'
+      | 'country_challenge'
+      | '500_errors'
+      | '1000_errors'
+      | 'managed_challenge'
+      | 'ratelimit_block',
     params: CustomPageUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CustomPageUpdateResponse | null> {
+  ): APIPromise<CustomPageUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -49,7 +56,7 @@ export class CustomPages extends APIResource {
       this._client.put(path`/${accountOrZone}/${accountOrZoneId}/custom_pages/${identifier}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: CustomPageUpdateResponse | null }>
+      }) as APIPromise<{ result: CustomPageUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -100,16 +107,23 @@ export class CustomPages extends APIResource {
    * @example
    * ```ts
    * const customPage = await client.customPages.get(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   'ratelimit_block',
    *   { account_id: 'account_id' },
    * );
    * ```
    */
   get(
-    identifier: string,
+    identifier:
+      | 'waf_block'
+      | 'ip_block'
+      | 'country_challenge'
+      | '500_errors'
+      | '1000_errors'
+      | 'managed_challenge'
+      | 'ratelimit_block',
     params: CustomPageGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CustomPageGetResponse | null> {
+  ): APIPromise<CustomPageGetResponse> {
     const { account_id, zone_id } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -131,18 +145,84 @@ export class CustomPages extends APIResource {
       this._client.get(
         path`/${accountOrZone}/${accountOrZoneId}/custom_pages/${identifier}`,
         options,
-      ) as APIPromise<{ result: CustomPageGetResponse | null }>
+      ) as APIPromise<{ result: CustomPageGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export type CustomPageListResponsesSinglePage = SinglePage<CustomPageListResponse>;
 
-export type CustomPageUpdateResponse = unknown | string;
+export interface CustomPageUpdateResponse {
+  id?: string;
 
-export type CustomPageListResponse = unknown;
+  created_on?: string;
 
-export type CustomPageGetResponse = unknown | string;
+  description?: string;
+
+  modified_on?: string;
+
+  preview_target?: string;
+
+  required_tokens?: Array<string>;
+
+  /**
+   * The custom page state.
+   */
+  state?: 'default' | 'customized';
+
+  /**
+   * The URL associated with the custom page.
+   */
+  url?: string;
+}
+
+export interface CustomPageListResponse {
+  id?: string;
+
+  created_on?: string;
+
+  description?: string;
+
+  modified_on?: string;
+
+  preview_target?: string;
+
+  required_tokens?: Array<string>;
+
+  /**
+   * The custom page state.
+   */
+  state?: 'default' | 'customized';
+
+  /**
+   * The URL associated with the custom page.
+   */
+  url?: string;
+}
+
+export interface CustomPageGetResponse {
+  id?: string;
+
+  created_on?: string;
+
+  description?: string;
+
+  modified_on?: string;
+
+  preview_target?: string;
+
+  required_tokens?: Array<string>;
+
+  /**
+   * The custom page state.
+   */
+  state?: 'default' | 'customized';
+
+  /**
+   * The URL associated with the custom page.
+   */
+  url?: string;
+}
 
 export interface CustomPageUpdateParams {
   /**
