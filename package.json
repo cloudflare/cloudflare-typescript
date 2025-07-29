@@ -58,10 +58,6 @@
     "./shims/web.js",
     "./shims/web.mjs"
   ],
-  "imports": {
-    "cloudflare": ".",
-    "cloudflare/*": "./src/*"
-  },
   "exports": {
     "./_shims/auto/*": {
       "deno": {
