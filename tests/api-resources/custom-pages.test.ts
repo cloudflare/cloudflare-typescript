@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource customPages', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.customPages.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.customPages.update('ratelimit_block', {
       state: 'default',
       url: 'http://www.example.com',
       account_id: 'account_id',
@@ -26,7 +26,7 @@ describe('resource customPages', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.customPages.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.customPages.update('ratelimit_block', {
       state: 'default',
       url: 'http://www.example.com',
       account_id: 'account_id',
@@ -45,9 +45,7 @@ describe('resource customPages', () => {
   });
 
   test('get', async () => {
-    const responsePromise = client.customPages.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: 'account_id',
-    });
+    const responsePromise = client.customPages.get('ratelimit_block', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
