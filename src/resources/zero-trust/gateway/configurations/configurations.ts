@@ -415,17 +415,17 @@ export interface ExtendedEmailMatching {
    * This setting was shared via the Orgs API and cannot be edited by the current
    * account
    */
-  read_only?: boolean | null;
+  read_only?: boolean;
 
   /**
    * Account tag of account that shared this setting
    */
-  source_account?: string | null;
+  source_account?: string;
 
   /**
    * Version number of the setting
    */
-  version?: number | null;
+  version?: number;
 }
 
 /**
