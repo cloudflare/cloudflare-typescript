@@ -47,7 +47,7 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { version, ...body } = args as any;
+  const { version, body, ...body } = args as any;
   return asTextContentResult(
     await maybeFilter(args, await client.zeroTrust.dlp.datasets.upload.edit(version, body)),
   );

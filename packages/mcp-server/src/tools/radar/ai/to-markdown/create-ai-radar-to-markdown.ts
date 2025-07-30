@@ -41,8 +41,8 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const body = args as any;
-  const response = await client.radar.ai.toMarkdown.create(body).asResponse();
+  const { body, ...body } = args as any;
+  const response = await client.radar.ai.toMarkdown.create(body, body).asResponse();
   return asTextContentResult(await maybeFilter(args, await response.json()));
 };
 

@@ -13,12 +13,7 @@ describe('resource entries', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.datasets.versions.entries.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        account_id: 'account_id',
-        dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        version: 0,
-        body: await toFile(Buffer.from('# my file contents'), 'README.md'),
-      },
+      await toFile(Buffer.from('# my file contents'), 'README.md'),
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -33,12 +28,8 @@ describe('resource entries', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.zeroTrust.dlp.datasets.versions.entries.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        account_id: 'account_id',
-        dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        version: 0,
-        body: await toFile(Buffer.from('# my file contents'), 'README.md'),
-      },
+      await toFile(Buffer.from('# my file contents'), 'README.md'),
+      { account_id: 'account_id', dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', version: 0 },
     );
   });
 });

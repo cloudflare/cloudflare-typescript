@@ -12,7 +12,7 @@ export {
   type DatasetGetParams,
   type DatasetsSinglePage,
 } from './datasets';
-export { Upload, type NewVersion, type UploadCreateParams, type UploadEditParams } from './upload';
+export { Upload, type NewVersion, type UploadCreateParams } from './upload';
 export {
   Versions,
   type VersionCreateResponse,

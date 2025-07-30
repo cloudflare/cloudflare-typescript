@@ -50,7 +50,7 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { entry_id, ...body } = args as any;
+  const { entry_id, body, ...body } = args as any;
   return asTextContentResult(
     await maybeFilter(args, await client.zeroTrust.dlp.datasets.versions.entries.create(entry_id, body)),
   );

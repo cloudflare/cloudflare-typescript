@@ -39,15 +39,22 @@ export class Upload extends APIResource {
    * @example
    * ```ts
    * const dataset =
-   *   await client.zeroTrust.dlp.datasets.upload.edit(0, {
-   *     account_id: 'account_id',
-   *     dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     body: fs.createReadStream('path/to/file'),
-   *   });
+   *   await client.zeroTrust.dlp.datasets.upload.edit(
+   *     0,
+   *     fs.createReadStream('path/to/file'),
+   *     {
+   *       account_id: 'account_id',
+   *       dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     },
+   *   );
    * ```
    */
-  edit(version: number, params: UploadEditParams, options?: RequestOptions): APIPromise<DatasetsAPI.Dataset> {
-    const { account_id, dataset_id, body } = params;
+  edit(
+    version: number,
+    body: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
+    options?: RequestOptions,
+  ): APIPromise<DatasetsAPI.Dataset> {
+    const { account_id, dataset_id } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/datasets/${dataset_id}/upload/${version}`, {
         body: body,
@@ -88,27 +95,6 @@ export interface UploadCreateParams {
   account_id: string;
 }
 
-export interface UploadEditParams {
-  /**
-   * Path param:
-   */
-  account_id: string;
-
-  /**
-   * Path param:
-   */
-  dataset_id: string;
-
-  /**
-   * Body param:
-   */
-  body: string | ArrayBuffer | ArrayBufferView | Blob | DataView;
-}
-
 export declare namespace Upload {
-  export {
-    type NewVersion as NewVersion,
-    type UploadCreateParams as UploadCreateParams,
-    type UploadEditParams as UploadEditParams,
-  };
+  export { type NewVersion as NewVersion, type UploadCreateParams as UploadCreateParams };
 }

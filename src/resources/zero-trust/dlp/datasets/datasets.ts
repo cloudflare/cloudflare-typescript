@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as UploadAPI from './upload';
-import { NewVersion, Upload as UploadAPIUpload, UploadCreateParams, UploadEditParams } from './upload';
+import { NewVersion, Upload as UploadAPIUpload, UploadCreateParams } from './upload';
 import * as VersionsAPI from './versions/versions';
 import {
   VersionCreateParams,
@@ -299,7 +299,6 @@ export declare namespace Datasets {
     UploadAPIUpload as Upload,
     type NewVersion as NewVersion,
     type UploadCreateParams as UploadCreateParams,
-    type UploadEditParams as UploadEditParams,
   };
 
   export {

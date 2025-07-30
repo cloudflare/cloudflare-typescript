@@ -3743,8 +3743,9 @@
           "location": "path"
         },
         {
-          "type": "params",
-          "maybeOverload": false
+          "type": "param",
+          "key": "body",
+          "location": "body"
         },
         {
           "type": "options"
@@ -3762,8 +3763,9 @@
           "location": "path"
         },
         {
-          "type": "params",
-          "maybeOverload": false
+          "type": "param",
+          "key": "body",
+          "location": "body"
         },
         {
           "type": "options"
@@ -3817,8 +3819,9 @@
           "location": "path"
         },
         {
-          "type": "params",
-          "maybeOverload": false
+          "type": "param",
+          "key": "body",
+          "location": "body"
         },
         {
           "type": "options"
@@ -3841,8 +3844,9 @@
           "location": "path"
         },
         {
-          "type": "params",
-          "maybeOverload": false
+          "type": "param",
+          "key": "body",
+          "location": "body"
         },
         {
           "type": "options"
