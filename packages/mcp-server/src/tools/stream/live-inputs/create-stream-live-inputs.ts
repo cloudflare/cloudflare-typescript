@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_stream_live_inputs',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates a live input, and returns credentials that you or your users can use to stream live video to Cloudflare Stream.",
+    'Creates a live input, and returns credentials that you or your users can use to stream live video to Cloudflare Stream.',
   inputSchema: {
     type: 'object',
     properties: {

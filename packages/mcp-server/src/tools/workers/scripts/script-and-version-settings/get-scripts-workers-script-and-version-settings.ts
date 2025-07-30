@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_scripts_workers_script_and_version_settings',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGet metadata and config, such as bindings or usage model.",
+  description: 'Get metadata and config, such as bindings or usage model.',
   inputSchema: {
     type: 'object',
     properties: {

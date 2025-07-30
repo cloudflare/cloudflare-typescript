@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_user_schemas_api_gateway_operations',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves all operations from the schema. Operations that already exist in API Shield Endpoint Management will be returned as full operations.",
+    'Retrieves all operations from the schema. Operations that already exist in API Shield Endpoint Management will be returned as full operations.',
   inputSchema: {
     type: 'object',
     properties: {

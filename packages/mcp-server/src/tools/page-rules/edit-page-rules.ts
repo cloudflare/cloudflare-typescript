@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'edit_page_rules',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates one or more fields of an existing Page Rule.",
+  description: 'Updates one or more fields of an existing Page Rule.',
   inputSchema: {
     type: 'object',
     properties: {

@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_accounts_members',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nList all members of an account.",
+  description: 'List all members of an account.',
   inputSchema: {
     type: 'object',
     properties: {

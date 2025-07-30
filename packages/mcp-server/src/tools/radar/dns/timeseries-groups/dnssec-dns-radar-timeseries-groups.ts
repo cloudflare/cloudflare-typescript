@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'dnssec_dns_radar_timeseries_groups',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves the distribution of DNS responses by DNSSEC (DNS Security Extensions) support over time.",
+    'Retrieves the distribution of DNS responses by DNSSEC (DNS Security Extensions) support over time.',
   inputSchema: {
     type: 'object',
     properties: {

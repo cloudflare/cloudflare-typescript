@@ -15,8 +15,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_rulesets_versions',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nFetches a specific version of an account or zone ruleset.",
+  description: 'Fetches a specific version of an account or zone ruleset.',
   inputSchema: {
     type: 'object',
     properties: {
