@@ -1044,29 +1044,6 @@ The following tools are available in this MCP server.
 - `destination_exists_logpush_validate` (`write`): Checks if there is an existing job with a destination.
 - `origin_logpush_validate` (`write`): Validates logpull origin with logpull_options.
 
-### Resource `logs.control.retention`:
-
-- `create_control_logs_retention` (`write`): Updates log retention flag for Logpull API.
-- `get_control_logs_retention` (`read`): Gets log retention flag for Logpull API.
-
-### Resource `logs.control.cmb.config`:
-
-- `create_cmb_control_logs_config` (`write`): Updates CMB config.
-- `delete_cmb_control_logs_config` (`write`): Deletes CMB config.
-- `get_cmb_control_logs_config` (`read`): Gets CMB config.
-
-### Resource `logs.rayid`:
-
-- `get_logs_rayid` (`read`): The `/rayids` api route allows lookups by specific rayid. The rayids route will return zero, one, or more records (ray ids are not unique).
-
-### Resource `logs.received`:
-
-- `get_logs_received` (`read`): The `/received` api route allows customers to retrieve their edge HTTP logs. The basic access pattern is "give me all the logs for zone Z for minute M", where the minute M refers to the time records were received at Cloudflare's central data center. `start` is inclusive, and `end` is exclusive. Because of that, to get all data, at minutely cadence, starting at 10AM, the proper values are: `start=2018-05-20T10:00:00Z&end=2018-05-20T10:01:00Z`, then `start=2018-05-20T10:01:00Z&end=2018-05-20T10:02:00Z` and so on; the overlap will be handled properly.
-
-### Resource `logs.received.fields`:
-
-- `get_received_logs_fields` (`read`): Lists all fields available. The response is json object with key-value pairs, where keys are field names, and values are descriptions.
-
 ### Resource `origin_tls_client_auth`:
 
 - `create_origin_tls_client_auth` (`write`): Upload your own certificate you want Cloudflare to use for edge-to-origin communication to override the shared certificate. Please note that it is important to keep only one certificate active. Also, make sure to enable zone-level authenticated origin pulls by making a PUT call to settings endpoint to see the uploaded certificate in use.
@@ -1291,12 +1268,6 @@ The following tools are available in this MCP server.
 - `update_workers_subdomains` (`write`): Creates a Workers subdomain for an account.
 - `get_workers_subdomains` (`read`): Returns a Workers subdomain for an account.
 
-### Resource `workers.observability.telemetry`:
-
-- `keys_observability_workers_telemetry` (`write`): List all the keys in your telemetry events.
-- `query_observability_workers_telemetry` (`write`): Runs a temporary or saved query
-- `values_observability_workers_telemetry` (`write`): List unique values found in your events
-
 ### Resource `kv.namespaces`:
 
 - `create_kv_namespaces` (`write`): Creates a namespace under the given title. A `400` is returned if the account already owns a namespace with this title. A namespace must be explicitly deleted to be replaced.
@@ -1304,7 +1275,6 @@ The following tools are available in this MCP server.
 - `list_kv_namespaces` (`read`): Returns the namespaces owned by an account.
 - `delete_kv_namespaces` (`write`): Deletes the namespace corresponding to the given ID.
 - `bulk_delete_kv_namespaces` (`write`): Remove multiple KV pairs from the namespace. Body should be an array of up to 10,000 keys to be removed.
-- `bulk_get_kv_namespaces` (`write`): Retrieve up to 100 KV pairs from the namespace. Keys must contain text-based values. JSON values can optionally be parsed instead of being returned as a string value. Metadata can be included if `withMetadata` is true.
 - `bulk_update_kv_namespaces` (`write`): Write multiple keys and values at once. Body should be an array of up to 10,000 key-value pairs to be stored, along with optional expiration information. Existing values and expirations will be overwritten. If neither `expiration` nor `expiration_ttl` is specified, the key-value pair will never expire. If both are set, `expiration_ttl` is used and `expiration` is ignored. The entire request size must be 100 megabytes or less.
 - `get_kv_namespaces` (`read`): Get the namespace corresponding to the given ID.
 
@@ -1312,7 +1282,6 @@ The following tools are available in this MCP server.
 
 - `list_namespaces_kv_keys` (`read`): Lists a namespace's keys.
 - `bulk_delete_namespaces_kv_keys` (`write`): Remove multiple KV pairs from the namespace. Body should be an array of up to 10,000 keys to be removed.
-- `bulk_get_namespaces_kv_keys` (`write`): Retrieve up to 100 KV pairs from the namespace. Keys must contain text-based values. JSON values can optionally be parsed instead of being returned as a string value. Metadata can be included if `withMetadata` is true.
 - `bulk_update_namespaces_kv_keys` (`write`): Write multiple keys and values at once. Body should be an array of up to 10,000 key-value pairs to be stored, along with optional expiration information. Existing values and expirations will be overwritten. If neither `expiration` nor `expiration_ttl` is specified, the key-value pair will never expire. If both are set, `expiration_ttl` is used and `expiration` is ignored. The entire request size must be 100 megabytes or less.
 
 ### Resource `kv.namespaces.metadata`:
@@ -1352,9 +1321,7 @@ The following tools are available in this MCP server.
 ### Resource `queues.messages`:
 
 - `ack_queues_messages` (`write`): Acknowledge + Retry messages from a Queue
-- `bulk_push_queues_messages` (`write`): Push a batch of message to a Queue
 - `pull_queues_messages` (`write`): Pull a batch of messages from a Queue
-- `push_queues_messages` (`write`): Push a message to a Queue
 
 ### Resource `queues.purge`:
 
@@ -1873,7 +1840,7 @@ The following tools are available in this MCP server.
 - `create_magic_transit_pcaps` (`write`): Create new PCAP request for account.
 - `list_magic_transit_pcaps` (`read`): Lists all packet capture requests for an account.
 - `get_magic_transit_pcaps` (`read`): Get information for a PCAP request by id.
-- `stop_magic_transit_pcaps` (`write`): Stop full PCAP
+- `stop_magic_transit_pcaps` (`write`): Stop full PCAP.
 
 ### Resource `magic_transit.pcaps.ownership`:
 
@@ -3953,33 +3920,6 @@ The following tools are available in this MCP server.
 - `update_security_txt` (`write`): Update security.txt
 - `delete_security_txt` (`write`): Delete security.txt
 - `get_security_txt` (`read`): Get security.txt
-
-### Resource `workflows`:
-
-- `update_workflows` (`write`): Create/modify Workflow
-- `list_workflows` (`read`): List all Workflows
-- `delete_workflows` (`write`): Deletes a Workflow. This only deletes the Workflow and does not delete or modify any Worker associated to this Workflow or bounded to it.
-- `get_workflows` (`read`): Get Workflow details
-
-### Resource `workflows.instances`:
-
-- `create_workflows_instances` (`write`): Create a new workflow instance
-- `list_workflows_instances` (`read`): List of workflow instances
-- `bulk_workflows_instances` (`write`): Batch create new Workflow instances
-- `get_workflows_instances` (`read`): Get logs and status from instance
-
-### Resource `workflows.instances.status`:
-
-- `edit_instances_workflows_status` (`write`): Change status of instance
-
-### Resource `workflows.instances.events`:
-
-- `create_instances_workflows_events` (`write`): Send event to instance
-
-### Resource `workflows.versions`:
-
-- `list_workflows_versions` (`read`): List deployed Workflow versions
-- `get_workflows_versions` (`read`): Get Workflow version details
 
 ### Resource `resource_sharing`:
 
