@@ -15,8 +15,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_rulesets_phases',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nFetches the latest version of the account or zone entry point ruleset for a given phase.",
+  description: 'Fetches the latest version of the account or zone entry point ruleset for a given phase.',
   inputSchema: {
     type: 'object',
     properties: {

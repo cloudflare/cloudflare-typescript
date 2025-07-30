@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_rate_limits',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates a new rate limit for a zone. Refer to the object definition for a list of required attributes.",
+    'Creates a new rate limit for a zone. Refer to the object definition for a list of required attributes.',
   inputSchema: {
     type: 'object',
     properties: {

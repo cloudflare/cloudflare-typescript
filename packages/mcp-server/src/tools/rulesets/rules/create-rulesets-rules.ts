@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_rulesets_rules',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nAdds a new rule to an account or zone ruleset. The rule will be added to the end of the existing list of rules in the ruleset by default.",
+    'Adds a new rule to an account or zone ruleset. The rule will be added to the end of the existing list of rules in the ruleset by default.',
   inputSchema: {
     type: 'object',
     anyOf: [

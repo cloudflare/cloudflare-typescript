@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'edit_gateway_zero_trust_configurations',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nPatches the current Zero Trust account configuration. This endpoint can update a single subcollection of settings such as `antivirus`, `tls_decrypt`, `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or `certificate`, without updating the entire configuration object. Returns an error if any collection of settings is not properly configured.",
+    'Patches the current Zero Trust account configuration. This endpoint can update a single subcollection of settings such as `antivirus`, `tls_decrypt`, `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or `certificate`, without updating the entire configuration object. Returns an error if any collection of settings is not properly configured.',
   inputSchema: {
     type: 'object',
     properties: {

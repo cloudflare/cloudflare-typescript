@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'edit_policies_devices_zero_trust_custom',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates a configured device settings profile.",
+  description: 'Updates a configured device settings profile.',
   inputSchema: {
     type: 'object',
     properties: {

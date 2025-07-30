@@ -15,8 +15,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_datasets_logpush_jobs',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nLists Logpush jobs for an account or zone for a dataset.",
+  description: 'Lists Logpush jobs for an account or zone for a dataset.',
   inputSchema: {
     type: 'object',
     properties: {

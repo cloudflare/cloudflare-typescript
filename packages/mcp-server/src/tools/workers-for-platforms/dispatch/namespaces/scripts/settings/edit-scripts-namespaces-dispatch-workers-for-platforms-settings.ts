@@ -17,8 +17,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'edit_scripts_namespaces_dispatch_workers_for_platforms_settings',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nPatch script metadata, such as bindings.",
+  description: 'Patch script metadata, such as bindings.',
   inputSchema: {
     type: 'object',
     properties: {

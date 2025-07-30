@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_tunnels_zero_trust_cloudflared',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nFetches a single Cloudflare Tunnel.",
+  description: 'Fetches a single Cloudflare Tunnel.',
   inputSchema: {
     type: 'object',
     properties: {

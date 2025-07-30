@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_bot_management',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieve a zone's Bot Management Config",
+  description: "Retrieve a zone's Bot Management Config",
   inputSchema: {
     type: 'object',
     properties: {

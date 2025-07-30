@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'create_access_zero_trust_policies',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates a new Access reusable policy.",
+  description: 'Creates a new Access reusable policy.',
   inputSchema: {
     type: 'object',
     properties: {

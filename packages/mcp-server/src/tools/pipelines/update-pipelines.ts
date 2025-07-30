@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_pipelines',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdate an existing pipeline.",
+  description: 'Update an existing pipeline.',
   inputSchema: {
     type: 'object',
     properties: {

@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'industry_layer7_attacks_radar_timeseries_groups',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves the distribution of layer 7 attacks by targeted industry over time.",
+  description: 'Retrieves the distribution of layer 7 attacks by targeted industry over time.',
   inputSchema: {
     type: 'object',
     properties: {
