@@ -3083,14 +3083,6 @@ The following tools are available in this MCP server.
 - `model_timeseries_groups_inference_ai_radar_summary` (`read`): Retrieves the distribution of unique accounts by model over time.
 - `task_timeseries_groups_inference_ai_radar_summary` (`read`): Retrieves the distribution of unique accounts by task over time.
 
-### Resource `radar.ai.bots.summary`:
-
-- `user_agent_bots_ai_radar_summary` (`read`): Retrieves the distribution of traffic by AI user agent.
-
-### Resource `radar.ai.timeseries_groups`:
-
-- `user_agent_ai_radar_timeseries_groups` (`read`): Retrieves the distribution of traffic by AI user agent over time.
-
 ### Resource `radar.annotations`:
 
 - `list_radar_annotations` (`read`): Retrieves the latest annotations.
