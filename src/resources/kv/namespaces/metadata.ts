@@ -33,11 +33,14 @@ export class Metadata extends APIResource {
   }
 }
 
-export type MetadataGetResponse = unknown;
+/**
+ * Arbitrary JSON that is associated with a key.
+ */
+export type MetadataGetResponse = { [key: string]: unknown };
 
 export interface MetadataGetParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 
