@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as EntriesAPI from './entries';
-import { Entries, EntryCreateParams, EntryCreateResponse } from './entries';
+import { Entries, EntryCreateResponse } from './entries';
 import { PagePromise, SinglePage } from '../../../../../core/pagination';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
@@ -102,9 +102,5 @@ export declare namespace Versions {
     type VersionCreateParams as VersionCreateParams,
   };
 
-  export {
-    Entries as Entries,
-    type EntryCreateResponse as EntryCreateResponse,
-    type EntryCreateParams as EntryCreateParams,
-  };
+  export { Entries as Entries, type EntryCreateResponse as EntryCreateResponse };
 }

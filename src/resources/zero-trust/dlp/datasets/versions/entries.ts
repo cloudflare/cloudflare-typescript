@@ -16,21 +16,21 @@ export class Entries extends APIResource {
    * const entry =
    *   await client.zeroTrust.dlp.datasets.versions.entries.create(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     fs.createReadStream('path/to/file'),
    *     {
    *       account_id: 'account_id',
    *       dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *       version: 0,
-   *       body: fs.createReadStream('path/to/file'),
    *     },
    *   );
    * ```
    */
   create(
     entryID: string,
-    params: EntryCreateParams,
+    body: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
     options?: RequestOptions,
   ): APIPromise<EntryCreateResponse> {
-    const { account_id, dataset_id, version, body } = params;
+    const { account_id, dataset_id, version } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/dlp/datasets/${dataset_id}/versions/${version}/entries/${entryID}`,
@@ -54,28 +54,6 @@ export interface EntryCreateResponse {
   upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 }
 
-export interface EntryCreateParams {
-  /**
-   * Path param:
-   */
-  account_id: string;
-
-  /**
-   * Path param:
-   */
-  dataset_id: string;
-
-  /**
-   * Path param:
-   */
-  version: number;
-
-  /**
-   * Body param:
-   */
-  body: string | ArrayBuffer | ArrayBufferView | Blob | DataView;
-}
-
 export declare namespace Entries {
-  export { type EntryCreateResponse as EntryCreateResponse, type EntryCreateParams as EntryCreateParams };
+  export { type EntryCreateResponse as EntryCreateResponse };
 }
