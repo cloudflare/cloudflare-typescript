@@ -13,7 +13,7 @@ describe('resource rules', () => {
   test('update: only required params', async () => {
     const responsePromise = client.snippets.rules.update({
       zone_id: '9f1839b6152d298aca64c4e906b6d074',
-      rules: [{ expression: 'ip.src eq 1.1.1.1', snippet_name: 'my_snippet' }],
+      body: [{ expression: 'ip.src ne 1.1.1.1', snippet_name: 'my_snippet' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,9 +27,9 @@ describe('resource rules', () => {
   test('update: required and optional params', async () => {
     const response = await client.snippets.rules.update({
       zone_id: '9f1839b6152d298aca64c4e906b6d074',
-      rules: [
+      body: [
         {
-          expression: 'ip.src eq 1.1.1.1',
+          expression: 'ip.src ne 1.1.1.1',
           snippet_name: 'my_snippet',
           description: 'Execute my_snippet when IP address is 1.1.1.1.',
           enabled: true,

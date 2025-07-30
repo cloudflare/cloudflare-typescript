@@ -408,7 +408,6 @@ export namespace LogListParams {
       | 'created_at'
       | 'request_content_type'
       | 'response_content_type'
-      | 'request_type'
       | 'success'
       | 'cached'
       | 'provider'
@@ -421,13 +420,11 @@ export namespace LogListParams {
       | 'duration'
       | 'feedback'
       | 'event_id'
+      | 'request_type'
       | 'metadata.key'
       | 'metadata.value'
       | 'prompts.prompt_id'
-      | 'prompts.version_id'
-      | 'authentication'
-      | 'wholesale'
-      | 'compatibilityMode';
+      | 'prompts.version_id';
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 
@@ -480,7 +477,6 @@ export namespace LogDeleteParams {
       | 'created_at'
       | 'request_content_type'
       | 'response_content_type'
-      | 'request_type'
       | 'success'
       | 'cached'
       | 'provider'
@@ -493,13 +489,11 @@ export namespace LogDeleteParams {
       | 'duration'
       | 'feedback'
       | 'event_id'
+      | 'request_type'
       | 'metadata.key'
       | 'metadata.value'
       | 'prompts.prompt_id'
-      | 'prompts.version_id'
-      | 'authentication'
-      | 'wholesale'
-      | 'compatibilityMode';
+      | 'prompts.version_id';
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 

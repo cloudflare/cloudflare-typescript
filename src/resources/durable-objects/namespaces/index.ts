@@ -6,9 +6,4 @@ export {
   type DurableObject,
   type ObjectListParams,
 } from './objects';
-export {
-  NamespacesV4PagePaginationArray,
-  Namespaces,
-  type Namespace,
-  type NamespaceListParams,
-} from './namespaces';
+export { NamespacesSinglePage, Namespaces, type Namespace, type NamespaceListParams } from './namespaces';

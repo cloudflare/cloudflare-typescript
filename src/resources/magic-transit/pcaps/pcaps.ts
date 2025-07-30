@@ -90,7 +90,7 @@ export class PCAPs extends APIResource {
   }
 
   /**
-   * Stop full PCAP.
+   * Stop full PCAP
    *
    * @example
    * ```ts
@@ -485,7 +485,7 @@ export type PCAPCreateParams =
 export declare namespace PCAPCreateParams {
   export interface MagicVisibilityPCAPsPCAPsRequestSimple {
     /**
-     * Path param: Identifier.
+     * Path param: Identifier
      */
     account_id: string;
 
@@ -526,7 +526,7 @@ export declare namespace PCAPCreateParams {
 
   export interface MagicVisibilityPCAPsPCAPsRequestFull {
     /**
-     * Path param: Identifier.
+     * Path param: Identifier
      */
     account_id: string;
 
@@ -580,21 +580,21 @@ export declare namespace PCAPCreateParams {
 
 export interface PCAPListParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
 
 export interface PCAPGetParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
 
 export interface PCAPStopParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
