@@ -18,9 +18,12 @@ import * as MessagesAPI from './messages';
 import {
   MessageAckParams,
   MessageAckResponse,
+  MessageBulkPushParams,
+  MessageBulkPushResponse,
   MessagePullParams,
   MessagePullResponse,
-  MessagePullResponsesSinglePage,
+  MessagePushParams,
+  MessagePushResponse,
   Messages,
 } from './messages';
 import * as PurgeAPI from './purge';
@@ -327,7 +330,6 @@ Queues.QueuesSinglePage = QueuesSinglePage;
 Queues.Consumers = Consumers;
 Queues.ConsumersSinglePage = ConsumersSinglePage;
 Queues.Messages = Messages;
-Queues.MessagePullResponsesSinglePage = MessagePullResponsesSinglePage;
 Queues.Purge = Purge;
 
 export declare namespace Queues {
@@ -357,10 +359,13 @@ export declare namespace Queues {
   export {
     Messages as Messages,
     type MessageAckResponse as MessageAckResponse,
+    type MessageBulkPushResponse as MessageBulkPushResponse,
     type MessagePullResponse as MessagePullResponse,
-    MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
+    type MessagePushResponse as MessagePushResponse,
     type MessageAckParams as MessageAckParams,
+    type MessageBulkPushParams as MessageBulkPushParams,
     type MessagePullParams as MessagePullParams,
+    type MessagePushParams as MessagePushParams,
   };
 
   export {

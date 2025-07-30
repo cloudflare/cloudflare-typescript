@@ -4,7 +4,7 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as ObjectsAPI from './objects';
 import { DurableObject, DurableObjectsCursorLimitPagination, ObjectListParams, Objects } from './objects';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { SinglePage } from '../../../pagination';
 
 export class Namespaces extends APIResource {
   objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
@@ -15,17 +15,17 @@ export class Namespaces extends APIResource {
   list(
     params: NamespaceListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace> {
-    const { account_id, ...query } = params;
+  ): Core.PagePromise<NamespacesSinglePage, Namespace> {
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/durable_objects/namespaces`,
-      NamespacesV4PagePaginationArray,
-      { query, ...options },
+      NamespacesSinglePage,
+      options,
     );
   }
 }
 
-export class NamespacesV4PagePaginationArray extends V4PagePaginationArray<Namespace> {}
+export class NamespacesSinglePage extends SinglePage<Namespace> {}
 
 export interface Namespace {
   id?: string;
@@ -39,21 +39,21 @@ export interface Namespace {
   use_sqlite?: boolean;
 }
 
-export interface NamespaceListParams extends V4PagePaginationArrayParams {
+export interface NamespaceListParams {
   /**
-   * Path param: Identifier.
+   * Identifier.
    */
   account_id: string;
 }
 
-Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;
+Namespaces.NamespacesSinglePage = NamespacesSinglePage;
 Namespaces.Objects = Objects;
 Namespaces.DurableObjectsCursorLimitPagination = DurableObjectsCursorLimitPagination;
 
 export declare namespace Namespaces {
   export {
     type Namespace as Namespace,
-    NamespacesV4PagePaginationArray as NamespacesV4PagePaginationArray,
+    NamespacesSinglePage as NamespacesSinglePage,
     type NamespaceListParams as NamespaceListParams,
   };
 

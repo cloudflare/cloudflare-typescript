@@ -102,7 +102,7 @@ export interface CustomNameserver {
   status: 'moved' | 'pending' | 'verified';
 
   /**
-   * Identifier.
+   * Identifier
    */
   zone_tag: string;
 
