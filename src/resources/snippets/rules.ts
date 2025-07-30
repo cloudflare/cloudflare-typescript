@@ -13,11 +13,11 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: RequestOptions,
   ): PagePromise<RuleUpdateResponsesSinglePage, RuleUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id, body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/snippets/snippet_rules`,
       SinglePage<RuleUpdateResponse>,
-      { body, method: 'put', ...options },
+      { body: body, method: 'put', ...options },
     );
   }
 
@@ -172,14 +172,14 @@ export interface RuleUpdateParams {
   /**
    * Body param: A list of snippet rules.
    */
-  rules: Array<RuleUpdateParams.Rule>;
+  body: Array<RuleUpdateParams.Body>;
 }
 
 export namespace RuleUpdateParams {
   /**
    * A snippet rule.
    */
-  export interface Rule {
+  export interface Body {
     /**
      * The expression defining which traffic will match the rule.
      */

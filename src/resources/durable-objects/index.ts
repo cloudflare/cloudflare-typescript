@@ -5,5 +5,5 @@ export {
   Namespaces,
   type Namespace,
   type NamespaceListParams,
-  type NamespacesV4PagePaginationArray,
+  type NamespacesSinglePage,
 } from './namespaces/index';

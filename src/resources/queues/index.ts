@@ -13,10 +13,13 @@ export {
 export {
   Messages,
   type MessageAckResponse,
+  type MessageBulkPushResponse,
   type MessagePullResponse,
+  type MessagePushResponse,
   type MessageAckParams,
+  type MessageBulkPushParams,
   type MessagePullParams,
-  type MessagePullResponsesSinglePage,
+  type MessagePushParams,
 } from './messages';
 export { Purge, type PurgeStatusResponse, type PurgeStartParams, type PurgeStatusParams } from './purge';
 export { Queues } from './queues';

@@ -17,17 +17,17 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'stop_magic_transit_pcaps',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nStop full PCAP.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {}\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nStop full PCAP\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {}\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier.',
+        description: 'Identifier',
       },
       pcap_id: {
         type: 'string',
-        description: 'Identifier.',
+        description: 'Identifier',
       },
       jq_filter: {
         type: 'string',

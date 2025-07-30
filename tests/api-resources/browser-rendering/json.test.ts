@@ -49,7 +49,6 @@ describe('resource json', () => {
           url: 'url',
         },
       ],
-      custom_ai: [{ authorization: 'authorization', model: 'model' }],
       emulateMediaType: 'emulateMediaType',
       gotoOptions: {
         referer: 'referer',
