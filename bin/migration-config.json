@@ -4742,6 +4742,159 @@
       ]
     },
     {
+      "base": "workflows.instances",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "workflow_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workflows.instances.status",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "workflow_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workflows.instances.events",
+      "name": "create",
+      "params": [
+        {
+          "type": "param",
+          "key": "event_type",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "workflow_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_type",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workflows.versions",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "version_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "workflow_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "version_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "resourceSharing.recipients",
       "name": "delete",
       "params": [

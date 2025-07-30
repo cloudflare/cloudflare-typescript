@@ -33,7 +33,6 @@ describe('resource custom', () => {
       domain: 'prefix.example-domain.com',
       enabled: true,
       zoneId: '36ca64a6d92827b8a6b90be344bb1bfd',
-      ciphers: ['string'],
       minTLS: '1.0',
       jurisdiction: 'default',
     });
@@ -59,7 +58,6 @@ describe('resource custom', () => {
     const response = await client.r2.buckets.domains.custom.update('example-domain/custom-domain.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
-      ciphers: ['string'],
       enabled: true,
       minTLS: '1.2',
       jurisdiction: 'default',

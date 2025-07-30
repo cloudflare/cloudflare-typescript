@@ -23,11 +23,11 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier.',
+        description: 'Identifier',
       },
       ownership_id: {
         type: 'string',
-        description: 'Identifier.',
+        description: 'Identifier',
       },
       jq_filter: {
         type: 'string',
