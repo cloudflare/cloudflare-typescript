@@ -65,7 +65,8 @@ export type AIRunResponse =
   | AIRunResponse.Translation
   | AIRunResponse.Summarization
   | AIRunResponse.ImageToText
-  | AIRunResponse.ImageTextToText;
+  | AIRunResponse.ImageTextToText
+  | AIRunResponse.MultimodalEmbeddings;
 
 export namespace AIRunResponse {
   export interface TextClassification {
@@ -255,6 +256,12 @@ export namespace AIRunResponse {
   export interface ImageTextToText {
     description?: string;
   }
+
+  export interface MultimodalEmbeddings {
+    data?: Array<Array<number>>;
+
+    shape?: Array<number>;
+  }
 }
 
 export type AIRunParams =
@@ -271,7 +278,8 @@ export type AIRunParams =
   | AIRunParams.Summarization
   | AIRunParams.ImageToText
   | AIRunParams.Variant12
-  | AIRunParams.Variant13;
+  | AIRunParams.Variant13
+  | AIRunParams.MultimodalEmbeddings;
 
 export declare namespace AIRunParams {
   export interface TextClassification {
@@ -1019,6 +1027,23 @@ export declare namespace AIRunParams {
        */
       role: string;
     }
+  }
+
+  export interface MultimodalEmbeddings {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param: Image in base64 encoded format.
+     */
+    image?: string;
+
+    /**
+     * Body param:
+     */
+    text?: Array<string>;
   }
 }
 
