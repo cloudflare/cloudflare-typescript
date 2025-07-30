@@ -16,10 +16,8 @@ export class Entries extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     0,
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     {
-   *       account_id: 'account_id',
-   *       body: fs.createReadStream('path/to/file'),
-   *     },
+   *     fs.createReadStream('path/to/file'),
+   *     fs.createReadStream('path/to/file'),
    *   );
    * ```
    */
@@ -27,10 +25,10 @@ export class Entries extends APIResource {
     datasetId: string,
     version: number,
     entryId: string,
-    params: EntryCreateParams,
+    body: string | ArrayBufferView | ArrayBuffer | BlobLike,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/dlp/datasets/${datasetId}/versions/${version}/entries/${entryId}`,
@@ -55,18 +53,6 @@ export interface EntryCreateResponse {
   upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 }
 
-export interface EntryCreateParams {
-  /**
-   * Path param:
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: string | ArrayBufferView | ArrayBuffer | BlobLike;
-}
-
 export declare namespace Entries {
-  export { type EntryCreateResponse as EntryCreateResponse, type EntryCreateParams as EntryCreateParams };
+  export { type EntryCreateResponse as EntryCreateResponse };
 }

@@ -13,22 +13,24 @@ export class ToMarkdown extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const toMarkdownCreateResponse of client.radar.ai.toMarkdown.create(
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   fs.createReadStream('path/to/file'),
+   *   fs.createReadStream('path/to/file'),
    * )) {
    *   // ...
    * }
    * ```
    */
   create(
+    body: string | ArrayBufferView | ArrayBuffer | BlobLike,
     params: ToMarkdownCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ToMarkdownCreateResponsesSinglePage, ToMarkdownCreateResponse> {
-    const { account_id, body } = params ?? {};
+    const { account_id } = params ?? {};
     return this._client.getAPIList(
       `/accounts/${account_id}/ai/tomarkdown`,
       ToMarkdownCreateResponsesSinglePage,
       {
-        body: body,
+        body,
         method: 'post',
         ...options,
         headers: { 'Content-Type': 'application/octet-stream', ...options?.headers },
@@ -52,17 +54,7 @@ export interface ToMarkdownCreateResponse {
   tokens: string;
 }
 
-export interface ToMarkdownCreateParams {
-  /**
-   * Path param:
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body?: string | ArrayBufferView | ArrayBuffer | BlobLike;
-}
+export type ToMarkdownCreateParams = string | ArrayBufferView | ArrayBuffer | BlobLike;
 
 ToMarkdown.ToMarkdownCreateResponsesSinglePage = ToMarkdownCreateResponsesSinglePage;
 

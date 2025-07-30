@@ -44,20 +44,18 @@ export class Upload extends APIResource {
    *   await client.zeroTrust.dlp.datasets.upload.edit(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     0,
-   *     {
-   *       account_id: 'account_id',
-   *       body: fs.createReadStream('path/to/file'),
-   *     },
+   *     fs.createReadStream('path/to/file'),
+   *     fs.createReadStream('path/to/file'),
    *   );
    * ```
    */
   edit(
     datasetId: string,
     version: number,
-    params: UploadEditParams,
+    body: string | ArrayBufferView | ArrayBuffer | BlobLike,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetsAPI.Dataset> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/datasets/${datasetId}/upload/${version}`, {
         body: body,
@@ -99,22 +97,6 @@ export interface UploadCreateParams {
   account_id: string;
 }
 
-export interface UploadEditParams {
-  /**
-   * Path param:
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: string | ArrayBufferView | ArrayBuffer | BlobLike;
-}
-
 export declare namespace Upload {
-  export {
-    type NewVersion as NewVersion,
-    type UploadCreateParams as UploadCreateParams,
-    type UploadEditParams as UploadEditParams,
-  };
+  export { type NewVersion as NewVersion, type UploadCreateParams as UploadCreateParams };
 }
