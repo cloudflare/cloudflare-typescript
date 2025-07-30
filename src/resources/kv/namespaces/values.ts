@@ -22,6 +22,7 @@ export class Values extends APIResource {
    *   'My-Key',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     metadata: '{"someMetadataKey": "someMetadataValue"}',
    *     value: 'Some Value',
    *   },
    * );
@@ -37,7 +38,12 @@ export class Values extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
-        Core.multipartFormRequestOptions({ query: { expiration, expiration_ttl }, body, ...options }),
+        Core.maybeMultipartFormRequestOptions({
+          query: { expiration, expiration_ttl },
+          body,
+          ...options,
+          headers: { 'Content-Type': '*/*', ...options?.headers },
+        }),
       ) as Core.APIPromise<{ result: ValueUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -113,9 +119,14 @@ export interface ValueDeleteResponse {}
 
 export interface ValueUpdateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param: Arbitrary JSON to be associated with a key/value pair.
+   */
+  metadata: string;
 
   /**
    * Body param: A byte sequence to be stored, up to 25 MiB in length.
@@ -123,32 +134,28 @@ export interface ValueUpdateParams {
   value: string;
 
   /**
-   * Query param: Expires the key at a certain time, measured in number of seconds
-   * since the UNIX epoch.
+   * Query param: The time, measured in number of seconds since the UNIX epoch, at
+   * which the key should expire.
    */
   expiration?: number;
 
   /**
-   * Query param: Expires the key after a number of seconds. Must be at least 60.
+   * Query param: The number of seconds for which the key should be visible before it
+   * expires. At least 60.
    */
   expiration_ttl?: number;
-
-  /**
-   * Body param:
-   */
-  metadata?: unknown;
 }
 
 export interface ValueDeleteParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
 
 export interface ValueGetParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
