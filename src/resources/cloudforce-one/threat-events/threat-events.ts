@@ -501,7 +501,7 @@ export interface ThreatEventCreateParams {
   /**
    * Body param:
    */
-  attacker?: string;
+  attacker?: string | null;
 
   /**
    * Body param:
@@ -648,7 +648,7 @@ export namespace ThreatEventBulkCreateParams {
 
     accountId?: number;
 
-    attacker?: string;
+    attacker?: string | null;
 
     attackerCountry?: string;
 
@@ -683,7 +683,7 @@ export interface ThreatEventEditParams {
   /**
    * Body param:
    */
-  attacker?: string;
+  attacker?: string | null;
 
   /**
    * Body param:

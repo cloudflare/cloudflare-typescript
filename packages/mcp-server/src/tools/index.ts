@@ -1318,8 +1318,6 @@ import model_inference_ai_radar_summary from './radar/ai/inference/summary/model
 import task_inference_ai_radar_summary from './radar/ai/inference/summary/task-inference-ai-radar-summary';
 import model_timeseries_groups_inference_ai_radar_summary from './radar/ai/inference/timeseries-groups/summary/model-timeseries-groups-inference-ai-radar-summary';
 import task_timeseries_groups_inference_ai_radar_summary from './radar/ai/inference/timeseries-groups/summary/task-timeseries-groups-inference-ai-radar-summary';
-import user_agent_bots_ai_radar_summary from './radar/ai/bots/summary/user-agent-bots-ai-radar-summary';
-import user_agent_ai_radar_timeseries_groups from './radar/ai/timeseries-groups/user-agent-ai-radar-timeseries-groups';
 import list_radar_annotations from './radar/annotations/list-radar-annotations';
 import get_annotations_radar_outages from './radar/annotations/outages/get-annotations-radar-outages';
 import locations_annotations_radar_outages from './radar/annotations/outages/locations-annotations-radar-outages';
@@ -3087,8 +3085,6 @@ addEndpoint(model_inference_ai_radar_summary);
 addEndpoint(task_inference_ai_radar_summary);
 addEndpoint(model_timeseries_groups_inference_ai_radar_summary);
 addEndpoint(task_timeseries_groups_inference_ai_radar_summary);
-addEndpoint(user_agent_bots_ai_radar_summary);
-addEndpoint(user_agent_ai_radar_timeseries_groups);
 addEndpoint(list_radar_annotations);
 addEndpoint(get_annotations_radar_outages);
 addEndpoint(locations_annotations_radar_outages);
