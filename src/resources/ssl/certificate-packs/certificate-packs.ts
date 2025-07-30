@@ -227,7 +227,21 @@ export interface CertificatePackCreateResponse {
   /**
    * Type of certificate pack.
    */
-  type?: 'advanced';
+  type?:
+    | 'mh_custom'
+    | 'managed_hostname'
+    | 'sni_custom'
+    | 'universal'
+    | 'advanced'
+    | 'total_tls'
+    | 'keyless'
+    | 'legacy_custom';
+
+  /**
+   * Domain validation errors that have been received by the certificate authority
+   * (CA).
+   */
+  validation_errors?: Array<CertificatePackCreateResponse.ValidationError>;
 
   /**
    * Validation Method selected for the order.
@@ -235,9 +249,58 @@ export interface CertificatePackCreateResponse {
   validation_method?: 'txt' | 'http' | 'email';
 
   /**
+   * Certificates' validation records. Only present when certificate pack is in
+   * "pending_validation" status
+   */
+  validation_records?: Array<CertificatePackCreateResponse.ValidationRecord>;
+
+  /**
    * Validity Days selected for the order.
    */
   validity_days?: 14 | 30 | 90 | 365;
+}
+
+export namespace CertificatePackCreateResponse {
+  export interface ValidationError {
+    /**
+     * A domain validation error.
+     */
+    message?: string;
+  }
+
+  /**
+   * Certificate's required validation record.
+   */
+  export interface ValidationRecord {
+    /**
+     * The set of email addresses that the certificate authority (CA) will use to
+     * complete domain validation.
+     */
+    emails?: Array<string>;
+
+    /**
+     * The content that the certificate authority (CA) will expect to find at the
+     * http_url during the domain validation.
+     */
+    http_body?: string;
+
+    /**
+     * The url that will be checked during domain validation.
+     */
+    http_url?: string;
+
+    /**
+     * The hostname that the certificate authority (CA) will check for a TXT record
+     * during domain validation .
+     */
+    txt_name?: string;
+
+    /**
+     * The TXT record that the certificate authority (CA) will check during domain
+     * validation.
+     */
+    txt_value?: string;
+  }
 }
 
 export type CertificatePackListResponse = unknown;
@@ -282,7 +345,21 @@ export interface CertificatePackEditResponse {
   /**
    * Type of certificate pack.
    */
-  type?: 'advanced';
+  type?:
+    | 'mh_custom'
+    | 'managed_hostname'
+    | 'sni_custom'
+    | 'universal'
+    | 'advanced'
+    | 'total_tls'
+    | 'keyless'
+    | 'legacy_custom';
+
+  /**
+   * Domain validation errors that have been received by the certificate authority
+   * (CA).
+   */
+  validation_errors?: Array<CertificatePackEditResponse.ValidationError>;
 
   /**
    * Validation Method selected for the order.
@@ -290,9 +367,58 @@ export interface CertificatePackEditResponse {
   validation_method?: 'txt' | 'http' | 'email';
 
   /**
+   * Certificates' validation records. Only present when certificate pack is in
+   * "pending_validation" status
+   */
+  validation_records?: Array<CertificatePackEditResponse.ValidationRecord>;
+
+  /**
    * Validity Days selected for the order.
    */
   validity_days?: 14 | 30 | 90 | 365;
+}
+
+export namespace CertificatePackEditResponse {
+  export interface ValidationError {
+    /**
+     * A domain validation error.
+     */
+    message?: string;
+  }
+
+  /**
+   * Certificate's required validation record.
+   */
+  export interface ValidationRecord {
+    /**
+     * The set of email addresses that the certificate authority (CA) will use to
+     * complete domain validation.
+     */
+    emails?: Array<string>;
+
+    /**
+     * The content that the certificate authority (CA) will expect to find at the
+     * http_url during the domain validation.
+     */
+    http_body?: string;
+
+    /**
+     * The url that will be checked during domain validation.
+     */
+    http_url?: string;
+
+    /**
+     * The hostname that the certificate authority (CA) will check for a TXT record
+     * during domain validation .
+     */
+    txt_name?: string;
+
+    /**
+     * The TXT record that the certificate authority (CA) will check during domain
+     * validation.
+     */
+    txt_value?: string;
+  }
 }
 
 export type CertificatePackGetResponse = unknown;
