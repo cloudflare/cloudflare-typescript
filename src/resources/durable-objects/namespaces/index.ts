@@ -4,7 +4,7 @@ export {
   Namespaces,
   type Namespace,
   type NamespaceListParams,
-  type NamespacesSinglePage,
+  type NamespacesV4PagePaginationArray,
 } from './namespaces';
 export {
   Objects,
