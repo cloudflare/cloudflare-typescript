@@ -51,13 +51,13 @@ export class Upload extends APIResource {
    */
   edit(
     version: number,
-    dataset: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
+    body: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
     options?: RequestOptions,
   ): APIPromise<DatasetsAPI.Dataset> {
     const { account_id, dataset_id } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/datasets/${dataset_id}/upload/${version}`, {
-        body: dataset,
+        body: body,
         ...options,
         headers: buildHeaders([{ 'Content-Type': 'application/octet-stream' }, options?.headers]),
       }) as APIPromise<{ result: DatasetsAPI.Dataset }>
