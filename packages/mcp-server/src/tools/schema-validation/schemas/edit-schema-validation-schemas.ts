@@ -47,9 +47,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { schema_id, ...body } = args as any;
+  const { schema_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.schemaValidation.schemas.edit(schema_id, body)),
+    await maybeFilter(jq_filter, await client.schemaValidation.schemas.edit(schema_id, body)),
   );
 };
 

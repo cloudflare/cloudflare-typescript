@@ -77,8 +77,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { site_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.magicTransit.sites.edit(site_id, body)));
+  const { site_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.magicTransit.sites.edit(site_id, body)),
+  );
 };
 
 export default { metadata, tool, handler };

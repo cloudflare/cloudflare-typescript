@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { package_id, ...body } = args as any;
+  const { package_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.firewall.waf.packages.get(package_id, body)),
+    await maybeFilter(jq_filter, await client.firewall.waf.packages.get(package_id, body)),
   );
 };
 

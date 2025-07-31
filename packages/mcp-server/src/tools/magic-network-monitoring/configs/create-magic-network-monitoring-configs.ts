@@ -78,9 +78,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const body = args as any;
+  const { jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.magicNetworkMonitoring.configs.create(body)),
+    await maybeFilter(jq_filter, await client.magicNetworkMonitoring.configs.create(body)),
   );
 };
 

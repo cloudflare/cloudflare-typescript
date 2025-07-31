@@ -45,8 +45,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { ua_rule_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.firewall.uaRules.get(ua_rule_id, body)));
+  const { ua_rule_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.firewall.uaRules.get(ua_rule_id, body)),
+  );
 };
 
 export default { metadata, tool, handler };

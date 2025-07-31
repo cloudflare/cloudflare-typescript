@@ -45,9 +45,12 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { policy_test_id, ...body } = args as any;
+  const { policy_test_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.zeroTrust.access.applications.policyTests.get(policy_test_id, body)),
+    await maybeFilter(
+      jq_filter,
+      await client.zeroTrust.access.applications.policyTests.get(policy_test_id, body),
+    ),
   );
 };
 

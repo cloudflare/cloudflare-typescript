@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { webhook_id, ...body } = args as any;
+  const { webhook_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.alerting.destinations.webhooks.delete(webhook_id, body)),
+    await maybeFilter(jq_filter, await client.alerting.destinations.webhooks.delete(webhook_id, body)),
   );
 };
 

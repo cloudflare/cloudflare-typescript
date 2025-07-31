@@ -44,9 +44,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { index_name, ...body } = args as any;
+  const { index_name, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.vectorize.indexes.delete(index_name, body)),
+    await maybeFilter(jq_filter, await client.vectorize.indexes.delete(index_name, body)),
   );
 };
 

@@ -44,9 +44,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { variant_id, ...body } = args as any;
+  const { variant_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.images.v1.variants.delete(variant_id, body)),
+    await maybeFilter(jq_filter, await client.images.v1.variants.delete(variant_id, body)),
   );
 };
 

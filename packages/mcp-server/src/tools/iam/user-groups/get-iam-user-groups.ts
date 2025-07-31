@@ -47,8 +47,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { user_group_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.iam.userGroups.get(user_group_id, body)));
+  const { user_group_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.iam.userGroups.get(user_group_id, body)),
+  );
 };
 
 export default { metadata, tool, handler };

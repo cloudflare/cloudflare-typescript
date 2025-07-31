@@ -49,9 +49,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { ip_address, ...body } = args as any;
+  const { ip_address, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.addressing.addressMaps.ips.delete(ip_address, body)),
+    await maybeFilter(jq_filter, await client.addressing.addressMaps.ips.delete(ip_address, body)),
   );
 };
 

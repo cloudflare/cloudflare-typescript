@@ -55,9 +55,12 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { ip_network_encoded, ...body } = args as any;
+  const { ip_network_encoded, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.zeroTrust.networks.routes.networks.create(ip_network_encoded, body)),
+    await maybeFilter(
+      jq_filter,
+      await client.zeroTrust.networks.routes.networks.create(ip_network_encoded, body),
+    ),
   );
 };
 

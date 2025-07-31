@@ -45,10 +45,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { dispatch_namespace, ...body } = args as any;
+  const { dispatch_namespace, jq_filter, ...body } = args as any;
   return asTextContentResult(
     await maybeFilter(
-      args,
+      jq_filter,
       await client.workersForPlatforms.dispatch.namespaces.get(dispatch_namespace, body),
     ),
   );

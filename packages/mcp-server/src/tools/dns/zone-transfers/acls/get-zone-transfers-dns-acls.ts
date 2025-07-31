@@ -43,8 +43,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { acl_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.dns.zoneTransfers.acls.get(acl_id, body)));
+  const { acl_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.dns.zoneTransfers.acls.get(acl_id, body)),
+  );
 };
 
 export default { metadata, tool, handler };

@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { rule_identifier, ...body } = args as any;
+  const { rule_identifier, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.emailRouting.rules.delete(rule_identifier, body)),
+    await maybeFilter(jq_filter, await client.emailRouting.rules.delete(rule_identifier, body)),
   );
 };
 

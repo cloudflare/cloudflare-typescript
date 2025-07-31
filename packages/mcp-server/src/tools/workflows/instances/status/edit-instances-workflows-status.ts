@@ -49,9 +49,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { instance_id, ...body } = args as any;
+  const { instance_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.workflows.instances.status.edit(instance_id, body)),
+    await maybeFilter(jq_filter, await client.workflows.instances.status.edit(instance_id, body)),
   );
 };
 

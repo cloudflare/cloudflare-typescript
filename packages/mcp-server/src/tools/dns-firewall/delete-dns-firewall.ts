@@ -45,8 +45,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { dns_firewall_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.dnsFirewall.delete(dns_firewall_id, body)));
+  const { dns_firewall_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.dnsFirewall.delete(dns_firewall_id, body)),
+  );
 };
 
 export default { metadata, tool, handler };

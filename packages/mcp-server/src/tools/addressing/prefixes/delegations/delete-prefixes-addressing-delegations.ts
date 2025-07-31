@@ -49,9 +49,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { delegation_id, ...body } = args as any;
+  const { delegation_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.addressing.prefixes.delegations.delete(delegation_id, body)),
+    await maybeFilter(jq_filter, await client.addressing.prefixes.delegations.delete(delegation_id, body)),
   );
 };
 

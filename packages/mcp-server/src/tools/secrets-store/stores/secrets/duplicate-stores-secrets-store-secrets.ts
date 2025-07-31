@@ -62,9 +62,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { secret_id, ...body } = args as any;
+  const { secret_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.secretsStore.stores.secrets.duplicate(secret_id, body)),
+    await maybeFilter(jq_filter, await client.secretsStore.stores.secrets.duplicate(secret_id, body)),
   );
 };
 

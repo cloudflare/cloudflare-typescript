@@ -54,10 +54,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { secret_name, ...body } = args as any;
+  const { secret_name, jq_filter, ...body } = args as any;
   return asTextContentResult(
     await maybeFilter(
-      args,
+      jq_filter,
       await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.get(secret_name, body),
     ),
   );

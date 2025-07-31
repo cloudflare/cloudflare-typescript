@@ -48,9 +48,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { certificate_pack_id, ...body } = args as any;
+  const { certificate_pack_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.ssl.verification.edit(certificate_pack_id, body)),
+    await maybeFilter(jq_filter, await client.ssl.verification.edit(certificate_pack_id, body)),
   );
 };
 

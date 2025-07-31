@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { hyperdrive_id, ...body } = args as any;
+  const { hyperdrive_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.hyperdrive.configs.get(hyperdrive_id, body)),
+    await maybeFilter(jq_filter, await client.hyperdrive.configs.get(hyperdrive_id, body)),
   );
 };
 

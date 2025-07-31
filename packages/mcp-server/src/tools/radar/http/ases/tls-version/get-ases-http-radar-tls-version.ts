@@ -163,9 +163,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { tls_version, ...body } = args as any;
+  const { tls_version, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.radar.http.ases.tlsVersion.get(tls_version, body)),
+    await maybeFilter(jq_filter, await client.radar.http.ases.tlsVersion.get(tls_version, body)),
   );
 };
 

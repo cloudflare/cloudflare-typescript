@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { priority_id, ...body } = args as any;
+  const { priority_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.cloudforceOne.requests.priority.get(priority_id, body)),
+    await maybeFilter(jq_filter, await client.cloudforceOne.requests.priority.get(priority_id, body)),
   );
 };
 

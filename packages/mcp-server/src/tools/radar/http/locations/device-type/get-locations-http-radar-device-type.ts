@@ -163,9 +163,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { device_type, ...body } = args as any;
+  const { device_type, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.radar.http.locations.deviceType.get(device_type, body)),
+    await maybeFilter(jq_filter, await client.radar.http.locations.deviceType.get(device_type, body)),
   );
 };
 

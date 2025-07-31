@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { live_input_identifier, ...body } = args as any;
+  const { live_input_identifier, jq_filter, ...body } = args as any;
   const response = await client.stream.liveInputs.outputs.list(live_input_identifier, body).asResponse();
-  return asTextContentResult(await maybeFilter(args, await response.json()));
+  return asTextContentResult(await maybeFilter(jq_filter, await response.json()));
 };
 
 export default { metadata, tool, handler };

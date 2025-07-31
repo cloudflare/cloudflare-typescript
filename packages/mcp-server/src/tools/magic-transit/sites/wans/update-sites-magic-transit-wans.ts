@@ -87,9 +87,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { wan_id, ...body } = args as any;
+  const { wan_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.magicTransit.sites.wans.update(wan_id, body)),
+    await maybeFilter(jq_filter, await client.magicTransit.sites.wans.update(wan_id, body)),
   );
 };
 

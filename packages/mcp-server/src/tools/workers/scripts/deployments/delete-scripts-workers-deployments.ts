@@ -48,9 +48,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { deployment_id, ...body } = args as any;
+  const { deployment_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.workers.scripts.deployments.delete(deployment_id, body)),
+    await maybeFilter(jq_filter, await client.workers.scripts.deployments.delete(deployment_id, body)),
   );
 };
 

@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { address_map_id, ...body } = args as any;
+  const { address_map_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.addressing.addressMaps.get(address_map_id, body)),
+    await maybeFilter(jq_filter, await client.addressing.addressMaps.get(address_map_id, body)),
   );
 };
 

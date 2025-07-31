@@ -163,9 +163,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { bot_class, ...body } = args as any;
+  const { bot_class, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.radar.http.locations.botClass.get(bot_class, body)),
+    await maybeFilter(jq_filter, await client.radar.http.locations.botClass.get(bot_class, body)),
   );
 };
 

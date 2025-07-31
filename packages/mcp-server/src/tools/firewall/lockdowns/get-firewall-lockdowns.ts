@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { lock_downs_id, ...body } = args as any;
+  const { lock_downs_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.firewall.lockdowns.get(lock_downs_id, body)),
+    await maybeFilter(jq_filter, await client.firewall.lockdowns.get(lock_downs_id, body)),
   );
 };
 

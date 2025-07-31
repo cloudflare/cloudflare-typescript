@@ -50,9 +50,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { issue_id, ...body } = args as any;
+  const { issue_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.securityCenter.insights.dismiss(issue_id, body)),
+    await maybeFilter(jq_filter, await client.securityCenter.insights.dismiss(issue_id, body)),
   );
 };
 

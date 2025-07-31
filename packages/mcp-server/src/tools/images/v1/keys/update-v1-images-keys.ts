@@ -44,9 +44,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { signing_key_name, ...body } = args as any;
+  const { signing_key_name, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.images.v1.keys.update(signing_key_name, body)),
+    await maybeFilter(jq_filter, await client.images.v1.keys.update(signing_key_name, body)),
   );
 };
 

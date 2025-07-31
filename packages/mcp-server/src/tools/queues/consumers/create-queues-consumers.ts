@@ -133,8 +133,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { queue_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.queues.consumers.create(queue_id, body)));
+  const { queue_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.queues.consumers.create(queue_id, body)),
+  );
 };
 
 export default { metadata, tool, handler };

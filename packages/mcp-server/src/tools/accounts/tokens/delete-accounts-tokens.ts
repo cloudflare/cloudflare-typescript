@@ -46,8 +46,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { token_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.accounts.tokens.delete(token_id, body)));
+  const { token_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.accounts.tokens.delete(token_id, body)),
+  );
 };
 
 export default { metadata, tool, handler };

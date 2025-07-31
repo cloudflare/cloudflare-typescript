@@ -45,8 +45,8 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { database_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.d1.database.get(database_id, body)));
+  const { database_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(await maybeFilter(jq_filter, await client.d1.database.get(database_id, body)));
 };
 
 export default { metadata, tool, handler };

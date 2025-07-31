@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { view_id, ...body } = args as any;
+  const { view_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.dns.settings.account.views.get(view_id, body)),
+    await maybeFilter(jq_filter, await client.dns.settings.account.views.get(view_id, body)),
   );
 };
 

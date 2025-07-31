@@ -98,8 +98,8 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { edns, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.radar.as112.top.edns(edns, body)));
+  const { edns, jq_filter, ...body } = args as any;
+  return asTextContentResult(await maybeFilter(jq_filter, await client.radar.as112.top.edns(edns, body)));
 };
 
 export default { metadata, tool, handler };

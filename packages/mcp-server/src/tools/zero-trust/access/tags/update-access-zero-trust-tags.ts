@@ -49,9 +49,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { tag_name, ...body } = args as any;
+  const { tag_name, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.zeroTrust.access.tags.update(tag_name, body)),
+    await maybeFilter(jq_filter, await client.zeroTrust.access.tags.update(tag_name, body)),
   );
 };
 

@@ -46,9 +46,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { project_name, ...body } = args as any;
+  const { project_name, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.pages.projects.domains.create(project_name, body)),
+    await maybeFilter(jq_filter, await client.pages.projects.domains.create(project_name, body)),
   );
 };
 

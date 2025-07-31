@@ -44,9 +44,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { slot, ...body } = args as any;
+  const { slot, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.networkInterconnects.slots.get(slot, body)),
+    await maybeFilter(jq_filter, await client.networkInterconnects.slots.get(slot, body)),
   );
 };
 

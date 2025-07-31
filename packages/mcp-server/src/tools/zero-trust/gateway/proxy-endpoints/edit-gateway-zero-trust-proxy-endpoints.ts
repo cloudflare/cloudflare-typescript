@@ -59,9 +59,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { proxy_endpoint_id, ...body } = args as any;
+  const { proxy_endpoint_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.zeroTrust.gateway.proxyEndpoints.edit(proxy_endpoint_id, body)),
+    await maybeFilter(jq_filter, await client.zeroTrust.gateway.proxyEndpoints.edit(proxy_endpoint_id, body)),
   );
 };
 

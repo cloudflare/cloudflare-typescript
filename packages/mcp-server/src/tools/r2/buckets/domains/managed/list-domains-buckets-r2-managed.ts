@@ -50,9 +50,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { bucket_name, ...body } = args as any;
+  const { bucket_name, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.r2.buckets.domains.managed.list(bucket_name, body)),
+    await maybeFilter(jq_filter, await client.r2.buckets.domains.managed.list(bucket_name, body)),
   );
 };
 

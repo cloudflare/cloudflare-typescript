@@ -98,9 +98,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { ip_version, ...body } = args as any;
+  const { ip_version, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.radar.as112.top.ipVersion(ip_version, body)),
+    await maybeFilter(jq_filter, await client.radar.as112.top.ipVersion(ip_version, body)),
   );
 };
 

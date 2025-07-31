@@ -49,9 +49,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { raw_id, ...body } = args as any;
+  const { raw_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.cloudforceOne.threatEvents.raw.get(raw_id, body)),
+    await maybeFilter(jq_filter, await client.cloudforceOne.threatEvents.raw.get(raw_id, body)),
   );
 };
 

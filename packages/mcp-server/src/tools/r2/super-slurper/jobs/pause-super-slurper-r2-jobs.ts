@@ -43,8 +43,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { job_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.r2.superSlurper.jobs.pause(job_id, body)));
+  const { job_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.r2.superSlurper.jobs.pause(job_id, body)),
+  );
 };
 
 export default { metadata, tool, handler };
