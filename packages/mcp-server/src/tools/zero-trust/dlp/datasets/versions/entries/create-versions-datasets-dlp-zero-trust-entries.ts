@@ -34,7 +34,7 @@ export const tool: Tool = {
       entry_id: {
         type: 'string',
       },
-      body: {
+      dataset_version_entry: {
         type: 'string',
       },
       jq_filter: {
@@ -44,15 +44,18 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
-    required: ['account_id', 'dataset_id', 'version', 'entry_id', 'body'],
+    required: ['account_id', 'dataset_id', 'version', 'entry_id', 'dataset_version_entry'],
   },
   annotations: {},
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { entry_id, body, ...body } = args as any;
+  const { entry_id, dataset_version_entry, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.zeroTrust.dlp.datasets.versions.entries.create(entry_id, body)),
+    await maybeFilter(
+      args,
+      await client.zeroTrust.dlp.datasets.versions.entries.create(entry_id, dataset_version_entry),
+    ),
   );
 };
 
