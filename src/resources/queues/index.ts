@@ -7,6 +7,7 @@ export {
   type ConsumerDeleteResponse,
   type ConsumerCreateParams,
   type ConsumerUpdateParams,
+  type ConsumerListParams,
   type ConsumerDeleteParams,
   type ConsumerGetParams,
 } from './consumers';

@@ -155,6 +155,11 @@ export namespace DeploymentCreateResponse {
      * Human-readable message about the deployment. Truncated to 100 bytes.
      */
     'workers/message'?: string;
+
+    /**
+     * Operation that triggered the creation of the deployment.
+     */
+    'workers/triggered_by'?: string;
   }
 }
 
@@ -191,6 +196,11 @@ export namespace DeploymentListResponse {
        * Human-readable message about the deployment. Truncated to 100 bytes.
        */
       'workers/message'?: string;
+
+      /**
+       * Operation that triggered the creation of the deployment.
+       */
+      'workers/triggered_by'?: string;
     }
   }
 }
@@ -268,6 +278,11 @@ export namespace DeploymentGetResponse {
      * Human-readable message about the deployment. Truncated to 100 bytes.
      */
     'workers/message'?: string;
+
+    /**
+     * Operation that triggered the creation of the deployment.
+     */
+    'workers/triggered_by'?: string;
   }
 }
 
