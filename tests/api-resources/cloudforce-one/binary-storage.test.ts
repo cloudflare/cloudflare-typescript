@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource binaryStorage', () => {
-  test('create: only required params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.binaryStorage.create({
       account_id: 'account_id',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
@@ -24,14 +25,16 @@ describe('resource binaryStorage', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('create: required and optional params', async () => {
     const response = await client.cloudforceOne.binaryStorage.create({
       account_id: 'account_id',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
   });
 
-  test('get: only required params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('get: only required params', async () => {
     const responsePromise = client.cloudforceOne.binaryStorage.get('hash', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,7 +45,8 @@ describe('resource binaryStorage', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // TODO: HTTP 401 from prism
+  test.skip('get: required and optional params', async () => {
     const response = await client.cloudforceOne.binaryStorage.get('hash', { account_id: 'account_id' });
   });
 });
