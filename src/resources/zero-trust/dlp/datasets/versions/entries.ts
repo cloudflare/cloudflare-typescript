@@ -25,7 +25,7 @@ export class Entries extends APIResource {
     datasetId: string,
     version: number,
     entryId: string,
-    datasetVersionEntry: string | ArrayBufferView | ArrayBuffer | BlobLike,
+    body: string | ArrayBufferView | ArrayBuffer | BlobLike,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryCreateResponse> {
     const { account_id } = params;
@@ -33,7 +33,7 @@ export class Entries extends APIResource {
       this._client.post(
         `/accounts/${account_id}/dlp/datasets/${datasetId}/versions/${version}/entries/${entryId}`,
         {
-          body: datasetVersionEntry,
+          body: body,
           ...options,
           headers: { 'Content-Type': 'application/octet-stream', ...options?.headers },
           __binaryRequest: true,
