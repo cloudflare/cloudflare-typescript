@@ -3781,7 +3781,7 @@
         },
         {
           "type": "param",
-          "key": "body",
+          "key": "dataset",
           "location": "body"
         },
         {
@@ -3801,7 +3801,7 @@
         },
         {
           "type": "param",
-          "key": "body",
+          "key": "dataset",
           "location": "body"
         },
         {
@@ -3857,7 +3857,7 @@
         },
         {
           "type": "param",
-          "key": "body",
+          "key": "dataset_version_entry",
           "location": "body"
         },
         {
@@ -3882,7 +3882,7 @@
         },
         {
           "type": "param",
-          "key": "body",
+          "key": "dataset_version_entry",
           "location": "body"
         },
         {
