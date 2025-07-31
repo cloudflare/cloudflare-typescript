@@ -1050,6 +1050,43 @@
       ]
     },
     {
+      "base": "queues.consumers",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "consumer_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "queue_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "consumer_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "rulesets.phases.versions",
       "name": "get",
       "params": [
