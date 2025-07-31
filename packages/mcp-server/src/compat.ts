@@ -70,8 +70,11 @@ export function parseEmbeddedJSON(args: Record<string, unknown>, schema: Record<
     if (typeof value === 'string') {
       try {
         const parsed = JSON.parse(value);
-        newArgs[key] = parsed;
-        updated = true;
+        // Only parse if result is a plain object (not array, null, or primitive)
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+          newArgs[key] = parsed;
+          updated = true;
+        }
       } catch (e) {
         // Not valid JSON, leave as is
       }

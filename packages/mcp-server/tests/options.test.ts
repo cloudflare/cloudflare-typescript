@@ -1,5 +1,6 @@
 import { parseOptions } from '../src/options';
 import { Filter } from '../src/tools';
+import { parseEmbeddedJSON } from '../src/compat';
 
 // Mock process.argv
 const mockArgv = (args: string[]) => {
@@ -182,5 +183,137 @@ describe('parseOptions', () => {
 
     console.error = originalError;
     cleanup();
+  });
+});
+
+describe('parseEmbeddedJSON', () => {
+  it('should not change non-string values', () => {
+    const args = {
+      numberProp: 42,
+      booleanProp: true,
+      objectProp: { nested: 'value' },
+      arrayProp: [1, 2, 3],
+      nullProp: null,
+      undefinedProp: undefined,
+    };
+    const schema = {};
+
+    const result = parseEmbeddedJSON(args, schema);
+
+    expect(result).toBe(args); // Should return original object since no changes made
+    expect(result['numberProp']).toBe(42);
+    expect(result['booleanProp']).toBe(true);
+    expect(result['objectProp']).toEqual({ nested: 'value' });
+    expect(result['arrayProp']).toEqual([1, 2, 3]);
+    expect(result['nullProp']).toBe(null);
+    expect(result['undefinedProp']).toBe(undefined);
+  });
+
+  it('should parse valid JSON objects in string properties', () => {
+    const args = {
+      jsonObjectString: '{"key": "value", "number": 123}',
+      regularString: 'not json',
+    };
+    const schema = {};
+
+    const result = parseEmbeddedJSON(args, schema);
+
+    expect(result).not.toBe(args); // Should return new object since changes were made
+    expect(result['jsonObjectString']).toEqual({ key: 'value', number: 123 });
+    expect(result['regularString']).toBe('not json');
+  });
+
+  it('should leave invalid JSON in string properties unchanged', () => {
+    const args = {
+      invalidJson1: '{"key": value}', // Missing quotes around value
+      invalidJson2: '{key: "value"}', // Missing quotes around key
+      invalidJson3: '{"key": "value",}', // Trailing comma
+      invalidJson4: 'just a regular string',
+      emptyString: '',
+    };
+    const schema = {};
+
+    const result = parseEmbeddedJSON(args, schema);
+
+    expect(result).toBe(args); // Should return original object since no changes made
+    expect(result['invalidJson1']).toBe('{"key": value}');
+    expect(result['invalidJson2']).toBe('{key: "value"}');
+    expect(result['invalidJson3']).toBe('{"key": "value",}');
+    expect(result['invalidJson4']).toBe('just a regular string');
+    expect(result['emptyString']).toBe('');
+  });
+
+  it('should not parse JSON primitives in string properties', () => {
+    const args = {
+      numberString: '123',
+      floatString: '45.67',
+      negativeNumberString: '-89',
+      booleanTrueString: 'true',
+      booleanFalseString: 'false',
+      nullString: 'null',
+      jsonArrayString: '[1, 2, 3, "test"]',
+      regularString: 'not json',
+    };
+    const schema = {};
+
+    const result = parseEmbeddedJSON(args, schema);
+
+    expect(result).toBe(args); // Should return original object since no changes made
+    expect(result['numberString']).toBe('123');
+    expect(result['floatString']).toBe('45.67');
+    expect(result['negativeNumberString']).toBe('-89');
+    expect(result['booleanTrueString']).toBe('true');
+    expect(result['booleanFalseString']).toBe('false');
+    expect(result['nullString']).toBe('null');
+    expect(result['jsonArrayString']).toBe('[1, 2, 3, "test"]');
+    expect(result['regularString']).toBe('not json');
+  });
+
+  it('should handle mixed valid objects and other JSON types', () => {
+    const args = {
+      validObject: '{"success": true}',
+      invalidObject: '{"missing": quote}',
+      validNumber: '42',
+      validArray: '[1, 2, 3]',
+      keepAsString: 'hello world',
+      nonString: 123,
+    };
+    const schema = {};
+
+    const result = parseEmbeddedJSON(args, schema);
+
+    expect(result).not.toBe(args); // Should return new object since some changes were made
+    expect(result['validObject']).toEqual({ success: true });
+    expect(result['invalidObject']).toBe('{"missing": quote}');
+    expect(result['validNumber']).toBe('42'); // Not parsed, remains string
+    expect(result['validArray']).toBe('[1, 2, 3]'); // Not parsed, remains string
+    expect(result['keepAsString']).toBe('hello world');
+    expect(result['nonString']).toBe(123);
+  });
+
+  it('should return original object when no strings are present', () => {
+    const args = {
+      number: 42,
+      boolean: true,
+      object: { key: 'value' },
+    };
+    const schema = {};
+
+    const result = parseEmbeddedJSON(args, schema);
+
+    expect(result).toBe(args); // Should return original object since no changes made
+  });
+
+  it('should return original object when all strings are invalid JSON', () => {
+    const args = {
+      string1: 'hello',
+      string2: 'world',
+      string3: 'not json at all',
+    };
+    const schema = {};
+
+    const result = parseEmbeddedJSON(args, schema);
+
+    expect(result).toBe(args); // Should return original object since no changes made
   });
 });

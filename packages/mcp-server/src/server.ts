@@ -117,7 +117,7 @@ export async function executeHandler(
   compatibilityOptions?: Partial<ClientCapabilities>,
 ) {
   const options = { ...defaultClientCapabilities, ...compatibilityOptions };
-  if (options.validJson && args) {
+  if (!options.validJson && args) {
     args = parseEmbeddedJSON(args, tool.inputSchema);
   }
   return await handler(client, args || {});
