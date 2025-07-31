@@ -299,7 +299,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.get()`
 - `client.queues.consumers.create()`
 - `client.queues.consumers.update()`
-- `client.queues.consumers.list()`
 - `client.queues.consumers.delete()`
 - `client.queues.consumers.get()`
 - `client.queues.messages.ack()`

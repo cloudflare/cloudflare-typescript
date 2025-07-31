@@ -54,33 +54,6 @@ export class Consumers extends APIResource {
   }
 
   /**
-   * Returns the consumers for a Queue
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const consumer of client.queues.consumers.list(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    queueID: string,
-    params: ConsumerListParams,
-    options?: RequestOptions,
-  ): PagePromise<ConsumersSinglePage, Consumer> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/queues/${queueID}/consumers`,
-      SinglePage<Consumer>,
-      options,
-    );
-  }
-
-  /**
    * Deletes the consumer for a queue.
    *
    * @example
@@ -107,27 +80,30 @@ export class Consumers extends APIResource {
   }
 
   /**
-   * Fetches the consumer for a queue by consumer id
+   * Returns the consumers for a Queue
    *
    * @example
    * ```ts
-   * const consumer = await client.queues.consumers.get(
+   * // Automatically fetches more pages as needed.
+   * for await (const consumer of client.queues.consumers.get(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     queue_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   },
-   * );
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
-  get(consumerID: string, params: ConsumerGetParams, options?: RequestOptions): APIPromise<Consumer> {
-    const { account_id, queue_id } = params;
-    return (
-      this._client.get(
-        path`/accounts/${account_id}/queues/${queue_id}/consumers/${consumerID}`,
-        options,
-      ) as APIPromise<{ result: Consumer }>
-    )._thenUnwrap((obj) => obj.result);
+  get(
+    queueID: string,
+    params: ConsumerGetParams,
+    options?: RequestOptions,
+  ): PagePromise<ConsumersSinglePage, Consumer> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/queues/${queueID}/consumers`,
+      SinglePage<Consumer>,
+      options,
+    );
   }
 }
 
@@ -483,13 +459,6 @@ export declare namespace ConsumerUpdateParams {
   }
 }
 
-export interface ConsumerListParams {
-  /**
-   * A Resource identifier.
-   */
-  account_id: string;
-}
-
 export interface ConsumerDeleteParams {
   /**
    * A Resource identifier.
@@ -507,11 +476,6 @@ export interface ConsumerGetParams {
    * A Resource identifier.
    */
   account_id: string;
-
-  /**
-   * A Resource identifier.
-   */
-  queue_id: string;
 }
 
 export declare namespace Consumers {
@@ -521,7 +485,6 @@ export declare namespace Consumers {
     type ConsumersSinglePage as ConsumersSinglePage,
     type ConsumerCreateParams as ConsumerCreateParams,
     type ConsumerUpdateParams as ConsumerUpdateParams,
-    type ConsumerListParams as ConsumerListParams,
     type ConsumerDeleteParams as ConsumerDeleteParams,
     type ConsumerGetParams as ConsumerGetParams,
   };
