@@ -1346,8 +1346,9 @@ The following tools are available in this MCP server.
 
 - `create_queues_consumers` (`write`): Creates a new consumer for a Queue
 - `update_queues_consumers` (`write`): Updates the consumer for a queue, or creates one if it does not exist.
+- `list_queues_consumers` (`read`): Returns the consumers for a Queue
 - `delete_queues_consumers` (`write`): Deletes the consumer for a queue.
-- `get_queues_consumers` (`read`): Returns the consumers for a Queue
+- `get_queues_consumers` (`read`): Fetches the consumer for a queue by consumer id
 
 ### Resource `queues.messages`:
 
