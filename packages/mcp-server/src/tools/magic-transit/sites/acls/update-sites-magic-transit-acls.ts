@@ -130,9 +130,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { acl_id, ...body } = args as any;
+  const { acl_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.magicTransit.sites.acls.update(acl_id, body)),
+    await maybeFilter(jq_filter, await client.magicTransit.sites.acls.update(acl_id, body)),
   );
 };
 

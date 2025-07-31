@@ -106,8 +106,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { identifier, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.stream.token.create(identifier, body)));
+  const { identifier, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.stream.token.create(identifier, body)),
+  );
 };
 
 export default { metadata, tool, handler };

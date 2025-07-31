@@ -70,9 +70,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { config_id, ...body } = args as any;
+  const { config_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.cloudforceOne.scans.config.edit(config_id, body)),
+    await maybeFilter(jq_filter, await client.cloudforceOne.scans.config.edit(config_id, body)),
   );
 };
 

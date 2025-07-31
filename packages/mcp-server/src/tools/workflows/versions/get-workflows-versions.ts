@@ -46,8 +46,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { version_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.workflows.versions.get(version_id, body)));
+  const { version_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.workflows.versions.get(version_id, body)),
+  );
 };
 
 export default { metadata, tool, handler };

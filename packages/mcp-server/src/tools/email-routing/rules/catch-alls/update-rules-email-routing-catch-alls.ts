@@ -97,8 +97,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const body = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.emailRouting.rules.catchAlls.update(body)));
+  const { jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.emailRouting.rules.catchAlls.update(body)),
+  );
 };
 
 export default { metadata, tool, handler };

@@ -70,9 +70,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { waiting_room_id, ...body } = args as any;
+  const { waiting_room_id, jq_filter, ...body } = args as any;
   const response = await client.waitingRooms.rules.update(waiting_room_id, body).asResponse();
-  return asTextContentResult(await maybeFilter(args, await response.json()));
+  return asTextContentResult(await maybeFilter(jq_filter, await response.json()));
 };
 
 export default { metadata, tool, handler };

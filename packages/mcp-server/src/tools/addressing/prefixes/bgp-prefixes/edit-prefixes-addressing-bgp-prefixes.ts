@@ -64,9 +64,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { bgp_prefix_id, ...body } = args as any;
+  const { bgp_prefix_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.addressing.prefixes.bgpPrefixes.edit(bgp_prefix_id, body)),
+    await maybeFilter(jq_filter, await client.addressing.prefixes.bgpPrefixes.edit(bgp_prefix_id, body)),
   );
 };
 

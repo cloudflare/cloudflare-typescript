@@ -49,8 +49,8 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { asn, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.intel.asn.subnets.get(asn, body)));
+  const { asn, jq_filter, ...body } = args as any;
+  return asTextContentResult(await maybeFilter(jq_filter, await client.intel.asn.subnets.get(asn, body)));
 };
 
 export default { metadata, tool, handler };

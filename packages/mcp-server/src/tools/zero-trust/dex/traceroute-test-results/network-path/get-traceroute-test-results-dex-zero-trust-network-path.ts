@@ -44,10 +44,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { test_result_id, ...body } = args as any;
+  const { test_result_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
     await maybeFilter(
-      args,
+      jq_filter,
       await client.zeroTrust.dex.tracerouteTestResults.networkPath.get(test_result_id, body),
     ),
   );

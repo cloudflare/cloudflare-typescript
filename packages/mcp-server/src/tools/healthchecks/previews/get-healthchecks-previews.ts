@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { healthcheck_id, ...body } = args as any;
+  const { healthcheck_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.healthchecks.previews.get(healthcheck_id, body)),
+    await maybeFilter(jq_filter, await client.healthchecks.previews.get(healthcheck_id, body)),
   );
 };
 

@@ -156,8 +156,8 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { dimension, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.radar.bots.summary(dimension, body)));
+  const { dimension, jq_filter, ...body } = args as any;
+  return asTextContentResult(await maybeFilter(jq_filter, await client.radar.bots.summary(dimension, body)));
 };
 
 export default { metadata, tool, handler };

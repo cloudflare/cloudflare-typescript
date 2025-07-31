@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { certificate_id, ...body } = args as any;
+  const { certificate_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.zeroTrust.gateway.certificates.activate(certificate_id, body)),
+    await maybeFilter(jq_filter, await client.zeroTrust.gateway.certificates.activate(certificate_id, body)),
   );
 };
 

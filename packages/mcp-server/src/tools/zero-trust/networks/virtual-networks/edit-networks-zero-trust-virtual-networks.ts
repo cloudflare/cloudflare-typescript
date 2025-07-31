@@ -55,9 +55,12 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { virtual_network_id, ...body } = args as any;
+  const { virtual_network_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.zeroTrust.networks.virtualNetworks.edit(virtual_network_id, body)),
+    await maybeFilter(
+      jq_filter,
+      await client.zeroTrust.networks.virtualNetworks.edit(virtual_network_id, body),
+    ),
   );
 };
 

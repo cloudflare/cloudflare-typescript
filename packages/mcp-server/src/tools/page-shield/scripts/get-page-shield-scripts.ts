@@ -45,8 +45,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { script_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.pageShield.scripts.get(script_id, body)));
+  const { script_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.pageShield.scripts.get(script_id, body)),
+  );
 };
 
 export default { metadata, tool, handler };

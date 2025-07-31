@@ -60,9 +60,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { namespace_id, ...body } = args as any;
+  const { namespace_id, jq_filter, ...body } = args as any;
   const response = await client.kv.namespaces.keys.list(namespace_id, body).asResponse();
-  return asTextContentResult(await maybeFilter(args, await response.json()));
+  return asTextContentResult(await maybeFilter(jq_filter, await response.json()));
 };
 
 export default { metadata, tool, handler };

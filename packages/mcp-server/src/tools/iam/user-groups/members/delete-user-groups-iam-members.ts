@@ -52,9 +52,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { member_id, ...body } = args as any;
+  const { member_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.iam.userGroups.members.delete(member_id, body)),
+    await maybeFilter(jq_filter, await client.iam.userGroups.members.delete(member_id, body)),
   );
 };
 

@@ -43,9 +43,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { tsig_id, ...body } = args as any;
+  const { tsig_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.dns.zoneTransfers.tsigs.delete(tsig_id, body)),
+    await maybeFilter(jq_filter, await client.dns.zoneTransfers.tsigs.delete(tsig_id, body)),
   );
 };
 

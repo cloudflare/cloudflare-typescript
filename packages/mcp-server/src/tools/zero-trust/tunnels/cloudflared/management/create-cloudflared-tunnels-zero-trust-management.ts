@@ -51,9 +51,12 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { tunnel_id, ...body } = args as any;
+  const { tunnel_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.zeroTrust.tunnels.cloudflared.management.create(tunnel_id, body)),
+    await maybeFilter(
+      jq_filter,
+      await client.zeroTrust.tunnels.cloudflared.management.create(tunnel_id, body),
+    ),
   );
 };
 

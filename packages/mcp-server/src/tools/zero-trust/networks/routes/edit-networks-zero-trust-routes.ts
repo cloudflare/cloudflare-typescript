@@ -59,9 +59,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { route_id, ...body } = args as any;
+  const { route_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.zeroTrust.networks.routes.edit(route_id, body)),
+    await maybeFilter(jq_filter, await client.zeroTrust.networks.routes.edit(route_id, body)),
   );
 };
 

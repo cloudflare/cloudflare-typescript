@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { custom_page_id, ...body } = args as any;
+  const { custom_page_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.zeroTrust.access.customPages.delete(custom_page_id, body)),
+    await maybeFilter(jq_filter, await client.zeroTrust.access.customPages.delete(custom_page_id, body)),
   );
 };
 

@@ -44,9 +44,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { pool_id, ...body } = args as any;
+  const { pool_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.loadBalancers.pools.health.get(pool_id, body)),
+    await maybeFilter(jq_filter, await client.loadBalancers.pools.health.get(pool_id, body)),
   );
 };
 

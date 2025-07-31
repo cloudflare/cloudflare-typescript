@@ -47,9 +47,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { policy_id, ...body } = args as any;
+  const { policy_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.emailSecurity.settings.allowPolicies.get(policy_id, body)),
+    await maybeFilter(jq_filter, await client.emailSecurity.settings.allowPolicies.get(policy_id, body)),
   );
 };
 

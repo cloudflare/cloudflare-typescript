@@ -41,8 +41,8 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { alias, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.radar.datasets.get(alias)));
+  const { alias, jq_filter, ...body } = args as any;
+  return asTextContentResult(await maybeFilter(jq_filter, await client.radar.datasets.get(alias)));
 };
 
 export default { metadata, tool, handler };

@@ -17,8 +17,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'get_scripts_namespaces_dispatch_workers_for_platforms_content',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nFetch script content from a script uploaded to a Workers for Platforms namespace.\n\n# Response Schema\n```json\n{\n  type: 'string'\n}\n```",
+  description: 'Fetch script content from a script uploaded to a Workers for Platforms namespace.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -33,12 +32,6 @@ export const tool: Tool = {
       script_name: {
         type: 'string',
         description: 'Name of the script, used in URLs and route configuration.',
-      },
-      jq_filter: {
-        type: 'string',
-        title: 'jq Filter',
-        description:
-          'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
     required: ['account_id', 'dispatch_namespace', 'script_name'],

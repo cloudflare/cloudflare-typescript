@@ -54,9 +54,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { queue_id, ...body } = args as any;
+  const { queue_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.r2.buckets.eventNotifications.get(queue_id, body)),
+    await maybeFilter(jq_filter, await client.r2.buckets.eventNotifications.get(queue_id, body)),
   );
 };
 

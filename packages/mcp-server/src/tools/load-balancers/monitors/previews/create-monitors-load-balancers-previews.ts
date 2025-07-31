@@ -121,9 +121,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { monitor_id, ...body } = args as any;
+  const { monitor_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.loadBalancers.monitors.previews.create(monitor_id, body)),
+    await maybeFilter(jq_filter, await client.loadBalancers.monitors.previews.create(monitor_id, body)),
   );
 };
 

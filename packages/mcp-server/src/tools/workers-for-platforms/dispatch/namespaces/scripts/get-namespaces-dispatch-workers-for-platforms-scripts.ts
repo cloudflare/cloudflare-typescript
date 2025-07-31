@@ -49,10 +49,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { script_name, ...body } = args as any;
+  const { script_name, jq_filter, ...body } = args as any;
   return asTextContentResult(
     await maybeFilter(
-      args,
+      jq_filter,
       await client.workersForPlatforms.dispatch.namespaces.scripts.get(script_name, body),
     ),
   );

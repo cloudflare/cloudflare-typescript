@@ -128,9 +128,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { spoof, ...body } = args as any;
+  const { spoof, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.radar.email.security.top.tlds.spoof.get(spoof, body)),
+    await maybeFilter(jq_filter, await client.radar.email.security.top.tlds.spoof.get(spoof, body)),
   );
 };
 

@@ -43,9 +43,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { policy_id, ...body } = args as any;
+  const { policy_id, jq_filter, ...body } = args as any;
   const response = await client.zeroTrust.devices.policies.custom.excludes.get(policy_id, body).asResponse();
-  return asTextContentResult(await maybeFilter(args, await response.json()));
+  return asTextContentResult(await maybeFilter(jq_filter, await response.json()));
 };
 
 export default { metadata, tool, handler };

@@ -46,10 +46,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { display_name_id, ...body } = args as any;
+  const { display_name_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
     await maybeFilter(
-      args,
+      jq_filter,
       await client.emailSecurity.settings.impersonationRegistry.delete(display_name_id, body),
     ),
   );

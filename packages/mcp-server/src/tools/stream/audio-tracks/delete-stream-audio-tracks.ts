@@ -49,9 +49,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { audio_identifier, ...body } = args as any;
+  const { audio_identifier, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.stream.audioTracks.delete(audio_identifier, body)),
+    await maybeFilter(jq_filter, await client.stream.audioTracks.delete(audio_identifier, body)),
   );
 };
 

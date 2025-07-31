@@ -45,9 +45,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { hostname, ...body } = args as any;
+  const { hostname, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.originTLSClientAuth.hostnames.get(hostname, body)),
+    await maybeFilter(jq_filter, await client.originTLSClientAuth.hostnames.get(hostname, body)),
   );
 };
 

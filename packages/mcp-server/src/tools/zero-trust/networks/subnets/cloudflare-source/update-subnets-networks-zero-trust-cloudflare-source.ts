@@ -56,10 +56,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { address_family, ...body } = args as any;
+  const { address_family, jq_filter, ...body } = args as any;
   return asTextContentResult(
     await maybeFilter(
-      args,
+      jq_filter,
       await client.zeroTrust.networks.subnets.cloudflareSource.update(address_family, body),
     ),
   );

@@ -51,9 +51,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { namespace_id, ...body } = args as any;
+  const { namespace_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.kv.namespaces.bulkDelete(namespace_id, body)),
+    await maybeFilter(jq_filter, await client.kv.namespaces.bulkDelete(namespace_id, body)),
   );
 };
 

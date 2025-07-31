@@ -66,9 +66,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { account_app_id, ...body } = args as any;
+  const { account_app_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.magicTransit.apps.edit(account_app_id, body)),
+    await maybeFilter(jq_filter, await client.magicTransit.apps.edit(account_app_id, body)),
   );
 };
 

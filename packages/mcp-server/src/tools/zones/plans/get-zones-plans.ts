@@ -45,8 +45,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { plan_identifier, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.zones.plans.get(plan_identifier, body)));
+  const { plan_identifier, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.zones.plans.get(plan_identifier, body)),
+  );
 };
 
 export default { metadata, tool, handler };

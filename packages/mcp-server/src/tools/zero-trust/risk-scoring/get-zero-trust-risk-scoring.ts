@@ -43,8 +43,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { user_id, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.zeroTrust.riskScoring.get(user_id, body)));
+  const { user_id, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.zeroTrust.riskScoring.get(user_id, body)),
+  );
 };
 
 export default { metadata, tool, handler };

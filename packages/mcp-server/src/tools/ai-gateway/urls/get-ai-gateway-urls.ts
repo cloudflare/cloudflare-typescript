@@ -47,8 +47,8 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { provider, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.aiGateway.urls.get(provider, body)));
+  const { provider, jq_filter, ...body } = args as any;
+  return asTextContentResult(await maybeFilter(jq_filter, await client.aiGateway.urls.get(provider, body)));
 };
 
 export default { metadata, tool, handler };

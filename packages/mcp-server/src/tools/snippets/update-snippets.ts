@@ -70,8 +70,8 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { snippet_name, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.snippets.update(snippet_name, body)));
+  const { snippet_name, jq_filter, ...body } = args as any;
+  return asTextContentResult(await maybeFilter(jq_filter, await client.snippets.update(snippet_name, body)));
 };
 
 export default { metadata, tool, handler };

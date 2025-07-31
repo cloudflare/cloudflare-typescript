@@ -46,9 +46,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
-  const { sync_id, ...body } = args as any;
+  const { sync_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.magicCloudNetworking.catalogSyncs.delete(sync_id, body)),
+    await maybeFilter(jq_filter, await client.magicCloudNetworking.catalogSyncs.delete(sync_id, body)),
   );
 };
 
