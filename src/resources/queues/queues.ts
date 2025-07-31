@@ -9,7 +9,6 @@ import {
   ConsumerDeleteParams,
   ConsumerDeleteResponse,
   ConsumerGetParams,
-  ConsumerListParams,
   ConsumerUpdateParams,
   Consumers,
   ConsumersSinglePage,
@@ -353,7 +352,6 @@ export declare namespace Queues {
     type ConsumersSinglePage as ConsumersSinglePage,
     type ConsumerCreateParams as ConsumerCreateParams,
     type ConsumerUpdateParams as ConsumerUpdateParams,
-    type ConsumerListParams as ConsumerListParams,
     type ConsumerDeleteParams as ConsumerDeleteParams,
     type ConsumerGetParams as ConsumerGetParams,
   };

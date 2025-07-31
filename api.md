@@ -2336,9 +2336,8 @@ Methods:
 
 - <code title="post /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">create</a>(queueID, { ...params }) -> Consumer</code>
 - <code title="put /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">update</a>(consumerID, { ...params }) -> Consumer</code>
-- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">list</a>(queueID, { ...params }) -> ConsumersSinglePage</code>
 - <code title="delete /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">delete</a>(consumerID, { ...params }) -> ConsumerDeleteResponse</code>
-- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">get</a>(consumerID, { ...params }) -> Consumer</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">get</a>(queueID, { ...params }) -> ConsumersSinglePage</code>
 
 ## Messages
 
@@ -5657,7 +5656,7 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/upload">client.zeroTrust.dlp.datasets.upload.<a href="./src/resources/zero-trust/dlp/datasets/upload.ts">create</a>(datasetID, { ...params }) -> NewVersion</code>
-- <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/upload/{version}">client.zeroTrust.dlp.datasets.upload.<a href="./src/resources/zero-trust/dlp/datasets/upload.ts">edit</a>(version, dataset, { ...params }) -> Dataset</code>
+- <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/upload/{version}">client.zeroTrust.dlp.datasets.upload.<a href="./src/resources/zero-trust/dlp/datasets/upload.ts">edit</a>(version, body, { ...params }) -> Dataset</code>
 
 #### Versions
 
@@ -5677,7 +5676,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/versions/{version}/entries/{entry_id}">client.zeroTrust.dlp.datasets.versions.entries.<a href="./src/resources/zero-trust/dlp/datasets/versions/entries.ts">create</a>(entryID, datasetVersionEntry, { ...params }) -> EntryCreateResponse</code>
+- <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/versions/{version}/entries/{entry_id}">client.zeroTrust.dlp.datasets.versions.entries.<a href="./src/resources/zero-trust/dlp/datasets/versions/entries.ts">create</a>(entryID, body, { ...params }) -> EntryCreateResponse</code>
 
 ### Patterns
 
