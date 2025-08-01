@@ -542,9 +542,6 @@ TEST_PATHS=(
 	tests/api-resources/radar/ai/inference/summary.test.ts
 	tests/api-resources/radar/ai/inference/timeseries-groups/timeseries-groups.test.ts
 	tests/api-resources/radar/ai/inference/timeseries-groups/summary.test.ts
-	tests/api-resources/radar/ai/bots/bots.test.ts
-	tests/api-resources/radar/ai/bots/summary.test.ts
-	tests/api-resources/radar/ai/timeseries-groups.test.ts
 	tests/api-resources/radar/annotations/annotations.test.ts
 	tests/api-resources/radar/annotations/outages.test.ts
 	tests/api-resources/radar/bgp/bgp.test.ts
