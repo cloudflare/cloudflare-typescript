@@ -13,7 +13,7 @@ import {
   KeyBulkUpdateResponse,
   KeyListParams,
   Keys,
-  KeysCursorPaginationAfter,
+  KeysCursorLimitPagination,
 } from './keys';
 import * as MetadataAPI from './metadata';
 import { Metadata, MetadataGetParams, MetadataGetResponse } from './metadata';
@@ -475,7 +475,7 @@ export interface NamespaceGetParams {
 
 Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;
 Namespaces.Keys = Keys;
-Namespaces.KeysCursorPaginationAfter = KeysCursorPaginationAfter;
+Namespaces.KeysCursorLimitPagination = KeysCursorLimitPagination;
 Namespaces.Metadata = Metadata;
 Namespaces.Values = ValuesAPIValues;
 
@@ -503,7 +503,7 @@ export declare namespace Namespaces {
     type KeyBulkDeleteResponse as KeyBulkDeleteResponse,
     type KeyBulkGetResponse as KeyBulkGetResponse,
     type KeyBulkUpdateResponse as KeyBulkUpdateResponse,
-    KeysCursorPaginationAfter as KeysCursorPaginationAfter,
+    KeysCursorLimitPagination as KeysCursorLimitPagination,
     type KeyListParams as KeyListParams,
     type KeyBulkDeleteParams as KeyBulkDeleteParams,
     type KeyBulkGetParams as KeyBulkGetParams,
