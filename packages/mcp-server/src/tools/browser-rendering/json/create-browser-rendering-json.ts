@@ -178,26 +178,6 @@ export const tool: Tool = {
           required: ['name', 'value'],
         },
       },
-      custom_ai: {
-        type: 'array',
-        description:
-          'Optional list of custom AI models to use for the request. The models will be tried in the order provided, and in case a model returns an error, the next one will be used as fallback.',
-        items: {
-          type: 'object',
-          properties: {
-            authorization: {
-              type: 'string',
-              description: 'Authorization token for the AI model: `Bearer <token>`.',
-            },
-            model: {
-              type: 'string',
-              description:
-                'AI model to use for the request. Must be formed as `<provider>/<model_name>`, e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`',
-            },
-          },
-          required: ['authorization', 'model'],
-        },
-      },
       emulateMediaType: {
         type: 'string',
       },

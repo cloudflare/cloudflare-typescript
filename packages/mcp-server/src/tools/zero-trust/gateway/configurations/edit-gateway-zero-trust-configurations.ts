@@ -212,7 +212,7 @@ export const tool: Tool = {
             type: 'string',
             description:
               'Controls whether the user is redirected to a Cloudflare-hosted block page or to a customer-provided URI.',
-            enum: ['', 'customized_block_page', 'redirect_uri'],
+            enum: ['customized_block_page', 'redirect_uri'],
           },
           name: {
             type: 'string',
