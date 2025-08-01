@@ -4,6 +4,6 @@ export {
   Audit,
   type AuditListResponse,
   type AuditListParams,
-  type AuditListResponsesCursorLimitPagination,
+  type AuditListResponsesCursorPaginationAfter,
 } from './audit';
 export { Logs } from './logs';
