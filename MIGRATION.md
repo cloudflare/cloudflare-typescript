@@ -1135,8 +1135,6 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.ai.inference.summary.task()`
 - `client.radar.ai.inference.timeseriesGroups.summary.model()`
 - `client.radar.ai.inference.timeseriesGroups.summary.task()`
-- `client.radar.ai.bots.summary.userAgent()`
-- `client.radar.ai.timeseriesGroups.userAgent()`
 - `client.radar.annotations.list()`
 - `client.radar.annotations.outages.get()`
 - `client.radar.annotations.outages.locations()`
