@@ -6375,7 +6375,23 @@ Methods:
 
 #### Summary
 
+Types:
+
+- <code><a href="./src/resources/radar/ai/bots/summary.ts">SummaryUserAgentResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/bots/summary/user_agent">client.radar.ai.bots.summary.<a href="./src/resources/radar/ai/bots/summary.ts">userAgent</a>({ ...params }) -> SummaryUserAgentResponse</code>
+
 ### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/timeseries-groups.ts">TimeseriesGroupUserAgentResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/bots/timeseries_groups/user_agent">client.radar.ai.timeseriesGroups.<a href="./src/resources/radar/ai/timeseries-groups.ts">userAgent</a>({ ...params }) -> TimeseriesGroupUserAgentResponse</code>
 
 ## Annotations
 
