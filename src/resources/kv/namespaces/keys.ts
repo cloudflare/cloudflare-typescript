@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import { CursorPaginationAfter, type CursorPaginationAfterParams } from '../../../pagination';
+import { CursorLimitPagination, type CursorLimitPaginationParams } from '../../../pagination';
 
 export class Keys extends APIResource {
   /**
@@ -23,11 +23,11 @@ export class Keys extends APIResource {
     namespaceId: string,
     params: KeyListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<KeysCursorPaginationAfter, Key> {
+  ): Core.PagePromise<KeysCursorLimitPagination, Key> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/keys`,
-      KeysCursorPaginationAfter,
+      KeysCursorLimitPagination,
       { query, ...options },
     );
   }
@@ -98,7 +98,7 @@ export class Keys extends APIResource {
   }
 }
 
-export class KeysCursorPaginationAfter extends CursorPaginationAfter<Key> {}
+export class KeysCursorLimitPagination extends CursorLimitPagination<Key> {}
 
 /**
  * A name for a value. A value stored under a given key may be retrieved via the
@@ -178,18 +178,11 @@ export interface KeyBulkUpdateResponse {
   unsuccessful_keys?: Array<string>;
 }
 
-export interface KeyListParams extends CursorPaginationAfterParams {
+export interface KeyListParams extends CursorLimitPaginationParams {
   /**
    * Path param: Identifier.
    */
   account_id: string;
-
-  /**
-   * Query param: Limits the number of keys returned in the response. The cursor
-   * attribute may be used to iterate over the next batch of keys if there are more
-   * than the limit.
-   */
-  limit?: number;
 
   /**
    * Query param: Filters returned keys by a name prefix. Exact matches and any key
@@ -279,7 +272,7 @@ export namespace KeyBulkUpdateParams {
   }
 }
 
-Keys.KeysCursorPaginationAfter = KeysCursorPaginationAfter;
+Keys.KeysCursorLimitPagination = KeysCursorLimitPagination;
 
 export declare namespace Keys {
   export {
@@ -287,7 +280,7 @@ export declare namespace Keys {
     type KeyBulkDeleteResponse as KeyBulkDeleteResponse,
     type KeyBulkGetResponse as KeyBulkGetResponse,
     type KeyBulkUpdateResponse as KeyBulkUpdateResponse,
-    KeysCursorPaginationAfter as KeysCursorPaginationAfter,
+    KeysCursorLimitPagination as KeysCursorLimitPagination,
     type KeyListParams as KeyListParams,
     type KeyBulkDeleteParams as KeyBulkDeleteParams,
     type KeyBulkGetParams as KeyBulkGetParams,

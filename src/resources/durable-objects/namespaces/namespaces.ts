@@ -3,7 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as ObjectsAPI from './objects';
-import { DurableObject, DurableObjectsCursorPaginationAfter, ObjectListParams, Objects } from './objects';
+import { DurableObject, DurableObjectsCursorLimitPagination, ObjectListParams, Objects } from './objects';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Namespaces extends APIResource {
@@ -48,7 +48,7 @@ export interface NamespaceListParams extends V4PagePaginationArrayParams {
 
 Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;
 Namespaces.Objects = Objects;
-Namespaces.DurableObjectsCursorPaginationAfter = DurableObjectsCursorPaginationAfter;
+Namespaces.DurableObjectsCursorLimitPagination = DurableObjectsCursorLimitPagination;
 
 export declare namespace Namespaces {
   export {
@@ -60,7 +60,7 @@ export declare namespace Namespaces {
   export {
     Objects as Objects,
     type DurableObject as DurableObject,
-    DurableObjectsCursorPaginationAfter as DurableObjectsCursorPaginationAfter,
+    DurableObjectsCursorLimitPagination as DurableObjectsCursorLimitPagination,
     type ObjectListParams as ObjectListParams,
   };
 }

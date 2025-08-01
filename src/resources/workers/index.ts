@@ -52,4 +52,5 @@ export {
   type SubdomainUpdateParams,
   type SubdomainGetParams,
 } from './subdomains';
+export { Versions } from './versions';
 export { Workers } from './workers';
