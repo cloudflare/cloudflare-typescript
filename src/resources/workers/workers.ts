@@ -42,6 +42,8 @@ import {
   SubdomainUpdateResponse,
   Subdomains,
 } from './subdomains';
+import * as VersionsAPI from './versions';
+import { Versions } from './versions';
 import * as AssetsAPI from './assets/assets';
 import { Assets } from './assets/assets';
 import * as ObservabilityAPI from './observability/observability';
@@ -64,6 +66,7 @@ import {
 export class Workers extends APIResource {
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
+  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
   accountSettings: AccountSettingsAPI.AccountSettings = new AccountSettingsAPI.AccountSettings(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
@@ -218,6 +221,7 @@ export interface WorkerMetadataParam {
 
 Workers.Routes = Routes;
 Workers.Assets = Assets;
+Workers.Versions = Versions;
 Workers.Scripts = Scripts;
 Workers.AccountSettings = AccountSettings;
 Workers.Domains = Domains;
@@ -247,6 +251,8 @@ export declare namespace Workers {
   };
 
   export { Assets as Assets };
+
+  export { Versions as Versions };
 
   export {
     Scripts as Scripts,

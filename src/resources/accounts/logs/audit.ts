@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../core/resource';
 import {
-  CursorPaginationAfter,
-  type CursorPaginationAfterParams,
+  CursorLimitPagination,
+  type CursorLimitPaginationParams,
   PagePromise,
 } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -34,17 +34,17 @@ export class Audit extends APIResource {
   list(
     params: AuditListParams,
     options?: RequestOptions,
-  ): PagePromise<AuditListResponsesCursorPaginationAfter, AuditListResponse> {
+  ): PagePromise<AuditListResponsesCursorLimitPagination, AuditListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/logs/audit`,
-      CursorPaginationAfter<AuditListResponse>,
+      CursorLimitPagination<AuditListResponse>,
       { query, ...options },
     );
   }
 }
 
-export type AuditListResponsesCursorPaginationAfter = CursorPaginationAfter<AuditListResponse>;
+export type AuditListResponsesCursorLimitPagination = CursorLimitPagination<AuditListResponse>;
 
 export interface AuditListResponse {
   /**
@@ -237,7 +237,7 @@ export namespace AuditListResponse {
   }
 }
 
-export interface AuditListParams extends CursorPaginationAfterParams {
+export interface AuditListParams extends CursorLimitPaginationParams {
   /**
    * Path param: The unique id that identifies the account.
    */
@@ -316,13 +316,6 @@ export interface AuditListParams extends CursorPaginationAfterParams {
    * Query param: Sets sorting order.
    */
   direction?: 'desc' | 'asc';
-
-  /**
-   * Query param: The number limits the objects to return. The cursor attribute may
-   * be used to iterate over the next batch of objects if there are more than the
-   * limit.
-   */
-  limit?: number;
 
   /**
    * Query param:
@@ -533,7 +526,7 @@ export namespace AuditListParams {
 export declare namespace Audit {
   export {
     type AuditListResponse as AuditListResponse,
-    type AuditListResponsesCursorPaginationAfter as AuditListResponsesCursorPaginationAfter,
+    type AuditListResponsesCursorLimitPagination as AuditListResponsesCursorLimitPagination,
     type AuditListParams as AuditListParams,
   };
 }

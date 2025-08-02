@@ -3,8 +3,8 @@
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import {
-  CursorPaginationAfter,
-  type CursorPaginationAfterParams,
+  CursorLimitPagination,
+  type CursorLimitPaginationParams,
   PagePromise,
 } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -29,11 +29,11 @@ export class Keys extends APIResource {
     namespaceID: string,
     params: KeyListParams,
     options?: RequestOptions,
-  ): PagePromise<KeysCursorPaginationAfter, Key> {
+  ): PagePromise<KeysCursorLimitPagination, Key> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/storage/kv/namespaces/${namespaceID}/keys`,
-      CursorPaginationAfter<Key>,
+      CursorLimitPagination<Key>,
       { query, ...options },
     );
   }
@@ -104,7 +104,7 @@ export class Keys extends APIResource {
   }
 }
 
-export type KeysCursorPaginationAfter = CursorPaginationAfter<Key>;
+export type KeysCursorLimitPagination = CursorLimitPagination<Key>;
 
 /**
  * A name for a value. A value stored under a given key may be retrieved via the
@@ -184,18 +184,11 @@ export interface KeyBulkUpdateResponse {
   unsuccessful_keys?: Array<string>;
 }
 
-export interface KeyListParams extends CursorPaginationAfterParams {
+export interface KeyListParams extends CursorLimitPaginationParams {
   /**
    * Path param: Identifier.
    */
   account_id: string;
-
-  /**
-   * Query param: Limits the number of keys returned in the response. The cursor
-   * attribute may be used to iterate over the next batch of keys if there are more
-   * than the limit.
-   */
-  limit?: number;
 
   /**
    * Query param: Filters returned keys by a name prefix. Exact matches and any key
@@ -291,7 +284,7 @@ export declare namespace Keys {
     type KeyBulkDeleteResponse as KeyBulkDeleteResponse,
     type KeyBulkGetResponse as KeyBulkGetResponse,
     type KeyBulkUpdateResponse as KeyBulkUpdateResponse,
-    type KeysCursorPaginationAfter as KeysCursorPaginationAfter,
+    type KeysCursorLimitPagination as KeysCursorLimitPagination,
     type KeyListParams as KeyListParams,
     type KeyBulkDeleteParams as KeyBulkDeleteParams,
     type KeyBulkGetParams as KeyBulkGetParams,
