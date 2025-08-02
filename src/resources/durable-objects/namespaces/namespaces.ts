@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ObjectsAPI from './objects';
-import { DurableObject, DurableObjectsCursorPaginationAfter, ObjectListParams, Objects } from './objects';
+import { DurableObject, DurableObjectsCursorLimitPagination, ObjectListParams, Objects } from './objects';
 import {
   PagePromise,
   V4PagePaginationArray,
@@ -63,7 +63,7 @@ export declare namespace Namespaces {
   export {
     Objects as Objects,
     type DurableObject as DurableObject,
-    type DurableObjectsCursorPaginationAfter as DurableObjectsCursorPaginationAfter,
+    type DurableObjectsCursorLimitPagination as DurableObjectsCursorLimitPagination,
     type ObjectListParams as ObjectListParams,
   };
 }

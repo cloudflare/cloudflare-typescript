@@ -10,5 +10,5 @@ export {
   Objects,
   type DurableObject,
   type ObjectListParams,
-  type DurableObjectsCursorPaginationAfter,
+  type DurableObjectsCursorLimitPagination,
 } from './objects';

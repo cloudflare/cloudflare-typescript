@@ -12,7 +12,7 @@ import {
   KeyBulkUpdateResponse,
   KeyListParams,
   Keys,
-  KeysCursorPaginationAfter,
+  KeysCursorLimitPagination,
 } from './keys';
 import * as MetadataAPI from './metadata';
 import { Metadata, MetadataGetParams, MetadataGetResponse } from './metadata';
@@ -503,7 +503,7 @@ export declare namespace Namespaces {
     type KeyBulkDeleteResponse as KeyBulkDeleteResponse,
     type KeyBulkGetResponse as KeyBulkGetResponse,
     type KeyBulkUpdateResponse as KeyBulkUpdateResponse,
-    type KeysCursorPaginationAfter as KeysCursorPaginationAfter,
+    type KeysCursorLimitPagination as KeysCursorLimitPagination,
     type KeyListParams as KeyListParams,
     type KeyBulkDeleteParams as KeyBulkDeleteParams,
     type KeyBulkGetParams as KeyBulkGetParams,

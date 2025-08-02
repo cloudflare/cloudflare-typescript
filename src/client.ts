@@ -19,8 +19,6 @@ import {
   AbstractPage,
   type CursorLimitPaginationParams,
   CursorLimitPaginationResponse,
-  type CursorPaginationAfterParams,
-  CursorPaginationAfterResponse,
   type CursorPaginationParams,
   CursorPaginationResponse,
   SinglePageResponse,
@@ -1129,12 +1127,6 @@ export declare namespace Cloudflare {
   export {
     type CursorPaginationParams as CursorPaginationParams,
     type CursorPaginationResponse as CursorPaginationResponse,
-  };
-
-  export import CursorPaginationAfter = Pagination.CursorPaginationAfter;
-  export {
-    type CursorPaginationAfterParams as CursorPaginationAfterParams,
-    type CursorPaginationAfterResponse as CursorPaginationAfterResponse,
   };
 
   export import CursorLimitPagination = Pagination.CursorLimitPagination;
