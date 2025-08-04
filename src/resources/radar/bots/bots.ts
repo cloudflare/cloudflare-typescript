@@ -145,6 +145,8 @@ export namespace BotListResponse {
      * A kebab-case identifier derived from the bot name.
      */
     slug: string;
+
+    userAgentPatterns: Array<string>;
   }
 }
 

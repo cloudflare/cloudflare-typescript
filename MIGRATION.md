@@ -998,7 +998,8 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.emailSecurity.investigate.release.bulk()`
 - `client.emailRouting.disable()`
 - `client.emailRouting.enable()`
-- `client.filters.update()`
+- `client.filters.create()`
+- `client.filters.bulkUpdate()`
 - `client.firewall.rules.bulkEdit()`
 - `client.firewall.rules.bulkUpdate()`
 - `client.waitingRooms.rules.create()`
@@ -1135,8 +1136,6 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.ai.inference.summary.task()`
 - `client.radar.ai.inference.timeseriesGroups.summary.model()`
 - `client.radar.ai.inference.timeseriesGroups.summary.task()`
-- `client.radar.ai.bots.summary.userAgent()`
-- `client.radar.ai.timeseriesGroups.userAgent()`
 - `client.radar.annotations.list()`
 - `client.radar.annotations.outages.get()`
 - `client.radar.annotations.outages.locations()`

@@ -13,8 +13,7 @@ describe('resource filters', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.filters.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      expression:
-        '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
+      body: [{}],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,8 +28,15 @@ describe('resource filters', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.filters.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      expression:
-        '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
+      body: [
+        {
+          description: 'Restrict access from these browsers on this address range.',
+          expression:
+            '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
+          paused: false,
+          ref: 'FIL-100',
+        },
+      ],
     });
   });
 
@@ -38,7 +44,6 @@ describe('resource filters', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.filters.update('372e67954025e0ba6aaa6d586b9e0b61', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -53,7 +58,11 @@ describe('resource filters', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.filters.update('372e67954025e0ba6aaa6d586b9e0b61', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
+      description: 'Restrict access from these browsers on this address range.',
+      expression:
+        '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
+      paused: false,
+      ref: 'FIL-100',
     });
   });
 
@@ -101,7 +110,10 @@ describe('resource filters', () => {
   });
 
   test('bulkDelete: only required params', async () => {
-    const responsePromise = client.filters.bulkDelete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.filters.bulkDelete({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      id: ['372e67954025e0ba6aaa6d586b9e0b61'],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -112,12 +124,18 @@ describe('resource filters', () => {
   });
 
   test('bulkDelete: required and optional params', async () => {
-    const response = await client.filters.bulkDelete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.filters.bulkDelete({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      id: ['372e67954025e0ba6aaa6d586b9e0b61'],
+    });
   });
 
   // TODO: investigate broken test
   test.skip('bulkUpdate: only required params', async () => {
-    const responsePromise = client.filters.bulkUpdate({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.filters.bulkUpdate({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: [{}],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -129,7 +147,18 @@ describe('resource filters', () => {
 
   // TODO: investigate broken test
   test.skip('bulkUpdate: required and optional params', async () => {
-    const response = await client.filters.bulkUpdate({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.filters.bulkUpdate({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: [
+        {
+          description: 'Restrict access from these browsers on this address range.',
+          expression:
+            '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
+          paused: false,
+          ref: 'FIL-100',
+        },
+      ],
+    });
   });
 
   test('get: only required params', async () => {
