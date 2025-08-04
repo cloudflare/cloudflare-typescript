@@ -2,7 +2,11 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
-import { PagePromise, SinglePage } from '../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -80,12 +84,12 @@ export class CustomPages extends APIResource {
   list(
     params: CustomPageListParams,
     options?: RequestOptions,
-  ): PagePromise<CustomPageWithoutHTMLsSinglePage, CustomPageWithoutHTML> {
-    const { account_id } = params;
+  ): PagePromise<CustomPageWithoutHTMLsV4PagePaginationArray, CustomPageWithoutHTML> {
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/custom_pages`,
-      SinglePage<CustomPageWithoutHTML>,
-      options,
+      V4PagePaginationArray<CustomPageWithoutHTML>,
+      { query, ...options },
     );
   }
 
@@ -138,7 +142,7 @@ export class CustomPages extends APIResource {
   }
 }
 
-export type CustomPageWithoutHTMLsSinglePage = SinglePage<CustomPageWithoutHTML>;
+export type CustomPageWithoutHTMLsV4PagePaginationArray = V4PagePaginationArray<CustomPageWithoutHTML>;
 
 export interface CustomPage {
   /**
@@ -258,9 +262,9 @@ export interface CustomPageUpdateParams {
   app_count?: number;
 }
 
-export interface CustomPageListParams {
+export interface CustomPageListParams extends V4PagePaginationArrayParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
 }
@@ -284,7 +288,7 @@ export declare namespace CustomPages {
     type CustomPage as CustomPage,
     type CustomPageWithoutHTML as CustomPageWithoutHTML,
     type CustomPageDeleteResponse as CustomPageDeleteResponse,
-    type CustomPageWithoutHTMLsSinglePage as CustomPageWithoutHTMLsSinglePage,
+    type CustomPageWithoutHTMLsV4PagePaginationArray as CustomPageWithoutHTMLsV4PagePaginationArray,
     type CustomPageCreateParams as CustomPageCreateParams,
     type CustomPageUpdateParams as CustomPageUpdateParams,
     type CustomPageListParams as CustomPageListParams,

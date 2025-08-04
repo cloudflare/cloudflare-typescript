@@ -31,6 +31,14 @@ export const tool: Tool = {
         type: 'string',
         description: 'The name of the group.',
       },
+      page: {
+        type: 'integer',
+        description: 'Page number of results.',
+      },
+      per_page: {
+        type: 'integer',
+        description: 'Number of results per page.',
+      },
       search: {
         type: 'string',
         description: 'Search for groups by other listed query parameters.',

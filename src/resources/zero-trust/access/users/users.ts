@@ -19,7 +19,11 @@ import {
 } from './failed-logins';
 import * as LastSeenIdentityAPI from './last-seen-identity';
 import { Identity, LastSeenIdentity, LastSeenIdentityGetParams } from './last-seen-identity';
-import { PagePromise, SinglePage } from '../../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -46,18 +50,19 @@ export class Users extends APIResource {
   list(
     params: UserListParams,
     options?: RequestOptions,
-  ): PagePromise<UserListResponsesSinglePage, UserListResponse> {
+  ): PagePromise<UserListResponsesV4PagePaginationArray, UserListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(path`/accounts/${account_id}/access/users`, SinglePage<UserListResponse>, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/access/users`,
+      V4PagePaginationArray<UserListResponse>,
+      { query, ...options },
+    );
   }
 }
 
-export type UserListResponsesSinglePage = SinglePage<UserListResponse>;
+export type UserListResponsesV4PagePaginationArray = V4PagePaginationArray<UserListResponse>;
 
-export type AccessUsersSinglePage = SinglePage<AccessUser>;
+export type AccessUsersV4PagePaginationArray = V4PagePaginationArray<AccessUser>;
 
 export interface AccessUser {
   /**
@@ -179,7 +184,7 @@ export interface UserListResponse {
   updated_at?: string;
 }
 
-export interface UserListParams {
+export interface UserListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
@@ -209,7 +214,7 @@ export declare namespace Users {
   export {
     type AccessUser as AccessUser,
     type UserListResponse as UserListResponse,
-    type UserListResponsesSinglePage as UserListResponsesSinglePage,
+    type UserListResponsesV4PagePaginationArray as UserListResponsesV4PagePaginationArray,
     type UserListParams as UserListParams,
   };
 

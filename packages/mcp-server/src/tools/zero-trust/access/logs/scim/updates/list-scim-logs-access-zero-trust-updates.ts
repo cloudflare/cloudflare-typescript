@@ -50,6 +50,14 @@ export const tool: Tool = {
         type: 'integer',
         description: 'The maximum number of update logs to retrieve.',
       },
+      page: {
+        type: 'integer',
+        description: 'Page number of results.',
+      },
+      per_page: {
+        type: 'integer',
+        description: 'Number of results per page.',
+      },
       request_method: {
         type: 'array',
         description: 'The request method of the SCIM request.',

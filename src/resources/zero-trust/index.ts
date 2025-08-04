@@ -45,7 +45,7 @@ export {
   type IdentityProviderListParams,
   type IdentityProviderDeleteParams,
   type IdentityProviderGetParams,
-  type IdentityProviderListResponsesSinglePage,
+  type IdentityProviderListResponsesV4PagePaginationArray,
 } from './identity-providers/index';
 export { Networks } from './networks/index';
 export {

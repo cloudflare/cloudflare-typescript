@@ -35,6 +35,14 @@ export const tool: Tool = {
         type: 'integer',
         description: 'The maximum number of log entries to retrieve.',
       },
+      page: {
+        type: 'integer',
+        description: 'Page number of results.',
+      },
+      per_page: {
+        type: 'integer',
+        description: 'Number of results per page.',
+      },
       since: {
         type: 'string',
         description: 'The earliest event timestamp to query.',

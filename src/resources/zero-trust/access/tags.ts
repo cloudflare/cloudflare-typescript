@@ -2,7 +2,11 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
-import { PagePromise, SinglePage } from '../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -63,9 +67,12 @@ export class Tags extends APIResource {
    * }
    * ```
    */
-  list(params: TagListParams, options?: RequestOptions): PagePromise<TagsSinglePage, Tag> {
-    const { account_id } = params;
-    return this._client.getAPIList(path`/accounts/${account_id}/access/tags`, SinglePage<Tag>, options);
+  list(params: TagListParams, options?: RequestOptions): PagePromise<TagsV4PagePaginationArray, Tag> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(path`/accounts/${account_id}/access/tags`, V4PagePaginationArray<Tag>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -109,7 +116,7 @@ export class Tags extends APIResource {
   }
 }
 
-export type TagsSinglePage = SinglePage<Tag>;
+export type TagsV4PagePaginationArray = V4PagePaginationArray<Tag>;
 
 /**
  * A tag
@@ -161,9 +168,9 @@ export interface TagUpdateParams {
   name: string;
 }
 
-export interface TagListParams {
+export interface TagListParams extends V4PagePaginationArrayParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
 }
@@ -186,7 +193,7 @@ export declare namespace Tags {
   export {
     type Tag as Tag,
     type TagDeleteResponse as TagDeleteResponse,
-    type TagsSinglePage as TagsSinglePage,
+    type TagsV4PagePaginationArray as TagsV4PagePaginationArray,
     type TagCreateParams as TagCreateParams,
     type TagUpdateParams as TagUpdateParams,
     type TagListParams as TagListParams,

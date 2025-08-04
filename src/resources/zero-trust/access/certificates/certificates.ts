@@ -11,7 +11,11 @@ import {
 } from './settings';
 import { APIPromise } from '../../../../core/api-promise';
 import { CloudflareError } from '../../../../core/error';
-import { PagePromise, SinglePage } from '../../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -119,8 +123,8 @@ export class Certificates extends APIResource {
   list(
     params: CertificateListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<CertificatesSinglePage, Certificate> {
-    const { account_id, zone_id } = params ?? {};
+  ): PagePromise<CertificatesV4PagePaginationArray, Certificate> {
+    const { account_id, zone_id, ...query } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -139,8 +143,8 @@ export class Certificates extends APIResource {
         };
     return this._client.getAPIList(
       path`/${accountOrZone}/${accountOrZoneId}/access/certificates`,
-      SinglePage<Certificate>,
-      options,
+      V4PagePaginationArray<Certificate>,
+      { query, ...options },
     );
   }
 
@@ -229,7 +233,7 @@ export class Certificates extends APIResource {
   }
 }
 
-export type CertificatesSinglePage = SinglePage<Certificate>;
+export type CertificatesV4PagePaginationArray = V4PagePaginationArray<Certificate>;
 
 /**
  * A fully-qualified domain name (FQDN).
@@ -329,14 +333,16 @@ export interface CertificateUpdateParams {
   name?: string;
 }
 
-export interface CertificateListParams {
+export interface CertificateListParams extends V4PagePaginationArrayParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
 }
@@ -372,7 +378,7 @@ export declare namespace Certificates {
     type AssociatedHostnames as AssociatedHostnames,
     type Certificate as Certificate,
     type CertificateDeleteResponse as CertificateDeleteResponse,
-    type CertificatesSinglePage as CertificatesSinglePage,
+    type CertificatesV4PagePaginationArray as CertificatesV4PagePaginationArray,
     type CertificateCreateParams as CertificateCreateParams,
     type CertificateUpdateParams as CertificateUpdateParams,
     type CertificateListParams as CertificateListParams,

@@ -3,7 +3,11 @@
 import { APIResource } from '../../../../core/resource';
 import { APIPromise } from '../../../../core/api-promise';
 import { CloudflareError } from '../../../../core/error';
-import { PagePromise, SinglePage } from '../../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -66,8 +70,8 @@ export class CAs extends APIResource {
   list(
     params: CAListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<CAsSinglePage, CA> {
-    const { account_id, zone_id } = params ?? {};
+  ): PagePromise<CAsV4PagePaginationArray, CA> {
+    const { account_id, zone_id, ...query } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -86,8 +90,8 @@ export class CAs extends APIResource {
         };
     return this._client.getAPIList(
       path`/${accountOrZone}/${accountOrZoneId}/access/apps/ca`,
-      SinglePage<CA>,
-      options,
+      V4PagePaginationArray<CA>,
+      { query, ...options },
     );
   }
 
@@ -172,7 +176,7 @@ export class CAs extends APIResource {
   }
 }
 
-export type CAsSinglePage = SinglePage<CA>;
+export type CAsV4PagePaginationArray = V4PagePaginationArray<CA>;
 
 export interface CA {
   /**
@@ -211,14 +215,16 @@ export interface CACreateParams {
   zone_id?: string;
 }
 
-export interface CAListParams {
+export interface CAListParams extends V4PagePaginationArrayParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
 }
@@ -251,7 +257,7 @@ export declare namespace CAs {
   export {
     type CA as CA,
     type CADeleteResponse as CADeleteResponse,
-    type CAsSinglePage as CAsSinglePage,
+    type CAsV4PagePaginationArray as CAsV4PagePaginationArray,
     type CACreateParams as CACreateParams,
     type CAListParams as CAListParams,
     type CADeleteParams as CADeleteParams,

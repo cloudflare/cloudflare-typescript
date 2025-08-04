@@ -2,7 +2,12 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as UpdatesAPI from './updates';
-import { UpdateListParams, UpdateListResponse, UpdateListResponsesSinglePage, Updates } from './updates';
+import {
+  UpdateListParams,
+  UpdateListResponse,
+  UpdateListResponsesV4PagePaginationArray,
+  Updates,
+} from './updates';
 
 export class SCIM extends APIResource {
   updates: UpdatesAPI.Updates = new UpdatesAPI.Updates(this._client);
@@ -60,7 +65,7 @@ export declare namespace SCIM {
   export {
     Updates as Updates,
     type UpdateListResponse as UpdateListResponse,
-    type UpdateListResponsesSinglePage as UpdateListResponsesSinglePage,
+    type UpdateListResponsesV4PagePaginationArray as UpdateListResponsesV4PagePaginationArray,
     type UpdateListParams as UpdateListParams,
   };
 }

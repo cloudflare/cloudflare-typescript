@@ -33,7 +33,7 @@ export {
   type ApplicationDeleteParams,
   type ApplicationGetParams,
   type ApplicationRevokeTokensParams,
-  type ApplicationListResponsesSinglePage,
+  type ApplicationListResponsesV4PagePaginationArray,
 } from './applications';
 export {
   CAs,
@@ -43,7 +43,7 @@ export {
   type CAListParams,
   type CADeleteParams,
   type CAGetParams,
-  type CAsSinglePage,
+  type CAsV4PagePaginationArray,
 } from './cas';
 export {
   Policies,
@@ -77,7 +77,7 @@ export {
   type PolicyListParams,
   type PolicyDeleteParams,
   type PolicyGetParams,
-  type PolicyListResponsesSinglePage,
+  type PolicyListResponsesV4PagePaginationArray,
 } from './policies';
 export {
   PolicyTests,

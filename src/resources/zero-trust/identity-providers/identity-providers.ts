@@ -6,7 +6,11 @@ import * as SCIMAPI from './scim/scim';
 import { SCIM } from './scim/scim';
 import { APIPromise } from '../../../core/api-promise';
 import { CloudflareError } from '../../../core/error';
-import { PagePromise, SinglePage } from '../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -116,7 +120,7 @@ export class IdentityProviders extends APIResource {
   list(
     params: IdentityProviderListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse> {
+  ): PagePromise<IdentityProviderListResponsesV4PagePaginationArray, IdentityProviderListResponse> {
     const { account_id, zone_id, ...query } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -136,7 +140,7 @@ export class IdentityProviders extends APIResource {
         };
     return this._client.getAPIList(
       path`/${accountOrZone}/${accountOrZoneId}/access/identity_providers`,
-      SinglePage<IdentityProviderListResponse>,
+      V4PagePaginationArray<IdentityProviderListResponse>,
       { query, ...options },
     );
   }
@@ -226,7 +230,8 @@ export class IdentityProviders extends APIResource {
   }
 }
 
-export type IdentityProviderListResponsesSinglePage = SinglePage<IdentityProviderListResponse>;
+export type IdentityProviderListResponsesV4PagePaginationArray =
+  V4PagePaginationArray<IdentityProviderListResponse>;
 
 export interface AzureAD {
   /**
@@ -4656,7 +4661,7 @@ export declare namespace IdentityProviderUpdateParams {
   }
 }
 
-export interface IdentityProviderListParams {
+export interface IdentityProviderListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
@@ -4711,7 +4716,7 @@ export declare namespace IdentityProviders {
     type IdentityProviderType as IdentityProviderType,
     type IdentityProviderListResponse as IdentityProviderListResponse,
     type IdentityProviderDeleteResponse as IdentityProviderDeleteResponse,
-    type IdentityProviderListResponsesSinglePage as IdentityProviderListResponsesSinglePage,
+    type IdentityProviderListResponsesV4PagePaginationArray as IdentityProviderListResponsesV4PagePaginationArray,
     type IdentityProviderCreateParams as IdentityProviderCreateParams,
     type IdentityProviderUpdateParams as IdentityProviderUpdateParams,
     type IdentityProviderListParams as IdentityProviderListParams,

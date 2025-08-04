@@ -1554,6 +1554,24 @@ export const tool: Tool = {
             type: 'string',
             description: 'The background color of the App Launcher page.',
           },
+          custom_deny_url: {
+            type: 'string',
+            description:
+              'The custom URL a user is redirected to when they are denied access to the application when failing identity-based rules.',
+          },
+          custom_non_identity_deny_url: {
+            type: 'string',
+            description:
+              'The custom URL a user is redirected to when they are denied access to the application when failing non-identity rules.',
+          },
+          custom_pages: {
+            type: 'array',
+            description: 'The custom pages that will be displayed when applicable for this application',
+            items: {
+              type: 'string',
+              description: 'The custom pages selected for application.',
+            },
+          },
           footer_links: {
             type: 'array',
             description: 'The links in the App Launcher footer.',
@@ -1675,124 +1693,6 @@ export const tool: Tool = {
               ],
               description: 'A JSON that links a reusable policy to an application.',
             },
-          },
-          scim_config: {
-            type: 'object',
-            description:
-              'Configuration for provisioning to this application via SCIM. This is currently in closed beta.',
-            properties: {
-              idp_uid: {
-                type: 'string',
-                description:
-                  'The UID of the IdP to use as the source for SCIM resources to provision to this application.',
-              },
-              remote_uri: {
-                type: 'string',
-                description: "The base URI for the application's SCIM-compatible API.",
-              },
-              authentication: {
-                anyOf: [
-                  {
-                    $ref: '#/$defs/scim_config_authentication_http_basic',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth2',
-                  },
-                  {
-                    type: 'object',
-                    title: 'Access Service Token',
-                    description:
-                      'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                    properties: {
-                      client_id: {
-                        type: 'string',
-                        description:
-                          'Client ID of the Access service token used to authenticate with the remote service.',
-                      },
-                      client_secret: {
-                        type: 'string',
-                        description:
-                          'Client secret of the Access service token used to authenticate with the remote service.',
-                      },
-                      scheme: {
-                        type: 'string',
-                        description:
-                          'The authentication scheme to use when making SCIM requests to this application.',
-                        enum: ['access_service_token'],
-                      },
-                    },
-                    required: ['client_id', 'client_secret', 'scheme'],
-                  },
-                  {
-                    type: 'array',
-                    description: 'Multiple authentication schemes',
-                    items: {
-                      anyOf: [
-                        {
-                          $ref: '#/$defs/scim_config_authentication_http_basic',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth2',
-                        },
-                        {
-                          type: 'object',
-                          title: 'Access Service Token',
-                          description:
-                            'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                          properties: {
-                            client_id: {
-                              type: 'string',
-                              description:
-                                'Client ID of the Access service token used to authenticate with the remote service.',
-                            },
-                            client_secret: {
-                              type: 'string',
-                              description:
-                                'Client secret of the Access service token used to authenticate with the remote service.',
-                            },
-                            scheme: {
-                              type: 'string',
-                              description:
-                                'The authentication scheme to use when making SCIM requests to this application.',
-                              enum: ['access_service_token'],
-                            },
-                          },
-                          required: ['client_id', 'client_secret', 'scheme'],
-                        },
-                      ],
-                      description:
-                        'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-                    },
-                  },
-                ],
-                description:
-                  'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-              },
-              deactivate_on_delete: {
-                type: 'boolean',
-                description:
-                  "If false, propagates DELETE requests to the target application for SCIM resources. If true, sets 'active' to false on the SCIM resource. Note: Some targets do not support DELETE operations.",
-              },
-              enabled: {
-                type: 'boolean',
-                description: 'Whether SCIM provisioning is turned on for this application.',
-              },
-              mappings: {
-                type: 'array',
-                description:
-                  'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
-                items: {
-                  $ref: '#/$defs/scim_config_mapping',
-                },
-              },
-            },
-            required: ['idp_uid', 'remote_uri'],
           },
           session_duration: {
             type: 'string',
@@ -1828,65 +1728,27 @@ export const tool: Tool = {
               $ref: '#/$defs/allowed_idps',
             },
           },
-          app_launcher_logo_url: {
-            type: 'string',
-            description: 'The image URL of the logo shown in the App Launcher header.',
-          },
           auto_redirect_to_identity: {
             type: 'boolean',
             description:
               'When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.',
           },
-          bg_color: {
+          custom_deny_url: {
             type: 'string',
-            description: 'The background color of the App Launcher page.',
+            description:
+              'The custom URL a user is redirected to when they are denied access to the application when failing identity-based rules.',
           },
-          footer_links: {
+          custom_non_identity_deny_url: {
+            type: 'string',
+            description:
+              'The custom URL a user is redirected to when they are denied access to the application when failing non-identity rules.',
+          },
+          custom_pages: {
             type: 'array',
-            description: 'The links in the App Launcher footer.',
+            description: 'The custom pages that will be displayed when applicable for this application',
             items: {
-              type: 'object',
-              properties: {
-                name: {
-                  type: 'string',
-                  description: 'The hypertext in the footer link.',
-                },
-                url: {
-                  type: 'string',
-                  description: 'the hyperlink in the footer link.',
-                },
-              },
-              required: ['name', 'url'],
-            },
-          },
-          header_bg_color: {
-            type: 'string',
-            description: 'The background color of the App Launcher header.',
-          },
-          landing_page_design: {
-            type: 'object',
-            description: 'The design of the App Launcher landing page shown to users when they log in.',
-            properties: {
-              button_color: {
-                type: 'string',
-                description: 'The background color of the log in button on the landing page.',
-              },
-              button_text_color: {
-                type: 'string',
-                description: 'The color of the text in the log in button on the landing page.',
-              },
-              image_url: {
-                type: 'string',
-                description: 'The URL of the image shown on the landing page.',
-              },
-              message: {
-                type: 'string',
-                description: 'The message shown on the landing page.',
-              },
-              title: {
-                type: 'string',
-                description: 'The title shown on the landing page.',
-              },
+              type: 'string',
+              description: 'The custom pages selected for application.',
             },
           },
           policies: {
@@ -1963,132 +1825,10 @@ export const tool: Tool = {
               description: 'A JSON that links a reusable policy to an application.',
             },
           },
-          scim_config: {
-            type: 'object',
-            description:
-              'Configuration for provisioning to this application via SCIM. This is currently in closed beta.',
-            properties: {
-              idp_uid: {
-                type: 'string',
-                description:
-                  'The UID of the IdP to use as the source for SCIM resources to provision to this application.',
-              },
-              remote_uri: {
-                type: 'string',
-                description: "The base URI for the application's SCIM-compatible API.",
-              },
-              authentication: {
-                anyOf: [
-                  {
-                    $ref: '#/$defs/scim_config_authentication_http_basic',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth2',
-                  },
-                  {
-                    type: 'object',
-                    title: 'Access Service Token',
-                    description:
-                      'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                    properties: {
-                      client_id: {
-                        type: 'string',
-                        description:
-                          'Client ID of the Access service token used to authenticate with the remote service.',
-                      },
-                      client_secret: {
-                        type: 'string',
-                        description:
-                          'Client secret of the Access service token used to authenticate with the remote service.',
-                      },
-                      scheme: {
-                        type: 'string',
-                        description:
-                          'The authentication scheme to use when making SCIM requests to this application.',
-                        enum: ['access_service_token'],
-                      },
-                    },
-                    required: ['client_id', 'client_secret', 'scheme'],
-                  },
-                  {
-                    type: 'array',
-                    description: 'Multiple authentication schemes',
-                    items: {
-                      anyOf: [
-                        {
-                          $ref: '#/$defs/scim_config_authentication_http_basic',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth2',
-                        },
-                        {
-                          type: 'object',
-                          title: 'Access Service Token',
-                          description:
-                            'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                          properties: {
-                            client_id: {
-                              type: 'string',
-                              description:
-                                'Client ID of the Access service token used to authenticate with the remote service.',
-                            },
-                            client_secret: {
-                              type: 'string',
-                              description:
-                                'Client secret of the Access service token used to authenticate with the remote service.',
-                            },
-                            scheme: {
-                              type: 'string',
-                              description:
-                                'The authentication scheme to use when making SCIM requests to this application.',
-                              enum: ['access_service_token'],
-                            },
-                          },
-                          required: ['client_id', 'client_secret', 'scheme'],
-                        },
-                      ],
-                      description:
-                        'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-                    },
-                  },
-                ],
-                description:
-                  'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-              },
-              deactivate_on_delete: {
-                type: 'boolean',
-                description:
-                  "If false, propagates DELETE requests to the target application for SCIM resources. If true, sets 'active' to false on the SCIM resource. Note: Some targets do not support DELETE operations.",
-              },
-              enabled: {
-                type: 'boolean',
-                description: 'Whether SCIM provisioning is turned on for this application.',
-              },
-              mappings: {
-                type: 'array',
-                description:
-                  'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
-                items: {
-                  $ref: '#/$defs/scim_config_mapping',
-                },
-              },
-            },
-            required: ['idp_uid', 'remote_uri'],
-          },
           session_duration: {
             type: 'string',
             description:
               'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
-          },
-          skip_app_launcher_login_page: {
-            type: 'boolean',
-            description: 'Determines when to skip the App Launcher landing page.',
           },
         },
         required: ['type'],
@@ -2115,65 +1855,27 @@ export const tool: Tool = {
               $ref: '#/$defs/allowed_idps',
             },
           },
-          app_launcher_logo_url: {
-            type: 'string',
-            description: 'The image URL of the logo shown in the App Launcher header.',
-          },
           auto_redirect_to_identity: {
             type: 'boolean',
             description:
               'When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.',
           },
-          bg_color: {
+          custom_deny_url: {
             type: 'string',
-            description: 'The background color of the App Launcher page.',
+            description:
+              'The custom URL a user is redirected to when they are denied access to the application when failing identity-based rules.',
           },
-          footer_links: {
+          custom_non_identity_deny_url: {
+            type: 'string',
+            description:
+              'The custom URL a user is redirected to when they are denied access to the application when failing non-identity rules.',
+          },
+          custom_pages: {
             type: 'array',
-            description: 'The links in the App Launcher footer.',
+            description: 'The custom pages that will be displayed when applicable for this application',
             items: {
-              type: 'object',
-              properties: {
-                name: {
-                  type: 'string',
-                  description: 'The hypertext in the footer link.',
-                },
-                url: {
-                  type: 'string',
-                  description: 'the hyperlink in the footer link.',
-                },
-              },
-              required: ['name', 'url'],
-            },
-          },
-          header_bg_color: {
-            type: 'string',
-            description: 'The background color of the App Launcher header.',
-          },
-          landing_page_design: {
-            type: 'object',
-            description: 'The design of the App Launcher landing page shown to users when they log in.',
-            properties: {
-              button_color: {
-                type: 'string',
-                description: 'The background color of the log in button on the landing page.',
-              },
-              button_text_color: {
-                type: 'string',
-                description: 'The color of the text in the log in button on the landing page.',
-              },
-              image_url: {
-                type: 'string',
-                description: 'The URL of the image shown on the landing page.',
-              },
-              message: {
-                type: 'string',
-                description: 'The message shown on the landing page.',
-              },
-              title: {
-                type: 'string',
-                description: 'The title shown on the landing page.',
-              },
+              type: 'string',
+              description: 'The custom pages selected for application.',
             },
           },
           policies: {
@@ -2250,132 +1952,10 @@ export const tool: Tool = {
               description: 'A JSON that links a reusable policy to an application.',
             },
           },
-          scim_config: {
-            type: 'object',
-            description:
-              'Configuration for provisioning to this application via SCIM. This is currently in closed beta.',
-            properties: {
-              idp_uid: {
-                type: 'string',
-                description:
-                  'The UID of the IdP to use as the source for SCIM resources to provision to this application.',
-              },
-              remote_uri: {
-                type: 'string',
-                description: "The base URI for the application's SCIM-compatible API.",
-              },
-              authentication: {
-                anyOf: [
-                  {
-                    $ref: '#/$defs/scim_config_authentication_http_basic',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth2',
-                  },
-                  {
-                    type: 'object',
-                    title: 'Access Service Token',
-                    description:
-                      'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                    properties: {
-                      client_id: {
-                        type: 'string',
-                        description:
-                          'Client ID of the Access service token used to authenticate with the remote service.',
-                      },
-                      client_secret: {
-                        type: 'string',
-                        description:
-                          'Client secret of the Access service token used to authenticate with the remote service.',
-                      },
-                      scheme: {
-                        type: 'string',
-                        description:
-                          'The authentication scheme to use when making SCIM requests to this application.',
-                        enum: ['access_service_token'],
-                      },
-                    },
-                    required: ['client_id', 'client_secret', 'scheme'],
-                  },
-                  {
-                    type: 'array',
-                    description: 'Multiple authentication schemes',
-                    items: {
-                      anyOf: [
-                        {
-                          $ref: '#/$defs/scim_config_authentication_http_basic',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth2',
-                        },
-                        {
-                          type: 'object',
-                          title: 'Access Service Token',
-                          description:
-                            'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                          properties: {
-                            client_id: {
-                              type: 'string',
-                              description:
-                                'Client ID of the Access service token used to authenticate with the remote service.',
-                            },
-                            client_secret: {
-                              type: 'string',
-                              description:
-                                'Client secret of the Access service token used to authenticate with the remote service.',
-                            },
-                            scheme: {
-                              type: 'string',
-                              description:
-                                'The authentication scheme to use when making SCIM requests to this application.',
-                              enum: ['access_service_token'],
-                            },
-                          },
-                          required: ['client_id', 'client_secret', 'scheme'],
-                        },
-                      ],
-                      description:
-                        'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-                    },
-                  },
-                ],
-                description:
-                  'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-              },
-              deactivate_on_delete: {
-                type: 'boolean',
-                description:
-                  "If false, propagates DELETE requests to the target application for SCIM resources. If true, sets 'active' to false on the SCIM resource. Note: Some targets do not support DELETE operations.",
-              },
-              enabled: {
-                type: 'boolean',
-                description: 'Whether SCIM provisioning is turned on for this application.',
-              },
-              mappings: {
-                type: 'array',
-                description:
-                  'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
-                items: {
-                  $ref: '#/$defs/scim_config_mapping',
-                },
-              },
-            },
-            required: ['idp_uid', 'remote_uri'],
-          },
           session_duration: {
             type: 'string',
             description:
               'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
-          },
-          skip_app_launcher_login_page: {
-            type: 'boolean',
-            description: 'Determines when to skip the App Launcher landing page.',
           },
         },
         required: ['type'],
@@ -2406,124 +1986,6 @@ export const tool: Tool = {
           name: {
             type: 'string',
             description: 'The name of the application.',
-          },
-          scim_config: {
-            type: 'object',
-            description:
-              'Configuration for provisioning to this application via SCIM. This is currently in closed beta.',
-            properties: {
-              idp_uid: {
-                type: 'string',
-                description:
-                  'The UID of the IdP to use as the source for SCIM resources to provision to this application.',
-              },
-              remote_uri: {
-                type: 'string',
-                description: "The base URI for the application's SCIM-compatible API.",
-              },
-              authentication: {
-                anyOf: [
-                  {
-                    $ref: '#/$defs/scim_config_authentication_http_basic',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                  },
-                  {
-                    $ref: '#/$defs/scim_config_authentication_oauth2',
-                  },
-                  {
-                    type: 'object',
-                    title: 'Access Service Token',
-                    description:
-                      'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                    properties: {
-                      client_id: {
-                        type: 'string',
-                        description:
-                          'Client ID of the Access service token used to authenticate with the remote service.',
-                      },
-                      client_secret: {
-                        type: 'string',
-                        description:
-                          'Client secret of the Access service token used to authenticate with the remote service.',
-                      },
-                      scheme: {
-                        type: 'string',
-                        description:
-                          'The authentication scheme to use when making SCIM requests to this application.',
-                        enum: ['access_service_token'],
-                      },
-                    },
-                    required: ['client_id', 'client_secret', 'scheme'],
-                  },
-                  {
-                    type: 'array',
-                    description: 'Multiple authentication schemes',
-                    items: {
-                      anyOf: [
-                        {
-                          $ref: '#/$defs/scim_config_authentication_http_basic',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth_bearer_token',
-                        },
-                        {
-                          $ref: '#/$defs/scim_config_authentication_oauth2',
-                        },
-                        {
-                          type: 'object',
-                          title: 'Access Service Token',
-                          description:
-                            'Attributes for configuring Access Service Token authentication scheme for SCIM provisioning to an application.',
-                          properties: {
-                            client_id: {
-                              type: 'string',
-                              description:
-                                'Client ID of the Access service token used to authenticate with the remote service.',
-                            },
-                            client_secret: {
-                              type: 'string',
-                              description:
-                                'Client secret of the Access service token used to authenticate with the remote service.',
-                            },
-                            scheme: {
-                              type: 'string',
-                              description:
-                                'The authentication scheme to use when making SCIM requests to this application.',
-                              enum: ['access_service_token'],
-                            },
-                          },
-                          required: ['client_id', 'client_secret', 'scheme'],
-                        },
-                      ],
-                      description:
-                        'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-                    },
-                  },
-                ],
-                description:
-                  'Attributes for configuring HTTP Basic authentication scheme for SCIM provisioning to an application.',
-              },
-              deactivate_on_delete: {
-                type: 'boolean',
-                description:
-                  "If false, propagates DELETE requests to the target application for SCIM resources. If true, sets 'active' to false on the SCIM resource. Note: Some targets do not support DELETE operations.",
-              },
-              enabled: {
-                type: 'boolean',
-                description: 'Whether SCIM provisioning is turned on for this application.',
-              },
-              mappings: {
-                type: 'array',
-                description:
-                  'A list of mappings to apply to SCIM resources before provisioning them in this application. These can transform or filter the resources to be provisioned.',
-                items: {
-                  $ref: '#/$defs/scim_config_mapping',
-                },
-              },
-            },
-            required: ['idp_uid', 'remote_uri'],
           },
           tags: {
             type: 'array',
