@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  ApplicationListResponsesSinglePage,
+  ApplicationListResponsesV4PagePaginationArray,
   Applications,
   type AllowedHeaders,
   type AllowedIdPs,
@@ -36,7 +36,7 @@ export {
   type ApplicationRevokeTokensParams,
 } from './applications';
 export {
-  CAsSinglePage,
+  CAsV4PagePaginationArray,
   CAs,
   type CA,
   type CADeleteResponse,
@@ -46,7 +46,7 @@ export {
   type CAGetParams,
 } from './cas';
 export {
-  PolicyListResponsesSinglePage,
+  PolicyListResponsesV4PagePaginationArray,
   Policies,
   type AccessDevicePostureRule,
   type AccessRule,

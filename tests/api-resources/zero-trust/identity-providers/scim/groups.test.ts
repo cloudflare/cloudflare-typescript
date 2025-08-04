@@ -32,6 +32,8 @@ describe('resource groups', () => {
         cf_resource_id: 'a2abeb50-59c9-4c01-8c5c-963d3bf5700f',
         idp_resource_id: 'all_employees',
         name: 'ALL_EMPLOYEES',
+        page: 0,
+        per_page: 0,
       },
     );
   });
