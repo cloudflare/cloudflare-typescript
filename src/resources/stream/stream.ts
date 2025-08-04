@@ -489,8 +489,9 @@ export interface StreamListParams {
   include_counts?: boolean;
 
   /**
-   * Query param: Searches over the `name` key in the `meta` field. This field can be
-   * set with or after the upload request.
+   * Query param: Provides a partial word match of the `name` key in the `meta`
+   * field. Slow for medium to large video libraries. May be unavailable for very
+   * large libraries.
    */
   search?: string;
 
@@ -508,6 +509,12 @@ export interface StreamListParams {
    * Query param: Specifies whether the video is `vod` or `live`.
    */
   type?: string;
+
+  /**
+   * Query param: Provides a fast, exact string match on the `name` key in the `meta`
+   * field.
+   */
+  video_name?: string;
 }
 
 export interface StreamDeleteParams {

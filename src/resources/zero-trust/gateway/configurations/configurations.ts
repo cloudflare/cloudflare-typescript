@@ -208,7 +208,7 @@ export interface BlockPageSettings {
    * Controls whether the user is redirected to a Cloudflare-hosted block page or to
    * a customer-provided URI.
    */
-  mode?: 'customized_block_page' | 'redirect_uri';
+  mode?: '' | 'customized_block_page' | 'redirect_uri';
 
   /**
    * If mode is customized_block_page: block page title.
@@ -293,7 +293,7 @@ export interface BlockPageSettingsParam {
    * Controls whether the user is redirected to a Cloudflare-hosted block page or to
    * a customer-provided URI.
    */
-  mode?: 'customized_block_page' | 'redirect_uri';
+  mode?: '' | 'customized_block_page' | 'redirect_uri';
 
   /**
    * If mode is customized_block_page: block page title.

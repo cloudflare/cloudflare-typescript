@@ -63,6 +63,7 @@ describe('resource stream', () => {
       start: '2014-01-02T02:20:00Z',
       status: 'inprogress',
       type: 'live',
+      video_name: 'puppy.mp4',
     });
   });
 
