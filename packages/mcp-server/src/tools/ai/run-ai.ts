@@ -740,6 +740,28 @@ export const tool: Tool = {
         },
         required: ['account_id', 'model_name', 'image', 'messages'],
       },
+      {
+        type: 'object',
+        properties: {
+          account_id: {
+            type: 'string',
+          },
+          model_name: {
+            type: 'string',
+          },
+          image: {
+            type: 'string',
+            description: 'Image in base64 encoded format.',
+          },
+          text: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        required: ['account_id', 'model_name'],
+      },
     ],
   },
   annotations: {},

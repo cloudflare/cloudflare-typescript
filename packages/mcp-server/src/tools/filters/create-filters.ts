@@ -26,10 +26,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'Defines an identifier.',
       },
-      expression: {
-        type: 'string',
-        description:
-          'The filter expression. For more information, refer to [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).',
+      body: {
+        type: 'array',
+        items: {
+          $ref: '#/$defs/firewall_filter',
+        },
       },
       jq_filter: {
         type: 'string',
@@ -38,7 +39,35 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
-    required: ['zone_id', 'expression'],
+    required: ['zone_id', 'body'],
+    $defs: {
+      firewall_filter: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+            description: 'The unique identifier of the filter.',
+          },
+          description: {
+            type: 'string',
+            description: 'An informative summary of the filter.',
+          },
+          expression: {
+            type: 'string',
+            description:
+              'The filter expression. For more information, refer to [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).',
+          },
+          paused: {
+            type: 'boolean',
+            description: 'When true, indicates that the filter is currently paused.',
+          },
+          ref: {
+            type: 'string',
+            description: 'A short reference tag. Allows you to select related filters.',
+          },
+        },
+      },
+    },
   },
   annotations: {},
 };

@@ -45,7 +45,7 @@ export const tool: Tool = {
       search: {
         type: 'string',
         description:
-          'Searches over the `name` key in the `meta` field. This field can be set with or after the upload request.',
+          'Provides a partial word match of the `name` key in the `meta` field. Slow for medium to large video libraries. May be unavailable for very large libraries.',
       },
       start: {
         type: 'string',
@@ -60,6 +60,10 @@ export const tool: Tool = {
       type: {
         type: 'string',
         description: 'Specifies whether the video is `vod` or `live`.',
+      },
+      video_name: {
+        type: 'string',
+        description: 'Provides a fast, exact string match on the `name` key in the `meta` field.',
       },
     },
     required: ['account_id'],
