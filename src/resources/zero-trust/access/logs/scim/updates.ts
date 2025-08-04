@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import { SinglePage } from '../../../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../../pagination';
 
 export class Updates extends APIResource {
   /**
@@ -29,17 +29,17 @@ export class Updates extends APIResource {
   list(
     params: UpdateListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<UpdateListResponsesSinglePage, UpdateListResponse> {
+  ): Core.PagePromise<UpdateListResponsesV4PagePaginationArray, UpdateListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/logs/scim/updates`,
-      UpdateListResponsesSinglePage,
+      UpdateListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
 }
 
-export class UpdateListResponsesSinglePage extends SinglePage<UpdateListResponse> {}
+export class UpdateListResponsesV4PagePaginationArray extends V4PagePaginationArray<UpdateListResponse> {}
 
 export interface UpdateListResponse {
   /**
@@ -96,7 +96,7 @@ export interface UpdateListResponse {
   status?: string;
 }
 
-export interface UpdateListParams {
+export interface UpdateListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
@@ -163,12 +163,12 @@ export interface UpdateListParams {
   until?: string;
 }
 
-Updates.UpdateListResponsesSinglePage = UpdateListResponsesSinglePage;
+Updates.UpdateListResponsesV4PagePaginationArray = UpdateListResponsesV4PagePaginationArray;
 
 export declare namespace Updates {
   export {
     type UpdateListResponse as UpdateListResponse,
-    UpdateListResponsesSinglePage as UpdateListResponsesSinglePage,
+    UpdateListResponsesV4PagePaginationArray as UpdateListResponsesV4PagePaginationArray,
     type UpdateListParams as UpdateListParams,
   };
 }

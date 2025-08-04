@@ -12,7 +12,7 @@ import {
   Settings,
 } from './settings';
 import { CloudflareError } from '../../../../error';
-import { SinglePage } from '../../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Certificates extends APIResource {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
@@ -118,16 +118,16 @@ export class Certificates extends APIResource {
   list(
     params?: CertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<CertificatesSinglePage, Certificate>;
-  list(options?: Core.RequestOptions): Core.PagePromise<CertificatesSinglePage, Certificate>;
+  ): Core.PagePromise<CertificatesV4PagePaginationArray, Certificate>;
+  list(options?: Core.RequestOptions): Core.PagePromise<CertificatesV4PagePaginationArray, Certificate>;
   list(
     params: CertificateListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<CertificatesSinglePage, Certificate> {
+  ): Core.PagePromise<CertificatesV4PagePaginationArray, Certificate> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id, zone_id, ...query } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -146,8 +146,8 @@ export class Certificates extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/certificates`,
-      CertificatesSinglePage,
-      options,
+      CertificatesV4PagePaginationArray,
+      { query, ...options },
     );
   }
 
@@ -254,7 +254,7 @@ export class Certificates extends APIResource {
   }
 }
 
-export class CertificatesSinglePage extends SinglePage<Certificate> {}
+export class CertificatesV4PagePaginationArray extends V4PagePaginationArray<Certificate> {}
 
 /**
  * A fully-qualified domain name (FQDN).
@@ -354,14 +354,16 @@ export interface CertificateUpdateParams {
   name?: string;
 }
 
-export interface CertificateListParams {
+export interface CertificateListParams extends V4PagePaginationArrayParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
 }
@@ -390,7 +392,7 @@ export interface CertificateGetParams {
   zone_id?: string;
 }
 
-Certificates.CertificatesSinglePage = CertificatesSinglePage;
+Certificates.CertificatesV4PagePaginationArray = CertificatesV4PagePaginationArray;
 Certificates.Settings = Settings;
 Certificates.CertificateSettingsSinglePage = CertificateSettingsSinglePage;
 
@@ -399,7 +401,7 @@ export declare namespace Certificates {
     type AssociatedHostnames as AssociatedHostnames,
     type Certificate as Certificate,
     type CertificateDeleteResponse as CertificateDeleteResponse,
-    CertificatesSinglePage as CertificatesSinglePage,
+    CertificatesV4PagePaginationArray as CertificatesV4PagePaginationArray,
     type CertificateCreateParams as CertificateCreateParams,
     type CertificateUpdateParams as CertificateUpdateParams,
     type CertificateListParams as CertificateListParams,

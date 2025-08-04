@@ -6,7 +6,7 @@ import * as Core from '../../../../core';
 import * as PoliciesAPI from '../policies';
 import * as ApplicationsAPI from './applications';
 import { CloudflareError } from '../../../../error';
-import { SinglePage } from '../../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Policies extends APIResource {
   /**
@@ -118,20 +118,20 @@ export class Policies extends APIResource {
     appId: string,
     params?: PolicyListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse>;
+  ): Core.PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse>;
   list(
     appId: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse>;
+  ): Core.PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse>;
   list(
     appId: string,
     params: PolicyListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
+  ): Core.PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse> {
     if (isRequestOptions(params)) {
       return this.list(appId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id, zone_id, ...query } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -150,8 +150,8 @@ export class Policies extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies`,
-      PolicyListResponsesSinglePage,
-      options,
+      PolicyListResponsesV4PagePaginationArray,
+      { query, ...options },
     );
   }
 
@@ -270,7 +270,7 @@ export class Policies extends APIResource {
   }
 }
 
-export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {}
+export class PolicyListResponsesV4PagePaginationArray extends V4PagePaginationArray<PolicyListResponse> {}
 
 /**
  * Enforces a device posture rule has run successfully
@@ -1669,14 +1669,16 @@ export interface PolicyUpdateParams {
   session_duration?: string;
 }
 
-export interface PolicyListParams {
+export interface PolicyListParams extends V4PagePaginationArrayParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
 }
@@ -1705,7 +1707,7 @@ export interface PolicyGetParams {
   zone_id?: string;
 }
 
-Policies.PolicyListResponsesSinglePage = PolicyListResponsesSinglePage;
+Policies.PolicyListResponsesV4PagePaginationArray = PolicyListResponsesV4PagePaginationArray;
 
 export declare namespace Policies {
   export {
@@ -1734,7 +1736,7 @@ export declare namespace Policies {
     type PolicyListResponse as PolicyListResponse,
     type PolicyDeleteResponse as PolicyDeleteResponse,
     type PolicyGetResponse as PolicyGetResponse,
-    PolicyListResponsesSinglePage as PolicyListResponsesSinglePage,
+    PolicyListResponsesV4PagePaginationArray as PolicyListResponsesV4PagePaginationArray,
     type PolicyCreateParams as PolicyCreateParams,
     type PolicyUpdateParams as PolicyUpdateParams,
     type PolicyListParams as PolicyListParams,

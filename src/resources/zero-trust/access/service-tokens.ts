@@ -4,7 +4,7 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { CloudflareError } from '../../../error';
-import { SinglePage } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class ServiceTokens extends APIResource {
   /**
@@ -108,12 +108,12 @@ export class ServiceTokens extends APIResource {
   list(
     params?: ServiceTokenListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ServiceTokensSinglePage, ServiceToken>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ServiceTokensSinglePage, ServiceToken>;
+  ): Core.PagePromise<ServiceTokensV4PagePaginationArray, ServiceToken>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ServiceTokensV4PagePaginationArray, ServiceToken>;
   list(
     params: ServiceTokenListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ServiceTokensSinglePage, ServiceToken> {
+  ): Core.PagePromise<ServiceTokensV4PagePaginationArray, ServiceToken> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -136,7 +136,7 @@ export class ServiceTokens extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/service_tokens`,
-      ServiceTokensSinglePage,
+      ServiceTokensV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -296,7 +296,7 @@ export class ServiceTokens extends APIResource {
   }
 }
 
-export class ServiceTokensSinglePage extends SinglePage<ServiceToken> {}
+export class ServiceTokensV4PagePaginationArray extends V4PagePaginationArray<ServiceToken> {}
 
 export interface ServiceToken {
   /**
@@ -453,7 +453,7 @@ export interface ServiceTokenUpdateParams {
   name?: string;
 }
 
-export interface ServiceTokenListParams {
+export interface ServiceTokenListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
@@ -515,14 +515,14 @@ export interface ServiceTokenRotateParams {
   account_id: string;
 }
 
-ServiceTokens.ServiceTokensSinglePage = ServiceTokensSinglePage;
+ServiceTokens.ServiceTokensV4PagePaginationArray = ServiceTokensV4PagePaginationArray;
 
 export declare namespace ServiceTokens {
   export {
     type ServiceToken as ServiceToken,
     type ServiceTokenCreateResponse as ServiceTokenCreateResponse,
     type ServiceTokenRotateResponse as ServiceTokenRotateResponse,
-    ServiceTokensSinglePage as ServiceTokensSinglePage,
+    ServiceTokensV4PagePaginationArray as ServiceTokensV4PagePaginationArray,
     type ServiceTokenCreateParams as ServiceTokenCreateParams,
     type ServiceTokenUpdateParams as ServiceTokenUpdateParams,
     type ServiceTokenListParams as ServiceTokenListParams,

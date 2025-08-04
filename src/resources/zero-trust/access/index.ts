@@ -2,15 +2,15 @@
 
 export { Access } from './access';
 export {
-  AccessUsersSinglePage,
-  UserListResponsesSinglePage,
+  AccessUsersV4PagePaginationArray,
+  UserListResponsesV4PagePaginationArray,
   Users,
   type AccessUser,
   type UserListResponse,
   type UserListParams,
 } from './users/index';
 export {
-  ApplicationListResponsesSinglePage,
+  ApplicationListResponsesV4PagePaginationArray,
   Applications,
   type AllowedHeaders,
   type AllowedIdPs,
@@ -56,7 +56,7 @@ export {
   type BookmarkGetParams,
 } from './bookmarks';
 export {
-  CertificatesSinglePage,
+  CertificatesV4PagePaginationArray,
   Certificates,
   type AssociatedHostnames,
   type Certificate,
@@ -68,7 +68,7 @@ export {
   type CertificateGetParams,
 } from './certificates/index';
 export {
-  CustomPageWithoutHTMLsSinglePage,
+  CustomPageWithoutHTMLsV4PagePaginationArray,
   CustomPages,
   type CustomPage,
   type CustomPageWithoutHTML,
@@ -101,7 +101,7 @@ export {
 } from './keys';
 export { Logs } from './logs/index';
 export {
-  PolicyListResponsesSinglePage,
+  PolicyListResponsesV4PagePaginationArray,
   Policies,
   type ApprovalGroup,
   type Policy,
@@ -117,7 +117,7 @@ export {
   type PolicyGetParams,
 } from './policies';
 export {
-  ServiceTokensSinglePage,
+  ServiceTokensV4PagePaginationArray,
   ServiceTokens,
   type ServiceToken,
   type ServiceTokenCreateResponse,
@@ -131,7 +131,7 @@ export {
   type ServiceTokenRotateParams,
 } from './service-tokens';
 export {
-  TagsSinglePage,
+  TagsV4PagePaginationArray,
   Tags,
   type Tag,
   type TagDeleteResponse,
@@ -142,8 +142,8 @@ export {
   type TagGetParams,
 } from './tags';
 export {
-  ZeroTrustGroupsSinglePage,
-  GroupListResponsesSinglePage,
+  ZeroTrustGroupsV4PagePaginationArray,
+  GroupListResponsesV4PagePaginationArray,
   Groups,
   type ZeroTrustGroup,
   type GroupCreateResponse,
