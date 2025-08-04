@@ -5,5 +5,5 @@ export {
   Updates,
   type UpdateListResponse,
   type UpdateListParams,
-  type UpdateListResponsesSinglePage,
+  type UpdateListResponsesV4PagePaginationArray,
 } from './updates';

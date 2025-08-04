@@ -1,7 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../core/resource';
-import { PagePromise, SinglePage } from '../../../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../../../core/pagination';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
@@ -30,17 +34,17 @@ export class Updates extends APIResource {
   list(
     params: UpdateListParams,
     options?: RequestOptions,
-  ): PagePromise<UpdateListResponsesSinglePage, UpdateListResponse> {
+  ): PagePromise<UpdateListResponsesV4PagePaginationArray, UpdateListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/logs/scim/updates`,
-      SinglePage<UpdateListResponse>,
+      V4PagePaginationArray<UpdateListResponse>,
       { query, ...options },
     );
   }
 }
 
-export type UpdateListResponsesSinglePage = SinglePage<UpdateListResponse>;
+export type UpdateListResponsesV4PagePaginationArray = V4PagePaginationArray<UpdateListResponse>;
 
 export interface UpdateListResponse {
   /**
@@ -97,7 +101,7 @@ export interface UpdateListResponse {
   status?: string;
 }
 
-export interface UpdateListParams {
+export interface UpdateListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
@@ -167,7 +171,7 @@ export interface UpdateListParams {
 export declare namespace Updates {
   export {
     type UpdateListResponse as UpdateListResponse,
-    type UpdateListResponsesSinglePage as UpdateListResponsesSinglePage,
+    type UpdateListResponsesV4PagePaginationArray as UpdateListResponsesV4PagePaginationArray,
     type UpdateListParams as UpdateListParams,
   };
 }

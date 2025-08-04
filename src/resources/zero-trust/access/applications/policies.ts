@@ -5,7 +5,11 @@ import * as PoliciesAPI from '../policies';
 import * as ApplicationsAPI from './applications';
 import { APIPromise } from '../../../../core/api-promise';
 import { CloudflareError } from '../../../../core/error';
-import { PagePromise, SinglePage } from '../../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -120,8 +124,8 @@ export class Policies extends APIResource {
     appID: string,
     params: PolicyListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
-    const { account_id, zone_id } = params ?? {};
+  ): PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse> {
+    const { account_id, zone_id, ...query } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -140,8 +144,8 @@ export class Policies extends APIResource {
         };
     return this._client.getAPIList(
       path`/${accountOrZone}/${accountOrZoneId}/access/apps/${appID}/policies`,
-      SinglePage<PolicyListResponse>,
-      options,
+      V4PagePaginationArray<PolicyListResponse>,
+      { query, ...options },
     );
   }
 
@@ -234,7 +238,7 @@ export class Policies extends APIResource {
   }
 }
 
-export type PolicyListResponsesSinglePage = SinglePage<PolicyListResponse>;
+export type PolicyListResponsesV4PagePaginationArray = V4PagePaginationArray<PolicyListResponse>;
 
 /**
  * Enforces a device posture rule has run successfully
@@ -1638,14 +1642,16 @@ export interface PolicyUpdateParams {
   session_duration?: string;
 }
 
-export interface PolicyListParams {
+export interface PolicyListParams extends V4PagePaginationArrayParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
 }
@@ -1711,7 +1717,7 @@ export declare namespace Policies {
     type PolicyListResponse as PolicyListResponse,
     type PolicyDeleteResponse as PolicyDeleteResponse,
     type PolicyGetResponse as PolicyGetResponse,
-    type PolicyListResponsesSinglePage as PolicyListResponsesSinglePage,
+    type PolicyListResponsesV4PagePaginationArray as PolicyListResponsesV4PagePaginationArray,
     type PolicyCreateParams as PolicyCreateParams,
     type PolicyUpdateParams as PolicyUpdateParams,
     type PolicyListParams as PolicyListParams,

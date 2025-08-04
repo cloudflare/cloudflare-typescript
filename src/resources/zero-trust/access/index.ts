@@ -34,7 +34,7 @@ export {
   type ApplicationDeleteParams,
   type ApplicationGetParams,
   type ApplicationRevokeTokensParams,
-  type ApplicationListResponsesSinglePage,
+  type ApplicationListResponsesV4PagePaginationArray,
 } from './applications/index';
 export {
   Bookmarks,
@@ -57,7 +57,7 @@ export {
   type CertificateListParams,
   type CertificateDeleteParams,
   type CertificateGetParams,
-  type CertificatesSinglePage,
+  type CertificatesV4PagePaginationArray,
 } from './certificates/index';
 export {
   CustomPages,
@@ -69,7 +69,7 @@ export {
   type CustomPageListParams,
   type CustomPageDeleteParams,
   type CustomPageGetParams,
-  type CustomPageWithoutHTMLsSinglePage,
+  type CustomPageWithoutHTMLsV4PagePaginationArray,
 } from './custom-pages';
 export {
   GatewayCA,
@@ -94,8 +94,8 @@ export {
   type GroupListParams,
   type GroupDeleteParams,
   type GroupGetParams,
-  type ZeroTrustGroupsSinglePage,
-  type GroupListResponsesSinglePage,
+  type ZeroTrustGroupsV4PagePaginationArray,
+  type GroupListResponsesV4PagePaginationArray,
 } from './groups';
 export { Infrastructure } from './infrastructure/index';
 export {
@@ -122,7 +122,7 @@ export {
   type PolicyListParams,
   type PolicyDeleteParams,
   type PolicyGetParams,
-  type PolicyListResponsesSinglePage,
+  type PolicyListResponsesV4PagePaginationArray,
 } from './policies';
 export {
   ServiceTokens,
@@ -136,7 +136,7 @@ export {
   type ServiceTokenGetParams,
   type ServiceTokenRefreshParams,
   type ServiceTokenRotateParams,
-  type ServiceTokensSinglePage,
+  type ServiceTokensV4PagePaginationArray,
 } from './service-tokens';
 export {
   Tags,
@@ -147,13 +147,13 @@ export {
   type TagListParams,
   type TagDeleteParams,
   type TagGetParams,
-  type TagsSinglePage,
+  type TagsV4PagePaginationArray,
 } from './tags';
 export {
   Users,
   type AccessUser,
   type UserListResponse,
   type UserListParams,
-  type AccessUsersSinglePage,
-  type UserListResponsesSinglePage,
+  type AccessUsersV4PagePaginationArray,
+  type UserListResponsesV4PagePaginationArray,
 } from './users/index';

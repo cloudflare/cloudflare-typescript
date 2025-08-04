@@ -2,8 +2,12 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as GroupsAPI from '../../access/groups';
-import { ZeroTrustGroupsSinglePage } from '../../access/groups';
-import { PagePromise, SinglePage } from '../../../../core/pagination';
+import { ZeroTrustGroupsV4PagePaginationArray } from '../../access/groups';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -27,17 +31,17 @@ export class Groups extends APIResource {
     identityProviderID: string,
     params: GroupListParams,
     options?: RequestOptions,
-  ): PagePromise<ZeroTrustGroupsSinglePage, GroupsAPI.ZeroTrustGroup> {
+  ): PagePromise<ZeroTrustGroupsV4PagePaginationArray, GroupsAPI.ZeroTrustGroup> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/identity_providers/${identityProviderID}/scim/groups`,
-      SinglePage<GroupsAPI.ZeroTrustGroup>,
+      V4PagePaginationArray<GroupsAPI.ZeroTrustGroup>,
       { query, ...options },
     );
   }
 }
 
-export interface GroupListParams {
+export interface GroupListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
@@ -65,4 +69,4 @@ export declare namespace Groups {
   export { type GroupListParams as GroupListParams };
 }
 
-export { type ZeroTrustGroupsSinglePage };
+export { type ZeroTrustGroupsV4PagePaginationArray };

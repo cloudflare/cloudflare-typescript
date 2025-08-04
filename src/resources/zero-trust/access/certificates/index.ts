@@ -10,7 +10,7 @@ export {
   type CertificateListParams,
   type CertificateDeleteParams,
   type CertificateGetParams,
-  type CertificatesSinglePage,
+  type CertificatesV4PagePaginationArray,
 } from './certificates';
 export {
   Settings,

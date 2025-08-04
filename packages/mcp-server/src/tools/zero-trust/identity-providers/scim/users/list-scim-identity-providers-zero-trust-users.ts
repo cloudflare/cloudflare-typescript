@@ -46,6 +46,14 @@ export const tool: Tool = {
         type: 'string',
         description: 'The name of the SCIM User resource.',
       },
+      page: {
+        type: 'integer',
+        description: 'Page number of results.',
+      },
+      per_page: {
+        type: 'integer',
+        description: 'Number of results per page.',
+      },
       username: {
         type: 'string',
         description: 'The username of the SCIM User resource.',

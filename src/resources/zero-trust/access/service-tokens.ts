@@ -3,7 +3,11 @@
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { CloudflareError } from '../../../core/error';
-import { PagePromise, SinglePage } from '../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -106,7 +110,7 @@ export class ServiceTokens extends APIResource {
   list(
     params: ServiceTokenListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<ServiceTokensSinglePage, ServiceToken> {
+  ): PagePromise<ServiceTokensV4PagePaginationArray, ServiceToken> {
     const { account_id, zone_id, ...query } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -126,7 +130,7 @@ export class ServiceTokens extends APIResource {
         };
     return this._client.getAPIList(
       path`/${accountOrZone}/${accountOrZoneId}/access/service_tokens`,
-      SinglePage<ServiceToken>,
+      V4PagePaginationArray<ServiceToken>,
       { query, ...options },
     );
   }
@@ -268,7 +272,7 @@ export class ServiceTokens extends APIResource {
   }
 }
 
-export type ServiceTokensSinglePage = SinglePage<ServiceToken>;
+export type ServiceTokensV4PagePaginationArray = V4PagePaginationArray<ServiceToken>;
 
 export interface ServiceToken {
   /**
@@ -425,7 +429,7 @@ export interface ServiceTokenUpdateParams {
   name?: string;
 }
 
-export interface ServiceTokenListParams {
+export interface ServiceTokenListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
@@ -492,7 +496,7 @@ export declare namespace ServiceTokens {
     type ServiceToken as ServiceToken,
     type ServiceTokenCreateResponse as ServiceTokenCreateResponse,
     type ServiceTokenRotateResponse as ServiceTokenRotateResponse,
-    type ServiceTokensSinglePage as ServiceTokensSinglePage,
+    type ServiceTokensV4PagePaginationArray as ServiceTokensV4PagePaginationArray,
     type ServiceTokenCreateParams as ServiceTokenCreateParams,
     type ServiceTokenUpdateParams as ServiceTokenUpdateParams,
     type ServiceTokenListParams as ServiceTokenListParams,

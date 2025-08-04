@@ -4,7 +4,11 @@ import { APIResource } from '../../../core/resource';
 import * as ApplicationsAPI from './applications/applications';
 import * as ApplicationsPoliciesAPI from './applications/policies';
 import { APIPromise } from '../../../core/api-promise';
-import { PagePromise, SinglePage } from '../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -91,12 +95,12 @@ export class Policies extends APIResource {
   list(
     params: PolicyListParams,
     options?: RequestOptions,
-  ): PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
-    const { account_id } = params;
+  ): PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse> {
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/policies`,
-      SinglePage<PolicyListResponse>,
-      options,
+      V4PagePaginationArray<PolicyListResponse>,
+      { query, ...options },
     );
   }
 
@@ -146,7 +150,7 @@ export class Policies extends APIResource {
   }
 }
 
-export type PolicyListResponsesSinglePage = SinglePage<PolicyListResponse>;
+export type PolicyListResponsesV4PagePaginationArray = V4PagePaginationArray<PolicyListResponse>;
 
 /**
  * A group of email addresses that can approve a temporary authentication request.
@@ -762,9 +766,9 @@ export interface PolicyUpdateParams {
   session_duration?: string;
 }
 
-export interface PolicyListParams {
+export interface PolicyListParams extends V4PagePaginationArrayParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
 }
@@ -792,7 +796,7 @@ export declare namespace Policies {
     type PolicyListResponse as PolicyListResponse,
     type PolicyDeleteResponse as PolicyDeleteResponse,
     type PolicyGetResponse as PolicyGetResponse,
-    type PolicyListResponsesSinglePage as PolicyListResponsesSinglePage,
+    type PolicyListResponsesV4PagePaginationArray as PolicyListResponsesV4PagePaginationArray,
     type PolicyCreateParams as PolicyCreateParams,
     type PolicyUpdateParams as PolicyUpdateParams,
     type PolicyListParams as PolicyListParams,

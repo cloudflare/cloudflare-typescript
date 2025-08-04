@@ -20,6 +20,6 @@ export {
   type AccessUser,
   type UserListResponse,
   type UserListParams,
-  type AccessUsersSinglePage,
-  type UserListResponsesSinglePage,
+  type AccessUsersV4PagePaginationArray,
+  type UserListResponsesV4PagePaginationArray,
 } from './users';

@@ -32,6 +32,7 @@ export const tool: Tool = {
       },
       page: {
         type: 'integer',
+        description: 'Page number of results.',
       },
       per_page: {
         type: 'integer',

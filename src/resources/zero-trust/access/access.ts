@@ -23,7 +23,7 @@ import {
   CustomPageListParams,
   CustomPageUpdateParams,
   CustomPageWithoutHTML,
-  CustomPageWithoutHTMLsSinglePage,
+  CustomPageWithoutHTMLsV4PagePaginationArray,
   CustomPages,
 } from './custom-pages';
 import * as GatewayCAAPI from './gateway-ca';
@@ -47,7 +47,7 @@ import {
   GroupGetResponse,
   GroupListParams,
   GroupListResponse,
-  GroupListResponsesSinglePage,
+  GroupListResponsesV4PagePaginationArray,
   GroupUpdateParams,
   GroupUpdateResponse,
   Groups,
@@ -76,7 +76,7 @@ import {
   PolicyGetResponse,
   PolicyListParams,
   PolicyListResponse,
-  PolicyListResponsesSinglePage,
+  PolicyListResponsesV4PagePaginationArray,
   PolicyUpdateParams,
   PolicyUpdateResponse,
 } from './policies';
@@ -93,7 +93,7 @@ import {
   ServiceTokenRotateResponse,
   ServiceTokenUpdateParams,
   ServiceTokens,
-  ServiceTokensSinglePage,
+  ServiceTokensV4PagePaginationArray,
 } from './service-tokens';
 import * as TagsAPI from './tags';
 import {
@@ -105,7 +105,7 @@ import {
   TagListParams,
   TagUpdateParams,
   Tags,
-  TagsSinglePage,
+  TagsV4PagePaginationArray,
 } from './tags';
 import * as ApplicationsAPI from './applications/applications';
 import {
@@ -123,7 +123,7 @@ import {
   ApplicationGetResponse,
   ApplicationListParams,
   ApplicationListResponse,
-  ApplicationListResponsesSinglePage,
+  ApplicationListResponsesV4PagePaginationArray,
   ApplicationPolicy,
   ApplicationRevokeTokensParams,
   ApplicationRevokeTokensResponse,
@@ -154,7 +154,7 @@ import {
   CertificateListParams,
   CertificateUpdateParams,
   Certificates,
-  CertificatesSinglePage,
+  CertificatesV4PagePaginationArray,
 } from './certificates/certificates';
 import * as InfrastructureAPI from './infrastructure/infrastructure';
 import { Infrastructure } from './infrastructure/infrastructure';
@@ -165,7 +165,7 @@ import {
   AccessUser,
   UserListParams,
   UserListResponse,
-  UserListResponsesSinglePage,
+  UserListResponsesV4PagePaginationArray,
   Users,
 } from './users/users';
 
@@ -240,7 +240,7 @@ export declare namespace Access {
     type ApplicationDeleteResponse as ApplicationDeleteResponse,
     type ApplicationGetResponse as ApplicationGetResponse,
     type ApplicationRevokeTokensResponse as ApplicationRevokeTokensResponse,
-    type ApplicationListResponsesSinglePage as ApplicationListResponsesSinglePage,
+    type ApplicationListResponsesV4PagePaginationArray as ApplicationListResponsesV4PagePaginationArray,
     type ApplicationCreateParams as ApplicationCreateParams,
     type ApplicationUpdateParams as ApplicationUpdateParams,
     type ApplicationListParams as ApplicationListParams,
@@ -254,7 +254,7 @@ export declare namespace Access {
     type AssociatedHostnames as AssociatedHostnames,
     type Certificate as Certificate,
     type CertificateDeleteResponse as CertificateDeleteResponse,
-    type CertificatesSinglePage as CertificatesSinglePage,
+    type CertificatesV4PagePaginationArray as CertificatesV4PagePaginationArray,
     type CertificateCreateParams as CertificateCreateParams,
     type CertificateUpdateParams as CertificateUpdateParams,
     type CertificateListParams as CertificateListParams,
@@ -270,7 +270,7 @@ export declare namespace Access {
     type GroupListResponse as GroupListResponse,
     type GroupDeleteResponse as GroupDeleteResponse,
     type GroupGetResponse as GroupGetResponse,
-    type GroupListResponsesSinglePage as GroupListResponsesSinglePage,
+    type GroupListResponsesV4PagePaginationArray as GroupListResponsesV4PagePaginationArray,
     type GroupCreateParams as GroupCreateParams,
     type GroupUpdateParams as GroupUpdateParams,
     type GroupListParams as GroupListParams,
@@ -283,7 +283,7 @@ export declare namespace Access {
     type ServiceToken as ServiceToken,
     type ServiceTokenCreateResponse as ServiceTokenCreateResponse,
     type ServiceTokenRotateResponse as ServiceTokenRotateResponse,
-    type ServiceTokensSinglePage as ServiceTokensSinglePage,
+    type ServiceTokensV4PagePaginationArray as ServiceTokensV4PagePaginationArray,
     type ServiceTokenCreateParams as ServiceTokenCreateParams,
     type ServiceTokenUpdateParams as ServiceTokenUpdateParams,
     type ServiceTokenListParams as ServiceTokenListParams,
@@ -321,7 +321,7 @@ export declare namespace Access {
     Users as Users,
     type AccessUser as AccessUser,
     type UserListResponse as UserListResponse,
-    type UserListResponsesSinglePage as UserListResponsesSinglePage,
+    type UserListResponsesV4PagePaginationArray as UserListResponsesV4PagePaginationArray,
     type UserListParams as UserListParams,
   };
 
@@ -330,7 +330,7 @@ export declare namespace Access {
     type CustomPage as CustomPage,
     type CustomPageWithoutHTML as CustomPageWithoutHTML,
     type CustomPageDeleteResponse as CustomPageDeleteResponse,
-    type CustomPageWithoutHTMLsSinglePage as CustomPageWithoutHTMLsSinglePage,
+    type CustomPageWithoutHTMLsV4PagePaginationArray as CustomPageWithoutHTMLsV4PagePaginationArray,
     type CustomPageCreateParams as CustomPageCreateParams,
     type CustomPageUpdateParams as CustomPageUpdateParams,
     type CustomPageListParams as CustomPageListParams,
@@ -342,7 +342,7 @@ export declare namespace Access {
     Tags as Tags,
     type Tag as Tag,
     type TagDeleteResponse as TagDeleteResponse,
-    type TagsSinglePage as TagsSinglePage,
+    type TagsV4PagePaginationArray as TagsV4PagePaginationArray,
     type TagCreateParams as TagCreateParams,
     type TagUpdateParams as TagUpdateParams,
     type TagListParams as TagListParams,
@@ -359,7 +359,7 @@ export declare namespace Access {
     type PolicyListResponse as PolicyListResponse,
     type PolicyDeleteResponse as PolicyDeleteResponse,
     type PolicyGetResponse as PolicyGetResponse,
-    type PolicyListResponsesSinglePage as PolicyListResponsesSinglePage,
+    type PolicyListResponsesV4PagePaginationArray as PolicyListResponsesV4PagePaginationArray,
     type PolicyCreateParams as PolicyCreateParams,
     type PolicyUpdateParams as PolicyUpdateParams,
     type PolicyListParams as PolicyListParams,

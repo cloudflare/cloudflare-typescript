@@ -14,6 +14,6 @@ export {
   type IdentityProviderListParams,
   type IdentityProviderDeleteParams,
   type IdentityProviderGetParams,
-  type IdentityProviderListResponsesSinglePage,
+  type IdentityProviderListResponsesV4PagePaginationArray,
 } from './identity-providers';
 export { SCIM } from './scim/index';

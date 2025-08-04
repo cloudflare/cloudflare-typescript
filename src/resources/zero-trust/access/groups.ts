@@ -4,7 +4,11 @@ import { APIResource } from '../../../core/resource';
 import * as PoliciesAPI from './applications/policies';
 import { APIPromise } from '../../../core/api-promise';
 import { CloudflareError } from '../../../core/error';
-import { PagePromise, SinglePage } from '../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -118,7 +122,7 @@ export class Groups extends APIResource {
   list(
     params: GroupListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<GroupListResponsesSinglePage, GroupListResponse> {
+  ): PagePromise<GroupListResponsesV4PagePaginationArray, GroupListResponse> {
     const { account_id, zone_id, ...query } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -138,7 +142,7 @@ export class Groups extends APIResource {
         };
     return this._client.getAPIList(
       path`/${accountOrZone}/${accountOrZoneId}/access/groups`,
-      SinglePage<GroupListResponse>,
+      V4PagePaginationArray<GroupListResponse>,
       { query, ...options },
     );
   }
@@ -226,9 +230,9 @@ export class Groups extends APIResource {
   }
 }
 
-export type GroupListResponsesSinglePage = SinglePage<GroupListResponse>;
+export type GroupListResponsesV4PagePaginationArray = V4PagePaginationArray<GroupListResponse>;
 
-export type ZeroTrustGroupsSinglePage = SinglePage<ZeroTrustGroup>;
+export type ZeroTrustGroupsV4PagePaginationArray = V4PagePaginationArray<ZeroTrustGroup>;
 
 export interface ZeroTrustGroup {
   /**
@@ -525,7 +529,7 @@ export interface GroupUpdateParams {
   require?: Array<PoliciesAPI.AccessRuleParam>;
 }
 
-export interface GroupListParams {
+export interface GroupListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
@@ -581,7 +585,7 @@ export declare namespace Groups {
     type GroupListResponse as GroupListResponse,
     type GroupDeleteResponse as GroupDeleteResponse,
     type GroupGetResponse as GroupGetResponse,
-    type GroupListResponsesSinglePage as GroupListResponsesSinglePage,
+    type GroupListResponsesV4PagePaginationArray as GroupListResponsesV4PagePaginationArray,
     type GroupCreateParams as GroupCreateParams,
     type GroupUpdateParams as GroupUpdateParams,
     type GroupListParams as GroupListParams,

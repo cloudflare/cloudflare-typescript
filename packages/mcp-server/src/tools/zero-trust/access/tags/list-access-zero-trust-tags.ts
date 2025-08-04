@@ -26,6 +26,14 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier.',
       },
+      page: {
+        type: 'integer',
+        description: 'Page number of results.',
+      },
+      per_page: {
+        type: 'integer',
+        description: 'Number of results per page.',
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',

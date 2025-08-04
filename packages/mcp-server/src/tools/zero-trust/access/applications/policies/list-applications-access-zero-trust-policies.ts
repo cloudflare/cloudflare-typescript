@@ -32,6 +32,14 @@ export const tool: Tool = {
         type: 'string',
         description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
       },
+      page: {
+        type: 'integer',
+        description: 'Page number of results.',
+      },
+      per_page: {
+        type: 'integer',
+        description: 'Number of results per page.',
+      },
     },
     required: ['app_id'],
   },
