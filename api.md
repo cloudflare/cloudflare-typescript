@@ -2030,8 +2030,6 @@ Methods:
 
 - <code title="post /accounts/{account_id}/workers/assets/upload">client.workers.assets.upload.<a href="./src/resources/workers/assets/upload.ts">create</a>({ ...params }) -> UploadCreateResponse</code>
 
-## Versions
-
 ## Scripts
 
 Types:
