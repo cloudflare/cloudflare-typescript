@@ -29,6 +29,7 @@
   "dependencies": {
     "cloudflare": "file:../../dist/",
     "@modelcontextprotocol/sdk": "^1.11.5",
+    "express": "^5.1.0",
     "jq-web": "https://github.com/stainless-api/jq-web/releases/download/v0.8.2/jq-web.tar.gz",
     "yargs": "^17.7.2",
     "@cloudflare/cabidela": "^0.2.4",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",
+    "@types/express": "^5.0.3",
     "@typescript-eslint/eslint-plugin": "8.31.1",
     "@typescript-eslint/parser": "8.31.1",
     "eslint": "^8.49.0",
