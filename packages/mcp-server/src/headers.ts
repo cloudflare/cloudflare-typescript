@@ -6,7 +6,7 @@ import { IncomingMessage } from 'node:http';
 
 export const parseAuthHeaders = (req: IncomingMessage): Partial<ClientOptions> => {
   if (req.headers.authorization) {
-    const scheme = req.headers.authorization.slice(req.headers.authorization.search(' '));
+    const scheme = req.headers.authorization.split(' ')[0]!;
     const value = req.headers.authorization.slice(scheme.length + 1);
     switch (scheme) {
       case 'Bearer':
