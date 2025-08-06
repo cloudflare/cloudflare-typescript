@@ -2232,7 +2232,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/kv/namespaces/namespaces.ts">Any</a></code>
 - <code><a href="./src/resources/kv/namespaces/namespaces.ts">Namespace</a></code>
 - <code><a href="./src/resources/kv/namespaces/namespaces.ts">NamespaceDeleteResponse</a></code>
 - <code><a href="./src/resources/kv/namespaces/namespaces.ts">NamespaceBulkDeleteResponse</a></code>
@@ -2268,9 +2267,13 @@ Methods:
 
 ### Metadata
 
+Types:
+
+- <code><a href="./src/resources/kv/namespaces/metadata.ts">MetadataGetResponse</a></code>
+
 Methods:
 
-- <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/metadata/{key_name}">client.kv.namespaces.metadata.<a href="./src/resources/kv/namespaces/metadata.ts">get</a>(namespaceId, keyName, { ...params }) -> Any</code>
+- <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/metadata/{key_name}">client.kv.namespaces.metadata.<a href="./src/resources/kv/namespaces/metadata.ts">get</a>(namespaceId, keyName, { ...params }) -> MetadataGetResponse</code>
 
 ### Values
 
