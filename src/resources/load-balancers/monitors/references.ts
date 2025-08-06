@@ -47,7 +47,7 @@ export interface ReferenceGetResponse {
 
 export interface ReferenceGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

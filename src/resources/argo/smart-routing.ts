@@ -50,9 +50,49 @@ export class SmartRouting extends APIResource {
   }
 }
 
-export type SmartRoutingEditResponse = unknown;
+export interface SmartRoutingEditResponse {
+  /**
+   * Specifies the identifier of the Argo Smart Routing setting.
+   */
+  id: string;
 
-export type SmartRoutingGetResponse = unknown;
+  /**
+   * Specifies if the setting is editable.
+   */
+  editable: boolean;
+
+  /**
+   * Specifies the enablement value of Argo Smart Routing.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Specifies the time when the setting was last modified.
+   */
+  modified_on?: string;
+}
+
+export interface SmartRoutingGetResponse {
+  /**
+   * Specifies the identifier of the Argo Smart Routing setting.
+   */
+  id: string;
+
+  /**
+   * Specifies if the setting is editable.
+   */
+  editable: boolean;
+
+  /**
+   * Specifies the enablement value of Argo Smart Routing.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Specifies the time when the setting was last modified.
+   */
+  modified_on?: string;
+}
 
 export interface SmartRoutingEditParams {
   /**
@@ -61,7 +101,7 @@ export interface SmartRoutingEditParams {
   zone_id: string;
 
   /**
-   * Body param: Enables Argo Smart Routing.
+   * Body param: Specifies the enablement value of Argo Smart Routing.
    */
   value: 'on' | 'off';
 }

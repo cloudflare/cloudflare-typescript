@@ -12,10 +12,11 @@ export {
   type KeyBulkGetParams,
   type KeyBulkUpdateParams,
 } from './keys';
-export { Metadata, type MetadataGetResponse, type MetadataGetParams } from './metadata';
+export { Metadata, type MetadataGetParams } from './metadata';
 export {
   NamespacesV4PagePaginationArray,
   Namespaces,
+  type Any,
   type Namespace,
   type NamespaceDeleteResponse,
   type NamespaceBulkDeleteResponse,
