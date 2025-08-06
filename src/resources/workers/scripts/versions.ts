@@ -1277,7 +1277,7 @@ export interface VersionCreateParams {
   account_id: string;
 
   /**
-   * Body param: JSON encoded metadata about the uploaded parts and Worker
+   * Body param: JSON-encoded metadata about the uploaded parts and Worker
    * configuration.
    */
   metadata: VersionCreateParams.Metadata;
@@ -1296,7 +1296,7 @@ export interface VersionCreateParams {
 
 export namespace VersionCreateParams {
   /**
-   * JSON encoded metadata about the uploaded parts and Worker configuration.
+   * JSON-encoded metadata about the uploaded parts and Worker configuration.
    */
   export interface Metadata {
     /**

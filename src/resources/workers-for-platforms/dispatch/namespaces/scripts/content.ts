@@ -102,7 +102,7 @@ export interface ContentUpdateParams {
   dispatch_namespace: string;
 
   /**
-   * Body param: JSON encoded metadata about the uploaded parts and Worker
+   * Body param: JSON-encoded metadata about the uploaded parts and Worker
    * configuration.
    */
   metadata: WorkersAPI.WorkerMetadataParam;

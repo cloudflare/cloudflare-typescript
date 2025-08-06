@@ -70,7 +70,7 @@ export interface HealthCreateResponse {
  */
 export interface HealthGetResponse {
   /**
-   * Pool ID
+   * Pool ID.
    */
   pool_id?: string;
 
@@ -126,7 +126,7 @@ export namespace HealthGetResponse {
 
 export interface HealthCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -232,7 +232,7 @@ export interface HealthCreateParams {
 
 export interface HealthGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
