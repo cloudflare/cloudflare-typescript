@@ -295,7 +295,7 @@ export interface PoolDeleteResponse {
 
 export interface PoolCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -378,7 +378,7 @@ export interface PoolCreateParams {
 
 export interface PoolUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -467,7 +467,7 @@ export interface PoolUpdateParams {
 
 export interface PoolListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -480,14 +480,14 @@ export interface PoolListParams {
 
 export interface PoolDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface PoolBulkEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -501,7 +501,7 @@ export interface PoolBulkEditParams {
 
 export interface PoolEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -590,7 +590,7 @@ export interface PoolEditParams {
 
 export interface PoolGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

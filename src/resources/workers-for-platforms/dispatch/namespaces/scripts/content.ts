@@ -91,7 +91,7 @@ export interface ContentUpdateParams {
   account_id: string;
 
   /**
-   * Body param: JSON encoded metadata about the uploaded parts and Worker
+   * Body param: JSON-encoded metadata about the uploaded parts and Worker
    * configuration.
    */
   metadata: WorkersAPI.WorkerMetadataParam;

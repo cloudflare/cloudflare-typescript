@@ -181,7 +181,7 @@ export namespace SingleStepMigrationParam {
 }
 
 /**
- * JSON encoded metadata about the uploaded parts and Worker configuration.
+ * JSON-encoded metadata about the uploaded parts and Worker configuration.
  */
 export interface WorkerMetadata {
   /**
@@ -199,7 +199,7 @@ export interface WorkerMetadata {
 }
 
 /**
- * JSON encoded metadata about the uploaded parts and Worker configuration.
+ * JSON-encoded metadata about the uploaded parts and Worker configuration.
  */
 export interface WorkerMetadataParam {
   /**
