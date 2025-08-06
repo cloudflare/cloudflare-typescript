@@ -17,18 +17,18 @@ export const parseAuthHeaders = (req: IncomingMessage): Partial<ClientOptions> =
   }
 
   const apiEmail =
-    req.headers['X-Auth-Email'] instanceof Array ?
-      req.headers['X-Auth-Email'][0]
-    : req.headers['X-Auth-Email'];
+    req.headers['x-auth-email'] instanceof Array ?
+      req.headers['x-auth-email'][0]
+    : req.headers['x-auth-email'];
   const apiKey =
-    req.headers['X-Auth-Key'] instanceof Array ? req.headers['X-Auth-Key'][0] : req.headers['X-Auth-Key'];
+    req.headers['x-auth-key'] instanceof Array ? req.headers['x-auth-key'][0] : req.headers['x-auth-key'];
   const apiToken =
     req.headers['x-cloudflare-api-token'] instanceof Array ?
       req.headers['x-cloudflare-api-token'][0]
     : req.headers['x-cloudflare-api-token'];
   const userServiceKey =
-    req.headers['X-Auth-User-Service-Key'] instanceof Array ?
-      req.headers['X-Auth-User-Service-Key'][0]
-    : req.headers['X-Auth-User-Service-Key'];
+    req.headers['x-auth-user-service-key'] instanceof Array ?
+      req.headers['x-auth-user-service-key'][0]
+    : req.headers['x-auth-user-service-key'];
   return { apiEmail, apiKey, apiToken, userServiceKey };
 };
