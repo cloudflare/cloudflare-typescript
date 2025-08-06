@@ -45,7 +45,7 @@ export interface PreviewCreateResponse {
 
 export interface PreviewCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

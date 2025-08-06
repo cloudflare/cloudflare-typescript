@@ -35,7 +35,7 @@ export const tool: Tool = {
       },
       metadata: {
         type: 'object',
-        description: 'JSON encoded metadata about the uploaded parts and Worker configuration.',
+        description: 'JSON-encoded metadata about the uploaded parts and Worker configuration.',
         properties: {
           assets: {
             type: 'object',

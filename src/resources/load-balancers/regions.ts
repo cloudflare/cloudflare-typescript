@@ -74,7 +74,7 @@ export type RegionGetResponse = unknown | string | null;
 
 export interface RegionListParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -96,7 +96,7 @@ export interface RegionListParams {
 
 export interface RegionGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
