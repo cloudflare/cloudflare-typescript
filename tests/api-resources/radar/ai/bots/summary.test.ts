@@ -8,9 +8,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource bots', () => {
+describe('resource summary', () => {
   test('summary', async () => {
-    const responsePromise = client.radar.ai.bots.summary('USER_AGENT');
+    const responsePromise = client.radar.ai.bots.summary.summary('USER_AGENT');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource bots', () => {
   test('summary: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.ai.bots.summary(
+      client.radar.ai.bots.summary.summary(
         'USER_AGENT',
         {
           asn: ['string'],
@@ -43,7 +43,7 @@ describe('resource bots', () => {
   });
 
   test('timeseries', async () => {
-    const responsePromise = client.radar.ai.bots.timeseries();
+    const responsePromise = client.radar.ai.bots.summary.timeseries();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,7 +56,7 @@ describe('resource bots', () => {
   test('timeseries: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.ai.bots.timeseries(
+      client.radar.ai.bots.summary.timeseries(
         {
           aggInterval: '1h',
           asn: ['string'],
@@ -77,7 +77,7 @@ describe('resource bots', () => {
   });
 
   test('timeseriesGroups', async () => {
-    const responsePromise = client.radar.ai.bots.timeseriesGroups('USER_AGENT');
+    const responsePromise = client.radar.ai.bots.summary.timeseriesGroups('USER_AGENT');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -90,7 +90,7 @@ describe('resource bots', () => {
   test('timeseriesGroups: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.ai.bots.timeseriesGroups(
+      client.radar.ai.bots.summary.timeseriesGroups(
         'USER_AGENT',
         {
           aggInterval: '1h',
