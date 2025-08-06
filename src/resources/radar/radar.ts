@@ -95,10 +95,10 @@ import { VerifiedBots } from './verified-bots/verified-bots';
 
 export class Radar extends APIResource {
   ai: AIAPI.AI = new AIAPI.AI(this._client);
+  ct: CtAPI.Ct = new CtAPI.Ct(this._client);
   annotations: AnnotationsAPI.Annotations = new AnnotationsAPI.Annotations(this._client);
   bgp: BGPAPI.BGP = new BGPAPI.BGP(this._client);
   bots: BotsAPI.Bots = new BotsAPI.Bots(this._client);
-  ct: CtAPI.Ct = new CtAPI.Ct(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
   netflows: NetflowsAPI.Netflows = new NetflowsAPI.Netflows(this._client);
@@ -124,10 +124,10 @@ export class Radar extends APIResource {
 }
 
 Radar.AI = AI;
+Radar.Ct = Ct;
 Radar.Annotations = Annotations;
 Radar.BGP = BGP;
 Radar.Bots = Bots;
-Radar.Ct = Ct;
 Radar.Datasets = Datasets;
 Radar.DNS = DNS;
 Radar.Netflows = Netflows;
@@ -147,6 +147,16 @@ Radar.LeakedCredentials = LeakedCredentials;
 
 export declare namespace Radar {
   export { AI as AI };
+
+  export {
+    Ct as Ct,
+    type CtSummaryResponse as CtSummaryResponse,
+    type CtTimeseriesResponse as CtTimeseriesResponse,
+    type CtTimeseriesGroupsResponse as CtTimeseriesGroupsResponse,
+    type CtSummaryParams as CtSummaryParams,
+    type CtTimeseriesParams as CtTimeseriesParams,
+    type CtTimeseriesGroupsParams as CtTimeseriesGroupsParams,
+  };
 
   export {
     Annotations as Annotations,
@@ -172,16 +182,6 @@ export declare namespace Radar {
     type BotSummaryParams as BotSummaryParams,
     type BotTimeseriesParams as BotTimeseriesParams,
     type BotTimeseriesGroupsParams as BotTimeseriesGroupsParams,
-  };
-
-  export {
-    Ct as Ct,
-    type CtSummaryResponse as CtSummaryResponse,
-    type CtTimeseriesResponse as CtTimeseriesResponse,
-    type CtTimeseriesGroupsResponse as CtTimeseriesGroupsResponse,
-    type CtSummaryParams as CtSummaryParams,
-    type CtTimeseriesParams as CtTimeseriesParams,
-    type CtTimeseriesGroupsParams as CtTimeseriesGroupsParams,
   };
 
   export {
