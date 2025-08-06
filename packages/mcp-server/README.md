@@ -3117,6 +3117,28 @@ The following tools are available in this MCP server.
 - `model_timeseries_groups_inference_ai_radar_summary` (`read`): Retrieves the distribution of unique accounts by model over time.
 - `task_timeseries_groups_inference_ai_radar_summary` (`read`): Retrieves the distribution of unique accounts by task over time.
 
+### Resource `radar.ai.bots.summary`:
+
+- `summary_bots_ai_radar_summary` (`read`): Retrieves an aggregated summary of AI bots HTTP requests grouped by the specified dimension.
+- `timeseries_bots_ai_radar_summary` (`read`): Retrieves AI bots HTTP request volume over time.
+- `timeseries_groups_bots_ai_radar_summary` (`read`): Retrieves the distribution of HTTP requests from AI bots, grouped by chosen the specified dimension over time.
+
+### Resource `radar.ct`:
+
+- `summary_radar_ct` (`read`): Retrieves an aggregated summary of certificates grouped by the specified dimension.
+- `timeseries_radar_ct` (`read`): Retrieves certificate volume over time.
+- `timeseries_groups_radar_ct` (`read`): Retrieves the distribution of certificates grouped by chosen the specified dimension over time.
+
+### Resource `radar.ct.authorities`:
+
+- `list_ct_radar_authorities` (`read`): Retrieves a list of certificate authorities.
+- `get_ct_radar_authorities` (`read`): Retrieves the requested CA information.
+
+### Resource `radar.ct.logs`:
+
+- `list_ct_radar_logs` (`read`): Retrieves a list of certificate logs.
+- `get_ct_radar_logs` (`read`): Retrieves the requested certificate log information.
+
 ### Resource `radar.annotations`:
 
 - `list_radar_annotations` (`read`): Retrieves the latest annotations.
