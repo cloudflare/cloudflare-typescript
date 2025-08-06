@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as NamespacesAPI from './namespaces';
 import { CursorLimitPagination, type CursorLimitPaginationParams } from '../../../pagination';
 
 export class Keys extends APIResource {
@@ -118,7 +117,7 @@ export interface Key {
    */
   expiration?: number;
 
-  metadata?: NamespacesAPI.Any;
+  metadata?: unknown;
 }
 
 export interface KeyBulkDeleteResponse {
@@ -154,9 +153,9 @@ export namespace KeyBulkGetResponse {
 
   export namespace WorkersKVBulkGetResultWithMetadata {
     export interface Values {
-      metadata: NamespacesAPI.Any;
+      metadata: unknown;
 
-      value: NamespacesAPI.Any;
+      value: unknown;
 
       /**
        * Expires the key at a certain time, measured in number of seconds since the UNIX
@@ -269,7 +268,7 @@ export namespace KeyBulkUpdateParams {
      */
     expiration_ttl?: number;
 
-    metadata?: NamespacesAPI.AnyParam;
+    metadata?: unknown;
   }
 }
 
