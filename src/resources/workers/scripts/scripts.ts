@@ -152,12 +152,11 @@ export class Scripts extends APIResource {
    * ```
    */
   list(params: ScriptListParams, options?: RequestOptions): PagePromise<ScriptsSinglePage, Script> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/workers/scripts`,
-      SinglePage<Script>,
-      options,
-    );
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(path`/accounts/${account_id}/workers/scripts`, SinglePage<Script>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -1213,9 +1212,15 @@ export namespace ScriptUpdateParams {
 
 export interface ScriptListParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: Filter scripts by tags. Format: comma-separated list of tag:allowed
+   * pairs where allowed is 'yes' or 'no'.
+   */
+  tags?: string;
 }
 
 export interface ScriptDeleteParams {

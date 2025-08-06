@@ -26,6 +26,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier.',
       },
+      tags: {
+        type: 'string',
+        description:
+          "Filter scripts by tags. Format: comma-separated list of tag:allowed pairs where allowed is 'yes' or 'no'.",
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',
