@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as NamespacesAPI from './namespaces';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -14,7 +13,7 @@ export class Metadata extends APIResource {
    *
    * @example
    * ```ts
-   * const any = await client.kv.namespaces.metadata.get(
+   * const metadata = await client.kv.namespaces.metadata.get(
    *   'My-Key',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -23,16 +22,18 @@ export class Metadata extends APIResource {
    * );
    * ```
    */
-  get(keyName: string, params: MetadataGetParams, options?: RequestOptions): APIPromise<NamespacesAPI.Any> {
+  get(keyName: string, params: MetadataGetParams, options?: RequestOptions): APIPromise<MetadataGetResponse> {
     const { account_id, namespace_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/storage/kv/namespaces/${namespace_id}/metadata/${keyName}`,
         options,
-      ) as APIPromise<{ result: NamespacesAPI.Any }>
+      ) as APIPromise<{ result: MetadataGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type MetadataGetResponse = unknown;
 
 export interface MetadataGetParams {
   /**
@@ -47,5 +48,5 @@ export interface MetadataGetParams {
 }
 
 export declare namespace Metadata {
-  export { type MetadataGetParams as MetadataGetParams };
+  export { type MetadataGetResponse as MetadataGetResponse, type MetadataGetParams as MetadataGetParams };
 }

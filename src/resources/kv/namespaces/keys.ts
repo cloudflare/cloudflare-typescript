@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as NamespacesAPI from './namespaces';
 import { APIPromise } from '../../../core/api-promise';
 import {
   CursorLimitPagination,
@@ -124,7 +123,7 @@ export interface Key {
    */
   expiration?: number;
 
-  metadata?: NamespacesAPI.Any;
+  metadata?: unknown;
 }
 
 export interface KeyBulkDeleteResponse {
@@ -160,9 +159,9 @@ export namespace KeyBulkGetResponse {
 
   export namespace WorkersKVBulkGetResultWithMetadata {
     export interface Values {
-      metadata: NamespacesAPI.Any;
+      metadata: unknown;
 
-      value: NamespacesAPI.Any;
+      value: unknown;
 
       /**
        * Expires the key at a certain time, measured in number of seconds since the UNIX
@@ -275,7 +274,7 @@ export namespace KeyBulkUpdateParams {
      */
     expiration_ttl?: number;
 
-    metadata?: NamespacesAPI.AnyParam;
+    metadata?: unknown;
   }
 }
 
