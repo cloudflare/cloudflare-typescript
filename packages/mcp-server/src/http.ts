@@ -1,3 +1,5 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 
@@ -67,11 +69,7 @@ const del = async (req: express.Request, res: express.Response) => {
   });
 };
 
-export const launchStreamableHTTPServer = async (
-  options: McpOptions,
-  endpoints: Endpoint[],
-  port: number | undefined,
-) => {
+export const streamableHTTPApp = (options: McpOptions) => {
   const app = express();
   app.use(express.json());
 
@@ -79,7 +77,23 @@ export const launchStreamableHTTPServer = async (
   app.post('/', post(options));
   app.delete('/', del);
 
-  console.error(`MCP Server running on streamable HTTP on port ${port}`);
+  return app;
+};
 
-  app.listen(port);
+export const launchStreamableHTTPServer = async (
+  options: McpOptions,
+  endpoints: Endpoint[],
+  port: number | undefined,
+) => {
+  const app = streamableHTTPApp(options);
+  const server = app.listen(port);
+  const address = server.address();
+
+  if (typeof address === 'string') {
+    console.error(`MCP Server running on streamable HTTP at ${address}`);
+  } else if (address !== null) {
+    console.error(`MCP Server running on streamable HTTP on port ${address.port}`);
+  } else {
+    console.error(`MCP Server running on streamable HTTP on port ${port}`);
+  }
 };
