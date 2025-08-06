@@ -7,6 +7,7 @@ export type CLIOptions = McpOptions & {
   list: boolean;
   transport: 'stdio' | 'http';
   port: number | undefined;
+  socket: string | undefined;
 };
 
 export type McpOptions = {
@@ -141,6 +142,10 @@ export function parseOptions(): CLIOptions {
       type: 'number',
       description: 'Port to serve on if using http transport',
     })
+    .option('socket', {
+      type: 'string',
+      description: 'Unix socket to serve on if using http transport',
+    })
     .help();
 
   for (const [command, desc] of examples()) {
@@ -262,6 +267,7 @@ export function parseOptions(): CLIOptions {
     list: argv.list || false,
     transport,
     port: argv.port,
+    socket: argv.socket,
   };
 }
 

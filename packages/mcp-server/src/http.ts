@@ -83,7 +83,7 @@ export const streamableHTTPApp = (options: McpOptions) => {
 export const launchStreamableHTTPServer = async (
   options: McpOptions,
   endpoints: Endpoint[],
-  port: number | undefined,
+  port: number | string | undefined,
 ) => {
   const app = streamableHTTPApp(options);
   const server = app.listen(port);

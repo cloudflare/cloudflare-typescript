@@ -67,7 +67,6 @@ export function init(params: {
   const logAtLevel =
     (level: 'debug' | 'info' | 'warning' | 'error') =>
     (message: string, ...rest: unknown[]) => {
-      console.error(message, ...rest);
       void server.sendLoggingMessage({
         level,
         data: { message, rest },
