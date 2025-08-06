@@ -33,14 +33,14 @@ export class Deployments extends APIResource {
     scriptName: string,
     params: DeploymentCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Deployment> {
+  ): Core.APIPromise<DeploymentCreateResponse> {
     const { account_id, force, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`, {
         query: { force },
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Deployment }>
+      }) as Core.APIPromise<{ result: DeploymentCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -116,18 +116,18 @@ export class Deployments extends APIResource {
     deploymentId: string,
     params: DeploymentGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Deployment> {
+  ): Core.APIPromise<DeploymentGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/deployments/${deploymentId}`,
         options,
-      ) as Core.APIPromise<{ result: Deployment }>
+      ) as Core.APIPromise<{ result: DeploymentGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface Deployment {
+export interface DeploymentCreateResponse {
   id: string;
 
   created_on: string;
@@ -136,14 +136,14 @@ export interface Deployment {
 
   strategy: 'percentage';
 
-  versions: Array<Deployment.Version>;
+  versions: Array<DeploymentCreateResponse.Version>;
 
-  annotations?: Deployment.Annotations;
+  annotations?: DeploymentCreateResponse.Annotations;
 
   author_email?: string;
 }
 
-export namespace Deployment {
+export namespace DeploymentCreateResponse {
   export interface Version {
     percentage: number;
 
@@ -164,7 +164,45 @@ export namespace Deployment {
 }
 
 export interface DeploymentListResponse {
-  deployments: Array<Deployment>;
+  deployments: Array<DeploymentListResponse.Deployment>;
+}
+
+export namespace DeploymentListResponse {
+  export interface Deployment {
+    id: string;
+
+    created_on: string;
+
+    source: string;
+
+    strategy: 'percentage';
+
+    versions: Array<Deployment.Version>;
+
+    annotations?: Deployment.Annotations;
+
+    author_email?: string;
+  }
+
+  export namespace Deployment {
+    export interface Version {
+      percentage: number;
+
+      version_id: string;
+    }
+
+    export interface Annotations {
+      /**
+       * Human-readable message about the deployment. Truncated to 100 bytes.
+       */
+      'workers/message'?: string;
+
+      /**
+       * Operation that triggered the creation of the deployment.
+       */
+      'workers/triggered_by'?: string;
+    }
+  }
 }
 
 export interface DeploymentDeleteResponse {
@@ -209,6 +247,42 @@ export namespace DeploymentDeleteResponse {
     export interface Source {
       pointer?: string;
     }
+  }
+}
+
+export interface DeploymentGetResponse {
+  id: string;
+
+  created_on: string;
+
+  source: string;
+
+  strategy: 'percentage';
+
+  versions: Array<DeploymentGetResponse.Version>;
+
+  annotations?: DeploymentGetResponse.Annotations;
+
+  author_email?: string;
+}
+
+export namespace DeploymentGetResponse {
+  export interface Version {
+    percentage: number;
+
+    version_id: string;
+  }
+
+  export interface Annotations {
+    /**
+     * Human-readable message about the deployment. Truncated to 100 bytes.
+     */
+    'workers/message'?: string;
+
+    /**
+     * Operation that triggered the creation of the deployment.
+     */
+    'workers/triggered_by'?: string;
   }
 }
 
@@ -279,9 +353,10 @@ export interface DeploymentGetParams {
 
 export declare namespace Deployments {
   export {
-    type Deployment as Deployment,
+    type DeploymentCreateResponse as DeploymentCreateResponse,
     type DeploymentListResponse as DeploymentListResponse,
     type DeploymentDeleteResponse as DeploymentDeleteResponse,
+    type DeploymentGetResponse as DeploymentGetResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
     type DeploymentListParams as DeploymentListParams,
     type DeploymentDeleteParams as DeploymentDeleteParams,

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as NamespacesAPI from './namespaces';
 import * as KeysAPI from './keys';
 import {
   Key,
@@ -17,7 +16,7 @@ import {
   KeysCursorLimitPagination,
 } from './keys';
 import * as MetadataAPI from './metadata';
-import { Metadata, MetadataGetParams } from './metadata';
+import { Metadata, MetadataGetParams, MetadataGetResponse } from './metadata';
 import * as ValuesAPI from './values';
 import {
   ValueDeleteParams,
@@ -255,10 +254,6 @@ export class Namespaces extends APIResource {
 
 export class NamespacesV4PagePaginationArray extends V4PagePaginationArray<Namespace> {}
 
-export type Any = unknown;
-
-export type AnyParam = unknown;
-
 export interface Namespace {
   /**
    * Namespace identifier tag.
@@ -317,9 +312,9 @@ export namespace NamespaceBulkGetResponse {
 
   export namespace WorkersKVBulkGetResultWithMetadata {
     export interface Values {
-      metadata: NamespacesAPI.Any;
+      metadata: unknown;
 
-      value: NamespacesAPI.Any;
+      value: unknown;
 
       /**
        * Expires the key at a certain time, measured in number of seconds since the UNIX
@@ -467,7 +462,7 @@ export namespace NamespaceBulkUpdateParams {
      */
     expiration_ttl?: number;
 
-    metadata?: NamespacesAPI.AnyParam;
+    metadata?: unknown;
   }
 }
 
@@ -486,7 +481,6 @@ Namespaces.Values = ValuesAPIValues;
 
 export declare namespace Namespaces {
   export {
-    type Any as Any,
     type Namespace as Namespace,
     type NamespaceDeleteResponse as NamespaceDeleteResponse,
     type NamespaceBulkDeleteResponse as NamespaceBulkDeleteResponse,
@@ -516,7 +510,11 @@ export declare namespace Namespaces {
     type KeyBulkUpdateParams as KeyBulkUpdateParams,
   };
 
-  export { Metadata as Metadata, type MetadataGetParams as MetadataGetParams };
+  export {
+    Metadata as Metadata,
+    type MetadataGetResponse as MetadataGetResponse,
+    type MetadataGetParams as MetadataGetParams,
+  };
 
   export {
     ValuesAPIValues as Values,

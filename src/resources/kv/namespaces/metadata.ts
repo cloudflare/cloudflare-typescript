@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as NamespacesAPI from './namespaces';
 
 export class Metadata extends APIResource {
   /**
@@ -12,7 +11,7 @@ export class Metadata extends APIResource {
    *
    * @example
    * ```ts
-   * const any = await client.kv.namespaces.metadata.get(
+   * const metadata = await client.kv.namespaces.metadata.get(
    *   '0f2ac74b498b48028cb68387c421e279',
    *   'My-Key',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -24,16 +23,18 @@ export class Metadata extends APIResource {
     keyName: string,
     params: MetadataGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespacesAPI.Any> {
+  ): Core.APIPromise<MetadataGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/metadata/${keyName}`,
         options,
-      ) as Core.APIPromise<{ result: NamespacesAPI.Any }>
+      ) as Core.APIPromise<{ result: MetadataGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type MetadataGetResponse = unknown;
 
 export interface MetadataGetParams {
   /**
@@ -43,5 +44,5 @@ export interface MetadataGetParams {
 }
 
 export declare namespace Metadata {
-  export { type MetadataGetParams as MetadataGetParams };
+  export { type MetadataGetResponse as MetadataGetResponse, type MetadataGetParams as MetadataGetParams };
 }
