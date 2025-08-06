@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import * as NamespacesAPI from './namespaces/namespaces';
 import {
-  Any,
   Namespace,
   NamespaceBulkDeleteParams,
   NamespaceBulkDeleteResponse,
@@ -31,7 +30,6 @@ KV.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;
 export declare namespace KV {
   export {
     Namespaces as Namespaces,
-    type Any as Any,
     type Namespace as Namespace,
     type NamespaceDeleteResponse as NamespaceDeleteResponse,
     type NamespaceBulkDeleteResponse as NamespaceBulkDeleteResponse,
