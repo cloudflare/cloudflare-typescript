@@ -2,7 +2,15 @@
 
 import { APIResource } from '../../../resource';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
-import { TimeseriesGroups } from './timeseries-groups';
+import {
+  TimeseriesGroupSummaryParams,
+  TimeseriesGroupSummaryResponse,
+  TimeseriesGroupTimeseriesGroupsParams,
+  TimeseriesGroupTimeseriesGroupsResponse,
+  TimeseriesGroupTimeseriesParams,
+  TimeseriesGroupTimeseriesResponse,
+  TimeseriesGroups,
+} from './timeseries-groups';
 import * as ToMarkdownAPI from './to-markdown';
 import {
   ToMarkdown,
@@ -42,5 +50,13 @@ export declare namespace AI {
 
   export { Bots as Bots };
 
-  export { TimeseriesGroups as TimeseriesGroups };
+  export {
+    TimeseriesGroups as TimeseriesGroups,
+    type TimeseriesGroupSummaryResponse as TimeseriesGroupSummaryResponse,
+    type TimeseriesGroupTimeseriesResponse as TimeseriesGroupTimeseriesResponse,
+    type TimeseriesGroupTimeseriesGroupsResponse as TimeseriesGroupTimeseriesGroupsResponse,
+    type TimeseriesGroupSummaryParams as TimeseriesGroupSummaryParams,
+    type TimeseriesGroupTimeseriesParams as TimeseriesGroupTimeseriesParams,
+    type TimeseriesGroupTimeseriesGroupsParams as TimeseriesGroupTimeseriesGroupsParams,
+  };
 }
