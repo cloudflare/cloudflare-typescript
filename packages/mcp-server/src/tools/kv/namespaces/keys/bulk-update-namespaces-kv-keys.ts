@@ -59,7 +59,7 @@ export const tool: Tool = {
               description: 'Expires the key after a number of seconds. Must be at least 60.',
             },
             metadata: {
-              $ref: '#/$defs/any',
+              type: 'object',
             },
           },
           required: ['key', 'value'],
@@ -73,11 +73,6 @@ export const tool: Tool = {
       },
     },
     required: ['account_id', 'namespace_id', 'body'],
-    $defs: {
-      any: {
-        type: 'object',
-      },
-    },
   },
   annotations: {
     idempotentHint: true,

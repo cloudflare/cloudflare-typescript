@@ -44,16 +44,6 @@ import {
   BotTimeseriesResponse,
   Bots,
 } from './bots/bots';
-import * as CtAPI from './ct/ct';
-import {
-  Ct,
-  CtSummaryParams,
-  CtSummaryResponse,
-  CtTimeseriesGroupsParams,
-  CtTimeseriesGroupsResponse,
-  CtTimeseriesParams,
-  CtTimeseriesResponse,
-} from './ct/ct';
 import * as DNSAPI from './dns/dns';
 import { DNS, DNSTimeseriesParams, DNSTimeseriesResponse } from './dns/dns';
 import * as EmailAPI from './email/email';
@@ -98,7 +88,6 @@ export class Radar extends APIResource {
   annotations: AnnotationsAPI.Annotations = new AnnotationsAPI.Annotations(this._client);
   bgp: BGPAPI.BGP = new BGPAPI.BGP(this._client);
   bots: BotsAPI.Bots = new BotsAPI.Bots(this._client);
-  ct: CtAPI.Ct = new CtAPI.Ct(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
   netflows: NetflowsAPI.Netflows = new NetflowsAPI.Netflows(this._client);
@@ -127,7 +116,6 @@ Radar.AI = AI;
 Radar.Annotations = Annotations;
 Radar.BGP = BGP;
 Radar.Bots = Bots;
-Radar.Ct = Ct;
 Radar.Datasets = Datasets;
 Radar.DNS = DNS;
 Radar.Netflows = Netflows;
@@ -172,16 +160,6 @@ export declare namespace Radar {
     type BotSummaryParams as BotSummaryParams,
     type BotTimeseriesParams as BotTimeseriesParams,
     type BotTimeseriesGroupsParams as BotTimeseriesGroupsParams,
-  };
-
-  export {
-    Ct as Ct,
-    type CtSummaryResponse as CtSummaryResponse,
-    type CtTimeseriesResponse as CtTimeseriesResponse,
-    type CtTimeseriesGroupsResponse as CtTimeseriesGroupsResponse,
-    type CtSummaryParams as CtSummaryParams,
-    type CtTimeseriesParams as CtTimeseriesParams,
-    type CtTimeseriesGroupsParams as CtTimeseriesGroupsParams,
   };
 
   export {

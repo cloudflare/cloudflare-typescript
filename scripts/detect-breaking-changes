@@ -537,11 +537,11 @@ TEST_PATHS=(
 	tests/api-resources/url-scanner/scans.test.ts
 	tests/api-resources/radar/radar.test.ts
 	tests/api-resources/radar/ai/ai.test.ts
+	tests/api-resources/radar/ai/to-markdown.test.ts
 	tests/api-resources/radar/ai/inference/inference.test.ts
 	tests/api-resources/radar/ai/inference/summary.test.ts
 	tests/api-resources/radar/ai/inference/timeseries-groups/timeseries-groups.test.ts
 	tests/api-resources/radar/ai/inference/timeseries-groups/summary.test.ts
-	tests/api-resources/radar/ai/bots.test.ts
 	tests/api-resources/radar/annotations/annotations.test.ts
 	tests/api-resources/radar/annotations/outages.test.ts
 	tests/api-resources/radar/bgp/bgp.test.ts
@@ -555,9 +555,6 @@ TEST_PATHS=(
 	tests/api-resources/radar/bgp/ips.test.ts
 	tests/api-resources/radar/bots/bots.test.ts
 	tests/api-resources/radar/bots/web-crawlers.test.ts
-	tests/api-resources/radar/ct/ct.test.ts
-	tests/api-resources/radar/ct/authorities.test.ts
-	tests/api-resources/radar/ct/logs.test.ts
 	tests/api-resources/radar/datasets.test.ts
 	tests/api-resources/radar/dns/dns.test.ts
 	tests/api-resources/radar/dns/top.test.ts

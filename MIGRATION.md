@@ -1051,6 +1051,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.vectorize.indexes.insert()`
 - `client.vectorize.indexes.upsert()`
 - `client.urlScanner.scans.bulkCreate()`
+- `client.radar.ai.toMarkdown.create()`
 - `client.zaraz.update()`
 - `client.zaraz.history.update()`
 - `client.zaraz.publish.create()`
@@ -1135,9 +1136,6 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.ai.inference.summary.task()`
 - `client.radar.ai.inference.timeseriesGroups.summary.model()`
 - `client.radar.ai.inference.timeseriesGroups.summary.task()`
-- `client.radar.ai.bots.summary()`
-- `client.radar.ai.bots.timeseries()`
-- `client.radar.ai.bots.timeseriesGroups()`
 - `client.radar.annotations.list()`
 - `client.radar.annotations.outages.get()`
 - `client.radar.annotations.outages.locations()`
@@ -1160,13 +1158,6 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.bots.timeseriesGroups()`
 - `client.radar.bots.webCrawlers.summary()`
 - `client.radar.bots.webCrawlers.timeseriesGroups()`
-- `client.radar.ct.summary()`
-- `client.radar.ct.timeseries()`
-- `client.radar.ct.timeseriesGroups()`
-- `client.radar.ct.authorities.list()`
-- `client.radar.ct.authorities.get()`
-- `client.radar.ct.logs.list()`
-- `client.radar.ct.logs.get()`
 - `client.radar.datasets.list()`
 - `client.radar.dns.timeseries()`
 - `client.radar.dns.top.ases()`
