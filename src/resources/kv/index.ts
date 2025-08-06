@@ -3,7 +3,6 @@
 export { KV } from './kv';
 export {
   Namespaces,
-  type Any,
   type Namespace,
   type NamespaceDeleteResponse,
   type NamespaceBulkDeleteResponse,
