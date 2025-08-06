@@ -2232,7 +2232,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/kv/namespaces/namespaces.ts">Any</a></code>
 - <code><a href="./src/resources/kv/namespaces/namespaces.ts">Namespace</a></code>
 - <code><a href="./src/resources/kv/namespaces/namespaces.ts">NamespaceDeleteResponse</a></code>
 - <code><a href="./src/resources/kv/namespaces/namespaces.ts">NamespaceBulkDeleteResponse</a></code>
@@ -2268,9 +2267,13 @@ Methods:
 
 ### Metadata
 
+Types:
+
+- <code><a href="./src/resources/kv/namespaces/metadata.ts">MetadataGetResponse</a></code>
+
 Methods:
 
-- <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/metadata/{key_name}">client.kv.namespaces.metadata.<a href="./src/resources/kv/namespaces/metadata.ts">get</a>(namespaceId, keyName, { ...params }) -> Any</code>
+- <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/metadata/{key_name}">client.kv.namespaces.metadata.<a href="./src/resources/kv/namespaces/metadata.ts">get</a>(namespaceId, keyName, { ...params }) -> MetadataGetResponse</code>
 
 ### Values
 
@@ -6373,57 +6376,7 @@ Methods:
 
 #### Summary
 
-Types:
-
-- <code><a href="./src/resources/radar/ai/bots/summary.ts">SummarySummaryResponse</a></code>
-- <code><a href="./src/resources/radar/ai/bots/summary.ts">SummaryTimeseriesResponse</a></code>
-- <code><a href="./src/resources/radar/ai/bots/summary.ts">SummaryTimeseriesGroupsResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/ai/bots/summary/{dimension}">client.radar.ai.bots.summary.<a href="./src/resources/radar/ai/bots/summary.ts">summary</a>(dimension, { ...params }) -> SummarySummaryResponse</code>
-- <code title="get /radar/ai/bots/timeseries">client.radar.ai.bots.summary.<a href="./src/resources/radar/ai/bots/summary.ts">timeseries</a>({ ...params }) -> SummaryTimeseriesResponse</code>
-- <code title="get /radar/ai/bots/timeseries_groups/{dimension}">client.radar.ai.bots.summary.<a href="./src/resources/radar/ai/bots/summary.ts">timeseriesGroups</a>(dimension, { ...params }) -> SummaryTimeseriesGroupsResponse</code>
-
 ### TimeseriesGroups
-
-## Ct
-
-Types:
-
-- <code><a href="./src/resources/radar/ct/ct.ts">CtSummaryResponse</a></code>
-- <code><a href="./src/resources/radar/ct/ct.ts">CtTimeseriesResponse</a></code>
-- <code><a href="./src/resources/radar/ct/ct.ts">CtTimeseriesGroupsResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/ct/summary/{dimension}">client.radar.ct.<a href="./src/resources/radar/ct/ct.ts">summary</a>(dimension, { ...params }) -> CtSummaryResponse</code>
-- <code title="get /radar/ct/timeseries">client.radar.ct.<a href="./src/resources/radar/ct/ct.ts">timeseries</a>({ ...params }) -> CtTimeseriesResponse</code>
-- <code title="get /radar/ct/timeseries_groups/{dimension}">client.radar.ct.<a href="./src/resources/radar/ct/ct.ts">timeseriesGroups</a>(dimension, { ...params }) -> CtTimeseriesGroupsResponse</code>
-
-### Authorities
-
-Types:
-
-- <code><a href="./src/resources/radar/ct/authorities.ts">AuthorityListResponse</a></code>
-- <code><a href="./src/resources/radar/ct/authorities.ts">AuthorityGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/ct/authorities">client.radar.ct.authorities.<a href="./src/resources/radar/ct/authorities.ts">list</a>({ ...params }) -> AuthorityListResponse</code>
-- <code title="get /radar/ct/authorities/{ca_slug}">client.radar.ct.authorities.<a href="./src/resources/radar/ct/authorities.ts">get</a>(caSlug, { ...params }) -> AuthorityGetResponse</code>
-
-### Logs
-
-Types:
-
-- <code><a href="./src/resources/radar/ct/logs.ts">LogListResponse</a></code>
-- <code><a href="./src/resources/radar/ct/logs.ts">LogGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/ct/logs">client.radar.ct.logs.<a href="./src/resources/radar/ct/logs.ts">list</a>({ ...params }) -> LogListResponse</code>
-- <code title="get /radar/ct/logs/{log_slug}">client.radar.ct.logs.<a href="./src/resources/radar/ct/logs.ts">get</a>(logSlug, { ...params }) -> LogGetResponse</code>
 
 ## Annotations
 
