@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as NamespacesAPI from './namespaces';
 import { type Response } from '../../../_shims/index';
 
 export class Values extends APIResource {
@@ -135,9 +134,9 @@ export interface ValueUpdateParams {
   expiration_ttl?: number;
 
   /**
-   * Body param:
+   * Body param: Associates arbitrary JSON data with a key/value pair.
    */
-  metadata?: NamespacesAPI.AnyParam;
+  metadata?: unknown;
 }
 
 export interface ValueDeleteParams {
