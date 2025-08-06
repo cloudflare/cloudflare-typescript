@@ -18,6 +18,15 @@ export {
   type BotTimeseriesParams,
   type BotTimeseriesGroupsParams,
 } from './bots/index';
+export {
+  Ct,
+  type CtSummaryResponse,
+  type CtTimeseriesResponse,
+  type CtTimeseriesGroupsResponse,
+  type CtSummaryParams,
+  type CtTimeseriesParams,
+  type CtTimeseriesGroupsParams,
+} from './ct/index';
 export { DNS, type DNSTimeseriesResponse, type DNSTimeseriesParams } from './dns/index';
 export {
   Datasets,
