@@ -4,7 +4,6 @@ export { KV } from './kv';
 export {
   NamespacesV4PagePaginationArray,
   Namespaces,
-  type Any,
   type Namespace,
   type NamespaceDeleteResponse,
   type NamespaceBulkDeleteResponse,
