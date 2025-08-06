@@ -48,7 +48,8 @@ export const tool: Tool = {
         description: 'Expires the key after a number of seconds. Must be at least 60.',
       },
       metadata: {
-        $ref: '#/$defs/any',
+        type: 'object',
+        description: 'Associates arbitrary JSON data with a key/value pair.',
       },
       jq_filter: {
         type: 'string',
@@ -58,11 +59,6 @@ export const tool: Tool = {
       },
     },
     required: ['account_id', 'namespace_id', 'key_name', 'value'],
-    $defs: {
-      any: {
-        type: 'object',
-      },
-    },
   },
   annotations: {
     idempotentHint: true,

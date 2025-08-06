@@ -12,10 +12,9 @@ export {
   type KeyBulkUpdateParams,
   type KeysCursorLimitPagination,
 } from './keys';
-export { Metadata, type MetadataGetParams } from './metadata';
+export { Metadata, type MetadataGetResponse, type MetadataGetParams } from './metadata';
 export {
   Namespaces,
-  type Any,
   type Namespace,
   type NamespaceDeleteResponse,
   type NamespaceBulkDeleteResponse,
