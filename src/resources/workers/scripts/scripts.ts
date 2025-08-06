@@ -144,8 +144,11 @@ export class Scripts extends APIResource {
    * ```
    */
   list(params: ScriptListParams, options?: Core.RequestOptions): Core.PagePromise<ScriptsSinglePage, Script> {
-    const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/workers/scripts`, ScriptsSinglePage, options);
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/workers/scripts`, ScriptsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -1201,9 +1204,15 @@ export namespace ScriptUpdateParams {
 
 export interface ScriptListParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: Filter scripts by tags. Format: comma-separated list of tag:allowed
+   * pairs where allowed is 'yes' or 'no'.
+   */
+  tags?: string;
 }
 
 export interface ScriptDeleteParams {
