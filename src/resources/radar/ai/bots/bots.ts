@@ -2,15 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import * as SummaryAPI from './summary';
-import {
-  Summary,
-  SummarySummaryParams,
-  SummarySummaryResponse,
-  SummaryTimeseriesGroupsParams,
-  SummaryTimeseriesGroupsResponse,
-  SummaryTimeseriesParams,
-  SummaryTimeseriesResponse,
-} from './summary';
+import { Summary } from './summary';
 
 export class Bots extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
@@ -19,13 +11,5 @@ export class Bots extends APIResource {
 Bots.Summary = Summary;
 
 export declare namespace Bots {
-  export {
-    Summary as Summary,
-    type SummarySummaryResponse as SummarySummaryResponse,
-    type SummaryTimeseriesResponse as SummaryTimeseriesResponse,
-    type SummaryTimeseriesGroupsResponse as SummaryTimeseriesGroupsResponse,
-    type SummarySummaryParams as SummarySummaryParams,
-    type SummaryTimeseriesParams as SummaryTimeseriesParams,
-    type SummaryTimeseriesGroupsParams as SummaryTimeseriesGroupsParams,
-  };
+  export { Summary as Summary };
 }
