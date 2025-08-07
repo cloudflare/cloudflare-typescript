@@ -123,6 +123,9 @@ export interface Key {
    */
   expiration?: number;
 
+  /**
+   * Arbitrary JSON that is associated with a key.
+   */
   metadata?: unknown;
 }
 
@@ -159,8 +162,14 @@ export namespace KeyBulkGetResponse {
 
   export namespace WorkersKVBulkGetResultWithMetadata {
     export interface Values {
+      /**
+       * The metadata associated with the key.
+       */
       metadata: unknown;
 
+      /**
+       * The value associated with the key.
+       */
       value: unknown;
 
       /**
@@ -274,6 +283,9 @@ export namespace KeyBulkUpdateParams {
      */
     expiration_ttl?: number;
 
+    /**
+     * Arbitrary JSON that is associated with a key.
+     */
     metadata?: unknown;
   }
 }
