@@ -7,12 +7,11 @@ import * as ContentAPI from './content';
 import { Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as DeploymentsAPI from './deployments';
 import {
+  Deployment,
   DeploymentCreateParams,
-  DeploymentCreateResponse,
   DeploymentDeleteParams,
   DeploymentDeleteResponse,
   DeploymentGetParams,
-  DeploymentGetResponse,
   DeploymentListParams,
   DeploymentListResponse,
   Deployments,
@@ -1310,10 +1309,9 @@ export declare namespace Scripts {
 
   export {
     Deployments as Deployments,
-    type DeploymentCreateResponse as DeploymentCreateResponse,
+    type Deployment as Deployment,
     type DeploymentListResponse as DeploymentListResponse,
     type DeploymentDeleteResponse as DeploymentDeleteResponse,
-    type DeploymentGetResponse as DeploymentGetResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
     type DeploymentListParams as DeploymentListParams,
     type DeploymentDeleteParams as DeploymentDeleteParams,
