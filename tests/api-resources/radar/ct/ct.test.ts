@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource timeseriesGroups', () => {
+describe('resource ct', () => {
   test('summary', async () => {
-    const responsePromise = client.radar.ai.timeseriesGroups.summary('USER_AGENT');
+    const responsePromise = client.radar.ct.summary('CA');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,27 +23,39 @@ describe('resource timeseriesGroups', () => {
 
   test('summary: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.ai.timeseriesGroups.summary('USER_AGENT', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.ct.summary('CA', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   test('summary: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.ai.timeseriesGroups.summary(
-        'USER_AGENT',
+      client.radar.ct.summary(
+        'CA',
         {
-          asn: ['string'],
-          continent: ['string'],
-          crawlPurpose: ['string'],
+          ca: ['string'],
+          caOwner: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
+          duration: ['LTE_3D'],
+          entryType: ['PRECERTIFICATE'],
+          expirationStatus: ['EXPIRED'],
           format: 'JSON',
+          hasIps: [true],
+          hasWildcards: [true],
           limitPerGroup: 10,
-          location: ['string'],
+          log: ['string'],
+          logApi: ['RFC6962'],
+          logOperator: ['string'],
           name: ['main_series'],
+          normalization: 'RAW_VALUES',
+          publicKeyAlgorithm: ['DSA'],
+          signatureAlgorithm: ['DSA_SHA_1'],
+          tld: ['string'],
+          uniqueEntries: ['true'],
+          validationLevel: ['DOMAIN'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -51,7 +63,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('timeseries', async () => {
-    const responsePromise = client.radar.ai.timeseriesGroups.timeseries();
+    const responsePromise = client.radar.ct.timeseries();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,28 +75,37 @@ describe('resource timeseriesGroups', () => {
 
   test('timeseries: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.ai.timeseriesGroups.timeseries({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.ct.timeseries({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   test('timeseries: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.ai.timeseriesGroups.timeseries(
+      client.radar.ct.timeseries(
         {
           aggInterval: '1h',
-          asn: ['string'],
-          continent: ['string'],
-          crawlPurpose: ['string'],
+          ca: ['string'],
+          caOwner: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
+          duration: ['LTE_3D'],
+          entryType: ['PRECERTIFICATE'],
+          expirationStatus: ['EXPIRED'],
           format: 'JSON',
-          limitPerGroup: 10,
-          location: ['string'],
+          hasIps: [true],
+          hasWildcards: [true],
+          log: ['string'],
+          logApi: ['RFC6962'],
+          logOperator: ['string'],
           name: ['main_series'],
-          userAgent: ['string'],
+          publicKeyAlgorithm: ['DSA'],
+          signatureAlgorithm: ['DSA_SHA_1'],
+          tld: ['string'],
+          uniqueEntries: ['true'],
+          validationLevel: ['DOMAIN'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -92,7 +113,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('timeseriesGroups', async () => {
-    const responsePromise = client.radar.ai.timeseriesGroups.timeseriesGroups('USER_AGENT');
+    const responsePromise = client.radar.ct.timeseriesGroups('CA');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -105,67 +126,39 @@ describe('resource timeseriesGroups', () => {
   test('timeseriesGroups: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.ai.timeseriesGroups.timeseriesGroups('USER_AGENT', { path: '/_stainless_unknown_path' }),
+      client.radar.ct.timeseriesGroups('CA', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('timeseriesGroups: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.ai.timeseriesGroups.timeseriesGroups(
-        'USER_AGENT',
+      client.radar.ct.timeseriesGroups(
+        'CA',
         {
           aggInterval: '1h',
-          asn: ['string'],
-          continent: ['string'],
-          crawlPurpose: ['string'],
+          ca: ['string'],
+          caOwner: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
+          duration: ['LTE_3D'],
+          entryType: ['PRECERTIFICATE'],
+          expirationStatus: ['EXPIRED'],
           format: 'JSON',
+          hasIps: [true],
+          hasWildcards: [true],
           limitPerGroup: 10,
-          location: ['string'],
+          log: ['string'],
+          logApi: ['RFC6962'],
+          logOperator: ['string'],
           name: ['main_series'],
-          normalization: 'MIN0_MAX',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('userAgent', async () => {
-    const responsePromise = client.radar.ai.timeseriesGroups.userAgent();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('userAgent: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.ai.timeseriesGroups.userAgent({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('userAgent: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.ai.timeseriesGroups.userAgent(
-        {
-          aggInterval: '1h',
-          asn: ['string'],
-          continent: ['string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z'],
-          format: 'JSON',
-          limitPerGroup: 10,
-          location: ['string'],
-          name: ['main_series'],
+          normalization: 'RAW_VALUES',
+          publicKeyAlgorithm: ['DSA'],
+          signatureAlgorithm: ['DSA_SHA_1'],
+          tld: ['string'],
+          uniqueEntries: ['true'],
+          validationLevel: ['DOMAIN'],
         },
         { path: '/_stainless_unknown_path' },
       ),
