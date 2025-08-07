@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'get_datasets_logpush_fields',
   description:
-    'Lists all fields available for a dataset. The response result is an object with key-value pairs, where keys are field names, and values are descriptions.',
+    'Lists all fields available for a dataset. The response result is. an object with key-value pairs, where keys are field names, and values are descriptions.',
   inputSchema: {
     type: 'object',
     properties: {
