@@ -49,7 +49,7 @@ export const tool: Tool = {
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { version, dataset, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(jq_filter, await client.zeroTrust.dlp.datasets.upload.edit(version, dataset)),
+    await maybeFilter(jq_filter, await client.zeroTrust.dlp.datasets.upload.edit(version, dataset, body)),
   );
 };
 

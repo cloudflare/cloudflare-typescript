@@ -28,6 +28,7 @@ export class Entries extends APIResource {
   create(
     entryID: string,
     datasetVersionEntry: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
+    params: EntryCreateParams,
     options?: RequestOptions,
   ): APIPromise<EntryCreateResponse> {
     const { account_id, dataset_id, version } = params;
@@ -54,6 +55,23 @@ export interface EntryCreateResponse {
   upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 }
 
+export interface EntryCreateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Path param:
+   */
+  dataset_id: string;
+
+  /**
+   * Path param:
+   */
+  version: number;
+}
+
 export declare namespace Entries {
-  export { type EntryCreateResponse as EntryCreateResponse };
+  export { type EntryCreateResponse as EntryCreateResponse, type EntryCreateParams as EntryCreateParams };
 }

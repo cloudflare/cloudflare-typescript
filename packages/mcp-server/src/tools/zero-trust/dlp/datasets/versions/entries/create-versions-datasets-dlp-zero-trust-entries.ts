@@ -54,7 +54,7 @@ export const handler = async (client: Cloudflare, args: Record<string, unknown> 
   return asTextContentResult(
     await maybeFilter(
       jq_filter,
-      await client.zeroTrust.dlp.datasets.versions.entries.create(entry_id, dataset_version_entry),
+      await client.zeroTrust.dlp.datasets.versions.entries.create(entry_id, dataset_version_entry, body),
     ),
   );
 };

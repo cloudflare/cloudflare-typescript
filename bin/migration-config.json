@@ -3785,6 +3785,10 @@
           "location": "body"
         },
         {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
           "type": "options"
         }
       ],
@@ -3803,6 +3807,10 @@
           "type": "param",
           "key": "dataset",
           "location": "body"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
         },
         {
           "type": "options"
@@ -3861,6 +3869,10 @@
           "location": "body"
         },
         {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
           "type": "options"
         }
       ],
@@ -3884,6 +3896,10 @@
           "type": "param",
           "key": "dataset_version_entry",
           "location": "body"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
         },
         {
           "type": "options"
