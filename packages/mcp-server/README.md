@@ -3123,7 +3123,26 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.ai.timeseries_groups`:
 
+- `summary_ai_radar_timeseries_groups` (`read`): Retrieves an aggregated summary of AI bots HTTP requests grouped by the specified dimension.
+- `timeseries_ai_radar_timeseries_groups` (`read`): Retrieves AI bots HTTP request volume over time.
+- `timeseries_groups_ai_radar_timeseries_groups` (`read`): Retrieves the distribution of HTTP requests from AI bots, grouped by chosen the specified dimension over time.
 - `user_agent_ai_radar_timeseries_groups` (`read`): Retrieves the distribution of traffic by AI user agent over time.
+
+### Resource `radar.ct`:
+
+- `summary_radar_ct` (`read`): Retrieves an aggregated summary of certificates grouped by the specified dimension.
+- `timeseries_radar_ct` (`read`): Retrieves certificate volume over time.
+- `timeseries_groups_radar_ct` (`read`): Retrieves the distribution of certificates grouped by chosen the specified dimension over time.
+
+### Resource `radar.ct.authorities`:
+
+- `list_ct_radar_authorities` (`read`): Retrieves a list of certificate authorities.
+- `get_ct_radar_authorities` (`read`): Retrieves the requested CA information.
+
+### Resource `radar.ct.logs`:
+
+- `list_ct_radar_logs` (`read`): Retrieves a list of certificate logs.
+- `get_ct_radar_logs` (`read`): Retrieves the requested certificate log information.
 
 ### Resource `radar.annotations`:
 

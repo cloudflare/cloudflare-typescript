@@ -4,10 +4,9 @@ export { Assets } from './assets/index';
 export { Content, type ContentUpdateParams, type ContentGetParams } from './content';
 export {
   Deployments,
-  type DeploymentCreateResponse,
+  type Deployment,
   type DeploymentListResponse,
   type DeploymentDeleteResponse,
-  type DeploymentGetResponse,
   type DeploymentCreateParams,
   type DeploymentListParams,
   type DeploymentDeleteParams,
