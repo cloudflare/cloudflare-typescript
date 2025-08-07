@@ -1137,7 +1137,17 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.ai.inference.timeseriesGroups.summary.model()`
 - `client.radar.ai.inference.timeseriesGroups.summary.task()`
 - `client.radar.ai.bots.summary.userAgent()`
+- `client.radar.ai.timeseriesGroups.summary()`
+- `client.radar.ai.timeseriesGroups.timeseries()`
+- `client.radar.ai.timeseriesGroups.timeseriesGroups()`
 - `client.radar.ai.timeseriesGroups.userAgent()`
+- `client.radar.ct.summary()`
+- `client.radar.ct.timeseries()`
+- `client.radar.ct.timeseriesGroups()`
+- `client.radar.ct.authorities.list()`
+- `client.radar.ct.authorities.get()`
+- `client.radar.ct.logs.list()`
+- `client.radar.ct.logs.get()`
 - `client.radar.annotations.list()`
 - `client.radar.annotations.outages.get()`
 - `client.radar.annotations.outages.locations()`
