@@ -7,7 +7,7 @@ import { CloudflareError } from '../../../error';
 
 export class Fields extends APIResource {
   /**
-   * Lists all fields available for a dataset. The response result is an object with
+   * Lists all fields available for a dataset. The response result is. an object with
    * key-value pairs, where keys are field names, and values are descriptions.
    *
    * @example
