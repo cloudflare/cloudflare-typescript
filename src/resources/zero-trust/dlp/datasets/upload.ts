@@ -53,6 +53,7 @@ export class Upload extends APIResource {
     datasetId: string,
     version: number,
     dataset: string | ArrayBufferView | ArrayBuffer | BlobLike,
+    params: UploadEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetsAPI.Dataset> {
     const { account_id } = params;
@@ -97,6 +98,12 @@ export interface UploadCreateParams {
   account_id: string;
 }
 
+export type UploadEditParams = string | ArrayBufferView | ArrayBuffer | BlobLike;
+
 export declare namespace Upload {
-  export { type NewVersion as NewVersion, type UploadCreateParams as UploadCreateParams };
+  export {
+    type NewVersion as NewVersion,
+    type UploadCreateParams as UploadCreateParams,
+    type UploadEditParams as UploadEditParams,
+  };
 }

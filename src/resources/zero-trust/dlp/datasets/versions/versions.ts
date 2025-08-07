@@ -3,7 +3,7 @@
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
 import * as EntriesAPI from './entries';
-import { Entries, EntryCreateResponse } from './entries';
+import { Entries, EntryCreateParams, EntryCreateResponse } from './entries';
 import { SinglePage } from '../../../../../pagination';
 
 export class Versions extends APIResource {
@@ -98,5 +98,9 @@ export declare namespace Versions {
     type VersionCreateParams as VersionCreateParams,
   };
 
-  export { Entries as Entries, type EntryCreateResponse as EntryCreateResponse };
+  export {
+    Entries as Entries,
+    type EntryCreateResponse as EntryCreateResponse,
+    type EntryCreateParams as EntryCreateParams,
+  };
 }
