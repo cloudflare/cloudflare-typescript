@@ -136,6 +136,12 @@ export interface BotFightModeConfiguration {
   fight_mode?: boolean;
 
   /**
+   * Enable cloudflare managed robots.txt. If an existing robots.txt is detected,
+   * then managed robots.txt will be prepended to the existing robots.txt.
+   */
+  is_robots_txt_managed?: boolean;
+
+  /**
    * A read-only field that shows which unauthorized settings are currently active on
    * the zone. These settings typically result from upgrades or downgrades.
    */
@@ -210,6 +216,12 @@ export interface BotFightModeConfigurationParam {
    * Whether to enable Bot Fight Mode.
    */
   fight_mode?: boolean;
+
+  /**
+   * Enable cloudflare managed robots.txt. If an existing robots.txt is detected,
+   * then managed robots.txt will be prepended to the existing robots.txt.
+   */
+  is_robots_txt_managed?: boolean;
 }
 
 export interface SubscriptionConfiguration {
@@ -236,6 +248,12 @@ export interface SubscriptionConfiguration {
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
    */
   enable_js?: boolean;
+
+  /**
+   * Enable cloudflare managed robots.txt. If an existing robots.txt is detected,
+   * then managed robots.txt will be prepended to the existing robots.txt.
+   */
+  is_robots_txt_managed?: boolean;
 
   /**
    * A read-only field that shows which unauthorized settings are currently active on
@@ -322,6 +340,12 @@ export interface SubscriptionConfigurationParam {
   enable_js?: boolean;
 
   /**
+   * Enable cloudflare managed robots.txt. If an existing robots.txt is detected,
+   * then managed robots.txt will be prepended to the existing robots.txt.
+   */
+  is_robots_txt_managed?: boolean;
+
+  /**
    * Whether to disable tracking the highest bot score for a session in the Bot
    * Management cookie.
    */
@@ -345,6 +369,12 @@ export interface SuperBotFightModeDefinitelyConfiguration {
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
    */
   enable_js?: boolean;
+
+  /**
+   * Enable cloudflare managed robots.txt. If an existing robots.txt is detected,
+   * then managed robots.txt will be prepended to the existing robots.txt.
+   */
+  is_robots_txt_managed?: boolean;
 
   /**
    * Whether to optimize Super Bot Fight Mode protections for Wordpress.
@@ -419,6 +449,12 @@ export interface SuperBotFightModeDefinitelyConfigurationParam {
   enable_js?: boolean;
 
   /**
+   * Enable cloudflare managed robots.txt. If an existing robots.txt is detected,
+   * then managed robots.txt will be prepended to the existing robots.txt.
+   */
+  is_robots_txt_managed?: boolean;
+
+  /**
    * Whether to optimize Super Bot Fight Mode protections for Wordpress.
    */
   optimize_wordpress?: boolean;
@@ -458,6 +494,12 @@ export interface SuperBotFightModeLikelyConfiguration {
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
    */
   enable_js?: boolean;
+
+  /**
+   * Enable cloudflare managed robots.txt. If an existing robots.txt is detected,
+   * then managed robots.txt will be prepended to the existing robots.txt.
+   */
+  is_robots_txt_managed?: boolean;
 
   /**
    * Whether to optimize Super Bot Fight Mode protections for Wordpress.
@@ -529,6 +571,12 @@ export interface SuperBotFightModeLikelyConfigurationParam {
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
    */
   enable_js?: boolean;
+
+  /**
+   * Enable cloudflare managed robots.txt. If an existing robots.txt is detected,
+   * then managed robots.txt will be prepended to the existing robots.txt.
+   */
+  is_robots_txt_managed?: boolean;
 
   /**
    * Whether to optimize Super Bot Fight Mode protections for Wordpress.
@@ -605,6 +653,12 @@ export declare namespace BotManagementUpdateParams {
      * Body param: Whether to enable Bot Fight Mode.
      */
     fight_mode?: boolean;
+
+    /**
+     * Body param: Enable cloudflare managed robots.txt. If an existing robots.txt is
+     * detected, then managed robots.txt will be prepended to the existing robots.txt.
+     */
+    is_robots_txt_managed?: boolean;
   }
 
   export interface SuperBotFightModeDefinitelyConfiguration {
@@ -630,6 +684,12 @@ export declare namespace BotManagementUpdateParams {
      * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
      */
     enable_js?: boolean;
+
+    /**
+     * Body param: Enable cloudflare managed robots.txt. If an existing robots.txt is
+     * detected, then managed robots.txt will be prepended to the existing robots.txt.
+     */
+    is_robots_txt_managed?: boolean;
 
     /**
      * Body param: Whether to optimize Super Bot Fight Mode protections for Wordpress.
@@ -679,6 +739,12 @@ export declare namespace BotManagementUpdateParams {
      * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
      */
     enable_js?: boolean;
+
+    /**
+     * Body param: Enable cloudflare managed robots.txt. If an existing robots.txt is
+     * detected, then managed robots.txt will be prepended to the existing robots.txt.
+     */
+    is_robots_txt_managed?: boolean;
 
     /**
      * Body param: Whether to optimize Super Bot Fight Mode protections for Wordpress.
@@ -741,6 +807,12 @@ export declare namespace BotManagementUpdateParams {
      * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
      */
     enable_js?: boolean;
+
+    /**
+     * Body param: Enable cloudflare managed robots.txt. If an existing robots.txt is
+     * detected, then managed robots.txt will be prepended to the existing robots.txt.
+     */
+    is_robots_txt_managed?: boolean;
 
     /**
      * Body param: Whether to disable tracking the highest bot score for a session in
