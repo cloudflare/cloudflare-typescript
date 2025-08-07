@@ -24,7 +24,7 @@ export const tool: Tool = {
       destination_conf: {
         type: 'string',
         description:
-          'Uniquely identifies a resource (such as an s3 bucket) where data will be pushed. Additional configuration parameters supported by the destination may be included.',
+          'Uniquely identifies a resource (such as an s3 bucket) where data. will be pushed. Additional configuration parameters supported by the destination may be included.',
       },
       ownership_challenge: {
         type: 'string',

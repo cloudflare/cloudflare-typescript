@@ -34,7 +34,7 @@ export const tool: Tool = {
       destination_conf: {
         type: 'string',
         description:
-          'Uniquely identifies a resource (such as an s3 bucket) where data will be pushed. Additional configuration parameters supported by the destination may be included.',
+          'Uniquely identifies a resource (such as an s3 bucket) where data. will be pushed. Additional configuration parameters supported by the destination may be included.',
       },
       enabled: {
         type: 'boolean',
@@ -48,7 +48,7 @@ export const tool: Tool = {
       frequency: {
         type: 'string',
         description:
-          'This field is deprecated. Please use `max_upload_*` parameters instead. The frequency at which Cloudflare sends batches of logs to your destination. Setting frequency to high sends your logs in larger quantities of smaller files. Setting frequency to low sends logs in smaller quantities of larger files.',
+          'This field is deprecated. Please use `max_upload_*` parameters instead. . The frequency at which Cloudflare sends batches of logs to your destination. Setting frequency to high sends your logs in larger quantities of smaller files. Setting frequency to low sends logs in smaller quantities of larger files.',
         enum: ['high', 'low'],
       },
       kind: {
@@ -110,7 +110,7 @@ export const tool: Tool = {
       name: {
         type: 'string',
         description:
-          'Optional human readable job name. Not unique. Cloudflare suggests that you set this to a meaningful string, like the domain name, to make it easier to identify your job.',
+          'Optional human readable job name. Not unique. Cloudflare suggests. that you set this to a meaningful string, like the domain name, to make it easier to identify your job.',
       },
       output_options: {
         $ref: '#/$defs/output_options',

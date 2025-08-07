@@ -36,6 +36,7 @@ export class Jobs extends APIResource {
    *     sample_rate: 1,
    *     timestamp_format: 'unixnano',
    *   },
+   *   ownership_challenge: '00000000000000000000',
    * });
    * ```
    */
@@ -91,6 +92,7 @@ export class Jobs extends APIResource {
    *     sample_rate: 1,
    *     timestamp_format: 'unixnano',
    *   },
+   *   ownership_challenge: '00000000000000000000',
    * });
    * ```
    */
@@ -282,8 +284,8 @@ export interface LogpushJob {
     | null;
 
   /**
-   * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed.
-   * Additional configuration parameters supported by the destination may be
+   * Uniquely identifies a resource (such as an s3 bucket) where data. will be
+   * pushed. Additional configuration parameters supported by the destination may be
    * included.
    */
   destination_conf?: string;
@@ -294,7 +296,7 @@ export interface LogpushJob {
   enabled?: boolean;
 
   /**
-   * If not null, the job is currently failing. Failures are usually repetitive
+   * If not null, the job is currently failing. Failures are usually. repetitive
    * (example: no permissions to write to destination bucket). Only the last failure
    * is recorded. On successful execution of a job the error_message and last_error
    * are set to null.
@@ -303,7 +305,7 @@ export interface LogpushJob {
 
   /**
    * @deprecated This field is deprecated. Please use `max_upload_*` parameters
-   * instead. The frequency at which Cloudflare sends batches of logs to your
+   * instead. . The frequency at which Cloudflare sends batches of logs to your
    * destination. Setting frequency to high sends your logs in larger quantities of
    * smaller files. Setting frequency to low sends logs in smaller quantities of
    * larger files.
@@ -325,9 +327,9 @@ export interface LogpushJob {
   last_complete?: string | null;
 
   /**
-   * Records the last time the job failed. If not null, the job is currently failing.
-   * If null, the job has either never failed or has run successfully at least once
-   * since last failure. See also the error_message field.
+   * Records the last time the job failed. If not null, the job is currently.
+   * failing. If null, the job has either never failed or has run successfully at
+   * least once since last failure. See also the error_message field.
    */
   last_error?: string | null;
 
@@ -365,7 +367,7 @@ export interface LogpushJob {
   max_upload_records?: 0 | number | null;
 
   /**
-   * Optional human readable job name. Not unique. Cloudflare suggests that you set
+   * Optional human readable job name. Not unique. Cloudflare suggests. that you set
    * this to a meaningful string, like the domain name, to make it easier to identify
    * your job.
    */
@@ -539,7 +541,7 @@ export interface JobDeleteResponse {
 
 export interface JobCreateParams {
   /**
-   * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
+   * Body param: Uniquely identifies a resource (such as an s3 bucket) where data.
    * will be pushed. Additional configuration parameters supported by the destination
    * may be included.
    */
@@ -603,7 +605,7 @@ export interface JobCreateParams {
 
   /**
    * @deprecated Body param: This field is deprecated. Please use `max_upload_*`
-   * parameters instead. The frequency at which Cloudflare sends batches of logs to
+   * parameters instead. . The frequency at which Cloudflare sends batches of logs to
    * your destination. Setting frequency to high sends your logs in larger quantities
    * of smaller files. Setting frequency to low sends logs in smaller quantities of
    * larger files.
@@ -650,7 +652,7 @@ export interface JobCreateParams {
   max_upload_records?: 0 | number | null;
 
   /**
-   * Body param: Optional human readable job name. Not unique. Cloudflare suggests
+   * Body param: Optional human readable job name. Not unique. Cloudflare suggests.
    * that you set this to a meaningful string, like the domain name, to make it
    * easier to identify your job.
    */
@@ -682,7 +684,7 @@ export interface JobUpdateParams {
   zone_id?: string;
 
   /**
-   * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
+   * Body param: Uniquely identifies a resource (such as an s3 bucket) where data.
    * will be pushed. Additional configuration parameters supported by the destination
    * may be included.
    */
@@ -702,7 +704,7 @@ export interface JobUpdateParams {
 
   /**
    * @deprecated Body param: This field is deprecated. Please use `max_upload_*`
-   * parameters instead. The frequency at which Cloudflare sends batches of logs to
+   * parameters instead. . The frequency at which Cloudflare sends batches of logs to
    * your destination. Setting frequency to high sends your logs in larger quantities
    * of smaller files. Setting frequency to low sends logs in smaller quantities of
    * larger files.
@@ -749,7 +751,7 @@ export interface JobUpdateParams {
   max_upload_records?: 0 | number | null;
 
   /**
-   * Body param: Optional human readable job name. Not unique. Cloudflare suggests
+   * Body param: Optional human readable job name. Not unique. Cloudflare suggests.
    * that you set this to a meaningful string, like the domain name, to make it
    * easier to identify your job.
    */

@@ -1014,7 +1014,7 @@ The following tools are available in this MCP server.
 
 ### Resource `logpush.datasets.fields`:
 
-- `get_datasets_logpush_fields` (`read`): Lists all fields available for a dataset. The response result is an object with key-value pairs, where keys are field names, and values are descriptions.
+- `get_datasets_logpush_fields` (`read`): Lists all fields available for a dataset. The response result is. an object with key-value pairs, where keys are field names, and values are descriptions.
 
 ### Resource `logpush.datasets.jobs`:
 
