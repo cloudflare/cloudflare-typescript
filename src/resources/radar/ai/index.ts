@@ -3,15 +3,7 @@
 export { AI } from './ai';
 export { Bots } from './bots/index';
 export { Inference } from './inference/index';
-export {
-  TimeseriesGroups,
-  type TimeseriesGroupSummaryResponse,
-  type TimeseriesGroupTimeseriesResponse,
-  type TimeseriesGroupTimeseriesGroupsResponse,
-  type TimeseriesGroupSummaryParams,
-  type TimeseriesGroupTimeseriesParams,
-  type TimeseriesGroupTimeseriesGroupsParams,
-} from './timeseries-groups';
+export { TimeseriesGroups } from './timeseries-groups';
 export {
   ToMarkdownCreateResponsesSinglePage,
   ToMarkdown,
