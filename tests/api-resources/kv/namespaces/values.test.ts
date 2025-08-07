@@ -32,7 +32,7 @@ describe('resource values', () => {
       value: 'Some Value',
       expiration: 1578435000,
       expiration_ttl: 300,
-      metadata: { someMetadataKey: 'someMetadataValue' },
+      metadata: {},
     });
   });
 
