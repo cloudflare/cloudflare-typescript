@@ -60,7 +60,6 @@ export const tool: Tool = {
             },
             metadata: {
               type: 'object',
-              description: 'Arbitrary JSON that is associated with a key.',
             },
           },
           required: ['key', 'value'],
