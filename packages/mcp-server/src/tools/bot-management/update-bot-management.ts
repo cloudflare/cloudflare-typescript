@@ -48,6 +48,11 @@ export const tool: Tool = {
             type: 'boolean',
             description: 'Whether to enable Bot Fight Mode.',
           },
+          is_robots_txt_managed: {
+            type: 'boolean',
+            description:
+              'Enable cloudflare managed robots.txt. If an existing robots.txt is detected, then managed robots.txt will be prepended to the existing robots.txt.',
+          },
         },
         required: ['zone_id'],
       },
@@ -73,6 +78,11 @@ export const tool: Tool = {
             type: 'boolean',
             description:
               'Use lightweight, invisible JavaScript detections to improve Bot Management. [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).',
+          },
+          is_robots_txt_managed: {
+            type: 'boolean',
+            description:
+              'Enable cloudflare managed robots.txt. If an existing robots.txt is detected, then managed robots.txt will be prepended to the existing robots.txt.',
           },
           optimize_wordpress: {
             type: 'boolean',
@@ -118,6 +128,11 @@ export const tool: Tool = {
             type: 'boolean',
             description:
               'Use lightweight, invisible JavaScript detections to improve Bot Management. [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).',
+          },
+          is_robots_txt_managed: {
+            type: 'boolean',
+            description:
+              'Enable cloudflare managed robots.txt. If an existing robots.txt is detected, then managed robots.txt will be prepended to the existing robots.txt.',
           },
           optimize_wordpress: {
             type: 'boolean',
@@ -173,6 +188,11 @@ export const tool: Tool = {
             type: 'boolean',
             description:
               'Use lightweight, invisible JavaScript detections to improve Bot Management. [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).',
+          },
+          is_robots_txt_managed: {
+            type: 'boolean',
+            description:
+              'Enable cloudflare managed robots.txt. If an existing robots.txt is detected, then managed robots.txt will be prepended to the existing robots.txt.',
           },
           suppress_session_score: {
             type: 'boolean',
