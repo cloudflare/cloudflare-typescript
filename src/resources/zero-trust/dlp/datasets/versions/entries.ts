@@ -26,6 +26,7 @@ export class Entries extends APIResource {
     version: number,
     entryId: string,
     datasetVersionEntry: string | ArrayBufferView | ArrayBuffer | BlobLike,
+    params: EntryCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryCreateResponse> {
     const { account_id } = params;
@@ -53,6 +54,8 @@ export interface EntryCreateResponse {
   upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 }
 
+export type EntryCreateParams = string | ArrayBufferView | ArrayBuffer | BlobLike;
+
 export declare namespace Entries {
-  export { type EntryCreateResponse as EntryCreateResponse };
+  export { type EntryCreateResponse as EntryCreateResponse, type EntryCreateParams as EntryCreateParams };
 }
