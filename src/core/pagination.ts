@@ -3,7 +3,6 @@
 import { CloudflareError } from './error';
 import { FinalRequestOptions } from '../internal/request-options';
 import { defaultParseResponse } from '../internal/parse';
-import * as StainlessPageResourceAPI from '../resources/stainless-page-resource';
 import { type Cloudflare } from '../client';
 import { APIPromise } from './api-promise';
 import { type APIResponseProps } from '../internal/parse';
@@ -270,70 +269,6 @@ export class CursorPagination<Item> extends AbstractPage<Item> implements Cursor
 
   nextPageRequestOptions(): PageRequestOptions | null {
     const cursor = this.result_info?.cursor;
-    if (!cursor) {
-      return null;
-    }
-
-    return {
-      ...this.options,
-      query: {
-        ...maybeObj(this.options.query),
-        cursor,
-      },
-    };
-  }
-}
-
-export interface CursorPaginationAfterResponse<Item> {
-  result: Array<Item>;
-
-  result_info: CursorPaginationAfterResponse.ResultInfo;
-}
-
-export namespace CursorPaginationAfterResponse {
-  export interface ResultInfo {
-    cursors?: StainlessPageResourceAPI.ResultInfo.Cursors;
-  }
-
-  export namespace ResultInfo {
-    export interface Cursors {
-      after?: string;
-    }
-  }
-}
-
-export interface CursorPaginationAfterParams {
-  cursor?: string;
-
-  per_page?: number;
-}
-
-export class CursorPaginationAfter<Item>
-  extends AbstractPage<Item>
-  implements CursorPaginationAfterResponse<Item>
-{
-  result: Array<Item>;
-
-  result_info: CursorPaginationAfterResponse.ResultInfo;
-
-  constructor(
-    client: Cloudflare,
-    response: Response,
-    body: CursorPaginationAfterResponse<Item>,
-    options: FinalRequestOptions,
-  ) {
-    super(client, response, body, options);
-
-    this.result = body.result || [];
-    this.result_info = body.result_info || {};
-  }
-
-  getPaginatedItems(): Item[] {
-    return this.result ?? [];
-  }
-
-  nextPageRequestOptions(): PageRequestOptions | null {
-    const cursor = this.result_info?.cursors?.after;
     if (!cursor) {
       return null;
     }
