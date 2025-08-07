@@ -33,9 +33,6 @@ export class Metadata extends APIResource {
   }
 }
 
-/**
- * Arbitrary JSON that is associated with a key.
- */
 export type MetadataGetResponse = unknown;
 
 export interface MetadataGetParams {

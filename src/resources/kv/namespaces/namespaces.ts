@@ -314,14 +314,8 @@ export namespace NamespaceBulkGetResponse {
 
   export namespace WorkersKVBulkGetResultWithMetadata {
     export interface Values {
-      /**
-       * The metadata associated with the key.
-       */
       metadata: unknown;
 
-      /**
-       * The value associated with the key.
-       */
       value: unknown;
 
       /**
@@ -470,9 +464,6 @@ export namespace NamespaceBulkUpdateParams {
      */
     expiration_ttl?: number;
 
-    /**
-     * Arbitrary JSON that is associated with a key.
-     */
     metadata?: unknown;
   }
 }

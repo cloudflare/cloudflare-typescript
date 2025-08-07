@@ -142,7 +142,7 @@ export interface ValueUpdateParams {
   expiration_ttl?: number;
 
   /**
-   * Body param: Associates arbitrary JSON data with a key/value pair.
+   * Body param:
    */
   metadata?: unknown;
 }
