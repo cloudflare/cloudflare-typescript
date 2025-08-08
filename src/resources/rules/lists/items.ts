@@ -181,7 +181,122 @@ export interface ItemUpdateResponse {
   operation_id: string;
 }
 
-export type ItemListResponse = unknown;
+export type ItemListResponse =
+  | ItemListResponse.ListsListItemIPFull
+  | ItemListResponse.ListsListItemHostnameFull
+  | ItemListResponse.ListsListItemRedirectFull
+  | ItemListResponse.ListsListItemASNFull;
+
+export namespace ItemListResponse {
+  export interface ListsListItemIPFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
+     */
+    ip: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemHostnameFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
+     */
+    hostname: ListsAPI.Hostname;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemRedirectFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The definition of the redirect.
+     */
+    redirect: ListsAPI.Redirect;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemASNFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn: number;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+}
 
 export interface ItemDeleteResponse {
   /**
@@ -190,7 +305,122 @@ export interface ItemDeleteResponse {
   operation_id: string;
 }
 
-export type ItemGetResponse = unknown;
+export type ItemGetResponse =
+  | ItemGetResponse.ListsListItemIPFull
+  | ItemGetResponse.ListsListItemHostnameFull
+  | ItemGetResponse.ListsListItemRedirectFull
+  | ItemGetResponse.ListsListItemASNFull;
+
+export namespace ItemGetResponse {
+  export interface ListsListItemIPFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
+     */
+    ip: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemHostnameFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
+     */
+    hostname: ListsAPI.Hostname;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemRedirectFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The definition of the redirect.
+     */
+    redirect: ListsAPI.Redirect;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemASNFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn: number;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+}
 
 export interface ItemCreateParams {
   /**
