@@ -2498,17 +2498,17 @@ export namespace HTTPSRecord {
    */
   export interface Data {
     /**
-     * priority.
+     * Priority.
      */
     priority?: number;
 
     /**
-     * target.
+     * Target.
      */
     target?: string;
 
     /**
-     * value.
+     * Value.
      */
     value?: string;
   }
@@ -2587,17 +2587,17 @@ export namespace HTTPSRecordParam {
    */
   export interface Data {
     /**
-     * priority.
+     * Priority.
      */
     priority?: number;
 
     /**
-     * target.
+     * Target.
      */
     target?: string;
 
     /**
-     * value.
+     * Value.
      */
     value?: string;
   }
@@ -4957,17 +4957,17 @@ export namespace SSHFPRecord {
    */
   export interface Data {
     /**
-     * algorithm.
+     * Algorithm.
      */
     algorithm?: number;
 
     /**
-     * fingerprint.
+     * Fingerprint.
      */
     fingerprint?: string;
 
     /**
-     * type.
+     * Type.
      */
     type?: number;
   }
@@ -5046,17 +5046,17 @@ export namespace SSHFPRecordParam {
    */
   export interface Data {
     /**
-     * algorithm.
+     * Algorithm.
      */
     algorithm?: number;
 
     /**
-     * fingerprint.
+     * Fingerprint.
      */
     fingerprint?: string;
 
     /**
-     * type.
+     * Type.
      */
     type?: number;
   }
@@ -5140,17 +5140,17 @@ export namespace SVCBRecord {
    */
   export interface Data {
     /**
-     * priority.
+     * Priority.
      */
     priority?: number;
 
     /**
-     * target.
+     * Target.
      */
     target?: string;
 
     /**
-     * value.
+     * Value.
      */
     value?: string;
   }
@@ -5229,17 +5229,17 @@ export namespace SVCBRecordParam {
    */
   export interface Data {
     /**
-     * priority.
+     * Priority.
      */
     priority?: number;
 
     /**
-     * target.
+     * Target.
      */
     target?: string;
 
     /**
-     * value.
+     * Value.
      */
     value?: string;
   }
@@ -5323,7 +5323,7 @@ export namespace TLSARecord {
    */
   export interface Data {
     /**
-     * certificate.
+     * Certificate.
      */
     certificate?: string;
 
@@ -5417,7 +5417,7 @@ export namespace TLSARecordParam {
    */
   export interface Data {
     /**
-     * certificate.
+     * Certificate.
      */
     certificate?: string;
 
@@ -6949,17 +6949,17 @@ export declare namespace RecordCreateParams {
      */
     export interface Data {
       /**
-       * priority.
+       * Priority.
        */
       priority?: number;
 
       /**
-       * target.
+       * Target.
        */
       target?: string;
 
       /**
-       * value.
+       * Value.
        */
       value?: string;
     }
@@ -7495,17 +7495,17 @@ export declare namespace RecordCreateParams {
      */
     export interface Data {
       /**
-       * algorithm.
+       * Algorithm.
        */
       algorithm?: number;
 
       /**
-       * fingerprint.
+       * Fingerprint.
        */
       fingerprint?: string;
 
       /**
-       * type.
+       * Type.
        */
       type?: number;
     }
@@ -7590,17 +7590,17 @@ export declare namespace RecordCreateParams {
      */
     export interface Data {
       /**
-       * priority.
+       * Priority.
        */
       priority?: number;
 
       /**
-       * target.
+       * Target.
        */
       target?: string;
 
       /**
-       * value.
+       * Value.
        */
       value?: string;
     }
@@ -7685,7 +7685,7 @@ export declare namespace RecordCreateParams {
      */
     export interface Data {
       /**
-       * certificate.
+       * Certificate.
        */
       certificate?: string;
 
@@ -8921,17 +8921,17 @@ export declare namespace RecordUpdateParams {
      */
     export interface Data {
       /**
-       * priority.
+       * Priority.
        */
       priority?: number;
 
       /**
-       * target.
+       * Target.
        */
       target?: string;
 
       /**
-       * value.
+       * Value.
        */
       value?: string;
     }
@@ -9467,17 +9467,17 @@ export declare namespace RecordUpdateParams {
      */
     export interface Data {
       /**
-       * algorithm.
+       * Algorithm.
        */
       algorithm?: number;
 
       /**
-       * fingerprint.
+       * Fingerprint.
        */
       fingerprint?: string;
 
       /**
-       * type.
+       * Type.
        */
       type?: number;
     }
@@ -9562,17 +9562,17 @@ export declare namespace RecordUpdateParams {
      */
     export interface Data {
       /**
-       * priority.
+       * Priority.
        */
       priority?: number;
 
       /**
-       * target.
+       * Target.
        */
       target?: string;
 
       /**
-       * value.
+       * Value.
        */
       value?: string;
     }
@@ -9657,7 +9657,7 @@ export declare namespace RecordUpdateParams {
      */
     export interface Data {
       /**
-       * certificate.
+       * Certificate.
        */
       certificate?: string;
 
@@ -11242,17 +11242,17 @@ export declare namespace RecordEditParams {
      */
     export interface Data {
       /**
-       * priority.
+       * Priority.
        */
       priority?: number;
 
       /**
-       * target.
+       * Target.
        */
       target?: string;
 
       /**
-       * value.
+       * Value.
        */
       value?: string;
     }
@@ -11788,17 +11788,17 @@ export declare namespace RecordEditParams {
      */
     export interface Data {
       /**
-       * algorithm.
+       * Algorithm.
        */
       algorithm?: number;
 
       /**
-       * fingerprint.
+       * Fingerprint.
        */
       fingerprint?: string;
 
       /**
-       * type.
+       * Type.
        */
       type?: number;
     }
@@ -11883,17 +11883,17 @@ export declare namespace RecordEditParams {
      */
     export interface Data {
       /**
-       * priority.
+       * Priority.
        */
       priority?: number;
 
       /**
-       * target.
+       * Target.
        */
       target?: string;
 
       /**
-       * value.
+       * Value.
        */
       value?: string;
     }
@@ -11978,7 +11978,7 @@ export declare namespace RecordEditParams {
      */
     export interface Data {
       /**
-       * certificate.
+       * Certificate.
        */
       certificate?: string;
 
