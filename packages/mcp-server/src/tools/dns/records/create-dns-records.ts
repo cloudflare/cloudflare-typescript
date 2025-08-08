@@ -826,15 +826,15 @@ export const tool: Tool = {
             properties: {
               priority: {
                 type: 'number',
-                description: 'priority.',
+                description: 'Priority.',
               },
               target: {
                 type: 'string',
-                description: 'target.',
+                description: 'Target.',
               },
               value: {
                 type: 'string',
-                description: 'value.',
+                description: 'Value.',
               },
             },
           },
@@ -1245,15 +1245,15 @@ export const tool: Tool = {
             properties: {
               algorithm: {
                 type: 'number',
-                description: 'algorithm.',
+                description: 'Algorithm.',
               },
               fingerprint: {
                 type: 'string',
-                description: 'fingerprint.',
+                description: 'Fingerprint.',
               },
               type: {
                 type: 'number',
-                description: 'type.',
+                description: 'Type.',
               },
             },
           },
@@ -1317,15 +1317,15 @@ export const tool: Tool = {
             properties: {
               priority: {
                 type: 'number',
-                description: 'priority.',
+                description: 'Priority.',
               },
               target: {
                 type: 'string',
-                description: 'target.',
+                description: 'Target.',
               },
               value: {
                 type: 'string',
-                description: 'value.',
+                description: 'Value.',
               },
             },
           },
@@ -1389,7 +1389,7 @@ export const tool: Tool = {
             properties: {
               certificate: {
                 type: 'string',
-                description: 'certificate.',
+                description: 'Certificate.',
               },
               matching_type: {
                 type: 'number',
