@@ -62,6 +62,11 @@ export interface DirectUploadCreateParams {
   id?: string;
 
   /**
+   * Body param: Can set the creator field with an internal user ID.
+   */
+  creator?: string;
+
+  /**
    * Body param: The date after which the upload will not be accepted. Minimum: Now +
    * 2 minutes. Maximum: Now + 6 hours.
    */

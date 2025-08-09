@@ -189,6 +189,8 @@ export namespace BotListResponse {
      * A kebab-case identifier derived from the bot name.
      */
     slug: string;
+
+    userAgentPatterns: Array<string>;
   }
 }
 
@@ -248,7 +250,7 @@ export namespace BotSummaryResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 

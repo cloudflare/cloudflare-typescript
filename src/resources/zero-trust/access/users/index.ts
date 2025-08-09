@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  AccessUsersSinglePage,
-  UserListResponsesSinglePage,
+  AccessUsersV4PagePaginationArray,
+  UserListResponsesV4PagePaginationArray,
   Users,
   type AccessUser,
   type UserListResponse,

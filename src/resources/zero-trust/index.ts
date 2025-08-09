@@ -32,7 +32,7 @@ export {
   type GatewayListParams,
 } from './gateway/index';
 export {
-  IdentityProviderListResponsesSinglePage,
+  IdentityProviderListResponsesV4PagePaginationArray,
   IdentityProviders,
   type AzureAD,
   type GenericOAuthConfig,

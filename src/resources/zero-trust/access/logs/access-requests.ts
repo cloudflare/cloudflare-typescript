@@ -49,6 +49,16 @@ export interface AccessRequestListParams {
   limit?: number;
 
   /**
+   * Query param: Page number of results.
+   */
+  page?: number;
+
+  /**
+   * Query param: Number of results per page.
+   */
+  per_page?: number;
+
+  /**
    * Query param: The earliest event timestamp to query.
    */
   since?: string;

@@ -3,6 +3,12 @@
 import { APIResource } from '../../../resource';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
+  TimeseriesGroupSummaryParams,
+  TimeseriesGroupSummaryResponse,
+  TimeseriesGroupTimeseriesGroupsParams,
+  TimeseriesGroupTimeseriesGroupsResponse,
+  TimeseriesGroupTimeseriesParams,
+  TimeseriesGroupTimeseriesResponse,
   TimeseriesGroupUserAgentParams,
   TimeseriesGroupUserAgentResponse,
   TimeseriesGroups,
@@ -48,7 +54,13 @@ export declare namespace AI {
 
   export {
     TimeseriesGroups as TimeseriesGroups,
+    type TimeseriesGroupSummaryResponse as TimeseriesGroupSummaryResponse,
+    type TimeseriesGroupTimeseriesResponse as TimeseriesGroupTimeseriesResponse,
+    type TimeseriesGroupTimeseriesGroupsResponse as TimeseriesGroupTimeseriesGroupsResponse,
     type TimeseriesGroupUserAgentResponse as TimeseriesGroupUserAgentResponse,
+    type TimeseriesGroupSummaryParams as TimeseriesGroupSummaryParams,
+    type TimeseriesGroupTimeseriesParams as TimeseriesGroupTimeseriesParams,
+    type TimeseriesGroupTimeseriesGroupsParams as TimeseriesGroupTimeseriesGroupsParams,
     type TimeseriesGroupUserAgentParams as TimeseriesGroupUserAgentParams,
   };
 }

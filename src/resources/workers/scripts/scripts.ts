@@ -9,9 +9,11 @@ import * as DeploymentsAPI from './deployments';
 import {
   Deployment,
   DeploymentCreateParams,
-  DeploymentCreateResponse,
+  DeploymentDeleteParams,
+  DeploymentDeleteResponse,
   DeploymentGetParams,
-  DeploymentGetResponse,
+  DeploymentListParams,
+  DeploymentListResponse,
   Deployments,
 } from './deployments';
 import * as SchedulesAPI from './schedules';
@@ -115,12 +117,12 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptUpdateResponse> {
-    const { account_id, files, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/workers/scripts/${scriptName}`,
         Core.maybeMultipartFormRequestOptions({
-          body: { ...body, ...files },
+          body,
           ...options,
           __multipartSyntax: 'json',
           headers: { 'Content-Type': 'application/javascript', ...options?.headers },
@@ -143,8 +145,11 @@ export class Scripts extends APIResource {
    * ```
    */
   list(params: ScriptListParams, options?: Core.RequestOptions): Core.PagePromise<ScriptsSinglePage, Script> {
-    const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/workers/scripts`, ScriptsSinglePage, options);
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/workers/scripts`, ScriptsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -452,17 +457,26 @@ export interface ScriptUpdateParams {
   account_id: string;
 
   /**
-   * Body param: JSON encoded metadata about the uploaded parts and Worker
+   * Body param: JSON-encoded metadata about the uploaded parts and Worker
    * configuration.
    */
   metadata: ScriptUpdateParams.Metadata;
 
-  files?: { [key: string]: Core.Uploadable };
+  /**
+   * Body param: An array of modules (often JavaScript files) comprising a Worker
+   * script. At least one module must be present and referenced in the metadata as
+   * `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are:
+   * `application/javascript+module`, `text/javascript+module`,
+   * `application/javascript`, `text/javascript`, `text/x-python`,
+   * `text/x-python-requirement`, `application/wasm`, `text/plain`,
+   * `application/octet-stream`, `application/source-map`.
+   */
+  files?: Array<Core.Uploadable>;
 }
 
 export namespace ScriptUpdateParams {
   /**
-   * JSON encoded metadata about the uploaded parts and Worker configuration.
+   * JSON-encoded metadata about the uploaded parts and Worker configuration.
    */
   export interface Metadata {
     /**
@@ -1191,9 +1205,15 @@ export namespace ScriptUpdateParams {
 
 export interface ScriptListParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: Filter scripts by tags. Format: comma-separated list of tag:allowed
+   * pairs where allowed is 'yes' or 'no'.
+   */
+  tags?: string;
 }
 
 export interface ScriptDeleteParams {
@@ -1291,9 +1311,11 @@ export declare namespace Scripts {
   export {
     Deployments as Deployments,
     type Deployment as Deployment,
-    type DeploymentCreateResponse as DeploymentCreateResponse,
-    type DeploymentGetResponse as DeploymentGetResponse,
+    type DeploymentListResponse as DeploymentListResponse,
+    type DeploymentDeleteResponse as DeploymentDeleteResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentListParams as DeploymentListParams,
+    type DeploymentDeleteParams as DeploymentDeleteParams,
     type DeploymentGetParams as DeploymentGetParams,
   };
 

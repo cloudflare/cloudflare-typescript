@@ -240,6 +240,8 @@ export interface AIGatewayCreateResponse {
   logpush?: boolean;
 
   logpush_public_key?: string | null;
+
+  store_id?: string | null;
 }
 
 export interface AIGatewayUpdateResponse {
@@ -279,6 +281,8 @@ export interface AIGatewayUpdateResponse {
   logpush?: boolean;
 
   logpush_public_key?: string | null;
+
+  store_id?: string | null;
 }
 
 export interface AIGatewayListResponse {
@@ -318,6 +322,8 @@ export interface AIGatewayListResponse {
   logpush?: boolean;
 
   logpush_public_key?: string | null;
+
+  store_id?: string | null;
 }
 
 export interface AIGatewayDeleteResponse {
@@ -357,6 +363,8 @@ export interface AIGatewayDeleteResponse {
   logpush?: boolean;
 
   logpush_public_key?: string | null;
+
+  store_id?: string | null;
 }
 
 export interface AIGatewayGetResponse {
@@ -396,6 +404,8 @@ export interface AIGatewayGetResponse {
   logpush?: boolean;
 
   logpush_public_key?: string | null;
+
+  store_id?: string | null;
 }
 
 export interface AIGatewayCreateParams {
@@ -525,6 +535,11 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   logpush_public_key?: string | null;
+
+  /**
+   * Body param:
+   */
+  store_id?: string | null;
 }
 
 export interface AIGatewayListParams extends V4PagePaginationArrayParams {

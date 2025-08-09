@@ -44,6 +44,7 @@ describe('resource instances', () => {
   test('list: required and optional params', async () => {
     const response = await client.workflows.instances.list('x', {
       account_id: 'account_id',
+      cursor: 'cursor',
       date_end: '2019-12-27T18:11:19.117Z',
       date_start: '2019-12-27T18:11:19.117Z',
       page: 1,

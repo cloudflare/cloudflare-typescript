@@ -5,7 +5,8 @@ import * as Core from '../../../../core';
 
 export class Predefined extends APIResource {
   /**
-   * This will update an existing predefined entry
+   * Predefined entries can't be created, this will update an existing predefined
+   * entry This is needed for our generated terraform API
    *
    * @example
    * ```ts

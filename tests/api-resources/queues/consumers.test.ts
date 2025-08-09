@@ -74,6 +74,25 @@ describe('resource consumers', () => {
     );
   });
 
+  test('list: only required params', async () => {
+    const responsePromise = client.queues.consumers.list('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('list: required and optional params', async () => {
+    const response = await client.queues.consumers.list('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
   test('delete: only required params', async () => {
     const responsePromise = client.queues.consumers.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -98,9 +117,11 @@ describe('resource consumers', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.queues.consumers.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.queues.consumers.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -111,8 +132,10 @@ describe('resource consumers', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.queues.consumers.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.queues.consumers.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

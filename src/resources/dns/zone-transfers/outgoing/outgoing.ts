@@ -179,12 +179,12 @@ export class OutgoingResource extends APIResource {
 }
 
 /**
- * The zone transfer status of a primary zone
+ * The zone transfer status of a primary zone.
  */
 export type DisableTransfer = string;
 
 /**
- * The zone transfer status of a primary zone
+ * The zone transfer status of a primary zone.
  */
 export type EnableTransfer = string;
 
@@ -223,7 +223,7 @@ export interface Outgoing {
 }
 
 /**
- * The zone transfer status of a primary zone
+ * The zone transfer status of a primary zone.
  */
 export type OutgoingStatus = string | null;
 
@@ -301,7 +301,7 @@ export interface OutgoingDeleteResponse {
 
 /**
  * When force_notify query parameter is set to true, the response is a simple
- * string
+ * string.
  */
 export type OutgoingForceNotifyResponse = string;
 

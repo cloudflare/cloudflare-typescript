@@ -28,6 +28,7 @@ describe('resource botManagement', () => {
       crawler_protection: 'enabled',
       enable_js: true,
       fight_mode: true,
+      is_robots_txt_managed: true,
     });
   });
 

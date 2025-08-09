@@ -470,12 +470,6 @@ export interface TopAttacksParams {
   location?: Array<string>;
 
   /**
-   * Deprecated parameter. Future support includes only attack magnitude defined by
-   * total mitigated requests (MITIGATED_REQUESTS).
-   */
-  magnitude?: 'AFFECTED_ZONES' | 'MITIGATED_REQUESTS';
-
-  /**
    * Filters the results by layer 7 mitigation product.
    */
   mitigationProduct?: Array<

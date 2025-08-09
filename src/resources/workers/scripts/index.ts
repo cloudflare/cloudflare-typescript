@@ -5,9 +5,11 @@ export { Content, type ContentUpdateParams, type ContentGetParams } from './cont
 export {
   Deployments,
   type Deployment,
-  type DeploymentCreateResponse,
-  type DeploymentGetResponse,
+  type DeploymentListResponse,
+  type DeploymentDeleteResponse,
   type DeploymentCreateParams,
+  type DeploymentListParams,
+  type DeploymentDeleteParams,
   type DeploymentGetParams,
 } from './deployments';
 export {

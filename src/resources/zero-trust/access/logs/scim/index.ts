@@ -2,7 +2,7 @@
 
 export { SCIM, type AccessRequest } from './scim';
 export {
-  UpdateListResponsesSinglePage,
+  UpdateListResponsesV4PagePaginationArray,
   Updates,
   type UpdateListResponse,
   type UpdateListParams,

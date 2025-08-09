@@ -18,7 +18,7 @@ export class Items extends APIResource {
    *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{}],
+   *     body: [{ ip: '10.0.0.1' }],
    *   },
    * );
    * ```
@@ -50,7 +50,7 @@ export class Items extends APIResource {
    *   '2c0fc9fa937b11eaa1b71c4d701ab86e',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{}],
+   *     body: [{ ip: '10.0.0.1' }],
    *   },
    * );
    * ```
@@ -164,203 +164,403 @@ export interface ListItem {
   /**
    * The unique operation ID of the asynchronous action.
    */
-  operation_id?: string;
+  operation_id: string;
 }
 
 export interface ItemCreateResponse {
   /**
    * The unique operation ID of the asynchronous action.
    */
-  operation_id?: string;
+  operation_id: string;
 }
 
 export interface ItemUpdateResponse {
   /**
    * The unique operation ID of the asynchronous action.
    */
-  operation_id?: string;
+  operation_id: string;
 }
 
-export interface ItemListResponse {
-  /**
-   * The unique ID of the list.
-   */
-  id?: string;
+export type ItemListResponse =
+  | ItemListResponse.ListsListItemIPFull
+  | ItemListResponse.ListsListItemHostnameFull
+  | ItemListResponse.ListsListItemRedirectFull
+  | ItemListResponse.ListsListItemASNFull;
 
-  /**
-   * Defines a non-negative 32 bit integer.
-   */
-  asn?: number;
+export namespace ItemListResponse {
+  export interface ListsListItemIPFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
 
-  /**
-   * Defines an informative summary of the list item.
-   */
-  comment?: string;
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
 
-  /**
-   * The RFC 3339 timestamp of when the item was created.
-   */
-  created_on?: string;
+    /**
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
+     */
+    ip: string;
 
-  /**
-   * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-   * 0 to 9, wildcards (\*), and the hyphen (-).
-   */
-  hostname?: ListsAPI.Hostname;
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
 
-  /**
-   * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
-   */
-  ip?: string;
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
 
-  /**
-   * The RFC 3339 timestamp of when the item was last modified.
-   */
-  modified_on?: string;
+  export interface ListsListItemHostnameFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
 
-  /**
-   * The definition of the redirect.
-   */
-  redirect?: ListsAPI.Redirect;
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
+     */
+    hostname: ListsAPI.Hostname;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemRedirectFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The definition of the redirect.
+     */
+    redirect: ListsAPI.Redirect;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemASNFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn: number;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
 }
 
 export interface ItemDeleteResponse {
   /**
    * The unique operation ID of the asynchronous action.
    */
-  operation_id?: string;
+  operation_id: string;
 }
 
-export interface ItemGetResponse {
-  /**
-   * The unique ID of the list.
-   */
-  id?: string;
+export type ItemGetResponse =
+  | ItemGetResponse.ListsListItemIPFull
+  | ItemGetResponse.ListsListItemHostnameFull
+  | ItemGetResponse.ListsListItemRedirectFull
+  | ItemGetResponse.ListsListItemASNFull;
 
-  /**
-   * Defines a non-negative 32 bit integer.
-   */
-  asn?: number;
+export namespace ItemGetResponse {
+  export interface ListsListItemIPFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
 
-  /**
-   * Defines an informative summary of the list item.
-   */
-  comment?: string;
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
 
-  /**
-   * The RFC 3339 timestamp of when the item was created.
-   */
-  created_on?: string;
+    /**
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
+     */
+    ip: string;
 
-  /**
-   * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-   * 0 to 9, wildcards (\*), and the hyphen (-).
-   */
-  hostname?: ListsAPI.Hostname;
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
 
-  /**
-   * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
-   */
-  ip?: string;
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
 
-  /**
-   * The RFC 3339 timestamp of when the item was last modified.
-   */
-  modified_on?: string;
+  export interface ListsListItemHostnameFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
 
-  /**
-   * The definition of the redirect.
-   */
-  redirect?: ListsAPI.Redirect;
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
+     */
+    hostname: ListsAPI.Hostname;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemRedirectFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The definition of the redirect.
+     */
+    redirect: ListsAPI.Redirect;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemASNFull {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
+
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn: number;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
 }
 
 export interface ItemCreateParams {
   /**
-   * Path param: Defines an identifier.
+   * Path param: The Account ID for this resource.
    */
   account_id: string;
 
   /**
    * Body param:
    */
-  body: Array<ItemCreateParams.Body>;
+  body: Array<
+    | ItemCreateParams.ListsListItemIPComment
+    | ItemCreateParams.ListsListItemRedirectComment
+    | ItemCreateParams.ListsListItemHostnameComment
+    | ItemCreateParams.ListsListItemASNComment
+  >;
 }
 
 export namespace ItemCreateParams {
-  export interface Body {
+  export interface ListsListItemIPComment {
     /**
-     * Defines a non-negative 32 bit integer.
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
      */
-    asn?: number;
+    ip: string;
 
     /**
      * Defines an informative summary of the list item.
      */
     comment?: string;
+  }
 
+  export interface ListsListItemRedirectComment {
+    /**
+     * The definition of the redirect.
+     */
+    redirect: ListsAPI.RedirectParam;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemHostnameComment {
     /**
      * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
      * 0 to 9, wildcards (\*), and the hyphen (-).
      */
-    hostname?: ListsAPI.HostnameParam;
+    hostname: ListsAPI.HostnameParam;
 
     /**
-     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
+     * Defines an informative summary of the list item.
      */
-    ip?: string;
+    comment?: string;
+  }
+
+  export interface ListsListItemASNComment {
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn: number;
 
     /**
-     * The definition of the redirect.
+     * Defines an informative summary of the list item.
      */
-    redirect?: ListsAPI.RedirectParam;
+    comment?: string;
   }
 }
 
 export interface ItemUpdateParams {
   /**
-   * Path param: Defines an identifier.
+   * Path param: The Account ID for this resource.
    */
   account_id: string;
 
   /**
    * Body param:
    */
-  body: Array<ItemUpdateParams.Body>;
+  body: Array<
+    | ItemUpdateParams.ListsListItemIPComment
+    | ItemUpdateParams.ListsListItemRedirectComment
+    | ItemUpdateParams.ListsListItemHostnameComment
+    | ItemUpdateParams.ListsListItemASNComment
+  >;
 }
 
 export namespace ItemUpdateParams {
-  export interface Body {
+  export interface ListsListItemIPComment {
     /**
-     * Defines a non-negative 32 bit integer.
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
      */
-    asn?: number;
+    ip: string;
 
     /**
      * Defines an informative summary of the list item.
      */
     comment?: string;
+  }
 
+  export interface ListsListItemRedirectComment {
+    /**
+     * The definition of the redirect.
+     */
+    redirect: ListsAPI.RedirectParam;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemHostnameComment {
     /**
      * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
      * 0 to 9, wildcards (\*), and the hyphen (-).
      */
-    hostname?: ListsAPI.HostnameParam;
+    hostname: ListsAPI.HostnameParam;
 
     /**
-     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
+     * Defines an informative summary of the list item.
      */
-    ip?: string;
+    comment?: string;
+  }
+
+  export interface ListsListItemASNComment {
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn: number;
 
     /**
-     * The definition of the redirect.
+     * Defines an informative summary of the list item.
      */
-    redirect?: ListsAPI.RedirectParam;
+    comment?: string;
   }
 }
 
 export interface ItemListParams extends CursorPaginationParams {
   /**
-   * Path param: Defines an identifier.
+   * Path param: The Account ID for this resource.
    */
   account_id: string;
 
@@ -374,7 +574,7 @@ export interface ItemListParams extends CursorPaginationParams {
 
 export interface ItemDeleteParams {
   /**
-   * Path param: Defines an identifier.
+   * Path param: The Account ID for this resource.
    */
   account_id: string;
 
@@ -390,7 +590,7 @@ export namespace ItemDeleteParams {
 
 export interface ItemGetParams {
   /**
-   * Defines an identifier.
+   * The Account ID for this resource.
    */
   account_id: string;
 }

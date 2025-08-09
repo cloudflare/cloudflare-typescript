@@ -7,7 +7,7 @@ import * as IdentityProvidersAPI from './identity-providers';
 import * as SCIMAPI from './scim/scim';
 import { SCIM } from './scim/scim';
 import { CloudflareError } from '../../../error';
-import { SinglePage } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class IdentityProviders extends APIResource {
   scim: SCIMAPI.SCIM = new SCIMAPI.SCIM(this._client);
@@ -118,14 +118,14 @@ export class IdentityProviders extends APIResource {
   list(
     params?: IdentityProviderListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse>;
+  ): Core.PagePromise<IdentityProviderListResponsesV4PagePaginationArray, IdentityProviderListResponse>;
   list(
     options?: Core.RequestOptions,
-  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse>;
+  ): Core.PagePromise<IdentityProviderListResponsesV4PagePaginationArray, IdentityProviderListResponse>;
   list(
     params: IdentityProviderListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse> {
+  ): Core.PagePromise<IdentityProviderListResponsesV4PagePaginationArray, IdentityProviderListResponse> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -148,7 +148,7 @@ export class IdentityProviders extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/identity_providers`,
-      IdentityProviderListResponsesSinglePage,
+      IdentityProviderListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -259,7 +259,7 @@ export class IdentityProviders extends APIResource {
   }
 }
 
-export class IdentityProviderListResponsesSinglePage extends SinglePage<IdentityProviderListResponse> {}
+export class IdentityProviderListResponsesV4PagePaginationArray extends V4PagePaginationArray<IdentityProviderListResponse> {}
 
 export interface AzureAD {
   /**
@@ -4689,7 +4689,7 @@ export declare namespace IdentityProviderUpdateParams {
   }
 }
 
-export interface IdentityProviderListParams {
+export interface IdentityProviderListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
@@ -4733,7 +4733,8 @@ export interface IdentityProviderGetParams {
   zone_id?: string;
 }
 
-IdentityProviders.IdentityProviderListResponsesSinglePage = IdentityProviderListResponsesSinglePage;
+IdentityProviders.IdentityProviderListResponsesV4PagePaginationArray =
+  IdentityProviderListResponsesV4PagePaginationArray;
 IdentityProviders.SCIM = SCIM;
 
 export declare namespace IdentityProviders {
@@ -4745,7 +4746,7 @@ export declare namespace IdentityProviders {
     type IdentityProviderType as IdentityProviderType,
     type IdentityProviderListResponse as IdentityProviderListResponse,
     type IdentityProviderDeleteResponse as IdentityProviderDeleteResponse,
-    IdentityProviderListResponsesSinglePage as IdentityProviderListResponsesSinglePage,
+    IdentityProviderListResponsesV4PagePaginationArray as IdentityProviderListResponsesV4PagePaginationArray,
     type IdentityProviderCreateParams as IdentityProviderCreateParams,
     type IdentityProviderUpdateParams as IdentityProviderUpdateParams,
     type IdentityProviderListParams as IdentityProviderListParams,

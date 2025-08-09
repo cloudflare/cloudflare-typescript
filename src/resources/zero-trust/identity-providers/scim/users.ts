@@ -3,7 +3,8 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as UsersAPI from '../../access/users/users';
-import { AccessUsersSinglePage } from '../../access/users/users';
+import { AccessUsersV4PagePaginationArray } from '../../access/users/users';
+import { type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Users extends APIResource {
   /**
@@ -25,17 +26,17 @@ export class Users extends APIResource {
     identityProviderId: string,
     params: UserListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AccessUsersSinglePage, UsersAPI.AccessUser> {
+  ): Core.PagePromise<AccessUsersV4PagePaginationArray, UsersAPI.AccessUser> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/identity_providers/${identityProviderId}/scim/users`,
-      AccessUsersSinglePage,
+      AccessUsersV4PagePaginationArray,
       { query, ...options },
     );
   }
 }
 
-export interface UserListParams {
+export interface UserListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
@@ -73,4 +74,4 @@ export declare namespace Users {
   export { type UserListParams as UserListParams };
 }
 
-export { AccessUsersSinglePage };
+export { AccessUsersV4PagePaginationArray };

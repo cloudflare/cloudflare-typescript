@@ -71,7 +71,7 @@ export namespace SearchListResponse {
 
 export interface SearchListParams extends V4PagePaginationParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

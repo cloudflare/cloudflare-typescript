@@ -183,6 +183,12 @@ export interface CustomCreateResponse {
   enabled: boolean;
 
   /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the
+   * BoringSSL format.
+   */
+  ciphers?: Array<string>;
+
+  /**
    * Minimum TLS Version the custom domain will accept for incoming connections. If
    * not set, defaults to 1.0.
    */
@@ -194,6 +200,12 @@ export interface CustomUpdateResponse {
    * Domain name of the affected custom domain.
    */
   domain: string;
+
+  /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the
+   * BoringSSL format.
+   */
+  ciphers?: Array<string>;
 
   /**
    * Whether this bucket is publicly accessible at the specified custom domain.
@@ -224,6 +236,12 @@ export namespace CustomListResponse {
     enabled: boolean;
 
     status: Domain.Status;
+
+    /**
+     * An allowlist of ciphers for TLS termination. These ciphers must be in the
+     * BoringSSL format.
+     */
+    ciphers?: Array<string>;
 
     /**
      * Minimum TLS Version the custom domain will accept for incoming connections. If
@@ -276,6 +294,12 @@ export interface CustomGetResponse {
   enabled: boolean;
 
   status: CustomGetResponse.Status;
+
+  /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the
+   * BoringSSL format.
+   */
+  ciphers?: Array<string>;
 
   /**
    * Minimum TLS Version the custom domain will accept for incoming connections. If
@@ -331,6 +355,12 @@ export interface CustomCreateParams {
   zoneId: string;
 
   /**
+   * Body param: An allowlist of ciphers for TLS termination. These ciphers must be
+   * in the BoringSSL format.
+   */
+  ciphers?: Array<string>;
+
+  /**
    * Body param: Minimum TLS Version the custom domain will accept for incoming
    * connections. If not set, defaults to 1.0.
    */
@@ -348,6 +378,12 @@ export interface CustomUpdateParams {
    * Path param: Account ID.
    */
   account_id: string;
+
+  /**
+   * Body param: An allowlist of ciphers for TLS termination. These ciphers must be
+   * in the BoringSSL format.
+   */
+  ciphers?: Array<string>;
 
   /**
    * Body param: Whether to enable public bucket access at the specified custom

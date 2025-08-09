@@ -99,6 +99,13 @@ export interface JsonCreateParams {
   cookies?: Array<JsonCreateParams.Cookie>;
 
   /**
+   * Body param: Optional list of custom AI models to use for the request. The models
+   * will be tried in the order provided, and in case a model returns an error, the
+   * next one will be used as fallback.
+   */
+  custom_ai?: Array<JsonCreateParams.CustomAI>;
+
+  /**
    * Body param:
    */
   emulateMediaType?: string;
@@ -246,6 +253,19 @@ export namespace JsonCreateParams {
     sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
 
     url?: string;
+  }
+
+  export interface CustomAI {
+    /**
+     * Authorization token for the AI model: `Bearer <token>`.
+     */
+    authorization: string;
+
+    /**
+     * AI model to use for the request. Must be formed as `<provider>/<model_name>`,
+     * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`
+     */
+    model: string;
   }
 
   /**

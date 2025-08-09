@@ -45,7 +45,7 @@ import {
   IdentityProviderGetParams,
   IdentityProviderListParams,
   IdentityProviderListResponse,
-  IdentityProviderListResponsesSinglePage,
+  IdentityProviderListResponsesV4PagePaginationArray,
   IdentityProviderSCIMConfig,
   IdentityProviderType,
   IdentityProviderUpdateParams,
@@ -102,7 +102,8 @@ export class ZeroTrust extends APIResource {
 ZeroTrust.Devices = Devices;
 ZeroTrust.DevicesSinglePage = DevicesSinglePage;
 ZeroTrust.IdentityProviders = IdentityProviders;
-ZeroTrust.IdentityProviderListResponsesSinglePage = IdentityProviderListResponsesSinglePage;
+ZeroTrust.IdentityProviderListResponsesV4PagePaginationArray =
+  IdentityProviderListResponsesV4PagePaginationArray;
 ZeroTrust.Organizations = Organizations;
 ZeroTrust.Seats = Seats;
 ZeroTrust.SeatsSinglePage = SeatsSinglePage;
@@ -135,7 +136,7 @@ export declare namespace ZeroTrust {
     type IdentityProviderType as IdentityProviderType,
     type IdentityProviderListResponse as IdentityProviderListResponse,
     type IdentityProviderDeleteResponse as IdentityProviderDeleteResponse,
-    IdentityProviderListResponsesSinglePage as IdentityProviderListResponsesSinglePage,
+    IdentityProviderListResponsesV4PagePaginationArray as IdentityProviderListResponsesV4PagePaginationArray,
     type IdentityProviderCreateParams as IdentityProviderCreateParams,
     type IdentityProviderUpdateParams as IdentityProviderUpdateParams,
     type IdentityProviderListParams as IdentityProviderListParams,

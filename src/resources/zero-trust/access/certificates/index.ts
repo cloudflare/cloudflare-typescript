@@ -8,7 +8,7 @@ export {
   type SettingGetParams,
 } from './settings';
 export {
-  CertificatesSinglePage,
+  CertificatesV4PagePaginationArray,
   Certificates,
   type AssociatedHostnames,
   type Certificate,

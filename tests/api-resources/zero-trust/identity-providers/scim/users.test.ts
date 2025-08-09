@@ -33,6 +33,8 @@ describe('resource users', () => {
         email: 'john.smith@example.com',
         idp_resource_id: 'john_smith_01',
         name: 'John Smith',
+        page: 0,
+        per_page: 0,
         username: 'John Smith',
       },
     );
