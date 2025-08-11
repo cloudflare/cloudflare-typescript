@@ -1,8 +1,7 @@
 // @ts-nocheck
 import initJq from 'jq-web';
 
-export async function maybeFilter(args: Record<string, unknown> | undefined, response: any): Promise<any> {
-  const jqFilter = args?.['jq_filter'];
+export async function maybeFilter(jqFilter: unknown | undefined, response: any): Promise<any> {
   if (jqFilter && typeof jqFilter === 'string') {
     return await jq(response, jqFilter);
   } else {
