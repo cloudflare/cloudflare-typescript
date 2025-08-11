@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -57,12 +56,12 @@ export type CustomNameserverUpdateResponsesSinglePage = SinglePage<CustomNameser
 export type CustomNameserverUpdateResponse = string;
 
 export interface CustomNameserverGetResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<CustomNameserverGetResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<CustomNameserverGetResponse.Message>;
 
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 
@@ -80,24 +79,56 @@ export interface CustomNameserverGetResponse {
 }
 
 export namespace CustomNameserverGetResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
   export interface ResultInfo {
     /**
-     * Total number of results for the requested service
+     * Total number of results for the requested service.
      */
     count?: number;
 
     /**
-     * Current page within paginated list of results
+     * Current page within paginated list of results.
      */
     page?: number;
 
     /**
-     * Number of results per page of results
+     * Number of results per page of results.
      */
     per_page?: number;
 
     /**
-     * Total results available without any search parameters
+     * Total results available without any search parameters.
      */
     total_count?: number;
   }
@@ -105,7 +136,7 @@ export namespace CustomNameserverGetResponse {
 
 export interface CustomNameserverUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -122,7 +153,7 @@ export interface CustomNameserverUpdateParams {
 
 export interface CustomNameserverGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
