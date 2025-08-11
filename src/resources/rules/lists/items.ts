@@ -190,7 +190,7 @@ export type ItemListResponse =
 export namespace ItemListResponse {
   export interface ListsListItemIPFull {
     /**
-     * The unique ID of the list.
+     * Defines the unique ID of the item in the List.
      */
     id: string;
 
@@ -217,7 +217,7 @@ export namespace ItemListResponse {
 
   export interface ListsListItemHostnameFull {
     /**
-     * The unique ID of the list.
+     * Defines the unique ID of the item in the List.
      */
     id: string;
 
@@ -245,7 +245,7 @@ export namespace ItemListResponse {
 
   export interface ListsListItemRedirectFull {
     /**
-     * The unique ID of the list.
+     * Defines the unique ID of the item in the List.
      */
     id: string;
 
@@ -272,7 +272,7 @@ export namespace ItemListResponse {
 
   export interface ListsListItemASNFull {
     /**
-     * The unique ID of the list.
+     * Defines the unique ID of the item in the List.
      */
     id: string;
 
@@ -314,7 +314,7 @@ export type ItemGetResponse =
 export namespace ItemGetResponse {
   export interface ListsListItemIPFull {
     /**
-     * The unique ID of the list.
+     * Defines the unique ID of the item in the List.
      */
     id: string;
 
@@ -341,7 +341,7 @@ export namespace ItemGetResponse {
 
   export interface ListsListItemHostnameFull {
     /**
-     * The unique ID of the list.
+     * Defines the unique ID of the item in the List.
      */
     id: string;
 
@@ -369,7 +369,7 @@ export namespace ItemGetResponse {
 
   export interface ListsListItemRedirectFull {
     /**
-     * The unique ID of the list.
+     * Defines the unique ID of the item in the List.
      */
     id: string;
 
@@ -396,7 +396,7 @@ export namespace ItemGetResponse {
 
   export interface ListsListItemASNFull {
     /**
-     * The unique ID of the list.
+     * Defines the unique ID of the item in the List.
      */
     id: string;
 
