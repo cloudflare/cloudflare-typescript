@@ -77,7 +77,7 @@ export interface URLNormalizationUpdateResponse {
   /**
    * The scope of the URL normalization.
    */
-  scope: 'incoming' | 'both';
+  scope: 'incoming' | 'both' | 'none';
 
   /**
    * The type of URL normalization performed by Cloudflare.
@@ -92,7 +92,7 @@ export interface URLNormalizationGetResponse {
   /**
    * The scope of the URL normalization.
    */
-  scope: 'incoming' | 'both';
+  scope: 'incoming' | 'both' | 'none';
 
   /**
    * The type of URL normalization performed by Cloudflare.
@@ -109,7 +109,7 @@ export interface URLNormalizationUpdateParams {
   /**
    * Body param: The scope of the URL normalization.
    */
-  scope: 'incoming' | 'both';
+  scope: 'incoming' | 'both' | 'none';
 
   /**
    * Body param: The type of URL normalization performed by Cloudflare.
