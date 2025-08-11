@@ -74,7 +74,7 @@ export class DNS extends APIResource {
 /**
  * Nominal metric values, broken down by time interval.
  */
-export type DNSAnalyticsNominalMetric = Array<unknown>;
+export type DNSAnalyticsNominalMetric = Array<number>;
 
 export interface DNSAnalyticsQuery {
   /**
