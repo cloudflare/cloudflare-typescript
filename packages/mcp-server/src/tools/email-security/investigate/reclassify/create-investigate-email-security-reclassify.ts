@@ -38,6 +38,9 @@ export const tool: Tool = {
         type: 'string',
         description: 'Base64 encoded content of the EML file',
       },
+      escalated_submission_id: {
+        type: 'string',
+      },
     },
     required: ['account_id', 'postfix_id', 'expected_disposition'],
   },
