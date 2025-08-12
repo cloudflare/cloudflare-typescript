@@ -299,8 +299,13 @@ export interface BrowserCacheTTL {
   id?: 'browser_cache_ttl';
 
   /**
-   * The number of seconds to cache resources for. The API prohibits setting this to
-   * 0 for non-Enterprise domains.
+   * The number of seconds to cache resources for. Minimum values by plan:
+   *
+   * - Free: 7200 seconds (2 hours)
+   * - Pro: 3600 seconds (1 hour)
+   * - Business: 1 second
+   * - Enterprise: 1 second Setting this to 0 enables "Respect Existing Headers" and
+   *   is allowed for all plans.
    */
   value?: number;
 }
@@ -312,8 +317,13 @@ export interface BrowserCacheTTLParam {
   id?: 'browser_cache_ttl';
 
   /**
-   * The number of seconds to cache resources for. The API prohibits setting this to
-   * 0 for non-Enterprise domains.
+   * The number of seconds to cache resources for. Minimum values by plan:
+   *
+   * - Free: 7200 seconds (2 hours)
+   * - Pro: 3600 seconds (1 hour)
+   * - Business: 1 second
+   * - Enterprise: 1 second Setting this to 0 enables "Respect Existing Headers" and
+   *   is allowed for all plans.
    */
   value?: number;
 }
@@ -1702,35 +1712,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value:
-      | 0
-      | 30
-      | 60
-      | 120
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 691200
-      | 1382400
-      | 2073600
-      | 2678400
-      | 5356800
-      | 16070400
-      | 31536000;
+    value: number;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2774,35 +2756,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value:
-      | 0
-      | 30
-      | 60
-      | 120
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 691200
-      | 1382400
-      | 2073600
-      | 2678400
-      | 5356800
-      | 16070400
-      | 31536000;
+    value: number;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
