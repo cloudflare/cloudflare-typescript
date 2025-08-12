@@ -138,6 +138,7 @@ TEST_PATHS=(
 	tests/api-resources/logpush/datasets/datasets.test.ts
 	tests/api-resources/logpush/datasets/fields.test.ts
 	tests/api-resources/logpush/datasets/jobs.test.ts
+	tests/api-resources/logpush/edge.test.ts
 	tests/api-resources/logpush/jobs.test.ts
 	tests/api-resources/logpush/ownership.test.ts
 	tests/api-resources/logpush/validate.test.ts
