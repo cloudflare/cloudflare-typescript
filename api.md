@@ -915,11 +915,6 @@ Methods:
 
 # DNS
 
-Types:
-
-- <code><a href="./src/resources/dns/dns.ts">DNSAnalyticsNominalMetric</a></code>
-- <code><a href="./src/resources/dns/dns.ts">DNSAnalyticsQuery</a></code>
-
 ## DNSSEC
 
 Types:

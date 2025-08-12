@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as DNSAPI from '../../dns';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -57,7 +56,7 @@ export interface ByTime {
    */
   min: unknown;
 
-  query: DNSAPI.DNSAnalyticsQuery;
+  query: ByTime.Query;
 
   /**
    * Total number of rows in the result.
@@ -89,7 +88,60 @@ export namespace ByTime {
      * Array with one item per requested metric. Each item is an array of values,
      * broken down by time interval.
      */
-    metrics: Array<DNSAPI.DNSAnalyticsNominalMetric>;
+    metrics: Array<Array<number>>;
+  }
+
+  export interface Query {
+    /**
+     * Array of dimension names.
+     */
+    dimensions: Array<string>;
+
+    /**
+     * Limit number of returned metrics.
+     */
+    limit: number;
+
+    /**
+     * Array of metric names.
+     */
+    metrics: Array<string>;
+
+    /**
+     * Start date and time of requesting data period in ISO 8601 format.
+     */
+    since: string;
+
+    /**
+     * Unit of time to group data by.
+     */
+    time_delta:
+      | 'all'
+      | 'auto'
+      | 'year'
+      | 'quarter'
+      | 'month'
+      | 'week'
+      | 'day'
+      | 'hour'
+      | 'dekaminute'
+      | 'minute';
+
+    /**
+     * End date and time of requesting data period in ISO 8601 format.
+     */
+    until: string;
+
+    /**
+     * Segmentation filter in 'attribute operator value' format.
+     */
+    filters?: string;
+
+    /**
+     * Array of dimensions to sort by, where each dimension may be prefixed by -
+     * (descending) or + (ascending).
+     */
+    sort?: Array<string>;
   }
 }
 
