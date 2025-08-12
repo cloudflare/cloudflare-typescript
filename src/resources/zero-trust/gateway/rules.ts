@@ -307,7 +307,9 @@ export interface GatewayRule {
   precedence: number;
 
   /**
-   * The wirefilter expression used for traffic matching.
+   * The wirefilter expression used for traffic matching. The API automatically
+   * formats and sanitizes this expression. This returns a normalized version that
+   * may differ from your input and cause Terraform state drift.
    */
   traffic: string;
 
@@ -329,7 +331,9 @@ export interface GatewayRule {
   description?: string;
 
   /**
-   * The wirefilter expression used for device posture check matching.
+   * The wirefilter expression used for device posture check matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   device_posture?: string;
 
@@ -342,7 +346,9 @@ export interface GatewayRule {
   expiration?: GatewayRule.Expiration | null;
 
   /**
-   * The wirefilter expression used for identity matching.
+   * The wirefilter expression used for identity matching. The API automatically
+   * formats and sanitizes this expression. This returns a normalized version that
+   * may differ from your input and cause Terraform state drift.
    */
   identity?: string;
 
@@ -673,7 +679,9 @@ export namespace RuleSetting {
    */
   export interface CheckSession {
     /**
-     * Configure how fresh the session needs to be to be considered valid.
+     * Configure how fresh the session needs to be to be considered valid. The API
+     * automatically formats and sanitizes this expression. This returns a normalized
+     * version that may differ from your input and cause Terraform state drift.
      */
     duration?: string;
 
@@ -1102,7 +1110,9 @@ export namespace RuleSettingParam {
    */
   export interface CheckSession {
     /**
-     * Configure how fresh the session needs to be to be considered valid.
+     * Configure how fresh the session needs to be to be considered valid. The API
+     * automatically formats and sanitizes this expression. This returns a normalized
+     * version that may differ from your input and cause Terraform state drift.
      */
     duration?: string;
 
@@ -1451,6 +1461,9 @@ export interface RuleCreateParams {
 
   /**
    * Body param: The wirefilter expression used for device posture check matching.
+   * The API automatically formats and sanitizes this expression. This returns a
+   * normalized version that may differ from your input and cause Terraform state
+   * drift.
    */
   device_posture?: string;
 
@@ -1474,7 +1487,9 @@ export interface RuleCreateParams {
   filters?: Array<GatewayFilterParam>;
 
   /**
-   * Body param: The wirefilter expression used for identity matching.
+   * Body param: The wirefilter expression used for identity matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   identity?: string;
 
@@ -1499,7 +1514,9 @@ export interface RuleCreateParams {
   schedule?: ScheduleParam | null;
 
   /**
-   * Body param: The wirefilter expression used for traffic matching.
+   * Body param: The wirefilter expression used for traffic matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   traffic?: string;
 }
@@ -1573,6 +1590,9 @@ export interface RuleUpdateParams {
 
   /**
    * Body param: The wirefilter expression used for device posture check matching.
+   * The API automatically formats and sanitizes this expression. This returns a
+   * normalized version that may differ from your input and cause Terraform state
+   * drift.
    */
   device_posture?: string;
 
@@ -1596,7 +1616,9 @@ export interface RuleUpdateParams {
   filters?: Array<GatewayFilterParam>;
 
   /**
-   * Body param: The wirefilter expression used for identity matching.
+   * Body param: The wirefilter expression used for identity matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   identity?: string;
 
@@ -1621,7 +1643,9 @@ export interface RuleUpdateParams {
   schedule?: ScheduleParam | null;
 
   /**
-   * Body param: The wirefilter expression used for traffic matching.
+   * Body param: The wirefilter expression used for traffic matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   traffic?: string;
 }

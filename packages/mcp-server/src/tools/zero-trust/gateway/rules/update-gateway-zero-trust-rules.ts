@@ -60,7 +60,8 @@ export const tool: Tool = {
       },
       device_posture: {
         type: 'string',
-        description: 'The wirefilter expression used for device posture check matching.',
+        description:
+          'The wirefilter expression used for device posture check matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.',
       },
       enabled: {
         type: 'boolean',
@@ -99,7 +100,8 @@ export const tool: Tool = {
       },
       identity: {
         type: 'string',
-        description: 'The wirefilter expression used for identity matching.',
+        description:
+          'The wirefilter expression used for identity matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.',
       },
       precedence: {
         type: 'integer',
@@ -114,7 +116,8 @@ export const tool: Tool = {
       },
       traffic: {
         type: 'string',
-        description: 'The wirefilter expression used for traffic matching.',
+        description:
+          'The wirefilter expression used for traffic matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.',
       },
     },
     required: ['account_id', 'rule_id', 'action', 'name'],
@@ -249,7 +252,8 @@ export const tool: Tool = {
             properties: {
               duration: {
                 type: 'string',
-                description: 'Configure how fresh the session needs to be to be considered valid.',
+                description:
+                  'Configure how fresh the session needs to be to be considered valid. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.',
               },
               enforce: {
                 type: 'boolean',
