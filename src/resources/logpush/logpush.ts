@@ -2,7 +2,13 @@
 
 import { APIResource } from '../../core/resource';
 import * as EdgeAPI from './edge';
-import { Edge, InstantLogpushJob } from './edge';
+import {
+  Edge,
+  EdgeCreateParams,
+  EdgeGetParams,
+  InstantLogpushJob,
+  InstantLogpushJobsSinglePage,
+} from './edge';
 import * as JobsAPI from './jobs';
 import {
   JobCreateParams,
@@ -54,7 +60,13 @@ Logpush.Validate = Validate;
 export declare namespace Logpush {
   export { Datasets as Datasets };
 
-  export { Edge as Edge, type InstantLogpushJob as InstantLogpushJob };
+  export {
+    Edge as Edge,
+    type InstantLogpushJob as InstantLogpushJob,
+    type InstantLogpushJobsSinglePage as InstantLogpushJobsSinglePage,
+    type EdgeCreateParams as EdgeCreateParams,
+    type EdgeGetParams as EdgeGetParams,
+  };
 
   export {
     Jobs as Jobs,
