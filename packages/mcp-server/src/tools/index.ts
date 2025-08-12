@@ -342,8 +342,6 @@ import edit_keyless_certificates from './keyless-certificates/edit-keyless-certi
 import get_keyless_certificates from './keyless-certificates/get-keyless-certificates';
 import get_datasets_logpush_fields from './logpush/datasets/fields/get-datasets-logpush-fields';
 import get_datasets_logpush_jobs from './logpush/datasets/jobs/get-datasets-logpush-jobs';
-import create_logpush_edge from './logpush/edge/create-logpush-edge';
-import get_logpush_edge from './logpush/edge/get-logpush-edge';
 import create_logpush_jobs from './logpush/jobs/create-logpush-jobs';
 import update_logpush_jobs from './logpush/jobs/update-logpush-jobs';
 import list_logpush_jobs from './logpush/jobs/list-logpush-jobs';
@@ -2149,8 +2147,6 @@ addEndpoint(edit_keyless_certificates);
 addEndpoint(get_keyless_certificates);
 addEndpoint(get_datasets_logpush_fields);
 addEndpoint(get_datasets_logpush_jobs);
-addEndpoint(create_logpush_edge);
-addEndpoint(get_logpush_edge);
 addEndpoint(create_logpush_jobs);
 addEndpoint(update_logpush_jobs);
 addEndpoint(list_logpush_jobs);
