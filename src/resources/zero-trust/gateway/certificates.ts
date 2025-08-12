@@ -174,14 +174,14 @@ export interface CertificateCreateResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'available' (previously called 'active') state may be used for Gateway TLS
-   * interception.
+   * The read only deployment status of the certificate on Cloudflare's edge.
+   * Certificates in the 'available' (previously called 'active') state may be used
+   * for Gateway TLS interception.
    */
   binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
-   * The CA certificate
+   * The CA certificate(read only).
    */
   certificate?: string;
 
@@ -190,27 +190,29 @@ export interface CertificateCreateResponse {
   expires_on?: string;
 
   /**
-   * The SHA256 fingerprint of the certificate.
+   * The SHA256 fingerprint of the certificate(read only).
    */
   fingerprint?: string;
 
   /**
-   * Use this certificate for Gateway TLS interception
+   * Read-only field that shows whether Gateway TLS interception is using this
+   * certificate. This value cannot be set directly. To configure the certificate for
+   * interception, use the Gateway configuration setting named certificate.
    */
   in_use?: boolean;
 
   /**
-   * The organization that issued the certificate.
+   * The organization that issued the certificate(read only).
    */
   issuer_org?: string;
 
   /**
-   * The entire issuer field of the certificate.
+   * The entire issuer field of the certificate(read only).
    */
   issuer_raw?: string;
 
   /**
-   * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
+   * The type of certificate, either BYO-PKI (custom) or Gateway-managed(read only).
    */
   type?: 'custom' | 'gateway_managed';
 
@@ -226,14 +228,14 @@ export interface CertificateListResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'available' (previously called 'active') state may be used for Gateway TLS
-   * interception.
+   * The read only deployment status of the certificate on Cloudflare's edge.
+   * Certificates in the 'available' (previously called 'active') state may be used
+   * for Gateway TLS interception.
    */
   binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
-   * The CA certificate
+   * The CA certificate(read only).
    */
   certificate?: string;
 
@@ -242,27 +244,29 @@ export interface CertificateListResponse {
   expires_on?: string;
 
   /**
-   * The SHA256 fingerprint of the certificate.
+   * The SHA256 fingerprint of the certificate(read only).
    */
   fingerprint?: string;
 
   /**
-   * Use this certificate for Gateway TLS interception
+   * Read-only field that shows whether Gateway TLS interception is using this
+   * certificate. This value cannot be set directly. To configure the certificate for
+   * interception, use the Gateway configuration setting named certificate.
    */
   in_use?: boolean;
 
   /**
-   * The organization that issued the certificate.
+   * The organization that issued the certificate(read only).
    */
   issuer_org?: string;
 
   /**
-   * The entire issuer field of the certificate.
+   * The entire issuer field of the certificate(read only).
    */
   issuer_raw?: string;
 
   /**
-   * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
+   * The type of certificate, either BYO-PKI (custom) or Gateway-managed(read only).
    */
   type?: 'custom' | 'gateway_managed';
 
@@ -278,14 +282,14 @@ export interface CertificateDeleteResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'available' (previously called 'active') state may be used for Gateway TLS
-   * interception.
+   * The read only deployment status of the certificate on Cloudflare's edge.
+   * Certificates in the 'available' (previously called 'active') state may be used
+   * for Gateway TLS interception.
    */
   binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
-   * The CA certificate
+   * The CA certificate(read only).
    */
   certificate?: string;
 
@@ -294,27 +298,29 @@ export interface CertificateDeleteResponse {
   expires_on?: string;
 
   /**
-   * The SHA256 fingerprint of the certificate.
+   * The SHA256 fingerprint of the certificate(read only).
    */
   fingerprint?: string;
 
   /**
-   * Use this certificate for Gateway TLS interception
+   * Read-only field that shows whether Gateway TLS interception is using this
+   * certificate. This value cannot be set directly. To configure the certificate for
+   * interception, use the Gateway configuration setting named certificate.
    */
   in_use?: boolean;
 
   /**
-   * The organization that issued the certificate.
+   * The organization that issued the certificate(read only).
    */
   issuer_org?: string;
 
   /**
-   * The entire issuer field of the certificate.
+   * The entire issuer field of the certificate(read only).
    */
   issuer_raw?: string;
 
   /**
-   * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
+   * The type of certificate, either BYO-PKI (custom) or Gateway-managed(read only).
    */
   type?: 'custom' | 'gateway_managed';
 
@@ -330,14 +336,14 @@ export interface CertificateActivateResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'available' (previously called 'active') state may be used for Gateway TLS
-   * interception.
+   * The read only deployment status of the certificate on Cloudflare's edge.
+   * Certificates in the 'available' (previously called 'active') state may be used
+   * for Gateway TLS interception.
    */
   binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
-   * The CA certificate
+   * The CA certificate(read only).
    */
   certificate?: string;
 
@@ -346,27 +352,29 @@ export interface CertificateActivateResponse {
   expires_on?: string;
 
   /**
-   * The SHA256 fingerprint of the certificate.
+   * The SHA256 fingerprint of the certificate(read only).
    */
   fingerprint?: string;
 
   /**
-   * Use this certificate for Gateway TLS interception
+   * Read-only field that shows whether Gateway TLS interception is using this
+   * certificate. This value cannot be set directly. To configure the certificate for
+   * interception, use the Gateway configuration setting named certificate.
    */
   in_use?: boolean;
 
   /**
-   * The organization that issued the certificate.
+   * The organization that issued the certificate(read only).
    */
   issuer_org?: string;
 
   /**
-   * The entire issuer field of the certificate.
+   * The entire issuer field of the certificate(read only).
    */
   issuer_raw?: string;
 
   /**
-   * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
+   * The type of certificate, either BYO-PKI (custom) or Gateway-managed(read only).
    */
   type?: 'custom' | 'gateway_managed';
 
@@ -382,14 +390,14 @@ export interface CertificateDeactivateResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'available' (previously called 'active') state may be used for Gateway TLS
-   * interception.
+   * The read only deployment status of the certificate on Cloudflare's edge.
+   * Certificates in the 'available' (previously called 'active') state may be used
+   * for Gateway TLS interception.
    */
   binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
-   * The CA certificate
+   * The CA certificate(read only).
    */
   certificate?: string;
 
@@ -398,27 +406,29 @@ export interface CertificateDeactivateResponse {
   expires_on?: string;
 
   /**
-   * The SHA256 fingerprint of the certificate.
+   * The SHA256 fingerprint of the certificate(read only).
    */
   fingerprint?: string;
 
   /**
-   * Use this certificate for Gateway TLS interception
+   * Read-only field that shows whether Gateway TLS interception is using this
+   * certificate. This value cannot be set directly. To configure the certificate for
+   * interception, use the Gateway configuration setting named certificate.
    */
   in_use?: boolean;
 
   /**
-   * The organization that issued the certificate.
+   * The organization that issued the certificate(read only).
    */
   issuer_org?: string;
 
   /**
-   * The entire issuer field of the certificate.
+   * The entire issuer field of the certificate(read only).
    */
   issuer_raw?: string;
 
   /**
-   * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
+   * The type of certificate, either BYO-PKI (custom) or Gateway-managed(read only).
    */
   type?: 'custom' | 'gateway_managed';
 
@@ -434,14 +444,14 @@ export interface CertificateGetResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'available' (previously called 'active') state may be used for Gateway TLS
-   * interception.
+   * The read only deployment status of the certificate on Cloudflare's edge.
+   * Certificates in the 'available' (previously called 'active') state may be used
+   * for Gateway TLS interception.
    */
   binding_status?: 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
   /**
-   * The CA certificate
+   * The CA certificate(read only).
    */
   certificate?: string;
 
@@ -450,27 +460,29 @@ export interface CertificateGetResponse {
   expires_on?: string;
 
   /**
-   * The SHA256 fingerprint of the certificate.
+   * The SHA256 fingerprint of the certificate(read only).
    */
   fingerprint?: string;
 
   /**
-   * Use this certificate for Gateway TLS interception
+   * Read-only field that shows whether Gateway TLS interception is using this
+   * certificate. This value cannot be set directly. To configure the certificate for
+   * interception, use the Gateway configuration setting named certificate.
    */
   in_use?: boolean;
 
   /**
-   * The organization that issued the certificate.
+   * The organization that issued the certificate(read only).
    */
   issuer_org?: string;
 
   /**
-   * The entire issuer field of the certificate.
+   * The entire issuer field of the certificate(read only).
    */
   issuer_raw?: string;
 
   /**
-   * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
+   * The type of certificate, either BYO-PKI (custom) or Gateway-managed(read only).
    */
   type?: 'custom' | 'gateway_managed';
 
