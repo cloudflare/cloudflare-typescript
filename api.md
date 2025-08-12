@@ -1646,6 +1646,11 @@ Types:
 
 - <code><a href="./src/resources/logpush/edge.ts">InstantLogpushJob</a></code>
 
+Methods:
+
+- <code title="post /zones/{zone_id}/logpush/edge">client.logpush.edge.<a href="./src/resources/logpush/edge.ts">create</a>({ ...params }) -> InstantLogpushJob | null</code>
+- <code title="get /zones/{zone_id}/logpush/edge">client.logpush.edge.<a href="./src/resources/logpush/edge.ts">get</a>({ ...params }) -> InstantLogpushJobsSinglePage</code>
+
 ## Jobs
 
 Types:
