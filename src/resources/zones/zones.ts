@@ -412,12 +412,12 @@ export namespace Zone {
     /**
      * Identifier
      */
-    id?: string;
+    id?: string | null;
 
     /**
-     * Name of the owner.
+     * Email of the owner.
      */
-    name?: string;
+    email?: string | null;
 
     /**
      * The type of owner.
@@ -488,7 +488,7 @@ export namespace Zone {
     /**
      * Identifier
      */
-    id?: string;
+    id?: string | null;
 
     /**
      * The name of the Tenant account.
