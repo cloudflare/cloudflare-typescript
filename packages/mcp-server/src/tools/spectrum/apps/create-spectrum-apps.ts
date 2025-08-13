@@ -30,26 +30,10 @@ export const tool: Tool = {
           dns: {
             $ref: '#/$defs/dns',
           },
-          ip_firewall: {
-            type: 'boolean',
-            description:
-              'Enables IP Access Rules for this application.\nNotes: Only available for TCP applications.',
-          },
           protocol: {
             type: 'string',
             description:
               'The port configuration at Cloudflare\'s edge. May specify a single port, for example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.',
-          },
-          proxy_protocol: {
-            type: 'string',
-            description:
-              'Enables Proxy Protocol to the origin. Refer to [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/) for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple Proxy Protocol.',
-            enum: ['off', 'v1', 'v2', 'simple'],
-          },
-          tls: {
-            type: 'string',
-            description: 'The type of TLS termination associated with the application.',
-            enum: ['off', 'flexible', 'full', 'strict'],
           },
           traffic_type: {
             type: 'string',
@@ -65,6 +49,11 @@ export const tool: Tool = {
           edge_ips: {
             $ref: '#/$defs/edge_ips',
           },
+          ip_firewall: {
+            type: 'boolean',
+            description:
+              'Enables IP Access Rules for this application.\nNotes: Only available for TCP applications.',
+          },
           origin_direct: {
             type: 'array',
             description:
@@ -79,8 +68,19 @@ export const tool: Tool = {
           origin_port: {
             $ref: '#/$defs/origin_port',
           },
+          proxy_protocol: {
+            type: 'string',
+            description:
+              'Enables Proxy Protocol to the origin. Refer to [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/) for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple Proxy Protocol.',
+            enum: ['off', 'v1', 'v2', 'simple'],
+          },
+          tls: {
+            type: 'string',
+            description: 'The type of TLS termination associated with the application.',
+            enum: ['off', 'flexible', 'full', 'strict'],
+          },
         },
-        required: ['zone_id', 'dns', 'ip_firewall', 'protocol', 'proxy_protocol', 'tls', 'traffic_type'],
+        required: ['zone_id', 'dns', 'protocol', 'traffic_type'],
       },
       {
         type: 'object',
