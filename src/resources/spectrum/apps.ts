@@ -17,10 +17,7 @@ export class Apps extends APIResource {
    * const app = await client.spectrum.apps.create({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   dns: {},
-   *   ip_firewall: true,
    *   protocol: 'tcp/22',
-   *   proxy_protocol: 'off',
-   *   tls: 'full',
    *   traffic_type: 'direct',
    * });
    * ```
@@ -45,10 +42,7 @@ export class Apps extends APIResource {
    *   {
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     dns: {},
-   *     ip_firewall: true,
    *     protocol: 'tcp/22',
-   *     proxy_protocol: 'off',
-   *     tls: 'full',
    *     traffic_type: 'direct',
    *   },
    * );
@@ -131,12 +125,6 @@ export namespace AppCreateResponse {
     dns: SpectrumAPI.DNS;
 
     /**
-     * Enables IP Access Rules for this application. Notes: Only available for TCP
-     * applications.
-     */
-    ip_firewall: boolean;
-
-    /**
      * When the Application was last modified.
      */
     modified_on: string;
@@ -146,19 +134,6 @@ export namespace AppCreateResponse {
      * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
      */
     protocol: string;
-
-    /**
-     * Enables Proxy Protocol to the origin. Refer to
-     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
-     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
-     * Proxy Protocol.
-     */
-    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
-
-    /**
-     * The type of TLS termination associated with the application.
-     */
-    tls: 'off' | 'flexible' | 'full' | 'strict';
 
     /**
      * Determines how data travels from the edge to your origin. When set to "direct",
@@ -181,6 +156,12 @@ export namespace AppCreateResponse {
     edge_ips?: SpectrumAPI.EdgeIPs;
 
     /**
+     * Enables IP Access Rules for this application. Notes: Only available for TCP
+     * applications.
+     */
+    ip_firewall?: boolean;
+
+    /**
      * List of origin IP addresses. Array may contain multiple IP addresses for load
      * balancing.
      */
@@ -199,6 +180,19 @@ export namespace AppCreateResponse {
      * range must match the number of ports specified in the "protocol" field.
      */
     origin_port?: SpectrumAPI.OriginPort;
+
+    /**
+     * Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol?: 'off' | 'v1' | 'v2' | 'simple';
+
+    /**
+     * The type of TLS termination associated with the application.
+     */
+    tls?: 'off' | 'flexible' | 'full' | 'strict';
   }
 
   export interface SpectrumConfigPaygoAppConfig {
@@ -258,12 +252,6 @@ export namespace AppUpdateResponse {
     dns: SpectrumAPI.DNS;
 
     /**
-     * Enables IP Access Rules for this application. Notes: Only available for TCP
-     * applications.
-     */
-    ip_firewall: boolean;
-
-    /**
      * When the Application was last modified.
      */
     modified_on: string;
@@ -273,19 +261,6 @@ export namespace AppUpdateResponse {
      * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
      */
     protocol: string;
-
-    /**
-     * Enables Proxy Protocol to the origin. Refer to
-     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
-     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
-     * Proxy Protocol.
-     */
-    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
-
-    /**
-     * The type of TLS termination associated with the application.
-     */
-    tls: 'off' | 'flexible' | 'full' | 'strict';
 
     /**
      * Determines how data travels from the edge to your origin. When set to "direct",
@@ -308,6 +283,12 @@ export namespace AppUpdateResponse {
     edge_ips?: SpectrumAPI.EdgeIPs;
 
     /**
+     * Enables IP Access Rules for this application. Notes: Only available for TCP
+     * applications.
+     */
+    ip_firewall?: boolean;
+
+    /**
      * List of origin IP addresses. Array may contain multiple IP addresses for load
      * balancing.
      */
@@ -326,6 +307,19 @@ export namespace AppUpdateResponse {
      * range must match the number of ports specified in the "protocol" field.
      */
     origin_port?: SpectrumAPI.OriginPort;
+
+    /**
+     * Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol?: 'off' | 'v1' | 'v2' | 'simple';
+
+    /**
+     * The type of TLS termination associated with the application.
+     */
+    tls?: 'off' | 'flexible' | 'full' | 'strict';
   }
 
   export interface SpectrumConfigPaygoAppConfig {
@@ -383,12 +377,6 @@ export namespace AppListResponse {
     dns: SpectrumAPI.DNS;
 
     /**
-     * Enables IP Access Rules for this application. Notes: Only available for TCP
-     * applications.
-     */
-    ip_firewall: boolean;
-
-    /**
      * When the Application was last modified.
      */
     modified_on: string;
@@ -398,19 +386,6 @@ export namespace AppListResponse {
      * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
      */
     protocol: string;
-
-    /**
-     * Enables Proxy Protocol to the origin. Refer to
-     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
-     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
-     * Proxy Protocol.
-     */
-    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
-
-    /**
-     * The type of TLS termination associated with the application.
-     */
-    tls: 'off' | 'flexible' | 'full' | 'strict';
 
     /**
      * Determines how data travels from the edge to your origin. When set to "direct",
@@ -433,6 +408,12 @@ export namespace AppListResponse {
     edge_ips?: SpectrumAPI.EdgeIPs;
 
     /**
+     * Enables IP Access Rules for this application. Notes: Only available for TCP
+     * applications.
+     */
+    ip_firewall?: boolean;
+
+    /**
      * List of origin IP addresses. Array may contain multiple IP addresses for load
      * balancing.
      */
@@ -451,6 +432,19 @@ export namespace AppListResponse {
      * range must match the number of ports specified in the "protocol" field.
      */
     origin_port?: SpectrumAPI.OriginPort;
+
+    /**
+     * Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol?: 'off' | 'v1' | 'v2' | 'simple';
+
+    /**
+     * The type of TLS termination associated with the application.
+     */
+    tls?: 'off' | 'flexible' | 'full' | 'strict';
   }
 
   export interface UnionMember1 {
@@ -517,12 +511,6 @@ export namespace AppGetResponse {
     dns: SpectrumAPI.DNS;
 
     /**
-     * Enables IP Access Rules for this application. Notes: Only available for TCP
-     * applications.
-     */
-    ip_firewall: boolean;
-
-    /**
      * When the Application was last modified.
      */
     modified_on: string;
@@ -532,19 +520,6 @@ export namespace AppGetResponse {
      * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
      */
     protocol: string;
-
-    /**
-     * Enables Proxy Protocol to the origin. Refer to
-     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
-     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
-     * Proxy Protocol.
-     */
-    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
-
-    /**
-     * The type of TLS termination associated with the application.
-     */
-    tls: 'off' | 'flexible' | 'full' | 'strict';
 
     /**
      * Determines how data travels from the edge to your origin. When set to "direct",
@@ -567,6 +542,12 @@ export namespace AppGetResponse {
     edge_ips?: SpectrumAPI.EdgeIPs;
 
     /**
+     * Enables IP Access Rules for this application. Notes: Only available for TCP
+     * applications.
+     */
+    ip_firewall?: boolean;
+
+    /**
      * List of origin IP addresses. Array may contain multiple IP addresses for load
      * balancing.
      */
@@ -585,6 +566,19 @@ export namespace AppGetResponse {
      * range must match the number of ports specified in the "protocol" field.
      */
     origin_port?: SpectrumAPI.OriginPort;
+
+    /**
+     * Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol?: 'off' | 'v1' | 'v2' | 'simple';
+
+    /**
+     * The type of TLS termination associated with the application.
+     */
+    tls?: 'off' | 'flexible' | 'full' | 'strict';
   }
 
   export interface SpectrumConfigPaygoAppConfig {
@@ -639,30 +633,11 @@ export declare namespace AppCreateParams {
     dns: SpectrumAPI.DNSParam;
 
     /**
-     * Body param: Enables IP Access Rules for this application. Notes: Only available
-     * for TCP applications.
-     */
-    ip_firewall: boolean;
-
-    /**
      * Body param: The port configuration at Cloudflare's edge. May specify a single
      * port, for example `"tcp/1000"`, or a range of ports, for example
      * `"tcp/1000-2000"`.
      */
     protocol: string;
-
-    /**
-     * Body param: Enables Proxy Protocol to the origin. Refer to
-     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
-     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
-     * Proxy Protocol.
-     */
-    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
-
-    /**
-     * Body param: The type of TLS termination associated with the application.
-     */
-    tls: 'off' | 'flexible' | 'full' | 'strict';
 
     /**
      * Body param: Determines how data travels from the edge to your origin. When set
@@ -686,6 +661,12 @@ export declare namespace AppCreateParams {
     edge_ips?: SpectrumAPI.EdgeIPsParam;
 
     /**
+     * Body param: Enables IP Access Rules for this application. Notes: Only available
+     * for TCP applications.
+     */
+    ip_firewall?: boolean;
+
+    /**
      * Body param: List of origin IP addresses. Array may contain multiple IP addresses
      * for load balancing.
      */
@@ -704,6 +685,19 @@ export declare namespace AppCreateParams {
      * range must match the number of ports specified in the "protocol" field.
      */
     origin_port?: SpectrumAPI.OriginPortParam;
+
+    /**
+     * Body param: Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol?: 'off' | 'v1' | 'v2' | 'simple';
+
+    /**
+     * Body param: The type of TLS termination associated with the application.
+     */
+    tls?: 'off' | 'flexible' | 'full' | 'strict';
   }
 
   export interface SpectrumConfigPaygoAppConfig {
@@ -749,30 +743,11 @@ export declare namespace AppUpdateParams {
     dns: SpectrumAPI.DNSParam;
 
     /**
-     * Body param: Enables IP Access Rules for this application. Notes: Only available
-     * for TCP applications.
-     */
-    ip_firewall: boolean;
-
-    /**
      * Body param: The port configuration at Cloudflare's edge. May specify a single
      * port, for example `"tcp/1000"`, or a range of ports, for example
      * `"tcp/1000-2000"`.
      */
     protocol: string;
-
-    /**
-     * Body param: Enables Proxy Protocol to the origin. Refer to
-     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
-     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
-     * Proxy Protocol.
-     */
-    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
-
-    /**
-     * Body param: The type of TLS termination associated with the application.
-     */
-    tls: 'off' | 'flexible' | 'full' | 'strict';
 
     /**
      * Body param: Determines how data travels from the edge to your origin. When set
@@ -796,6 +771,12 @@ export declare namespace AppUpdateParams {
     edge_ips?: SpectrumAPI.EdgeIPsParam;
 
     /**
+     * Body param: Enables IP Access Rules for this application. Notes: Only available
+     * for TCP applications.
+     */
+    ip_firewall?: boolean;
+
+    /**
      * Body param: List of origin IP addresses. Array may contain multiple IP addresses
      * for load balancing.
      */
@@ -814,6 +795,19 @@ export declare namespace AppUpdateParams {
      * range must match the number of ports specified in the "protocol" field.
      */
     origin_port?: SpectrumAPI.OriginPortParam;
+
+    /**
+     * Body param: Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol?: 'off' | 'v1' | 'v2' | 'simple';
+
+    /**
+     * Body param: The type of TLS termination associated with the application.
+     */
+    tls?: 'off' | 'flexible' | 'full' | 'strict';
   }
 
   export interface SpectrumConfigPaygoAppConfig {
