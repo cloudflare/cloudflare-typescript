@@ -615,6 +615,7 @@ import submit_brand_protection from './brand-protection/submit-brand-protection'
 import url_info_brand_protection from './brand-protection/url-info-brand-protection';
 import create_brand_protection_queries from './brand-protection/queries/create-brand-protection-queries';
 import delete_brand_protection_queries from './brand-protection/queries/delete-brand-protection-queries';
+import bulk_brand_protection_queries from './brand-protection/queries/bulk-brand-protection-queries';
 import download_brand_protection_matches from './brand-protection/matches/download-brand-protection-matches';
 import get_brand_protection_matches from './brand-protection/matches/get-brand-protection-matches';
 import create_brand_protection_logos from './brand-protection/logos/create-brand-protection-logos';
@@ -2422,6 +2423,7 @@ addEndpoint(submit_brand_protection);
 addEndpoint(url_info_brand_protection);
 addEndpoint(create_brand_protection_queries);
 addEndpoint(delete_brand_protection_queries);
+addEndpoint(bulk_brand_protection_queries);
 addEndpoint(download_brand_protection_matches);
 addEndpoint(get_brand_protection_matches);
 addEndpoint(create_brand_protection_logos);

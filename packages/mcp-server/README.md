@@ -1615,6 +1615,7 @@ The following tools are available in this MCP server.
 
 - `create_brand_protection_queries` (`write`): Return a success message after creating new saved string queries
 - `delete_brand_protection_queries` (`write`): Return a success message after deleting saved string queries by ID
+- `bulk_brand_protection_queries` (`write`): Return a success message after creating new saved string queries in bulk
 
 ### Resource `brand_protection.matches`:
 
