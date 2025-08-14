@@ -2967,6 +2967,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/brand-protection/queries">client.brandProtection.queries.<a href="./src/resources/brand-protection/queries.ts">create</a>({ ...params }) -> void</code>
 - <code title="delete /accounts/{account_id}/brand-protection/queries">client.brandProtection.queries.<a href="./src/resources/brand-protection/queries.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /accounts/{account_id}/brand-protection/queries/bulk">client.brandProtection.queries.<a href="./src/resources/brand-protection/queries.ts">bulk</a>({ ...params }) -> void</code>
 
 ## Matches
 
