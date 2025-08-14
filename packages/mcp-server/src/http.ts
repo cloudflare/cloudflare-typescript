@@ -69,7 +69,7 @@ const del = async (req: express.Request, res: express.Response) => {
   });
 };
 
-export const streamableHTTPApp = (options: McpOptions) => {
+export const streamableHTTPApp = (options: McpOptions): express.Express => {
   const app = express();
   app.use(express.json());
 
