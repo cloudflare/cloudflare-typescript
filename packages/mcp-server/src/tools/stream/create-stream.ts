@@ -27,6 +27,7 @@ export const tool: Tool = {
       },
       body: {
         type: 'object',
+        additionalProperties: true,
       },
       'Tus-Resumable': {
         type: 'string',

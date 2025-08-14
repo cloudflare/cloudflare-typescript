@@ -50,6 +50,7 @@ export const tool: Tool = {
       metadata: {
         type: 'object',
         description: 'Associates arbitrary JSON data with a key/value pair.',
+        additionalProperties: true,
       },
       jq_filter: {
         type: 'string',

@@ -119,6 +119,7 @@ export const tool: Tool = {
               properties: {
                 headers: {
                   type: 'object',
+                  additionalProperties: true,
                 },
                 url: {
                   type: 'string',

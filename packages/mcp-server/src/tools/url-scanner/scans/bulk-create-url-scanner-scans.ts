@@ -41,6 +41,7 @@ export const tool: Tool = {
             customHeaders: {
               type: 'object',
               description: 'Set custom headers.',
+              additionalProperties: true,
             },
             referer: {
               type: 'string',

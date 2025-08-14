@@ -79,6 +79,7 @@ export const tool: Tool = {
                   type: 'object',
                   title: 'Action parameters',
                   description: "The parameters configuring the rule's action.",
+                  additionalProperties: true,
                 },
                 categories: {
                   type: 'array',
@@ -228,6 +229,7 @@ export const tool: Tool = {
                   type: 'object',
                   title: 'Action parameters',
                   description: "The parameters configuring the rule's action.",
+                  additionalProperties: true,
                 },
                 categories: {
                   type: 'array',
@@ -1054,6 +1056,7 @@ export const tool: Tool = {
             type: 'object',
             title: 'Action parameters',
             description: "The parameters configuring the rule's action.",
+            additionalProperties: true,
           },
           categories: {
             type: 'array',
@@ -1197,6 +1200,7 @@ export const tool: Tool = {
             type: 'object',
             title: 'Action parameters',
             description: "The parameters configuring the rule's action.",
+            additionalProperties: true,
           },
           categories: {
             type: 'array',
@@ -1551,6 +1555,7 @@ export const tool: Tool = {
                 type: 'object',
                 title: 'Headers',
                 description: 'Map of request headers to modify.',
+                additionalProperties: true,
               },
               uri: {
                 type: 'object',
@@ -2513,6 +2518,7 @@ export const tool: Tool = {
                 title: 'Rules',
                 description:
                   'A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the execution of. This option is incompatible with the ruleset option.',
+                additionalProperties: true,
               },
               ruleset: {
                 type: 'string',
@@ -2785,6 +2791,7 @@ export const tool: Tool = {
                             title: 'Header contains',
                             description:
                               'For each header name and list of values combination, check if the request header contains any of the values provided. The presence of the request header and whether any of the values provided are contained in the request header value is used in building the cache key.',
+                            additionalProperties: true,
                           },
                           exclude_origin: {
                             type: 'boolean',
@@ -3455,6 +3462,7 @@ export const tool: Tool = {
             type: 'object',
             title: 'Action parameters',
             description: "The parameters configuring the rule's action.",
+            additionalProperties: true,
           },
           categories: {
             type: 'array',
@@ -3598,6 +3606,7 @@ export const tool: Tool = {
             type: 'object',
             title: 'Action parameters',
             description: "The parameters configuring the rule's action.",
+            additionalProperties: true,
           },
           categories: {
             type: 'array',

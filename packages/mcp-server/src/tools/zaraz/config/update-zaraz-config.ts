@@ -108,16 +108,19 @@ export const tool: Tool = {
         type: 'object',
         description:
           'Tools set up under Zaraz configuration, where key is the alpha-numeric tool ID and value is the tool configuration object.',
+        additionalProperties: true,
       },
       triggers: {
         type: 'object',
         description:
           'Triggers set up under Zaraz configuration, where key is the trigger alpha-numeric ID and value is the trigger configuration.',
+        additionalProperties: true,
       },
       variables: {
         type: 'object',
         description:
           'Variables set up under Zaraz configuration, where key is the variable alpha-numeric ID and value is the variable configuration. Values of variables of type secret are not included.',
+        additionalProperties: true,
       },
       zarazVersion: {
         type: 'integer',
@@ -166,6 +169,7 @@ export const tool: Tool = {
           consentModalIntroHTMLWithTranslations: {
             type: 'object',
             description: 'Object where keys are language codes',
+            additionalProperties: true,
           },
           cookieName: {
             type: 'string',
@@ -185,10 +189,12 @@ export const tool: Tool = {
           purposes: {
             type: 'object',
             description: 'Object where keys are purpose alpha-numeric IDs',
+            additionalProperties: true,
           },
           purposesWithTranslations: {
             type: 'object',
             description: 'Object where keys are purpose alpha-numeric IDs',
+            additionalProperties: true,
           },
           tcfCompliant: {
             type: 'boolean',
@@ -218,14 +224,17 @@ export const tool: Tool = {
           accept_all: {
             type: 'object',
             description: 'Object where keys are language codes',
+            additionalProperties: true,
           },
           confirm_my_choices: {
             type: 'object',
             description: 'Object where keys are language codes',
+            additionalProperties: true,
           },
           reject_all: {
             type: 'object',
             description: 'Object where keys are language codes',
+            additionalProperties: true,
           },
         },
         required: ['accept_all', 'confirm_my_choices', 'reject_all'],

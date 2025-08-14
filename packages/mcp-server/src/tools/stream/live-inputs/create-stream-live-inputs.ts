@@ -38,6 +38,7 @@ export const tool: Tool = {
         type: 'object',
         description:
           'A user modifiable key-value store used to reference other systems of record for managing live inputs.',
+        additionalProperties: true,
       },
       recording: {
         type: 'object',

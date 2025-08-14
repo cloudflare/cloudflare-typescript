@@ -52,6 +52,7 @@ export const tool: Tool = {
         type: 'object',
         description:
           'A user modifiable key-value store used to reference other systems of record for managing videos.',
+        additionalProperties: true,
       },
       requireSignedURLs: {
         type: 'boolean',

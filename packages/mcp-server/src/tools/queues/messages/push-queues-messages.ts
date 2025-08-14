@@ -60,6 +60,7 @@ export const tool: Tool = {
           },
           body: {
             type: 'object',
+            additionalProperties: true,
           },
           content_type: {
             type: 'string',

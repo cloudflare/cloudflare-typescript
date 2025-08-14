@@ -53,6 +53,7 @@ export const tool: Tool = {
             anyOf: [
               {
                 type: 'object',
+                additionalProperties: true,
               },
               {
                 type: 'object',

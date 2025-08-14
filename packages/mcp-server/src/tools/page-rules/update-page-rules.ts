@@ -270,6 +270,7 @@ export const tool: Tool = {
                   type: 'object',
                   description:
                     'A JSON object containing status codes and their corresponding TTLs.\nEach key-value pair in the cache TTL by status cache rule has the\nfollowing syntax\n- `status_code`: An integer value such as 200 or 500. status_code\n  matches the exact status code from the origin web server. Valid\n  status codes are between 100-999.\n- `status_code_range`: Integer values for from and to.\n  status_code_range matches any status code from the origin web\n  server within the specified range.\n- `value`: An integer value that defines the duration an asset is\n  valid in seconds or one of the following strings: no-store\n  (equivalent to -1), no-cache (equivalent to 0).\n',
+                  additionalProperties: true,
                 },
               },
             },

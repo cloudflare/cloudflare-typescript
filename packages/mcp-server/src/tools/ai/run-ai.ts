@@ -271,6 +271,7 @@ export const tool: Tool = {
             properties: {
               json_schema: {
                 type: 'object',
+                additionalProperties: true,
               },
               type: {
                 type: 'string',
@@ -374,6 +375,7 @@ export const tool: Tool = {
             properties: {
               json_schema: {
                 type: 'object',
+                additionalProperties: true,
               },
               type: {
                 type: 'string',
@@ -417,6 +419,7 @@ export const tool: Tool = {
                         properties: {
                           type: 'object',
                           description: 'Definitions of each parameter.',
+                          additionalProperties: true,
                         },
                         type: {
                           type: 'string',
@@ -457,6 +460,7 @@ export const tool: Tool = {
                             properties: {
                               type: 'object',
                               description: 'Definitions of each parameter.',
+                              additionalProperties: true,
                             },
                             type: {
                               type: 'string',

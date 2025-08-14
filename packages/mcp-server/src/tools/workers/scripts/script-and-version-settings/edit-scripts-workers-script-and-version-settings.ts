@@ -476,6 +476,7 @@ export const tool: Tool = {
                       type: 'object',
                       description:
                         'Algorithm-specific key parameters. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).',
+                      additionalProperties: true,
                     },
                     format: {
                       type: 'string',
@@ -519,6 +520,7 @@ export const tool: Tool = {
                       type: 'object',
                       description:
                         'Key data in [JSON Web Key](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#json_web_key) format. Required if `format` is "jwk".',
+                      additionalProperties: true,
                     },
                   },
                   required: ['algorithm', 'format', 'name', 'type', 'usages'],

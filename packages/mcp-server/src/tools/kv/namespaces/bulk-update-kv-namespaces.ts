@@ -61,6 +61,7 @@ export const tool: Tool = {
             metadata: {
               type: 'object',
               description: 'Arbitrary JSON that is associated with a key.',
+              additionalProperties: true,
             },
           },
           required: ['key', 'value'],

@@ -141,6 +141,7 @@ export const tool: Tool = {
             type: 'object',
             description:
               'The HTTP request headers to send in the health check. It is recommended you set a Host header by default. The User-Agent header cannot be overridden.',
+            additionalProperties: true,
           },
           method: {
             type: 'string',

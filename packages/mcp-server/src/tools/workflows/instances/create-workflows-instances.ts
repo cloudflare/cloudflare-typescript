@@ -33,9 +33,11 @@ export const tool: Tool = {
       },
       instance_retention: {
         type: 'object',
+        additionalProperties: true,
       },
       params: {
         type: 'object',
+        additionalProperties: true,
       },
       jq_filter: {
         type: 'string',

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'get_logs_rayid',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nThe `/rayids` api route allows lookups by specific rayid. The rayids route will return zero, one, or more records (ray ids are not unique).\n\n# Response Schema\n```json\n{\n  anyOf: [    {\n      type: 'string'\n    },\n    {\n      type: 'object'\n    }\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nThe `/rayids` api route allows lookups by specific rayid. The rayids route will return zero, one, or more records (ray ids are not unique).\n\n# Response Schema\n```json\n{\n  anyOf: [    {\n      type: 'string'\n    },\n    {\n      type: 'object',\n      additionalProperties: true\n    }\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {

@@ -131,6 +131,7 @@ export const tool: Tool = {
             type: 'object',
             description:
               'Add custom headers to allowed requests, in the form of key-value pairs. Keys are header names, pointing to an array with its header value(s).',
+            additionalProperties: true,
           },
           allow_child_bypass: {
             type: 'boolean',

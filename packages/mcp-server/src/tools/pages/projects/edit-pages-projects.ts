@@ -70,14 +70,17 @@ export const tool: Tool = {
               ai_bindings: {
                 type: 'object',
                 description: 'Constellation bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               analytics_engine_datasets: {
                 type: 'object',
                 description: 'Analytics Engine bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               browsers: {
                 type: 'object',
                 description: 'Browser bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               compatibility_date: {
                 type: 'string',
@@ -93,26 +96,32 @@ export const tool: Tool = {
               d1_databases: {
                 type: 'object',
                 description: 'D1 databases used for Pages Functions.',
+                additionalProperties: true,
               },
               durable_object_namespaces: {
                 type: 'object',
                 description: 'Durable Object namespaces used for Pages Functions.',
+                additionalProperties: true,
               },
               env_vars: {
                 type: 'object',
                 description: 'Environment variables used for builds and Pages Functions.',
+                additionalProperties: true,
               },
               hyperdrive_bindings: {
                 type: 'object',
                 description: 'Hyperdrive bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               kv_namespaces: {
                 type: 'object',
                 description: 'KV namespaces used for Pages Functions.',
+                additionalProperties: true,
               },
               mtls_certificates: {
                 type: 'object',
                 description: 'mTLS bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               placement: {
                 type: 'object',
@@ -127,18 +136,22 @@ export const tool: Tool = {
               queue_producers: {
                 type: 'object',
                 description: 'Queue Producer bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               r2_buckets: {
                 type: 'object',
                 description: 'R2 buckets used for Pages Functions.',
+                additionalProperties: true,
               },
               services: {
                 type: 'object',
                 description: 'Services used for Pages Functions.',
+                additionalProperties: true,
               },
               vectorize_bindings: {
                 type: 'object',
                 description: 'Vectorize bindings used for Pages Functions.',
+                additionalProperties: true,
               },
             },
           },
@@ -149,14 +162,17 @@ export const tool: Tool = {
               ai_bindings: {
                 type: 'object',
                 description: 'Constellation bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               analytics_engine_datasets: {
                 type: 'object',
                 description: 'Analytics Engine bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               browsers: {
                 type: 'object',
                 description: 'Browser bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               compatibility_date: {
                 type: 'string',
@@ -172,26 +188,32 @@ export const tool: Tool = {
               d1_databases: {
                 type: 'object',
                 description: 'D1 databases used for Pages Functions.',
+                additionalProperties: true,
               },
               durable_object_namespaces: {
                 type: 'object',
                 description: 'Durable Object namespaces used for Pages Functions.',
+                additionalProperties: true,
               },
               env_vars: {
                 type: 'object',
                 description: 'Environment variables used for builds and Pages Functions.',
+                additionalProperties: true,
               },
               hyperdrive_bindings: {
                 type: 'object',
                 description: 'Hyperdrive bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               kv_namespaces: {
                 type: 'object',
                 description: 'KV namespaces used for Pages Functions.',
+                additionalProperties: true,
               },
               mtls_certificates: {
                 type: 'object',
                 description: 'mTLS bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               placement: {
                 type: 'object',
@@ -206,18 +228,22 @@ export const tool: Tool = {
               queue_producers: {
                 type: 'object',
                 description: 'Queue Producer bindings used for Pages Functions.',
+                additionalProperties: true,
               },
               r2_buckets: {
                 type: 'object',
                 description: 'R2 buckets used for Pages Functions.',
+                additionalProperties: true,
               },
               services: {
                 type: 'object',
                 description: 'Services used for Pages Functions.',
+                additionalProperties: true,
               },
               vectorize_bindings: {
                 type: 'object',
                 description: 'Vectorize bindings used for Pages Functions.',
+                additionalProperties: true,
               },
             },
           },

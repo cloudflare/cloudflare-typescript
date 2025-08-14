@@ -28,6 +28,7 @@ export const tool: Tool = {
       },
       body: {
         type: 'object',
+        additionalProperties: true,
       },
       'x-magic-new-hc-target': {
         type: 'boolean',
