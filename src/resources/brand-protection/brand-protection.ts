@@ -20,7 +20,7 @@ import {
   Matches,
 } from './matches';
 import * as QueriesAPI from './queries';
-import { Queries, QueryCreateParams, QueryDeleteParams } from './queries';
+import { Queries, QueryBulkParams, QueryCreateParams, QueryDeleteParams } from './queries';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -259,6 +259,7 @@ export declare namespace BrandProtection {
     Queries as Queries,
     type QueryCreateParams as QueryCreateParams,
     type QueryDeleteParams as QueryDeleteParams,
+    type QueryBulkParams as QueryBulkParams,
   };
 
   export {

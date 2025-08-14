@@ -31,6 +31,18 @@ export class Queries extends APIResource {
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
+
+  /**
+   * Return a success message after creating new saved string queries in bulk
+   */
+  bulk(params: QueryBulkParams, options?: RequestOptions): APIPromise<void> {
+    const { account_id, ...body } = params;
+    return this._client.post(path`/accounts/${account_id}/brand-protection/queries/bulk`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
 }
 
 export interface QueryCreateParams {
@@ -102,6 +114,22 @@ export interface QueryDeleteParams {
   tag?: string;
 }
 
+export interface QueryBulkParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  queries?: Array<{ [key: string]: unknown }>;
+}
+
 export declare namespace Queries {
-  export { type QueryCreateParams as QueryCreateParams, type QueryDeleteParams as QueryDeleteParams };
+  export {
+    type QueryCreateParams as QueryCreateParams,
+    type QueryDeleteParams as QueryDeleteParams,
+    type QueryBulkParams as QueryBulkParams,
+  };
 }
