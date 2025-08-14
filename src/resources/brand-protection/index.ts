@@ -16,4 +16,4 @@ export {
   type MatchDownloadParams,
   type MatchGetParams,
 } from './matches';
-export { Queries, type QueryCreateParams, type QueryDeleteParams } from './queries';
+export { Queries, type QueryCreateParams, type QueryDeleteParams, type QueryBulkParams } from './queries';

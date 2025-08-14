@@ -21,7 +21,7 @@ import {
   Matches,
 } from './matches';
 import * as QueriesAPI from './queries';
-import { Queries, QueryCreateParams, QueryDeleteParams } from './queries';
+import { Queries, QueryBulkParams, QueryCreateParams, QueryDeleteParams } from './queries';
 import { SinglePage } from '../../pagination';
 
 export class BrandProtection extends APIResource {
@@ -258,6 +258,7 @@ export declare namespace BrandProtection {
     Queries as Queries,
     type QueryCreateParams as QueryCreateParams,
     type QueryDeleteParams as QueryDeleteParams,
+    type QueryBulkParams as QueryBulkParams,
   };
 
   export {
