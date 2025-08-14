@@ -2051,6 +2051,7 @@ export const tool: Tool = {
                 target_attributes: {
                   type: 'object',
                   description: 'Contains a map of target attribute keys to target attribute values.',
+                  additionalProperties: true,
                 },
               },
               required: ['port', 'protocol', 'target_attributes'],
@@ -2174,6 +2175,7 @@ export const tool: Tool = {
                 target_attributes: {
                   type: 'object',
                   description: 'Contains a map of target attribute keys to target attribute values.',
+                  additionalProperties: true,
                 },
               },
               required: ['port', 'protocol', 'target_attributes'],
@@ -2993,6 +2995,7 @@ export const tool: Tool = {
                     name_by_idp: {
                       type: 'object',
                       description: 'A mapping from IdP ID to claim name.',
+                      additionalProperties: true,
                     },
                   },
                 },

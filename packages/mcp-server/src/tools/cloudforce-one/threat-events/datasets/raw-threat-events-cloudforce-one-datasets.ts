@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'raw_threat_events_cloudforce_one_datasets',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nReads data for a raw event\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    id: {\n      type: 'string'\n    },\n    accountId: {\n      type: 'number'\n    },\n    created: {\n      type: 'string'\n    },\n    data: {\n      type: 'object'\n    },\n    source: {\n      type: 'string'\n    },\n    tlp: {\n      type: 'string'\n    }\n  },\n  required: [    'id',\n    'accountId',\n    'created',\n    'data',\n    'source',\n    'tlp'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nReads data for a raw event\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    id: {\n      type: 'string'\n    },\n    accountId: {\n      type: 'number'\n    },\n    created: {\n      type: 'string'\n    },\n    data: {\n      type: 'object',\n      additionalProperties: true\n    },\n    source: {\n      type: 'string'\n    },\n    tlp: {\n      type: 'string'\n    }\n  },\n  required: [    'id',\n    'accountId',\n    'created',\n    'data',\n    'source',\n    'tlp'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {

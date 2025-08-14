@@ -27,6 +27,7 @@ export const tool: Tool = {
       },
       new_priorities: {
         type: 'object',
+        additionalProperties: true,
       },
       jq_filter: {
         type: 'string',

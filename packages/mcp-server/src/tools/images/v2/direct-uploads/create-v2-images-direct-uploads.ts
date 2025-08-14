@@ -45,6 +45,7 @@ export const tool: Tool = {
         type: 'object',
         description:
           'User modifiable key-value store. Can be used for keeping references to another system of record, for managing images.',
+        additionalProperties: true,
       },
       requireSignedURLs: {
         type: 'boolean',

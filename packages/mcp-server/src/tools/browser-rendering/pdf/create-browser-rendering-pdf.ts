@@ -379,6 +379,7 @@ export const tool: Tool = {
       },
       setExtraHTTPHeaders: {
         type: 'object',
+        additionalProperties: true,
       },
       setJavaScriptEnabled: {
         type: 'boolean',

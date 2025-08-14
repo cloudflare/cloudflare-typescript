@@ -30,6 +30,7 @@ export const tool: Tool = {
       },
       body: {
         type: 'object',
+        additionalProperties: true,
       },
     },
     required: ['account_id', 'identifier', 'body'],

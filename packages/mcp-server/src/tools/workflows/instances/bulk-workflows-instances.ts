@@ -38,9 +38,11 @@ export const tool: Tool = {
             },
             instance_retention: {
               type: 'object',
+              additionalProperties: true,
             },
             params: {
               type: 'object',
+              additionalProperties: true,
             },
           },
         },

@@ -47,6 +47,7 @@ export const tool: Tool = {
         type: 'object',
         description:
           'A mapping of country codes to a list of pool IDs (ordered by their failover priority) for the given country. Any country not explicitly defined will fall back to using the corresponding region_pool mapping if it exists else to default_pools.',
+        additionalProperties: true,
       },
       description: {
         type: 'string',
@@ -66,6 +67,7 @@ export const tool: Tool = {
         type: 'object',
         description:
           'Enterprise only: A mapping of Cloudflare PoP identifiers to a list of pool IDs (ordered by their failover priority) for the PoP (datacenter). Any PoPs not explicitly defined will fall back to using the corresponding country_pool, then region_pool mapping if it exists else to default_pools.',
+        additionalProperties: true,
       },
       proxied: {
         type: 'boolean',
@@ -78,6 +80,7 @@ export const tool: Tool = {
         type: 'object',
         description:
           'A mapping of region codes to a list of pool IDs (ordered by their failover priority) for the given region. Any regions not explicitly defined will fall back to using default_pools.',
+        additionalProperties: true,
       },
       rules: {
         type: 'array',
@@ -157,6 +160,7 @@ export const tool: Tool = {
             type: 'object',
             description:
               'A mapping of pool IDs to custom weights. The weight is relative to other pools in the load balancer.',
+            additionalProperties: true,
           },
         },
       },
@@ -212,6 +216,7 @@ export const tool: Tool = {
                 type: 'object',
                 description:
                   'A mapping of country codes to a list of pool IDs (ordered by their failover priority) for the given country. Any country not explicitly defined will fall back to using the corresponding region_pool mapping if it exists else to default_pools.',
+                additionalProperties: true,
               },
               default_pools: {
                 type: 'array',
@@ -232,6 +237,7 @@ export const tool: Tool = {
                 type: 'object',
                 description:
                   'Enterprise only: A mapping of Cloudflare PoP identifiers to a list of pool IDs (ordered by their failover priority) for the PoP (datacenter). Any PoPs not explicitly defined will fall back to using the corresponding country_pool, then region_pool mapping if it exists else to default_pools.',
+                additionalProperties: true,
               },
               random_steering: {
                 $ref: '#/$defs/random_steering',
@@ -240,6 +246,7 @@ export const tool: Tool = {
                 type: 'object',
                 description:
                   'A mapping of region codes to a list of pool IDs (ordered by their failover priority) for the given region. Any regions not explicitly defined will fall back to using default_pools.',
+                additionalProperties: true,
               },
               session_affinity: {
                 $ref: '#/$defs/session_affinity',

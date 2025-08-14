@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'submit_brand_protection',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nReturn new URL submissions\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    skipped_urls: {\n      type: 'array',\n      items: {\n        type: 'object'\n      }\n    },\n    submitted_urls: {\n      type: 'array',\n      items: {\n        type: 'object'\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nReturn new URL submissions\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    skipped_urls: {\n      type: 'array',\n      items: {\n        type: 'object',\n        additionalProperties: true\n      }\n    },\n    submitted_urls: {\n      type: 'array',\n      items: {\n        type: 'object',\n        additionalProperties: true\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {

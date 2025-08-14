@@ -34,6 +34,7 @@ export const tool: Tool = {
       },
       body: {
         type: 'object',
+        additionalProperties: true,
       },
     },
     required: ['account_id', 'workflow_name', 'instance_id', 'event_type'],

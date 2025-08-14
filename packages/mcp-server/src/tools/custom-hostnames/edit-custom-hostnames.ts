@@ -33,6 +33,7 @@ export const tool: Tool = {
         type: 'object',
         description:
           'Unique key/value metadata for this hostname. These are per-hostname (customer) settings.',
+        additionalProperties: true,
       },
       custom_origin_server: {
         type: 'string',

@@ -32,6 +32,7 @@ export const tool: Tool = {
       },
       body: {
         type: 'object',
+        additionalProperties: true,
       },
       jq_filter: {
         type: 'string',

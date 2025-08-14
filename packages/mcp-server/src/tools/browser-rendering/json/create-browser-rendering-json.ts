@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_browser_rendering_json',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGets json from a webpage from a provided URL or HTML. Pass `prompt` or `schema` in the body. Control page loading with `gotoOptions` and `waitFor*` options.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'object'\n    },\n    status: {\n      type: 'boolean',\n      description: 'Response status'\n    },\n    errors: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'number',\n            description: 'Error code'\n          },\n          message: {\n            type: 'string',\n            description: 'Error Message'\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    }\n  },\n  required: [    'result',\n    'status'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGets json from a webpage from a provided URL or HTML. Pass `prompt` or `schema` in the body. Control page loading with `gotoOptions` and `waitFor*` options.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'object',\n      additionalProperties: true\n    },\n    status: {\n      type: 'boolean',\n      description: 'Response status'\n    },\n    errors: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'number',\n            description: 'Error code'\n          },\n          message: {\n            type: 'string',\n            description: 'Error Message'\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    }\n  },\n  required: [    'result',\n    'status'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -284,12 +284,14 @@ export const tool: Tool = {
             type: 'object',
             description:
               'Schema for the response format. More information here: https://developers.cloudflare.com/workers-ai/json-mode/',
+            additionalProperties: true,
           },
         },
         required: ['type'],
       },
       setExtraHTTPHeaders: {
         type: 'object',
+        additionalProperties: true,
       },
       setJavaScriptEnabled: {
         type: 'boolean',

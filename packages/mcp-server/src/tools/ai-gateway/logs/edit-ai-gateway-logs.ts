@@ -35,6 +35,7 @@ export const tool: Tool = {
       },
       metadata: {
         type: 'object',
+        additionalProperties: true,
       },
       score: {
         type: 'number',

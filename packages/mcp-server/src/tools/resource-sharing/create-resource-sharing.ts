@@ -55,6 +55,7 @@ export const tool: Tool = {
             meta: {
               type: 'object',
               description: 'Resource Metadata.',
+              additionalProperties: true,
             },
             resource_account_id: {
               type: 'string',

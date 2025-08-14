@@ -44,6 +44,7 @@ export const tool: Tool = {
       },
       string_matches: {
         type: 'object',
+        additionalProperties: true,
       },
       body_tag: {
         type: 'string',
