@@ -1013,6 +1013,7 @@ export class Cloudflare {
   pipelines: API.Pipelines = new API.Pipelines(this);
   schemaValidation: API.SchemaValidation = new API.SchemaValidation(this);
 }
+
 Cloudflare.Accounts = Accounts;
 Cloudflare.OriginCACertificates = OriginCACertificates;
 Cloudflare.IPs = IPs;
@@ -1108,6 +1109,7 @@ Cloudflare.CustomPages = CustomPages;
 Cloudflare.SecretsStore = SecretsStore;
 Cloudflare.Pipelines = Pipelines;
 Cloudflare.SchemaValidation = SchemaValidation;
+
 export declare namespace Cloudflare {
   export type RequestOptions = Opts.RequestOptions;
 
