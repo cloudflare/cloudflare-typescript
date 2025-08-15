@@ -165,13 +165,13 @@ Additionally, authorization can be provided via the following headers:
 | `x-cloudflare-api-token` | `apiToken` | api_token |
 | `X-Auth-User-Service-Key` | `userServiceKey` | user_service_key |
 
-A configuration JSON for this server might look like this:
+A configuration JSON for this server might look like this, assuming the server is hosted at `http://localhost:3000`:
 
 ```json
 {
   "mcpServers": {
     "cloudflare_api": {
-      "url": "http://localhost:3000", # or wherever the server is hosted
+      "url": "http://localhost:3000",
       "headers": {
         "Authorization": "Bearer <auth value>"
       }
