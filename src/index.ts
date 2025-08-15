@@ -586,6 +586,7 @@ Cloudflare.CustomPages = CustomPages;
 Cloudflare.SecretsStore = SecretsStore;
 Cloudflare.Pipelines = Pipelines;
 Cloudflare.SchemaValidation = SchemaValidation;
+
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
