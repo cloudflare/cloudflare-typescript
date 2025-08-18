@@ -28,20 +28,22 @@
   },
   "dependencies": {
     "cloudflare": "file:../../dist/",
+    "@cloudflare/cabidela": "^0.2.4",
     "@modelcontextprotocol/sdk": "^1.11.5",
     "express": "^5.1.0",
     "jq-web": "https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz",
+    "qs": "^6.14.0",
     "yargs": "^17.7.2",
-    "@cloudflare/cabidela": "^0.2.4",
     "zod": "^3.25.20",
-    "zod-to-json-schema": "^3.24.5"
+    "zod-to-json-schema": "^3.24.5",
+    "zod-validation-error": "^4.0.1"
   },
   "bin": {
     "mcp-server": "dist/index.js"
   },
   "devDependencies": {
-    "@types/jest": "^29.4.0",
     "@types/express": "^5.0.3",
+    "@types/jest": "^29.4.0",
     "@types/yargs": "^17.0.8",
     "@typescript-eslint/eslint-plugin": "8.31.1",
     "@typescript-eslint/parser": "8.31.1",

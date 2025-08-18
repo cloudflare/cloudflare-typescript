@@ -2,7 +2,7 @@
 
 import { selectTools } from './server';
 import { Endpoint, endpoints } from './tools';
-import { McpOptions, parseOptions } from './options';
+import { McpOptions, parseCLIOptions } from './options';
 import { launchStdioServer } from './stdio';
 import { launchStreamableHTTPServer } from './http';
 
@@ -40,7 +40,7 @@ if (require.main === module) {
 
 function parseOptionsOrError() {
   try {
-    return parseOptions();
+    return parseCLIOptions();
   } catch (error) {
     console.error('Error parsing options:', error);
     process.exit(1);
