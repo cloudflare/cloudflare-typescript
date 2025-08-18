@@ -1,4 +1,4 @@
-import { parseOptions } from '../src/options';
+import { parseCLIOptions, parseQueryOptions } from '../src/options';
 import { Filter } from '../src/tools';
 import { parseEmbeddedJSON } from '../src/compat';
 
@@ -11,7 +11,7 @@ const mockArgv = (args: string[]) => {
   };
 };
 
-describe('parseOptions', () => {
+describe('parseCLIOptions', () => {
   it('should parse basic filter options', () => {
     const cleanup = mockArgv([
       '--tool=test-tool',
@@ -20,7 +20,7 @@ describe('parseOptions', () => {
       '--tag=test-tag',
     ]);
 
-    const result = parseOptions();
+    const result = parseCLIOptions();
 
     expect(result.filters).toEqual([
       { type: 'tag', op: 'include', value: 'test-tag' },
@@ -52,7 +52,7 @@ describe('parseOptions', () => {
       '--no-tag=exclude-tag',
     ]);
 
-    const result = parseOptions();
+    const result = parseCLIOptions();
 
     expect(result.filters).toEqual([
       { type: 'tag', op: 'exclude', value: 'exclude-tag' },
@@ -76,7 +76,7 @@ describe('parseOptions', () => {
   it('should parse client presets', () => {
     const cleanup = mockArgv(['--client=openai-agents']);
 
-    const result = parseOptions();
+    const result = parseCLIOptions();
 
     expect(result.client).toEqual('openai-agents');
 
@@ -92,7 +92,7 @@ describe('parseOptions', () => {
       '--capability=tool-name-length=40',
     ]);
 
-    const result = parseOptions();
+    const result = parseCLIOptions();
 
     expect(result.capabilities).toEqual({
       topLevelUnions: true,
@@ -109,7 +109,7 @@ describe('parseOptions', () => {
   it('should handle list option', () => {
     const cleanup = mockArgv(['--list']);
 
-    const result = parseOptions();
+    const result = parseCLIOptions();
 
     expect(result.list).toBe(true);
 
@@ -119,7 +119,7 @@ describe('parseOptions', () => {
   it('should handle multiple filters of the same type', () => {
     const cleanup = mockArgv(['--tool=tool1', '--tool=tool2', '--resource=res1', '--resource=res2']);
 
-    const result = parseOptions();
+    const result = parseCLIOptions();
 
     expect(result.filters).toEqual([
       { type: 'resource', op: 'include', value: 'res1' },
@@ -138,7 +138,7 @@ describe('parseOptions', () => {
       '--capability=top-level-unions,valid-json,unions',
     ]);
 
-    const result = parseOptions();
+    const result = parseCLIOptions();
 
     expect(result.filters).toEqual([
       { type: 'resource', op: 'include', value: 'res1' },
@@ -166,7 +166,7 @@ describe('parseOptions', () => {
     const originalError = console.error;
     console.error = jest.fn();
 
-    expect(() => parseOptions()).toThrow();
+    expect(() => parseCLIOptions()).toThrow();
 
     console.error = originalError;
     cleanup();
@@ -179,10 +179,228 @@ describe('parseOptions', () => {
     const originalError = console.error;
     console.error = jest.fn();
 
-    expect(() => parseOptions()).toThrow();
+    expect(() => parseCLIOptions()).toThrow();
 
     console.error = originalError;
     cleanup();
+  });
+});
+
+describe('parseQueryOptions', () => {
+  const defaultOptions = {
+    client: undefined,
+    includeDynamicTools: undefined,
+    includeAllTools: undefined,
+    filters: [],
+    capabilities: {
+      topLevelUnions: true,
+      validJson: true,
+      refs: true,
+      unions: true,
+      formats: true,
+      toolNameLength: undefined,
+    },
+  };
+
+  it('should parse basic filter options from query string', () => {
+    const query = 'tool=test-tool&resource=test-resource&operation=read&tag=test-tag';
+    const result = parseQueryOptions(defaultOptions, query);
+
+    expect(result.filters).toEqual([
+      { type: 'resource', op: 'include', value: 'test-resource' },
+      { type: 'operation', op: 'include', value: 'read' },
+      { type: 'tag', op: 'include', value: 'test-tag' },
+      { type: 'tool', op: 'include', value: 'test-tool' },
+    ]);
+
+    expect(result.capabilities).toEqual({
+      topLevelUnions: true,
+      validJson: true,
+      refs: true,
+      unions: true,
+      formats: true,
+      toolNameLength: undefined,
+    });
+  });
+
+  it('should parse exclusion filters from query string', () => {
+    const query = 'no_tool=exclude-tool&no_resource=exclude-resource&no_operation=write&no_tag=exclude-tag';
+    const result = parseQueryOptions(defaultOptions, query);
+
+    expect(result.filters).toEqual([
+      { type: 'resource', op: 'exclude', value: 'exclude-resource' },
+      { type: 'operation', op: 'exclude', value: 'write' },
+      { type: 'tag', op: 'exclude', value: 'exclude-tag' },
+      { type: 'tool', op: 'exclude', value: 'exclude-tool' },
+    ]);
+  });
+
+  it('should parse client option from query string', () => {
+    const query = 'client=openai-agents';
+    const result = parseQueryOptions(defaultOptions, query);
+
+    expect(result.client).toBe('openai-agents');
+  });
+
+  it('should parse client capabilities from query string', () => {
+    const query = 'capability=top-level-unions&capability=valid-json&capability=tool-name-length%3D40';
+    const result = parseQueryOptions(defaultOptions, query);
+
+    expect(result.capabilities).toEqual({
+      topLevelUnions: true,
+      validJson: true,
+      refs: true,
+      unions: true,
+      formats: true,
+      toolNameLength: 40,
+    });
+  });
+
+  it('should parse no-capability options from query string', () => {
+    const query = 'no_capability=top-level-unions&no_capability=refs&no_capability=formats';
+    const result = parseQueryOptions(defaultOptions, query);
+
+    expect(result.capabilities).toEqual({
+      topLevelUnions: false,
+      validJson: true,
+      refs: false,
+      unions: true,
+      formats: false,
+      toolNameLength: undefined,
+    });
+  });
+
+  it('should parse tools options from query string', () => {
+    const query = 'tools=dynamic&tools=all';
+    const result = parseQueryOptions(defaultOptions, query);
+
+    expect(result.includeDynamicTools).toBe(true);
+    expect(result.includeAllTools).toBe(true);
+  });
+
+  it('should parse no-tools options from query string', () => {
+    const query = 'tools=dynamic&tools=all&no_tools=dynamic';
+    const result = parseQueryOptions(defaultOptions, query);
+
+    expect(result.includeDynamicTools).toBe(false);
+    expect(result.includeAllTools).toBe(true);
+  });
+
+  it('should handle array values in query string', () => {
+    const query = 'tool[]=tool1&tool[]=tool2&resource[]=res1&resource[]=res2';
+    const result = parseQueryOptions(defaultOptions, query);
+
+    expect(result.filters).toEqual([
+      { type: 'resource', op: 'include', value: 'res1' },
+      { type: 'resource', op: 'include', value: 'res2' },
+      { type: 'tool', op: 'include', value: 'tool1' },
+      { type: 'tool', op: 'include', value: 'tool2' },
+    ]);
+  });
+
+  it('should merge with default options', () => {
+    const defaultWithFilters = {
+      ...defaultOptions,
+      filters: [{ type: 'tag' as const, op: 'include' as const, value: 'existing-tag' }],
+      client: 'cursor' as const,
+      includeDynamicTools: true,
+    };
+
+    const query = 'tool=new-tool&resource=new-resource';
+    const result = parseQueryOptions(defaultWithFilters, query);
+
+    expect(result.filters).toEqual([
+      { type: 'tag', op: 'include', value: 'existing-tag' },
+      { type: 'resource', op: 'include', value: 'new-resource' },
+      { type: 'tool', op: 'include', value: 'new-tool' },
+    ]);
+
+    expect(result.client).toBe('cursor');
+    expect(result.includeDynamicTools).toBe(true);
+  });
+
+  it('should override client from default options', () => {
+    const defaultWithClient = {
+      ...defaultOptions,
+      client: 'cursor' as const,
+    };
+
+    const query = 'client=openai-agents';
+    const result = parseQueryOptions(defaultWithClient, query);
+
+    expect(result.client).toBe('openai-agents');
+  });
+
+  it('should merge capabilities with default options', () => {
+    const defaultWithCapabilities = {
+      ...defaultOptions,
+      capabilities: {
+        topLevelUnions: false,
+        validJson: false,
+        refs: true,
+        unions: true,
+        formats: true,
+        toolNameLength: 30,
+      },
+    };
+
+    const query = 'capability=top-level-unions&no_capability=refs';
+    const result = parseQueryOptions(defaultWithCapabilities, query);
+
+    expect(result.capabilities).toEqual({
+      topLevelUnions: true,
+      validJson: false,
+      refs: false,
+      unions: true,
+      formats: true,
+      toolNameLength: 30,
+    });
+  });
+
+  it('should handle empty query string', () => {
+    const query = '';
+    const result = parseQueryOptions(defaultOptions, query);
+
+    expect(result).toEqual(defaultOptions);
+  });
+
+  it('should handle invalid query string gracefully', () => {
+    const query = 'invalid=value&operation=invalid-operation';
+
+    // Should throw due to Zod validation for invalid operation
+    expect(() => parseQueryOptions(defaultOptions, query)).toThrow();
+  });
+
+  it('should preserve default undefined values when not specified', () => {
+    const defaultWithUndefined = {
+      ...defaultOptions,
+      client: undefined,
+      includeDynamicTools: undefined,
+      includeAllTools: undefined,
+    };
+
+    const query = 'tool=test-tool';
+    const result = parseQueryOptions(defaultWithUndefined, query);
+
+    expect(result.client).toBeUndefined();
+    expect(result.includeDynamicTools).toBeFalsy();
+    expect(result.includeAllTools).toBeFalsy();
+  });
+
+  it('should handle complex query with mixed include and exclude filters', () => {
+    const query =
+      'tool=include-tool&no_tool=exclude-tool&resource=include-res&no_resource=exclude-res&operation=read&tag=include-tag&no_tag=exclude-tag';
+    const result = parseQueryOptions(defaultOptions, query);
+
+    expect(result.filters).toEqual([
+      { type: 'resource', op: 'include', value: 'include-res' },
+      { type: 'operation', op: 'include', value: 'read' },
+      { type: 'tag', op: 'include', value: 'include-tag' },
+      { type: 'tool', op: 'include', value: 'include-tool' },
+      { type: 'resource', op: 'exclude', value: 'exclude-res' },
+      { type: 'tag', op: 'exclude', value: 'exclude-tag' },
+      { type: 'tool', op: 'exclude', value: 'exclude-tool' },
+    ]);
   });
 });
 

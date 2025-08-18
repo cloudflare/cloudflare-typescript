@@ -1,4 +1,5 @@
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { z } from 'zod';
 import { Endpoint } from './tools';
 
 export interface ClientCapabilities {
@@ -19,7 +20,8 @@ export const defaultClientCapabilities: ClientCapabilities = {
   toolNameLength: undefined,
 };
 
-export type ClientType = 'openai-agents' | 'claude' | 'claude-code' | 'cursor';
+export const ClientType = z.enum(['openai-agents', 'claude', 'claude-code', 'cursor']);
+export type ClientType = z.infer<typeof ClientType>;
 
 // Client presets for compatibility
 // Note that these could change over time as models get better, so this is
