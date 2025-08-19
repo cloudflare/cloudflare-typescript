@@ -14,6 +14,7 @@ import {
   parseEmbeddedJSON,
 } from './compat';
 import { dynamicTools } from './dynamic-tools';
+import { codeTool } from './code-tool';
 import { McpOptions } from './options';
 
 export { McpOptions } from './options';
@@ -116,6 +117,8 @@ export function selectTools(endpoints: Endpoint[], options: McpOptions): Endpoin
       includedTools = endpoints;
     } else if (options.includeDynamicTools) {
       includedTools = dynamicTools(endpoints);
+    } else if (options.includeCodeTools) {
+      includedTools = [codeTool()];
     } else {
       includedTools = endpoints;
     }
