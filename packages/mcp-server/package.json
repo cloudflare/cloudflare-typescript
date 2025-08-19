@@ -30,6 +30,7 @@
     "cloudflare": "file:../../dist/",
     "@cloudflare/cabidela": "^0.2.4",
     "@modelcontextprotocol/sdk": "^1.11.5",
+    "@valtown/deno-http-worker": "^0.0.21",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "jq-web": "https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz",
@@ -57,7 +58,7 @@
     "ts-jest": "^29.1.0",
     "ts-morph": "^19.0.0",
     "ts-node": "^10.5.0",
-    "tsc-multi": "https://github.com/stainless-api/tsc-multi/releases/download/v1.1.8/tsc-multi.tgz",
+    "tsc-multi": "https://github.com/stainless-api/tsc-multi/releases/download/v1.1.9/tsc-multi.tgz",
     "tsconfig-paths": "^4.0.0",
     "typescript": "5.8.3"
   },

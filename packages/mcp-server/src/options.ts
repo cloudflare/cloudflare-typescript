@@ -16,6 +16,7 @@ export type McpOptions = {
   client: ClientType | undefined;
   includeDynamicTools: boolean | undefined;
   includeAllTools: boolean | undefined;
+  includeCodeTools: boolean | undefined;
   filters: Filter[];
   capabilities?: Partial<ClientCapabilities>;
 };
@@ -54,13 +55,13 @@ export function parseCLIOptions(): CLIOptions {
     .option('tools', {
       type: 'string',
       array: true,
-      choices: ['dynamic', 'all'],
+      choices: ['dynamic', 'all', 'code'],
       description: 'Use dynamic tools or all tools',
     })
     .option('no-tools', {
       type: 'string',
       array: true,
-      choices: ['dynamic', 'all'],
+      choices: ['dynamic', 'all', 'code'],
       description: 'Do not use any dynamic or all tools',
     })
     .option('tool', {
@@ -251,11 +252,13 @@ export function parseCLIOptions(): CLIOptions {
     }
   }
 
+  const shouldIncludeToolType = (toolType: 'dynamic' | 'all' | 'code') =>
+    explicitTools ? argv.tools?.includes(toolType) && !argv.noTools?.includes(toolType) : undefined;
+
   const explicitTools = Boolean(argv.tools || argv.noTools);
-  const includeDynamicTools =
-    explicitTools ? argv.tools?.includes('dynamic') && !argv.noTools?.includes('dynamic') : undefined;
-  const includeAllTools =
-    explicitTools ? argv.tools?.includes('all') && !argv.noTools?.includes('all') : undefined;
+  const includeDynamicTools = shouldIncludeToolType('dynamic');
+  const includeAllTools = shouldIncludeToolType('all');
+  const includeCodeTools = shouldIncludeToolType('code');
 
   const transport = argv.transport as 'stdio' | 'http';
 
@@ -264,6 +267,7 @@ export function parseCLIOptions(): CLIOptions {
     client: client && knownClients[client] ? client : undefined,
     includeDynamicTools,
     includeAllTools,
+    includeCodeTools,
     filters,
     capabilities: clientCapabilities,
     list: argv.list || false,
@@ -385,6 +389,8 @@ export function parseQueryOptions(defaultOptions: McpOptions, query: unknown): M
     includeAllTools:
       defaultOptions.includeAllTools ??
       (queryOptions.tools?.includes('all') && !queryOptions.no_tools?.includes('all')),
+    // Never include code tools on remote server.
+    includeCodeTools: undefined,
     filters,
     capabilities: clientCapabilities,
   };
