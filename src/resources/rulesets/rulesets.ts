@@ -14,7 +14,6 @@ import {
   ManagedChallengeRule,
   RedirectRule,
   RewriteRule,
-  RewriteURIPart,
   RouteRule,
   RuleCreateParams,
   RuleCreateResponse,
@@ -396,21 +395,21 @@ export interface RulesetCreateResponse {
     | RulesAPI.BlockRule
     | RulesetCreateResponse.RulesetsChallengeRule
     | RulesAPI.CompressResponseRule
+    | RulesAPI.DDoSDynamicRule
     | RulesAPI.ExecuteRule
+    | RulesAPI.ForceConnectionCloseRule
     | RulesetCreateResponse.RulesetsJSChallengeRule
     | RulesAPI.LogRule
+    | RulesAPI.LogCustomFieldRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
     | RulesAPI.RewriteRule
     | RulesAPI.RouteRule
     | RulesAPI.ScoreRule
     | RulesAPI.ServeErrorRule
+    | RulesAPI.SetCacheSettingsRule
     | RulesAPI.SetConfigRule
     | RulesAPI.SkipRule
-    | RulesAPI.SetCacheSettingsRule
-    | RulesAPI.LogCustomFieldRule
-    | RulesAPI.DDoSDynamicRule
-    | RulesAPI.ForceConnectionCloseRule
   >;
 
   /**
@@ -467,7 +466,7 @@ export namespace RulesetCreateResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
 
@@ -482,38 +481,38 @@ export namespace RulesetCreateResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -524,7 +523,7 @@ export namespace RulesetCreateResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -542,7 +541,7 @@ export namespace RulesetCreateResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -553,8 +552,8 @@ export namespace RulesetCreateResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -602,7 +601,7 @@ export namespace RulesetCreateResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
 
@@ -617,38 +616,38 @@ export namespace RulesetCreateResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsJSChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsJSChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -659,7 +658,7 @@ export namespace RulesetCreateResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -677,7 +676,7 @@ export namespace RulesetCreateResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -688,8 +687,8 @@ export namespace RulesetCreateResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -732,21 +731,21 @@ export interface RulesetUpdateResponse {
     | RulesAPI.BlockRule
     | RulesetUpdateResponse.RulesetsChallengeRule
     | RulesAPI.CompressResponseRule
+    | RulesAPI.DDoSDynamicRule
     | RulesAPI.ExecuteRule
+    | RulesAPI.ForceConnectionCloseRule
     | RulesetUpdateResponse.RulesetsJSChallengeRule
     | RulesAPI.LogRule
+    | RulesAPI.LogCustomFieldRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
     | RulesAPI.RewriteRule
     | RulesAPI.RouteRule
     | RulesAPI.ScoreRule
     | RulesAPI.ServeErrorRule
+    | RulesAPI.SetCacheSettingsRule
     | RulesAPI.SetConfigRule
     | RulesAPI.SkipRule
-    | RulesAPI.SetCacheSettingsRule
-    | RulesAPI.LogCustomFieldRule
-    | RulesAPI.DDoSDynamicRule
-    | RulesAPI.ForceConnectionCloseRule
   >;
 
   /**
@@ -803,7 +802,7 @@ export namespace RulesetUpdateResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
 
@@ -818,38 +817,38 @@ export namespace RulesetUpdateResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -860,7 +859,7 @@ export namespace RulesetUpdateResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -878,7 +877,7 @@ export namespace RulesetUpdateResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -889,8 +888,8 @@ export namespace RulesetUpdateResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -938,7 +937,7 @@ export namespace RulesetUpdateResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
 
@@ -953,38 +952,38 @@ export namespace RulesetUpdateResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsJSChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsJSChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -995,7 +994,7 @@ export namespace RulesetUpdateResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -1013,7 +1012,7 @@ export namespace RulesetUpdateResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -1024,8 +1023,8 @@ export namespace RulesetUpdateResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -1108,21 +1107,21 @@ export interface RulesetGetResponse {
     | RulesAPI.BlockRule
     | RulesetGetResponse.RulesetsChallengeRule
     | RulesAPI.CompressResponseRule
+    | RulesAPI.DDoSDynamicRule
     | RulesAPI.ExecuteRule
+    | RulesAPI.ForceConnectionCloseRule
     | RulesetGetResponse.RulesetsJSChallengeRule
     | RulesAPI.LogRule
+    | RulesAPI.LogCustomFieldRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
     | RulesAPI.RewriteRule
     | RulesAPI.RouteRule
     | RulesAPI.ScoreRule
     | RulesAPI.ServeErrorRule
+    | RulesAPI.SetCacheSettingsRule
     | RulesAPI.SetConfigRule
     | RulesAPI.SkipRule
-    | RulesAPI.SetCacheSettingsRule
-    | RulesAPI.LogCustomFieldRule
-    | RulesAPI.DDoSDynamicRule
-    | RulesAPI.ForceConnectionCloseRule
   >;
 
   /**
@@ -1179,7 +1178,7 @@ export namespace RulesetGetResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
 
@@ -1194,38 +1193,38 @@ export namespace RulesetGetResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -1236,7 +1235,7 @@ export namespace RulesetGetResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -1254,7 +1253,7 @@ export namespace RulesetGetResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -1265,8 +1264,8 @@ export namespace RulesetGetResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -1314,7 +1313,7 @@ export namespace RulesetGetResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
 
@@ -1329,38 +1328,38 @@ export namespace RulesetGetResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsJSChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsJSChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -1371,7 +1370,7 @@ export namespace RulesetGetResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -1389,7 +1388,7 @@ export namespace RulesetGetResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -1400,8 +1399,8 @@ export namespace RulesetGetResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -1448,21 +1447,21 @@ export interface RulesetCreateParams {
     | RulesAPI.BlockRuleParam
     | RulesetCreateParams.RulesetsChallengeRule
     | RulesAPI.CompressResponseRuleParam
+    | RulesAPI.DDoSDynamicRuleParam
     | RulesAPI.ExecuteRuleParam
+    | RulesAPI.ForceConnectionCloseRuleParam
     | RulesetCreateParams.RulesetsJSChallengeRule
     | RulesAPI.LogRuleParam
+    | RulesAPI.LogCustomFieldRuleParam
     | RulesAPI.ManagedChallengeRuleParam
     | RulesAPI.RedirectRuleParam
     | RulesAPI.RewriteRuleParam
     | RulesAPI.RouteRuleParam
     | RulesAPI.ScoreRuleParam
     | RulesAPI.ServeErrorRuleParam
+    | RulesAPI.SetCacheSettingsRuleParam
     | RulesAPI.SetConfigRuleParam
     | RulesAPI.SkipRuleParam
-    | RulesAPI.SetCacheSettingsRuleParam
-    | RulesAPI.LogCustomFieldRuleParam
-    | RulesAPI.DDoSDynamicRuleParam
-    | RulesAPI.ForceConnectionCloseRuleParam
   >;
 }
 
@@ -1494,7 +1493,7 @@ export namespace RulesetCreateParams {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
 
@@ -1509,38 +1508,38 @@ export namespace RulesetCreateParams {
     logging?: RulesAPI.LoggingParam;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -1551,7 +1550,7 @@ export namespace RulesetCreateParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -1569,7 +1568,7 @@ export namespace RulesetCreateParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -1580,8 +1579,8 @@ export namespace RulesetCreateParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -1614,7 +1613,7 @@ export namespace RulesetCreateParams {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
 
@@ -1629,38 +1628,38 @@ export namespace RulesetCreateParams {
     logging?: RulesAPI.LoggingParam;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsJSChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsJSChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -1671,7 +1670,7 @@ export namespace RulesetCreateParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -1689,7 +1688,7 @@ export namespace RulesetCreateParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -1700,8 +1699,8 @@ export namespace RulesetCreateParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -1748,21 +1747,21 @@ export interface RulesetUpdateParams {
     | RulesAPI.BlockRuleParam
     | RulesetUpdateParams.RulesetsChallengeRule
     | RulesAPI.CompressResponseRuleParam
+    | RulesAPI.DDoSDynamicRuleParam
     | RulesAPI.ExecuteRuleParam
+    | RulesAPI.ForceConnectionCloseRuleParam
     | RulesetUpdateParams.RulesetsJSChallengeRule
     | RulesAPI.LogRuleParam
+    | RulesAPI.LogCustomFieldRuleParam
     | RulesAPI.ManagedChallengeRuleParam
     | RulesAPI.RedirectRuleParam
     | RulesAPI.RewriteRuleParam
     | RulesAPI.RouteRuleParam
     | RulesAPI.ScoreRuleParam
     | RulesAPI.ServeErrorRuleParam
+    | RulesAPI.SetCacheSettingsRuleParam
     | RulesAPI.SetConfigRuleParam
     | RulesAPI.SkipRuleParam
-    | RulesAPI.SetCacheSettingsRuleParam
-    | RulesAPI.LogCustomFieldRuleParam
-    | RulesAPI.DDoSDynamicRuleParam
-    | RulesAPI.ForceConnectionCloseRuleParam
   >;
 }
 
@@ -1794,7 +1793,7 @@ export namespace RulesetUpdateParams {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
 
@@ -1809,38 +1808,38 @@ export namespace RulesetUpdateParams {
     logging?: RulesAPI.LoggingParam;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -1851,7 +1850,7 @@ export namespace RulesetUpdateParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -1869,7 +1868,7 @@ export namespace RulesetUpdateParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -1880,8 +1879,8 @@ export namespace RulesetUpdateParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -1914,7 +1913,7 @@ export namespace RulesetUpdateParams {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
 
@@ -1929,38 +1928,38 @@ export namespace RulesetUpdateParams {
     logging?: RulesAPI.LoggingParam;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsJSChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsJSChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -1971,7 +1970,7 @@ export namespace RulesetUpdateParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -1989,7 +1988,7 @@ export namespace RulesetUpdateParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -2000,8 +1999,8 @@ export namespace RulesetUpdateParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -2088,7 +2087,6 @@ export declare namespace Rulesets {
     type ManagedChallengeRule as ManagedChallengeRule,
     type RedirectRule as RedirectRule,
     type RewriteRule as RewriteRule,
-    type RewriteURIPart as RewriteURIPart,
     type RouteRule as RouteRule,
     type RulesetRule as RulesetRule,
     type ScoreRule as ScoreRule,

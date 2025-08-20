@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'put',
   httpPath: '/accounts/{account_id}/gateway/configuration',
-  operationId: 'zero-trust-accounts-update-zero-trust-account-configuration',
+  operationId: 'zero-trust-accounts-update-zero-trust-account-configuration.',
 };
 
 export const tool: Tool = {
@@ -31,7 +31,7 @@ export const tool: Tool = {
     $defs: {
       gateway_configuration_settings: {
         type: 'object',
-        description: 'Account settings',
+        description: 'Account settings.',
         properties: {
           activity_log: {
             $ref: '#/$defs/activity_log_settings',
@@ -82,7 +82,7 @@ export const tool: Tool = {
           },
           inspection: {
             type: 'object',
-            description: 'Setting to define inspection settings',
+            description: 'Setting to define inspection settings.',
             properties: {
               mode: {
                 type: 'string',
@@ -153,11 +153,11 @@ export const tool: Tool = {
         properties: {
           enabled: {
             type: 'boolean',
-            description: 'Set notification on',
+            description: 'Set notification on.',
           },
           include_context: {
             type: 'boolean',
-            description: 'If true, context information will be passed as query parameters',
+            description: 'If true, context information will be passed as query parameters.',
           },
           msg: {
             type: 'string',
@@ -180,7 +180,7 @@ export const tool: Tool = {
           },
           enabled: {
             type: 'boolean',
-            description: 'Enable only cipher suites and TLS versions compliant with FIPS 140-2.',
+            description: 'Enable only cipher suites and TLS versions compliant with FIPS. 140-2.',
           },
           footer_text: {
             type: 'string',
@@ -220,11 +220,11 @@ export const tool: Tool = {
           read_only: {
             type: 'boolean',
             description:
-              'This setting was shared via the Orgs API and cannot be edited by the current account',
+              'This setting was shared via the Orgs API and cannot be edited by the current account.',
           },
           source_account: {
             type: 'string',
-            description: 'Account tag of account that shared this setting',
+            description: 'Account tag of account that shared this setting.',
           },
           suppress_footer: {
             type: 'boolean',
@@ -237,7 +237,7 @@ export const tool: Tool = {
           },
           version: {
             type: 'integer',
-            description: 'Version number of the setting',
+            description: 'Version number of the setting.',
           },
         },
       },
@@ -268,11 +268,11 @@ export const tool: Tool = {
       },
       custom_certificate_settings: {
         type: 'object',
-        description: 'Custom certificate settings for BYO-PKI. (deprecated and replaced by `certificate`)',
+        description: 'Custom certificate settings for BYO-PKI. (deprecated and replaced by `certificate`).',
         properties: {
           enabled: {
             type: 'boolean',
-            description: 'Enable use of custom certificate authority for signing Gateway traffic.',
+            description: 'Enable use of custom certificate authority for signing Gateway. traffic.',
           },
           id: {
             type: 'string',
@@ -301,15 +301,15 @@ export const tool: Tool = {
           read_only: {
             type: 'boolean',
             description:
-              'This setting was shared via the Orgs API and cannot be edited by the current account',
+              'This setting was shared via the Orgs API and cannot be edited by the current account.',
           },
           source_account: {
             type: 'string',
-            description: 'Account tag of account that shared this setting',
+            description: 'Account tag of account that shared this setting.',
           },
           version: {
             type: 'integer',
-            description: 'Version number of the setting',
+            description: 'Version number of the setting.',
           },
         },
       },
@@ -319,7 +319,7 @@ export const tool: Tool = {
         properties: {
           tls: {
             type: 'boolean',
-            description: 'Enable only cipher suites and TLS versions compliant with FIPS 140-2.',
+            description: 'Enable only cipher suites and TLS versions compliant with FIPS. 140-2.',
           },
         },
       },

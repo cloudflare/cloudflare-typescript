@@ -21,12 +21,12 @@ export const tool: Tool = {
     properties: {
       ruleset_id: {
         type: 'string',
-        title: 'ID',
+        title: 'Ruleset ID',
         description: 'The unique ID of the ruleset.',
       },
       rule_id: {
         type: 'string',
-        title: 'ID',
+        title: 'Rule ID',
         description: 'The unique ID of the rule.',
       },
       account_id: {

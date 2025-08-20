@@ -188,7 +188,7 @@ export interface GatewayCreateResponse {
   gateway_tag?: string;
 
   /**
-   * The name of the provider. Usually Cloudflare.
+   * Provider Name. Usually Cloudflare.
    */
   provider_name?: string;
 }
@@ -205,7 +205,7 @@ export interface GatewayListResponse {
   gateway_tag?: string;
 
   /**
-   * The name of the provider. Usually Cloudflare.
+   * Provider Name. Usually Cloudflare.
    */
   provider_name?: string;
 }

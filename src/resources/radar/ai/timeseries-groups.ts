@@ -19,7 +19,7 @@ export class TimeseriesGroups extends APIResource {
    * ```
    */
   summary(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE',
+    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
     query: TimeseriesGroupSummaryParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<TimeseriesGroupSummaryResponse> {
@@ -63,7 +63,7 @@ export class TimeseriesGroups extends APIResource {
    * ```
    */
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE',
+    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
     query: TimeseriesGroupTimeseriesGroupsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<TimeseriesGroupTimeseriesGroupsResponse> {
@@ -566,6 +566,11 @@ export interface TimeseriesGroupSummaryParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by industry.
+   */
+  industry?: Array<string>;
+
+  /**
    * Limits the number of objects per group to the top items within the specified
    * time range. When item count exceeds the limit, extra items appear grouped under
    * an "other" category.
@@ -583,6 +588,11 @@ export interface TimeseriesGroupSummaryParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by vertical.
+   */
+  vertical?: Array<string>;
 }
 
 export interface TimeseriesGroupTimeseriesParams {
@@ -636,6 +646,11 @@ export interface TimeseriesGroupTimeseriesParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by industry.
+   */
+  industry?: Array<string>;
+
+  /**
    * Limits the number of objects per group to the top items within the specified
    * time range. When item count exceeds the limit, extra items appear grouped under
    * an "other" category.
@@ -658,6 +673,11 @@ export interface TimeseriesGroupTimeseriesParams {
    * Filters results by user agent.
    */
   userAgent?: Array<string>;
+
+  /**
+   * Filters results by vertical.
+   */
+  vertical?: Array<string>;
 }
 
 export interface TimeseriesGroupTimeseriesGroupsParams {
@@ -711,6 +731,11 @@ export interface TimeseriesGroupTimeseriesGroupsParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by industry.
+   */
+  industry?: Array<string>;
+
+  /**
    * Limits the number of objects per group to the top items within the specified
    * time range. When item count exceeds the limit, extra items appear grouped under
    * an "other" category.
@@ -734,6 +759,11 @@ export interface TimeseriesGroupTimeseriesGroupsParams {
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
   normalization?: 'PERCENTAGE_CHANGE' | 'MIN0_MAX';
+
+  /**
+   * Filters results by vertical.
+   */
+  vertical?: Array<string>;
 }
 
 export interface TimeseriesGroupUserAgentParams {

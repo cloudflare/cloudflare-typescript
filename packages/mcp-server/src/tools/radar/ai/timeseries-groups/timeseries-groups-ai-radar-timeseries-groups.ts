@@ -25,7 +25,7 @@ export const tool: Tool = {
       dimension: {
         type: 'string',
         description: 'Specifies the attribute by which to group the results.',
-        enum: ['USER_AGENT', 'CRAWL_PURPOSE'],
+        enum: ['USER_AGENT', 'CRAWL_PURPOSE', 'INDUSTRY', 'VERTICAL'],
       },
       aggInterval: {
         type: 'string',
@@ -85,6 +85,13 @@ export const tool: Tool = {
         description: 'Format in which results will be returned.',
         enum: ['JSON', 'CSV'],
       },
+      industry: {
+        type: 'array',
+        description: 'Filters results by industry.',
+        items: {
+          type: 'string',
+        },
+      },
       limitPerGroup: {
         type: 'integer',
         description:
@@ -110,6 +117,13 @@ export const tool: Tool = {
         description:
           'Normalization method applied to the results. Refer to [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).',
         enum: ['PERCENTAGE_CHANGE', 'MIN0_MAX'],
+      },
+      vertical: {
+        type: 'array',
+        description: 'Filters results by vertical.',
+        items: {
+          type: 'string',
+        },
       },
       jq_filter: {
         type: 'string',

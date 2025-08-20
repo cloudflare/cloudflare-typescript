@@ -183,37 +183,25 @@ export namespace SingleStepMigrationParam {
 /**
  * JSON-encoded metadata about the uploaded parts and Worker configuration.
  */
-export interface WorkerMetadata {
-  /**
-   * Name of the part in the multipart request that contains the script (e.g. the
-   * file adding a listener to the `fetch` event). Indicates a
-   * `service worker syntax` Worker.
-   */
-  body_part?: string;
+export type WorkerMetadata = WorkerMetadata.MainModule | WorkerMetadata.BodyPart;
 
-  /**
-   * Name of the part in the multipart request that contains the main module (e.g.
-   * the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
-   */
-  main_module?: string;
-}
+export namespace WorkerMetadata {
+  export interface MainModule {
+    /**
+     * Name of the part in the multipart request that contains the main module (e.g.
+     * the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
+     */
+    main_module: string;
+  }
 
-/**
- * JSON-encoded metadata about the uploaded parts and Worker configuration.
- */
-export interface WorkerMetadataParam {
-  /**
-   * Name of the part in the multipart request that contains the script (e.g. the
-   * file adding a listener to the `fetch` event). Indicates a
-   * `service worker syntax` Worker.
-   */
-  body_part?: string;
-
-  /**
-   * Name of the part in the multipart request that contains the main module (e.g.
-   * the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
-   */
-  main_module?: string;
+  export interface BodyPart {
+    /**
+     * Name of the part in the multipart request that contains the script (e.g. the
+     * file adding a listener to the `fetch` event). Indicates a
+     * `service worker syntax` Worker.
+     */
+    body_part: string;
+  }
 }
 
 Workers.Routes = Routes;

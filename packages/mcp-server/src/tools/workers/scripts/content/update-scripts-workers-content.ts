@@ -31,20 +31,31 @@ export const tool: Tool = {
         description: 'Name of the script, used in URLs and route configuration.',
       },
       metadata: {
-        type: 'object',
+        anyOf: [
+          {
+            type: 'object',
+            properties: {
+              main_module: {
+                type: 'string',
+                description:
+                  'Name of the uploaded file that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.',
+              },
+            },
+            required: ['main_module'],
+          },
+          {
+            type: 'object',
+            properties: {
+              body_part: {
+                type: 'string',
+                description:
+                  'Name of the uploaded file that contains the Worker script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.',
+              },
+            },
+            required: ['body_part'],
+          },
+        ],
         description: 'JSON-encoded metadata about the uploaded parts and Worker configuration.',
-        properties: {
-          body_part: {
-            type: 'string',
-            description:
-              'Name of the uploaded file that contains the Worker script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.',
-          },
-          main_module: {
-            type: 'string',
-            description:
-              'Name of the uploaded file that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.',
-          },
-        },
       },
       files: {
         type: 'array',

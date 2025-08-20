@@ -287,7 +287,7 @@ export interface GatewayRule {
   enabled: boolean;
 
   /**
-   * The protocol or layer to evaluate the traffic, identity, and device posture
+   * The protocol or layer to evaluate the traffic, identity, and device. posture
    * expressions.
    */
   filters: Array<GatewayFilter>;
@@ -353,12 +353,13 @@ export interface GatewayRule {
   identity?: string;
 
   /**
-   * The rule cannot be shared via the Orgs API
+   * The rule cannot be shared via the Orgs API.
    */
   not_sharable?: boolean;
 
   /**
-   * The rule was shared via the Orgs API and cannot be edited by the current account
+   * The rule was shared via the Orgs API and cannot be edited by the current
+   * account.
    */
   read_only?: boolean;
 
@@ -374,14 +375,14 @@ export interface GatewayRule {
   schedule?: Schedule | null;
 
   /**
-   * account tag of account that created the rule
+   * account tag of account that created the rule.
    */
   source_account?: string;
 
   updated_at?: string;
 
   /**
-   * version number of the rule
+   * version number of the rule.
    */
   version?: number;
 
@@ -517,7 +518,7 @@ export interface RuleSetting {
   ip_indicator_feeds?: boolean;
 
   /**
-   * Send matching traffic to the supplied destination IP address and port.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   l4override?: RuleSetting.L4override | null;
 
@@ -543,12 +544,12 @@ export interface RuleSetting {
   payload_log?: RuleSetting.PayloadLog | null;
 
   /**
-   * Settings that apply to quarantine rules
+   * Settings that apply to quarantine rules.
    */
   quarantine?: RuleSetting.Quarantine | null;
 
   /**
-   * Settings that apply to redirect rules
+   * Settings that apply to redirect rules.
    */
   redirect?: RuleSetting.Redirect | null;
 
@@ -664,12 +665,12 @@ export namespace RuleSetting {
    */
   export interface BlockPage {
     /**
-     * URI to which the user will be redirected
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
   }
@@ -728,7 +729,7 @@ export namespace RuleSetting {
   }
 
   /**
-   * Send matching traffic to the supplied destination IP address and port.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   export interface L4override {
     /**
@@ -748,12 +749,12 @@ export namespace RuleSetting {
    */
   export interface NotificationSettings {
     /**
-     * Set notification on
+     * Set notification on.
      */
     enabled?: boolean;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
@@ -780,7 +781,7 @@ export namespace RuleSetting {
   }
 
   /**
-   * Settings that apply to quarantine rules
+   * Settings that apply to quarantine rules.
    */
   export interface Quarantine {
     /**
@@ -804,22 +805,22 @@ export namespace RuleSetting {
   }
 
   /**
-   * Settings that apply to redirect rules
+   * Settings that apply to redirect rules.
    */
   export interface Redirect {
     /**
-     * URI to which the user will be redirected
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
     /**
      * If true, the path and query parameters from the original request will be
-     * appended to target_uri
+     * appended to target_uri.
      */
     preserve_path_and_query?: boolean;
   }
@@ -948,7 +949,7 @@ export interface RuleSettingParam {
   ip_indicator_feeds?: boolean;
 
   /**
-   * Send matching traffic to the supplied destination IP address and port.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   l4override?: RuleSettingParam.L4override | null;
 
@@ -974,12 +975,12 @@ export interface RuleSettingParam {
   payload_log?: RuleSettingParam.PayloadLog | null;
 
   /**
-   * Settings that apply to quarantine rules
+   * Settings that apply to quarantine rules.
    */
   quarantine?: RuleSettingParam.Quarantine | null;
 
   /**
-   * Settings that apply to redirect rules
+   * Settings that apply to redirect rules.
    */
   redirect?: RuleSettingParam.Redirect | null;
 
@@ -1095,12 +1096,12 @@ export namespace RuleSettingParam {
    */
   export interface BlockPage {
     /**
-     * URI to which the user will be redirected
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
   }
@@ -1159,7 +1160,7 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Send matching traffic to the supplied destination IP address and port.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   export interface L4override {
     /**
@@ -1179,12 +1180,12 @@ export namespace RuleSettingParam {
    */
   export interface NotificationSettings {
     /**
-     * Set notification on
+     * Set notification on.
      */
     enabled?: boolean;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
@@ -1211,7 +1212,7 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Settings that apply to quarantine rules
+   * Settings that apply to quarantine rules.
    */
   export interface Quarantine {
     /**
@@ -1235,22 +1236,22 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Settings that apply to redirect rules
+   * Settings that apply to redirect rules.
    */
   export interface Redirect {
     /**
-     * URI to which the user will be redirected
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
     /**
      * If true, the path and query parameters from the original request will be
-     * appended to target_uri
+     * appended to target_uri.
      */
     preserve_path_and_query?: boolean;
   }
@@ -1481,7 +1482,7 @@ export interface RuleCreateParams {
   expiration?: RuleCreateParams.Expiration | null;
 
   /**
-   * Body param: The protocol or layer to evaluate the traffic, identity, and device
+   * Body param: The protocol or layer to evaluate the traffic, identity, and device.
    * posture expressions.
    */
   filters?: Array<GatewayFilterParam>;
@@ -1610,7 +1611,7 @@ export interface RuleUpdateParams {
   expiration?: RuleUpdateParams.Expiration | null;
 
   /**
-   * Body param: The protocol or layer to evaluate the traffic, identity, and device
+   * Body param: The protocol or layer to evaluate the traffic, identity, and device.
    * posture expressions.
    */
   filters?: Array<GatewayFilterParam>;

@@ -80,6 +80,13 @@ export const tool: Tool = {
         description: 'Format in which results will be returned.',
         enum: ['JSON', 'CSV'],
       },
+      industry: {
+        type: 'array',
+        description: 'Filters results by industry.',
+        items: {
+          type: 'string',
+        },
+      },
       limitPerGroup: {
         type: 'integer',
         description:
@@ -103,6 +110,13 @@ export const tool: Tool = {
       userAgent: {
         type: 'array',
         description: 'Filters results by user agent.',
+        items: {
+          type: 'string',
+        },
+      },
+      vertical: {
+        type: 'array',
+        description: 'Filters results by vertical.',
         items: {
           type: 'string',
         },

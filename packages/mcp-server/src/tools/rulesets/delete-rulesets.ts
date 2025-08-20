@@ -21,7 +21,7 @@ export const tool: Tool = {
     properties: {
       ruleset_id: {
         type: 'string',
-        title: 'ID',
+        title: 'Ruleset ID',
         description: 'The unique ID of the ruleset.',
       },
       account_id: {
