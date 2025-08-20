@@ -3,7 +3,12 @@
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { Endpoint, endpoints, HandlerFunction, query } from './tools';
-import { CallToolRequestSchema, ListToolsRequestSchema, Tool } from '@modelcontextprotocol/sdk/types.js';
+import {
+  CallToolRequestSchema,
+  Implementation,
+  ListToolsRequestSchema,
+  Tool,
+} from '@modelcontextprotocol/sdk/types.js';
 import { ClientOptions } from 'cloudflare';
 import Cloudflare from 'cloudflare';
 import {
@@ -41,29 +46,29 @@ export const server = newMcpServer();
  */
 export function initMcpServer(params: {
   server: Server | McpServer;
-  clientOptions: ClientOptions;
-  mcpOptions: McpOptions;
-  endpoints?: { tool: Tool; handler: HandlerFunction }[];
-}) {
-  const transformedEndpoints = selectTools(endpoints, params.mcpOptions);
-  const client = new Cloudflare(params.clientOptions);
-  const capabilities = {
-    ...defaultClientCapabilities,
-    ...(params.mcpOptions.client ? knownClients[params.mcpOptions.client] : params.mcpOptions.capabilities),
-  };
-  init({ server: params.server, client, endpoints: transformedEndpoints, capabilities });
-}
-
-export function init(params: {
-  server: Server | McpServer;
-  client?: Cloudflare;
-  endpoints?: { tool: Tool; handler: HandlerFunction }[];
-  capabilities?: Partial<ClientCapabilities>;
+  clientOptions?: ClientOptions;
+  mcpOptions?: McpOptions;
 }) {
   const server = params.server instanceof McpServer ? params.server.server : params.server;
-  const providedEndpoints = params.endpoints || endpoints;
+  const mcpOptions = params.mcpOptions ?? {};
 
-  const endpointMap = Object.fromEntries(providedEndpoints.map((endpoint) => [endpoint.tool.name, endpoint]));
+  let providedEndpoints: Endpoint[] | null = null;
+  let endpointMap: Record<string, Endpoint> | null = null;
+
+  const initTools = (implementation?: Implementation) => {
+    if (implementation && (!mcpOptions.client || mcpOptions.client === 'infer')) {
+      mcpOptions.client =
+        implementation.name.toLowerCase().includes('claude') ? 'claude'
+        : implementation.name.toLowerCase().includes('cursor') ? 'cursor'
+        : undefined;
+      mcpOptions.capabilities = {
+        ...(mcpOptions.client && knownClients[mcpOptions.client]),
+        ...mcpOptions.capabilities,
+      };
+    }
+    providedEndpoints = selectTools(endpoints, mcpOptions);
+    endpointMap = Object.fromEntries(providedEndpoints.map((endpoint) => [endpoint.tool.name, endpoint]));
+  };
 
   const logAtLevel =
     (level: 'debug' | 'info' | 'warning' | 'error') =>
@@ -80,51 +85,63 @@ export function init(params: {
     error: logAtLevel('error'),
   };
 
-  const client =
-    params.client || new Cloudflare({ defaultHeaders: { 'X-Stainless-MCP': 'true' }, logger: logger });
+  const client = new Cloudflare({
+    logger,
+    ...params.clientOptions,
+    defaultHeaders: {
+      ...params.clientOptions?.defaultHeaders,
+      'X-Stainless-MCP': 'true',
+    },
+  });
 
   server.setRequestHandler(ListToolsRequestSchema, async () => {
+    if (providedEndpoints === null) {
+      initTools(server.getClientVersion());
+    }
     return {
-      tools: providedEndpoints.map((endpoint) => endpoint.tool),
+      tools: providedEndpoints!.map((endpoint) => endpoint.tool),
     };
   });
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
+    if (endpointMap === null) {
+      initTools(server.getClientVersion());
+    }
     const { name, arguments: args } = request.params;
-    const endpoint = endpointMap[name];
+    const endpoint = endpointMap![name];
     if (!endpoint) {
       throw new Error(`Unknown tool: ${name}`);
     }
 
-    return executeHandler(endpoint.tool, endpoint.handler, client, args, params.capabilities);
+    return executeHandler(endpoint.tool, endpoint.handler, client, args, mcpOptions.capabilities);
   });
 }
 
 /**
  * Selects the tools to include in the MCP Server based on the provided options.
  */
-export function selectTools(endpoints: Endpoint[], options: McpOptions): Endpoint[] {
-  const filteredEndpoints = query(options.filters, endpoints);
+export function selectTools(endpoints: Endpoint[], options?: McpOptions): Endpoint[] {
+  const filteredEndpoints = query(options?.filters ?? [], endpoints);
 
   let includedTools = filteredEndpoints;
 
   if (includedTools.length > 0) {
-    if (options.includeDynamicTools) {
+    if (options?.includeDynamicTools) {
       includedTools = dynamicTools(includedTools);
     }
   } else {
-    if (options.includeAllTools) {
+    if (options?.includeAllTools) {
       includedTools = endpoints;
-    } else if (options.includeDynamicTools) {
+    } else if (options?.includeDynamicTools) {
       includedTools = dynamicTools(endpoints);
-    } else if (options.includeCodeTools) {
+    } else if (options?.includeCodeTools) {
       includedTools = [codeTool()];
     } else {
       includedTools = endpoints;
     }
   }
 
-  const capabilities = { ...defaultClientCapabilities, ...options.capabilities };
+  const capabilities = { ...defaultClientCapabilities, ...options?.capabilities };
   return applyCompatibilityTransformations(includedTools, capabilities);
 }
 

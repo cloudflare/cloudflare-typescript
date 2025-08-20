@@ -13,12 +13,12 @@ export type CLIOptions = McpOptions & {
 };
 
 export type McpOptions = {
-  client: ClientType | undefined;
-  includeDynamicTools: boolean | undefined;
-  includeAllTools: boolean | undefined;
-  includeCodeTools: boolean | undefined;
-  filters: Filter[];
-  capabilities?: Partial<ClientCapabilities>;
+  client?: ClientType | undefined;
+  includeDynamicTools?: boolean | undefined;
+  includeAllTools?: boolean | undefined;
+  includeCodeTools?: boolean | undefined;
+  filters?: Filter[] | undefined;
+  capabilities?: Partial<ClientCapabilities> | undefined;
 };
 
 const CAPABILITY_CHOICES = [
@@ -204,14 +204,7 @@ export function parseCLIOptions(): CLIOptions {
   }
 
   // Parse client capabilities
-  const clientCapabilities: ClientCapabilities = {
-    topLevelUnions: true,
-    validJson: true,
-    refs: true,
-    unions: true,
-    formats: true,
-    toolNameLength: undefined,
-  };
+  const clientCapabilities: Partial<ClientCapabilities> = {};
 
   // Apply individual capability overrides
   if (Array.isArray(argv.capability)) {
@@ -264,7 +257,7 @@ export function parseCLIOptions(): CLIOptions {
 
   const client = argv.client as ClientType;
   return {
-    client: client && knownClients[client] ? client : undefined,
+    client: client && client !== 'infer' && knownClients[client] ? client : undefined,
     includeDynamicTools,
     includeAllTools,
     includeCodeTools,
@@ -310,7 +303,7 @@ export function parseQueryOptions(defaultOptions: McpOptions, query: unknown): M
   const queryObject = typeof query === 'string' ? qs.parse(query) : query;
   const queryOptions = QueryOptions.parse(queryObject);
 
-  const filters: Filter[] = [...defaultOptions.filters];
+  const filters: Filter[] = [...(defaultOptions.filters ?? [])];
 
   for (const resource of queryOptions.resource || []) {
     filters.push({ type: 'resource', op: 'include', value: resource });
@@ -338,15 +331,7 @@ export function parseQueryOptions(defaultOptions: McpOptions, query: unknown): M
   }
 
   // Parse client capabilities
-  const clientCapabilities: ClientCapabilities = {
-    topLevelUnions: true,
-    validJson: true,
-    refs: true,
-    unions: true,
-    formats: true,
-    toolNameLength: undefined,
-    ...defaultOptions.capabilities,
-  };
+  const clientCapabilities: Partial<ClientCapabilities> = { ...defaultOptions.capabilities };
 
   for (const cap of queryOptions.capability || []) {
     const parsed = parseCapabilityValue(cap);
@@ -384,12 +369,13 @@ export function parseQueryOptions(defaultOptions: McpOptions, query: unknown): M
   return {
     client: queryOptions.client ?? defaultOptions.client,
     includeDynamicTools:
-      defaultOptions.includeDynamicTools ??
-      (queryOptions.tools?.includes('dynamic') && !queryOptions.no_tools?.includes('dynamic')),
+      defaultOptions.includeDynamicTools === false ?
+        false
+      : queryOptions.tools?.includes('dynamic') && !queryOptions.no_tools?.includes('dynamic'),
     includeAllTools:
-      defaultOptions.includeAllTools ??
-      (queryOptions.tools?.includes('all') && !queryOptions.no_tools?.includes('all')),
-    // Never include code tools on remote server.
+      defaultOptions.includeAllTools === false ?
+        false
+      : queryOptions.tools?.includes('all') && !queryOptions.no_tools?.includes('all'),
     includeCodeTools: undefined,
     filters,
     capabilities: clientCapabilities,

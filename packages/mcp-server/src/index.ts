@@ -23,10 +23,10 @@ async function main() {
 
   switch (options.transport) {
     case 'stdio':
-      await launchStdioServer(options, selectedTools);
+      await launchStdioServer(options);
       break;
     case 'http':
-      await launchStreamableHTTPServer(options, selectedTools, options.port ?? options.socket);
+      await launchStreamableHTTPServer(options, options.port ?? options.socket);
       break;
   }
 }
