@@ -1,8 +1,58 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import { APIPromise } from '../../core/api-promise';
+import { PagePromise, SinglePage } from '../../core/pagination';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
 
-export class Edge extends APIResource {}
+export class Edge extends APIResource {
+  /**
+   * Creates a new Instant Logs job for a zone.
+   *
+   * @example
+   * ```ts
+   * const instantLogpushJob = await client.logpush.edge.create({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  create(params: EdgeCreateParams, options?: RequestOptions): APIPromise<InstantLogpushJob | null> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.post(path`/zones/${zone_id}/logpush/edge/jobs`, { body, ...options }) as APIPromise<{
+        result: InstantLogpushJob | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists Instant Logs jobs for a zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const instantLogpushJob of client.logpush.edge.get(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  get(
+    params: EdgeGetParams,
+    options?: RequestOptions,
+  ): PagePromise<InstantLogpushJobsSinglePage, InstantLogpushJob | null> {
+    const { zone_id } = params;
+    return this._client.getAPIList(
+      path`/zones/${zone_id}/logpush/edge/jobs`,
+      SinglePage<InstantLogpushJob | null>,
+      options,
+    );
+  }
+}
+
+export type InstantLogpushJobsSinglePage = SinglePage<InstantLogpushJob | null>;
 
 export interface InstantLogpushJob {
   /**
@@ -32,6 +82,41 @@ export interface InstantLogpushJob {
   session_id?: string;
 }
 
+export interface EdgeCreateParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Comma-separated list of fields.
+   */
+  fields?: string;
+
+  /**
+   * Body param: Filters to drill down into specific events.
+   */
+  filter?: string;
+
+  /**
+   * Body param: The sample parameter is the sample rate of the records set by the
+   * client: "sample": 1 is 100% of records "sample": 10 is 10% and so on.
+   */
+  sample?: number;
+}
+
+export interface EdgeGetParams {
+  /**
+   * Identifier.
+   */
+  zone_id: string;
+}
+
 export declare namespace Edge {
-  export { type InstantLogpushJob as InstantLogpushJob };
+  export {
+    type InstantLogpushJob as InstantLogpushJob,
+    type InstantLogpushJobsSinglePage as InstantLogpushJobsSinglePage,
+    type EdgeCreateParams as EdgeCreateParams,
+    type EdgeGetParams as EdgeGetParams,
+  };
 }

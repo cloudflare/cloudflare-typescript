@@ -1062,6 +1062,11 @@ The following tools are available in this MCP server.
 
 - `get_datasets_logpush_jobs` (`read`): Lists Logpush jobs for an account or zone for a dataset.
 
+### Resource `logpush.edge`:
+
+- `create_logpush_edge` (`write`): Creates a new Instant Logs job for a zone.
+- `get_logpush_edge` (`read`): Lists Instant Logs jobs for a zone.
+
 ### Resource `logpush.jobs`:
 
 - `create_logpush_jobs` (`write`): Creates a new Logpush job for an account or zone.
