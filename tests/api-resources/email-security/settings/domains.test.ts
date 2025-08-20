@@ -99,6 +99,7 @@ describe('resource domains', () => {
       folder: 'AllItems',
       integration_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       lookback_hops: 1,
+      regions: ['GLOBAL'],
       require_tls_inbound: true,
       require_tls_outbound: true,
       transport: 'transport',
