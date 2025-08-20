@@ -89,7 +89,6 @@ export class ThreatEvents extends APIResource {
    *     category: 'Domain Resolution',
    *     date: '2022-04-01T00:00:00Z',
    *     event: 'An attacker registered the domain domain.com',
-   *     indicatorType: 'domain',
    *     raw: { data: { foo: 'bar' } },
    *     tlp: 'amber',
    *   });
@@ -164,7 +163,6 @@ export class ThreatEvents extends APIResource {
    *         date: '2022-04-01T00:00:00Z',
    *         event:
    *           'An attacker registered the domain domain.com',
-   *         indicatorType: 'domain',
    *         raw: { data: { foo: 'bar' } },
    *         tlp: 'amber',
    *       },
@@ -229,10 +227,6 @@ export class ThreatEvents extends APIResource {
 }
 
 export interface ThreatEventCreateResponse {
-  id: number;
-
-  accountId: number;
-
   attacker: string;
 
   attackerCountry: string;
@@ -245,10 +239,6 @@ export interface ThreatEventCreateResponse {
 
   indicator: string;
 
-  indicatorType: string;
-
-  indicatorTypeId: number;
-
   killChain: number;
 
   mitreAttack: Array<string>;
@@ -256,8 +246,6 @@ export interface ThreatEventCreateResponse {
   numReferenced: number;
 
   numReferences: number;
-
-  rawId: string;
 
   referenced: Array<string>;
 
@@ -278,18 +266,12 @@ export interface ThreatEventCreateResponse {
   uuid: string;
 
   insight?: string;
-
-  releasabilityId?: string;
 }
 
 export type ThreatEventListResponse = Array<ThreatEventListResponse.ThreatEventListResponseItem>;
 
 export namespace ThreatEventListResponse {
   export interface ThreatEventListResponseItem {
-    id: number;
-
-    accountId: number;
-
     attacker: string;
 
     attackerCountry: string;
@@ -302,10 +284,6 @@ export namespace ThreatEventListResponse {
 
     indicator: string;
 
-    indicatorType: string;
-
-    indicatorTypeId: number;
-
     killChain: number;
 
     mitreAttack: Array<string>;
@@ -313,8 +291,6 @@ export namespace ThreatEventListResponse {
     numReferenced: number;
 
     numReferences: number;
-
-    rawId: string;
 
     referenced: Array<string>;
 
@@ -335,8 +311,6 @@ export namespace ThreatEventListResponse {
     uuid: string;
 
     insight?: string;
-
-    releasabilityId?: string;
   }
 }
 
@@ -350,10 +324,6 @@ export interface ThreatEventDeleteResponse {
 export type ThreatEventBulkCreateResponse = number;
 
 export interface ThreatEventEditResponse {
-  id: number;
-
-  accountId: number;
-
   attacker: string;
 
   attackerCountry: string;
@@ -366,10 +336,6 @@ export interface ThreatEventEditResponse {
 
   indicator: string;
 
-  indicatorType: string;
-
-  indicatorTypeId: number;
-
   killChain: number;
 
   mitreAttack: Array<string>;
@@ -377,8 +343,6 @@ export interface ThreatEventEditResponse {
   numReferenced: number;
 
   numReferences: number;
-
-  rawId: string;
 
   referenced: Array<string>;
 
@@ -399,15 +363,9 @@ export interface ThreatEventEditResponse {
   uuid: string;
 
   insight?: string;
-
-  releasabilityId?: string;
 }
 
 export interface ThreatEventGetResponse {
-  id: number;
-
-  accountId: number;
-
   attacker: string;
 
   attackerCountry: string;
@@ -420,10 +378,6 @@ export interface ThreatEventGetResponse {
 
   indicator: string;
 
-  indicatorType: string;
-
-  indicatorTypeId: number;
-
   killChain: number;
 
   mitreAttack: Array<string>;
@@ -431,8 +385,6 @@ export interface ThreatEventGetResponse {
   numReferenced: number;
 
   numReferences: number;
-
-  rawId: string;
 
   referenced: Array<string>;
 
@@ -453,8 +405,6 @@ export interface ThreatEventGetResponse {
   uuid: string;
 
   insight?: string;
-
-  releasabilityId?: string;
 }
 
 export interface ThreatEventCreateParams {
@@ -477,11 +427,6 @@ export interface ThreatEventCreateParams {
    * Body param:
    */
   event: string;
-
-  /**
-   * Body param:
-   */
-  indicatorType: string;
 
   /**
    * Body param:
@@ -640,8 +585,6 @@ export namespace ThreatEventBulkCreateParams {
 
     event: string;
 
-    indicatorType: string;
-
     raw: Data.Raw;
 
     tlp: string;
@@ -709,11 +652,6 @@ export interface ThreatEventEditParams {
    * Body param:
    */
   indicator?: string;
-
-  /**
-   * Body param:
-   */
-  indicatorType?: string;
 
   /**
    * Body param:
