@@ -20,13 +20,13 @@ export const defaultClientCapabilities: ClientCapabilities = {
   toolNameLength: undefined,
 };
 
-export const ClientType = z.enum(['openai-agents', 'claude', 'claude-code', 'cursor']);
+export const ClientType = z.enum(['openai-agents', 'claude', 'claude-code', 'cursor', 'infer']);
 export type ClientType = z.infer<typeof ClientType>;
 
 // Client presets for compatibility
 // Note that these could change over time as models get better, so this is
 // a best effort.
-export const knownClients: Record<ClientType, ClientCapabilities> = {
+export const knownClients: Record<Exclude<ClientType, 'infer'>, ClientCapabilities> = {
   'openai-agents': {
     topLevelUnions: false,
     validJson: true,

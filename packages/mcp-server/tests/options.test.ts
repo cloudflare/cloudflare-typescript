@@ -29,15 +29,7 @@ describe('parseCLIOptions', () => {
       { type: 'operation', op: 'include', value: 'read' },
     ] as Filter[]);
 
-    // Default client capabilities
-    expect(result.capabilities).toEqual({
-      topLevelUnions: true,
-      validJson: true,
-      refs: true,
-      unions: true,
-      formats: true,
-      toolNameLength: undefined,
-    });
+    expect(result.capabilities).toEqual({});
 
     expect(result.list).toBe(false);
 
@@ -61,14 +53,7 @@ describe('parseCLIOptions', () => {
       { type: 'operation', op: 'exclude', value: 'write' },
     ] as Filter[]);
 
-    expect(result.capabilities).toEqual({
-      topLevelUnions: true,
-      validJson: true,
-      refs: true,
-      unions: true,
-      formats: true,
-      toolNameLength: undefined,
-    });
+    expect(result.capabilities).toEqual({});
 
     cleanup();
   });
@@ -99,7 +84,6 @@ describe('parseCLIOptions', () => {
       validJson: true,
       refs: true,
       unions: true,
-      formats: true,
       toolNameLength: 40,
     });
 
@@ -150,10 +134,7 @@ describe('parseCLIOptions', () => {
     expect(result.capabilities).toEqual({
       topLevelUnions: true,
       validJson: true,
-      refs: true,
       unions: true,
-      formats: true,
-      toolNameLength: undefined,
     });
 
     cleanup();
@@ -316,7 +297,7 @@ describe('parseQueryOptions', () => {
     ]);
 
     expect(result.client).toBe('cursor');
-    expect(result.includeDynamicTools).toBe(true);
+    expect(result.includeDynamicTools).toBe(undefined);
   });
 
   it('should override client from default options', () => {

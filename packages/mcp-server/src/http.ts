@@ -8,7 +8,6 @@ import { fromError } from 'zod-validation-error/v3';
 import { McpOptions, parseQueryOptions } from './options';
 import { initMcpServer, newMcpServer } from './server';
 import { parseAuthHeaders } from './headers';
-import { Endpoint } from './tools';
 
 const newServer = (
   defaultMcpOptions: McpOptions,
@@ -101,11 +100,7 @@ export const streamableHTTPApp = (options: McpOptions): express.Express => {
   return app;
 };
 
-export const launchStreamableHTTPServer = async (
-  options: McpOptions,
-  endpoints: Endpoint[],
-  port: number | string | undefined,
-) => {
+export const launchStreamableHTTPServer = async (options: McpOptions, port: number | string | undefined) => {
   const app = streamableHTTPApp(options);
   const server = app.listen(port);
   const address = server.address();
