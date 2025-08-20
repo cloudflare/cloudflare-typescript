@@ -168,7 +168,7 @@ export interface BlockPageSettings {
   background_color?: string;
 
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
    */
   enabled?: boolean | null;
 
@@ -217,12 +217,12 @@ export interface BlockPageSettings {
 
   /**
    * This setting was shared via the Orgs API and cannot be edited by the current
-   * account
+   * account.
    */
   read_only?: boolean | null;
 
   /**
-   * Account tag of account that shared this setting
+   * Account tag of account that shared this setting.
    */
   source_account?: string | null;
 
@@ -238,7 +238,7 @@ export interface BlockPageSettings {
   target_uri?: string;
 
   /**
-   * Version number of the setting
+   * Version number of the setting.
    */
   version?: number | null;
 }
@@ -253,7 +253,7 @@ export interface BlockPageSettingsParam {
   background_color?: string;
 
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
    */
   enabled?: boolean | null;
 
@@ -364,11 +364,11 @@ export interface BrowserIsolationSettingsParam {
 
 /**
  * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
- * `certificate`)
+ * `certificate`).
  */
 export interface CustomCertificateSettings {
   /**
-   * Enable use of custom certificate authority for signing Gateway traffic.
+   * Enable use of custom certificate authority for signing Gateway. traffic.
    */
   enabled: boolean | null;
 
@@ -387,11 +387,11 @@ export interface CustomCertificateSettings {
 
 /**
  * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
- * `certificate`)
+ * `certificate`).
  */
 export interface CustomCertificateSettingsParam {
   /**
-   * Enable use of custom certificate authority for signing Gateway traffic.
+   * Enable use of custom certificate authority for signing Gateway. traffic.
    */
   enabled: boolean | null;
 
@@ -413,17 +413,17 @@ export interface ExtendedEmailMatching {
 
   /**
    * This setting was shared via the Orgs API and cannot be edited by the current
-   * account
+   * account.
    */
   read_only?: boolean;
 
   /**
-   * Account tag of account that shared this setting
+   * Account tag of account that shared this setting.
    */
   source_account?: string;
 
   /**
-   * Version number of the setting
+   * Version number of the setting.
    */
   version?: number;
 }
@@ -444,7 +444,7 @@ export interface ExtendedEmailMatchingParam {
  */
 export interface FipsSettings {
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
    */
   tls?: boolean;
 }
@@ -454,13 +454,13 @@ export interface FipsSettings {
  */
 export interface FipsSettingsParam {
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
    */
   tls?: boolean;
 }
 
 /**
- * Account settings
+ * Account settings.
  */
 export interface GatewayConfigurationSettings {
   /**
@@ -496,7 +496,7 @@ export interface GatewayConfigurationSettings {
 
   /**
    * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
-   * `certificate`)
+   * `certificate`).
    */
   custom_certificate?: CustomCertificateSettings | null;
 
@@ -516,7 +516,7 @@ export interface GatewayConfigurationSettings {
   host_selector?: GatewayConfigurationSettings.HostSelector | null;
 
   /**
-   * Setting to define inspection settings
+   * Setting to define inspection settings.
    */
   inspection?: GatewayConfigurationSettings.Inspection | null;
 
@@ -561,7 +561,7 @@ export namespace GatewayConfigurationSettings {
   }
 
   /**
-   * Setting to define inspection settings
+   * Setting to define inspection settings.
    */
   export interface Inspection {
     /**
@@ -592,7 +592,7 @@ export namespace GatewayConfigurationSettings {
 }
 
 /**
- * Account settings
+ * Account settings.
  */
 export interface GatewayConfigurationSettingsParam {
   /**
@@ -628,7 +628,7 @@ export interface GatewayConfigurationSettingsParam {
 
   /**
    * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
-   * `certificate`)
+   * `certificate`).
    */
   custom_certificate?: CustomCertificateSettingsParam | null;
 
@@ -648,7 +648,7 @@ export interface GatewayConfigurationSettingsParam {
   host_selector?: GatewayConfigurationSettingsParam.HostSelector | null;
 
   /**
-   * Setting to define inspection settings
+   * Setting to define inspection settings.
    */
   inspection?: GatewayConfigurationSettingsParam.Inspection | null;
 
@@ -693,7 +693,7 @@ export namespace GatewayConfigurationSettingsParam {
   }
 
   /**
-   * Setting to define inspection settings
+   * Setting to define inspection settings.
    */
   export interface Inspection {
     /**
@@ -729,12 +729,12 @@ export namespace GatewayConfigurationSettingsParam {
  */
 export interface NotificationSettings {
   /**
-   * Set notification on
+   * Set notification on.
    */
   enabled?: boolean;
 
   /**
-   * If true, context information will be passed as query parameters
+   * If true, context information will be passed as query parameters.
    */
   include_context?: boolean;
 
@@ -756,12 +756,12 @@ export interface NotificationSettings {
  */
 export interface NotificationSettingsParam {
   /**
-   * Set notification on
+   * Set notification on.
    */
   enabled?: boolean;
 
   /**
-   * If true, context information will be passed as query parameters
+   * If true, context information will be passed as query parameters.
    */
   include_context?: boolean;
 
@@ -818,13 +818,13 @@ export interface TLSSettingsParam {
 }
 
 /**
- * Account settings
+ * Account settings.
  */
 export interface ConfigurationUpdateResponse {
   created_at?: string;
 
   /**
-   * Account settings
+   * Account settings.
    */
   settings?: GatewayConfigurationSettings;
 
@@ -832,13 +832,13 @@ export interface ConfigurationUpdateResponse {
 }
 
 /**
- * Account settings
+ * Account settings.
  */
 export interface ConfigurationEditResponse {
   created_at?: string;
 
   /**
-   * Account settings
+   * Account settings.
    */
   settings?: GatewayConfigurationSettings;
 
@@ -846,13 +846,13 @@ export interface ConfigurationEditResponse {
 }
 
 /**
- * Account settings
+ * Account settings.
  */
 export interface ConfigurationGetResponse {
   created_at?: string;
 
   /**
-   * Account settings
+   * Account settings.
    */
   settings?: GatewayConfigurationSettings;
 
@@ -866,7 +866,7 @@ export interface ConfigurationUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Account settings
+   * Body param: Account settings.
    */
   settings?: GatewayConfigurationSettingsParam;
 }
@@ -878,7 +878,7 @@ export interface ConfigurationEditParams {
   account_id: string;
 
   /**
-   * Body param: Account settings
+   * Body param: Account settings.
    */
   settings?: GatewayConfigurationSettingsParam;
 }

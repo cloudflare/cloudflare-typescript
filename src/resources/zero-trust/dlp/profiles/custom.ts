@@ -198,6 +198,8 @@ export namespace CustomProfile {
     type: 'predefined';
 
     profile_id?: string | null;
+
+    variant?: PredefinedEntry.Variant;
   }
 
   export namespace PredefinedEntry {
@@ -212,6 +214,12 @@ export namespace CustomProfile {
        * service.
        */
       available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
     }
   }
 

@@ -2646,7 +2646,6 @@ Types:
 - <code><a href="./src/resources/rulesets/rules.ts">ManagedChallengeRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RedirectRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RewriteRule</a></code>
-- <code><a href="./src/resources/rulesets/rules.ts">RewriteURIPart</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RouteRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RulesetRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">ScoreRule</a></code>
