@@ -166,6 +166,8 @@ export interface DomainListResponse {
 
   lookback_hops: number;
 
+  regions: Array<'GLOBAL' | 'AU' | 'DE' | 'IN' | 'US'>;
+
   transport: string;
 
   authorization?: DomainListResponse.Authorization | null;
@@ -248,6 +250,8 @@ export interface DomainEditResponse {
 
   lookback_hops: number;
 
+  regions: Array<'GLOBAL' | 'AU' | 'DE' | 'IN' | 'US'>;
+
   transport: string;
 
   authorization?: DomainEditResponse.Authorization | null;
@@ -315,6 +319,8 @@ export interface DomainGetResponse {
   last_modified: string;
 
   lookback_hops: number;
+
+  regions: Array<'GLOBAL' | 'AU' | 'DE' | 'IN' | 'US'>;
 
   transport: string;
 
@@ -459,6 +465,11 @@ export interface DomainEditParams {
    * Body param:
    */
   lookback_hops?: number;
+
+  /**
+   * Body param:
+   */
+  regions?: Array<'GLOBAL' | 'AU' | 'DE' | 'IN' | 'US'>;
 
   /**
    * Body param:
