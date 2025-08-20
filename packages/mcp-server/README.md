@@ -3013,7 +3013,7 @@ The following tools are available in this MCP server.
 - `list_gateway_zero_trust_certificates` (`read`): Fetches all Zero Trust certificates for an account.
 - `delete_gateway_zero_trust_certificates` (`write`): Deletes a gateway-managed Zero Trust certificate. A certificate must be deactivated from the edge (inactive) before it is deleted.
 - `activate_gateway_zero_trust_certificates` (`write`): Binds a single Zero Trust certificate to the edge.
-- `deactivate_gateway_zero_trust_certificates` (`write`): Unbinds a single Zero Trust certificate from the edge
+- `deactivate_gateway_zero_trust_certificates` (`write`): Unbinds a single Zero Trust certificate from the edge.
 - `get_gateway_zero_trust_certificates` (`read`): Fetches a single Zero Trust certificate.
 
 ### Resource `zero_trust.networks.routes`:
@@ -3295,7 +3295,7 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.search`:
 
-- `global_radar_search` (`read`): Searches for locations, autonomous systems, reports, bots, certificate logs, and certificate authorities.
+- `global_radar_search` (`read`): Searches for locations, autonomous systems, reports, bots, certificate logs, certificate authorities, industries and verticals
 
 ### Resource `radar.verified_bots.top`:
 

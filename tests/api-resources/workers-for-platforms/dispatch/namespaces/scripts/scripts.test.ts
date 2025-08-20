@@ -16,7 +16,7 @@ describe('resource scripts', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         dispatch_namespace: 'my-dispatch-namespace',
-        metadata: {},
+        metadata: { main_module: 'worker.js' },
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -36,6 +36,7 @@ describe('resource scripts', () => {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         dispatch_namespace: 'my-dispatch-namespace',
         metadata: {
+          main_module: 'worker.js',
           assets: {
             config: {
               _headers: '/dashboard/*\nX-Frame-Options: DENY\n\n/static/*\nAccess-Control-Allow-Origin: *',
@@ -48,13 +49,11 @@ describe('resource scripts', () => {
             jwt: 'jwt',
           },
           bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
-          body_part: 'worker.js',
           compatibility_date: '2021-01-01',
           compatibility_flags: ['nodejs_compat'],
           keep_assets: false,
           keep_bindings: ['string'],
           logpush: false,
-          main_module: 'worker.js',
           migrations: {
             deleted_classes: ['string'],
             new_classes: ['string'],

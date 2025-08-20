@@ -13,7 +13,7 @@ describe('resource scripts', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.workers.scripts.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      metadata: {},
+      metadata: { main_module: 'worker.js' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,6 +29,7 @@ describe('resource scripts', () => {
     const response = await client.workers.scripts.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       metadata: {
+        main_module: 'worker.js',
         assets: {
           config: {
             _headers: '/dashboard/*\nX-Frame-Options: DENY\n\n/static/*\nAccess-Control-Allow-Origin: *',
@@ -41,13 +42,11 @@ describe('resource scripts', () => {
           jwt: 'jwt',
         },
         bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
-        body_part: 'worker.js',
         compatibility_date: '2021-01-01',
         compatibility_flags: ['nodejs_compat'],
         keep_assets: false,
         keep_bindings: ['string'],
         logpush: false,
-        main_module: 'worker.js',
         migrations: {
           deleted_classes: ['string'],
           new_classes: ['string'],

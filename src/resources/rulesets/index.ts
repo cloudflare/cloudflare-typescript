@@ -20,7 +20,6 @@ export {
   type ManagedChallengeRule,
   type RedirectRule,
   type RewriteRule,
-  type RewriteURIPart,
   type RouteRule,
   type RulesetRule,
   type ScoreRule,

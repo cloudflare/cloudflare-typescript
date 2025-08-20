@@ -93,7 +93,7 @@ export const tool: Tool = {
       filters: {
         type: 'array',
         description:
-          'The protocol or layer to evaluate the traffic, identity, and device posture expressions.',
+          'The protocol or layer to evaluate the traffic, identity, and device. posture expressions.',
         items: {
           $ref: '#/$defs/gateway_filter',
         },
@@ -225,11 +225,11 @@ export const tool: Tool = {
             properties: {
               target_uri: {
                 type: 'string',
-                description: 'URI to which the user will be redirected',
+                description: 'URI to which the user will be redirected.',
               },
               include_context: {
                 type: 'boolean',
-                description: 'If true, context information will be passed as query parameters',
+                description: 'If true, context information will be passed as query parameters.',
               },
             },
             required: ['target_uri'],
@@ -322,7 +322,7 @@ export const tool: Tool = {
           },
           l4override: {
             type: 'object',
-            description: 'Send matching traffic to the supplied destination IP address and port.',
+            description: 'Send matching traffic to the supplied destination IP address. and port.',
             properties: {
               ip: {
                 type: 'string',
@@ -341,11 +341,11 @@ export const tool: Tool = {
             properties: {
               enabled: {
                 type: 'boolean',
-                description: 'Set notification on',
+                description: 'Set notification on.',
               },
               include_context: {
                 type: 'boolean',
-                description: 'If true, context information will be passed as query parameters',
+                description: 'If true, context information will be passed as query parameters.',
               },
               msg: {
                 type: 'string',
@@ -382,7 +382,7 @@ export const tool: Tool = {
           },
           quarantine: {
             type: 'object',
-            description: 'Settings that apply to quarantine rules',
+            description: 'Settings that apply to quarantine rules.',
             properties: {
               file_types: {
                 type: 'array',
@@ -410,20 +410,20 @@ export const tool: Tool = {
           },
           redirect: {
             type: 'object',
-            description: 'Settings that apply to redirect rules',
+            description: 'Settings that apply to redirect rules.',
             properties: {
               target_uri: {
                 type: 'string',
-                description: 'URI to which the user will be redirected',
+                description: 'URI to which the user will be redirected.',
               },
               include_context: {
                 type: 'boolean',
-                description: 'If true, context information will be passed as query parameters',
+                description: 'If true, context information will be passed as query parameters.',
               },
               preserve_path_and_query: {
                 type: 'boolean',
                 description:
-                  'If true, the path and query parameters from the original request will be appended to target_uri',
+                  'If true, the path and query parameters from the original request will be appended to target_uri.',
               },
             },
             required: ['target_uri'],

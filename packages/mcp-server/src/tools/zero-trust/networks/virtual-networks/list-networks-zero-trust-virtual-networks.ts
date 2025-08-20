@@ -35,6 +35,11 @@ export const tool: Tool = {
         description:
           'If `true`, only include the default virtual network. If `false`, exclude the default virtual network. If empty, all virtual networks will be included.',
       },
+      is_default_network: {
+        type: 'boolean',
+        description:
+          'If `true`, only include the default virtual network. If `false`, exclude the default virtual network. If empty, all virtual networks will be included.',
+      },
       is_deleted: {
         type: 'boolean',
         description:

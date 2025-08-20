@@ -25,7 +25,7 @@ export const tool: Tool = {
       dimension: {
         type: 'string',
         description: 'Specifies the attribute by which to group the results.',
-        enum: ['USER_AGENT', 'CRAWL_PURPOSE'],
+        enum: ['USER_AGENT', 'CRAWL_PURPOSE', 'INDUSTRY', 'VERTICAL'],
       },
       asn: {
         type: 'array',
@@ -79,6 +79,13 @@ export const tool: Tool = {
         description: 'Format in which results will be returned.',
         enum: ['JSON', 'CSV'],
       },
+      industry: {
+        type: 'array',
+        description: 'Filters results by industry.',
+        items: {
+          type: 'string',
+        },
+      },
       limitPerGroup: {
         type: 'integer',
         description:
@@ -95,6 +102,13 @@ export const tool: Tool = {
       name: {
         type: 'array',
         description: 'Array of names used to label the series in the response.',
+        items: {
+          type: 'string',
+        },
+      },
+      vertical: {
+        type: 'array',
+        description: 'Filters results by vertical.',
         items: {
           type: 'string',
         },

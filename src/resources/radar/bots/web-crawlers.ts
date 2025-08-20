@@ -17,7 +17,7 @@ export class WebCrawlers extends APIResource {
    * ```
    */
   summary(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO',
+    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     query: WebCrawlerSummaryParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WebCrawlerSummaryResponse> {
@@ -41,7 +41,7 @@ export class WebCrawlers extends APIResource {
    * ```
    */
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO',
+    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     query: WebCrawlerTimeseriesGroupsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WebCrawlerTimeseriesGroupsResponse> {
@@ -290,6 +290,11 @@ export interface WebCrawlerSummaryParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by industry.
+   */
+  industry?: Array<string>;
+
+  /**
    * Limits the number of objects per group to the top items within the specified
    * time range. When item count exceeds the limit, extra items appear grouped under
    * an "other" category.
@@ -300,6 +305,11 @@ export interface WebCrawlerSummaryParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by vertical.
+   */
+  vertical?: Array<string>;
 }
 
 export interface WebCrawlerTimeseriesGroupsParams {
@@ -338,6 +348,11 @@ export interface WebCrawlerTimeseriesGroupsParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by industry.
+   */
+  industry?: Array<string>;
+
+  /**
    * Limits the number of objects per group to the top items within the specified
    * time range. When item count exceeds the limit, extra items appear grouped under
    * an "other" category.
@@ -348,6 +363,11 @@ export interface WebCrawlerTimeseriesGroupsParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by vertical.
+   */
+  vertical?: Array<string>;
 }
 
 export declare namespace WebCrawlers {

@@ -77,7 +77,7 @@ export namespace AppType {
 
 export interface AppTypeListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

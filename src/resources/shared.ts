@@ -292,6 +292,11 @@ export interface Member {
   id?: string;
 
   /**
+   * The contact email address of the user.
+   */
+  email?: string;
+
+  /**
    * Access policy for the membership
    */
   policies?: Array<Member.Policy>;

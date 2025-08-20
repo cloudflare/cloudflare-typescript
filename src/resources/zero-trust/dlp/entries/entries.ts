@@ -222,6 +222,8 @@ export namespace EntryUpdateResponse {
     type: 'predefined';
 
     profile_id?: string | null;
+
+    variant?: PredefinedEntry.Variant;
   }
 
   export namespace PredefinedEntry {
@@ -236,6 +238,12 @@ export namespace EntryUpdateResponse {
        * service.
        */
       available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
     }
   }
 
@@ -349,6 +357,8 @@ export namespace EntryListResponse {
     type: 'predefined';
 
     profile_id?: string | null;
+
+    variant?: PredefinedEntry.Variant;
   }
 
   export namespace PredefinedEntry {
@@ -363,6 +373,12 @@ export namespace EntryListResponse {
        * service.
        */
       available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
     }
   }
 
@@ -478,6 +494,8 @@ export namespace EntryGetResponse {
     type: 'predefined';
 
     profile_id?: string | null;
+
+    variant?: PredefinedEntry.Variant;
   }
 
   export namespace PredefinedEntry {
@@ -492,6 +510,12 @@ export namespace EntryGetResponse {
        * service.
        */
       available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
     }
   }
 

@@ -6,8 +6,8 @@ import { RequestOptions } from '../../internal/request-options';
 
 export class Search extends APIResource {
   /**
-   * Searches for locations, autonomous systems, reports, bots, certificate logs, and
-   * certificate authorities.
+   * Searches for locations, autonomous systems, reports, bots, certificate logs,
+   * certificate authorities, industries and verticals
    *
    * @example
    * ```ts
@@ -49,7 +49,14 @@ export interface SearchGlobalParams {
    * Search types excluded from results.
    */
   exclude?: Array<
-    'ASNS' | 'BOTS' | 'CERTIFICATE_AUTHORITIES' | 'CERTIFICATE_LOGS' | 'LOCATIONS' | 'NOTEBOOKS'
+    | 'ASNS'
+    | 'BOTS'
+    | 'CERTIFICATE_AUTHORITIES'
+    | 'CERTIFICATE_LOGS'
+    | 'LOCATIONS'
+    | 'NOTEBOOKS'
+    | 'VERTICALS'
+    | 'INDUSTRIES'
   >;
 
   /**
@@ -61,7 +68,14 @@ export interface SearchGlobalParams {
    * Search types included in results.
    */
   include?: Array<
-    'ASNS' | 'BOTS' | 'CERTIFICATE_AUTHORITIES' | 'CERTIFICATE_LOGS' | 'LOCATIONS' | 'NOTEBOOKS'
+    | 'ASNS'
+    | 'BOTS'
+    | 'CERTIFICATE_AUTHORITIES'
+    | 'CERTIFICATE_LOGS'
+    | 'LOCATIONS'
+    | 'NOTEBOOKS'
+    | 'VERTICALS'
+    | 'INDUSTRIES'
   >;
 
   /**

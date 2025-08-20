@@ -174,7 +174,7 @@ export interface BlockRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: BlockRule.ExposedCredentialCheck;
 
@@ -189,12 +189,12 @@ export interface BlockRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: BlockRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -233,26 +233,26 @@ export namespace BlockRule {
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -263,7 +263,7 @@ export namespace BlockRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -281,7 +281,7 @@ export namespace BlockRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -292,8 +292,8 @@ export namespace BlockRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -326,7 +326,7 @@ export interface BlockRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: BlockRuleParam.ExposedCredentialCheck;
 
@@ -341,12 +341,12 @@ export interface BlockRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: BlockRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -385,26 +385,26 @@ export namespace BlockRuleParam {
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -415,7 +415,7 @@ export namespace BlockRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -433,7 +433,7 @@ export namespace BlockRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -444,8 +444,8 @@ export namespace BlockRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -493,7 +493,7 @@ export interface CompressResponseRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: CompressResponseRule.ExposedCredentialCheck;
 
@@ -508,12 +508,12 @@ export interface CompressResponseRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: CompressResponseRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -526,7 +526,7 @@ export namespace CompressResponseRule {
     /**
      * Custom order for compression algorithms.
      */
-    algorithms?: Array<ActionParameters.Algorithm>;
+    algorithms: Array<ActionParameters.Algorithm>;
   }
 
   export namespace ActionParameters {
@@ -535,33 +535,33 @@ export namespace CompressResponseRule {
      */
     export interface Algorithm {
       /**
-       * Name of compression algorithm to enable.
+       * Name of the compression algorithm to enable.
        */
       name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli' | 'zstd';
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -572,7 +572,7 @@ export namespace CompressResponseRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -590,7 +590,7 @@ export namespace CompressResponseRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -601,8 +601,8 @@ export namespace CompressResponseRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -635,7 +635,7 @@ export interface CompressResponseRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: CompressResponseRuleParam.ExposedCredentialCheck;
 
@@ -650,12 +650,12 @@ export interface CompressResponseRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: CompressResponseRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -668,7 +668,7 @@ export namespace CompressResponseRuleParam {
     /**
      * Custom order for compression algorithms.
      */
-    algorithms?: Array<ActionParameters.Algorithm>;
+    algorithms: Array<ActionParameters.Algorithm>;
   }
 
   export namespace ActionParameters {
@@ -677,33 +677,33 @@ export namespace CompressResponseRuleParam {
      */
     export interface Algorithm {
       /**
-       * Name of compression algorithm to enable.
+       * Name of the compression algorithm to enable.
        */
       name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli' | 'zstd';
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -714,7 +714,7 @@ export namespace CompressResponseRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -732,7 +732,7 @@ export namespace CompressResponseRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -743,8 +743,8 @@ export namespace CompressResponseRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -792,7 +792,7 @@ export interface DDoSDynamicRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: DDoSDynamicRule.ExposedCredentialCheck;
 
@@ -807,38 +807,38 @@ export interface DDoSDynamicRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: DDoSDynamicRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
 
 export namespace DDoSDynamicRule {
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -849,7 +849,7 @@ export namespace DDoSDynamicRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -867,7 +867,7 @@ export namespace DDoSDynamicRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -878,8 +878,8 @@ export namespace DDoSDynamicRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -912,7 +912,7 @@ export interface DDoSDynamicRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: DDoSDynamicRuleParam.ExposedCredentialCheck;
 
@@ -927,38 +927,38 @@ export interface DDoSDynamicRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: DDoSDynamicRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
 
 export namespace DDoSDynamicRuleParam {
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -969,7 +969,7 @@ export namespace DDoSDynamicRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -987,7 +987,7 @@ export namespace DDoSDynamicRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -998,8 +998,8 @@ export namespace DDoSDynamicRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -1047,7 +1047,7 @@ export interface ExecuteRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: ExecuteRule.ExposedCredentialCheck;
 
@@ -1062,12 +1062,12 @@ export interface ExecuteRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: ExecuteRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -1159,7 +1159,8 @@ export namespace ExecuteRule {
         enabled?: boolean;
 
         /**
-         * The sensitivity level to use for rules in the category.
+         * The sensitivity level to use for rules in the category. This option is only
+         * applicable for DDoS phases.
          */
         sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
       }
@@ -1189,7 +1190,8 @@ export namespace ExecuteRule {
         score_threshold?: number;
 
         /**
-         * The sensitivity level to use for the rule.
+         * The sensitivity level to use for the rule. This option is only applicable for
+         * DDoS phases.
          */
         sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
       }
@@ -1197,26 +1199,26 @@ export namespace ExecuteRule {
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -1227,7 +1229,7 @@ export namespace ExecuteRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -1245,7 +1247,7 @@ export namespace ExecuteRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -1256,8 +1258,8 @@ export namespace ExecuteRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -1290,7 +1292,7 @@ export interface ExecuteRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: ExecuteRuleParam.ExposedCredentialCheck;
 
@@ -1305,12 +1307,12 @@ export interface ExecuteRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: ExecuteRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -1402,7 +1404,8 @@ export namespace ExecuteRuleParam {
         enabled?: boolean;
 
         /**
-         * The sensitivity level to use for rules in the category.
+         * The sensitivity level to use for rules in the category. This option is only
+         * applicable for DDoS phases.
          */
         sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
       }
@@ -1432,7 +1435,8 @@ export namespace ExecuteRuleParam {
         score_threshold?: number;
 
         /**
-         * The sensitivity level to use for the rule.
+         * The sensitivity level to use for the rule. This option is only applicable for
+         * DDoS phases.
          */
         sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
       }
@@ -1440,26 +1444,26 @@ export namespace ExecuteRuleParam {
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -1470,7 +1474,7 @@ export namespace ExecuteRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -1488,7 +1492,7 @@ export namespace ExecuteRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -1499,8 +1503,8 @@ export namespace ExecuteRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -1548,7 +1552,7 @@ export interface ForceConnectionCloseRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: ForceConnectionCloseRule.ExposedCredentialCheck;
 
@@ -1563,38 +1567,38 @@ export interface ForceConnectionCloseRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: ForceConnectionCloseRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
 
 export namespace ForceConnectionCloseRule {
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -1605,7 +1609,7 @@ export namespace ForceConnectionCloseRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -1623,7 +1627,7 @@ export namespace ForceConnectionCloseRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -1634,8 +1638,8 @@ export namespace ForceConnectionCloseRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -1668,7 +1672,7 @@ export interface ForceConnectionCloseRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: ForceConnectionCloseRuleParam.ExposedCredentialCheck;
 
@@ -1683,38 +1687,38 @@ export interface ForceConnectionCloseRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: ForceConnectionCloseRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
 
 export namespace ForceConnectionCloseRuleParam {
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -1725,7 +1729,7 @@ export namespace ForceConnectionCloseRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -1743,7 +1747,7 @@ export namespace ForceConnectionCloseRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -1754,8 +1758,8 @@ export namespace ForceConnectionCloseRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -1803,7 +1807,7 @@ export interface LogCustomFieldRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: LogCustomFieldRule.ExposedCredentialCheck;
 
@@ -1818,12 +1822,12 @@ export interface LogCustomFieldRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: LogCustomFieldRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -1865,7 +1869,7 @@ export namespace LogCustomFieldRule {
      */
     export interface CookieField {
       /**
-       * The name of the field.
+       * The name of the cookie.
        */
       name: string;
     }
@@ -1875,7 +1879,7 @@ export namespace LogCustomFieldRule {
      */
     export interface RawResponseField {
       /**
-       * The name of the field.
+       * The name of the response header.
        */
       name: string;
 
@@ -1890,7 +1894,7 @@ export namespace LogCustomFieldRule {
      */
     export interface RequestField {
       /**
-       * The name of the field.
+       * The name of the header.
        */
       name: string;
     }
@@ -1900,7 +1904,7 @@ export namespace LogCustomFieldRule {
      */
     export interface ResponseField {
       /**
-       * The name of the field.
+       * The name of the response header.
        */
       name: string;
 
@@ -1915,33 +1919,33 @@ export namespace LogCustomFieldRule {
      */
     export interface TransformedRequestField {
       /**
-       * The name of the field.
+       * The name of the header.
        */
       name: string;
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -1952,7 +1956,7 @@ export namespace LogCustomFieldRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -1970,7 +1974,7 @@ export namespace LogCustomFieldRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -1981,8 +1985,8 @@ export namespace LogCustomFieldRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -2015,7 +2019,7 @@ export interface LogCustomFieldRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: LogCustomFieldRuleParam.ExposedCredentialCheck;
 
@@ -2030,12 +2034,12 @@ export interface LogCustomFieldRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: LogCustomFieldRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -2077,7 +2081,7 @@ export namespace LogCustomFieldRuleParam {
      */
     export interface CookieField {
       /**
-       * The name of the field.
+       * The name of the cookie.
        */
       name: string;
     }
@@ -2087,7 +2091,7 @@ export namespace LogCustomFieldRuleParam {
      */
     export interface RawResponseField {
       /**
-       * The name of the field.
+       * The name of the response header.
        */
       name: string;
 
@@ -2102,7 +2106,7 @@ export namespace LogCustomFieldRuleParam {
      */
     export interface RequestField {
       /**
-       * The name of the field.
+       * The name of the header.
        */
       name: string;
     }
@@ -2112,7 +2116,7 @@ export namespace LogCustomFieldRuleParam {
      */
     export interface ResponseField {
       /**
-       * The name of the field.
+       * The name of the response header.
        */
       name: string;
 
@@ -2127,33 +2131,33 @@ export namespace LogCustomFieldRuleParam {
      */
     export interface TransformedRequestField {
       /**
-       * The name of the field.
+       * The name of the header.
        */
       name: string;
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -2164,7 +2168,7 @@ export namespace LogCustomFieldRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -2182,7 +2186,7 @@ export namespace LogCustomFieldRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -2193,8 +2197,8 @@ export namespace LogCustomFieldRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -2242,7 +2246,7 @@ export interface LogRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: LogRule.ExposedCredentialCheck;
 
@@ -2257,38 +2261,38 @@ export interface LogRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: LogRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
 
 export namespace LogRule {
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -2299,7 +2303,7 @@ export namespace LogRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -2317,7 +2321,7 @@ export namespace LogRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -2328,8 +2332,8 @@ export namespace LogRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -2362,7 +2366,7 @@ export interface LogRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: LogRuleParam.ExposedCredentialCheck;
 
@@ -2377,38 +2381,38 @@ export interface LogRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: LogRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
 
 export namespace LogRuleParam {
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -2419,7 +2423,7 @@ export namespace LogRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -2437,7 +2441,7 @@ export namespace LogRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -2448,8 +2452,8 @@ export namespace LogRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -2517,7 +2521,7 @@ export interface ManagedChallengeRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: ManagedChallengeRule.ExposedCredentialCheck;
 
@@ -2532,38 +2536,38 @@ export interface ManagedChallengeRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: ManagedChallengeRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
 
 export namespace ManagedChallengeRule {
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -2574,7 +2578,7 @@ export namespace ManagedChallengeRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -2592,7 +2596,7 @@ export namespace ManagedChallengeRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -2603,8 +2607,8 @@ export namespace ManagedChallengeRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -2637,7 +2641,7 @@ export interface ManagedChallengeRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: ManagedChallengeRuleParam.ExposedCredentialCheck;
 
@@ -2652,38 +2656,38 @@ export interface ManagedChallengeRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: ManagedChallengeRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
 
 export namespace ManagedChallengeRuleParam {
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -2694,7 +2698,7 @@ export namespace ManagedChallengeRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -2712,7 +2716,7 @@ export namespace ManagedChallengeRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -2723,8 +2727,8 @@ export namespace ManagedChallengeRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -2772,7 +2776,7 @@ export interface RedirectRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: RedirectRule.ExposedCredentialCheck;
 
@@ -2787,12 +2791,12 @@ export interface RedirectRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: RedirectRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -2803,90 +2807,91 @@ export namespace RedirectRule {
    */
   export interface ActionParameters {
     /**
-     * Serve a redirect based on a bulk list lookup.
+     * A redirect based on a bulk list lookup.
      */
     from_list?: ActionParameters.FromList;
 
     /**
-     * Serve a redirect based on the request properties.
+     * A redirect based on the request properties.
      */
     from_value?: ActionParameters.FromValue;
   }
 
   export namespace ActionParameters {
     /**
-     * Serve a redirect based on a bulk list lookup.
+     * A redirect based on a bulk list lookup.
      */
     export interface FromList {
       /**
-       * Expression that evaluates to the list lookup key.
+       * An expression that evaluates to the list lookup key.
        */
-      key?: string;
+      key: string;
 
       /**
        * The name of the list to match against.
        */
-      name?: string;
+      name: string;
     }
 
     /**
-     * Serve a redirect based on the request properties.
+     * A redirect based on the request properties.
      */
     export interface FromValue {
       /**
-       * Keep the query string of the original request.
+       * A URL to redirect the request to.
+       */
+      target_url: FromValue.TargetURL;
+
+      /**
+       * Whether to keep the query string of the original request.
        */
       preserve_query_string?: boolean;
 
       /**
-       * The status code to be used for the redirect.
+       * The status code to use for the redirect.
        */
       status_code?: 301 | 302 | 303 | 307 | 308;
-
-      /**
-       * The URL to redirect the request to.
-       */
-      target_url?: FromValue.StaticURLRedirect | FromValue.DynamicURLRedirect;
     }
 
     export namespace FromValue {
-      export interface StaticURLRedirect {
+      /**
+       * A URL to redirect the request to.
+       */
+      export interface TargetURL {
         /**
-         * The URL to redirect the request to.
-         */
-        value?: string;
-      }
-
-      export interface DynamicURLRedirect {
-        /**
-         * An expression to evaluate to get the URL to redirect the request to.
+         * An expression that evaluates to a URL to redirect the request to.
          */
         expression?: string;
+
+        /**
+         * A URL to redirect the request to.
+         */
+        value?: string;
       }
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -2897,7 +2902,7 @@ export namespace RedirectRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -2915,7 +2920,7 @@ export namespace RedirectRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -2926,8 +2931,8 @@ export namespace RedirectRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -2960,7 +2965,7 @@ export interface RedirectRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: RedirectRuleParam.ExposedCredentialCheck;
 
@@ -2975,12 +2980,12 @@ export interface RedirectRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: RedirectRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -2991,90 +2996,91 @@ export namespace RedirectRuleParam {
    */
   export interface ActionParameters {
     /**
-     * Serve a redirect based on a bulk list lookup.
+     * A redirect based on a bulk list lookup.
      */
     from_list?: ActionParameters.FromList;
 
     /**
-     * Serve a redirect based on the request properties.
+     * A redirect based on the request properties.
      */
     from_value?: ActionParameters.FromValue;
   }
 
   export namespace ActionParameters {
     /**
-     * Serve a redirect based on a bulk list lookup.
+     * A redirect based on a bulk list lookup.
      */
     export interface FromList {
       /**
-       * Expression that evaluates to the list lookup key.
+       * An expression that evaluates to the list lookup key.
        */
-      key?: string;
+      key: string;
 
       /**
        * The name of the list to match against.
        */
-      name?: string;
+      name: string;
     }
 
     /**
-     * Serve a redirect based on the request properties.
+     * A redirect based on the request properties.
      */
     export interface FromValue {
       /**
-       * Keep the query string of the original request.
+       * A URL to redirect the request to.
+       */
+      target_url: FromValue.TargetURL;
+
+      /**
+       * Whether to keep the query string of the original request.
        */
       preserve_query_string?: boolean;
 
       /**
-       * The status code to be used for the redirect.
+       * The status code to use for the redirect.
        */
       status_code?: 301 | 302 | 303 | 307 | 308;
-
-      /**
-       * The URL to redirect the request to.
-       */
-      target_url?: FromValue.StaticURLRedirect | FromValue.DynamicURLRedirect;
     }
 
     export namespace FromValue {
-      export interface StaticURLRedirect {
+      /**
+       * A URL to redirect the request to.
+       */
+      export interface TargetURL {
         /**
-         * The URL to redirect the request to.
-         */
-        value?: string;
-      }
-
-      export interface DynamicURLRedirect {
-        /**
-         * An expression to evaluate to get the URL to redirect the request to.
+         * An expression that evaluates to a URL to redirect the request to.
          */
         expression?: string;
+
+        /**
+         * A URL to redirect the request to.
+         */
+        value?: string;
       }
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -3085,7 +3091,7 @@ export namespace RedirectRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -3103,7 +3109,7 @@ export namespace RedirectRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -3114,8 +3120,8 @@ export namespace RedirectRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -3163,7 +3169,7 @@ export interface RewriteRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: RewriteRule.ExposedCredentialCheck;
 
@@ -3178,12 +3184,12 @@ export interface RewriteRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: RewriteRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -3194,116 +3200,180 @@ export namespace RewriteRule {
    */
   export interface ActionParameters {
     /**
-     * Map of request headers to modify.
+     * A map of headers to rewrite.
      */
     headers?: {
       [key: string]:
-        | ActionParameters.RemoveHeader
         | ActionParameters.AddStaticHeader
-        | ActionParameters.SetStaticHeader
         | ActionParameters.AddDynamicHeader
-        | ActionParameters.SetDynamicHeader;
+        | ActionParameters.SetStaticHeader
+        | ActionParameters.SetDynamicHeader
+        | ActionParameters.RemoveHeader;
     };
 
     /**
-     * URI to rewrite the request to.
+     * A URI path rewrite.
      */
-    uri?: ActionParameters.URI;
+    uri?: ActionParameters.URIPath | ActionParameters.URIQuery;
   }
 
   export namespace ActionParameters {
     /**
-     * Remove the header from the request.
+     * A header with a static value to add.
+     */
+    export interface AddStaticHeader {
+      /**
+       * The operation to perform on the header.
+       */
+      operation: 'add';
+
+      /**
+       * A static value for the header.
+       */
+      value: string;
+    }
+
+    /**
+     * A header with a dynamic value to add.
+     */
+    export interface AddDynamicHeader {
+      /**
+       * An expression that evaluates to a value for the header.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the header.
+       */
+      operation: 'add';
+    }
+
+    /**
+     * A header with a static value to set.
+     */
+    export interface SetStaticHeader {
+      /**
+       * The operation to perform on the header.
+       */
+      operation: 'set';
+
+      /**
+       * A static value for the header.
+       */
+      value: string;
+    }
+
+    /**
+     * A header with a dynamic value to set.
+     */
+    export interface SetDynamicHeader {
+      /**
+       * An expression that evaluates to a value for the header.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the header.
+       */
+      operation: 'set';
+    }
+
+    /**
+     * A header to remove.
      */
     export interface RemoveHeader {
+      /**
+       * The operation to perform on the header.
+       */
       operation: 'remove';
     }
 
     /**
-     * Add a request header with a static value.
+     * A URI path rewrite.
      */
-    export interface AddStaticHeader {
-      operation: 'add';
+    export interface URIPath {
+      /**
+       * A URI path rewrite.
+       */
+      path: URIPath.Path;
 
       /**
-       * Static value for the header.
+       * Whether to propagate the rewritten URI to origin.
        */
-      value: string;
+      origin?: boolean;
+    }
+
+    export namespace URIPath {
+      /**
+       * A URI path rewrite.
+       */
+      export interface Path {
+        /**
+         * An expression that evaluates to a value to rewrite the URI path to.
+         */
+        expression?: string;
+
+        /**
+         * A value to rewrite the URI path to.
+         */
+        value?: string;
+      }
     }
 
     /**
-     * Set a request header with a static value.
+     * A URI query rewrite.
      */
-    export interface SetStaticHeader {
-      operation: 'set';
+    export interface URIQuery {
+      /**
+       * A URI query rewrite.
+       */
+      query: URIQuery.Query;
 
       /**
-       * Static value for the header.
+       * Whether to propagate the rewritten URI to origin.
        */
-      value: string;
+      origin?: boolean;
     }
 
-    /**
-     * Add a request header with a dynamic value.
-     */
-    export interface AddDynamicHeader {
+    export namespace URIQuery {
       /**
-       * Expression for the header value.
+       * A URI query rewrite.
        */
-      expression: string;
+      export interface Query {
+        /**
+         * An expression that evaluates to a value to rewrite the URI query to.
+         */
+        expression?: string;
 
-      operation: 'add';
-    }
-
-    /**
-     * Set a request header with a dynamic value.
-     */
-    export interface SetDynamicHeader {
-      /**
-       * Expression for the header value.
-       */
-      expression: string;
-
-      operation: 'set';
-    }
-
-    /**
-     * URI to rewrite the request to.
-     */
-    export interface URI {
-      /**
-       * Path portion rewrite.
-       */
-      path?: RulesAPI.RewriteURIPart;
-
-      /**
-       * Query portion rewrite.
-       */
-      query?: RulesAPI.RewriteURIPart;
+        /**
+         * A value to rewrite the URI query to.
+         */
+        value?: string;
+      }
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -3314,7 +3384,7 @@ export namespace RewriteRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -3332,7 +3402,7 @@ export namespace RewriteRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -3343,8 +3413,8 @@ export namespace RewriteRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -3377,7 +3447,7 @@ export interface RewriteRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: RewriteRuleParam.ExposedCredentialCheck;
 
@@ -3392,12 +3462,12 @@ export interface RewriteRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: RewriteRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -3408,116 +3478,170 @@ export namespace RewriteRuleParam {
    */
   export interface ActionParameters {
     /**
-     * Map of request headers to modify.
+     * A map of headers to rewrite.
      */
     headers?: {
       [key: string]:
-        | ActionParameters.RemoveHeader
         | ActionParameters.AddStaticHeader
-        | ActionParameters.SetStaticHeader
         | ActionParameters.AddDynamicHeader
-        | ActionParameters.SetDynamicHeader;
+        | ActionParameters.SetStaticHeader
+        | ActionParameters.SetDynamicHeader
+        | ActionParameters.RemoveHeader;
     };
 
     /**
-     * URI to rewrite the request to.
+     * A URI path rewrite.
      */
-    uri?: ActionParameters.URI;
+    uri?: ActionParameters.URIPath | ActionParameters.URIQuery;
   }
 
   export namespace ActionParameters {
     /**
-     * Remove the header from the request.
+     * A header with a static value to add.
+     */
+    export interface AddStaticHeader {
+      /**
+       * The operation to perform on the header.
+       */
+      operation: 'add';
+
+      /**
+       * A static value for the header.
+       */
+      value: string;
+    }
+
+    /**
+     * A header with a dynamic value to add.
+     */
+    export interface AddDynamicHeader {
+      /**
+       * An expression that evaluates to a value for the header.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the header.
+       */
+      operation: 'add';
+    }
+
+    /**
+     * A header with a static value to set.
+     */
+    export interface SetStaticHeader {
+      /**
+       * The operation to perform on the header.
+       */
+      operation: 'set';
+
+      /**
+       * A static value for the header.
+       */
+      value: string;
+    }
+
+    /**
+     * A header with a dynamic value to set.
+     */
+    export interface SetDynamicHeader {
+      /**
+       * An expression that evaluates to a value for the header.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the header.
+       */
+      operation: 'set';
+    }
+
+    /**
+     * A header to remove.
      */
     export interface RemoveHeader {
+      /**
+       * The operation to perform on the header.
+       */
       operation: 'remove';
     }
 
     /**
-     * Add a request header with a static value.
+     * A URI path rewrite.
      */
-    export interface AddStaticHeader {
-      operation: 'add';
-
+    export interface URIPath {
       /**
-       * Static value for the header.
+       * A URI path rewrite.
        */
-      value: string;
+      path: URIPath.Path;
+    }
+
+    export namespace URIPath {
+      /**
+       * A URI path rewrite.
+       */
+      export interface Path {
+        /**
+         * An expression that evaluates to a value to rewrite the URI path to.
+         */
+        expression?: string;
+
+        /**
+         * A value to rewrite the URI path to.
+         */
+        value?: string;
+      }
     }
 
     /**
-     * Set a request header with a static value.
+     * A URI query rewrite.
      */
-    export interface SetStaticHeader {
-      operation: 'set';
-
+    export interface URIQuery {
       /**
-       * Static value for the header.
+       * A URI query rewrite.
        */
-      value: string;
+      query: URIQuery.Query;
     }
 
-    /**
-     * Add a request header with a dynamic value.
-     */
-    export interface AddDynamicHeader {
+    export namespace URIQuery {
       /**
-       * Expression for the header value.
+       * A URI query rewrite.
        */
-      expression: string;
+      export interface Query {
+        /**
+         * An expression that evaluates to a value to rewrite the URI query to.
+         */
+        expression?: string;
 
-      operation: 'add';
-    }
-
-    /**
-     * Set a request header with a dynamic value.
-     */
-    export interface SetDynamicHeader {
-      /**
-       * Expression for the header value.
-       */
-      expression: string;
-
-      operation: 'set';
-    }
-
-    /**
-     * URI to rewrite the request to.
-     */
-    export interface URI {
-      /**
-       * Path portion rewrite.
-       */
-      path?: RulesAPI.RewriteURIPartParam;
-
-      /**
-       * Query portion rewrite.
-       */
-      query?: RulesAPI.RewriteURIPartParam;
+        /**
+         * A value to rewrite the URI query to.
+         */
+        value?: string;
+      }
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -3528,7 +3652,7 @@ export namespace RewriteRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -3546,7 +3670,7 @@ export namespace RewriteRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -3557,46 +3681,10 @@ export namespace RewriteRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
-  }
-}
-
-export type RewriteURIPart = RewriteURIPart.StaticValue | RewriteURIPart.DynamicValue;
-
-export namespace RewriteURIPart {
-  export interface StaticValue {
-    /**
-     * Predefined replacement value.
-     */
-    value: string;
-  }
-
-  export interface DynamicValue {
-    /**
-     * Expression to evaluate for the replacement value.
-     */
-    expression: string;
-  }
-}
-
-export type RewriteURIPartParam = RewriteURIPartParam.StaticValue | RewriteURIPartParam.DynamicValue;
-
-export namespace RewriteURIPartParam {
-  export interface StaticValue {
-    /**
-     * Predefined replacement value.
-     */
-    value: string;
-  }
-
-  export interface DynamicValue {
-    /**
-     * Expression to evaluate for the replacement value.
-     */
-    expression: string;
   }
 }
 
@@ -3642,7 +3730,7 @@ export interface RouteRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: RouteRule.ExposedCredentialCheck;
 
@@ -3657,12 +3745,12 @@ export interface RouteRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: RouteRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -3673,69 +3761,69 @@ export namespace RouteRule {
    */
   export interface ActionParameters {
     /**
-     * Rewrite the HTTP Host header.
+     * A value to rewrite the HTTP host header to.
      */
     host_header?: string;
 
     /**
-     * Override the IP/TCP destination.
+     * An origin to route to.
      */
     origin?: ActionParameters.Origin;
 
     /**
-     * Override the Server Name Indication (SNI).
+     * A Server Name Indication (SNI) override.
      */
     sni?: ActionParameters.SNI;
   }
 
   export namespace ActionParameters {
     /**
-     * Override the IP/TCP destination.
+     * An origin to route to.
      */
     export interface Origin {
       /**
-       * Override the resolved hostname.
+       * A resolved host to route to.
        */
       host?: string;
 
       /**
-       * Override the destination port.
+       * A destination port to route to.
        */
       port?: number;
     }
 
     /**
-     * Override the Server Name Indication (SNI).
+     * A Server Name Indication (SNI) override.
      */
     export interface SNI {
       /**
-       * The SNI override.
+       * A value to override the SNI to.
        */
       value: string;
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -3746,7 +3834,7 @@ export namespace RouteRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -3764,7 +3852,7 @@ export namespace RouteRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -3775,8 +3863,8 @@ export namespace RouteRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -3809,7 +3897,7 @@ export interface RouteRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: RouteRuleParam.ExposedCredentialCheck;
 
@@ -3824,12 +3912,12 @@ export interface RouteRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: RouteRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -3840,69 +3928,69 @@ export namespace RouteRuleParam {
    */
   export interface ActionParameters {
     /**
-     * Rewrite the HTTP Host header.
+     * A value to rewrite the HTTP host header to.
      */
     host_header?: string;
 
     /**
-     * Override the IP/TCP destination.
+     * An origin to route to.
      */
     origin?: ActionParameters.Origin;
 
     /**
-     * Override the Server Name Indication (SNI).
+     * A Server Name Indication (SNI) override.
      */
     sni?: ActionParameters.SNI;
   }
 
   export namespace ActionParameters {
     /**
-     * Override the IP/TCP destination.
+     * An origin to route to.
      */
     export interface Origin {
       /**
-       * Override the resolved hostname.
+       * A resolved host to route to.
        */
       host?: string;
 
       /**
-       * Override the destination port.
+       * A destination port to route to.
        */
       port?: number;
     }
 
     /**
-     * Override the Server Name Indication (SNI).
+     * A Server Name Indication (SNI) override.
      */
     export interface SNI {
       /**
-       * The SNI override.
+       * A value to override the SNI to.
        */
       value: string;
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -3913,7 +4001,7 @@ export namespace RouteRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -3931,7 +4019,7 @@ export namespace RouteRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -3942,8 +4030,8 @@ export namespace RouteRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -3991,7 +4079,7 @@ export interface RulesetRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: RulesetRule.ExposedCredentialCheck;
 
@@ -4006,38 +4094,38 @@ export interface RulesetRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: RulesetRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
 
 export namespace RulesetRule {
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -4048,7 +4136,7 @@ export namespace RulesetRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -4066,7 +4154,7 @@ export namespace RulesetRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -4077,8 +4165,8 @@ export namespace RulesetRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -4126,7 +4214,7 @@ export interface ScoreRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: ScoreRule.ExposedCredentialCheck;
 
@@ -4141,12 +4229,12 @@ export interface ScoreRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: ScoreRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -4157,33 +4245,32 @@ export namespace ScoreRule {
    */
   export interface ActionParameters {
     /**
-     * Increment contains the delta to change the score and can be either positive or
-     * negative.
+     * A delta to change the score by, which can be either positive or negative.
      */
-    increment?: number;
+    increment: number;
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -4194,7 +4281,7 @@ export namespace ScoreRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -4212,7 +4299,7 @@ export namespace ScoreRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -4223,8 +4310,8 @@ export namespace ScoreRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -4257,7 +4344,7 @@ export interface ScoreRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: ScoreRuleParam.ExposedCredentialCheck;
 
@@ -4272,12 +4359,12 @@ export interface ScoreRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: ScoreRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -4288,33 +4375,32 @@ export namespace ScoreRuleParam {
    */
   export interface ActionParameters {
     /**
-     * Increment contains the delta to change the score and can be either positive or
-     * negative.
+     * A delta to change the score by, which can be either positive or negative.
      */
-    increment?: number;
+    increment: number;
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -4325,7 +4411,7 @@ export namespace ScoreRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -4343,7 +4429,7 @@ export namespace ScoreRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -4354,8 +4440,8 @@ export namespace ScoreRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -4385,7 +4471,7 @@ export interface ServeErrorRule {
   /**
    * The parameters configuring the rule's action.
    */
-  action_parameters?: ServeErrorRule.ActionParameters;
+  action_parameters?: ServeErrorRule.ActionParametersContent | ServeErrorRule.ActionParametersAsset;
 
   /**
    * The categories of the rule.
@@ -4403,7 +4489,7 @@ export interface ServeErrorRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: ServeErrorRule.ExposedCredentialCheck;
 
@@ -4418,30 +4504,44 @@ export interface ServeErrorRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: ServeErrorRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
 
 export namespace ServeErrorRule {
-  /**
-   * The parameters configuring the rule's action.
-   */
-  export interface ActionParameters {
+  export interface ActionParametersContent {
     /**
-     * Error response content.
+     * The response content.
      */
-    content?: string;
+    content: string;
 
     /**
-     * Content-type header to set with the response.
+     * The content type header to set with the error response.
      */
-    content_type?: 'application/json' | 'text/xml' | 'text/plain' | 'text/html';
+    content_type?: 'application/json' | 'text/html' | 'text/plain' | 'text/xml';
+
+    /**
+     * The status code to use for the error.
+     */
+    status_code?: number;
+  }
+
+  export interface ActionParametersAsset {
+    /**
+     * The name of a custom asset to serve as the error response.
+     */
+    asset_name: string;
+
+    /**
+     * The content type header to set with the error response.
+     */
+    content_type?: 'application/json' | 'text/html' | 'text/plain' | 'text/xml';
 
     /**
      * The status code to use for the error.
@@ -4450,26 +4550,26 @@ export namespace ServeErrorRule {
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -4480,7 +4580,7 @@ export namespace ServeErrorRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -4498,7 +4598,7 @@ export namespace ServeErrorRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -4509,8 +4609,8 @@ export namespace ServeErrorRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -4530,7 +4630,7 @@ export interface ServeErrorRuleParam {
   /**
    * The parameters configuring the rule's action.
    */
-  action_parameters?: ServeErrorRuleParam.ActionParameters;
+  action_parameters?: ServeErrorRuleParam.ActionParametersContent | ServeErrorRuleParam.ActionParametersAsset;
 
   /**
    * An informative description of the rule.
@@ -4543,7 +4643,7 @@ export interface ServeErrorRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: ServeErrorRuleParam.ExposedCredentialCheck;
 
@@ -4558,30 +4658,44 @@ export interface ServeErrorRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: ServeErrorRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
 
 export namespace ServeErrorRuleParam {
-  /**
-   * The parameters configuring the rule's action.
-   */
-  export interface ActionParameters {
+  export interface ActionParametersContent {
     /**
-     * Error response content.
+     * The response content.
      */
-    content?: string;
+    content: string;
 
     /**
-     * Content-type header to set with the response.
+     * The content type header to set with the error response.
      */
-    content_type?: 'application/json' | 'text/xml' | 'text/plain' | 'text/html';
+    content_type?: 'application/json' | 'text/html' | 'text/plain' | 'text/xml';
+
+    /**
+     * The status code to use for the error.
+     */
+    status_code?: number;
+  }
+
+  export interface ActionParametersAsset {
+    /**
+     * The name of a custom asset to serve as the error response.
+     */
+    asset_name: string;
+
+    /**
+     * The content type header to set with the error response.
+     */
+    content_type?: 'application/json' | 'text/html' | 'text/plain' | 'text/xml';
 
     /**
      * The status code to use for the error.
@@ -4590,26 +4704,26 @@ export namespace ServeErrorRuleParam {
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -4620,7 +4734,7 @@ export namespace ServeErrorRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -4638,7 +4752,7 @@ export namespace ServeErrorRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -4649,8 +4763,8 @@ export namespace ServeErrorRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -4698,7 +4812,7 @@ export interface SetCacheSettingsRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: SetCacheSettingsRule.ExposedCredentialCheck;
 
@@ -4713,12 +4827,12 @@ export interface SetCacheSettingsRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: SetCacheSettingsRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -4729,55 +4843,53 @@ export namespace SetCacheSettingsRule {
    */
   export interface ActionParameters {
     /**
-     * List of additional ports that caching can be enabled on.
+     * A list of additional ports that caching should be enabled on.
      */
     additional_cacheable_ports?: Array<number>;
 
     /**
-     * Specify how long client browsers should cache the response. Cloudflare cache
-     * purge will not purge content cached on client browsers, so high browser TTLs may
-     * lead to stale content.
+     * How long client browsers should cache the response. Cloudflare cache purge will
+     * not purge content cached on client browsers, so high browser TTLs may lead to
+     * stale content.
      */
     browser_ttl?: ActionParameters.BrowserTTL;
 
     /**
-     * Mark whether the request’s response from origin is eligible for caching. Caching
-     * itself will still depend on the cache-control header and your other caching
+     * Whether the request's response from the origin is eligible for caching. Caching
+     * itself will still depend on the cache control header and your other caching
      * configurations.
      */
     cache?: boolean;
 
     /**
-     * Define which components of the request are included or excluded from the cache
-     * key Cloudflare uses to store the response in cache.
+     * Which components of the request are included in or excluded from the cache key
+     * Cloudflare uses to store the response in cache.
      */
     cache_key?: ActionParameters.CacheKey;
 
     /**
-     * Mark whether the request's response from origin is eligible for Cache Reserve
-     * (requires a Cache Reserve add-on plan).
+     * Settings to determine whether the request's response from origin is eligible for
+     * Cache Reserve (requires a Cache Reserve add-on plan).
      */
     cache_reserve?: ActionParameters.CacheReserve;
 
     /**
-     * TTL (Time to Live) specifies the maximum time to cache a resource in the
-     * Cloudflare edge network.
+     * How long the Cloudflare edge network should cache the response.
      */
     edge_ttl?: ActionParameters.EdgeTTL;
 
     /**
-     * When enabled, Cloudflare will aim to strictly adhere to RFC 7234.
+     * Whether Cloudflare will aim to strictly adhere to RFC 7234.
      */
     origin_cache_control?: boolean;
 
     /**
-     * Generate Cloudflare error pages from issues sent from the origin server. When
-     * on, error pages will trigger for issues from the origin.
+     * Whether to generate Cloudflare error pages for issues from the origin server.
      */
     origin_error_page_passthru?: boolean;
 
     /**
-     * Define a timeout value between two successive read operations to your origin
+     * A timeout value between two successive read operations to use for your origin
      * server. Historically, the timeout value between two read options from Cloudflare
      * to an origin server is 100 seconds. If you are attempting to reduce HTTP 524
      * errors because of timeouts from an origin server, try increasing this timeout
@@ -4786,239 +4898,212 @@ export namespace SetCacheSettingsRule {
     read_timeout?: number;
 
     /**
-     * Specify whether or not Cloudflare should respect strong ETag (entity tag)
-     * headers. When off, Cloudflare converts strong ETag headers to weak ETag headers.
+     * Whether Cloudflare should respect strong ETag (entity tag) headers. If false,
+     * Cloudflare converts strong ETag headers to weak ETag headers.
      */
     respect_strong_etags?: boolean;
 
     /**
-     * Define if Cloudflare should serve stale content while getting the latest content
-     * from the origin. If on, Cloudflare will not serve stale content while getting
-     * the latest content from the origin.
+     * When to serve stale content from cache.
      */
     serve_stale?: ActionParameters.ServeStale;
   }
 
   export namespace ActionParameters {
     /**
-     * Specify how long client browsers should cache the response. Cloudflare cache
-     * purge will not purge content cached on client browsers, so high browser TTLs may
-     * lead to stale content.
+     * How long client browsers should cache the response. Cloudflare cache purge will
+     * not purge content cached on client browsers, so high browser TTLs may lead to
+     * stale content.
      */
     export interface BrowserTTL {
       /**
-       * Determines which browser ttl mode to use.
+       * The browser TTL mode.
        */
       mode: 'respect_origin' | 'bypass_by_default' | 'override_origin' | 'bypass';
 
       /**
-       * The TTL (in seconds) if you choose override_origin mode.
+       * The browser TTL (in seconds) if you choose the "override_origin" mode.
        */
       default?: number;
     }
 
     /**
-     * Define which components of the request are included or excluded from the cache
-     * key Cloudflare uses to store the response in cache.
+     * Which components of the request are included in or excluded from the cache key
+     * Cloudflare uses to store the response in cache.
      */
     export interface CacheKey {
       /**
-       * Separate cached content based on the visitor’s device type.
+       * Whether to separate cached content based on the visitor's device type.
        */
       cache_by_device_type?: boolean;
 
       /**
-       * Protect from web cache deception attacks while allowing static assets to be
-       * cached.
+       * Whether to protect from web cache deception attacks, while allowing static
+       * assets to be cached.
        */
       cache_deception_armor?: boolean;
 
       /**
-       * Customize which components of the request are included or excluded from the
-       * cache key.
+       * Which components of the request are included or excluded from the cache key.
        */
       custom_key?: CacheKey.CustomKey;
 
       /**
-       * Treat requests with the same query parameters the same, regardless of the order
-       * those query parameters are in. A value of true ignores the query strings' order.
+       * Whether to treat requests with the same query parameters the same, regardless of
+       * the order those query parameters are in.
        */
       ignore_query_strings_order?: boolean;
     }
 
     export namespace CacheKey {
       /**
-       * Customize which components of the request are included or excluded from the
-       * cache key.
+       * Which components of the request are included or excluded from the cache key.
        */
       export interface CustomKey {
         /**
-         * The cookies to include in building the cache key.
+         * Which cookies to include in the cache key.
          */
         cookie?: CustomKey.Cookie;
 
         /**
-         * The header names and values to include in building the cache key.
+         * Which headers to include in the cache key.
          */
         header?: CustomKey.Header;
 
         /**
-         * Whether to use the original host or the resolved host in the cache key.
+         * How to use the host in the cache key.
          */
         host?: CustomKey.Host;
 
         /**
-         * Use the presence of parameters in the query string to build the cache key.
+         * Which query string parameters to include in or exclude from the cache key.
          */
-        query_string?: CustomKey.IncludedQueryStringParameters | CustomKey.ExcludedQueryStringParameters;
+        query_string?: CustomKey.QueryString;
 
         /**
-         * Characteristics of the request user agent used in building the cache key.
+         * How to use characteristics of the request user agent in the cache key.
          */
         user?: CustomKey.User;
       }
 
       export namespace CustomKey {
         /**
-         * The cookies to include in building the cache key.
+         * Which cookies to include in the cache key.
          */
         export interface Cookie {
           /**
-           * Checks for the presence of these cookie names. The presence of these cookies is
-           * used in building the cache key.
+           * A list of cookies to check for the presence of. The presence of these cookies is
+           * included in the cache key.
            */
           check_presence?: Array<string>;
 
           /**
-           * Include these cookies' names and their values.
+           * A list of cookies to include in the cache key.
            */
           include?: Array<string>;
         }
 
         /**
-         * The header names and values to include in building the cache key.
+         * Which headers to include in the cache key.
          */
         export interface Header {
           /**
-           * Checks for the presence of these header names. The presence of these headers is
-           * used in building the cache key.
+           * A list of headers to check for the presence of. The presence of these headers is
+           * included in the cache key.
            */
           check_presence?: Array<string>;
 
           /**
-           * For each header name and list of values combination, check if the request header
-           * contains any of the values provided. The presence of the request header and
-           * whether any of the values provided are contained in the request header value is
-           * used in building the cache key.
+           * A mapping of header names to a list of values. If a header is present in the
+           * request and contains any of the values provided, its value is included in the
+           * cache key.
            */
           contains?: { [key: string]: Array<string> };
 
           /**
-           * Whether or not to include the origin header. A value of true will exclude the
-           * origin header in the cache key.
+           * Whether to exclude the origin header in the cache key.
            */
           exclude_origin?: boolean;
 
           /**
-           * Include these headers' names and their values.
+           * A list of headers to include in the cache key.
            */
           include?: Array<string>;
         }
 
         /**
-         * Whether to use the original host or the resolved host in the cache key.
+         * How to use the host in the cache key.
          */
         export interface Host {
           /**
-           * Use the resolved host in the cache key. A value of true will use the resolved
-           * host, while a value or false will use the original host.
+           * Whether to use the resolved host in the cache key.
            */
           resolved?: boolean;
         }
 
         /**
-         * Use the presence of parameters in the query string to build the cache key.
+         * Which query string parameters to include in or exclude from the cache key.
          */
-        export interface IncludedQueryStringParameters {
+        export interface QueryString {
           /**
-           * A list of query string parameters used to build the cache key.
+           * Which query string parameters to exclude from the cache key.
            */
-          include?:
-            | IncludedQueryStringParameters.SomeQueryStringParameters
-            | IncludedQueryStringParameters.AllQueryStringParameters;
+          exclude?: QueryString.Exclude;
+
+          /**
+           * Which query string parameters to include in the cache key.
+           */
+          include?: QueryString.Include;
         }
 
-        export namespace IncludedQueryStringParameters {
+        export namespace QueryString {
           /**
-           * A list of query string parameters used to build the cache key.
+           * Which query string parameters to exclude from the cache key.
            */
-          export interface SomeQueryStringParameters {
+          export interface Exclude {
+            /**
+             * Whether to exclude all query string parameters from the cache key.
+             */
+            all?: true;
+
+            /**
+             * A list of query string parameters to exclude from the cache key.
+             */
             list?: Array<string>;
           }
 
           /**
-           * Build the cache key using ALL query string parameters that are in the request.
+           * Which query string parameters to include in the cache key.
            */
-          export interface AllQueryStringParameters {
+          export interface Include {
             /**
-             * Determines whether to include all query string parameters in the cache key.
+             * Whether to include all query string parameters in the cache key.
              */
-            all?: boolean;
-          }
-        }
+            all?: true;
 
-        /**
-         * Use the absence of parameters in the query string to build the cache key.
-         */
-        export interface ExcludedQueryStringParameters {
-          /**
-           * A list of query string parameters NOT used to build the cache key. All
-           * parameters present in the request but missing in this list will be used to build
-           * the cache key.
-           */
-          exclude?:
-            | ExcludedQueryStringParameters.SomeQueryStringParameters
-            | ExcludedQueryStringParameters.AllQueryStringParameters;
-        }
-
-        export namespace ExcludedQueryStringParameters {
-          /**
-           * A list of query string parameters NOT used to build the cache key. All
-           * parameters present in the request but missing in this list will be used to build
-           * the cache key.
-           */
-          export interface SomeQueryStringParameters {
+            /**
+             * A list of query string parameters to include in the cache key.
+             */
             list?: Array<string>;
           }
-
-          /**
-           * Build the cache key excluding ALL query string parameters that are in the
-           * request.
-           */
-          export interface AllQueryStringParameters {
-            /**
-             * Determines whether to exclude all query string parameters from the cache key.
-             */
-            all?: boolean;
-          }
         }
 
         /**
-         * Characteristics of the request user agent used in building the cache key.
+         * How to use characteristics of the request user agent in the cache key.
          */
         export interface User {
           /**
-           * Use the user agent's device type in the cache key.
+           * Whether to use the user agent's device type in the cache key.
            */
           device_type?: boolean;
 
           /**
-           * Use the user agents's country in the cache key.
+           * Whether to use the user agents's country in the cache key.
            */
           geo?: boolean;
 
           /**
-           * Use the user agent's language in the cache key.
+           * Whether to use the user agent's language in the cache key.
            */
           lang?: boolean;
         }
@@ -5026,121 +5111,113 @@ export namespace SetCacheSettingsRule {
     }
 
     /**
-     * Mark whether the request's response from origin is eligible for Cache Reserve
-     * (requires a Cache Reserve add-on plan).
+     * Settings to determine whether the request's response from origin is eligible for
+     * Cache Reserve (requires a Cache Reserve add-on plan).
      */
     export interface CacheReserve {
       /**
-       * Determines whether cache reserve is enabled. If this is true and a request meets
-       * eligibility criteria, Cloudflare will write the resource to cache reserve.
+       * Whether Cache Reserve is enabled. If this is true and a request meets
+       * eligibility criteria, Cloudflare will write the resource to Cache Reserve.
        */
       eligible: boolean;
 
       /**
-       * The minimum file size eligible for store in cache reserve.
+       * The minimum file size eligible for storage in Cache Reserve.
        */
-      minimum_file_size: number;
+      minimum_file_size?: number;
     }
 
     /**
-     * TTL (Time to Live) specifies the maximum time to cache a resource in the
-     * Cloudflare edge network.
+     * How long the Cloudflare edge network should cache the response.
      */
     export interface EdgeTTL {
       /**
-       * The TTL (in seconds) if you choose override_origin mode.
-       */
-      default: number;
-
-      /**
-       * Edge TTL options.
+       * The edge TTL mode.
        */
       mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
 
       /**
-       * List of single status codes, or status code ranges to apply the selected mode.
+       * The edge TTL (in seconds) if you choose the "override_origin" mode.
        */
-      status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
+      default?: number;
+
+      /**
+       * A list of TTLs to apply to specific status codes or status code ranges.
+       */
+      status_code_ttl?: Array<EdgeTTL.StatusCodeTTL>;
     }
 
     export namespace EdgeTTL {
-      /**
-       * Specify how long Cloudflare should cache the response based on the status code
-       * from the origin. Can be a single status code or a range or status codes.
-       */
       export interface StatusCodeTTL {
         /**
-         * Time to cache a response (in seconds). A value of 0 is equivalent to setting the
-         * Cache-Control header with the value "no-cache". A value of -1 is equivalent to
-         * setting Cache-Control header with the value of "no-store".
+         * The time to cache the response for (in seconds). A value of 0 is equivalent to
+         * setting the cache control header with the value "no-cache". A value of -1 is
+         * equivalent to setting the cache control header with the value of "no-store".
          */
         value: number;
 
         /**
-         * The range of status codes used to apply the selected mode.
+         * A single status code to apply the TTL to.
          */
-        status_code_range?: StatusCodeTTL.StatusCodeRange;
+        status_code?: number;
 
         /**
-         * Set the TTL for responses with this specific status code.
+         * A range of status codes to apply the TTL to.
          */
-        status_code_value?: number;
+        status_code_range?: StatusCodeTTL.StatusCodeRange;
       }
 
       export namespace StatusCodeTTL {
         /**
-         * The range of status codes used to apply the selected mode.
+         * A range of status codes to apply the TTL to.
          */
         export interface StatusCodeRange {
           /**
-           * Response status code lower bound.
+           * The lower bound of the range.
            */
-          from: number;
+          from?: number;
 
           /**
-           * Response status code upper bound.
+           * The upper bound of the range.
            */
-          to: number;
+          to?: number;
         }
       }
     }
 
     /**
-     * Define if Cloudflare should serve stale content while getting the latest content
-     * from the origin. If on, Cloudflare will not serve stale content while getting
-     * the latest content from the origin.
+     * When to serve stale content from cache.
      */
     export interface ServeStale {
       /**
-       * Defines whether Cloudflare should serve stale content while updating. If true,
-       * Cloudflare will not serve stale content while getting the latest content from
-       * the origin.
+       * Whether Cloudflare should disable serving stale content while getting the latest
+       * content from the origin.
        */
-      disable_stale_while_updating: boolean;
+      disable_stale_while_updating?: boolean;
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -5151,7 +5228,7 @@ export namespace SetCacheSettingsRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -5169,7 +5246,7 @@ export namespace SetCacheSettingsRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -5180,8 +5257,8 @@ export namespace SetCacheSettingsRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -5214,7 +5291,7 @@ export interface SetCacheSettingsRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: SetCacheSettingsRuleParam.ExposedCredentialCheck;
 
@@ -5229,12 +5306,12 @@ export interface SetCacheSettingsRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: SetCacheSettingsRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -5245,55 +5322,53 @@ export namespace SetCacheSettingsRuleParam {
    */
   export interface ActionParameters {
     /**
-     * List of additional ports that caching can be enabled on.
+     * A list of additional ports that caching should be enabled on.
      */
     additional_cacheable_ports?: Array<number>;
 
     /**
-     * Specify how long client browsers should cache the response. Cloudflare cache
-     * purge will not purge content cached on client browsers, so high browser TTLs may
-     * lead to stale content.
+     * How long client browsers should cache the response. Cloudflare cache purge will
+     * not purge content cached on client browsers, so high browser TTLs may lead to
+     * stale content.
      */
     browser_ttl?: ActionParameters.BrowserTTL;
 
     /**
-     * Mark whether the request’s response from origin is eligible for caching. Caching
-     * itself will still depend on the cache-control header and your other caching
+     * Whether the request's response from the origin is eligible for caching. Caching
+     * itself will still depend on the cache control header and your other caching
      * configurations.
      */
     cache?: boolean;
 
     /**
-     * Define which components of the request are included or excluded from the cache
-     * key Cloudflare uses to store the response in cache.
+     * Which components of the request are included in or excluded from the cache key
+     * Cloudflare uses to store the response in cache.
      */
     cache_key?: ActionParameters.CacheKey;
 
     /**
-     * Mark whether the request's response from origin is eligible for Cache Reserve
-     * (requires a Cache Reserve add-on plan).
+     * Settings to determine whether the request's response from origin is eligible for
+     * Cache Reserve (requires a Cache Reserve add-on plan).
      */
     cache_reserve?: ActionParameters.CacheReserve;
 
     /**
-     * TTL (Time to Live) specifies the maximum time to cache a resource in the
-     * Cloudflare edge network.
+     * How long the Cloudflare edge network should cache the response.
      */
     edge_ttl?: ActionParameters.EdgeTTL;
 
     /**
-     * When enabled, Cloudflare will aim to strictly adhere to RFC 7234.
+     * Whether Cloudflare will aim to strictly adhere to RFC 7234.
      */
     origin_cache_control?: boolean;
 
     /**
-     * Generate Cloudflare error pages from issues sent from the origin server. When
-     * on, error pages will trigger for issues from the origin.
+     * Whether to generate Cloudflare error pages for issues from the origin server.
      */
     origin_error_page_passthru?: boolean;
 
     /**
-     * Define a timeout value between two successive read operations to your origin
+     * A timeout value between two successive read operations to use for your origin
      * server. Historically, the timeout value between two read options from Cloudflare
      * to an origin server is 100 seconds. If you are attempting to reduce HTTP 524
      * errors because of timeouts from an origin server, try increasing this timeout
@@ -5302,239 +5377,212 @@ export namespace SetCacheSettingsRuleParam {
     read_timeout?: number;
 
     /**
-     * Specify whether or not Cloudflare should respect strong ETag (entity tag)
-     * headers. When off, Cloudflare converts strong ETag headers to weak ETag headers.
+     * Whether Cloudflare should respect strong ETag (entity tag) headers. If false,
+     * Cloudflare converts strong ETag headers to weak ETag headers.
      */
     respect_strong_etags?: boolean;
 
     /**
-     * Define if Cloudflare should serve stale content while getting the latest content
-     * from the origin. If on, Cloudflare will not serve stale content while getting
-     * the latest content from the origin.
+     * When to serve stale content from cache.
      */
     serve_stale?: ActionParameters.ServeStale;
   }
 
   export namespace ActionParameters {
     /**
-     * Specify how long client browsers should cache the response. Cloudflare cache
-     * purge will not purge content cached on client browsers, so high browser TTLs may
-     * lead to stale content.
+     * How long client browsers should cache the response. Cloudflare cache purge will
+     * not purge content cached on client browsers, so high browser TTLs may lead to
+     * stale content.
      */
     export interface BrowserTTL {
       /**
-       * Determines which browser ttl mode to use.
+       * The browser TTL mode.
        */
       mode: 'respect_origin' | 'bypass_by_default' | 'override_origin' | 'bypass';
 
       /**
-       * The TTL (in seconds) if you choose override_origin mode.
+       * The browser TTL (in seconds) if you choose the "override_origin" mode.
        */
       default?: number;
     }
 
     /**
-     * Define which components of the request are included or excluded from the cache
-     * key Cloudflare uses to store the response in cache.
+     * Which components of the request are included in or excluded from the cache key
+     * Cloudflare uses to store the response in cache.
      */
     export interface CacheKey {
       /**
-       * Separate cached content based on the visitor’s device type.
+       * Whether to separate cached content based on the visitor's device type.
        */
       cache_by_device_type?: boolean;
 
       /**
-       * Protect from web cache deception attacks while allowing static assets to be
-       * cached.
+       * Whether to protect from web cache deception attacks, while allowing static
+       * assets to be cached.
        */
       cache_deception_armor?: boolean;
 
       /**
-       * Customize which components of the request are included or excluded from the
-       * cache key.
+       * Which components of the request are included or excluded from the cache key.
        */
       custom_key?: CacheKey.CustomKey;
 
       /**
-       * Treat requests with the same query parameters the same, regardless of the order
-       * those query parameters are in. A value of true ignores the query strings' order.
+       * Whether to treat requests with the same query parameters the same, regardless of
+       * the order those query parameters are in.
        */
       ignore_query_strings_order?: boolean;
     }
 
     export namespace CacheKey {
       /**
-       * Customize which components of the request are included or excluded from the
-       * cache key.
+       * Which components of the request are included or excluded from the cache key.
        */
       export interface CustomKey {
         /**
-         * The cookies to include in building the cache key.
+         * Which cookies to include in the cache key.
          */
         cookie?: CustomKey.Cookie;
 
         /**
-         * The header names and values to include in building the cache key.
+         * Which headers to include in the cache key.
          */
         header?: CustomKey.Header;
 
         /**
-         * Whether to use the original host or the resolved host in the cache key.
+         * How to use the host in the cache key.
          */
         host?: CustomKey.Host;
 
         /**
-         * Use the presence of parameters in the query string to build the cache key.
+         * Which query string parameters to include in or exclude from the cache key.
          */
-        query_string?: CustomKey.IncludedQueryStringParameters | CustomKey.ExcludedQueryStringParameters;
+        query_string?: CustomKey.QueryString;
 
         /**
-         * Characteristics of the request user agent used in building the cache key.
+         * How to use characteristics of the request user agent in the cache key.
          */
         user?: CustomKey.User;
       }
 
       export namespace CustomKey {
         /**
-         * The cookies to include in building the cache key.
+         * Which cookies to include in the cache key.
          */
         export interface Cookie {
           /**
-           * Checks for the presence of these cookie names. The presence of these cookies is
-           * used in building the cache key.
+           * A list of cookies to check for the presence of. The presence of these cookies is
+           * included in the cache key.
            */
           check_presence?: Array<string>;
 
           /**
-           * Include these cookies' names and their values.
+           * A list of cookies to include in the cache key.
            */
           include?: Array<string>;
         }
 
         /**
-         * The header names and values to include in building the cache key.
+         * Which headers to include in the cache key.
          */
         export interface Header {
           /**
-           * Checks for the presence of these header names. The presence of these headers is
-           * used in building the cache key.
+           * A list of headers to check for the presence of. The presence of these headers is
+           * included in the cache key.
            */
           check_presence?: Array<string>;
 
           /**
-           * For each header name and list of values combination, check if the request header
-           * contains any of the values provided. The presence of the request header and
-           * whether any of the values provided are contained in the request header value is
-           * used in building the cache key.
+           * A mapping of header names to a list of values. If a header is present in the
+           * request and contains any of the values provided, its value is included in the
+           * cache key.
            */
           contains?: { [key: string]: Array<string> };
 
           /**
-           * Whether or not to include the origin header. A value of true will exclude the
-           * origin header in the cache key.
+           * Whether to exclude the origin header in the cache key.
            */
           exclude_origin?: boolean;
 
           /**
-           * Include these headers' names and their values.
+           * A list of headers to include in the cache key.
            */
           include?: Array<string>;
         }
 
         /**
-         * Whether to use the original host or the resolved host in the cache key.
+         * How to use the host in the cache key.
          */
         export interface Host {
           /**
-           * Use the resolved host in the cache key. A value of true will use the resolved
-           * host, while a value or false will use the original host.
+           * Whether to use the resolved host in the cache key.
            */
           resolved?: boolean;
         }
 
         /**
-         * Use the presence of parameters in the query string to build the cache key.
+         * Which query string parameters to include in or exclude from the cache key.
          */
-        export interface IncludedQueryStringParameters {
+        export interface QueryString {
           /**
-           * A list of query string parameters used to build the cache key.
+           * Which query string parameters to exclude from the cache key.
            */
-          include?:
-            | IncludedQueryStringParameters.SomeQueryStringParameters
-            | IncludedQueryStringParameters.AllQueryStringParameters;
+          exclude?: QueryString.Exclude;
+
+          /**
+           * Which query string parameters to include in the cache key.
+           */
+          include?: QueryString.Include;
         }
 
-        export namespace IncludedQueryStringParameters {
+        export namespace QueryString {
           /**
-           * A list of query string parameters used to build the cache key.
+           * Which query string parameters to exclude from the cache key.
            */
-          export interface SomeQueryStringParameters {
+          export interface Exclude {
+            /**
+             * Whether to exclude all query string parameters from the cache key.
+             */
+            all?: true;
+
+            /**
+             * A list of query string parameters to exclude from the cache key.
+             */
             list?: Array<string>;
           }
 
           /**
-           * Build the cache key using ALL query string parameters that are in the request.
+           * Which query string parameters to include in the cache key.
            */
-          export interface AllQueryStringParameters {
+          export interface Include {
             /**
-             * Determines whether to include all query string parameters in the cache key.
+             * Whether to include all query string parameters in the cache key.
              */
-            all?: boolean;
-          }
-        }
+            all?: true;
 
-        /**
-         * Use the absence of parameters in the query string to build the cache key.
-         */
-        export interface ExcludedQueryStringParameters {
-          /**
-           * A list of query string parameters NOT used to build the cache key. All
-           * parameters present in the request but missing in this list will be used to build
-           * the cache key.
-           */
-          exclude?:
-            | ExcludedQueryStringParameters.SomeQueryStringParameters
-            | ExcludedQueryStringParameters.AllQueryStringParameters;
-        }
-
-        export namespace ExcludedQueryStringParameters {
-          /**
-           * A list of query string parameters NOT used to build the cache key. All
-           * parameters present in the request but missing in this list will be used to build
-           * the cache key.
-           */
-          export interface SomeQueryStringParameters {
+            /**
+             * A list of query string parameters to include in the cache key.
+             */
             list?: Array<string>;
           }
-
-          /**
-           * Build the cache key excluding ALL query string parameters that are in the
-           * request.
-           */
-          export interface AllQueryStringParameters {
-            /**
-             * Determines whether to exclude all query string parameters from the cache key.
-             */
-            all?: boolean;
-          }
         }
 
         /**
-         * Characteristics of the request user agent used in building the cache key.
+         * How to use characteristics of the request user agent in the cache key.
          */
         export interface User {
           /**
-           * Use the user agent's device type in the cache key.
+           * Whether to use the user agent's device type in the cache key.
            */
           device_type?: boolean;
 
           /**
-           * Use the user agents's country in the cache key.
+           * Whether to use the user agents's country in the cache key.
            */
           geo?: boolean;
 
           /**
-           * Use the user agent's language in the cache key.
+           * Whether to use the user agent's language in the cache key.
            */
           lang?: boolean;
         }
@@ -5542,121 +5590,113 @@ export namespace SetCacheSettingsRuleParam {
     }
 
     /**
-     * Mark whether the request's response from origin is eligible for Cache Reserve
-     * (requires a Cache Reserve add-on plan).
+     * Settings to determine whether the request's response from origin is eligible for
+     * Cache Reserve (requires a Cache Reserve add-on plan).
      */
     export interface CacheReserve {
       /**
-       * Determines whether cache reserve is enabled. If this is true and a request meets
-       * eligibility criteria, Cloudflare will write the resource to cache reserve.
+       * Whether Cache Reserve is enabled. If this is true and a request meets
+       * eligibility criteria, Cloudflare will write the resource to Cache Reserve.
        */
       eligible: boolean;
 
       /**
-       * The minimum file size eligible for store in cache reserve.
+       * The minimum file size eligible for storage in Cache Reserve.
        */
-      minimum_file_size: number;
+      minimum_file_size?: number;
     }
 
     /**
-     * TTL (Time to Live) specifies the maximum time to cache a resource in the
-     * Cloudflare edge network.
+     * How long the Cloudflare edge network should cache the response.
      */
     export interface EdgeTTL {
       /**
-       * The TTL (in seconds) if you choose override_origin mode.
-       */
-      default: number;
-
-      /**
-       * Edge TTL options.
+       * The edge TTL mode.
        */
       mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
 
       /**
-       * List of single status codes, or status code ranges to apply the selected mode.
+       * The edge TTL (in seconds) if you choose the "override_origin" mode.
        */
-      status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
+      default?: number;
+
+      /**
+       * A list of TTLs to apply to specific status codes or status code ranges.
+       */
+      status_code_ttl?: Array<EdgeTTL.StatusCodeTTL>;
     }
 
     export namespace EdgeTTL {
-      /**
-       * Specify how long Cloudflare should cache the response based on the status code
-       * from the origin. Can be a single status code or a range or status codes.
-       */
       export interface StatusCodeTTL {
         /**
-         * Time to cache a response (in seconds). A value of 0 is equivalent to setting the
-         * Cache-Control header with the value "no-cache". A value of -1 is equivalent to
-         * setting Cache-Control header with the value of "no-store".
+         * The time to cache the response for (in seconds). A value of 0 is equivalent to
+         * setting the cache control header with the value "no-cache". A value of -1 is
+         * equivalent to setting the cache control header with the value of "no-store".
          */
         value: number;
 
         /**
-         * The range of status codes used to apply the selected mode.
+         * A single status code to apply the TTL to.
          */
-        status_code_range?: StatusCodeTTL.StatusCodeRange;
+        status_code?: number;
 
         /**
-         * Set the TTL for responses with this specific status code.
+         * A range of status codes to apply the TTL to.
          */
-        status_code_value?: number;
+        status_code_range?: StatusCodeTTL.StatusCodeRange;
       }
 
       export namespace StatusCodeTTL {
         /**
-         * The range of status codes used to apply the selected mode.
+         * A range of status codes to apply the TTL to.
          */
         export interface StatusCodeRange {
           /**
-           * Response status code lower bound.
+           * The lower bound of the range.
            */
-          from: number;
+          from?: number;
 
           /**
-           * Response status code upper bound.
+           * The upper bound of the range.
            */
-          to: number;
+          to?: number;
         }
       }
     }
 
     /**
-     * Define if Cloudflare should serve stale content while getting the latest content
-     * from the origin. If on, Cloudflare will not serve stale content while getting
-     * the latest content from the origin.
+     * When to serve stale content from cache.
      */
     export interface ServeStale {
       /**
-       * Defines whether Cloudflare should serve stale content while updating. If true,
-       * Cloudflare will not serve stale content while getting the latest content from
-       * the origin.
+       * Whether Cloudflare should disable serving stale content while getting the latest
+       * content from the origin.
        */
-      disable_stale_while_updating: boolean;
+      disable_stale_while_updating?: boolean;
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -5667,7 +5707,7 @@ export namespace SetCacheSettingsRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -5685,7 +5725,7 @@ export namespace SetCacheSettingsRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -5696,8 +5736,8 @@ export namespace SetCacheSettingsRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -5745,7 +5785,7 @@ export interface SetConfigRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: SetConfigRule.ExposedCredentialCheck;
 
@@ -5760,12 +5800,12 @@ export interface SetConfigRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: SetConfigRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -5776,134 +5816,139 @@ export namespace SetConfigRule {
    */
   export interface ActionParameters {
     /**
-     * Turn on or off Automatic HTTPS Rewrites.
+     * Whether to enable Automatic HTTPS Rewrites.
      */
     automatic_https_rewrites?: boolean;
 
     /**
-     * Select which file extensions to minify automatically.
+     * Which file extensions to minify automatically.
      */
     autominify?: ActionParameters.Autominify;
 
     /**
-     * Turn on or off Browser Integrity Check.
+     * Whether to enable Browser Integrity Check (BIC).
      */
     bic?: boolean;
 
     /**
-     * Turn off all active Cloudflare Apps.
+     * Whether to disable Cloudflare Apps.
      */
     disable_apps?: true;
 
     /**
-     * Turn off Real User Monitoring (RUM).
+     * Whether to disable Pay Per Crawl.
+     */
+    disable_pay_per_crawl?: true;
+
+    /**
+     * Whether to disable Real User Monitoring (RUM).
      */
     disable_rum?: true;
 
     /**
-     * Turn off Zaraz.
+     * Whether to disable Zaraz.
      */
     disable_zaraz?: true;
 
     /**
-     * Turn on or off Email Obfuscation.
+     * Whether to enable Email Obfuscation.
      */
     email_obfuscation?: boolean;
 
     /**
-     * Turn on or off Cloudflare Fonts.
+     * Whether to enable Cloudflare Fonts.
      */
     fonts?: boolean;
 
     /**
-     * Turn on or off the Hotlink Protection.
+     * Whether to enable Hotlink Protection.
      */
     hotlink_protection?: boolean;
 
     /**
-     * Turn on or off Mirage.
+     * Whether to enable Mirage.
      */
     mirage?: boolean;
 
     /**
-     * Turn on or off Opportunistic Encryption.
+     * Whether to enable Opportunistic Encryption.
      */
     opportunistic_encryption?: boolean;
 
     /**
-     * Configure the Polish level.
+     * The Polish level to configure.
      */
     polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
     /**
-     * Turn on or off Rocket Loader.
+     * Whether to enable Rocket Loader.
      */
     rocket_loader?: boolean;
 
     /**
-     * Configure the Security Level.
+     * The Security Level to configure.
      */
     security_level?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
 
     /**
-     * Turn on or off Server Side Excludes.
+     * Whether to enable Server-Side Excludes.
      */
     server_side_excludes?: boolean;
 
     /**
-     * Configure the SSL level.
+     * The SSL level to configure.
      */
     ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
 
     /**
-     * Turn on or off Signed Exchanges (SXG).
+     * Whether to enable Signed Exchanges (SXG).
      */
     sxg?: boolean;
   }
 
   export namespace ActionParameters {
     /**
-     * Select which file extensions to minify automatically.
+     * Which file extensions to minify automatically.
      */
     export interface Autominify {
       /**
-       * Minify CSS files.
+       * Whether to minify CSS files.
        */
       css?: boolean;
 
       /**
-       * Minify HTML files.
+       * Whether to minify HTML files.
        */
       html?: boolean;
 
       /**
-       * Minify JS files.
+       * Whether to minify JavaScript files.
        */
       js?: boolean;
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -5914,7 +5959,7 @@ export namespace SetConfigRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -5932,7 +5977,7 @@ export namespace SetConfigRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -5943,8 +5988,8 @@ export namespace SetConfigRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -5977,7 +6022,7 @@ export interface SetConfigRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: SetConfigRuleParam.ExposedCredentialCheck;
 
@@ -5992,12 +6037,12 @@ export interface SetConfigRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: SetConfigRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -6008,134 +6053,139 @@ export namespace SetConfigRuleParam {
    */
   export interface ActionParameters {
     /**
-     * Turn on or off Automatic HTTPS Rewrites.
+     * Whether to enable Automatic HTTPS Rewrites.
      */
     automatic_https_rewrites?: boolean;
 
     /**
-     * Select which file extensions to minify automatically.
+     * Which file extensions to minify automatically.
      */
     autominify?: ActionParameters.Autominify;
 
     /**
-     * Turn on or off Browser Integrity Check.
+     * Whether to enable Browser Integrity Check (BIC).
      */
     bic?: boolean;
 
     /**
-     * Turn off all active Cloudflare Apps.
+     * Whether to disable Cloudflare Apps.
      */
     disable_apps?: true;
 
     /**
-     * Turn off Real User Monitoring (RUM).
+     * Whether to disable Pay Per Crawl.
+     */
+    disable_pay_per_crawl?: true;
+
+    /**
+     * Whether to disable Real User Monitoring (RUM).
      */
     disable_rum?: true;
 
     /**
-     * Turn off Zaraz.
+     * Whether to disable Zaraz.
      */
     disable_zaraz?: true;
 
     /**
-     * Turn on or off Email Obfuscation.
+     * Whether to enable Email Obfuscation.
      */
     email_obfuscation?: boolean;
 
     /**
-     * Turn on or off Cloudflare Fonts.
+     * Whether to enable Cloudflare Fonts.
      */
     fonts?: boolean;
 
     /**
-     * Turn on or off the Hotlink Protection.
+     * Whether to enable Hotlink Protection.
      */
     hotlink_protection?: boolean;
 
     /**
-     * Turn on or off Mirage.
+     * Whether to enable Mirage.
      */
     mirage?: boolean;
 
     /**
-     * Turn on or off Opportunistic Encryption.
+     * Whether to enable Opportunistic Encryption.
      */
     opportunistic_encryption?: boolean;
 
     /**
-     * Configure the Polish level.
+     * The Polish level to configure.
      */
     polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
     /**
-     * Turn on or off Rocket Loader.
+     * Whether to enable Rocket Loader.
      */
     rocket_loader?: boolean;
 
     /**
-     * Configure the Security Level.
+     * The Security Level to configure.
      */
     security_level?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
 
     /**
-     * Turn on or off Server Side Excludes.
+     * Whether to enable Server-Side Excludes.
      */
     server_side_excludes?: boolean;
 
     /**
-     * Configure the SSL level.
+     * The SSL level to configure.
      */
     ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
 
     /**
-     * Turn on or off Signed Exchanges (SXG).
+     * Whether to enable Signed Exchanges (SXG).
      */
     sxg?: boolean;
   }
 
   export namespace ActionParameters {
     /**
-     * Select which file extensions to minify automatically.
+     * Which file extensions to minify automatically.
      */
     export interface Autominify {
       /**
-       * Minify CSS files.
+       * Whether to minify CSS files.
        */
       css?: boolean;
 
       /**
-       * Minify HTML files.
+       * Whether to minify HTML files.
        */
       html?: boolean;
 
       /**
-       * Minify JS files.
+       * Whether to minify JavaScript files.
        */
       js?: boolean;
     }
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -6146,7 +6196,7 @@ export namespace SetConfigRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -6164,7 +6214,7 @@ export namespace SetConfigRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -6175,8 +6225,8 @@ export namespace SetConfigRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -6224,7 +6274,7 @@ export interface SkipRule {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: SkipRule.ExposedCredentialCheck;
 
@@ -6239,12 +6289,12 @@ export interface SkipRule {
   logging?: Logging;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: SkipRule.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -6255,8 +6305,8 @@ export namespace SkipRule {
    */
   export interface ActionParameters {
     /**
-     * A phase to skip the execution of. This property is only compatible with
-     * products.
+     * A phase to skip the execution of. This option is only compatible with the
+     * products option.
      */
     phase?: 'current';
 
@@ -6291,26 +6341,26 @@ export namespace SkipRule {
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -6321,7 +6371,7 @@ export namespace SkipRule {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -6339,7 +6389,7 @@ export namespace SkipRule {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -6350,8 +6400,8 @@ export namespace SkipRule {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -6384,7 +6434,7 @@ export interface SkipRuleParam {
   enabled?: boolean;
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   exposed_credential_check?: SkipRuleParam.ExposedCredentialCheck;
 
@@ -6399,12 +6449,12 @@ export interface SkipRuleParam {
   logging?: LoggingParam;
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   ratelimit?: SkipRuleParam.Ratelimit;
 
   /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    */
   ref?: string;
 }
@@ -6415,8 +6465,8 @@ export namespace SkipRuleParam {
    */
   export interface ActionParameters {
     /**
-     * A phase to skip the execution of. This property is only compatible with
-     * products.
+     * A phase to skip the execution of. This option is only compatible with the
+     * products option.
      */
     phase?: 'current';
 
@@ -6451,26 +6501,26 @@ export namespace SkipRuleParam {
   }
 
   /**
-   * Configure checks for exposed credentials.
+   * Configuration for exposed credential checking.
    */
   export interface ExposedCredentialCheck {
     /**
-     * Expression that selects the password used in the credentials check.
+     * An expression that selects the password used in the credentials check.
      */
     password_expression: string;
 
     /**
-     * Expression that selects the user ID used in the credentials check.
+     * An expression that selects the user ID used in the credentials check.
      */
     username_expression: string;
   }
 
   /**
-   * An object configuring the rule's ratelimit behavior.
+   * An object configuring the rule's rate limit behavior.
    */
   export interface Ratelimit {
     /**
-     * Characteristics of the request on which the ratelimiter counter will be
+     * Characteristics of the request on which the rate limit counter will be
      * incremented.
      */
     characteristics: Array<string>;
@@ -6481,7 +6531,7 @@ export namespace SkipRuleParam {
     period: number;
 
     /**
-     * Defines when the ratelimit counter should be incremented. It is optional and
+     * An expression that defines when the rate limit counter should be incremented. It
      * defaults to the same as the rule's expression.
      */
     counting_expression?: string;
@@ -6499,7 +6549,7 @@ export namespace SkipRuleParam {
     requests_per_period?: number;
 
     /**
-     * Defines if ratelimit counting is only done when an origin is reached.
+     * Whether counting is only performed when an origin is reached.
      */
     requests_to_origin?: boolean;
 
@@ -6510,8 +6560,8 @@ export namespace SkipRuleParam {
     score_per_period?: number;
 
     /**
-     * The response header name provided by the origin which should contain the score
-     * to increment ratelimit counter on.
+     * A response header name provided by the origin, which contains the score to
+     * increment rate limit counter with.
      */
     score_response_header_name?: string;
   }
@@ -6553,21 +6603,21 @@ export interface RuleCreateResponse {
     | BlockRule
     | RuleCreateResponse.RulesetsChallengeRule
     | CompressResponseRule
+    | DDoSDynamicRule
     | ExecuteRule
+    | ForceConnectionCloseRule
     | RuleCreateResponse.RulesetsJSChallengeRule
     | LogRule
+    | LogCustomFieldRule
     | ManagedChallengeRule
     | RedirectRule
     | RewriteRule
     | RouteRule
     | ScoreRule
     | ServeErrorRule
+    | SetCacheSettingsRule
     | SetConfigRule
     | SkipRule
-    | SetCacheSettingsRule
-    | LogCustomFieldRule
-    | DDoSDynamicRule
-    | ForceConnectionCloseRule
   >;
 
   /**
@@ -6624,7 +6674,7 @@ export namespace RuleCreateResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
 
@@ -6639,38 +6689,38 @@ export namespace RuleCreateResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -6681,7 +6731,7 @@ export namespace RuleCreateResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -6699,7 +6749,7 @@ export namespace RuleCreateResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -6710,8 +6760,8 @@ export namespace RuleCreateResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -6759,7 +6809,7 @@ export namespace RuleCreateResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
 
@@ -6774,38 +6824,38 @@ export namespace RuleCreateResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsJSChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsJSChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -6816,7 +6866,7 @@ export namespace RuleCreateResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -6834,7 +6884,7 @@ export namespace RuleCreateResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -6845,8 +6895,8 @@ export namespace RuleCreateResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -6889,21 +6939,21 @@ export interface RuleDeleteResponse {
     | BlockRule
     | RuleDeleteResponse.RulesetsChallengeRule
     | CompressResponseRule
+    | DDoSDynamicRule
     | ExecuteRule
+    | ForceConnectionCloseRule
     | RuleDeleteResponse.RulesetsJSChallengeRule
     | LogRule
+    | LogCustomFieldRule
     | ManagedChallengeRule
     | RedirectRule
     | RewriteRule
     | RouteRule
     | ScoreRule
     | ServeErrorRule
+    | SetCacheSettingsRule
     | SetConfigRule
     | SkipRule
-    | SetCacheSettingsRule
-    | LogCustomFieldRule
-    | DDoSDynamicRule
-    | ForceConnectionCloseRule
   >;
 
   /**
@@ -6960,7 +7010,7 @@ export namespace RuleDeleteResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
 
@@ -6975,38 +7025,38 @@ export namespace RuleDeleteResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -7017,7 +7067,7 @@ export namespace RuleDeleteResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -7035,7 +7085,7 @@ export namespace RuleDeleteResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -7046,8 +7096,8 @@ export namespace RuleDeleteResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -7095,7 +7145,7 @@ export namespace RuleDeleteResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
 
@@ -7110,38 +7160,38 @@ export namespace RuleDeleteResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsJSChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsJSChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -7152,7 +7202,7 @@ export namespace RuleDeleteResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -7170,7 +7220,7 @@ export namespace RuleDeleteResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -7181,8 +7231,8 @@ export namespace RuleDeleteResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -7225,21 +7275,21 @@ export interface RuleEditResponse {
     | BlockRule
     | RuleEditResponse.RulesetsChallengeRule
     | CompressResponseRule
+    | DDoSDynamicRule
     | ExecuteRule
+    | ForceConnectionCloseRule
     | RuleEditResponse.RulesetsJSChallengeRule
     | LogRule
+    | LogCustomFieldRule
     | ManagedChallengeRule
     | RedirectRule
     | RewriteRule
     | RouteRule
     | ScoreRule
     | ServeErrorRule
+    | SetCacheSettingsRule
     | SetConfigRule
     | SkipRule
-    | SetCacheSettingsRule
-    | LogCustomFieldRule
-    | DDoSDynamicRule
-    | ForceConnectionCloseRule
   >;
 
   /**
@@ -7296,7 +7346,7 @@ export namespace RuleEditResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsChallengeRule.ExposedCredentialCheck;
 
@@ -7311,38 +7361,38 @@ export namespace RuleEditResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -7353,7 +7403,7 @@ export namespace RuleEditResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -7371,7 +7421,7 @@ export namespace RuleEditResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -7382,8 +7432,8 @@ export namespace RuleEditResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -7431,7 +7481,7 @@ export namespace RuleEditResponse {
     enabled?: boolean;
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     exposed_credential_check?: RulesetsJSChallengeRule.ExposedCredentialCheck;
 
@@ -7446,38 +7496,38 @@ export namespace RuleEditResponse {
     logging?: RulesAPI.Logging;
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     ratelimit?: RulesetsJSChallengeRule.Ratelimit;
 
     /**
-     * The reference of the rule (the rule ID by default).
+     * The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace RulesetsJSChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -7488,7 +7538,7 @@ export namespace RuleEditResponse {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -7506,7 +7556,7 @@ export namespace RuleEditResponse {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -7517,8 +7567,8 @@ export namespace RuleEditResponse {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -7528,22 +7578,22 @@ export namespace RuleEditResponse {
 export type RuleCreateParams =
   | RuleCreateParams.BlockRule
   | RuleCreateParams.ChallengeRule
-  | RuleCreateParams.CompressionRule
+  | RuleCreateParams.ResponseCompressionRule
+  | RuleCreateParams.DDoSDynamicRule
   | RuleCreateParams.ExecuteRule
-  | RuleCreateParams.JavascriptChallengeRule
+  | RuleCreateParams.ForceConnectionCloseRule
+  | RuleCreateParams.JavaScriptChallengeRule
   | RuleCreateParams.LogRule
+  | RuleCreateParams.LogCustomFieldRule
   | RuleCreateParams.ManagedChallengeRule
   | RuleCreateParams.RedirectRule
   | RuleCreateParams.RewriteRule
-  | RuleCreateParams.OriginRule
+  | RuleCreateParams.RouteRule
   | RuleCreateParams.ScoreRule
   | RuleCreateParams.ServeErrorRule
-  | RuleCreateParams.SetConfigRule
-  | RuleCreateParams.SkipRule
   | RuleCreateParams.SetCacheSettingsRule
-  | RuleCreateParams.LogCustomFieldRule
-  | RuleCreateParams.DDoSDynamicRule
-  | RuleCreateParams.ForceConnectionCloseRule;
+  | RuleCreateParams.SetConfigurationRule
+  | RuleCreateParams.SkipRule;
 
 export declare namespace RuleCreateParams {
   export interface BlockRule {
@@ -7585,7 +7635,7 @@ export declare namespace RuleCreateParams {
     enabled?: boolean;
 
     /**
-     * Body param: Configure checks for exposed credentials.
+     * Body param: Configuration for exposed credential checking.
      */
     exposed_credential_check?: BlockRule.ExposedCredentialCheck;
 
@@ -7605,12 +7655,12 @@ export declare namespace RuleCreateParams {
     position?: BlockRule.BeforePosition | BlockRule.AfterPosition | BlockRule.IndexPosition;
 
     /**
-     * Body param: An object configuring the rule's ratelimit behavior.
+     * Body param: An object configuring the rule's rate limit behavior.
      */
     ratelimit?: BlockRule.Ratelimit;
 
     /**
-     * Body param: The reference of the rule (the rule ID by default).
+     * Body param: The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
@@ -7649,16 +7699,16 @@ export declare namespace RuleCreateParams {
     }
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
@@ -7696,11 +7746,11 @@ export declare namespace RuleCreateParams {
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -7711,7 +7761,7 @@ export declare namespace RuleCreateParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -7729,7 +7779,7 @@ export declare namespace RuleCreateParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -7740,8 +7790,8 @@ export declare namespace RuleCreateParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -7786,7 +7836,7 @@ export declare namespace RuleCreateParams {
     enabled?: boolean;
 
     /**
-     * Body param: Configure checks for exposed credentials.
+     * Body param: Configuration for exposed credential checking.
      */
     exposed_credential_check?: ChallengeRule.ExposedCredentialCheck;
 
@@ -7806,28 +7856,28 @@ export declare namespace RuleCreateParams {
     position?: ChallengeRule.BeforePosition | ChallengeRule.AfterPosition | ChallengeRule.IndexPosition;
 
     /**
-     * Body param: An object configuring the rule's ratelimit behavior.
+     * Body param: An object configuring the rule's rate limit behavior.
      */
     ratelimit?: ChallengeRule.Ratelimit;
 
     /**
-     * Body param: The reference of the rule (the rule ID by default).
+     * Body param: The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace ChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
@@ -7865,11 +7915,11 @@ export declare namespace RuleCreateParams {
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -7880,7 +7930,7 @@ export declare namespace RuleCreateParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -7898,7 +7948,7 @@ export declare namespace RuleCreateParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -7909,14 +7959,14 @@ export declare namespace RuleCreateParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
   }
 
-  export interface CompressionRule {
+  export interface ResponseCompressionRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7942,7 +7992,7 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: CompressionRule.ActionParameters;
+    action_parameters?: ResponseCompressionRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -7955,9 +8005,9 @@ export declare namespace RuleCreateParams {
     enabled?: boolean;
 
     /**
-     * Body param: Configure checks for exposed credentials.
+     * Body param: Configuration for exposed credential checking.
      */
-    exposed_credential_check?: CompressionRule.ExposedCredentialCheck;
+    exposed_credential_check?: ResponseCompressionRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -7972,20 +8022,23 @@ export declare namespace RuleCreateParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?: CompressionRule.BeforePosition | CompressionRule.AfterPosition | CompressionRule.IndexPosition;
+    position?:
+      | ResponseCompressionRule.BeforePosition
+      | ResponseCompressionRule.AfterPosition
+      | ResponseCompressionRule.IndexPosition;
 
     /**
-     * Body param: An object configuring the rule's ratelimit behavior.
+     * Body param: An object configuring the rule's rate limit behavior.
      */
-    ratelimit?: CompressionRule.Ratelimit;
+    ratelimit?: ResponseCompressionRule.Ratelimit;
 
     /**
-     * Body param: The reference of the rule (the rule ID by default).
+     * Body param: The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
-  export namespace CompressionRule {
+  export namespace ResponseCompressionRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -7993,7 +8046,7 @@ export declare namespace RuleCreateParams {
       /**
        * Custom order for compression algorithms.
        */
-      algorithms?: Array<ActionParameters.Algorithm>;
+      algorithms: Array<ActionParameters.Algorithm>;
     }
 
     export namespace ActionParameters {
@@ -8002,23 +8055,23 @@ export declare namespace RuleCreateParams {
        */
       export interface Algorithm {
         /**
-         * Name of compression algorithm to enable.
+         * Name of the compression algorithm to enable.
          */
         name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli' | 'zstd';
       }
     }
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
@@ -8056,11 +8109,11 @@ export declare namespace RuleCreateParams {
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -8071,7 +8124,7 @@ export declare namespace RuleCreateParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -8089,7 +8142,7 @@ export declare namespace RuleCreateParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -8100,8 +8153,177 @@ export declare namespace RuleCreateParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface DDoSDynamicRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'ddos_dynamic';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: DDoSDynamicRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: DDoSDynamicRule.BeforePosition | DDoSDynamicRule.AfterPosition | DDoSDynamicRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: DDoSDynamicRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace DDoSDynamicRule {
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -8146,7 +8368,7 @@ export declare namespace RuleCreateParams {
     enabled?: boolean;
 
     /**
-     * Body param: Configure checks for exposed credentials.
+     * Body param: Configuration for exposed credential checking.
      */
     exposed_credential_check?: ExecuteRule.ExposedCredentialCheck;
 
@@ -8166,12 +8388,12 @@ export declare namespace RuleCreateParams {
     position?: ExecuteRule.BeforePosition | ExecuteRule.AfterPosition | ExecuteRule.IndexPosition;
 
     /**
-     * Body param: An object configuring the rule's ratelimit behavior.
+     * Body param: An object configuring the rule's rate limit behavior.
      */
     ratelimit?: ExecuteRule.Ratelimit;
 
     /**
-     * Body param: The reference of the rule (the rule ID by default).
+     * Body param: The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
@@ -8263,7 +8485,8 @@ export declare namespace RuleCreateParams {
           enabled?: boolean;
 
           /**
-           * The sensitivity level to use for rules in the category.
+           * The sensitivity level to use for rules in the category. This option is only
+           * applicable for DDoS phases.
            */
           sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
         }
@@ -8293,7 +8516,8 @@ export declare namespace RuleCreateParams {
           score_threshold?: number;
 
           /**
-           * The sensitivity level to use for the rule.
+           * The sensitivity level to use for the rule. This option is only applicable for
+           * DDoS phases.
            */
           sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
         }
@@ -8301,16 +8525,16 @@ export declare namespace RuleCreateParams {
     }
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
@@ -8348,11 +8572,11 @@ export declare namespace RuleCreateParams {
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -8363,7 +8587,7 @@ export declare namespace RuleCreateParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -8381,7 +8605,7 @@ export declare namespace RuleCreateParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -8392,3097 +8616,8 @@ export declare namespace RuleCreateParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface JavascriptChallengeRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'js_challenge';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: JavascriptChallengeRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?:
-      | JavascriptChallengeRule.BeforePosition
-      | JavascriptChallengeRule.AfterPosition
-      | JavascriptChallengeRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: JavascriptChallengeRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace JavascriptChallengeRule {
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface LogRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'log';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: LogRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: LogRule.BeforePosition | LogRule.AfterPosition | LogRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: LogRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace LogRule {
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface ManagedChallengeRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'managed_challenge';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: ManagedChallengeRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?:
-      | ManagedChallengeRule.BeforePosition
-      | ManagedChallengeRule.AfterPosition
-      | ManagedChallengeRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: ManagedChallengeRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace ManagedChallengeRule {
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface RedirectRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'redirect';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: RedirectRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: RedirectRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: RedirectRule.BeforePosition | RedirectRule.AfterPosition | RedirectRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: RedirectRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RedirectRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Serve a redirect based on a bulk list lookup.
-       */
-      from_list?: ActionParameters.FromList;
-
-      /**
-       * Serve a redirect based on the request properties.
-       */
-      from_value?: ActionParameters.FromValue;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Serve a redirect based on a bulk list lookup.
-       */
-      export interface FromList {
-        /**
-         * Expression that evaluates to the list lookup key.
-         */
-        key?: string;
-
-        /**
-         * The name of the list to match against.
-         */
-        name?: string;
-      }
-
-      /**
-       * Serve a redirect based on the request properties.
-       */
-      export interface FromValue {
-        /**
-         * Keep the query string of the original request.
-         */
-        preserve_query_string?: boolean;
-
-        /**
-         * The status code to be used for the redirect.
-         */
-        status_code?: 301 | 302 | 303 | 307 | 308;
-
-        /**
-         * The URL to redirect the request to.
-         */
-        target_url?: FromValue.StaticURLRedirect | FromValue.DynamicURLRedirect;
-      }
-
-      export namespace FromValue {
-        export interface StaticURLRedirect {
-          /**
-           * The URL to redirect the request to.
-           */
-          value?: string;
-        }
-
-        export interface DynamicURLRedirect {
-          /**
-           * An expression to evaluate to get the URL to redirect the request to.
-           */
-          expression?: string;
-        }
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface RewriteRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'rewrite';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: RewriteRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: RewriteRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: RewriteRule.BeforePosition | RewriteRule.AfterPosition | RewriteRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: RewriteRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RewriteRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Map of request headers to modify.
-       */
-      headers?: {
-        [key: string]:
-          | ActionParameters.RemoveHeader
-          | ActionParameters.AddStaticHeader
-          | ActionParameters.SetStaticHeader
-          | ActionParameters.AddDynamicHeader
-          | ActionParameters.SetDynamicHeader;
-      };
-
-      /**
-       * URI to rewrite the request to.
-       */
-      uri?: ActionParameters.URI;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Remove the header from the request.
-       */
-      export interface RemoveHeader {
-        operation: 'remove';
-      }
-
-      /**
-       * Add a request header with a static value.
-       */
-      export interface AddStaticHeader {
-        operation: 'add';
-
-        /**
-         * Static value for the header.
-         */
-        value: string;
-      }
-
-      /**
-       * Set a request header with a static value.
-       */
-      export interface SetStaticHeader {
-        operation: 'set';
-
-        /**
-         * Static value for the header.
-         */
-        value: string;
-      }
-
-      /**
-       * Add a request header with a dynamic value.
-       */
-      export interface AddDynamicHeader {
-        /**
-         * Expression for the header value.
-         */
-        expression: string;
-
-        operation: 'add';
-      }
-
-      /**
-       * Set a request header with a dynamic value.
-       */
-      export interface SetDynamicHeader {
-        /**
-         * Expression for the header value.
-         */
-        expression: string;
-
-        operation: 'set';
-      }
-
-      /**
-       * URI to rewrite the request to.
-       */
-      export interface URI {
-        /**
-         * Path portion rewrite.
-         */
-        path?: RulesAPI.RewriteURIPartParam;
-
-        /**
-         * Query portion rewrite.
-         */
-        query?: RulesAPI.RewriteURIPartParam;
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface OriginRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'route';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: OriginRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: OriginRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: OriginRule.BeforePosition | OriginRule.AfterPosition | OriginRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: OriginRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace OriginRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Rewrite the HTTP Host header.
-       */
-      host_header?: string;
-
-      /**
-       * Override the IP/TCP destination.
-       */
-      origin?: ActionParameters.Origin;
-
-      /**
-       * Override the Server Name Indication (SNI).
-       */
-      sni?: ActionParameters.SNI;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Override the IP/TCP destination.
-       */
-      export interface Origin {
-        /**
-         * Override the resolved hostname.
-         */
-        host?: string;
-
-        /**
-         * Override the destination port.
-         */
-        port?: number;
-      }
-
-      /**
-       * Override the Server Name Indication (SNI).
-       */
-      export interface SNI {
-        /**
-         * The SNI override.
-         */
-        value: string;
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface ScoreRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'score';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: ScoreRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: ScoreRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: ScoreRule.BeforePosition | ScoreRule.AfterPosition | ScoreRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: ScoreRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace ScoreRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Increment contains the delta to change the score and can be either positive or
-       * negative.
-       */
-      increment?: number;
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface ServeErrorRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'serve_error';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: ServeErrorRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: ServeErrorRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: ServeErrorRule.BeforePosition | ServeErrorRule.AfterPosition | ServeErrorRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: ServeErrorRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace ServeErrorRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Error response content.
-       */
-      content?: string;
-
-      /**
-       * Content-type header to set with the response.
-       */
-      content_type?: 'application/json' | 'text/xml' | 'text/plain' | 'text/html';
-
-      /**
-       * The status code to use for the error.
-       */
-      status_code?: number;
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface SetConfigRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'set_config';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: SetConfigRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: SetConfigRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: SetConfigRule.BeforePosition | SetConfigRule.AfterPosition | SetConfigRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: SetConfigRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace SetConfigRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Turn on or off Automatic HTTPS Rewrites.
-       */
-      automatic_https_rewrites?: boolean;
-
-      /**
-       * Select which file extensions to minify automatically.
-       */
-      autominify?: ActionParameters.Autominify;
-
-      /**
-       * Turn on or off Browser Integrity Check.
-       */
-      bic?: boolean;
-
-      /**
-       * Turn off all active Cloudflare Apps.
-       */
-      disable_apps?: true;
-
-      /**
-       * Turn off Real User Monitoring (RUM).
-       */
-      disable_rum?: true;
-
-      /**
-       * Turn off Zaraz.
-       */
-      disable_zaraz?: true;
-
-      /**
-       * Turn on or off Email Obfuscation.
-       */
-      email_obfuscation?: boolean;
-
-      /**
-       * Turn on or off Cloudflare Fonts.
-       */
-      fonts?: boolean;
-
-      /**
-       * Turn on or off the Hotlink Protection.
-       */
-      hotlink_protection?: boolean;
-
-      /**
-       * Turn on or off Mirage.
-       */
-      mirage?: boolean;
-
-      /**
-       * Turn on or off Opportunistic Encryption.
-       */
-      opportunistic_encryption?: boolean;
-
-      /**
-       * Configure the Polish level.
-       */
-      polish?: 'off' | 'lossless' | 'lossy' | 'webp';
-
-      /**
-       * Turn on or off Rocket Loader.
-       */
-      rocket_loader?: boolean;
-
-      /**
-       * Configure the Security Level.
-       */
-      security_level?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
-
-      /**
-       * Turn on or off Server Side Excludes.
-       */
-      server_side_excludes?: boolean;
-
-      /**
-       * Configure the SSL level.
-       */
-      ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
-
-      /**
-       * Turn on or off Signed Exchanges (SXG).
-       */
-      sxg?: boolean;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Select which file extensions to minify automatically.
-       */
-      export interface Autominify {
-        /**
-         * Minify CSS files.
-         */
-        css?: boolean;
-
-        /**
-         * Minify HTML files.
-         */
-        html?: boolean;
-
-        /**
-         * Minify JS files.
-         */
-        js?: boolean;
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface SkipRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'skip';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: SkipRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: SkipRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: SkipRule.BeforePosition | SkipRule.AfterPosition | SkipRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: SkipRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace SkipRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * A phase to skip the execution of. This property is only compatible with
-       * products.
-       */
-      phase?: 'current';
-
-      /**
-       * A list of phases to skip the execution of. This option is incompatible with the
-       * rulesets option.
-       */
-      phases?: Array<RulesetsAPI.PhaseParam>;
-
-      /**
-       * A list of legacy security products to skip the execution of.
-       */
-      products?: Array<'bic' | 'hot' | 'rateLimit' | 'securityLevel' | 'uaBlock' | 'waf' | 'zoneLockdown'>;
-
-      /**
-       * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the
-       * execution of. This option is incompatible with the ruleset option.
-       */
-      rules?: { [key: string]: Array<string> };
-
-      /**
-       * A ruleset to skip the execution of. This option is incompatible with the
-       * rulesets option.
-       */
-      ruleset?: 'current';
-
-      /**
-       * A list of ruleset IDs to skip the execution of. This option is incompatible with
-       * the ruleset and phases options.
-       */
-      rulesets?: Array<string>;
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface SetCacheSettingsRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'set_cache_settings';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: SetCacheSettingsRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: SetCacheSettingsRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?:
-      | SetCacheSettingsRule.BeforePosition
-      | SetCacheSettingsRule.AfterPosition
-      | SetCacheSettingsRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: SetCacheSettingsRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace SetCacheSettingsRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * List of additional ports that caching can be enabled on.
-       */
-      additional_cacheable_ports?: Array<number>;
-
-      /**
-       * Specify how long client browsers should cache the response. Cloudflare cache
-       * purge will not purge content cached on client browsers, so high browser TTLs may
-       * lead to stale content.
-       */
-      browser_ttl?: ActionParameters.BrowserTTL;
-
-      /**
-       * Mark whether the request’s response from origin is eligible for caching. Caching
-       * itself will still depend on the cache-control header and your other caching
-       * configurations.
-       */
-      cache?: boolean;
-
-      /**
-       * Define which components of the request are included or excluded from the cache
-       * key Cloudflare uses to store the response in cache.
-       */
-      cache_key?: ActionParameters.CacheKey;
-
-      /**
-       * Mark whether the request's response from origin is eligible for Cache Reserve
-       * (requires a Cache Reserve add-on plan).
-       */
-      cache_reserve?: ActionParameters.CacheReserve;
-
-      /**
-       * TTL (Time to Live) specifies the maximum time to cache a resource in the
-       * Cloudflare edge network.
-       */
-      edge_ttl?: ActionParameters.EdgeTTL;
-
-      /**
-       * When enabled, Cloudflare will aim to strictly adhere to RFC 7234.
-       */
-      origin_cache_control?: boolean;
-
-      /**
-       * Generate Cloudflare error pages from issues sent from the origin server. When
-       * on, error pages will trigger for issues from the origin.
-       */
-      origin_error_page_passthru?: boolean;
-
-      /**
-       * Define a timeout value between two successive read operations to your origin
-       * server. Historically, the timeout value between two read options from Cloudflare
-       * to an origin server is 100 seconds. If you are attempting to reduce HTTP 524
-       * errors because of timeouts from an origin server, try increasing this timeout
-       * value.
-       */
-      read_timeout?: number;
-
-      /**
-       * Specify whether or not Cloudflare should respect strong ETag (entity tag)
-       * headers. When off, Cloudflare converts strong ETag headers to weak ETag headers.
-       */
-      respect_strong_etags?: boolean;
-
-      /**
-       * Define if Cloudflare should serve stale content while getting the latest content
-       * from the origin. If on, Cloudflare will not serve stale content while getting
-       * the latest content from the origin.
-       */
-      serve_stale?: ActionParameters.ServeStale;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Specify how long client browsers should cache the response. Cloudflare cache
-       * purge will not purge content cached on client browsers, so high browser TTLs may
-       * lead to stale content.
-       */
-      export interface BrowserTTL {
-        /**
-         * Determines which browser ttl mode to use.
-         */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin' | 'bypass';
-
-        /**
-         * The TTL (in seconds) if you choose override_origin mode.
-         */
-        default?: number;
-      }
-
-      /**
-       * Define which components of the request are included or excluded from the cache
-       * key Cloudflare uses to store the response in cache.
-       */
-      export interface CacheKey {
-        /**
-         * Separate cached content based on the visitor’s device type.
-         */
-        cache_by_device_type?: boolean;
-
-        /**
-         * Protect from web cache deception attacks while allowing static assets to be
-         * cached.
-         */
-        cache_deception_armor?: boolean;
-
-        /**
-         * Customize which components of the request are included or excluded from the
-         * cache key.
-         */
-        custom_key?: CacheKey.CustomKey;
-
-        /**
-         * Treat requests with the same query parameters the same, regardless of the order
-         * those query parameters are in. A value of true ignores the query strings' order.
-         */
-        ignore_query_strings_order?: boolean;
-      }
-
-      export namespace CacheKey {
-        /**
-         * Customize which components of the request are included or excluded from the
-         * cache key.
-         */
-        export interface CustomKey {
-          /**
-           * The cookies to include in building the cache key.
-           */
-          cookie?: CustomKey.Cookie;
-
-          /**
-           * The header names and values to include in building the cache key.
-           */
-          header?: CustomKey.Header;
-
-          /**
-           * Whether to use the original host or the resolved host in the cache key.
-           */
-          host?: CustomKey.Host;
-
-          /**
-           * Use the presence of parameters in the query string to build the cache key.
-           */
-          query_string?: CustomKey.IncludedQueryStringParameters | CustomKey.ExcludedQueryStringParameters;
-
-          /**
-           * Characteristics of the request user agent used in building the cache key.
-           */
-          user?: CustomKey.User;
-        }
-
-        export namespace CustomKey {
-          /**
-           * The cookies to include in building the cache key.
-           */
-          export interface Cookie {
-            /**
-             * Checks for the presence of these cookie names. The presence of these cookies is
-             * used in building the cache key.
-             */
-            check_presence?: Array<string>;
-
-            /**
-             * Include these cookies' names and their values.
-             */
-            include?: Array<string>;
-          }
-
-          /**
-           * The header names and values to include in building the cache key.
-           */
-          export interface Header {
-            /**
-             * Checks for the presence of these header names. The presence of these headers is
-             * used in building the cache key.
-             */
-            check_presence?: Array<string>;
-
-            /**
-             * For each header name and list of values combination, check if the request header
-             * contains any of the values provided. The presence of the request header and
-             * whether any of the values provided are contained in the request header value is
-             * used in building the cache key.
-             */
-            contains?: { [key: string]: Array<string> };
-
-            /**
-             * Whether or not to include the origin header. A value of true will exclude the
-             * origin header in the cache key.
-             */
-            exclude_origin?: boolean;
-
-            /**
-             * Include these headers' names and their values.
-             */
-            include?: Array<string>;
-          }
-
-          /**
-           * Whether to use the original host or the resolved host in the cache key.
-           */
-          export interface Host {
-            /**
-             * Use the resolved host in the cache key. A value of true will use the resolved
-             * host, while a value or false will use the original host.
-             */
-            resolved?: boolean;
-          }
-
-          /**
-           * Use the presence of parameters in the query string to build the cache key.
-           */
-          export interface IncludedQueryStringParameters {
-            /**
-             * A list of query string parameters used to build the cache key.
-             */
-            include?:
-              | IncludedQueryStringParameters.SomeQueryStringParameters
-              | IncludedQueryStringParameters.AllQueryStringParameters;
-          }
-
-          export namespace IncludedQueryStringParameters {
-            /**
-             * A list of query string parameters used to build the cache key.
-             */
-            export interface SomeQueryStringParameters {
-              list?: Array<string>;
-            }
-
-            /**
-             * Build the cache key using ALL query string parameters that are in the request.
-             */
-            export interface AllQueryStringParameters {
-              /**
-               * Determines whether to include all query string parameters in the cache key.
-               */
-              all?: boolean;
-            }
-          }
-
-          /**
-           * Use the absence of parameters in the query string to build the cache key.
-           */
-          export interface ExcludedQueryStringParameters {
-            /**
-             * A list of query string parameters NOT used to build the cache key. All
-             * parameters present in the request but missing in this list will be used to build
-             * the cache key.
-             */
-            exclude?:
-              | ExcludedQueryStringParameters.SomeQueryStringParameters
-              | ExcludedQueryStringParameters.AllQueryStringParameters;
-          }
-
-          export namespace ExcludedQueryStringParameters {
-            /**
-             * A list of query string parameters NOT used to build the cache key. All
-             * parameters present in the request but missing in this list will be used to build
-             * the cache key.
-             */
-            export interface SomeQueryStringParameters {
-              list?: Array<string>;
-            }
-
-            /**
-             * Build the cache key excluding ALL query string parameters that are in the
-             * request.
-             */
-            export interface AllQueryStringParameters {
-              /**
-               * Determines whether to exclude all query string parameters from the cache key.
-               */
-              all?: boolean;
-            }
-          }
-
-          /**
-           * Characteristics of the request user agent used in building the cache key.
-           */
-          export interface User {
-            /**
-             * Use the user agent's device type in the cache key.
-             */
-            device_type?: boolean;
-
-            /**
-             * Use the user agents's country in the cache key.
-             */
-            geo?: boolean;
-
-            /**
-             * Use the user agent's language in the cache key.
-             */
-            lang?: boolean;
-          }
-        }
-      }
-
-      /**
-       * Mark whether the request's response from origin is eligible for Cache Reserve
-       * (requires a Cache Reserve add-on plan).
-       */
-      export interface CacheReserve {
-        /**
-         * Determines whether cache reserve is enabled. If this is true and a request meets
-         * eligibility criteria, Cloudflare will write the resource to cache reserve.
-         */
-        eligible: boolean;
-
-        /**
-         * The minimum file size eligible for store in cache reserve.
-         */
-        minimum_file_size: number;
-      }
-
-      /**
-       * TTL (Time to Live) specifies the maximum time to cache a resource in the
-       * Cloudflare edge network.
-       */
-      export interface EdgeTTL {
-        /**
-         * The TTL (in seconds) if you choose override_origin mode.
-         */
-        default: number;
-
-        /**
-         * Edge TTL options.
-         */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
-
-        /**
-         * List of single status codes, or status code ranges to apply the selected mode.
-         */
-        status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
-      }
-
-      export namespace EdgeTTL {
-        /**
-         * Specify how long Cloudflare should cache the response based on the status code
-         * from the origin. Can be a single status code or a range or status codes.
-         */
-        export interface StatusCodeTTL {
-          /**
-           * Time to cache a response (in seconds). A value of 0 is equivalent to setting the
-           * Cache-Control header with the value "no-cache". A value of -1 is equivalent to
-           * setting Cache-Control header with the value of "no-store".
-           */
-          value: number;
-
-          /**
-           * The range of status codes used to apply the selected mode.
-           */
-          status_code_range?: StatusCodeTTL.StatusCodeRange;
-
-          /**
-           * Set the TTL for responses with this specific status code.
-           */
-          status_code_value?: number;
-        }
-
-        export namespace StatusCodeTTL {
-          /**
-           * The range of status codes used to apply the selected mode.
-           */
-          export interface StatusCodeRange {
-            /**
-             * Response status code lower bound.
-             */
-            from: number;
-
-            /**
-             * Response status code upper bound.
-             */
-            to: number;
-          }
-        }
-      }
-
-      /**
-       * Define if Cloudflare should serve stale content while getting the latest content
-       * from the origin. If on, Cloudflare will not serve stale content while getting
-       * the latest content from the origin.
-       */
-      export interface ServeStale {
-        /**
-         * Defines whether Cloudflare should serve stale content while updating. If true,
-         * Cloudflare will not serve stale content while getting the latest content from
-         * the origin.
-         */
-        disable_stale_while_updating: boolean;
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface LogCustomFieldRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'log_custom_field';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: LogCustomFieldRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: LogCustomFieldRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?:
-      | LogCustomFieldRule.BeforePosition
-      | LogCustomFieldRule.AfterPosition
-      | LogCustomFieldRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: LogCustomFieldRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace LogCustomFieldRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * The cookie fields to log.
-       */
-      cookie_fields?: Array<ActionParameters.CookieField>;
-
-      /**
-       * The raw response fields to log.
-       */
-      raw_response_fields?: Array<ActionParameters.RawResponseField>;
-
-      /**
-       * The raw request fields to log.
-       */
-      request_fields?: Array<ActionParameters.RequestField>;
-
-      /**
-       * The transformed response fields to log.
-       */
-      response_fields?: Array<ActionParameters.ResponseField>;
-
-      /**
-       * The transformed request fields to log.
-       */
-      transformed_request_fields?: Array<ActionParameters.TransformedRequestField>;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The cookie field to log.
-       */
-      export interface CookieField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The raw response field to log.
-       */
-      export interface RawResponseField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-
-        /**
-         * Whether to log duplicate values of the same header.
-         */
-        preserve_duplicates?: boolean;
-      }
-
-      /**
-       * The raw request field to log.
-       */
-      export interface RequestField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The transformed response field to log.
-       */
-      export interface ResponseField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-
-        /**
-         * Whether to log duplicate values of the same header.
-         */
-        preserve_duplicates?: boolean;
-      }
-
-      /**
-       * The transformed request field to log.
-       */
-      export interface TransformedRequestField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface DDoSDynamicRule {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'ddos_dynamic';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: DDoSDynamicRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: DDoSDynamicRule.BeforePosition | DDoSDynamicRule.AfterPosition | DDoSDynamicRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: DDoSDynamicRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace DDoSDynamicRule {
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -11527,7 +8662,7 @@ export declare namespace RuleCreateParams {
     enabled?: boolean;
 
     /**
-     * Body param: Configure checks for exposed credentials.
+     * Body param: Configuration for exposed credential checking.
      */
     exposed_credential_check?: ForceConnectionCloseRule.ExposedCredentialCheck;
 
@@ -11550,28 +8685,28 @@ export declare namespace RuleCreateParams {
       | ForceConnectionCloseRule.IndexPosition;
 
     /**
-     * Body param: An object configuring the rule's ratelimit behavior.
+     * Body param: An object configuring the rule's rate limit behavior.
      */
     ratelimit?: ForceConnectionCloseRule.Ratelimit;
 
     /**
-     * Body param: The reference of the rule (the rule ID by default).
+     * Body param: The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace ForceConnectionCloseRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
@@ -11609,11 +8744,11 @@ export declare namespace RuleCreateParams {
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -11624,7 +8759,7 @@ export declare namespace RuleCreateParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -11642,7 +8777,7 @@ export declare namespace RuleCreateParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -11653,8 +8788,2967 @@ export declare namespace RuleCreateParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface JavaScriptChallengeRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'js_challenge';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: JavaScriptChallengeRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | JavaScriptChallengeRule.BeforePosition
+      | JavaScriptChallengeRule.AfterPosition
+      | JavaScriptChallengeRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: JavaScriptChallengeRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace JavaScriptChallengeRule {
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface LogRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'log';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: LogRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: LogRule.BeforePosition | LogRule.AfterPosition | LogRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: LogRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace LogRule {
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface LogCustomFieldRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'log_custom_field';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: LogCustomFieldRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: LogCustomFieldRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | LogCustomFieldRule.BeforePosition
+      | LogCustomFieldRule.AfterPosition
+      | LogCustomFieldRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: LogCustomFieldRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace LogCustomFieldRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * The cookie fields to log.
+       */
+      cookie_fields?: Array<ActionParameters.CookieField>;
+
+      /**
+       * The raw response fields to log.
+       */
+      raw_response_fields?: Array<ActionParameters.RawResponseField>;
+
+      /**
+       * The raw request fields to log.
+       */
+      request_fields?: Array<ActionParameters.RequestField>;
+
+      /**
+       * The transformed response fields to log.
+       */
+      response_fields?: Array<ActionParameters.ResponseField>;
+
+      /**
+       * The transformed request fields to log.
+       */
+      transformed_request_fields?: Array<ActionParameters.TransformedRequestField>;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * The cookie field to log.
+       */
+      export interface CookieField {
+        /**
+         * The name of the cookie.
+         */
+        name: string;
+      }
+
+      /**
+       * The raw response field to log.
+       */
+      export interface RawResponseField {
+        /**
+         * The name of the response header.
+         */
+        name: string;
+
+        /**
+         * Whether to log duplicate values of the same header.
+         */
+        preserve_duplicates?: boolean;
+      }
+
+      /**
+       * The raw request field to log.
+       */
+      export interface RequestField {
+        /**
+         * The name of the header.
+         */
+        name: string;
+      }
+
+      /**
+       * The transformed response field to log.
+       */
+      export interface ResponseField {
+        /**
+         * The name of the response header.
+         */
+        name: string;
+
+        /**
+         * Whether to log duplicate values of the same header.
+         */
+        preserve_duplicates?: boolean;
+      }
+
+      /**
+       * The transformed request field to log.
+       */
+      export interface TransformedRequestField {
+        /**
+         * The name of the header.
+         */
+        name: string;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface ManagedChallengeRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'managed_challenge';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: ManagedChallengeRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | ManagedChallengeRule.BeforePosition
+      | ManagedChallengeRule.AfterPosition
+      | ManagedChallengeRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: ManagedChallengeRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace ManagedChallengeRule {
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RedirectRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'redirect';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: RedirectRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RedirectRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: RedirectRule.BeforePosition | RedirectRule.AfterPosition | RedirectRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RedirectRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RedirectRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A redirect based on a bulk list lookup.
+       */
+      from_list?: ActionParameters.FromList;
+
+      /**
+       * A redirect based on the request properties.
+       */
+      from_value?: ActionParameters.FromValue;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * A redirect based on a bulk list lookup.
+       */
+      export interface FromList {
+        /**
+         * An expression that evaluates to the list lookup key.
+         */
+        key: string;
+
+        /**
+         * The name of the list to match against.
+         */
+        name: string;
+      }
+
+      /**
+       * A redirect based on the request properties.
+       */
+      export interface FromValue {
+        /**
+         * A URL to redirect the request to.
+         */
+        target_url: FromValue.TargetURL;
+
+        /**
+         * Whether to keep the query string of the original request.
+         */
+        preserve_query_string?: boolean;
+
+        /**
+         * The status code to use for the redirect.
+         */
+        status_code?: 301 | 302 | 303 | 307 | 308;
+      }
+
+      export namespace FromValue {
+        /**
+         * A URL to redirect the request to.
+         */
+        export interface TargetURL {
+          /**
+           * An expression that evaluates to a URL to redirect the request to.
+           */
+          expression?: string;
+
+          /**
+           * A URL to redirect the request to.
+           */
+          value?: string;
+        }
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RewriteRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'rewrite';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: RewriteRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RewriteRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: RewriteRule.BeforePosition | RewriteRule.AfterPosition | RewriteRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RewriteRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RewriteRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A map of headers to rewrite.
+       */
+      headers?: {
+        [key: string]:
+          | ActionParameters.AddStaticHeader
+          | ActionParameters.AddDynamicHeader
+          | ActionParameters.SetStaticHeader
+          | ActionParameters.SetDynamicHeader
+          | ActionParameters.RemoveHeader;
+      };
+
+      /**
+       * A URI path rewrite.
+       */
+      uri?: ActionParameters.URIPath | ActionParameters.URIQuery;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * A header with a static value to add.
+       */
+      export interface AddStaticHeader {
+        /**
+         * The operation to perform on the header.
+         */
+        operation: 'add';
+
+        /**
+         * A static value for the header.
+         */
+        value: string;
+      }
+
+      /**
+       * A header with a dynamic value to add.
+       */
+      export interface AddDynamicHeader {
+        /**
+         * An expression that evaluates to a value for the header.
+         */
+        expression: string;
+
+        /**
+         * The operation to perform on the header.
+         */
+        operation: 'add';
+      }
+
+      /**
+       * A header with a static value to set.
+       */
+      export interface SetStaticHeader {
+        /**
+         * The operation to perform on the header.
+         */
+        operation: 'set';
+
+        /**
+         * A static value for the header.
+         */
+        value: string;
+      }
+
+      /**
+       * A header with a dynamic value to set.
+       */
+      export interface SetDynamicHeader {
+        /**
+         * An expression that evaluates to a value for the header.
+         */
+        expression: string;
+
+        /**
+         * The operation to perform on the header.
+         */
+        operation: 'set';
+      }
+
+      /**
+       * A header to remove.
+       */
+      export interface RemoveHeader {
+        /**
+         * The operation to perform on the header.
+         */
+        operation: 'remove';
+      }
+
+      /**
+       * A URI path rewrite.
+       */
+      export interface URIPath {
+        /**
+         * A URI path rewrite.
+         */
+        path: URIPath.Path;
+      }
+
+      export namespace URIPath {
+        /**
+         * A URI path rewrite.
+         */
+        export interface Path {
+          /**
+           * An expression that evaluates to a value to rewrite the URI path to.
+           */
+          expression?: string;
+
+          /**
+           * A value to rewrite the URI path to.
+           */
+          value?: string;
+        }
+      }
+
+      /**
+       * A URI query rewrite.
+       */
+      export interface URIQuery {
+        /**
+         * A URI query rewrite.
+         */
+        query: URIQuery.Query;
+      }
+
+      export namespace URIQuery {
+        /**
+         * A URI query rewrite.
+         */
+        export interface Query {
+          /**
+           * An expression that evaluates to a value to rewrite the URI query to.
+           */
+          expression?: string;
+
+          /**
+           * A value to rewrite the URI query to.
+           */
+          value?: string;
+        }
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RouteRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'route';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: RouteRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RouteRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: RouteRule.BeforePosition | RouteRule.AfterPosition | RouteRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RouteRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RouteRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A value to rewrite the HTTP host header to.
+       */
+      host_header?: string;
+
+      /**
+       * An origin to route to.
+       */
+      origin?: ActionParameters.Origin;
+
+      /**
+       * A Server Name Indication (SNI) override.
+       */
+      sni?: ActionParameters.SNI;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * An origin to route to.
+       */
+      export interface Origin {
+        /**
+         * A resolved host to route to.
+         */
+        host?: string;
+
+        /**
+         * A destination port to route to.
+         */
+        port?: number;
+      }
+
+      /**
+       * A Server Name Indication (SNI) override.
+       */
+      export interface SNI {
+        /**
+         * A value to override the SNI to.
+         */
+        value: string;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface ScoreRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'score';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: ScoreRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: ScoreRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: ScoreRule.BeforePosition | ScoreRule.AfterPosition | ScoreRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: ScoreRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace ScoreRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A delta to change the score by, which can be either positive or negative.
+       */
+      increment: number;
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface ServeErrorRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'serve_error';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: ServeErrorRule.ActionParametersContent | ServeErrorRule.ActionParametersAsset;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: ServeErrorRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: ServeErrorRule.BeforePosition | ServeErrorRule.AfterPosition | ServeErrorRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: ServeErrorRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace ServeErrorRule {
+    export interface ActionParametersContent {
+      /**
+       * The response content.
+       */
+      content: string;
+
+      /**
+       * The content type header to set with the error response.
+       */
+      content_type?: 'application/json' | 'text/html' | 'text/plain' | 'text/xml';
+
+      /**
+       * The status code to use for the error.
+       */
+      status_code?: number;
+    }
+
+    export interface ActionParametersAsset {
+      /**
+       * The name of a custom asset to serve as the error response.
+       */
+      asset_name: string;
+
+      /**
+       * The content type header to set with the error response.
+       */
+      content_type?: 'application/json' | 'text/html' | 'text/plain' | 'text/xml';
+
+      /**
+       * The status code to use for the error.
+       */
+      status_code?: number;
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface SetCacheSettingsRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'set_cache_settings';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: SetCacheSettingsRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: SetCacheSettingsRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | SetCacheSettingsRule.BeforePosition
+      | SetCacheSettingsRule.AfterPosition
+      | SetCacheSettingsRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: SetCacheSettingsRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace SetCacheSettingsRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A list of additional ports that caching should be enabled on.
+       */
+      additional_cacheable_ports?: Array<number>;
+
+      /**
+       * How long client browsers should cache the response. Cloudflare cache purge will
+       * not purge content cached on client browsers, so high browser TTLs may lead to
+       * stale content.
+       */
+      browser_ttl?: ActionParameters.BrowserTTL;
+
+      /**
+       * Whether the request's response from the origin is eligible for caching. Caching
+       * itself will still depend on the cache control header and your other caching
+       * configurations.
+       */
+      cache?: boolean;
+
+      /**
+       * Which components of the request are included in or excluded from the cache key
+       * Cloudflare uses to store the response in cache.
+       */
+      cache_key?: ActionParameters.CacheKey;
+
+      /**
+       * Settings to determine whether the request's response from origin is eligible for
+       * Cache Reserve (requires a Cache Reserve add-on plan).
+       */
+      cache_reserve?: ActionParameters.CacheReserve;
+
+      /**
+       * How long the Cloudflare edge network should cache the response.
+       */
+      edge_ttl?: ActionParameters.EdgeTTL;
+
+      /**
+       * Whether Cloudflare will aim to strictly adhere to RFC 7234.
+       */
+      origin_cache_control?: boolean;
+
+      /**
+       * Whether to generate Cloudflare error pages for issues from the origin server.
+       */
+      origin_error_page_passthru?: boolean;
+
+      /**
+       * A timeout value between two successive read operations to use for your origin
+       * server. Historically, the timeout value between two read options from Cloudflare
+       * to an origin server is 100 seconds. If you are attempting to reduce HTTP 524
+       * errors because of timeouts from an origin server, try increasing this timeout
+       * value.
+       */
+      read_timeout?: number;
+
+      /**
+       * Whether Cloudflare should respect strong ETag (entity tag) headers. If false,
+       * Cloudflare converts strong ETag headers to weak ETag headers.
+       */
+      respect_strong_etags?: boolean;
+
+      /**
+       * When to serve stale content from cache.
+       */
+      serve_stale?: ActionParameters.ServeStale;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * How long client browsers should cache the response. Cloudflare cache purge will
+       * not purge content cached on client browsers, so high browser TTLs may lead to
+       * stale content.
+       */
+      export interface BrowserTTL {
+        /**
+         * The browser TTL mode.
+         */
+        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin' | 'bypass';
+
+        /**
+         * The browser TTL (in seconds) if you choose the "override_origin" mode.
+         */
+        default?: number;
+      }
+
+      /**
+       * Which components of the request are included in or excluded from the cache key
+       * Cloudflare uses to store the response in cache.
+       */
+      export interface CacheKey {
+        /**
+         * Whether to separate cached content based on the visitor's device type.
+         */
+        cache_by_device_type?: boolean;
+
+        /**
+         * Whether to protect from web cache deception attacks, while allowing static
+         * assets to be cached.
+         */
+        cache_deception_armor?: boolean;
+
+        /**
+         * Which components of the request are included or excluded from the cache key.
+         */
+        custom_key?: CacheKey.CustomKey;
+
+        /**
+         * Whether to treat requests with the same query parameters the same, regardless of
+         * the order those query parameters are in.
+         */
+        ignore_query_strings_order?: boolean;
+      }
+
+      export namespace CacheKey {
+        /**
+         * Which components of the request are included or excluded from the cache key.
+         */
+        export interface CustomKey {
+          /**
+           * Which cookies to include in the cache key.
+           */
+          cookie?: CustomKey.Cookie;
+
+          /**
+           * Which headers to include in the cache key.
+           */
+          header?: CustomKey.Header;
+
+          /**
+           * How to use the host in the cache key.
+           */
+          host?: CustomKey.Host;
+
+          /**
+           * Which query string parameters to include in or exclude from the cache key.
+           */
+          query_string?: CustomKey.QueryString;
+
+          /**
+           * How to use characteristics of the request user agent in the cache key.
+           */
+          user?: CustomKey.User;
+        }
+
+        export namespace CustomKey {
+          /**
+           * Which cookies to include in the cache key.
+           */
+          export interface Cookie {
+            /**
+             * A list of cookies to check for the presence of. The presence of these cookies is
+             * included in the cache key.
+             */
+            check_presence?: Array<string>;
+
+            /**
+             * A list of cookies to include in the cache key.
+             */
+            include?: Array<string>;
+          }
+
+          /**
+           * Which headers to include in the cache key.
+           */
+          export interface Header {
+            /**
+             * A list of headers to check for the presence of. The presence of these headers is
+             * included in the cache key.
+             */
+            check_presence?: Array<string>;
+
+            /**
+             * A mapping of header names to a list of values. If a header is present in the
+             * request and contains any of the values provided, its value is included in the
+             * cache key.
+             */
+            contains?: { [key: string]: Array<string> };
+
+            /**
+             * Whether to exclude the origin header in the cache key.
+             */
+            exclude_origin?: boolean;
+
+            /**
+             * A list of headers to include in the cache key.
+             */
+            include?: Array<string>;
+          }
+
+          /**
+           * How to use the host in the cache key.
+           */
+          export interface Host {
+            /**
+             * Whether to use the resolved host in the cache key.
+             */
+            resolved?: boolean;
+          }
+
+          /**
+           * Which query string parameters to include in or exclude from the cache key.
+           */
+          export interface QueryString {
+            /**
+             * Which query string parameters to exclude from the cache key.
+             */
+            exclude?: QueryString.Exclude;
+
+            /**
+             * Which query string parameters to include in the cache key.
+             */
+            include?: QueryString.Include;
+          }
+
+          export namespace QueryString {
+            /**
+             * Which query string parameters to exclude from the cache key.
+             */
+            export interface Exclude {
+              /**
+               * Whether to exclude all query string parameters from the cache key.
+               */
+              all?: true;
+
+              /**
+               * A list of query string parameters to exclude from the cache key.
+               */
+              list?: Array<string>;
+            }
+
+            /**
+             * Which query string parameters to include in the cache key.
+             */
+            export interface Include {
+              /**
+               * Whether to include all query string parameters in the cache key.
+               */
+              all?: true;
+
+              /**
+               * A list of query string parameters to include in the cache key.
+               */
+              list?: Array<string>;
+            }
+          }
+
+          /**
+           * How to use characteristics of the request user agent in the cache key.
+           */
+          export interface User {
+            /**
+             * Whether to use the user agent's device type in the cache key.
+             */
+            device_type?: boolean;
+
+            /**
+             * Whether to use the user agents's country in the cache key.
+             */
+            geo?: boolean;
+
+            /**
+             * Whether to use the user agent's language in the cache key.
+             */
+            lang?: boolean;
+          }
+        }
+      }
+
+      /**
+       * Settings to determine whether the request's response from origin is eligible for
+       * Cache Reserve (requires a Cache Reserve add-on plan).
+       */
+      export interface CacheReserve {
+        /**
+         * Whether Cache Reserve is enabled. If this is true and a request meets
+         * eligibility criteria, Cloudflare will write the resource to Cache Reserve.
+         */
+        eligible: boolean;
+
+        /**
+         * The minimum file size eligible for storage in Cache Reserve.
+         */
+        minimum_file_size?: number;
+      }
+
+      /**
+       * How long the Cloudflare edge network should cache the response.
+       */
+      export interface EdgeTTL {
+        /**
+         * The edge TTL mode.
+         */
+        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
+
+        /**
+         * The edge TTL (in seconds) if you choose the "override_origin" mode.
+         */
+        default?: number;
+
+        /**
+         * A list of TTLs to apply to specific status codes or status code ranges.
+         */
+        status_code_ttl?: Array<EdgeTTL.StatusCodeTTL>;
+      }
+
+      export namespace EdgeTTL {
+        export interface StatusCodeTTL {
+          /**
+           * The time to cache the response for (in seconds). A value of 0 is equivalent to
+           * setting the cache control header with the value "no-cache". A value of -1 is
+           * equivalent to setting the cache control header with the value of "no-store".
+           */
+          value: number;
+
+          /**
+           * A single status code to apply the TTL to.
+           */
+          status_code?: number;
+
+          /**
+           * A range of status codes to apply the TTL to.
+           */
+          status_code_range?: StatusCodeTTL.StatusCodeRange;
+        }
+
+        export namespace StatusCodeTTL {
+          /**
+           * A range of status codes to apply the TTL to.
+           */
+          export interface StatusCodeRange {
+            /**
+             * The lower bound of the range.
+             */
+            from?: number;
+
+            /**
+             * The upper bound of the range.
+             */
+            to?: number;
+          }
+        }
+      }
+
+      /**
+       * When to serve stale content from cache.
+       */
+      export interface ServeStale {
+        /**
+         * Whether Cloudflare should disable serving stale content while getting the latest
+         * content from the origin.
+         */
+        disable_stale_while_updating?: boolean;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface SetConfigurationRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'set_config';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: SetConfigurationRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: SetConfigurationRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | SetConfigurationRule.BeforePosition
+      | SetConfigurationRule.AfterPosition
+      | SetConfigurationRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: SetConfigurationRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace SetConfigurationRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * Whether to enable Automatic HTTPS Rewrites.
+       */
+      automatic_https_rewrites?: boolean;
+
+      /**
+       * Which file extensions to minify automatically.
+       */
+      autominify?: ActionParameters.Autominify;
+
+      /**
+       * Whether to enable Browser Integrity Check (BIC).
+       */
+      bic?: boolean;
+
+      /**
+       * Whether to disable Cloudflare Apps.
+       */
+      disable_apps?: true;
+
+      /**
+       * Whether to disable Pay Per Crawl.
+       */
+      disable_pay_per_crawl?: true;
+
+      /**
+       * Whether to disable Real User Monitoring (RUM).
+       */
+      disable_rum?: true;
+
+      /**
+       * Whether to disable Zaraz.
+       */
+      disable_zaraz?: true;
+
+      /**
+       * Whether to enable Email Obfuscation.
+       */
+      email_obfuscation?: boolean;
+
+      /**
+       * Whether to enable Cloudflare Fonts.
+       */
+      fonts?: boolean;
+
+      /**
+       * Whether to enable Hotlink Protection.
+       */
+      hotlink_protection?: boolean;
+
+      /**
+       * Whether to enable Mirage.
+       */
+      mirage?: boolean;
+
+      /**
+       * Whether to enable Opportunistic Encryption.
+       */
+      opportunistic_encryption?: boolean;
+
+      /**
+       * The Polish level to configure.
+       */
+      polish?: 'off' | 'lossless' | 'lossy' | 'webp';
+
+      /**
+       * Whether to enable Rocket Loader.
+       */
+      rocket_loader?: boolean;
+
+      /**
+       * The Security Level to configure.
+       */
+      security_level?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
+
+      /**
+       * Whether to enable Server-Side Excludes.
+       */
+      server_side_excludes?: boolean;
+
+      /**
+       * The SSL level to configure.
+       */
+      ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
+
+      /**
+       * Whether to enable Signed Exchanges (SXG).
+       */
+      sxg?: boolean;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * Which file extensions to minify automatically.
+       */
+      export interface Autominify {
+        /**
+         * Whether to minify CSS files.
+         */
+        css?: boolean;
+
+        /**
+         * Whether to minify HTML files.
+         */
+        html?: boolean;
+
+        /**
+         * Whether to minify JavaScript files.
+         */
+        js?: boolean;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface SkipRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'skip';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: SkipRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: SkipRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: SkipRule.BeforePosition | SkipRule.AfterPosition | SkipRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: SkipRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace SkipRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A phase to skip the execution of. This option is only compatible with the
+       * products option.
+       */
+      phase?: 'current';
+
+      /**
+       * A list of phases to skip the execution of. This option is incompatible with the
+       * rulesets option.
+       */
+      phases?: Array<RulesetsAPI.PhaseParam>;
+
+      /**
+       * A list of legacy security products to skip the execution of.
+       */
+      products?: Array<'bic' | 'hot' | 'rateLimit' | 'securityLevel' | 'uaBlock' | 'waf' | 'zoneLockdown'>;
+
+      /**
+       * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the
+       * execution of. This option is incompatible with the ruleset option.
+       */
+      rules?: { [key: string]: Array<string> };
+
+      /**
+       * A ruleset to skip the execution of. This option is incompatible with the
+       * rulesets option.
+       */
+      ruleset?: 'current';
+
+      /**
+       * A list of ruleset IDs to skip the execution of. This option is incompatible with
+       * the ruleset and phases options.
+       */
+      rulesets?: Array<string>;
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -11681,22 +11775,22 @@ export interface RuleDeleteParams {
 export type RuleEditParams =
   | RuleEditParams.BlockRule
   | RuleEditParams.ChallengeRule
-  | RuleEditParams.CompressionRule
+  | RuleEditParams.ResponseCompressionRule
+  | RuleEditParams.DDoSDynamicRule
   | RuleEditParams.ExecuteRule
-  | RuleEditParams.JavascriptChallengeRule
+  | RuleEditParams.ForceConnectionCloseRule
+  | RuleEditParams.JavaScriptChallengeRule
   | RuleEditParams.LogRule
+  | RuleEditParams.LogCustomFieldRule
   | RuleEditParams.ManagedChallengeRule
   | RuleEditParams.RedirectRule
   | RuleEditParams.RewriteRule
-  | RuleEditParams.OriginRule
+  | RuleEditParams.RouteRule
   | RuleEditParams.ScoreRule
   | RuleEditParams.ServeErrorRule
-  | RuleEditParams.SetConfigRule
-  | RuleEditParams.SkipRule
   | RuleEditParams.SetCacheSettingsRule
-  | RuleEditParams.LogCustomFieldRule
-  | RuleEditParams.DDoSDynamicRule
-  | RuleEditParams.ForceConnectionCloseRule;
+  | RuleEditParams.SetConfigurationRule
+  | RuleEditParams.SkipRule;
 
 export declare namespace RuleEditParams {
   export interface BlockRule {
@@ -11743,7 +11837,7 @@ export declare namespace RuleEditParams {
     enabled?: boolean;
 
     /**
-     * Body param: Configure checks for exposed credentials.
+     * Body param: Configuration for exposed credential checking.
      */
     exposed_credential_check?: BlockRule.ExposedCredentialCheck;
 
@@ -11763,12 +11857,12 @@ export declare namespace RuleEditParams {
     position?: BlockRule.BeforePosition | BlockRule.AfterPosition | BlockRule.IndexPosition;
 
     /**
-     * Body param: An object configuring the rule's ratelimit behavior.
+     * Body param: An object configuring the rule's rate limit behavior.
      */
     ratelimit?: BlockRule.Ratelimit;
 
     /**
-     * Body param: The reference of the rule (the rule ID by default).
+     * Body param: The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
@@ -11807,16 +11901,16 @@ export declare namespace RuleEditParams {
     }
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
@@ -11854,11 +11948,11 @@ export declare namespace RuleEditParams {
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -11869,7 +11963,7 @@ export declare namespace RuleEditParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -11887,7 +11981,7 @@ export declare namespace RuleEditParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -11898,8 +11992,8 @@ export declare namespace RuleEditParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -11949,7 +12043,7 @@ export declare namespace RuleEditParams {
     enabled?: boolean;
 
     /**
-     * Body param: Configure checks for exposed credentials.
+     * Body param: Configuration for exposed credential checking.
      */
     exposed_credential_check?: ChallengeRule.ExposedCredentialCheck;
 
@@ -11969,28 +12063,28 @@ export declare namespace RuleEditParams {
     position?: ChallengeRule.BeforePosition | ChallengeRule.AfterPosition | ChallengeRule.IndexPosition;
 
     /**
-     * Body param: An object configuring the rule's ratelimit behavior.
+     * Body param: An object configuring the rule's rate limit behavior.
      */
     ratelimit?: ChallengeRule.Ratelimit;
 
     /**
-     * Body param: The reference of the rule (the rule ID by default).
+     * Body param: The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace ChallengeRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
@@ -12028,11 +12122,11 @@ export declare namespace RuleEditParams {
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -12043,7 +12137,7 @@ export declare namespace RuleEditParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -12061,7 +12155,7 @@ export declare namespace RuleEditParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -12072,14 +12166,14 @@ export declare namespace RuleEditParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
   }
 
-  export interface CompressionRule {
+  export interface ResponseCompressionRule {
     /**
      * Path param: The unique ID of the ruleset.
      */
@@ -12110,7 +12204,7 @@ export declare namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: CompressionRule.ActionParameters;
+    action_parameters?: ResponseCompressionRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -12123,9 +12217,9 @@ export declare namespace RuleEditParams {
     enabled?: boolean;
 
     /**
-     * Body param: Configure checks for exposed credentials.
+     * Body param: Configuration for exposed credential checking.
      */
-    exposed_credential_check?: CompressionRule.ExposedCredentialCheck;
+    exposed_credential_check?: ResponseCompressionRule.ExposedCredentialCheck;
 
     /**
      * Body param: The expression defining which traffic will match the rule.
@@ -12140,20 +12234,23 @@ export declare namespace RuleEditParams {
     /**
      * Body param: An object configuring where the rule will be placed.
      */
-    position?: CompressionRule.BeforePosition | CompressionRule.AfterPosition | CompressionRule.IndexPosition;
+    position?:
+      | ResponseCompressionRule.BeforePosition
+      | ResponseCompressionRule.AfterPosition
+      | ResponseCompressionRule.IndexPosition;
 
     /**
-     * Body param: An object configuring the rule's ratelimit behavior.
+     * Body param: An object configuring the rule's rate limit behavior.
      */
-    ratelimit?: CompressionRule.Ratelimit;
+    ratelimit?: ResponseCompressionRule.Ratelimit;
 
     /**
-     * Body param: The reference of the rule (the rule ID by default).
+     * Body param: The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
-  export namespace CompressionRule {
+  export namespace ResponseCompressionRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -12161,7 +12258,7 @@ export declare namespace RuleEditParams {
       /**
        * Custom order for compression algorithms.
        */
-      algorithms?: Array<ActionParameters.Algorithm>;
+      algorithms: Array<ActionParameters.Algorithm>;
     }
 
     export namespace ActionParameters {
@@ -12170,23 +12267,23 @@ export declare namespace RuleEditParams {
        */
       export interface Algorithm {
         /**
-         * Name of compression algorithm to enable.
+         * Name of the compression algorithm to enable.
          */
         name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli' | 'zstd';
       }
     }
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
@@ -12224,11 +12321,11 @@ export declare namespace RuleEditParams {
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -12239,7 +12336,7 @@ export declare namespace RuleEditParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -12257,7 +12354,7 @@ export declare namespace RuleEditParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -12268,8 +12365,182 @@ export declare namespace RuleEditParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface DDoSDynamicRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'ddos_dynamic';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: DDoSDynamicRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: DDoSDynamicRule.BeforePosition | DDoSDynamicRule.AfterPosition | DDoSDynamicRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: DDoSDynamicRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace DDoSDynamicRule {
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -12319,7 +12590,7 @@ export declare namespace RuleEditParams {
     enabled?: boolean;
 
     /**
-     * Body param: Configure checks for exposed credentials.
+     * Body param: Configuration for exposed credential checking.
      */
     exposed_credential_check?: ExecuteRule.ExposedCredentialCheck;
 
@@ -12339,12 +12610,12 @@ export declare namespace RuleEditParams {
     position?: ExecuteRule.BeforePosition | ExecuteRule.AfterPosition | ExecuteRule.IndexPosition;
 
     /**
-     * Body param: An object configuring the rule's ratelimit behavior.
+     * Body param: An object configuring the rule's rate limit behavior.
      */
     ratelimit?: ExecuteRule.Ratelimit;
 
     /**
-     * Body param: The reference of the rule (the rule ID by default).
+     * Body param: The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
@@ -12436,7 +12707,8 @@ export declare namespace RuleEditParams {
           enabled?: boolean;
 
           /**
-           * The sensitivity level to use for rules in the category.
+           * The sensitivity level to use for rules in the category. This option is only
+           * applicable for DDoS phases.
            */
           sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
         }
@@ -12466,7 +12738,8 @@ export declare namespace RuleEditParams {
           score_threshold?: number;
 
           /**
-           * The sensitivity level to use for the rule.
+           * The sensitivity level to use for the rule. This option is only applicable for
+           * DDoS phases.
            */
           sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
         }
@@ -12474,16 +12747,16 @@ export declare namespace RuleEditParams {
     }
 
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
@@ -12521,11 +12794,11 @@ export declare namespace RuleEditParams {
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -12536,7 +12809,7 @@ export declare namespace RuleEditParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -12554,7 +12827,7 @@ export declare namespace RuleEditParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -12565,3162 +12838,8 @@ export declare namespace RuleEditParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface JavascriptChallengeRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'js_challenge';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: JavascriptChallengeRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?:
-      | JavascriptChallengeRule.BeforePosition
-      | JavascriptChallengeRule.AfterPosition
-      | JavascriptChallengeRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: JavascriptChallengeRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace JavascriptChallengeRule {
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface LogRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'log';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: LogRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: LogRule.BeforePosition | LogRule.AfterPosition | LogRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: LogRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace LogRule {
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface ManagedChallengeRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'managed_challenge';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: ManagedChallengeRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?:
-      | ManagedChallengeRule.BeforePosition
-      | ManagedChallengeRule.AfterPosition
-      | ManagedChallengeRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: ManagedChallengeRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace ManagedChallengeRule {
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface RedirectRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'redirect';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: RedirectRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: RedirectRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: RedirectRule.BeforePosition | RedirectRule.AfterPosition | RedirectRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: RedirectRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RedirectRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Serve a redirect based on a bulk list lookup.
-       */
-      from_list?: ActionParameters.FromList;
-
-      /**
-       * Serve a redirect based on the request properties.
-       */
-      from_value?: ActionParameters.FromValue;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Serve a redirect based on a bulk list lookup.
-       */
-      export interface FromList {
-        /**
-         * Expression that evaluates to the list lookup key.
-         */
-        key?: string;
-
-        /**
-         * The name of the list to match against.
-         */
-        name?: string;
-      }
-
-      /**
-       * Serve a redirect based on the request properties.
-       */
-      export interface FromValue {
-        /**
-         * Keep the query string of the original request.
-         */
-        preserve_query_string?: boolean;
-
-        /**
-         * The status code to be used for the redirect.
-         */
-        status_code?: 301 | 302 | 303 | 307 | 308;
-
-        /**
-         * The URL to redirect the request to.
-         */
-        target_url?: FromValue.StaticURLRedirect | FromValue.DynamicURLRedirect;
-      }
-
-      export namespace FromValue {
-        export interface StaticURLRedirect {
-          /**
-           * The URL to redirect the request to.
-           */
-          value?: string;
-        }
-
-        export interface DynamicURLRedirect {
-          /**
-           * An expression to evaluate to get the URL to redirect the request to.
-           */
-          expression?: string;
-        }
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface RewriteRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'rewrite';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: RewriteRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: RewriteRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: RewriteRule.BeforePosition | RewriteRule.AfterPosition | RewriteRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: RewriteRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RewriteRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Map of request headers to modify.
-       */
-      headers?: {
-        [key: string]:
-          | ActionParameters.RemoveHeader
-          | ActionParameters.AddStaticHeader
-          | ActionParameters.SetStaticHeader
-          | ActionParameters.AddDynamicHeader
-          | ActionParameters.SetDynamicHeader;
-      };
-
-      /**
-       * URI to rewrite the request to.
-       */
-      uri?: ActionParameters.URI;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Remove the header from the request.
-       */
-      export interface RemoveHeader {
-        operation: 'remove';
-      }
-
-      /**
-       * Add a request header with a static value.
-       */
-      export interface AddStaticHeader {
-        operation: 'add';
-
-        /**
-         * Static value for the header.
-         */
-        value: string;
-      }
-
-      /**
-       * Set a request header with a static value.
-       */
-      export interface SetStaticHeader {
-        operation: 'set';
-
-        /**
-         * Static value for the header.
-         */
-        value: string;
-      }
-
-      /**
-       * Add a request header with a dynamic value.
-       */
-      export interface AddDynamicHeader {
-        /**
-         * Expression for the header value.
-         */
-        expression: string;
-
-        operation: 'add';
-      }
-
-      /**
-       * Set a request header with a dynamic value.
-       */
-      export interface SetDynamicHeader {
-        /**
-         * Expression for the header value.
-         */
-        expression: string;
-
-        operation: 'set';
-      }
-
-      /**
-       * URI to rewrite the request to.
-       */
-      export interface URI {
-        /**
-         * Path portion rewrite.
-         */
-        path?: RulesAPI.RewriteURIPartParam;
-
-        /**
-         * Query portion rewrite.
-         */
-        query?: RulesAPI.RewriteURIPartParam;
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface OriginRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'route';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: OriginRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: OriginRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: OriginRule.BeforePosition | OriginRule.AfterPosition | OriginRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: OriginRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace OriginRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Rewrite the HTTP Host header.
-       */
-      host_header?: string;
-
-      /**
-       * Override the IP/TCP destination.
-       */
-      origin?: ActionParameters.Origin;
-
-      /**
-       * Override the Server Name Indication (SNI).
-       */
-      sni?: ActionParameters.SNI;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Override the IP/TCP destination.
-       */
-      export interface Origin {
-        /**
-         * Override the resolved hostname.
-         */
-        host?: string;
-
-        /**
-         * Override the destination port.
-         */
-        port?: number;
-      }
-
-      /**
-       * Override the Server Name Indication (SNI).
-       */
-      export interface SNI {
-        /**
-         * The SNI override.
-         */
-        value: string;
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface ScoreRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'score';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: ScoreRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: ScoreRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: ScoreRule.BeforePosition | ScoreRule.AfterPosition | ScoreRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: ScoreRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace ScoreRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Increment contains the delta to change the score and can be either positive or
-       * negative.
-       */
-      increment?: number;
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface ServeErrorRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'serve_error';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: ServeErrorRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: ServeErrorRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: ServeErrorRule.BeforePosition | ServeErrorRule.AfterPosition | ServeErrorRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: ServeErrorRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace ServeErrorRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Error response content.
-       */
-      content?: string;
-
-      /**
-       * Content-type header to set with the response.
-       */
-      content_type?: 'application/json' | 'text/xml' | 'text/plain' | 'text/html';
-
-      /**
-       * The status code to use for the error.
-       */
-      status_code?: number;
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface SetConfigRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'set_config';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: SetConfigRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: SetConfigRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: SetConfigRule.BeforePosition | SetConfigRule.AfterPosition | SetConfigRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: SetConfigRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace SetConfigRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Turn on or off Automatic HTTPS Rewrites.
-       */
-      automatic_https_rewrites?: boolean;
-
-      /**
-       * Select which file extensions to minify automatically.
-       */
-      autominify?: ActionParameters.Autominify;
-
-      /**
-       * Turn on or off Browser Integrity Check.
-       */
-      bic?: boolean;
-
-      /**
-       * Turn off all active Cloudflare Apps.
-       */
-      disable_apps?: true;
-
-      /**
-       * Turn off Real User Monitoring (RUM).
-       */
-      disable_rum?: true;
-
-      /**
-       * Turn off Zaraz.
-       */
-      disable_zaraz?: true;
-
-      /**
-       * Turn on or off Email Obfuscation.
-       */
-      email_obfuscation?: boolean;
-
-      /**
-       * Turn on or off Cloudflare Fonts.
-       */
-      fonts?: boolean;
-
-      /**
-       * Turn on or off the Hotlink Protection.
-       */
-      hotlink_protection?: boolean;
-
-      /**
-       * Turn on or off Mirage.
-       */
-      mirage?: boolean;
-
-      /**
-       * Turn on or off Opportunistic Encryption.
-       */
-      opportunistic_encryption?: boolean;
-
-      /**
-       * Configure the Polish level.
-       */
-      polish?: 'off' | 'lossless' | 'lossy' | 'webp';
-
-      /**
-       * Turn on or off Rocket Loader.
-       */
-      rocket_loader?: boolean;
-
-      /**
-       * Configure the Security Level.
-       */
-      security_level?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
-
-      /**
-       * Turn on or off Server Side Excludes.
-       */
-      server_side_excludes?: boolean;
-
-      /**
-       * Configure the SSL level.
-       */
-      ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
-
-      /**
-       * Turn on or off Signed Exchanges (SXG).
-       */
-      sxg?: boolean;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Select which file extensions to minify automatically.
-       */
-      export interface Autominify {
-        /**
-         * Minify CSS files.
-         */
-        css?: boolean;
-
-        /**
-         * Minify HTML files.
-         */
-        html?: boolean;
-
-        /**
-         * Minify JS files.
-         */
-        js?: boolean;
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface SkipRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'skip';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: SkipRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: SkipRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: SkipRule.BeforePosition | SkipRule.AfterPosition | SkipRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: SkipRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace SkipRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * A phase to skip the execution of. This property is only compatible with
-       * products.
-       */
-      phase?: 'current';
-
-      /**
-       * A list of phases to skip the execution of. This option is incompatible with the
-       * rulesets option.
-       */
-      phases?: Array<RulesetsAPI.PhaseParam>;
-
-      /**
-       * A list of legacy security products to skip the execution of.
-       */
-      products?: Array<'bic' | 'hot' | 'rateLimit' | 'securityLevel' | 'uaBlock' | 'waf' | 'zoneLockdown'>;
-
-      /**
-       * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the
-       * execution of. This option is incompatible with the ruleset option.
-       */
-      rules?: { [key: string]: Array<string> };
-
-      /**
-       * A ruleset to skip the execution of. This option is incompatible with the
-       * rulesets option.
-       */
-      ruleset?: 'current';
-
-      /**
-       * A list of ruleset IDs to skip the execution of. This option is incompatible with
-       * the ruleset and phases options.
-       */
-      rulesets?: Array<string>;
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface SetCacheSettingsRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'set_cache_settings';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: SetCacheSettingsRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: SetCacheSettingsRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?:
-      | SetCacheSettingsRule.BeforePosition
-      | SetCacheSettingsRule.AfterPosition
-      | SetCacheSettingsRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: SetCacheSettingsRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace SetCacheSettingsRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * List of additional ports that caching can be enabled on.
-       */
-      additional_cacheable_ports?: Array<number>;
-
-      /**
-       * Specify how long client browsers should cache the response. Cloudflare cache
-       * purge will not purge content cached on client browsers, so high browser TTLs may
-       * lead to stale content.
-       */
-      browser_ttl?: ActionParameters.BrowserTTL;
-
-      /**
-       * Mark whether the request’s response from origin is eligible for caching. Caching
-       * itself will still depend on the cache-control header and your other caching
-       * configurations.
-       */
-      cache?: boolean;
-
-      /**
-       * Define which components of the request are included or excluded from the cache
-       * key Cloudflare uses to store the response in cache.
-       */
-      cache_key?: ActionParameters.CacheKey;
-
-      /**
-       * Mark whether the request's response from origin is eligible for Cache Reserve
-       * (requires a Cache Reserve add-on plan).
-       */
-      cache_reserve?: ActionParameters.CacheReserve;
-
-      /**
-       * TTL (Time to Live) specifies the maximum time to cache a resource in the
-       * Cloudflare edge network.
-       */
-      edge_ttl?: ActionParameters.EdgeTTL;
-
-      /**
-       * When enabled, Cloudflare will aim to strictly adhere to RFC 7234.
-       */
-      origin_cache_control?: boolean;
-
-      /**
-       * Generate Cloudflare error pages from issues sent from the origin server. When
-       * on, error pages will trigger for issues from the origin.
-       */
-      origin_error_page_passthru?: boolean;
-
-      /**
-       * Define a timeout value between two successive read operations to your origin
-       * server. Historically, the timeout value between two read options from Cloudflare
-       * to an origin server is 100 seconds. If you are attempting to reduce HTTP 524
-       * errors because of timeouts from an origin server, try increasing this timeout
-       * value.
-       */
-      read_timeout?: number;
-
-      /**
-       * Specify whether or not Cloudflare should respect strong ETag (entity tag)
-       * headers. When off, Cloudflare converts strong ETag headers to weak ETag headers.
-       */
-      respect_strong_etags?: boolean;
-
-      /**
-       * Define if Cloudflare should serve stale content while getting the latest content
-       * from the origin. If on, Cloudflare will not serve stale content while getting
-       * the latest content from the origin.
-       */
-      serve_stale?: ActionParameters.ServeStale;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Specify how long client browsers should cache the response. Cloudflare cache
-       * purge will not purge content cached on client browsers, so high browser TTLs may
-       * lead to stale content.
-       */
-      export interface BrowserTTL {
-        /**
-         * Determines which browser ttl mode to use.
-         */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin' | 'bypass';
-
-        /**
-         * The TTL (in seconds) if you choose override_origin mode.
-         */
-        default?: number;
-      }
-
-      /**
-       * Define which components of the request are included or excluded from the cache
-       * key Cloudflare uses to store the response in cache.
-       */
-      export interface CacheKey {
-        /**
-         * Separate cached content based on the visitor’s device type.
-         */
-        cache_by_device_type?: boolean;
-
-        /**
-         * Protect from web cache deception attacks while allowing static assets to be
-         * cached.
-         */
-        cache_deception_armor?: boolean;
-
-        /**
-         * Customize which components of the request are included or excluded from the
-         * cache key.
-         */
-        custom_key?: CacheKey.CustomKey;
-
-        /**
-         * Treat requests with the same query parameters the same, regardless of the order
-         * those query parameters are in. A value of true ignores the query strings' order.
-         */
-        ignore_query_strings_order?: boolean;
-      }
-
-      export namespace CacheKey {
-        /**
-         * Customize which components of the request are included or excluded from the
-         * cache key.
-         */
-        export interface CustomKey {
-          /**
-           * The cookies to include in building the cache key.
-           */
-          cookie?: CustomKey.Cookie;
-
-          /**
-           * The header names and values to include in building the cache key.
-           */
-          header?: CustomKey.Header;
-
-          /**
-           * Whether to use the original host or the resolved host in the cache key.
-           */
-          host?: CustomKey.Host;
-
-          /**
-           * Use the presence of parameters in the query string to build the cache key.
-           */
-          query_string?: CustomKey.IncludedQueryStringParameters | CustomKey.ExcludedQueryStringParameters;
-
-          /**
-           * Characteristics of the request user agent used in building the cache key.
-           */
-          user?: CustomKey.User;
-        }
-
-        export namespace CustomKey {
-          /**
-           * The cookies to include in building the cache key.
-           */
-          export interface Cookie {
-            /**
-             * Checks for the presence of these cookie names. The presence of these cookies is
-             * used in building the cache key.
-             */
-            check_presence?: Array<string>;
-
-            /**
-             * Include these cookies' names and their values.
-             */
-            include?: Array<string>;
-          }
-
-          /**
-           * The header names and values to include in building the cache key.
-           */
-          export interface Header {
-            /**
-             * Checks for the presence of these header names. The presence of these headers is
-             * used in building the cache key.
-             */
-            check_presence?: Array<string>;
-
-            /**
-             * For each header name and list of values combination, check if the request header
-             * contains any of the values provided. The presence of the request header and
-             * whether any of the values provided are contained in the request header value is
-             * used in building the cache key.
-             */
-            contains?: { [key: string]: Array<string> };
-
-            /**
-             * Whether or not to include the origin header. A value of true will exclude the
-             * origin header in the cache key.
-             */
-            exclude_origin?: boolean;
-
-            /**
-             * Include these headers' names and their values.
-             */
-            include?: Array<string>;
-          }
-
-          /**
-           * Whether to use the original host or the resolved host in the cache key.
-           */
-          export interface Host {
-            /**
-             * Use the resolved host in the cache key. A value of true will use the resolved
-             * host, while a value or false will use the original host.
-             */
-            resolved?: boolean;
-          }
-
-          /**
-           * Use the presence of parameters in the query string to build the cache key.
-           */
-          export interface IncludedQueryStringParameters {
-            /**
-             * A list of query string parameters used to build the cache key.
-             */
-            include?:
-              | IncludedQueryStringParameters.SomeQueryStringParameters
-              | IncludedQueryStringParameters.AllQueryStringParameters;
-          }
-
-          export namespace IncludedQueryStringParameters {
-            /**
-             * A list of query string parameters used to build the cache key.
-             */
-            export interface SomeQueryStringParameters {
-              list?: Array<string>;
-            }
-
-            /**
-             * Build the cache key using ALL query string parameters that are in the request.
-             */
-            export interface AllQueryStringParameters {
-              /**
-               * Determines whether to include all query string parameters in the cache key.
-               */
-              all?: boolean;
-            }
-          }
-
-          /**
-           * Use the absence of parameters in the query string to build the cache key.
-           */
-          export interface ExcludedQueryStringParameters {
-            /**
-             * A list of query string parameters NOT used to build the cache key. All
-             * parameters present in the request but missing in this list will be used to build
-             * the cache key.
-             */
-            exclude?:
-              | ExcludedQueryStringParameters.SomeQueryStringParameters
-              | ExcludedQueryStringParameters.AllQueryStringParameters;
-          }
-
-          export namespace ExcludedQueryStringParameters {
-            /**
-             * A list of query string parameters NOT used to build the cache key. All
-             * parameters present in the request but missing in this list will be used to build
-             * the cache key.
-             */
-            export interface SomeQueryStringParameters {
-              list?: Array<string>;
-            }
-
-            /**
-             * Build the cache key excluding ALL query string parameters that are in the
-             * request.
-             */
-            export interface AllQueryStringParameters {
-              /**
-               * Determines whether to exclude all query string parameters from the cache key.
-               */
-              all?: boolean;
-            }
-          }
-
-          /**
-           * Characteristics of the request user agent used in building the cache key.
-           */
-          export interface User {
-            /**
-             * Use the user agent's device type in the cache key.
-             */
-            device_type?: boolean;
-
-            /**
-             * Use the user agents's country in the cache key.
-             */
-            geo?: boolean;
-
-            /**
-             * Use the user agent's language in the cache key.
-             */
-            lang?: boolean;
-          }
-        }
-      }
-
-      /**
-       * Mark whether the request's response from origin is eligible for Cache Reserve
-       * (requires a Cache Reserve add-on plan).
-       */
-      export interface CacheReserve {
-        /**
-         * Determines whether cache reserve is enabled. If this is true and a request meets
-         * eligibility criteria, Cloudflare will write the resource to cache reserve.
-         */
-        eligible: boolean;
-
-        /**
-         * The minimum file size eligible for store in cache reserve.
-         */
-        minimum_file_size: number;
-      }
-
-      /**
-       * TTL (Time to Live) specifies the maximum time to cache a resource in the
-       * Cloudflare edge network.
-       */
-      export interface EdgeTTL {
-        /**
-         * The TTL (in seconds) if you choose override_origin mode.
-         */
-        default: number;
-
-        /**
-         * Edge TTL options.
-         */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
-
-        /**
-         * List of single status codes, or status code ranges to apply the selected mode.
-         */
-        status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
-      }
-
-      export namespace EdgeTTL {
-        /**
-         * Specify how long Cloudflare should cache the response based on the status code
-         * from the origin. Can be a single status code or a range or status codes.
-         */
-        export interface StatusCodeTTL {
-          /**
-           * Time to cache a response (in seconds). A value of 0 is equivalent to setting the
-           * Cache-Control header with the value "no-cache". A value of -1 is equivalent to
-           * setting Cache-Control header with the value of "no-store".
-           */
-          value: number;
-
-          /**
-           * The range of status codes used to apply the selected mode.
-           */
-          status_code_range?: StatusCodeTTL.StatusCodeRange;
-
-          /**
-           * Set the TTL for responses with this specific status code.
-           */
-          status_code_value?: number;
-        }
-
-        export namespace StatusCodeTTL {
-          /**
-           * The range of status codes used to apply the selected mode.
-           */
-          export interface StatusCodeRange {
-            /**
-             * Response status code lower bound.
-             */
-            from: number;
-
-            /**
-             * Response status code upper bound.
-             */
-            to: number;
-          }
-        }
-      }
-
-      /**
-       * Define if Cloudflare should serve stale content while getting the latest content
-       * from the origin. If on, Cloudflare will not serve stale content while getting
-       * the latest content from the origin.
-       */
-      export interface ServeStale {
-        /**
-         * Defines whether Cloudflare should serve stale content while updating. If true,
-         * Cloudflare will not serve stale content while getting the latest content from
-         * the origin.
-         */
-        disable_stale_while_updating: boolean;
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface LogCustomFieldRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'log_custom_field';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: LogCustomFieldRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: LogCustomFieldRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?:
-      | LogCustomFieldRule.BeforePosition
-      | LogCustomFieldRule.AfterPosition
-      | LogCustomFieldRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: LogCustomFieldRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace LogCustomFieldRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * The cookie fields to log.
-       */
-      cookie_fields?: Array<ActionParameters.CookieField>;
-
-      /**
-       * The raw response fields to log.
-       */
-      raw_response_fields?: Array<ActionParameters.RawResponseField>;
-
-      /**
-       * The raw request fields to log.
-       */
-      request_fields?: Array<ActionParameters.RequestField>;
-
-      /**
-       * The transformed response fields to log.
-       */
-      response_fields?: Array<ActionParameters.ResponseField>;
-
-      /**
-       * The transformed request fields to log.
-       */
-      transformed_request_fields?: Array<ActionParameters.TransformedRequestField>;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The cookie field to log.
-       */
-      export interface CookieField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The raw response field to log.
-       */
-      export interface RawResponseField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-
-        /**
-         * Whether to log duplicate values of the same header.
-         */
-        preserve_duplicates?: boolean;
-      }
-
-      /**
-       * The raw request field to log.
-       */
-      export interface RequestField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The transformed response field to log.
-       */
-      export interface ResponseField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-
-        /**
-         * Whether to log duplicate values of the same header.
-         */
-        preserve_duplicates?: boolean;
-      }
-
-      /**
-       * The transformed request field to log.
-       */
-      export interface TransformedRequestField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-    }
-
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
-       */
-      score_response_header_name?: string;
-    }
-  }
-
-  export interface DDoSDynamicRule {
-    /**
-     * Path param: The unique ID of the ruleset.
-     */
-    ruleset_id: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'ddos_dynamic';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: Configure checks for exposed credentials.
-     */
-    exposed_credential_check?: DDoSDynamicRule.ExposedCredentialCheck;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: LoggingParam;
-
-    /**
-     * Body param: An object configuring where the rule will be placed.
-     */
-    position?: DDoSDynamicRule.BeforePosition | DDoSDynamicRule.AfterPosition | DDoSDynamicRule.IndexPosition;
-
-    /**
-     * Body param: An object configuring the rule's ratelimit behavior.
-     */
-    ratelimit?: DDoSDynamicRule.Ratelimit;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace DDoSDynamicRule {
-    /**
-     * Configure checks for exposed credentials.
-     */
-    export interface ExposedCredentialCheck {
-      /**
-       * Expression that selects the password used in the credentials check.
-       */
-      password_expression: string;
-
-      /**
-       * Expression that selects the user ID used in the credentials check.
-       */
-      username_expression: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface BeforePosition {
-      /**
-       * The ID of another rule to place the rule before. An empty value causes the rule
-       * to be placed at the top.
-       */
-      before?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface AfterPosition {
-      /**
-       * The ID of another rule to place the rule after. An empty value causes the rule
-       * to be placed at the bottom.
-       */
-      after?: string;
-    }
-
-    /**
-     * An object configuring where the rule will be placed.
-     */
-    export interface IndexPosition {
-      /**
-       * An index at which to place the rule, where index 1 is the first rule.
-       */
-      index?: number;
-    }
-
-    /**
-     * An object configuring the rule's ratelimit behavior.
-     */
-    export interface Ratelimit {
-      /**
-       * Characteristics of the request on which the ratelimiter counter will be
-       * incremented.
-       */
-      characteristics: Array<string>;
-
-      /**
-       * Period in seconds over which the counter is being incremented.
-       */
-      period: number;
-
-      /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
-       * defaults to the same as the rule's expression.
-       */
-      counting_expression?: string;
-
-      /**
-       * Period of time in seconds after which the action will be disabled following its
-       * first execution.
-       */
-      mitigation_timeout?: number;
-
-      /**
-       * The threshold of requests per period after which the action will be executed for
-       * the first time.
-       */
-      requests_per_period?: number;
-
-      /**
-       * Defines if ratelimit counting is only done when an origin is reached.
-       */
-      requests_to_origin?: boolean;
-
-      /**
-       * The score threshold per period for which the action will be executed the first
-       * time.
-       */
-      score_per_period?: number;
-
-      /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -15770,7 +12889,7 @@ export declare namespace RuleEditParams {
     enabled?: boolean;
 
     /**
-     * Body param: Configure checks for exposed credentials.
+     * Body param: Configuration for exposed credential checking.
      */
     exposed_credential_check?: ForceConnectionCloseRule.ExposedCredentialCheck;
 
@@ -15793,28 +12912,28 @@ export declare namespace RuleEditParams {
       | ForceConnectionCloseRule.IndexPosition;
 
     /**
-     * Body param: An object configuring the rule's ratelimit behavior.
+     * Body param: An object configuring the rule's rate limit behavior.
      */
     ratelimit?: ForceConnectionCloseRule.Ratelimit;
 
     /**
-     * Body param: The reference of the rule (the rule ID by default).
+     * Body param: The reference of the rule (the rule's ID by default).
      */
     ref?: string;
   }
 
   export namespace ForceConnectionCloseRule {
     /**
-     * Configure checks for exposed credentials.
+     * Configuration for exposed credential checking.
      */
     export interface ExposedCredentialCheck {
       /**
-       * Expression that selects the password used in the credentials check.
+       * An expression that selects the password used in the credentials check.
        */
       password_expression: string;
 
       /**
-       * Expression that selects the user ID used in the credentials check.
+       * An expression that selects the user ID used in the credentials check.
        */
       username_expression: string;
     }
@@ -15852,11 +12971,11 @@ export declare namespace RuleEditParams {
     }
 
     /**
-     * An object configuring the rule's ratelimit behavior.
+     * An object configuring the rule's rate limit behavior.
      */
     export interface Ratelimit {
       /**
-       * Characteristics of the request on which the ratelimiter counter will be
+       * Characteristics of the request on which the rate limit counter will be
        * incremented.
        */
       characteristics: Array<string>;
@@ -15867,7 +12986,7 @@ export declare namespace RuleEditParams {
       period: number;
 
       /**
-       * Defines when the ratelimit counter should be incremented. It is optional and
+       * An expression that defines when the rate limit counter should be incremented. It
        * defaults to the same as the rule's expression.
        */
       counting_expression?: string;
@@ -15885,7 +13004,7 @@ export declare namespace RuleEditParams {
       requests_per_period?: number;
 
       /**
-       * Defines if ratelimit counting is only done when an origin is reached.
+       * Whether counting is only performed when an origin is reached.
        */
       requests_to_origin?: boolean;
 
@@ -15896,8 +13015,3027 @@ export declare namespace RuleEditParams {
       score_per_period?: number;
 
       /**
-       * The response header name provided by the origin which should contain the score
-       * to increment ratelimit counter on.
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface JavaScriptChallengeRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'js_challenge';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: JavaScriptChallengeRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | JavaScriptChallengeRule.BeforePosition
+      | JavaScriptChallengeRule.AfterPosition
+      | JavaScriptChallengeRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: JavaScriptChallengeRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace JavaScriptChallengeRule {
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface LogRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'log';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: LogRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: LogRule.BeforePosition | LogRule.AfterPosition | LogRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: LogRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace LogRule {
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface LogCustomFieldRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'log_custom_field';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: LogCustomFieldRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: LogCustomFieldRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | LogCustomFieldRule.BeforePosition
+      | LogCustomFieldRule.AfterPosition
+      | LogCustomFieldRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: LogCustomFieldRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace LogCustomFieldRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * The cookie fields to log.
+       */
+      cookie_fields?: Array<ActionParameters.CookieField>;
+
+      /**
+       * The raw response fields to log.
+       */
+      raw_response_fields?: Array<ActionParameters.RawResponseField>;
+
+      /**
+       * The raw request fields to log.
+       */
+      request_fields?: Array<ActionParameters.RequestField>;
+
+      /**
+       * The transformed response fields to log.
+       */
+      response_fields?: Array<ActionParameters.ResponseField>;
+
+      /**
+       * The transformed request fields to log.
+       */
+      transformed_request_fields?: Array<ActionParameters.TransformedRequestField>;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * The cookie field to log.
+       */
+      export interface CookieField {
+        /**
+         * The name of the cookie.
+         */
+        name: string;
+      }
+
+      /**
+       * The raw response field to log.
+       */
+      export interface RawResponseField {
+        /**
+         * The name of the response header.
+         */
+        name: string;
+
+        /**
+         * Whether to log duplicate values of the same header.
+         */
+        preserve_duplicates?: boolean;
+      }
+
+      /**
+       * The raw request field to log.
+       */
+      export interface RequestField {
+        /**
+         * The name of the header.
+         */
+        name: string;
+      }
+
+      /**
+       * The transformed response field to log.
+       */
+      export interface ResponseField {
+        /**
+         * The name of the response header.
+         */
+        name: string;
+
+        /**
+         * Whether to log duplicate values of the same header.
+         */
+        preserve_duplicates?: boolean;
+      }
+
+      /**
+       * The transformed request field to log.
+       */
+      export interface TransformedRequestField {
+        /**
+         * The name of the header.
+         */
+        name: string;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface ManagedChallengeRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'managed_challenge';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: ManagedChallengeRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | ManagedChallengeRule.BeforePosition
+      | ManagedChallengeRule.AfterPosition
+      | ManagedChallengeRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: ManagedChallengeRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace ManagedChallengeRule {
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RedirectRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'redirect';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: RedirectRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RedirectRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: RedirectRule.BeforePosition | RedirectRule.AfterPosition | RedirectRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RedirectRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RedirectRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A redirect based on a bulk list lookup.
+       */
+      from_list?: ActionParameters.FromList;
+
+      /**
+       * A redirect based on the request properties.
+       */
+      from_value?: ActionParameters.FromValue;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * A redirect based on a bulk list lookup.
+       */
+      export interface FromList {
+        /**
+         * An expression that evaluates to the list lookup key.
+         */
+        key: string;
+
+        /**
+         * The name of the list to match against.
+         */
+        name: string;
+      }
+
+      /**
+       * A redirect based on the request properties.
+       */
+      export interface FromValue {
+        /**
+         * A URL to redirect the request to.
+         */
+        target_url: FromValue.TargetURL;
+
+        /**
+         * Whether to keep the query string of the original request.
+         */
+        preserve_query_string?: boolean;
+
+        /**
+         * The status code to use for the redirect.
+         */
+        status_code?: 301 | 302 | 303 | 307 | 308;
+      }
+
+      export namespace FromValue {
+        /**
+         * A URL to redirect the request to.
+         */
+        export interface TargetURL {
+          /**
+           * An expression that evaluates to a URL to redirect the request to.
+           */
+          expression?: string;
+
+          /**
+           * A URL to redirect the request to.
+           */
+          value?: string;
+        }
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RewriteRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'rewrite';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: RewriteRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RewriteRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: RewriteRule.BeforePosition | RewriteRule.AfterPosition | RewriteRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RewriteRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RewriteRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A map of headers to rewrite.
+       */
+      headers?: {
+        [key: string]:
+          | ActionParameters.AddStaticHeader
+          | ActionParameters.AddDynamicHeader
+          | ActionParameters.SetStaticHeader
+          | ActionParameters.SetDynamicHeader
+          | ActionParameters.RemoveHeader;
+      };
+
+      /**
+       * A URI path rewrite.
+       */
+      uri?: ActionParameters.URIPath | ActionParameters.URIQuery;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * A header with a static value to add.
+       */
+      export interface AddStaticHeader {
+        /**
+         * The operation to perform on the header.
+         */
+        operation: 'add';
+
+        /**
+         * A static value for the header.
+         */
+        value: string;
+      }
+
+      /**
+       * A header with a dynamic value to add.
+       */
+      export interface AddDynamicHeader {
+        /**
+         * An expression that evaluates to a value for the header.
+         */
+        expression: string;
+
+        /**
+         * The operation to perform on the header.
+         */
+        operation: 'add';
+      }
+
+      /**
+       * A header with a static value to set.
+       */
+      export interface SetStaticHeader {
+        /**
+         * The operation to perform on the header.
+         */
+        operation: 'set';
+
+        /**
+         * A static value for the header.
+         */
+        value: string;
+      }
+
+      /**
+       * A header with a dynamic value to set.
+       */
+      export interface SetDynamicHeader {
+        /**
+         * An expression that evaluates to a value for the header.
+         */
+        expression: string;
+
+        /**
+         * The operation to perform on the header.
+         */
+        operation: 'set';
+      }
+
+      /**
+       * A header to remove.
+       */
+      export interface RemoveHeader {
+        /**
+         * The operation to perform on the header.
+         */
+        operation: 'remove';
+      }
+
+      /**
+       * A URI path rewrite.
+       */
+      export interface URIPath {
+        /**
+         * A URI path rewrite.
+         */
+        path: URIPath.Path;
+      }
+
+      export namespace URIPath {
+        /**
+         * A URI path rewrite.
+         */
+        export interface Path {
+          /**
+           * An expression that evaluates to a value to rewrite the URI path to.
+           */
+          expression?: string;
+
+          /**
+           * A value to rewrite the URI path to.
+           */
+          value?: string;
+        }
+      }
+
+      /**
+       * A URI query rewrite.
+       */
+      export interface URIQuery {
+        /**
+         * A URI query rewrite.
+         */
+        query: URIQuery.Query;
+      }
+
+      export namespace URIQuery {
+        /**
+         * A URI query rewrite.
+         */
+        export interface Query {
+          /**
+           * An expression that evaluates to a value to rewrite the URI query to.
+           */
+          expression?: string;
+
+          /**
+           * A value to rewrite the URI query to.
+           */
+          value?: string;
+        }
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RouteRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'route';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: RouteRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RouteRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: RouteRule.BeforePosition | RouteRule.AfterPosition | RouteRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RouteRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RouteRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A value to rewrite the HTTP host header to.
+       */
+      host_header?: string;
+
+      /**
+       * An origin to route to.
+       */
+      origin?: ActionParameters.Origin;
+
+      /**
+       * A Server Name Indication (SNI) override.
+       */
+      sni?: ActionParameters.SNI;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * An origin to route to.
+       */
+      export interface Origin {
+        /**
+         * A resolved host to route to.
+         */
+        host?: string;
+
+        /**
+         * A destination port to route to.
+         */
+        port?: number;
+      }
+
+      /**
+       * A Server Name Indication (SNI) override.
+       */
+      export interface SNI {
+        /**
+         * A value to override the SNI to.
+         */
+        value: string;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface ScoreRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'score';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: ScoreRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: ScoreRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: ScoreRule.BeforePosition | ScoreRule.AfterPosition | ScoreRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: ScoreRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace ScoreRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A delta to change the score by, which can be either positive or negative.
+       */
+      increment: number;
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface ServeErrorRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'serve_error';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: ServeErrorRule.ActionParametersContent | ServeErrorRule.ActionParametersAsset;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: ServeErrorRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: ServeErrorRule.BeforePosition | ServeErrorRule.AfterPosition | ServeErrorRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: ServeErrorRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace ServeErrorRule {
+    export interface ActionParametersContent {
+      /**
+       * The response content.
+       */
+      content: string;
+
+      /**
+       * The content type header to set with the error response.
+       */
+      content_type?: 'application/json' | 'text/html' | 'text/plain' | 'text/xml';
+
+      /**
+       * The status code to use for the error.
+       */
+      status_code?: number;
+    }
+
+    export interface ActionParametersAsset {
+      /**
+       * The name of a custom asset to serve as the error response.
+       */
+      asset_name: string;
+
+      /**
+       * The content type header to set with the error response.
+       */
+      content_type?: 'application/json' | 'text/html' | 'text/plain' | 'text/xml';
+
+      /**
+       * The status code to use for the error.
+       */
+      status_code?: number;
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface SetCacheSettingsRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'set_cache_settings';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: SetCacheSettingsRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: SetCacheSettingsRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | SetCacheSettingsRule.BeforePosition
+      | SetCacheSettingsRule.AfterPosition
+      | SetCacheSettingsRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: SetCacheSettingsRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace SetCacheSettingsRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A list of additional ports that caching should be enabled on.
+       */
+      additional_cacheable_ports?: Array<number>;
+
+      /**
+       * How long client browsers should cache the response. Cloudflare cache purge will
+       * not purge content cached on client browsers, so high browser TTLs may lead to
+       * stale content.
+       */
+      browser_ttl?: ActionParameters.BrowserTTL;
+
+      /**
+       * Whether the request's response from the origin is eligible for caching. Caching
+       * itself will still depend on the cache control header and your other caching
+       * configurations.
+       */
+      cache?: boolean;
+
+      /**
+       * Which components of the request are included in or excluded from the cache key
+       * Cloudflare uses to store the response in cache.
+       */
+      cache_key?: ActionParameters.CacheKey;
+
+      /**
+       * Settings to determine whether the request's response from origin is eligible for
+       * Cache Reserve (requires a Cache Reserve add-on plan).
+       */
+      cache_reserve?: ActionParameters.CacheReserve;
+
+      /**
+       * How long the Cloudflare edge network should cache the response.
+       */
+      edge_ttl?: ActionParameters.EdgeTTL;
+
+      /**
+       * Whether Cloudflare will aim to strictly adhere to RFC 7234.
+       */
+      origin_cache_control?: boolean;
+
+      /**
+       * Whether to generate Cloudflare error pages for issues from the origin server.
+       */
+      origin_error_page_passthru?: boolean;
+
+      /**
+       * A timeout value between two successive read operations to use for your origin
+       * server. Historically, the timeout value between two read options from Cloudflare
+       * to an origin server is 100 seconds. If you are attempting to reduce HTTP 524
+       * errors because of timeouts from an origin server, try increasing this timeout
+       * value.
+       */
+      read_timeout?: number;
+
+      /**
+       * Whether Cloudflare should respect strong ETag (entity tag) headers. If false,
+       * Cloudflare converts strong ETag headers to weak ETag headers.
+       */
+      respect_strong_etags?: boolean;
+
+      /**
+       * When to serve stale content from cache.
+       */
+      serve_stale?: ActionParameters.ServeStale;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * How long client browsers should cache the response. Cloudflare cache purge will
+       * not purge content cached on client browsers, so high browser TTLs may lead to
+       * stale content.
+       */
+      export interface BrowserTTL {
+        /**
+         * The browser TTL mode.
+         */
+        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin' | 'bypass';
+
+        /**
+         * The browser TTL (in seconds) if you choose the "override_origin" mode.
+         */
+        default?: number;
+      }
+
+      /**
+       * Which components of the request are included in or excluded from the cache key
+       * Cloudflare uses to store the response in cache.
+       */
+      export interface CacheKey {
+        /**
+         * Whether to separate cached content based on the visitor's device type.
+         */
+        cache_by_device_type?: boolean;
+
+        /**
+         * Whether to protect from web cache deception attacks, while allowing static
+         * assets to be cached.
+         */
+        cache_deception_armor?: boolean;
+
+        /**
+         * Which components of the request are included or excluded from the cache key.
+         */
+        custom_key?: CacheKey.CustomKey;
+
+        /**
+         * Whether to treat requests with the same query parameters the same, regardless of
+         * the order those query parameters are in.
+         */
+        ignore_query_strings_order?: boolean;
+      }
+
+      export namespace CacheKey {
+        /**
+         * Which components of the request are included or excluded from the cache key.
+         */
+        export interface CustomKey {
+          /**
+           * Which cookies to include in the cache key.
+           */
+          cookie?: CustomKey.Cookie;
+
+          /**
+           * Which headers to include in the cache key.
+           */
+          header?: CustomKey.Header;
+
+          /**
+           * How to use the host in the cache key.
+           */
+          host?: CustomKey.Host;
+
+          /**
+           * Which query string parameters to include in or exclude from the cache key.
+           */
+          query_string?: CustomKey.QueryString;
+
+          /**
+           * How to use characteristics of the request user agent in the cache key.
+           */
+          user?: CustomKey.User;
+        }
+
+        export namespace CustomKey {
+          /**
+           * Which cookies to include in the cache key.
+           */
+          export interface Cookie {
+            /**
+             * A list of cookies to check for the presence of. The presence of these cookies is
+             * included in the cache key.
+             */
+            check_presence?: Array<string>;
+
+            /**
+             * A list of cookies to include in the cache key.
+             */
+            include?: Array<string>;
+          }
+
+          /**
+           * Which headers to include in the cache key.
+           */
+          export interface Header {
+            /**
+             * A list of headers to check for the presence of. The presence of these headers is
+             * included in the cache key.
+             */
+            check_presence?: Array<string>;
+
+            /**
+             * A mapping of header names to a list of values. If a header is present in the
+             * request and contains any of the values provided, its value is included in the
+             * cache key.
+             */
+            contains?: { [key: string]: Array<string> };
+
+            /**
+             * Whether to exclude the origin header in the cache key.
+             */
+            exclude_origin?: boolean;
+
+            /**
+             * A list of headers to include in the cache key.
+             */
+            include?: Array<string>;
+          }
+
+          /**
+           * How to use the host in the cache key.
+           */
+          export interface Host {
+            /**
+             * Whether to use the resolved host in the cache key.
+             */
+            resolved?: boolean;
+          }
+
+          /**
+           * Which query string parameters to include in or exclude from the cache key.
+           */
+          export interface QueryString {
+            /**
+             * Which query string parameters to exclude from the cache key.
+             */
+            exclude?: QueryString.Exclude;
+
+            /**
+             * Which query string parameters to include in the cache key.
+             */
+            include?: QueryString.Include;
+          }
+
+          export namespace QueryString {
+            /**
+             * Which query string parameters to exclude from the cache key.
+             */
+            export interface Exclude {
+              /**
+               * Whether to exclude all query string parameters from the cache key.
+               */
+              all?: true;
+
+              /**
+               * A list of query string parameters to exclude from the cache key.
+               */
+              list?: Array<string>;
+            }
+
+            /**
+             * Which query string parameters to include in the cache key.
+             */
+            export interface Include {
+              /**
+               * Whether to include all query string parameters in the cache key.
+               */
+              all?: true;
+
+              /**
+               * A list of query string parameters to include in the cache key.
+               */
+              list?: Array<string>;
+            }
+          }
+
+          /**
+           * How to use characteristics of the request user agent in the cache key.
+           */
+          export interface User {
+            /**
+             * Whether to use the user agent's device type in the cache key.
+             */
+            device_type?: boolean;
+
+            /**
+             * Whether to use the user agents's country in the cache key.
+             */
+            geo?: boolean;
+
+            /**
+             * Whether to use the user agent's language in the cache key.
+             */
+            lang?: boolean;
+          }
+        }
+      }
+
+      /**
+       * Settings to determine whether the request's response from origin is eligible for
+       * Cache Reserve (requires a Cache Reserve add-on plan).
+       */
+      export interface CacheReserve {
+        /**
+         * Whether Cache Reserve is enabled. If this is true and a request meets
+         * eligibility criteria, Cloudflare will write the resource to Cache Reserve.
+         */
+        eligible: boolean;
+
+        /**
+         * The minimum file size eligible for storage in Cache Reserve.
+         */
+        minimum_file_size?: number;
+      }
+
+      /**
+       * How long the Cloudflare edge network should cache the response.
+       */
+      export interface EdgeTTL {
+        /**
+         * The edge TTL mode.
+         */
+        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
+
+        /**
+         * The edge TTL (in seconds) if you choose the "override_origin" mode.
+         */
+        default?: number;
+
+        /**
+         * A list of TTLs to apply to specific status codes or status code ranges.
+         */
+        status_code_ttl?: Array<EdgeTTL.StatusCodeTTL>;
+      }
+
+      export namespace EdgeTTL {
+        export interface StatusCodeTTL {
+          /**
+           * The time to cache the response for (in seconds). A value of 0 is equivalent to
+           * setting the cache control header with the value "no-cache". A value of -1 is
+           * equivalent to setting the cache control header with the value of "no-store".
+           */
+          value: number;
+
+          /**
+           * A single status code to apply the TTL to.
+           */
+          status_code?: number;
+
+          /**
+           * A range of status codes to apply the TTL to.
+           */
+          status_code_range?: StatusCodeTTL.StatusCodeRange;
+        }
+
+        export namespace StatusCodeTTL {
+          /**
+           * A range of status codes to apply the TTL to.
+           */
+          export interface StatusCodeRange {
+            /**
+             * The lower bound of the range.
+             */
+            from?: number;
+
+            /**
+             * The upper bound of the range.
+             */
+            to?: number;
+          }
+        }
+      }
+
+      /**
+       * When to serve stale content from cache.
+       */
+      export interface ServeStale {
+        /**
+         * Whether Cloudflare should disable serving stale content while getting the latest
+         * content from the origin.
+         */
+        disable_stale_while_updating?: boolean;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface SetConfigurationRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'set_config';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: SetConfigurationRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: SetConfigurationRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?:
+      | SetConfigurationRule.BeforePosition
+      | SetConfigurationRule.AfterPosition
+      | SetConfigurationRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: SetConfigurationRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace SetConfigurationRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * Whether to enable Automatic HTTPS Rewrites.
+       */
+      automatic_https_rewrites?: boolean;
+
+      /**
+       * Which file extensions to minify automatically.
+       */
+      autominify?: ActionParameters.Autominify;
+
+      /**
+       * Whether to enable Browser Integrity Check (BIC).
+       */
+      bic?: boolean;
+
+      /**
+       * Whether to disable Cloudflare Apps.
+       */
+      disable_apps?: true;
+
+      /**
+       * Whether to disable Pay Per Crawl.
+       */
+      disable_pay_per_crawl?: true;
+
+      /**
+       * Whether to disable Real User Monitoring (RUM).
+       */
+      disable_rum?: true;
+
+      /**
+       * Whether to disable Zaraz.
+       */
+      disable_zaraz?: true;
+
+      /**
+       * Whether to enable Email Obfuscation.
+       */
+      email_obfuscation?: boolean;
+
+      /**
+       * Whether to enable Cloudflare Fonts.
+       */
+      fonts?: boolean;
+
+      /**
+       * Whether to enable Hotlink Protection.
+       */
+      hotlink_protection?: boolean;
+
+      /**
+       * Whether to enable Mirage.
+       */
+      mirage?: boolean;
+
+      /**
+       * Whether to enable Opportunistic Encryption.
+       */
+      opportunistic_encryption?: boolean;
+
+      /**
+       * The Polish level to configure.
+       */
+      polish?: 'off' | 'lossless' | 'lossy' | 'webp';
+
+      /**
+       * Whether to enable Rocket Loader.
+       */
+      rocket_loader?: boolean;
+
+      /**
+       * The Security Level to configure.
+       */
+      security_level?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
+
+      /**
+       * Whether to enable Server-Side Excludes.
+       */
+      server_side_excludes?: boolean;
+
+      /**
+       * The SSL level to configure.
+       */
+      ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
+
+      /**
+       * Whether to enable Signed Exchanges (SXG).
+       */
+      sxg?: boolean;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * Which file extensions to minify automatically.
+       */
+      export interface Autominify {
+        /**
+         * Whether to minify CSS files.
+         */
+        css?: boolean;
+
+        /**
+         * Whether to minify HTML files.
+         */
+        html?: boolean;
+
+        /**
+         * Whether to minify JavaScript files.
+         */
+        js?: boolean;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface SkipRule {
+    /**
+     * Path param: The unique ID of the ruleset.
+     */
+    ruleset_id: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'skip';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: SkipRule.ActionParameters;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: SkipRule.ExposedCredentialCheck;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: An object configuring where the rule will be placed.
+     */
+    position?: SkipRule.BeforePosition | SkipRule.AfterPosition | SkipRule.IndexPosition;
+
+    /**
+     * Body param: An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: SkipRule.Ratelimit;
+
+    /**
+     * Body param: The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace SkipRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A phase to skip the execution of. This option is only compatible with the
+       * products option.
+       */
+      phase?: 'current';
+
+      /**
+       * A list of phases to skip the execution of. This option is incompatible with the
+       * rulesets option.
+       */
+      phases?: Array<RulesetsAPI.PhaseParam>;
+
+      /**
+       * A list of legacy security products to skip the execution of.
+       */
+      products?: Array<'bic' | 'hot' | 'rateLimit' | 'securityLevel' | 'uaBlock' | 'waf' | 'zoneLockdown'>;
+
+      /**
+       * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the
+       * execution of. This option is incompatible with the ruleset option.
+       */
+      rules?: { [key: string]: Array<string> };
+
+      /**
+       * A ruleset to skip the execution of. This option is incompatible with the
+       * rulesets option.
+       */
+      ruleset?: 'current';
+
+      /**
+       * A list of ruleset IDs to skip the execution of. This option is incompatible with
+       * the ruleset and phases options.
+       */
+      rulesets?: Array<string>;
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface BeforePosition {
+      /**
+       * The ID of another rule to place the rule before. An empty value causes the rule
+       * to be placed at the top.
+       */
+      before?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface AfterPosition {
+      /**
+       * The ID of another rule to place the rule after. An empty value causes the rule
+       * to be placed at the bottom.
+       */
+      after?: string;
+    }
+
+    /**
+     * An object configuring where the rule will be placed.
+     */
+    export interface IndexPosition {
+      /**
+       * An index at which to place the rule, where index 1 is the first rule.
+       */
+      index?: number;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
        */
       score_response_header_name?: string;
     }
@@ -15917,7 +16055,6 @@ export declare namespace Rules {
     type ManagedChallengeRule as ManagedChallengeRule,
     type RedirectRule as RedirectRule,
     type RewriteRule as RewriteRule,
-    type RewriteURIPart as RewriteURIPart,
     type RouteRule as RouteRule,
     type RulesetRule as RulesetRule,
     type ScoreRule as ScoreRule,

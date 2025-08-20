@@ -24,7 +24,7 @@ export const tool: Tool = {
     properties: {
       zone_id: {
         type: 'string',
-        title: 'ID',
+        title: 'Zone ID',
         description: 'The unique ID of the zone.',
       },
       scope: {
