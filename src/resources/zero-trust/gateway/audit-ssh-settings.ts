@@ -88,7 +88,7 @@ export interface GatewaySettings {
   public_key?: string;
 
   /**
-   * Seed ID
+   * Seed ID.
    */
   seed_id?: string;
 

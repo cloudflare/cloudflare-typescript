@@ -111,7 +111,7 @@ export class Certificates extends APIResource {
   }
 
   /**
-   * Unbinds a single Zero Trust certificate from the edge
+   * Unbinds a single Zero Trust certificate from the edge.
    *
    * @example
    * ```ts

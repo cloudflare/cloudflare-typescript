@@ -95,6 +95,8 @@ export interface PredefinedCreateResponse {
   name: string;
 
   profile_id?: string | null;
+
+  variant?: PredefinedCreateResponse.Variant;
 }
 
 export namespace PredefinedCreateResponse {
@@ -110,6 +112,12 @@ export namespace PredefinedCreateResponse {
      */
     available: boolean;
   }
+
+  export interface Variant {
+    topic_type: 'Intent' | 'Content';
+
+    type: 'PromptTopic';
+  }
 }
 
 export interface PredefinedUpdateResponse {
@@ -122,6 +130,8 @@ export interface PredefinedUpdateResponse {
   name: string;
 
   profile_id?: string | null;
+
+  variant?: PredefinedUpdateResponse.Variant;
 }
 
 export namespace PredefinedUpdateResponse {
@@ -136,6 +146,12 @@ export namespace PredefinedUpdateResponse {
      * service.
      */
     available: boolean;
+  }
+
+  export interface Variant {
+    topic_type: 'Intent' | 'Content';
+
+    type: 'PromptTopic';
   }
 }
 

@@ -158,7 +158,7 @@ export interface GatewayItem {
   created_at?: string;
 
   /**
-   * The description of the list item, if present
+   * The description of the list item, if present.
    */
   description?: string;
 
@@ -267,7 +267,7 @@ export interface ListCreateParams {
 export namespace ListCreateParams {
   export interface Item {
     /**
-     * The description of the list item, if present
+     * The description of the list item, if present.
      */
     description?: string;
 
@@ -303,7 +303,7 @@ export interface ListUpdateParams {
 export namespace ListUpdateParams {
   export interface Item {
     /**
-     * The description of the list item, if present
+     * The description of the list item, if present.
      */
     description?: string;
 
@@ -350,7 +350,7 @@ export interface ListEditParams {
 export namespace ListEditParams {
   export interface Append {
     /**
-     * The description of the list item, if present
+     * The description of the list item, if present.
      */
     description?: string;
 

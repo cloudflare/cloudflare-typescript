@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
 import { type Response } from '../../../../../_shims/index';
 
@@ -18,7 +17,7 @@ export class Content extends APIResource {
    *     'this-is_my_script-01',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       metadata: {},
+   *       metadata: { main_module: 'worker.js' },
    *     },
    *   );
    * ```
@@ -94,7 +93,7 @@ export interface ContentUpdateParams {
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
    * configuration.
    */
-  metadata: WorkersAPI.WorkerMetadataParam;
+  metadata: ContentUpdateParams.MainModule | ContentUpdateParams.BodyPart;
 
   /**
    * Body param: An array of modules (often JavaScript files) comprising a Worker
@@ -118,6 +117,24 @@ export interface ContentUpdateParams {
    * content in es module format. Alternative to including in a metadata part.
    */
   'CF-WORKER-MAIN-MODULE-PART'?: string;
+}
+
+export namespace ContentUpdateParams {
+  export interface MainModule {
+    /**
+     * Name of the uploaded file that contains the main module (e.g. the file exporting
+     * a `fetch` handler). Indicates a `module syntax` Worker.
+     */
+    main_module: string;
+  }
+
+  export interface BodyPart {
+    /**
+     * Name of the uploaded file that contains the Worker script (e.g. the file adding
+     * a listener to the `fetch` event). Indicates a `service worker syntax` Worker.
+     */
+    body_part: string;
+  }
 }
 
 export interface ContentGetParams {

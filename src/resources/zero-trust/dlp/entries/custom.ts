@@ -141,6 +141,8 @@ export namespace CustomUpdateResponse {
     type: 'predefined';
 
     profile_id?: string | null;
+
+    variant?: PredefinedEntry.Variant;
   }
 
   export namespace PredefinedEntry {
@@ -155,6 +157,12 @@ export namespace CustomUpdateResponse {
        * service.
        */
       available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
     }
   }
 

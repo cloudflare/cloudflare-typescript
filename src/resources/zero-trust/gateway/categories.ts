@@ -102,7 +102,7 @@ export namespace Category {
 
 export interface CategoryListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

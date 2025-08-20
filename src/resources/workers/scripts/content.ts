@@ -15,7 +15,7 @@ export class Content extends APIResource {
    *   'this-is_my_script-01',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     metadata: {},
+   *     metadata: { main_module: 'worker.js' },
    *   },
    * );
    * ```
@@ -87,7 +87,7 @@ export interface ContentUpdateParams {
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
    * configuration.
    */
-  metadata: ContentUpdateParams.Metadata;
+  metadata: ContentUpdateParams.MainModule | ContentUpdateParams.BodyPart;
 
   /**
    * Body param: An array of modules (often JavaScript files) comprising a Worker
@@ -114,21 +114,20 @@ export interface ContentUpdateParams {
 }
 
 export namespace ContentUpdateParams {
-  /**
-   * JSON-encoded metadata about the uploaded parts and Worker configuration.
-   */
-  export interface Metadata {
-    /**
-     * Name of the uploaded file that contains the Worker script (e.g. the file adding
-     * a listener to the `fetch` event). Indicates a `service worker syntax` Worker.
-     */
-    body_part?: string;
-
+  export interface MainModule {
     /**
      * Name of the uploaded file that contains the main module (e.g. the file exporting
      * a `fetch` handler). Indicates a `module syntax` Worker.
      */
-    main_module?: string;
+    main_module: string;
+  }
+
+  export interface BodyPart {
+    /**
+     * Name of the uploaded file that contains the Worker script (e.g. the file adding
+     * a listener to the `fetch` event). Indicates a `service worker syntax` Worker.
+     */
+    body_part: string;
   }
 }
 
