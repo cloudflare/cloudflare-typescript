@@ -41,9 +41,6 @@ export const tool: Tool = {
             event: {
               type: 'string',
             },
-            indicatorType: {
-              type: 'string',
-            },
             raw: {
               type: 'object',
               properties: {
@@ -91,7 +88,7 @@ export const tool: Tool = {
               type: 'string',
             },
           },
-          required: ['category', 'date', 'event', 'indicatorType', 'raw', 'tlp'],
+          required: ['category', 'date', 'event', 'raw', 'tlp'],
         },
       },
       datasetId: {
