@@ -2321,21 +2321,6 @@ Methods:
 - <code title="patch /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">edit</a>(queueId, { ...params }) -> Queue</code>
 - <code title="get /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">get</a>(queueId, { ...params }) -> Queue</code>
 
-## Consumers
-
-Types:
-
-- <code><a href="./src/resources/queues/consumers.ts">Consumer</a></code>
-- <code><a href="./src/resources/queues/consumers.ts">ConsumerDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">create</a>(queueId, { ...params }) -> Consumer</code>
-- <code title="put /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">update</a>(queueId, consumerId, { ...params }) -> Consumer</code>
-- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">list</a>(queueId, { ...params }) -> ConsumersSinglePage</code>
-- <code title="delete /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">delete</a>(queueId, consumerId, { ...params }) -> ConsumerDeleteResponse</code>
-- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">get</a>(queueId, consumerId, { ...params }) -> Consumer</code>
-
 ## Messages
 
 Types:
@@ -2362,6 +2347,37 @@ Methods:
 
 - <code title="post /accounts/{account_id}/queues/{queue_id}/purge">client.queues.purge.<a href="./src/resources/queues/purge.ts">start</a>(queueId, { ...params }) -> Queue</code>
 - <code title="get /accounts/{account_id}/queues/{queue_id}/purge">client.queues.purge.<a href="./src/resources/queues/purge.ts">status</a>(queueId, { ...params }) -> PurgeStatusResponse</code>
+
+## Consumers
+
+Types:
+
+- <code><a href="./src/resources/queues/consumers.ts">Consumer</a></code>
+- <code><a href="./src/resources/queues/consumers.ts">ConsumerDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">create</a>(queueId, { ...params }) -> Consumer</code>
+- <code title="put /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">update</a>(queueId, consumerId, { ...params }) -> Consumer</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">list</a>(queueId, { ...params }) -> ConsumersSinglePage</code>
+- <code title="delete /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">delete</a>(queueId, consumerId, { ...params }) -> ConsumerDeleteResponse</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">get</a>(queueId, consumerId, { ...params }) -> Consumer</code>
+
+## Subscriptions
+
+Types:
+
+- <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionCreateResponse</a></code>
+- <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionUpdateResponse</a></code>
+- <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionListResponse</a></code>
+- <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/event_subscriptions/subscriptions">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">create</a>({ ...params }) -> SubscriptionCreateResponse</code>
+- <code title="patch /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">update</a>(subscriptionId, { ...params }) -> SubscriptionUpdateResponse</code>
+- <code title="get /accounts/{account_id}/event_subscriptions/subscriptions">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">list</a>({ ...params }) -> SubscriptionListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">delete</a>(subscriptionId, { ...params }) -> SubscriptionDeleteResponse</code>
 
 # APIGateway
 
