@@ -45,7 +45,7 @@ export class Upload extends APIResource {
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     0,
    *     fs.createReadStream('path/to/file'),
-   *     fs.createReadStream('path/to/file'),
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -98,7 +98,12 @@ export interface UploadCreateParams {
   account_id: string;
 }
 
-export type UploadEditParams = string | ArrayBufferView | ArrayBuffer | BlobLike;
+export interface UploadEditParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+}
 
 export declare namespace Upload {
   export {
