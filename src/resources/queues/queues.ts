@@ -28,15 +28,29 @@ import {
 } from './messages';
 import * as PurgeAPI from './purge';
 import { Purge, PurgeStartParams, PurgeStatusParams, PurgeStatusResponse } from './purge';
+import * as SubscriptionsAPI from './subscriptions';
+import {
+  SubscriptionCreateParams,
+  SubscriptionCreateResponse,
+  SubscriptionDeleteParams,
+  SubscriptionDeleteResponse,
+  SubscriptionListParams,
+  SubscriptionListResponse,
+  SubscriptionListResponsesV4PagePaginationArray,
+  SubscriptionUpdateParams,
+  SubscriptionUpdateResponse,
+  Subscriptions,
+} from './subscriptions';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Queues extends APIResource {
-  consumers: ConsumersAPI.Consumers = new ConsumersAPI.Consumers(this._client);
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
   purge: PurgeAPI.Purge = new PurgeAPI.Purge(this._client);
+  consumers: ConsumersAPI.Consumers = new ConsumersAPI.Consumers(this._client);
+  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
 
   /**
    * Create a new queue
@@ -329,9 +343,10 @@ export interface QueueGetParams {
   account_id: string;
 }
 
-Queues.Consumers = Consumers;
 Queues.Messages = Messages;
 Queues.Purge = Purge;
+Queues.Consumers = Consumers;
+Queues.Subscriptions = Subscriptions;
 
 export declare namespace Queues {
   export {
@@ -344,18 +359,6 @@ export declare namespace Queues {
     type QueueDeleteParams as QueueDeleteParams,
     type QueueEditParams as QueueEditParams,
     type QueueGetParams as QueueGetParams,
-  };
-
-  export {
-    Consumers as Consumers,
-    type Consumer as Consumer,
-    type ConsumerDeleteResponse as ConsumerDeleteResponse,
-    type ConsumersSinglePage as ConsumersSinglePage,
-    type ConsumerCreateParams as ConsumerCreateParams,
-    type ConsumerUpdateParams as ConsumerUpdateParams,
-    type ConsumerListParams as ConsumerListParams,
-    type ConsumerDeleteParams as ConsumerDeleteParams,
-    type ConsumerGetParams as ConsumerGetParams,
   };
 
   export {
@@ -375,5 +378,30 @@ export declare namespace Queues {
     type PurgeStatusResponse as PurgeStatusResponse,
     type PurgeStartParams as PurgeStartParams,
     type PurgeStatusParams as PurgeStatusParams,
+  };
+
+  export {
+    Consumers as Consumers,
+    type Consumer as Consumer,
+    type ConsumerDeleteResponse as ConsumerDeleteResponse,
+    type ConsumersSinglePage as ConsumersSinglePage,
+    type ConsumerCreateParams as ConsumerCreateParams,
+    type ConsumerUpdateParams as ConsumerUpdateParams,
+    type ConsumerListParams as ConsumerListParams,
+    type ConsumerDeleteParams as ConsumerDeleteParams,
+    type ConsumerGetParams as ConsumerGetParams,
+  };
+
+  export {
+    Subscriptions as Subscriptions,
+    type SubscriptionCreateResponse as SubscriptionCreateResponse,
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionListResponse as SubscriptionListResponse,
+    type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
+    type SubscriptionListResponsesV4PagePaginationArray as SubscriptionListResponsesV4PagePaginationArray,
+    type SubscriptionCreateParams as SubscriptionCreateParams,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+    type SubscriptionListParams as SubscriptionListParams,
+    type SubscriptionDeleteParams as SubscriptionDeleteParams,
   };
 }

@@ -198,9 +198,10 @@ TEST_PATHS=(
 	tests/api-resources/durable-objects/namespaces/namespaces.test.ts
 	tests/api-resources/durable-objects/namespaces/objects.test.ts
 	tests/api-resources/queues/queues.test.ts
-	tests/api-resources/queues/consumers.test.ts
 	tests/api-resources/queues/messages.test.ts
 	tests/api-resources/queues/purge.test.ts
+	tests/api-resources/queues/consumers.test.ts
+	tests/api-resources/queues/subscriptions.test.ts
 	tests/api-resources/api-gateway/api-gateway.test.ts
 	tests/api-resources/api-gateway/configurations.test.ts
 	tests/api-resources/api-gateway/discovery/discovery.test.ts

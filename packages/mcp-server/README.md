@@ -1384,14 +1384,6 @@ The following tools are available in this MCP server.
 - `edit_queues` (`write`): Updates a Queue.
 - `get_queues` (`read`): Get details about a specific queue.
 
-### Resource `queues.consumers`:
-
-- `create_queues_consumers` (`write`): Creates a new consumer for a Queue
-- `update_queues_consumers` (`write`): Updates the consumer for a queue, or creates one if it does not exist.
-- `list_queues_consumers` (`read`): Returns the consumers for a Queue
-- `delete_queues_consumers` (`write`): Deletes the consumer for a queue.
-- `get_queues_consumers` (`read`): Fetches the consumer for a queue by consumer id
-
 ### Resource `queues.messages`:
 
 - `ack_queues_messages` (`write`): Acknowledge + Retry messages from a Queue
@@ -1403,6 +1395,21 @@ The following tools are available in this MCP server.
 
 - `start_queues_purge` (`write`): Deletes all messages from the Queue.
 - `status_queues_purge` (`read`): Get details about a Queue's purge status.
+
+### Resource `queues.consumers`:
+
+- `create_queues_consumers` (`write`): Creates a new consumer for a Queue
+- `update_queues_consumers` (`write`): Updates the consumer for a queue, or creates one if it does not exist.
+- `list_queues_consumers` (`read`): Returns the consumers for a Queue
+- `delete_queues_consumers` (`write`): Deletes the consumer for a queue.
+- `get_queues_consumers` (`read`): Fetches the consumer for a queue by consumer id
+
+### Resource `queues.subscriptions`:
+
+- `create_queues_subscriptions` (`write`): Create a new event subscription for a queue
+- `update_queues_subscriptions` (`write`): Update an existing event subscription
+- `list_queues_subscriptions` (`read`): Get a paginated list of event subscriptions with optional sorting and filtering
+- `delete_queues_subscriptions` (`write`): Delete an existing event subscription
 
 ### Resource `api_gateway.configurations`:
 
