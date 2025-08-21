@@ -24,3 +24,15 @@ export {
 } from './messages';
 export { Purge, type PurgeStatusResponse, type PurgeStartParams, type PurgeStatusParams } from './purge';
 export { Queues } from './queues';
+export {
+  SubscriptionListResponsesV4PagePaginationArray,
+  Subscriptions,
+  type SubscriptionCreateResponse,
+  type SubscriptionUpdateResponse,
+  type SubscriptionListResponse,
+  type SubscriptionDeleteResponse,
+  type SubscriptionCreateParams,
+  type SubscriptionUpdateParams,
+  type SubscriptionListParams,
+  type SubscriptionDeleteParams,
+} from './subscriptions';
