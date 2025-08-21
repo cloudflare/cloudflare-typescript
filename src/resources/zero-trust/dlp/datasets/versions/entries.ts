@@ -17,7 +17,7 @@ export class Entries extends APIResource {
    *     0,
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     fs.createReadStream('path/to/file'),
-   *     fs.createReadStream('path/to/file'),
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -54,7 +54,12 @@ export interface EntryCreateResponse {
   upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 }
 
-export type EntryCreateParams = string | ArrayBufferView | ArrayBuffer | BlobLike;
+export interface EntryCreateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+}
 
 export declare namespace Entries {
   export { type EntryCreateResponse as EntryCreateResponse, type EntryCreateParams as EntryCreateParams };
