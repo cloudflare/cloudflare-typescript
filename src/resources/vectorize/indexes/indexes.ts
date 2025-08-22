@@ -199,7 +199,7 @@ export class Indexes extends APIResource {
    *   'example-index',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: '@/path/to/vectors.ndjson',
+   *     body: fs.createReadStream('path/to/file'),
    *   },
    * );
    * ```
@@ -216,6 +216,7 @@ export class Indexes extends APIResource {
         body: body,
         ...options,
         headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
+        __binaryRequest: true,
       }) as Core.APIPromise<{ result: IndexInsertResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -258,7 +259,7 @@ export class Indexes extends APIResource {
    *   'example-index',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: '@/path/to/vectors.ndjson',
+   *     body: fs.createReadStream('path/to/file'),
    *   },
    * );
    * ```
@@ -275,6 +276,7 @@ export class Indexes extends APIResource {
         body: body,
         ...options,
         headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
+        __binaryRequest: true,
       }) as Core.APIPromise<{ result: IndexUpsertResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -576,7 +578,7 @@ export interface IndexInsertParams {
   /**
    * Body param: ndjson file containing vectors to insert.
    */
-  body: string;
+  body: Core.Uploadable;
 
   /**
    * Query param: Behavior for ndjson parse failures.
@@ -626,7 +628,7 @@ export interface IndexUpsertParams {
   /**
    * Body param: ndjson file containing vectors to upsert.
    */
-  body: string;
+  body: Core.Uploadable;
 
   /**
    * Query param: Behavior for ndjson parse failures.

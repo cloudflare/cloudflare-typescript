@@ -979,17 +979,17 @@ export interface OriginErrorPagePassThruParam {
 
 export interface OriginMaxHTTPVersion {
   /**
-   * Value of the zone setting.
+   * The identifier of the caching setting.
    */
   id: 'origin_max_http_version';
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
   /**
-   * The value of the feature
+   * Value of the Origin Max HTTP Version Setting.
    */
   value: '2' | '1';
 

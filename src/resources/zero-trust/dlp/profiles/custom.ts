@@ -14,13 +14,6 @@ export class Custom extends APIResource {
    * const profile =
    *   await client.zeroTrust.dlp.profiles.custom.create({
    *     account_id: 'account_id',
-   *     entries: [
-   *       {
-   *         enabled: true,
-   *         name: 'name',
-   *         pattern: { regex: 'regex' },
-   *       },
-   *     ],
    *     name: 'name',
    *   });
    * ```
@@ -220,6 +213,8 @@ export namespace CustomProfile {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
+
+      description?: string | null;
     }
   }
 
@@ -323,11 +318,6 @@ export interface CustomCreateParams {
   /**
    * Body param:
    */
-  entries: Array<CustomCreateParams.DLPNewCustomEntry | CustomCreateParams.DLPNewWordListEntry>;
-
-  /**
-   * Body param:
-   */
   name: string;
 
   /**
@@ -356,6 +346,11 @@ export interface CustomCreateParams {
    * Body param: The description of the profile.
    */
   description?: string | null;
+
+  /**
+   * Body param:
+   */
+  entries?: Array<CustomCreateParams.DLPNewCustomEntry | CustomCreateParams.DLPNewWordListEntry>;
 
   /**
    * Body param:

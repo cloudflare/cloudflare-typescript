@@ -58,23 +58,23 @@ export class RegionalTieredCacheResource extends APIResource {
 }
 
 /**
- * ID of the zone setting.
+ * The identifier of the caching setting.
  */
 export type RegionalTieredCache = 'tc_regional';
 
 export interface RegionalTieredCacheEditResponse {
   /**
-   * ID of the zone setting.
+   * The identifier of the caching setting.
    */
   id: RegionalTieredCache;
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
   /**
-   * The value of the feature
+   * Value of the Regional Tiered Cache zone setting.
    */
   value: 'on' | 'off';
 
@@ -86,17 +86,17 @@ export interface RegionalTieredCacheEditResponse {
 
 export interface RegionalTieredCacheGetResponse {
   /**
-   * ID of the zone setting.
+   * The identifier of the caching setting.
    */
   id: RegionalTieredCache;
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
   /**
-   * The value of the feature
+   * Value of the Regional Tiered Cache zone setting.
    */
   value: 'on' | 'off';
 
@@ -108,7 +108,7 @@ export interface RegionalTieredCacheGetResponse {
 
 export interface RegionalTieredCacheEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -120,7 +120,7 @@ export interface RegionalTieredCacheEditParams {
 
 export interface RegionalTieredCacheGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

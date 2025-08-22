@@ -138,7 +138,7 @@ export interface ScriptAndVersionSettingEditResponse {
   /**
    * Usage model for the Worker invocations.
    */
-  usage_model?: 'standard';
+  usage_model?: 'standard' | 'bundled' | 'unbound';
 }
 
 export namespace ScriptAndVersionSettingEditResponse {
@@ -748,7 +748,7 @@ export interface ScriptAndVersionSettingGetResponse {
   /**
    * Usage model for the Worker invocations.
    */
-  usage_model?: 'standard';
+  usage_model?: 'standard' | 'bundled' | 'unbound';
 }
 
 export namespace ScriptAndVersionSettingGetResponse {
@@ -1376,7 +1376,7 @@ export namespace ScriptAndVersionSettingEditParams {
     /**
      * Usage model for the Worker invocations.
      */
-    usage_model?: 'standard';
+    usage_model?: 'standard' | 'bundled' | 'unbound';
   }
 
   export namespace Settings {

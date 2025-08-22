@@ -165,7 +165,7 @@ export interface Webhooks {
   /**
    * Type of webhook endpoint.
    */
-  type?: 'slack' | 'generic' | 'gchat';
+  type?: 'datadog' | 'discord' | 'feishu' | 'gchat' | 'generic' | 'opsgenie' | 'slack' | 'splunk';
 
   /**
    * The POST endpoint to call when dispatching a notification.

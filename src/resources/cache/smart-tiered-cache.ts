@@ -94,12 +94,12 @@ export class SmartTieredCache extends APIResource {
 
 export interface SmartTieredCacheDeleteResponse {
   /**
-   * ID of the zone setting.
+   * The identifier of the caching setting.
    */
   id: 'tiered_cache_smart_topology_enable';
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
@@ -111,17 +111,17 @@ export interface SmartTieredCacheDeleteResponse {
 
 export interface SmartTieredCacheEditResponse {
   /**
-   * ID of the zone setting.
+   * The identifier of the caching setting.
    */
   id: 'tiered_cache_smart_topology_enable';
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
   /**
-   * The value of the feature
+   * Value of the Smart Tiered Cache zone setting.
    */
   value: 'on' | 'off';
 
@@ -133,17 +133,17 @@ export interface SmartTieredCacheEditResponse {
 
 export interface SmartTieredCacheGetResponse {
   /**
-   * ID of the zone setting.
+   * The identifier of the caching setting.
    */
   id: 'tiered_cache_smart_topology_enable';
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
   /**
-   * The value of the feature
+   * Value of the Smart Tiered Cache zone setting.
    */
   value: 'on' | 'off';
 
@@ -155,26 +155,26 @@ export interface SmartTieredCacheGetResponse {
 
 export interface SmartTieredCacheDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface SmartTieredCacheEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
   /**
-   * Body param: Enable or disable the Smart Tiered Cache
+   * Body param: Enable or disable the Smart Tiered Cache.
    */
   value: 'on' | 'off';
 }
 
 export interface SmartTieredCacheGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
