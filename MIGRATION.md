@@ -747,10 +747,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.dlp.entries.get()`
 - `client.zeroTrust.dlp.entries.custom.update()`
 - `client.zeroTrust.dlp.entries.custom.delete()`
+- `client.zeroTrust.dlp.entries.custom.get()`
 - `client.zeroTrust.dlp.entries.predefined.update()`
 - `client.zeroTrust.dlp.entries.predefined.delete()`
+- `client.zeroTrust.dlp.entries.predefined.get()`
 - `client.zeroTrust.dlp.entries.integration.update()`
 - `client.zeroTrust.dlp.entries.integration.delete()`
+- `client.zeroTrust.dlp.entries.integration.get()`
 - `client.zeroTrust.gateway.lists.update()`
 - `client.zeroTrust.gateway.lists.delete()`
 - `client.zeroTrust.gateway.lists.edit()`
