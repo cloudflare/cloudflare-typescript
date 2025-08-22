@@ -366,16 +366,20 @@ export function parseQueryOptions(defaultOptions: McpOptions, query: unknown): M
     }
   }
 
+  let dynamicTools: boolean | undefined =
+    queryOptions.no_tools && !queryOptions.no_tools?.includes('dynamic') ? false
+    : queryOptions.tools?.includes('dynamic') ? true
+    : defaultOptions.includeDynamicTools;
+
+  let allTools: boolean | undefined =
+    queryOptions.no_tools && !queryOptions.no_tools?.includes('all') ? false
+    : queryOptions.tools?.includes('all') ? true
+    : defaultOptions.includeAllTools;
+
   return {
     client: queryOptions.client ?? defaultOptions.client,
-    includeDynamicTools:
-      defaultOptions.includeDynamicTools === false ?
-        false
-      : queryOptions.tools?.includes('dynamic') && !queryOptions.no_tools?.includes('dynamic'),
-    includeAllTools:
-      defaultOptions.includeAllTools === false ?
-        false
-      : queryOptions.tools?.includes('all') && !queryOptions.no_tools?.includes('all'),
+    includeDynamicTools: dynamicTools,
+    includeAllTools: allTools,
     includeCodeTools: undefined,
     filters,
     capabilities: clientCapabilities,
