@@ -203,6 +203,8 @@ export namespace PredefinedProfile {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
+
+      description?: string | null;
     }
   }
 

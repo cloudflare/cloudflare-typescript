@@ -12,7 +12,7 @@ export class OriginPostQuantumEncryption extends APIResource {
    * send a Post-Quantum keyshare in the first message to the origin (for fastest
    * connections when the origin supports and prefers PQ), supported means that PQ
    * algorithms are advertised but only used when requested by the origin, and off
-   * means that PQ algorithms are not advertised
+   * means that PQ algorithms are not advertised.
    */
   update(
     params: OriginPostQuantumEncryptionUpdateParams,
@@ -33,7 +33,7 @@ export class OriginPostQuantumEncryption extends APIResource {
    * send a Post-Quantum keyshare in the first message to the origin (for fastest
    * connections when the origin supports and prefers PQ), supported means that PQ
    * algorithms are advertised but only used when requested by the origin, and off
-   * means that PQ algorithms are not advertised
+   * means that PQ algorithms are not advertised.
    */
   get(
     params: OriginPostQuantumEncryptionGetParams,
@@ -50,17 +50,17 @@ export class OriginPostQuantumEncryption extends APIResource {
 
 export interface OriginPostQuantumEncryptionUpdateResponse {
   /**
-   * Value of the zone setting.
+   * The identifier of the caching setting.
    */
   id: 'origin_pqe';
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
   /**
-   * The value of the feature
+   * Value of the Origin Post Quantum Encryption Setting.
    */
   value: 'preferred' | 'supported' | 'off';
 
@@ -72,17 +72,17 @@ export interface OriginPostQuantumEncryptionUpdateResponse {
 
 export interface OriginPostQuantumEncryptionGetResponse {
   /**
-   * Value of the zone setting.
+   * The identifier of the caching setting.
    */
   id: 'origin_pqe';
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
   /**
-   * The value of the feature
+   * Value of the Origin Post Quantum Encryption Setting.
    */
   value: 'preferred' | 'supported' | 'off';
 
@@ -94,7 +94,7 @@ export interface OriginPostQuantumEncryptionGetResponse {
 
 export interface OriginPostQuantumEncryptionUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -106,7 +106,7 @@ export interface OriginPostQuantumEncryptionUpdateParams {
 
 export interface OriginPostQuantumEncryptionGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

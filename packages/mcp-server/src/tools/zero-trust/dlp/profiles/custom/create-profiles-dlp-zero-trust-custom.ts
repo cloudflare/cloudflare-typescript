@@ -23,6 +23,26 @@ export const tool: Tool = {
       account_id: {
         type: 'string',
       },
+      name: {
+        type: 'string',
+      },
+      ai_context_enabled: {
+        type: 'boolean',
+      },
+      allowed_match_count: {
+        type: 'integer',
+        description: 'Related DLP policies will trigger when the match count exceeds the number set.',
+      },
+      confidence_threshold: {
+        type: 'string',
+      },
+      context_awareness: {
+        $ref: '#/$defs/context_awareness',
+      },
+      description: {
+        type: 'string',
+        description: 'The description of the profile.',
+      },
       entries: {
         type: 'array',
         items: {
@@ -62,26 +82,6 @@ export const tool: Tool = {
             },
           ],
         },
-      },
-      name: {
-        type: 'string',
-      },
-      ai_context_enabled: {
-        type: 'boolean',
-      },
-      allowed_match_count: {
-        type: 'integer',
-        description: 'Related DLP policies will trigger when the match count exceeds the number set.',
-      },
-      confidence_threshold: {
-        type: 'string',
-      },
-      context_awareness: {
-        $ref: '#/$defs/context_awareness',
-      },
-      description: {
-        type: 'string',
-        description: 'The description of the profile.',
       },
       ocr_enabled: {
         type: 'boolean',
@@ -176,21 +176,8 @@ export const tool: Tool = {
         },
       },
     },
-    required: ['account_id', 'entries', 'name'],
+    required: ['account_id', 'name'],
     $defs: {
-      pattern: {
-        type: 'object',
-        properties: {
-          regex: {
-            type: 'string',
-          },
-          validation: {
-            type: 'string',
-            enum: ['luhn'],
-          },
-        },
-        required: ['regex'],
-      },
       context_awareness: {
         type: 'object',
         description: 'Scan the context of predefined entries to only return matches surrounded by keywords.',
@@ -216,6 +203,19 @@ export const tool: Tool = {
           },
         },
         required: ['files'],
+      },
+      pattern: {
+        type: 'object',
+        properties: {
+          regex: {
+            type: 'string',
+          },
+          validation: {
+            type: 'string',
+            enum: ['luhn'],
+          },
+        },
+        required: ['regex'],
       },
     },
   },

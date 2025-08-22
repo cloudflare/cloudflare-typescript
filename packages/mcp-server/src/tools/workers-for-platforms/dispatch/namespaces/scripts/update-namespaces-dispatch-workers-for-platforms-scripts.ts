@@ -770,7 +770,7 @@ export const tool: Tool = {
               usage_model: {
                 type: 'string',
                 description: 'Usage model for the Worker invocations.',
-                enum: ['standard'],
+                enum: ['standard', 'bundled', 'unbound'],
               },
             },
             required: ['main_module'],
@@ -1510,7 +1510,7 @@ export const tool: Tool = {
               usage_model: {
                 type: 'string',
                 description: 'Usage model for the Worker invocations.',
-                enum: ['standard'],
+                enum: ['standard', 'bundled', 'unbound'],
               },
             },
             required: ['body_part'],

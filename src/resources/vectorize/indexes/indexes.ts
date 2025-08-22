@@ -13,6 +13,7 @@ import {
 } from './metadata-index';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
+import { type Uploadable } from '../../../core/uploads';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -195,7 +196,7 @@ export class Indexes extends APIResource {
    *   'example-index',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: '@/path/to/vectors.ndjson',
+   *     body: fs.createReadStream('path/to/file'),
    *   },
    * );
    * ```
@@ -254,7 +255,7 @@ export class Indexes extends APIResource {
    *   'example-index',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: '@/path/to/vectors.ndjson',
+   *     body: fs.createReadStream('path/to/file'),
    *   },
    * );
    * ```
@@ -572,7 +573,7 @@ export interface IndexInsertParams {
   /**
    * Body param: ndjson file containing vectors to insert.
    */
-  body: string;
+  body: Uploadable;
 
   /**
    * Query param: Behavior for ndjson parse failures.
@@ -622,7 +623,7 @@ export interface IndexUpsertParams {
   /**
    * Body param: ndjson file containing vectors to upsert.
    */
-  body: string;
+  body: Uploadable;
 
   /**
    * Query param: Behavior for ndjson parse failures.
