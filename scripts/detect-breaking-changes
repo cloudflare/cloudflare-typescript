@@ -169,6 +169,9 @@ TEST_PATHS=(
 	tests/api-resources/web3/hostnames/ipfs-universal-paths/content-lists/content-lists.test.ts
 	tests/api-resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.test.ts
 	tests/api-resources/workers/workers.test.ts
+	tests/api-resources/workers/beta/beta.test.ts
+	tests/api-resources/workers/beta/workers/workers.test.ts
+	tests/api-resources/workers/beta/workers/versions.test.ts
 	tests/api-resources/workers/routes.test.ts
 	tests/api-resources/workers/assets/assets.test.ts
 	tests/api-resources/workers/assets/upload.test.ts
