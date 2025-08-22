@@ -44,6 +44,8 @@ import {
 } from './subdomains';
 import * as AssetsAPI from './assets/assets';
 import { Assets } from './assets/assets';
+import * as BetaAPI from './beta/beta';
+import { Beta } from './beta/beta';
 import * as ObservabilityAPI from './observability/observability';
 import { Observability } from './observability/observability';
 import * as ScriptsAPI from './scripts/scripts';
@@ -62,6 +64,7 @@ import {
 } from './scripts/scripts';
 
 export class Workers extends APIResource {
+  beta: BetaAPI.Beta = new BetaAPI.Beta(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
@@ -204,6 +207,7 @@ export namespace WorkerMetadata {
   }
 }
 
+Workers.Beta = Beta;
 Workers.Routes = Routes;
 Workers.RouteListResponsesSinglePage = RouteListResponsesSinglePage;
 Workers.Assets = Assets;
@@ -221,6 +225,8 @@ export declare namespace Workers {
     type SingleStepMigration as SingleStepMigration,
     type WorkerMetadata as WorkerMetadata,
   };
+
+  export { Beta as Beta };
 
   export {
     Routes as Routes,

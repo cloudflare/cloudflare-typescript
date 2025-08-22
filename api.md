@@ -1997,6 +1997,37 @@ Types:
 - <code><a href="./src/resources/workers/workers.ts">SingleStepMigration</a></code>
 - <code><a href="./src/resources/workers/workers.ts">WorkerMetadata</a></code>
 
+## Beta
+
+### Workers
+
+Types:
+
+- <code><a href="./src/resources/workers/beta/workers/workers.ts">Worker</a></code>
+- <code><a href="./src/resources/workers/beta/workers/workers.ts">WorkerDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/workers">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">create</a>({ ...params }) -> Worker</code>
+- <code title="put /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">update</a>(workerId, { ...params }) -> Worker</code>
+- <code title="get /accounts/{account_id}/workers/workers">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">list</a>({ ...params }) -> WorkersV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">delete</a>(workerId, { ...params }) -> WorkerDeleteResponse</code>
+- <code title="get /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">get</a>(workerId, { ...params }) -> Worker</code>
+
+#### Versions
+
+Types:
+
+- <code><a href="./src/resources/workers/beta/workers/versions.ts">Version</a></code>
+- <code><a href="./src/resources/workers/beta/workers/versions.ts">VersionDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/workers/{worker_id}/versions">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">create</a>(workerId, { ...params }) -> Version</code>
+- <code title="get /accounts/{account_id}/workers/workers/{worker_id}/versions">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">list</a>(workerId, { ...params }) -> VersionsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/workers/workers/{worker_id}/versions/{version_id}">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">delete</a>(workerId, versionId, { ...params }) -> VersionDeleteResponse</code>
+- <code title="get /accounts/{account_id}/workers/workers/{worker_id}/versions/{version_id}">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">get</a>(workerId, versionId, { ...params }) -> Version</code>
+
 ## Routes
 
 Types:
