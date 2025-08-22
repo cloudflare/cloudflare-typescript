@@ -244,6 +244,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.list()`
 - `client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.delete()`
 - `client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.get()`
+- `client.workers.beta.workers.update()`
+- `client.workers.beta.workers.delete()`
+- `client.workers.beta.workers.get()`
+- `client.workers.beta.workers.versions.create()`
+- `client.workers.beta.workers.versions.list()`
+- `client.workers.beta.workers.versions.delete()`
+- `client.workers.beta.workers.versions.get()`
 - `client.workers.routes.update()`
 - `client.workers.routes.delete()`
 - `client.workers.routes.get()`

@@ -606,6 +606,80 @@
       ]
     },
     {
+      "base": "workers.beta.workers.versions",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "version_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "worker_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "version_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workers.beta.workers.versions",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "version_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "worker_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "version_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "workers.scripts.tail",
       "name": "delete",
       "params": [
