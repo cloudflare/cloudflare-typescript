@@ -1241,6 +1241,21 @@ The following tools are available in this MCP server.
 - `delete_content_lists_ipfs_universal_paths_hostnames_web3_entries` (`write`): Delete IPFS Universal Path Gateway Content List Entry
 - `get_content_lists_ipfs_universal_paths_hostnames_web3_entries` (`read`): IPFS Universal Path Gateway Content List Entry Details
 
+### Resource `workers.beta.workers`:
+
+- `create_beta_workers_workers` (`write`): Create a new Worker.
+- `update_beta_workers_workers` (`write`): Update an existing Worker.
+- `list_beta_workers_workers` (`read`): List all Workers for an account.
+- `delete_beta_workers_workers` (`write`): Delete a Worker and all its associated resources (versions, deployments, etc.).
+- `get_beta_workers_workers` (`read`): Get details about a specific Worker.
+
+### Resource `workers.beta.workers.versions`:
+
+- `create_workers_beta_workers_versions` (`write`): Create a new version.
+- `list_workers_beta_workers_versions` (`read`): List all versions for a Worker.
+- `delete_workers_beta_workers_versions` (`write`): Delete a version.
+- `get_workers_beta_workers_versions` (`read`): Get details about a specific version.
+
 ### Resource `workers.routes`:
 
 - `create_workers_routes` (`write`): Creates a route that maps a URL pattern to a Worker.
