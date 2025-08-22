@@ -65,16 +65,16 @@ async function main() {
           },
         ],
       },
-      files: {
+      files: [
         // Add main_module file
-        [scriptFileName]: await toFile(Buffer.from(scriptContent), scriptFileName, {
+        await toFile(Buffer.from(scriptContent), scriptFileName, {
           type: 'application/javascript+module',
         }),
         // Can add other files, such as more modules or source maps
-        // [sourceMapFileName]: await toFile(Buffer.from(sourceMapContent), sourceMapFileName, {
+        // await toFile(Buffer.from(sourceMapContent), sourceMapFileName, {
         //   type: 'application/source-map',
         // }),
-      },
+      ],
     });
     console.log('Script Upload success!');
     console.log(JSON.stringify(script, null, 2));
