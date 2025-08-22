@@ -297,7 +297,7 @@ describe('parseQueryOptions', () => {
     ]);
 
     expect(result.client).toBe('cursor');
-    expect(result.includeDynamicTools).toBe(undefined);
+    expect(result.includeDynamicTools).toBe(true);
   });
 
   it('should override client from default options', () => {
