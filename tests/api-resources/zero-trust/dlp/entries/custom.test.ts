@@ -41,7 +41,7 @@ describe('resource custom', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.entries.custom.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id', name: 'name', pattern: { regex: 'regex' }, type: 'custom' },
+      { account_id: 'account_id', enabled: true, name: 'name', pattern: { regex: 'regex' } },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -58,12 +58,26 @@ describe('resource custom', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 'account_id',
+        enabled: true,
         name: 'name',
         pattern: { regex: 'regex', validation: 'luhn' },
-        type: 'custom',
-        enabled: true,
       },
     );
+  });
+
+  test('list: only required params', async () => {
+    const responsePromise = client.zeroTrust.dlp.entries.custom.list({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('list: required and optional params', async () => {
+    const response = await client.zeroTrust.dlp.entries.custom.list({ account_id: 'account_id' });
   });
 
   test('delete: only required params', async () => {
@@ -85,5 +99,24 @@ describe('resource custom', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'account_id' },
     );
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.zeroTrust.dlp.entries.custom.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.zeroTrust.dlp.entries.custom.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
   });
 });
