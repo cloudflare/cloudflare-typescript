@@ -244,6 +244,8 @@ export namespace EntryUpdateResponse {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
+
+      description?: string | null;
     }
   }
 
@@ -379,6 +381,8 @@ export namespace EntryListResponse {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
+
+      description?: string | null;
     }
   }
 
@@ -516,6 +520,8 @@ export namespace EntryGetResponse {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
+
+      description?: string | null;
     }
   }
 

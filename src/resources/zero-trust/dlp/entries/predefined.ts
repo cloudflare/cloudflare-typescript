@@ -116,6 +116,8 @@ export namespace PredefinedCreateResponse {
     topic_type: 'Intent' | 'Content';
 
     type: 'PromptTopic';
+
+    description?: string | null;
   }
 }
 
@@ -151,6 +153,8 @@ export namespace PredefinedUpdateResponse {
     topic_type: 'Intent' | 'Content';
 
     type: 'PromptTopic';
+
+    description?: string | null;
   }
 }
 

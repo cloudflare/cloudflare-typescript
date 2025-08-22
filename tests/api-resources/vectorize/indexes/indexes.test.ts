@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -149,7 +149,7 @@ describe('resource indexes', () => {
   test.skip('insert: only required params', async () => {
     const responsePromise = client.vectorize.indexes.insert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: '@/path/to/vectors.ndjson',
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -164,7 +164,7 @@ describe('resource indexes', () => {
   test.skip('insert: required and optional params', async () => {
     const response = await client.vectorize.indexes.insert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: '@/path/to/vectors.ndjson',
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
       'unparsable-behavior': 'error',
     });
   });
@@ -198,7 +198,7 @@ describe('resource indexes', () => {
   test.skip('upsert: only required params', async () => {
     const responsePromise = client.vectorize.indexes.upsert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: '@/path/to/vectors.ndjson',
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -213,7 +213,7 @@ describe('resource indexes', () => {
   test.skip('upsert: required and optional params', async () => {
     const response = await client.vectorize.indexes.upsert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: '@/path/to/vectors.ndjson',
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
       'unparsable-behavior': 'error',
     });
   });
