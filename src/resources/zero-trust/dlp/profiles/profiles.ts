@@ -222,6 +222,8 @@ export namespace Profile {
         topic_type: 'Intent' | 'Content';
 
         type: 'PromptTopic';
+
+        description?: string | null;
       }
     }
 
@@ -391,6 +393,8 @@ export namespace Profile {
         topic_type: 'Intent' | 'Content';
 
         type: 'PromptTopic';
+
+        description?: string | null;
       }
     }
 
@@ -544,6 +548,8 @@ export namespace Profile {
         topic_type: 'Intent' | 'Content';
 
         type: 'PromptTopic';
+
+        description?: string | null;
       }
     }
 

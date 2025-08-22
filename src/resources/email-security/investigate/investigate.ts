@@ -187,6 +187,15 @@ export namespace InvestigateListResponse {
     blocklisted_message?: boolean;
 
     blocklisted_pattern?: string;
+
+    whitelisted_pattern_type?:
+      | 'quarantine_release'
+      | 'acceptable_sender'
+      | 'allowed_sender'
+      | 'allowed_recipient'
+      | 'domain_similarity'
+      | 'domain_recency'
+      | 'managed_acceptable_sender';
   }
 
   export interface Finding {
@@ -300,6 +309,15 @@ export namespace InvestigateGetResponse {
     blocklisted_message?: boolean;
 
     blocklisted_pattern?: string;
+
+    whitelisted_pattern_type?:
+      | 'quarantine_release'
+      | 'acceptable_sender'
+      | 'allowed_sender'
+      | 'allowed_recipient'
+      | 'domain_similarity'
+      | 'domain_recency'
+      | 'managed_acceptable_sender';
   }
 
   export interface Finding {

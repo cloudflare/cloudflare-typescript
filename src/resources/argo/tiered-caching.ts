@@ -72,17 +72,17 @@ export class TieredCaching extends APIResource {
 
 export interface TieredCachingEditResponse {
   /**
-   * ID of the zone setting.
+   * The identifier of the caching setting.
    */
   id: 'tiered_caching';
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
   /**
-   * The value of the feature
+   * Value of the Tiered Cache zone setting.
    */
   value: 'on' | 'off';
 
@@ -94,17 +94,17 @@ export interface TieredCachingEditResponse {
 
 export interface TieredCachingGetResponse {
   /**
-   * ID of the zone setting.
+   * The identifier of the caching setting.
    */
   id: 'tiered_caching';
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
   /**
-   * The value of the feature
+   * Value of the Tiered Cache zone setting.
    */
   value: 'on' | 'off';
 
@@ -116,7 +116,7 @@ export interface TieredCachingGetResponse {
 
 export interface TieredCachingEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -128,7 +128,7 @@ export interface TieredCachingEditParams {
 
 export interface TieredCachingGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

@@ -262,7 +262,7 @@ export interface Script {
   /**
    * Usage model for the Worker invocations.
    */
-  usage_model?: 'standard';
+  usage_model?: 'standard' | 'bundled' | 'unbound';
 }
 
 export namespace Script {
@@ -417,7 +417,7 @@ export interface ScriptUpdateResponse {
   /**
    * Usage model for the Worker invocations.
    */
-  usage_model?: 'standard';
+  usage_model?: 'standard' | 'bundled' | 'unbound';
 }
 
 export namespace ScriptUpdateResponse {
@@ -576,7 +576,7 @@ export namespace ScriptUpdateParams {
     /**
      * Usage model for the Worker invocations.
      */
-    usage_model?: 'standard';
+    usage_model?: 'standard' | 'bundled' | 'unbound';
   }
 
   export namespace UnionMember0 {
@@ -1293,7 +1293,7 @@ export namespace ScriptUpdateParams {
     /**
      * Usage model for the Worker invocations.
      */
-    usage_model?: 'standard';
+    usage_model?: 'standard' | 'bundled' | 'unbound';
   }
 
   export namespace UnionMember1 {

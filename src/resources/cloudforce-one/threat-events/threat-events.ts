@@ -238,7 +238,7 @@ export interface ThreatEventCreateResponse {
 
   event: string;
 
-  indicator: string;
+  indicatorType: string;
 
   killChain: number;
 
@@ -283,7 +283,7 @@ export namespace ThreatEventListResponse {
 
     event: string;
 
-    indicator: string;
+    indicatorType: string;
 
     killChain: number;
 
@@ -335,7 +335,7 @@ export interface ThreatEventEditResponse {
 
   event: string;
 
-  indicator: string;
+  indicatorType: string;
 
   killChain: number;
 
@@ -377,7 +377,7 @@ export interface ThreatEventGetResponse {
 
   event: string;
 
-  indicator: string;
+  indicatorType: string;
 
   killChain: number;
 
