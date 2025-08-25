@@ -129,15 +129,6 @@ export namespace Profile {
      */
     created_at: string;
 
-    entries: Array<
-      | CustomProfile.CustomEntry
-      | CustomProfile.PredefinedEntry
-      | CustomProfile.IntegrationEntry
-      | CustomProfile.ExactDataEntry
-      | CustomProfile.DocumentFingerprintEntry
-      | CustomProfile.WordListEntry
-    >;
-
     /**
      * The name of the profile.
      */
@@ -166,6 +157,15 @@ export namespace Profile {
      * The description of the profile.
      */
     description?: string | null;
+
+    entries?: Array<
+      | CustomProfile.CustomEntry
+      | CustomProfile.PredefinedEntry
+      | CustomProfile.IntegrationEntry
+      | CustomProfile.ExactDataEntry
+      | CustomProfile.DocumentFingerprintEntry
+      | CustomProfile.WordListEntry
+    >;
   }
 
   export namespace CustomProfile {
