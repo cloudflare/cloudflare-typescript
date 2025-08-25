@@ -20,15 +20,7 @@ import { Copy, CopyCreateParams } from './copy';
 import * as DirectUploadAPI from './direct-upload';
 import { DirectUpload, DirectUploadCreateParams, DirectUploadCreateResponse } from './direct-upload';
 import * as DownloadsAPI from './downloads';
-import {
-  DownloadCreateParams,
-  DownloadCreateResponse,
-  DownloadDeleteParams,
-  DownloadDeleteResponse,
-  DownloadGetParams,
-  DownloadGetResponse,
-  Downloads,
-} from './downloads';
+import { DownloadGetParams, DownloadGetResponse, Downloads } from './downloads';
 import * as EmbedAPI from './embed';
 import { Embed, EmbedGetParams, EmbedGetResponse } from './embed';
 import * as KeysAPI from './keys';
@@ -702,11 +694,7 @@ export declare namespace Stream {
 
   export {
     Downloads as Downloads,
-    type DownloadCreateResponse as DownloadCreateResponse,
-    type DownloadDeleteResponse as DownloadDeleteResponse,
     type DownloadGetResponse as DownloadGetResponse,
-    type DownloadCreateParams as DownloadCreateParams,
-    type DownloadDeleteParams as DownloadDeleteParams,
     type DownloadGetParams as DownloadGetParams,
   };
 
