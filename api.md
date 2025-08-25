@@ -6312,6 +6312,7 @@ Types:
 - <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexGetByIDsResponse</a></code>
 - <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexInfoResponse</a></code>
 - <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexInsertResponse</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexListVectorsResponse</a></code>
 - <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexQueryResponse</a></code>
 - <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexUpsertResponse</a></code>
 
@@ -6325,6 +6326,7 @@ Methods:
 - <code title="post /accounts/{account_id}/vectorize/v2/indexes/{index_name}/get_by_ids">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">getByIds</a>(indexName, { ...params }) -> IndexGetByIDsResponse | null</code>
 - <code title="get /accounts/{account_id}/vectorize/v2/indexes/{index_name}/info">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">info</a>(indexName, { ...params }) -> IndexInfoResponse | null</code>
 - <code title="post /accounts/{account_id}/vectorize/v2/indexes/{index_name}/insert">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">insert</a>(indexName, { ...params }) -> IndexInsertResponse | null</code>
+- <code title="get /accounts/{account_id}/vectorize/v2/indexes/{index_name}/list">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">listVectors</a>(indexName, { ...params }) -> IndexListVectorsResponse | null</code>
 - <code title="post /accounts/{account_id}/vectorize/v2/indexes/{index_name}/query">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">query</a>(indexName, { ...params }) -> IndexQueryResponse | null</code>
 - <code title="post /accounts/{account_id}/vectorize/v2/indexes/{index_name}/upsert">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">upsert</a>(indexName, { ...params }) -> IndexUpsertResponse | null</code>
 

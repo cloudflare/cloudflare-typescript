@@ -222,6 +222,31 @@ export class Indexes extends APIResource {
   }
 
   /**
+   * Returns a paginated list of vector identifiers from the specified index.
+   *
+   * @example
+   * ```ts
+   * const response = await client.vectorize.indexes.listVectors(
+   *   'example-index',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  listVectors(
+    indexName: string,
+    params: IndexListVectorsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndexListVectorsResponse | null> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/list`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: IndexListVectorsResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Finds vectors closest to a given vector in an index.
    *
    * @example
@@ -440,6 +465,47 @@ export interface IndexInsertResponse {
   mutationId?: string;
 }
 
+export interface IndexListVectorsResponse {
+  /**
+   * Number of vectors returned in this response
+   */
+  count: number;
+
+  /**
+   * Whether there are more vectors available beyond this response
+   */
+  isTruncated: boolean;
+
+  /**
+   * Total number of vectors in the index
+   */
+  totalCount: number;
+
+  /**
+   * Array of vector items
+   */
+  vectors: Array<IndexListVectorsResponse.Vector>;
+
+  /**
+   * When the cursor expires as an ISO8601 string
+   */
+  cursorExpirationTimestamp?: string | null;
+
+  /**
+   * Cursor for the next page of results
+   */
+  nextCursor?: string | null;
+}
+
+export namespace IndexListVectorsResponse {
+  export interface Vector {
+    /**
+     * Identifier for a Vector
+     */
+    id: string;
+  }
+}
+
 export interface IndexQueryResponse {
   /**
    * Specifies the count of vectors returned by the search
@@ -586,6 +652,23 @@ export interface IndexInsertParams {
   'unparsable-behavior'?: 'error' | 'discard';
 }
 
+export interface IndexListVectorsParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: Maximum number of vectors to return
+   */
+  count?: number;
+
+  /**
+   * Query param: Cursor for pagination to get the next page of results
+   */
+  cursor?: string;
+}
+
 export interface IndexQueryParams {
   /**
    * Path param: Identifier
@@ -652,6 +735,7 @@ export declare namespace Indexes {
     type IndexGetByIDsResponse as IndexGetByIDsResponse,
     type IndexInfoResponse as IndexInfoResponse,
     type IndexInsertResponse as IndexInsertResponse,
+    type IndexListVectorsResponse as IndexListVectorsResponse,
     type IndexQueryResponse as IndexQueryResponse,
     type IndexUpsertResponse as IndexUpsertResponse,
     CreateIndicesSinglePage as CreateIndicesSinglePage,
@@ -663,6 +747,7 @@ export declare namespace Indexes {
     type IndexGetByIDsParams as IndexGetByIDsParams,
     type IndexInfoParams as IndexInfoParams,
     type IndexInsertParams as IndexInsertParams,
+    type IndexListVectorsParams as IndexListVectorsParams,
     type IndexQueryParams as IndexQueryParams,
     type IndexUpsertParams as IndexUpsertParams,
   };
