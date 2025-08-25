@@ -3,7 +3,11 @@
 import { APIResource } from '../../../core/resource';
 import * as ListsAPI from './lists';
 import { APIPromise } from '../../../core/api-promise';
-import { CursorPagination, type CursorPaginationParams, PagePromise } from '../../../core/pagination';
+import {
+  CursorPaginationAfter,
+  type CursorPaginationAfterParams,
+  PagePromise,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -81,11 +85,11 @@ export class Items extends APIResource {
     listID: string,
     params: ItemListParams,
     options?: RequestOptions,
-  ): PagePromise<ItemListResponsesCursorPagination, ItemListResponse> {
+  ): PagePromise<ItemListResponsesCursorPaginationAfter, ItemListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/rules/lists/${listID}/items`,
-      CursorPagination<ItemListResponse>,
+      CursorPaginationAfter<ItemListResponse>,
       { query, ...options },
     );
   }
@@ -139,7 +143,7 @@ export class Items extends APIResource {
   }
 }
 
-export type ItemListResponsesCursorPagination = CursorPagination<ItemListResponse>;
+export type ItemListResponsesCursorPaginationAfter = CursorPaginationAfter<ItemListResponse>;
 
 export interface ListCursor {
   after?: string;
@@ -545,11 +549,17 @@ export namespace ItemUpdateParams {
   }
 }
 
-export interface ItemListParams extends CursorPaginationParams {
+export interface ItemListParams extends CursorPaginationAfterParams {
   /**
    * Path param: The Account ID for this resource.
    */
   account_id: string;
+
+  /**
+   * Query param: Amount of results to include in each paginated response. A
+   * non-negative 32 bit integer.
+   */
+  per_page?: number;
 
   /**
    * Query param: A search query to filter returned items. Its meaning depends on the
@@ -596,7 +606,7 @@ export declare namespace Items {
     type ItemListResponse as ItemListResponse,
     type ItemDeleteResponse as ItemDeleteResponse,
     type ItemGetResponse as ItemGetResponse,
-    type ItemListResponsesCursorPagination as ItemListResponsesCursorPagination,
+    type ItemListResponsesCursorPaginationAfter as ItemListResponsesCursorPaginationAfter,
     type ItemCreateParams as ItemCreateParams,
     type ItemUpdateParams as ItemUpdateParams,
     type ItemListParams as ItemListParams,
