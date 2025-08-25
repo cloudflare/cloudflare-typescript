@@ -14,7 +14,7 @@ import {
   ItemGetResponse,
   ItemListParams,
   ItemListResponse,
-  ItemListResponsesCursorPagination,
+  ItemListResponsesCursorPaginationAfter,
   ItemUpdateParams,
   ItemUpdateResponse,
   Items,
@@ -452,7 +452,7 @@ export interface ListGetParams {
 Lists.ListsListsSinglePage = ListsListsSinglePage;
 Lists.BulkOperations = BulkOperations;
 Lists.Items = Items;
-Lists.ItemListResponsesCursorPagination = ItemListResponsesCursorPagination;
+Lists.ItemListResponsesCursorPaginationAfter = ItemListResponsesCursorPaginationAfter;
 
 export declare namespace Lists {
   export {
@@ -486,7 +486,7 @@ export declare namespace Lists {
     type ItemListResponse as ItemListResponse,
     type ItemDeleteResponse as ItemDeleteResponse,
     type ItemGetResponse as ItemGetResponse,
-    ItemListResponsesCursorPagination as ItemListResponsesCursorPagination,
+    ItemListResponsesCursorPaginationAfter as ItemListResponsesCursorPaginationAfter,
     type ItemCreateParams as ItemCreateParams,
     type ItemUpdateParams as ItemUpdateParams,
     type ItemListParams as ItemListParams,

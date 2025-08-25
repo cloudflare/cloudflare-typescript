@@ -3,7 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as ListsAPI from './lists';
-import { CursorPagination, type CursorPaginationParams } from '../../../pagination';
+import { CursorPaginationAfter, type CursorPaginationAfterParams } from '../../../pagination';
 
 export class Items extends APIResource {
   /**
@@ -87,11 +87,11 @@ export class Items extends APIResource {
     listId: string,
     params: ItemListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ItemListResponsesCursorPagination, ItemListResponse> {
+  ): Core.PagePromise<ItemListResponsesCursorPaginationAfter, ItemListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/rules/lists/${listId}/items`,
-      ItemListResponsesCursorPagination,
+      ItemListResponsesCursorPaginationAfter,
       { query, ...options },
     );
   }
@@ -152,7 +152,7 @@ export class Items extends APIResource {
   }
 }
 
-export class ItemListResponsesCursorPagination extends CursorPagination<ItemListResponse> {}
+export class ItemListResponsesCursorPaginationAfter extends CursorPaginationAfter<ItemListResponse> {}
 
 export interface ListCursor {
   after?: string;
@@ -558,11 +558,17 @@ export namespace ItemUpdateParams {
   }
 }
 
-export interface ItemListParams extends CursorPaginationParams {
+export interface ItemListParams extends CursorPaginationAfterParams {
   /**
    * Path param: The Account ID for this resource.
    */
   account_id: string;
+
+  /**
+   * Query param: Amount of results to include in each paginated response. A
+   * non-negative 32 bit integer.
+   */
+  per_page?: number;
 
   /**
    * Query param: A search query to filter returned items. Its meaning depends on the
@@ -595,7 +601,7 @@ export interface ItemGetParams {
   account_id: string;
 }
 
-Items.ItemListResponsesCursorPagination = ItemListResponsesCursorPagination;
+Items.ItemListResponsesCursorPaginationAfter = ItemListResponsesCursorPaginationAfter;
 
 export declare namespace Items {
   export {
@@ -606,7 +612,7 @@ export declare namespace Items {
     type ItemListResponse as ItemListResponse,
     type ItemDeleteResponse as ItemDeleteResponse,
     type ItemGetResponse as ItemGetResponse,
-    ItemListResponsesCursorPagination as ItemListResponsesCursorPagination,
+    ItemListResponsesCursorPaginationAfter as ItemListResponsesCursorPaginationAfter,
     type ItemCreateParams as ItemCreateParams,
     type ItemUpdateParams as ItemUpdateParams,
     type ItemListParams as ItemListParams,
