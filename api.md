@@ -4219,14 +4219,10 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/stream/downloads.ts">DownloadCreateResponse</a></code>
-- <code><a href="./src/resources/stream/downloads.ts">DownloadDeleteResponse</a></code>
 - <code><a href="./src/resources/stream/downloads.ts">DownloadGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/stream/{identifier}/downloads">client.stream.downloads.<a href="./src/resources/stream/downloads.ts">create</a>(identifier, { ...params }) -> DownloadCreateResponse</code>
-- <code title="delete /accounts/{account_id}/stream/{identifier}/downloads">client.stream.downloads.<a href="./src/resources/stream/downloads.ts">delete</a>(identifier, { ...params }) -> DownloadDeleteResponse</code>
 - <code title="get /accounts/{account_id}/stream/{identifier}/downloads">client.stream.downloads.<a href="./src/resources/stream/downloads.ts">get</a>(identifier, { ...params }) -> DownloadGetResponse</code>
 
 ## Embed

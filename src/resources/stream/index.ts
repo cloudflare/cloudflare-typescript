@@ -18,15 +18,7 @@ export {
   type DirectUploadCreateResponse,
   type DirectUploadCreateParams,
 } from './direct-upload';
-export {
-  Downloads,
-  type DownloadCreateResponse,
-  type DownloadDeleteResponse,
-  type DownloadGetResponse,
-  type DownloadCreateParams,
-  type DownloadDeleteParams,
-  type DownloadGetParams,
-} from './downloads';
+export { Downloads, type DownloadGetResponse, type DownloadGetParams } from './downloads';
 export { Embed, type EmbedGetResponse, type EmbedGetParams } from './embed';
 export {
   KeyGetResponsesSinglePage,
