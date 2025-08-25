@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import { CursorLimitPagination, type CursorLimitPaginationParams } from '../../../pagination';
+import { CursorPaginationAfter, type CursorPaginationAfterParams } from '../../../pagination';
 
 export class Objects extends APIResource {
   /**
@@ -12,17 +12,17 @@ export class Objects extends APIResource {
     id: string,
     params: ObjectListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DurableObjectsCursorLimitPagination, DurableObject> {
+  ): Core.PagePromise<DurableObjectsCursorPaginationAfter, DurableObject> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/durable_objects/namespaces/${id}/objects`,
-      DurableObjectsCursorLimitPagination,
+      DurableObjectsCursorPaginationAfter,
       { query, ...options },
     );
   }
 }
 
-export class DurableObjectsCursorLimitPagination extends CursorLimitPagination<DurableObject> {}
+export class DurableObjectsCursorPaginationAfter extends CursorPaginationAfter<DurableObject> {}
 
 export interface DurableObject {
   /**
@@ -36,19 +36,25 @@ export interface DurableObject {
   hasStoredData?: boolean;
 }
 
-export interface ObjectListParams extends CursorLimitPaginationParams {
+export interface ObjectListParams extends CursorPaginationAfterParams {
   /**
    * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: The number of objects to return. The cursor attribute may be used
+   * to iterate over the next batch of objects if there are more than the limit.
+   */
+  limit?: number;
 }
 
-Objects.DurableObjectsCursorLimitPagination = DurableObjectsCursorLimitPagination;
+Objects.DurableObjectsCursorPaginationAfter = DurableObjectsCursorPaginationAfter;
 
 export declare namespace Objects {
   export {
     type DurableObject as DurableObject,
-    DurableObjectsCursorLimitPagination as DurableObjectsCursorLimitPagination,
+    DurableObjectsCursorPaginationAfter as DurableObjectsCursorPaginationAfter,
     type ObjectListParams as ObjectListParams,
   };
 }
