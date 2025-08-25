@@ -3149,6 +3149,7 @@ The following tools are available in this MCP server.
 - `get_by_ids_vectorize_indexes` (`write`): Get a set of vectors from an index by their vector identifiers.
 - `info_vectorize_indexes` (`read`): Get information about a vectorize index.
 - `insert_vectorize_indexes` (`write`): Inserts vectors into the specified index and returns a mutation id corresponding to the vectors enqueued for insertion.
+- `list_vectors_vectorize_indexes` (`read`): Returns a paginated list of vector identifiers from the specified index.
 - `query_vectorize_indexes` (`write`): Finds vectors closest to a given vector in an index.
 - `upsert_vectorize_indexes` (`write`): Upserts vectors into the specified index, creating them if they do not exist and returns a mutation id corresponding to the vectors enqueued for upsertion.
 

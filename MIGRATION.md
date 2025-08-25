@@ -810,6 +810,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.vectorize.indexes.getByIDs()`
 - `client.vectorize.indexes.info()`
 - `client.vectorize.indexes.insert()`
+- `client.vectorize.indexes.listVectors()`
 - `client.vectorize.indexes.query()`
 - `client.vectorize.indexes.upsert()`
 - `client.vectorize.indexes.metadataIndex.create()`
