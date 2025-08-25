@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
+import { SinglePage } from '../../pagination';
 
 export class ResourceGroups extends APIResource {
   /**
@@ -73,11 +73,11 @@ export class ResourceGroups extends APIResource {
   list(
     params: ResourceGroupListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ResourceGroupListResponsesV4PagePaginationArray, ResourceGroupListResponse> {
+  ): Core.PagePromise<ResourceGroupListResponsesSinglePage, ResourceGroupListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/iam/resource_groups`,
-      ResourceGroupListResponsesV4PagePaginationArray,
+      ResourceGroupListResponsesSinglePage,
       { query, ...options },
     );
   }
@@ -129,7 +129,7 @@ export class ResourceGroups extends APIResource {
   }
 }
 
-export class ResourceGroupListResponsesV4PagePaginationArray extends V4PagePaginationArray<ResourceGroupListResponse> {}
+export class ResourceGroupListResponsesSinglePage extends SinglePage<ResourceGroupListResponse> {}
 
 /**
  * A group of scoped resources.
@@ -491,7 +491,7 @@ export namespace ResourceGroupUpdateParams {
   }
 }
 
-export interface ResourceGroupListParams extends V4PagePaginationArrayParams {
+export interface ResourceGroupListParams {
   /**
    * Path param: Account identifier tag.
    */
@@ -522,8 +522,7 @@ export interface ResourceGroupGetParams {
   account_id: string;
 }
 
-ResourceGroups.ResourceGroupListResponsesV4PagePaginationArray =
-  ResourceGroupListResponsesV4PagePaginationArray;
+ResourceGroups.ResourceGroupListResponsesSinglePage = ResourceGroupListResponsesSinglePage;
 
 export declare namespace ResourceGroups {
   export {
@@ -532,7 +531,7 @@ export declare namespace ResourceGroups {
     type ResourceGroupListResponse as ResourceGroupListResponse,
     type ResourceGroupDeleteResponse as ResourceGroupDeleteResponse,
     type ResourceGroupGetResponse as ResourceGroupGetResponse,
-    ResourceGroupListResponsesV4PagePaginationArray as ResourceGroupListResponsesV4PagePaginationArray,
+    ResourceGroupListResponsesSinglePage as ResourceGroupListResponsesSinglePage,
     type ResourceGroupCreateParams as ResourceGroupCreateParams,
     type ResourceGroupUpdateParams as ResourceGroupUpdateParams,
     type ResourceGroupListParams as ResourceGroupListParams,
