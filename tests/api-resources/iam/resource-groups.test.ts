@@ -81,8 +81,6 @@ describe('resource resourceGroups', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'NameOfTheResourceGroup',
-      page: 1,
-      per_page: 5,
     });
   });
 
