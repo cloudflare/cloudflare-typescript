@@ -36,14 +36,6 @@ export const tool: Tool = {
         type: 'string',
         description: 'Name of the resource group to be fetched.',
       },
-      page: {
-        type: 'number',
-        description: 'Page number of paginated results.',
-      },
-      per_page: {
-        type: 'number',
-        description: 'Maximum number of results per page.',
-      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',

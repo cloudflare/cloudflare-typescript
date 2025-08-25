@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
-import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
+import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -75,11 +75,11 @@ export class ResourceGroups extends APIResource {
   list(
     params: ResourceGroupListParams,
     options?: RequestOptions,
-  ): PagePromise<ResourceGroupListResponsesV4PagePaginationArray, ResourceGroupListResponse> {
+  ): PagePromise<ResourceGroupListResponsesSinglePage, ResourceGroupListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/iam/resource_groups`,
-      V4PagePaginationArray<ResourceGroupListResponse>,
+      SinglePage<ResourceGroupListResponse>,
       { query, ...options },
     );
   }
@@ -131,8 +131,7 @@ export class ResourceGroups extends APIResource {
   }
 }
 
-export type ResourceGroupListResponsesV4PagePaginationArray =
-  V4PagePaginationArray<ResourceGroupListResponse>;
+export type ResourceGroupListResponsesSinglePage = SinglePage<ResourceGroupListResponse>;
 
 /**
  * A group of scoped resources.
@@ -494,7 +493,7 @@ export namespace ResourceGroupUpdateParams {
   }
 }
 
-export interface ResourceGroupListParams extends V4PagePaginationArrayParams {
+export interface ResourceGroupListParams {
   /**
    * Path param: Account identifier tag.
    */
@@ -532,7 +531,7 @@ export declare namespace ResourceGroups {
     type ResourceGroupListResponse as ResourceGroupListResponse,
     type ResourceGroupDeleteResponse as ResourceGroupDeleteResponse,
     type ResourceGroupGetResponse as ResourceGroupGetResponse,
-    type ResourceGroupListResponsesV4PagePaginationArray as ResourceGroupListResponsesV4PagePaginationArray,
+    type ResourceGroupListResponsesSinglePage as ResourceGroupListResponsesSinglePage,
     type ResourceGroupCreateParams as ResourceGroupCreateParams,
     type ResourceGroupUpdateParams as ResourceGroupUpdateParams,
     type ResourceGroupListParams as ResourceGroupListParams,
