@@ -70,6 +70,9 @@ export const tool: Tool = {
       indicator: {
         type: 'string',
       },
+      indicatorType: {
+        type: 'string',
+      },
       tags: {
         type: 'array',
         items: {
