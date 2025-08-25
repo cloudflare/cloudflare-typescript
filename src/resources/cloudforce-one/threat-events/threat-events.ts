@@ -467,6 +467,11 @@ export interface ThreatEventCreateParams {
   /**
    * Body param:
    */
+  indicatorType?: string;
+
+  /**
+   * Body param:
+   */
   tags?: Array<string>;
 
   /**
@@ -599,6 +604,8 @@ export namespace ThreatEventBulkCreateParams {
     datasetId?: string;
 
     indicator?: string;
+
+    indicatorType?: string;
 
     tags?: Array<string>;
 
