@@ -14,7 +14,7 @@ describe('resource content', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.workers.scripts.content.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      metadata: { main_module: 'worker.js' },
+      metadata: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource content', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.workers.scripts.content.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      metadata: { main_module: 'worker.js' },
+      metadata: { body_part: 'worker.js', main_module: 'worker.js' },
       files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
       'CF-WORKER-BODY-PART': 'CF-WORKER-BODY-PART',
       'CF-WORKER-MAIN-MODULE-PART': 'CF-WORKER-MAIN-MODULE-PART',
