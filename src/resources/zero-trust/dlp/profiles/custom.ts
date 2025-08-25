@@ -123,15 +123,6 @@ export interface CustomProfile {
    */
   created_at: string;
 
-  entries: Array<
-    | CustomProfile.CustomEntry
-    | CustomProfile.PredefinedEntry
-    | CustomProfile.IntegrationEntry
-    | CustomProfile.ExactDataEntry
-    | CustomProfile.DocumentFingerprintEntry
-    | CustomProfile.WordListEntry
-  >;
-
   /**
    * The name of the profile.
    */
@@ -158,6 +149,15 @@ export interface CustomProfile {
    * The description of the profile.
    */
   description?: string | null;
+
+  entries?: Array<
+    | CustomProfile.CustomEntry
+    | CustomProfile.PredefinedEntry
+    | CustomProfile.IntegrationEntry
+    | CustomProfile.ExactDataEntry
+    | CustomProfile.DocumentFingerprintEntry
+    | CustomProfile.WordListEntry
+  >;
 }
 
 export namespace CustomProfile {
