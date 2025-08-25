@@ -21,7 +21,7 @@ export {
   type ResourceGroupListParams,
   type ResourceGroupDeleteParams,
   type ResourceGroupGetParams,
-  type ResourceGroupListResponsesV4PagePaginationArray,
+  type ResourceGroupListResponsesSinglePage,
 } from './resource-groups';
 export {
   UserGroups,
