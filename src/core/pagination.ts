@@ -3,7 +3,6 @@
 import { CloudflareError } from './error';
 import { FinalRequestOptions } from '../internal/request-options';
 import { defaultParseResponse } from '../internal/parse';
-import * as StainlessPageResourceAPI from '../resources/stainless-page-resource';
 import { type Cloudflare } from '../client';
 import { APIPromise } from './api-promise';
 import { type APIResponseProps } from '../internal/parse';
@@ -292,7 +291,7 @@ export interface CursorPaginationAfterResponse<Item> {
 
 export namespace CursorPaginationAfterResponse {
   export interface ResultInfo {
-    cursors?: StainlessPageResourceAPI.ResultInfo.Cursors;
+    cursors?: ResultInfo.Cursors;
   }
 
   export namespace ResultInfo {
