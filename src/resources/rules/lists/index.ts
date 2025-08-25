@@ -19,7 +19,7 @@ export {
   type ItemListParams,
   type ItemDeleteParams,
   type ItemGetParams,
-  type ItemListResponsesCursorPagination,
+  type ItemListResponsesCursorPaginationAfter,
 } from './items';
 export {
   Lists,

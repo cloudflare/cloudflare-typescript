@@ -10,7 +10,7 @@ export {
   type KeyBulkDeleteParams,
   type KeyBulkGetParams,
   type KeyBulkUpdateParams,
-  type KeysCursorLimitPagination,
+  type KeysCursorPaginationAfter,
 } from './keys';
 export { Metadata, type MetadataGetResponse, type MetadataGetParams } from './metadata';
 export {

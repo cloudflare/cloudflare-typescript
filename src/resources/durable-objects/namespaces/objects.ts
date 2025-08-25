@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../core/resource';
 import {
-  CursorLimitPagination,
-  type CursorLimitPaginationParams,
+  CursorPaginationAfter,
+  type CursorPaginationAfterParams,
   PagePromise,
 } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -17,17 +17,17 @@ export class Objects extends APIResource {
     id: string,
     params: ObjectListParams,
     options?: RequestOptions,
-  ): PagePromise<DurableObjectsCursorLimitPagination, DurableObject> {
+  ): PagePromise<DurableObjectsCursorPaginationAfter, DurableObject> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/durable_objects/namespaces/${id}/objects`,
-      CursorLimitPagination<DurableObject>,
+      CursorPaginationAfter<DurableObject>,
       { query, ...options },
     );
   }
 }
 
-export type DurableObjectsCursorLimitPagination = CursorLimitPagination<DurableObject>;
+export type DurableObjectsCursorPaginationAfter = CursorPaginationAfter<DurableObject>;
 
 export interface DurableObject {
   /**
@@ -41,17 +41,23 @@ export interface DurableObject {
   hasStoredData?: boolean;
 }
 
-export interface ObjectListParams extends CursorLimitPaginationParams {
+export interface ObjectListParams extends CursorPaginationAfterParams {
   /**
    * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: The number of objects to return. The cursor attribute may be used
+   * to iterate over the next batch of objects if there are more than the limit.
+   */
+  limit?: number;
 }
 
 export declare namespace Objects {
   export {
     type DurableObject as DurableObject,
-    type DurableObjectsCursorLimitPagination as DurableObjectsCursorLimitPagination,
+    type DurableObjectsCursorPaginationAfter as DurableObjectsCursorPaginationAfter,
     type ObjectListParams as ObjectListParams,
   };
 }
