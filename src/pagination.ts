@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { AbstractPage, Response, APIClient, FinalRequestOptions, PageInfo } from './core';
-import * as StainlessPageResourceAPI from './resources/stainless-page-resource';
 
 export interface V4PagePaginationResponse<Item> {
   result: V4PagePaginationResponse.Result<Item>;
@@ -203,7 +202,7 @@ export interface CursorPaginationAfterResponse<Item> {
 
 export namespace CursorPaginationAfterResponse {
   export interface ResultInfo {
-    cursors?: StainlessPageResourceAPI.ResultInfo.Cursors;
+    cursors?: ResultInfo.Cursors;
   }
 
   export namespace ResultInfo {
