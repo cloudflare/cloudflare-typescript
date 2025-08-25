@@ -170,6 +170,27 @@ describe('resource indexes', () => {
     });
   });
 
+  test('listVectors: only required params', async () => {
+    const responsePromise = client.vectorize.indexes.listVectors('example-index', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('listVectors: required and optional params', async () => {
+    const response = await client.vectorize.indexes.listVectors('example-index', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      count: 50,
+      cursor: 'suUTaDY5PFUiRweVccnzyt9n75suNPbXHPshvCzue5mHjtj7Letjvzlza9eGj099',
+    });
+  });
+
   test('query: only required params', async () => {
     const responsePromise = client.vectorize.indexes.query('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
