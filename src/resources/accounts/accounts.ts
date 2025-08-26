@@ -56,7 +56,6 @@ export class Accounts extends APIResource {
    * ```ts
    * const account = await client.accounts.create({
    *   name: 'name',
-   *   type: 'standard',
    * });
    * ```
    */
@@ -75,6 +74,7 @@ export class Accounts extends APIResource {
    *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   name: 'Demo Account',
+   *   type: 'standard',
    * });
    * ```
    */
@@ -168,6 +168,8 @@ export interface Account {
    */
   name: string;
 
+  type: 'standard' | 'enterprise';
+
   /**
    * Timestamp for the creation of the account
    */
@@ -210,11 +212,7 @@ export interface AccountCreateParams {
    */
   name: string;
 
-  /**
-   * the type of account being created. For self-serve customers, use standard. for
-   * enterprise customers, use enterprise.
-   */
-  type: 'standard' | 'enterprise';
+  type?: 'standard' | 'enterprise';
 
   /**
    * information related to the tenant unit, and optionally, an id of the unit to
@@ -253,6 +251,11 @@ export interface AccountUpdateParams {
    * Body param: Account name
    */
   name: string;
+
+  /**
+   * Body param:
+   */
+  type: 'standard' | 'enterprise';
 
   /**
    * Body param: Account settings
