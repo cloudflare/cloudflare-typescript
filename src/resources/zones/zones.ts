@@ -297,7 +297,10 @@ export interface Zone {
   owner: Zone.Owner;
 
   /**
-   * @deprecated A Zones subscription information.
+   * @deprecated Please use the `/zones/{zone_id}/subscription` API to update a
+   * zone's plan. Changing this value will create/cancel associated subscriptions. To
+   * view available plans for this zone, see
+   * [Zone Plans](https://developers.cloudflare.com/api/resources/zones/subresources/plans/).
    */
   plan: Zone.Plan;
 
@@ -313,7 +316,7 @@ export interface Zone {
   paused?: boolean;
 
   /**
-   * @deprecated Legacy permissions based on legacy user membership information.
+   * @deprecated This has been replaced by Account memberships.
    */
   permissions?: Array<string>;
 
@@ -426,7 +429,10 @@ export namespace Zone {
   }
 
   /**
-   * @deprecated A Zones subscription information.
+   * @deprecated Please use the `/zones/{zone_id}/subscription` API to update a
+   * zone's plan. Changing this value will create/cancel associated subscriptions. To
+   * view available plans for this zone, see
+   * [Zone Plans](https://developers.cloudflare.com/api/resources/zones/subresources/plans/).
    */
   export interface Plan {
     /**
