@@ -240,6 +240,12 @@ export interface SubscriptionConfiguration {
   auto_update_model?: boolean;
 
   /**
+   * Indicates that the bot management cookie can be placed on end user devices
+   * accessing the site. Defaults to true
+   */
+  bm_cookie_enabled?: boolean;
+
+  /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
    */
   crawler_protection?: 'enabled' | 'disabled';
@@ -328,6 +334,12 @@ export interface SubscriptionConfigurationParam {
    * [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
    */
   auto_update_model?: boolean;
+
+  /**
+   * Indicates that the bot management cookie can be placed on end user devices
+   * accessing the site. Defaults to true
+   */
+  bm_cookie_enabled?: boolean;
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -796,6 +808,12 @@ export declare namespace BotManagementUpdateParams {
      * [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
      */
     auto_update_model?: boolean;
+
+    /**
+     * Body param: Indicates that the bot management cookie can be placed on end user
+     * devices accessing the site. Defaults to true
+     */
+    bm_cookie_enabled?: boolean;
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
