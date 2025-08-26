@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_bot_management',
   description:
-    'Updates the Bot Management configuration for a zone.\n\nThis API is used to update:\n- **Bot Fight Mode**\n- **Super Bot Fight Mode**\n- **Bot Management for Enterprise**\n\nSee [Bot Plans](https://developers.cloudflare.com/bots/plans/) for more information on the different plans \n\\\nIf you recently upgraded or downgraded your plan, refer to the following examples to clean up old configurations. \nCopy and paste the example body to remove old zone configurations based on your current plan.\n#### Clean up configuration for Bot Fight Mode plan\n```json\n{\n  "sbfm_likely_automated": "allow", \n  "sbfm_definitely_automated": "allow", \n  "sbfm_verified_bots": "allow", \n  "sbfm_static_resource_protection": false, \n  "optimize_wordpress": false, \n  "suppress_session_score": false \n}\n```\n#### Clean up configuration for SBFM Pro plan\n```json\n{\n  "sbfm_likely_automated": "allow", \n  "fight_mode": false \n}\n```\n#### Clean up configuration for SBFM Biz plan\n```json\n{\n  "fight_mode": false\n}\n```\n#### Clean up configuration for BM Enterprise Subscription plan\nIt is strongly recommended that you ensure you have [custom rules](https://developers.cloudflare.com/waf/custom-rules/) in place to protect your zone before disabling the SBFM rules. Without these protections, your zone is vulnerable to attacks.\n```json\n{\n  "sbfm_likely_automated": "allow", \n  "sbfm_definitely_automated": "allow", \n  "sbfm_verified_bots": "allow", \n  "sbfm_static_resource_protection": false, \n  "optimize_wordpress": false, \n  "fight_mode": false\n}\n```\n',
+    'Updates the Bot Management configuration for a zone.\n\nThis API is used to update:\n- **Bot Fight Mode**\n- **Super Bot Fight Mode**\n- **Bot Management for Enterprise**\n\nSee [Bot Plans](https://developers.cloudflare.com/bots/plans/) for more information on the different plans \n\\\nIf you recently upgraded or downgraded your plan, refer to the following examples to clean up old configurations. \nCopy and paste the example body to remove old zone configurations based on your current plan.\n#### Clean up configuration for Bot Fight Mode plan\n```json\n{\n  "sbfm_likely_automated": "allow", \n  "sbfm_definitely_automated": "allow", \n  "sbfm_verified_bots": "allow", \n  "sbfm_static_resource_protection": false, \n  "optimize_wordpress": false, \n  "suppress_session_score": false\n}\n```\n#### Clean up configuration for SBFM Pro plan\n```json\n{\n  "sbfm_likely_automated": "allow", \n  "fight_mode": false \n}\n```\n#### Clean up configuration for SBFM Biz plan\n```json\n{\n  "fight_mode": false\n}\n```\n#### Clean up configuration for BM Enterprise Subscription plan\nIt is strongly recommended that you ensure you have [custom rules](https://developers.cloudflare.com/waf/custom-rules/) in place to protect your zone before disabling the SBFM rules. Without these protections, your zone is vulnerable to attacks.\n```json\n{\n  "sbfm_likely_automated": "allow", \n  "sbfm_definitely_automated": "allow", \n  "sbfm_verified_bots": "allow", \n  "sbfm_static_resource_protection": false, \n  "optimize_wordpress": false, \n  "fight_mode": false\n}\n```\n',
   inputSchema: {
     type: 'object',
     anyOf: [
@@ -178,6 +178,11 @@ export const tool: Tool = {
             type: 'boolean',
             description:
               'Automatically update to the newest bot detection models created by Cloudflare as they are released. [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)',
+          },
+          bm_cookie_enabled: {
+            type: 'boolean',
+            description:
+              'Indicates that the bot management cookie can be placed on end user devices accessing the site. Defaults to true',
           },
           crawler_protection: {
             type: 'string',
