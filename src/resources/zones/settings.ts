@@ -1992,10 +1992,8 @@ export namespace SettingEditResponse {
   }
 
   /**
-   * Automatically optimize image loading for website visitors on mobile devices.
-   * Refer to
-   * [our blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for
-   * more information.
+   * @deprecated Mirage is being deprecated. More information at
+   * https://developers.cloudflare.com/speed/optimization/images/mirage/
    */
   export interface ZonesSchemasMirage {
     /**
@@ -2004,7 +2002,8 @@ export namespace SettingEditResponse {
     id: 'mirage';
 
     /**
-     * Current value of the zone setting.
+     * @deprecated Mirage is being deprecated. More information at
+     * https://developers.cloudflare.com/speed/optimization/images/mirage/
      */
     value: 'on' | 'off';
 
@@ -2105,7 +2104,7 @@ export namespace SettingEditResponse {
    * requests to your origin. (Refer to
    * [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/),
    * for more information.). The default value is "2" for all plan types except
-   * Enterprise where it is "1"
+   * Enterprise where it is "1".
    */
   export interface ZonesCacheRulesOriginMaxHTTPVersion {
     /**
@@ -3036,10 +3035,8 @@ export namespace SettingGetResponse {
   }
 
   /**
-   * Automatically optimize image loading for website visitors on mobile devices.
-   * Refer to
-   * [our blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for
-   * more information.
+   * @deprecated Mirage is being deprecated. More information at
+   * https://developers.cloudflare.com/speed/optimization/images/mirage/
    */
   export interface ZonesSchemasMirage {
     /**
@@ -3048,7 +3045,8 @@ export namespace SettingGetResponse {
     id: 'mirage';
 
     /**
-     * Current value of the zone setting.
+     * @deprecated Mirage is being deprecated. More information at
+     * https://developers.cloudflare.com/speed/optimization/images/mirage/
      */
     value: 'on' | 'off';
 
@@ -3149,7 +3147,7 @@ export namespace SettingGetResponse {
    * requests to your origin. (Refer to
    * [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/),
    * for more information.). The default value is "2" for all plan types except
-   * Enterprise where it is "1"
+   * Enterprise where it is "1".
    */
   export interface ZonesCacheRulesOriginMaxHTTPVersion {
     /**
