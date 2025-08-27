@@ -52,10 +52,11 @@ export interface SearchGlobalParams {
     | 'BOTS'
     | 'CERTIFICATE_AUTHORITIES'
     | 'CERTIFICATE_LOGS'
+    | 'INDUSTRIES'
     | 'LOCATIONS'
     | 'NOTEBOOKS'
+    | 'TLDS'
     | 'VERTICALS'
-    | 'INDUSTRIES'
   >;
 
   /**
@@ -71,10 +72,11 @@ export interface SearchGlobalParams {
     | 'BOTS'
     | 'CERTIFICATE_AUTHORITIES'
     | 'CERTIFICATE_LOGS'
+    | 'INDUSTRIES'
     | 'LOCATIONS'
     | 'NOTEBOOKS'
+    | 'TLDS'
     | 'VERTICALS'
-    | 'INDUSTRIES'
   >;
 
   /**
