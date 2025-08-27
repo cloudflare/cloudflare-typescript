@@ -897,6 +897,8 @@ import update_captions_stream_language from './stream/captions/language/update-c
 import delete_captions_stream_language from './stream/captions/language/delete-captions-stream-language';
 import get_captions_stream_language from './stream/captions/language/get-captions-stream-language';
 import get_language_captions_stream_vtt from './stream/captions/language/vtt/get-language-captions-stream-vtt';
+import create_stream_downloads from './stream/downloads/create-stream-downloads';
+import delete_stream_downloads from './stream/downloads/delete-stream-downloads';
 import get_stream_downloads from './stream/downloads/get-stream-downloads';
 import get_stream_embed from './stream/embed/get-stream-embed';
 import create_stream_token from './stream/token/create-stream-token';
@@ -2723,6 +2725,8 @@ addEndpoint(update_captions_stream_language);
 addEndpoint(delete_captions_stream_language);
 addEndpoint(get_captions_stream_language);
 addEndpoint(get_language_captions_stream_vtt);
+addEndpoint(create_stream_downloads);
+addEndpoint(delete_stream_downloads);
 addEndpoint(get_stream_downloads);
 addEndpoint(get_stream_embed);
 addEndpoint(create_stream_token);
