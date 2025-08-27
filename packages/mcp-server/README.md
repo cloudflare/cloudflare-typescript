@@ -2223,6 +2223,8 @@ The following tools are available in this MCP server.
 
 ### Resource `stream.downloads`:
 
+- `create_stream_downloads` (`write`): Creates a download for a video when a video is ready to view.
+- `delete_stream_downloads` (`write`): Delete the downloads for a video.
 - `get_stream_downloads` (`read`): Lists the downloads created for a video.
 
 ### Resource `stream.embed`:

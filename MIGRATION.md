@@ -535,6 +535,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.stream.captions.language.delete()`
 - `client.stream.captions.language.get()`
 - `client.stream.captions.language.vtt.get()`
+- `client.stream.downloads.create()`
+- `client.stream.downloads.delete()`
 - `client.stream.downloads.get()`
 - `client.stream.embed.get()`
 - `client.stream.token.create()`
@@ -1040,6 +1042,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.rules.lists.items.update()`
 - `client.stream.create()`
 - `client.stream.keys.create()`
+- `client.stream.downloads.create()`
 - `client.workersForPlatforms.dispatch.namespaces.scripts.tags.update()`
 - `client.zeroTrust.devices.policies.default.excludes.update()`
 - `client.zeroTrust.devices.policies.default.includes.update()`
