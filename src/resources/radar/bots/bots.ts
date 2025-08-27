@@ -72,16 +72,16 @@ export class Bots extends APIResource {
    * ```
    */
   summary(
-    dimension: 'BOT' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
+    dimension: 'BOT' | 'BOT_KIND' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
     query?: BotSummaryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotSummaryResponse>;
   summary(
-    dimension: 'BOT' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
+    dimension: 'BOT' | 'BOT_KIND' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotSummaryResponse>;
   summary(
-    dimension: 'BOT' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
+    dimension: 'BOT' | 'BOT_KIND' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
     query: BotSummaryParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotSummaryResponse> {
@@ -134,16 +134,16 @@ export class Bots extends APIResource {
    * ```
    */
   timeseriesGroups(
-    dimension: 'BOT' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
+    dimension: 'BOT' | 'BOT_KIND' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
     query?: BotTimeseriesGroupsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'BOT' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
+    dimension: 'BOT' | 'BOT_KIND' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'BOT' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
+    dimension: 'BOT' | 'BOT_KIND' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
     query: BotTimeseriesGroupsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotTimeseriesGroupsResponse> {
@@ -174,6 +174,11 @@ export namespace BotListResponse {
      * A summary for the bot (e.g., purpose).
      */
     description: string;
+
+    /**
+     * The kind of the bot.
+     */
+    kind: string;
 
     /**
      * The name of the bot.
@@ -209,6 +214,11 @@ export namespace BotGetResponse {
      * A summary for the bot (e.g., purpose).
      */
     description: string;
+
+    /**
+     * The kind of the bot.
+     */
+    kind: string;
 
     /**
      * The name of the bot.
@@ -594,6 +604,11 @@ export interface BotListParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by bot kind.
+   */
+  kind?: 'AGENT' | 'BOT';
+
+  /**
    * Limits the number of objects returned in the response.
    */
   limit?: number;
@@ -646,6 +661,11 @@ export interface BotSummaryParams {
     | 'AI_SEARCH'
     | 'ARCHIVER'
   >;
+
+  /**
+   * Filters results by bot kind.
+   */
+  botKind?: Array<'AGENT' | 'BOT'>;
 
   /**
    * Filters results by bot operator.
@@ -750,6 +770,11 @@ export interface BotTimeseriesParams {
   >;
 
   /**
+   * Filters results by bot kind.
+   */
+  botKind?: Array<'AGENT' | 'BOT'>;
+
+  /**
    * Filters results by bot operator.
    */
   botOperator?: Array<string>;
@@ -843,6 +868,11 @@ export interface BotTimeseriesGroupsParams {
     | 'AI_SEARCH'
     | 'ARCHIVER'
   >;
+
+  /**
+   * Filters results by bot kind.
+   */
+  botKind?: Array<'AGENT' | 'BOT'>;
 
   /**
    * Filters results by bot operator.
