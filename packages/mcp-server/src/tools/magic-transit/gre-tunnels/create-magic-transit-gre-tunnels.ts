@@ -43,6 +43,29 @@ export const tool: Tool = {
         description:
           'The name of the tunnel. The name cannot contain spaces or special characters, must be 15 characters or less, and cannot share a name with another GRE tunnel.',
       },
+      bgp: {
+        type: 'object',
+        properties: {
+          customer_asn: {
+            type: 'integer',
+            description: 'ASN used on the customer end of the BGP session',
+          },
+          extra_prefixes: {
+            type: 'array',
+            description:
+              'Prefixes in this list will be advertised to the customer device, in addition to the routes in the Magic routing table.',
+            items: {
+              type: 'string',
+            },
+          },
+          md5_key: {
+            type: 'string',
+            description:
+              'MD5 key to use for session authentication.\n\nNote that *this is not a security measure*. MD5 is not a valid security mechanism, and the\nkey is not treated as a secret value. This is *only* supported for preventing\nmisconfiguration, not for defending against malicious attacks.\n\nThe MD5 key, if set, must be of non-zero length and consist only of the following types of\ncharacter:\n\n* ASCII alphanumerics: `[a-zA-Z0-9]`\n* Special characters in the set `\'!@#$%^&*()+[]{}<>/.,;:_-~`= \\|`\n\nIn other words, MD5 keys may contain any printable ASCII character aside from newline (0x0A),\nquotation mark (`"`), vertical tab (0x0B), carriage return (0x0D), tab (0x09), form feed\n(0x0C), and the question mark (`?`). Requests specifying an MD5 key with one or more of\nthese disallowed characters will be rejected.',
+          },
+        },
+        required: ['customer_asn'],
+      },
       description: {
         type: 'string',
         description: 'An optional description of the GRE tunnel.',
