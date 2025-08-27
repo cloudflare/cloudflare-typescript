@@ -69,6 +69,14 @@ export const tool: Tool = {
           ],
         },
       },
+      botKind: {
+        type: 'array',
+        description: 'Filters results by bot kind.',
+        items: {
+          type: 'string',
+          enum: ['AGENT', 'BOT'],
+        },
+      },
       botOperator: {
         type: 'array',
         description: 'Filters results by bot operator.',

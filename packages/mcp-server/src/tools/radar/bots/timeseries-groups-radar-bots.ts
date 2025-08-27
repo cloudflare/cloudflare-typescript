@@ -25,7 +25,7 @@ export const tool: Tool = {
       dimension: {
         type: 'string',
         description: 'Specifies the attribute by which to group the results.',
-        enum: ['BOT', 'BOT_OPERATOR', 'BOT_CATEGORY'],
+        enum: ['BOT', 'BOT_KIND', 'BOT_OPERATOR', 'BOT_CATEGORY'],
       },
       aggInterval: {
         type: 'string',
@@ -72,6 +72,14 @@ export const tool: Tool = {
             'AI_SEARCH',
             'ARCHIVER',
           ],
+        },
+      },
+      botKind: {
+        type: 'array',
+        description: 'Filters results by bot kind.',
+        items: {
+          type: 'string',
+          enum: ['AGENT', 'BOT'],
         },
       },
       botOperator: {
