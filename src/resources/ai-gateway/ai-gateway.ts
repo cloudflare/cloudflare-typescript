@@ -228,6 +228,8 @@ export interface AIGatewayCreateResponse {
 
   authentication?: boolean;
 
+  dlp?: AIGatewayCreateResponse.DLP;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -237,6 +239,16 @@ export interface AIGatewayCreateResponse {
   logpush_public_key?: string | null;
 
   store_id?: string | null;
+}
+
+export namespace AIGatewayCreateResponse {
+  export interface DLP {
+    action: 'BLOCK' | 'FLAG';
+
+    enabled: boolean;
+
+    profiles: Array<string>;
+  }
 }
 
 export interface AIGatewayUpdateResponse {
@@ -269,6 +281,8 @@ export interface AIGatewayUpdateResponse {
 
   authentication?: boolean;
 
+  dlp?: AIGatewayUpdateResponse.DLP;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -278,6 +292,16 @@ export interface AIGatewayUpdateResponse {
   logpush_public_key?: string | null;
 
   store_id?: string | null;
+}
+
+export namespace AIGatewayUpdateResponse {
+  export interface DLP {
+    action: 'BLOCK' | 'FLAG';
+
+    enabled: boolean;
+
+    profiles: Array<string>;
+  }
 }
 
 export interface AIGatewayListResponse {
@@ -310,6 +334,8 @@ export interface AIGatewayListResponse {
 
   authentication?: boolean;
 
+  dlp?: AIGatewayListResponse.DLP;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -319,6 +345,16 @@ export interface AIGatewayListResponse {
   logpush_public_key?: string | null;
 
   store_id?: string | null;
+}
+
+export namespace AIGatewayListResponse {
+  export interface DLP {
+    action: 'BLOCK' | 'FLAG';
+
+    enabled: boolean;
+
+    profiles: Array<string>;
+  }
 }
 
 export interface AIGatewayDeleteResponse {
@@ -351,6 +387,8 @@ export interface AIGatewayDeleteResponse {
 
   authentication?: boolean;
 
+  dlp?: AIGatewayDeleteResponse.DLP;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -360,6 +398,16 @@ export interface AIGatewayDeleteResponse {
   logpush_public_key?: string | null;
 
   store_id?: string | null;
+}
+
+export namespace AIGatewayDeleteResponse {
+  export interface DLP {
+    action: 'BLOCK' | 'FLAG';
+
+    enabled: boolean;
+
+    profiles: Array<string>;
+  }
 }
 
 export interface AIGatewayGetResponse {
@@ -392,6 +440,8 @@ export interface AIGatewayGetResponse {
 
   authentication?: boolean;
 
+  dlp?: AIGatewayGetResponse.DLP;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -401,6 +451,16 @@ export interface AIGatewayGetResponse {
   logpush_public_key?: string | null;
 
   store_id?: string | null;
+}
+
+export namespace AIGatewayGetResponse {
+  export interface DLP {
+    action: 'BLOCK' | 'FLAG';
+
+    enabled: boolean;
+
+    profiles: Array<string>;
+  }
 }
 
 export interface AIGatewayCreateParams {
@@ -514,6 +574,11 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
+  dlp?: AIGatewayUpdateParams.DLP;
+
+  /**
+   * Body param:
+   */
   log_management?: number | null;
 
   /**
@@ -535,6 +600,16 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   store_id?: string | null;
+}
+
+export namespace AIGatewayUpdateParams {
+  export interface DLP {
+    action: 'BLOCK' | 'FLAG';
+
+    enabled: boolean;
+
+    profiles: Array<string>;
+  }
 }
 
 export interface AIGatewayListParams extends V4PagePaginationArrayParams {
