@@ -60,7 +60,7 @@ export class Bots extends APIResource {
    * ```
    */
   summary(
-    dimension: 'BOT' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
+    dimension: 'BOT' | 'BOT_KIND' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
     query: BotSummaryParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BotSummaryResponse> {
@@ -102,7 +102,7 @@ export class Bots extends APIResource {
    * ```
    */
   timeseriesGroups(
-    dimension: 'BOT' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
+    dimension: 'BOT' | 'BOT_KIND' | 'BOT_OPERATOR' | 'BOT_CATEGORY',
     query: BotTimeseriesGroupsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BotTimeseriesGroupsResponse> {
@@ -130,6 +130,11 @@ export namespace BotListResponse {
      * A summary for the bot (e.g., purpose).
      */
     description: string;
+
+    /**
+     * The kind of the bot.
+     */
+    kind: string;
 
     /**
      * The name of the bot.
@@ -165,6 +170,11 @@ export namespace BotGetResponse {
      * A summary for the bot (e.g., purpose).
      */
     description: string;
+
+    /**
+     * The kind of the bot.
+     */
+    kind: string;
 
     /**
      * The name of the bot.
@@ -550,6 +560,11 @@ export interface BotListParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by bot kind.
+   */
+  kind?: 'AGENT' | 'BOT';
+
+  /**
    * Limits the number of objects returned in the response.
    */
   limit?: number;
@@ -602,6 +617,11 @@ export interface BotSummaryParams {
     | 'AI_SEARCH'
     | 'ARCHIVER'
   >;
+
+  /**
+   * Filters results by bot kind.
+   */
+  botKind?: Array<'AGENT' | 'BOT'>;
 
   /**
    * Filters results by bot operator.
@@ -706,6 +726,11 @@ export interface BotTimeseriesParams {
   >;
 
   /**
+   * Filters results by bot kind.
+   */
+  botKind?: Array<'AGENT' | 'BOT'>;
+
+  /**
    * Filters results by bot operator.
    */
   botOperator?: Array<string>;
@@ -799,6 +824,11 @@ export interface BotTimeseriesGroupsParams {
     | 'AI_SEARCH'
     | 'ARCHIVER'
   >;
+
+  /**
+   * Filters results by bot kind.
+   */
+  botKind?: Array<'AGENT' | 'BOT'>;
 
   /**
    * Filters results by bot operator.
