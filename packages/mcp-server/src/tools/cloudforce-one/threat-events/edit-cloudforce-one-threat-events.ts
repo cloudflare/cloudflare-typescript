@@ -49,6 +49,9 @@ export const tool: Tool = {
       indicator: {
         type: 'string',
       },
+      indicatorType: {
+        type: 'string',
+      },
       insight: {
         type: 'string',
       },
