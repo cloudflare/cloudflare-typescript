@@ -664,6 +664,11 @@ export interface ThreatEventEditParams {
   /**
    * Body param:
    */
+  indicatorType?: string;
+
+  /**
+   * Body param:
+   */
   insight?: string;
 
   /**
