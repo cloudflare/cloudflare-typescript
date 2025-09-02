@@ -14,7 +14,7 @@ async function main() {
     return;
   }
 
-  const selectedTools = selectToolsOrError(endpoints, options);
+  const selectedTools = await selectToolsOrError(endpoints, options);
 
   console.error(
     `MCP Server starting with ${selectedTools.length} tools:`,
@@ -47,9 +47,9 @@ function parseOptionsOrError() {
   }
 }
 
-function selectToolsOrError(endpoints: Endpoint[], options: McpOptions): Endpoint[] {
+async function selectToolsOrError(endpoints: Endpoint[], options: McpOptions): Promise<Endpoint[]> {
   try {
-    const includedTools = selectTools(endpoints, options);
+    const includedTools = await selectTools(endpoints, options);
     if (includedTools.length === 0) {
       console.error('No tools match the provided filters.');
       process.exit(1);
