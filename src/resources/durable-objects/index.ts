@@ -2,7 +2,7 @@
 
 export { DurableObjects } from './durable-objects';
 export {
-  NamespacesSinglePage,
+  NamespacesV4PagePaginationArray,
   Namespaces,
   type Namespace,
   type NamespaceListParams,

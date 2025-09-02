@@ -37,7 +37,12 @@ export class Values extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
-        Core.multipartFormRequestOptions({ query: { expiration, expiration_ttl }, body, ...options }),
+        Core.multipartFormRequestOptions({
+          query: { expiration, expiration_ttl },
+          body,
+          __multipartSyntax: 'json',
+          ...options,
+        }),
       ) as Core.APIPromise<{ result: ValueUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -134,7 +139,7 @@ export interface ValueUpdateParams {
   expiration_ttl?: number;
 
   /**
-   * Body param:
+   * Body param: Associates arbitrary JSON data with a key/value pair.
    */
   metadata?: unknown;
 }

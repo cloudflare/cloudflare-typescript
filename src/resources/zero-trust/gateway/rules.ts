@@ -265,15 +265,10 @@ export type GatewayFilterParam = 'http' | 'dns' | 'l4' | 'egress' | 'dns_resolve
 
 export interface GatewayRule {
   /**
-   * The API resource UUID.
-   */
-  id?: string;
-
-  /**
-   * The action to preform when the associated traffic, identity, and device posture
+   * The action to perform when the associated traffic, identity, and device posture
    * expressions are either absent or evaluate to `true`.
    */
-  action?:
+  action:
     | 'on'
     | 'off'
     | 'allow'
@@ -291,6 +286,43 @@ export interface GatewayRule {
     | 'quarantine'
     | 'redirect';
 
+  /**
+   * True if the rule is enabled.
+   */
+  enabled: boolean;
+
+  /**
+   * The protocol or layer to evaluate the traffic, identity, and device. posture
+   * expressions.
+   */
+  filters: Array<GatewayFilter>;
+
+  /**
+   * The name of the rule.
+   */
+  name: string;
+
+  /**
+   * Precedence sets the order of your rules. Lower values indicate higher
+   * precedence. At each processing phase, applicable rules are evaluated in
+   * ascending order of this value. Refer to
+   * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
+   * docs on how to manage precedence via Terraform.
+   */
+  precedence: number;
+
+  /**
+   * The wirefilter expression used for traffic matching. The API automatically
+   * formats and sanitizes this expression. This returns a normalized version that
+   * may differ from your input and cause Terraform state drift.
+   */
+  traffic: string;
+
+  /**
+   * The API resource UUID.
+   */
+  id?: string;
+
   created_at?: string;
 
   /**
@@ -304,14 +336,11 @@ export interface GatewayRule {
   description?: string;
 
   /**
-   * The wirefilter expression used for device posture check matching.
+   * The wirefilter expression used for device posture check matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   device_posture?: string;
-
-  /**
-   * True if the rule is enabled.
-   */
-  enabled?: boolean;
 
   /**
    * The expiration time stamp and default duration of a DNS policy. Takes precedence
@@ -322,29 +351,22 @@ export interface GatewayRule {
   expiration?: GatewayRule.Expiration | null;
 
   /**
-   * The protocol or layer to evaluate the traffic, identity, and device posture
-   * expressions.
-   */
-  filters?: Array<GatewayFilter>;
-
-  /**
-   * The wirefilter expression used for identity matching.
+   * The wirefilter expression used for identity matching. The API automatically
+   * formats and sanitizes this expression. This returns a normalized version that
+   * may differ from your input and cause Terraform state drift.
    */
   identity?: string;
 
   /**
-   * The name of the rule.
+   * The rule cannot be shared via the Orgs API.
    */
-  name?: string;
+  not_sharable?: boolean;
 
   /**
-   * Precedence sets the order of your rules. Lower values indicate higher
-   * precedence. At each processing phase, applicable rules are evaluated in
-   * ascending order of this value. Refer to
-   * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
-   * docs on how to manage precedence via Terraform.
+   * The rule was shared via the Orgs API and cannot be edited by the current
+   * account.
    */
-  precedence?: number;
+  read_only?: boolean;
 
   /**
    * Additional settings that modify the rule's action.
@@ -358,14 +380,14 @@ export interface GatewayRule {
   schedule?: Schedule | null;
 
   /**
-   * The wirefilter expression used for traffic matching.
+   * account tag of account that created the rule.
    */
-  traffic?: string;
+  source_account?: string;
 
   updated_at?: string;
 
   /**
-   * version number of the rule
+   * version number of the rule.
    */
   version?: number;
 
@@ -417,7 +439,7 @@ export interface RuleSetting {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: { [key: string]: string } | null;
+  add_headers?: { [key: string]: Array<string> } | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
@@ -432,7 +454,7 @@ export interface RuleSetting {
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSetting.BISOAdminControls | null;
+  biso_admin_controls?: RuleSetting.BISOAdminControls;
 
   /**
    * Custom block page settings. If missing/null, blocking will use the the account
@@ -449,7 +471,7 @@ export interface RuleSetting {
    * The text describing why this block occurred, displayed on the custom block page
    * (if enabled).
    */
-  block_reason?: string;
+  block_reason?: string | null;
 
   /**
    * Set by children MSP accounts to bypass their parent's rules.
@@ -501,7 +523,7 @@ export interface RuleSetting {
   ip_indicator_feeds?: boolean;
 
   /**
-   * Send matching traffic to the supplied destination IP address and port.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   l4override?: RuleSetting.L4override | null;
 
@@ -527,12 +549,12 @@ export interface RuleSetting {
   payload_log?: RuleSetting.PayloadLog | null;
 
   /**
-   * Settings that apply to quarantine rules
+   * Settings that apply to quarantine rules.
    */
   quarantine?: RuleSetting.Quarantine | null;
 
   /**
-   * Settings that apply to redirect rules
+   * Settings that apply to redirect rules.
    */
   redirect?: RuleSetting.Redirect | null;
 
@@ -648,12 +670,12 @@ export namespace RuleSetting {
    */
   export interface BlockPage {
     /**
-     * URI to which the user will be redirected
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
   }
@@ -663,7 +685,9 @@ export namespace RuleSetting {
    */
   export interface CheckSession {
     /**
-     * Configure how fresh the session needs to be to be considered valid.
+     * Configure how fresh the session needs to be to be considered valid. The API
+     * automatically formats and sanitizes this expression. This returns a normalized
+     * version that may differ from your input and cause Terraform state drift.
      */
     duration?: string;
 
@@ -710,7 +734,7 @@ export namespace RuleSetting {
   }
 
   /**
-   * Send matching traffic to the supplied destination IP address and port.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   export interface L4override {
     /**
@@ -730,12 +754,12 @@ export namespace RuleSetting {
    */
   export interface NotificationSettings {
     /**
-     * Set notification on
+     * Set notification on.
      */
     enabled?: boolean;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
@@ -762,7 +786,7 @@ export namespace RuleSetting {
   }
 
   /**
-   * Settings that apply to quarantine rules
+   * Settings that apply to quarantine rules.
    */
   export interface Quarantine {
     /**
@@ -786,22 +810,22 @@ export namespace RuleSetting {
   }
 
   /**
-   * Settings that apply to redirect rules
+   * Settings that apply to redirect rules.
    */
   export interface Redirect {
     /**
-     * URI to which the user will be redirected
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
     /**
      * If true, the path and query parameters from the original request will be
-     * appended to target_uri
+     * appended to target_uri.
      */
     preserve_path_and_query?: boolean;
   }
@@ -846,7 +870,7 @@ export interface RuleSettingParam {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: { [key: string]: string } | null;
+  add_headers?: { [key: string]: Array<string> } | null;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
@@ -861,7 +885,7 @@ export interface RuleSettingParam {
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSettingParam.BISOAdminControls | null;
+  biso_admin_controls?: RuleSettingParam.BISOAdminControls;
 
   /**
    * Custom block page settings. If missing/null, blocking will use the the account
@@ -878,7 +902,7 @@ export interface RuleSettingParam {
    * The text describing why this block occurred, displayed on the custom block page
    * (if enabled).
    */
-  block_reason?: string;
+  block_reason?: string | null;
 
   /**
    * Set by children MSP accounts to bypass their parent's rules.
@@ -930,7 +954,7 @@ export interface RuleSettingParam {
   ip_indicator_feeds?: boolean;
 
   /**
-   * Send matching traffic to the supplied destination IP address and port.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   l4override?: RuleSettingParam.L4override | null;
 
@@ -956,12 +980,12 @@ export interface RuleSettingParam {
   payload_log?: RuleSettingParam.PayloadLog | null;
 
   /**
-   * Settings that apply to quarantine rules
+   * Settings that apply to quarantine rules.
    */
   quarantine?: RuleSettingParam.Quarantine | null;
 
   /**
-   * Settings that apply to redirect rules
+   * Settings that apply to redirect rules.
    */
   redirect?: RuleSettingParam.Redirect | null;
 
@@ -1077,12 +1101,12 @@ export namespace RuleSettingParam {
    */
   export interface BlockPage {
     /**
-     * URI to which the user will be redirected
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
   }
@@ -1092,7 +1116,9 @@ export namespace RuleSettingParam {
    */
   export interface CheckSession {
     /**
-     * Configure how fresh the session needs to be to be considered valid.
+     * Configure how fresh the session needs to be to be considered valid. The API
+     * automatically formats and sanitizes this expression. This returns a normalized
+     * version that may differ from your input and cause Terraform state drift.
      */
     duration?: string;
 
@@ -1139,7 +1165,7 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Send matching traffic to the supplied destination IP address and port.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   export interface L4override {
     /**
@@ -1159,12 +1185,12 @@ export namespace RuleSettingParam {
    */
   export interface NotificationSettings {
     /**
-     * Set notification on
+     * Set notification on.
      */
     enabled?: boolean;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
@@ -1191,7 +1217,7 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Settings that apply to quarantine rules
+   * Settings that apply to quarantine rules.
    */
   export interface Quarantine {
     /**
@@ -1215,22 +1241,22 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Settings that apply to redirect rules
+   * Settings that apply to redirect rules.
    */
   export interface Redirect {
     /**
-     * URI to which the user will be redirected
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
     /**
      * If true, the path and query parameters from the original request will be
-     * appended to target_uri
+     * appended to target_uri.
      */
     preserve_path_and_query?: boolean;
   }
@@ -1408,7 +1434,7 @@ export interface RuleCreateParams {
   account_id: string;
 
   /**
-   * Body param: The action to preform when the associated traffic, identity, and
+   * Body param: The action to perform when the associated traffic, identity, and
    * device posture expressions are either absent or evaluate to `true`.
    */
   action:
@@ -1441,6 +1467,9 @@ export interface RuleCreateParams {
 
   /**
    * Body param: The wirefilter expression used for device posture check matching.
+   * The API automatically formats and sanitizes this expression. This returns a
+   * normalized version that may differ from your input and cause Terraform state
+   * drift.
    */
   device_posture?: string;
 
@@ -1458,13 +1487,15 @@ export interface RuleCreateParams {
   expiration?: RuleCreateParams.Expiration | null;
 
   /**
-   * Body param: The protocol or layer to evaluate the traffic, identity, and device
+   * Body param: The protocol or layer to evaluate the traffic, identity, and device.
    * posture expressions.
    */
   filters?: Array<GatewayFilterParam>;
 
   /**
-   * Body param: The wirefilter expression used for identity matching.
+   * Body param: The wirefilter expression used for identity matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   identity?: string;
 
@@ -1489,7 +1520,9 @@ export interface RuleCreateParams {
   schedule?: ScheduleParam | null;
 
   /**
-   * Body param: The wirefilter expression used for traffic matching.
+   * Body param: The wirefilter expression used for traffic matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   traffic?: string;
 }
@@ -1530,7 +1563,7 @@ export interface RuleUpdateParams {
   account_id: string;
 
   /**
-   * Body param: The action to preform when the associated traffic, identity, and
+   * Body param: The action to perform when the associated traffic, identity, and
    * device posture expressions are either absent or evaluate to `true`.
    */
   action:
@@ -1563,6 +1596,9 @@ export interface RuleUpdateParams {
 
   /**
    * Body param: The wirefilter expression used for device posture check matching.
+   * The API automatically formats and sanitizes this expression. This returns a
+   * normalized version that may differ from your input and cause Terraform state
+   * drift.
    */
   device_posture?: string;
 
@@ -1580,13 +1616,15 @@ export interface RuleUpdateParams {
   expiration?: RuleUpdateParams.Expiration | null;
 
   /**
-   * Body param: The protocol or layer to evaluate the traffic, identity, and device
+   * Body param: The protocol or layer to evaluate the traffic, identity, and device.
    * posture expressions.
    */
   filters?: Array<GatewayFilterParam>;
 
   /**
-   * Body param: The wirefilter expression used for identity matching.
+   * Body param: The wirefilter expression used for identity matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   identity?: string;
 
@@ -1611,7 +1649,9 @@ export interface RuleUpdateParams {
   schedule?: ScheduleParam | null;
 
   /**
-   * Body param: The wirefilter expression used for traffic matching.
+   * Body param: The wirefilter expression used for traffic matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   traffic?: string;
 }

@@ -50,7 +50,12 @@ export interface ReclassifyCreateParams {
   /**
    * Body param: Base64 encoded content of the EML file
    */
-  eml_content?: string | null;
+  eml_content?: string;
+
+  /**
+   * Body param:
+   */
+  escalated_submission_id?: string;
 }
 
 export declare namespace Reclassify {

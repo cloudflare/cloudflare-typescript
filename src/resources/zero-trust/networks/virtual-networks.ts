@@ -212,6 +212,13 @@ export interface VirtualNetworkListParams {
   is_default?: boolean;
 
   /**
+   * Query param: If `true`, only include the default virtual network. If `false`,
+   * exclude the default virtual network. If empty, all virtual networks will be
+   * included.
+   */
+  is_default_network?: boolean;
+
+  /**
    * Query param: If `true`, only include deleted virtual networks. If `false`,
    * exclude deleted virtual networks. If empty, all virtual networks will be
    * included.

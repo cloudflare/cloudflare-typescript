@@ -8,11 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of traffic by AI user agent.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.ai.bots.summary.userAgent();
-   * ```
+   * @deprecated
    */
   userAgent(
     query?: SummaryUserAgentParams,
@@ -48,7 +44,7 @@ export namespace SummaryUserAgentResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 

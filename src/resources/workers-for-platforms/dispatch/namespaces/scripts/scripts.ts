@@ -77,12 +77,12 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptUpdateResponse> {
-    const { account_id, files, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
         Core.maybeMultipartFormRequestOptions({
-          body: { ...body, ...files },
+          body,
           ...options,
           __multipartSyntax: 'json',
           headers: { 'Content-Type': 'application/javascript', ...options?.headers },
@@ -180,6 +180,19 @@ export interface ScriptUpdateResponse {
   id?: string;
 
   /**
+   * Date indicating targeted support in the Workers runtime. Backwards incompatible
+   * fixes to the runtime following this date will not affect this Worker.
+   */
+  compatibility_date?: string;
+
+  /**
+   * Flags that enable or disable certain features in the Workers runtime. Used to
+   * enable upcoming features or opt in or out of specific changes not included in a
+   * `compatibility_date`.
+   */
+  compatibility_flags?: Array<string>;
+
+  /**
    * When the script was created.
    */
   created_on?: string;
@@ -188,6 +201,11 @@ export interface ScriptUpdateResponse {
    * Hashed script content, can be used in a If-None-Match header when updating.
    */
   etag?: string;
+
+  /**
+   * The names of handlers exported as part of the default export.
+   */
+  handlers?: Array<string>;
 
   /**
    * Whether a Worker contains assets.
@@ -200,14 +218,31 @@ export interface ScriptUpdateResponse {
   has_modules?: boolean;
 
   /**
+   * The client most recently used to deploy this Worker.
+   */
+  last_deployed_from?: string;
+
+  /**
    * Whether Logpush is turned on for the Worker.
    */
   logpush?: boolean;
 
   /**
+   * The tag of the Durable Object migration that was most recently applied for this
+   * Worker.
+   */
+  migration_tag?: string;
+
+  /**
    * When the script was last modified.
    */
   modified_on?: string;
+
+  /**
+   * Named exports, such as Durable Object class implementations and named
+   * entrypoints.
+   */
+  named_handlers?: Array<ScriptUpdateResponse.NamedHandler>;
 
   /**
    * Configuration for
@@ -233,10 +268,22 @@ export interface ScriptUpdateResponse {
   /**
    * Usage model for the Worker invocations.
    */
-  usage_model?: 'standard';
+  usage_model?: 'standard' | 'bundled' | 'unbound';
 }
 
 export namespace ScriptUpdateResponse {
+  export interface NamedHandler {
+    /**
+     * The names of handlers exported as part of the named export.
+     */
+    handlers?: Array<string>;
+
+    /**
+     * The name of the export.
+     */
+    name?: string;
+  }
+
   /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
@@ -271,17 +318,26 @@ export interface ScriptUpdateParams {
   account_id: string;
 
   /**
-   * Body param: JSON encoded metadata about the uploaded parts and Worker
+   * Body param: JSON-encoded metadata about the uploaded parts and Worker
    * configuration.
    */
   metadata: ScriptUpdateParams.Metadata;
 
-  files?: { [key: string]: Core.Uploadable };
+  /**
+   * Body param: An array of modules (often JavaScript files) comprising a Worker
+   * script. At least one module must be present and referenced in the metadata as
+   * `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are:
+   * `application/javascript+module`, `text/javascript+module`,
+   * `application/javascript`, `text/javascript`, `text/x-python`,
+   * `text/x-python-requirement`, `application/wasm`, `text/plain`,
+   * `application/octet-stream`, `application/source-map`.
+   */
+  files?: Array<Core.Uploadable>;
 }
 
 export namespace ScriptUpdateParams {
   /**
-   * JSON encoded metadata about the uploaded parts and Worker configuration.
+   * JSON-encoded metadata about the uploaded parts and Worker configuration.
    */
   export interface Metadata {
     /**
@@ -352,6 +408,11 @@ export namespace ScriptUpdateParams {
     keep_bindings?: Array<string>;
 
     /**
+     * Limits to apply for this Worker.
+     */
+    limits?: Metadata.Limits;
+
+    /**
      * Whether Logpush is turned on for the Worker.
      */
     logpush?: boolean;
@@ -391,7 +452,7 @@ export namespace ScriptUpdateParams {
     /**
      * Usage model for the Worker invocations.
      */
-    usage_model?: 'standard';
+    usage_model?: 'standard' | 'bundled' | 'unbound';
   }
 
   export namespace Metadata {
@@ -929,6 +990,16 @@ export namespace ScriptUpdateParams {
        * name.
        */
       script_name?: string;
+    }
+
+    /**
+     * Limits to apply for this Worker.
+     */
+    export interface Limits {
+      /**
+       * The amount of CPU time this Worker can use in milliseconds.
+       */
+      cpu_ms?: number;
     }
 
     export interface WorkersMultipleStepMigrations {

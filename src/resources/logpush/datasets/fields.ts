@@ -7,7 +7,7 @@ import { CloudflareError } from '../../../error';
 
 export class Fields extends APIResource {
   /**
-   * Lists all fields available for a dataset. The response result is an object with
+   * Lists all fields available for a dataset. The response result is. an object with
    * key-value pairs, where keys are field names, and values are descriptions.
    *
    * @example
@@ -22,6 +22,7 @@ export class Fields extends APIResource {
     datasetId:
       | 'access_requests'
       | 'audit_logs'
+      | 'audit_logs_v2'
       | 'biso_user_actions'
       | 'casb_findings'
       | 'device_posture_results'
@@ -52,6 +53,7 @@ export class Fields extends APIResource {
     datasetId:
       | 'access_requests'
       | 'audit_logs'
+      | 'audit_logs_v2'
       | 'biso_user_actions'
       | 'casb_findings'
       | 'device_posture_results'
@@ -81,6 +83,7 @@ export class Fields extends APIResource {
     datasetId:
       | 'access_requests'
       | 'audit_logs'
+      | 'audit_logs_v2'
       | 'biso_user_actions'
       | 'casb_findings'
       | 'device_posture_results'

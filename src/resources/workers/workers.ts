@@ -44,6 +44,8 @@ import {
 } from './subdomains';
 import * as AssetsAPI from './assets/assets';
 import { Assets } from './assets/assets';
+import * as BetaAPI from './beta/beta';
+import { Beta } from './beta/beta';
 import * as ObservabilityAPI from './observability/observability';
 import { Observability } from './observability/observability';
 import * as ScriptsAPI from './scripts/scripts';
@@ -62,6 +64,7 @@ import {
 } from './scripts/scripts';
 
 export class Workers extends APIResource {
+  beta: BetaAPI.Beta = new BetaAPI.Beta(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
@@ -71,49 +74,7 @@ export class Workers extends APIResource {
   observability: ObservabilityAPI.Observability = new ObservabilityAPI.Observability(this._client);
 }
 
-export interface MigrationStep {
-  /**
-   * A list of classes to delete Durable Object namespaces from.
-   */
-  deleted_classes?: Array<string>;
-
-  /**
-   * A list of classes to create Durable Object namespaces from.
-   */
-  new_classes?: Array<string>;
-
-  /**
-   * A list of classes to create Durable Object namespaces with SQLite from.
-   */
-  new_sqlite_classes?: Array<string>;
-
-  /**
-   * A list of classes with Durable Object namespaces that were renamed.
-   */
-  renamed_classes?: Array<MigrationStep.RenamedClass>;
-
-  /**
-   * A list of transfers for Durable Object namespaces from a different Worker and
-   * class to a class defined in this Worker.
-   */
-  transferred_classes?: Array<MigrationStep.TransferredClass>;
-}
-
-export namespace MigrationStep {
-  export interface RenamedClass {
-    from?: string;
-
-    to?: string;
-  }
-
-  export interface TransferredClass {
-    from?: string;
-
-    from_script?: string;
-
-    to?: string;
-  }
-}
+export interface MigrationStep {}
 
 export interface MigrationStepParam {
   /**
@@ -162,60 +123,7 @@ export namespace MigrationStepParam {
 /**
  * A single set of migrations to apply.
  */
-export interface SingleStepMigration {
-  /**
-   * A list of classes to delete Durable Object namespaces from.
-   */
-  deleted_classes?: Array<string>;
-
-  /**
-   * A list of classes to create Durable Object namespaces from.
-   */
-  new_classes?: Array<string>;
-
-  /**
-   * A list of classes to create Durable Object namespaces with SQLite from.
-   */
-  new_sqlite_classes?: Array<string>;
-
-  /**
-   * Tag to set as the latest migration tag.
-   */
-  new_tag?: string;
-
-  /**
-   * Tag used to verify against the latest migration tag for this Worker. If they
-   * don't match, the upload is rejected.
-   */
-  old_tag?: string;
-
-  /**
-   * A list of classes with Durable Object namespaces that were renamed.
-   */
-  renamed_classes?: Array<SingleStepMigration.RenamedClass>;
-
-  /**
-   * A list of transfers for Durable Object namespaces from a different Worker and
-   * class to a class defined in this Worker.
-   */
-  transferred_classes?: Array<SingleStepMigration.TransferredClass>;
-}
-
-export namespace SingleStepMigration {
-  export interface RenamedClass {
-    from?: string;
-
-    to?: string;
-  }
-
-  export interface TransferredClass {
-    from?: string;
-
-    from_script?: string;
-
-    to?: string;
-  }
-}
+export interface SingleStepMigration {}
 
 /**
  * A single set of migrations to apply.
@@ -276,7 +184,7 @@ export namespace SingleStepMigrationParam {
 }
 
 /**
- * JSON encoded metadata about the uploaded parts and Worker configuration.
+ * JSON-encoded metadata about the uploaded parts and Worker configuration.
  */
 export interface WorkerMetadata {
   /**
@@ -294,7 +202,7 @@ export interface WorkerMetadata {
 }
 
 /**
- * JSON encoded metadata about the uploaded parts and Worker configuration.
+ * JSON-encoded metadata about the uploaded parts and Worker configuration.
  */
 export interface WorkerMetadataParam {
   /**
@@ -311,6 +219,7 @@ export interface WorkerMetadataParam {
   main_module?: string;
 }
 
+Workers.Beta = Beta;
 Workers.Routes = Routes;
 Workers.RouteListResponsesSinglePage = RouteListResponsesSinglePage;
 Workers.Assets = Assets;
@@ -328,6 +237,8 @@ export declare namespace Workers {
     type SingleStepMigration as SingleStepMigration,
     type WorkerMetadata as WorkerMetadata,
   };
+
+  export { Beta as Beta };
 
   export {
     Routes as Routes,

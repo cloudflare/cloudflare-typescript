@@ -3,8 +3,8 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as ObjectsAPI from './objects';
-import { DurableObject, DurableObjectsCursorLimitPagination, ObjectListParams, Objects } from './objects';
-import { SinglePage } from '../../../pagination';
+import { DurableObject, DurableObjectsCursorPaginationAfter, ObjectListParams, Objects } from './objects';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Namespaces extends APIResource {
   objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
@@ -15,17 +15,17 @@ export class Namespaces extends APIResource {
   list(
     params: NamespaceListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<NamespacesSinglePage, Namespace> {
-    const { account_id } = params;
+  ): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace> {
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/durable_objects/namespaces`,
-      NamespacesSinglePage,
-      options,
+      NamespacesV4PagePaginationArray,
+      { query, ...options },
     );
   }
 }
 
-export class NamespacesSinglePage extends SinglePage<Namespace> {}
+export class NamespacesV4PagePaginationArray extends V4PagePaginationArray<Namespace> {}
 
 export interface Namespace {
   id?: string;
@@ -39,28 +39,28 @@ export interface Namespace {
   use_sqlite?: boolean;
 }
 
-export interface NamespaceListParams {
+export interface NamespaceListParams extends V4PagePaginationArrayParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
 }
 
-Namespaces.NamespacesSinglePage = NamespacesSinglePage;
+Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;
 Namespaces.Objects = Objects;
-Namespaces.DurableObjectsCursorLimitPagination = DurableObjectsCursorLimitPagination;
+Namespaces.DurableObjectsCursorPaginationAfter = DurableObjectsCursorPaginationAfter;
 
 export declare namespace Namespaces {
   export {
     type Namespace as Namespace,
-    NamespacesSinglePage as NamespacesSinglePage,
+    NamespacesV4PagePaginationArray as NamespacesV4PagePaginationArray,
     type NamespaceListParams as NamespaceListParams,
   };
 
   export {
     Objects as Objects,
     type DurableObject as DurableObject,
-    DurableObjectsCursorLimitPagination as DurableObjectsCursorLimitPagination,
+    DurableObjectsCursorPaginationAfter as DurableObjectsCursorPaginationAfter,
     type ObjectListParams as ObjectListParams,
   };
 }

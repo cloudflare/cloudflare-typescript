@@ -35,31 +35,67 @@ export class BulkOperations extends APIResource {
   }
 }
 
-export interface BulkOperationGetResponse {
-  /**
-   * The unique operation ID of the asynchronous action.
-   */
-  id: string;
+export type BulkOperationGetResponse =
+  | BulkOperationGetResponse.ListsBulkOperationPendingOrRunning
+  | BulkOperationGetResponse.ListsBulkOperationCompleted
+  | BulkOperationGetResponse.ListsBulkOperationFailed;
 
-  /**
-   * The current status of the asynchronous operation.
-   */
-  status: 'pending' | 'running' | 'completed' | 'failed';
+export namespace BulkOperationGetResponse {
+  export interface ListsBulkOperationPendingOrRunning {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    id: string;
 
-  /**
-   * The RFC 3339 timestamp of when the operation was completed.
-   */
-  completed?: string;
+    /**
+     * The current status of the asynchronous operation.
+     */
+    status: 'pending' | 'running';
+  }
 
-  /**
-   * A message describing the error when the status is `failed`.
-   */
-  error?: string;
+  export interface ListsBulkOperationCompleted {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the operation was completed.
+     */
+    completed: string;
+
+    /**
+     * The current status of the asynchronous operation.
+     */
+    status: 'completed';
+  }
+
+  export interface ListsBulkOperationFailed {
+    /**
+     * The unique operation ID of the asynchronous action.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the operation was completed.
+     */
+    completed: string;
+
+    /**
+     * A message describing the error when the status is `failed`.
+     */
+    error: string;
+
+    /**
+     * The current status of the asynchronous operation.
+     */
+    status: 'failed';
+  }
 }
 
 export interface BulkOperationGetParams {
   /**
-   * Defines an identifier.
+   * The Account ID for this resource.
    */
   account_id: string;
 }

@@ -93,7 +93,7 @@ export interface ActivityLogSettings {
   /**
    * Enable activity logging.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 }
 
 /**
@@ -103,7 +103,7 @@ export interface ActivityLogSettingsParam {
   /**
    * Enable activity logging.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 }
 
 /**
@@ -113,17 +113,17 @@ export interface AntiVirusSettings {
   /**
    * Enable anti-virus scanning on downloads.
    */
-  enabled_download_phase?: boolean;
+  enabled_download_phase?: boolean | null;
 
   /**
    * Enable anti-virus scanning on uploads.
    */
-  enabled_upload_phase?: boolean;
+  enabled_upload_phase?: boolean | null;
 
   /**
    * Block requests for files that cannot be scanned.
    */
-  fail_closed?: boolean;
+  fail_closed?: boolean | null;
 
   /**
    * Configure a message to display on the user's device when an antivirus search is
@@ -139,17 +139,17 @@ export interface AntiVirusSettingsParam {
   /**
    * Enable anti-virus scanning on downloads.
    */
-  enabled_download_phase?: boolean;
+  enabled_download_phase?: boolean | null;
 
   /**
    * Enable anti-virus scanning on uploads.
    */
-  enabled_upload_phase?: boolean;
+  enabled_upload_phase?: boolean | null;
 
   /**
    * Block requests for files that cannot be scanned.
    */
-  fail_closed?: boolean;
+  fail_closed?: boolean | null;
 
   /**
    * Configure a message to display on the user's device when an antivirus search is
@@ -168,9 +168,9 @@ export interface BlockPageSettings {
   background_color?: string;
 
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 
   /**
    * If mode is customized_block_page: block page footer text.
@@ -208,7 +208,7 @@ export interface BlockPageSettings {
    * Controls whether the user is redirected to a Cloudflare-hosted block page or to
    * a customer-provided URI.
    */
-  mode?: 'customized_block_page' | 'redirect_uri';
+  mode?: '' | 'customized_block_page' | 'redirect_uri';
 
   /**
    * If mode is customized_block_page: block page title.
@@ -217,14 +217,14 @@ export interface BlockPageSettings {
 
   /**
    * This setting was shared via the Orgs API and cannot be edited by the current
-   * account
+   * account.
    */
-  read_only?: boolean;
+  read_only?: boolean | null;
 
   /**
-   * Account tag of account that shared this setting
+   * Account tag of account that shared this setting.
    */
-  source_account?: string;
+  source_account?: string | null;
 
   /**
    * If mode is customized_block_page: suppress detailed info at the bottom of the
@@ -236,6 +236,11 @@ export interface BlockPageSettings {
    * If mode is redirect_uri: URI to which the user should be redirected.
    */
   target_uri?: string;
+
+  /**
+   * Version number of the setting.
+   */
+  version?: number | null;
 }
 
 /**
@@ -248,9 +253,9 @@ export interface BlockPageSettingsParam {
   background_color?: string;
 
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 
   /**
    * If mode is customized_block_page: block page footer text.
@@ -288,7 +293,7 @@ export interface BlockPageSettingsParam {
    * Controls whether the user is redirected to a Cloudflare-hosted block page or to
    * a customer-provided URI.
    */
-  mode?: 'customized_block_page' | 'redirect_uri';
+  mode?: '' | 'customized_block_page' | 'redirect_uri';
 
   /**
    * If mode is customized_block_page: block page title.
@@ -314,7 +319,7 @@ export interface BodyScanningSettings {
   /**
    * Set the inspection mode to either `deep` or `shallow`.
    */
-  inspection_mode?: string;
+  inspection_mode?: 'deep' | 'shallow';
 }
 
 /**
@@ -324,7 +329,7 @@ export interface BodyScanningSettingsParam {
   /**
    * Set the inspection mode to either `deep` or `shallow`.
    */
-  inspection_mode?: string;
+  inspection_mode?: 'deep' | 'shallow';
 }
 
 /**
@@ -359,13 +364,13 @@ export interface BrowserIsolationSettingsParam {
 
 /**
  * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
- * `certificate`)
+ * `certificate`).
  */
 export interface CustomCertificateSettings {
   /**
-   * Enable use of custom certificate authority for signing Gateway traffic.
+   * Enable use of custom certificate authority for signing Gateway. traffic.
    */
-  enabled: boolean;
+  enabled: boolean | null;
 
   /**
    * UUID of certificate (ID from MTLS certificate store).
@@ -382,13 +387,13 @@ export interface CustomCertificateSettings {
 
 /**
  * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
- * `certificate`)
+ * `certificate`).
  */
 export interface CustomCertificateSettingsParam {
   /**
-   * Enable use of custom certificate authority for signing Gateway traffic.
+   * Enable use of custom certificate authority for signing Gateway. traffic.
    */
-  enabled: boolean;
+  enabled: boolean | null;
 
   /**
    * UUID of certificate (ID from MTLS certificate store).
@@ -404,18 +409,23 @@ export interface ExtendedEmailMatching {
    * Enable matching all variants of user emails (with + or . modifiers) used as
    * criteria in Firewall policies.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 
   /**
    * This setting was shared via the Orgs API and cannot be edited by the current
-   * account
+   * account.
    */
   read_only?: boolean;
 
   /**
-   * Account tag of account that shared this setting
+   * Account tag of account that shared this setting.
    */
   source_account?: string;
+
+  /**
+   * Version number of the setting.
+   */
+  version?: number;
 }
 
 /**
@@ -426,7 +436,7 @@ export interface ExtendedEmailMatchingParam {
    * Enable matching all variants of user emails (with + or . modifiers) used as
    * criteria in Firewall policies.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 }
 
 /**
@@ -434,7 +444,7 @@ export interface ExtendedEmailMatchingParam {
  */
 export interface FipsSettings {
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
    */
   tls?: boolean;
 }
@@ -444,13 +454,13 @@ export interface FipsSettings {
  */
 export interface FipsSettingsParam {
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
    */
   tls?: boolean;
 }
 
 /**
- * Account settings
+ * Account settings.
  */
 export interface GatewayConfigurationSettings {
   /**
@@ -486,7 +496,7 @@ export interface GatewayConfigurationSettings {
 
   /**
    * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
-   * `certificate`)
+   * `certificate`).
    */
   custom_certificate?: CustomCertificateSettings | null;
 
@@ -504,6 +514,11 @@ export interface GatewayConfigurationSettings {
    * Setting to enable host selector in egress policies.
    */
   host_selector?: GatewayConfigurationSettings.HostSelector | null;
+
+  /**
+   * Setting to define inspection settings.
+   */
+  inspection?: GatewayConfigurationSettings.Inspection | null;
 
   /**
    * Protocol Detection settings.
@@ -542,7 +557,22 @@ export namespace GatewayConfigurationSettings {
     /**
      * Enable filtering via hosts for egress policies.
      */
-    enabled?: boolean;
+    enabled?: boolean | null;
+  }
+
+  /**
+   * Setting to define inspection settings.
+   */
+  export interface Inspection {
+    /**
+     * Defines the mode of inspection the proxy will use.
+     *
+     * - static: Gateway will use static inspection to inspect HTTP on TCP(80). If TLS
+     *   decryption is on, Gateway will inspect HTTPS traffic on TCP(443) & UDP(443).
+     * - dynamic: Gateway will use protocol detection to dynamically inspect HTTP and
+     *   HTTPS traffic on any port. TLS decryption must be on to inspect HTTPS traffic.
+     */
+    mode?: 'static' | 'dynamic';
   }
 
   /**
@@ -552,7 +582,7 @@ export namespace GatewayConfigurationSettings {
     /**
      * Enable sandbox.
      */
-    enabled?: boolean;
+    enabled?: boolean | null;
 
     /**
      * Action to take when the file cannot be scanned.
@@ -562,7 +592,7 @@ export namespace GatewayConfigurationSettings {
 }
 
 /**
- * Account settings
+ * Account settings.
  */
 export interface GatewayConfigurationSettingsParam {
   /**
@@ -598,7 +628,7 @@ export interface GatewayConfigurationSettingsParam {
 
   /**
    * @deprecated Custom certificate settings for BYO-PKI. (deprecated and replaced by
-   * `certificate`)
+   * `certificate`).
    */
   custom_certificate?: CustomCertificateSettingsParam | null;
 
@@ -616,6 +646,11 @@ export interface GatewayConfigurationSettingsParam {
    * Setting to enable host selector in egress policies.
    */
   host_selector?: GatewayConfigurationSettingsParam.HostSelector | null;
+
+  /**
+   * Setting to define inspection settings.
+   */
+  inspection?: GatewayConfigurationSettingsParam.Inspection | null;
 
   /**
    * Protocol Detection settings.
@@ -654,7 +689,22 @@ export namespace GatewayConfigurationSettingsParam {
     /**
      * Enable filtering via hosts for egress policies.
      */
-    enabled?: boolean;
+    enabled?: boolean | null;
+  }
+
+  /**
+   * Setting to define inspection settings.
+   */
+  export interface Inspection {
+    /**
+     * Defines the mode of inspection the proxy will use.
+     *
+     * - static: Gateway will use static inspection to inspect HTTP on TCP(80). If TLS
+     *   decryption is on, Gateway will inspect HTTPS traffic on TCP(443) & UDP(443).
+     * - dynamic: Gateway will use protocol detection to dynamically inspect HTTP and
+     *   HTTPS traffic on any port. TLS decryption must be on to inspect HTTPS traffic.
+     */
+    mode?: 'static' | 'dynamic';
   }
 
   /**
@@ -664,7 +714,7 @@ export namespace GatewayConfigurationSettingsParam {
     /**
      * Enable sandbox.
      */
-    enabled?: boolean;
+    enabled?: boolean | null;
 
     /**
      * Action to take when the file cannot be scanned.
@@ -679,12 +729,12 @@ export namespace GatewayConfigurationSettingsParam {
  */
 export interface NotificationSettings {
   /**
-   * Set notification on
+   * Set notification on.
    */
   enabled?: boolean;
 
   /**
-   * If true, context information will be passed as query parameters
+   * If true, context information will be passed as query parameters.
    */
   include_context?: boolean;
 
@@ -706,12 +756,12 @@ export interface NotificationSettings {
  */
 export interface NotificationSettingsParam {
   /**
-   * Set notification on
+   * Set notification on.
    */
   enabled?: boolean;
 
   /**
-   * If true, context information will be passed as query parameters
+   * If true, context information will be passed as query parameters.
    */
   include_context?: boolean;
 
@@ -734,7 +784,7 @@ export interface ProtocolDetection {
   /**
    * Enable detecting protocol on initial bytes of client traffic.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 }
 
 /**
@@ -744,7 +794,7 @@ export interface ProtocolDetectionParam {
   /**
    * Enable detecting protocol on initial bytes of client traffic.
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 }
 
 /**
@@ -768,13 +818,13 @@ export interface TLSSettingsParam {
 }
 
 /**
- * Account settings
+ * Account settings.
  */
 export interface ConfigurationUpdateResponse {
   created_at?: string;
 
   /**
-   * Account settings
+   * Account settings.
    */
   settings?: GatewayConfigurationSettings;
 
@@ -782,13 +832,13 @@ export interface ConfigurationUpdateResponse {
 }
 
 /**
- * Account settings
+ * Account settings.
  */
 export interface ConfigurationEditResponse {
   created_at?: string;
 
   /**
-   * Account settings
+   * Account settings.
    */
   settings?: GatewayConfigurationSettings;
 
@@ -796,13 +846,13 @@ export interface ConfigurationEditResponse {
 }
 
 /**
- * Account settings
+ * Account settings.
  */
 export interface ConfigurationGetResponse {
   created_at?: string;
 
   /**
-   * Account settings
+   * Account settings.
    */
   settings?: GatewayConfigurationSettings;
 
@@ -816,7 +866,7 @@ export interface ConfigurationUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Account settings
+   * Body param: Account settings.
    */
   settings?: GatewayConfigurationSettingsParam;
 }
@@ -828,7 +878,7 @@ export interface ConfigurationEditParams {
   account_id: string;
 
   /**
-   * Body param: Account settings
+   * Body param: Account settings.
    */
   settings?: GatewayConfigurationSettingsParam;
 }

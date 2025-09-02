@@ -143,7 +143,7 @@ export interface DOHEndpoint {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPNetwork>;
+  networks?: Array<IPNetwork> | null;
 
   /**
    * True if the endpoint requires
@@ -164,7 +164,7 @@ export interface DOHEndpointParam {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPNetworkParam>;
+  networks?: Array<IPNetworkParam> | null;
 
   /**
    * True if the endpoint requires
@@ -185,7 +185,7 @@ export interface DOTEndpoint {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPNetwork>;
+  networks?: Array<IPNetwork> | null;
 }
 
 export interface DOTEndpointParam {
@@ -199,7 +199,7 @@ export interface DOTEndpointParam {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPNetworkParam>;
+  networks?: Array<IPNetworkParam> | null;
 }
 
 /**
@@ -208,13 +208,13 @@ export interface DOTEndpointParam {
  * remains unchanged.
  */
 export interface Endpoint {
-  doh?: DOHEndpoint;
+  doh: DOHEndpoint;
 
-  dot?: DOTEndpoint;
+  dot: DOTEndpoint;
 
-  ipv4?: IPV4Endpoint;
+  ipv4: IPV4Endpoint;
 
-  ipv6?: IPV6Endpoint;
+  ipv6: IPV6Endpoint;
 }
 
 /**
@@ -223,13 +223,13 @@ export interface Endpoint {
  * remains unchanged.
  */
 export interface EndpointParam {
-  doh?: DOHEndpointParam;
+  doh: DOHEndpointParam;
 
-  dot?: DOTEndpointParam;
+  dot: DOTEndpointParam;
 
-  ipv4?: IPV4EndpointParam;
+  ipv4: IPV4EndpointParam;
 
-  ipv6?: IPV6EndpointParam;
+  ipv6: IPV6EndpointParam;
 }
 
 export interface IPNetwork {
@@ -271,7 +271,7 @@ export interface IPV6Endpoint {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPV6Network>;
+  networks?: Array<IPV6Network> | null;
 }
 
 export interface IPV6EndpointParam {
@@ -285,7 +285,7 @@ export interface IPV6EndpointParam {
    * source IPs are allowed. A non-empty list is only effective if the endpoint is
    * enabled for this location.
    */
-  networks?: Array<IPV6NetworkParam>;
+  networks?: Array<IPV6NetworkParam> | null;
 }
 
 export interface IPV6Network {
@@ -320,7 +320,7 @@ export interface Location {
   /**
    * The uuid identifier of the IPv6 block brought to the gateway, so that this
    * location's IPv6 address is allocated from the Bring Your Own Ipv6(BYOIPv6) block
-   * and not from the standard CloudFlare IPv6 block.
+   * and not from the standard Cloudflare IPv6 block.
    */
   dns_destination_ipv6_block_id?: string | null;
 
@@ -340,7 +340,7 @@ export interface Location {
    * location, if this field is absent or set with null, the endpoints configuration
    * remains unchanged.
    */
-  endpoints?: Endpoint;
+  endpoints?: Endpoint | null;
 
   /**
    * IPV6 destination ip assigned to this location. DNS requests sent to this IP will
@@ -371,7 +371,7 @@ export interface Location {
    * A non-empty list is only effective if the ipv4 endpoint is enabled for this
    * location.
    */
-  networks?: Array<Location.Network>;
+  networks?: Array<Location.Network> | null;
 
   updated_at?: string;
 }
@@ -422,14 +422,14 @@ export interface LocationCreateParams {
    * updating a location, if this field is absent or set with null, the endpoints
    * configuration remains unchanged.
    */
-  endpoints?: EndpointParam;
+  endpoints?: EndpointParam | null;
 
   /**
    * Body param: A list of network ranges that requests from this location would
    * originate from. A non-empty list is only effective if the ipv4 endpoint is
    * enabled for this location.
    */
-  networks?: Array<LocationCreateParams.Network>;
+  networks?: Array<LocationCreateParams.Network> | null;
 }
 
 export namespace LocationCreateParams {
@@ -476,14 +476,14 @@ export interface LocationUpdateParams {
    * updating a location, if this field is absent or set with null, the endpoints
    * configuration remains unchanged.
    */
-  endpoints?: EndpointParam;
+  endpoints?: EndpointParam | null;
 
   /**
    * Body param: A list of network ranges that requests from this location would
    * originate from. A non-empty list is only effective if the ipv4 endpoint is
    * enabled for this location.
    */
-  networks?: Array<LocationUpdateParams.Network>;
+  networks?: Array<LocationUpdateParams.Network> | null;
 }
 
 export namespace LocationUpdateParams {

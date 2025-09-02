@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -150,7 +150,7 @@ describe('resource indexes', () => {
   test.skip('insert: only required params', async () => {
     const responsePromise = client.vectorize.indexes.insert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: '@/path/to/vectors.ndjson',
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -165,8 +165,29 @@ describe('resource indexes', () => {
   test.skip('insert: required and optional params', async () => {
     const response = await client.vectorize.indexes.insert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: '@/path/to/vectors.ndjson',
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
       'unparsable-behavior': 'error',
+    });
+  });
+
+  test('listVectors: only required params', async () => {
+    const responsePromise = client.vectorize.indexes.listVectors('example-index', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('listVectors: required and optional params', async () => {
+    const response = await client.vectorize.indexes.listVectors('example-index', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      count: 50,
+      cursor: 'suUTaDY5PFUiRweVccnzyt9n75suNPbXHPshvCzue5mHjtj7Letjvzlza9eGj099',
     });
   });
 
@@ -199,7 +220,7 @@ describe('resource indexes', () => {
   test.skip('upsert: only required params', async () => {
     const responsePromise = client.vectorize.indexes.upsert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: '@/path/to/vectors.ndjson',
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -214,7 +235,7 @@ describe('resource indexes', () => {
   test.skip('upsert: required and optional params', async () => {
     const response = await client.vectorize.indexes.upsert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: '@/path/to/vectors.ndjson',
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
       'unparsable-behavior': 'error',
     });
   });

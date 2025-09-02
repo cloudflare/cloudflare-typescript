@@ -14,13 +14,6 @@ export class Custom extends APIResource {
    * const profile =
    *   await client.zeroTrust.dlp.profiles.custom.create({
    *     account_id: 'account_id',
-   *     entries: [
-   *       {
-   *         enabled: true,
-   *         name: 'name',
-   *         pattern: { regex: 'regex' },
-   *       },
-   *     ],
    *     name: 'name',
    *   });
    * ```
@@ -126,24 +119,9 @@ export interface CustomProfile {
   allowed_match_count: number;
 
   /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  context_awareness: ProfilesAPI.ContextAwareness;
-
-  /**
    * When the profile was created.
    */
   created_at: string;
-
-  entries: Array<
-    | CustomProfile.CustomEntry
-    | CustomProfile.PredefinedEntry
-    | CustomProfile.IntegrationEntry
-    | CustomProfile.ExactDataEntry
-    | CustomProfile.DocumentFingerprintEntry
-    | CustomProfile.WordListEntry
-  >;
 
   /**
    * The name of the profile.
@@ -162,9 +140,24 @@ export interface CustomProfile {
   confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
   /**
+   * @deprecated Scan the context of predefined entries to only return matches
+   * surrounded by keywords.
+   */
+  context_awareness?: ProfilesAPI.ContextAwareness;
+
+  /**
    * The description of the profile.
    */
   description?: string | null;
+
+  entries?: Array<
+    | CustomProfile.CustomEntry
+    | CustomProfile.PredefinedEntry
+    | CustomProfile.IntegrationEntry
+    | CustomProfile.ExactDataEntry
+    | CustomProfile.DocumentFingerprintEntry
+    | CustomProfile.WordListEntry
+  >;
 }
 
 export namespace CustomProfile {
@@ -198,6 +191,8 @@ export namespace CustomProfile {
     type: 'predefined';
 
     profile_id?: string | null;
+
+    variant?: PredefinedEntry.Variant;
   }
 
   export namespace PredefinedEntry {
@@ -212,6 +207,14 @@ export namespace CustomProfile {
        * service.
        */
       available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
+
+      description?: string | null;
     }
   }
 
@@ -315,11 +318,6 @@ export interface CustomCreateParams {
   /**
    * Body param:
    */
-  entries: Array<CustomCreateParams.DLPNewCustomEntry | CustomCreateParams.DLPNewWordListEntry>;
-
-  /**
-   * Body param:
-   */
   name: string;
 
   /**
@@ -339,8 +337,8 @@ export interface CustomCreateParams {
   confidence_threshold?: string | null;
 
   /**
-   * Body param: Scan the context of predefined entries to only return matches
-   * surrounded by keywords.
+   * @deprecated Body param: Scan the context of predefined entries to only return
+   * matches surrounded by keywords.
    */
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
@@ -348,6 +346,11 @@ export interface CustomCreateParams {
    * Body param: The description of the profile.
    */
   description?: string | null;
+
+  /**
+   * Body param:
+   */
+  entries?: Array<CustomCreateParams.DLPNewCustomEntry | CustomCreateParams.DLPNewWordListEntry>;
 
   /**
    * Body param:
@@ -452,8 +455,8 @@ export interface CustomUpdateParams {
   confidence_threshold?: string | null;
 
   /**
-   * Body param: Scan the context of predefined entries to only return matches
-   * surrounded by keywords.
+   * @deprecated Body param: Scan the context of predefined entries to only return
+   * matches surrounded by keywords.
    */
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
 

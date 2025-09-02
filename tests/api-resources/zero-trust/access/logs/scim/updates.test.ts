@@ -32,6 +32,8 @@ describe('resource updates', () => {
       direction: 'desc',
       idp_resource_id: 'idp_resource_id',
       limit: 10,
+      page: 0,
+      per_page: 0,
       request_method: ['DELETE', 'PATCH'],
       resource_group_name: 'ALL_EMPLOYEES',
       resource_type: ['USER', 'GROUP'],

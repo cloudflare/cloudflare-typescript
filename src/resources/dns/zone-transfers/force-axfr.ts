@@ -28,7 +28,7 @@ export class ForceAXFRResource extends APIResource {
 }
 
 /**
- * When force_axfr query parameter is set to true, the response is a simple string
+ * When force_axfr query parameter is set to true, the response is a simple string.
  */
 export type ForceAXFR = string;
 

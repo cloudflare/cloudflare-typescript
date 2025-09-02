@@ -272,7 +272,7 @@ export interface MonitorDeleteResponse {
 
 export interface MonitorCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -378,7 +378,7 @@ export interface MonitorCreateParams {
 
 export interface MonitorUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -484,21 +484,21 @@ export interface MonitorUpdateParams {
 
 export interface MonitorListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface MonitorDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface MonitorEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -604,7 +604,7 @@ export interface MonitorEditParams {
 
 export interface MonitorGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

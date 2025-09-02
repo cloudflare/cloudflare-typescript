@@ -96,7 +96,7 @@ export interface Clip {
   /**
    * Specifies the processing status for all quality levels for a video.
    */
-  status?: 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error';
+  status?: 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error' | 'live-inprogress';
 
   /**
    * The timestamp for a thumbnail image calculated as a percentage value of the

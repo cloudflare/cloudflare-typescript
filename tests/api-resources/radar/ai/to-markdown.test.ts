@@ -12,9 +12,10 @@ const client = new Cloudflare({
 describe('resource toMarkdown', () => {
   // TODO: investigate prism error for invalid security scheme used
   test.skip('create: only required params', async () => {
-    const responsePromise = client.radar.ai.toMarkdown.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.radar.ai.toMarkdown.create(
+      await toFile(Buffer.from('# my file contents'), 'README.md'),
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,9 +27,9 @@ describe('resource toMarkdown', () => {
 
   // TODO: investigate prism error for invalid security scheme used
   test.skip('create: required and optional params', async () => {
-    const response = await client.radar.ai.toMarkdown.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
-    });
+    const response = await client.radar.ai.toMarkdown.create(
+      await toFile(Buffer.from('# my file contents'), 'README.md'),
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

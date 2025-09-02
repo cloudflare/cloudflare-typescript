@@ -8,6 +8,7 @@ export {
   type AccountSettingGetParams,
 } from './account-settings';
 export { Assets } from './assets/index';
+export { Beta } from './beta/index';
 export {
   DomainsSinglePage,
   Domains,

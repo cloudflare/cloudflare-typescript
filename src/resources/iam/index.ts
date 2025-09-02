@@ -10,7 +10,7 @@ export {
   type PermissionGroupGetParams,
 } from './permission-groups';
 export {
-  ResourceGroupListResponsesV4PagePaginationArray,
+  ResourceGroupListResponsesSinglePage,
   ResourceGroups,
   type ResourceGroupCreateResponse,
   type ResourceGroupUpdateResponse,

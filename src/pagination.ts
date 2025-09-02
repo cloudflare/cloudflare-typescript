@@ -194,6 +194,76 @@ export class CursorPagination<Item> extends AbstractPage<Item> implements Cursor
   }
 }
 
+export interface CursorPaginationAfterResponse<Item> {
+  result: Array<Item>;
+
+  result_info: CursorPaginationAfterResponse.ResultInfo;
+}
+
+export namespace CursorPaginationAfterResponse {
+  export interface ResultInfo {
+    cursors?: ResultInfo.Cursors;
+  }
+
+  export namespace ResultInfo {
+    export interface Cursors {
+      after?: string;
+    }
+  }
+}
+
+export interface CursorPaginationAfterParams {
+  cursor?: string;
+}
+
+export class CursorPaginationAfter<Item>
+  extends AbstractPage<Item>
+  implements CursorPaginationAfterResponse<Item>
+{
+  result: Array<Item>;
+
+  result_info: CursorPaginationAfterResponse.ResultInfo;
+
+  constructor(
+    client: APIClient,
+    response: Response,
+    body: CursorPaginationAfterResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
+    super(client, response, body, options);
+
+    this.result = body.result || [];
+    this.result_info = body.result_info || {};
+  }
+
+  getPaginatedItems(): Item[] {
+    return this.result ?? [];
+  }
+
+  // @deprecated Please use `nextPageInfo()` instead
+  nextPageParams(): Partial<CursorPaginationAfterParams> | null {
+    const info = this.nextPageInfo();
+    if (!info) return null;
+    if ('params' in info) return info.params;
+    const params = Object.fromEntries(info.url.searchParams);
+    if (!Object.keys(params).length) return null;
+    return params;
+  }
+
+  nextPageInfo(): PageInfo | null {
+    const cursor = this.result_info?.cursors?.after;
+    if (!cursor) {
+      return null;
+    }
+
+    return {
+      params: {
+        cursor,
+      },
+    };
+  }
+}
+
 export interface CursorLimitPaginationResponse<Item> {
   result: Array<Item>;
 

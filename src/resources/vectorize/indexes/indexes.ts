@@ -199,7 +199,7 @@ export class Indexes extends APIResource {
    *   'example-index',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: '@/path/to/vectors.ndjson',
+   *     body: fs.createReadStream('path/to/file'),
    *   },
    * );
    * ```
@@ -216,7 +216,33 @@ export class Indexes extends APIResource {
         body: body,
         ...options,
         headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
+        __binaryRequest: true,
       }) as Core.APIPromise<{ result: IndexInsertResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Returns a paginated list of vector identifiers from the specified index.
+   *
+   * @example
+   * ```ts
+   * const response = await client.vectorize.indexes.listVectors(
+   *   'example-index',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  listVectors(
+    indexName: string,
+    params: IndexListVectorsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndexListVectorsResponse | null> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/list`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: IndexListVectorsResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -258,7 +284,7 @@ export class Indexes extends APIResource {
    *   'example-index',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: '@/path/to/vectors.ndjson',
+   *     body: fs.createReadStream('path/to/file'),
    *   },
    * );
    * ```
@@ -275,6 +301,7 @@ export class Indexes extends APIResource {
         body: body,
         ...options,
         headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
+        __binaryRequest: true,
       }) as Core.APIPromise<{ result: IndexUpsertResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -438,6 +465,47 @@ export interface IndexInsertResponse {
   mutationId?: string;
 }
 
+export interface IndexListVectorsResponse {
+  /**
+   * Number of vectors returned in this response
+   */
+  count: number;
+
+  /**
+   * Whether there are more vectors available beyond this response
+   */
+  isTruncated: boolean;
+
+  /**
+   * Total number of vectors in the index
+   */
+  totalCount: number;
+
+  /**
+   * Array of vector items
+   */
+  vectors: Array<IndexListVectorsResponse.Vector>;
+
+  /**
+   * When the cursor expires as an ISO8601 string
+   */
+  cursorExpirationTimestamp?: string | null;
+
+  /**
+   * Cursor for the next page of results
+   */
+  nextCursor?: string | null;
+}
+
+export namespace IndexListVectorsResponse {
+  export interface Vector {
+    /**
+     * Identifier for a Vector
+     */
+    id: string;
+  }
+}
+
 export interface IndexQueryResponse {
   /**
    * Specifies the count of vectors returned by the search
@@ -576,12 +644,29 @@ export interface IndexInsertParams {
   /**
    * Body param: ndjson file containing vectors to insert.
    */
-  body: string;
+  body: Core.Uploadable;
 
   /**
    * Query param: Behavior for ndjson parse failures.
    */
   'unparsable-behavior'?: 'error' | 'discard';
+}
+
+export interface IndexListVectorsParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: Maximum number of vectors to return
+   */
+  count?: number;
+
+  /**
+   * Query param: Cursor for pagination to get the next page of results
+   */
+  cursor?: string;
 }
 
 export interface IndexQueryParams {
@@ -626,7 +711,7 @@ export interface IndexUpsertParams {
   /**
    * Body param: ndjson file containing vectors to upsert.
    */
-  body: string;
+  body: Core.Uploadable;
 
   /**
    * Query param: Behavior for ndjson parse failures.
@@ -650,6 +735,7 @@ export declare namespace Indexes {
     type IndexGetByIDsResponse as IndexGetByIDsResponse,
     type IndexInfoResponse as IndexInfoResponse,
     type IndexInsertResponse as IndexInsertResponse,
+    type IndexListVectorsResponse as IndexListVectorsResponse,
     type IndexQueryResponse as IndexQueryResponse,
     type IndexUpsertResponse as IndexUpsertResponse,
     CreateIndicesSinglePage as CreateIndicesSinglePage,
@@ -661,6 +747,7 @@ export declare namespace Indexes {
     type IndexGetByIDsParams as IndexGetByIDsParams,
     type IndexInfoParams as IndexInfoParams,
     type IndexInsertParams as IndexInsertParams,
+    type IndexListVectorsParams as IndexListVectorsParams,
     type IndexQueryParams as IndexQueryParams,
     type IndexUpsertParams as IndexUpsertParams,
   };

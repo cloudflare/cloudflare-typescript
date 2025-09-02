@@ -78,8 +78,8 @@ export class Profiles extends APIResource {
 export class ProfilesSinglePage extends SinglePage<Profile> {}
 
 /**
- * Scan the context of predefined entries to only return matches surrounded by
- * keywords.
+ * @deprecated Scan the context of predefined entries to only return matches
+ * surrounded by keywords.
  */
 export interface ContextAwareness {
   /**
@@ -95,8 +95,8 @@ export interface ContextAwareness {
 }
 
 /**
- * Scan the context of predefined entries to only return matches surrounded by
- * keywords.
+ * @deprecated Scan the context of predefined entries to only return matches
+ * surrounded by keywords.
  */
 export interface ContextAwarenessParam {
   /**
@@ -126,24 +126,9 @@ export namespace Profile {
     allowed_match_count: number;
 
     /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    context_awareness: ProfilesAPI.ContextAwareness;
-
-    /**
      * When the profile was created.
      */
     created_at: string;
-
-    entries: Array<
-      | CustomProfile.CustomEntry
-      | CustomProfile.PredefinedEntry
-      | CustomProfile.IntegrationEntry
-      | CustomProfile.ExactDataEntry
-      | CustomProfile.DocumentFingerprintEntry
-      | CustomProfile.WordListEntry
-    >;
 
     /**
      * The name of the profile.
@@ -164,9 +149,24 @@ export namespace Profile {
     confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
     /**
+     * @deprecated Scan the context of predefined entries to only return matches
+     * surrounded by keywords.
+     */
+    context_awareness?: ProfilesAPI.ContextAwareness;
+
+    /**
      * The description of the profile.
      */
     description?: string | null;
+
+    entries?: Array<
+      | CustomProfile.CustomEntry
+      | CustomProfile.PredefinedEntry
+      | CustomProfile.IntegrationEntry
+      | CustomProfile.ExactDataEntry
+      | CustomProfile.DocumentFingerprintEntry
+      | CustomProfile.WordListEntry
+    >;
   }
 
   export namespace CustomProfile {
@@ -200,6 +200,8 @@ export namespace Profile {
       type: 'predefined';
 
       profile_id?: string | null;
+
+      variant?: PredefinedEntry.Variant;
     }
 
     export namespace PredefinedEntry {
@@ -214,6 +216,14 @@ export namespace Profile {
          * service.
          */
         available: boolean;
+      }
+
+      export interface Variant {
+        topic_type: 'Intent' | 'Content';
+
+        type: 'PromptTopic';
+
+        description?: string | null;
       }
     }
 
@@ -317,8 +327,8 @@ export namespace Profile {
     confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
     /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
+     * @deprecated Scan the context of predefined entries to only return matches
+     * surrounded by keywords.
      */
     context_awareness?: ProfilesAPI.ContextAwareness;
 
@@ -361,6 +371,8 @@ export namespace Profile {
       type: 'predefined';
 
       profile_id?: string | null;
+
+      variant?: PredefinedEntry.Variant;
     }
 
     export namespace PredefinedEntry {
@@ -375,6 +387,14 @@ export namespace Profile {
          * service.
          */
         available: boolean;
+      }
+
+      export interface Variant {
+        topic_type: 'Intent' | 'Content';
+
+        type: 'PromptTopic';
+
+        description?: string | null;
       }
     }
 
@@ -506,6 +526,8 @@ export namespace Profile {
       type: 'predefined';
 
       profile_id?: string | null;
+
+      variant?: PredefinedEntry.Variant;
     }
 
     export namespace PredefinedEntry {
@@ -520,6 +542,14 @@ export namespace Profile {
          * service.
          */
         available: boolean;
+      }
+
+      export interface Variant {
+        topic_type: 'Intent' | 'Content';
+
+        type: 'PromptTopic';
+
+        description?: string | null;
       }
     }
 

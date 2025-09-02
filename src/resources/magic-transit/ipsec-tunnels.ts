@@ -279,6 +279,10 @@ export interface IPSECTunnelCreateResponse {
    */
   allow_null_cipher?: boolean;
 
+  bgp?: IPSECTunnelCreateResponse.BGP;
+
+  bgp_status?: IPSECTunnelCreateResponse.BGPStatus;
+
   /**
    * The date and time the tunnel was created.
    */
@@ -298,6 +302,14 @@ export interface IPSECTunnelCreateResponse {
   health_check?: IPSECTunnelCreateResponse.HealthCheck;
 
   /**
+   * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+   * address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
+
+  /**
    * The date and time the tunnel was last modified.
    */
   modified_on?: string;
@@ -315,6 +327,59 @@ export interface IPSECTunnelCreateResponse {
 }
 
 export namespace IPSECTunnelCreateResponse {
+  export interface BGP {
+    /**
+     * ASN used on the customer end of the BGP session
+     */
+    customer_asn: number;
+
+    /**
+     * Prefixes in this list will be advertised to the customer device, in addition to
+     * the routes in the Magic routing table.
+     */
+    extra_prefixes?: Array<string>;
+
+    /**
+     * MD5 key to use for session authentication.
+     *
+     * Note that _this is not a security measure_. MD5 is not a valid security
+     * mechanism, and the key is not treated as a secret value. This is _only_
+     * supported for preventing misconfiguration, not for defending against malicious
+     * attacks.
+     *
+     * The MD5 key, if set, must be of non-zero length and consist only of the
+     * following types of character:
+     *
+     * - ASCII alphanumerics: `[a-zA-Z0-9]`
+     * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+     *
+     * In other words, MD5 keys may contain any printable ASCII character aside from
+     * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+     * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+     * specifying an MD5 key with one or more of these disallowed characters will be
+     * rejected.
+     */
+    md5_key?: string;
+  }
+
+  export interface BGPStatus {
+    state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+    tcp_established: boolean;
+
+    updated_at: string;
+
+    bgp_state?: string;
+
+    cf_speaker_ip?: string;
+
+    cf_speaker_port?: number;
+
+    customer_speaker_ip?: string;
+
+    customer_speaker_port?: number;
+  }
+
   export interface HealthCheck {
     /**
      * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -412,6 +477,10 @@ export namespace IPSECTunnelUpdateResponse {
      */
     allow_null_cipher?: boolean;
 
+    bgp?: ModifiedIPSECTunnel.BGP;
+
+    bgp_status?: ModifiedIPSECTunnel.BGPStatus;
+
     /**
      * The date and time the tunnel was created.
      */
@@ -431,6 +500,14 @@ export namespace IPSECTunnelUpdateResponse {
     health_check?: ModifiedIPSECTunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -448,6 +525,59 @@ export namespace IPSECTunnelUpdateResponse {
   }
 
   export namespace ModifiedIPSECTunnel {
+    export interface BGP {
+      /**
+       * ASN used on the customer end of the BGP session
+       */
+      customer_asn: number;
+
+      /**
+       * Prefixes in this list will be advertised to the customer device, in addition to
+       * the routes in the Magic routing table.
+       */
+      extra_prefixes?: Array<string>;
+
+      /**
+       * MD5 key to use for session authentication.
+       *
+       * Note that _this is not a security measure_. MD5 is not a valid security
+       * mechanism, and the key is not treated as a secret value. This is _only_
+       * supported for preventing misconfiguration, not for defending against malicious
+       * attacks.
+       *
+       * The MD5 key, if set, must be of non-zero length and consist only of the
+       * following types of character:
+       *
+       * - ASCII alphanumerics: `[a-zA-Z0-9]`
+       * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+       *
+       * In other words, MD5 keys may contain any printable ASCII character aside from
+       * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+       * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+       * specifying an MD5 key with one or more of these disallowed characters will be
+       * rejected.
+       */
+      md5_key?: string;
+    }
+
+    export interface BGPStatus {
+      state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+      tcp_established: boolean;
+
+      updated_at: string;
+
+      bgp_state?: string;
+
+      cf_speaker_ip?: string;
+
+      cf_speaker_port?: number;
+
+      customer_speaker_ip?: string;
+
+      customer_speaker_port?: number;
+    }
+
     export interface HealthCheck {
       /**
        * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -544,6 +674,10 @@ export namespace IPSECTunnelListResponse {
      */
     allow_null_cipher?: boolean;
 
+    bgp?: IPSECTunnel.BGP;
+
+    bgp_status?: IPSECTunnel.BGPStatus;
+
     /**
      * The date and time the tunnel was created.
      */
@@ -563,6 +697,14 @@ export namespace IPSECTunnelListResponse {
     health_check?: IPSECTunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -580,6 +722,59 @@ export namespace IPSECTunnelListResponse {
   }
 
   export namespace IPSECTunnel {
+    export interface BGP {
+      /**
+       * ASN used on the customer end of the BGP session
+       */
+      customer_asn: number;
+
+      /**
+       * Prefixes in this list will be advertised to the customer device, in addition to
+       * the routes in the Magic routing table.
+       */
+      extra_prefixes?: Array<string>;
+
+      /**
+       * MD5 key to use for session authentication.
+       *
+       * Note that _this is not a security measure_. MD5 is not a valid security
+       * mechanism, and the key is not treated as a secret value. This is _only_
+       * supported for preventing misconfiguration, not for defending against malicious
+       * attacks.
+       *
+       * The MD5 key, if set, must be of non-zero length and consist only of the
+       * following types of character:
+       *
+       * - ASCII alphanumerics: `[a-zA-Z0-9]`
+       * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+       *
+       * In other words, MD5 keys may contain any printable ASCII character aside from
+       * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+       * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+       * specifying an MD5 key with one or more of these disallowed characters will be
+       * rejected.
+       */
+      md5_key?: string;
+    }
+
+    export interface BGPStatus {
+      state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+      tcp_established: boolean;
+
+      updated_at: string;
+
+      bgp_state?: string;
+
+      cf_speaker_ip?: string;
+
+      cf_speaker_port?: number;
+
+      customer_speaker_ip?: string;
+
+      customer_speaker_port?: number;
+    }
+
     export interface HealthCheck {
       /**
        * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -678,6 +873,10 @@ export namespace IPSECTunnelDeleteResponse {
      */
     allow_null_cipher?: boolean;
 
+    bgp?: DeletedIPSECTunnel.BGP;
+
+    bgp_status?: DeletedIPSECTunnel.BGPStatus;
+
     /**
      * The date and time the tunnel was created.
      */
@@ -697,6 +896,14 @@ export namespace IPSECTunnelDeleteResponse {
     health_check?: DeletedIPSECTunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -714,6 +921,59 @@ export namespace IPSECTunnelDeleteResponse {
   }
 
   export namespace DeletedIPSECTunnel {
+    export interface BGP {
+      /**
+       * ASN used on the customer end of the BGP session
+       */
+      customer_asn: number;
+
+      /**
+       * Prefixes in this list will be advertised to the customer device, in addition to
+       * the routes in the Magic routing table.
+       */
+      extra_prefixes?: Array<string>;
+
+      /**
+       * MD5 key to use for session authentication.
+       *
+       * Note that _this is not a security measure_. MD5 is not a valid security
+       * mechanism, and the key is not treated as a secret value. This is _only_
+       * supported for preventing misconfiguration, not for defending against malicious
+       * attacks.
+       *
+       * The MD5 key, if set, must be of non-zero length and consist only of the
+       * following types of character:
+       *
+       * - ASCII alphanumerics: `[a-zA-Z0-9]`
+       * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+       *
+       * In other words, MD5 keys may contain any printable ASCII character aside from
+       * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+       * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+       * specifying an MD5 key with one or more of these disallowed characters will be
+       * rejected.
+       */
+      md5_key?: string;
+    }
+
+    export interface BGPStatus {
+      state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+      tcp_established: boolean;
+
+      updated_at: string;
+
+      bgp_state?: string;
+
+      cf_speaker_ip?: string;
+
+      cf_speaker_port?: number;
+
+      customer_speaker_ip?: string;
+
+      customer_speaker_port?: number;
+    }
+
     export interface HealthCheck {
       /**
        * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -812,6 +1072,10 @@ export namespace IPSECTunnelBulkUpdateResponse {
      */
     allow_null_cipher?: boolean;
 
+    bgp?: ModifiedIPSECTunnel.BGP;
+
+    bgp_status?: ModifiedIPSECTunnel.BGPStatus;
+
     /**
      * The date and time the tunnel was created.
      */
@@ -831,6 +1095,14 @@ export namespace IPSECTunnelBulkUpdateResponse {
     health_check?: ModifiedIPSECTunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -848,6 +1120,59 @@ export namespace IPSECTunnelBulkUpdateResponse {
   }
 
   export namespace ModifiedIPSECTunnel {
+    export interface BGP {
+      /**
+       * ASN used on the customer end of the BGP session
+       */
+      customer_asn: number;
+
+      /**
+       * Prefixes in this list will be advertised to the customer device, in addition to
+       * the routes in the Magic routing table.
+       */
+      extra_prefixes?: Array<string>;
+
+      /**
+       * MD5 key to use for session authentication.
+       *
+       * Note that _this is not a security measure_. MD5 is not a valid security
+       * mechanism, and the key is not treated as a secret value. This is _only_
+       * supported for preventing misconfiguration, not for defending against malicious
+       * attacks.
+       *
+       * The MD5 key, if set, must be of non-zero length and consist only of the
+       * following types of character:
+       *
+       * - ASCII alphanumerics: `[a-zA-Z0-9]`
+       * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+       *
+       * In other words, MD5 keys may contain any printable ASCII character aside from
+       * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+       * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+       * specifying an MD5 key with one or more of these disallowed characters will be
+       * rejected.
+       */
+      md5_key?: string;
+    }
+
+    export interface BGPStatus {
+      state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+      tcp_established: boolean;
+
+      updated_at: string;
+
+      bgp_state?: string;
+
+      cf_speaker_ip?: string;
+
+      cf_speaker_port?: number;
+
+      customer_speaker_ip?: string;
+
+      customer_speaker_port?: number;
+    }
+
     export interface HealthCheck {
       /**
        * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -944,6 +1269,10 @@ export namespace IPSECTunnelGetResponse {
      */
     allow_null_cipher?: boolean;
 
+    bgp?: IPSECTunnel.BGP;
+
+    bgp_status?: IPSECTunnel.BGPStatus;
+
     /**
      * The date and time the tunnel was created.
      */
@@ -963,6 +1292,14 @@ export namespace IPSECTunnelGetResponse {
     health_check?: IPSECTunnel.HealthCheck;
 
     /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
+
+    /**
      * The date and time the tunnel was last modified.
      */
     modified_on?: string;
@@ -980,6 +1317,59 @@ export namespace IPSECTunnelGetResponse {
   }
 
   export namespace IPSECTunnel {
+    export interface BGP {
+      /**
+       * ASN used on the customer end of the BGP session
+       */
+      customer_asn: number;
+
+      /**
+       * Prefixes in this list will be advertised to the customer device, in addition to
+       * the routes in the Magic routing table.
+       */
+      extra_prefixes?: Array<string>;
+
+      /**
+       * MD5 key to use for session authentication.
+       *
+       * Note that _this is not a security measure_. MD5 is not a valid security
+       * mechanism, and the key is not treated as a secret value. This is _only_
+       * supported for preventing misconfiguration, not for defending against malicious
+       * attacks.
+       *
+       * The MD5 key, if set, must be of non-zero length and consist only of the
+       * following types of character:
+       *
+       * - ASCII alphanumerics: `[a-zA-Z0-9]`
+       * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+       *
+       * In other words, MD5 keys may contain any printable ASCII character aside from
+       * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+       * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+       * specifying an MD5 key with one or more of these disallowed characters will be
+       * rejected.
+       */
+      md5_key?: string;
+    }
+
+    export interface BGPStatus {
+      state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+      tcp_established: boolean;
+
+      updated_at: string;
+
+      bgp_state?: string;
+
+      cf_speaker_ip?: string;
+
+      cf_speaker_port?: number;
+
+      customer_speaker_ip?: string;
+
+      customer_speaker_port?: number;
+    }
+
     export interface HealthCheck {
       /**
        * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -1084,6 +1474,11 @@ export interface IPSECTunnelCreateParams {
   name: string;
 
   /**
+   * Body param:
+   */
+  bgp?: IPSECTunnelCreateParams.BGP;
+
+  /**
    * Body param: The IP address assigned to the customer side of the IPsec tunnel.
    * Not required, but must be set for proactive traceroutes to work.
    */
@@ -1098,6 +1493,14 @@ export interface IPSECTunnelCreateParams {
    * Body param:
    */
   health_check?: IPSECTunnelCreateParams.HealthCheck;
+
+  /**
+   * Body param: A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space
+   * with the address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
 
   /**
    * Body param: A randomly generated or provided string for use in the IPsec tunnel.
@@ -1118,6 +1521,41 @@ export interface IPSECTunnelCreateParams {
 }
 
 export namespace IPSECTunnelCreateParams {
+  export interface BGP {
+    /**
+     * ASN used on the customer end of the BGP session
+     */
+    customer_asn: number;
+
+    /**
+     * Prefixes in this list will be advertised to the customer device, in addition to
+     * the routes in the Magic routing table.
+     */
+    extra_prefixes?: Array<string>;
+
+    /**
+     * MD5 key to use for session authentication.
+     *
+     * Note that _this is not a security measure_. MD5 is not a valid security
+     * mechanism, and the key is not treated as a secret value. This is _only_
+     * supported for preventing misconfiguration, not for defending against malicious
+     * attacks.
+     *
+     * The MD5 key, if set, must be of non-zero length and consist only of the
+     * following types of character:
+     *
+     * - ASCII alphanumerics: `[a-zA-Z0-9]`
+     * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+     *
+     * In other words, MD5 keys may contain any printable ASCII character aside from
+     * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+     * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+     * specifying an MD5 key with one or more of these disallowed characters will be
+     * rejected.
+     */
+    md5_key?: string;
+  }
+
   export interface HealthCheck {
     /**
      * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -1197,6 +1635,11 @@ export interface IPSECTunnelUpdateParams {
   name: string;
 
   /**
+   * Body param:
+   */
+  bgp?: IPSECTunnelUpdateParams.BGP;
+
+  /**
    * Body param: The IP address assigned to the customer side of the IPsec tunnel.
    * Not required, but must be set for proactive traceroutes to work.
    */
@@ -1211,6 +1654,14 @@ export interface IPSECTunnelUpdateParams {
    * Body param:
    */
   health_check?: IPSECTunnelUpdateParams.HealthCheck;
+
+  /**
+   * Body param: A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space
+   * with the address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
 
   /**
    * Body param: A randomly generated or provided string for use in the IPsec tunnel.
@@ -1231,6 +1682,41 @@ export interface IPSECTunnelUpdateParams {
 }
 
 export namespace IPSECTunnelUpdateParams {
+  export interface BGP {
+    /**
+     * ASN used on the customer end of the BGP session
+     */
+    customer_asn: number;
+
+    /**
+     * Prefixes in this list will be advertised to the customer device, in addition to
+     * the routes in the Magic routing table.
+     */
+    extra_prefixes?: Array<string>;
+
+    /**
+     * MD5 key to use for session authentication.
+     *
+     * Note that _this is not a security measure_. MD5 is not a valid security
+     * mechanism, and the key is not treated as a secret value. This is _only_
+     * supported for preventing misconfiguration, not for defending against malicious
+     * attacks.
+     *
+     * The MD5 key, if set, must be of non-zero length and consist only of the
+     * following types of character:
+     *
+     * - ASCII alphanumerics: `[a-zA-Z0-9]`
+     * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+     *
+     * In other words, MD5 keys may contain any printable ASCII character aside from
+     * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+     * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+     * specifying an MD5 key with one or more of these disallowed characters will be
+     * rejected.
+     */
+    md5_key?: string;
+  }
+
   export interface HealthCheck {
     /**
      * The direction of the flow of the healthcheck. Either unidirectional, where the

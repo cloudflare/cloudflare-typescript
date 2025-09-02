@@ -1,9 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  DurableObjectsCursorLimitPagination,
+  DurableObjectsCursorPaginationAfter,
   Objects,
   type DurableObject,
   type ObjectListParams,
 } from './objects';
-export { NamespacesSinglePage, Namespaces, type Namespace, type NamespaceListParams } from './namespaces';
+export {
+  NamespacesV4PagePaginationArray,
+  Namespaces,
+  type Namespace,
+  type NamespaceListParams,
+} from './namespaces';

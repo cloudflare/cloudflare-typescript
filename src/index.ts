@@ -8,6 +8,8 @@ import * as Pagination from './pagination';
 import {
   type CursorLimitPaginationParams,
   CursorLimitPaginationResponse,
+  type CursorPaginationAfterParams,
+  CursorPaginationAfterResponse,
   type CursorPaginationParams,
   CursorPaginationResponse,
   SinglePageResponse,
@@ -379,7 +381,11 @@ export class Cloudflare extends Core.APIClient {
     };
   }
 
-  protected override validateHeaders(headers: Core.Headers, customHeaders: Core.Headers) {
+  protected override validateHeaders(
+    headers: Core.Headers,
+    customHeaders: Core.Headers,
+    usingCustomFetch: boolean,
+  ) {
     if (this.apiEmail && headers['x-auth-email']) {
       return;
     }
@@ -405,6 +411,11 @@ export class Cloudflare extends Core.APIClient {
       return;
     }
     if (customHeaders['x-auth-user-service-key'] === null) {
+      return;
+    }
+
+    // we can't check for the presence of the headers with a custom fetch implementation, so we shouldn't throw an error
+    if (usingCustomFetch) {
       return;
     }
 
@@ -586,6 +597,7 @@ Cloudflare.CustomPages = CustomPages;
 Cloudflare.SecretsStore = SecretsStore;
 Cloudflare.Pipelines = Pipelines;
 Cloudflare.SchemaValidation = SchemaValidation;
+
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -605,6 +617,12 @@ export declare namespace Cloudflare {
   export {
     type CursorPaginationParams as CursorPaginationParams,
     type CursorPaginationResponse as CursorPaginationResponse,
+  };
+
+  export import CursorPaginationAfter = Pagination.CursorPaginationAfter;
+  export {
+    type CursorPaginationAfterParams as CursorPaginationAfterParams,
+    type CursorPaginationAfterResponse as CursorPaginationAfterResponse,
   };
 
   export import CursorLimitPagination = Pagination.CursorLimitPagination;

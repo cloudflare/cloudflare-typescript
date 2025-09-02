@@ -3,7 +3,8 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as GroupsAPI from '../../access/groups';
-import { ZeroTrustGroupsSinglePage } from '../../access/groups';
+import { ZeroTrustGroupsV4PagePaginationArray } from '../../access/groups';
+import { type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Groups extends APIResource {
   /**
@@ -25,17 +26,17 @@ export class Groups extends APIResource {
     identityProviderId: string,
     params: GroupListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustGroupsSinglePage, GroupsAPI.ZeroTrustGroup> {
+  ): Core.PagePromise<ZeroTrustGroupsV4PagePaginationArray, GroupsAPI.ZeroTrustGroup> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/identity_providers/${identityProviderId}/scim/groups`,
-      ZeroTrustGroupsSinglePage,
+      ZeroTrustGroupsV4PagePaginationArray,
       { query, ...options },
     );
   }
 }
 
-export interface GroupListParams {
+export interface GroupListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
@@ -63,4 +64,4 @@ export declare namespace Groups {
   export { type GroupListParams as GroupListParams };
 }
 
-export { ZeroTrustGroupsSinglePage };
+export { ZeroTrustGroupsV4PagePaginationArray };

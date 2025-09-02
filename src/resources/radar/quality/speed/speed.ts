@@ -91,7 +91,7 @@ export namespace SpeedHistogramResponse {
      */
     bucketSize: number;
 
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -190,7 +190,7 @@ export namespace SpeedSummaryResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 

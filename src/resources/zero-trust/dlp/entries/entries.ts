@@ -9,6 +9,11 @@ import {
   CustomCreateResponse,
   CustomDeleteParams,
   CustomDeleteResponse,
+  CustomGetParams,
+  CustomGetResponse,
+  CustomListParams,
+  CustomListResponse,
+  CustomListResponsesSinglePage,
   CustomUpdateParams,
   CustomUpdateResponse,
 } from './custom';
@@ -19,6 +24,11 @@ import {
   IntegrationCreateResponse,
   IntegrationDeleteParams,
   IntegrationDeleteResponse,
+  IntegrationGetParams,
+  IntegrationGetResponse,
+  IntegrationListParams,
+  IntegrationListResponse,
+  IntegrationListResponsesSinglePage,
   IntegrationUpdateParams,
   IntegrationUpdateResponse,
 } from './integration';
@@ -29,6 +39,11 @@ import {
   PredefinedCreateResponse,
   PredefinedDeleteParams,
   PredefinedDeleteResponse,
+  PredefinedGetParams,
+  PredefinedGetResponse,
+  PredefinedListParams,
+  PredefinedListResponse,
+  PredefinedListResponsesSinglePage,
   PredefinedUpdateParams,
   PredefinedUpdateResponse,
 } from './predefined';
@@ -224,6 +239,8 @@ export namespace EntryUpdateResponse {
     type: 'predefined';
 
     profile_id?: string | null;
+
+    variant?: PredefinedEntry.Variant;
   }
 
   export namespace PredefinedEntry {
@@ -238,6 +255,14 @@ export namespace EntryUpdateResponse {
        * service.
        */
       available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
+
+      description?: string | null;
     }
   }
 
@@ -351,6 +376,8 @@ export namespace EntryListResponse {
     type: 'predefined';
 
     profile_id?: string | null;
+
+    variant?: PredefinedEntry.Variant;
   }
 
   export namespace PredefinedEntry {
@@ -365,6 +392,14 @@ export namespace EntryListResponse {
        * service.
        */
       available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
+
+      description?: string | null;
     }
   }
 
@@ -480,6 +515,8 @@ export namespace EntryGetResponse {
     type: 'predefined';
 
     profile_id?: string | null;
+
+    variant?: PredefinedEntry.Variant;
   }
 
   export namespace PredefinedEntry {
@@ -494,6 +531,14 @@ export namespace EntryGetResponse {
        * service.
        */
       available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
+
+      description?: string | null;
     }
   }
 
@@ -677,8 +722,11 @@ export interface EntryGetParams {
 
 Entries.EntryListResponsesSinglePage = EntryListResponsesSinglePage;
 Entries.Custom = Custom;
+Entries.CustomListResponsesSinglePage = CustomListResponsesSinglePage;
 Entries.Predefined = Predefined;
+Entries.PredefinedListResponsesSinglePage = PredefinedListResponsesSinglePage;
 Entries.Integration = Integration;
+Entries.IntegrationListResponsesSinglePage = IntegrationListResponsesSinglePage;
 
 export declare namespace Entries {
   export {
@@ -699,29 +747,44 @@ export declare namespace Entries {
     Custom as Custom,
     type CustomCreateResponse as CustomCreateResponse,
     type CustomUpdateResponse as CustomUpdateResponse,
+    type CustomListResponse as CustomListResponse,
     type CustomDeleteResponse as CustomDeleteResponse,
+    type CustomGetResponse as CustomGetResponse,
+    CustomListResponsesSinglePage as CustomListResponsesSinglePage,
     type CustomCreateParams as CustomCreateParams,
     type CustomUpdateParams as CustomUpdateParams,
+    type CustomListParams as CustomListParams,
     type CustomDeleteParams as CustomDeleteParams,
+    type CustomGetParams as CustomGetParams,
   };
 
   export {
     Predefined as Predefined,
     type PredefinedCreateResponse as PredefinedCreateResponse,
     type PredefinedUpdateResponse as PredefinedUpdateResponse,
+    type PredefinedListResponse as PredefinedListResponse,
     type PredefinedDeleteResponse as PredefinedDeleteResponse,
+    type PredefinedGetResponse as PredefinedGetResponse,
+    PredefinedListResponsesSinglePage as PredefinedListResponsesSinglePage,
     type PredefinedCreateParams as PredefinedCreateParams,
     type PredefinedUpdateParams as PredefinedUpdateParams,
+    type PredefinedListParams as PredefinedListParams,
     type PredefinedDeleteParams as PredefinedDeleteParams,
+    type PredefinedGetParams as PredefinedGetParams,
   };
 
   export {
     Integration as Integration,
     type IntegrationCreateResponse as IntegrationCreateResponse,
     type IntegrationUpdateResponse as IntegrationUpdateResponse,
+    type IntegrationListResponse as IntegrationListResponse,
     type IntegrationDeleteResponse as IntegrationDeleteResponse,
+    type IntegrationGetResponse as IntegrationGetResponse,
+    IntegrationListResponsesSinglePage as IntegrationListResponsesSinglePage,
     type IntegrationCreateParams as IntegrationCreateParams,
     type IntegrationUpdateParams as IntegrationUpdateParams,
+    type IntegrationListParams as IntegrationListParams,
     type IntegrationDeleteParams as IntegrationDeleteParams,
+    type IntegrationGetParams as IntegrationGetParams,
   };
 }

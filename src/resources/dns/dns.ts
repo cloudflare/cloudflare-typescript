@@ -71,64 +71,6 @@ export class DNS extends APIResource {
   zoneTransfers: ZoneTransfersAPI.ZoneTransfers = new ZoneTransfersAPI.ZoneTransfers(this._client);
 }
 
-/**
- * Nominal metric values, broken down by time interval.
- */
-export type DNSAnalyticsNominalMetric = Array<unknown>;
-
-export interface DNSAnalyticsQuery {
-  /**
-   * Array of dimension names.
-   */
-  dimensions: Array<string>;
-
-  /**
-   * Limit number of returned metrics.
-   */
-  limit: number;
-
-  /**
-   * Array of metric names.
-   */
-  metrics: Array<string>;
-
-  /**
-   * Start date and time of requesting data period in ISO 8601 format.
-   */
-  since: string;
-
-  /**
-   * Unit of time to group data by.
-   */
-  time_delta:
-    | 'all'
-    | 'auto'
-    | 'year'
-    | 'quarter'
-    | 'month'
-    | 'week'
-    | 'day'
-    | 'hour'
-    | 'dekaminute'
-    | 'minute';
-
-  /**
-   * End date and time of requesting data period in ISO 8601 format.
-   */
-  until: string;
-
-  /**
-   * Segmentation filter in 'attribute operator value' format.
-   */
-  filters?: string;
-
-  /**
-   * Array of dimensions to sort by, where each dimension may be prefixed by -
-   * (descending) or + (ascending).
-   */
-  sort?: Array<string>;
-}
-
 DNS.DNSSECResource = DNSSECResource;
 DNS.Records = Records;
 DNS.RecordResponsesV4PagePaginationArray = RecordResponsesV4PagePaginationArray;
@@ -137,11 +79,6 @@ DNS.Analytics = Analytics;
 DNS.ZoneTransfers = ZoneTransfers;
 
 export declare namespace DNS {
-  export {
-    type DNSAnalyticsNominalMetric as DNSAnalyticsNominalMetric,
-    type DNSAnalyticsQuery as DNSAnalyticsQuery,
-  };
-
   export {
     DNSSECResource as DNSSECResource,
     type DNSSEC as DNSSEC,

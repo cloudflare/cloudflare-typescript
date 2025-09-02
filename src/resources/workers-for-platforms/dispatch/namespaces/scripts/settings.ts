@@ -119,11 +119,6 @@ export interface SettingEditResponse {
   logpush?: boolean;
 
   /**
-   * Migrations to apply for Durable Objects associated with this Worker.
-   */
-  migrations?: WorkersAPI.SingleStepMigration | SettingEditResponse.WorkersMultipleStepMigrations;
-
-  /**
    * Observability settings for the Worker.
    */
   observability?: SettingEditResponse.Observability;
@@ -147,7 +142,7 @@ export interface SettingEditResponse {
   /**
    * Usage model for the Worker invocations.
    */
-  usage_model?: 'standard';
+  usage_model?: 'standard' | 'bundled' | 'unbound';
 }
 
 export namespace SettingEditResponse {
@@ -620,24 +615,6 @@ export namespace SettingEditResponse {
     cpu_ms?: number;
   }
 
-  export interface WorkersMultipleStepMigrations {
-    /**
-     * Tag to set as the latest migration tag.
-     */
-    new_tag?: string;
-
-    /**
-     * Tag used to verify against the latest migration tag for this Worker. If they
-     * don't match, the upload is rejected.
-     */
-    old_tag?: string;
-
-    /**
-     * Migrations to apply in order.
-     */
-    steps?: Array<WorkersAPI.MigrationStep>;
-  }
-
   /**
    * Observability settings for the Worker.
    */
@@ -752,11 +729,6 @@ export interface SettingGetResponse {
   logpush?: boolean;
 
   /**
-   * Migrations to apply for Durable Objects associated with this Worker.
-   */
-  migrations?: WorkersAPI.SingleStepMigration | SettingGetResponse.WorkersMultipleStepMigrations;
-
-  /**
    * Observability settings for the Worker.
    */
   observability?: SettingGetResponse.Observability;
@@ -780,7 +752,7 @@ export interface SettingGetResponse {
   /**
    * Usage model for the Worker invocations.
    */
-  usage_model?: 'standard';
+  usage_model?: 'standard' | 'bundled' | 'unbound';
 }
 
 export namespace SettingGetResponse {
@@ -1253,24 +1225,6 @@ export namespace SettingGetResponse {
     cpu_ms?: number;
   }
 
-  export interface WorkersMultipleStepMigrations {
-    /**
-     * Tag to set as the latest migration tag.
-     */
-    new_tag?: string;
-
-    /**
-     * Tag used to verify against the latest migration tag for this Worker. If they
-     * don't match, the upload is rejected.
-     */
-    old_tag?: string;
-
-    /**
-     * Migrations to apply in order.
-     */
-    steps?: Array<WorkersAPI.MigrationStep>;
-  }
-
   /**
    * Observability settings for the Worker.
    */
@@ -1426,7 +1380,7 @@ export namespace SettingEditParams {
     /**
      * Usage model for the Worker invocations.
      */
-    usage_model?: 'standard';
+    usage_model?: 'standard' | 'bundled' | 'unbound';
   }
 
   export namespace Settings {

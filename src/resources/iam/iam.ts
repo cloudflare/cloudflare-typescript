@@ -20,7 +20,7 @@ import {
   ResourceGroupGetResponse,
   ResourceGroupListParams,
   ResourceGroupListResponse,
-  ResourceGroupListResponsesV4PagePaginationArray,
+  ResourceGroupListResponsesSinglePage,
   ResourceGroupUpdateParams,
   ResourceGroupUpdateResponse,
   ResourceGroups,
@@ -52,7 +52,7 @@ export class IAM extends APIResource {
 IAM.PermissionGroups = PermissionGroups;
 IAM.PermissionGroupListResponsesV4PagePaginationArray = PermissionGroupListResponsesV4PagePaginationArray;
 IAM.ResourceGroups = ResourceGroups;
-IAM.ResourceGroupListResponsesV4PagePaginationArray = ResourceGroupListResponsesV4PagePaginationArray;
+IAM.ResourceGroupListResponsesSinglePage = ResourceGroupListResponsesSinglePage;
 IAM.UserGroups = UserGroups;
 IAM.UserGroupListResponsesV4PagePaginationArray = UserGroupListResponsesV4PagePaginationArray;
 
@@ -73,7 +73,7 @@ export declare namespace IAM {
     type ResourceGroupListResponse as ResourceGroupListResponse,
     type ResourceGroupDeleteResponse as ResourceGroupDeleteResponse,
     type ResourceGroupGetResponse as ResourceGroupGetResponse,
-    ResourceGroupListResponsesV4PagePaginationArray as ResourceGroupListResponsesV4PagePaginationArray,
+    ResourceGroupListResponsesSinglePage as ResourceGroupListResponsesSinglePage,
     type ResourceGroupCreateParams as ResourceGroupCreateParams,
     type ResourceGroupUpdateParams as ResourceGroupUpdateParams,
     type ResourceGroupListParams as ResourceGroupListParams,

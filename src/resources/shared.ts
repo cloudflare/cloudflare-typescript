@@ -141,6 +141,13 @@ export interface CloudflareTunnel {
   account_tag?: string;
 
   /**
+   * Indicates if this is a locally or remotely configured tunnel. If `local`, manage
+   * the tunnel using a YAML file on the origin machine. If `cloudflare`, manage the
+   * tunnel on the Zero Trust dashboard.
+   */
+  config_src?: 'local' | 'cloudflare';
+
+  /**
    * @deprecated This field will start returning an empty array. To fetch the
    * connections of a given tunnel, please use the dedicated endpoint
    * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
@@ -181,8 +188,7 @@ export interface CloudflareTunnel {
   name?: string;
 
   /**
-   * If `true`, the tunnel can be configured remotely from the Zero Trust dashboard.
-   * If `false`, the tunnel must be configured locally on the origin machine.
+   * @deprecated Use the config_src field instead.
    */
   remote_config?: boolean;
 
@@ -284,6 +290,11 @@ export interface Member {
    * Membership identifier tag.
    */
   id?: string;
+
+  /**
+   * The contact email address of the user.
+   */
+  email?: string;
 
   /**
    * Access policy for the membership
@@ -890,7 +901,7 @@ export interface TokenPolicy {
   /**
    * A list of resource names that the policy applies to.
    */
-  resources: { [key: string]: string | { [key: string]: string } };
+  resources: { [key: string]: string } | { [key: string]: { [key: string]: string } };
 }
 
 export namespace TokenPolicy {
@@ -941,7 +952,7 @@ export interface TokenPolicyParam {
   /**
    * A list of resource names that the policy applies to.
    */
-  resources: { [key: string]: string | { [key: string]: string } };
+  resources: { [key: string]: string } | { [key: string]: { [key: string]: string } };
 }
 
 export namespace TokenPolicyParam {

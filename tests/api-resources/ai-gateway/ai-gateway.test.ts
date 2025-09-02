@@ -77,10 +77,12 @@ describe('resource aiGateway', () => {
       rate_limiting_limit: 0,
       rate_limiting_technique: 'fixed',
       authentication: true,
+      dlp: { action: 'BLOCK', enabled: true, profiles: ['string'] },
       log_management: 10000,
       log_management_strategy: 'STOP_INSERTING',
       logpush: true,
       logpush_public_key: 'xxxxxxxxxxxxxxxx',
+      store_id: 'store_id',
     });
   });
 

@@ -4,7 +4,7 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as ApplicationsAPI from './applications/applications';
 import * as ApplicationsPoliciesAPI from './applications/policies';
-import { SinglePage } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Policies extends APIResource {
   /**
@@ -89,12 +89,12 @@ export class Policies extends APIResource {
   list(
     params: PolicyListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
-    const { account_id } = params;
+  ): Core.PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse> {
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/policies`,
-      PolicyListResponsesSinglePage,
-      options,
+      PolicyListResponsesV4PagePaginationArray,
+      { query, ...options },
     );
   }
 
@@ -148,7 +148,7 @@ export class Policies extends APIResource {
   }
 }
 
-export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {}
+export class PolicyListResponsesV4PagePaginationArray extends V4PagePaginationArray<PolicyListResponse> {}
 
 /**
  * A group of email addresses that can approve a temporary authentication request.
@@ -764,9 +764,9 @@ export interface PolicyUpdateParams {
   session_duration?: string;
 }
 
-export interface PolicyListParams {
+export interface PolicyListParams extends V4PagePaginationArrayParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
 }
@@ -785,7 +785,7 @@ export interface PolicyGetParams {
   account_id: string;
 }
 
-Policies.PolicyListResponsesSinglePage = PolicyListResponsesSinglePage;
+Policies.PolicyListResponsesV4PagePaginationArray = PolicyListResponsesV4PagePaginationArray;
 
 export declare namespace Policies {
   export {
@@ -796,7 +796,7 @@ export declare namespace Policies {
     type PolicyListResponse as PolicyListResponse,
     type PolicyDeleteResponse as PolicyDeleteResponse,
     type PolicyGetResponse as PolicyGetResponse,
-    PolicyListResponsesSinglePage as PolicyListResponsesSinglePage,
+    PolicyListResponsesV4PagePaginationArray as PolicyListResponsesV4PagePaginationArray,
     type PolicyCreateParams as PolicyCreateParams,
     type PolicyUpdateParams as PolicyUpdateParams,
     type PolicyListParams as PolicyListParams,

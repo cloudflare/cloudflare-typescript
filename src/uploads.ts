@@ -282,6 +282,13 @@ const addFormValueJson = async (form: FormData, key: string, value: unknown): Pr
     return;
   }
 
+  if (Array.isArray(value) && value.some((e) => isUploadable(e))) {
+    for (const entry of value) {
+      form.append(key, await toFile(entry));
+    }
+    return;
+  }
+
   if (Array.isArray(value) || typeof value === 'object') {
     form.append(key, new File([JSON.stringify(value)], key, { type: 'application/json' }));
     return;

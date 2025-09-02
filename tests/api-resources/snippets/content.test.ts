@@ -11,8 +11,8 @@ const client = new Cloudflare({
 describe('resource content', () => {
   // throwing HTTP 415
   test.skip('get: required and optional params', async () => {
-    const response = await client.snippets.content.get('snippet_name_01', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.snippets.content.get('my_snippet', {
+      zone_id: '9f1839b6152d298aca64c4e906b6d074',
     });
   });
 });

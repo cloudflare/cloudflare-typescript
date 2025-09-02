@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -12,8 +12,10 @@ const client = new Cloudflare({
 describe('resource snippets', () => {
   // throwing HTTP 415
   test.skip('update: only required params', async () => {
-    const responsePromise = client.snippets.update('snippet_name_01', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.snippets.update('my_snippet', {
+      zone_id: '9f1839b6152d298aca64c4e906b6d074',
+      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
+      metadata: { main_module: 'main.js' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,15 +28,15 @@ describe('resource snippets', () => {
 
   // throwing HTTP 415
   test.skip('update: required and optional params', async () => {
-    const response = await client.snippets.update('snippet_name_01', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      files: "export { async function fetch(request, env) {return new Response('some_response') } }",
+    const response = await client.snippets.update('my_snippet', {
+      zone_id: '9f1839b6152d298aca64c4e906b6d074',
+      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
       metadata: { main_module: 'main.js' },
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.snippets.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.snippets.list({ zone_id: '9f1839b6152d298aca64c4e906b6d074' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,12 +47,16 @@ describe('resource snippets', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.snippets.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.snippets.list({
+      zone_id: '9f1839b6152d298aca64c4e906b6d074',
+      page: 1,
+      per_page: 25,
+    });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.snippets.delete('snippet_name_01', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.snippets.delete('my_snippet', {
+      zone_id: '9f1839b6152d298aca64c4e906b6d074',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -62,14 +68,14 @@ describe('resource snippets', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.snippets.delete('snippet_name_01', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.snippets.delete('my_snippet', {
+      zone_id: '9f1839b6152d298aca64c4e906b6d074',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.snippets.get('snippet_name_01', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.snippets.get('my_snippet', {
+      zone_id: '9f1839b6152d298aca64c4e906b6d074',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -81,8 +87,6 @@ describe('resource snippets', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.snippets.get('snippet_name_01', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.snippets.get('my_snippet', { zone_id: '9f1839b6152d298aca64c4e906b6d074' });
   });
 });

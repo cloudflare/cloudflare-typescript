@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource accounts', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.accounts.create({ name: 'name', type: 'standard' });
+    const responsePromise = client.accounts.create({ name: 'name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -34,6 +34,7 @@ describe('resource accounts', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'Demo Account',
+      type: 'standard',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -49,6 +50,7 @@ describe('resource accounts', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'Demo Account',
+      type: 'standard',
       settings: { abuse_contact_email: 'abuse_contact_email', enforce_twofactor: true },
     });
   });

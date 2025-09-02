@@ -18,7 +18,7 @@ export class Edge extends APIResource {
   create(params: EdgeCreateParams, options?: Core.RequestOptions): Core.APIPromise<InstantLogpushJob | null> {
     const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zone_id}/logpush/edge`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/logpush/edge/jobs`, { body, ...options }) as Core.APIPromise<{
         result: InstantLogpushJob | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -42,7 +42,11 @@ export class Edge extends APIResource {
     options?: Core.RequestOptions,
   ): Core.PagePromise<InstantLogpushJobsSinglePage, InstantLogpushJob | null> {
     const { zone_id } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/logpush/edge`, InstantLogpushJobsSinglePage, options);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/logpush/edge/jobs`,
+      InstantLogpushJobsSinglePage,
+      options,
+    );
   }
 }
 

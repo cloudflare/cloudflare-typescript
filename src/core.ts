@@ -234,7 +234,7 @@ export abstract class APIClient {
   /**
    * Override this to add your own headers validation:
    */
-  protected validateHeaders(headers: Headers, customHeaders: Headers) {}
+  protected validateHeaders(headers: Headers, customHeaders: Headers, usingCustomFetch: boolean) {}
 
   protected defaultIdempotencyKey(): string {
     return `stainless-node-retry-${uuid4()}`;
@@ -397,7 +397,7 @@ export abstract class APIClient {
       reqHeaders['x-stainless-timeout'] = String(options.timeout);
     }
 
-    this.validateHeaders(reqHeaders, headers);
+    this.validateHeaders(reqHeaders, headers, this.fetch !== fetch);
 
     return reqHeaders;
   }

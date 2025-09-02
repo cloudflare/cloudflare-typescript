@@ -16,7 +16,8 @@ describe('resource entries', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id', body: await toFile(Buffer.from('# my file contents'), 'README.md') },
+      await toFile(Buffer.from('# my file contents'), 'README.md'),
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -33,7 +34,8 @@ describe('resource entries', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id', body: await toFile(Buffer.from('# my file contents'), 'README.md') },
+      await toFile(Buffer.from('# my file contents'), 'README.md'),
+      { account_id: 'account_id' },
     );
   });
 });

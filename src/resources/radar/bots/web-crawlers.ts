@@ -16,16 +16,16 @@ export class WebCrawlers extends APIResource {
    * ```
    */
   summary(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO',
+    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     query?: WebCrawlerSummaryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerSummaryResponse>;
   summary(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO',
+    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerSummaryResponse>;
   summary(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO',
+    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     query: WebCrawlerSummaryParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerSummaryResponse> {
@@ -53,16 +53,16 @@ export class WebCrawlers extends APIResource {
    * ```
    */
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO',
+    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     query?: WebCrawlerTimeseriesGroupsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO',
+    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO',
+    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     query: WebCrawlerTimeseriesGroupsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerTimeseriesGroupsResponse> {
@@ -92,7 +92,7 @@ export namespace WebCrawlerSummaryResponse {
    * Metadata for the results.
    */
   export interface Meta {
-    confidenceInfo: Meta.ConfidenceInfo | null;
+    confidenceInfo: Meta.ConfidenceInfo;
 
     dateRange: Array<Meta.DateRange>;
 
@@ -314,6 +314,11 @@ export interface WebCrawlerSummaryParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by industry.
+   */
+  industry?: Array<string>;
+
+  /**
    * Limits the number of objects per group to the top items within the specified
    * time range. When item count exceeds the limit, extra items appear grouped under
    * an "other" category.
@@ -324,6 +329,11 @@ export interface WebCrawlerSummaryParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by vertical.
+   */
+  vertical?: Array<string>;
 }
 
 export interface WebCrawlerTimeseriesGroupsParams {
@@ -362,6 +372,11 @@ export interface WebCrawlerTimeseriesGroupsParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by industry.
+   */
+  industry?: Array<string>;
+
+  /**
    * Limits the number of objects per group to the top items within the specified
    * time range. When item count exceeds the limit, extra items appear grouped under
    * an "other" category.
@@ -372,6 +387,11 @@ export interface WebCrawlerTimeseriesGroupsParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by vertical.
+   */
+  vertical?: Array<string>;
 }
 
 export declare namespace WebCrawlers {

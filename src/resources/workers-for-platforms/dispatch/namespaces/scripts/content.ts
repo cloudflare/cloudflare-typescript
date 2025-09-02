@@ -91,10 +91,21 @@ export interface ContentUpdateParams {
   account_id: string;
 
   /**
-   * Body param: JSON encoded metadata about the uploaded parts and Worker
+   * Body param: JSON-encoded metadata about the uploaded parts and Worker
    * configuration.
    */
   metadata: WorkersAPI.WorkerMetadataParam;
+
+  /**
+   * Body param: An array of modules (often JavaScript files) comprising a Worker
+   * script. At least one module must be present and referenced in the metadata as
+   * `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are:
+   * `application/javascript+module`, `text/javascript+module`,
+   * `application/javascript`, `text/javascript`, `text/x-python`,
+   * `text/x-python-requirement`, `application/wasm`, `text/plain`,
+   * `application/octet-stream`, `application/source-map`.
+   */
+  files?: Array<Core.Uploadable>;
 
   /**
    * Header param: The multipart name of a script upload part containing script
@@ -107,8 +118,6 @@ export interface ContentUpdateParams {
    * content in es module format. Alternative to including in a metadata part.
    */
   'CF-WORKER-MAIN-MODULE-PART'?: string;
-
-  [k: string]: Array<Core.Uploadable> | string | WorkersAPI.WorkerMetadataParam | undefined;
 }
 
 export interface ContentGetParams {

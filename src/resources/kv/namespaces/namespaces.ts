@@ -13,7 +13,7 @@ import {
   KeyBulkUpdateResponse,
   KeyListParams,
   Keys,
-  KeysCursorLimitPagination,
+  KeysCursorPaginationAfter,
 } from './keys';
 import * as MetadataAPI from './metadata';
 import { Metadata, MetadataGetParams, MetadataGetResponse } from './metadata';
@@ -266,11 +266,6 @@ export interface Namespace {
   title: string;
 
   /**
-   * True if new beta namespace, with additional preview features.
-   */
-  beta?: boolean;
-
-  /**
    * True if keys written on the URL will be URL-decoded before storing. For example,
    * if set to "true", a key written on the URL as "%3F" will be stored as "?".
    */
@@ -312,8 +307,14 @@ export namespace NamespaceBulkGetResponse {
 
   export namespace WorkersKVBulkGetResultWithMetadata {
     export interface Values {
+      /**
+       * The metadata associated with the key.
+       */
       metadata: unknown;
 
+      /**
+       * The value associated with the key.
+       */
       value: unknown;
 
       /**
@@ -462,6 +463,9 @@ export namespace NamespaceBulkUpdateParams {
      */
     expiration_ttl?: number;
 
+    /**
+     * Arbitrary JSON that is associated with a key.
+     */
     metadata?: unknown;
   }
 }
@@ -475,7 +479,7 @@ export interface NamespaceGetParams {
 
 Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;
 Namespaces.Keys = Keys;
-Namespaces.KeysCursorLimitPagination = KeysCursorLimitPagination;
+Namespaces.KeysCursorPaginationAfter = KeysCursorPaginationAfter;
 Namespaces.Metadata = Metadata;
 Namespaces.Values = ValuesAPIValues;
 
@@ -503,7 +507,7 @@ export declare namespace Namespaces {
     type KeyBulkDeleteResponse as KeyBulkDeleteResponse,
     type KeyBulkGetResponse as KeyBulkGetResponse,
     type KeyBulkUpdateResponse as KeyBulkUpdateResponse,
-    KeysCursorLimitPagination as KeysCursorLimitPagination,
+    KeysCursorPaginationAfter as KeysCursorPaginationAfter,
     type KeyListParams as KeyListParams,
     type KeyBulkDeleteParams as KeyBulkDeleteParams,
     type KeyBulkGetParams as KeyBulkGetParams,

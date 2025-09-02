@@ -113,7 +113,7 @@ export class CacheReserveResource extends APIResource {
 }
 
 /**
- * ID of the zone setting.
+ * The identifier of the caching setting.
  */
 export type CacheReserve = 'cache_reserve';
 
@@ -162,17 +162,17 @@ export interface CacheReserveClearResponse {
 
 export interface CacheReserveEditResponse {
   /**
-   * ID of the zone setting.
+   * The identifier of the caching setting.
    */
   id: CacheReserve;
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
   /**
-   * The value of the feature
+   * Value of the Cache Reserve zone setting.
    */
   value: 'on' | 'off';
 
@@ -184,17 +184,17 @@ export interface CacheReserveEditResponse {
 
 export interface CacheReserveGetResponse {
   /**
-   * ID of the zone setting.
+   * The identifier of the caching setting.
    */
   id: CacheReserve;
 
   /**
-   * Whether the setting is editable
+   * Whether the setting is editable.
    */
   editable: boolean;
 
   /**
-   * The value of the feature
+   * Value of the Cache Reserve zone setting.
    */
   value: 'on' | 'off';
 
@@ -239,7 +239,7 @@ export interface CacheReserveStatusResponse {
 
 export interface CacheReserveClearParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -251,7 +251,7 @@ export interface CacheReserveClearParams {
 
 export interface CacheReserveEditParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 
@@ -263,14 +263,14 @@ export interface CacheReserveEditParams {
 
 export interface CacheReserveGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }
 
 export interface CacheReserveStatusParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

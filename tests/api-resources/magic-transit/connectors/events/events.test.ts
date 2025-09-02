@@ -31,6 +31,7 @@ describe('resource events', () => {
       from: 0,
       to: 0,
       cursor: 'cursor',
+      k: 'k',
       limit: 0,
     });
   });

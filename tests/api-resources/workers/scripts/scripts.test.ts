@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -47,6 +47,7 @@ describe('resource scripts', () => {
         compatibility_flags: ['nodejs_compat'],
         keep_assets: false,
         keep_bindings: ['string'],
+        limits: { cpu_ms: 50 },
         logpush: false,
         main_module: 'worker.js',
         migrations: {
@@ -70,6 +71,7 @@ describe('resource scripts', () => {
         ],
         usage_model: 'standard',
       },
+      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
     });
   });
 
@@ -85,7 +87,10 @@ describe('resource scripts', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.workers.scripts.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.workers.scripts.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      tags: 'production:yes,staging:no',
+    });
   });
 
   test('delete: only required params', async () => {

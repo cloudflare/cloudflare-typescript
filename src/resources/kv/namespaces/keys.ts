@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import { CursorLimitPagination, type CursorLimitPaginationParams } from '../../../pagination';
+import { CursorPaginationAfter, type CursorPaginationAfterParams } from '../../../pagination';
 
 export class Keys extends APIResource {
   /**
@@ -23,11 +23,11 @@ export class Keys extends APIResource {
     namespaceId: string,
     params: KeyListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<KeysCursorLimitPagination, Key> {
+  ): Core.PagePromise<KeysCursorPaginationAfter, Key> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/keys`,
-      KeysCursorLimitPagination,
+      KeysCursorPaginationAfter,
       { query, ...options },
     );
   }
@@ -98,7 +98,7 @@ export class Keys extends APIResource {
   }
 }
 
-export class KeysCursorLimitPagination extends CursorLimitPagination<Key> {}
+export class KeysCursorPaginationAfter extends CursorPaginationAfter<Key> {}
 
 /**
  * A name for a value. A value stored under a given key may be retrieved via the
@@ -117,6 +117,9 @@ export interface Key {
    */
   expiration?: number;
 
+  /**
+   * Arbitrary JSON that is associated with a key.
+   */
   metadata?: unknown;
 }
 
@@ -153,8 +156,14 @@ export namespace KeyBulkGetResponse {
 
   export namespace WorkersKVBulkGetResultWithMetadata {
     export interface Values {
+      /**
+       * The metadata associated with the key.
+       */
       metadata: unknown;
 
+      /**
+       * The value associated with the key.
+       */
       value: unknown;
 
       /**
@@ -178,11 +187,18 @@ export interface KeyBulkUpdateResponse {
   unsuccessful_keys?: Array<string>;
 }
 
-export interface KeyListParams extends CursorLimitPaginationParams {
+export interface KeyListParams extends CursorPaginationAfterParams {
   /**
    * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: Limits the number of keys returned in the response. The cursor
+   * attribute may be used to iterate over the next batch of keys if there are more
+   * than the limit.
+   */
+  limit?: number;
 
   /**
    * Query param: Filters returned keys by a name prefix. Exact matches and any key
@@ -268,11 +284,14 @@ export namespace KeyBulkUpdateParams {
      */
     expiration_ttl?: number;
 
+    /**
+     * Arbitrary JSON that is associated with a key.
+     */
     metadata?: unknown;
   }
 }
 
-Keys.KeysCursorLimitPagination = KeysCursorLimitPagination;
+Keys.KeysCursorPaginationAfter = KeysCursorPaginationAfter;
 
 export declare namespace Keys {
   export {
@@ -280,7 +299,7 @@ export declare namespace Keys {
     type KeyBulkDeleteResponse as KeyBulkDeleteResponse,
     type KeyBulkGetResponse as KeyBulkGetResponse,
     type KeyBulkUpdateResponse as KeyBulkUpdateResponse,
-    KeysCursorLimitPagination as KeysCursorLimitPagination,
+    KeysCursorPaginationAfter as KeysCursorPaginationAfter,
     type KeyListParams as KeyListParams,
     type KeyBulkDeleteParams as KeyBulkDeleteParams,
     type KeyBulkGetParams as KeyBulkGetParams,

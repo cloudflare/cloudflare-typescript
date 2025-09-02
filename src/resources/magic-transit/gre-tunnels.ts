@@ -229,6 +229,10 @@ export interface GRETunnelCreateResponse {
    */
   name: string;
 
+  bgp?: GRETunnelCreateResponse.BGP;
+
+  bgp_status?: GRETunnelCreateResponse.BGPStatus;
+
   /**
    * The date and time the tunnel was created.
    */
@@ -240,6 +244,14 @@ export interface GRETunnelCreateResponse {
   description?: string;
 
   health_check?: GRETunnelCreateResponse.HealthCheck;
+
+  /**
+   * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+   * address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
 
   /**
    * The date and time the tunnel was last modified.
@@ -259,6 +271,59 @@ export interface GRETunnelCreateResponse {
 }
 
 export namespace GRETunnelCreateResponse {
+  export interface BGP {
+    /**
+     * ASN used on the customer end of the BGP session
+     */
+    customer_asn: number;
+
+    /**
+     * Prefixes in this list will be advertised to the customer device, in addition to
+     * the routes in the Magic routing table.
+     */
+    extra_prefixes?: Array<string>;
+
+    /**
+     * MD5 key to use for session authentication.
+     *
+     * Note that _this is not a security measure_. MD5 is not a valid security
+     * mechanism, and the key is not treated as a secret value. This is _only_
+     * supported for preventing misconfiguration, not for defending against malicious
+     * attacks.
+     *
+     * The MD5 key, if set, must be of non-zero length and consist only of the
+     * following types of character:
+     *
+     * - ASCII alphanumerics: `[a-zA-Z0-9]`
+     * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+     *
+     * In other words, MD5 keys may contain any printable ASCII character aside from
+     * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+     * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+     * specifying an MD5 key with one or more of these disallowed characters will be
+     * rejected.
+     */
+    md5_key?: string;
+  }
+
+  export interface BGPStatus {
+    state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+    tcp_established: boolean;
+
+    updated_at: string;
+
+    bgp_state?: string;
+
+    cf_speaker_ip?: string;
+
+    cf_speaker_port?: number;
+
+    customer_speaker_ip?: string;
+
+    customer_speaker_port?: number;
+  }
+
   export interface HealthCheck {
     /**
      * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -356,6 +421,10 @@ export namespace GRETunnelUpdateResponse {
      */
     name: string;
 
+    bgp?: ModifiedGRETunnel.BGP;
+
+    bgp_status?: ModifiedGRETunnel.BGPStatus;
+
     /**
      * The date and time the tunnel was created.
      */
@@ -367,6 +436,14 @@ export namespace GRETunnelUpdateResponse {
     description?: string;
 
     health_check?: ModifiedGRETunnel.HealthCheck;
+
+    /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
 
     /**
      * The date and time the tunnel was last modified.
@@ -386,6 +463,59 @@ export namespace GRETunnelUpdateResponse {
   }
 
   export namespace ModifiedGRETunnel {
+    export interface BGP {
+      /**
+       * ASN used on the customer end of the BGP session
+       */
+      customer_asn: number;
+
+      /**
+       * Prefixes in this list will be advertised to the customer device, in addition to
+       * the routes in the Magic routing table.
+       */
+      extra_prefixes?: Array<string>;
+
+      /**
+       * MD5 key to use for session authentication.
+       *
+       * Note that _this is not a security measure_. MD5 is not a valid security
+       * mechanism, and the key is not treated as a secret value. This is _only_
+       * supported for preventing misconfiguration, not for defending against malicious
+       * attacks.
+       *
+       * The MD5 key, if set, must be of non-zero length and consist only of the
+       * following types of character:
+       *
+       * - ASCII alphanumerics: `[a-zA-Z0-9]`
+       * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+       *
+       * In other words, MD5 keys may contain any printable ASCII character aside from
+       * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+       * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+       * specifying an MD5 key with one or more of these disallowed characters will be
+       * rejected.
+       */
+      md5_key?: string;
+    }
+
+    export interface BGPStatus {
+      state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+      tcp_established: boolean;
+
+      updated_at: string;
+
+      bgp_state?: string;
+
+      cf_speaker_ip?: string;
+
+      cf_speaker_port?: number;
+
+      customer_speaker_ip?: string;
+
+      customer_speaker_port?: number;
+    }
+
     export interface HealthCheck {
       /**
        * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -482,6 +612,10 @@ export namespace GRETunnelListResponse {
      */
     name: string;
 
+    bgp?: GRETunnel.BGP;
+
+    bgp_status?: GRETunnel.BGPStatus;
+
     /**
      * The date and time the tunnel was created.
      */
@@ -493,6 +627,14 @@ export namespace GRETunnelListResponse {
     description?: string;
 
     health_check?: GRETunnel.HealthCheck;
+
+    /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
 
     /**
      * The date and time the tunnel was last modified.
@@ -512,6 +654,59 @@ export namespace GRETunnelListResponse {
   }
 
   export namespace GRETunnel {
+    export interface BGP {
+      /**
+       * ASN used on the customer end of the BGP session
+       */
+      customer_asn: number;
+
+      /**
+       * Prefixes in this list will be advertised to the customer device, in addition to
+       * the routes in the Magic routing table.
+       */
+      extra_prefixes?: Array<string>;
+
+      /**
+       * MD5 key to use for session authentication.
+       *
+       * Note that _this is not a security measure_. MD5 is not a valid security
+       * mechanism, and the key is not treated as a secret value. This is _only_
+       * supported for preventing misconfiguration, not for defending against malicious
+       * attacks.
+       *
+       * The MD5 key, if set, must be of non-zero length and consist only of the
+       * following types of character:
+       *
+       * - ASCII alphanumerics: `[a-zA-Z0-9]`
+       * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+       *
+       * In other words, MD5 keys may contain any printable ASCII character aside from
+       * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+       * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+       * specifying an MD5 key with one or more of these disallowed characters will be
+       * rejected.
+       */
+      md5_key?: string;
+    }
+
+    export interface BGPStatus {
+      state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+      tcp_established: boolean;
+
+      updated_at: string;
+
+      bgp_state?: string;
+
+      cf_speaker_ip?: string;
+
+      cf_speaker_port?: number;
+
+      customer_speaker_ip?: string;
+
+      customer_speaker_port?: number;
+    }
+
     export interface HealthCheck {
       /**
        * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -610,6 +805,10 @@ export namespace GRETunnelDeleteResponse {
      */
     name: string;
 
+    bgp?: DeletedGRETunnel.BGP;
+
+    bgp_status?: DeletedGRETunnel.BGPStatus;
+
     /**
      * The date and time the tunnel was created.
      */
@@ -621,6 +820,14 @@ export namespace GRETunnelDeleteResponse {
     description?: string;
 
     health_check?: DeletedGRETunnel.HealthCheck;
+
+    /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
 
     /**
      * The date and time the tunnel was last modified.
@@ -640,6 +847,59 @@ export namespace GRETunnelDeleteResponse {
   }
 
   export namespace DeletedGRETunnel {
+    export interface BGP {
+      /**
+       * ASN used on the customer end of the BGP session
+       */
+      customer_asn: number;
+
+      /**
+       * Prefixes in this list will be advertised to the customer device, in addition to
+       * the routes in the Magic routing table.
+       */
+      extra_prefixes?: Array<string>;
+
+      /**
+       * MD5 key to use for session authentication.
+       *
+       * Note that _this is not a security measure_. MD5 is not a valid security
+       * mechanism, and the key is not treated as a secret value. This is _only_
+       * supported for preventing misconfiguration, not for defending against malicious
+       * attacks.
+       *
+       * The MD5 key, if set, must be of non-zero length and consist only of the
+       * following types of character:
+       *
+       * - ASCII alphanumerics: `[a-zA-Z0-9]`
+       * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+       *
+       * In other words, MD5 keys may contain any printable ASCII character aside from
+       * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+       * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+       * specifying an MD5 key with one or more of these disallowed characters will be
+       * rejected.
+       */
+      md5_key?: string;
+    }
+
+    export interface BGPStatus {
+      state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+      tcp_established: boolean;
+
+      updated_at: string;
+
+      bgp_state?: string;
+
+      cf_speaker_ip?: string;
+
+      cf_speaker_port?: number;
+
+      customer_speaker_ip?: string;
+
+      customer_speaker_port?: number;
+    }
+
     export interface HealthCheck {
       /**
        * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -738,6 +998,10 @@ export namespace GRETunnelBulkUpdateResponse {
      */
     name: string;
 
+    bgp?: ModifiedGRETunnel.BGP;
+
+    bgp_status?: ModifiedGRETunnel.BGPStatus;
+
     /**
      * The date and time the tunnel was created.
      */
@@ -749,6 +1013,14 @@ export namespace GRETunnelBulkUpdateResponse {
     description?: string;
 
     health_check?: ModifiedGRETunnel.HealthCheck;
+
+    /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
 
     /**
      * The date and time the tunnel was last modified.
@@ -768,6 +1040,59 @@ export namespace GRETunnelBulkUpdateResponse {
   }
 
   export namespace ModifiedGRETunnel {
+    export interface BGP {
+      /**
+       * ASN used on the customer end of the BGP session
+       */
+      customer_asn: number;
+
+      /**
+       * Prefixes in this list will be advertised to the customer device, in addition to
+       * the routes in the Magic routing table.
+       */
+      extra_prefixes?: Array<string>;
+
+      /**
+       * MD5 key to use for session authentication.
+       *
+       * Note that _this is not a security measure_. MD5 is not a valid security
+       * mechanism, and the key is not treated as a secret value. This is _only_
+       * supported for preventing misconfiguration, not for defending against malicious
+       * attacks.
+       *
+       * The MD5 key, if set, must be of non-zero length and consist only of the
+       * following types of character:
+       *
+       * - ASCII alphanumerics: `[a-zA-Z0-9]`
+       * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+       *
+       * In other words, MD5 keys may contain any printable ASCII character aside from
+       * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+       * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+       * specifying an MD5 key with one or more of these disallowed characters will be
+       * rejected.
+       */
+      md5_key?: string;
+    }
+
+    export interface BGPStatus {
+      state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+      tcp_established: boolean;
+
+      updated_at: string;
+
+      bgp_state?: string;
+
+      cf_speaker_ip?: string;
+
+      cf_speaker_port?: number;
+
+      customer_speaker_ip?: string;
+
+      customer_speaker_port?: number;
+    }
+
     export interface HealthCheck {
       /**
        * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -864,6 +1189,10 @@ export namespace GRETunnelGetResponse {
      */
     name: string;
 
+    bgp?: GRETunnel.BGP;
+
+    bgp_status?: GRETunnel.BGPStatus;
+
     /**
      * The date and time the tunnel was created.
      */
@@ -875,6 +1204,14 @@ export namespace GRETunnelGetResponse {
     description?: string;
 
     health_check?: GRETunnel.HealthCheck;
+
+    /**
+     * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the
+     * address being the first IP of the subnet and not same as the address of
+     * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+     * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+     */
+    interface_address6?: string;
 
     /**
      * The date and time the tunnel was last modified.
@@ -894,6 +1231,59 @@ export namespace GRETunnelGetResponse {
   }
 
   export namespace GRETunnel {
+    export interface BGP {
+      /**
+       * ASN used on the customer end of the BGP session
+       */
+      customer_asn: number;
+
+      /**
+       * Prefixes in this list will be advertised to the customer device, in addition to
+       * the routes in the Magic routing table.
+       */
+      extra_prefixes?: Array<string>;
+
+      /**
+       * MD5 key to use for session authentication.
+       *
+       * Note that _this is not a security measure_. MD5 is not a valid security
+       * mechanism, and the key is not treated as a secret value. This is _only_
+       * supported for preventing misconfiguration, not for defending against malicious
+       * attacks.
+       *
+       * The MD5 key, if set, must be of non-zero length and consist only of the
+       * following types of character:
+       *
+       * - ASCII alphanumerics: `[a-zA-Z0-9]`
+       * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+       *
+       * In other words, MD5 keys may contain any printable ASCII character aside from
+       * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+       * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+       * specifying an MD5 key with one or more of these disallowed characters will be
+       * rejected.
+       */
+      md5_key?: string;
+    }
+
+    export interface BGPStatus {
+      state: 'BGP_DOWN' | 'BGP_UP' | 'BGP_ESTABLISHING';
+
+      tcp_established: boolean;
+
+      updated_at: string;
+
+      bgp_state?: string;
+
+      cf_speaker_ip?: string;
+
+      cf_speaker_port?: number;
+
+      customer_speaker_ip?: string;
+
+      customer_speaker_port?: number;
+    }
+
     export interface HealthCheck {
       /**
        * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -987,6 +1377,11 @@ export interface GRETunnelCreateParams {
   name: string;
 
   /**
+   * Body param:
+   */
+  bgp?: GRETunnelCreateParams.BGP;
+
+  /**
    * Body param: An optional description of the GRE tunnel.
    */
   description?: string;
@@ -995,6 +1390,14 @@ export interface GRETunnelCreateParams {
    * Body param:
    */
   health_check?: GRETunnelCreateParams.HealthCheck;
+
+  /**
+   * Body param: A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space
+   * with the address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
 
   /**
    * Body param: Maximum Transmission Unit (MTU) in bytes for the GRE tunnel. The
@@ -1015,6 +1418,41 @@ export interface GRETunnelCreateParams {
 }
 
 export namespace GRETunnelCreateParams {
+  export interface BGP {
+    /**
+     * ASN used on the customer end of the BGP session
+     */
+    customer_asn: number;
+
+    /**
+     * Prefixes in this list will be advertised to the customer device, in addition to
+     * the routes in the Magic routing table.
+     */
+    extra_prefixes?: Array<string>;
+
+    /**
+     * MD5 key to use for session authentication.
+     *
+     * Note that _this is not a security measure_. MD5 is not a valid security
+     * mechanism, and the key is not treated as a secret value. This is _only_
+     * supported for preventing misconfiguration, not for defending against malicious
+     * attacks.
+     *
+     * The MD5 key, if set, must be of non-zero length and consist only of the
+     * following types of character:
+     *
+     * - ASCII alphanumerics: `[a-zA-Z0-9]`
+     * - Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+     *
+     * In other words, MD5 keys may contain any printable ASCII character aside from
+     * newline (0x0A), quotation mark (`"`), vertical tab (0x0B), carriage return
+     * (0x0D), tab (0x09), form feed (0x0C), and the question mark (`?`). Requests
+     * specifying an MD5 key with one or more of these disallowed characters will be
+     * rejected.
+     */
+    md5_key?: string;
+  }
+
   export interface HealthCheck {
     /**
      * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -1108,6 +1546,14 @@ export interface GRETunnelUpdateParams {
    * Body param:
    */
   health_check?: GRETunnelUpdateParams.HealthCheck;
+
+  /**
+   * Body param: A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space
+   * with the address being the first IP of the subnet and not same as the address of
+   * virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 ,
+   * interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+   */
+  interface_address6?: string;
 
   /**
    * Body param: Maximum Transmission Unit (MTU) in bytes for the GRE tunnel. The

@@ -44,7 +44,7 @@ export namespace PreviewGetResponse {
 
   export namespace item {
     /**
-     * The origin ipv4/ipv6 address or domain name mapped to it's health data.
+     * The origin ipv4/ipv6 address or domain name mapped to its health data.
      */
     export interface load_balancing_origin_health_data {
       failure_reason?: string;
@@ -60,7 +60,7 @@ export namespace PreviewGetResponse {
 
 export interface PreviewGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
