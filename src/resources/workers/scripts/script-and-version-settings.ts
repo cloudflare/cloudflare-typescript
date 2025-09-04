@@ -27,7 +27,7 @@ export class ScriptAndVersionSettings extends APIResource {
     return (
       this._client.patch(
         `/accounts/${account_id}/workers/scripts/${scriptName}/settings`,
-        Core.multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options, __multipartSyntax: 'json' }),
       ) as Core.APIPromise<{ result: ScriptAndVersionSettingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }

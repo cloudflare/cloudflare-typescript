@@ -29,7 +29,7 @@ export class Settings extends APIResource {
     return (
       this._client.patch(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`,
-        Core.multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options, __multipartSyntax: 'json' }),
       ) as Core.APIPromise<{ result: SettingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
