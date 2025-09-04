@@ -37,6 +37,7 @@ export class Content extends APIResource {
         Core.multipartFormRequestOptions({
           body,
           ...options,
+          __multipartSyntax: 'json',
           headers: {
             ...(cfWorkerBodyPart != null ? { 'CF-WORKER-BODY-PART': cfWorkerBodyPart } : undefined),
             ...(cfWorkerMainModulePart != null ?

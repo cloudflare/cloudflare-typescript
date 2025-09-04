@@ -35,7 +35,7 @@ export class Snippets extends APIResource {
     return (
       this._client.put(
         `/zones/${zone_id}/snippets/${snippetName}`,
-        Core.multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options, __multipartSyntax: 'json' }),
       ) as Core.APIPromise<{ result: SnippetUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
