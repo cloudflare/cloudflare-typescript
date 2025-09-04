@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.0.1 (2025-09-04)
+
+Full Changelog: [v5.0.0...v5.0.1](https://github.com/cloudflare/cloudflare-typescript/compare/v5.0.0...v5.0.1)
+
+### Bug Fixes
+
+* correctly handle sending multipart/form-data requests with JSON ([e9deab6](https://github.com/cloudflare/cloudflare-typescript/commit/e9deab61fad243c4339df7362529fd9b92693f8a))
+
 ## 5.0.0 (2025-09-02)
 
 Full Changelog: [v4.5.0...v5.0.0](https://github.com/cloudflare/cloudflare-typescript/compare/v4.5.0...v5.0.0)
