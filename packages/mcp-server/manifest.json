@@ -1,0 +1,63 @@
+{
+  "dxt_version": "0.1",
+  "name": "cloudflare-mcp",
+  "version": "0.0.1-alpha.0",
+  "description": "The official MCP Server for the Cloudflare API",
+  "author": {
+    "name": "Cloudflare",
+    "email": "api@cloudflare.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stainless-sdks/cloudflare-typescript.git"
+  },
+  "homepage": "https://github.com/stainless-sdks/cloudflare-typescript/tree/main/packages/mcp-server#readme",
+  "documentation": "https://developers.cloudflare.com/api",
+  "server": {
+    "type": "node",
+    "entry_point": "${__dirname}/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/index.js"],
+      "env": {
+        "CLOUDFLARE_API_TOKEN": "${user_config.CLOUDFLARE_API_TOKEN}",
+        "CLOUDFLARE_API_KEY": "${user_config.CLOUDFLARE_API_KEY}",
+        "CLOUDFLARE_EMAIL": "${user_config.CLOUDFLARE_EMAIL}",
+        "CLOUDFLARE_API_USER_SERVICE_KEY": "${user_config.CLOUDFLARE_API_USER_SERVICE_KEY}"
+      }
+    }
+  },
+  "user_config": {
+    "CLOUDFLARE_API_TOKEN": {
+      "title": "api_token",
+      "description": "The preferred authorization scheme for interacting with the Cloudflare API. [Create a token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).",
+      "required": false,
+      "type": "string"
+    },
+    "CLOUDFLARE_API_KEY": {
+      "title": "api_key",
+      "description": "The previous authorization scheme for interacting with the Cloudflare API. When possible, use API tokens instead of Global API keys.",
+      "required": false,
+      "type": "string"
+    },
+    "CLOUDFLARE_EMAIL": {
+      "title": "api_email",
+      "description": "The previous authorization scheme for interacting with the Cloudflare API, used in conjunction with a Global API key.",
+      "required": false,
+      "type": "string"
+    },
+    "CLOUDFLARE_API_USER_SERVICE_KEY": {
+      "title": "user_service_key",
+      "description": "Used when interacting with the Origin CA certificates API. [View/change your key](https://developers.cloudflare.com/fundamentals/api/get-started/ca-keys/#viewchange-your-origin-ca-keys).",
+      "required": false,
+      "type": "string"
+    }
+  },
+  "tools_generated": true,
+  "compatibility": {
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  },
+  "keywords": ["api"]
+}

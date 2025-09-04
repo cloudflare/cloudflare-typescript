@@ -30,3 +30,27 @@ cp tsconfig.dist-src.json dist/src/tsconfig.json
 chmod +x dist/index.js
 
 DIST_PATH=./dist PKG_IMPORT_PATH=cloudflare-mcp/ node ../../scripts/utils/postprocess-files.cjs
+
+# mcp bundle
+rm -rf dist-bundle cloudflare_api.dxt; mkdir dist-bundle
+
+# copy package.json
+PKG_JSON_PATH=../../packages/mcp-server/package.json node ../../scripts/utils/make-dist-package-json.cjs > dist-bundle/package.json
+
+# copy files
+node scripts/copy-bundle-files.cjs
+
+# install runtime deps
+cd dist-bundle
+npm install
+cd ..
+
+# pack bundle
+cp manifest.json dist-bundle
+
+npx dxt pack dist-bundle cloudflare_api.dxt
+
+npx dxt sign cloudflare_api.dxt --self-signed
+
+# clean up
+rm -rf dist-bundle
