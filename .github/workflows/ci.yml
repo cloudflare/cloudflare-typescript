@@ -75,7 +75,7 @@ jobs:
           URL: https://pkg.stainless.com/s?subpackage=mcp-server
           AUTH: ${{ steps.github-oidc.outputs.github_token }}
           SHA: ${{ github.sha }}
-          BUILD_PATH: packages/mcp-server/dist
+          BASE_PATH: packages/mcp-server
         run: ./scripts/utils/upload-artifact.sh
   test:
     timeout-minutes: 10
