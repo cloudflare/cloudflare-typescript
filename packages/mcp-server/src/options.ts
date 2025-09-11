@@ -367,12 +367,12 @@ export function parseQueryOptions(defaultOptions: McpOptions, query: unknown): M
   }
 
   let dynamicTools: boolean | undefined =
-    queryOptions.no_tools && !queryOptions.no_tools?.includes('dynamic') ? false
+    queryOptions.no_tools && queryOptions.no_tools?.includes('dynamic') ? false
     : queryOptions.tools?.includes('dynamic') ? true
     : defaultOptions.includeDynamicTools;
 
   let allTools: boolean | undefined =
-    queryOptions.no_tools && !queryOptions.no_tools?.includes('all') ? false
+    queryOptions.no_tools && queryOptions.no_tools?.includes('all') ? false
     : queryOptions.tools?.includes('all') ? true
     : defaultOptions.includeAllTools;
 
