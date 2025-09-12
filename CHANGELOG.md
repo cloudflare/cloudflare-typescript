@@ -1,5 +1,28 @@
 # Changelog
 
+## 5.1.0 (2025-09-12)
+
+Full Changelog: [v5.0.0...v5.1.0](https://github.com/cloudflare/cloudflare-typescript/compare/v5.0.0...v5.1.0)
+
+### Features
+
+* Merge branch 'vaishak/skip-worker-test' into 'main' ([a556698](https://github.com/cloudflare/cloudflare-typescript/commit/a5566983ae47453ffc4d5d9a266d7480ed620d51))
+
+
+### Bug Fixes
+
+* coerce nullable values to undefined ([7847e84](https://github.com/cloudflare/cloudflare-typescript/commit/7847e845eb146f099a63f32931e5991840799c9c))
+* correctly handle sending multipart/form-data requests with JSON ([e9deab6](https://github.com/cloudflare/cloudflare-typescript/commit/e9deab61fad243c4339df7362529fd9b92693f8a))
+
+
+### Chores
+
+* ci build action ([23d3577](https://github.com/cloudflare/cloudflare-typescript/commit/23d3577a92a835ffc1aeffb3004801b75efeb136))
+* fix lint on the examples ([dd14379](https://github.com/cloudflare/cloudflare-typescript/commit/dd143796d0494f2c9a57493a330f229ce5d2533a))
+* fix lint on the examples ([dd14379](https://github.com/cloudflare/cloudflare-typescript/commit/dd143796d0494f2c9a57493a330f229ce5d2533a))
+* fix lint on the examples ([5b2f145](https://github.com/cloudflare/cloudflare-typescript/commit/5b2f145f72d68b9f9bfde59c55323b4abb89ca71))
+* **internal:** codegen related update ([2860479](https://github.com/cloudflare/cloudflare-typescript/commit/2860479dc7310af6a02647597900aba2c76c554c))
+
 ## 5.0.0 (2025-09-02)
 
 Full Changelog: [v4.5.0...v5.0.0](https://github.com/cloudflare/cloudflare-typescript/compare/v4.5.0...v5.0.0)

@@ -25,7 +25,7 @@ export class ToMarkdown extends APIResource {
     params: ToMarkdownCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ToMarkdownCreateResponsesSinglePage, ToMarkdownCreateResponse> {
-    const { account_id } = params ?? {};
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai/tomarkdown`,
       ToMarkdownCreateResponsesSinglePage,
