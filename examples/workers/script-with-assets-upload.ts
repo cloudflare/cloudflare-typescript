@@ -2,11 +2,11 @@
 
 /**
  * Create a Worker that serves static assets
- * 
+ *
  * This example demonstrates how to:
  * - Upload static assets to Cloudflare Workers
  * - Create and deploy a Worker that serves those assets
- * 
+ *
  * Docs:
  * - https://developers.cloudflare.com/workers/static-assets/direct-upload
  *
@@ -17,7 +17,7 @@
  *
  * Environment variables:
  *   - CLOUDFLARE_API_TOKEN (required)
- *   - CLOUDFLARE_ACCOUNT_ID (required) 
+ *   - CLOUDFLARE_ACCOUNT_ID (required)
  *   - ASSETS_DIRECTORY (required)
  *   - CLOUDFLARE_SUBDOMAIN (optional)
  *
@@ -99,11 +99,11 @@ const client = new Cloudflare({
  */
 function createManifest(directory: string): AssetManifest {
   const manifest: AssetManifest = {};
-  
+
   function processDirectory(currentDir: string, basePath = ''): void {
     try {
       const entries = fs.readdirSync(currentDir, { withFileTypes: true });
-      
+
       for (const entry of entries) {
         const fullPath = path.join(currentDir, entry.name);
         const relativePath = path.join(basePath, entry.name);
@@ -124,12 +124,12 @@ function createManifest(directory: string): AssetManifest {
 
             // Normalize path separators to forward slashes
             const manifestPath = `/${relativePath.replace(/\\/g, '/')}`;
-            
+
             manifest[manifestPath] = {
               hash,
               size: fileContent.length,
             };
-            
+
             console.log(`Added to manifest: ${manifestPath} (${fileContent.length} bytes)`);
           } catch (error) {
             console.warn(`Failed to process file ${fullPath}:`, error);
@@ -140,13 +140,13 @@ function createManifest(directory: string): AssetManifest {
       throw new Error(`Failed to read directory ${currentDir}: ${error}`);
     }
   }
-  
+
   processDirectory(directory);
-  
+
   if (Object.keys(manifest).length === 0) {
     throw new Error(`No files found in assets directory: ${directory}`);
   }
-  
+
   console.log(`Created manifest with ${Object.keys(manifest).length} files`);
   return manifest;
 }
@@ -201,26 +201,24 @@ export default {
 async function createUploadPayloads(
   buckets: string[][],
   manifest: AssetManifest,
-  assetsDirectory: string
+  assetsDirectory: string,
 ): Promise<UploadPayload[]> {
   const payloads: UploadPayload[] = [];
-  
+
   for (const bucket of buckets) {
     const payload: UploadPayload = {};
-    
+
     for (const hash of bucket) {
       // Find the file path for this hash
-      const manifestEntry = Object.entries(manifest).find(
-        ([_, data]) => data.hash === hash
-      );
-      
+      const manifestEntry = Object.entries(manifest).find(([_, data]) => data.hash === hash);
+
       if (!manifestEntry) {
         throw new Error(`Could not find file for hash: ${hash}`);
       }
-      
+
       const [relativePath] = manifestEntry;
       const fullPath = path.join(assetsDirectory, relativePath);
-      
+
       try {
         const fileContent = await readFile(fullPath);
         payload[hash] = fileContent.toString('base64');
@@ -229,10 +227,10 @@ async function createUploadPayloads(
         throw new Error(`Failed to read file ${fullPath}: ${error}`);
       }
     }
-    
+
     payloads.push(payload);
   }
-  
+
   return payloads;
 }
 
@@ -242,16 +240,16 @@ async function createUploadPayloads(
 async function uploadAssets(
   payloads: UploadPayload[],
   uploadJwt: string,
-  accountId: string
+  accountId: string,
 ): Promise<string> {
   let completionJwt: string | undefined;
-  
+
   console.log(`Uploading ${payloads.length} payload(s)...`);
-  
+
   for (let i = 0; i < payloads.length; i++) {
     const payload = payloads[i]!;
     console.log(`Uploading payload ${i + 1}/${payloads.length}...`);
-    
+
     try {
       const response = await client.workers.assets.upload.create(
         {
@@ -261,9 +259,9 @@ async function uploadAssets(
         },
         {
           headers: { Authorization: `Bearer ${uploadJwt}` },
-        }
+        },
       );
-      
+
       if (response?.jwt) {
         completionJwt = response.jwt;
       }
@@ -271,11 +269,11 @@ async function uploadAssets(
       throw new Error(`Failed to upload payload ${i + 1}: ${error}`);
     }
   }
-  
+
   if (!completionJwt) {
     throw new Error('Upload completed but no completion JWT received');
   }
-  
+
   console.log('✅ All assets uploaded successfully');
   return completionJwt;
 }
@@ -284,13 +282,13 @@ async function main(): Promise<void> {
   try {
     console.log('🚀 Starting Worker creation and deployment with static assets...');
     console.log(`📁 Assets directory: ${config.assetsDirectory}`);
-    
+
     console.log('📝 Creating asset manifest...');
     const manifest = createManifest(config.assetsDirectory);
     const exampleFile = Object.keys(manifest)[0]?.replace(/^\//, '') || 'file.txt';
 
     const scriptContent = generateWorkerScript(exampleFile);
-    
+
     let worker;
     try {
       worker = await client.workers.beta.workers.get(config.workerName, {
@@ -298,7 +296,9 @@ async function main(): Promise<void> {
       });
       console.log(`♻️  Worker ${config.workerName} already exists. Using it.`);
     } catch (error) {
-      if (!(error instanceof Cloudflare.NotFoundError)) { throw error; }
+      if (!(error instanceof Cloudflare.NotFoundError)) {
+        throw error;
+      }
       console.log(`✏️  Creating Worker ${config.workerName}...`);
       worker = await client.workers.beta.workers.create({
         account_id: config.accountId,
@@ -314,39 +314,28 @@ async function main(): Promise<void> {
 
     console.log(`⚙️  Worker id: ${worker.id}`);
     console.log('🔄 Starting asset upload session...');
-    
-    const uploadResponse = await client.workers.scripts.assets.upload.create(
-      config.workerName,
-      {
-        account_id: config.accountId,
-        manifest,
-      }
-    );
-    
+
+    const uploadResponse = await client.workers.scripts.assets.upload.create(config.workerName, {
+      account_id: config.accountId,
+      manifest,
+    });
+
     const { buckets, jwt: uploadJwt } = uploadResponse;
-    
+
     if (!uploadJwt || !buckets) {
       throw new Error('Failed to start asset upload session');
     }
-    
+
     let completionJwt: string;
-    
+
     if (buckets.length === 0) {
       console.log('✅ No new assets to upload!');
       // Use the initial upload JWT as completion JWT when no uploads are needed
       completionJwt = uploadJwt;
     } else {
-      const payloads = await createUploadPayloads(
-        buckets,
-        manifest,
-        config.assetsDirectory
-      );
-      
-      completionJwt = await uploadAssets(
-        payloads,
-        uploadJwt,
-        config.accountId
-      );
+      const payloads = await createUploadPayloads(buckets, manifest, config.assetsDirectory);
+
+      completionJwt = await uploadAssets(payloads, uploadJwt, config.accountId);
     }
 
     console.log('✏️  Creating Worker version...');
@@ -373,23 +362,23 @@ async function main(): Promise<void> {
         },
       ],
     });
-    
+
     console.log('🚚 Creating Worker deployment...');
-    
+
     // Create a deployment and point all traffic to the version we created
     await client.workers.scripts.deployments.create(config.workerName, {
       account_id: config.accountId,
       strategy: 'percentage',
       versions: [
         {
-            percentage: 100,
-            version_id: version.id,
-          },
-        ],
+          percentage: 100,
+          version_id: version.id,
+        },
+      ],
     });
 
     console.log('✅ Deployment successful!');
-    
+
     if (config.subdomain) {
       console.log(`
 🌍 Your Worker is live!

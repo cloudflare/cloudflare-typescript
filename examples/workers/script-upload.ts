@@ -2,11 +2,11 @@
 
 /**
  * Create and deploy a Worker
- * 
+ *
  * Docs:
  * - https://developers.cloudflare.com/workers/configuration/versions-and-deployments/
  * - https://developers.cloudflare.com/workers/platform/infrastructure-as-code/
- * 
+ *
  * Prerequisites:
  * 1. Generate an API token: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
  * 2. Find your account ID: https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/
@@ -72,7 +72,7 @@ async function main(): Promise<void> {
           return new Response(env.MESSAGE, { status: 200 });
         },
       }`.trim();
-    
+
     let worker;
     try {
       worker = await client.workers.beta.workers.get(config.workerName, {
@@ -80,7 +80,9 @@ async function main(): Promise<void> {
       });
       console.log(`♻️  Worker ${config.workerName} already exists. Using it.`);
     } catch (error) {
-      if (!(error instanceof Cloudflare.NotFoundError)) { throw error; }
+      if (!(error instanceof Cloudflare.NotFoundError)) {
+        throw error;
+      }
       console.log(`✏️  Creating Worker ${config.workerName}...`);
       worker = await client.workers.beta.workers.create({
         account_id: config.accountId,
@@ -96,7 +98,7 @@ async function main(): Promise<void> {
 
     console.log(`⚙️  Worker id: ${worker.id}`);
     console.log('✏️  Creating Worker version...');
-    
+
     // Create the first version of the Worker
     const version = await client.workers.beta.workers.versions.create(worker.id, {
       account_id: config.accountId,
@@ -120,21 +122,21 @@ async function main(): Promise<void> {
 
     console.log(`⚙️  Version id: ${version.id}`);
     console.log('🚚 Creating Worker deployment...');
-    
+
     // Create a deployment and point all traffic to the version we created
     await client.workers.scripts.deployments.create(config.workerName, {
       account_id: config.accountId,
       strategy: 'percentage',
       versions: [
         {
-            percentage: 100,
-            version_id: version.id,
-          },
-        ],
+          percentage: 100,
+          version_id: version.id,
+        },
+      ],
     });
-    
+
     console.log('✅ Deployment successful!');
-    
+
     if (config.subdomain) {
       console.log(`
 🌍 Your Worker is live!
