@@ -6,7 +6,7 @@ import { SinglePage } from '../../../pagination';
 
 export class Categories extends APIResource {
   /**
-   * Fetches a list of all categories.
+   * List all categories.
    *
    * @example
    * ```ts
@@ -35,35 +35,34 @@ export class CategoriesSinglePage extends SinglePage<Category> {}
 
 export interface Category {
   /**
-   * The identifier for this category. There is only one category per ID.
+   * Identify this category. Only one category per ID.
    */
   id?: number;
 
   /**
-   * True if the category is in beta and subject to change.
+   * Indicate whether the category is in beta and subject to change.
    */
   beta?: boolean;
 
   /**
-   * Which account types are allowed to create policies based on this category.
-   * `blocked` categories are blocked unconditionally for all accounts.
-   * `removalPending` categories can be removed from policies but not added.
-   * `noBlock` categories cannot be blocked.
+   * Specify which account types can create policies for this category. `blocked`
+   * Blocks unconditionally for all accounts. `removalPending` Allows removal from
+   * policies but disables addition. `noBlock` Prevents blocking.
    */
   class?: 'free' | 'premium' | 'blocked' | 'removalPending' | 'noBlock';
 
   /**
-   * A short summary of domains in the category.
+   * Provide a short summary of domains in the category.
    */
   description?: string;
 
   /**
-   * The name of the category.
+   * Specify the category name.
    */
   name?: string;
 
   /**
-   * All subcategories for this category.
+   * Provide all subcategories for this category.
    */
   subcategories?: Array<Category.Subcategory>;
 }
@@ -71,30 +70,29 @@ export interface Category {
 export namespace Category {
   export interface Subcategory {
     /**
-     * The identifier for this category. There is only one category per ID.
+     * Identify this category. Only one category per ID.
      */
     id?: number;
 
     /**
-     * True if the category is in beta and subject to change.
+     * Indicate whether the category is in beta and subject to change.
      */
     beta?: boolean;
 
     /**
-     * Which account types are allowed to create policies based on this category.
-     * `blocked` categories are blocked unconditionally for all accounts.
-     * `removalPending` categories can be removed from policies but not added.
-     * `noBlock` categories cannot be blocked.
+     * Specify which account types can create policies for this category. `blocked`
+     * Blocks unconditionally for all accounts. `removalPending` Allows removal from
+     * policies but disables addition. `noBlock` Prevents blocking.
      */
     class?: 'free' | 'premium' | 'blocked' | 'removalPending' | 'noBlock';
 
     /**
-     * A short summary of domains in the category.
+     * Provide a short summary of domains in the category.
      */
     description?: string;
 
     /**
-     * The name of the category.
+     * Specify the category name.
      */
     name?: string;
   }
@@ -102,7 +100,7 @@ export namespace Category {
 
 export interface CategoryListParams {
   /**
-   * Identifier.
+   * Provide the identifier string.
    */
   account_id: string;
 }

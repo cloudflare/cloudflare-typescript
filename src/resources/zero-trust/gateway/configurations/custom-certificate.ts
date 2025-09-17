@@ -6,7 +6,7 @@ import * as ConfigurationsAPI from './configurations';
 
 export class CustomCertificate extends APIResource {
   /**
-   * Fetches the current Zero Trust certificate configuration.
+   * Retrieve the current Zero Trust certificate configuration.
    *
    * @deprecated
    */

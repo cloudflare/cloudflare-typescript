@@ -28,6 +28,7 @@ describe('resource cfInterconnects', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.magicTransit.cfInterconnects.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      automatic_return_routing: true,
       description: 'Tunnel for Interconnect to ORD',
       gre: { cloudflare_endpoint: '203.0.113.1' },
       health_check: { enabled: true, rate: 'low', target: { saved: '203.0.113.1' }, type: 'request' },

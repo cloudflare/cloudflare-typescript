@@ -6,7 +6,7 @@ import { SinglePage } from '../../../pagination';
 
 export class AppTypes extends APIResource {
   /**
-   * Fetches all application and application type mappings.
+   * List all application and application type mappings.
    *
    * @example
    * ```ts
@@ -34,40 +34,40 @@ export type AppType = AppType.ZeroTrustGatewayApplication | AppType.ZeroTrustGat
 export namespace AppType {
   export interface ZeroTrustGatewayApplication {
     /**
-     * The identifier for this application. There is only one application per ID.
+     * Identify this application. Only one application per ID.
      */
     id?: number;
 
     /**
-     * The identifier for the type of this application. There can be many applications
-     * with the same type. This refers to the `id` of a returned application type.
+     * Identify the type of this application. Multiple applications can share the same
+     * type. Refers to the `id` of a returned application type.
      */
     application_type_id?: number;
 
     created_at?: string;
 
     /**
-     * The name of the application or application type.
+     * Specify the name of the application or application type.
      */
     name?: string;
   }
 
   export interface ZeroTrustGatewayApplicationType {
     /**
-     * The identifier for the type of this application. There can be many applications
-     * with the same type. This refers to the `id` of a returned application type.
+     * Identify the type of this application. Multiple applications can share the same
+     * type. Refers to the `id` of a returned application type.
      */
     id?: number;
 
     created_at?: string;
 
     /**
-     * A short summary of applications with this type.
+     * Provide a short summary of applications with this type.
      */
     description?: string;
 
     /**
-     * The name of the application or application type.
+     * Specify the name of the application or application type.
      */
     name?: string;
   }
@@ -75,7 +75,7 @@ export namespace AppType {
 
 export interface AppTypeListParams {
   /**
-   * Identifier.
+   * Provide the identifier string.
    */
   account_id: string;
 }

@@ -14,7 +14,7 @@ describe('resource tags', () => {
     const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.tags.update(
       'my-dispatch-namespace',
       'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: ['my-tag'] },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: ['my-team', 'my-public-api'] },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource tags', () => {
     const response = await client.workersForPlatforms.dispatch.namespaces.scripts.tags.update(
       'my-dispatch-namespace',
       'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: ['my-tag'] },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: ['my-team', 'my-public-api'] },
     );
   });
 

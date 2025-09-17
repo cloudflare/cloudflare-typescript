@@ -28,7 +28,7 @@ describe('resource subdomain', () => {
     const response = await client.workers.scripts.subdomain.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: true,
-      previews_enabled: true,
+      previews_enabled: false,
     });
   });
 

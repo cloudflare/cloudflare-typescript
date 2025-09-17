@@ -277,8 +277,6 @@ export interface Certificate {
    */
   associated_hostnames?: Array<AssociatedHostnames>;
 
-  created_at?: string;
-
   expires_on?: string;
 
   /**
@@ -290,8 +288,6 @@ export interface Certificate {
    * The name of the certificate.
    */
   name?: string;
-
-  updated_at?: string;
 }
 
 export interface CertificateDeleteResponse {

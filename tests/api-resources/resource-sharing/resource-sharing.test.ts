@@ -90,10 +90,13 @@ describe('resource resourceSharing', () => {
     const response = await client.resourceSharing.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
+      include_recipient_counts: true,
+      include_resources: true,
       kind: 'sent',
       order: 'name',
       page: 2,
       per_page: 20,
+      resource_types: ['custom-ruleset'],
       status: 'active',
       target_type: 'account',
     });
@@ -134,6 +137,8 @@ describe('resource resourceSharing', () => {
   test('get: required and optional params', async () => {
     const response = await client.resourceSharing.get('3fd85f74b32742f1bff64a85009dda07', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      include_recipient_counts: true,
+      include_resources: true,
     });
   });
 });

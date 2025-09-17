@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare, { toFile } from 'cloudflare';
+import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const client = new Cloudflare({
@@ -14,7 +14,6 @@ describe('resource snippets', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.snippets.update('my_snippet', {
       zone_id: '9f1839b6152d298aca64c4e906b6d074',
-      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
       metadata: { main_module: 'main.js' },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +29,6 @@ describe('resource snippets', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.snippets.update('my_snippet', {
       zone_id: '9f1839b6152d298aca64c4e906b6d074',
-      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
       metadata: { main_module: 'main.js' },
     });
   });

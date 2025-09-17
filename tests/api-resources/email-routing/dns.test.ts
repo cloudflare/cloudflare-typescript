@@ -11,10 +11,7 @@ const client = new Cloudflare({
 
 describe('resource dns', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.emailRouting.dns.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'example.net',
-    });
+    const responsePromise = client.emailRouting.dns.create({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,10 +44,7 @@ describe('resource dns', () => {
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.emailRouting.dns.edit({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'example.net',
-    });
+    const responsePromise = client.emailRouting.dns.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
