@@ -100,12 +100,12 @@ export class Registrations extends APIResource {
     params: RegistrationGetParams,
     options?: RequestOptions,
   ): APIPromise<RegistrationGetResponse> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return (
-      this._client.get(
-        path`/accounts/${account_id}/devices/registrations/${registrationID}`,
-        options,
-      ) as APIPromise<{ result: RegistrationGetResponse }>
+      this._client.get(path`/accounts/${account_id}/devices/registrations/${registrationID}`, {
+        query,
+        ...options,
+      }) as APIPromise<{ result: RegistrationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -209,6 +209,11 @@ export interface RegistrationListResponse {
   key_type?: string | null;
 
   /**
+   * The device settings profile assigned to this registration.
+   */
+  policy?: RegistrationListResponse.Policy;
+
+  /**
    * The RFC3339 timestamp when the registration was revoked.
    */
   revoked_at?: string | null;
@@ -240,6 +245,37 @@ export namespace RegistrationListResponse {
      * Version of the WARP client.
      */
     client_version?: string;
+  }
+
+  /**
+   * The device settings profile assigned to this registration.
+   */
+  export interface Policy {
+    /**
+     * The ID of the device settings profile.
+     */
+    id: string;
+
+    /**
+     * Whether the device settings profile is the default profile for the account.
+     */
+    default: boolean;
+
+    /**
+     * Whether the device settings profile was deleted.
+     */
+    deleted: boolean;
+
+    /**
+     * The name of the device settings profile.
+     */
+    name: string;
+
+    /**
+     * The RFC3339 timestamp of when the device settings profile last changed for the
+     * registration.
+     */
+    updated_at: string;
   }
 
   export interface User {
@@ -311,6 +347,11 @@ export interface RegistrationGetResponse {
   key_type?: string | null;
 
   /**
+   * The device settings profile assigned to this registration.
+   */
+  policy?: RegistrationGetResponse.Policy;
+
+  /**
    * The RFC3339 timestamp when the registration was revoked.
    */
   revoked_at?: string | null;
@@ -342,6 +383,37 @@ export namespace RegistrationGetResponse {
      * Version of the WARP client.
      */
     client_version?: string;
+  }
+
+  /**
+   * The device settings profile assigned to this registration.
+   */
+  export interface Policy {
+    /**
+     * The ID of the device settings profile.
+     */
+    id: string;
+
+    /**
+     * Whether the device settings profile is the default profile for the account.
+     */
+    default: boolean;
+
+    /**
+     * Whether the device settings profile was deleted.
+     */
+    deleted: boolean;
+
+    /**
+     * The name of the device settings profile.
+     */
+    name: string;
+
+    /**
+     * The RFC3339 timestamp of when the device settings profile last changed for the
+     * registration.
+     */
+    updated_at: string;
   }
 
   export interface User {
@@ -383,7 +455,8 @@ export interface RegistrationListParams extends CursorPaginationParams {
   device?: RegistrationListParams.Device;
 
   /**
-   * Query param:
+   * Query param: Comma-separated list of additional information that should be
+   * included in the registration response. Supported values are: "policy".
    */
   include?: string;
 
@@ -458,7 +531,16 @@ export interface RegistrationBulkDeleteParams {
 }
 
 export interface RegistrationGetParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Query param: Comma-separated list of additional information that should be
+   * included in the registration response. Supported values are: "policy".
+   */
+  include?: string;
 }
 
 export interface RegistrationRevokeParams {

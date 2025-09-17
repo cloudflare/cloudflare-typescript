@@ -280,7 +280,7 @@ export const tool: Tool = {
           type: {
             type: 'string',
           },
-          schema: {
+          json_schema: {
             type: 'object',
             description:
               'Schema for the response format. More information here: https://developers.cloudflare.com/workers-ai/json-mode/',

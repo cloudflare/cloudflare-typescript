@@ -55,5 +55,5 @@ export {
   type RecordScanParams,
   type RecordResponsesV4PagePaginationArray,
 } from './records';
-export { Settings, type DNSSetting } from './settings/index';
+export { Settings } from './settings/index';
 export { ZoneTransfers } from './zone-transfers/index';

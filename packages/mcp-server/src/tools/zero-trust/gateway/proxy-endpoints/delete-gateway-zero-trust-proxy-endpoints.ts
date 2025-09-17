@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'delete_gateway_zero_trust_proxy_endpoints',
-  description: 'Deletes a configured Zero Trust Gateway proxy endpoint.',
+  description: 'Delete a configured Zero Trust Gateway proxy endpoint.',
   inputSchema: {
     type: 'object',
     properties: {

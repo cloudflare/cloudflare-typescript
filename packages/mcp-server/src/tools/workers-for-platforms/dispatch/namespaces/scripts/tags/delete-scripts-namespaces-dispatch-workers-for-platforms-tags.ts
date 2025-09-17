@@ -35,7 +35,6 @@ export const tool: Tool = {
       },
       tag: {
         type: 'string',
-        description: 'Tag to help you manage your Worker.',
       },
     },
     required: ['account_id', 'dispatch_namespace', 'script_name', 'tag'],

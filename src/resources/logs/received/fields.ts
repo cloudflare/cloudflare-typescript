@@ -29,7 +29,7 @@ export interface FieldGetResponse {
 
 export interface FieldGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   zone_id: string;
 }

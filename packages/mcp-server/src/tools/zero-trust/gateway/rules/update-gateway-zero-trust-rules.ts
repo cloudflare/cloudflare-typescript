@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_gateway_zero_trust_rules',
-  description: 'Updates a configured Zero Trust Gateway rule.',
+  description: 'Update a configured Zero Trust Gateway rule.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -25,12 +25,12 @@ export const tool: Tool = {
       },
       rule_id: {
         type: 'string',
-        description: 'The API resource UUID.',
+        description: 'Identify the API resource with a UUID.',
       },
       action: {
         type: 'string',
         description:
-          'The action to perform when the associated traffic, identity, and device posture expressions are either absent or evaluate to `true`.',
+          'Specify the action to perform when the associated traffic, identity, and device posture expressions either absent or evaluate to `true`.',
         enum: [
           'on',
           'off',
@@ -52,40 +52,40 @@ export const tool: Tool = {
       },
       name: {
         type: 'string',
-        description: 'The name of the rule.',
+        description: 'Specify the rule name.',
       },
       description: {
         type: 'string',
-        description: 'The description of the rule.',
+        description: 'Specify the rule description.',
       },
       device_posture: {
         type: 'string',
         description:
-          'The wirefilter expression used for device posture check matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.',
+          'Specify the wirefilter expression used for device posture check. The API automatically formats and sanitizes expressions before storing them. To prevent Terraform state drift, use the formatted expression returned in the API response.',
       },
       enabled: {
         type: 'boolean',
-        description: 'True if the rule is enabled.',
+        description: 'Specify whether the rule is enabled.',
       },
       expiration: {
         type: 'object',
         description:
-          "The expiration time stamp and default duration of a DNS policy. Takes\nprecedence over the policy's `schedule` configuration, if any.\n\nThis does not apply to HTTP or network policies.\n",
+          "Defines the expiration time stamp and default duration of a DNS policy. Takes precedence over the policy's `schedule` configuration, if any. This  does not apply to HTTP or network policies.",
         properties: {
           expires_at: {
             type: 'string',
             description:
-              'The time stamp at which the policy will expire and cease to be\napplied.\n\nMust adhere to RFC 3339 and include a UTC offset. Non-zero\noffsets are accepted but will be converted to the equivalent\nvalue with offset zero (UTC+00:00) and will be returned as time\nstamps with offset zero denoted by a trailing \'Z\'.\n\nPolicies with an expiration do not consider the timezone of\nclients they are applied to, and expire "globally" at the point\ngiven by their `expires_at` value.\n',
+              'Show the timestamp when the policy expires and stops applying.  The value must follow RFC 3339 and include a UTC offset.  The system accepts non-zero offsets but converts them to the equivalent UTC+00:00  value and returns timestamps with a trailing Z. Expiration policies ignore client  timezones and expire globally at the specified expires_at time.',
             format: 'date-time',
           },
           duration: {
             type: 'integer',
             description:
-              'The default duration a policy will be active in minutes. Must be set in order to use the `reset_expiration` endpoint on this rule.',
+              'Defines the default duration a policy active in minutes. Must set in order to use the `reset_expiration` endpoint on this rule.',
           },
           expired: {
             type: 'boolean',
-            description: 'Whether the policy has expired.',
+            description: 'Indicates whether the policy is expired.',
           },
         },
         required: ['expires_at'],
@@ -93,7 +93,7 @@ export const tool: Tool = {
       filters: {
         type: 'array',
         description:
-          'The protocol or layer to evaluate the traffic, identity, and device. posture expressions.',
+          'Specify the protocol or layer to evaluate the traffic, identity, and device posture expressions.',
         items: {
           $ref: '#/$defs/gateway_filter',
         },
@@ -101,12 +101,12 @@ export const tool: Tool = {
       identity: {
         type: 'string',
         description:
-          'The wirefilter expression used for identity matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.',
+          'Specify the wirefilter expression used for identity matching. The API automatically formats and sanitizes expressions before storing them. To prevent Terraform state drift, use the formatted expression returned in the API response.',
       },
       precedence: {
         type: 'integer',
         description:
-          'Precedence sets the order of your rules. Lower values indicate higher precedence. At each processing phase, applicable rules are evaluated in ascending order of this value. Refer to [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform) docs on how to manage precedence via Terraform.',
+          'Set the order of your rules. Lower values indicate higher precedence. At each processing phase, evaluate applicable rules in ascending order of this value. Refer to [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform) to manage precedence via Terraform.',
       },
       rule_settings: {
         $ref: '#/$defs/rule_setting',
@@ -117,48 +117,49 @@ export const tool: Tool = {
       traffic: {
         type: 'string',
         description:
-          'The wirefilter expression used for traffic matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.',
+          'Specify the wirefilter expression used for traffic matching. The API automatically formats and sanitizes expressions before storing them. To prevent Terraform state drift, use the formatted expression returned in the API response.',
       },
     },
     required: ['account_id', 'rule_id', 'action', 'name'],
     $defs: {
       gateway_filter: {
         type: 'string',
-        description: 'The protocol or layer to use.',
+        description: 'Specify the protocol or layer to use.',
         enum: ['http', 'dns', 'l4', 'egress', 'dns_resolver'],
       },
       rule_setting: {
         type: 'object',
-        description: "Additional settings that modify the rule's action.",
+        description: 'Set settings related to this rule.',
         properties: {
           add_headers: {
             type: 'object',
             description:
-              'Add custom headers to allowed requests, in the form of key-value pairs. Keys are header names, pointing to an array with its header value(s).',
+              'Add custom headers to allowed requests as key-value pairs. Use header names as keys that map to arrays of header values.',
             additionalProperties: true,
           },
           allow_child_bypass: {
             type: 'boolean',
-            description: 'Set by parent MSP accounts to enable their children to bypass this rule.',
+            description:
+              'Set to enable MSP children to bypass this rule. Only parent MSP accounts can set this. this rule.',
           },
           audit_ssh: {
             type: 'object',
-            description: 'Settings for the Audit SSH action.',
+            description: 'Define the settings for the Audit SSH action.',
             properties: {
               command_logging: {
                 type: 'boolean',
-                description: 'Enable to turn on SSH command logging.',
+                description: 'Enable SSH command logging.',
               },
             },
           },
           biso_admin_controls: {
             type: 'object',
-            description: 'Configure how browser isolation behaves.',
+            description: 'Configure browser isolation behavior.',
             properties: {
               copy: {
                 type: 'string',
                 description:
-                  'Configure whether copy is enabled or not. When set with "remote_only", copying isolated content from the remote browser to the user\'s local clipboard is disabled. When absent, copy is enabled. Only applies when `version == "v2"`.',
+                  'Configure copy behavior. If set to remote_only, users cannot copy isolated content from the remote browser to the local clipboard. If this field is absent, copying remains enabled. Applies only when version == "v2".',
                 enum: ['enabled', 'disabled', 'remote_only'],
               },
               dcp: {
@@ -176,7 +177,7 @@ export const tool: Tool = {
               download: {
                 type: 'string',
                 description:
-                  'Configure whether downloading enabled or not. When set with "remote_only", downloads are only available for viewing. Only applies when `version == "v2"`.',
+                  'Configure download behavior. When set to remote_only, users can view downloads but cannot save them. Applies only when version == "v2".',
                 enum: ['enabled', 'disabled', 'remote_only'],
               },
               dp: {
@@ -190,30 +191,30 @@ export const tool: Tool = {
               keyboard: {
                 type: 'string',
                 description:
-                  'Configure whether keyboard usage is enabled or not. When absent, keyboard usage is enabled. Only applies when `version == "v2"`.',
+                  'Configure keyboard usage behavior. If this field is absent, keyboard usage remains enabled. Applies only when version == "v2".',
                 enum: ['enabled', 'disabled'],
               },
               paste: {
                 type: 'string',
                 description:
-                  'Configure whether pasting is enabled or not. When set with "remote_only", pasting content from the user\'s local clipboard into isolated pages is disabled. When absent, paste is enabled. Only applies when `version == "v2"`.',
+                  'Configure paste behavior. If set to remote_only, users cannot paste content from the local clipboard into isolated pages. If this field is absent, pasting remains enabled. Applies only when version == "v2".',
                 enum: ['enabled', 'disabled', 'remote_only'],
               },
               printing: {
                 type: 'string',
                 description:
-                  'Configure whether printing is enabled or not. When absent, printing is enabled. Only applies when `version == "v2"`.',
+                  'Configure print behavior. Default, Printing is enabled. Applies only when version == "v2".',
                 enum: ['enabled', 'disabled'],
               },
               upload: {
                 type: 'string',
                 description:
-                  'Configure whether uploading is enabled or not. When absent, uploading is enabled. Only applies when `version == "v2"`.',
+                  'Configure upload behavior. If this field is absent, uploading remains enabled. Applies only when version == "v2".',
                 enum: ['enabled', 'disabled'],
               },
               version: {
                 type: 'string',
-                description: 'Indicates which version of the browser isolation controls should apply.',
+                description: 'Indicate which version of the browser isolation controls should apply.',
                 enum: ['v1', 'v2'],
               },
             },
@@ -221,15 +222,15 @@ export const tool: Tool = {
           block_page: {
             type: 'object',
             description:
-              'Custom block page settings. If missing/null, blocking will use the the account settings.',
+              'Configure custom block page settings. If missing or null, use the account settings.',
             properties: {
               target_uri: {
                 type: 'string',
-                description: 'URI to which the user will be redirected.',
+                description: 'Specify the URI to which the user is redirected.',
               },
               include_context: {
                 type: 'boolean',
-                description: 'If true, context information will be passed as query parameters.',
+                description: 'Specify whether to pass the context information as query parameters.',
               },
             },
             required: ['target_uri'],
@@ -241,31 +242,32 @@ export const tool: Tool = {
           block_reason: {
             type: 'string',
             description:
-              'The text describing why this block occurred, displayed on the custom block page (if enabled).',
+              'Explain why the rule blocks the request. The custom block page shows this text (if enabled).',
           },
           bypass_parent_rule: {
             type: 'boolean',
-            description: "Set by children MSP accounts to bypass their parent's rules.",
+            description:
+              "Set to enable MSP accounts to bypass their parent's rules. Only MSP child accounts can set this.",
           },
           check_session: {
             type: 'object',
-            description: 'Configure how session check behaves.',
+            description: 'Configure session check behavior.',
             properties: {
               duration: {
                 type: 'string',
                 description:
-                  'Configure how fresh the session needs to be to be considered valid. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.',
+                  'Sets the required session freshness threshold. The API returns a normalized version of this value.',
               },
               enforce: {
                 type: 'boolean',
-                description: 'Set to true to enable session enforcement.',
+                description: 'Enable session enforcement.',
               },
             },
           },
           dns_resolvers: {
             type: 'object',
             description:
-              "Add your own custom resolvers to route queries that match the resolver policy. Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' are set. DNS queries will route to the address closest to their origin. Only valid when a rule's action is set to 'resolve'.",
+              "Configure custom resolvers to route queries that match the resolver policy. Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' settings. DNS queries get routed to the address closest to their origin. Only valid when a rule's action is set to 'resolve'.",
             properties: {
               ipv4: {
                 type: 'array',
@@ -288,37 +290,37 @@ export const tool: Tool = {
             properties: {
               ipv4: {
                 type: 'string',
-                description: 'The IPv4 address to be used for egress.',
+                description: 'Specify the IPv4 address to use for egress.',
               },
               ipv4_fallback: {
                 type: 'string',
                 description:
-                  "The fallback IPv4 address to be used for egress in the event of an error egressing with the primary IPv4. Can be '0.0.0.0' to indicate local egress via WARP IPs.",
+                  "Specify the fallback IPv4 address to use for egress when the primary IPv4 fails. Set '0.0.0.0' to indicate local egress via WARP IPs.",
               },
               ipv6: {
                 type: 'string',
-                description: 'The IPv6 range to be used for egress.',
+                description: 'Specify the IPv6 range to use for egress.',
               },
             },
           },
           ignore_cname_category_matches: {
             type: 'boolean',
             description:
-              'Set to true, to ignore the category matches at CNAME domains in a response. If unchecked, the categories in this rule will be checked against all the CNAME domain categories in a response.',
+              'Ignore category matches at CNAME domains in a response. When off, evaluate categories in this rule against all CNAME domain categories in the response.',
           },
           insecure_disable_dnssec_validation: {
             type: 'boolean',
-            description: 'INSECURE - disable DNSSEC validation (for Allow actions).',
+            description: 'Specify whether to disable DNSSEC validation (for Allow actions) [INSECURE].',
           },
           ip_categories: {
             type: 'boolean',
             description:
-              'Set to true to enable IPs in DNS resolver category blocks. By default categories only block based on domain names.',
+              'Enable IPs in DNS resolver category blocks. The system blocks only domain name categories unless you enable this setting.',
           },
           ip_indicator_feeds: {
             type: 'boolean',
             description:
-              'Set to true to include IPs in DNS resolver indicator feed blocks. By default indicator feeds only block based on domain names.',
+              'Indicates whether to include IPs in DNS resolver indicator feed blocks. Default, indicator feeds block only domain names.',
           },
           l4override: {
             type: 'object',
@@ -326,26 +328,25 @@ export const tool: Tool = {
             properties: {
               ip: {
                 type: 'string',
-                description: 'IPv4 or IPv6 address.',
+                description: 'Defines the IPv4 or IPv6 address.',
               },
               port: {
                 type: 'integer',
-                description: 'A port number to use for TCP/UDP overrides.',
+                description: 'Defines a port number to use for TCP/UDP overrides.',
               },
             },
           },
           notification_settings: {
             type: 'object',
-            description:
-              "Configure a notification to display on the user's device when this rule is matched.",
+            description: "Configure a notification to display on the user's device when this rule matched.",
             properties: {
               enabled: {
                 type: 'boolean',
-                description: 'Set notification on.',
+                description: 'Enable notification.',
               },
               include_context: {
                 type: 'boolean',
-                description: 'If true, context information will be passed as query parameters.',
+                description: 'Indicates whether to pass the context information as query parameters.',
               },
               msg: {
                 type: 'string',
@@ -354,20 +355,20 @@ export const tool: Tool = {
               support_url: {
                 type: 'string',
                 description:
-                  'Optional URL to direct users to additional information. If not set, the notification will open a block page.',
+                  'Defines an optional URL to direct users to additional information. If unset, the notification opens a block page.',
               },
             },
           },
           override_host: {
             type: 'string',
-            description: 'Override matching DNS queries with a hostname.',
+            description: 'Defines a hostname for override, for the matching DNS queries.',
           },
           override_ips: {
             type: 'array',
-            description: 'Override matching DNS queries with an IP or set of IPs.',
+            description: 'Defines a an IP or set of IPs for overriding matched DNS queries.',
             items: {
               type: 'string',
-              description: 'IPv4 or IPv6 address.',
+              description: 'Defines the IPv4 or IPv6 address.',
             },
           },
           payload_log: {
@@ -376,17 +377,17 @@ export const tool: Tool = {
             properties: {
               enabled: {
                 type: 'boolean',
-                description: 'Set to true to enable DLP payload logging for this rule.',
+                description: 'Enable DLP payload logging for this rule.',
               },
             },
           },
           quarantine: {
             type: 'object',
-            description: 'Settings that apply to quarantine rules.',
+            description: 'Configure settings that apply to quarantine rules.',
             properties: {
               file_types: {
                 type: 'array',
-                description: 'Types of files to sandbox.',
+                description: 'Specify the types of files to sandbox.',
                 items: {
                   type: 'string',
                   enum: [
@@ -410,20 +411,20 @@ export const tool: Tool = {
           },
           redirect: {
             type: 'object',
-            description: 'Settings that apply to redirect rules.',
+            description: 'Apply settings to redirect rules.',
             properties: {
               target_uri: {
                 type: 'string',
-                description: 'URI to which the user will be redirected.',
+                description: 'Specify the URI to which the user is redirected.',
               },
               include_context: {
                 type: 'boolean',
-                description: 'If true, context information will be passed as query parameters.',
+                description: 'Specify whether to pass the context information as query parameters.',
               },
               preserve_path_and_query: {
                 type: 'boolean',
                 description:
-                  'If true, the path and query parameters from the original request will be appended to target_uri.',
+                  'Specify whether to append the path and query parameters from the original request to target_uri.',
               },
             },
             required: ['target_uri'],
@@ -431,33 +432,33 @@ export const tool: Tool = {
           resolve_dns_internally: {
             type: 'object',
             description:
-              "Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set to 'resolve'.",
+              "Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Not used when 'dns_resolvers' is specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set to 'resolve'.",
             properties: {
               fallback: {
                 type: 'string',
                 description:
-                  "The fallback behavior to apply when the internal DNS response code is different from 'NOERROR' or when the response data only contains CNAME records for 'A' or 'AAAA' queries.",
+                  "Specify the fallback behavior to apply when the internal DNS response code differs from 'NOERROR' or when the response data contains only CNAME records for 'A' or 'AAAA' queries.",
                 enum: ['none', 'public_dns'],
               },
               view_id: {
                 type: 'string',
-                description: "The internal DNS view identifier that's passed to the internal DNS service.",
+                description: 'Specify the internal DNS view identifier to pass to the internal DNS service.',
               },
             },
           },
           resolve_dns_through_cloudflare: {
             type: 'boolean',
             description:
-              "Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_internally' is set. Only valid when a rule's action is set to 'resolve'.",
+              "Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot set when 'dns_resolvers' specified or 'resolve_dns_internally' is set. Only valid when a rule's action set to 'resolve'.",
           },
           untrusted_cert: {
             type: 'object',
-            description: 'Configure behavior when an upstream cert is invalid or an SSL error occurs.',
+            description: 'Configure behavior when an upstream certificate is invalid or an SSL error occurs.',
             properties: {
               action: {
                 type: 'string',
                 description:
-                  'The action performed when an untrusted certificate is seen. The default action is an error with HTTP code 526.',
+                  'Defines the action performed when an untrusted certificate seen. The default action an error with HTTP code 526.',
                 enum: ['pass_through', 'block', 'error'],
               },
             },
@@ -469,21 +470,22 @@ export const tool: Tool = {
         properties: {
           ip: {
             type: 'string',
-            description: 'IPv4 address of upstream resolver.',
+            description: 'Specify the IPv4 address of the upstream resolver.',
           },
           port: {
             type: 'integer',
-            description: 'A port number to use for upstream resolver. Defaults to 53 if unspecified.',
+            description:
+              'Specify a port number to use for the upstream resolver. Defaults to 53 if unspecified.',
           },
           route_through_private_network: {
             type: 'boolean',
             description:
-              'Whether to connect to this resolver over a private network. Must be set when vnet_id is set.',
+              'Indicate whether to connect to this resolver over a private network. Must set when vnet_id set.',
           },
           vnet_id: {
             type: 'string',
             description:
-              'Optionally specify a virtual network for this resolver. Uses default virtual network id if omitted.',
+              'Specify an optional virtual network for this resolver. Uses default virtual network id if omitted.',
           },
         },
         required: ['ip'],
@@ -493,69 +495,69 @@ export const tool: Tool = {
         properties: {
           ip: {
             type: 'string',
-            description: 'IPv6 address of upstream resolver.',
+            description: 'Specify the IPv6 address of the upstream resolver.',
           },
           port: {
             type: 'integer',
-            description: 'A port number to use for upstream resolver. Defaults to 53 if unspecified.',
+            description:
+              'Specify a port number to use for the upstream resolver. Defaults to 53 if unspecified.',
           },
           route_through_private_network: {
             type: 'boolean',
             description:
-              'Whether to connect to this resolver over a private network. Must be set when vnet_id is set.',
+              'Indicate whether to connect to this resolver over a private network. Must set when vnet_id set.',
           },
           vnet_id: {
             type: 'string',
             description:
-              'Optionally specify a virtual network for this resolver. Uses default virtual network id if omitted.',
+              'Specify an optional virtual network for this resolver. Uses default virtual network id if omitted.',
           },
         },
         required: ['ip'],
       },
       schedule: {
         type: 'object',
-        description:
-          'The schedule for activating DNS policies. This does not apply to HTTP or network policies.',
+        description: 'Defines the schedule for activating DNS policies. (HTTP/Egress or L4 unsupported).',
         properties: {
           fri: {
             type: 'string',
             description:
-              'The time intervals when the rule will be active on Fridays, in increasing order from 00:00-24:00.  If this parameter is omitted, the rule will be deactivated on Fridays.',
+              'Specify the time intervals when the rule is active on Fridays, in the increasing order from 00:00-24:00.  If this parameter omitted, the rule is deactivated on Fridays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.',
           },
           mon: {
             type: 'string',
             description:
-              'The time intervals when the rule will be active on Mondays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Mondays.',
+              'Specify the time intervals when the rule is active on Mondays, in the increasing order from 00:00-24:00(capped at maximum of 6 time splits). If this parameter omitted, the rule is deactivated on Mondays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.',
           },
           sat: {
             type: 'string',
             description:
-              'The time intervals when the rule will be active on Saturdays, in increasing order from 00:00-24:00.  If this parameter is omitted, the rule will be deactivated on Saturdays.',
+              'Specify the time intervals when the rule is active on Saturdays, in the increasing order from 00:00-24:00.  If this parameter omitted, the rule is deactivated on Saturdays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.',
           },
           sun: {
             type: 'string',
             description:
-              'The time intervals when the rule will be active on Sundays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Sundays.',
+              'Specify the time intervals when the rule is active on Sundays, in the increasing order from 00:00-24:00. If this parameter omitted, the rule is deactivated on Sundays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.',
           },
           thu: {
             type: 'string',
             description:
-              'The time intervals when the rule will be active on Thursdays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Thursdays.',
+              'Specify the time intervals when the rule is active on Thursdays, in the increasing order from 00:00-24:00. If this parameter omitted, the rule is deactivated on Thursdays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.',
           },
           time_zone: {
             type: 'string',
             description:
-              "The time zone the rule will be evaluated against. If a [valid time zone city name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) is provided, Gateway will always use the current time at that time zone. If this parameter is omitted, then Gateway will use the time zone inferred from the user's source IP to evaluate the rule. If Gateway cannot determine the time zone from the IP, we will fall back to the time zone of the user's connected data center.",
+              "Specify the time zone for rule evaluation. When a [valid time zone city name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) is provided, Gateway always uses the current time for that time zone. When this parameter is omitted, Gateway uses the time zone determined from the user's IP address. Colo time zone is used when the user's IP address does not resolve to a location.",
           },
           tue: {
             type: 'string',
             description:
-              'The time intervals when the rule will be active on Tuesdays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Tuesdays.',
+              'Specify the time intervals when the rule is active on Tuesdays, in the increasing order from 00:00-24:00. If this parameter omitted, the rule is deactivated on Tuesdays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.',
           },
           wed: {
             type: 'string',
             description:
-              'The time intervals when the rule will be active on Wednesdays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Wednesdays.',
+              'Specify the time intervals when the rule is active on Wednesdays, in the increasing order from 00:00-24:00. If this parameter omitted, the rule is deactivated on Wednesdays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.',
           },
         },
       },

@@ -37,7 +37,7 @@ export const tool: Tool = {
       },
       export: {
         type: 'string',
-        description: 'Export the list of cookies as a file.',
+        description: 'Export the list of cookies as a file, limited to 50000 entries.',
         enum: ['csv'],
       },
       hosts: {
