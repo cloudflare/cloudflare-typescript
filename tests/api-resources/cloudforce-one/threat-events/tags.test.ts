@@ -37,7 +37,7 @@ describe('resource tags', () => {
       analyticPriority: 0,
       attributionConfidence: 'attributionConfidence',
       attributionOrganization: 'attributionOrganization',
-      categoryId: 1,
+      categoryUuid: '12345678-1234-1234-1234-1234567890ab',
       externalReferenceLinks: ['string'],
       internalDescription: 'internalDescription',
       motive: 'motive',
