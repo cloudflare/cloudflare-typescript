@@ -80,12 +80,12 @@ export class Secrets extends APIResource {
     params: SecretDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecretDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id, url_encoded } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/workers/scripts/${scriptName}/secrets/${secretName}`,
-        options,
-      ) as Core.APIPromise<{ result: SecretDeleteResponse | null }>
+      this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}/secrets/${secretName}`, {
+        query: { url_encoded },
+        ...options,
+      }) as Core.APIPromise<{ result: SecretDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -107,12 +107,12 @@ export class Secrets extends APIResource {
     params: SecretGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecretGetResponse> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return (
-      this._client.get(
-        `/accounts/${account_id}/workers/scripts/${scriptName}/secrets/${secretName}`,
-        options,
-      ) as Core.APIPromise<{ result: SecretGetResponse }>
+      this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}/secrets/${secretName}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: SecretGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -367,16 +367,26 @@ export interface SecretListParams {
 
 export interface SecretDeleteParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: Flag that indicates whether the secret name is URL encoded.
+   */
+  url_encoded?: boolean;
 }
 
 export interface SecretGetParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: Flag that indicates whether the secret name is URL encoded.
+   */
+  url_encoded?: boolean;
 }
 
 Secrets.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
