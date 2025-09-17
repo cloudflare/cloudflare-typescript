@@ -32,7 +32,7 @@ export class Lists extends APIResource {
 
   /**
    * Updates a configured Zero Trust list. Skips updating list items if not included
-   * in the payload. A non empty list items will overwrite the existing list.
+   * in the payload.
    *
    * @example
    * ```ts
@@ -61,7 +61,7 @@ export class Lists extends APIResource {
   }
 
   /**
-   * Fetch all Zero Trust lists for an account.
+   * Fetches all Zero Trust lists for an account.
    *
    * @example
    * ```ts
@@ -131,7 +131,7 @@ export class Lists extends APIResource {
   }
 
   /**
-   * Fetch a single Zero Trust list.
+   * Fetches a single Zero Trust list.
    *
    * @example
    * ```ts
@@ -158,46 +158,46 @@ export interface GatewayItem {
   created_at?: string;
 
   /**
-   * Provide the list item description (optional).
+   * The description of the list item, if present.
    */
   description?: string;
 
   /**
-   * Specify the item value.
+   * The value of the item in a list.
    */
   value?: string;
 }
 
 export interface GatewayList {
   /**
-   * Identify the API resource with a UUID.
+   * API Resource UUID tag.
    */
   id?: string;
 
   /**
-   * Indicate the number of items in the list.
+   * The number of items in the list.
    */
   count?: number;
 
   created_at?: string;
 
   /**
-   * Provide the list description.
+   * The description of the list.
    */
   description?: string;
 
   /**
-   * Provide the list items.
+   * The items in the list.
    */
   items?: Array<GatewayItem>;
 
   /**
-   * Specify the list name.
+   * The name of the list.
    */
   name?: string;
 
   /**
-   * Specify the list type.
+   * The type of list.
    */
   type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
 
@@ -206,29 +206,29 @@ export interface GatewayList {
 
 export interface ListCreateResponse {
   /**
-   * Identify the API resource with a UUID.
+   * API Resource UUID tag.
    */
   id?: string;
 
   created_at?: string;
 
   /**
-   * Provide the list description.
+   * The description of the list.
    */
   description?: string;
 
   /**
-   * Provide the list items.
+   * The items in the list.
    */
   items?: Array<GatewayItem>;
 
   /**
-   * Specify the list name.
+   * The name of the list.
    */
   name?: string;
 
   /**
-   * Specify the list type.
+   * The type of list.
    */
   type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
 
@@ -244,22 +244,22 @@ export interface ListCreateParams {
   account_id: string;
 
   /**
-   * Body param: Specify the list name.
+   * Body param: The name of the list.
    */
   name: string;
 
   /**
-   * Body param: Specify the list type.
+   * Body param: The type of list.
    */
   type: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
 
   /**
-   * Body param: Provide the list description.
+   * Body param: The description of the list.
    */
   description?: string;
 
   /**
-   * Body param: Add items to the list.
+   * Body param: items to add to the list.
    */
   items?: Array<ListCreateParams.Item>;
 }
@@ -267,12 +267,12 @@ export interface ListCreateParams {
 export namespace ListCreateParams {
   export interface Item {
     /**
-     * Provide the list item description (optional).
+     * The description of the list item, if present.
      */
     description?: string;
 
     /**
-     * Specify the item value.
+     * The value of the item in a list.
      */
     value?: string;
   }
@@ -285,17 +285,17 @@ export interface ListUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Specify the list name.
+   * Body param: The name of the list.
    */
   name: string;
 
   /**
-   * Body param: Provide the list description.
+   * Body param: The description of the list.
    */
   description?: string;
 
   /**
-   * Body param: Add items to the list.
+   * Body param: items to add to the list.
    */
   items?: Array<ListUpdateParams.Item>;
 }
@@ -303,12 +303,12 @@ export interface ListUpdateParams {
 export namespace ListUpdateParams {
   export interface Item {
     /**
-     * Provide the list item description (optional).
+     * The description of the list item, if present.
      */
     description?: string;
 
     /**
-     * Specify the item value.
+     * The value of the item in a list.
      */
     value?: string;
   }
@@ -321,7 +321,7 @@ export interface ListListParams {
   account_id: string;
 
   /**
-   * Query param: Specify the list type.
+   * Query param: The type of list.
    */
   type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
 }
@@ -337,12 +337,12 @@ export interface ListEditParams {
   account_id: string;
 
   /**
-   * Body param: Add items to the list.
+   * Body param: items to add to the list.
    */
   append?: Array<ListEditParams.Append>;
 
   /**
-   * Body param: Lists of item values you want to remove.
+   * Body param: A list of the item values you want to remove.
    */
   remove?: Array<string>;
 }
@@ -350,12 +350,12 @@ export interface ListEditParams {
 export namespace ListEditParams {
   export interface Append {
     /**
-     * Provide the list item description (optional).
+     * The description of the list item, if present.
      */
     description?: string;
 
     /**
-     * Specify the item value.
+     * The value of the item in a list.
      */
     value?: string;
   }

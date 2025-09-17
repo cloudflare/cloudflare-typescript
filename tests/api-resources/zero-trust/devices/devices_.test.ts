@@ -73,10 +73,7 @@ describe('resource devices', () => {
 
   // TODO: investigate prism error for invalid security scheme used
   test.skip('get: required and optional params', async () => {
-    const response = await client.zeroTrust.devices.devices.get('device_id', {
-      account_id: 'account_id',
-      include: 'include',
-    });
+    const response = await client.zeroTrust.devices.devices.get('device_id', { account_id: 'account_id' });
   });
 
   // TODO: investigate prism error for invalid security scheme used

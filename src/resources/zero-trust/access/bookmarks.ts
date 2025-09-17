@@ -107,6 +107,8 @@ export interface Bookmark {
    */
   app_launcher_visible?: boolean;
 
+  created_at?: string;
+
   /**
    * The domain of the Bookmark application.
    */
@@ -121,6 +123,8 @@ export interface Bookmark {
    * The name of the Bookmark application.
    */
   name?: string;
+
+  updated_at?: string;
 }
 
 export interface BookmarkDeleteResponse {

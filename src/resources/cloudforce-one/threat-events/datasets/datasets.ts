@@ -3,7 +3,7 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as HealthAPI from './health';
-import { Health } from './health';
+import { Health, HealthGetParams, HealthGetResponse } from './health';
 
 export class Datasets extends APIResource {
   health: HealthAPI.Health = new HealthAPI.Health(this._client);
@@ -240,5 +240,9 @@ export declare namespace Datasets {
     type DatasetRawParams as DatasetRawParams,
   };
 
-  export { Health as Health };
+  export {
+    Health as Health,
+    type HealthGetResponse as HealthGetResponse,
+    type HealthGetParams as HealthGetParams,
+  };
 }

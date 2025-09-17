@@ -59,7 +59,7 @@ import {
 import * as AnalyticsAPI from './analytics/analytics';
 import { Analytics } from './analytics/analytics';
 import * as SettingsAPI from './settings/settings';
-import { Settings } from './settings/settings';
+import { DNSSetting, Settings } from './settings/settings';
 import * as ZoneTransfersAPI from './zone-transfers/zone-transfers';
 import { ZoneTransfers } from './zone-transfers/zone-transfers';
 
@@ -134,7 +134,7 @@ export declare namespace DNS {
     type RecordScanParams as RecordScanParams,
   };
 
-  export { Settings as Settings };
+  export { Settings as Settings, type DNSSetting as DNSSetting };
 
   export { Analytics as Analytics };
 

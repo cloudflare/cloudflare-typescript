@@ -273,7 +273,13 @@ export class Records extends APIResource {
    * Scan for common DNS records on your domain and automatically add them to your
    * zone. Useful if you haven't updated your nameservers yet.
    *
-   * @deprecated This endpoint is deprecated in favor of a new asynchronous version. Please use the [/scan/trigger](https://developers.cloudflare.com/api/resources/dns/subresources/records/methods/scan/trigger) and [/scan/review](https://developers.cloudflare.com/api/resources/dns/subresources/records/methods/scan/review) endpoints instead.
+   * @example
+   * ```ts
+   * const response = await client.dns.records.scan({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   body: {},
+   * });
+   * ```
    */
   scan(params: RecordScanParams, options?: Core.RequestOptions): Core.APIPromise<RecordScanResponse> {
     const { zone_id, body } = params;

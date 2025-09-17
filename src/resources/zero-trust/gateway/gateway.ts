@@ -136,7 +136,7 @@ export class Gateway extends APIResource {
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
 
   /**
-   * Create a Zero Trust account for an existing Cloudflare account.
+   * Creates a Zero Trust account with an existing Cloudflare account.
    *
    * @example
    * ```ts
@@ -155,7 +155,7 @@ export class Gateway extends APIResource {
   }
 
   /**
-   * Retrieve information about the current Zero Trust account.
+   * Gets information about the current Zero Trust account.
    *
    * @example
    * ```ts
@@ -176,34 +176,34 @@ export class Gateway extends APIResource {
 
 export interface GatewayCreateResponse {
   /**
-   * Specify the Cloudflare account ID.
+   * Cloudflare account ID.
    */
   id?: string;
 
   /**
-   * Specify the gateway internal ID.
+   * Gateway internal ID.
    */
   gateway_tag?: string;
 
   /**
-   * Specify the provider name (usually Cloudflare).
+   * Provider Name. Usually Cloudflare.
    */
   provider_name?: string;
 }
 
 export interface GatewayListResponse {
   /**
-   * Specify the Cloudflare account ID.
+   * Cloudflare account ID.
    */
   id?: string;
 
   /**
-   * Specify the gateway internal ID.
+   * Gateway internal ID.
    */
   gateway_tag?: string;
 
   /**
-   * Specify the provider name (usually Cloudflare).
+   * Provider Name. Usually Cloudflare.
    */
   provider_name?: string;
 }

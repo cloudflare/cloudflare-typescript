@@ -106,12 +106,12 @@ export class Recipients extends APIResource {
     params: RecipientGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecipientGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/shares/${shareId}/recipients/${recipientId}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: RecipientGetResponse }>
+      this._client.get(
+        `/accounts/${account_id}/shares/${shareId}/recipients/${recipientId}`,
+        options,
+      ) as Core.APIPromise<{ result: RecipientGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -148,27 +148,6 @@ export interface RecipientCreateResponse {
    * Share Recipient status message.
    */
   status_message: string;
-
-  resources?: Array<RecipientCreateResponse.Resource>;
-}
-
-export namespace RecipientCreateResponse {
-  export interface Resource {
-    /**
-     * Share Recipient error message.
-     */
-    error: string;
-
-    /**
-     * Share Resource identifier.
-     */
-    resource_id: string;
-
-    /**
-     * Resource Version.
-     */
-    resource_version: number;
-  }
 }
 
 export interface RecipientListResponse {
@@ -201,27 +180,6 @@ export interface RecipientListResponse {
    * Share Recipient status message.
    */
   status_message: string;
-
-  resources?: Array<RecipientListResponse.Resource>;
-}
-
-export namespace RecipientListResponse {
-  export interface Resource {
-    /**
-     * Share Recipient error message.
-     */
-    error: string;
-
-    /**
-     * Share Resource identifier.
-     */
-    resource_id: string;
-
-    /**
-     * Resource Version.
-     */
-    resource_version: number;
-  }
 }
 
 export interface RecipientDeleteResponse {
@@ -254,27 +212,6 @@ export interface RecipientDeleteResponse {
    * Share Recipient status message.
    */
   status_message: string;
-
-  resources?: Array<RecipientDeleteResponse.Resource>;
-}
-
-export namespace RecipientDeleteResponse {
-  export interface Resource {
-    /**
-     * Share Recipient error message.
-     */
-    error: string;
-
-    /**
-     * Share Resource identifier.
-     */
-    resource_id: string;
-
-    /**
-     * Resource Version.
-     */
-    resource_version: number;
-  }
 }
 
 export interface RecipientGetResponse {
@@ -307,27 +244,6 @@ export interface RecipientGetResponse {
    * Share Recipient status message.
    */
   status_message: string;
-
-  resources?: Array<RecipientGetResponse.Resource>;
-}
-
-export namespace RecipientGetResponse {
-  export interface Resource {
-    /**
-     * Share Recipient error message.
-     */
-    error: string;
-
-    /**
-     * Share Resource identifier.
-     */
-    resource_id: string;
-
-    /**
-     * Resource Version.
-     */
-    resource_version: number;
-  }
 }
 
 export interface RecipientCreateParams {
@@ -352,11 +268,6 @@ export interface RecipientListParams extends V4PagePaginationArrayParams {
    * Path param: Account identifier.
    */
   account_id: string;
-
-  /**
-   * Query param: Include resources in the response.
-   */
-  include_resources?: boolean;
 }
 
 export interface RecipientDeleteParams {
@@ -368,14 +279,9 @@ export interface RecipientDeleteParams {
 
 export interface RecipientGetParams {
   /**
-   * Path param: Account identifier.
+   * Account identifier.
    */
   account_id: string;
-
-  /**
-   * Query param: Include resources in the response.
-   */
-  include_resources?: boolean;
 }
 
 Recipients.RecipientListResponsesV4PagePaginationArray = RecipientListResponsesV4PagePaginationArray;

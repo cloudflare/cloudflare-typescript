@@ -9,9 +9,11 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource instances', () => {
+describe('resource detections', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.workflows.instances.create('x', { account_id: 'account_id' });
+    const responsePromise = client.leakedCredentialChecks.detections.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,16 +24,42 @@ describe('resource instances', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.workflows.instances.create('x', {
-      account_id: 'account_id',
-      instance_id: 'instance_id',
-      instance_retention: {},
-      params: {},
+    const response = await client.leakedCredentialChecks.detections.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      password: 'lookup_json_string(http.request.body.raw, "secret")',
+      username: 'lookup_json_string(http.request.body.raw, "user")',
     });
   });
 
+  test('update: only required params', async () => {
+    const responsePromise = client.leakedCredentialChecks.detections.update(
+      '18a14bafaa8eb1df04ce683ec18c765e',
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.leakedCredentialChecks.detections.update(
+      '18a14bafaa8eb1df04ce683ec18c765e',
+      {
+        zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        password: 'lookup_json_string(http.request.body.raw, "secret")',
+        username: 'lookup_json_string(http.request.body.raw, "user")',
+      },
+    );
+  });
+
   test('list: only required params', async () => {
-    const responsePromise = client.workflows.instances.list('x', { account_id: 'account_id' });
+    const responsePromise = client.leakedCredentialChecks.detections.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,19 +70,16 @@ describe('resource instances', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.workflows.instances.list('x', {
-      account_id: 'account_id',
-      cursor: 'cursor',
-      date_end: '2019-12-27T18:11:19.117Z',
-      date_start: '2019-12-27T18:11:19.117Z',
-      page: 1,
-      per_page: 1,
-      status: 'queued',
+    const response = await client.leakedCredentialChecks.detections.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('bulk: only required params', async () => {
-    const responsePromise = client.workflows.instances.bulk('x', { account_id: 'account_id' });
+  test('delete: only required params', async () => {
+    const responsePromise = client.leakedCredentialChecks.detections.delete(
+      '18a14bafaa8eb1df04ce683ec18c765e',
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,25 +89,10 @@ describe('resource instances', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('bulk: required and optional params', async () => {
-    const response = await client.workflows.instances.bulk('x', {
-      account_id: 'account_id',
-      body: [{ instance_id: 'instance_id', instance_retention: {}, params: {} }],
-    });
-  });
-
-  test('get: only required params', async () => {
-    const responsePromise = client.workflows.instances.get('x', 'x', { account_id: 'account_id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('get: required and optional params', async () => {
-    const response = await client.workflows.instances.get('x', 'x', { account_id: 'account_id' });
+  test('delete: required and optional params', async () => {
+    const response = await client.leakedCredentialChecks.detections.delete(
+      '18a14bafaa8eb1df04ce683ec18c765e',
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

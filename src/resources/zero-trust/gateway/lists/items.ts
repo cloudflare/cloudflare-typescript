@@ -7,7 +7,7 @@ import { SinglePage } from '../../../../pagination';
 
 export class Items extends APIResource {
   /**
-   * Fetch all items in a single Zero Trust list.
+   * Fetches all items in a single Zero Trust list.
    *
    * @example
    * ```ts
@@ -37,7 +37,7 @@ export class Items extends APIResource {
 export class ItemListResponsesSinglePage extends SinglePage<ItemListResponse> {}
 
 /**
- * Provide the list items.
+ * The items in the list.
  */
 export type ItemListResponse = Array<ListsAPI.GatewayItem>;
 

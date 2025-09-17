@@ -47,7 +47,6 @@ describe('resource recipients', () => {
   test('list: required and optional params', async () => {
     const response = await client.resourceSharing.recipients.list('3fd85f74b32742f1bff64a85009dda07', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      include_resources: true,
       page: 2,
       per_page: 20,
     });
@@ -95,7 +94,7 @@ describe('resource recipients', () => {
     const response = await client.resourceSharing.recipients.get(
       '3fd85f74b32742f1bff64a85009dda07',
       '3fd85f74b32742f1bff64a85009dda07',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', include_resources: true },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 });

@@ -7,7 +7,7 @@ export {
   type AccountEditParams,
   type AccountGetParams,
 } from './account/index';
-export { Settings } from './settings';
+export { Settings, type DNSSetting } from './settings';
 export {
   Zone,
   type ZoneEditResponse,

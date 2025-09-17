@@ -56,6 +56,8 @@ export interface DOHUpdateResponse {
    */
   client_id?: string;
 
+  created_at?: string;
+
   /**
    * The duration the DoH JWT is valid for. Must be in the format `300ms` or `2h45m`.
    * Valid time units are: ns, us (or µs), ms, s, m, h. Note that the maximum
@@ -73,10 +75,14 @@ export interface DOHUpdateResponse {
 
   expires_at?: string;
 
+  last_seen_at?: string;
+
   /**
    * The name of the service token.
    */
   name?: string;
+
+  updated_at?: string;
 }
 
 export interface DOHGetResponse {
@@ -90,6 +96,8 @@ export interface DOHGetResponse {
    * `CF-Access-Client-ID` request header.
    */
   client_id?: string;
+
+  created_at?: string;
 
   /**
    * The duration the DoH JWT is valid for. Must be in the format `300ms` or `2h45m`.
@@ -107,10 +115,14 @@ export interface DOHGetResponse {
 
   expires_at?: string;
 
+  last_seen_at?: string;
+
   /**
    * The name of the service token.
    */
   name?: string;
+
+  updated_at?: string;
 }
 
 export interface DOHUpdateParams {

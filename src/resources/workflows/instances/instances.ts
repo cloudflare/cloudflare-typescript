@@ -351,12 +351,6 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   date_start?: string;
 
   /**
-   * Query param: should only be used when `cursor` is used, defines a new direction
-   * for the cursor
-   */
-  direction?: 'asc' | 'desc';
-
-  /**
    * Query param:
    */
   status?:

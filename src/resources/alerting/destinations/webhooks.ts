@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as Shared from '../../shared';
 import { SinglePage } from '../../../pagination';
 
 export class Webhooks extends APIResource {
@@ -187,27 +188,39 @@ export interface WebhookUpdateResponse {
 }
 
 export interface WebhookDeleteResponse {
-  errors: Array<WebhookDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<WebhookDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
+
+  result_info?: WebhookDeleteResponse.ResultInfo;
 }
 
 export namespace WebhookDeleteResponse {
-  export interface Error {
-    message: string;
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
 
-    code?: number;
-  }
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
 
-  export interface Message {
-    message: string;
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
 
-    code?: number;
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
   }
 }
 

@@ -66,13 +66,7 @@ describe('resource scripts', () => {
           observability: {
             enabled: true,
             head_sampling_rate: 0.1,
-            logs: {
-              enabled: true,
-              invocation_logs: true,
-              destinations: ['cloudflare'],
-              head_sampling_rate: 0.1,
-              persist: true,
-            },
+            logs: { enabled: true, invocation_logs: true, head_sampling_rate: 0.1 },
           },
           placement: { mode: 'smart' },
           tags: ['string'],

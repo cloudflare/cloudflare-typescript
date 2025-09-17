@@ -8,7 +8,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of unique accounts by model.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ai.inference.summary.model();
+   * ```
    */
   model(query?: SummaryModelParams, options?: Core.RequestOptions): Core.APIPromise<SummaryModelResponse>;
   model(options?: Core.RequestOptions): Core.APIPromise<SummaryModelResponse>;
@@ -29,7 +33,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of unique accounts by task.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.ai.inference.summary.task();
+   * ```
    */
   task(query?: SummaryTaskParams, options?: Core.RequestOptions): Core.APIPromise<SummaryTaskResponse>;
   task(options?: Core.RequestOptions): Core.APIPromise<SummaryTaskResponse>;
