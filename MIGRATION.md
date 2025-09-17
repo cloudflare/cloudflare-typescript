@@ -246,6 +246,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.get()`
 - `client.workers.beta.workers.update()`
 - `client.workers.beta.workers.delete()`
+- `client.workers.beta.workers.edit()`
 - `client.workers.beta.workers.get()`
 - `client.workers.beta.workers.versions.create()`
 - `client.workers.beta.workers.versions.list()`
@@ -871,7 +872,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.cloudforceOne.threatEvents.datasets.edit()`
 - `client.cloudforceOne.threatEvents.datasets.get()`
 - `client.cloudforceOne.threatEvents.datasets.raw()`
-- `client.cloudforceOne.threatEvents.datasets.health.get()`
 - `client.cloudforceOne.threatEvents.raw.edit()`
 - `client.cloudforceOne.threatEvents.raw.get()`
 - `client.cloudforceOne.threatEvents.relate.delete()`
@@ -933,8 +933,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.resourceSharing.resources.list()`
 - `client.resourceSharing.resources.delete()`
 - `client.resourceSharing.resources.get()`
-- `client.leakedCredentialChecks.detections.update()`
-- `client.leakedCredentialChecks.detections.delete()`
 - `client.contentScanning.payloads.delete()`
 - `client.abuseReports.create()`
 - `client.ai.run()`

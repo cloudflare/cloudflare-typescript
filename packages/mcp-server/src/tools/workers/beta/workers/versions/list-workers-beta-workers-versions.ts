@@ -26,7 +26,7 @@ export const tool: Tool = {
       },
       worker_id: {
         type: 'string',
-        description: 'Identifier.',
+        description: 'Identifier for the Worker, which can be ID or name.',
       },
       page: {
         type: 'integer',

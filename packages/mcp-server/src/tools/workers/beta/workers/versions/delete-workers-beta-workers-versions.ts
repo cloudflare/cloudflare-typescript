@@ -28,18 +28,12 @@ export const tool: Tool = {
       },
       worker_id: {
         type: 'string',
-        description: 'Identifier.',
+        description: 'Identifier for the Worker, which can be ID or name.',
       },
       version_id: {
-        anyOf: [
-          {
-            type: 'string',
-          },
-          {
-            type: 'string',
-            enum: ['latest'],
-          },
-        ],
+        type: 'string',
+        description:
+          'Identifier for the version, which can be ID or the literal "latest" to operate on the most recently created version.',
       },
       jq_filter: {
         type: 'string',

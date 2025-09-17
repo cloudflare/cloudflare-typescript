@@ -20,7 +20,7 @@ import {
 import * as CountriesAPI from './countries';
 import { Countries, CountryListParams, CountryListResponse } from './countries';
 import * as CronsAPI from './crons';
-import { CronEditParams, CronEditResponse, CronListParams, CronListResponse, Crons } from './crons';
+import { Crons } from './crons';
 import * as EventTagsAPI from './event-tags';
 import {
   EventTagCreateParams,
@@ -89,6 +89,7 @@ export class ThreatEvents extends APIResource {
    *     category: 'Domain Resolution',
    *     date: '2022-04-01T00:00:00Z',
    *     event: 'An attacker registered the domain domain.com',
+   *     indicatorType: 'domain',
    *     raw: { data: { foo: 'bar' } },
    *     tlp: 'amber',
    *   });
@@ -163,6 +164,7 @@ export class ThreatEvents extends APIResource {
    *         date: '2022-04-01T00:00:00Z',
    *         event:
    *           'An attacker registered the domain domain.com',
+   *         indicatorType: 'domain',
    *         raw: { data: { foo: 'bar' } },
    *         tlp: 'amber',
    *       },
@@ -237,7 +239,11 @@ export interface ThreatEventCreateResponse {
 
   event: string;
 
+  indicator: string;
+
   indicatorType: string;
+
+  indicatorTypeId: number;
 
   killChain: number;
 
@@ -246,6 +252,8 @@ export interface ThreatEventCreateResponse {
   numReferenced: number;
 
   numReferences: number;
+
+  rawId: string;
 
   referenced: Array<string>;
 
@@ -266,6 +274,8 @@ export interface ThreatEventCreateResponse {
   uuid: string;
 
   insight?: string;
+
+  releasabilityId?: string;
 }
 
 export type ThreatEventListResponse = Array<ThreatEventListResponse.ThreatEventListResponseItem>;
@@ -282,7 +292,11 @@ export namespace ThreatEventListResponse {
 
     event: string;
 
+    indicator: string;
+
     indicatorType: string;
+
+    indicatorTypeId: number;
 
     killChain: number;
 
@@ -291,6 +305,8 @@ export namespace ThreatEventListResponse {
     numReferenced: number;
 
     numReferences: number;
+
+    rawId: string;
 
     referenced: Array<string>;
 
@@ -311,6 +327,8 @@ export namespace ThreatEventListResponse {
     uuid: string;
 
     insight?: string;
+
+    releasabilityId?: string;
   }
 }
 
@@ -334,7 +352,11 @@ export interface ThreatEventEditResponse {
 
   event: string;
 
+  indicator: string;
+
   indicatorType: string;
+
+  indicatorTypeId: number;
 
   killChain: number;
 
@@ -343,6 +365,8 @@ export interface ThreatEventEditResponse {
   numReferenced: number;
 
   numReferences: number;
+
+  rawId: string;
 
   referenced: Array<string>;
 
@@ -363,6 +387,8 @@ export interface ThreatEventEditResponse {
   uuid: string;
 
   insight?: string;
+
+  releasabilityId?: string;
 }
 
 export interface ThreatEventGetResponse {
@@ -376,7 +402,11 @@ export interface ThreatEventGetResponse {
 
   event: string;
 
+  indicator: string;
+
   indicatorType: string;
+
+  indicatorTypeId: number;
 
   killChain: number;
 
@@ -385,6 +415,8 @@ export interface ThreatEventGetResponse {
   numReferenced: number;
 
   numReferences: number;
+
+  rawId: string;
 
   referenced: Array<string>;
 
@@ -405,6 +437,8 @@ export interface ThreatEventGetResponse {
   uuid: string;
 
   insight?: string;
+
+  releasabilityId?: string;
 }
 
 export interface ThreatEventCreateParams {
@@ -427,6 +461,11 @@ export interface ThreatEventCreateParams {
    * Body param:
    */
   event: string;
+
+  /**
+   * Body param:
+   */
+  indicatorType: string;
 
   /**
    * Body param:
@@ -466,7 +505,7 @@ export interface ThreatEventCreateParams {
   /**
    * Body param:
    */
-  indicatorType?: string;
+  insight?: string;
 
   /**
    * Body param:
@@ -590,6 +629,8 @@ export namespace ThreatEventBulkCreateParams {
 
     event: string;
 
+    indicatorType: string;
+
     raw: Data.Raw;
 
     tlp: string;
@@ -604,7 +645,7 @@ export namespace ThreatEventBulkCreateParams {
 
     indicator?: string;
 
-    indicatorType?: string;
+    insight?: string;
 
     tags?: Array<string>;
 
@@ -763,13 +804,7 @@ export declare namespace ThreatEvents {
     type CountryListParams as CountryListParams,
   };
 
-  export {
-    Crons as Crons,
-    type CronListResponse as CronListResponse,
-    type CronEditResponse as CronEditResponse,
-    type CronListParams as CronListParams,
-    type CronEditParams as CronEditParams,
-  };
+  export { Crons as Crons };
 
   export {
     Datasets as Datasets,

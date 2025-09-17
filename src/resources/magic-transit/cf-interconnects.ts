@@ -155,6 +155,12 @@ export namespace CfInterconnectUpdateResponse {
     id?: string;
 
     /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
+    /**
      * The name of the interconnect. The name cannot share a name with other tunnels.
      */
     colo_name?: string;
@@ -232,6 +238,12 @@ export namespace CfInterconnectListResponse {
      * Identifier
      */
     id?: string;
+
+    /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
 
     /**
      * The name of the interconnect. The name cannot share a name with other tunnels.
@@ -315,6 +327,12 @@ export namespace CfInterconnectBulkUpdateResponse {
     id?: string;
 
     /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
+    /**
      * The name of the interconnect. The name cannot share a name with other tunnels.
      */
     colo_name?: string;
@@ -394,6 +412,12 @@ export namespace CfInterconnectGetResponse {
     id?: string;
 
     /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
+    /**
      * The name of the interconnect. The name cannot share a name with other tunnels.
      */
     colo_name?: string;
@@ -466,6 +490,12 @@ export interface CfInterconnectUpdateParams {
    * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param: True if automatic stateful return routing should be enabled for a
+   * tunnel, false otherwise.
+   */
+  automatic_return_routing?: boolean;
 
   /**
    * Body param: An optional description of the interconnect.

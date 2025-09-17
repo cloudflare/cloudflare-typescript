@@ -102,6 +102,7 @@ describe('resource registrations', () => {
   test.skip('get: required and optional params', async () => {
     const response = await client.zeroTrust.devices.registrations.get('registration_id', {
       account_id: 'account_id',
+      include: 'include',
     });
   });
 

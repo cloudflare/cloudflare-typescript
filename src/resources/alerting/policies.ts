@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -765,9 +764,9 @@ export interface PolicyUpdateResponse {
 }
 
 export interface PolicyDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
+  errors: Array<PolicyDeleteResponse.Error>;
 
-  messages: Array<Shared.ResponseInfo>;
+  messages: Array<PolicyDeleteResponse.Message>;
 
   /**
    * Whether the API call was successful
@@ -778,6 +777,18 @@ export interface PolicyDeleteResponse {
 }
 
 export namespace PolicyDeleteResponse {
+  export interface Error {
+    message: string;
+
+    code?: number;
+  }
+
+  export interface Message {
+    message: string;
+
+    code?: number;
+  }
+
   export interface ResultInfo {
     /**
      * Total number of results for the requested service
