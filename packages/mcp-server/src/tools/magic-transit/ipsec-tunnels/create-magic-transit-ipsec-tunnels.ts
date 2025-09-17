@@ -38,6 +38,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'The name of the IPsec tunnel. The name cannot share a name with other tunnels.',
       },
+      automatic_return_routing: {
+        type: 'boolean',
+        description:
+          'True if automatic stateful return routing should be enabled for a tunnel, false otherwise.',
+      },
       bgp: {
         type: 'object',
         properties: {

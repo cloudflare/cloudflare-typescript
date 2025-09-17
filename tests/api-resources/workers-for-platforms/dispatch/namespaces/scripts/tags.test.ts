@@ -15,7 +15,7 @@ describe('resource tags', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         dispatch_namespace: 'my-dispatch-namespace',
-        body: ['my-tag'],
+        body: ['my-team', 'my-public-api'],
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -33,7 +33,7 @@ describe('resource tags', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         dispatch_namespace: 'my-dispatch-namespace',
-        body: ['my-tag'],
+        body: ['my-team', 'my-public-api'],
       },
     );
   });

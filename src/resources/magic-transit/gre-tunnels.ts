@@ -241,6 +241,12 @@ export interface GRETunnelCreateResponse {
    */
   name: string;
 
+  /**
+   * True if automatic stateful return routing should be enabled for a tunnel, false
+   * otherwise.
+   */
+  automatic_return_routing?: boolean;
+
   bgp?: GRETunnelCreateResponse.BGP;
 
   bgp_status?: GRETunnelCreateResponse.BGPStatus;
@@ -433,6 +439,12 @@ export namespace GRETunnelUpdateResponse {
      */
     name: string;
 
+    /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
     bgp?: ModifiedGRETunnel.BGP;
 
     bgp_status?: ModifiedGRETunnel.BGPStatus;
@@ -623,6 +635,12 @@ export namespace GRETunnelListResponse {
      * must be 15 characters or less, and cannot share a name with another GRE tunnel.
      */
     name: string;
+
+    /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
 
     bgp?: GRETunnel.BGP;
 
@@ -817,6 +835,12 @@ export namespace GRETunnelDeleteResponse {
      */
     name: string;
 
+    /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
     bgp?: DeletedGRETunnel.BGP;
 
     bgp_status?: DeletedGRETunnel.BGPStatus;
@@ -1010,6 +1034,12 @@ export namespace GRETunnelBulkUpdateResponse {
      */
     name: string;
 
+    /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
     bgp?: ModifiedGRETunnel.BGP;
 
     bgp_status?: ModifiedGRETunnel.BGPStatus;
@@ -1201,6 +1231,12 @@ export namespace GRETunnelGetResponse {
      */
     name: string;
 
+    /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
     bgp?: GRETunnel.BGP;
 
     bgp_status?: GRETunnel.BGPStatus;
@@ -1389,6 +1425,12 @@ export interface GRETunnelCreateParams {
   name: string;
 
   /**
+   * Body param: True if automatic stateful return routing should be enabled for a
+   * tunnel, false otherwise.
+   */
+  automatic_return_routing?: boolean;
+
+  /**
    * Body param:
    */
   bgp?: GRETunnelCreateParams.BGP;
@@ -1548,6 +1590,12 @@ export interface GRETunnelUpdateParams {
    * GRE tunnel.
    */
   name: string;
+
+  /**
+   * Body param: True if automatic stateful return routing should be enabled for a
+   * tunnel, false otherwise.
+   */
+  automatic_return_routing?: boolean;
 
   /**
    * Body param: An optional description of the GRE tunnel.

@@ -43,7 +43,7 @@ export const tool: Tool = {
       },
       export: {
         type: 'string',
-        description: 'Export the list of connections as a file.',
+        description: 'Export the list of connections as a file, limited to 50000 entries.',
         enum: ['csv'],
       },
       hosts: {
