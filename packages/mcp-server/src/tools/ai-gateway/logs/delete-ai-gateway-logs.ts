@@ -61,7 +61,6 @@ export const tool: Tool = {
                 'authentication',
                 'wholesale',
                 'compatibilityMode',
-                'dlp_action',
               ],
             },
             operator: {

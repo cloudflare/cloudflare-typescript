@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'edit_gateway_zero_trust_configurations',
   description:
-    'Update (PATCH) a single subcollection of settings such as `antivirus`, `tls_decrypt`, `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or `certificate` without updating the entire configuration object. This endpoint returns an error if any settings collection lacks proper configuration.',
+    'Patches the current Zero Trust account configuration. This endpoint can update a single subcollection of settings such as `antivirus`, `tls_decrypt`, `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or `certificate`, without updating the entire configuration object. Returns an error if any collection of settings is not properly configured.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -32,7 +32,7 @@ export const tool: Tool = {
     $defs: {
       gateway_configuration_settings: {
         type: 'object',
-        description: 'Specify account settings.',
+        description: 'Account settings.',
         properties: {
           activity_log: {
             $ref: '#/$defs/activity_log_settings',
@@ -52,12 +52,12 @@ export const tool: Tool = {
           certificate: {
             type: 'object',
             description:
-              'Specify certificate settings for Gateway TLS interception. If unset, the Cloudflare Root CA handles interception.',
+              'Certificate settings for Gateway TLS interception. If not specified, the Cloudflare Root CA will be used.',
             properties: {
               id: {
                 type: 'string',
                 description:
-                  "Specify the UUID of the certificate used for interception. Ensure the certificate is available at the edge(previously called 'active'). A nil UUID directs Cloudflare to use the Root CA.",
+                  "UUID of certificate to be used for interception. Certificate must be available (previously called 'active') on the edge. A nil UUID will indicate the Cloudflare Root CA should be used.",
               },
             },
             required: ['id'],
@@ -73,22 +73,22 @@ export const tool: Tool = {
           },
           host_selector: {
             type: 'object',
-            description: 'Enable host selection in egress policies.',
+            description: 'Setting to enable host selector in egress policies.',
             properties: {
               enabled: {
                 type: 'boolean',
-                description: 'Specify whether to enable filtering via hosts for egress policies.',
+                description: 'Enable filtering via hosts for egress policies.',
               },
             },
           },
           inspection: {
             type: 'object',
-            description: 'Define the proxy inspection mode.',
+            description: 'Setting to define inspection settings.',
             properties: {
               mode: {
                 type: 'string',
                 description:
-                  'Define the proxy inspection mode.   1. static: Gateway applies static inspection to HTTP on TCP(80). With TLS decryption on, Gateway inspects HTTPS traffic on TCP(443) and UDP(443).   2. dynamic: Gateway applies protocol detection to inspect HTTP and HTTPS traffic on any port. TLS decryption must remain on to inspect HTTPS traffic.',
+                  'Defines the mode of inspection the proxy will use.\n- static: Gateway will use static inspection to inspect HTTP on TCP(80). If TLS decryption is on, Gateway will inspect HTTPS traffic on TCP(443) & UDP(443).\n- dynamic: Gateway will use protocol detection to dynamically inspect HTTP and HTTPS traffic on any port. TLS decryption must be on to inspect HTTPS traffic.',
                 enum: ['static', 'dynamic'],
               },
             },
@@ -98,15 +98,15 @@ export const tool: Tool = {
           },
           sandbox: {
             type: 'object',
-            description: 'Specify whether to enable the sandbox.',
+            description: 'Sandbox settings.',
             properties: {
               enabled: {
                 type: 'boolean',
-                description: 'Specify whether to enable the sandbox.',
+                description: 'Enable sandbox.',
               },
               fallback_action: {
                 type: 'string',
-                description: 'Specify the action to take when the system cannot scan the file.',
+                description: 'Action to take when the file cannot be scanned.',
                 enum: ['allow', 'block'],
               },
             },
@@ -118,29 +118,29 @@ export const tool: Tool = {
       },
       activity_log_settings: {
         type: 'object',
-        description: 'Specify activity log settings.',
+        description: 'Activity log settings.',
         properties: {
           enabled: {
             type: 'boolean',
-            description: 'Specify whether to log activity.',
+            description: 'Enable activity logging.',
           },
         },
       },
       anti_virus_settings: {
         type: 'object',
-        description: 'Specify anti-virus settings.',
+        description: 'Anti-virus settings.',
         properties: {
           enabled_download_phase: {
             type: 'boolean',
-            description: 'Specify whether to enable anti-virus scanning on downloads.',
+            description: 'Enable anti-virus scanning on downloads.',
           },
           enabled_upload_phase: {
             type: 'boolean',
-            description: 'Specify whether to enable anti-virus scanning on uploads.',
+            description: 'Enable anti-virus scanning on uploads.',
           },
           fail_closed: {
             type: 'boolean',
-            description: 'Specify whether to block requests for unscannable files.',
+            description: 'Block requests for files that cannot be scanned.',
           },
           notification_settings: {
             $ref: '#/$defs/notification_settings',
@@ -149,143 +149,139 @@ export const tool: Tool = {
       },
       notification_settings: {
         type: 'object',
-        description: "Configure the message the user's device shows during an antivirus scan.",
+        description:
+          "Configure a message to display on the user's device when an antivirus search is performed.",
         properties: {
           enabled: {
             type: 'boolean',
-            description: 'Specify whether to enable notifications.',
+            description: 'Set notification on.',
           },
           include_context: {
             type: 'boolean',
-            description: 'Specify whether to include context information as query parameters.',
+            description: 'If true, context information will be passed as query parameters.',
           },
           msg: {
             type: 'string',
-            description: 'Specify the message to show in the notification.',
+            description: 'Customize the message shown in the notification.',
           },
           support_url: {
             type: 'string',
             description:
-              'Specify a URL that directs users to more information. If unset, the notification opens a block page.',
+              'Optional URL to direct users to additional information. If not set, the notification will open a block page.',
           },
         },
       },
       block_page_settings: {
         type: 'object',
-        description: 'Specify block page layout settings.',
+        description: 'Block page layout settings.',
         properties: {
           background_color: {
             type: 'string',
-            description:
-              'Specify the block page background color in `#rrggbb` format when the mode is customized_block_page.',
+            description: 'If mode is customized_block_page: block page background color in #rrggbb format.',
           },
           enabled: {
             type: 'boolean',
-            description: 'Specify whether to enable the custom block page.',
+            description: 'Enable only cipher suites and TLS versions compliant with FIPS. 140-2.',
           },
           footer_text: {
             type: 'string',
-            description: 'Specify the block page footer text when the mode is customized_block_page.',
+            description: 'If mode is customized_block_page: block page footer text.',
           },
           header_text: {
             type: 'string',
-            description: 'Specify the block page header text when the mode is customized_block_page.',
+            description: 'If mode is customized_block_page: block page header text.',
           },
           include_context: {
             type: 'boolean',
             description:
-              'Specify whether to append context to target_uri as query parameters. This applies only when the mode is redirect_uri.',
+              'If mode is redirect_uri: when enabled, context will be appended to target_uri as query parameters.',
           },
           logo_path: {
             type: 'string',
-            description: 'Specify the full URL to the logo file when the mode is customized_block_page.',
+            description: 'If mode is customized_block_page: full URL to the logo file.',
           },
           mailto_address: {
             type: 'string',
-            description:
-              'Specify the admin email for users to contact when the mode is customized_block_page.',
+            description: 'If mode is customized_block_page: admin email for users to contact.',
           },
           mailto_subject: {
             type: 'string',
-            description:
-              'Specify the subject line for emails created from the block page when the mode is customized_block_page.',
+            description: 'If mode is customized_block_page: subject line for emails created from block page.',
           },
           mode: {
             type: 'string',
             description:
-              'Specify whether to redirect users to a Cloudflare-hosted block page or a customer-provided URI.',
+              'Controls whether the user is redirected to a Cloudflare-hosted block page or to a customer-provided URI.',
             enum: ['', 'customized_block_page', 'redirect_uri'],
           },
           name: {
             type: 'string',
-            description: 'Specify the block page title when the mode is customized_block_page.',
+            description: 'If mode is customized_block_page: block page title.',
           },
           read_only: {
             type: 'boolean',
             description:
-              'Indicate that this setting was shared via the Orgs API and read only for the current account.',
+              'This setting was shared via the Orgs API and cannot be edited by the current account.',
           },
           source_account: {
             type: 'string',
-            description: 'Indicate the account tag of the account that shared this setting.',
+            description: 'Account tag of account that shared this setting.',
           },
           suppress_footer: {
             type: 'boolean',
             description:
-              'Specify whether to suppress detailed information at the bottom of the block page when the mode is customized_block_page.',
+              'If mode is customized_block_page: suppress detailed info at the bottom of the block page.',
           },
           target_uri: {
             type: 'string',
-            description: 'Specify the URI to redirect users to when the mode is redirect_uri.',
+            description: 'If mode is redirect_uri: URI to which the user should be redirected.',
           },
           version: {
             type: 'integer',
-            description: 'Indicate the version number of the setting.',
+            description: 'Version number of the setting.',
           },
         },
       },
       body_scanning_settings: {
         type: 'object',
-        description: 'Specify the DLP inspection mode.',
+        description: 'DLP body scanning settings.',
         properties: {
           inspection_mode: {
             type: 'string',
-            description: 'Specify the inspection mode as either `deep` or `shallow`.',
+            description: 'Set the inspection mode to either `deep` or `shallow`.',
             enum: ['deep', 'shallow'],
           },
         },
       },
       browser_isolation_settings: {
         type: 'object',
-        description: 'Specify Clientless Browser Isolation settings.',
+        description: 'Browser isolation settings.',
         properties: {
           non_identity_enabled: {
             type: 'boolean',
-            description: 'Specify whether to enable non-identity onramp support for Browser Isolation.',
+            description: 'Enable non-identity onramp support for Browser Isolation.',
           },
           url_browser_isolation_enabled: {
             type: 'boolean',
-            description: 'Specify whether to enable Clientless Browser Isolation.',
+            description: 'Enable Clientless Browser Isolation.',
           },
         },
       },
       custom_certificate_settings: {
         type: 'object',
-        description:
-          'Specify custom certificate settings for BYO-PKI. This field is deprecated; use `certificate` instead.',
+        description: 'Custom certificate settings for BYO-PKI. (deprecated and replaced by `certificate`).',
         properties: {
           enabled: {
             type: 'boolean',
-            description:
-              'Specify whether to enable a custom certificate authority for signing Gateway traffic.',
+            description: 'Enable use of custom certificate authority for signing Gateway. traffic.',
           },
           id: {
             type: 'string',
-            description: 'Specify the UUID of the certificate (ID from MTLS certificate store).',
+            description: 'UUID of certificate (ID from MTLS certificate store).',
           },
           binding_status: {
             type: 'string',
-            description: 'Indicate the internal certificate status.',
+            description: 'Certificate status (internal).',
           },
           updated_at: {
             type: 'string',
@@ -296,55 +292,55 @@ export const tool: Tool = {
       },
       extended_email_matching: {
         type: 'object',
-        description: 'Specify user emails settings for the firewall policies.',
+        description: 'Extended e-mail matching settings.',
         properties: {
           enabled: {
             type: 'boolean',
             description:
-              'Specify whether to match all variants of user emails (with + or . modifiers) used as criteria in Firewall policies.',
+              'Enable matching all variants of user emails (with + or . modifiers) used as criteria in Firewall policies.',
           },
           read_only: {
             type: 'boolean',
             description:
-              'Indicate that this setting was shared via the Orgs API and read only for the current account.',
+              'This setting was shared via the Orgs API and cannot be edited by the current account.',
           },
           source_account: {
             type: 'string',
-            description: 'Indicate the account tag of the account that shared this setting.',
+            description: 'Account tag of account that shared this setting.',
           },
           version: {
             type: 'integer',
-            description: 'Indicate the version number of the setting.',
+            description: 'Version number of the setting.',
           },
         },
       },
       fips_settings: {
         type: 'object',
-        description: 'Specify FIPS settings.',
+        description: 'FIPS settings.',
         properties: {
           tls: {
             type: 'boolean',
-            description: 'Enforce cipher suites and TLS versions compliant with FIPS 140-2.',
+            description: 'Enable only cipher suites and TLS versions compliant with FIPS. 140-2.',
           },
         },
       },
       protocol_detection: {
         type: 'object',
-        description: 'Specify whether to detect protocols from the initial bytes of client traffic.',
+        description: 'Protocol Detection settings.',
         properties: {
           enabled: {
             type: 'boolean',
-            description: 'Specify whether to detect protocols from the initial bytes of client traffic.',
+            description: 'Enable detecting protocol on initial bytes of client traffic.',
           },
         },
       },
       tls_settings: {
         type: 'object',
-        description: 'Specify whether to inspect encrypted HTTP traffic.',
+        description: 'TLS interception settings.',
         properties: {
           enabled: {
             type: 'boolean',
-            description: 'Specify whether to inspect encrypted HTTP traffic.',
+            description: 'Enable inspecting encrypted HTTP traffic.',
           },
         },
       },

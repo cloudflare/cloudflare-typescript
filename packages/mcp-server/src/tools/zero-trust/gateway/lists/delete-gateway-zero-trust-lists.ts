@@ -25,7 +25,7 @@ export const tool: Tool = {
       },
       list_id: {
         type: 'string',
-        description: 'Identify the API resource with a UUID.',
+        description: 'API Resource UUID tag.',
       },
     },
     required: ['account_id', 'list_id'],

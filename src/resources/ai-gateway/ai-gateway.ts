@@ -228,7 +228,7 @@ export interface AIGatewayCreateResponse {
 
   authentication?: boolean;
 
-  dlp?: AIGatewayCreateResponse.UnionMember0 | AIGatewayCreateResponse.UnionMember1;
+  dlp?: AIGatewayCreateResponse.DLP;
 
   log_management?: number | null;
 
@@ -242,32 +242,12 @@ export interface AIGatewayCreateResponse {
 }
 
 export namespace AIGatewayCreateResponse {
-  export interface UnionMember0 {
+  export interface DLP {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
-  }
-
-  export interface UnionMember1 {
-    enabled: boolean;
-
-    policies: Array<UnionMember1.Policy>;
-  }
-
-  export namespace UnionMember1 {
-    export interface Policy {
-      id: string;
-
-      action: 'FLAG' | 'BLOCK';
-
-      check: Array<'REQUEST' | 'RESPONSE'>;
-
-      enabled: boolean;
-
-      profiles: Array<string>;
-    }
   }
 }
 
@@ -301,7 +281,7 @@ export interface AIGatewayUpdateResponse {
 
   authentication?: boolean;
 
-  dlp?: AIGatewayUpdateResponse.UnionMember0 | AIGatewayUpdateResponse.UnionMember1;
+  dlp?: AIGatewayUpdateResponse.DLP;
 
   log_management?: number | null;
 
@@ -315,32 +295,12 @@ export interface AIGatewayUpdateResponse {
 }
 
 export namespace AIGatewayUpdateResponse {
-  export interface UnionMember0 {
+  export interface DLP {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
-  }
-
-  export interface UnionMember1 {
-    enabled: boolean;
-
-    policies: Array<UnionMember1.Policy>;
-  }
-
-  export namespace UnionMember1 {
-    export interface Policy {
-      id: string;
-
-      action: 'FLAG' | 'BLOCK';
-
-      check: Array<'REQUEST' | 'RESPONSE'>;
-
-      enabled: boolean;
-
-      profiles: Array<string>;
-    }
   }
 }
 
@@ -374,7 +334,7 @@ export interface AIGatewayListResponse {
 
   authentication?: boolean;
 
-  dlp?: AIGatewayListResponse.UnionMember0 | AIGatewayListResponse.UnionMember1;
+  dlp?: AIGatewayListResponse.DLP;
 
   log_management?: number | null;
 
@@ -388,32 +348,12 @@ export interface AIGatewayListResponse {
 }
 
 export namespace AIGatewayListResponse {
-  export interface UnionMember0 {
+  export interface DLP {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
-  }
-
-  export interface UnionMember1 {
-    enabled: boolean;
-
-    policies: Array<UnionMember1.Policy>;
-  }
-
-  export namespace UnionMember1 {
-    export interface Policy {
-      id: string;
-
-      action: 'FLAG' | 'BLOCK';
-
-      check: Array<'REQUEST' | 'RESPONSE'>;
-
-      enabled: boolean;
-
-      profiles: Array<string>;
-    }
   }
 }
 
@@ -447,7 +387,7 @@ export interface AIGatewayDeleteResponse {
 
   authentication?: boolean;
 
-  dlp?: AIGatewayDeleteResponse.UnionMember0 | AIGatewayDeleteResponse.UnionMember1;
+  dlp?: AIGatewayDeleteResponse.DLP;
 
   log_management?: number | null;
 
@@ -461,32 +401,12 @@ export interface AIGatewayDeleteResponse {
 }
 
 export namespace AIGatewayDeleteResponse {
-  export interface UnionMember0 {
+  export interface DLP {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
-  }
-
-  export interface UnionMember1 {
-    enabled: boolean;
-
-    policies: Array<UnionMember1.Policy>;
-  }
-
-  export namespace UnionMember1 {
-    export interface Policy {
-      id: string;
-
-      action: 'FLAG' | 'BLOCK';
-
-      check: Array<'REQUEST' | 'RESPONSE'>;
-
-      enabled: boolean;
-
-      profiles: Array<string>;
-    }
   }
 }
 
@@ -520,7 +440,7 @@ export interface AIGatewayGetResponse {
 
   authentication?: boolean;
 
-  dlp?: AIGatewayGetResponse.UnionMember0 | AIGatewayGetResponse.UnionMember1;
+  dlp?: AIGatewayGetResponse.DLP;
 
   log_management?: number | null;
 
@@ -534,32 +454,12 @@ export interface AIGatewayGetResponse {
 }
 
 export namespace AIGatewayGetResponse {
-  export interface UnionMember0 {
+  export interface DLP {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
-  }
-
-  export interface UnionMember1 {
-    enabled: boolean;
-
-    policies: Array<UnionMember1.Policy>;
-  }
-
-  export namespace UnionMember1 {
-    export interface Policy {
-      id: string;
-
-      action: 'FLAG' | 'BLOCK';
-
-      check: Array<'REQUEST' | 'RESPONSE'>;
-
-      enabled: boolean;
-
-      profiles: Array<string>;
-    }
   }
 }
 
@@ -674,7 +574,7 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
-  dlp?: AIGatewayUpdateParams.UnionMember0 | AIGatewayUpdateParams.UnionMember1;
+  dlp?: AIGatewayUpdateParams.DLP;
 
   /**
    * Body param:
@@ -703,32 +603,12 @@ export interface AIGatewayUpdateParams {
 }
 
 export namespace AIGatewayUpdateParams {
-  export interface UnionMember0 {
+  export interface DLP {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
-  }
-
-  export interface UnionMember1 {
-    enabled: boolean;
-
-    policies: Array<UnionMember1.Policy>;
-  }
-
-  export namespace UnionMember1 {
-    export interface Policy {
-      id: string;
-
-      action: 'FLAG' | 'BLOCK';
-
-      check: Array<'REQUEST' | 'RESPONSE'>;
-
-      enabled: boolean;
-
-      profiles: Array<string>;
-    }
   }
 }
 

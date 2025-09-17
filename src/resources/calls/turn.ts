@@ -19,11 +19,7 @@ export class TURN extends APIResource {
    */
   create(params: TURNCreateParams, options?: RequestOptions): APIPromise<TURNCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(path`/accounts/${account_id}/calls/turn_keys`, { body, ...options }) as APIPromise<{
-        result: TURNCreateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.post(path`/accounts/${account_id}/calls/turn_keys`, { body, ...options });
   }
 
   /**

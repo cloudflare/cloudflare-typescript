@@ -7,7 +7,6 @@ import {
   WorkerCreateParams,
   WorkerDeleteParams,
   WorkerDeleteResponse,
-  WorkerEditParams,
   WorkerGetParams,
   WorkerListParams,
   WorkerUpdateParams,
@@ -31,7 +30,6 @@ export declare namespace Beta {
     type WorkerUpdateParams as WorkerUpdateParams,
     type WorkerListParams as WorkerListParams,
     type WorkerDeleteParams as WorkerDeleteParams,
-    type WorkerEditParams as WorkerEditParams,
     type WorkerGetParams as WorkerGetParams,
   };
 }

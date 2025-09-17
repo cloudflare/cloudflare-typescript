@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'edit_gateway_zero_trust_proxy_endpoints',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdate a configured Zero Trust Gateway proxy endpoint.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Indicate whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      $ref: '#/$defs/proxy_endpoint'\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    proxy_endpoint: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string'\n        },\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        ips: {\n          type: 'array',\n          description: 'Specify the list of CIDRs to restrict ingress connections.',\n          items: {\n            $ref: '#/$defs/gateway_ips'\n          }\n        },\n        name: {\n          type: 'string',\n          description: 'Specify the name of the proxy endpoint.'\n        },\n        subdomain: {\n          type: 'string',\n          description: 'Specify the subdomain to use as the destination in the proxy client.'\n        },\n        updated_at: {\n          type: 'string',\n          format: 'date-time'\n        }\n      }\n    },\n    gateway_ips: {\n      type: 'string',\n      description: 'Specify an IPv4 or IPv6 CIDR. Limit IPv6 to a maximum of /109 and IPv4 to a maximum of /25.'\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates a configured Zero Trust Gateway proxy endpoint.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      $ref: '#/$defs/proxy_endpoint'\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    proxy_endpoint: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string'\n        },\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        ips: {\n          type: 'array',\n          description: 'A list of CIDRs to restrict ingress connections.',\n          items: {\n            $ref: '#/$defs/gateway_ips'\n          }\n        },\n        name: {\n          type: 'string',\n          description: 'The name of the proxy endpoint.'\n        },\n        subdomain: {\n          type: 'string',\n          description: 'The subdomain to be used as the destination in the proxy client.'\n        },\n        updated_at: {\n          type: 'string',\n          format: 'date-time'\n        }\n      }\n    },\n    gateway_ips: {\n      type: 'string',\n      description: 'The IPv4 CIDR or IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /109. IPv4 CIDRs are limited to a maximum of /25.'\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -30,14 +30,14 @@ export const tool: Tool = {
       },
       ips: {
         type: 'array',
-        description: 'Specify the list of CIDRs to restrict ingress connections.',
+        description: 'A list of CIDRs to restrict ingress connections.',
         items: {
           $ref: '#/$defs/gateway_ips',
         },
       },
       name: {
         type: 'string',
-        description: 'Specify the name of the proxy endpoint.',
+        description: 'The name of the proxy endpoint.',
       },
       jq_filter: {
         type: 'string',
@@ -51,7 +51,7 @@ export const tool: Tool = {
       gateway_ips: {
         type: 'string',
         description:
-          'Specify an IPv4 or IPv6 CIDR. Limit IPv6 to a maximum of /109 and IPv4 to a maximum of /25.',
+          'The IPv4 CIDR or IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /109. IPv4 CIDRs are limited to a maximum of /25.',
       },
     },
   },

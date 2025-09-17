@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'create_stream_downloads',
-  description:
-    'Creates a download for a video when a video is ready to view. Use `/downloads/{download_type}` instead for type-specific downloads.',
+  description: 'Creates a download for a video when a video is ready to view.',
   inputSchema: {
     type: 'object',
     properties: {

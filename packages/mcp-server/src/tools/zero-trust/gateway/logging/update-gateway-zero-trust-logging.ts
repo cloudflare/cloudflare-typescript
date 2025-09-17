@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_gateway_zero_trust_logging',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdate logging settings for the current Zero Trust account.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Indicate whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      $ref: '#/$defs/logging_setting'\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    logging_setting: {\n      type: 'object',\n      properties: {\n        redact_pii: {\n          type: 'boolean',\n          description: 'Indicate whether to redact personally identifiable information from activity logging (PII fields include source IP, user email, user ID, device ID, URL, referrer, and user agent).'\n        },\n        settings_by_rule_type: {\n          type: 'object',\n          description: 'Configure logging settings for each rule type.',\n          properties: {\n            dns: {\n              type: 'object',\n              description: 'Configure logging settings for DNS firewall.',\n              properties: {\n                log_all: {\n                  type: 'boolean',\n                  description: 'Specify whether to log all requests to this service.'\n                },\n                log_blocks: {\n                  type: 'boolean',\n                  description: 'Specify whether to log only blocking requests to this service.'\n                }\n              }\n            },\n            http: {\n              type: 'object',\n              description: 'Configure logging settings for HTTP/HTTPS firewall.',\n              properties: {\n                log_all: {\n                  type: 'boolean',\n                  description: 'Specify whether to log all requests to this service.'\n                },\n                log_blocks: {\n                  type: 'boolean',\n                  description: 'Specify whether to log only blocking requests to this service.'\n                }\n              }\n            },\n            l4: {\n              type: 'object',\n              description: 'Configure logging settings for Network firewall.',\n              properties: {\n                log_all: {\n                  type: 'boolean',\n                  description: 'Specify whether to log all requests to this service.'\n                },\n                log_blocks: {\n                  type: 'boolean',\n                  description: 'Specify whether to log only blocking requests to this service.'\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates logging settings for the current Zero Trust account.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      $ref: '#/$defs/logging_setting'\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    logging_setting: {\n      type: 'object',\n      properties: {\n        redact_pii: {\n          type: 'boolean',\n          description: 'Redact personally identifiable information from activity logging (PII fields are: source IP, user email, user ID, device ID, URL, referrer, user agent).'\n        },\n        settings_by_rule_type: {\n          type: 'object',\n          description: 'Logging settings by rule type.',\n          properties: {\n            dns: {\n              type: 'object',\n              properties: {\n                log_all: {\n                  type: 'boolean',\n                  description: 'Log all requests to this service.'\n                },\n                log_blocks: {\n                  type: 'boolean',\n                  description: 'Log only blocking requests to this service.'\n                }\n              }\n            },\n            http: {\n              type: 'object',\n              properties: {\n                log_all: {\n                  type: 'boolean',\n                  description: 'Log all requests to this service.'\n                },\n                log_blocks: {\n                  type: 'boolean',\n                  description: 'Log only blocking requests to this service.'\n                }\n              }\n            },\n            l4: {\n              type: 'object',\n              properties: {\n                log_all: {\n                  type: 'boolean',\n                  description: 'Log all requests to this service.'\n                },\n                log_blocks: {\n                  type: 'boolean',\n                  description: 'Log only blocking requests to this service.'\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -28,51 +28,48 @@ export const tool: Tool = {
       redact_pii: {
         type: 'boolean',
         description:
-          'Indicate whether to redact personally identifiable information from activity logging (PII fields include source IP, user email, user ID, device ID, URL, referrer, and user agent).',
+          'Redact personally identifiable information from activity logging (PII fields are: source IP, user email, user ID, device ID, URL, referrer, user agent).',
       },
       settings_by_rule_type: {
         type: 'object',
-        description: 'Configure logging settings for each rule type.',
+        description: 'Logging settings by rule type.',
         properties: {
           dns: {
             type: 'object',
-            description: 'Configure logging settings for DNS firewall.',
             properties: {
               log_all: {
                 type: 'boolean',
-                description: 'Specify whether to log all requests to this service.',
+                description: 'Log all requests to this service.',
               },
               log_blocks: {
                 type: 'boolean',
-                description: 'Specify whether to log only blocking requests to this service.',
+                description: 'Log only blocking requests to this service.',
               },
             },
           },
           http: {
             type: 'object',
-            description: 'Configure logging settings for HTTP/HTTPS firewall.',
             properties: {
               log_all: {
                 type: 'boolean',
-                description: 'Specify whether to log all requests to this service.',
+                description: 'Log all requests to this service.',
               },
               log_blocks: {
                 type: 'boolean',
-                description: 'Specify whether to log only blocking requests to this service.',
+                description: 'Log only blocking requests to this service.',
               },
             },
           },
           l4: {
             type: 'object',
-            description: 'Configure logging settings for Network firewall.',
             properties: {
               log_all: {
                 type: 'boolean',
-                description: 'Specify whether to log all requests to this service.',
+                description: 'Log all requests to this service.',
               },
               log_blocks: {
                 type: 'boolean',
-                description: 'Specify whether to log only blocking requests to this service.',
+                description: 'Log only blocking requests to this service.',
               },
             },
           },

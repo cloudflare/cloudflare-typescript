@@ -1779,6 +1779,8 @@ export interface OIDCSaaSApp {
    */
   client_secret?: string;
 
+  created_at?: string;
+
   custom_claims?: Array<OIDCSaaSApp.CustomClaim>;
 
   /**
@@ -1813,6 +1815,8 @@ export interface OIDCSaaSApp {
    * automatically enabled if refresh tokens are enabled
    */
   scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
+
+  updated_at?: string;
 }
 
 export namespace OIDCSaaSApp {
@@ -2018,6 +2022,8 @@ export interface SAMLSaaSApp {
    */
   consumer_service_url?: string;
 
+  created_at?: string;
+
   custom_attributes?: Array<SAMLSaaSApp.CustomAttribute>;
 
   /**
@@ -2067,6 +2073,8 @@ export interface SAMLSaaSApp {
    * The endpoint where your SaaS application will send login requests.
    */
   sso_endpoint?: string;
+
+  updated_at?: string;
 }
 
 export namespace SAMLSaaSApp {
@@ -2604,6 +2612,8 @@ export namespace ApplicationCreateResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -2723,6 +2733,8 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace SelfHostedApplication {
@@ -2985,6 +2997,8 @@ export namespace ApplicationCreateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom pages that will be displayed when applicable for this application
      */
@@ -3020,6 +3034,8 @@ export namespace ApplicationCreateResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+
+    updated_at?: string;
   }
 
   export namespace SaaSApplication {
@@ -3269,6 +3285,8 @@ export namespace ApplicationCreateResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -3388,6 +3406,8 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserSSHApplication {
@@ -3687,6 +3707,8 @@ export namespace ApplicationCreateResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -3806,6 +3828,8 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserVNCApplication {
@@ -4089,6 +4113,8 @@ export namespace ApplicationCreateResponse {
      */
     bg_color?: string;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -4145,6 +4171,8 @@ export namespace ApplicationCreateResponse {
      * Determines when to skip the App Launcher landing page.
      */
     skip_app_launcher_login_page?: boolean;
+
+    updated_at?: string;
   }
 
   export namespace AppLauncherApplication {
@@ -4300,6 +4328,8 @@ export namespace ApplicationCreateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -4336,6 +4366,8 @@ export namespace ApplicationCreateResponse {
      * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
+
+    updated_at?: string;
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
@@ -4449,6 +4481,8 @@ export namespace ApplicationCreateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -4485,6 +4519,8 @@ export namespace ApplicationCreateResponse {
      * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
+
+    updated_at?: string;
   }
 
   export namespace BrowserIsolationPermissionsApplication {
@@ -4586,6 +4622,8 @@ export namespace ApplicationCreateResponse {
      */
     aud?: string;
 
+    created_at?: string;
+
     /**
      * The URL or domain of the bookmark.
      */
@@ -4611,6 +4649,8 @@ export namespace ApplicationCreateResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+
+    updated_at?: string;
   }
 
   export interface InfrastructureApplication {
@@ -4631,12 +4671,16 @@ export namespace ApplicationCreateResponse {
      */
     aud?: string;
 
+    created_at?: string;
+
     /**
      * The name of the application.
      */
     name?: string;
 
     policies?: Array<InfrastructureApplication.Policy>;
+
+    updated_at?: string;
   }
 
   export namespace InfrastructureApplication {
@@ -4793,6 +4837,8 @@ export namespace ApplicationCreateResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -4912,6 +4958,8 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserRdpApplication {
@@ -5232,6 +5280,8 @@ export namespace ApplicationUpdateResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -5351,6 +5401,8 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace SelfHostedApplication {
@@ -5613,6 +5665,8 @@ export namespace ApplicationUpdateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom pages that will be displayed when applicable for this application
      */
@@ -5648,6 +5702,8 @@ export namespace ApplicationUpdateResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+
+    updated_at?: string;
   }
 
   export namespace SaaSApplication {
@@ -5897,6 +5953,8 @@ export namespace ApplicationUpdateResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -6016,6 +6074,8 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserSSHApplication {
@@ -6315,6 +6375,8 @@ export namespace ApplicationUpdateResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -6434,6 +6496,8 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserVNCApplication {
@@ -6717,6 +6781,8 @@ export namespace ApplicationUpdateResponse {
      */
     bg_color?: string;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -6773,6 +6839,8 @@ export namespace ApplicationUpdateResponse {
      * Determines when to skip the App Launcher landing page.
      */
     skip_app_launcher_login_page?: boolean;
+
+    updated_at?: string;
   }
 
   export namespace AppLauncherApplication {
@@ -6928,6 +6996,8 @@ export namespace ApplicationUpdateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -6964,6 +7034,8 @@ export namespace ApplicationUpdateResponse {
      * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
+
+    updated_at?: string;
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
@@ -7077,6 +7149,8 @@ export namespace ApplicationUpdateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -7113,6 +7187,8 @@ export namespace ApplicationUpdateResponse {
      * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
+
+    updated_at?: string;
   }
 
   export namespace BrowserIsolationPermissionsApplication {
@@ -7214,6 +7290,8 @@ export namespace ApplicationUpdateResponse {
      */
     aud?: string;
 
+    created_at?: string;
+
     /**
      * The URL or domain of the bookmark.
      */
@@ -7239,6 +7317,8 @@ export namespace ApplicationUpdateResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+
+    updated_at?: string;
   }
 
   export interface InfrastructureApplication {
@@ -7259,12 +7339,16 @@ export namespace ApplicationUpdateResponse {
      */
     aud?: string;
 
+    created_at?: string;
+
     /**
      * The name of the application.
      */
     name?: string;
 
     policies?: Array<InfrastructureApplication.Policy>;
+
+    updated_at?: string;
   }
 
   export namespace InfrastructureApplication {
@@ -7421,6 +7505,8 @@ export namespace ApplicationUpdateResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -7540,6 +7626,8 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserRdpApplication {
@@ -7860,6 +7948,8 @@ export namespace ApplicationListResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -7979,6 +8069,8 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace SelfHostedApplication {
@@ -8241,6 +8333,8 @@ export namespace ApplicationListResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom pages that will be displayed when applicable for this application
      */
@@ -8276,6 +8370,8 @@ export namespace ApplicationListResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+
+    updated_at?: string;
   }
 
   export namespace SaaSApplication {
@@ -8525,6 +8621,8 @@ export namespace ApplicationListResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -8644,6 +8742,8 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserSSHApplication {
@@ -8943,6 +9043,8 @@ export namespace ApplicationListResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -9062,6 +9164,8 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserVNCApplication {
@@ -9345,6 +9449,8 @@ export namespace ApplicationListResponse {
      */
     bg_color?: string;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -9401,6 +9507,8 @@ export namespace ApplicationListResponse {
      * Determines when to skip the App Launcher landing page.
      */
     skip_app_launcher_login_page?: boolean;
+
+    updated_at?: string;
   }
 
   export namespace AppLauncherApplication {
@@ -9556,6 +9664,8 @@ export namespace ApplicationListResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -9592,6 +9702,8 @@ export namespace ApplicationListResponse {
      * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
+
+    updated_at?: string;
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
@@ -9705,6 +9817,8 @@ export namespace ApplicationListResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -9741,6 +9855,8 @@ export namespace ApplicationListResponse {
      * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
+
+    updated_at?: string;
   }
 
   export namespace BrowserIsolationPermissionsApplication {
@@ -9842,6 +9958,8 @@ export namespace ApplicationListResponse {
      */
     aud?: string;
 
+    created_at?: string;
+
     /**
      * The URL or domain of the bookmark.
      */
@@ -9867,6 +9985,8 @@ export namespace ApplicationListResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+
+    updated_at?: string;
   }
 
   export interface InfrastructureApplication {
@@ -9887,12 +10007,16 @@ export namespace ApplicationListResponse {
      */
     aud?: string;
 
+    created_at?: string;
+
     /**
      * The name of the application.
      */
     name?: string;
 
     policies?: Array<InfrastructureApplication.Policy>;
+
+    updated_at?: string;
   }
 
   export namespace InfrastructureApplication {
@@ -10049,6 +10173,8 @@ export namespace ApplicationListResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -10168,6 +10294,8 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserRdpApplication {
@@ -10495,6 +10623,8 @@ export namespace ApplicationGetResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -10614,6 +10744,8 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace SelfHostedApplication {
@@ -10876,6 +11008,8 @@ export namespace ApplicationGetResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom pages that will be displayed when applicable for this application
      */
@@ -10911,6 +11045,8 @@ export namespace ApplicationGetResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+
+    updated_at?: string;
   }
 
   export namespace SaaSApplication {
@@ -11160,6 +11296,8 @@ export namespace ApplicationGetResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -11279,6 +11417,8 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserSSHApplication {
@@ -11578,6 +11718,8 @@ export namespace ApplicationGetResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -11697,6 +11839,8 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserVNCApplication {
@@ -11980,6 +12124,8 @@ export namespace ApplicationGetResponse {
      */
     bg_color?: string;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -12036,6 +12182,8 @@ export namespace ApplicationGetResponse {
      * Determines when to skip the App Launcher landing page.
      */
     skip_app_launcher_login_page?: boolean;
+
+    updated_at?: string;
   }
 
   export namespace AppLauncherApplication {
@@ -12191,6 +12339,8 @@ export namespace ApplicationGetResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -12227,6 +12377,8 @@ export namespace ApplicationGetResponse {
      * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
+
+    updated_at?: string;
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
@@ -12340,6 +12492,8 @@ export namespace ApplicationGetResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    created_at?: string;
+
     /**
      * The custom URL a user is redirected to when they are denied access to the
      * application when failing identity-based rules.
@@ -12376,6 +12530,8 @@ export namespace ApplicationGetResponse {
      * s, m, h. Note: unsupported for infrastructure type applications.
      */
     session_duration?: string;
+
+    updated_at?: string;
   }
 
   export namespace BrowserIsolationPermissionsApplication {
@@ -12477,6 +12633,8 @@ export namespace ApplicationGetResponse {
      */
     aud?: string;
 
+    created_at?: string;
+
     /**
      * The URL or domain of the bookmark.
      */
@@ -12502,6 +12660,8 @@ export namespace ApplicationGetResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+
+    updated_at?: string;
   }
 
   export interface InfrastructureApplication {
@@ -12522,12 +12682,16 @@ export namespace ApplicationGetResponse {
      */
     aud?: string;
 
+    created_at?: string;
+
     /**
      * The name of the application.
      */
     name?: string;
 
     policies?: Array<InfrastructureApplication.Policy>;
+
+    updated_at?: string;
   }
 
   export namespace InfrastructureApplication {
@@ -12684,6 +12848,8 @@ export namespace ApplicationGetResponse {
 
     cors_headers?: ApplicationsAPI.CORSHeaders;
 
+    created_at?: string;
+
     /**
      * The custom error message shown to a user when they are denied access to the
      * application.
@@ -12803,6 +12969,8 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    updated_at?: string;
   }
 
   export namespace BrowserRdpApplication {

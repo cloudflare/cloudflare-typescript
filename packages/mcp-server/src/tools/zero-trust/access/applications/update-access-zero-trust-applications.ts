@@ -2827,6 +2827,10 @@ export const tool: Tool = {
             description:
               "The service provider's endpoint that is responsible for receiving and parsing a SAML assertion.",
           },
+          created_at: {
+            type: 'string',
+            format: 'date-time',
+          },
           custom_attributes: {
             type: 'array',
             items: {
@@ -2916,6 +2920,10 @@ export const tool: Tool = {
             type: 'string',
             description: 'The endpoint where your SaaS application will send login requests.',
           },
+          updated_at: {
+            type: 'string',
+            format: 'date-time',
+          },
         },
       },
       saas_app_name_id_format: {
@@ -2954,6 +2962,10 @@ export const tool: Tool = {
           client_secret: {
             type: 'string',
             description: 'The application client secret, only returned on POST request.',
+          },
+          created_at: {
+            type: 'string',
+            format: 'date-time',
           },
           custom_claims: {
             type: 'array',
@@ -3051,6 +3063,10 @@ export const tool: Tool = {
               type: 'string',
               enum: ['openid', 'groups', 'email', 'profile'],
             },
+          },
+          updated_at: {
+            type: 'string',
+            format: 'date-time',
           },
         },
       },

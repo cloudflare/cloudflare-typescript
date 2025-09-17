@@ -22,11 +22,11 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier.',
+        description: 'Identifier',
       },
       pcap_id: {
         type: 'string',
-        description: 'Identifier.',
+        description: 'Identifier',
       },
     },
     required: ['account_id', 'pcap_id'],

@@ -18,7 +18,7 @@ export class Tags extends APIResource {
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     dispatch_namespace: 'my-dispatch-namespace',
-   *     body: ['my-team', 'my-public-api'],
+   *     body: ['my-tag'],
    *   },
    * )) {
    *   // ...
@@ -103,8 +103,14 @@ export type TagUpdateResponsesSinglePage = SinglePage<TagUpdateResponse>;
 
 export type TagListResponsesSinglePage = SinglePage<TagListResponse>;
 
+/**
+ * Tag to help you manage your Worker.
+ */
 export type TagUpdateResponse = string;
 
+/**
+ * Tag to help you manage your Worker.
+ */
 export type TagListResponse = string;
 
 export type TagDeleteResponse = unknown;
@@ -121,7 +127,7 @@ export interface TagUpdateParams {
   dispatch_namespace: string;
 
   /**
-   * Body param: Tags associated with the Worker.
+   * Body param: Tags to help you manage your Workers.
    */
   body: Array<string>;
 }

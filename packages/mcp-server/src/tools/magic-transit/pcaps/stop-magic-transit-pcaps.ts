@@ -16,17 +16,17 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'stop_magic_transit_pcaps',
-  description: 'Stop full PCAP.',
+  description: 'Stop full PCAP',
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier.',
+        description: 'Identifier',
       },
       pcap_id: {
         type: 'string',
-        description: 'Identifier.',
+        description: 'Identifier',
       },
     },
     required: ['account_id', 'pcap_id'],

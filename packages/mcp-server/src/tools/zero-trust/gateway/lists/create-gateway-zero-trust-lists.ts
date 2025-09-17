@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_gateway_zero_trust_lists',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates a new Zero Trust list.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Indicate whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'Identify the API resource with a UUID.'\n        },\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        description: {\n          type: 'string',\n          description: 'Provide the list description.'\n        },\n        items: {\n          type: 'array',\n          description: 'Provide the list items.',\n          items: {\n            $ref: '#/$defs/gateway_item'\n          }\n        },\n        name: {\n          type: 'string',\n          description: 'Specify the list name.'\n        },\n        type: {\n          type: 'string',\n          description: 'Specify the list type.',\n          enum: [            'SERIAL',\n            'URL',\n            'DOMAIN',\n            'EMAIL',\n            'IP'\n          ]\n        },\n        updated_at: {\n          type: 'string',\n          format: 'date-time'\n        }\n      }\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    gateway_item: {\n      type: 'object',\n      properties: {\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        description: {\n          type: 'string',\n          description: 'Provide the list item description (optional).'\n        },\n        value: {\n          type: 'string',\n          description: 'Specify the item value.'\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates a new Zero Trust list.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'API Resource UUID tag.'\n        },\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        description: {\n          type: 'string',\n          description: 'The description of the list.'\n        },\n        items: {\n          type: 'array',\n          description: 'The items in the list.',\n          items: {\n            $ref: '#/$defs/gateway_item'\n          }\n        },\n        name: {\n          type: 'string',\n          description: 'The name of the list.'\n        },\n        type: {\n          type: 'string',\n          description: 'The type of list.',\n          enum: [            'SERIAL',\n            'URL',\n            'DOMAIN',\n            'EMAIL',\n            'IP'\n          ]\n        },\n        updated_at: {\n          type: 'string',\n          format: 'date-time'\n        }\n      }\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    gateway_item: {\n      type: 'object',\n      properties: {\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        description: {\n          type: 'string',\n          description: 'The description of the list item, if present.'\n        },\n        value: {\n          type: 'string',\n          description: 'The value of the item in a list.'\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -27,30 +27,30 @@ export const tool: Tool = {
       },
       name: {
         type: 'string',
-        description: 'Specify the list name.',
+        description: 'The name of the list.',
       },
       type: {
         type: 'string',
-        description: 'Specify the list type.',
+        description: 'The type of list.',
         enum: ['SERIAL', 'URL', 'DOMAIN', 'EMAIL', 'IP'],
       },
       description: {
         type: 'string',
-        description: 'Provide the list description.',
+        description: 'The description of the list.',
       },
       items: {
         type: 'array',
-        description: 'Add items to the list.',
+        description: 'items to add to the list.',
         items: {
           type: 'object',
           properties: {
             description: {
               type: 'string',
-              description: 'Provide the list item description (optional).',
+              description: 'The description of the list item, if present.',
             },
             value: {
               type: 'string',
-              description: 'Specify the item value.',
+              description: 'The value of the item in a list.',
             },
           },
         },
