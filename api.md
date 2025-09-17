@@ -979,10 +979,6 @@ Methods:
 
 ## Settings
 
-Types:
-
-- <code><a href="./src/resources/dns/settings/settings.ts">DNSSetting</a></code>
-
 ### Zone
 
 Types:
@@ -2012,6 +2008,7 @@ Methods:
 - <code title="put /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">update</a>(workerId, { ...params }) -> Worker</code>
 - <code title="get /accounts/{account_id}/workers/workers">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">list</a>({ ...params }) -> WorkersV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">delete</a>(workerId, { ...params }) -> WorkerDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">edit</a>(workerId, { ...params }) -> Worker</code>
 - <code title="get /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">get</a>(workerId, { ...params }) -> Worker</code>
 
 #### Versions
@@ -2067,6 +2064,7 @@ Types:
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptUpdateResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptDeleteResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptGetResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptSearchResponse</a></code>
 
 Methods:
 
@@ -2074,6 +2072,7 @@ Methods:
 - <code title="get /accounts/{account_id}/workers/scripts">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">list</a>({ ...params }) -> ScriptsSinglePage</code>
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">delete</a>(scriptName, { ...params }) -> ScriptDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> string</code>
+- <code title="get /accounts/{account_id}/workers/scripts-search">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">search</a>({ ...params }) -> ScriptSearchResponse</code>
 
 ### Assets
 
@@ -8034,16 +8033,6 @@ Methods:
 
 ### Crons
 
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/threat-events/crons.ts">CronListResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/crons.ts">CronEditResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/cloudforce-one/events/cron">client.cloudforceOne.threatEvents.crons.<a href="./src/resources/cloudforce-one/threat-events/crons.ts">list</a>({ ...params }) -> CronListResponse</code>
-- <code title="patch /accounts/{account_id}/cloudforce-one/events/cron">client.cloudforceOne.threatEvents.crons.<a href="./src/resources/cloudforce-one/threat-events/crons.ts">edit</a>({ ...params }) -> CronEditResponse</code>
-
 ### Datasets
 
 Types:
@@ -8063,14 +8052,6 @@ Methods:
 - <code title="get /accounts/{account_id}/cloudforce-one/events/raw/{dataset_id}/{event_id}">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">raw</a>(datasetId, eventId, { ...params }) -> DatasetRawResponse</code>
 
 #### Health
-
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/health.ts">HealthGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/health">client.cloudforceOne.threatEvents.datasets.health.<a href="./src/resources/cloudforce-one/threat-events/datasets/health.ts">get</a>(datasetId, { ...params }) -> HealthGetResponse</code>
 
 ### IndicatorTypes
 
@@ -8470,31 +8451,7 @@ Methods:
 
 # LeakedCredentialChecks
 
-Types:
-
-- <code><a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">LeakedCredentialCheckCreateResponse</a></code>
-- <code><a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">LeakedCredentialCheckGetResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/leaked-credential-checks">client.leakedCredentialChecks.<a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">create</a>({ ...params }) -> LeakedCredentialCheckCreateResponse</code>
-- <code title="get /zones/{zone_id}/leaked-credential-checks">client.leakedCredentialChecks.<a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">get</a>({ ...params }) -> LeakedCredentialCheckGetResponse</code>
-
 ## Detections
-
-Types:
-
-- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionCreateResponse</a></code>
-- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionUpdateResponse</a></code>
-- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionListResponse</a></code>
-- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/leaked-credential-checks/detections">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">create</a>({ ...params }) -> DetectionCreateResponse</code>
-- <code title="put /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">update</a>(detectionId, { ...params }) -> DetectionUpdateResponse</code>
-- <code title="get /zones/{zone_id}/leaked-credential-checks/detections">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">list</a>({ ...params }) -> DetectionListResponsesSinglePage</code>
-- <code title="delete /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">delete</a>(detectionId, { ...params }) -> DetectionDeleteResponse</code>
 
 # ContentScanning
 
