@@ -39,6 +39,10 @@ export const tool: Tool = {
         type: 'string',
         description: 'A JavaScript variable name for the secret binding.',
       },
+      url_encoded: {
+        type: 'boolean',
+        description: 'Flag that indicates whether the secret name is URL encoded.',
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',

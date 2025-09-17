@@ -471,6 +471,12 @@ export const tool: Tool = {
                       description: 'The kind of resource that the binding provides.',
                       enum: ['r2_bucket'],
                     },
+                    jurisdiction: {
+                      type: 'string',
+                      description:
+                        'The [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions) of the R2 bucket.',
+                      enum: ['eu', 'fedramp'],
+                    },
                   },
                   required: ['bucket_name', 'name', 'type'],
                 },

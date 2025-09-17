@@ -90,11 +90,11 @@ export class Secrets extends APIResource {
     params: SecretDeleteParams,
     options?: RequestOptions,
   ): APIPromise<SecretDeleteResponse | null> {
-    const { account_id, dispatch_namespace, script_name } = params;
+    const { account_id, dispatch_namespace, script_name, url_encoded } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${script_name}/secrets/${secretName}`,
-        options,
+        { query: { url_encoded }, ...options },
       ) as APIPromise<{ result: SecretDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -117,11 +117,11 @@ export class Secrets extends APIResource {
    * ```
    */
   get(secretName: string, params: SecretGetParams, options?: RequestOptions): APIPromise<SecretGetResponse> {
-    const { account_id, dispatch_namespace, script_name } = params;
+    const { account_id, dispatch_namespace, script_name, ...query } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${script_name}/secrets/${secretName}`,
-        options,
+        { query, ...options },
       ) as APIPromise<{ result: SecretGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -392,36 +392,46 @@ export interface SecretListParams {
 
 export interface SecretDeleteParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Name of the Workers for Platforms dispatch namespace.
+   * Path param: Name of the Workers for Platforms dispatch namespace.
    */
   dispatch_namespace: string;
 
   /**
-   * Name of the script, used in URLs and route configuration.
+   * Path param: Name of the script, used in URLs and route configuration.
    */
   script_name: string;
+
+  /**
+   * Query param: Flag that indicates whether the secret name is URL encoded.
+   */
+  url_encoded?: boolean;
 }
 
 export interface SecretGetParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Name of the Workers for Platforms dispatch namespace.
+   * Path param: Name of the Workers for Platforms dispatch namespace.
    */
   dispatch_namespace: string;
 
   /**
-   * Name of the script, used in URLs and route configuration.
+   * Path param: Name of the script, used in URLs and route configuration.
    */
   script_name: string;
+
+  /**
+   * Query param: Flag that indicates whether the secret name is URL encoded.
+   */
+  url_encoded?: boolean;
 }
 
 export declare namespace Secrets {
