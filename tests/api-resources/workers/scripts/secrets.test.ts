@@ -70,6 +70,7 @@ describe('resource secrets', () => {
   test('delete: required and optional params', async () => {
     const response = await client.workers.scripts.secrets.delete('this-is_my_script-01', 'mySecret', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      url_encoded: true,
     });
   });
 
@@ -89,6 +90,7 @@ describe('resource secrets', () => {
   test('get: required and optional params', async () => {
     const response = await client.workers.scripts.secrets.get('this-is_my_script-01', 'mySecret', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      url_encoded: true,
     });
   });
 });
