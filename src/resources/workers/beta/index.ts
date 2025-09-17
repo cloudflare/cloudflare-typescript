@@ -9,6 +9,7 @@ export {
   type WorkerUpdateParams,
   type WorkerListParams,
   type WorkerDeleteParams,
+  type WorkerEditParams,
   type WorkerGetParams,
   type WorkersV4PagePaginationArray,
 } from './workers/index';

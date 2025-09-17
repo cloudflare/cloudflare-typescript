@@ -43,6 +43,11 @@ export const tool: Tool = {
         description:
           'The name of the tunnel. The name cannot contain spaces or special characters, must be 15 characters or less, and cannot share a name with another GRE tunnel.',
       },
+      automatic_return_routing: {
+        type: 'boolean',
+        description:
+          'True if automatic stateful return routing should be enabled for a tunnel, false otherwise.',
+      },
       bgp: {
         type: 'object',
         properties: {

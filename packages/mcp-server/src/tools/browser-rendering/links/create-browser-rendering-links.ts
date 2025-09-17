@@ -181,6 +181,9 @@ export const tool: Tool = {
       emulateMediaType: {
         type: 'string',
       },
+      excludeExternalLinks: {
+        type: 'boolean',
+      },
       gotoOptions: {
         type: 'object',
         description: 'Check [options](https://pptr.dev/api/puppeteer.gotooptions).',

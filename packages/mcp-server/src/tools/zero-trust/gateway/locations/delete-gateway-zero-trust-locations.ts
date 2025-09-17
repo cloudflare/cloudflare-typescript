@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'delete_gateway_zero_trust_locations',
-  description: 'Deletes a configured Zero Trust Gateway location.',
+  description: 'Delete a configured Zero Trust Gateway location.',
   inputSchema: {
     type: 'object',
     properties: {
