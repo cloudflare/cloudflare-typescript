@@ -52,7 +52,6 @@ describe('resource pools', () => {
       longitude: 0,
       minimum_origins: 0,
       monitor: 'monitor',
-      monitor_group: 'monitor_group',
       notification_email: 'someone@example.com,sometwo@example.com',
       notification_filter: {
         origin: { disable: true, healthy: true },
@@ -105,7 +104,6 @@ describe('resource pools', () => {
       longitude: 0,
       minimum_origins: 0,
       monitor: 'monitor',
-      monitor_group: 'monitor_group',
       notification_email: 'someone@example.com,sometwo@example.com',
       notification_filter: {
         origin: { disable: true, healthy: true },
@@ -205,7 +203,6 @@ describe('resource pools', () => {
       longitude: 0,
       minimum_origins: 0,
       monitor: 'monitor',
-      monitor_group: 'monitor_group',
       name: 'primary-dc-1',
       notification_email: 'someone@example.com,sometwo@example.com',
       notification_filter: {
