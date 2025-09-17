@@ -30,7 +30,7 @@ export type RayIDGetResponse = string | unknown;
 
 export interface RayIDGetParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   zone_id: string;
 

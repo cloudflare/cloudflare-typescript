@@ -16,7 +16,7 @@ export class Tags extends APIResource {
    *   'this-is_my_script-01',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: ['my-team', 'my-public-api'],
+   *     body: ['my-tag'],
    *   },
    * )) {
    *   // ...
@@ -101,8 +101,14 @@ export class TagUpdateResponsesSinglePage extends SinglePage<TagUpdateResponse> 
 
 export class TagListResponsesSinglePage extends SinglePage<TagListResponse> {}
 
+/**
+ * Tag to help you manage your Worker.
+ */
 export type TagUpdateResponse = string;
 
+/**
+ * Tag to help you manage your Worker.
+ */
 export type TagListResponse = string;
 
 export type TagDeleteResponse = unknown;
@@ -114,7 +120,7 @@ export interface TagUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Tags associated with the Worker.
+   * Body param: Tags to help you manage your Workers.
    */
   body: Array<string>;
 }

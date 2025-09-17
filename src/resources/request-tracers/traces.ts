@@ -109,7 +109,7 @@ export interface TraceCreateResponse {
 
 export interface TraceCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   account_id: string;
 

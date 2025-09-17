@@ -14,6 +14,7 @@ export class DNS extends APIResource {
    * ```ts
    * const settings = await client.emailRouting.dns.create({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'example.net',
    * });
    * ```
    */
@@ -58,6 +59,7 @@ export class DNS extends APIResource {
    * ```ts
    * const settings = await client.emailRouting.dns.edit({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'example.net',
    * });
    * ```
    */
@@ -312,7 +314,7 @@ export interface DNSCreateParams {
   /**
    * Body param: Domain of your zone.
    */
-  name?: string;
+  name: string;
 }
 
 export interface DNSDeleteParams {
@@ -331,7 +333,7 @@ export interface DNSEditParams {
   /**
    * Body param: Domain of your zone.
    */
-  name?: string;
+  name: string;
 }
 
 export interface DNSGetParams {

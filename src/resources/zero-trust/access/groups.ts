@@ -307,6 +307,8 @@ export interface GroupCreateResponse {
    */
   id?: string;
 
+  created_at?: string;
+
   /**
    * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
    * meet any of the Exclude rules.
@@ -335,6 +337,8 @@ export interface GroupCreateResponse {
    * meet all of the Require rules.
    */
   require?: Array<PoliciesAPI.AccessRule>;
+
+  updated_at?: string;
 }
 
 export interface GroupUpdateResponse {
@@ -343,6 +347,8 @@ export interface GroupUpdateResponse {
    */
   id?: string;
 
+  created_at?: string;
+
   /**
    * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
    * meet any of the Exclude rules.
@@ -371,6 +377,8 @@ export interface GroupUpdateResponse {
    * meet all of the Require rules.
    */
   require?: Array<PoliciesAPI.AccessRule>;
+
+  updated_at?: string;
 }
 
 export interface GroupListResponse {
@@ -379,6 +387,8 @@ export interface GroupListResponse {
    */
   id?: string;
 
+  created_at?: string;
+
   /**
    * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
    * meet any of the Exclude rules.
@@ -407,6 +417,8 @@ export interface GroupListResponse {
    * meet all of the Require rules.
    */
   require?: Array<PoliciesAPI.AccessRule>;
+
+  updated_at?: string;
 }
 
 export interface GroupDeleteResponse {
@@ -422,6 +434,8 @@ export interface GroupGetResponse {
    */
   id?: string;
 
+  created_at?: string;
+
   /**
    * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
    * meet any of the Exclude rules.
@@ -450,6 +464,8 @@ export interface GroupGetResponse {
    * meet all of the Require rules.
    */
   require?: Array<PoliciesAPI.AccessRule>;
+
+  updated_at?: string;
 }
 
 export interface GroupCreateParams {

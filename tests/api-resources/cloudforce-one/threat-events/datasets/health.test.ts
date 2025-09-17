@@ -9,13 +9,13 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource tags', () => {
+describe('resource health', () => {
   // TODO: HTTP 401 from prism
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.tags.create({
-      account_id: 'account_id',
-      name: 'name',
-    });
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.cloudforceOne.threatEvents.datasets.health.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,10 +26,10 @@ describe('resource tags', () => {
   });
 
   // TODO: HTTP 401 from prism
-  test.skip('create: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.tags.create({
-      account_id: 'account_id',
-      name: 'name',
-    });
+  test.skip('get: required and optional params', async () => {
+    const response = await client.cloudforceOne.threatEvents.datasets.health.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
   });
 });

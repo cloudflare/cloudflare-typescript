@@ -72,12 +72,12 @@ export class Devices extends APIResource {
     params: DeviceGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/devices/physical-devices/${deviceId}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: DeviceGetResponse }>
+      this._client.get(
+        `/accounts/${account_id}/devices/physical-devices/${deviceId}`,
+        options,
+      ) as Core.APIPromise<{ result: DeviceGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -166,11 +166,6 @@ export interface DeviceListResponse {
   hardware_id?: string | null;
 
   /**
-   * The last seen registration for the device.
-   */
-  last_seen_registration?: DeviceListResponse.LastSeenRegistration | null;
-
-  /**
    * The last user to use the WARP device.
    */
   last_seen_user?: DeviceListResponse.LastSeenUser | null;
@@ -213,49 +208,6 @@ export interface DeviceListResponse {
 }
 
 export namespace DeviceListResponse {
-  /**
-   * The last seen registration for the device.
-   */
-  export interface LastSeenRegistration {
-    /**
-     * A summary of the device profile evaluated for the registration.
-     */
-    policy?: LastSeenRegistration.Policy | null;
-  }
-
-  export namespace LastSeenRegistration {
-    /**
-     * A summary of the device profile evaluated for the registration.
-     */
-    export interface Policy {
-      /**
-       * The ID of the device settings profile.
-       */
-      id: string;
-
-      /**
-       * Whether the device settings profile is the default profile for the account.
-       */
-      default: boolean;
-
-      /**
-       * Whether the device settings profile was deleted.
-       */
-      deleted: boolean;
-
-      /**
-       * The name of the device settings profile.
-       */
-      name: string;
-
-      /**
-       * The RFC3339 timestamp of when the device settings profile last changed for the
-       * registration.
-       */
-      updated_at: string;
-    }
-  }
-
   /**
    * The last user to use the WARP device.
    */
@@ -335,11 +287,6 @@ export interface DeviceGetResponse {
   hardware_id?: string | null;
 
   /**
-   * The last seen registration for the device.
-   */
-  last_seen_registration?: DeviceGetResponse.LastSeenRegistration | null;
-
-  /**
    * The last user to use the WARP device.
    */
   last_seen_user?: DeviceGetResponse.LastSeenUser | null;
@@ -383,49 +330,6 @@ export interface DeviceGetResponse {
 
 export namespace DeviceGetResponse {
   /**
-   * The last seen registration for the device.
-   */
-  export interface LastSeenRegistration {
-    /**
-     * A summary of the device profile evaluated for the registration.
-     */
-    policy?: LastSeenRegistration.Policy | null;
-  }
-
-  export namespace LastSeenRegistration {
-    /**
-     * A summary of the device profile evaluated for the registration.
-     */
-    export interface Policy {
-      /**
-       * The ID of the device settings profile.
-       */
-      id: string;
-
-      /**
-       * Whether the device settings profile is the default profile for the account.
-       */
-      default: boolean;
-
-      /**
-       * Whether the device settings profile was deleted.
-       */
-      deleted: boolean;
-
-      /**
-       * The name of the device settings profile.
-       */
-      name: string;
-
-      /**
-       * The RFC3339 timestamp of when the device settings profile last changed for the
-       * registration.
-       */
-      updated_at: string;
-    }
-  }
-
-  /**
    * The last user to use the WARP device.
    */
   export interface LastSeenUser {
@@ -466,9 +370,7 @@ export interface DeviceListParams extends CursorPaginationParams {
   active_registrations?: 'include' | 'only' | 'exclude';
 
   /**
-   * Query param: Comma-separated list of additional information that should be
-   * included in the device response. Supported values are:
-   * "last_seen_registration.policy".
+   * Query param:
    */
   include?: string;
 
@@ -526,17 +428,7 @@ export interface DeviceDeleteParams {
 }
 
 export interface DeviceGetParams {
-  /**
-   * Path param:
-   */
   account_id: string;
-
-  /**
-   * Query param: Comma-separated list of additional information that should be
-   * included in the device response. Supported values are:
-   * "last_seen_registration.policy".
-   */
-  include?: string;
 }
 
 export interface DeviceRevokeParams {

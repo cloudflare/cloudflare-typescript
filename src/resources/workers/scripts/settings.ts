@@ -80,11 +80,6 @@ export interface SettingEditParams {
   observability?: SettingEditParams.Observability | null;
 
   /**
-   * Body param: Tags associated with the Worker.
-   */
-  tags?: Array<string>;
-
-  /**
    * Body param: List of Workers that will consume logs from the attached Worker.
    */
   tail_consumers?: Array<TailAPI.ConsumerScriptParam> | null;
@@ -130,19 +125,9 @@ export namespace SettingEditParams {
       invocation_logs: boolean;
 
       /**
-       * A list of destinations where logs will be exported to.
-       */
-      destinations?: Array<string>;
-
-      /**
        * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
        */
       head_sampling_rate?: number | null;
-
-      /**
-       * Whether log persistence is enabled for the Worker.
-       */
-      persist?: boolean;
     }
   }
 }

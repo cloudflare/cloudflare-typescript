@@ -75,12 +75,9 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindAssets
     | SettingEditResponse.WorkersBindingKindBrowser
     | SettingEditResponse.WorkersBindingKindD1
-    | SettingEditResponse.WorkersBindingKindDataBlob
     | SettingEditResponse.WorkersBindingKindDispatchNamespace
     | SettingEditResponse.WorkersBindingKindDurableObjectNamespace
     | SettingEditResponse.WorkersBindingKindHyperdrive
-    | SettingEditResponse.WorkersBindingKindInherit
-    | SettingEditResponse.WorkersBindingKindImages
     | SettingEditResponse.WorkersBindingKindJson
     | SettingEditResponse.WorkersBindingKindKVNamespace
     | SettingEditResponse.WorkersBindingKindMTLSCertificate
@@ -89,16 +86,13 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindQueue
     | SettingEditResponse.WorkersBindingKindR2Bucket
     | SettingEditResponse.WorkersBindingKindSecretText
-    | SettingEditResponse.WorkersBindingKindSendEmail
     | SettingEditResponse.WorkersBindingKindService
     | SettingEditResponse.WorkersBindingKindTailConsumer
-    | SettingEditResponse.WorkersBindingKindTextBlob
     | SettingEditResponse.WorkersBindingKindVectorize
     | SettingEditResponse.WorkersBindingKindVersionMetadata
     | SettingEditResponse.WorkersBindingKindSecretsStoreSecret
     | SettingEditResponse.WorkersBindingKindSecretKey
     | SettingEditResponse.WorkersBindingKindWorkflow
-    | SettingEditResponse.WorkersBindingKindWasmModule
   >;
 
   /**
@@ -136,7 +130,7 @@ export interface SettingEditResponse {
   placement?: SettingEditResponse.Placement;
 
   /**
-   * Tags associated with the Worker.
+   * Tags to help you manage your Workers.
    */
   tags?: Array<string>;
 
@@ -222,24 +216,6 @@ export namespace SettingEditResponse {
     type: 'd1';
   }
 
-  export interface WorkersBindingKindDataBlob {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * The name of the file containing the data content. Only accepted for
-     * `service worker syntax` Workers.
-     */
-    part: string;
-
-    /**
-     * @deprecated The kind of resource that the binding provides.
-     */
-    type: 'data_blob';
-  }
-
   export interface WorkersBindingKindDispatchNamespace {
     /**
      * A JavaScript variable name for the binding.
@@ -345,44 +321,6 @@ export namespace SettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'hyperdrive';
-  }
-
-  export interface WorkersBindingKindInherit {
-    /**
-     * The name of the inherited binding.
-     */
-    name: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'inherit';
-
-    /**
-     * The old name of the inherited binding. If set, the binding will be renamed from
-     * `old_name` to `name` in the new version. If not set, the binding will keep the
-     * same name between versions.
-     */
-    old_name?: string;
-
-    /**
-     * Identifier for the version to inherit the binding from, which can be the version
-     * ID or the literal "latest" to inherit from the latest version. Defaults to
-     * inheriting the binding from the latest version.
-     */
-    version_id?: string;
-  }
-
-  export interface WorkersBindingKindImages {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'images';
   }
 
   export interface WorkersBindingKindJson {
@@ -516,34 +454,12 @@ export namespace SettingEditResponse {
     type: 'secret_text';
   }
 
-  export interface WorkersBindingKindSendEmail {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'send_email';
-
-    /**
-     * List of allowed destination addresses.
-     */
-    allowed_destination_addresses?: Array<string>;
-
-    /**
-     * List of allowed sender addresses.
-     */
-    allowed_sender_addresses?: Array<string>;
-
-    /**
-     * Destination address for the email.
-     */
-    destination_address?: string;
-  }
-
   export interface WorkersBindingKindService {
+    /**
+     * Optional environment if the Worker utilizes one.
+     */
+    environment: string;
+
     /**
      * A JavaScript variable name for the binding.
      */
@@ -558,11 +474,6 @@ export namespace SettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'service';
-
-    /**
-     * Optional environment if the Worker utilizes one.
-     */
-    environment?: string;
   }
 
   export interface WorkersBindingKindTailConsumer {
@@ -580,24 +491,6 @@ export namespace SettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'tail_consumer';
-  }
-
-  export interface WorkersBindingKindTextBlob {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * The name of the file containing the text content. Only accepted for
-     * `service worker syntax` Workers.
-     */
-    part: string;
-
-    /**
-     * @deprecated The kind of resource that the binding provides.
-     */
-    type: 'text_blob';
   }
 
   export interface WorkersBindingKindVectorize {
@@ -712,24 +605,6 @@ export namespace SettingEditResponse {
     script_name?: string;
   }
 
-  export interface WorkersBindingKindWasmModule {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * The name of the file containing the WebAssembly module content. Only accepted
-     * for `service worker syntax` Workers.
-     */
-    part: string;
-
-    /**
-     * @deprecated The kind of resource that the binding provides.
-     */
-    type: 'wasm_module';
-  }
-
   /**
    * Limits to apply for this Worker.
    */
@@ -779,19 +654,9 @@ export namespace SettingEditResponse {
       invocation_logs: boolean;
 
       /**
-       * A list of destinations where logs will be exported to.
-       */
-      destinations?: Array<string>;
-
-      /**
        * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
        */
       head_sampling_rate?: number | null;
-
-      /**
-       * Whether log persistence is enabled for the Worker.
-       */
-      persist?: boolean;
     }
   }
 
@@ -820,12 +685,9 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindAssets
     | SettingGetResponse.WorkersBindingKindBrowser
     | SettingGetResponse.WorkersBindingKindD1
-    | SettingGetResponse.WorkersBindingKindDataBlob
     | SettingGetResponse.WorkersBindingKindDispatchNamespace
     | SettingGetResponse.WorkersBindingKindDurableObjectNamespace
     | SettingGetResponse.WorkersBindingKindHyperdrive
-    | SettingGetResponse.WorkersBindingKindInherit
-    | SettingGetResponse.WorkersBindingKindImages
     | SettingGetResponse.WorkersBindingKindJson
     | SettingGetResponse.WorkersBindingKindKVNamespace
     | SettingGetResponse.WorkersBindingKindMTLSCertificate
@@ -834,16 +696,13 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindQueue
     | SettingGetResponse.WorkersBindingKindR2Bucket
     | SettingGetResponse.WorkersBindingKindSecretText
-    | SettingGetResponse.WorkersBindingKindSendEmail
     | SettingGetResponse.WorkersBindingKindService
     | SettingGetResponse.WorkersBindingKindTailConsumer
-    | SettingGetResponse.WorkersBindingKindTextBlob
     | SettingGetResponse.WorkersBindingKindVectorize
     | SettingGetResponse.WorkersBindingKindVersionMetadata
     | SettingGetResponse.WorkersBindingKindSecretsStoreSecret
     | SettingGetResponse.WorkersBindingKindSecretKey
     | SettingGetResponse.WorkersBindingKindWorkflow
-    | SettingGetResponse.WorkersBindingKindWasmModule
   >;
 
   /**
@@ -881,7 +740,7 @@ export interface SettingGetResponse {
   placement?: SettingGetResponse.Placement;
 
   /**
-   * Tags associated with the Worker.
+   * Tags to help you manage your Workers.
    */
   tags?: Array<string>;
 
@@ -967,24 +826,6 @@ export namespace SettingGetResponse {
     type: 'd1';
   }
 
-  export interface WorkersBindingKindDataBlob {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * The name of the file containing the data content. Only accepted for
-     * `service worker syntax` Workers.
-     */
-    part: string;
-
-    /**
-     * @deprecated The kind of resource that the binding provides.
-     */
-    type: 'data_blob';
-  }
-
   export interface WorkersBindingKindDispatchNamespace {
     /**
      * A JavaScript variable name for the binding.
@@ -1090,44 +931,6 @@ export namespace SettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'hyperdrive';
-  }
-
-  export interface WorkersBindingKindInherit {
-    /**
-     * The name of the inherited binding.
-     */
-    name: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'inherit';
-
-    /**
-     * The old name of the inherited binding. If set, the binding will be renamed from
-     * `old_name` to `name` in the new version. If not set, the binding will keep the
-     * same name between versions.
-     */
-    old_name?: string;
-
-    /**
-     * Identifier for the version to inherit the binding from, which can be the version
-     * ID or the literal "latest" to inherit from the latest version. Defaults to
-     * inheriting the binding from the latest version.
-     */
-    version_id?: string;
-  }
-
-  export interface WorkersBindingKindImages {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'images';
   }
 
   export interface WorkersBindingKindJson {
@@ -1261,34 +1064,12 @@ export namespace SettingGetResponse {
     type: 'secret_text';
   }
 
-  export interface WorkersBindingKindSendEmail {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'send_email';
-
-    /**
-     * List of allowed destination addresses.
-     */
-    allowed_destination_addresses?: Array<string>;
-
-    /**
-     * List of allowed sender addresses.
-     */
-    allowed_sender_addresses?: Array<string>;
-
-    /**
-     * Destination address for the email.
-     */
-    destination_address?: string;
-  }
-
   export interface WorkersBindingKindService {
+    /**
+     * Optional environment if the Worker utilizes one.
+     */
+    environment: string;
+
     /**
      * A JavaScript variable name for the binding.
      */
@@ -1303,11 +1084,6 @@ export namespace SettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'service';
-
-    /**
-     * Optional environment if the Worker utilizes one.
-     */
-    environment?: string;
   }
 
   export interface WorkersBindingKindTailConsumer {
@@ -1325,24 +1101,6 @@ export namespace SettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'tail_consumer';
-  }
-
-  export interface WorkersBindingKindTextBlob {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * The name of the file containing the text content. Only accepted for
-     * `service worker syntax` Workers.
-     */
-    part: string;
-
-    /**
-     * @deprecated The kind of resource that the binding provides.
-     */
-    type: 'text_blob';
   }
 
   export interface WorkersBindingKindVectorize {
@@ -1457,24 +1215,6 @@ export namespace SettingGetResponse {
     script_name?: string;
   }
 
-  export interface WorkersBindingKindWasmModule {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * The name of the file containing the WebAssembly module content. Only accepted
-     * for `service worker syntax` Workers.
-     */
-    part: string;
-
-    /**
-     * @deprecated The kind of resource that the binding provides.
-     */
-    type: 'wasm_module';
-  }
-
   /**
    * Limits to apply for this Worker.
    */
@@ -1524,19 +1264,9 @@ export namespace SettingGetResponse {
       invocation_logs: boolean;
 
       /**
-       * A list of destinations where logs will be exported to.
-       */
-      destinations?: Array<string>;
-
-      /**
        * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
        */
       head_sampling_rate?: number | null;
-
-      /**
-       * Whether log persistence is enabled for the Worker.
-       */
-      persist?: boolean;
     }
   }
 
@@ -1578,12 +1308,9 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindAssets
       | Settings.WorkersBindingKindBrowser
       | Settings.WorkersBindingKindD1
-      | Settings.WorkersBindingKindDataBlob
       | Settings.WorkersBindingKindDispatchNamespace
       | Settings.WorkersBindingKindDurableObjectNamespace
       | Settings.WorkersBindingKindHyperdrive
-      | Settings.WorkersBindingKindInherit
-      | Settings.WorkersBindingKindImages
       | Settings.WorkersBindingKindJson
       | Settings.WorkersBindingKindKVNamespace
       | Settings.WorkersBindingKindMTLSCertificate
@@ -1592,16 +1319,13 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindQueue
       | Settings.WorkersBindingKindR2Bucket
       | Settings.WorkersBindingKindSecretText
-      | Settings.WorkersBindingKindSendEmail
       | Settings.WorkersBindingKindService
       | Settings.WorkersBindingKindTailConsumer
-      | Settings.WorkersBindingKindTextBlob
       | Settings.WorkersBindingKindVectorize
       | Settings.WorkersBindingKindVersionMetadata
       | Settings.WorkersBindingKindSecretsStoreSecret
       | Settings.WorkersBindingKindSecretKey
       | Settings.WorkersBindingKindWorkflow
-      | Settings.WorkersBindingKindWasmModule
     >;
 
     /**
@@ -1644,7 +1368,7 @@ export namespace SettingEditParams {
     placement?: Settings.Placement;
 
     /**
-     * Tags associated with the Worker.
+     * Tags to help you manage your Workers.
      */
     tags?: Array<string>;
 
@@ -1728,24 +1452,6 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'd1';
-    }
-
-    export interface WorkersBindingKindDataBlob {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * The name of the file containing the data content. Only accepted for
-       * `service worker syntax` Workers.
-       */
-      part: string;
-
-      /**
-       * @deprecated The kind of resource that the binding provides.
-       */
-      type: 'data_blob';
     }
 
     export interface WorkersBindingKindDispatchNamespace {
@@ -1853,44 +1559,6 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'hyperdrive';
-    }
-
-    export interface WorkersBindingKindInherit {
-      /**
-       * The name of the inherited binding.
-       */
-      name: string;
-
-      /**
-       * The kind of resource that the binding provides.
-       */
-      type: 'inherit';
-
-      /**
-       * The old name of the inherited binding. If set, the binding will be renamed from
-       * `old_name` to `name` in the new version. If not set, the binding will keep the
-       * same name between versions.
-       */
-      old_name?: string;
-
-      /**
-       * Identifier for the version to inherit the binding from, which can be the version
-       * ID or the literal "latest" to inherit from the latest version. Defaults to
-       * inheriting the binding from the latest version.
-       */
-      version_id?: string;
-    }
-
-    export interface WorkersBindingKindImages {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * The kind of resource that the binding provides.
-       */
-      type: 'images';
     }
 
     export interface WorkersBindingKindJson {
@@ -2029,34 +1697,12 @@ export namespace SettingEditParams {
       type: 'secret_text';
     }
 
-    export interface WorkersBindingKindSendEmail {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * The kind of resource that the binding provides.
-       */
-      type: 'send_email';
-
-      /**
-       * List of allowed destination addresses.
-       */
-      allowed_destination_addresses?: Array<string>;
-
-      /**
-       * List of allowed sender addresses.
-       */
-      allowed_sender_addresses?: Array<string>;
-
-      /**
-       * Destination address for the email.
-       */
-      destination_address?: string;
-    }
-
     export interface WorkersBindingKindService {
+      /**
+       * Optional environment if the Worker utilizes one.
+       */
+      environment: string;
+
       /**
        * A JavaScript variable name for the binding.
        */
@@ -2071,11 +1717,6 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'service';
-
-      /**
-       * Optional environment if the Worker utilizes one.
-       */
-      environment?: string;
     }
 
     export interface WorkersBindingKindTailConsumer {
@@ -2093,24 +1734,6 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'tail_consumer';
-    }
-
-    export interface WorkersBindingKindTextBlob {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * The name of the file containing the text content. Only accepted for
-       * `service worker syntax` Workers.
-       */
-      part: string;
-
-      /**
-       * @deprecated The kind of resource that the binding provides.
-       */
-      type: 'text_blob';
     }
 
     export interface WorkersBindingKindVectorize {
@@ -2237,24 +1860,6 @@ export namespace SettingEditParams {
       script_name?: string;
     }
 
-    export interface WorkersBindingKindWasmModule {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * The name of the file containing the WebAssembly module content. Only accepted
-       * for `service worker syntax` Workers.
-       */
-      part: string;
-
-      /**
-       * @deprecated The kind of resource that the binding provides.
-       */
-      type: 'wasm_module';
-    }
-
     /**
      * Limits to apply for this Worker.
      */
@@ -2322,19 +1927,9 @@ export namespace SettingEditParams {
         invocation_logs: boolean;
 
         /**
-         * A list of destinations where logs will be exported to.
-         */
-        destinations?: Array<string>;
-
-        /**
          * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
          */
         head_sampling_rate?: number | null;
-
-        /**
-         * Whether log persistence is enabled for the Worker.
-         */
-        persist?: boolean;
       }
     }
 

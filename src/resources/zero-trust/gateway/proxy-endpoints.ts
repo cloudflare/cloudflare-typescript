@@ -6,7 +6,7 @@ import { SinglePage } from '../../../pagination';
 
 export class ProxyEndpoints extends APIResource {
   /**
-   * Create a new Zero Trust Gateway proxy endpoint.
+   * Creates a new Zero Trust Gateway proxy endpoint.
    *
    * @example
    * ```ts
@@ -29,7 +29,7 @@ export class ProxyEndpoints extends APIResource {
   }
 
   /**
-   * List all Zero Trust Gateway proxy endpoints for an account.
+   * Fetches all Zero Trust Gateway proxy endpoints for an account.
    *
    * @example
    * ```ts
@@ -49,7 +49,7 @@ export class ProxyEndpoints extends APIResource {
   }
 
   /**
-   * Delete a configured Zero Trust Gateway proxy endpoint.
+   * Deletes a configured Zero Trust Gateway proxy endpoint.
    *
    * @example
    * ```ts
@@ -75,7 +75,7 @@ export class ProxyEndpoints extends APIResource {
   }
 
   /**
-   * Update a configured Zero Trust Gateway proxy endpoint.
+   * Updates a configured Zero Trust Gateway proxy endpoint.
    *
    * @example
    * ```ts
@@ -101,7 +101,7 @@ export class ProxyEndpoints extends APIResource {
   }
 
   /**
-   * Get a single Zero Trust Gateway proxy endpoint.
+   * Fetches a single Zero Trust Gateway proxy endpoint.
    *
    * @example
    * ```ts
@@ -131,14 +131,14 @@ export class ProxyEndpoints extends APIResource {
 export class ProxyEndpointsSinglePage extends SinglePage<ProxyEndpoint> {}
 
 /**
- * Specify an IPv4 or IPv6 CIDR. Limit IPv6 to a maximum of /109 and IPv4 to a
- * maximum of /25.
+ * The IPv4 CIDR or IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /109. IPv4
+ * CIDRs are limited to a maximum of /25.
  */
 export type GatewayIPs = string;
 
 /**
- * Specify an IPv4 or IPv6 CIDR. Limit IPv6 to a maximum of /109 and IPv4 to a
- * maximum of /25.
+ * The IPv4 CIDR or IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /109. IPv4
+ * CIDRs are limited to a maximum of /25.
  */
 export type GatewayIPsParam = string;
 
@@ -148,17 +148,17 @@ export interface ProxyEndpoint {
   created_at?: string;
 
   /**
-   * Specify the list of CIDRs to restrict ingress connections.
+   * A list of CIDRs to restrict ingress connections.
    */
   ips?: Array<GatewayIPs>;
 
   /**
-   * Specify the name of the proxy endpoint.
+   * The name of the proxy endpoint.
    */
   name?: string;
 
   /**
-   * Specify the subdomain to use as the destination in the proxy client.
+   * The subdomain to be used as the destination in the proxy client.
    */
   subdomain?: string;
 
@@ -174,12 +174,12 @@ export interface ProxyEndpointCreateParams {
   account_id: string;
 
   /**
-   * Body param: Specify the list of CIDRs to restrict ingress connections.
+   * Body param: A list of CIDRs to restrict ingress connections.
    */
   ips: Array<GatewayIPsParam>;
 
   /**
-   * Body param: Specify the name of the proxy endpoint.
+   * Body param: The name of the proxy endpoint.
    */
   name: string;
 }
@@ -199,12 +199,12 @@ export interface ProxyEndpointEditParams {
   account_id: string;
 
   /**
-   * Body param: Specify the list of CIDRs to restrict ingress connections.
+   * Body param: A list of CIDRs to restrict ingress connections.
    */
   ips?: Array<GatewayIPsParam>;
 
   /**
-   * Body param: Specify the name of the proxy endpoint.
+   * Body param: The name of the proxy endpoint.
    */
   name?: string;
 }

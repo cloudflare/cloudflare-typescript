@@ -7,7 +7,7 @@ import { SinglePage } from '../../../pagination';
 
 export class Rules extends APIResource {
   /**
-   * Create a new Zero Trust Gateway rule.
+   * Creates a new Zero Trust Gateway rule.
    *
    * @example
    * ```ts
@@ -29,7 +29,7 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Update a configured Zero Trust Gateway rule.
+   * Updates a configured Zero Trust Gateway rule.
    *
    * @example
    * ```ts
@@ -59,7 +59,7 @@ export class Rules extends APIResource {
   }
 
   /**
-   * List Zero Trust Gateway rules for an account.
+   * Fetches the Zero Trust Gateway rules for an account.
    *
    * @example
    * ```ts
@@ -80,7 +80,7 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Delete a Zero Trust Gateway rule.
+   * Deletes a Zero Trust Gateway rule.
    *
    * @example
    * ```ts
@@ -104,7 +104,7 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Get a single Zero Trust Gateway rule.
+   * Fetches a single Zero Trust Gateway rule.
    *
    * @example
    * ```ts
@@ -125,9 +125,11 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Resets the expiration of a Zero Trust Gateway Rule if its duration elapsed and
-   * it has a default duration. The Zero Trust Gateway Rule must have values for both
-   * `expiration.expires_at` and `expiration.duration`.
+   * Resets the expiration of a Zero Trust Gateway Rule if its duration has elapsed
+   * and it has a default duration.
+   *
+   * The Zero Trust Gateway Rule must have values for both `expiration.expires_at`
+   * and `expiration.duration`.
    *
    * @example
    * ```ts
@@ -157,24 +159,23 @@ export class GatewayRulesSinglePage extends SinglePage<GatewayRule> {}
 
 export interface DNSResolverSettingsV4 {
   /**
-   * Specify the IPv4 address of the upstream resolver.
+   * IPv4 address of upstream resolver.
    */
   ip: string;
 
   /**
-   * Specify a port number to use for the upstream resolver. Defaults to 53 if
-   * unspecified.
+   * A port number to use for upstream resolver. Defaults to 53 if unspecified.
    */
   port?: number;
 
   /**
-   * Indicate whether to connect to this resolver over a private network. Must set
-   * when vnet_id set.
+   * Whether to connect to this resolver over a private network. Must be set when
+   * vnet_id is set.
    */
   route_through_private_network?: boolean;
 
   /**
-   * Specify an optional virtual network for this resolver. Uses default virtual
+   * Optionally specify a virtual network for this resolver. Uses default virtual
    * network id if omitted.
    */
   vnet_id?: string;
@@ -182,24 +183,23 @@ export interface DNSResolverSettingsV4 {
 
 export interface DNSResolverSettingsV4Param {
   /**
-   * Specify the IPv4 address of the upstream resolver.
+   * IPv4 address of upstream resolver.
    */
   ip: string;
 
   /**
-   * Specify a port number to use for the upstream resolver. Defaults to 53 if
-   * unspecified.
+   * A port number to use for upstream resolver. Defaults to 53 if unspecified.
    */
   port?: number;
 
   /**
-   * Indicate whether to connect to this resolver over a private network. Must set
-   * when vnet_id set.
+   * Whether to connect to this resolver over a private network. Must be set when
+   * vnet_id is set.
    */
   route_through_private_network?: boolean;
 
   /**
-   * Specify an optional virtual network for this resolver. Uses default virtual
+   * Optionally specify a virtual network for this resolver. Uses default virtual
    * network id if omitted.
    */
   vnet_id?: string;
@@ -207,24 +207,23 @@ export interface DNSResolverSettingsV4Param {
 
 export interface DNSResolverSettingsV6 {
   /**
-   * Specify the IPv6 address of the upstream resolver.
+   * IPv6 address of upstream resolver.
    */
   ip: string;
 
   /**
-   * Specify a port number to use for the upstream resolver. Defaults to 53 if
-   * unspecified.
+   * A port number to use for upstream resolver. Defaults to 53 if unspecified.
    */
   port?: number;
 
   /**
-   * Indicate whether to connect to this resolver over a private network. Must set
-   * when vnet_id set.
+   * Whether to connect to this resolver over a private network. Must be set when
+   * vnet_id is set.
    */
   route_through_private_network?: boolean;
 
   /**
-   * Specify an optional virtual network for this resolver. Uses default virtual
+   * Optionally specify a virtual network for this resolver. Uses default virtual
    * network id if omitted.
    */
   vnet_id?: string;
@@ -232,43 +231,42 @@ export interface DNSResolverSettingsV6 {
 
 export interface DNSResolverSettingsV6Param {
   /**
-   * Specify the IPv6 address of the upstream resolver.
+   * IPv6 address of upstream resolver.
    */
   ip: string;
 
   /**
-   * Specify a port number to use for the upstream resolver. Defaults to 53 if
-   * unspecified.
+   * A port number to use for upstream resolver. Defaults to 53 if unspecified.
    */
   port?: number;
 
   /**
-   * Indicate whether to connect to this resolver over a private network. Must set
-   * when vnet_id set.
+   * Whether to connect to this resolver over a private network. Must be set when
+   * vnet_id is set.
    */
   route_through_private_network?: boolean;
 
   /**
-   * Specify an optional virtual network for this resolver. Uses default virtual
+   * Optionally specify a virtual network for this resolver. Uses default virtual
    * network id if omitted.
    */
   vnet_id?: string;
 }
 
 /**
- * Specify the protocol or layer to use.
+ * The protocol or layer to use.
  */
 export type GatewayFilter = 'http' | 'dns' | 'l4' | 'egress' | 'dns_resolver';
 
 /**
- * Specify the protocol or layer to use.
+ * The protocol or layer to use.
  */
 export type GatewayFilterParam = 'http' | 'dns' | 'l4' | 'egress' | 'dns_resolver';
 
 export interface GatewayRule {
   /**
-   * Specify the action to perform when the associated traffic, identity, and device
-   * posture expressions either absent or evaluate to `true`.
+   * The action to perform when the associated traffic, identity, and device posture
+   * expressions are either absent or evaluate to `true`.
    */
   action:
     | 'on'
@@ -289,174 +287,177 @@ export interface GatewayRule {
     | 'redirect';
 
   /**
-   * Specify whether the rule is enabled.
+   * True if the rule is enabled.
    */
   enabled: boolean;
 
   /**
-   * Specify the protocol or layer to evaluate the traffic, identity, and device
-   * posture expressions.
+   * The protocol or layer to evaluate the traffic, identity, and device. posture
+   * expressions.
    */
   filters: Array<GatewayFilter>;
 
   /**
-   * Specify the rule name.
+   * The name of the rule.
    */
   name: string;
 
   /**
-   * Set the order of your rules. Lower values indicate higher precedence. At each
-   * processing phase, evaluate applicable rules in ascending order of this value.
-   * Refer to
+   * Precedence sets the order of your rules. Lower values indicate higher
+   * precedence. At each processing phase, applicable rules are evaluated in
+   * ascending order of this value. Refer to
    * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
-   * to manage precedence via Terraform.
+   * docs on how to manage precedence via Terraform.
    */
   precedence: number;
 
   /**
-   * Specify the wirefilter expression used for traffic matching. The API
-   * automatically formats and sanitizes expressions before storing them. To prevent
-   * Terraform state drift, use the formatted expression returned in the API
-   * response.
+   * The wirefilter expression used for traffic matching. The API automatically
+   * formats and sanitizes this expression. This returns a normalized version that
+   * may differ from your input and cause Terraform state drift.
    */
   traffic: string;
 
   /**
-   * Identify the API resource with a UUID.
+   * The API resource UUID.
    */
   id?: string;
 
   created_at?: string;
 
   /**
-   * Indicate the date of deletion, if any.
+   * Date of deletion, if any.
    */
   deleted_at?: string | null;
 
   /**
-   * Specify the rule description.
+   * The description of the rule.
    */
   description?: string;
 
   /**
-   * Specify the wirefilter expression used for device posture check. The API
-   * automatically formats and sanitizes expressions before storing them. To prevent
-   * Terraform state drift, use the formatted expression returned in the API
-   * response.
+   * The wirefilter expression used for device posture check matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   device_posture?: string;
 
   /**
-   * Defines the expiration time stamp and default duration of a DNS policy. Takes
-   * precedence over the policy's `schedule` configuration, if any. This does not
-   * apply to HTTP or network policies.
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
    */
   expiration?: GatewayRule.Expiration | null;
 
   /**
-   * Specify the wirefilter expression used for identity matching. The API
-   * automatically formats and sanitizes expressions before storing them. To prevent
-   * Terraform state drift, use the formatted expression returned in the API
-   * response.
+   * The wirefilter expression used for identity matching. The API automatically
+   * formats and sanitizes this expression. This returns a normalized version that
+   * may differ from your input and cause Terraform state drift.
    */
   identity?: string;
 
   /**
-   * Indicate that this rule is shared via the Orgs API and read only.
+   * The rule cannot be shared via the Orgs API.
+   */
+  not_sharable?: boolean;
+
+  /**
+   * The rule was shared via the Orgs API and cannot be edited by the current
+   * account.
    */
   read_only?: boolean;
 
   /**
-   * Set settings related to this rule.
+   * Additional settings that modify the rule's action.
    */
   rule_settings?: RuleSetting;
 
   /**
-   * Defines the schedule for activating DNS policies. (HTTP/Egress or L4
-   * unsupported).
+   * The schedule for activating DNS policies. This does not apply to HTTP or network
+   * policies.
    */
   schedule?: Schedule | null;
 
   /**
-   * Indicate that this rule is sharable via the Orgs API.
-   */
-  sharable?: boolean;
-
-  /**
-   * Provide the account tag of the account that created the rule.
+   * account tag of account that created the rule.
    */
   source_account?: string;
 
   updated_at?: string;
 
   /**
-   * Indicate the version number of the rule(read-only).
+   * version number of the rule.
    */
   version?: number;
 
   /**
-   * Indicate a warning for a misconfigured rule, if any.
+   * Warning for a misconfigured rule, if any.
    */
   warning_status?: string | null;
 }
 
 export namespace GatewayRule {
   /**
-   * Defines the expiration time stamp and default duration of a DNS policy. Takes
-   * precedence over the policy's `schedule` configuration, if any. This does not
-   * apply to HTTP or network policies.
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
    */
   export interface Expiration {
     /**
-     * Show the timestamp when the policy expires and stops applying. The value must
-     * follow RFC 3339 and include a UTC offset. The system accepts non-zero offsets
-     * but converts them to the equivalent UTC+00:00 value and returns timestamps with
-     * a trailing Z. Expiration policies ignore client timezones and expire globally at
-     * the specified expires_at time.
+     * The time stamp at which the policy will expire and cease to be applied.
+     *
+     * Must adhere to RFC 3339 and include a UTC offset. Non-zero offsets are accepted
+     * but will be converted to the equivalent value with offset zero (UTC+00:00) and
+     * will be returned as time stamps with offset zero denoted by a trailing 'Z'.
+     *
+     * Policies with an expiration do not consider the timezone of clients they are
+     * applied to, and expire "globally" at the point given by their `expires_at`
+     * value.
      */
     expires_at: string;
 
     /**
-     * Defines the default duration a policy active in minutes. Must set in order to
+     * The default duration a policy will be active in minutes. Must be set in order to
      * use the `reset_expiration` endpoint on this rule.
      */
     duration?: number;
 
     /**
-     * Indicates whether the policy is expired.
+     * Whether the policy has expired.
      */
     expired?: boolean;
   }
 }
 
 /**
- * Set settings related to this rule.
+ * Additional settings that modify the rule's action.
  */
 export interface RuleSetting {
   /**
-   * Add custom headers to allowed requests as key-value pairs. Use header names as
-   * keys that map to arrays of header values.
+   * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
+   * header names, pointing to an array with its header value(s).
    */
   add_headers?: { [key: string]: Array<string> } | null;
 
   /**
-   * Set to enable MSP children to bypass this rule. Only parent MSP accounts can set
-   * this. this rule.
+   * Set by parent MSP accounts to enable their children to bypass this rule.
    */
   allow_child_bypass?: boolean | null;
 
   /**
-   * Define the settings for the Audit SSH action.
+   * Settings for the Audit SSH action.
    */
   audit_ssh?: RuleSetting.AuditSSH | null;
 
   /**
-   * Configure browser isolation behavior.
+   * Configure how browser isolation behaves.
    */
   biso_admin_controls?: RuleSetting.BISOAdminControls;
 
   /**
-   * Configure custom block page settings. If missing or null, use the account
+   * Custom block page settings. If missing/null, blocking will use the the account
    * settings.
    */
   block_page?: RuleSetting.BlockPage | null;
@@ -467,26 +468,25 @@ export interface RuleSetting {
   block_page_enabled?: boolean;
 
   /**
-   * Explain why the rule blocks the request. The custom block page shows this text
+   * The text describing why this block occurred, displayed on the custom block page
    * (if enabled).
    */
   block_reason?: string | null;
 
   /**
-   * Set to enable MSP accounts to bypass their parent's rules. Only MSP child
-   * accounts can set this.
+   * Set by children MSP accounts to bypass their parent's rules.
    */
   bypass_parent_rule?: boolean | null;
 
   /**
-   * Configure session check behavior.
+   * Configure how session check behaves.
    */
   check_session?: RuleSetting.CheckSession | null;
 
   /**
-   * Configure custom resolvers to route queries that match the resolver policy.
-   * Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
-   * settings. DNS queries get routed to the address closest to their origin. Only
+   * Add your own custom resolvers to route queries that match the resolver policy.
+   * Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
+   * are set. DNS queries will route to the address closest to their origin. Only
    * valid when a rule's action is set to 'resolve'.
    */
   dns_resolvers?: RuleSetting.DNSResolvers | null;
@@ -499,25 +499,26 @@ export interface RuleSetting {
   egress?: RuleSetting.Egress | null;
 
   /**
-   * Ignore category matches at CNAME domains in a response. When off, evaluate
-   * categories in this rule against all CNAME domain categories in the response.
+   * Set to true, to ignore the category matches at CNAME domains in a response. If
+   * unchecked, the categories in this rule will be checked against all the CNAME
+   * domain categories in a response.
    */
   ignore_cname_category_matches?: boolean;
 
   /**
-   * Specify whether to disable DNSSEC validation (for Allow actions) [INSECURE].
+   * INSECURE - disable DNSSEC validation (for Allow actions).
    */
   insecure_disable_dnssec_validation?: boolean;
 
   /**
-   * Enable IPs in DNS resolver category blocks. The system blocks only domain name
-   * categories unless you enable this setting.
+   * Set to true to enable IPs in DNS resolver category blocks. By default categories
+   * only block based on domain names.
    */
   ip_categories?: boolean;
 
   /**
-   * Indicates whether to include IPs in DNS resolver indicator feed blocks. Default,
-   * indicator feeds block only domain names.
+   * Set to true to include IPs in DNS resolver indicator feed blocks. By default
+   * indicator feeds only block based on domain names.
    */
   ip_indicator_feeds?: boolean;
 
@@ -527,17 +528,18 @@ export interface RuleSetting {
   l4override?: RuleSetting.L4override | null;
 
   /**
-   * Configure a notification to display on the user's device when this rule matched.
+   * Configure a notification to display on the user's device when this rule is
+   * matched.
    */
   notification_settings?: RuleSetting.NotificationSettings | null;
 
   /**
-   * Defines a hostname for override, for the matching DNS queries.
+   * Override matching DNS queries with a hostname.
    */
   override_host?: string;
 
   /**
-   * Defines a an IP or set of IPs for overriding matched DNS queries.
+   * Override matching DNS queries with an IP or set of IPs.
    */
   override_ips?: Array<string> | null;
 
@@ -547,56 +549,56 @@ export interface RuleSetting {
   payload_log?: RuleSetting.PayloadLog | null;
 
   /**
-   * Configure settings that apply to quarantine rules.
+   * Settings that apply to quarantine rules.
    */
   quarantine?: RuleSetting.Quarantine | null;
 
   /**
-   * Apply settings to redirect rules.
+   * Settings that apply to redirect rules.
    */
   redirect?: RuleSetting.Redirect | null;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
-   * specified 'view_id' as input. Not used when 'dns_resolvers' is specified or
-   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set
-   * to 'resolve'.
+   * specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified
+   * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
+   * set to 'resolve'.
    */
   resolve_dns_internally?: RuleSetting.ResolveDNSInternally | null;
 
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
-   * resolver. Cannot set when 'dns_resolvers' specified or 'resolve_dns_internally'
-   * is set. Only valid when a rule's action set to 'resolve'.
+   * resolver. Cannot be set when 'dns_resolvers' are specified or
+   * 'resolve_dns_internally' is set. Only valid when a rule's action is set to
+   * 'resolve'.
    */
   resolve_dns_through_cloudflare?: boolean | null;
 
   /**
-   * Configure behavior when an upstream certificate is invalid or an SSL error
-   * occurs.
+   * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
   untrusted_cert?: RuleSetting.UntrustedCERT | null;
 }
 
 export namespace RuleSetting {
   /**
-   * Define the settings for the Audit SSH action.
+   * Settings for the Audit SSH action.
    */
   export interface AuditSSH {
     /**
-     * Enable SSH command logging.
+     * Enable to turn on SSH command logging.
      */
     command_logging?: boolean;
   }
 
   /**
-   * Configure browser isolation behavior.
+   * Configure how browser isolation behaves.
    */
   export interface BISOAdminControls {
     /**
-     * Configure copy behavior. If set to remote_only, users cannot copy isolated
-     * content from the remote browser to the local clipboard. If this field is absent,
-     * copying remains enabled. Applies only when version == "v2".
+     * Configure whether copy is enabled or not. When set with "remote_only", copying
+     * isolated content from the remote browser to the user's local clipboard is
+     * disabled. When absent, copy is enabled. Only applies when `version == "v2"`.
      */
     copy?: 'enabled' | 'disabled' | 'remote_only';
 
@@ -616,8 +618,8 @@ export namespace RuleSetting {
     dk?: boolean;
 
     /**
-     * Configure download behavior. When set to remote_only, users can view downloads
-     * but cannot save them. Applies only when version == "v2".
+     * Configure whether downloading enabled or not. When set with "remote_only",
+     * downloads are only available for viewing. Only applies when `version == "v2"`.
      */
     download?: 'enabled' | 'disabled' | 'remote_only';
 
@@ -632,72 +634,73 @@ export namespace RuleSetting {
     du?: boolean;
 
     /**
-     * Configure keyboard usage behavior. If this field is absent, keyboard usage
-     * remains enabled. Applies only when version == "v2".
+     * Configure whether keyboard usage is enabled or not. When absent, keyboard usage
+     * is enabled. Only applies when `version == "v2"`.
      */
     keyboard?: 'enabled' | 'disabled';
 
     /**
-     * Configure paste behavior. If set to remote_only, users cannot paste content from
-     * the local clipboard into isolated pages. If this field is absent, pasting
-     * remains enabled. Applies only when version == "v2".
+     * Configure whether pasting is enabled or not. When set with "remote_only",
+     * pasting content from the user's local clipboard into isolated pages is disabled.
+     * When absent, paste is enabled. Only applies when `version == "v2"`.
      */
     paste?: 'enabled' | 'disabled' | 'remote_only';
 
     /**
-     * Configure print behavior. Default, Printing is enabled. Applies only when
-     * version == "v2".
+     * Configure whether printing is enabled or not. When absent, printing is enabled.
+     * Only applies when `version == "v2"`.
      */
     printing?: 'enabled' | 'disabled';
 
     /**
-     * Configure upload behavior. If this field is absent, uploading remains enabled.
-     * Applies only when version == "v2".
+     * Configure whether uploading is enabled or not. When absent, uploading is
+     * enabled. Only applies when `version == "v2"`.
      */
     upload?: 'enabled' | 'disabled';
 
     /**
-     * Indicate which version of the browser isolation controls should apply.
+     * Indicates which version of the browser isolation controls should apply.
      */
     version?: 'v1' | 'v2';
   }
 
   /**
-   * Configure custom block page settings. If missing or null, use the account
+   * Custom block page settings. If missing/null, blocking will use the the account
    * settings.
    */
   export interface BlockPage {
     /**
-     * Specify the URI to which the user is redirected.
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * Specify whether to pass the context information as query parameters.
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
   }
 
   /**
-   * Configure session check behavior.
+   * Configure how session check behaves.
    */
   export interface CheckSession {
     /**
-     * Sets the required session freshness threshold. The API returns a normalized
-     * version of this value.
+     * Configure how fresh the session needs to be to be considered valid. The API
+     * automatically formats and sanitizes this expression. This returns a normalized
+     * version that may differ from your input and cause Terraform state drift.
      */
     duration?: string;
 
     /**
-     * Enable session enforcement.
+     * Set to true to enable session enforcement.
      */
     enforce?: boolean;
   }
 
   /**
-   * Configure custom resolvers to route queries that match the resolver policy.
-   * Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
-   * settings. DNS queries get routed to the address closest to their origin. Only
+   * Add your own custom resolvers to route queries that match the resolver policy.
+   * Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
+   * are set. DNS queries will route to the address closest to their origin. Only
    * valid when a rule's action is set to 'resolve'.
    */
   export interface DNSResolvers {
@@ -713,18 +716,19 @@ export namespace RuleSetting {
    */
   export interface Egress {
     /**
-     * Specify the IPv4 address to use for egress.
+     * The IPv4 address to be used for egress.
      */
     ipv4?: string;
 
     /**
-     * Specify the fallback IPv4 address to use for egress when the primary IPv4 fails.
-     * Set '0.0.0.0' to indicate local egress via WARP IPs.
+     * The fallback IPv4 address to be used for egress in the event of an error
+     * egressing with the primary IPv4. Can be '0.0.0.0' to indicate local egress via
+     * WARP IPs.
      */
     ipv4_fallback?: string;
 
     /**
-     * Specify the IPv6 range to use for egress.
+     * The IPv6 range to be used for egress.
      */
     ipv6?: string;
   }
@@ -734,27 +738,28 @@ export namespace RuleSetting {
    */
   export interface L4override {
     /**
-     * Defines the IPv4 or IPv6 address.
+     * IPv4 or IPv6 address.
      */
     ip?: string;
 
     /**
-     * Defines a port number to use for TCP/UDP overrides.
+     * A port number to use for TCP/UDP overrides.
      */
     port?: number;
   }
 
   /**
-   * Configure a notification to display on the user's device when this rule matched.
+   * Configure a notification to display on the user's device when this rule is
+   * matched.
    */
   export interface NotificationSettings {
     /**
-     * Enable notification.
+     * Set notification on.
      */
     enabled?: boolean;
 
     /**
-     * Indicates whether to pass the context information as query parameters.
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
@@ -764,8 +769,8 @@ export namespace RuleSetting {
     msg?: string;
 
     /**
-     * Defines an optional URL to direct users to additional information. If unset, the
-     * notification opens a block page.
+     * Optional URL to direct users to additional information. If not set, the
+     * notification will open a block page.
      */
     support_url?: string;
   }
@@ -775,17 +780,17 @@ export namespace RuleSetting {
    */
   export interface PayloadLog {
     /**
-     * Enable DLP payload logging for this rule.
+     * Set to true to enable DLP payload logging for this rule.
      */
     enabled?: boolean;
   }
 
   /**
-   * Configure settings that apply to quarantine rules.
+   * Settings that apply to quarantine rules.
    */
   export interface Quarantine {
     /**
-     * Specify the types of files to sandbox.
+     * Types of files to sandbox.
      */
     file_types?: Array<
       | 'exe'
@@ -805,87 +810,85 @@ export namespace RuleSetting {
   }
 
   /**
-   * Apply settings to redirect rules.
+   * Settings that apply to redirect rules.
    */
   export interface Redirect {
     /**
-     * Specify the URI to which the user is redirected.
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * Specify whether to pass the context information as query parameters.
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
     /**
-     * Specify whether to append the path and query parameters from the original
-     * request to target_uri.
+     * If true, the path and query parameters from the original request will be
+     * appended to target_uri.
      */
     preserve_path_and_query?: boolean;
   }
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
-   * specified 'view_id' as input. Not used when 'dns_resolvers' is specified or
-   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set
-   * to 'resolve'.
+   * specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified
+   * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
+   * set to 'resolve'.
    */
   export interface ResolveDNSInternally {
     /**
-     * Specify the fallback behavior to apply when the internal DNS response code
-     * differs from 'NOERROR' or when the response data contains only CNAME records for
-     * 'A' or 'AAAA' queries.
+     * The fallback behavior to apply when the internal DNS response code is different
+     * from 'NOERROR' or when the response data only contains CNAME records for 'A' or
+     * 'AAAA' queries.
      */
     fallback?: 'none' | 'public_dns';
 
     /**
-     * Specify the internal DNS view identifier to pass to the internal DNS service.
+     * The internal DNS view identifier that's passed to the internal DNS service.
      */
     view_id?: string;
   }
 
   /**
-   * Configure behavior when an upstream certificate is invalid or an SSL error
-   * occurs.
+   * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
   export interface UntrustedCERT {
     /**
-     * Defines the action performed when an untrusted certificate seen. The default
-     * action an error with HTTP code 526.
+     * The action performed when an untrusted certificate is seen. The default action
+     * is an error with HTTP code 526.
      */
     action?: 'pass_through' | 'block' | 'error';
   }
 }
 
 /**
- * Set settings related to this rule.
+ * Additional settings that modify the rule's action.
  */
 export interface RuleSettingParam {
   /**
-   * Add custom headers to allowed requests as key-value pairs. Use header names as
-   * keys that map to arrays of header values.
+   * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
+   * header names, pointing to an array with its header value(s).
    */
   add_headers?: { [key: string]: Array<string> } | null;
 
   /**
-   * Set to enable MSP children to bypass this rule. Only parent MSP accounts can set
-   * this. this rule.
+   * Set by parent MSP accounts to enable their children to bypass this rule.
    */
   allow_child_bypass?: boolean | null;
 
   /**
-   * Define the settings for the Audit SSH action.
+   * Settings for the Audit SSH action.
    */
   audit_ssh?: RuleSettingParam.AuditSSH | null;
 
   /**
-   * Configure browser isolation behavior.
+   * Configure how browser isolation behaves.
    */
   biso_admin_controls?: RuleSettingParam.BISOAdminControls;
 
   /**
-   * Configure custom block page settings. If missing or null, use the account
+   * Custom block page settings. If missing/null, blocking will use the the account
    * settings.
    */
   block_page?: RuleSettingParam.BlockPage | null;
@@ -896,26 +899,25 @@ export interface RuleSettingParam {
   block_page_enabled?: boolean;
 
   /**
-   * Explain why the rule blocks the request. The custom block page shows this text
+   * The text describing why this block occurred, displayed on the custom block page
    * (if enabled).
    */
   block_reason?: string | null;
 
   /**
-   * Set to enable MSP accounts to bypass their parent's rules. Only MSP child
-   * accounts can set this.
+   * Set by children MSP accounts to bypass their parent's rules.
    */
   bypass_parent_rule?: boolean | null;
 
   /**
-   * Configure session check behavior.
+   * Configure how session check behaves.
    */
   check_session?: RuleSettingParam.CheckSession | null;
 
   /**
-   * Configure custom resolvers to route queries that match the resolver policy.
-   * Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
-   * settings. DNS queries get routed to the address closest to their origin. Only
+   * Add your own custom resolvers to route queries that match the resolver policy.
+   * Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
+   * are set. DNS queries will route to the address closest to their origin. Only
    * valid when a rule's action is set to 'resolve'.
    */
   dns_resolvers?: RuleSettingParam.DNSResolvers | null;
@@ -928,25 +930,26 @@ export interface RuleSettingParam {
   egress?: RuleSettingParam.Egress | null;
 
   /**
-   * Ignore category matches at CNAME domains in a response. When off, evaluate
-   * categories in this rule against all CNAME domain categories in the response.
+   * Set to true, to ignore the category matches at CNAME domains in a response. If
+   * unchecked, the categories in this rule will be checked against all the CNAME
+   * domain categories in a response.
    */
   ignore_cname_category_matches?: boolean;
 
   /**
-   * Specify whether to disable DNSSEC validation (for Allow actions) [INSECURE].
+   * INSECURE - disable DNSSEC validation (for Allow actions).
    */
   insecure_disable_dnssec_validation?: boolean;
 
   /**
-   * Enable IPs in DNS resolver category blocks. The system blocks only domain name
-   * categories unless you enable this setting.
+   * Set to true to enable IPs in DNS resolver category blocks. By default categories
+   * only block based on domain names.
    */
   ip_categories?: boolean;
 
   /**
-   * Indicates whether to include IPs in DNS resolver indicator feed blocks. Default,
-   * indicator feeds block only domain names.
+   * Set to true to include IPs in DNS resolver indicator feed blocks. By default
+   * indicator feeds only block based on domain names.
    */
   ip_indicator_feeds?: boolean;
 
@@ -956,17 +959,18 @@ export interface RuleSettingParam {
   l4override?: RuleSettingParam.L4override | null;
 
   /**
-   * Configure a notification to display on the user's device when this rule matched.
+   * Configure a notification to display on the user's device when this rule is
+   * matched.
    */
   notification_settings?: RuleSettingParam.NotificationSettings | null;
 
   /**
-   * Defines a hostname for override, for the matching DNS queries.
+   * Override matching DNS queries with a hostname.
    */
   override_host?: string;
 
   /**
-   * Defines a an IP or set of IPs for overriding matched DNS queries.
+   * Override matching DNS queries with an IP or set of IPs.
    */
   override_ips?: Array<string> | null;
 
@@ -976,56 +980,56 @@ export interface RuleSettingParam {
   payload_log?: RuleSettingParam.PayloadLog | null;
 
   /**
-   * Configure settings that apply to quarantine rules.
+   * Settings that apply to quarantine rules.
    */
   quarantine?: RuleSettingParam.Quarantine | null;
 
   /**
-   * Apply settings to redirect rules.
+   * Settings that apply to redirect rules.
    */
   redirect?: RuleSettingParam.Redirect | null;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
-   * specified 'view_id' as input. Not used when 'dns_resolvers' is specified or
-   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set
-   * to 'resolve'.
+   * specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified
+   * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
+   * set to 'resolve'.
    */
   resolve_dns_internally?: RuleSettingParam.ResolveDNSInternally | null;
 
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
-   * resolver. Cannot set when 'dns_resolvers' specified or 'resolve_dns_internally'
-   * is set. Only valid when a rule's action set to 'resolve'.
+   * resolver. Cannot be set when 'dns_resolvers' are specified or
+   * 'resolve_dns_internally' is set. Only valid when a rule's action is set to
+   * 'resolve'.
    */
   resolve_dns_through_cloudflare?: boolean | null;
 
   /**
-   * Configure behavior when an upstream certificate is invalid or an SSL error
-   * occurs.
+   * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
   untrusted_cert?: RuleSettingParam.UntrustedCERT | null;
 }
 
 export namespace RuleSettingParam {
   /**
-   * Define the settings for the Audit SSH action.
+   * Settings for the Audit SSH action.
    */
   export interface AuditSSH {
     /**
-     * Enable SSH command logging.
+     * Enable to turn on SSH command logging.
      */
     command_logging?: boolean;
   }
 
   /**
-   * Configure browser isolation behavior.
+   * Configure how browser isolation behaves.
    */
   export interface BISOAdminControls {
     /**
-     * Configure copy behavior. If set to remote_only, users cannot copy isolated
-     * content from the remote browser to the local clipboard. If this field is absent,
-     * copying remains enabled. Applies only when version == "v2".
+     * Configure whether copy is enabled or not. When set with "remote_only", copying
+     * isolated content from the remote browser to the user's local clipboard is
+     * disabled. When absent, copy is enabled. Only applies when `version == "v2"`.
      */
     copy?: 'enabled' | 'disabled' | 'remote_only';
 
@@ -1045,8 +1049,8 @@ export namespace RuleSettingParam {
     dk?: boolean;
 
     /**
-     * Configure download behavior. When set to remote_only, users can view downloads
-     * but cannot save them. Applies only when version == "v2".
+     * Configure whether downloading enabled or not. When set with "remote_only",
+     * downloads are only available for viewing. Only applies when `version == "v2"`.
      */
     download?: 'enabled' | 'disabled' | 'remote_only';
 
@@ -1061,72 +1065,73 @@ export namespace RuleSettingParam {
     du?: boolean;
 
     /**
-     * Configure keyboard usage behavior. If this field is absent, keyboard usage
-     * remains enabled. Applies only when version == "v2".
+     * Configure whether keyboard usage is enabled or not. When absent, keyboard usage
+     * is enabled. Only applies when `version == "v2"`.
      */
     keyboard?: 'enabled' | 'disabled';
 
     /**
-     * Configure paste behavior. If set to remote_only, users cannot paste content from
-     * the local clipboard into isolated pages. If this field is absent, pasting
-     * remains enabled. Applies only when version == "v2".
+     * Configure whether pasting is enabled or not. When set with "remote_only",
+     * pasting content from the user's local clipboard into isolated pages is disabled.
+     * When absent, paste is enabled. Only applies when `version == "v2"`.
      */
     paste?: 'enabled' | 'disabled' | 'remote_only';
 
     /**
-     * Configure print behavior. Default, Printing is enabled. Applies only when
-     * version == "v2".
+     * Configure whether printing is enabled or not. When absent, printing is enabled.
+     * Only applies when `version == "v2"`.
      */
     printing?: 'enabled' | 'disabled';
 
     /**
-     * Configure upload behavior. If this field is absent, uploading remains enabled.
-     * Applies only when version == "v2".
+     * Configure whether uploading is enabled or not. When absent, uploading is
+     * enabled. Only applies when `version == "v2"`.
      */
     upload?: 'enabled' | 'disabled';
 
     /**
-     * Indicate which version of the browser isolation controls should apply.
+     * Indicates which version of the browser isolation controls should apply.
      */
     version?: 'v1' | 'v2';
   }
 
   /**
-   * Configure custom block page settings. If missing or null, use the account
+   * Custom block page settings. If missing/null, blocking will use the the account
    * settings.
    */
   export interface BlockPage {
     /**
-     * Specify the URI to which the user is redirected.
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * Specify whether to pass the context information as query parameters.
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
   }
 
   /**
-   * Configure session check behavior.
+   * Configure how session check behaves.
    */
   export interface CheckSession {
     /**
-     * Sets the required session freshness threshold. The API returns a normalized
-     * version of this value.
+     * Configure how fresh the session needs to be to be considered valid. The API
+     * automatically formats and sanitizes this expression. This returns a normalized
+     * version that may differ from your input and cause Terraform state drift.
      */
     duration?: string;
 
     /**
-     * Enable session enforcement.
+     * Set to true to enable session enforcement.
      */
     enforce?: boolean;
   }
 
   /**
-   * Configure custom resolvers to route queries that match the resolver policy.
-   * Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
-   * settings. DNS queries get routed to the address closest to their origin. Only
+   * Add your own custom resolvers to route queries that match the resolver policy.
+   * Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
+   * are set. DNS queries will route to the address closest to their origin. Only
    * valid when a rule's action is set to 'resolve'.
    */
   export interface DNSResolvers {
@@ -1142,18 +1147,19 @@ export namespace RuleSettingParam {
    */
   export interface Egress {
     /**
-     * Specify the IPv4 address to use for egress.
+     * The IPv4 address to be used for egress.
      */
     ipv4?: string;
 
     /**
-     * Specify the fallback IPv4 address to use for egress when the primary IPv4 fails.
-     * Set '0.0.0.0' to indicate local egress via WARP IPs.
+     * The fallback IPv4 address to be used for egress in the event of an error
+     * egressing with the primary IPv4. Can be '0.0.0.0' to indicate local egress via
+     * WARP IPs.
      */
     ipv4_fallback?: string;
 
     /**
-     * Specify the IPv6 range to use for egress.
+     * The IPv6 range to be used for egress.
      */
     ipv6?: string;
   }
@@ -1163,27 +1169,28 @@ export namespace RuleSettingParam {
    */
   export interface L4override {
     /**
-     * Defines the IPv4 or IPv6 address.
+     * IPv4 or IPv6 address.
      */
     ip?: string;
 
     /**
-     * Defines a port number to use for TCP/UDP overrides.
+     * A port number to use for TCP/UDP overrides.
      */
     port?: number;
   }
 
   /**
-   * Configure a notification to display on the user's device when this rule matched.
+   * Configure a notification to display on the user's device when this rule is
+   * matched.
    */
   export interface NotificationSettings {
     /**
-     * Enable notification.
+     * Set notification on.
      */
     enabled?: boolean;
 
     /**
-     * Indicates whether to pass the context information as query parameters.
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
@@ -1193,8 +1200,8 @@ export namespace RuleSettingParam {
     msg?: string;
 
     /**
-     * Defines an optional URL to direct users to additional information. If unset, the
-     * notification opens a block page.
+     * Optional URL to direct users to additional information. If not set, the
+     * notification will open a block page.
      */
     support_url?: string;
   }
@@ -1204,17 +1211,17 @@ export namespace RuleSettingParam {
    */
   export interface PayloadLog {
     /**
-     * Enable DLP payload logging for this rule.
+     * Set to true to enable DLP payload logging for this rule.
      */
     enabled?: boolean;
   }
 
   /**
-   * Configure settings that apply to quarantine rules.
+   * Settings that apply to quarantine rules.
    */
   export interface Quarantine {
     /**
-     * Specify the types of files to sandbox.
+     * Types of files to sandbox.
      */
     file_types?: Array<
       | 'exe'
@@ -1234,199 +1241,186 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Apply settings to redirect rules.
+   * Settings that apply to redirect rules.
    */
   export interface Redirect {
     /**
-     * Specify the URI to which the user is redirected.
+     * URI to which the user will be redirected.
      */
     target_uri: string;
 
     /**
-     * Specify whether to pass the context information as query parameters.
+     * If true, context information will be passed as query parameters.
      */
     include_context?: boolean;
 
     /**
-     * Specify whether to append the path and query parameters from the original
-     * request to target_uri.
+     * If true, the path and query parameters from the original request will be
+     * appended to target_uri.
      */
     preserve_path_and_query?: boolean;
   }
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
-   * specified 'view_id' as input. Not used when 'dns_resolvers' is specified or
-   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set
-   * to 'resolve'.
+   * specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified
+   * or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is
+   * set to 'resolve'.
    */
   export interface ResolveDNSInternally {
     /**
-     * Specify the fallback behavior to apply when the internal DNS response code
-     * differs from 'NOERROR' or when the response data contains only CNAME records for
-     * 'A' or 'AAAA' queries.
+     * The fallback behavior to apply when the internal DNS response code is different
+     * from 'NOERROR' or when the response data only contains CNAME records for 'A' or
+     * 'AAAA' queries.
      */
     fallback?: 'none' | 'public_dns';
 
     /**
-     * Specify the internal DNS view identifier to pass to the internal DNS service.
+     * The internal DNS view identifier that's passed to the internal DNS service.
      */
     view_id?: string;
   }
 
   /**
-   * Configure behavior when an upstream certificate is invalid or an SSL error
-   * occurs.
+   * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
   export interface UntrustedCERT {
     /**
-     * Defines the action performed when an untrusted certificate seen. The default
-     * action an error with HTTP code 526.
+     * The action performed when an untrusted certificate is seen. The default action
+     * is an error with HTTP code 526.
      */
     action?: 'pass_through' | 'block' | 'error';
   }
 }
 
 /**
- * Defines the schedule for activating DNS policies. (HTTP/Egress or L4
- * unsupported).
+ * The schedule for activating DNS policies. This does not apply to HTTP or network
+ * policies.
  */
 export interface Schedule {
   /**
-   * Specify the time intervals when the rule is active on Fridays, in the increasing
-   * order from 00:00-24:00. If this parameter omitted, the rule is deactivated on
-   * Fridays. API returns a formatted version of this string, which may cause
-   * Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Fridays, in increasing order
+   * from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on
+   * Fridays.
    */
   fri?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Mondays, in the increasing
-   * order from 00:00-24:00(capped at maximum of 6 time splits). If this parameter
-   * omitted, the rule is deactivated on Mondays. API returns a formatted version of
-   * this string, which may cause Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Mondays, in increasing order
+   * from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on
+   * Mondays.
    */
   mon?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Saturdays, in the
-   * increasing order from 00:00-24:00. If this parameter omitted, the rule is
-   * deactivated on Saturdays. API returns a formatted version of this string, which
-   * may cause Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Saturdays, in increasing
+   * order from 00:00-24:00. If this parameter is omitted, the rule will be
+   * deactivated on Saturdays.
    */
   sat?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Sundays, in the increasing
-   * order from 00:00-24:00. If this parameter omitted, the rule is deactivated on
-   * Sundays. API returns a formatted version of this string, which may cause
-   * Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Sundays, in increasing order
+   * from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on
+   * Sundays.
    */
   sun?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Thursdays, in the
-   * increasing order from 00:00-24:00. If this parameter omitted, the rule is
-   * deactivated on Thursdays. API returns a formatted version of this string, which
-   * may cause Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Thursdays, in increasing
+   * order from 00:00-24:00. If this parameter is omitted, the rule will be
+   * deactivated on Thursdays.
    */
   thu?: string;
 
   /**
-   * Specify the time zone for rule evaluation. When a
+   * The time zone the rule will be evaluated against. If a
    * [valid time zone city name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)
-   * is provided, Gateway always uses the current time for that time zone. When this
-   * parameter is omitted, Gateway uses the time zone determined from the user's IP
-   * address. Colo time zone is used when the user's IP address does not resolve to a
-   * location.
+   * is provided, Gateway will always use the current time at that time zone. If this
+   * parameter is omitted, then Gateway will use the time zone inferred from the
+   * user's source IP to evaluate the rule. If Gateway cannot determine the time zone
+   * from the IP, we will fall back to the time zone of the user's connected data
+   * center.
    */
   time_zone?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Tuesdays, in the
-   * increasing order from 00:00-24:00. If this parameter omitted, the rule is
-   * deactivated on Tuesdays. API returns a formatted version of this string, which
-   * may cause Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Tuesdays, in increasing order
+   * from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on
+   * Tuesdays.
    */
   tue?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Wednesdays, in the
-   * increasing order from 00:00-24:00. If this parameter omitted, the rule is
-   * deactivated on Wednesdays. API returns a formatted version of this string, which
-   * may cause Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Wednesdays, in increasing
+   * order from 00:00-24:00. If this parameter is omitted, the rule will be
+   * deactivated on Wednesdays.
    */
   wed?: string;
 }
 
 /**
- * Defines the schedule for activating DNS policies. (HTTP/Egress or L4
- * unsupported).
+ * The schedule for activating DNS policies. This does not apply to HTTP or network
+ * policies.
  */
 export interface ScheduleParam {
   /**
-   * Specify the time intervals when the rule is active on Fridays, in the increasing
-   * order from 00:00-24:00. If this parameter omitted, the rule is deactivated on
-   * Fridays. API returns a formatted version of this string, which may cause
-   * Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Fridays, in increasing order
+   * from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on
+   * Fridays.
    */
   fri?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Mondays, in the increasing
-   * order from 00:00-24:00(capped at maximum of 6 time splits). If this parameter
-   * omitted, the rule is deactivated on Mondays. API returns a formatted version of
-   * this string, which may cause Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Mondays, in increasing order
+   * from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on
+   * Mondays.
    */
   mon?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Saturdays, in the
-   * increasing order from 00:00-24:00. If this parameter omitted, the rule is
-   * deactivated on Saturdays. API returns a formatted version of this string, which
-   * may cause Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Saturdays, in increasing
+   * order from 00:00-24:00. If this parameter is omitted, the rule will be
+   * deactivated on Saturdays.
    */
   sat?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Sundays, in the increasing
-   * order from 00:00-24:00. If this parameter omitted, the rule is deactivated on
-   * Sundays. API returns a formatted version of this string, which may cause
-   * Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Sundays, in increasing order
+   * from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on
+   * Sundays.
    */
   sun?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Thursdays, in the
-   * increasing order from 00:00-24:00. If this parameter omitted, the rule is
-   * deactivated on Thursdays. API returns a formatted version of this string, which
-   * may cause Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Thursdays, in increasing
+   * order from 00:00-24:00. If this parameter is omitted, the rule will be
+   * deactivated on Thursdays.
    */
   thu?: string;
 
   /**
-   * Specify the time zone for rule evaluation. When a
+   * The time zone the rule will be evaluated against. If a
    * [valid time zone city name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)
-   * is provided, Gateway always uses the current time for that time zone. When this
-   * parameter is omitted, Gateway uses the time zone determined from the user's IP
-   * address. Colo time zone is used when the user's IP address does not resolve to a
-   * location.
+   * is provided, Gateway will always use the current time at that time zone. If this
+   * parameter is omitted, then Gateway will use the time zone inferred from the
+   * user's source IP to evaluate the rule. If Gateway cannot determine the time zone
+   * from the IP, we will fall back to the time zone of the user's connected data
+   * center.
    */
   time_zone?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Tuesdays, in the
-   * increasing order from 00:00-24:00. If this parameter omitted, the rule is
-   * deactivated on Tuesdays. API returns a formatted version of this string, which
-   * may cause Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Tuesdays, in increasing order
+   * from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on
+   * Tuesdays.
    */
   tue?: string;
 
   /**
-   * Specify the time intervals when the rule is active on Wednesdays, in the
-   * increasing order from 00:00-24:00. If this parameter omitted, the rule is
-   * deactivated on Wednesdays. API returns a formatted version of this string, which
-   * may cause Terraform drift if a unformatted value is used.
+   * The time intervals when the rule will be active on Wednesdays, in increasing
+   * order from 00:00-24:00. If this parameter is omitted, the rule will be
+   * deactivated on Wednesdays.
    */
   wed?: string;
 }
@@ -1440,8 +1434,8 @@ export interface RuleCreateParams {
   account_id: string;
 
   /**
-   * Body param: Specify the action to perform when the associated traffic, identity,
-   * and device posture expressions either absent or evaluate to `true`.
+   * Body param: The action to perform when the associated traffic, identity, and
+   * device posture expressions are either absent or evaluate to `true`.
    */
   action:
     | 'on'
@@ -1462,96 +1456,100 @@ export interface RuleCreateParams {
     | 'redirect';
 
   /**
-   * Body param: Specify the rule name.
+   * Body param: The name of the rule.
    */
   name: string;
 
   /**
-   * Body param: Specify the rule description.
+   * Body param: The description of the rule.
    */
   description?: string;
 
   /**
-   * Body param: Specify the wirefilter expression used for device posture check. The
-   * API automatically formats and sanitizes expressions before storing them. To
-   * prevent Terraform state drift, use the formatted expression returned in the API
-   * response.
+   * Body param: The wirefilter expression used for device posture check matching.
+   * The API automatically formats and sanitizes this expression. This returns a
+   * normalized version that may differ from your input and cause Terraform state
+   * drift.
    */
   device_posture?: string;
 
   /**
-   * Body param: Specify whether the rule is enabled.
+   * Body param: True if the rule is enabled.
    */
   enabled?: boolean;
 
   /**
-   * Body param: Defines the expiration time stamp and default duration of a DNS
-   * policy. Takes precedence over the policy's `schedule` configuration, if any.
+   * Body param: The expiration time stamp and default duration of a DNS policy.
+   * Takes precedence over the policy's `schedule` configuration, if any.
+   *
    * This does not apply to HTTP or network policies.
    */
   expiration?: RuleCreateParams.Expiration | null;
 
   /**
-   * Body param: Specify the protocol or layer to evaluate the traffic, identity, and
-   * device posture expressions.
+   * Body param: The protocol or layer to evaluate the traffic, identity, and device.
+   * posture expressions.
    */
   filters?: Array<GatewayFilterParam>;
 
   /**
-   * Body param: Specify the wirefilter expression used for identity matching. The
-   * API automatically formats and sanitizes expressions before storing them. To
-   * prevent Terraform state drift, use the formatted expression returned in the API
-   * response.
+   * Body param: The wirefilter expression used for identity matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   identity?: string;
 
   /**
-   * Body param: Set the order of your rules. Lower values indicate higher
-   * precedence. At each processing phase, evaluate applicable rules in ascending
-   * order of this value. Refer to
+   * Body param: Precedence sets the order of your rules. Lower values indicate
+   * higher precedence. At each processing phase, applicable rules are evaluated in
+   * ascending order of this value. Refer to
    * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
-   * to manage precedence via Terraform.
+   * docs on how to manage precedence via Terraform.
    */
   precedence?: number;
 
   /**
-   * Body param: Set settings related to this rule.
+   * Body param: Additional settings that modify the rule's action.
    */
   rule_settings?: RuleSettingParam;
 
   /**
-   * Body param: Defines the schedule for activating DNS policies. (HTTP/Egress or L4
-   * unsupported).
+   * Body param: The schedule for activating DNS policies. This does not apply to
+   * HTTP or network policies.
    */
   schedule?: ScheduleParam | null;
 
   /**
-   * Body param: Specify the wirefilter expression used for traffic matching. The API
-   * automatically formats and sanitizes expressions before storing them. To prevent
-   * Terraform state drift, use the formatted expression returned in the API
-   * response.
+   * Body param: The wirefilter expression used for traffic matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   traffic?: string;
 }
 
 export namespace RuleCreateParams {
   /**
-   * Defines the expiration time stamp and default duration of a DNS policy. Takes
-   * precedence over the policy's `schedule` configuration, if any. This does not
-   * apply to HTTP or network policies.
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
    */
   export interface Expiration {
     /**
-     * Show the timestamp when the policy expires and stops applying. The value must
-     * follow RFC 3339 and include a UTC offset. The system accepts non-zero offsets
-     * but converts them to the equivalent UTC+00:00 value and returns timestamps with
-     * a trailing Z. Expiration policies ignore client timezones and expire globally at
-     * the specified expires_at time.
+     * The time stamp at which the policy will expire and cease to be applied.
+     *
+     * Must adhere to RFC 3339 and include a UTC offset. Non-zero offsets are accepted
+     * but will be converted to the equivalent value with offset zero (UTC+00:00) and
+     * will be returned as time stamps with offset zero denoted by a trailing 'Z'.
+     *
+     * Policies with an expiration do not consider the timezone of clients they are
+     * applied to, and expire "globally" at the point given by their `expires_at`
+     * value.
      */
     expires_at: string;
 
     /**
-     * Defines the default duration a policy active in minutes. Must set in order to
+     * The default duration a policy will be active in minutes. Must be set in order to
      * use the `reset_expiration` endpoint on this rule.
      */
     duration?: number;
@@ -1565,8 +1563,8 @@ export interface RuleUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Specify the action to perform when the associated traffic, identity,
-   * and device posture expressions either absent or evaluate to `true`.
+   * Body param: The action to perform when the associated traffic, identity, and
+   * device posture expressions are either absent or evaluate to `true`.
    */
   action:
     | 'on'
@@ -1587,96 +1585,100 @@ export interface RuleUpdateParams {
     | 'redirect';
 
   /**
-   * Body param: Specify the rule name.
+   * Body param: The name of the rule.
    */
   name: string;
 
   /**
-   * Body param: Specify the rule description.
+   * Body param: The description of the rule.
    */
   description?: string;
 
   /**
-   * Body param: Specify the wirefilter expression used for device posture check. The
-   * API automatically formats and sanitizes expressions before storing them. To
-   * prevent Terraform state drift, use the formatted expression returned in the API
-   * response.
+   * Body param: The wirefilter expression used for device posture check matching.
+   * The API automatically formats and sanitizes this expression. This returns a
+   * normalized version that may differ from your input and cause Terraform state
+   * drift.
    */
   device_posture?: string;
 
   /**
-   * Body param: Specify whether the rule is enabled.
+   * Body param: True if the rule is enabled.
    */
   enabled?: boolean;
 
   /**
-   * Body param: Defines the expiration time stamp and default duration of a DNS
-   * policy. Takes precedence over the policy's `schedule` configuration, if any.
+   * Body param: The expiration time stamp and default duration of a DNS policy.
+   * Takes precedence over the policy's `schedule` configuration, if any.
+   *
    * This does not apply to HTTP or network policies.
    */
   expiration?: RuleUpdateParams.Expiration | null;
 
   /**
-   * Body param: Specify the protocol or layer to evaluate the traffic, identity, and
-   * device posture expressions.
+   * Body param: The protocol or layer to evaluate the traffic, identity, and device.
+   * posture expressions.
    */
   filters?: Array<GatewayFilterParam>;
 
   /**
-   * Body param: Specify the wirefilter expression used for identity matching. The
-   * API automatically formats and sanitizes expressions before storing them. To
-   * prevent Terraform state drift, use the formatted expression returned in the API
-   * response.
+   * Body param: The wirefilter expression used for identity matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   identity?: string;
 
   /**
-   * Body param: Set the order of your rules. Lower values indicate higher
-   * precedence. At each processing phase, evaluate applicable rules in ascending
-   * order of this value. Refer to
+   * Body param: Precedence sets the order of your rules. Lower values indicate
+   * higher precedence. At each processing phase, applicable rules are evaluated in
+   * ascending order of this value. Refer to
    * [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform)
-   * to manage precedence via Terraform.
+   * docs on how to manage precedence via Terraform.
    */
   precedence?: number;
 
   /**
-   * Body param: Set settings related to this rule.
+   * Body param: Additional settings that modify the rule's action.
    */
   rule_settings?: RuleSettingParam;
 
   /**
-   * Body param: Defines the schedule for activating DNS policies. (HTTP/Egress or L4
-   * unsupported).
+   * Body param: The schedule for activating DNS policies. This does not apply to
+   * HTTP or network policies.
    */
   schedule?: ScheduleParam | null;
 
   /**
-   * Body param: Specify the wirefilter expression used for traffic matching. The API
-   * automatically formats and sanitizes expressions before storing them. To prevent
-   * Terraform state drift, use the formatted expression returned in the API
-   * response.
+   * Body param: The wirefilter expression used for traffic matching. The API
+   * automatically formats and sanitizes this expression. This returns a normalized
+   * version that may differ from your input and cause Terraform state drift.
    */
   traffic?: string;
 }
 
 export namespace RuleUpdateParams {
   /**
-   * Defines the expiration time stamp and default duration of a DNS policy. Takes
-   * precedence over the policy's `schedule` configuration, if any. This does not
-   * apply to HTTP or network policies.
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
    */
   export interface Expiration {
     /**
-     * Show the timestamp when the policy expires and stops applying. The value must
-     * follow RFC 3339 and include a UTC offset. The system accepts non-zero offsets
-     * but converts them to the equivalent UTC+00:00 value and returns timestamps with
-     * a trailing Z. Expiration policies ignore client timezones and expire globally at
-     * the specified expires_at time.
+     * The time stamp at which the policy will expire and cease to be applied.
+     *
+     * Must adhere to RFC 3339 and include a UTC offset. Non-zero offsets are accepted
+     * but will be converted to the equivalent value with offset zero (UTC+00:00) and
+     * will be returned as time stamps with offset zero denoted by a trailing 'Z'.
+     *
+     * Policies with an expiration do not consider the timezone of clients they are
+     * applied to, and expire "globally" at the point given by their `expires_at`
+     * value.
      */
     expires_at: string;
 
     /**
-     * Defines the default duration a policy active in minutes. Must set in order to
+     * The default duration a policy will be active in minutes. Must be set in order to
      * use the `reset_expiration` endpoint on this rule.
      */
     duration?: number;

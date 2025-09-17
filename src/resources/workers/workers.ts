@@ -56,8 +56,6 @@ import {
   ScriptGetParams,
   ScriptGetResponse,
   ScriptListParams,
-  ScriptSearchParams,
-  ScriptSearchResponse,
   ScriptSetting,
   ScriptUpdateParams,
   ScriptUpdateResponse,
@@ -266,13 +264,11 @@ export declare namespace Workers {
     type ScriptUpdateResponse as ScriptUpdateResponse,
     type ScriptDeleteResponse as ScriptDeleteResponse,
     type ScriptGetResponse as ScriptGetResponse,
-    type ScriptSearchResponse as ScriptSearchResponse,
     ScriptsSinglePage as ScriptsSinglePage,
     type ScriptUpdateParams as ScriptUpdateParams,
     type ScriptListParams as ScriptListParams,
     type ScriptDeleteParams as ScriptDeleteParams,
     type ScriptGetParams as ScriptGetParams,
-    type ScriptSearchParams as ScriptSearchParams,
   };
 
   export {

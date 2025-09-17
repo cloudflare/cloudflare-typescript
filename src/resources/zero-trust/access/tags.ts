@@ -127,6 +127,15 @@ export interface Tag {
    * The name of the tag
    */
   name: string;
+
+  /**
+   * The number of applications that have this tag
+   */
+  app_count?: number;
+
+  created_at?: string;
+
+  updated_at?: string;
 }
 
 export interface TagDeleteResponse {

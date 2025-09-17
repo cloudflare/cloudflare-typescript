@@ -177,18 +177,14 @@ export interface Prefix {
   account_id?: string;
 
   /**
-   * @deprecated Prefer the
-   * [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/)
-   * instead, which allows for advertising multiple BGP routes within a single IP
-   * Prefix.
+   * Prefix advertisement status to the Internet. This field is only not 'null' if on
+   * demand is enabled.
    */
   advertised?: boolean | null;
 
   /**
-   * @deprecated Prefer the
-   * [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/)
-   * instead, which allows for advertising multiple BGP routes within a single IP
-   * Prefix.
+   * Last time the advertisement status was changed. This field is only not 'null' if
+   * on demand is enabled.
    */
   advertised_modified_at?: string | null;
 
@@ -222,18 +218,14 @@ export interface Prefix {
   modified_at?: string;
 
   /**
-   * @deprecated Prefer the
-   * [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/)
-   * instead, which allows for advertising multiple BGP routes within a single IP
-   * Prefix.
+   * Whether advertisement of the prefix to the Internet may be dynamically enabled
+   * or disabled.
    */
   on_demand_enabled?: boolean;
 
   /**
-   * @deprecated Prefer the
-   * [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/)
-   * instead, which allows for advertising multiple BGP routes within a single IP
-   * Prefix.
+   * Whether advertisement status of the prefix is locked, meaning it cannot be
+   * changed.
    */
   on_demand_locked?: boolean;
 }

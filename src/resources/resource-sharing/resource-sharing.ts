@@ -165,12 +165,11 @@ export class ResourceSharing extends APIResource {
     params: ResourceSharingGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceSharingGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/shares/${shareId}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: ResourceSharingGetResponse }>
+      this._client.get(`/accounts/${account_id}/shares/${shareId}`, options) as Core.APIPromise<{
+        result: ResourceSharingGetResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -217,92 +216,7 @@ export interface ResourceSharingCreateResponse {
 
   target_type: 'account' | 'organization';
 
-  /**
-   * The number of recipients in the 'associated' state. This field is only included
-   * when requested via the 'include_recipient_counts' parameter.
-   */
-  associated_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'associating' state. This field is only included
-   * when requested via the 'include_recipient_counts' parameter.
-   */
-  associating_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'disassociated' state. This field is only
-   * included when requested via the 'include_recipient_counts' parameter.
-   */
-  disassociated_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'disassociating' state. This field is only
-   * included when requested via the 'include_recipient_counts' parameter.
-   */
-  disassociating_recipient_count?: number;
-
   kind?: 'sent' | 'received';
-
-  /**
-   * A list of resources that are part of the share. This field is only included when
-   * requested via the 'include_resources' parameter.
-   */
-  resources?: Array<ResourceSharingCreateResponse.Resource>;
-}
-
-export namespace ResourceSharingCreateResponse {
-  export interface Resource {
-    /**
-     * Share Resource identifier.
-     */
-    id: string;
-
-    /**
-     * When the share was created.
-     */
-    created: string;
-
-    /**
-     * Resource Metadata.
-     */
-    meta: unknown;
-
-    /**
-     * When the share was modified.
-     */
-    modified: string;
-
-    /**
-     * Account identifier.
-     */
-    resource_account_id: string;
-
-    /**
-     * Share Resource identifier.
-     */
-    resource_id: string;
-
-    /**
-     * Resource Type.
-     */
-    resource_type:
-      | 'custom-ruleset'
-      | 'widget'
-      | 'gateway-policy'
-      | 'gateway-destination-ip'
-      | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
-
-    /**
-     * Resource Version.
-     */
-    resource_version: number;
-
-    /**
-     * Resource Status.
-     */
-    status: 'active' | 'deleting' | 'deleted';
-  }
 }
 
 export interface ResourceSharingUpdateResponse {
@@ -345,92 +259,7 @@ export interface ResourceSharingUpdateResponse {
 
   target_type: 'account' | 'organization';
 
-  /**
-   * The number of recipients in the 'associated' state. This field is only included
-   * when requested via the 'include_recipient_counts' parameter.
-   */
-  associated_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'associating' state. This field is only included
-   * when requested via the 'include_recipient_counts' parameter.
-   */
-  associating_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'disassociated' state. This field is only
-   * included when requested via the 'include_recipient_counts' parameter.
-   */
-  disassociated_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'disassociating' state. This field is only
-   * included when requested via the 'include_recipient_counts' parameter.
-   */
-  disassociating_recipient_count?: number;
-
   kind?: 'sent' | 'received';
-
-  /**
-   * A list of resources that are part of the share. This field is only included when
-   * requested via the 'include_resources' parameter.
-   */
-  resources?: Array<ResourceSharingUpdateResponse.Resource>;
-}
-
-export namespace ResourceSharingUpdateResponse {
-  export interface Resource {
-    /**
-     * Share Resource identifier.
-     */
-    id: string;
-
-    /**
-     * When the share was created.
-     */
-    created: string;
-
-    /**
-     * Resource Metadata.
-     */
-    meta: unknown;
-
-    /**
-     * When the share was modified.
-     */
-    modified: string;
-
-    /**
-     * Account identifier.
-     */
-    resource_account_id: string;
-
-    /**
-     * Share Resource identifier.
-     */
-    resource_id: string;
-
-    /**
-     * Resource Type.
-     */
-    resource_type:
-      | 'custom-ruleset'
-      | 'widget'
-      | 'gateway-policy'
-      | 'gateway-destination-ip'
-      | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
-
-    /**
-     * Resource Version.
-     */
-    resource_version: number;
-
-    /**
-     * Resource Status.
-     */
-    status: 'active' | 'deleting' | 'deleted';
-  }
 }
 
 export interface ResourceSharingListResponse {
@@ -473,92 +302,7 @@ export interface ResourceSharingListResponse {
 
   target_type: 'account' | 'organization';
 
-  /**
-   * The number of recipients in the 'associated' state. This field is only included
-   * when requested via the 'include_recipient_counts' parameter.
-   */
-  associated_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'associating' state. This field is only included
-   * when requested via the 'include_recipient_counts' parameter.
-   */
-  associating_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'disassociated' state. This field is only
-   * included when requested via the 'include_recipient_counts' parameter.
-   */
-  disassociated_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'disassociating' state. This field is only
-   * included when requested via the 'include_recipient_counts' parameter.
-   */
-  disassociating_recipient_count?: number;
-
   kind?: 'sent' | 'received';
-
-  /**
-   * A list of resources that are part of the share. This field is only included when
-   * requested via the 'include_resources' parameter.
-   */
-  resources?: Array<ResourceSharingListResponse.Resource>;
-}
-
-export namespace ResourceSharingListResponse {
-  export interface Resource {
-    /**
-     * Share Resource identifier.
-     */
-    id: string;
-
-    /**
-     * When the share was created.
-     */
-    created: string;
-
-    /**
-     * Resource Metadata.
-     */
-    meta: unknown;
-
-    /**
-     * When the share was modified.
-     */
-    modified: string;
-
-    /**
-     * Account identifier.
-     */
-    resource_account_id: string;
-
-    /**
-     * Share Resource identifier.
-     */
-    resource_id: string;
-
-    /**
-     * Resource Type.
-     */
-    resource_type:
-      | 'custom-ruleset'
-      | 'widget'
-      | 'gateway-policy'
-      | 'gateway-destination-ip'
-      | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
-
-    /**
-     * Resource Version.
-     */
-    resource_version: number;
-
-    /**
-     * Resource Status.
-     */
-    status: 'active' | 'deleting' | 'deleted';
-  }
 }
 
 export interface ResourceSharingDeleteResponse {
@@ -601,92 +345,7 @@ export interface ResourceSharingDeleteResponse {
 
   target_type: 'account' | 'organization';
 
-  /**
-   * The number of recipients in the 'associated' state. This field is only included
-   * when requested via the 'include_recipient_counts' parameter.
-   */
-  associated_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'associating' state. This field is only included
-   * when requested via the 'include_recipient_counts' parameter.
-   */
-  associating_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'disassociated' state. This field is only
-   * included when requested via the 'include_recipient_counts' parameter.
-   */
-  disassociated_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'disassociating' state. This field is only
-   * included when requested via the 'include_recipient_counts' parameter.
-   */
-  disassociating_recipient_count?: number;
-
   kind?: 'sent' | 'received';
-
-  /**
-   * A list of resources that are part of the share. This field is only included when
-   * requested via the 'include_resources' parameter.
-   */
-  resources?: Array<ResourceSharingDeleteResponse.Resource>;
-}
-
-export namespace ResourceSharingDeleteResponse {
-  export interface Resource {
-    /**
-     * Share Resource identifier.
-     */
-    id: string;
-
-    /**
-     * When the share was created.
-     */
-    created: string;
-
-    /**
-     * Resource Metadata.
-     */
-    meta: unknown;
-
-    /**
-     * When the share was modified.
-     */
-    modified: string;
-
-    /**
-     * Account identifier.
-     */
-    resource_account_id: string;
-
-    /**
-     * Share Resource identifier.
-     */
-    resource_id: string;
-
-    /**
-     * Resource Type.
-     */
-    resource_type:
-      | 'custom-ruleset'
-      | 'widget'
-      | 'gateway-policy'
-      | 'gateway-destination-ip'
-      | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
-
-    /**
-     * Resource Version.
-     */
-    resource_version: number;
-
-    /**
-     * Resource Status.
-     */
-    status: 'active' | 'deleting' | 'deleted';
-  }
 }
 
 export interface ResourceSharingGetResponse {
@@ -729,92 +388,7 @@ export interface ResourceSharingGetResponse {
 
   target_type: 'account' | 'organization';
 
-  /**
-   * The number of recipients in the 'associated' state. This field is only included
-   * when requested via the 'include_recipient_counts' parameter.
-   */
-  associated_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'associating' state. This field is only included
-   * when requested via the 'include_recipient_counts' parameter.
-   */
-  associating_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'disassociated' state. This field is only
-   * included when requested via the 'include_recipient_counts' parameter.
-   */
-  disassociated_recipient_count?: number;
-
-  /**
-   * The number of recipients in the 'disassociating' state. This field is only
-   * included when requested via the 'include_recipient_counts' parameter.
-   */
-  disassociating_recipient_count?: number;
-
   kind?: 'sent' | 'received';
-
-  /**
-   * A list of resources that are part of the share. This field is only included when
-   * requested via the 'include_resources' parameter.
-   */
-  resources?: Array<ResourceSharingGetResponse.Resource>;
-}
-
-export namespace ResourceSharingGetResponse {
-  export interface Resource {
-    /**
-     * Share Resource identifier.
-     */
-    id: string;
-
-    /**
-     * When the share was created.
-     */
-    created: string;
-
-    /**
-     * Resource Metadata.
-     */
-    meta: unknown;
-
-    /**
-     * When the share was modified.
-     */
-    modified: string;
-
-    /**
-     * Account identifier.
-     */
-    resource_account_id: string;
-
-    /**
-     * Share Resource identifier.
-     */
-    resource_id: string;
-
-    /**
-     * Resource Type.
-     */
-    resource_type:
-      | 'custom-ruleset'
-      | 'widget'
-      | 'gateway-policy'
-      | 'gateway-destination-ip'
-      | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
-
-    /**
-     * Resource Version.
-     */
-    resource_version: number;
-
-    /**
-     * Resource Status.
-     */
-    status: 'active' | 'deleting' | 'deleted';
-  }
 }
 
 export interface ResourceSharingCreateParams {
@@ -874,13 +448,7 @@ export namespace ResourceSharingCreateParams {
     /**
      * Resource Type.
      */
-    resource_type:
-      | 'custom-ruleset'
-      | 'widget'
-      | 'gateway-policy'
-      | 'gateway-destination-ip'
-      | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
+    resource_type: 'custom-ruleset' | 'widget';
   }
 }
 
@@ -908,16 +476,6 @@ export interface ResourceSharingListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Include recipient counts in the response.
-   */
-  include_recipient_counts?: boolean;
-
-  /**
-   * Query param: Include resources in the response.
-   */
-  include_resources?: boolean;
-
-  /**
    * Query param: Filter shares by kind.
    */
   kind?: 'sent' | 'received';
@@ -926,18 +484,6 @@ export interface ResourceSharingListParams extends V4PagePaginationArrayParams {
    * Query param: Order shares by values in the given field.
    */
   order?: 'name' | 'created';
-
-  /**
-   * Query param: Filter share resources by resource_types.
-   */
-  resource_types?: Array<
-    | 'custom-ruleset'
-    | 'widget'
-    | 'gateway-policy'
-    | 'gateway-destination-ip'
-    | 'gateway-block-page-settings'
-    | 'gateway-extended-email-matching'
-  >;
 
   /**
    * Query param: Filter shares by status.
@@ -959,19 +505,9 @@ export interface ResourceSharingDeleteParams {
 
 export interface ResourceSharingGetParams {
   /**
-   * Path param: Account identifier.
+   * Account identifier.
    */
   account_id: string;
-
-  /**
-   * Query param: Include recipient counts in the response.
-   */
-  include_recipient_counts?: boolean;
-
-  /**
-   * Query param: Include resources in the response.
-   */
-  include_resources?: boolean;
 }
 
 ResourceSharing.ResourceSharingListResponsesV4PagePaginationArray =

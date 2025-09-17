@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 
 export class Logging extends APIResource {
   /**
-   * Update logging settings for the current Zero Trust account.
+   * Updates logging settings for the current Zero Trust account.
    *
    * @example
    * ```ts
@@ -25,7 +25,7 @@ export class Logging extends APIResource {
   }
 
   /**
-   * Retrieve the current logging settings for the Zero Trust account.
+   * Fetches the current logging settings for Zero Trust account.
    *
    * @example
    * ```ts
@@ -47,81 +47,62 @@ export class Logging extends APIResource {
 
 export interface LoggingSetting {
   /**
-   * Indicate whether to redact personally identifiable information from activity
-   * logging (PII fields include source IP, user email, user ID, device ID, URL,
-   * referrer, and user agent).
+   * Redact personally identifiable information from activity logging (PII fields
+   * are: source IP, user email, user ID, device ID, URL, referrer, user agent).
    */
   redact_pii?: boolean;
 
   /**
-   * Configure logging settings for each rule type.
+   * Logging settings by rule type.
    */
   settings_by_rule_type?: LoggingSetting.SettingsByRuleType;
 }
 
 export namespace LoggingSetting {
   /**
-   * Configure logging settings for each rule type.
+   * Logging settings by rule type.
    */
   export interface SettingsByRuleType {
-    /**
-     * Configure logging settings for DNS firewall.
-     */
     dns?: SettingsByRuleType.DNS;
 
-    /**
-     * Configure logging settings for HTTP/HTTPS firewall.
-     */
     http?: SettingsByRuleType.HTTP;
 
-    /**
-     * Configure logging settings for Network firewall.
-     */
     l4?: SettingsByRuleType.L4;
   }
 
   export namespace SettingsByRuleType {
-    /**
-     * Configure logging settings for DNS firewall.
-     */
     export interface DNS {
       /**
-       * Specify whether to log all requests to this service.
+       * Log all requests to this service.
        */
       log_all?: boolean;
 
       /**
-       * Specify whether to log only blocking requests to this service.
+       * Log only blocking requests to this service.
        */
       log_blocks?: boolean;
     }
 
-    /**
-     * Configure logging settings for HTTP/HTTPS firewall.
-     */
     export interface HTTP {
       /**
-       * Specify whether to log all requests to this service.
+       * Log all requests to this service.
        */
       log_all?: boolean;
 
       /**
-       * Specify whether to log only blocking requests to this service.
+       * Log only blocking requests to this service.
        */
       log_blocks?: boolean;
     }
 
-    /**
-     * Configure logging settings for Network firewall.
-     */
     export interface L4 {
       /**
-       * Specify whether to log all requests to this service.
+       * Log all requests to this service.
        */
       log_all?: boolean;
 
       /**
-       * Specify whether to log only blocking requests to this service.
+       * Log only blocking requests to this service.
        */
       log_blocks?: boolean;
     }
@@ -135,81 +116,63 @@ export interface LoggingUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Indicate whether to redact personally identifiable information from
-   * activity logging (PII fields include source IP, user email, user ID, device ID,
-   * URL, referrer, and user agent).
+   * Body param: Redact personally identifiable information from activity logging
+   * (PII fields are: source IP, user email, user ID, device ID, URL, referrer, user
+   * agent).
    */
   redact_pii?: boolean;
 
   /**
-   * Body param: Configure logging settings for each rule type.
+   * Body param: Logging settings by rule type.
    */
   settings_by_rule_type?: LoggingUpdateParams.SettingsByRuleType;
 }
 
 export namespace LoggingUpdateParams {
   /**
-   * Configure logging settings for each rule type.
+   * Logging settings by rule type.
    */
   export interface SettingsByRuleType {
-    /**
-     * Configure logging settings for DNS firewall.
-     */
     dns?: SettingsByRuleType.DNS;
 
-    /**
-     * Configure logging settings for HTTP/HTTPS firewall.
-     */
     http?: SettingsByRuleType.HTTP;
 
-    /**
-     * Configure logging settings for Network firewall.
-     */
     l4?: SettingsByRuleType.L4;
   }
 
   export namespace SettingsByRuleType {
-    /**
-     * Configure logging settings for DNS firewall.
-     */
     export interface DNS {
       /**
-       * Specify whether to log all requests to this service.
+       * Log all requests to this service.
        */
       log_all?: boolean;
 
       /**
-       * Specify whether to log only blocking requests to this service.
+       * Log only blocking requests to this service.
        */
       log_blocks?: boolean;
     }
 
-    /**
-     * Configure logging settings for HTTP/HTTPS firewall.
-     */
     export interface HTTP {
       /**
-       * Specify whether to log all requests to this service.
+       * Log all requests to this service.
        */
       log_all?: boolean;
 
       /**
-       * Specify whether to log only blocking requests to this service.
+       * Log only blocking requests to this service.
        */
       log_blocks?: boolean;
     }
 
-    /**
-     * Configure logging settings for Network firewall.
-     */
     export interface L4 {
       /**
-       * Specify whether to log all requests to this service.
+       * Log all requests to this service.
        */
       log_all?: boolean;
 
       /**
-       * Specify whether to log only blocking requests to this service.
+       * Log only blocking requests to this service.
        */
       log_blocks?: boolean;
     }
