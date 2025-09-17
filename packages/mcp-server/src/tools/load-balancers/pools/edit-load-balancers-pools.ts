@@ -66,11 +66,6 @@ export const tool: Tool = {
         type: 'string',
         description: 'The ID of the Monitor to use for checking the health of origins within this pool.',
       },
-      monitor_group: {
-        type: 'string',
-        description:
-          'The ID of the Monitor Group to use for checking the health of origins within this pool.',
-      },
       name: {
         type: 'string',
         description:

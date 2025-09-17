@@ -246,12 +246,6 @@ export interface Pool {
   monitor?: string;
 
   /**
-   * The ID of the Monitor Group to use for checking the health of origins within
-   * this pool.
-   */
-  monitor_group?: string;
-
-  /**
    * A short name (tag) for the pool. Only alphanumeric characters, hyphens, and
    * underscores are allowed.
    */
@@ -356,12 +350,6 @@ export interface PoolCreateParams {
   monitor?: string;
 
   /**
-   * Body param: The ID of the Monitor Group to use for checking the health of
-   * origins within this pool.
-   */
-  monitor_group?: string;
-
-  /**
    * Body param: This field is now deprecated. It has been moved to Cloudflare's
    * Centralized Notification service
    * https://developers.cloudflare.com/fundamentals/notifications/. The email address
@@ -449,12 +437,6 @@ export interface PoolUpdateParams {
    * within this pool.
    */
   monitor?: string;
-
-  /**
-   * Body param: The ID of the Monitor Group to use for checking the health of
-   * origins within this pool.
-   */
-  monitor_group?: string;
 
   /**
    * Body param: This field is now deprecated. It has been moved to Cloudflare's
@@ -565,12 +547,6 @@ export interface PoolEditParams {
    * within this pool.
    */
   monitor?: string;
-
-  /**
-   * Body param: The ID of the Monitor Group to use for checking the health of
-   * origins within this pool.
-   */
-  monitor_group?: string;
 
   /**
    * Body param: A short name (tag) for the pool. Only alphanumeric characters,
