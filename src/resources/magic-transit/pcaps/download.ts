@@ -32,7 +32,7 @@ export class Download extends APIResource {
 
 export interface DownloadGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

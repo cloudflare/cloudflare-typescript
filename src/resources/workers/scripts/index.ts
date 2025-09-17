@@ -34,10 +34,12 @@ export {
   type ScriptUpdateResponse,
   type ScriptDeleteResponse,
   type ScriptGetResponse,
+  type ScriptSearchResponse,
   type ScriptUpdateParams,
   type ScriptListParams,
   type ScriptDeleteParams,
   type ScriptGetParams,
+  type ScriptSearchParams,
 } from './scripts';
 export {
   SecretListResponsesSinglePage,

@@ -47,6 +47,7 @@ describe('resource instances', () => {
       cursor: 'cursor',
       date_end: '2019-12-27T18:11:19.117Z',
       date_start: '2019-12-27T18:11:19.117Z',
+      direction: 'asc',
       page: 1,
       per_page: 1,
       status: 'queued',

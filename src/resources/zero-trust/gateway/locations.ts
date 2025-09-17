@@ -6,7 +6,7 @@ import { SinglePage } from '../../../pagination';
 
 export class Locations extends APIResource {
   /**
-   * Creates a new Zero Trust Gateway location.
+   * Create a new Zero Trust Gateway location.
    *
    * @example
    * ```ts
@@ -28,7 +28,7 @@ export class Locations extends APIResource {
   }
 
   /**
-   * Updates a configured Zero Trust Gateway location.
+   * Update a configured Zero Trust Gateway location.
    *
    * @example
    * ```ts
@@ -57,7 +57,7 @@ export class Locations extends APIResource {
   }
 
   /**
-   * Fetches Zero Trust Gateway locations for an account.
+   * List Zero Trust Gateway locations for an account.
    *
    * @example
    * ```ts
@@ -78,7 +78,7 @@ export class Locations extends APIResource {
   }
 
   /**
-   * Deletes a configured Zero Trust Gateway location.
+   * Delete a configured Zero Trust Gateway location.
    *
    * @example
    * ```ts
@@ -104,7 +104,7 @@ export class Locations extends APIResource {
   }
 
   /**
-   * Fetches a single Zero Trust Gateway location.
+   * Get a single Zero Trust Gateway location.
    *
    * @example
    * ```ts
@@ -134,78 +134,72 @@ export class LocationsSinglePage extends SinglePage<Location> {}
 
 export interface DOHEndpoint {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the DOH endpoint is enabled for this location.
    */
   enabled?: boolean;
 
   /**
-   * A list of allowed source IP network ranges for this endpoint. When empty, all
-   * source IPs are allowed. A non-empty list is only effective if the endpoint is
-   * enabled for this location.
+   * Specify the list of allowed source IP network ranges for this endpoint. When the
+   * list is empty, the endpoint allows all source IPs. The list takes effect only if
+   * the endpoint is enabled for this location.
    */
   networks?: Array<IPNetwork> | null;
 
   /**
-   * True if the endpoint requires
-   * [user identity](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/agentless/dns/dns-over-https/#filter-doh-requests-by-user)
-   * authentication.
+   * Specify whether the DOH endpoint requires user identity authentication.
    */
   require_token?: boolean;
 }
 
 export interface DOHEndpointParam {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the DOH endpoint is enabled for this location.
    */
   enabled?: boolean;
 
   /**
-   * A list of allowed source IP network ranges for this endpoint. When empty, all
-   * source IPs are allowed. A non-empty list is only effective if the endpoint is
-   * enabled for this location.
+   * Specify the list of allowed source IP network ranges for this endpoint. When the
+   * list is empty, the endpoint allows all source IPs. The list takes effect only if
+   * the endpoint is enabled for this location.
    */
   networks?: Array<IPNetworkParam> | null;
 
   /**
-   * True if the endpoint requires
-   * [user identity](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/agentless/dns/dns-over-https/#filter-doh-requests-by-user)
-   * authentication.
+   * Specify whether the DOH endpoint requires user identity authentication.
    */
   require_token?: boolean;
 }
 
 export interface DOTEndpoint {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the DOT endpoint is enabled for this location.
    */
   enabled?: boolean;
 
   /**
-   * A list of allowed source IP network ranges for this endpoint. When empty, all
-   * source IPs are allowed. A non-empty list is only effective if the endpoint is
-   * enabled for this location.
+   * Specify the list of allowed source IP network ranges for this endpoint. When the
+   * list is empty, the endpoint allows all source IPs. The list takes effect only if
+   * the endpoint is enabled for this location.
    */
   networks?: Array<IPNetwork> | null;
 }
 
 export interface DOTEndpointParam {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the DOT endpoint is enabled for this location.
    */
   enabled?: boolean;
 
   /**
-   * A list of allowed source IP network ranges for this endpoint. When empty, all
-   * source IPs are allowed. A non-empty list is only effective if the endpoint is
-   * enabled for this location.
+   * Specify the list of allowed source IP network ranges for this endpoint. When the
+   * list is empty, the endpoint allows all source IPs. The list takes effect only if
+   * the endpoint is enabled for this location.
    */
   networks?: Array<IPNetworkParam> | null;
 }
 
 /**
- * The destination endpoints configured for this location. When updating a
- * location, if this field is absent or set with null, the endpoints configuration
- * remains unchanged.
+ * Configure the destination endpoints for this location.
  */
 export interface Endpoint {
   doh: DOHEndpoint;
@@ -218,9 +212,7 @@ export interface Endpoint {
 }
 
 /**
- * The destination endpoints configured for this location. When updating a
- * location, if this field is absent or set with null, the endpoints configuration
- * remains unchanged.
+ * Configure the destination endpoints for this location.
  */
 export interface EndpointParam {
   doh: DOHEndpointParam;
@@ -234,70 +226,70 @@ export interface EndpointParam {
 
 export interface IPNetwork {
   /**
-   * The IP address or IP CIDR.
+   * Specify the IP address or IP CIDR.
    */
   network: string;
 }
 
 export interface IPNetworkParam {
   /**
-   * The IP address or IP CIDR.
+   * Specify the IP address or IP CIDR.
    */
   network: string;
 }
 
 export interface IPV4Endpoint {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the IPv4 endpoint is enabled for this location.
    */
   enabled?: boolean;
 }
 
 export interface IPV4EndpointParam {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the IPv4 endpoint is enabled for this location.
    */
   enabled?: boolean;
 }
 
 export interface IPV6Endpoint {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the IPV6 endpoint is enabled for this location.
    */
   enabled?: boolean;
 
   /**
-   * A list of allowed source IPv6 network ranges for this endpoint. When empty, all
-   * source IPs are allowed. A non-empty list is only effective if the endpoint is
-   * enabled for this location.
+   * Specify the list of allowed source IPv6 network ranges for this endpoint. When
+   * the list is empty, the endpoint allows all source IPs. The list takes effect
+   * only if the endpoint is enabled for this location.
    */
   networks?: Array<IPV6Network> | null;
 }
 
 export interface IPV6EndpointParam {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the IPV6 endpoint is enabled for this location.
    */
   enabled?: boolean;
 
   /**
-   * A list of allowed source IPv6 network ranges for this endpoint. When empty, all
-   * source IPs are allowed. A non-empty list is only effective if the endpoint is
-   * enabled for this location.
+   * Specify the list of allowed source IPv6 network ranges for this endpoint. When
+   * the list is empty, the endpoint allows all source IPs. The list takes effect
+   * only if the endpoint is enabled for this location.
    */
   networks?: Array<IPV6NetworkParam> | null;
 }
 
 export interface IPV6Network {
   /**
-   * The IPv6 address or IPv6 CIDR.
+   * Specify the IPv6 address or IPv6 CIDR.
    */
   network: string;
 }
 
 export interface IPV6NetworkParam {
   /**
-   * The IPv6 address or IPv6 CIDR.
+   * Specify the IPv6 address or IPv6 CIDR.
    */
   network: string;
 }
@@ -306,70 +298,68 @@ export interface Location {
   id?: string;
 
   /**
-   * True if the location is the default location.
+   * Indicate whether this location is the default location.
    */
   client_default?: boolean;
 
   created_at?: string;
 
   /**
-   * The identifier of the pair of IPv4 addresses assigned to this location.
+   * Indicate the identifier of the pair of IPv4 addresses assigned to this location.
    */
   dns_destination_ips_id?: string;
 
   /**
-   * The uuid identifier of the IPv6 block brought to the gateway, so that this
-   * location's IPv6 address is allocated from the Bring Your Own Ipv6(BYOIPv6) block
-   * and not from the standard Cloudflare IPv6 block.
+   * Specify the UUID of the IPv6 block brought to the gateway so that this
+   * location's IPv6 address is allocated from the Bring Your Own IPv6 (BYOIPv6)
+   * block rather than the standard Cloudflare IPv6 block.
    */
   dns_destination_ipv6_block_id?: string | null;
 
   /**
-   * The DNS over HTTPS domain to send DNS requests to. This field is auto-generated
-   * by Gateway.
+   * Specify the DNS over HTTPS domain that receives DNS requests. Gateway
+   * automatically generates this value.
    */
   doh_subdomain?: string;
 
   /**
-   * True if the location needs to resolve EDNS queries.
+   * Indicate whether the location must resolve EDNS queries.
    */
   ecs_support?: boolean;
 
   /**
-   * The destination endpoints configured for this location. When updating a
-   * location, if this field is absent or set with null, the endpoints configuration
-   * remains unchanged.
+   * Configure the destination endpoints for this location.
    */
   endpoints?: Endpoint | null;
 
   /**
-   * IPV6 destination ip assigned to this location. DNS requests sent to this IP will
-   * counted as the request under this location. This field is auto-generated by
-   * Gateway.
+   * Defines the automatically generated IPv6 destination IP assigned to this
+   * location. Gateway counts all DNS requests sent to this IP as requests under this
+   * location.
    */
   ip?: string;
 
   /**
-   * The primary destination IPv4 address from the pair identified by the
-   * dns_destination_ips_id. This field is read-only.
+   * Show the primary destination IPv4 address from the pair identified
+   * dns_destination_ips_id. This field read-only.
    */
   ipv4_destination?: string;
 
   /**
-   * The backup destination IPv4 address from the pair identified by the
-   * dns_destination_ips_id. This field is read-only.
+   * Show the backup destination IPv4 address from the pair identified
+   * dns_destination_ips_id. This field read-only.
    */
   ipv4_destination_backup?: string;
 
   /**
-   * The name of the location.
+   * Specify the location name.
    */
   name?: string;
 
   /**
-   * A list of network ranges that requests from this location would originate from.
-   * A non-empty list is only effective if the ipv4 endpoint is enabled for this
-   * location.
+   * Specify the list of network ranges from which requests at this location
+   * originate. The list takes effect only if it is non-empty and the IPv4 endpoint
+   * is enabled for this location.
    */
   networks?: Array<Location.Network> | null;
 
@@ -379,7 +369,7 @@ export interface Location {
 export namespace Location {
   export interface Network {
     /**
-     * The IPv4 address or IPv4 CIDR. IPv4 CIDRs are limited to a maximum of /24.
+     * Specify the IPv4 address or IPv4 CIDR. Limit IPv4 CIDRs to a maximum of /24.
      */
     network: string;
   }
@@ -394,40 +384,38 @@ export interface LocationCreateParams {
   account_id: string;
 
   /**
-   * Body param: The name of the location.
+   * Body param: Specify the location name.
    */
   name: string;
 
   /**
-   * Body param: True if the location is the default location.
+   * Body param: Indicate whether this location is the default location.
    */
   client_default?: boolean;
 
   /**
-   * Body param: The identifier of the pair of IPv4 addresses assigned to this
-   * location. When creating a location, if this field is absent or set with null,
+   * Body param: Specify the identifier of the pair of IPv4 addresses assigned to
+   * this location. When creating a location, if this field is absent or set to null,
    * the pair of shared IPv4 addresses (0e4a32c6-6fb8-4858-9296-98f51631e8e6) is
-   * auto-assigned. When updating a location, if the field is absent or set with
-   * null, the pre-assigned pair remains unchanged.
+   * auto-assigned. When updating a location, if this field is absent or set to null,
+   * the pre-assigned pair remains unchanged.
    */
   dns_destination_ips_id?: string;
 
   /**
-   * Body param: True if the location needs to resolve EDNS queries.
+   * Body param: Indicate whether the location must resolve EDNS queries.
    */
   ecs_support?: boolean;
 
   /**
-   * Body param: The destination endpoints configured for this location. When
-   * updating a location, if this field is absent or set with null, the endpoints
-   * configuration remains unchanged.
+   * Body param: Configure the destination endpoints for this location.
    */
   endpoints?: EndpointParam | null;
 
   /**
-   * Body param: A list of network ranges that requests from this location would
-   * originate from. A non-empty list is only effective if the ipv4 endpoint is
-   * enabled for this location.
+   * Body param: Specify the list of network ranges from which requests at this
+   * location originate. The list takes effect only if it is non-empty and the IPv4
+   * endpoint is enabled for this location.
    */
   networks?: Array<LocationCreateParams.Network> | null;
 }
@@ -435,7 +423,7 @@ export interface LocationCreateParams {
 export namespace LocationCreateParams {
   export interface Network {
     /**
-     * The IPv4 address or IPv4 CIDR. IPv4 CIDRs are limited to a maximum of /24.
+     * Specify the IPv4 address or IPv4 CIDR. Limit IPv4 CIDRs to a maximum of /24.
      */
     network: string;
   }
@@ -448,40 +436,38 @@ export interface LocationUpdateParams {
   account_id: string;
 
   /**
-   * Body param: The name of the location.
+   * Body param: Specify the location name.
    */
   name: string;
 
   /**
-   * Body param: True if the location is the default location.
+   * Body param: Indicate whether this location is the default location.
    */
   client_default?: boolean;
 
   /**
-   * Body param: The identifier of the pair of IPv4 addresses assigned to this
-   * location. When creating a location, if this field is absent or set with null,
+   * Body param: Specify the identifier of the pair of IPv4 addresses assigned to
+   * this location. When creating a location, if this field is absent or set to null,
    * the pair of shared IPv4 addresses (0e4a32c6-6fb8-4858-9296-98f51631e8e6) is
-   * auto-assigned. When updating a location, if the field is absent or set with
-   * null, the pre-assigned pair remains unchanged.
+   * auto-assigned. When updating a location, if this field is absent or set to null,
+   * the pre-assigned pair remains unchanged.
    */
   dns_destination_ips_id?: string;
 
   /**
-   * Body param: True if the location needs to resolve EDNS queries.
+   * Body param: Indicate whether the location must resolve EDNS queries.
    */
   ecs_support?: boolean;
 
   /**
-   * Body param: The destination endpoints configured for this location. When
-   * updating a location, if this field is absent or set with null, the endpoints
-   * configuration remains unchanged.
+   * Body param: Configure the destination endpoints for this location.
    */
   endpoints?: EndpointParam | null;
 
   /**
-   * Body param: A list of network ranges that requests from this location would
-   * originate from. A non-empty list is only effective if the ipv4 endpoint is
-   * enabled for this location.
+   * Body param: Specify the list of network ranges from which requests at this
+   * location originate. The list takes effect only if it is non-empty and the IPv4
+   * endpoint is enabled for this location.
    */
   networks?: Array<LocationUpdateParams.Network> | null;
 }
@@ -489,7 +475,7 @@ export interface LocationUpdateParams {
 export namespace LocationUpdateParams {
   export interface Network {
     /**
-     * The IPv4 address or IPv4 CIDR. IPv4 CIDRs are limited to a maximum of /24.
+     * Specify the IPv4 address or IPv4 CIDR. Limit IPv4 CIDRs to a maximum of /24.
      */
     network: string;
   }

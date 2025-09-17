@@ -246,8 +246,6 @@ export interface Organization {
    */
   auto_redirect_to_identity?: boolean;
 
-  created_at?: string;
-
   custom_pages?: Organization.CustomPages;
 
   /**
@@ -274,8 +272,6 @@ export interface Organization {
    * A description of the reason why the UI read only field is being toggled.
    */
   ui_read_only_toggle_reason?: string;
-
-  updated_at?: string;
 
   /**
    * The amount of time a user seat is inactive before it expires. When the user seat

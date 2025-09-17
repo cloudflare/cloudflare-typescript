@@ -279,6 +279,12 @@ export interface IPSECTunnelCreateResponse {
    */
   allow_null_cipher?: boolean;
 
+  /**
+   * True if automatic stateful return routing should be enabled for a tunnel, false
+   * otherwise.
+   */
+  automatic_return_routing?: boolean;
+
   bgp?: IPSECTunnelCreateResponse.BGP;
 
   bgp_status?: IPSECTunnelCreateResponse.BGPStatus;
@@ -287,6 +293,8 @@ export interface IPSECTunnelCreateResponse {
    * The date and time the tunnel was created.
    */
   created_on?: string;
+
+  custom_remote_identities?: IPSECTunnelCreateResponse.CustomRemoteIdentities;
 
   /**
    * The IP address assigned to the customer side of the IPsec tunnel. Not required,
@@ -378,6 +386,20 @@ export namespace IPSECTunnelCreateResponse {
     customer_speaker_ip?: string;
 
     customer_speaker_port?: number;
+  }
+
+  export interface CustomRemoteIdentities {
+    /**
+     * A custom IKE ID of type FQDN that may be used to identity the IPsec tunnel. The
+     * generated IKE IDs can still be used even if this custom value is specified.
+     *
+     * Must be of the form `<custom label>.<account ID>.custom.ipsec.cloudflare.com`.
+     *
+     * This custom ID does not need to be unique. Two IPsec tunnels may have the same
+     * custom fqdn_id. However, if another IPsec tunnel has the same value then the two
+     * tunnels cannot have the same cloudflare_endpoint.
+     */
+    fqdn_id?: string;
   }
 
   export interface HealthCheck {
@@ -477,6 +499,12 @@ export namespace IPSECTunnelUpdateResponse {
      */
     allow_null_cipher?: boolean;
 
+    /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
     bgp?: ModifiedIPSECTunnel.BGP;
 
     bgp_status?: ModifiedIPSECTunnel.BGPStatus;
@@ -485,6 +513,8 @@ export namespace IPSECTunnelUpdateResponse {
      * The date and time the tunnel was created.
      */
     created_on?: string;
+
+    custom_remote_identities?: ModifiedIPSECTunnel.CustomRemoteIdentities;
 
     /**
      * The IP address assigned to the customer side of the IPsec tunnel. Not required,
@@ -576,6 +606,20 @@ export namespace IPSECTunnelUpdateResponse {
       customer_speaker_ip?: string;
 
       customer_speaker_port?: number;
+    }
+
+    export interface CustomRemoteIdentities {
+      /**
+       * A custom IKE ID of type FQDN that may be used to identity the IPsec tunnel. The
+       * generated IKE IDs can still be used even if this custom value is specified.
+       *
+       * Must be of the form `<custom label>.<account ID>.custom.ipsec.cloudflare.com`.
+       *
+       * This custom ID does not need to be unique. Two IPsec tunnels may have the same
+       * custom fqdn_id. However, if another IPsec tunnel has the same value then the two
+       * tunnels cannot have the same cloudflare_endpoint.
+       */
+      fqdn_id?: string;
     }
 
     export interface HealthCheck {
@@ -674,6 +718,12 @@ export namespace IPSECTunnelListResponse {
      */
     allow_null_cipher?: boolean;
 
+    /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
     bgp?: IPSECTunnel.BGP;
 
     bgp_status?: IPSECTunnel.BGPStatus;
@@ -682,6 +732,8 @@ export namespace IPSECTunnelListResponse {
      * The date and time the tunnel was created.
      */
     created_on?: string;
+
+    custom_remote_identities?: IPSECTunnel.CustomRemoteIdentities;
 
     /**
      * The IP address assigned to the customer side of the IPsec tunnel. Not required,
@@ -773,6 +825,20 @@ export namespace IPSECTunnelListResponse {
       customer_speaker_ip?: string;
 
       customer_speaker_port?: number;
+    }
+
+    export interface CustomRemoteIdentities {
+      /**
+       * A custom IKE ID of type FQDN that may be used to identity the IPsec tunnel. The
+       * generated IKE IDs can still be used even if this custom value is specified.
+       *
+       * Must be of the form `<custom label>.<account ID>.custom.ipsec.cloudflare.com`.
+       *
+       * This custom ID does not need to be unique. Two IPsec tunnels may have the same
+       * custom fqdn_id. However, if another IPsec tunnel has the same value then the two
+       * tunnels cannot have the same cloudflare_endpoint.
+       */
+      fqdn_id?: string;
     }
 
     export interface HealthCheck {
@@ -873,6 +939,12 @@ export namespace IPSECTunnelDeleteResponse {
      */
     allow_null_cipher?: boolean;
 
+    /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
     bgp?: DeletedIPSECTunnel.BGP;
 
     bgp_status?: DeletedIPSECTunnel.BGPStatus;
@@ -881,6 +953,8 @@ export namespace IPSECTunnelDeleteResponse {
      * The date and time the tunnel was created.
      */
     created_on?: string;
+
+    custom_remote_identities?: DeletedIPSECTunnel.CustomRemoteIdentities;
 
     /**
      * The IP address assigned to the customer side of the IPsec tunnel. Not required,
@@ -972,6 +1046,20 @@ export namespace IPSECTunnelDeleteResponse {
       customer_speaker_ip?: string;
 
       customer_speaker_port?: number;
+    }
+
+    export interface CustomRemoteIdentities {
+      /**
+       * A custom IKE ID of type FQDN that may be used to identity the IPsec tunnel. The
+       * generated IKE IDs can still be used even if this custom value is specified.
+       *
+       * Must be of the form `<custom label>.<account ID>.custom.ipsec.cloudflare.com`.
+       *
+       * This custom ID does not need to be unique. Two IPsec tunnels may have the same
+       * custom fqdn_id. However, if another IPsec tunnel has the same value then the two
+       * tunnels cannot have the same cloudflare_endpoint.
+       */
+      fqdn_id?: string;
     }
 
     export interface HealthCheck {
@@ -1072,6 +1160,12 @@ export namespace IPSECTunnelBulkUpdateResponse {
      */
     allow_null_cipher?: boolean;
 
+    /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
     bgp?: ModifiedIPSECTunnel.BGP;
 
     bgp_status?: ModifiedIPSECTunnel.BGPStatus;
@@ -1080,6 +1174,8 @@ export namespace IPSECTunnelBulkUpdateResponse {
      * The date and time the tunnel was created.
      */
     created_on?: string;
+
+    custom_remote_identities?: ModifiedIPSECTunnel.CustomRemoteIdentities;
 
     /**
      * The IP address assigned to the customer side of the IPsec tunnel. Not required,
@@ -1171,6 +1267,20 @@ export namespace IPSECTunnelBulkUpdateResponse {
       customer_speaker_ip?: string;
 
       customer_speaker_port?: number;
+    }
+
+    export interface CustomRemoteIdentities {
+      /**
+       * A custom IKE ID of type FQDN that may be used to identity the IPsec tunnel. The
+       * generated IKE IDs can still be used even if this custom value is specified.
+       *
+       * Must be of the form `<custom label>.<account ID>.custom.ipsec.cloudflare.com`.
+       *
+       * This custom ID does not need to be unique. Two IPsec tunnels may have the same
+       * custom fqdn_id. However, if another IPsec tunnel has the same value then the two
+       * tunnels cannot have the same cloudflare_endpoint.
+       */
+      fqdn_id?: string;
     }
 
     export interface HealthCheck {
@@ -1269,6 +1379,12 @@ export namespace IPSECTunnelGetResponse {
      */
     allow_null_cipher?: boolean;
 
+    /**
+     * True if automatic stateful return routing should be enabled for a tunnel, false
+     * otherwise.
+     */
+    automatic_return_routing?: boolean;
+
     bgp?: IPSECTunnel.BGP;
 
     bgp_status?: IPSECTunnel.BGPStatus;
@@ -1277,6 +1393,8 @@ export namespace IPSECTunnelGetResponse {
      * The date and time the tunnel was created.
      */
     created_on?: string;
+
+    custom_remote_identities?: IPSECTunnel.CustomRemoteIdentities;
 
     /**
      * The IP address assigned to the customer side of the IPsec tunnel. Not required,
@@ -1368,6 +1486,20 @@ export namespace IPSECTunnelGetResponse {
       customer_speaker_ip?: string;
 
       customer_speaker_port?: number;
+    }
+
+    export interface CustomRemoteIdentities {
+      /**
+       * A custom IKE ID of type FQDN that may be used to identity the IPsec tunnel. The
+       * generated IKE IDs can still be used even if this custom value is specified.
+       *
+       * Must be of the form `<custom label>.<account ID>.custom.ipsec.cloudflare.com`.
+       *
+       * This custom ID does not need to be unique. Two IPsec tunnels may have the same
+       * custom fqdn_id. However, if another IPsec tunnel has the same value then the two
+       * tunnels cannot have the same cloudflare_endpoint.
+       */
+      fqdn_id?: string;
     }
 
     export interface HealthCheck {
@@ -1472,6 +1604,12 @@ export interface IPSECTunnelCreateParams {
    * other tunnels.
    */
   name: string;
+
+  /**
+   * Body param: True if automatic stateful return routing should be enabled for a
+   * tunnel, false otherwise.
+   */
+  automatic_return_routing?: boolean;
 
   /**
    * Body param:
@@ -1633,6 +1771,12 @@ export interface IPSECTunnelUpdateParams {
    * other tunnels.
    */
   name: string;
+
+  /**
+   * Body param: True if automatic stateful return routing should be enabled for a
+   * tunnel, false otherwise.
+   */
+  automatic_return_routing?: boolean;
 
   /**
    * Body param:

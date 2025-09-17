@@ -356,9 +356,12 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindAssets
       | Metadata.WorkersBindingKindBrowser
       | Metadata.WorkersBindingKindD1
+      | Metadata.WorkersBindingKindDataBlob
       | Metadata.WorkersBindingKindDispatchNamespace
       | Metadata.WorkersBindingKindDurableObjectNamespace
       | Metadata.WorkersBindingKindHyperdrive
+      | Metadata.WorkersBindingKindInherit
+      | Metadata.WorkersBindingKindImages
       | Metadata.WorkersBindingKindJson
       | Metadata.WorkersBindingKindKVNamespace
       | Metadata.WorkersBindingKindMTLSCertificate
@@ -367,19 +370,21 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindQueue
       | Metadata.WorkersBindingKindR2Bucket
       | Metadata.WorkersBindingKindSecretText
+      | Metadata.WorkersBindingKindSendEmail
       | Metadata.WorkersBindingKindService
       | Metadata.WorkersBindingKindTailConsumer
+      | Metadata.WorkersBindingKindTextBlob
       | Metadata.WorkersBindingKindVectorize
       | Metadata.WorkersBindingKindVersionMetadata
       | Metadata.WorkersBindingKindSecretsStoreSecret
       | Metadata.WorkersBindingKindSecretKey
       | Metadata.WorkersBindingKindWorkflow
+      | Metadata.WorkersBindingKindWasmModule
     >;
 
     /**
-     * Name of the part in the multipart request that contains the script (e.g. the
-     * file adding a listener to the `fetch` event). Indicates a
-     * `service worker syntax` Worker.
+     * Name of the uploaded file that contains the script (e.g. the file adding a
+     * listener to the `fetch` event). Indicates a `service worker syntax` Worker.
      */
     body_part?: string;
 
@@ -418,8 +423,8 @@ export namespace ScriptUpdateParams {
     logpush?: boolean;
 
     /**
-     * Name of the part in the multipart request that contains the main module (e.g.
-     * the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
+     * Name of the uploaded file that contains the main module (e.g. the file exporting
+     * a `fetch` handler). Indicates a `module syntax` Worker.
      */
     main_module?: string;
 
@@ -586,6 +591,24 @@ export namespace ScriptUpdateParams {
       type: 'd1';
     }
 
+    export interface WorkersBindingKindDataBlob {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the data content. Only accepted for
+       * `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'data_blob';
+    }
+
     export interface WorkersBindingKindDispatchNamespace {
       /**
        * A JavaScript variable name for the binding.
@@ -691,6 +714,44 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'hyperdrive';
+    }
+
+    export interface WorkersBindingKindInherit {
+      /**
+       * The name of the inherited binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'inherit';
+
+      /**
+       * The old name of the inherited binding. If set, the binding will be renamed from
+       * `old_name` to `name` in the new version. If not set, the binding will keep the
+       * same name between versions.
+       */
+      old_name?: string;
+
+      /**
+       * Identifier for the version to inherit the binding from, which can be the version
+       * ID or the literal "latest" to inherit from the latest version. Defaults to
+       * inheriting the binding from the latest version.
+       */
+      version_id?: string;
+    }
+
+    export interface WorkersBindingKindImages {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'images';
     }
 
     export interface WorkersBindingKindJson {
@@ -829,12 +890,34 @@ export namespace ScriptUpdateParams {
       type: 'secret_text';
     }
 
-    export interface WorkersBindingKindService {
+    export interface WorkersBindingKindSendEmail {
       /**
-       * Optional environment if the Worker utilizes one.
+       * A JavaScript variable name for the binding.
        */
-      environment: string;
+      name: string;
 
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'send_email';
+
+      /**
+       * List of allowed destination addresses.
+       */
+      allowed_destination_addresses?: Array<string>;
+
+      /**
+       * List of allowed sender addresses.
+       */
+      allowed_sender_addresses?: Array<string>;
+
+      /**
+       * Destination address for the email.
+       */
+      destination_address?: string;
+    }
+
+    export interface WorkersBindingKindService {
       /**
        * A JavaScript variable name for the binding.
        */
@@ -849,6 +932,11 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'service';
+
+      /**
+       * Optional environment if the Worker utilizes one.
+       */
+      environment?: string;
     }
 
     export interface WorkersBindingKindTailConsumer {
@@ -866,6 +954,24 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'tail_consumer';
+    }
+
+    export interface WorkersBindingKindTextBlob {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the text content. Only accepted for
+       * `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'text_blob';
     }
 
     export interface WorkersBindingKindVectorize {
@@ -992,6 +1098,24 @@ export namespace ScriptUpdateParams {
       script_name?: string;
     }
 
+    export interface WorkersBindingKindWasmModule {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the WebAssembly module content. Only accepted
+       * for `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'wasm_module';
+    }
+
     /**
      * Limits to apply for this Worker.
      */
@@ -1059,9 +1183,19 @@ export namespace ScriptUpdateParams {
         invocation_logs: boolean;
 
         /**
+         * A list of destinations where logs will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
          * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
          */
         head_sampling_rate?: number | null;
+
+        /**
+         * Whether log persistence is enabled for the Worker.
+         */
+        persist?: boolean;
       }
     }
 

@@ -30,7 +30,9 @@ describe('resource serviceTokens', () => {
     const response = await client.zeroTrust.access.serviceTokens.create({
       name: 'CI/CD token',
       account_id: 'account_id',
+      client_secret_version: 0,
       duration: '60m',
+      previous_client_secret_expires_at: '2014-01-01T05:20:00.12345Z',
     });
   });
 
@@ -129,7 +131,10 @@ describe('resource serviceTokens', () => {
   test('rotate: required and optional params', async () => {
     const response = await client.zeroTrust.access.serviceTokens.rotate(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        previous_client_secret_expires_at: '2014-01-01T05:20:00.12345Z',
+      },
     );
   });
 });
