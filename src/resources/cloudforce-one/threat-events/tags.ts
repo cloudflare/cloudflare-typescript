@@ -46,7 +46,7 @@ export interface TagCreateResponse {
 
   attributionOrganization?: string;
 
-  categoryId?: number;
+  categoryUuid?: string;
 
   externalReferenceLinks?: Array<string>;
 
@@ -112,7 +112,7 @@ export interface TagCreateParams {
   /**
    * Body param:
    */
-  categoryId?: number;
+  categoryUuid?: string;
 
   /**
    * Body param:
