@@ -13,7 +13,7 @@ describe('resource tags', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.tags.create({
       account_id: 'account_id',
-      value: 'APT28',
+      name: 'name',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,22 +28,7 @@ describe('resource tags', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.tags.create({
       account_id: 'account_id',
-      value: 'APT28',
-      activeDuration: 'activeDuration',
-      actorCategory: 'actorCategory',
-      aliasGroupNames: ['string'],
-      aliasGroupNamesInternal: ['string'],
-      analyticPriority: 0,
-      attributionConfidence: 'attributionConfidence',
-      attributionOrganization: 'attributionOrganization',
-      categoryId: 1,
-      externalReferenceLinks: ['string'],
-      internalDescription: 'internalDescription',
-      motive: 'motive',
-      opsecLevel: 'opsecLevel',
-      originCountryISO: 'originCountryISO',
-      priority: 0,
-      sophisticationLevel: 'sophisticationLevel',
+      name: 'name',
     });
   });
 });

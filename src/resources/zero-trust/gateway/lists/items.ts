@@ -8,7 +8,7 @@ import { path } from '../../../../internal/utils/path';
 
 export class Items extends APIResource {
   /**
-   * Fetch all items in a single Zero Trust list.
+   * Fetches all items in a single Zero Trust list.
    *
    * @example
    * ```ts
@@ -38,7 +38,7 @@ export class Items extends APIResource {
 export type ItemListResponsesSinglePage = SinglePage<ItemListResponse>;
 
 /**
- * Provide the list items.
+ * The items in the list.
  */
 export type ItemListResponse = Array<ListsAPI.GatewayItem>;
 

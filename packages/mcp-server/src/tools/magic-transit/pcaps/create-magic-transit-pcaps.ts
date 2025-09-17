@@ -25,7 +25,7 @@ export const tool: Tool = {
         properties: {
           account_id: {
             type: 'string',
-            description: 'Identifier.',
+            description: 'Identifier',
           },
           packet_limit: {
             type: 'number',
@@ -63,7 +63,7 @@ export const tool: Tool = {
         properties: {
           account_id: {
             type: 'string',
-            description: 'Identifier.',
+            description: 'Identifier',
           },
           colo_name: {
             type: 'string',

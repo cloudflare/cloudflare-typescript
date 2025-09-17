@@ -10,7 +10,7 @@ const client = new Cloudflare({
 
 describe('resource versions', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.workers.beta.workers.versions.create('worker_id', {
+    const responsePromise = client.workers.beta.workers.versions.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -23,9 +23,8 @@ describe('resource versions', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.workers.beta.workers.versions.create('worker_id', {
+    const response = await client.workers.beta.workers.versions.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      deploy: true,
       annotations: { 'workers/message': 'Fixed bug.', 'workers/tag': 'v1.0.1' },
       assets: {
         config: {
@@ -63,7 +62,7 @@ describe('resource versions', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.workers.beta.workers.versions.list('worker_id', {
+    const responsePromise = client.workers.beta.workers.versions.list('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -76,7 +75,7 @@ describe('resource versions', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.workers.beta.workers.versions.list('worker_id', {
+    const response = await client.workers.beta.workers.versions.list('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
       per_page: 1,
@@ -84,10 +83,10 @@ describe('resource versions', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.workers.beta.workers.versions.delete('version_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      worker_id: 'worker_id',
-    });
+    const responsePromise = client.workers.beta.workers.versions.delete(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', worker_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -98,16 +97,16 @@ describe('resource versions', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.workers.beta.workers.versions.delete('version_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      worker_id: 'worker_id',
-    });
+    const response = await client.workers.beta.workers.versions.delete(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', worker_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.workers.beta.workers.versions.get('version_id', {
+    const responsePromise = client.workers.beta.workers.versions.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      worker_id: 'worker_id',
+      worker_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -119,9 +118,9 @@ describe('resource versions', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.workers.beta.workers.versions.get('version_id', {
+    const response = await client.workers.beta.workers.versions.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      worker_id: 'worker_id',
+      worker_id: '023e105f4ecef8ad9ca31a8372d0c353',
       include: 'modules',
     });
   });

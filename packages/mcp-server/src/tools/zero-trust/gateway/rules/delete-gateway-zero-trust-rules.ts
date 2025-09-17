@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'delete_gateway_zero_trust_rules',
-  description: 'Delete a Zero Trust Gateway rule.',
+  description: 'Deletes a Zero Trust Gateway rule.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -25,7 +25,7 @@ export const tool: Tool = {
       },
       rule_id: {
         type: 'string',
-        description: 'Identify the API resource with a UUID.',
+        description: 'The API resource UUID.',
       },
     },
     required: ['account_id', 'rule_id'],

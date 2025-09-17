@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'reset_expiration_gateway_zero_trust_rules',
   description:
-    'Resets the expiration of a Zero Trust Gateway Rule if its duration elapsed and it has a default duration. The Zero Trust Gateway Rule must have values  for both `expiration.expires_at` and `expiration.duration`.',
+    'Resets the expiration of a Zero Trust Gateway Rule if its duration has elapsed and it has a default duration.\n\nThe Zero Trust Gateway Rule must have values for both `expiration.expires_at` and `expiration.duration`.\n',
   inputSchema: {
     type: 'object',
     properties: {
@@ -26,7 +26,7 @@ export const tool: Tool = {
       },
       rule_id: {
         type: 'string',
-        description: 'Identify the API resource with a UUID.',
+        description: 'The API resource UUID.',
       },
     },
     required: ['account_id', 'rule_id'],

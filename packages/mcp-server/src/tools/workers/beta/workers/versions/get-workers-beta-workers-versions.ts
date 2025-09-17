@@ -26,17 +26,21 @@ export const tool: Tool = {
       },
       worker_id: {
         type: 'string',
-        description: 'Identifier for the Worker, which can be ID or name.',
+        description: 'Identifier.',
       },
       version_id: {
-        type: 'string',
-        description:
-          'Identifier for the version, which can be ID or the literal "latest" to operate on the most recently created version.',
+        anyOf: [
+          {
+            type: 'string',
+          },
+          {
+            type: 'string',
+            enum: ['latest'],
+          },
+        ],
       },
       include: {
         type: 'string',
-        description:
-          'Whether to include the `modules` property of the version in the response, which contains code and sourcemap content and may add several megabytes to the response size.',
         enum: ['modules'],
       },
     },

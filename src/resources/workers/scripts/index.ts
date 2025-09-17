@@ -33,12 +33,10 @@ export {
   type ScriptUpdateResponse,
   type ScriptDeleteResponse,
   type ScriptGetResponse,
-  type ScriptSearchResponse,
   type ScriptUpdateParams,
   type ScriptListParams,
   type ScriptDeleteParams,
   type ScriptGetParams,
-  type ScriptSearchParams,
   type ScriptsSinglePage,
 } from './scripts';
 export {

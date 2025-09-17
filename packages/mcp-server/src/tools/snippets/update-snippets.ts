@@ -32,6 +32,16 @@ export const tool: Tool = {
         title: 'Snippet Name',
         description: 'The identifying name of the snippet.',
       },
+      files: {
+        type: 'array',
+        title: 'Files',
+        description: 'The list of files belonging to the snippet.',
+        items: {
+          type: 'string',
+          title: 'File',
+          description: 'A file belonging to the snippet.',
+        },
+      },
       metadata: {
         type: 'object',
         title: 'Metadata',
@@ -52,7 +62,7 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
-    required: ['zone_id', 'snippet_name', 'metadata'],
+    required: ['zone_id', 'snippet_name', 'files', 'metadata'],
   },
   annotations: {
     idempotentHint: true,

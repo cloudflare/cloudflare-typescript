@@ -161,9 +161,18 @@ export interface CustomPage {
   type: 'identity_denied' | 'forbidden';
 
   /**
+   * Number of apps the custom page is assigned to.
+   */
+  app_count?: number;
+
+  created_at?: string;
+
+  /**
    * UUID.
    */
   uid?: string;
+
+  updated_at?: string;
 }
 
 export interface CustomPageWithoutHTML {
@@ -178,9 +187,18 @@ export interface CustomPageWithoutHTML {
   type: 'identity_denied' | 'forbidden';
 
   /**
+   * Number of apps the custom page is assigned to.
+   */
+  app_count?: number;
+
+  created_at?: string;
+
+  /**
    * UUID.
    */
   uid?: string;
+
+  updated_at?: string;
 }
 
 export interface CustomPageDeleteResponse {
@@ -210,6 +228,11 @@ export interface CustomPageCreateParams {
    * Body param: Custom page type.
    */
   type: 'identity_denied' | 'forbidden';
+
+  /**
+   * Body param: Number of apps the custom page is assigned to.
+   */
+  app_count?: number;
 }
 
 export interface CustomPageUpdateParams {
@@ -232,6 +255,11 @@ export interface CustomPageUpdateParams {
    * Body param: Custom page type.
    */
   type: 'identity_denied' | 'forbidden';
+
+  /**
+   * Body param: Number of apps the custom page is assigned to.
+   */
+  app_count?: number;
 }
 
 export interface CustomPageListParams extends V4PagePaginationArrayParams {

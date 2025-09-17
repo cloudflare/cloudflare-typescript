@@ -29,11 +29,6 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier',
       },
-      automatic_return_routing: {
-        type: 'boolean',
-        description:
-          'True if automatic stateful return routing should be enabled for a tunnel, false otherwise.',
-      },
       description: {
         type: 'string',
         description: 'An optional description of the interconnect.',

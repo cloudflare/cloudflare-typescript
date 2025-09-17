@@ -1244,10 +1244,9 @@ The following tools are available in this MCP server.
 ### Resource `workers.beta.workers`:
 
 - `create_beta_workers_workers` (`write`): Create a new Worker.
-- `update_beta_workers_workers` (`write`): Perform a complete replacement of a Worker, where omitted properties are set to their default values. This is the exact same as the Create Worker endpoint, but operates on an existing Worker. To perform a partial update instead, use the Edit Worker endpoint.
+- `update_beta_workers_workers` (`write`): Update an existing Worker.
 - `list_beta_workers_workers` (`read`): List all Workers for an account.
 - `delete_beta_workers_workers` (`write`): Delete a Worker and all its associated resources (versions, deployments, etc.).
-- `edit_beta_workers_workers` (`write`): Perform a partial update on a Worker, where omitted properties are left unchanged from their current values.
 - `get_beta_workers_workers` (`read`): Get details about a specific Worker.
 
 ### Resource `workers.beta.workers.versions`:
@@ -1275,7 +1274,6 @@ The following tools are available in this MCP server.
 - `list_workers_scripts` (`read`): Fetch a list of uploaded workers.
 - `delete_workers_scripts` (`write`): Delete your worker. This call has no response body on a successful delete.
 - `get_workers_scripts` (`read`): Fetch raw script content for your worker. Note this is the original script content, not JSON encoded.
-- `search_workers_scripts` (`read`): Search for Workers in an account.
 
 ### Resource `workers.scripts.assets.upload`:
 
@@ -1941,7 +1939,7 @@ The following tools are available in this MCP server.
 - `create_magic_transit_pcaps` (`write`): Create new PCAP request for account.
 - `list_magic_transit_pcaps` (`read`): Lists all packet capture requests for an account.
 - `get_magic_transit_pcaps` (`read`): Get information for a PCAP request by id.
-- `stop_magic_transit_pcaps` (`write`): Stop full PCAP.
+- `stop_magic_transit_pcaps` (`write`): Stop full PCAP
 
 ### Resource `magic_transit.pcaps.ownership`:
 
@@ -2225,8 +2223,8 @@ The following tools are available in this MCP server.
 
 ### Resource `stream.downloads`:
 
-- `create_stream_downloads` (`write`): Creates a download for a video when a video is ready to view. Use `/downloads/{download_type}` instead for type-specific downloads.
-- `delete_stream_downloads` (`write`): Delete the downloads for a video. Use `/downloads/{download_type}` instead for type-specific downloads.
+- `create_stream_downloads` (`write`): Creates a download for a video when a video is ready to view.
+- `delete_stream_downloads` (`write`): Delete the downloads for a video.
 - `get_stream_downloads` (`read`): Lists the downloads created for a video.
 
 ### Resource `stream.embed`:
@@ -2965,84 +2963,86 @@ The following tools are available in this MCP server.
 
 ### Resource `zero_trust.gateway`:
 
-- `create_zero_trust_gateway` (`write`): Create a Zero Trust account for an existing Cloudflare account.
-- `list_zero_trust_gateway` (`read`): Retrieve information about the current Zero Trust account.
+- `create_zero_trust_gateway` (`write`): Creates a Zero Trust account with an existing Cloudflare account.
+- `list_zero_trust_gateway` (`read`): Gets information about the current Zero Trust account.
 
 ### Resource `zero_trust.gateway.audit_ssh_settings`:
 
-- `update_gateway_zero_trust_audit_ssh_settings` (`write`): Update Zero Trust Audit SSH and SSH with Access for Infrastructure settings for an account.
-- `get_gateway_zero_trust_audit_ssh_settings` (`read`): Retrieve all Zero Trust Audit SSH and SSH with Access for Infrastructure settings for an account.
-- `rotate_seed_gateway_zero_trust_audit_ssh_settings` (`write`): Rotate the SSH account seed that generates the host key identity when connecting through the Cloudflare SSH Proxy.
+- `update_gateway_zero_trust_audit_ssh_settings` (`write`): Updates Zero Trust Audit SSH and SSH with Access for Infrastructure settings for an account.
+- `get_gateway_zero_trust_audit_ssh_settings` (`read`): Gets all Zero Trust Audit SSH and SSH with Access for Infrastructure settings for an account.
+- `rotate_seed_gateway_zero_trust_audit_ssh_settings` (`write`): Rotates the SSH account seed that is used for generating the host key identity when connecting through the Cloudflare SSH Proxy.
 
 ### Resource `zero_trust.gateway.categories`:
 
-- `list_gateway_zero_trust_categories` (`read`): List all categories.
+- `list_gateway_zero_trust_categories` (`read`): Fetches a list of all categories.
 
 ### Resource `zero_trust.gateway.app_types`:
 
-- `list_gateway_zero_trust_app_types` (`read`): List all application and application type mappings.
+- `list_gateway_zero_trust_app_types` (`read`): Fetches all application and application type mappings.
 
 ### Resource `zero_trust.gateway.configurations`:
 
-- `update_gateway_zero_trust_configurations` (`write`): Update the current Zero Trust account configuration.
-- `edit_gateway_zero_trust_configurations` (`write`): Update (PATCH) a single subcollection of settings such as `antivirus`, `tls_decrypt`, `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or `certificate` without updating the entire configuration object. This endpoint returns an error if any settings collection lacks proper configuration.
-- `get_gateway_zero_trust_configurations` (`read`): Retrieve the current Zero Trust account configuration.
+- `update_gateway_zero_trust_configurations` (`write`): Updates the current Zero Trust account configuration.
+- `edit_gateway_zero_trust_configurations` (`write`): Patches the current Zero Trust account configuration. This endpoint can update a single subcollection of settings such as `antivirus`, `tls_decrypt`, `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or `certificate`, without updating the entire configuration object. Returns an error if any collection of settings is not properly configured.
+- `get_gateway_zero_trust_configurations` (`read`): Fetches the current Zero Trust account configuration.
 
 ### Resource `zero_trust.gateway.configurations.custom_certificate`:
 
-- `get_configurations_gateway_zero_trust_custom_certificate` (`read`): Retrieve the current Zero Trust certificate configuration.
+- `get_configurations_gateway_zero_trust_custom_certificate` (`read`): Fetches the current Zero Trust certificate configuration.
 
 ### Resource `zero_trust.gateway.lists`:
 
 - `create_gateway_zero_trust_lists` (`write`): Creates a new Zero Trust list.
-- `update_gateway_zero_trust_lists` (`write`): Updates a configured Zero Trust list. Skips updating list items if not included in the payload. A non empty list items will overwrite the existing list.
-- `list_gateway_zero_trust_lists` (`read`): Fetch all Zero Trust lists for an account.
+- `update_gateway_zero_trust_lists` (`write`): Updates a configured Zero Trust list. Skips updating list items if not included in the payload.
+- `list_gateway_zero_trust_lists` (`read`): Fetches all Zero Trust lists for an account.
 - `delete_gateway_zero_trust_lists` (`write`): Deletes a Zero Trust list.
 - `edit_gateway_zero_trust_lists` (`write`): Appends or removes an item from a configured Zero Trust list.
-- `get_gateway_zero_trust_lists` (`read`): Fetch a single Zero Trust list.
+- `get_gateway_zero_trust_lists` (`read`): Fetches a single Zero Trust list.
 
 ### Resource `zero_trust.gateway.lists.items`:
 
-- `list_lists_gateway_zero_trust_items` (`read`): Fetch all items in a single Zero Trust list.
+- `list_lists_gateway_zero_trust_items` (`read`): Fetches all items in a single Zero Trust list.
 
 ### Resource `zero_trust.gateway.locations`:
 
-- `create_gateway_zero_trust_locations` (`write`): Create a new Zero Trust Gateway location.
-- `update_gateway_zero_trust_locations` (`write`): Update a configured Zero Trust Gateway location.
-- `list_gateway_zero_trust_locations` (`read`): List Zero Trust Gateway locations for an account.
-- `delete_gateway_zero_trust_locations` (`write`): Delete a configured Zero Trust Gateway location.
-- `get_gateway_zero_trust_locations` (`read`): Get a single Zero Trust Gateway location.
+- `create_gateway_zero_trust_locations` (`write`): Creates a new Zero Trust Gateway location.
+- `update_gateway_zero_trust_locations` (`write`): Updates a configured Zero Trust Gateway location.
+- `list_gateway_zero_trust_locations` (`read`): Fetches Zero Trust Gateway locations for an account.
+- `delete_gateway_zero_trust_locations` (`write`): Deletes a configured Zero Trust Gateway location.
+- `get_gateway_zero_trust_locations` (`read`): Fetches a single Zero Trust Gateway location.
 
 ### Resource `zero_trust.gateway.logging`:
 
-- `update_gateway_zero_trust_logging` (`write`): Update logging settings for the current Zero Trust account.
-- `get_gateway_zero_trust_logging` (`read`): Retrieve the current logging settings for the Zero Trust account.
+- `update_gateway_zero_trust_logging` (`write`): Updates logging settings for the current Zero Trust account.
+- `get_gateway_zero_trust_logging` (`read`): Fetches the current logging settings for Zero Trust account.
 
 ### Resource `zero_trust.gateway.proxy_endpoints`:
 
-- `create_gateway_zero_trust_proxy_endpoints` (`write`): Create a new Zero Trust Gateway proxy endpoint.
-- `list_gateway_zero_trust_proxy_endpoints` (`read`): List all Zero Trust Gateway proxy endpoints for an account.
-- `delete_gateway_zero_trust_proxy_endpoints` (`write`): Delete a configured Zero Trust Gateway proxy endpoint.
-- `edit_gateway_zero_trust_proxy_endpoints` (`write`): Update a configured Zero Trust Gateway proxy endpoint.
-- `get_gateway_zero_trust_proxy_endpoints` (`read`): Get a single Zero Trust Gateway proxy endpoint.
+- `create_gateway_zero_trust_proxy_endpoints` (`write`): Creates a new Zero Trust Gateway proxy endpoint.
+- `list_gateway_zero_trust_proxy_endpoints` (`read`): Fetches all Zero Trust Gateway proxy endpoints for an account.
+- `delete_gateway_zero_trust_proxy_endpoints` (`write`): Deletes a configured Zero Trust Gateway proxy endpoint.
+- `edit_gateway_zero_trust_proxy_endpoints` (`write`): Updates a configured Zero Trust Gateway proxy endpoint.
+- `get_gateway_zero_trust_proxy_endpoints` (`read`): Fetches a single Zero Trust Gateway proxy endpoint.
 
 ### Resource `zero_trust.gateway.rules`:
 
-- `create_gateway_zero_trust_rules` (`write`): Create a new Zero Trust Gateway rule.
-- `update_gateway_zero_trust_rules` (`write`): Update a configured Zero Trust Gateway rule.
-- `list_gateway_zero_trust_rules` (`read`): List Zero Trust Gateway rules for an account.
-- `delete_gateway_zero_trust_rules` (`write`): Delete a Zero Trust Gateway rule.
-- `get_gateway_zero_trust_rules` (`read`): Get a single Zero Trust Gateway rule.
-- `reset_expiration_gateway_zero_trust_rules` (`write`): Resets the expiration of a Zero Trust Gateway Rule if its duration elapsed and it has a default duration. The Zero Trust Gateway Rule must have values for both `expiration.expires_at` and `expiration.duration`.
+- `create_gateway_zero_trust_rules` (`write`): Creates a new Zero Trust Gateway rule.
+- `update_gateway_zero_trust_rules` (`write`): Updates a configured Zero Trust Gateway rule.
+- `list_gateway_zero_trust_rules` (`read`): Fetches the Zero Trust Gateway rules for an account.
+- `delete_gateway_zero_trust_rules` (`write`): Deletes a Zero Trust Gateway rule.
+- `get_gateway_zero_trust_rules` (`read`): Fetches a single Zero Trust Gateway rule.
+- `reset_expiration_gateway_zero_trust_rules` (`write`): Resets the expiration of a Zero Trust Gateway Rule if its duration has elapsed and it has a default duration.
+
+  The Zero Trust Gateway Rule must have values for both `expiration.expires_at` and `expiration.duration`.
 
 ### Resource `zero_trust.gateway.certificates`:
 
-- `create_gateway_zero_trust_certificates` (`write`): Create a new Zero Trust certificate.
-- `list_gateway_zero_trust_certificates` (`read`): List all Zero Trust certificates for an account.
-- `delete_gateway_zero_trust_certificates` (`write`): Delete a gateway-managed Zero Trust certificate. You must deactivate the certificate from the edge (inactive) before deleting it.
-- `activate_gateway_zero_trust_certificates` (`write`): Bind a single Zero Trust certificate to the edge.
-- `deactivate_gateway_zero_trust_certificates` (`write`): Unbind a single Zero Trust certificate from the edge.
-- `get_gateway_zero_trust_certificates` (`read`): Get a single Zero Trust certificate.
+- `create_gateway_zero_trust_certificates` (`write`): Creates a new Zero Trust certificate.
+- `list_gateway_zero_trust_certificates` (`read`): Fetches all Zero Trust certificates for an account.
+- `delete_gateway_zero_trust_certificates` (`write`): Deletes a gateway-managed Zero Trust certificate. A certificate must be deactivated from the edge (inactive) before it is deleted.
+- `activate_gateway_zero_trust_certificates` (`write`): Binds a single Zero Trust certificate to the edge.
+- `deactivate_gateway_zero_trust_certificates` (`write`): Unbinds a single Zero Trust certificate from the edge.
+- `get_gateway_zero_trust_certificates` (`read`): Fetches a single Zero Trust certificate.
 
 ### Resource `zero_trust.networks.routes`:
 
@@ -3914,6 +3914,11 @@ The following tools are available in this MCP server.
 
 - `list_threat_events_cloudforce_one_countries` (`read`): Retrieves countries information for all countries
 
+### Resource `cloudforce_one.threat_events.crons`:
+
+- `list_threat_events_cloudforce_one_crons` (`read`): Reads the last cron update time
+- `edit_threat_events_cloudforce_one_crons` (`write`): Reads the last cron update time
+
 ### Resource `cloudforce_one.threat_events.datasets`:
 
 - `create_threat_events_cloudforce_one_datasets` (`write`): Creates a dataset
@@ -3921,6 +3926,10 @@ The following tools are available in this MCP server.
 - `edit_threat_events_cloudforce_one_datasets` (`write`): Updates an existing dataset
 - `get_threat_events_cloudforce_one_datasets` (`read`): Reads a dataset
 - `raw_threat_events_cloudforce_one_datasets` (`read`): Reads data for a raw event
+
+### Resource `cloudforce_one.threat_events.datasets.health`:
+
+- `get_datasets_threat_events_cloudforce_one_health` (`read`): Benchmark Durable Object warmup
 
 ### Resource `cloudforce_one.threat_events.indicator_types`:
 
@@ -3937,7 +3946,7 @@ The following tools are available in this MCP server.
 
 ### Resource `cloudforce_one.threat_events.tags`:
 
-- `create_threat_events_cloudforce_one_tags` (`write`): Creates a new tag to be used accross threat events.
+- `create_threat_events_cloudforce_one_tags` (`write`): Creates a new tag
 
 ### Resource `cloudforce_one.threat_events.event_tags`:
 
@@ -4086,6 +4095,18 @@ The following tools are available in this MCP server.
 - `list_resource_sharing_resources` (`read`): List share resources by share ID.
 - `delete_resource_sharing_resources` (`write`): Deletion is not immediate, an updated share resource object with a new status will be returned.
 - `get_resource_sharing_resources` (`read`): Get share resource by ID.
+
+### Resource `leaked_credential_checks`:
+
+- `create_leaked_credential_checks` (`write`): Updates the current status of Leaked Credential Checks.
+- `get_leaked_credential_checks` (`read`): Retrieves the current status of Leaked Credential Checks.
+
+### Resource `leaked_credential_checks.detections`:
+
+- `create_leaked_credential_checks_detections` (`write`): Create user-defined detection pattern for Leaked Credential Checks.
+- `update_leaked_credential_checks_detections` (`write`): Update user-defined detection pattern for Leaked Credential Checks.
+- `list_leaked_credential_checks_detections` (`read`): List user-defined detection patterns for Leaked Credential Checks.
+- `delete_leaked_credential_checks_detections` (`write`): Remove user-defined detection pattern for Leaked Credential Checks.
 
 ### Resource `content_scanning`:
 

@@ -15,7 +15,13 @@ export {
   type CategoryGetParams,
 } from './categories';
 export { Countries, type CountryListResponse, type CountryListParams } from './countries';
-export { Crons } from './crons';
+export {
+  Crons,
+  type CronListResponse,
+  type CronEditResponse,
+  type CronListParams,
+  type CronEditParams,
+} from './crons';
 export {
   Datasets,
   type DatasetCreateResponse,

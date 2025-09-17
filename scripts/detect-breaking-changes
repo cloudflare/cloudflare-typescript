@@ -682,7 +682,9 @@ TEST_PATHS=(
 	tests/api-resources/cloudforce-one/threat-events/attackers.test.ts
 	tests/api-resources/cloudforce-one/threat-events/categories.test.ts
 	tests/api-resources/cloudforce-one/threat-events/countries.test.ts
+	tests/api-resources/cloudforce-one/threat-events/crons.test.ts
 	tests/api-resources/cloudforce-one/threat-events/datasets/datasets.test.ts
+	tests/api-resources/cloudforce-one/threat-events/datasets/health.test.ts
 	tests/api-resources/cloudforce-one/threat-events/indicator-types.test.ts
 	tests/api-resources/cloudforce-one/threat-events/raw.test.ts
 	tests/api-resources/cloudforce-one/threat-events/relate.test.ts
@@ -715,6 +717,8 @@ TEST_PATHS=(
 	tests/api-resources/resource-sharing/resource-sharing.test.ts
 	tests/api-resources/resource-sharing/recipients.test.ts
 	tests/api-resources/resource-sharing/resources.test.ts
+	tests/api-resources/leaked-credential-checks/leaked-credential-checks.test.ts
+	tests/api-resources/leaked-credential-checks/detections.test.ts
 	tests/api-resources/content-scanning/content-scanning.test.ts
 	tests/api-resources/content-scanning/payloads.test.ts
 	tests/api-resources/content-scanning/settings.test.ts

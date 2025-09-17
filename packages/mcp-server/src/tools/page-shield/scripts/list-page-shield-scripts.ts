@@ -47,7 +47,7 @@ export const tool: Tool = {
       },
       export: {
         type: 'string',
-        description: 'Export the list of scripts as a file, limited to 50000 entries.',
+        description: 'Export the list of scripts as a file.',
         enum: ['csv'],
       },
       hosts: {

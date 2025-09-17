@@ -105,11 +105,6 @@ export interface LinkCreateParams {
   emulateMediaType?: string;
 
   /**
-   * Body param:
-   */
-  excludeExternalLinks?: boolean;
-
-  /**
    * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
    */
   gotoOptions?: LinkCreateParams.GotoOptions;

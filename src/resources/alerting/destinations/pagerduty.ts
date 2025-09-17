@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -115,27 +116,39 @@ export interface PagerdutyCreateResponse {
 }
 
 export interface PagerdutyDeleteResponse {
-  errors: Array<PagerdutyDeleteResponse.Error>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<PagerdutyDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Whether the API call was successful
    */
   success: true;
+
+  result_info?: PagerdutyDeleteResponse.ResultInfo;
 }
 
 export namespace PagerdutyDeleteResponse {
-  export interface Error {
-    message: string;
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
 
-    code?: number;
-  }
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
 
-  export interface Message {
-    message: string;
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
 
-    code?: number;
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
   }
 }
 

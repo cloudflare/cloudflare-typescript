@@ -8,7 +8,7 @@ import { path } from '../../../../internal/utils/path';
 
 export class CustomCertificate extends APIResource {
   /**
-   * Retrieve the current Zero Trust certificate configuration.
+   * Fetches the current Zero Trust certificate configuration.
    *
    * @deprecated
    */

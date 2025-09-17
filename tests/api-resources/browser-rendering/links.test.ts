@@ -50,7 +50,6 @@ describe('resource links', () => {
         },
       ],
       emulateMediaType: 'emulateMediaType',
-      excludeExternalLinks: true,
       gotoOptions: {
         referer: 'referer',
         referrerPolicy: 'referrerPolicy',

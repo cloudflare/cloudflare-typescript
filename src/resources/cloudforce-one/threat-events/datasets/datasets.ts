@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as HealthAPI from './health';
-import { Health } from './health';
+import { Health, HealthGetParams, HealthGetResponse } from './health';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -240,5 +240,9 @@ export declare namespace Datasets {
     type DatasetRawParams as DatasetRawParams,
   };
 
-  export { Health as Health };
+  export {
+    Health as Health,
+    type HealthGetResponse as HealthGetResponse,
+    type HealthGetParams as HealthGetParams,
+  };
 }

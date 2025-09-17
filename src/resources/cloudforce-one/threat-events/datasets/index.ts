@@ -13,4 +13,4 @@ export {
   type DatasetGetParams,
   type DatasetRawParams,
 } from './datasets';
-export { Health } from './health';
+export { Health, type HealthGetResponse, type HealthGetParams } from './health';

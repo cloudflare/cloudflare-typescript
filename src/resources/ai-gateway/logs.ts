@@ -408,8 +408,7 @@ export namespace LogListParams {
       | 'prompts.version_id'
       | 'authentication'
       | 'wholesale'
-      | 'compatibilityMode'
-      | 'dlp_action';
+      | 'compatibilityMode';
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 
@@ -481,8 +480,7 @@ export namespace LogDeleteParams {
       | 'prompts.version_id'
       | 'authentication'
       | 'wholesale'
-      | 'compatibilityMode'
-      | 'dlp_action';
+      | 'compatibilityMode';
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 

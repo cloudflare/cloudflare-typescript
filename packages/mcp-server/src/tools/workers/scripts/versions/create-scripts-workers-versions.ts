@@ -147,26 +147,6 @@ export const tool: Tool = {
                       type: 'string',
                       description: 'A JavaScript variable name for the binding.',
                     },
-                    part: {
-                      type: 'string',
-                      description:
-                        'The name of the file containing the data content. Only accepted for `service worker syntax` Workers.',
-                    },
-                    type: {
-                      type: 'string',
-                      description: 'The kind of resource that the binding provides.',
-                      enum: ['data_blob'],
-                    },
-                  },
-                  required: ['name', 'part', 'type'],
-                },
-                {
-                  type: 'object',
-                  properties: {
-                    name: {
-                      type: 'string',
-                      description: 'A JavaScript variable name for the binding.',
-                    },
                     namespace: {
                       type: 'string',
                       description: 'Namespace to bind to.',
@@ -257,46 +237,6 @@ export const tool: Tool = {
                     },
                   },
                   required: ['id', 'name', 'type'],
-                },
-                {
-                  type: 'object',
-                  properties: {
-                    name: {
-                      type: 'string',
-                      description: 'The name of the inherited binding.',
-                    },
-                    type: {
-                      type: 'string',
-                      description: 'The kind of resource that the binding provides.',
-                      enum: ['inherit'],
-                    },
-                    old_name: {
-                      type: 'string',
-                      description:
-                        'The old name of the inherited binding. If set, the binding will be renamed from `old_name` to `name` in the new version. If not set, the binding will keep the same name between versions.',
-                    },
-                    version_id: {
-                      type: 'string',
-                      description:
-                        'Identifier for the version to inherit the binding from, which can be the version ID or the literal "latest" to inherit from the latest version. Defaults to inheriting the binding from the latest version.',
-                    },
-                  },
-                  required: ['name', 'type'],
-                },
-                {
-                  type: 'object',
-                  properties: {
-                    name: {
-                      type: 'string',
-                      description: 'A JavaScript variable name for the binding.',
-                    },
-                    type: {
-                      type: 'string',
-                      description: 'The kind of resource that the binding provides.',
-                      enum: ['images'],
-                    },
-                  },
-                  required: ['name', 'type'],
                 },
                 {
                   type: 'object',
@@ -453,39 +393,10 @@ export const tool: Tool = {
                 {
                   type: 'object',
                   properties: {
-                    name: {
+                    environment: {
                       type: 'string',
-                      description: 'A JavaScript variable name for the binding.',
+                      description: 'Optional environment if the Worker utilizes one.',
                     },
-                    type: {
-                      type: 'string',
-                      description: 'The kind of resource that the binding provides.',
-                      enum: ['send_email'],
-                    },
-                    allowed_destination_addresses: {
-                      type: 'array',
-                      description: 'List of allowed destination addresses.',
-                      items: {
-                        type: 'string',
-                      },
-                    },
-                    allowed_sender_addresses: {
-                      type: 'array',
-                      description: 'List of allowed sender addresses.',
-                      items: {
-                        type: 'string',
-                      },
-                    },
-                    destination_address: {
-                      type: 'string',
-                      description: 'Destination address for the email.',
-                    },
-                  },
-                  required: ['name', 'type'],
-                },
-                {
-                  type: 'object',
-                  properties: {
                     name: {
                       type: 'string',
                       description: 'A JavaScript variable name for the binding.',
@@ -499,12 +410,8 @@ export const tool: Tool = {
                       description: 'The kind of resource that the binding provides.',
                       enum: ['service'],
                     },
-                    environment: {
-                      type: 'string',
-                      description: 'Optional environment if the Worker utilizes one.',
-                    },
                   },
-                  required: ['name', 'service', 'type'],
+                  required: ['environment', 'name', 'service', 'type'],
                 },
                 {
                   type: 'object',
@@ -524,26 +431,6 @@ export const tool: Tool = {
                     },
                   },
                   required: ['name', 'service', 'type'],
-                },
-                {
-                  type: 'object',
-                  properties: {
-                    name: {
-                      type: 'string',
-                      description: 'A JavaScript variable name for the binding.',
-                    },
-                    part: {
-                      type: 'string',
-                      description:
-                        'The name of the file containing the text content. Only accepted for `service worker syntax` Workers.',
-                    },
-                    type: {
-                      type: 'string',
-                      description: 'The kind of resource that the binding provides.',
-                      enum: ['text_blob'],
-                    },
-                  },
-                  required: ['name', 'part', 'type'],
                 },
                 {
                   type: 'object',
@@ -686,26 +573,6 @@ export const tool: Tool = {
                     },
                   },
                   required: ['name', 'type', 'workflow_name'],
-                },
-                {
-                  type: 'object',
-                  properties: {
-                    name: {
-                      type: 'string',
-                      description: 'A JavaScript variable name for the binding.',
-                    },
-                    part: {
-                      type: 'string',
-                      description:
-                        'The name of the file containing the WebAssembly module content. Only accepted for `service worker syntax` Workers.',
-                    },
-                    type: {
-                      type: 'string',
-                      description: 'The kind of resource that the binding provides.',
-                      enum: ['wasm_module'],
-                    },
-                  },
-                  required: ['name', 'part', 'type'],
                 },
               ],
               description: 'A binding to allow the Worker to communicate with resources.',
