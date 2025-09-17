@@ -161,14 +161,11 @@ export interface SnippetUpdateParams {
   zone_id: string;
 
   /**
-   * Body param: The list of files belonging to the snippet.
-   */
-  files: Array<Core.Uploadable>;
-
-  /**
    * Body param: Metadata about the snippet.
    */
   metadata: SnippetUpdateParams.Metadata;
+
+  [k: string]: Array<Core.Uploadable> | string | SnippetUpdateParams.Metadata | undefined;
 }
 
 export namespace SnippetUpdateParams {

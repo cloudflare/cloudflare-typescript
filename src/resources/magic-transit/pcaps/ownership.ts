@@ -131,7 +131,7 @@ export interface Ownership {
 
 export interface OwnershipCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -144,21 +144,21 @@ export interface OwnershipCreateParams {
 
 export interface OwnershipDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface OwnershipGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface OwnershipValidateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

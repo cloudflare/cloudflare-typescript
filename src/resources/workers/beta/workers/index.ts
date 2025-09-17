@@ -19,5 +19,6 @@ export {
   type WorkerUpdateParams,
   type WorkerListParams,
   type WorkerDeleteParams,
+  type WorkerEditParams,
   type WorkerGetParams,
 } from './workers';

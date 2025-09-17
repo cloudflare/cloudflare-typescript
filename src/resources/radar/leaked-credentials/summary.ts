@@ -8,11 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of HTTP authentication requests by bot class.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.leakedCredentials.summary.botClass();
-   * ```
+   * @deprecated
    */
   botClass(
     query?: SummaryBotClassParams,
@@ -38,11 +34,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of HTTP authentication requests by compromised
    * credential status.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.leakedCredentials.summary.compromised();
-   * ```
+   * @deprecated
    */
   compromised(
     query?: SummaryCompromisedParams,

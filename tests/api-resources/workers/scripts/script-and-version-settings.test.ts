@@ -46,10 +46,16 @@ describe('resource scriptAndVersionSettings', () => {
         observability: {
           enabled: true,
           head_sampling_rate: 0.1,
-          logs: { enabled: true, invocation_logs: true, head_sampling_rate: 0.1 },
+          logs: {
+            enabled: true,
+            invocation_logs: true,
+            destinations: ['cloudflare'],
+            head_sampling_rate: 0.1,
+            persist: true,
+          },
         },
         placement: { mode: 'smart' },
-        tags: ['my-tag'],
+        tags: ['my-team', 'my-public-api'],
         tail_consumers: [
           { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
         ],

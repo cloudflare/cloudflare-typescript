@@ -62,7 +62,7 @@ describe('resource json', () => {
       prompt: 'prompt',
       rejectRequestPattern: ['string'],
       rejectResourceTypes: ['document'],
-      response_format: { type: 'type', schema: { foo: {} } },
+      response_format: { type: 'type', json_schema: { foo: 'string' } },
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
       url: 'https://example.com',

@@ -39,12 +39,15 @@ export class Workers extends APIResource {
   }
 
   /**
-   * Update an existing Worker.
+   * Perform a complete replacement of a Worker, where omitted properties are set to
+   * their default values. This is the exact same as the Create Worker endpoint, but
+   * operates on an existing Worker. To perform a partial update instead, use the
+   * Edit Worker endpoint.
    *
    * @example
    * ```ts
    * const worker = await client.workers.beta.workers.update(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   'worker_id',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     name: 'my-worker',
@@ -96,7 +99,7 @@ export class Workers extends APIResource {
    * @example
    * ```ts
    * const worker = await client.workers.beta.workers.delete(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   'worker_id',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
@@ -111,12 +114,43 @@ export class Workers extends APIResource {
   }
 
   /**
+   * Perform a partial update on a Worker, where omitted properties are left
+   * unchanged from their current values.
+   *
+   * @example
+   * ```ts
+   * const worker = await client.workers.beta.workers.edit(
+   *   'worker_id',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     logpush: true,
+   *     name: 'my-worker',
+   *     observability: {},
+   *     subdomain: {},
+   *     tags: ['my-team', 'my-public-api'],
+   *     tail_consumers: [{ name: 'my-tail-consumer' }],
+   *   },
+   * );
+   * ```
+   */
+  edit(workerId: string, params: WorkerEditParams, options?: Core.RequestOptions): Core.APIPromise<Worker> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/workers/workers/${workerId}`, {
+        body,
+        ...options,
+        headers: { 'Content-Type': 'application/merge-patch+json', ...options?.headers },
+      }) as Core.APIPromise<{ result: Worker }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get details about a specific Worker.
    *
    * @example
    * ```ts
    * const worker = await client.workers.beta.workers.get(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   'worker_id',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
@@ -135,7 +169,7 @@ export class WorkersV4PagePaginationArray extends V4PagePaginationArray<Worker> 
 
 export interface Worker {
   /**
-   * Identifier.
+   * Immutable ID of the Worker.
    */
   id: string;
 
@@ -145,39 +179,39 @@ export interface Worker {
   created_on: string;
 
   /**
+   * Whether logpush is enabled for the Worker.
+   */
+  logpush: boolean;
+
+  /**
    * Name of the Worker.
    */
   name: string;
 
   /**
-   * When the Worker was most recently updated.
-   */
-  updated_on: string;
-
-  /**
-   * Whether logpush is enabled for the Worker.
-   */
-  logpush?: boolean;
-
-  /**
    * Observability settings for the Worker.
    */
-  observability?: Worker.Observability;
+  observability: Worker.Observability;
 
   /**
    * Subdomain settings for the Worker.
    */
-  subdomain?: Worker.Subdomain;
+  subdomain: Worker.Subdomain;
 
   /**
    * Tags associated with the Worker.
    */
-  tags?: Array<string>;
+  tags: Array<string>;
 
   /**
    * Other Workers that should consume logs from the Worker.
    */
-  tail_consumers?: Array<Worker.TailConsumer>;
+  tail_consumers: Array<Worker.TailConsumer>;
+
+  /**
+   * When the Worker was most recently updated.
+   */
+  updated_on: string;
 }
 
 export namespace Worker {
@@ -523,6 +557,113 @@ export interface WorkerDeleteParams {
   account_id: string;
 }
 
+export interface WorkerEditParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Whether logpush is enabled for the Worker.
+   */
+  logpush: boolean;
+
+  /**
+   * Body param: Name of the Worker.
+   */
+  name: string;
+
+  /**
+   * Body param: Observability settings for the Worker.
+   */
+  observability: WorkerEditParams.Observability;
+
+  /**
+   * Body param: Subdomain settings for the Worker.
+   */
+  subdomain: WorkerEditParams.Subdomain;
+
+  /**
+   * Body param: Tags associated with the Worker.
+   */
+  tags: Array<string>;
+
+  /**
+   * Body param: Other Workers that should consume logs from the Worker.
+   */
+  tail_consumers: Array<WorkerEditParams.TailConsumer>;
+}
+
+export namespace WorkerEditParams {
+  /**
+   * Observability settings for the Worker.
+   */
+  export interface Observability {
+    /**
+     * Whether observability is enabled for the Worker.
+     */
+    enabled?: boolean;
+
+    /**
+     * The sampling rate for observability. From 0 to 1 (1 = 100%, 0.1 = 10%).
+     */
+    head_sampling_rate?: number;
+
+    /**
+     * Log settings for the Worker.
+     */
+    logs?: Observability.Logs;
+  }
+
+  export namespace Observability {
+    /**
+     * Log settings for the Worker.
+     */
+    export interface Logs {
+      /**
+       * Whether logs are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Whether
+       * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+       * are enabled for the Worker.
+       */
+      invocation_logs?: boolean;
+    }
+  }
+
+  /**
+   * Subdomain settings for the Worker.
+   */
+  export interface Subdomain {
+    /**
+     * Whether the \*.workers.dev subdomain is enabled for the Worker.
+     */
+    enabled?: boolean;
+
+    /**
+     * Whether
+     * [preview URLs](https://developers.cloudflare.com/workers/configuration/previews/)
+     * are enabled for the Worker.
+     */
+    previews_enabled?: boolean;
+  }
+
+  export interface TailConsumer {
+    /**
+     * Name of the consumer Worker.
+     */
+    name: string;
+  }
+}
+
 export interface WorkerGetParams {
   /**
    * Identifier.
@@ -543,6 +684,7 @@ export declare namespace Workers {
     type WorkerUpdateParams as WorkerUpdateParams,
     type WorkerListParams as WorkerListParams,
     type WorkerDeleteParams as WorkerDeleteParams,
+    type WorkerEditParams as WorkerEditParams,
     type WorkerGetParams as WorkerGetParams,
   };
 

@@ -13,7 +13,7 @@ export class Versions extends APIResource {
    * ```ts
    * const version =
    *   await client.workers.beta.workers.versions.create(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     'worker_id',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -23,9 +23,10 @@ export class Versions extends APIResource {
     params: VersionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Version> {
-    const { account_id, ...body } = params;
+    const { account_id, deploy, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/workers/${workerId}/versions`, {
+        query: { deploy },
         body,
         ...options,
       }) as Core.APIPromise<{ result: Version }>
@@ -39,7 +40,7 @@ export class Versions extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const version of client.workers.beta.workers.versions.list(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   'worker_id',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
@@ -66,15 +67,15 @@ export class Versions extends APIResource {
    * ```ts
    * const version =
    *   await client.workers.beta.workers.versions.delete(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'worker_id',
+   *     'version_id',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   delete(
     workerId: string,
-    versionId: (string & {}) | 'latest',
+    versionId: string,
     params: VersionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionDeleteResponse> {
@@ -92,15 +93,15 @@ export class Versions extends APIResource {
    * ```ts
    * const version =
    *   await client.workers.beta.workers.versions.get(
-   *     '023e105f4ecef8ad9ca31a8372d0c353',
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'worker_id',
+   *     'version_id',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   get(
     workerId: string,
-    versionId: (string & {}) | 'latest',
+    versionId: string,
     params: VersionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Version> {
@@ -139,6 +140,12 @@ export interface Version {
 
   /**
    * Configuration for assets within a Worker.
+   *
+   * [`_headers`](https://developers.cloudflare.com/workers/static-assets/headers/#custom-headers)
+   * and
+   * [`_redirects`](https://developers.cloudflare.com/workers/static-assets/redirects/)
+   * files should be included as modules named `_headers` and `_redirects` with
+   * content type `text/plain`.
    */
   assets?: Version.Assets;
 
@@ -153,9 +160,12 @@ export interface Version {
     | Version.WorkersBindingKindAssets
     | Version.WorkersBindingKindBrowser
     | Version.WorkersBindingKindD1
+    | Version.WorkersBindingKindDataBlob
     | Version.WorkersBindingKindDispatchNamespace
     | Version.WorkersBindingKindDurableObjectNamespace
     | Version.WorkersBindingKindHyperdrive
+    | Version.WorkersBindingKindInherit
+    | Version.WorkersBindingKindImages
     | Version.WorkersBindingKindJson
     | Version.WorkersBindingKindKVNamespace
     | Version.WorkersBindingKindMTLSCertificate
@@ -164,13 +174,16 @@ export interface Version {
     | Version.WorkersBindingKindQueue
     | Version.WorkersBindingKindR2Bucket
     | Version.WorkersBindingKindSecretText
+    | Version.WorkersBindingKindSendEmail
     | Version.WorkersBindingKindService
     | Version.WorkersBindingKindTailConsumer
+    | Version.WorkersBindingKindTextBlob
     | Version.WorkersBindingKindVectorize
     | Version.WorkersBindingKindVersionMetadata
     | Version.WorkersBindingKindSecretsStoreSecret
     | Version.WorkersBindingKindSecretKey
     | Version.WorkersBindingKindWorkflow
+    | Version.WorkersBindingKindWasmModule
   >;
 
   /**
@@ -205,6 +218,15 @@ export interface Version {
 
   /**
    * Code, sourcemaps, and other content used at runtime.
+   *
+   * This includes
+   * [`_headers`](https://developers.cloudflare.com/workers/static-assets/headers/#custom-headers)
+   * and
+   * [`_redirects`](https://developers.cloudflare.com/workers/static-assets/redirects/)
+   * files used to configure
+   * [Static Assets](https://developers.cloudflare.com/workers/static-assets/).
+   * `_headers` and `_redirects` files should be included as modules named `_headers`
+   * and `_redirects` with content type `text/plain`.
    */
   modules?: Array<Version.Module>;
 
@@ -247,6 +269,12 @@ export namespace Version {
 
   /**
    * Configuration for assets within a Worker.
+   *
+   * [`_headers`](https://developers.cloudflare.com/workers/static-assets/headers/#custom-headers)
+   * and
+   * [`_redirects`](https://developers.cloudflare.com/workers/static-assets/redirects/)
+   * files should be included as modules named `_headers` and `_redirects` with
+   * content type `text/plain`.
    */
   export interface Assets {
     /**
@@ -356,6 +384,24 @@ export namespace Version {
     type: 'd1';
   }
 
+  export interface WorkersBindingKindDataBlob {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The name of the file containing the data content. Only accepted for
+     * `service worker syntax` Workers.
+     */
+    part: string;
+
+    /**
+     * @deprecated The kind of resource that the binding provides.
+     */
+    type: 'data_blob';
+  }
+
   export interface WorkersBindingKindDispatchNamespace {
     /**
      * A JavaScript variable name for the binding.
@@ -461,6 +507,44 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'hyperdrive';
+  }
+
+  export interface WorkersBindingKindInherit {
+    /**
+     * The name of the inherited binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'inherit';
+
+    /**
+     * The old name of the inherited binding. If set, the binding will be renamed from
+     * `old_name` to `name` in the new version. If not set, the binding will keep the
+     * same name between versions.
+     */
+    old_name?: string;
+
+    /**
+     * Identifier for the version to inherit the binding from, which can be the version
+     * ID or the literal "latest" to inherit from the latest version. Defaults to
+     * inheriting the binding from the latest version.
+     */
+    version_id?: string;
+  }
+
+  export interface WorkersBindingKindImages {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'images';
   }
 
   export interface WorkersBindingKindJson {
@@ -594,12 +678,34 @@ export namespace Version {
     type: 'secret_text';
   }
 
-  export interface WorkersBindingKindService {
+  export interface WorkersBindingKindSendEmail {
     /**
-     * Optional environment if the Worker utilizes one.
+     * A JavaScript variable name for the binding.
      */
-    environment: string;
+    name: string;
 
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'send_email';
+
+    /**
+     * List of allowed destination addresses.
+     */
+    allowed_destination_addresses?: Array<string>;
+
+    /**
+     * List of allowed sender addresses.
+     */
+    allowed_sender_addresses?: Array<string>;
+
+    /**
+     * Destination address for the email.
+     */
+    destination_address?: string;
+  }
+
+  export interface WorkersBindingKindService {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -614,6 +720,11 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'service';
+
+    /**
+     * Optional environment if the Worker utilizes one.
+     */
+    environment?: string;
   }
 
   export interface WorkersBindingKindTailConsumer {
@@ -631,6 +742,24 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'tail_consumer';
+  }
+
+  export interface WorkersBindingKindTextBlob {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The name of the file containing the text content. Only accepted for
+     * `service worker syntax` Workers.
+     */
+    part: string;
+
+    /**
+     * @deprecated The kind of resource that the binding provides.
+     */
+    type: 'text_blob';
   }
 
   export interface WorkersBindingKindVectorize {
@@ -745,6 +874,24 @@ export namespace Version {
     script_name?: string;
   }
 
+  export interface WorkersBindingKindWasmModule {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The name of the file containing the WebAssembly module content. Only accepted
+     * for `service worker syntax` Workers.
+     */
+    part: string;
+
+    /**
+     * @deprecated The kind of resource that the binding provides.
+     */
+    type: 'wasm_module';
+  }
+
   /**
    * Resource limits enforced at runtime.
    */
@@ -837,12 +984,24 @@ export interface VersionCreateParams {
   account_id: string;
 
   /**
+   * Query param: If true, a deployment will be created that sends 100% of traffic to
+   * the new version.
+   */
+  deploy?: boolean;
+
+  /**
    * Body param: Metadata about the version.
    */
   annotations?: VersionCreateParams.Annotations;
 
   /**
    * Body param: Configuration for assets within a Worker.
+   *
+   * [`_headers`](https://developers.cloudflare.com/workers/static-assets/headers/#custom-headers)
+   * and
+   * [`_redirects`](https://developers.cloudflare.com/workers/static-assets/redirects/)
+   * files should be included as modules named `_headers` and `_redirects` with
+   * content type `text/plain`.
    */
   assets?: VersionCreateParams.Assets;
 
@@ -857,9 +1016,12 @@ export interface VersionCreateParams {
     | VersionCreateParams.WorkersBindingKindAssets
     | VersionCreateParams.WorkersBindingKindBrowser
     | VersionCreateParams.WorkersBindingKindD1
+    | VersionCreateParams.WorkersBindingKindDataBlob
     | VersionCreateParams.WorkersBindingKindDispatchNamespace
     | VersionCreateParams.WorkersBindingKindDurableObjectNamespace
     | VersionCreateParams.WorkersBindingKindHyperdrive
+    | VersionCreateParams.WorkersBindingKindInherit
+    | VersionCreateParams.WorkersBindingKindImages
     | VersionCreateParams.WorkersBindingKindJson
     | VersionCreateParams.WorkersBindingKindKVNamespace
     | VersionCreateParams.WorkersBindingKindMTLSCertificate
@@ -868,13 +1030,16 @@ export interface VersionCreateParams {
     | VersionCreateParams.WorkersBindingKindQueue
     | VersionCreateParams.WorkersBindingKindR2Bucket
     | VersionCreateParams.WorkersBindingKindSecretText
+    | VersionCreateParams.WorkersBindingKindSendEmail
     | VersionCreateParams.WorkersBindingKindService
     | VersionCreateParams.WorkersBindingKindTailConsumer
+    | VersionCreateParams.WorkersBindingKindTextBlob
     | VersionCreateParams.WorkersBindingKindVectorize
     | VersionCreateParams.WorkersBindingKindVersionMetadata
     | VersionCreateParams.WorkersBindingKindSecretsStoreSecret
     | VersionCreateParams.WorkersBindingKindSecretKey
     | VersionCreateParams.WorkersBindingKindWorkflow
+    | VersionCreateParams.WorkersBindingKindWasmModule
   >;
 
   /**
@@ -910,6 +1075,15 @@ export interface VersionCreateParams {
 
   /**
    * Body param: Code, sourcemaps, and other content used at runtime.
+   *
+   * This includes
+   * [`_headers`](https://developers.cloudflare.com/workers/static-assets/headers/#custom-headers)
+   * and
+   * [`_redirects`](https://developers.cloudflare.com/workers/static-assets/redirects/)
+   * files used to configure
+   * [Static Assets](https://developers.cloudflare.com/workers/static-assets/).
+   * `_headers` and `_redirects` files should be included as modules named `_headers`
+   * and `_redirects` with content type `text/plain`.
    */
   modules?: Array<VersionCreateParams.Module>;
 
@@ -942,6 +1116,12 @@ export namespace VersionCreateParams {
 
   /**
    * Configuration for assets within a Worker.
+   *
+   * [`_headers`](https://developers.cloudflare.com/workers/static-assets/headers/#custom-headers)
+   * and
+   * [`_redirects`](https://developers.cloudflare.com/workers/static-assets/redirects/)
+   * files should be included as modules named `_headers` and `_redirects` with
+   * content type `text/plain`.
    */
   export interface Assets {
     /**
@@ -1051,6 +1231,24 @@ export namespace VersionCreateParams {
     type: 'd1';
   }
 
+  export interface WorkersBindingKindDataBlob {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The name of the file containing the data content. Only accepted for
+     * `service worker syntax` Workers.
+     */
+    part: string;
+
+    /**
+     * @deprecated The kind of resource that the binding provides.
+     */
+    type: 'data_blob';
+  }
+
   export interface WorkersBindingKindDispatchNamespace {
     /**
      * A JavaScript variable name for the binding.
@@ -1156,6 +1354,44 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'hyperdrive';
+  }
+
+  export interface WorkersBindingKindInherit {
+    /**
+     * The name of the inherited binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'inherit';
+
+    /**
+     * The old name of the inherited binding. If set, the binding will be renamed from
+     * `old_name` to `name` in the new version. If not set, the binding will keep the
+     * same name between versions.
+     */
+    old_name?: string;
+
+    /**
+     * Identifier for the version to inherit the binding from, which can be the version
+     * ID or the literal "latest" to inherit from the latest version. Defaults to
+     * inheriting the binding from the latest version.
+     */
+    version_id?: string;
+  }
+
+  export interface WorkersBindingKindImages {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'images';
   }
 
   export interface WorkersBindingKindJson {
@@ -1294,12 +1530,34 @@ export namespace VersionCreateParams {
     type: 'secret_text';
   }
 
-  export interface WorkersBindingKindService {
+  export interface WorkersBindingKindSendEmail {
     /**
-     * Optional environment if the Worker utilizes one.
+     * A JavaScript variable name for the binding.
      */
-    environment: string;
+    name: string;
 
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'send_email';
+
+    /**
+     * List of allowed destination addresses.
+     */
+    allowed_destination_addresses?: Array<string>;
+
+    /**
+     * List of allowed sender addresses.
+     */
+    allowed_sender_addresses?: Array<string>;
+
+    /**
+     * Destination address for the email.
+     */
+    destination_address?: string;
+  }
+
+  export interface WorkersBindingKindService {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -1314,6 +1572,11 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'service';
+
+    /**
+     * Optional environment if the Worker utilizes one.
+     */
+    environment?: string;
   }
 
   export interface WorkersBindingKindTailConsumer {
@@ -1331,6 +1594,24 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'tail_consumer';
+  }
+
+  export interface WorkersBindingKindTextBlob {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The name of the file containing the text content. Only accepted for
+     * `service worker syntax` Workers.
+     */
+    part: string;
+
+    /**
+     * @deprecated The kind of resource that the binding provides.
+     */
+    type: 'text_blob';
   }
 
   export interface WorkersBindingKindVectorize {
@@ -1457,6 +1738,24 @@ export namespace VersionCreateParams {
     script_name?: string;
   }
 
+  export interface WorkersBindingKindWasmModule {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The name of the file containing the WebAssembly module content. Only accepted
+     * for `service worker syntax` Workers.
+     */
+    part: string;
+
+    /**
+     * @deprecated The kind of resource that the binding provides.
+     */
+    type: 'wasm_module';
+  }
+
   /**
    * Resource limits enforced at runtime.
    */
@@ -1534,7 +1833,9 @@ export interface VersionGetParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param: Whether to include the `modules` property of the version in the
+   * response, which contains code and sourcemap content and may add several
+   * megabytes to the response size.
    */
   include?: 'modules';
 }

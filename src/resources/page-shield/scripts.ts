@@ -276,7 +276,7 @@ export interface ScriptListParams {
   exclude_urls?: string;
 
   /**
-   * Query param: Export the list of scripts as a file.
+   * Query param: Export the list of scripts as a file, limited to 50000 entries.
    */
   export?: 'csv';
 

@@ -140,7 +140,7 @@ export interface CookieListParams {
   domain?: string;
 
   /**
-   * Query param: Export the list of cookies as a file.
+   * Query param: Export the list of cookies as a file, limited to 50000 entries.
    */
   export?: 'csv';
 
