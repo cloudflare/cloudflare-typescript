@@ -349,7 +349,7 @@ export interface GatewayRule {
   /**
    * Defines the expiration time stamp and default duration of a DNS policy. Takes
    * precedence over the policy's `schedule` configuration, if any. This does not
-   * apply to HTTP or network policies. Settable only for `dns` rules.
+   * apply to HTTP or network policies.
    */
   expiration?: GatewayRule.Expiration | null;
 
@@ -367,18 +367,13 @@ export interface GatewayRule {
   read_only?: boolean;
 
   /**
-   * Set settings related to this rule. Each setting is only valid for specific rule
-   * types and can only be used with the appropriate selectors. If Terraform drift is
-   * observed in these setting values, verify that the setting is supported for the
-   * given rule type and that the API response reflects the requested value. If the
-   * API response returns sanitized or modified values that differ from the request,
-   * use the API-provided values in Terraform to ensure consistency.
+   * Set settings related to this rule.
    */
   rule_settings?: RuleSetting;
 
   /**
-   * Defines the schedule for activating DNS policies. Settable only for `dns` and
-   * `dns_resolver` rules.
+   * Defines the schedule for activating DNS policies. (HTTP/Egress or L4
+   * unsupported).
    */
   schedule?: Schedule | null;
 
@@ -409,7 +404,7 @@ export namespace GatewayRule {
   /**
    * Defines the expiration time stamp and default duration of a DNS policy. Takes
    * precedence over the policy's `schedule` configuration, if any. This does not
-   * apply to HTTP or network policies. Settable only for `dns` rules.
+   * apply to HTTP or network policies.
    */
   export interface Expiration {
     /**
@@ -435,66 +430,56 @@ export namespace GatewayRule {
 }
 
 /**
- * Set settings related to this rule. Each setting is only valid for specific rule
- * types and can only be used with the appropriate selectors. If Terraform drift is
- * observed in these setting values, verify that the setting is supported for the
- * given rule type and that the API response reflects the requested value. If the
- * API response returns sanitized or modified values that differ from the request,
- * use the API-provided values in Terraform to ensure consistency.
+ * Set settings related to this rule.
  */
 export interface RuleSetting {
   /**
    * Add custom headers to allowed requests as key-value pairs. Use header names as
-   * keys that map to arrays of header values. Settable only for `http` rules with
-   * the action set to `allow`.
+   * keys that map to arrays of header values.
    */
   add_headers?: { [key: string]: Array<string> } | null;
 
   /**
    * Set to enable MSP children to bypass this rule. Only parent MSP accounts can set
-   * this. this rule. Settable for all types of rules.
+   * this. this rule.
    */
   allow_child_bypass?: boolean | null;
 
   /**
-   * Define the settings for the Audit SSH action. Settable only for `l4` rules with
-   * `audit_ssh` action.
+   * Define the settings for the Audit SSH action.
    */
   audit_ssh?: RuleSetting.AuditSSH | null;
 
   /**
-   * Configure browser isolation behavior. Settable only for `http` rules with the
-   * action set to `isolate`.
+   * Configure browser isolation behavior.
    */
   biso_admin_controls?: RuleSetting.BISOAdminControls;
 
   /**
    * Configure custom block page settings. If missing or null, use the account
-   * settings. Settable only for `http` rules with the action set to `block`.
+   * settings.
    */
   block_page?: RuleSetting.BlockPage | null;
 
   /**
-   * Enable the custom block page. Settable only for `dns` rules with action `block`.
+   * Enable the custom block page.
    */
   block_page_enabled?: boolean;
 
   /**
    * Explain why the rule blocks the request. The custom block page shows this text
-   * (if enabled). Settable only for `dns`, `l4`, and `http` rules when the action
-   * set to `block`.
+   * (if enabled).
    */
   block_reason?: string | null;
 
   /**
    * Set to enable MSP accounts to bypass their parent's rules. Only MSP child
-   * accounts can set this. Settable for all types of rules.
+   * accounts can set this.
    */
   bypass_parent_rule?: boolean | null;
 
   /**
-   * Configure session check behavior. Settable only for `l4` and `http` rules with
-   * the action set to `allow`.
+   * Configure session check behavior.
    */
   check_session?: RuleSetting.CheckSession | null;
 
@@ -502,113 +487,100 @@ export interface RuleSetting {
    * Configure custom resolvers to route queries that match the resolver policy.
    * Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
    * settings. DNS queries get routed to the address closest to their origin. Only
-   * valid when a rule's action set to 'resolve'. Settable only for `dns_resolver`
-   * rules.
+   * valid when a rule's action is set to 'resolve'.
    */
   dns_resolvers?: RuleSetting.DNSResolvers | null;
 
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for
    * rules with Egress actions and filters, or omit it to indicate local egress via
-   * WARP IPs. Settable only for `egress` rules.
+   * WARP IPs.
    */
   egress?: RuleSetting.Egress | null;
 
   /**
    * Ignore category matches at CNAME domains in a response. When off, evaluate
    * categories in this rule against all CNAME domain categories in the response.
-   * Settable only for `dns` and `dns_resolver` rules.
    */
   ignore_cname_category_matches?: boolean;
 
   /**
    * Specify whether to disable DNSSEC validation (for Allow actions) [INSECURE].
-   * Settable only for `dns` rules.
    */
   insecure_disable_dnssec_validation?: boolean;
 
   /**
    * Enable IPs in DNS resolver category blocks. The system blocks only domain name
-   * categories unless you enable this setting. Settable only for `dns` and
-   * `dns_resolver` rules.
+   * categories unless you enable this setting.
    */
   ip_categories?: boolean;
 
   /**
    * Indicates whether to include IPs in DNS resolver indicator feed blocks. Default,
-   * indicator feeds block only domain names. Settable only for `dns` and
-   * `dns_resolver` rules.
+   * indicator feeds block only domain names.
    */
   ip_indicator_feeds?: boolean;
 
   /**
-   * Send matching traffic to the supplied destination IP address and port. Settable
-   * only for `l4` rules with the action set to `l4_override`.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   l4override?: RuleSetting.L4override | null;
 
   /**
    * Configure a notification to display on the user's device when this rule matched.
-   * Settable for all types of rules with the action set to `block`.
    */
   notification_settings?: RuleSetting.NotificationSettings | null;
 
   /**
-   * Defines a hostname for override, for the matching DNS queries. Settable only for
-   * `dns` rules with the action set to `override`.
+   * Defines a hostname for override, for the matching DNS queries.
    */
   override_host?: string;
 
   /**
-   * Defines a an IP or set of IPs for overriding matched DNS queries. Settable only
-   * for `dns` rules with the action set to `override`.
+   * Defines a an IP or set of IPs for overriding matched DNS queries.
    */
   override_ips?: Array<string> | null;
 
   /**
-   * Configure DLP payload logging. Settable only for `http` rules.
+   * Configure DLP payload logging.
    */
   payload_log?: RuleSetting.PayloadLog | null;
 
   /**
-   * Configure settings that apply to quarantine rules. Settable only for `http`
-   * rules.
+   * Configure settings that apply to quarantine rules.
    */
   quarantine?: RuleSetting.Quarantine | null;
 
   /**
-   * Apply settings to redirect rules. Settable only for `http` rules with the action
-   * set to `redirect`.
+   * Apply settings to redirect rules.
    */
   redirect?: RuleSetting.Redirect | null;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
    * specified 'view_id' as input. Not used when 'dns_resolvers' is specified or
-   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action set to
-   * 'resolve'. Settable only for `dns_resolver` rules.
+   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set
+   * to 'resolve'.
    */
   resolve_dns_internally?: RuleSetting.ResolveDNSInternally | null;
 
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
    * resolver. Cannot set when 'dns_resolvers' specified or 'resolve_dns_internally'
-   * is set. Only valid when a rule's action set to 'resolve'. Settable only for
-   * `dns_resolver` rules.
+   * is set. Only valid when a rule's action set to 'resolve'.
    */
   resolve_dns_through_cloudflare?: boolean | null;
 
   /**
    * Configure behavior when an upstream certificate is invalid or an SSL error
-   * occurs. Settable only for `http` rules with the action set to `allow`.
+   * occurs.
    */
   untrusted_cert?: RuleSetting.UntrustedCERT | null;
 }
 
 export namespace RuleSetting {
   /**
-   * Define the settings for the Audit SSH action. Settable only for `l4` rules with
-   * `audit_ssh` action.
+   * Define the settings for the Audit SSH action.
    */
   export interface AuditSSH {
     /**
@@ -618,8 +590,7 @@ export namespace RuleSetting {
   }
 
   /**
-   * Configure browser isolation behavior. Settable only for `http` rules with the
-   * action set to `isolate`.
+   * Configure browser isolation behavior.
    */
   export interface BISOAdminControls {
     /**
@@ -693,7 +664,7 @@ export namespace RuleSetting {
 
   /**
    * Configure custom block page settings. If missing or null, use the account
-   * settings. Settable only for `http` rules with the action set to `block`.
+   * settings.
    */
   export interface BlockPage {
     /**
@@ -708,8 +679,7 @@ export namespace RuleSetting {
   }
 
   /**
-   * Configure session check behavior. Settable only for `l4` and `http` rules with
-   * the action set to `allow`.
+   * Configure session check behavior.
    */
   export interface CheckSession {
     /**
@@ -728,8 +698,7 @@ export namespace RuleSetting {
    * Configure custom resolvers to route queries that match the resolver policy.
    * Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
    * settings. DNS queries get routed to the address closest to their origin. Only
-   * valid when a rule's action set to 'resolve'. Settable only for `dns_resolver`
-   * rules.
+   * valid when a rule's action is set to 'resolve'.
    */
   export interface DNSResolvers {
     ipv4?: Array<RulesAPI.DNSResolverSettingsV4>;
@@ -740,7 +709,7 @@ export namespace RuleSetting {
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for
    * rules with Egress actions and filters, or omit it to indicate local egress via
-   * WARP IPs. Settable only for `egress` rules.
+   * WARP IPs.
    */
   export interface Egress {
     /**
@@ -761,8 +730,7 @@ export namespace RuleSetting {
   }
 
   /**
-   * Send matching traffic to the supplied destination IP address and port. Settable
-   * only for `l4` rules with the action set to `l4_override`.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   export interface L4override {
     /**
@@ -778,7 +746,6 @@ export namespace RuleSetting {
 
   /**
    * Configure a notification to display on the user's device when this rule matched.
-   * Settable for all types of rules with the action set to `block`.
    */
   export interface NotificationSettings {
     /**
@@ -804,7 +771,7 @@ export namespace RuleSetting {
   }
 
   /**
-   * Configure DLP payload logging. Settable only for `http` rules.
+   * Configure DLP payload logging.
    */
   export interface PayloadLog {
     /**
@@ -814,8 +781,7 @@ export namespace RuleSetting {
   }
 
   /**
-   * Configure settings that apply to quarantine rules. Settable only for `http`
-   * rules.
+   * Configure settings that apply to quarantine rules.
    */
   export interface Quarantine {
     /**
@@ -839,8 +805,7 @@ export namespace RuleSetting {
   }
 
   /**
-   * Apply settings to redirect rules. Settable only for `http` rules with the action
-   * set to `redirect`.
+   * Apply settings to redirect rules.
    */
   export interface Redirect {
     /**
@@ -863,8 +828,8 @@ export namespace RuleSetting {
   /**
    * Configure to forward the query to the internal DNS service, passing the
    * specified 'view_id' as input. Not used when 'dns_resolvers' is specified or
-   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action set to
-   * 'resolve'. Settable only for `dns_resolver` rules.
+   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set
+   * to 'resolve'.
    */
   export interface ResolveDNSInternally {
     /**
@@ -882,7 +847,7 @@ export namespace RuleSetting {
 
   /**
    * Configure behavior when an upstream certificate is invalid or an SSL error
-   * occurs. Settable only for `http` rules with the action set to `allow`.
+   * occurs.
    */
   export interface UntrustedCERT {
     /**
@@ -894,66 +859,56 @@ export namespace RuleSetting {
 }
 
 /**
- * Set settings related to this rule. Each setting is only valid for specific rule
- * types and can only be used with the appropriate selectors. If Terraform drift is
- * observed in these setting values, verify that the setting is supported for the
- * given rule type and that the API response reflects the requested value. If the
- * API response returns sanitized or modified values that differ from the request,
- * use the API-provided values in Terraform to ensure consistency.
+ * Set settings related to this rule.
  */
 export interface RuleSettingParam {
   /**
    * Add custom headers to allowed requests as key-value pairs. Use header names as
-   * keys that map to arrays of header values. Settable only for `http` rules with
-   * the action set to `allow`.
+   * keys that map to arrays of header values.
    */
   add_headers?: { [key: string]: Array<string> } | null;
 
   /**
    * Set to enable MSP children to bypass this rule. Only parent MSP accounts can set
-   * this. this rule. Settable for all types of rules.
+   * this. this rule.
    */
   allow_child_bypass?: boolean | null;
 
   /**
-   * Define the settings for the Audit SSH action. Settable only for `l4` rules with
-   * `audit_ssh` action.
+   * Define the settings for the Audit SSH action.
    */
   audit_ssh?: RuleSettingParam.AuditSSH | null;
 
   /**
-   * Configure browser isolation behavior. Settable only for `http` rules with the
-   * action set to `isolate`.
+   * Configure browser isolation behavior.
    */
   biso_admin_controls?: RuleSettingParam.BISOAdminControls;
 
   /**
    * Configure custom block page settings. If missing or null, use the account
-   * settings. Settable only for `http` rules with the action set to `block`.
+   * settings.
    */
   block_page?: RuleSettingParam.BlockPage | null;
 
   /**
-   * Enable the custom block page. Settable only for `dns` rules with action `block`.
+   * Enable the custom block page.
    */
   block_page_enabled?: boolean;
 
   /**
    * Explain why the rule blocks the request. The custom block page shows this text
-   * (if enabled). Settable only for `dns`, `l4`, and `http` rules when the action
-   * set to `block`.
+   * (if enabled).
    */
   block_reason?: string | null;
 
   /**
    * Set to enable MSP accounts to bypass their parent's rules. Only MSP child
-   * accounts can set this. Settable for all types of rules.
+   * accounts can set this.
    */
   bypass_parent_rule?: boolean | null;
 
   /**
-   * Configure session check behavior. Settable only for `l4` and `http` rules with
-   * the action set to `allow`.
+   * Configure session check behavior.
    */
   check_session?: RuleSettingParam.CheckSession | null;
 
@@ -961,113 +916,100 @@ export interface RuleSettingParam {
    * Configure custom resolvers to route queries that match the resolver policy.
    * Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
    * settings. DNS queries get routed to the address closest to their origin. Only
-   * valid when a rule's action set to 'resolve'. Settable only for `dns_resolver`
-   * rules.
+   * valid when a rule's action is set to 'resolve'.
    */
   dns_resolvers?: RuleSettingParam.DNSResolvers | null;
 
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for
    * rules with Egress actions and filters, or omit it to indicate local egress via
-   * WARP IPs. Settable only for `egress` rules.
+   * WARP IPs.
    */
   egress?: RuleSettingParam.Egress | null;
 
   /**
    * Ignore category matches at CNAME domains in a response. When off, evaluate
    * categories in this rule against all CNAME domain categories in the response.
-   * Settable only for `dns` and `dns_resolver` rules.
    */
   ignore_cname_category_matches?: boolean;
 
   /**
    * Specify whether to disable DNSSEC validation (for Allow actions) [INSECURE].
-   * Settable only for `dns` rules.
    */
   insecure_disable_dnssec_validation?: boolean;
 
   /**
    * Enable IPs in DNS resolver category blocks. The system blocks only domain name
-   * categories unless you enable this setting. Settable only for `dns` and
-   * `dns_resolver` rules.
+   * categories unless you enable this setting.
    */
   ip_categories?: boolean;
 
   /**
    * Indicates whether to include IPs in DNS resolver indicator feed blocks. Default,
-   * indicator feeds block only domain names. Settable only for `dns` and
-   * `dns_resolver` rules.
+   * indicator feeds block only domain names.
    */
   ip_indicator_feeds?: boolean;
 
   /**
-   * Send matching traffic to the supplied destination IP address and port. Settable
-   * only for `l4` rules with the action set to `l4_override`.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   l4override?: RuleSettingParam.L4override | null;
 
   /**
    * Configure a notification to display on the user's device when this rule matched.
-   * Settable for all types of rules with the action set to `block`.
    */
   notification_settings?: RuleSettingParam.NotificationSettings | null;
 
   /**
-   * Defines a hostname for override, for the matching DNS queries. Settable only for
-   * `dns` rules with the action set to `override`.
+   * Defines a hostname for override, for the matching DNS queries.
    */
   override_host?: string;
 
   /**
-   * Defines a an IP or set of IPs for overriding matched DNS queries. Settable only
-   * for `dns` rules with the action set to `override`.
+   * Defines a an IP or set of IPs for overriding matched DNS queries.
    */
   override_ips?: Array<string> | null;
 
   /**
-   * Configure DLP payload logging. Settable only for `http` rules.
+   * Configure DLP payload logging.
    */
   payload_log?: RuleSettingParam.PayloadLog | null;
 
   /**
-   * Configure settings that apply to quarantine rules. Settable only for `http`
-   * rules.
+   * Configure settings that apply to quarantine rules.
    */
   quarantine?: RuleSettingParam.Quarantine | null;
 
   /**
-   * Apply settings to redirect rules. Settable only for `http` rules with the action
-   * set to `redirect`.
+   * Apply settings to redirect rules.
    */
   redirect?: RuleSettingParam.Redirect | null;
 
   /**
    * Configure to forward the query to the internal DNS service, passing the
    * specified 'view_id' as input. Not used when 'dns_resolvers' is specified or
-   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action set to
-   * 'resolve'. Settable only for `dns_resolver` rules.
+   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set
+   * to 'resolve'.
    */
   resolve_dns_internally?: RuleSettingParam.ResolveDNSInternally | null;
 
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
    * resolver. Cannot set when 'dns_resolvers' specified or 'resolve_dns_internally'
-   * is set. Only valid when a rule's action set to 'resolve'. Settable only for
-   * `dns_resolver` rules.
+   * is set. Only valid when a rule's action set to 'resolve'.
    */
   resolve_dns_through_cloudflare?: boolean | null;
 
   /**
    * Configure behavior when an upstream certificate is invalid or an SSL error
-   * occurs. Settable only for `http` rules with the action set to `allow`.
+   * occurs.
    */
   untrusted_cert?: RuleSettingParam.UntrustedCERT | null;
 }
 
 export namespace RuleSettingParam {
   /**
-   * Define the settings for the Audit SSH action. Settable only for `l4` rules with
-   * `audit_ssh` action.
+   * Define the settings for the Audit SSH action.
    */
   export interface AuditSSH {
     /**
@@ -1077,8 +1019,7 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Configure browser isolation behavior. Settable only for `http` rules with the
-   * action set to `isolate`.
+   * Configure browser isolation behavior.
    */
   export interface BISOAdminControls {
     /**
@@ -1152,7 +1093,7 @@ export namespace RuleSettingParam {
 
   /**
    * Configure custom block page settings. If missing or null, use the account
-   * settings. Settable only for `http` rules with the action set to `block`.
+   * settings.
    */
   export interface BlockPage {
     /**
@@ -1167,8 +1108,7 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Configure session check behavior. Settable only for `l4` and `http` rules with
-   * the action set to `allow`.
+   * Configure session check behavior.
    */
   export interface CheckSession {
     /**
@@ -1187,8 +1127,7 @@ export namespace RuleSettingParam {
    * Configure custom resolvers to route queries that match the resolver policy.
    * Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally'
    * settings. DNS queries get routed to the address closest to their origin. Only
-   * valid when a rule's action set to 'resolve'. Settable only for `dns_resolver`
-   * rules.
+   * valid when a rule's action is set to 'resolve'.
    */
   export interface DNSResolvers {
     ipv4?: Array<RulesAPI.DNSResolverSettingsV4Param>;
@@ -1199,7 +1138,7 @@ export namespace RuleSettingParam {
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for
    * rules with Egress actions and filters, or omit it to indicate local egress via
-   * WARP IPs. Settable only for `egress` rules.
+   * WARP IPs.
    */
   export interface Egress {
     /**
@@ -1220,8 +1159,7 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Send matching traffic to the supplied destination IP address and port. Settable
-   * only for `l4` rules with the action set to `l4_override`.
+   * Send matching traffic to the supplied destination IP address. and port.
    */
   export interface L4override {
     /**
@@ -1237,7 +1175,6 @@ export namespace RuleSettingParam {
 
   /**
    * Configure a notification to display on the user's device when this rule matched.
-   * Settable for all types of rules with the action set to `block`.
    */
   export interface NotificationSettings {
     /**
@@ -1263,7 +1200,7 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Configure DLP payload logging. Settable only for `http` rules.
+   * Configure DLP payload logging.
    */
   export interface PayloadLog {
     /**
@@ -1273,8 +1210,7 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Configure settings that apply to quarantine rules. Settable only for `http`
-   * rules.
+   * Configure settings that apply to quarantine rules.
    */
   export interface Quarantine {
     /**
@@ -1298,8 +1234,7 @@ export namespace RuleSettingParam {
   }
 
   /**
-   * Apply settings to redirect rules. Settable only for `http` rules with the action
-   * set to `redirect`.
+   * Apply settings to redirect rules.
    */
   export interface Redirect {
     /**
@@ -1322,8 +1257,8 @@ export namespace RuleSettingParam {
   /**
    * Configure to forward the query to the internal DNS service, passing the
    * specified 'view_id' as input. Not used when 'dns_resolvers' is specified or
-   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action set to
-   * 'resolve'. Settable only for `dns_resolver` rules.
+   * 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set
+   * to 'resolve'.
    */
   export interface ResolveDNSInternally {
     /**
@@ -1341,7 +1276,7 @@ export namespace RuleSettingParam {
 
   /**
    * Configure behavior when an upstream certificate is invalid or an SSL error
-   * occurs. Settable only for `http` rules with the action set to `allow`.
+   * occurs.
    */
   export interface UntrustedCERT {
     /**
@@ -1353,8 +1288,8 @@ export namespace RuleSettingParam {
 }
 
 /**
- * Defines the schedule for activating DNS policies. Settable only for `dns` and
- * `dns_resolver` rules.
+ * Defines the schedule for activating DNS policies. (HTTP/Egress or L4
+ * unsupported).
  */
 export interface Schedule {
   /**
@@ -1425,8 +1360,8 @@ export interface Schedule {
 }
 
 /**
- * Defines the schedule for activating DNS policies. Settable only for `dns` and
- * `dns_resolver` rules.
+ * Defines the schedule for activating DNS policies. (HTTP/Egress or L4
+ * unsupported).
  */
 export interface ScheduleParam {
   /**
@@ -1552,7 +1487,7 @@ export interface RuleCreateParams {
   /**
    * Body param: Defines the expiration time stamp and default duration of a DNS
    * policy. Takes precedence over the policy's `schedule` configuration, if any.
-   * This does not apply to HTTP or network policies. Settable only for `dns` rules.
+   * This does not apply to HTTP or network policies.
    */
   expiration?: RuleCreateParams.Expiration | null;
 
@@ -1580,19 +1515,13 @@ export interface RuleCreateParams {
   precedence?: number;
 
   /**
-   * Body param: Set settings related to this rule. Each setting is only valid for
-   * specific rule types and can only be used with the appropriate selectors. If
-   * Terraform drift is observed in these setting values, verify that the setting is
-   * supported for the given rule type and that the API response reflects the
-   * requested value. If the API response returns sanitized or modified values that
-   * differ from the request, use the API-provided values in Terraform to ensure
-   * consistency.
+   * Body param: Set settings related to this rule.
    */
   rule_settings?: RuleSettingParam;
 
   /**
-   * Body param: Defines the schedule for activating DNS policies. Settable only for
-   * `dns` and `dns_resolver` rules.
+   * Body param: Defines the schedule for activating DNS policies. (HTTP/Egress or L4
+   * unsupported).
    */
   schedule?: ScheduleParam | null;
 
@@ -1609,7 +1538,7 @@ export namespace RuleCreateParams {
   /**
    * Defines the expiration time stamp and default duration of a DNS policy. Takes
    * precedence over the policy's `schedule` configuration, if any. This does not
-   * apply to HTTP or network policies. Settable only for `dns` rules.
+   * apply to HTTP or network policies.
    */
   export interface Expiration {
     /**
@@ -1683,7 +1612,7 @@ export interface RuleUpdateParams {
   /**
    * Body param: Defines the expiration time stamp and default duration of a DNS
    * policy. Takes precedence over the policy's `schedule` configuration, if any.
-   * This does not apply to HTTP or network policies. Settable only for `dns` rules.
+   * This does not apply to HTTP or network policies.
    */
   expiration?: RuleUpdateParams.Expiration | null;
 
@@ -1711,19 +1640,13 @@ export interface RuleUpdateParams {
   precedence?: number;
 
   /**
-   * Body param: Set settings related to this rule. Each setting is only valid for
-   * specific rule types and can only be used with the appropriate selectors. If
-   * Terraform drift is observed in these setting values, verify that the setting is
-   * supported for the given rule type and that the API response reflects the
-   * requested value. If the API response returns sanitized or modified values that
-   * differ from the request, use the API-provided values in Terraform to ensure
-   * consistency.
+   * Body param: Set settings related to this rule.
    */
   rule_settings?: RuleSettingParam;
 
   /**
-   * Body param: Defines the schedule for activating DNS policies. Settable only for
-   * `dns` and `dns_resolver` rules.
+   * Body param: Defines the schedule for activating DNS policies. (HTTP/Egress or L4
+   * unsupported).
    */
   schedule?: ScheduleParam | null;
 
@@ -1740,7 +1663,7 @@ export namespace RuleUpdateParams {
   /**
    * Defines the expiration time stamp and default duration of a DNS policy. Takes
    * precedence over the policy's `schedule` configuration, if any. This does not
-   * apply to HTTP or network policies. Settable only for `dns` rules.
+   * apply to HTTP or network policies.
    */
   export interface Expiration {
     /**
