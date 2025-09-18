@@ -1,5 +1,5 @@
 {
-  "dxt_version": "0.1",
+  "dxt_version": "0.2",
   "name": "cloudflare-mcp",
   "version": "0.0.1-alpha.0",
   "description": "The official MCP Server for the Cloudflare API",
@@ -15,7 +15,7 @@
   "documentation": "https://developers.cloudflare.com/api",
   "server": {
     "type": "node",
-    "entry_point": "${__dirname}/index.js",
+    "entry_point": "index.js",
     "mcp_config": {
       "command": "node",
       "args": ["${__dirname}/index.js"],
@@ -53,6 +53,7 @@
       "type": "string"
     }
   },
+  "tools": [],
   "tools_generated": true,
   "compatibility": {
     "runtimes": {
