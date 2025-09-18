@@ -173,8 +173,6 @@ export interface DomainListResponse {
 
   authorization?: DomainListResponse.Authorization | null;
 
-  dmarc_status?: 'none' | 'good' | 'invalid' | null;
-
   emails_processed?: DomainListResponse.EmailsProcessed | null;
 
   folder?: 'AllItems' | 'Inbox' | null;
@@ -188,8 +186,6 @@ export interface DomainListResponse {
   require_tls_inbound?: boolean | null;
 
   require_tls_outbound?: boolean | null;
-
-  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid' | null;
 }
 
 export namespace DomainListResponse {
@@ -261,8 +257,6 @@ export interface DomainEditResponse {
 
   authorization?: DomainEditResponse.Authorization | null;
 
-  dmarc_status?: 'none' | 'good' | 'invalid' | null;
-
   emails_processed?: DomainEditResponse.EmailsProcessed | null;
 
   folder?: 'AllItems' | 'Inbox' | null;
@@ -276,8 +270,6 @@ export interface DomainEditResponse {
   require_tls_inbound?: boolean | null;
 
   require_tls_outbound?: boolean | null;
-
-  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid' | null;
 }
 
 export namespace DomainEditResponse {
@@ -335,8 +327,6 @@ export interface DomainGetResponse {
 
   authorization?: DomainGetResponse.Authorization | null;
 
-  dmarc_status?: 'none' | 'good' | 'invalid' | null;
-
   emails_processed?: DomainGetResponse.EmailsProcessed | null;
 
   folder?: 'AllItems' | 'Inbox' | null;
@@ -350,8 +340,6 @@ export interface DomainGetResponse {
   require_tls_inbound?: boolean | null;
 
   require_tls_outbound?: boolean | null;
-
-  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid' | null;
 }
 
 export namespace DomainGetResponse {
