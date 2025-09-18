@@ -79,6 +79,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.loadBalancers.monitors.get()`
 - `client.loadBalancers.monitors.previews.create()`
 - `client.loadBalancers.monitors.references.get()`
+- `client.loadBalancers.monitorGroups.update()`
+- `client.loadBalancers.monitorGroups.delete()`
+- `client.loadBalancers.monitorGroups.edit()`
+- `client.loadBalancers.monitorGroups.get()`
 - `client.loadBalancers.pools.update()`
 - `client.loadBalancers.pools.delete()`
 - `client.loadBalancers.pools.edit()`
