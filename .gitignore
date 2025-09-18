@@ -8,4 +8,4 @@ dist-deno
 /*.tgz
 .idea/
 dist-bundle
-*.dxt
+*.mcpb
