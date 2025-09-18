@@ -5,9 +5,7 @@ import * as Core from '../../../core';
 
 export class Stats extends APIResource {
   /**
-   * Fetch image statistics details for Cloudflare Images. The returned statistics
-   * detail storage usage, including the current image count vs this account's
-   * allowance.
+   * Fetch usage statistics details for Cloudflare Images.
    *
    * @example
    * ```ts
