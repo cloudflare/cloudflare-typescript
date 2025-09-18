@@ -402,7 +402,12 @@ export interface CustomCertificateSettingsParam {
 }
 
 /**
- * Specify user emails settings for the firewall policies.
+ * Specify user email settings for the firewall policies. When this is enabled, we
+ * standardize the email addresses in the identity part of the rule, so that they
+ * match the extended email variants in the firewall policies. When this setting is
+ * turned off, the email addresses in the identity part of the rule will be matched
+ * exactly as provided. If your email has `.` or `+` modifiers, you should enable
+ * this setting.
  */
 export interface ExtendedEmailMatching {
   /**
@@ -429,7 +434,12 @@ export interface ExtendedEmailMatching {
 }
 
 /**
- * Specify user emails settings for the firewall policies.
+ * Specify user email settings for the firewall policies. When this is enabled, we
+ * standardize the email addresses in the identity part of the rule, so that they
+ * match the extended email variants in the firewall policies. When this setting is
+ * turned off, the email addresses in the identity part of the rule will be matched
+ * exactly as provided. If your email has `.` or `+` modifiers, you should enable
+ * this setting.
  */
 export interface ExtendedEmailMatchingParam {
   /**
@@ -501,7 +511,12 @@ export interface GatewayConfigurationSettings {
   custom_certificate?: CustomCertificateSettings | null;
 
   /**
-   * Specify user emails settings for the firewall policies.
+   * Specify user email settings for the firewall policies. When this is enabled, we
+   * standardize the email addresses in the identity part of the rule, so that they
+   * match the extended email variants in the firewall policies. When this setting is
+   * turned off, the email addresses in the identity part of the rule will be matched
+   * exactly as provided. If your email has `.` or `+` modifiers, you should enable
+   * this setting.
    */
   extended_email_matching?: ExtendedEmailMatching | null;
 
@@ -632,7 +647,12 @@ export interface GatewayConfigurationSettingsParam {
   custom_certificate?: CustomCertificateSettingsParam | null;
 
   /**
-   * Specify user emails settings for the firewall policies.
+   * Specify user email settings for the firewall policies. When this is enabled, we
+   * standardize the email addresses in the identity part of the rule, so that they
+   * match the extended email variants in the firewall policies. When this setting is
+   * turned off, the email addresses in the identity part of the rule will be matched
+   * exactly as provided. If your email has `.` or `+` modifiers, you should enable
+   * this setting.
    */
   extended_email_matching?: ExtendedEmailMatchingParam | null;
 
