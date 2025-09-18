@@ -66,7 +66,7 @@ export const tool: Tool = {
       expiration: {
         type: 'object',
         description:
-          "Defines the expiration time stamp and default duration of a DNS policy. Takes precedence over the policy's `schedule` configuration, if any. This  does not apply to HTTP or network policies. Settable only for `dns` rules.",
+          "Defines the expiration time stamp and default duration of a DNS policy. Takes precedence over the policy's `schedule` configuration, if any. This  does not apply to HTTP or network policies.",
         properties: {
           expires_at: {
             type: 'string',
@@ -125,24 +125,22 @@ export const tool: Tool = {
       },
       rule_setting: {
         type: 'object',
-        description:
-          'Set settings related to this rule. Each setting is only valid for specific rule types and can only be used with the appropriate selectors. If Terraform drift is observed in these setting values, verify that the setting is supported for the given rule type and that the API response reflects the requested value. If the API response returns sanitized or modified values that differ from the request, use the API-provided values in Terraform to ensure consistency.',
+        description: 'Set settings related to this rule.',
         properties: {
           add_headers: {
             type: 'object',
             description:
-              'Add custom headers to allowed requests as key-value pairs. Use header names as keys that map to arrays of header values. Settable only for `http` rules with the action set to `allow`.',
+              'Add custom headers to allowed requests as key-value pairs. Use header names as keys that map to arrays of header values.',
             additionalProperties: true,
           },
           allow_child_bypass: {
             type: 'boolean',
             description:
-              'Set to enable MSP children to bypass this rule. Only parent MSP accounts can set this. this rule. Settable for all types of rules.',
+              'Set to enable MSP children to bypass this rule. Only parent MSP accounts can set this. this rule.',
           },
           audit_ssh: {
             type: 'object',
-            description:
-              'Define the settings for the Audit SSH action. Settable only for `l4` rules with `audit_ssh` action.',
+            description: 'Define the settings for the Audit SSH action.',
             properties: {
               command_logging: {
                 type: 'boolean',
@@ -152,8 +150,7 @@ export const tool: Tool = {
           },
           biso_admin_controls: {
             type: 'object',
-            description:
-              'Configure browser isolation behavior. Settable only for `http` rules with the action set to `isolate`.',
+            description: 'Configure browser isolation behavior.',
             properties: {
               copy: {
                 type: 'string',
@@ -221,7 +218,7 @@ export const tool: Tool = {
           block_page: {
             type: 'object',
             description:
-              'Configure custom block page settings. If missing or null, use the account settings. Settable only for `http` rules with the action set to `block`.',
+              'Configure custom block page settings. If missing or null, use the account settings.',
             properties: {
               target_uri: {
                 type: 'string',
@@ -236,22 +233,21 @@ export const tool: Tool = {
           },
           block_page_enabled: {
             type: 'boolean',
-            description: 'Enable the custom block page. Settable only for `dns` rules with action `block`.',
+            description: 'Enable the custom block page.',
           },
           block_reason: {
             type: 'string',
             description:
-              'Explain why the rule blocks the request. The custom block page shows this text (if enabled). Settable only for `dns`, `l4`, and `http` rules when the action set to `block`.',
+              'Explain why the rule blocks the request. The custom block page shows this text (if enabled).',
           },
           bypass_parent_rule: {
             type: 'boolean',
             description:
-              "Set to enable MSP accounts to bypass their parent's rules. Only MSP child accounts can set this. Settable for all types of rules.",
+              "Set to enable MSP accounts to bypass their parent's rules. Only MSP child accounts can set this.",
           },
           check_session: {
             type: 'object',
-            description:
-              'Configure session check behavior. Settable only for `l4` and `http` rules with the action set to `allow`.',
+            description: 'Configure session check behavior.',
             properties: {
               duration: {
                 type: 'string',
@@ -267,7 +263,7 @@ export const tool: Tool = {
           dns_resolvers: {
             type: 'object',
             description:
-              "Configure custom resolvers to route queries that match the resolver policy. Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' settings. DNS queries get routed to the address closest to their origin. Only valid when a rule's action set to 'resolve'. Settable only for `dns_resolver` rules.",
+              "Configure custom resolvers to route queries that match the resolver policy. Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' settings. DNS queries get routed to the address closest to their origin. Only valid when a rule's action is set to 'resolve'.",
             properties: {
               ipv4: {
                 type: 'array',
@@ -286,7 +282,7 @@ export const tool: Tool = {
           egress: {
             type: 'object',
             description:
-              'Configure how Gateway Proxy traffic egresses. You can enable this setting for rules with Egress actions and filters, or omit it to indicate local egress via WARP IPs. Settable only for `egress` rules.',
+              'Configure how Gateway Proxy traffic egresses. You can enable this setting for rules with Egress actions and filters, or omit it to indicate local egress via WARP IPs.',
             properties: {
               ipv4: {
                 type: 'string',
@@ -306,27 +302,25 @@ export const tool: Tool = {
           ignore_cname_category_matches: {
             type: 'boolean',
             description:
-              'Ignore category matches at CNAME domains in a response. When off, evaluate categories in this rule against all CNAME domain categories in the response. Settable only for `dns` and `dns_resolver` rules.',
+              'Ignore category matches at CNAME domains in a response. When off, evaluate categories in this rule against all CNAME domain categories in the response.',
           },
           insecure_disable_dnssec_validation: {
             type: 'boolean',
-            description:
-              'Specify whether to disable DNSSEC validation (for Allow actions) [INSECURE]. Settable only for `dns` rules.',
+            description: 'Specify whether to disable DNSSEC validation (for Allow actions) [INSECURE].',
           },
           ip_categories: {
             type: 'boolean',
             description:
-              'Enable IPs in DNS resolver category blocks. The system blocks only domain name categories unless you enable this setting. Settable only for `dns` and `dns_resolver` rules.',
+              'Enable IPs in DNS resolver category blocks. The system blocks only domain name categories unless you enable this setting.',
           },
           ip_indicator_feeds: {
             type: 'boolean',
             description:
-              'Indicates whether to include IPs in DNS resolver indicator feed blocks. Default, indicator feeds block only domain names. Settable only for `dns` and `dns_resolver` rules.',
+              'Indicates whether to include IPs in DNS resolver indicator feed blocks. Default, indicator feeds block only domain names.',
           },
           l4override: {
             type: 'object',
-            description:
-              'Send matching traffic to the supplied destination IP address and port. Settable only for `l4` rules with the action set to `l4_override`.',
+            description: 'Send matching traffic to the supplied destination IP address. and port.',
             properties: {
               ip: {
                 type: 'string',
@@ -340,8 +334,7 @@ export const tool: Tool = {
           },
           notification_settings: {
             type: 'object',
-            description:
-              "Configure a notification to display on the user's device when this rule matched. Settable for all types of rules with the action set to `block`.",
+            description: "Configure a notification to display on the user's device when this rule matched.",
             properties: {
               enabled: {
                 type: 'boolean',
@@ -364,13 +357,11 @@ export const tool: Tool = {
           },
           override_host: {
             type: 'string',
-            description:
-              'Defines a hostname for override, for the matching DNS queries. Settable only for `dns` rules with the action set to `override`.',
+            description: 'Defines a hostname for override, for the matching DNS queries.',
           },
           override_ips: {
             type: 'array',
-            description:
-              'Defines a an IP or set of IPs for overriding matched DNS queries. Settable only for `dns` rules with the action set to `override`.',
+            description: 'Defines a an IP or set of IPs for overriding matched DNS queries.',
             items: {
               type: 'string',
               description: 'Defines the IPv4 or IPv6 address.',
@@ -378,7 +369,7 @@ export const tool: Tool = {
           },
           payload_log: {
             type: 'object',
-            description: 'Configure DLP payload logging. Settable only for `http` rules.',
+            description: 'Configure DLP payload logging.',
             properties: {
               enabled: {
                 type: 'boolean',
@@ -388,7 +379,7 @@ export const tool: Tool = {
           },
           quarantine: {
             type: 'object',
-            description: 'Configure settings that apply to quarantine rules. Settable only for `http` rules.',
+            description: 'Configure settings that apply to quarantine rules.',
             properties: {
               file_types: {
                 type: 'array',
@@ -416,8 +407,7 @@ export const tool: Tool = {
           },
           redirect: {
             type: 'object',
-            description:
-              'Apply settings to redirect rules. Settable only for `http` rules with the action set to `redirect`.',
+            description: 'Apply settings to redirect rules.',
             properties: {
               target_uri: {
                 type: 'string',
@@ -438,7 +428,7 @@ export const tool: Tool = {
           resolve_dns_internally: {
             type: 'object',
             description:
-              "Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Not used when 'dns_resolvers' is specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action set to 'resolve'. Settable only for `dns_resolver` rules.",
+              "Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Not used when 'dns_resolvers' is specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set to 'resolve'.",
             properties: {
               fallback: {
                 type: 'string',
@@ -455,12 +445,11 @@ export const tool: Tool = {
           resolve_dns_through_cloudflare: {
             type: 'boolean',
             description:
-              "Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot set when 'dns_resolvers' specified or 'resolve_dns_internally' is set. Only valid when a rule's action set to 'resolve'. Settable only for `dns_resolver` rules.",
+              "Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot set when 'dns_resolvers' specified or 'resolve_dns_internally' is set. Only valid when a rule's action set to 'resolve'.",
           },
           untrusted_cert: {
             type: 'object',
-            description:
-              'Configure behavior when an upstream certificate is invalid or an SSL error occurs. Settable only for `http` rules with the action set to `allow`.',
+            description: 'Configure behavior when an upstream certificate is invalid or an SSL error occurs.',
             properties: {
               action: {
                 type: 'string',
@@ -524,8 +513,7 @@ export const tool: Tool = {
       },
       schedule: {
         type: 'object',
-        description:
-          'Defines the schedule for activating DNS policies. Settable only for `dns` and `dns_resolver` rules.',
+        description: 'Defines the schedule for activating DNS policies. (HTTP/Egress or L4 unsupported).',
         properties: {
           fri: {
             type: 'string',
