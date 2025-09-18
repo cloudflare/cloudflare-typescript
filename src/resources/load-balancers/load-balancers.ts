@@ -2,6 +2,18 @@
 
 import { APIResource } from '../../core/resource';
 import * as LoadBalancersAPI from './load-balancers';
+import * as MonitorGroupsAPI from './monitor-groups';
+import {
+  MonitorGroup,
+  MonitorGroupCreateParams,
+  MonitorGroupDeleteParams,
+  MonitorGroupEditParams,
+  MonitorGroupGetParams,
+  MonitorGroupListParams,
+  MonitorGroupUpdateParams,
+  MonitorGroups,
+  MonitorGroupsSinglePage,
+} from './monitor-groups';
 import * as PreviewsAPI from './previews';
 import { PreviewGetParams, PreviewGetResponse, Previews } from './previews';
 import * as RegionsAPI from './regions';
@@ -47,6 +59,7 @@ import { path } from '../../internal/utils/path';
 
 export class LoadBalancers extends APIResource {
   monitors: MonitorsAPI.Monitors = new MonitorsAPI.Monitors(this._client);
+  monitorGroups: MonitorGroupsAPI.MonitorGroups = new MonitorGroupsAPI.MonitorGroups(this._client);
   pools: PoolsAPI.Pools = new PoolsAPI.Pools(this._client);
   previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
   regions: RegionsAPI.Regions = new RegionsAPI.Regions(this._client);
@@ -2132,6 +2145,7 @@ export interface LoadBalancerGetParams {
 }
 
 LoadBalancers.Monitors = Monitors;
+LoadBalancers.MonitorGroups = MonitorGroups;
 LoadBalancers.Pools = Pools;
 LoadBalancers.Previews = Previews;
 LoadBalancers.Regions = Regions;
@@ -2177,6 +2191,18 @@ export declare namespace LoadBalancers {
     type MonitorDeleteParams as MonitorDeleteParams,
     type MonitorEditParams as MonitorEditParams,
     type MonitorGetParams as MonitorGetParams,
+  };
+
+  export {
+    MonitorGroups as MonitorGroups,
+    type MonitorGroup as MonitorGroup,
+    type MonitorGroupsSinglePage as MonitorGroupsSinglePage,
+    type MonitorGroupCreateParams as MonitorGroupCreateParams,
+    type MonitorGroupUpdateParams as MonitorGroupUpdateParams,
+    type MonitorGroupListParams as MonitorGroupListParams,
+    type MonitorGroupDeleteParams as MonitorGroupDeleteParams,
+    type MonitorGroupEditParams as MonitorGroupEditParams,
+    type MonitorGroupGetParams as MonitorGroupGetParams,
   };
 
   export {

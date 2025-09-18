@@ -434,6 +434,15 @@ The following tools are available in this MCP server.
 
 - `get_monitors_load_balancers_references` (`read`): Get the list of resources that reference the provided monitor.
 
+### Resource `load_balancers.monitor_groups`:
+
+- `create_load_balancers_monitor_groups` (`write`): Create a new monitor group.
+- `update_load_balancers_monitor_groups` (`write`): Modify a configured monitor group.
+- `list_load_balancers_monitor_groups` (`read`): List configured monitor groups.
+- `delete_load_balancers_monitor_groups` (`write`): Delete a configured monitor group.
+- `edit_load_balancers_monitor_groups` (`write`): Apply changes to an existing monitor group, overwriting the supplied properties.
+- `get_load_balancers_monitor_groups` (`read`): Fetch a single configured monitor group.
+
 ### Resource `load_balancers.pools`:
 
 - `create_load_balancers_pools` (`write`): Create a new pool.
