@@ -487,6 +487,21 @@ Methods:
 
 - <code title="get /accounts/{account_id}/load_balancers/monitors/{monitor_id}/references">client.loadBalancers.monitors.references.<a href="./src/resources/load-balancers/monitors/references.ts">get</a>(monitorId, { ...params }) -> ReferenceGetResponsesSinglePage</code>
 
+## MonitorGroups
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/monitor-groups.ts">MonitorGroup</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/load_balancers/monitor_groups">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">create</a>({ ...params }) -> MonitorGroup</code>
+- <code title="put /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">update</a>(monitorGroupId, { ...params }) -> MonitorGroup</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitor_groups">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">list</a>({ ...params }) -> MonitorGroupsSinglePage</code>
+- <code title="delete /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">delete</a>(monitorGroupId, { ...params }) -> MonitorGroup</code>
+- <code title="patch /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">edit</a>(monitorGroupId, { ...params }) -> MonitorGroup</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">get</a>(monitorGroupId, { ...params }) -> MonitorGroup</code>
+
 ## Pools
 
 Types:

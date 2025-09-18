@@ -3,6 +3,18 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as LoadBalancersAPI from './load-balancers';
+import * as MonitorGroupsAPI from './monitor-groups';
+import {
+  MonitorGroup,
+  MonitorGroupCreateParams,
+  MonitorGroupDeleteParams,
+  MonitorGroupEditParams,
+  MonitorGroupGetParams,
+  MonitorGroupListParams,
+  MonitorGroupUpdateParams,
+  MonitorGroups,
+  MonitorGroupsSinglePage,
+} from './monitor-groups';
 import * as PreviewsAPI from './previews';
 import { PreviewGetParams, PreviewGetResponse, Previews } from './previews';
 import * as RegionsAPI from './regions';
@@ -45,6 +57,7 @@ import { SinglePage } from '../../pagination';
 
 export class LoadBalancers extends APIResource {
   monitors: MonitorsAPI.Monitors = new MonitorsAPI.Monitors(this._client);
+  monitorGroups: MonitorGroupsAPI.MonitorGroups = new MonitorGroupsAPI.MonitorGroups(this._client);
   pools: PoolsAPI.Pools = new PoolsAPI.Pools(this._client);
   previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
   regions: RegionsAPI.Regions = new RegionsAPI.Regions(this._client);
@@ -2132,6 +2145,8 @@ export interface LoadBalancerGetParams {
 LoadBalancers.LoadBalancersSinglePage = LoadBalancersSinglePage;
 LoadBalancers.Monitors = Monitors;
 LoadBalancers.MonitorsSinglePage = MonitorsSinglePage;
+LoadBalancers.MonitorGroups = MonitorGroups;
+LoadBalancers.MonitorGroupsSinglePage = MonitorGroupsSinglePage;
 LoadBalancers.Pools = Pools;
 LoadBalancers.PoolsSinglePage = PoolsSinglePage;
 LoadBalancers.Previews = Previews;
@@ -2179,6 +2194,18 @@ export declare namespace LoadBalancers {
     type MonitorDeleteParams as MonitorDeleteParams,
     type MonitorEditParams as MonitorEditParams,
     type MonitorGetParams as MonitorGetParams,
+  };
+
+  export {
+    MonitorGroups as MonitorGroups,
+    type MonitorGroup as MonitorGroup,
+    MonitorGroupsSinglePage as MonitorGroupsSinglePage,
+    type MonitorGroupCreateParams as MonitorGroupCreateParams,
+    type MonitorGroupUpdateParams as MonitorGroupUpdateParams,
+    type MonitorGroupListParams as MonitorGroupListParams,
+    type MonitorGroupDeleteParams as MonitorGroupDeleteParams,
+    type MonitorGroupEditParams as MonitorGroupEditParams,
+    type MonitorGroupGetParams as MonitorGroupGetParams,
   };
 
   export {
