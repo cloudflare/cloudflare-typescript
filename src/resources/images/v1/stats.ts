@@ -7,7 +7,9 @@ import { path } from '../../../internal/utils/path';
 
 export class Stats extends APIResource {
   /**
-   * Fetch usage statistics details for Cloudflare Images.
+   * Fetch image statistics details for Cloudflare Images. The returned statistics
+   * detail storage usage, including the current image count vs this account's
+   * allowance.
    *
    * @example
    * ```ts

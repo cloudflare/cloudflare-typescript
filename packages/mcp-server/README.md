@@ -1728,7 +1728,7 @@ The following tools are available in this MCP server.
 
 ### Resource `images.v1.stats`:
 
-- `get_v1_images_stats` (`read`): Fetch usage statistics details for Cloudflare Images.
+- `get_v1_images_stats` (`read`): Fetch image statistics details for Cloudflare Images. The returned statistics detail storage usage, including the current image count vs this account's allowance.
 
 ### Resource `images.v1.variants`:
 
