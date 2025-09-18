@@ -42,6 +42,7 @@ TEST_PATHS=(
 	tests/api-resources/load-balancers/monitors/monitors.test.ts
 	tests/api-resources/load-balancers/monitors/previews.test.ts
 	tests/api-resources/load-balancers/monitors/references.test.ts
+	tests/api-resources/load-balancers/monitor-groups.test.ts
 	tests/api-resources/load-balancers/pools/pools.test.ts
 	tests/api-resources/load-balancers/pools/health.test.ts
 	tests/api-resources/load-balancers/pools/references.test.ts
