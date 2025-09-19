@@ -12,6 +12,9 @@ export class Items extends APIResource {
    * This operation is asynchronous. To get current the operation status, invoke the
    * `Get bulk operation status` endpoint with the returned `operation_id`.
    *
+   * There is a limit of 1 pending bulk operation per account. If an outstanding bulk
+   * operation is in progress, the request will be rejected.
+   *
    * @example
    * ```ts
    * const item = await client.rules.lists.items.create(
@@ -43,6 +46,9 @@ export class Items extends APIResource {
    *
    * This operation is asynchronous. To get current the operation status, invoke the
    * `Get bulk operation status` endpoint with the returned `operation_id`.
+   *
+   * There is a limit of 1 pending bulk operation per account. If an outstanding bulk
+   * operation is in progress, the request will be rejected.
    *
    * @example
    * ```ts
@@ -101,6 +107,9 @@ export class Items extends APIResource {
    *
    * This operation is asynchronous. To get current the operation status, invoke the
    * `Get bulk operation status` endpoint with the returned `operation_id`.
+   *
+   * There is a limit of 1 pending bulk operation per account. If an outstanding bulk
+   * operation is in progress, the request will be rejected.
    *
    * @example
    * ```ts
