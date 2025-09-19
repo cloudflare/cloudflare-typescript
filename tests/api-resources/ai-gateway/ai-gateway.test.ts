@@ -83,6 +83,7 @@ describe('resource aiGateway', () => {
       logpush: true,
       logpush_public_key: 'xxxxxxxxxxxxxxxx',
       store_id: 'store_id',
+      stripe: { authorization: 'authorization', usage_events: [{ payload: 'payload' }] },
     });
   });
 
