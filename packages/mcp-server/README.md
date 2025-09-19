@@ -2141,14 +2141,20 @@ The following tools are available in this MCP server.
 
   This operation is asynchronous. To get current the operation status, invoke the `Get bulk operation status` endpoint with the returned `operation_id`.
 
+  There is a limit of 1 pending bulk operation per account. If an outstanding bulk operation is in progress, the request will be rejected.
+
 - `update_lists_rules_items` (`write`): Removes all existing items from the list and adds the provided items to the list.
 
   This operation is asynchronous. To get current the operation status, invoke the `Get bulk operation status` endpoint with the returned `operation_id`.
+
+  There is a limit of 1 pending bulk operation per account. If an outstanding bulk operation is in progress, the request will be rejected.
 
 - `list_lists_rules_items` (`read`): Fetches all the items in the list.
 - `delete_lists_rules_items` (`write`): Removes one or more items from a list.
 
   This operation is asynchronous. To get current the operation status, invoke the `Get bulk operation status` endpoint with the returned `operation_id`.
+
+  There is a limit of 1 pending bulk operation per account. If an outstanding bulk operation is in progress, the request will be rejected.
 
 - `get_lists_rules_items` (`read`): Fetches a list item in the list.
 
