@@ -239,6 +239,8 @@ export interface AIGatewayCreateResponse {
   logpush_public_key?: string | null;
 
   store_id?: string | null;
+
+  stripe?: AIGatewayCreateResponse.Stripe | null;
 }
 
 export namespace AIGatewayCreateResponse {
@@ -267,6 +269,18 @@ export namespace AIGatewayCreateResponse {
       enabled: boolean;
 
       profiles: Array<string>;
+    }
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
     }
   }
 }
@@ -312,6 +326,8 @@ export interface AIGatewayUpdateResponse {
   logpush_public_key?: string | null;
 
   store_id?: string | null;
+
+  stripe?: AIGatewayUpdateResponse.Stripe | null;
 }
 
 export namespace AIGatewayUpdateResponse {
@@ -340,6 +356,18 @@ export namespace AIGatewayUpdateResponse {
       enabled: boolean;
 
       profiles: Array<string>;
+    }
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
     }
   }
 }
@@ -385,6 +413,8 @@ export interface AIGatewayListResponse {
   logpush_public_key?: string | null;
 
   store_id?: string | null;
+
+  stripe?: AIGatewayListResponse.Stripe | null;
 }
 
 export namespace AIGatewayListResponse {
@@ -413,6 +443,18 @@ export namespace AIGatewayListResponse {
       enabled: boolean;
 
       profiles: Array<string>;
+    }
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
     }
   }
 }
@@ -458,6 +500,8 @@ export interface AIGatewayDeleteResponse {
   logpush_public_key?: string | null;
 
   store_id?: string | null;
+
+  stripe?: AIGatewayDeleteResponse.Stripe | null;
 }
 
 export namespace AIGatewayDeleteResponse {
@@ -486,6 +530,18 @@ export namespace AIGatewayDeleteResponse {
       enabled: boolean;
 
       profiles: Array<string>;
+    }
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
     }
   }
 }
@@ -531,6 +587,8 @@ export interface AIGatewayGetResponse {
   logpush_public_key?: string | null;
 
   store_id?: string | null;
+
+  stripe?: AIGatewayGetResponse.Stripe | null;
 }
 
 export namespace AIGatewayGetResponse {
@@ -559,6 +617,18 @@ export namespace AIGatewayGetResponse {
       enabled: boolean;
 
       profiles: Array<string>;
+    }
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
     }
   }
 }
@@ -700,6 +770,11 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   store_id?: string | null;
+
+  /**
+   * Body param:
+   */
+  stripe?: AIGatewayUpdateParams.Stripe | null;
 }
 
 export namespace AIGatewayUpdateParams {
@@ -728,6 +803,18 @@ export namespace AIGatewayUpdateParams {
       enabled: boolean;
 
       profiles: Array<string>;
+    }
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
     }
   }
 }
