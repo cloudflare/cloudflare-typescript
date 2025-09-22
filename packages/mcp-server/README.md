@@ -4105,20 +4105,17 @@ The following tools are available in this MCP server.
 - `delete_resource_sharing_resources` (`write`): Deletion is not immediate, an updated share resource object with a new status will be returned.
 - `get_resource_sharing_resources` (`read`): Get share resource by ID.
 
-### Resource `content_scanning`:
+### Resource `leaked_credential_checks`:
 
-- `disable_content_scanning` (`write`): Disable Content Scanning.
-- `enable_content_scanning` (`write`): Enable Content Scanning.
+- `create_leaked_credential_checks` (`write`): Updates the current status of Leaked Credential Checks.
+- `get_leaked_credential_checks` (`read`): Retrieves the current status of Leaked Credential Checks.
 
-### Resource `content_scanning.payloads`:
+### Resource `leaked_credential_checks.detections`:
 
-- `create_content_scanning_payloads` (`write`): Add custom scan expressions for Content Scanning.
-- `list_content_scanning_payloads` (`read`): Get a list of existing custom scan expressions for Content Scanning.
-- `delete_content_scanning_payloads` (`write`): Delete a Content Scan Custom Expression.
-
-### Resource `content_scanning.settings`:
-
-- `get_content_scanning_settings` (`read`): Retrieve the current status of Content Scanning.
+- `create_leaked_credential_checks_detections` (`write`): Create user-defined detection pattern for Leaked Credential Checks.
+- `update_leaked_credential_checks_detections` (`write`): Update user-defined detection pattern for Leaked Credential Checks.
+- `list_leaked_credential_checks_detections` (`read`): List user-defined detection patterns for Leaked Credential Checks.
+- `delete_leaked_credential_checks_detections` (`write`): Remove user-defined detection pattern for Leaked Credential Checks.
 
 ### Resource `abuse_reports`:
 
