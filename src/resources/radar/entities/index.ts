@@ -3,10 +3,12 @@
 export {
   ASNs,
   type ASNListResponse,
+  type ASNAsSetResponse,
   type ASNGetResponse,
   type ASNIPResponse,
   type ASNRelResponse,
   type ASNListParams,
+  type ASNAsSetParams,
   type ASNGetParams,
   type ASNIPParams,
   type ASNRelParams,
