@@ -8,10 +8,4 @@ export {
   type SmartRoutingEditParams,
   type SmartRoutingGetParams,
 } from './smart-routing';
-export {
-  TieredCaching,
-  type TieredCachingEditResponse,
-  type TieredCachingGetResponse,
-  type TieredCachingEditParams,
-  type TieredCachingGetParams,
-} from './tiered-caching';
+export { TieredCaching } from './tiered-caching';

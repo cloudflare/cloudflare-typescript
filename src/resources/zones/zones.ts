@@ -38,7 +38,6 @@ import {
 import * as SettingsAPI from './settings';
 import {
   AdvancedDDoS,
-  Aegis,
   AlwaysOnline,
   AlwaysUseHTTPS,
   AutomaticHTTPSRewrites,
@@ -67,7 +66,6 @@ import {
   OpportunisticOnion,
   OrangeToOrange,
   OriginErrorPagePassThru,
-  OriginMaxHTTPVersion,
   Polish,
   PrefetchPreload,
   ProxyReadTimeout,
@@ -683,7 +681,6 @@ export declare namespace Zones {
   export {
     Settings as Settings,
     type AdvancedDDoS as AdvancedDDoS,
-    type Aegis as Aegis,
     type AlwaysOnline as AlwaysOnline,
     type AlwaysUseHTTPS as AlwaysUseHTTPS,
     type AutomaticHTTPSRewrites as AutomaticHTTPSRewrites,
@@ -712,7 +709,6 @@ export declare namespace Zones {
     type OpportunisticOnion as OpportunisticOnion,
     type OrangeToOrange as OrangeToOrange,
     type OriginErrorPagePassThru as OriginErrorPagePassThru,
-    type OriginMaxHTTPVersion as OriginMaxHTTPVersion,
     type Polish as Polish,
     type PrefetchPreload as PrefetchPreload,
     type ProxyReadTimeout as ProxyReadTimeout,

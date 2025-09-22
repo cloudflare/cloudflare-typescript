@@ -3,59 +3,22 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as CacheReserveAPI from './cache-reserve';
-import {
-  CacheReserve,
-  CacheReserveClear,
-  CacheReserveClearParams,
-  CacheReserveClearResponse,
-  CacheReserveEditParams,
-  CacheReserveEditResponse,
-  CacheReserveGetParams,
-  CacheReserveGetResponse,
-  CacheReserveResource,
-  CacheReserveStatusParams,
-  CacheReserveStatusResponse,
-  State,
-} from './cache-reserve';
+import { CacheReserve } from './cache-reserve';
 import * as RegionalTieredCacheAPI from './regional-tiered-cache';
-import {
-  RegionalTieredCache,
-  RegionalTieredCacheEditParams,
-  RegionalTieredCacheEditResponse,
-  RegionalTieredCacheGetParams,
-  RegionalTieredCacheGetResponse,
-  RegionalTieredCacheResource,
-} from './regional-tiered-cache';
+import { RegionalTieredCache } from './regional-tiered-cache';
 import * as SmartTieredCacheAPI from './smart-tiered-cache';
-import {
-  SmartTieredCache,
-  SmartTieredCacheDeleteParams,
-  SmartTieredCacheDeleteResponse,
-  SmartTieredCacheEditParams,
-  SmartTieredCacheEditResponse,
-  SmartTieredCacheGetParams,
-  SmartTieredCacheGetResponse,
-} from './smart-tiered-cache';
+import { SmartTieredCache } from './smart-tiered-cache';
 import * as VariantsAPI from './variants';
-import {
-  CacheVariant,
-  VariantDeleteParams,
-  VariantDeleteResponse,
-  VariantEditParams,
-  VariantEditResponse,
-  VariantGetParams,
-  VariantGetResponse,
-  Variants,
-} from './variants';
+import { Variants } from './variants';
 
 export class Cache extends APIResource {
-  cacheReserve: CacheReserveAPI.CacheReserveResource = new CacheReserveAPI.CacheReserveResource(this._client);
+  cacheReserve: CacheReserveAPI.CacheReserve = new CacheReserveAPI.CacheReserve(this._client);
   smartTieredCache: SmartTieredCacheAPI.SmartTieredCache = new SmartTieredCacheAPI.SmartTieredCache(
     this._client,
   );
   variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
-  regionalTieredCache: RegionalTieredCacheAPI.RegionalTieredCacheResource =
-    new RegionalTieredCacheAPI.RegionalTieredCacheResource(this._client);
+  regionalTieredCache: RegionalTieredCacheAPI.RegionalTieredCache =
+    new RegionalTieredCacheAPI.RegionalTieredCache(this._client);
 
   /**
    * ### Purge All Cached Content
@@ -239,56 +202,19 @@ export declare namespace CachePurgeParams {
   }
 }
 
-Cache.CacheReserveResource = CacheReserveResource;
+Cache.CacheReserve = CacheReserve;
 Cache.SmartTieredCache = SmartTieredCache;
 Cache.Variants = Variants;
-Cache.RegionalTieredCacheResource = RegionalTieredCacheResource;
+Cache.RegionalTieredCache = RegionalTieredCache;
 
 export declare namespace Cache {
   export { type CachePurgeResponse as CachePurgeResponse, type CachePurgeParams as CachePurgeParams };
 
-  export {
-    CacheReserveResource as CacheReserveResource,
-    type CacheReserve as CacheReserve,
-    type CacheReserveClear as CacheReserveClear,
-    type State as State,
-    type CacheReserveClearResponse as CacheReserveClearResponse,
-    type CacheReserveEditResponse as CacheReserveEditResponse,
-    type CacheReserveGetResponse as CacheReserveGetResponse,
-    type CacheReserveStatusResponse as CacheReserveStatusResponse,
-    type CacheReserveClearParams as CacheReserveClearParams,
-    type CacheReserveEditParams as CacheReserveEditParams,
-    type CacheReserveGetParams as CacheReserveGetParams,
-    type CacheReserveStatusParams as CacheReserveStatusParams,
-  };
+  export { CacheReserve as CacheReserve };
 
-  export {
-    SmartTieredCache as SmartTieredCache,
-    type SmartTieredCacheDeleteResponse as SmartTieredCacheDeleteResponse,
-    type SmartTieredCacheEditResponse as SmartTieredCacheEditResponse,
-    type SmartTieredCacheGetResponse as SmartTieredCacheGetResponse,
-    type SmartTieredCacheDeleteParams as SmartTieredCacheDeleteParams,
-    type SmartTieredCacheEditParams as SmartTieredCacheEditParams,
-    type SmartTieredCacheGetParams as SmartTieredCacheGetParams,
-  };
+  export { SmartTieredCache as SmartTieredCache };
 
-  export {
-    Variants as Variants,
-    type CacheVariant as CacheVariant,
-    type VariantDeleteResponse as VariantDeleteResponse,
-    type VariantEditResponse as VariantEditResponse,
-    type VariantGetResponse as VariantGetResponse,
-    type VariantDeleteParams as VariantDeleteParams,
-    type VariantEditParams as VariantEditParams,
-    type VariantGetParams as VariantGetParams,
-  };
+  export { Variants as Variants };
 
-  export {
-    RegionalTieredCacheResource as RegionalTieredCacheResource,
-    type RegionalTieredCache as RegionalTieredCache,
-    type RegionalTieredCacheEditResponse as RegionalTieredCacheEditResponse,
-    type RegionalTieredCacheGetResponse as RegionalTieredCacheGetResponse,
-    type RegionalTieredCacheEditParams as RegionalTieredCacheEditParams,
-    type RegionalTieredCacheGetParams as RegionalTieredCacheGetParams,
-  };
+  export { RegionalTieredCache as RegionalTieredCache };
 }
