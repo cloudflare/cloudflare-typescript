@@ -14,8 +14,8 @@ describe('resource pageRules', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.pageRules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{}],
-      targets: [{}],
+      actions: [{ id: 'browser_check' }],
+      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -41,8 +41,8 @@ describe('resource pageRules', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.pageRules.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{}],
-      targets: [{}],
+      actions: [{ id: 'browser_check' }],
+      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
