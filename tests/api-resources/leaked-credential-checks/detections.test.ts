@@ -9,11 +9,10 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource payloads', () => {
+describe('resource detections', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.contentScanning.payloads.create({
+    const responsePromise = client.leakedCredentialChecks.detections.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{ payload: 'lookup_json_string(http.request.body.raw, "file")' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,14 +24,40 @@ describe('resource payloads', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.contentScanning.payloads.create({
+    const response = await client.leakedCredentialChecks.detections.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{ payload: 'lookup_json_string(http.request.body.raw, "file")' }],
+      password: 'lookup_json_string(http.request.body.raw, "secret")',
+      username: 'lookup_json_string(http.request.body.raw, "user")',
     });
   });
 
+  test('update: only required params', async () => {
+    const responsePromise = client.leakedCredentialChecks.detections.update(
+      '18a14bafaa8eb1df04ce683ec18c765e',
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.leakedCredentialChecks.detections.update(
+      '18a14bafaa8eb1df04ce683ec18c765e',
+      {
+        zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        password: 'lookup_json_string(http.request.body.raw, "secret")',
+        username: 'lookup_json_string(http.request.body.raw, "user")',
+      },
+    );
+  });
+
   test('list: only required params', async () => {
-    const responsePromise = client.contentScanning.payloads.list({
+    const responsePromise = client.leakedCredentialChecks.detections.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -45,15 +70,16 @@ describe('resource payloads', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.contentScanning.payloads.list({
+    const response = await client.leakedCredentialChecks.detections.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.contentScanning.payloads.delete('a350a054caa840c9becd89c3b4f0195b', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.leakedCredentialChecks.detections.delete(
+      '18a14bafaa8eb1df04ce683ec18c765e',
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,8 +90,9 @@ describe('resource payloads', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.contentScanning.payloads.delete('a350a054caa840c9becd89c3b4f0195b', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.leakedCredentialChecks.detections.delete(
+      '18a14bafaa8eb1df04ce683ec18c765e',
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });
