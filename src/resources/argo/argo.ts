@@ -10,13 +10,7 @@ import {
   SmartRoutingGetResponse,
 } from './smart-routing';
 import * as TieredCachingAPI from './tiered-caching';
-import {
-  TieredCaching,
-  TieredCachingEditParams,
-  TieredCachingEditResponse,
-  TieredCachingGetParams,
-  TieredCachingGetResponse,
-} from './tiered-caching';
+import { TieredCaching } from './tiered-caching';
 
 export class Argo extends APIResource {
   smartRouting: SmartRoutingAPI.SmartRouting = new SmartRoutingAPI.SmartRouting(this._client);
@@ -35,11 +29,5 @@ export declare namespace Argo {
     type SmartRoutingGetParams as SmartRoutingGetParams,
   };
 
-  export {
-    TieredCaching as TieredCaching,
-    type TieredCachingEditResponse as TieredCachingEditResponse,
-    type TieredCachingGetResponse as TieredCachingGetResponse,
-    type TieredCachingEditParams as TieredCachingEditParams,
-    type TieredCachingGetParams as TieredCachingGetParams,
-  };
+  export { TieredCaching as TieredCaching };
 }

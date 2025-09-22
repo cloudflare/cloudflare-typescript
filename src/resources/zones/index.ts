@@ -37,7 +37,6 @@ export {
 export {
   Settings,
   type AdvancedDDoS,
-  type Aegis,
   type AlwaysOnline,
   type AlwaysUseHTTPS,
   type AutomaticHTTPSRewrites,
@@ -66,7 +65,6 @@ export {
   type OpportunisticOnion,
   type OrangeToOrange,
   type OriginErrorPagePassThru,
-  type OriginMaxHTTPVersion,
   type Polish,
   type PrefetchPreload,
   type ProxyReadTimeout,
