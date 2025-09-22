@@ -23,6 +23,26 @@ export class ASNs extends APIResource {
   }
 
   /**
+   * Retrieves Internet Routing Registry AS-SETs that an AS is a member of.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.entities.asns.asSet(3);
+   * ```
+   */
+  asSet(
+    asn: number,
+    query: ASNAsSetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ASNAsSetResponse> {
+    return (
+      this._client.get(path`/radar/entities/asns/${asn}/as_set`, { query, ...options }) as APIPromise<{
+        result: ASNAsSetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Retrieves the requested autonomous system information. (A confidence level below
    * `5` indicates a low level of confidence in the traffic data - normally this
    * happens because Cloudflare has a small amount of traffic from/to this AS).
@@ -104,6 +124,54 @@ export namespace ASNListResponse {
     orgName?: string;
 
     website?: string;
+  }
+}
+
+export interface ASNAsSetResponse {
+  as_sets: Array<ASNAsSetResponse.AsSet>;
+
+  /**
+   * Paths from the AS-SET that include the given AS to its upstreams recursively
+   */
+  paths: Array<Array<string>>;
+}
+
+export namespace ASNAsSetResponse {
+  export interface AsSet {
+    /**
+     * The number of AS members in the AS-SET
+     */
+    as_members_count: number;
+
+    /**
+     * The number of AS-SET members in the AS-SET
+     */
+    as_set_members_count: number;
+
+    /**
+     * The number of recursive upstream AS-SETs
+     */
+    as_set_upstreams_count: number;
+
+    /**
+     * The number of unique ASNs in the AS-SETs recursive downstream
+     */
+    asn_cone_size: number;
+
+    /**
+     * The IRR sources of the AS-SET
+     */
+    irr_sources: Array<string>;
+
+    /**
+     * The name of the AS-SET
+     */
+    name: string;
+
+    /**
+     * The inferred AS number of the AS-SET
+     */
+    asn?: number;
   }
 }
 
@@ -310,6 +378,13 @@ export interface ASNListParams {
   orderBy?: 'ASN' | 'POPULATION';
 }
 
+export interface ASNAsSetParams {
+  /**
+   * Format in which results will be returned.
+   */
+  format?: 'JSON' | 'CSV';
+}
+
 export interface ASNGetParams {
   /**
    * Format in which results will be returned.
@@ -344,10 +419,12 @@ export interface ASNRelParams {
 export declare namespace ASNs {
   export {
     type ASNListResponse as ASNListResponse,
+    type ASNAsSetResponse as ASNAsSetResponse,
     type ASNGetResponse as ASNGetResponse,
     type ASNIPResponse as ASNIPResponse,
     type ASNRelResponse as ASNRelResponse,
     type ASNListParams as ASNListParams,
+    type ASNAsSetParams as ASNAsSetParams,
     type ASNGetParams as ASNGetParams,
     type ASNIPParams as ASNIPParams,
     type ASNRelParams as ASNRelParams,

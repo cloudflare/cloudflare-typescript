@@ -3517,6 +3517,7 @@ The following tools are available in this MCP server.
 ### Resource `radar.entities.asns`:
 
 - `list_entities_radar_asns` (`read`): Retrieves a list of autonomous systems.
+- `as_set_entities_radar_asns` (`read`): Retrieves Internet Routing Registry AS-SETs that an AS is a member of.
 - `get_entities_radar_asns` (`read`): Retrieves the requested autonomous system information. (A confidence level below `5` indicates a low level of confidence in the traffic data - normally this happens because Cloudflare has a small amount of traffic from/to this AS). Population estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
 - `ip_entities_radar_asns` (`read`): Retrieves the requested autonomous system information based on IP address. Population estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
 - `rel_entities_radar_asns` (`read`): Retrieves AS-level relationship for given networks.
