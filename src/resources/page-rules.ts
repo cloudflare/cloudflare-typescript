@@ -12,8 +12,16 @@ export class PageRules extends APIResource {
    * ```ts
    * const pageRule = await client.pageRules.create({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   actions: [{}],
-   *   targets: [{}],
+   *   actions: [{ id: 'browser_check' }],
+   *   targets: [
+   *     {
+   *       constraint: {
+   *         operator: 'matches',
+   *         value: '*example.com/images/*',
+   *       },
+   *       target: 'url',
+   *     },
+   *   ],
    * });
    * ```
    */
@@ -36,8 +44,16 @@ export class PageRules extends APIResource {
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   {
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     actions: [{}],
-   *     targets: [{}],
+   *     actions: [{ id: 'browser_check' }],
+   *     targets: [
+   *       {
+   *         constraint: {
+   *           operator: 'matches',
+   *           value: '*example.com/images/*',
+   *         },
+   *         target: 'url',
+   *       },
+   *     ],
    *   },
    * );
    * ```
