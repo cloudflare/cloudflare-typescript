@@ -1527,6 +1527,7 @@ import target_top_layer7_attacks_radar_locations from './radar/attacks/layer7/to
 import origin_top_layer7_attacks_radar_ases from './radar/attacks/layer7/top/ases/origin-top-layer7-attacks-radar-ases';
 import get_radar_entities from './radar/entities/get-radar-entities';
 import list_entities_radar_asns from './radar/entities/asns/list-entities-radar-asns';
+import as_set_entities_radar_asns from './radar/entities/asns/as-set-entities-radar-asns';
 import get_entities_radar_asns from './radar/entities/asns/get-entities-radar-asns';
 import ip_entities_radar_asns from './radar/entities/asns/ip-entities-radar-asns';
 import rel_entities_radar_asns from './radar/entities/asns/rel-entities-radar-asns';
@@ -3357,6 +3358,7 @@ addEndpoint(target_top_layer7_attacks_radar_locations);
 addEndpoint(origin_top_layer7_attacks_radar_ases);
 addEndpoint(get_radar_entities);
 addEndpoint(list_entities_radar_asns);
+addEndpoint(as_set_entities_radar_asns);
 addEndpoint(get_entities_radar_asns);
 addEndpoint(ip_entities_radar_asns);
 addEndpoint(rel_entities_radar_asns);

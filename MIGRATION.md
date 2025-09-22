@@ -1308,6 +1308,7 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.attacks.layer7.top.locations.target()`
 - `client.radar.attacks.layer7.top.ases.origin()`
 - `client.radar.entities.asns.list()`
+- `client.radar.entities.asns.asSet()`
 - `client.radar.entities.asns.get()`
 - `client.radar.entities.asns.rel()`
 - `client.radar.entities.locations.list()`

@@ -7187,6 +7187,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNListResponse</a></code>
+- <code><a href="./src/resources/radar/entities/asns.ts">ASNAsSetResponse</a></code>
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNGetResponse</a></code>
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNIPResponse</a></code>
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNRelResponse</a></code>
@@ -7194,6 +7195,7 @@ Types:
 Methods:
 
 - <code title="get /radar/entities/asns">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">list</a>({ ...params }) -> ASNListResponse</code>
+- <code title="get /radar/entities/asns/{asn}/as_set">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">asSet</a>(asn, { ...params }) -> ASNAsSetResponse</code>
 - <code title="get /radar/entities/asns/{asn}">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">get</a>(asn, { ...params }) -> ASNGetResponse</code>
 - <code title="get /radar/entities/asns/ip">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">ip</a>({ ...params }) -> ASNIPResponse</code>
 - <code title="get /radar/entities/asns/{asn}/rel">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">rel</a>(asn, { ...params }) -> ASNRelResponse</code>
