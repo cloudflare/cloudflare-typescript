@@ -9,9 +9,11 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource contentScanning', () => {
-  test('disable: only required params', async () => {
-    const responsePromise = client.contentScanning.disable({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+describe('resource leakedCredentialChecks', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.leakedCredentialChecks.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,12 +23,17 @@ describe('resource contentScanning', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('disable: required and optional params', async () => {
-    const response = await client.contentScanning.disable({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+  test('create: required and optional params', async () => {
+    const response = await client.leakedCredentialChecks.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      enabled: true,
+    });
   });
 
-  test('enable: only required params', async () => {
-    const responsePromise = client.contentScanning.enable({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+  test('get: only required params', async () => {
+    const responsePromise = client.leakedCredentialChecks.get({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,7 +43,7 @@ describe('resource contentScanning', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('enable: required and optional params', async () => {
-    const response = await client.contentScanning.enable({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+  test('get: required and optional params', async () => {
+    const response = await client.leakedCredentialChecks.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });
