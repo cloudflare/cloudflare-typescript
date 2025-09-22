@@ -240,16 +240,6 @@ export const tool: Tool = {
               },
             },
           },
-          'warp-routing': {
-            type: 'object',
-            description:
-              'Enable private network access from WARP users to private network routes. This is enabled if the tunnel has an assigned route.',
-            properties: {
-              enabled: {
-                type: 'boolean',
-              },
-            },
-          },
         },
       },
     },
