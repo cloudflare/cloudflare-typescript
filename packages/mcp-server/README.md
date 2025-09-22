@@ -733,6 +733,9 @@ The following tools are available in this MCP server.
   See [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/ 'Import and export records') for more information.
 
 - `scan_dns_records` (`write`): Scan for common DNS records on your domain and automatically add them to your zone. Useful if you haven't updated your nameservers yet.
+- `scan_list_dns_records` (`read`): Retrieves the list of DNS records discovered up to this point by the asynchronous scan. These records are temporary until explicitly accepted or rejected via `POST /scan/review`. Additional records may be discovered by the scan later.
+- `scan_review_dns_records` (`write`): Accept or reject DNS records found by the DNS records scan. Accepted records will be permanently added to the zone, while rejected records will be permanently deleted.
+- `scan_trigger_dns_records` (`write`): Initiates an asynchronous scan for common DNS records on your domain. Note that this **does not** automatically add records to your zone. The scan runs in the background, and results can be reviewed later using the `/scan/review` endpoints. Useful if you haven't updated your nameservers yet.
 
 ### Resource `dns.settings.zone`:
 
