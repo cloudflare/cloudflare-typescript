@@ -4,7 +4,7 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as RecordsAPI from './records';
 import * as Shared from '../shared';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Records extends APIResource {
   /**
@@ -283,9 +283,85 @@ export class Records extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Retrieves the list of DNS records discovered up to this point by the
+   * asynchronous scan. These records are temporary until explicitly accepted or
+   * rejected via `POST /scan/review`. Additional records may be discovered by the
+   * scan later.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const recordResponse of client.dns.records.scanList(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  scanList(
+    params: RecordScanListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RecordResponsesSinglePage, RecordResponse> {
+    const { zone_id } = params;
+    return this._client.getAPIList(
+      `/zones/${zone_id}/dns_records/scan/review`,
+      RecordResponsesSinglePage,
+      options,
+    );
+  }
+
+  /**
+   * Accept or reject DNS records found by the DNS records scan. Accepted records
+   * will be permanently added to the zone, while rejected records will be
+   * permanently deleted.
+   *
+   * @example
+   * ```ts
+   * const response = await client.dns.records.scanReview({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  scanReview(
+    params: RecordScanReviewParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordScanReviewResponse> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.post(`/zones/${zone_id}/dns_records/scan/review`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RecordScanReviewResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Initiates an asynchronous scan for common DNS records on your domain. Note that
+   * this **does not** automatically add records to your zone. The scan runs in the
+   * background, and results can be reviewed later using the `/scan/review`
+   * endpoints. Useful if you haven't updated your nameservers yet.
+   *
+   * @example
+   * ```ts
+   * const response = await client.dns.records.scanTrigger({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  scanTrigger(
+    params: RecordScanTriggerParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordScanTriggerResponse> {
+    const { zone_id } = params;
+    return this._client.post(`/zones/${zone_id}/dns_records/scan/trigger`, options);
+  }
 }
 
 export class RecordResponsesV4PagePaginationArray extends V4PagePaginationArray<RecordResponse> {}
+
+export class RecordResponsesSinglePage extends SinglePage<RecordResponse> {}
 
 export interface ARecord {
   /**
@@ -5844,6 +5920,57 @@ export interface RecordScanResponse {
    * Total number of DNS records parsed.
    */
   total_records_parsed?: number;
+}
+
+export interface RecordScanReviewResponse {
+  accepts?: Array<RecordResponse>;
+
+  rejects?: Array<string>;
+}
+
+export interface RecordScanTriggerResponse {
+  errors: Array<RecordScanTriggerResponse.Error>;
+
+  messages: Array<RecordScanTriggerResponse.Message>;
+
+  /**
+   * Whether the API call was successful.
+   */
+  success: true;
+}
+
+export namespace RecordScanTriggerResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
 }
 
 export type RecordCreateParams =
@@ -12160,7 +12287,139 @@ export interface RecordScanParams {
   body: unknown;
 }
 
+export interface RecordScanListParams {
+  /**
+   * Identifier.
+   */
+  zone_id: string;
+}
+
+export interface RecordScanReviewParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
+  accepts?: Array<
+    | ARecordParam
+    | AAAARecordParam
+    | CNAMERecordParam
+    | MXRecordParam
+    | NSRecordParam
+    | RecordScanReviewParams.DNSRecordsOpenpgpkeyRecord
+    | PTRRecordParam
+    | TXTRecordParam
+    | CAARecordParam
+    | CERTRecordParam
+    | DNSKEYRecordParam
+    | DSRecordParam
+    | HTTPSRecordParam
+    | LOCRecordParam
+    | NAPTRRecordParam
+    | SMIMEARecordParam
+    | SRVRecordParam
+    | SSHFPRecordParam
+    | SVCBRecordParam
+    | TLSARecordParam
+    | URIRecordParam
+  >;
+
+  /**
+   * Body param:
+   */
+  rejects?: Array<RecordScanReviewParams.Reject>;
+}
+
+export namespace RecordScanReviewParams {
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Complete DNS record name, including the zone name, in Punycode.
+     */
+    name: string;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTLParam;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTagsParam>;
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface Reject {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+}
+
+export interface RecordScanTriggerParams {
+  /**
+   * Identifier.
+   */
+  zone_id: string;
+}
+
 Records.RecordResponsesV4PagePaginationArray = RecordResponsesV4PagePaginationArray;
+Records.RecordResponsesSinglePage = RecordResponsesSinglePage;
 
 export declare namespace Records {
   export {
@@ -12195,7 +12454,10 @@ export declare namespace Records {
     type RecordExportResponse as RecordExportResponse,
     type RecordImportResponse as RecordImportResponse,
     type RecordScanResponse as RecordScanResponse,
+    type RecordScanReviewResponse as RecordScanReviewResponse,
+    type RecordScanTriggerResponse as RecordScanTriggerResponse,
     RecordResponsesV4PagePaginationArray as RecordResponsesV4PagePaginationArray,
+    RecordResponsesSinglePage as RecordResponsesSinglePage,
     type RecordCreateParams as RecordCreateParams,
     type RecordUpdateParams as RecordUpdateParams,
     type RecordListParams as RecordListParams,
@@ -12206,5 +12468,8 @@ export declare namespace Records {
     type RecordGetParams as RecordGetParams,
     type RecordImportParams as RecordImportParams,
     type RecordScanParams as RecordScanParams,
+    type RecordScanListParams as RecordScanListParams,
+    type RecordScanReviewParams as RecordScanReviewParams,
+    type RecordScanTriggerParams as RecordScanTriggerParams,
   };
 }
