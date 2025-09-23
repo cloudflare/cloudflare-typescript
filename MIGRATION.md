@@ -1006,6 +1006,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 
 - `client.accounts.tokens.value.update()`
 - `client.user.tokens.value.update()`
+- `client.cache.cacheReserve.clear()`
 - `client.dns.records.scan()`
 - `client.dns.zoneTransfers.forceAXFR.create()`
 - `client.dns.zoneTransfers.outgoing.disable()`
