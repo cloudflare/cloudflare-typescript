@@ -308,6 +308,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zones/settings.ts">AdvancedDDoS</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Aegis</a></code>
 - <code><a href="./src/resources/zones/settings.ts">AlwaysOnline</a></code>
 - <code><a href="./src/resources/zones/settings.ts">AlwaysUseHTTPS</a></code>
 - <code><a href="./src/resources/zones/settings.ts">AutomaticHTTPSRewrites</a></code>
@@ -336,6 +337,7 @@ Types:
 - <code><a href="./src/resources/zones/settings.ts">OpportunisticOnion</a></code>
 - <code><a href="./src/resources/zones/settings.ts">OrangeToOrange</a></code>
 - <code><a href="./src/resources/zones/settings.ts">OriginErrorPagePassThru</a></code>
+- <code><a href="./src/resources/zones/settings.ts">OriginMaxHTTPVersion</a></code>
 - <code><a href="./src/resources/zones/settings.ts">Polish</a></code>
 - <code><a href="./src/resources/zones/settings.ts">PrefetchPreload</a></code>
 - <code><a href="./src/resources/zones/settings.ts">ProxyReadTimeout</a></code>
@@ -583,11 +585,64 @@ Methods:
 
 ## CacheReserve
 
+Types:
+
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserve</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClear</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">State</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClearResponse</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveEditResponse</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveGetResponse</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveStatusResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/cache/cache_reserve_clear">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">clear</a>({ ...params }) -> CacheReserveClearResponse</code>
+- <code title="patch /zones/{zone_id}/cache/cache_reserve">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">edit</a>({ ...params }) -> CacheReserveEditResponse</code>
+- <code title="get /zones/{zone_id}/cache/cache_reserve">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">get</a>({ ...params }) -> CacheReserveGetResponse</code>
+- <code title="get /zones/{zone_id}/cache/cache_reserve_clear">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">status</a>({ ...params }) -> CacheReserveStatusResponse</code>
+
 ## SmartTieredCache
+
+Types:
+
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheDeleteResponse</a></code>
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheEditResponse</a></code>
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheGetResponse</a></code>
+
+Methods:
+
+- <code title="delete /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">delete</a>({ ...params }) -> SmartTieredCacheDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">edit</a>({ ...params }) -> SmartTieredCacheEditResponse</code>
+- <code title="get /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">get</a>({ ...params }) -> SmartTieredCacheGetResponse</code>
 
 ## Variants
 
+Types:
+
+- <code><a href="./src/resources/cache/variants.ts">CacheVariant</a></code>
+- <code><a href="./src/resources/cache/variants.ts">VariantDeleteResponse</a></code>
+- <code><a href="./src/resources/cache/variants.ts">VariantEditResponse</a></code>
+- <code><a href="./src/resources/cache/variants.ts">VariantGetResponse</a></code>
+
+Methods:
+
+- <code title="delete /zones/{zone_id}/cache/variants">client.cache.variants.<a href="./src/resources/cache/variants.ts">delete</a>({ ...params }) -> VariantDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/cache/variants">client.cache.variants.<a href="./src/resources/cache/variants.ts">edit</a>({ ...params }) -> VariantEditResponse</code>
+- <code title="get /zones/{zone_id}/cache/variants">client.cache.variants.<a href="./src/resources/cache/variants.ts">get</a>({ ...params }) -> VariantGetResponse</code>
+
 ## RegionalTieredCache
+
+Types:
+
+- <code><a href="./src/resources/cache/regional-tiered-cache.ts">RegionalTieredCache</a></code>
+- <code><a href="./src/resources/cache/regional-tiered-cache.ts">RegionalTieredCacheEditResponse</a></code>
+- <code><a href="./src/resources/cache/regional-tiered-cache.ts">RegionalTieredCacheGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/cache/regional_tiered_cache">client.cache.regionalTieredCache.<a href="./src/resources/cache/regional-tiered-cache.ts">edit</a>({ ...params }) -> RegionalTieredCacheEditResponse</code>
+- <code title="get /zones/{zone_id}/cache/regional_tiered_cache">client.cache.regionalTieredCache.<a href="./src/resources/cache/regional-tiered-cache.ts">get</a>({ ...params }) -> RegionalTieredCacheGetResponse</code>
 
 # SSL
 
@@ -699,6 +754,16 @@ Methods:
 - <code title="get /zones/{zone_id}/argo/smart_routing">client.argo.smartRouting.<a href="./src/resources/argo/smart-routing.ts">get</a>({ ...params }) -> SmartRoutingGetResponse</code>
 
 ## TieredCaching
+
+Types:
+
+- <code><a href="./src/resources/argo/tiered-caching.ts">TieredCachingEditResponse</a></code>
+- <code><a href="./src/resources/argo/tiered-caching.ts">TieredCachingGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/argo/tiered_caching">client.argo.tieredCaching.<a href="./src/resources/argo/tiered-caching.ts">edit</a>({ ...params }) -> TieredCachingEditResponse</code>
+- <code title="get /zones/{zone_id}/argo/tiered_caching">client.argo.tieredCaching.<a href="./src/resources/argo/tiered-caching.ts">get</a>({ ...params }) -> TieredCachingGetResponse</code>
 
 # CertificateAuthorities
 
@@ -7572,6 +7637,16 @@ Methods:
 - <code title="get /zones/{zone_id}/bot_management">client.botManagement.<a href="./src/resources/bot-management.ts">get</a>({ ...params }) -> BotManagementGetResponse</code>
 
 # OriginPostQuantumEncryption
+
+Types:
+
+- <code><a href="./src/resources/origin-post-quantum-encryption.ts">OriginPostQuantumEncryptionUpdateResponse</a></code>
+- <code><a href="./src/resources/origin-post-quantum-encryption.ts">OriginPostQuantumEncryptionGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">update</a>({ ...params }) -> OriginPostQuantumEncryptionUpdateResponse</code>
+- <code title="get /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">get</a>({ ...params }) -> OriginPostQuantumEncryptionGetResponse</code>
 
 # Zaraz
 

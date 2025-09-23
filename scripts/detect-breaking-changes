@@ -50,6 +50,10 @@ TEST_PATHS=(
 	tests/api-resources/load-balancers/regions.test.ts
 	tests/api-resources/load-balancers/searches.test.ts
 	tests/api-resources/cache/cache.test.ts
+	tests/api-resources/cache/cache-reserve.test.ts
+	tests/api-resources/cache/smart-tiered-cache.test.ts
+	tests/api-resources/cache/variants.test.ts
+	tests/api-resources/cache/regional-tiered-cache.test.ts
 	tests/api-resources/ssl/ssl.test.ts
 	tests/api-resources/ssl/analyze.test.ts
 	tests/api-resources/ssl/certificate-packs/certificate-packs.test.ts
@@ -62,6 +66,7 @@ TEST_PATHS=(
 	tests/api-resources/acm/total-tls.test.ts
 	tests/api-resources/argo/argo.test.ts
 	tests/api-resources/argo/smart-routing.test.ts
+	tests/api-resources/argo/tiered-caching.test.ts
 	tests/api-resources/certificate-authorities/certificate-authorities.test.ts
 	tests/api-resources/certificate-authorities/hostname-associations.test.ts
 	tests/api-resources/client-certificates.test.ts
@@ -641,6 +646,7 @@ TEST_PATHS=(
 	tests/api-resources/radar/leaked-credentials/summary.test.ts
 	tests/api-resources/radar/leaked-credentials/timeseries-groups.test.ts
 	tests/api-resources/bot-management.test.ts
+	tests/api-resources/origin-post-quantum-encryption.test.ts
 	tests/api-resources/zaraz/zaraz.test.ts
 	tests/api-resources/zaraz/config.test.ts
 	tests/api-resources/zaraz/default.test.ts
