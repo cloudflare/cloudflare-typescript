@@ -939,6 +939,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.resourceSharing.resources.get()`
 - `client.leakedCredentialChecks.detections.update()`
 - `client.leakedCredentialChecks.detections.delete()`
+- `client.contentScanning.payloads.delete()`
 - `client.abuseReports.create()`
 - `client.ai.run()`
 - `client.ai.finetunes.assets.create()`
@@ -1075,6 +1076,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.cloudConnector.rules.update()`
 - `client.workflows.instances.bulk()`
 - `client.workflows.instances.events.create()`
+- `client.contentScanning.payloads.create()`
 - `client.secretsStore.stores.create()`
 - `client.secretsStore.stores.secrets.create()`
 - `client.schemaValidation.settings.operations.bulkEdit()`
