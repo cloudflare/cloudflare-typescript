@@ -40,6 +40,7 @@ export const tool: Tool = {
               description: 'Defines the unique ID of the item in the List.',
             },
           },
+          required: ['id'],
         },
       },
       jq_filter: {
