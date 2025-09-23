@@ -50,14 +50,6 @@ export const tool: Tool = {
         items: {
           type: 'object',
           properties: {
-            can_delete: {
-              type: 'boolean',
-              description: 'Controls whether the membership can be deleted via the API or not.',
-            },
-            created_at: {
-              type: 'string',
-              format: 'date-time',
-            },
             identifier: {
               type: 'string',
               description: 'The identifier for the membership (eg. a zone or account tag).',
