@@ -44,7 +44,7 @@ export interface TagCreateResponse {
 
   attributionOrganization?: string;
 
-  categoryUuid?: string;
+  categoryName?: string;
 
   externalReferenceLinks?: Array<string>;
 
