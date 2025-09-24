@@ -49,6 +49,7 @@ export interface SearchGlobalParams {
    * Search types excluded from results.
    */
   exclude?: Array<
+    | 'ADM1S'
     | 'ASNS'
     | 'BOTS'
     | 'CERTIFICATE_AUTHORITIES'
@@ -69,6 +70,7 @@ export interface SearchGlobalParams {
    * Search types included in results.
    */
   include?: Array<
+    | 'ADM1S'
     | 'ASNS'
     | 'BOTS'
     | 'CERTIFICATE_AUTHORITIES'

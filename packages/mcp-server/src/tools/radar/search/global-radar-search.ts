@@ -32,6 +32,7 @@ export const tool: Tool = {
         items: {
           type: 'string',
           enum: [
+            'ADM1S',
             'ASNS',
             'BOTS',
             'CERTIFICATE_AUTHORITIES',
@@ -55,6 +56,7 @@ export const tool: Tool = {
         items: {
           type: 'string',
           enum: [
+            'ADM1S',
             'ASNS',
             'BOTS',
             'CERTIFICATE_AUTHORITIES',
