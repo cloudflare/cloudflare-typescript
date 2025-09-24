@@ -332,12 +332,6 @@ TEST_PATHS=(
 	tests/api-resources/network-interconnects/slots.test.ts
 	tests/api-resources/mtls-certificates/mtls-certificates.test.ts
 	tests/api-resources/mtls-certificates/associations.test.ts
-	tests/api-resources/pages/pages.test.ts
-	tests/api-resources/pages/projects/projects.test.ts
-	tests/api-resources/pages/projects/deployments/deployments.test.ts
-	tests/api-resources/pages/projects/deployments/history/history.test.ts
-	tests/api-resources/pages/projects/deployments/history/logs.test.ts
-	tests/api-resources/pages/projects/domains.test.ts
 	tests/api-resources/registrar/registrar.test.ts
 	tests/api-resources/registrar/domains.test.ts
 	tests/api-resources/request-tracers/request-tracers.test.ts
