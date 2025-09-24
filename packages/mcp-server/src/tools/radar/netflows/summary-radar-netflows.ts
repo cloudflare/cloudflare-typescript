@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'get',
   httpPath: '/radar/netflows/summary',
-  operationId: 'radar-get-netflows-summary',
+  operationId: 'radar-get-netflows-summary-deprecated',
 };
 
 export const tool: Tool = {
@@ -66,6 +66,14 @@ export const tool: Tool = {
         type: 'string',
         description: 'Format in which results will be returned.',
         enum: ['JSON', 'CSV'],
+      },
+      geoId: {
+        type: 'array',
+        description:
+          'Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs. Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689` excludes results from the 2267056 (Lisbon), but includes results from 5128638 (New York).',
+        items: {
+          type: 'string',
+        },
       },
       location: {
         type: 'array',

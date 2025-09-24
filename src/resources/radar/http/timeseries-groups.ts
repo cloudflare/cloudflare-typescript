@@ -10,11 +10,7 @@ export class TimeseriesGroups extends APIResource {
    * over time. Visit https://developers.cloudflare.com/radar/concepts/bot-classes/
    * for more information.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.http.timeseriesGroups.botClass();
-   * ```
+   * @deprecated
    */
   botClass(
     query: TimeseriesGroupBotClassParams | null | undefined = {},
@@ -30,11 +26,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by user agent over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.http.timeseriesGroups.browser();
-   * ```
+   * @deprecated
    */
   browser(
     query: TimeseriesGroupBrowserParams | null | undefined = {},
@@ -50,11 +42,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by user agent family over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.http.timeseriesGroups.browserFamily();
-   * ```
+   * @deprecated
    */
   browserFamily(
     query: TimeseriesGroupBrowserFamilyParams | null | undefined = {},
@@ -70,11 +58,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by device type over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.http.timeseriesGroups.deviceType();
-   * ```
+   * @deprecated
    */
   deviceType(
     query: TimeseriesGroupDeviceTypeParams | null | undefined = {},
@@ -91,11 +75,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of HTTP requests by HTTP protocol (HTTP vs. HTTPS)
    * over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.http.timeseriesGroups.httpProtocol();
-   * ```
+   * @deprecated
    */
   httpProtocol(
     query: TimeseriesGroupHTTPProtocolParams | null | undefined = {},
@@ -111,11 +91,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by HTTP version over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.http.timeseriesGroups.httpVersion();
-   * ```
+   * @deprecated
    */
   httpVersion(
     query: TimeseriesGroupHTTPVersionParams | null | undefined = {},
@@ -131,11 +107,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by IP version over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.http.timeseriesGroups.ipVersion();
-   * ```
+   * @deprecated
    */
   ipVersion(
     query: TimeseriesGroupIPVersionParams | null | undefined = {},
@@ -151,11 +123,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by operating system over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.http.timeseriesGroups.os();
-   * ```
+   * @deprecated
    */
   os(
     query: TimeseriesGroupOSParams | null | undefined = {},
@@ -171,11 +139,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by post-quantum support over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.http.timeseriesGroups.postQuantum();
-   * ```
+   * @deprecated
    */
   postQuantum(
     query: TimeseriesGroupPostQuantumParams | null | undefined = {},
@@ -191,11 +155,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by TLS version over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.http.timeseriesGroups.tlsVersion();
-   * ```
+   * @deprecated
    */
   tlsVersion(
     query: TimeseriesGroupTLSVersionParams | null | undefined = {},
@@ -1389,6 +1349,14 @@ export interface TimeseriesGroupBotClassParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
+
+  /**
    * Filters results by HTTP protocol (HTTP vs. HTTPS).
    */
   httpProtocol?: Array<'HTTP' | 'HTTPS'>;
@@ -1486,6 +1454,14 @@ export interface TimeseriesGroupBrowserParams {
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
 
   /**
    * Filters results by HTTP protocol (HTTP vs. HTTPS).
@@ -1589,6 +1565,14 @@ export interface TimeseriesGroupBrowserFamilyParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
+
+  /**
    * Filters results by HTTP protocol (HTTP vs. HTTPS).
    */
   httpProtocol?: Array<'HTTP' | 'HTTPS'>;
@@ -1690,6 +1674,14 @@ export interface TimeseriesGroupDeviceTypeParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
+
+  /**
    * Filters results by HTTP protocol (HTTP vs. HTTPS).
    */
   httpProtocol?: Array<'HTTP' | 'HTTPS'>;
@@ -1789,6 +1781,14 @@ export interface TimeseriesGroupHTTPProtocolParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
+
+  /**
    * Filters results by HTTP version.
    */
   httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
@@ -1881,6 +1881,14 @@ export interface TimeseriesGroupHTTPVersionParams {
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
 
   /**
    * Filters results by HTTP protocol (HTTP vs. HTTPS).
@@ -1977,6 +1985,14 @@ export interface TimeseriesGroupIPVersionParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
+
+  /**
    * Filters results by HTTP protocol (HTTP vs. HTTPS).
    */
   httpProtocol?: Array<'HTTP' | 'HTTPS'>;
@@ -2071,6 +2087,14 @@ export interface TimeseriesGroupOSParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
+
+  /**
    * Filters results by HTTP protocol (HTTP vs. HTTPS).
    */
   httpProtocol?: Array<'HTTP' | 'HTTPS'>;
@@ -2163,6 +2187,14 @@ export interface TimeseriesGroupPostQuantumParams {
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
 
   /**
    * Filters results by HTTP protocol (HTTP vs. HTTPS).
@@ -2262,6 +2294,14 @@ export interface TimeseriesGroupTLSVersionParams {
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
 
   /**
    * Filters results by HTTP protocol (HTTP vs. HTTPS).
