@@ -72,6 +72,7 @@ export class BotManagement extends APIResource {
    * const botManagement = await client.botManagement.update({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   ai_bots_protection: 'disabled',
+   *   cf_robots_variant: 'off',
    *   crawler_protection: 'disabled',
    *   enable_js: true,
    *   fight_mode: true,
@@ -119,6 +120,11 @@ export interface BotFightModeConfiguration {
    * `only_on_ad_pages` is currently not available for Enterprise customers.
    */
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+  /**
+   * Specifies the Robots Access Control License variant to use.
+   */
+  cf_robots_variant?: 'off' | 'policy_only';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -203,6 +209,11 @@ export interface BotFightModeConfigurationParam {
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
+   * Specifies the Robots Access Control License variant to use.
+   */
+  cf_robots_variant?: 'off' | 'policy_only';
+
+  /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
    */
   crawler_protection?: 'enabled' | 'disabled';
@@ -244,6 +255,11 @@ export interface SubscriptionConfiguration {
    * accessing the site. Defaults to true
    */
   bm_cookie_enabled?: boolean;
+
+  /**
+   * Specifies the Robots Access Control License variant to use.
+   */
+  cf_robots_variant?: 'off' | 'policy_only';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -342,6 +358,11 @@ export interface SubscriptionConfigurationParam {
   bm_cookie_enabled?: boolean;
 
   /**
+   * Specifies the Robots Access Control License variant to use.
+   */
+  cf_robots_variant?: 'off' | 'policy_only';
+
+  /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
    */
   crawler_protection?: 'enabled' | 'disabled';
@@ -371,6 +392,11 @@ export interface SuperBotFightModeDefinitelyConfiguration {
    * `only_on_ad_pages` is currently not available for Enterprise customers.
    */
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+  /**
+   * Specifies the Robots Access Control License variant to use.
+   */
+  cf_robots_variant?: 'off' | 'policy_only';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -451,6 +477,11 @@ export interface SuperBotFightModeDefinitelyConfigurationParam {
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
+   * Specifies the Robots Access Control License variant to use.
+   */
+  cf_robots_variant?: 'off' | 'policy_only';
+
+  /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
    */
   crawler_protection?: 'enabled' | 'disabled';
@@ -496,6 +527,11 @@ export interface SuperBotFightModeLikelyConfiguration {
    * `only_on_ad_pages` is currently not available for Enterprise customers.
    */
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+  /**
+   * Specifies the Robots Access Control License variant to use.
+   */
+  cf_robots_variant?: 'off' | 'policy_only';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -575,6 +611,11 @@ export interface SuperBotFightModeLikelyConfigurationParam {
   ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
   /**
+   * Specifies the Robots Access Control License variant to use.
+   */
+  cf_robots_variant?: 'off' | 'policy_only';
+
+  /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
    */
   crawler_protection?: 'enabled' | 'disabled';
@@ -651,6 +692,11 @@ export declare namespace BotManagementUpdateParams {
     ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
 
     /**
+     * Body param: Specifies the Robots Access Control License variant to use.
+     */
+    cf_robots_variant?: 'off' | 'policy_only';
+
+    /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
      */
     crawler_protection?: 'enabled' | 'disabled';
@@ -685,6 +731,11 @@ export declare namespace BotManagementUpdateParams {
      * `only_on_ad_pages` is currently not available for Enterprise customers.
      */
     ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Specifies the Robots Access Control License variant to use.
+     */
+    cf_robots_variant?: 'off' | 'policy_only';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -740,6 +791,11 @@ export declare namespace BotManagementUpdateParams {
      * `only_on_ad_pages` is currently not available for Enterprise customers.
      */
     ai_bots_protection?: 'block' | 'disabled' | 'only_on_ad_pages';
+
+    /**
+     * Body param: Specifies the Robots Access Control License variant to use.
+     */
+    cf_robots_variant?: 'off' | 'policy_only';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -814,6 +870,11 @@ export declare namespace BotManagementUpdateParams {
      * devices accessing the site. Defaults to true
      */
     bm_cookie_enabled?: boolean;
+
+    /**
+     * Body param: Specifies the Robots Access Control License variant to use.
+     */
+    cf_robots_variant?: 'off' | 'policy_only';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
