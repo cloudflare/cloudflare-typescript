@@ -310,6 +310,14 @@ export interface TopAsesParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
+
+  /**
    * Limits the number of objects returned in the response.
    */
   limit?: number;
@@ -364,6 +372,14 @@ export interface TopLocationsParams {
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
 
   /**
    * Limits the number of objects returned in the response.

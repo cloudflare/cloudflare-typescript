@@ -43,6 +43,7 @@ describe('resource ipVersion', () => {
           dateStart: ['2019-12-27T18:11:19.117Z'],
           deviceType: ['DESKTOP'],
           format: 'JSON',
+          geoId: ['string'],
           httpProtocol: ['HTTP'],
           httpVersion: ['HTTPv1'],
           limit: 5,
