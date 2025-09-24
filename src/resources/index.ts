@@ -79,6 +79,7 @@ export { SchemaValidation } from './schema-validation/schema-validation';
 export { SecretsStore } from './secrets-store/secrets-store';
 export { SecurityCenter } from './security-center/security-center';
 export { SecurityTXT } from './security-txt';
+export { SmartShield } from './smart-shield';
 export { Snippets } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';
 export { Speed } from './speed/speed';

@@ -1862,6 +1862,30 @@ Methods:
 - <code title="put /zones/{zone_id}/rate_limits/{rate_limit_id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">edit</a>(rateLimitId, { ...params }) -> RateLimit</code>
 - <code title="get /zones/{zone_id}/rate_limits/{rate_limit_id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">get</a>(rateLimitId, { ...params }) -> RateLimit</code>
 
+# SmartShield
+
+Types:
+
+- <code><a href="./src/resources/smart-shield.ts">SmartShieldUpdateResponse</a></code>
+- <code><a href="./src/resources/smart-shield.ts">SmartShieldCreateHealthcheckResponse</a></code>
+- <code><a href="./src/resources/smart-shield.ts">SmartShieldDeleteHealthcheckResponse</a></code>
+- <code><a href="./src/resources/smart-shield.ts">SmartShieldEditHealthcheckResponse</a></code>
+- <code><a href="./src/resources/smart-shield.ts">SmartShieldGetResponse</a></code>
+- <code><a href="./src/resources/smart-shield.ts">SmartShieldGetHealthcheckResponse</a></code>
+- <code><a href="./src/resources/smart-shield.ts">SmartShieldListHealthchecksResponse</a></code>
+- <code><a href="./src/resources/smart-shield.ts">SmartShieldUpdateHealthcheckResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/smart_shield">client.smartShield.<a href="./src/resources/smart-shield.ts">update</a>({ ...params }) -> SmartShieldUpdateResponse</code>
+- <code title="post /zones/{zone_id}/smart_shield/healthchecks">client.smartShield.<a href="./src/resources/smart-shield.ts">createHealthcheck</a>({ ...params }) -> SmartShieldCreateHealthcheckResponse</code>
+- <code title="delete /zones/{zone_id}/smart_shield/healthchecks/{healthcheck_id}">client.smartShield.<a href="./src/resources/smart-shield.ts">deleteHealthcheck</a>(healthcheckId, { ...params }) -> SmartShieldDeleteHealthcheckResponse</code>
+- <code title="patch /zones/{zone_id}/smart_shield/healthchecks/{healthcheck_id}">client.smartShield.<a href="./src/resources/smart-shield.ts">editHealthcheck</a>(healthcheckId, { ...params }) -> SmartShieldEditHealthcheckResponse</code>
+- <code title="get /zones/{zone_id}/smart_shield">client.smartShield.<a href="./src/resources/smart-shield.ts">get</a>({ ...params }) -> SmartShieldGetResponse</code>
+- <code title="get /zones/{zone_id}/smart_shield/healthchecks/{healthcheck_id}">client.smartShield.<a href="./src/resources/smart-shield.ts">getHealthcheck</a>(healthcheckId, { ...params }) -> SmartShieldGetHealthcheckResponse</code>
+- <code title="get /zones/{zone_id}/smart_shield/healthchecks">client.smartShield.<a href="./src/resources/smart-shield.ts">listHealthchecks</a>({ ...params }) -> SmartShieldListHealthchecksResponsesV4PagePaginationArray</code>
+- <code title="put /zones/{zone_id}/smart_shield/healthchecks/{healthcheck_id}">client.smartShield.<a href="./src/resources/smart-shield.ts">updateHealthcheck</a>(healthcheckId, { ...params }) -> SmartShieldUpdateHealthcheckResponse</code>
+
 # WaitingRooms
 
 Types:
