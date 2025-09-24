@@ -243,6 +243,8 @@ export interface AIGatewayCreateResponse {
 
   logpush_public_key?: string | null;
 
+  otel?: Array<AIGatewayCreateResponse.Otel> | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayCreateResponse.Stripe | null;
@@ -275,6 +277,14 @@ export namespace AIGatewayCreateResponse {
 
       profiles: Array<string>;
     }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
   }
 
   export interface Stripe {
@@ -330,6 +340,8 @@ export interface AIGatewayUpdateResponse {
 
   logpush_public_key?: string | null;
 
+  otel?: Array<AIGatewayUpdateResponse.Otel> | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayUpdateResponse.Stripe | null;
@@ -362,6 +374,14 @@ export namespace AIGatewayUpdateResponse {
 
       profiles: Array<string>;
     }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
   }
 
   export interface Stripe {
@@ -417,6 +437,8 @@ export interface AIGatewayListResponse {
 
   logpush_public_key?: string | null;
 
+  otel?: Array<AIGatewayListResponse.Otel> | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayListResponse.Stripe | null;
@@ -449,6 +471,14 @@ export namespace AIGatewayListResponse {
 
       profiles: Array<string>;
     }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
   }
 
   export interface Stripe {
@@ -504,6 +534,8 @@ export interface AIGatewayDeleteResponse {
 
   logpush_public_key?: string | null;
 
+  otel?: Array<AIGatewayDeleteResponse.Otel> | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayDeleteResponse.Stripe | null;
@@ -536,6 +568,14 @@ export namespace AIGatewayDeleteResponse {
 
       profiles: Array<string>;
     }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
   }
 
   export interface Stripe {
@@ -591,6 +631,8 @@ export interface AIGatewayGetResponse {
 
   logpush_public_key?: string | null;
 
+  otel?: Array<AIGatewayGetResponse.Otel> | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayGetResponse.Stripe | null;
@@ -623,6 +665,14 @@ export namespace AIGatewayGetResponse {
 
       profiles: Array<string>;
     }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
   }
 
   export interface Stripe {
@@ -774,6 +824,11 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
+  otel?: Array<AIGatewayUpdateParams.Otel> | null;
+
+  /**
+   * Body param:
+   */
   store_id?: string | null;
 
   /**
@@ -809,6 +864,14 @@ export namespace AIGatewayUpdateParams {
 
       profiles: Array<string>;
     }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
   }
 
   export interface Stripe {
