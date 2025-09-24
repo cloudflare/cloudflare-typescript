@@ -43,6 +43,7 @@ describe('resource httpMethod', () => {
           dateStart: ['2019-12-27T18:11:19.117Z'],
           deviceType: ['DESKTOP'],
           format: 'JSON',
+          geoId: ['string'],
           httpProtocol: ['HTTP'],
           ipVersion: ['IPv4'],
           limit: 5,
