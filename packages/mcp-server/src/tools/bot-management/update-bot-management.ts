@@ -34,6 +34,11 @@ export const tool: Tool = {
               'Enable rule to block AI Scrapers and Crawlers. Please note the value `only_on_ad_pages` is currently not available for Enterprise customers.',
             enum: ['block', 'disabled', 'only_on_ad_pages'],
           },
+          cf_robots_variant: {
+            type: 'string',
+            description: 'Specifies the Robots Access Control License variant to use.',
+            enum: ['off', 'policy_only'],
+          },
           crawler_protection: {
             type: 'string',
             description: 'Enable rule to punish AI Scrapers and Crawlers via a link maze.',
@@ -68,6 +73,11 @@ export const tool: Tool = {
             description:
               'Enable rule to block AI Scrapers and Crawlers. Please note the value `only_on_ad_pages` is currently not available for Enterprise customers.',
             enum: ['block', 'disabled', 'only_on_ad_pages'],
+          },
+          cf_robots_variant: {
+            type: 'string',
+            description: 'Specifies the Robots Access Control License variant to use.',
+            enum: ['off', 'policy_only'],
           },
           crawler_protection: {
             type: 'string',
@@ -118,6 +128,11 @@ export const tool: Tool = {
             description:
               'Enable rule to block AI Scrapers and Crawlers. Please note the value `only_on_ad_pages` is currently not available for Enterprise customers.',
             enum: ['block', 'disabled', 'only_on_ad_pages'],
+          },
+          cf_robots_variant: {
+            type: 'string',
+            description: 'Specifies the Robots Access Control License variant to use.',
+            enum: ['off', 'policy_only'],
           },
           crawler_protection: {
             type: 'string',
@@ -183,6 +198,11 @@ export const tool: Tool = {
             type: 'boolean',
             description:
               'Indicates that the bot management cookie can be placed on end user devices accessing the site. Defaults to true',
+          },
+          cf_robots_variant: {
+            type: 'string',
+            description: 'Specifies the Robots Access Control License variant to use.',
+            enum: ['off', 'policy_only'],
           },
           crawler_protection: {
             type: 'string',
