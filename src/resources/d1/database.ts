@@ -404,7 +404,7 @@ export interface DatabaseExportResponse {
    */
   result?: DatabaseExportResponse.Result;
 
-  status?: 'complete' | 'error';
+  status?: 'complete' | 'error' | 'active';
 
   success?: boolean;
 
