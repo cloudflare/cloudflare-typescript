@@ -624,22 +624,6 @@ export namespace ResponseInfo {
   }
 }
 
-export interface ResponseInfoParam {
-  code: number;
-
-  message: string;
-
-  documentation_url?: string;
-
-  source?: ResponseInfoParam.Source;
-}
-
-export namespace ResponseInfoParam {
-  export interface Source {
-    pointer?: string;
-  }
-}
-
 export type Result = Result.UnionMember0 | Result.AaaAPIResponseCommon;
 
 export namespace Result {
