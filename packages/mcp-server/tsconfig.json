@@ -7,10 +7,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./",
     "paths": {
-      "cloudflare-mcp/*": ["src/*"],
-      "cloudflare-mcp": ["src/index.ts"]
+      "cloudflare-mcp/*": ["./src/*"],
+      "cloudflare-mcp": ["./src/index.ts"]
     },
     "noEmit": true,
 

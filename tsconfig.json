@@ -7,10 +7,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./",
     "paths": {
-      "cloudflare/*": ["src/*"],
-      "cloudflare": ["src/index.ts"]
+      "cloudflare/*": ["./src/*"],
+      "cloudflare": ["./src/index.ts"]
     },
     "noEmit": true,
 

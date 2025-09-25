@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "cloudflare-mcp/*": ["dist/src/*"],
-      "cloudflare-mcp": ["dist/src/index.ts"]
+      "cloudflare-mcp/*": ["./dist/src/*"],
+      "cloudflare-mcp": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,
