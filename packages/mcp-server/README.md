@@ -1162,17 +1162,6 @@ The following tools are available in this MCP server.
 - `edit_rate_limits` (`write`): Updates an existing rate limit.
 - `get_rate_limits` (`read`): Fetches the details of a rate limit.
 
-### Resource `smart_shield`:
-
-- `update_smart_shield` (`write`): Set Smart Shield Settings.
-- `create_healthcheck_smart_shield` (`write`): Create a new health check.
-- `delete_healthcheck_smart_shield` (`write`): Delete a health check.
-- `edit_healthcheck_smart_shield` (`write`): Patch a configured health check.
-- `get_smart_shield` (`read`): Retrieve Smart Shield Settings.
-- `get_healthcheck_smart_shield` (`read`): Fetch a single configured health check.
-- `list_healthchecks_smart_shield` (`read`): List configured health checks.
-- `update_healthcheck_smart_shield` (`write`): Update a configured health check.
-
 ### Resource `waiting_rooms`:
 
 - `create_waiting_rooms` (`write`): Creates a new waiting room.
