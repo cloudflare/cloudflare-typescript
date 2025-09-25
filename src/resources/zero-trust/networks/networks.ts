@@ -1,6 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import * as HostnameRoutesAPI from './hostname-routes';
+import {
+  HostnameRoute,
+  HostnameRouteCreateParams,
+  HostnameRouteDeleteParams,
+  HostnameRouteEditParams,
+  HostnameRouteGetParams,
+  HostnameRouteListParams,
+  HostnameRoutes,
+  HostnameRoutesV4PagePaginationArray,
+} from './hostname-routes';
 import * as VirtualNetworksAPI from './virtual-networks';
 import {
   VirtualNetwork,
@@ -37,6 +48,7 @@ export class Networks extends APIResource {
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   virtualNetworks: VirtualNetworksAPI.VirtualNetworks = new VirtualNetworksAPI.VirtualNetworks(this._client);
   subnets: SubnetsAPI.Subnets = new SubnetsAPI.Subnets(this._client);
+  hostnameRoutes: HostnameRoutesAPI.HostnameRoutes = new HostnameRoutesAPI.HostnameRoutes(this._client);
 }
 
 Networks.Routes = Routes;
@@ -45,6 +57,8 @@ Networks.VirtualNetworks = VirtualNetworks;
 Networks.VirtualNetworksSinglePage = VirtualNetworksSinglePage;
 Networks.Subnets = Subnets;
 Networks.SubnetListResponsesV4PagePaginationArray = SubnetListResponsesV4PagePaginationArray;
+Networks.HostnameRoutes = HostnameRoutes;
+Networks.HostnameRoutesV4PagePaginationArray = HostnameRoutesV4PagePaginationArray;
 
 export declare namespace Networks {
   export {
@@ -76,5 +90,16 @@ export declare namespace Networks {
     type SubnetListResponse as SubnetListResponse,
     SubnetListResponsesV4PagePaginationArray as SubnetListResponsesV4PagePaginationArray,
     type SubnetListParams as SubnetListParams,
+  };
+
+  export {
+    HostnameRoutes as HostnameRoutes,
+    type HostnameRoute as HostnameRoute,
+    HostnameRoutesV4PagePaginationArray as HostnameRoutesV4PagePaginationArray,
+    type HostnameRouteCreateParams as HostnameRouteCreateParams,
+    type HostnameRouteListParams as HostnameRouteListParams,
+    type HostnameRouteDeleteParams as HostnameRouteDeleteParams,
+    type HostnameRouteEditParams as HostnameRouteEditParams,
+    type HostnameRouteGetParams as HostnameRouteGetParams,
   };
 }

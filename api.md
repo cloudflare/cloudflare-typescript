@@ -6151,6 +6151,20 @@ Methods:
 
 - <code title="patch /accounts/{account_id}/zerotrust/subnets/cloudflare_source/{address_family}">client.zeroTrust.networks.subnets.cloudflareSource.<a href="./src/resources/zero-trust/networks/subnets/cloudflare-source.ts">update</a>(addressFamily, { ...params }) -> CloudflareSourceUpdateResponse</code>
 
+### HostnameRoutes
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/networks/hostname-routes.ts">HostnameRoute</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/zerotrust/routes/hostname">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">create</a>({ ...params }) -> HostnameRoute</code>
+- <code title="get /accounts/{account_id}/zerotrust/routes/hostname">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">list</a>({ ...params }) -> HostnameRoutesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">delete</a>(hostnameRouteId, { ...params }) -> HostnameRoute</code>
+- <code title="patch /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">edit</a>(hostnameRouteId, { ...params }) -> HostnameRoute</code>
+- <code title="get /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">get</a>(hostnameRouteId, { ...params }) -> HostnameRoute</code>
+
 ## RiskScoring
 
 Types:
