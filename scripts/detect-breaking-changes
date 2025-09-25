@@ -157,7 +157,6 @@ TEST_PATHS=(
 	tests/api-resources/origin-tls-client-auth/settings.test.ts
 	tests/api-resources/page-rules.test.ts
 	tests/api-resources/rate-limits.test.ts
-	tests/api-resources/smart-shield.test.ts
 	tests/api-resources/waiting-rooms/waiting-rooms.test.ts
 	tests/api-resources/waiting-rooms/page.test.ts
 	tests/api-resources/waiting-rooms/events/events.test.ts

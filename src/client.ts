@@ -50,7 +50,6 @@ import { PageRules } from './resources/page-rules';
 import { Pipelines } from './resources/pipelines';
 import { RateLimits } from './resources/rate-limits';
 import { SecurityTXT } from './resources/security-txt';
-import { SmartShield } from './resources/smart-shield';
 import { URLNormalization } from './resources/url-normalization';
 import { Accounts } from './resources/accounts/accounts';
 import { ACM } from './resources/acm/acm';
@@ -949,7 +948,6 @@ export class Cloudflare {
   originTLSClientAuth: API.OriginTLSClientAuth = new API.OriginTLSClientAuth(this);
   pageRules: API.PageRules = new API.PageRules(this);
   rateLimits: API.RateLimits = new API.RateLimits(this);
-  smartShield: API.SmartShield = new API.SmartShield(this);
   waitingRooms: API.WaitingRooms = new API.WaitingRooms(this);
   web3: API.Web3 = new API.Web3(this);
   workers: API.Workers = new API.Workers(this);
@@ -1047,7 +1045,6 @@ Cloudflare.Logs = Logs;
 Cloudflare.OriginTLSClientAuth = OriginTLSClientAuth;
 Cloudflare.PageRules = PageRules;
 Cloudflare.RateLimits = RateLimits;
-Cloudflare.SmartShield = SmartShield;
 Cloudflare.WaitingRooms = WaitingRooms;
 Cloudflare.Web3 = Web3;
 Cloudflare.Workers = Workers;
@@ -1208,8 +1205,6 @@ export declare namespace Cloudflare {
   export { PageRules as PageRules };
 
   export { RateLimits as RateLimits };
-
-  export { SmartShield as SmartShield };
 
   export { WaitingRooms as WaitingRooms };
 
