@@ -777,6 +777,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.networks.virtualNetworks.edit()`
 - `client.zeroTrust.networks.virtualNetworks.get()`
 - `client.zeroTrust.networks.subnets.cloudflareSource.update()`
+- `client.zeroTrust.networks.hostnameRoutes.delete()`
+- `client.zeroTrust.networks.hostnameRoutes.edit()`
+- `client.zeroTrust.networks.hostnameRoutes.get()`
 - `client.zeroTrust.riskScoring.get()`
 - `client.zeroTrust.riskScoring.reset()`
 - `client.zeroTrust.riskScoring.integrations.update()`

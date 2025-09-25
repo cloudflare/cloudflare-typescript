@@ -3077,6 +3077,14 @@ The following tools are available in this MCP server.
 
 - `update_subnets_networks_zero_trust_cloudflare_source` (`write`): Updates the Cloudflare Source subnet of the given address family
 
+### Resource `zero_trust.networks.hostname_routes`:
+
+- `create_networks_zero_trust_hostname_routes` (`write`): Create a hostname route.
+- `list_networks_zero_trust_hostname_routes` (`read`): Lists and filters hostname routes in an account.
+- `delete_networks_zero_trust_hostname_routes` (`write`): Delete a hostname route.
+- `edit_networks_zero_trust_hostname_routes` (`write`): Updates a hostname route.
+- `get_networks_zero_trust_hostname_routes` (`read`): Get a hostname route.
+
 ### Resource `zero_trust.risk_scoring`:
 
 - `get_zero_trust_risk_scoring` (`read`): Get risk event/score information for a specific user

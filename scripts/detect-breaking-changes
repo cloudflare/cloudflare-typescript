@@ -517,6 +517,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/networks/virtual-networks.test.ts
 	tests/api-resources/zero-trust/networks/subnets/subnets.test.ts
 	tests/api-resources/zero-trust/networks/subnets/cloudflare-source.test.ts
+	tests/api-resources/zero-trust/networks/hostname-routes.test.ts
 	tests/api-resources/zero-trust/risk-scoring/risk-scoring.test.ts
 	tests/api-resources/zero-trust/risk-scoring/behaviours.test.ts
 	tests/api-resources/zero-trust/risk-scoring/summary.test.ts

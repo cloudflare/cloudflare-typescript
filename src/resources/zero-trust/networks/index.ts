@@ -1,5 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export {
+  HostnameRoutes,
+  type HostnameRoute,
+  type HostnameRouteCreateParams,
+  type HostnameRouteListParams,
+  type HostnameRouteDeleteParams,
+  type HostnameRouteEditParams,
+  type HostnameRouteGetParams,
+  type HostnameRoutesV4PagePaginationArray,
+} from './hostname-routes';
 export { Networks } from './networks';
 export {
   Routes,
