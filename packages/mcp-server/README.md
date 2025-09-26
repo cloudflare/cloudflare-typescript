@@ -1821,10 +1821,6 @@ The following tools are available in this MCP server.
 - `list_indicator_feeds_intel_permissions` (`read`): List indicator feed permissions
 - `delete_indicator_feeds_intel_permissions` (`write`): Revoke permission to indicator feed
 
-### Resource `intel.indicator_feeds.downloads`:
-
-- `get_indicator_feeds_intel_downloads` (`read`): Download indicator feed data
-
 ### Resource `intel.sinkholes`:
 
 - `list_intel_sinkholes` (`read`): List sinkholes owned by this account
