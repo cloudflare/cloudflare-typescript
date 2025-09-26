@@ -287,7 +287,6 @@ TEST_PATHS=(
 	tests/api-resources/intel/indicator-feeds/indicator-feeds.test.ts
 	tests/api-resources/intel/indicator-feeds/snapshots.test.ts
 	tests/api-resources/intel/indicator-feeds/permissions.test.ts
-	tests/api-resources/intel/indicator-feeds/downloads.test.ts
 	tests/api-resources/intel/sinkholes.test.ts
 	tests/api-resources/intel/attack-surface-report/attack-surface-report.test.ts
 	tests/api-resources/intel/attack-surface-report/issue-types.test.ts

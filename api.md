@@ -3332,14 +3332,6 @@ Methods:
 
 ### Downloads
 
-Types:
-
-- <code><a href="./src/resources/intel/indicator-feeds/downloads.ts">DownloadGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/intel/indicator_feeds/{feed_id}/download">client.intel.indicatorFeeds.downloads.<a href="./src/resources/intel/indicator-feeds/downloads.ts">get</a>(feedId, { ...params }) -> DownloadGetResponse</code>
-
 ## Sinkholes
 
 Types:
