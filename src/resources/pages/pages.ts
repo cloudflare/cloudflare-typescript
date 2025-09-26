@@ -2,7 +2,21 @@
 
 import { APIResource } from '../../core/resource';
 import * as ProjectsAPI from './projects/projects';
-import { Projects } from './projects/projects';
+import {
+  Deployment,
+  DeploymentsSinglePage,
+  Project,
+  ProjectCreateParams,
+  ProjectDeleteParams,
+  ProjectDeleteResponse,
+  ProjectEditParams,
+  ProjectGetParams,
+  ProjectListParams,
+  ProjectPurgeBuildCacheParams,
+  ProjectPurgeBuildCacheResponse,
+  Projects,
+  Stage,
+} from './projects/projects';
 
 export class Pages extends APIResource {
   projects: ProjectsAPI.Projects = new ProjectsAPI.Projects(this._client);
@@ -11,5 +25,19 @@ export class Pages extends APIResource {
 Pages.Projects = Projects;
 
 export declare namespace Pages {
-  export { Projects as Projects };
+  export {
+    Projects as Projects,
+    type Deployment as Deployment,
+    type Project as Project,
+    type Stage as Stage,
+    type ProjectDeleteResponse as ProjectDeleteResponse,
+    type ProjectPurgeBuildCacheResponse as ProjectPurgeBuildCacheResponse,
+    type DeploymentsSinglePage as DeploymentsSinglePage,
+    type ProjectCreateParams as ProjectCreateParams,
+    type ProjectListParams as ProjectListParams,
+    type ProjectDeleteParams as ProjectDeleteParams,
+    type ProjectEditParams as ProjectEditParams,
+    type ProjectGetParams as ProjectGetParams,
+    type ProjectPurgeBuildCacheParams as ProjectPurgeBuildCacheParams,
+  };
 }
