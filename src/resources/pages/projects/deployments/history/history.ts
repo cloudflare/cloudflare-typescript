@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../../resource';
 import * as LogsAPI from './logs';
-import { Logs } from './logs';
+import { LogGetParams, LogGetResponse, Logs } from './logs';
 
 export class History extends APIResource {
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
@@ -11,5 +11,5 @@ export class History extends APIResource {
 History.Logs = Logs;
 
 export declare namespace History {
-  export { Logs as Logs };
+  export { Logs as Logs, type LogGetResponse as LogGetResponse, type LogGetParams as LogGetParams };
 }
