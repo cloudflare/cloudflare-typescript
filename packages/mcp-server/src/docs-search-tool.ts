@@ -35,10 +35,13 @@ export const tool: Tool = {
   },
 };
 
+const docsSearchURL =
+  process.env['DOCS_SEARCH_URL'] || 'https://api.stainless.com/api/projects/cloudflare/docs/search';
+
 export const handler = async (_: unknown, args: Record<string, unknown> | undefined) => {
   const body = args as any;
   const query = new URLSearchParams(body).toString();
-  const result = await fetch('https://api.stainless.com/api/projects/cloudflare/docs/search?' + query);
+  const result = await fetch(`${docsSearchURL}?${query}`);
   return asTextContentResult(await result.json());
 };
 
