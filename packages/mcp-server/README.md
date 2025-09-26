@@ -2084,36 +2084,6 @@ The following tools are available in this MCP server.
 
 - `get_mtls_certificates_associations` (`read`): Lists all active associations between the certificate and Cloudflare services.
 
-### Resource `pages.projects`:
-
-- `create_pages_projects` (`write`): Create a new project.
-- `list_pages_projects` (`read`): Fetch a list of all user projects.
-- `delete_pages_projects` (`write`): Delete a project by name.
-- `edit_pages_projects` (`write`): Set new attributes for an existing project. Modify environment variables. To delete an environment variable, set the key to null.
-- `get_pages_projects` (`read`): Fetch a project by name.
-- `purge_build_cache_pages_projects` (`write`): Purge all cached build artifacts for a Pages project
-
-### Resource `pages.projects.deployments`:
-
-- `create_projects_pages_deployments` (`write`): Start a new deployment from production. The repository and account must have already been authorized on the Cloudflare Pages dashboard.
-- `list_projects_pages_deployments` (`read`): Fetch a list of project deployments.
-- `delete_projects_pages_deployments` (`write`): Delete a deployment.
-- `get_projects_pages_deployments` (`read`): Fetch information about a deployment.
-- `retry_projects_pages_deployments` (`write`): Retry a previous deployment.
-- `rollback_projects_pages_deployments` (`write`): Rollback the production deployment to a previous deployment. You can only rollback to succesful builds on production.
-
-### Resource `pages.projects.deployments.history.logs`:
-
-- `get_history_deployments_projects_pages_logs` (`read`): Fetch deployment logs for a project.
-
-### Resource `pages.projects.domains`:
-
-- `create_projects_pages_domains` (`write`): Add a new domain for the Pages project.
-- `list_projects_pages_domains` (`read`): Fetch a list of all domains associated with a Pages project.
-- `delete_projects_pages_domains` (`write`): Delete a Pages project's domain.
-- `edit_projects_pages_domains` (`write`): Retry the validation status of a single domain.
-- `get_projects_pages_domains` (`read`): Fetch a single domain.
-
 ### Resource `registrar.domains`:
 
 - `update_registrar_domains` (`write`): Update individual domain.
