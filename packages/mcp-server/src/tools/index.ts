@@ -688,7 +688,6 @@ import update_indicator_feeds_intel_snapshots from './intel/indicator-feeds/snap
 import create_indicator_feeds_intel_permissions from './intel/indicator-feeds/permissions/create-indicator-feeds-intel-permissions';
 import list_indicator_feeds_intel_permissions from './intel/indicator-feeds/permissions/list-indicator-feeds-intel-permissions';
 import delete_indicator_feeds_intel_permissions from './intel/indicator-feeds/permissions/delete-indicator-feeds-intel-permissions';
-import get_indicator_feeds_intel_downloads from './intel/indicator-feeds/downloads/get-indicator-feeds-intel-downloads';
 import list_intel_sinkholes from './intel/sinkholes/list-intel-sinkholes';
 import get_attack_surface_report_intel_issue_types from './intel/attack-surface-report/issue-types/get-attack-surface-report-intel-issue-types';
 import list_attack_surface_report_intel_issues from './intel/attack-surface-report/issues/list-attack-surface-report-intel-issues';
@@ -2530,7 +2529,6 @@ addEndpoint(update_indicator_feeds_intel_snapshots);
 addEndpoint(create_indicator_feeds_intel_permissions);
 addEndpoint(list_indicator_feeds_intel_permissions);
 addEndpoint(delete_indicator_feeds_intel_permissions);
-addEndpoint(get_indicator_feeds_intel_downloads);
 addEndpoint(list_intel_sinkholes);
 addEndpoint(get_attack_surface_report_intel_issue_types);
 addEndpoint(list_attack_surface_report_intel_issues);

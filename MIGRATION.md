@@ -403,7 +403,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.intel.indicatorFeeds.data()`
 - `client.intel.indicatorFeeds.get()`
 - `client.intel.indicatorFeeds.snapshots.update()`
-- `client.intel.indicatorFeeds.downloads.get()`
 - `client.intel.attackSurfaceReport.issues.dismiss()`
 - `client.magicTransit.apps.update()`
 - `client.magicTransit.apps.delete()`
