@@ -2128,6 +2128,302 @@
       ]
     },
     {
+      "base": "pages.projects.deployments",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments",
+      "name": "retry",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments",
+      "name": "rollback",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments.history.logs",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.domains",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.domains",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.domains",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "domain_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "rules.lists.items",
       "name": "get",
       "params": [
