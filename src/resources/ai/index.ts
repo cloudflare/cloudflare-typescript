@@ -21,3 +21,9 @@ export {
   type ModelListParams,
 } from './models/index';
 export { TaskListResponsesSinglePage, Tasks, type TaskListResponse, type TaskListParams } from './tasks';
+export {
+  ToMarkdownTransformResponsesSinglePage,
+  ToMarkdown,
+  type ToMarkdownTransformResponse,
+  type ToMarkdownTransformParams,
+} from './to-markdown';
