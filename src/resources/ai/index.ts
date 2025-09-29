@@ -21,3 +21,9 @@ export {
   type ModelListResponsesV4PagePaginationArray,
 } from './models/index';
 export { Tasks, type TaskListResponse, type TaskListParams, type TaskListResponsesSinglePage } from './tasks';
+export {
+  ToMarkdown,
+  type ToMarkdownTransformResponse,
+  type ToMarkdownTransformParams,
+  type ToMarkdownTransformResponsesSinglePage,
+} from './to-markdown';

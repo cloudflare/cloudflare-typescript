@@ -1,0 +1,59 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../core/resource';
+import { PagePromise, SinglePage } from '../../core/pagination';
+import { buildHeaders } from '../../internal/headers';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
+
+export class ToMarkdown extends APIResource {
+  /**
+   * Convert Files into Markdown
+   */
+  transform(
+    body: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
+    params: ToMarkdownTransformParams,
+    options?: RequestOptions,
+  ): PagePromise<ToMarkdownTransformResponsesSinglePage, ToMarkdownTransformResponse> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/ai/tomarkdown`,
+      SinglePage<ToMarkdownTransformResponse>,
+      {
+        body: body,
+        method: 'post',
+        ...options,
+        headers: buildHeaders([{ 'Content-Type': 'application/octet-stream' }, options?.headers]),
+      },
+    );
+  }
+}
+
+export type ToMarkdownTransformResponsesSinglePage = SinglePage<ToMarkdownTransformResponse>;
+
+export interface ToMarkdownTransformResponse {
+  data: string;
+
+  format: string;
+
+  mimeType: string;
+
+  name: string;
+
+  tokens: string;
+}
+
+export interface ToMarkdownTransformParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+}
+
+export declare namespace ToMarkdown {
+  export {
+    type ToMarkdownTransformResponse as ToMarkdownTransformResponse,
+    type ToMarkdownTransformResponsesSinglePage as ToMarkdownTransformResponsesSinglePage,
+    type ToMarkdownTransformParams as ToMarkdownTransformParams,
+  };
+}

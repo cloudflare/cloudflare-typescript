@@ -4179,6 +4179,10 @@ The following tools are available in this MCP server.
 
 - `get_models_ai_schema` (`read`): Get Model Schema
 
+### Resource `ai.to_markdown`:
+
+- `transform_ai_to_markdown` (`write`): Convert Files into Markdown
+
 ### Resource `security_center.insights`:
 
 - `list_security_center_insights` (`read`): Get Security Center Insights

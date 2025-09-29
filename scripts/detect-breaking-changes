@@ -730,6 +730,7 @@ TEST_PATHS=(
 	tests/api-resources/ai/tasks.test.ts
 	tests/api-resources/ai/models/models.test.ts
 	tests/api-resources/ai/models/schema.test.ts
+	tests/api-resources/ai/to-markdown.test.ts
 	tests/api-resources/security-center/security-center.test.ts
 	tests/api-resources/security-center/insights/insights.test.ts
 	tests/api-resources/security-center/insights/class.test.ts
