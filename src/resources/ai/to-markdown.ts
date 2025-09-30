@@ -10,7 +10,7 @@ export class ToMarkdown extends APIResource {
    * Convert Files into Markdown
    */
   transform(
-    body: string | ArrayBufferView | ArrayBuffer | BlobLike,
+    file: string | ArrayBufferView | ArrayBuffer | BlobLike,
     params: ToMarkdownTransformParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ToMarkdownTransformResponsesSinglePage, ToMarkdownTransformResponse> {
@@ -19,7 +19,7 @@ export class ToMarkdown extends APIResource {
       `/accounts/${account_id}/ai/tomarkdown`,
       ToMarkdownTransformResponsesSinglePage,
       {
-        body: body,
+        body: file,
         method: 'post',
         ...options,
         headers: { 'Content-Type': 'application/octet-stream', ...options?.headers },
