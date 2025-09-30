@@ -8641,7 +8641,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/ai/tomarkdown">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">transform</a>(body, { ...params }) -> ToMarkdownTransformResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/ai/tomarkdown">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">transform</a>(file, { ...params }) -> ToMarkdownTransformResponsesSinglePage</code>
 
 # SecurityCenter
 

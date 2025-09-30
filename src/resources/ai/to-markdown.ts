@@ -11,7 +11,7 @@ export class ToMarkdown extends APIResource {
    * Convert Files into Markdown
    */
   transform(
-    body: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
+    file: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
     params: ToMarkdownTransformParams,
     options?: RequestOptions,
   ): PagePromise<ToMarkdownTransformResponsesSinglePage, ToMarkdownTransformResponse> {
@@ -20,7 +20,7 @@ export class ToMarkdown extends APIResource {
       path`/accounts/${account_id}/ai/tomarkdown`,
       SinglePage<ToMarkdownTransformResponse>,
       {
-        body: body,
+        body: file,
         method: 'post',
         ...options,
         headers: buildHeaders([{ 'Content-Type': 'application/octet-stream' }, options?.headers]),
