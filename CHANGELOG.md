@@ -1,5 +1,74 @@
 # Changelog
 
+## 5.2.0 (2025-09-30)
+
+Full Changelog: [v5.1.0...v5.2.0](https://github.com/cloudflare/cloudflare-typescript/compare/v5.1.0...v5.2.0)
+
+### Features
+
+* **api:** api update ([932e696](https://github.com/cloudflare/cloudflare-typescript/commit/932e69652a97b73ea3073749187a78ee6ddb5cc0))
+* **api:** api update ([4656a4e](https://github.com/cloudflare/cloudflare-typescript/commit/4656a4eb8cc5ed853ce5f248056c48413ebc9a0f))
+* fix(ai): rename duplicate parameter in the to_markdown subresource ([98ccef7](https://github.com/cloudflare/cloudflare-typescript/commit/98ccef7983622f556d6c1356849f84ca1441ebdd))
+* fix(api): RAG-286: Add to_markdown subresource to AI resource ([770500f](https://github.com/cloudflare/cloudflare-typescript/commit/770500fa751cec08bbd4bca0632c3a54e724aefd))
+* Merge branch 'cbennett/LB-4979' into 'main' ([5764b60](https://github.com/cloudflare/cloudflare-typescript/commit/5764b602234b4245009022a2fed3f3e3fd0ea75d))
+* Merge branch 'davis/PINGORA-2658' into 'main' ([92a159e](https://github.com/cloudflare/cloudflare-typescript/commit/92a159e4adfb873f547ab8b6c78da7b0d7fc49f2))
+* Merge branch 'mingwei/BGP-418' into 'main' ([e8480e8](https://github.com/cloudflare/cloudflare-typescript/commit/e8480e8d5f510114fc64459ad6dc40a3a4f32aeb))
+* Revert "Merge branch 'davis/PINGORA-2658' into 'main'" ([03d5bae](https://github.com/cloudflare/cloudflare-typescript/commit/03d5bae6c136efd74b8204f74f588aeb3cc2ac1d))
+
+
+### Performance Improvements
+
+* faster formatting ([17f6c4f](https://github.com/cloudflare/cloudflare-typescript/commit/17f6c4f43a503ad2f0b8f7d72dcb0718c62b184e))
+
+
+### Chores
+
+* **api:** update composite API spec ([ab0bebd](https://github.com/cloudflare/cloudflare-typescript/commit/ab0bebd30006a7ec15c63b4115ab44c545f0ad27))
+* **api:** update composite API spec ([04d593f](https://github.com/cloudflare/cloudflare-typescript/commit/04d593f11dd0d7246717d36a8da8d1b7eb232377))
+* **api:** update composite API spec ([3cd521d](https://github.com/cloudflare/cloudflare-typescript/commit/3cd521d14666a86ac2c5710ff46142233145dfef))
+* **api:** update composite API spec ([15ff36b](https://github.com/cloudflare/cloudflare-typescript/commit/15ff36bd678935131a2f65eb009b19e8cd408695))
+* **api:** update composite API spec ([38722d4](https://github.com/cloudflare/cloudflare-typescript/commit/38722d4d86dd2cc859d7e2227ba177df7b661af1))
+* **api:** update composite API spec ([f5dbf2f](https://github.com/cloudflare/cloudflare-typescript/commit/f5dbf2f6fdeb58df2f6b7e0fbe4a67cce1a41768))
+* **api:** update composite API spec ([944d006](https://github.com/cloudflare/cloudflare-typescript/commit/944d0067f1027f0516a67dbe76d19a94c90d7ab0))
+* **api:** update composite API spec ([65fb516](https://github.com/cloudflare/cloudflare-typescript/commit/65fb516ba359790a81015844202b142910fc64bd))
+* **api:** update composite API spec ([0227a05](https://github.com/cloudflare/cloudflare-typescript/commit/0227a052c6365411126863f27f6044753562c2b1))
+* **api:** update composite API spec ([2a87192](https://github.com/cloudflare/cloudflare-typescript/commit/2a871929714e7038037bd1b9eddfb7611ac3a27f))
+* **api:** update composite API spec ([9b6e363](https://github.com/cloudflare/cloudflare-typescript/commit/9b6e36343baed1d2b20f048ee03e6b025f1af3f2))
+* **api:** update composite API spec ([3a8a22d](https://github.com/cloudflare/cloudflare-typescript/commit/3a8a22dce7d8d90273e72add4ca427771aa862b8))
+* **api:** update composite API spec ([ceb49a5](https://github.com/cloudflare/cloudflare-typescript/commit/ceb49a54c198672834ef599d92957a41c73450f0))
+* **api:** update composite API spec ([f85cb6b](https://github.com/cloudflare/cloudflare-typescript/commit/f85cb6be0c283dfa6e1e52d0f255541e71485b55))
+* **api:** update composite API spec ([3204575](https://github.com/cloudflare/cloudflare-typescript/commit/32045759e5391d905caafac85506f12aff209be3))
+* **api:** update composite API spec ([852e202](https://github.com/cloudflare/cloudflare-typescript/commit/852e202f145def55c4fbefccd561ed91d140b89e))
+* **api:** update composite API spec ([02745e6](https://github.com/cloudflare/cloudflare-typescript/commit/02745e6039710252caaebecab1c58460b8a3eb55))
+* **api:** update composite API spec ([47d98b6](https://github.com/cloudflare/cloudflare-typescript/commit/47d98b61ca1dd66d2ea622613dbabcbebfa6935e))
+* **api:** update composite API spec ([0c1056e](https://github.com/cloudflare/cloudflare-typescript/commit/0c1056ea63598991152c2e1384822448f80b5614))
+* **api:** update composite API spec ([79e8b83](https://github.com/cloudflare/cloudflare-typescript/commit/79e8b839fb40c574a5d41647d86aba9d62c06c95))
+* **api:** update composite API spec ([d35bbfb](https://github.com/cloudflare/cloudflare-typescript/commit/d35bbfb00b9d1b74a724e9fd5ba764d8e30e4622))
+* **api:** update composite API spec ([87fc40c](https://github.com/cloudflare/cloudflare-typescript/commit/87fc40c356c53ba7a73db3f80050bc2980efcd19))
+* **api:** update composite API spec ([2a6e7ed](https://github.com/cloudflare/cloudflare-typescript/commit/2a6e7ed99641acb0c4708ebf0c201072347a11fe))
+* **api:** update composite API spec ([30a4ab2](https://github.com/cloudflare/cloudflare-typescript/commit/30a4ab26545c98738abff666fcbdc54f945ae7c4))
+* **api:** update composite API spec ([0cab872](https://github.com/cloudflare/cloudflare-typescript/commit/0cab872cbe1428f16df2caddd7f71e3eacf3720e))
+* **api:** update composite API spec ([36c1def](https://github.com/cloudflare/cloudflare-typescript/commit/36c1def65037635cb80a18f37a03d48e090ac317))
+* **api:** update composite API spec ([fabf439](https://github.com/cloudflare/cloudflare-typescript/commit/fabf439a0d8ce775a1ea0814a224d38623f47811))
+* **api:** update composite API spec ([eca4953](https://github.com/cloudflare/cloudflare-typescript/commit/eca49531f0d208f1c12b9df3fac0bfdcc1717d61))
+* **api:** update composite API spec ([de00074](https://github.com/cloudflare/cloudflare-typescript/commit/de0007405ea4cefe380582f48c10ba971c390d25))
+* **api:** update composite API spec ([5fef81c](https://github.com/cloudflare/cloudflare-typescript/commit/5fef81c748ed5e1f36fa3d3c612cd8e4575e2af0))
+* **api:** update composite API spec ([a0bf932](https://github.com/cloudflare/cloudflare-typescript/commit/a0bf932043180bbe447b84187dc049bd7b13ceec))
+* **api:** update composite API spec ([8292aee](https://github.com/cloudflare/cloudflare-typescript/commit/8292aeeda89bebfeb958078b0b8795d746bc7aae))
+* **api:** update composite API spec ([d5b6a6a](https://github.com/cloudflare/cloudflare-typescript/commit/d5b6a6a74d23366c9f2a40a24c462b59843100af))
+* **api:** update composite API spec ([65fff47](https://github.com/cloudflare/cloudflare-typescript/commit/65fff47d4f140920ad7abb22270b5d7a792ab475))
+* **api:** update composite API spec ([c5cc86a](https://github.com/cloudflare/cloudflare-typescript/commit/c5cc86a98b35542e7394ea29123a20bcbfe86bd3))
+* **api:** update composite API spec ([bb6586e](https://github.com/cloudflare/cloudflare-typescript/commit/bb6586eaaccfec366402a2f17aa60e8e3c7ac4be))
+* **api:** update composite API spec ([29623b8](https://github.com/cloudflare/cloudflare-typescript/commit/29623b80f2d5137a211c8400ecec09912269b99b))
+* **api:** update composite API spec ([1fa622c](https://github.com/cloudflare/cloudflare-typescript/commit/1fa622cc4313376ad2c49275db3b4850a12e4038))
+* **api:** update composite API spec ([80d3e7a](https://github.com/cloudflare/cloudflare-typescript/commit/80d3e7ac8e95d4c62665b1892a3eb0d7c5e62b69))
+* do not install brew dependencies in ./scripts/bootstrap by default ([257ac1d](https://github.com/cloudflare/cloudflare-typescript/commit/257ac1dce3d1bdfb915e203f393cde3deb24f8c8))
+* improve example values ([20f0585](https://github.com/cloudflare/cloudflare-typescript/commit/20f05856df1bad6a284198aaae8aee27ee0c31af))
+* **internal:** codegen related update ([0448452](https://github.com/cloudflare/cloudflare-typescript/commit/04484522a5aa79dfdf5334550183fe0a5525ca90))
+* **internal:** fix incremental formatting in some cases ([9abf5ab](https://github.com/cloudflare/cloudflare-typescript/commit/9abf5ab20e49740b74f2537ea854b18023d1b170))
+* **internal:** ignore .eslintcache ([a80827e](https://github.com/cloudflare/cloudflare-typescript/commit/a80827e844ae136ac437ce1b67fd160824f21930))
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([ea38064](https://github.com/cloudflare/cloudflare-typescript/commit/ea3806498caf32cf70d51131f098211f6f17a09d))
+
 ## 5.1.0 (2025-09-12)
 
 Full Changelog: [v5.0.0...v5.1.0](https://github.com/cloudflare/cloudflare-typescript/compare/v5.0.0...v5.1.0)
