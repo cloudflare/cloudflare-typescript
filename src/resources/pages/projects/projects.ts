@@ -28,12 +28,7 @@ import {
   Deployments,
 } from './deployments/deployments';
 import { APIPromise } from '../../../core/api-promise';
-import {
-  PagePromise,
-  SinglePage,
-  V4PagePaginationArray,
-  type V4PagePaginationArrayParams,
-} from '../../../core/pagination';
+import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -73,15 +68,12 @@ export class Projects extends APIResource {
    * }
    * ```
    */
-  list(
-    params: ProjectListParams,
-    options?: RequestOptions,
-  ): PagePromise<DeploymentsV4PagePaginationArray, Deployment> {
-    const { account_id, ...query } = params;
+  list(params: ProjectListParams, options?: RequestOptions): PagePromise<DeploymentsSinglePage, Deployment> {
+    const { account_id } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/pages/projects`,
-      V4PagePaginationArray<Deployment>,
-      { query, ...options },
+      SinglePage<Deployment>,
+      options,
     );
   }
 
@@ -178,8 +170,6 @@ export class Projects extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type DeploymentsV4PagePaginationArray = V4PagePaginationArray<Deployment>;
 
 export type DeploymentsSinglePage = SinglePage<Deployment>;
 
@@ -1646,9 +1636,9 @@ export namespace ProjectCreateParams {
   }
 }
 
-export interface ProjectListParams extends V4PagePaginationArrayParams {
+export interface ProjectListParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
 }
@@ -2285,7 +2275,7 @@ export declare namespace Projects {
     type Stage as Stage,
     type ProjectDeleteResponse as ProjectDeleteResponse,
     type ProjectPurgeBuildCacheResponse as ProjectPurgeBuildCacheResponse,
-    type DeploymentsV4PagePaginationArray as DeploymentsV4PagePaginationArray,
+    type DeploymentsSinglePage as DeploymentsSinglePage,
     type ProjectCreateParams as ProjectCreateParams,
     type ProjectListParams as ProjectListParams,
     type ProjectDeleteParams as ProjectDeleteParams,

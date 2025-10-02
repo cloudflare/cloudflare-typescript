@@ -2239,8 +2239,8 @@ The following tools are available in this MCP server.
 
 ### Resource `stream.downloads`:
 
-- `create_stream_downloads` (`write`): Creates a download for a video when a video is ready to view. Use `/downloads/{download_type}` instead for type-specific downloads. Available types are `default` and `audio`.
-- `delete_stream_downloads` (`write`): Delete the downloads for a video. Use `/downloads/{download_type}` instead for type-specific downloads. Available types are `default` and `audio`.
+- `create_stream_downloads` (`write`): Creates a download for a video when a video is ready to view. Use `/downloads/{download_type}` instead for type-specific downloads.
+- `delete_stream_downloads` (`write`): Delete the downloads for a video. Use `/downloads/{download_type}` instead for type-specific downloads.
 - `get_stream_downloads` (`read`): Lists the downloads created for a video.
 
 ### Resource `stream.embed`:
