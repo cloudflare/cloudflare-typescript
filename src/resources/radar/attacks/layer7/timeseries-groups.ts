@@ -8,7 +8,11 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by HTTP method over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer7.timeseriesGroups.httpMethod();
+   * ```
    */
   httpMethod(
     query?: TimeseriesGroupHTTPMethodParams,
@@ -33,7 +37,11 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by HTTP version over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer7.timeseriesGroups.httpVersion();
+   * ```
    */
   httpVersion(
     query?: TimeseriesGroupHTTPVersionParams,
@@ -58,7 +66,11 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by targeted industry over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer7.timeseriesGroups.industry();
+   * ```
    */
   industry(
     query?: TimeseriesGroupIndustryParams,
@@ -83,7 +95,11 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by IP version used over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer7.timeseriesGroups.ipVersion();
+   * ```
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -108,7 +124,11 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by managed rules over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer7.timeseriesGroups.managedRules();
+   * ```
    */
   managedRules(
     query?: TimeseriesGroupManagedRulesParams,
@@ -133,7 +153,11 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by mitigation product over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer7.timeseriesGroups.mitigationProduct();
+   * ```
    */
   mitigationProduct(
     query?: TimeseriesGroupMitigationProductParams,
@@ -158,7 +182,11 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by targeted vertical over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.attacks.layer7.timeseriesGroups.vertical();
+   * ```
    */
   vertical(
     query?: TimeseriesGroupVerticalParams,
