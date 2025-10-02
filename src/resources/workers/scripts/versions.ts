@@ -245,7 +245,7 @@ export namespace VersionCreateResponse {
       name: string;
 
       /**
-       * Namespace to bind to.
+       * The name of the dispatch namespace.
        */
       namespace: string;
 
@@ -981,7 +981,7 @@ export namespace VersionGetResponse {
       name: string;
 
       /**
-       * Namespace to bind to.
+       * The name of the dispatch namespace.
        */
       namespace: string;
 
@@ -1745,7 +1745,7 @@ export namespace VersionCreateParams {
       name: string;
 
       /**
-       * Namespace to bind to.
+       * The name of the dispatch namespace.
        */
       namespace: string;
 
