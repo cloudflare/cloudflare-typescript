@@ -13,7 +13,7 @@ export class Netflows extends APIResource {
    * Retrieves the distribution of network traffic (NetFlows) by HTTP vs other
    * protocols.
    *
-   * @deprecated
+   * @deprecated Use [Get Network Traffic Distribution By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/netflows/methods/summary_v2/) instead.
    */
   summary(
     query?: NetflowSummaryParams,
