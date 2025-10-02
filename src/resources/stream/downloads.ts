@@ -8,7 +8,8 @@ import { path } from '../../internal/utils/path';
 export class Downloads extends APIResource {
   /**
    * Creates a download for a video when a video is ready to view. Use
-   * `/downloads/{download_type}` instead for type-specific downloads.
+   * `/downloads/{download_type}` instead for type-specific downloads. Available
+   * types are `default` and `audio`.
    *
    * @example
    * ```ts
@@ -37,7 +38,7 @@ export class Downloads extends APIResource {
 
   /**
    * Delete the downloads for a video. Use `/downloads/{download_type}` instead for
-   * type-specific downloads.
+   * type-specific downloads. Available types are `default` and `audio`.
    *
    * @example
    * ```ts

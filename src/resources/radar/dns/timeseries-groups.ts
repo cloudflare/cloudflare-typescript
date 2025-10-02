@@ -8,11 +8,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by cache status over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.cacheHit();
-   * ```
+   * @deprecated
    */
   cacheHit(
     query: TimeseriesGroupCacheHitParams | null | undefined = {},
@@ -29,11 +25,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of DNS responses by DNSSEC (DNS Security Extensions)
    * support over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.dnssec();
-   * ```
+   * @deprecated
    */
   dnssec(
     query: TimeseriesGroupDNSSECParams | null | undefined = {},
@@ -50,11 +42,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of DNS queries by DNSSEC (DNS Security Extensions)
    * client awareness over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.dnssecAware();
-   * ```
+   * @deprecated
    */
   dnssecAware(
     query: TimeseriesGroupDNSSECAwareParams | null | undefined = {},
@@ -71,11 +59,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of DNSSEC-validated answers by end-to-end security
    * status over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.dnssecE2E();
-   * ```
+   * @deprecated
    */
   dnssecE2E(
     query: TimeseriesGroupDNSSECE2EParams | null | undefined = {},
@@ -91,11 +75,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by IP version over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.ipVersion();
-   * ```
+   * @deprecated
    */
   ipVersion(
     query: TimeseriesGroupIPVersionParams | null | undefined = {},
@@ -111,11 +91,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by matching answers over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.matchingAnswer();
-   * ```
+   * @deprecated
    */
   matchingAnswer(
     query: TimeseriesGroupMatchingAnswerParams | null | undefined = {},
@@ -131,11 +107,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by DNS transport protocol over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.protocol();
-   * ```
+   * @deprecated
    */
   protocol(
     query: TimeseriesGroupProtocolParams | null | undefined = {},
@@ -151,11 +123,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by type over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.queryType();
-   * ```
+   * @deprecated
    */
   queryType(
     query: TimeseriesGroupQueryTypeParams | null | undefined = {},
@@ -171,11 +139,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by response code over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.responseCode();
-   * ```
+   * @deprecated
    */
   responseCode(
     query: TimeseriesGroupResponseCodeParams | null | undefined = {},
@@ -191,11 +155,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by minimum answer TTL over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.responseTTL();
-   * ```
+   * @deprecated
    */
   responseTTL(
     query: TimeseriesGroupResponseTTLParams | null | undefined = {},

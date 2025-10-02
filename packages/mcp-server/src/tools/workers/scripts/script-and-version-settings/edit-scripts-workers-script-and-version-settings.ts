@@ -149,7 +149,7 @@ export const tool: Tool = {
                     },
                     namespace: {
                       type: 'string',
-                      description: 'Namespace to bind to.',
+                      description: 'The name of the dispatch namespace.',
                     },
                     type: {
                       type: 'string',
