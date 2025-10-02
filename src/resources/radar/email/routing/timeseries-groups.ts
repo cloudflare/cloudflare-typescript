@@ -10,11 +10,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.timeseriesGroups.arc();
-   * ```
+   * @deprecated
    */
   arc(
     query: TimeseriesGroupARCParams | null | undefined = {},
@@ -31,11 +27,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
    * validation over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.timeseriesGroups.dkim();
-   * ```
+   * @deprecated
    */
   dkim(
     query: TimeseriesGroupDKIMParams | null | undefined = {},
@@ -52,11 +44,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by DMARC (Domain-based Message
    * Authentication, Reporting and Conformance) validation over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.timeseriesGroups.dmarc();
-   * ```
+   * @deprecated
    */
   dmarc(
     query: TimeseriesGroupDMARCParams | null | undefined = {},
@@ -73,11 +61,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by encryption status (encrypted vs.
    * not-encrypted) over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.timeseriesGroups.encrypted();
-   * ```
+   * @deprecated
    */
   encrypted(
     query: TimeseriesGroupEncryptedParams | null | undefined = {},
@@ -94,11 +78,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of emails by IP version over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.timeseriesGroups.ipVersion();
-   * ```
+   * @deprecated
    */
   ipVersion(
     query: TimeseriesGroupIPVersionParams | null | undefined = {},
@@ -116,11 +96,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by SPF (Sender Policy Framework) validation
    * over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.timeseriesGroups.spf();
-   * ```
+   * @deprecated
    */
   spf(
     query: TimeseriesGroupSPFParams | null | undefined = {},
