@@ -26,14 +26,6 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier',
       },
-      page: {
-        type: 'integer',
-        description: 'Which page of projects to fetch.',
-      },
-      per_page: {
-        type: 'integer',
-        description: 'How many project to return per page.',
-      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',
