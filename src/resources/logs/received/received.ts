@@ -36,7 +36,7 @@ export type ReceivedGetResponse = string | unknown;
 
 export interface ReceivedGetParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   zone_id: string;
 

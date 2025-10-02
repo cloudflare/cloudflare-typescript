@@ -87,7 +87,7 @@ describe('resource secrets', () => {
       'my-dispatch-namespace',
       'this-is_my_script-01',
       'mySecret',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', url_encoded: true },
     );
   });
 
@@ -112,7 +112,7 @@ describe('resource secrets', () => {
       'my-dispatch-namespace',
       'this-is_my_script-01',
       'mySecret',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', url_encoded: true },
     );
   });
 });

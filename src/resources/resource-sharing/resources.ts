@@ -190,7 +190,13 @@ export interface ResourceCreateResponse {
   /**
    * Resource Type.
    */
-  resource_type: 'custom-ruleset' | 'widget';
+  resource_type:
+    | 'custom-ruleset'
+    | 'widget'
+    | 'gateway-policy'
+    | 'gateway-destination-ip'
+    | 'gateway-block-page-settings'
+    | 'gateway-extended-email-matching';
 
   /**
    * Resource Version.
@@ -237,7 +243,13 @@ export interface ResourceUpdateResponse {
   /**
    * Resource Type.
    */
-  resource_type: 'custom-ruleset' | 'widget';
+  resource_type:
+    | 'custom-ruleset'
+    | 'widget'
+    | 'gateway-policy'
+    | 'gateway-destination-ip'
+    | 'gateway-block-page-settings'
+    | 'gateway-extended-email-matching';
 
   /**
    * Resource Version.
@@ -284,7 +296,13 @@ export interface ResourceListResponse {
   /**
    * Resource Type.
    */
-  resource_type: 'custom-ruleset' | 'widget';
+  resource_type:
+    | 'custom-ruleset'
+    | 'widget'
+    | 'gateway-policy'
+    | 'gateway-destination-ip'
+    | 'gateway-block-page-settings'
+    | 'gateway-extended-email-matching';
 
   /**
    * Resource Version.
@@ -331,7 +349,13 @@ export interface ResourceDeleteResponse {
   /**
    * Resource Type.
    */
-  resource_type: 'custom-ruleset' | 'widget';
+  resource_type:
+    | 'custom-ruleset'
+    | 'widget'
+    | 'gateway-policy'
+    | 'gateway-destination-ip'
+    | 'gateway-block-page-settings'
+    | 'gateway-extended-email-matching';
 
   /**
    * Resource Version.
@@ -378,7 +402,13 @@ export interface ResourceGetResponse {
   /**
    * Resource Type.
    */
-  resource_type: 'custom-ruleset' | 'widget';
+  resource_type:
+    | 'custom-ruleset'
+    | 'widget'
+    | 'gateway-policy'
+    | 'gateway-destination-ip'
+    | 'gateway-block-page-settings'
+    | 'gateway-extended-email-matching';
 
   /**
    * Resource Version.
@@ -415,7 +445,13 @@ export interface ResourceCreateParams {
   /**
    * Body param: Resource Type.
    */
-  resource_type: 'custom-ruleset' | 'widget';
+  resource_type:
+    | 'custom-ruleset'
+    | 'widget'
+    | 'gateway-policy'
+    | 'gateway-destination-ip'
+    | 'gateway-block-page-settings'
+    | 'gateway-extended-email-matching';
 }
 
 export interface ResourceUpdateParams {
@@ -439,7 +475,13 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: Filter share resources by resource_type.
    */
-  resource_type?: 'custom-ruleset' | 'widget';
+  resource_type?:
+    | 'custom-ruleset'
+    | 'widget'
+    | 'gateway-policy'
+    | 'gateway-destination-ip'
+    | 'gateway-block-page-settings'
+    | 'gateway-extended-email-matching';
 
   /**
    * Query param: Filter share resources by status.

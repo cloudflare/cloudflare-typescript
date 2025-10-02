@@ -42,6 +42,7 @@ TEST_PATHS=(
 	tests/api-resources/load-balancers/monitors/monitors.test.ts
 	tests/api-resources/load-balancers/monitors/previews.test.ts
 	tests/api-resources/load-balancers/monitors/references.test.ts
+	tests/api-resources/load-balancers/monitor-groups.test.ts
 	tests/api-resources/load-balancers/pools/pools.test.ts
 	tests/api-resources/load-balancers/pools/health.test.ts
 	tests/api-resources/load-balancers/pools/references.test.ts
@@ -286,7 +287,6 @@ TEST_PATHS=(
 	tests/api-resources/intel/indicator-feeds/indicator-feeds.test.ts
 	tests/api-resources/intel/indicator-feeds/snapshots.test.ts
 	tests/api-resources/intel/indicator-feeds/permissions.test.ts
-	tests/api-resources/intel/indicator-feeds/downloads.test.ts
 	tests/api-resources/intel/sinkholes.test.ts
 	tests/api-resources/intel/attack-surface-report/attack-surface-report.test.ts
 	tests/api-resources/intel/attack-surface-report/issue-types.test.ts
@@ -521,6 +521,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/networks/virtual-networks.test.ts
 	tests/api-resources/zero-trust/networks/subnets/subnets.test.ts
 	tests/api-resources/zero-trust/networks/subnets/cloudflare-source.test.ts
+	tests/api-resources/zero-trust/networks/hostname-routes.test.ts
 	tests/api-resources/zero-trust/risk-scoring/risk-scoring.test.ts
 	tests/api-resources/zero-trust/risk-scoring/behaviours.test.ts
 	tests/api-resources/zero-trust/risk-scoring/summary.test.ts
@@ -682,9 +683,7 @@ TEST_PATHS=(
 	tests/api-resources/cloudforce-one/threat-events/attackers.test.ts
 	tests/api-resources/cloudforce-one/threat-events/categories.test.ts
 	tests/api-resources/cloudforce-one/threat-events/countries.test.ts
-	tests/api-resources/cloudforce-one/threat-events/crons.test.ts
 	tests/api-resources/cloudforce-one/threat-events/datasets/datasets.test.ts
-	tests/api-resources/cloudforce-one/threat-events/datasets/health.test.ts
 	tests/api-resources/cloudforce-one/threat-events/indicator-types.test.ts
 	tests/api-resources/cloudforce-one/threat-events/raw.test.ts
 	tests/api-resources/cloudforce-one/threat-events/relate.test.ts
@@ -731,6 +730,7 @@ TEST_PATHS=(
 	tests/api-resources/ai/tasks.test.ts
 	tests/api-resources/ai/models/models.test.ts
 	tests/api-resources/ai/models/schema.test.ts
+	tests/api-resources/ai/to-markdown.test.ts
 	tests/api-resources/security-center/security-center.test.ts
 	tests/api-resources/security-center/insights/insights.test.ts
 	tests/api-resources/security-center/insights/class.test.ts

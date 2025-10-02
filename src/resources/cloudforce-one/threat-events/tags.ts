@@ -5,14 +5,14 @@ import * as Core from '../../../core';
 
 export class Tags extends APIResource {
   /**
-   * Creates a new tag
+   * Creates a new tag to be used accross threat events.
    *
    * @example
    * ```ts
    * const tag =
    *   await client.cloudforceOne.threatEvents.tags.create({
    *     account_id: 'account_id',
-   *     name: 'name',
+   *     value: 'APT28',
    *   });
    * ```
    */
@@ -26,9 +26,39 @@ export class Tags extends APIResource {
 }
 
 export interface TagCreateResponse {
-  name: string;
-
   uuid: string;
+
+  value: string;
+
+  activeDuration?: string;
+
+  actorCategory?: string;
+
+  aliasGroupNames?: Array<string>;
+
+  aliasGroupNamesInternal?: Array<string>;
+
+  analyticPriority?: number;
+
+  attributionConfidence?: string;
+
+  attributionOrganization?: string;
+
+  categoryName?: string;
+
+  externalReferenceLinks?: Array<string>;
+
+  internalDescription?: string;
+
+  motive?: string;
+
+  opsecLevel?: string;
+
+  originCountryISO?: string;
+
+  priority?: number;
+
+  sophisticationLevel?: string;
 }
 
 export interface TagCreateParams {
@@ -40,7 +70,82 @@ export interface TagCreateParams {
   /**
    * Body param:
    */
-  name: string;
+  value: string;
+
+  /**
+   * Body param:
+   */
+  activeDuration?: string;
+
+  /**
+   * Body param:
+   */
+  actorCategory?: string;
+
+  /**
+   * Body param:
+   */
+  aliasGroupNames?: Array<string>;
+
+  /**
+   * Body param:
+   */
+  aliasGroupNamesInternal?: Array<string>;
+
+  /**
+   * Body param:
+   */
+  analyticPriority?: number;
+
+  /**
+   * Body param:
+   */
+  attributionConfidence?: string;
+
+  /**
+   * Body param:
+   */
+  attributionOrganization?: string;
+
+  /**
+   * Body param:
+   */
+  categoryUuid?: string;
+
+  /**
+   * Body param:
+   */
+  externalReferenceLinks?: Array<string>;
+
+  /**
+   * Body param:
+   */
+  internalDescription?: string;
+
+  /**
+   * Body param:
+   */
+  motive?: string;
+
+  /**
+   * Body param:
+   */
+  opsecLevel?: string;
+
+  /**
+   * Body param:
+   */
+  originCountryISO?: string;
+
+  /**
+   * Body param:
+   */
+  priority?: number;
+
+  /**
+   * Body param:
+   */
+  sophisticationLevel?: string;
 }
 
 export declare namespace Tags {

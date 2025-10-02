@@ -13,10 +13,7 @@ export class Netflows extends APIResource {
    * Retrieves the distribution of network traffic (NetFlows) by HTTP vs other
    * protocols.
    *
-   * @example
-   * ```ts
-   * const response = await client.radar.netflows.summary();
-   * ```
+   * @deprecated
    */
   summary(
     query?: NetflowSummaryParams,
@@ -323,6 +320,14 @@ export interface NetflowSummaryParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
+
+  /**
    * Filters results by location. Specify a comma-separated list of alpha-2 codes.
    * Prefix with `-` to exclude locations from results. For example, `-US,PT`
    * excludes results from the US, but includes results from PT.
@@ -379,6 +384,14 @@ export interface NetflowTimeseriesParams {
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filters results by Geolocation. Specify a comma-separated list of GeoNames IDs.
+   * Prefix with `-` to exclude geoIds from results. For example, `-2267056,360689`
+   * excludes results from the 2267056 (Lisbon), but includes results from 5128638
+   * (New York).
+   */
+  geoId?: Array<string>;
 
   /**
    * Filters results by location. Specify a comma-separated list of alpha-2 codes.

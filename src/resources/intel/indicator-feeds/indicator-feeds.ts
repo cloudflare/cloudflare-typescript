@@ -3,7 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as DownloadsAPI from './downloads';
-import { DownloadGetParams, DownloadGetResponse, Downloads } from './downloads';
+import { Downloads } from './downloads';
 import * as PermissionsAPI from './permissions';
 import {
   PermissionCreateParams,
@@ -439,9 +439,5 @@ export declare namespace IndicatorFeeds {
     type PermissionDeleteParams as PermissionDeleteParams,
   };
 
-  export {
-    Downloads as Downloads,
-    type DownloadGetResponse as DownloadGetResponse,
-    type DownloadGetParams as DownloadGetParams,
-  };
+  export { Downloads as Downloads };
 }

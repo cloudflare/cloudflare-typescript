@@ -293,7 +293,7 @@ export namespace JsonCreateParams {
      * Schema for the response format. More information here:
      * https://developers.cloudflare.com/workers-ai/json-mode/
      */
-    schema?: { [key: string]: unknown };
+    json_schema?: { [key: string]: string | number | boolean | unknown | Array<string> } | null;
   }
 
   /**

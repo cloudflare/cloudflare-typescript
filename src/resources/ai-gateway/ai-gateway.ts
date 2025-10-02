@@ -233,7 +233,7 @@ export interface AIGatewayCreateResponse {
 
   authentication?: boolean;
 
-  dlp?: AIGatewayCreateResponse.DLP;
+  dlp?: AIGatewayCreateResponse.UnionMember0 | AIGatewayCreateResponse.UnionMember1;
 
   log_management?: number | null;
 
@@ -243,16 +243,60 @@ export interface AIGatewayCreateResponse {
 
   logpush_public_key?: string | null;
 
+  otel?: Array<AIGatewayCreateResponse.Otel> | null;
+
   store_id?: string | null;
+
+  stripe?: AIGatewayCreateResponse.Stripe | null;
 }
 
 export namespace AIGatewayCreateResponse {
-  export interface DLP {
+  export interface UnionMember0 {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
+  }
+
+  export interface UnionMember1 {
+    enabled: boolean;
+
+    policies: Array<UnionMember1.Policy>;
+  }
+
+  export namespace UnionMember1 {
+    export interface Policy {
+      id: string;
+
+      action: 'FLAG' | 'BLOCK';
+
+      check: Array<'REQUEST' | 'RESPONSE'>;
+
+      enabled: boolean;
+
+      profiles: Array<string>;
+    }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
+    }
   }
 }
 
@@ -286,7 +330,7 @@ export interface AIGatewayUpdateResponse {
 
   authentication?: boolean;
 
-  dlp?: AIGatewayUpdateResponse.DLP;
+  dlp?: AIGatewayUpdateResponse.UnionMember0 | AIGatewayUpdateResponse.UnionMember1;
 
   log_management?: number | null;
 
@@ -296,16 +340,60 @@ export interface AIGatewayUpdateResponse {
 
   logpush_public_key?: string | null;
 
+  otel?: Array<AIGatewayUpdateResponse.Otel> | null;
+
   store_id?: string | null;
+
+  stripe?: AIGatewayUpdateResponse.Stripe | null;
 }
 
 export namespace AIGatewayUpdateResponse {
-  export interface DLP {
+  export interface UnionMember0 {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
+  }
+
+  export interface UnionMember1 {
+    enabled: boolean;
+
+    policies: Array<UnionMember1.Policy>;
+  }
+
+  export namespace UnionMember1 {
+    export interface Policy {
+      id: string;
+
+      action: 'FLAG' | 'BLOCK';
+
+      check: Array<'REQUEST' | 'RESPONSE'>;
+
+      enabled: boolean;
+
+      profiles: Array<string>;
+    }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
+    }
   }
 }
 
@@ -339,7 +427,7 @@ export interface AIGatewayListResponse {
 
   authentication?: boolean;
 
-  dlp?: AIGatewayListResponse.DLP;
+  dlp?: AIGatewayListResponse.UnionMember0 | AIGatewayListResponse.UnionMember1;
 
   log_management?: number | null;
 
@@ -349,16 +437,60 @@ export interface AIGatewayListResponse {
 
   logpush_public_key?: string | null;
 
+  otel?: Array<AIGatewayListResponse.Otel> | null;
+
   store_id?: string | null;
+
+  stripe?: AIGatewayListResponse.Stripe | null;
 }
 
 export namespace AIGatewayListResponse {
-  export interface DLP {
+  export interface UnionMember0 {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
+  }
+
+  export interface UnionMember1 {
+    enabled: boolean;
+
+    policies: Array<UnionMember1.Policy>;
+  }
+
+  export namespace UnionMember1 {
+    export interface Policy {
+      id: string;
+
+      action: 'FLAG' | 'BLOCK';
+
+      check: Array<'REQUEST' | 'RESPONSE'>;
+
+      enabled: boolean;
+
+      profiles: Array<string>;
+    }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
+    }
   }
 }
 
@@ -392,7 +524,7 @@ export interface AIGatewayDeleteResponse {
 
   authentication?: boolean;
 
-  dlp?: AIGatewayDeleteResponse.DLP;
+  dlp?: AIGatewayDeleteResponse.UnionMember0 | AIGatewayDeleteResponse.UnionMember1;
 
   log_management?: number | null;
 
@@ -402,16 +534,60 @@ export interface AIGatewayDeleteResponse {
 
   logpush_public_key?: string | null;
 
+  otel?: Array<AIGatewayDeleteResponse.Otel> | null;
+
   store_id?: string | null;
+
+  stripe?: AIGatewayDeleteResponse.Stripe | null;
 }
 
 export namespace AIGatewayDeleteResponse {
-  export interface DLP {
+  export interface UnionMember0 {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
+  }
+
+  export interface UnionMember1 {
+    enabled: boolean;
+
+    policies: Array<UnionMember1.Policy>;
+  }
+
+  export namespace UnionMember1 {
+    export interface Policy {
+      id: string;
+
+      action: 'FLAG' | 'BLOCK';
+
+      check: Array<'REQUEST' | 'RESPONSE'>;
+
+      enabled: boolean;
+
+      profiles: Array<string>;
+    }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
+    }
   }
 }
 
@@ -445,7 +621,7 @@ export interface AIGatewayGetResponse {
 
   authentication?: boolean;
 
-  dlp?: AIGatewayGetResponse.DLP;
+  dlp?: AIGatewayGetResponse.UnionMember0 | AIGatewayGetResponse.UnionMember1;
 
   log_management?: number | null;
 
@@ -455,16 +631,60 @@ export interface AIGatewayGetResponse {
 
   logpush_public_key?: string | null;
 
+  otel?: Array<AIGatewayGetResponse.Otel> | null;
+
   store_id?: string | null;
+
+  stripe?: AIGatewayGetResponse.Stripe | null;
 }
 
 export namespace AIGatewayGetResponse {
-  export interface DLP {
+  export interface UnionMember0 {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
+  }
+
+  export interface UnionMember1 {
+    enabled: boolean;
+
+    policies: Array<UnionMember1.Policy>;
+  }
+
+  export namespace UnionMember1 {
+    export interface Policy {
+      id: string;
+
+      action: 'FLAG' | 'BLOCK';
+
+      check: Array<'REQUEST' | 'RESPONSE'>;
+
+      enabled: boolean;
+
+      profiles: Array<string>;
+    }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
+    }
   }
 }
 
@@ -579,7 +799,7 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
-  dlp?: AIGatewayUpdateParams.DLP;
+  dlp?: AIGatewayUpdateParams.UnionMember0 | AIGatewayUpdateParams.UnionMember1;
 
   /**
    * Body param:
@@ -604,16 +824,66 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
+  otel?: Array<AIGatewayUpdateParams.Otel> | null;
+
+  /**
+   * Body param:
+   */
   store_id?: string | null;
+
+  /**
+   * Body param:
+   */
+  stripe?: AIGatewayUpdateParams.Stripe | null;
 }
 
 export namespace AIGatewayUpdateParams {
-  export interface DLP {
+  export interface UnionMember0 {
     action: 'BLOCK' | 'FLAG';
 
     enabled: boolean;
 
     profiles: Array<string>;
+  }
+
+  export interface UnionMember1 {
+    enabled: boolean;
+
+    policies: Array<UnionMember1.Policy>;
+  }
+
+  export namespace UnionMember1 {
+    export interface Policy {
+      id: string;
+
+      action: 'FLAG' | 'BLOCK';
+
+      check: Array<'REQUEST' | 'RESPONSE'>;
+
+      enabled: boolean;
+
+      profiles: Array<string>;
+    }
+  }
+
+  export interface Otel {
+    authorization: string;
+
+    headers: { [key: string]: string };
+
+    url: string;
+  }
+
+  export interface Stripe {
+    authorization: string;
+
+    usage_events: Array<Stripe.UsageEvent>;
+  }
+
+  export namespace Stripe {
+    export interface UsageEvent {
+      payload: string;
+    }
   }
 }
 

@@ -487,6 +487,21 @@ Methods:
 
 - <code title="get /accounts/{account_id}/load_balancers/monitors/{monitor_id}/references">client.loadBalancers.monitors.references.<a href="./src/resources/load-balancers/monitors/references.ts">get</a>(monitorId, { ...params }) -> ReferenceGetResponsesSinglePage</code>
 
+## MonitorGroups
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/monitor-groups.ts">MonitorGroup</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/load_balancers/monitor_groups">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">create</a>({ ...params }) -> MonitorGroup</code>
+- <code title="put /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">update</a>(monitorGroupId, { ...params }) -> MonitorGroup</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitor_groups">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">list</a>({ ...params }) -> MonitorGroupsSinglePage</code>
+- <code title="delete /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">delete</a>(monitorGroupId, { ...params }) -> MonitorGroup</code>
+- <code title="patch /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">edit</a>(monitorGroupId, { ...params }) -> MonitorGroup</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">get</a>(monitorGroupId, { ...params }) -> MonitorGroup</code>
+
 ## Pools
 
 Types:
@@ -963,6 +978,8 @@ Types:
 - <code><a href="./src/resources/dns/records.ts">RecordExportResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordImportResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordScanResponse</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordScanReviewResponse</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordScanTriggerResponse</a></code>
 
 Methods:
 
@@ -976,12 +993,11 @@ Methods:
 - <code title="get /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">get</a>(dnsRecordId, { ...params }) -> RecordResponse</code>
 - <code title="post /zones/{zone_id}/dns_records/import">client.dns.records.<a href="./src/resources/dns/records.ts">import</a>({ ...params }) -> RecordImportResponse</code>
 - <code title="post /zones/{zone_id}/dns_records/scan">client.dns.records.<a href="./src/resources/dns/records.ts">scan</a>({ ...params }) -> RecordScanResponse</code>
+- <code title="get /zones/{zone_id}/dns_records/scan/review">client.dns.records.<a href="./src/resources/dns/records.ts">scanList</a>({ ...params }) -> RecordResponsesSinglePage</code>
+- <code title="post /zones/{zone_id}/dns_records/scan/review">client.dns.records.<a href="./src/resources/dns/records.ts">scanReview</a>({ ...params }) -> RecordScanReviewResponse</code>
+- <code title="post /zones/{zone_id}/dns_records/scan/trigger">client.dns.records.<a href="./src/resources/dns/records.ts">scanTrigger</a>({ ...params }) -> RecordScanTriggerResponse</code>
 
 ## Settings
-
-Types:
-
-- <code><a href="./src/resources/dns/settings/settings.ts">DNSSetting</a></code>
 
 ### Zone
 
@@ -2012,6 +2028,7 @@ Methods:
 - <code title="put /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">update</a>(workerId, { ...params }) -> Worker</code>
 - <code title="get /accounts/{account_id}/workers/workers">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">list</a>({ ...params }) -> WorkersV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">delete</a>(workerId, { ...params }) -> WorkerDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">edit</a>(workerId, { ...params }) -> Worker</code>
 - <code title="get /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">get</a>(workerId, { ...params }) -> Worker</code>
 
 #### Versions
@@ -2067,6 +2084,7 @@ Types:
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptUpdateResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptDeleteResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptGetResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptSearchResponse</a></code>
 
 Methods:
 
@@ -2074,6 +2092,7 @@ Methods:
 - <code title="get /accounts/{account_id}/workers/scripts">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">list</a>({ ...params }) -> ScriptsSinglePage</code>
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">delete</a>(scriptName, { ...params }) -> ScriptDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> string</code>
+- <code title="get /accounts/{account_id}/workers/scripts-search">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">search</a>({ ...params }) -> ScriptSearchResponse</code>
 
 ### Assets
 
@@ -3312,14 +3331,6 @@ Methods:
 - <code title="put /accounts/{account_id}/intel/indicator-feeds/permissions/remove">client.intel.indicatorFeeds.permissions.<a href="./src/resources/intel/indicator-feeds/permissions.ts">delete</a>({ ...params }) -> PermissionDeleteResponse</code>
 
 ### Downloads
-
-Types:
-
-- <code><a href="./src/resources/intel/indicator-feeds/downloads.ts">DownloadGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/intel/indicator_feeds/{feed_id}/download">client.intel.indicatorFeeds.downloads.<a href="./src/resources/intel/indicator-feeds/downloads.ts">get</a>(feedId, { ...params }) -> DownloadGetResponse</code>
 
 ## Sinkholes
 
@@ -6162,6 +6173,20 @@ Methods:
 
 - <code title="patch /accounts/{account_id}/zerotrust/subnets/cloudflare_source/{address_family}">client.zeroTrust.networks.subnets.cloudflareSource.<a href="./src/resources/zero-trust/networks/subnets/cloudflare-source.ts">update</a>(addressFamily, { ...params }) -> CloudflareSourceUpdateResponse</code>
 
+### HostnameRoutes
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/networks/hostname-routes.ts">HostnameRoute</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/zerotrust/routes/hostname">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">create</a>({ ...params }) -> HostnameRoute</code>
+- <code title="get /accounts/{account_id}/zerotrust/routes/hostname">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">list</a>({ ...params }) -> HostnameRoutesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">delete</a>(hostnameRouteId, { ...params }) -> HostnameRoute</code>
+- <code title="patch /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">edit</a>(hostnameRouteId, { ...params }) -> HostnameRoute</code>
+- <code title="get /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">get</a>(hostnameRouteId, { ...params }) -> HostnameRoute</code>
+
 ## RiskScoring
 
 Types:
@@ -7168,6 +7193,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNListResponse</a></code>
+- <code><a href="./src/resources/radar/entities/asns.ts">ASNAsSetResponse</a></code>
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNGetResponse</a></code>
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNIPResponse</a></code>
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNRelResponse</a></code>
@@ -7175,6 +7201,7 @@ Types:
 Methods:
 
 - <code title="get /radar/entities/asns">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">list</a>({ ...params }) -> ASNListResponse</code>
+- <code title="get /radar/entities/asns/{asn}/as_set">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">asSet</a>(asn, { ...params }) -> ASNAsSetResponse</code>
 - <code title="get /radar/entities/asns/{asn}">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">get</a>(asn, { ...params }) -> ASNGetResponse</code>
 - <code title="get /radar/entities/asns/ip">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">ip</a>({ ...params }) -> ASNIPResponse</code>
 - <code title="get /radar/entities/asns/{asn}/rel">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">rel</a>(asn, { ...params }) -> ASNRelResponse</code>
@@ -8034,16 +8061,6 @@ Methods:
 
 ### Crons
 
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/threat-events/crons.ts">CronListResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/threat-events/crons.ts">CronEditResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/cloudforce-one/events/cron">client.cloudforceOne.threatEvents.crons.<a href="./src/resources/cloudforce-one/threat-events/crons.ts">list</a>({ ...params }) -> CronListResponse</code>
-- <code title="patch /accounts/{account_id}/cloudforce-one/events/cron">client.cloudforceOne.threatEvents.crons.<a href="./src/resources/cloudforce-one/threat-events/crons.ts">edit</a>({ ...params }) -> CronEditResponse</code>
-
 ### Datasets
 
 Types:
@@ -8063,14 +8080,6 @@ Methods:
 - <code title="get /accounts/{account_id}/cloudforce-one/events/raw/{dataset_id}/{event_id}">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">raw</a>(datasetId, eventId, { ...params }) -> DatasetRawResponse</code>
 
 #### Health
-
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/health.ts">HealthGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/health">client.cloudforceOne.threatEvents.datasets.health.<a href="./src/resources/cloudforce-one/threat-events/datasets/health.ts">get</a>(datasetId, { ...params }) -> HealthGetResponse</code>
 
 ### IndicatorTypes
 
@@ -8623,6 +8632,16 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/ai/models/schema">client.ai.models.schema.<a href="./src/resources/ai/models/schema.ts">get</a>({ ...params }) -> SchemaGetResponse</code>
+
+## ToMarkdown
+
+Types:
+
+- <code><a href="./src/resources/ai/to-markdown.ts">ToMarkdownTransformResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai/tomarkdown">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">transform</a>(file, { ...params }) -> ToMarkdownTransformResponsesSinglePage</code>
 
 # SecurityCenter
 

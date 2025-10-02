@@ -107,12 +107,6 @@ export namespace ConfigurationUpdateResponse {
      * between cloudflared and origin server.
      */
     originRequest?: Config.OriginRequest;
-
-    /**
-     * Enable private network access from WARP users to private network routes. This is
-     * enabled if the tunnel has an assigned route.
-     */
-    'warp-routing'?: Config.WARPRouting;
   }
 
   export namespace Config {
@@ -362,14 +356,6 @@ export namespace ConfigurationUpdateResponse {
          */
         required?: boolean;
       }
-    }
-
-    /**
-     * Enable private network access from WARP users to private network routes. This is
-     * enabled if the tunnel has an assigned route.
-     */
-    export interface WARPRouting {
-      enabled?: boolean;
     }
   }
 }
@@ -424,12 +410,6 @@ export namespace ConfigurationGetResponse {
      * between cloudflared and origin server.
      */
     originRequest?: Config.OriginRequest;
-
-    /**
-     * Enable private network access from WARP users to private network routes. This is
-     * enabled if the tunnel has an assigned route.
-     */
-    'warp-routing'?: Config.WARPRouting;
   }
 
   export namespace Config {
@@ -679,14 +659,6 @@ export namespace ConfigurationGetResponse {
          */
         required?: boolean;
       }
-    }
-
-    /**
-     * Enable private network access from WARP users to private network routes. This is
-     * enabled if the tunnel has an assigned route.
-     */
-    export interface WARPRouting {
-      enabled?: boolean;
     }
   }
 }

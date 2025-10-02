@@ -82,7 +82,9 @@ describe('resource aiGateway', () => {
       log_management_strategy: 'STOP_INSERTING',
       logpush: true,
       logpush_public_key: 'xxxxxxxxxxxxxxxx',
+      otel: [{ authorization: 'authorization', headers: { foo: 'string' }, url: 'url' }],
       store_id: 'store_id',
+      stripe: { authorization: 'authorization', usage_events: [{ payload: 'payload' }] },
     });
   });
 

@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 
 export class AuditSSHSettings extends APIResource {
   /**
-   * Updates Zero Trust Audit SSH and SSH with Access for Infrastructure settings for
+   * Update Zero Trust Audit SSH and SSH with Access for Infrastructure settings for
    * an account.
    *
    * @example
@@ -32,8 +32,8 @@ export class AuditSSHSettings extends APIResource {
   }
 
   /**
-   * Gets all Zero Trust Audit SSH and SSH with Access for Infrastructure settings
-   * for an account.
+   * Retrieve all Zero Trust Audit SSH and SSH with Access for Infrastructure
+   * settings for an account.
    *
    * @example
    * ```ts
@@ -53,8 +53,8 @@ export class AuditSSHSettings extends APIResource {
   }
 
   /**
-   * Rotates the SSH account seed that is used for generating the host key identity
-   * when connecting through the Cloudflare SSH Proxy.
+   * Rotate the SSH account seed that generates the host key identity when connecting
+   * through the Cloudflare SSH Proxy.
    *
    * @example
    * ```ts
@@ -82,13 +82,13 @@ export interface GatewaySettings {
   created_at?: string;
 
   /**
-   * Base64 encoded HPKE public key used to encrypt all your ssh session logs.
-   * https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/ssh-infrastructure-access/#enable-ssh-command-logging
+   * Provide the Base64-encoded HPKE public key that encrypts SSH session logs. See
+   * https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/ssh-infrastructure-access/#enable-ssh-command-logging.
    */
   public_key?: string;
 
   /**
-   * Seed ID.
+   * Identify the seed ID.
    */
   seed_id?: string;
 
@@ -102,9 +102,9 @@ export interface AuditSSHSettingUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Base64 encoded HPKE public key used to encrypt all your ssh session
-   * logs.
-   * https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/ssh-infrastructure-access/#enable-ssh-command-logging
+   * Body param: Provide the Base64-encoded HPKE public key that encrypts SSH session
+   * logs. See
+   * https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/ssh-infrastructure-access/#enable-ssh-command-logging.
    */
   public_key: string;
 }
