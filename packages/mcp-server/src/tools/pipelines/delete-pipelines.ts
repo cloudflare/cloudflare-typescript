@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'delete',
   httpPath: '/accounts/{account_id}/pipelines/{pipeline_name}',
-  operationId: 'deleteV4AccountsByAccount_idPipelinesByPipeline_name_deprecated',
+  operationId: 'deleteV4AccountsByAccount_idPipelinesByPipeline_name',
 };
 
 export const tool: Tool = {
   name: 'delete_pipelines',
-  description: '[DEPRECATED] Delete a pipeline. Use the new /pipelines/v1/pipelines endpoint instead.',
+  description: 'Delete a pipeline.',
   inputSchema: {
     type: 'object',
     properties: {
