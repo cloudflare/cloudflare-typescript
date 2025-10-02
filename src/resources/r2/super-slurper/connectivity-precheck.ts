@@ -15,6 +15,12 @@ export class ConnectivityPrecheck extends APIResource {
    * const response =
    *   await client.r2.superSlurper.connectivityPrecheck.source({
    *     account_id: 'account_id',
+   *     bucket: 'bucket',
+   *     secret: {
+   *       accessKeyId: 'accessKeyId',
+   *       secretAccessKey: 'secretAccessKey',
+   *     },
+   *     vendor: 's3',
    *   });
    * ```
    */
@@ -39,6 +45,12 @@ export class ConnectivityPrecheck extends APIResource {
    * const response =
    *   await client.r2.superSlurper.connectivityPrecheck.target({
    *     account_id: 'account_id',
+   *     bucket: 'bucket',
+   *     secret: {
+   *       accessKeyId: 'accessKeyId',
+   *       secretAccessKey: 'secretAccessKey',
+   *     },
+   *     vendor: 'r2',
    *   });
    * ```
    */
@@ -79,7 +91,17 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Body param:
      */
-    bucket?: string;
+    bucket: string;
+
+    /**
+     * Body param:
+     */
+    secret: R2SlurperS3SourceSchema.Secret;
+
+    /**
+     * Body param:
+     */
+    vendor: 's3';
 
     /**
      * Body param:
@@ -89,19 +111,19 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Body param:
      */
-    secret?: R2SlurperS3SourceSchema.Secret;
+    pathPrefix?: string | null;
 
     /**
      * Body param:
      */
-    vendor?: 's3';
+    region?: string | null;
   }
 
   export namespace R2SlurperS3SourceSchema {
     export interface Secret {
-      accessKeyId?: string;
+      accessKeyId: string;
 
-      secretAccessKey?: string;
+      secretAccessKey: string;
     }
   }
 
@@ -114,24 +136,29 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Body param:
      */
-    bucket?: string;
+    bucket: string;
 
     /**
      * Body param:
      */
-    secret?: R2SlurperGcsSourceSchema.Secret;
+    secret: R2SlurperGcsSourceSchema.Secret;
 
     /**
      * Body param:
      */
-    vendor?: 'gcs';
+    vendor: 'gcs';
+
+    /**
+     * Body param:
+     */
+    pathPrefix?: string | null;
   }
 
   export namespace R2SlurperGcsSourceSchema {
     export interface Secret {
-      clientEmail?: string;
+      clientEmail: string;
 
-      privateKey?: string;
+      privateKey: string;
     }
   }
 
@@ -144,7 +171,17 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Body param:
      */
-    bucket?: string;
+    bucket: string;
+
+    /**
+     * Body param:
+     */
+    secret: R2SlurperR2SourceSchema.Secret;
+
+    /**
+     * Body param:
+     */
+    vendor: SippyAPI.ProviderParam;
 
     /**
      * Body param:
@@ -154,19 +191,14 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Body param:
      */
-    secret?: R2SlurperR2SourceSchema.Secret;
-
-    /**
-     * Body param:
-     */
-    vendor?: SippyAPI.ProviderParam;
+    pathPrefix?: string | null;
   }
 
   export namespace R2SlurperR2SourceSchema {
     export interface Secret {
-      accessKeyId?: string;
+      accessKeyId: string;
 
-      secretAccessKey?: string;
+      secretAccessKey: string;
     }
   }
 }
@@ -180,29 +212,29 @@ export interface ConnectivityPrecheckTargetParams {
   /**
    * Body param:
    */
-  bucket?: string;
+  bucket: string;
+
+  /**
+   * Body param:
+   */
+  secret: ConnectivityPrecheckTargetParams.Secret;
+
+  /**
+   * Body param:
+   */
+  vendor: SippyAPI.ProviderParam;
 
   /**
    * Body param:
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
-
-  /**
-   * Body param:
-   */
-  secret?: ConnectivityPrecheckTargetParams.Secret;
-
-  /**
-   * Body param:
-   */
-  vendor?: SippyAPI.ProviderParam;
 }
 
 export namespace ConnectivityPrecheckTargetParams {
   export interface Secret {
-    accessKeyId?: string;
+    accessKeyId: string;
 
-    secretAccessKey?: string;
+    secretAccessKey: string;
   }
 }
 
