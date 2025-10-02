@@ -10,7 +10,11 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.summary.arc();
+   * ```
    */
   arc(query?: SummaryARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
   arc(options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
@@ -32,7 +36,11 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
    * validation.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.summary.dkim();
+   * ```
    */
   dkim(query?: SummaryDKIMParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
   dkim(options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
@@ -54,7 +62,11 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by DMARC (Domain-based Message
    * Authentication, Reporting and Conformance) validation.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.summary.dmarc();
+   * ```
    */
   dmarc(query?: SummaryDMARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
   dmarc(options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
@@ -76,7 +88,11 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by encryption status (encrypted vs.
    * not-encrypted).
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.summary.encrypted();
+   * ```
    */
   encrypted(
     query?: SummaryEncryptedParams,
@@ -100,7 +116,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by IP version.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.summary.ipVersion();
+   * ```
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -125,7 +145,11 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by SPF (Sender Policy Framework)
    * validation.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.summary.spf();
+   * ```
    */
   spf(query?: SummarySPFParams, options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
   spf(options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
