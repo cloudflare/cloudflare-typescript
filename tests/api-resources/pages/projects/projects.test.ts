@@ -115,11 +115,7 @@ describe('resource projects', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.pages.projects.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      page: 1,
-      per_page: 10,
-    });
+    const response = await client.pages.projects.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('delete: only required params', async () => {

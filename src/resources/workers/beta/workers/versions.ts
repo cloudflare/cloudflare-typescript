@@ -409,7 +409,7 @@ export namespace Version {
     name: string;
 
     /**
-     * The name of the dispatch namespace.
+     * Namespace to bind to.
      */
     namespace: string;
 
@@ -1263,7 +1263,7 @@ export namespace VersionCreateParams {
     name: string;
 
     /**
-     * The name of the dispatch namespace.
+     * Namespace to bind to.
      */
     namespace: string;
 
