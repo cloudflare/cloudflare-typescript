@@ -2,11 +2,11 @@
 
 import { APIResource } from '../../resource';
 import * as RayIDAPI from './rayid';
-import { RayID } from './rayid';
+import { RayID, RayIDGetParams, RayIDGetResponse } from './rayid';
 import * as ControlAPI from './control/control';
 import { Control } from './control/control';
 import * as ReceivedAPI from './received/received';
-import { Received } from './received/received';
+import { Received, ReceivedGetParams, ReceivedGetResponse } from './received/received';
 
 export class Logs extends APIResource {
   control: ControlAPI.Control = new ControlAPI.Control(this._client);
@@ -21,7 +21,11 @@ Logs.Received = Received;
 export declare namespace Logs {
   export { Control as Control };
 
-  export { RayID as RayID };
+  export { RayID as RayID, type RayIDGetResponse as RayIDGetResponse, type RayIDGetParams as RayIDGetParams };
 
-  export { Received as Received };
+  export {
+    Received as Received,
+    type ReceivedGetResponse as ReceivedGetResponse,
+    type ReceivedGetParams as ReceivedGetParams,
+  };
 }
