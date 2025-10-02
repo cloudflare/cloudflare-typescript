@@ -9,10 +9,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS queries to AS112 by DNSSEC (DNS Security
    * Extensions) support.
    *
-   * @example
-   * ```ts
-   * const response = await client.radar.as112.summary.dnssec();
-   * ```
+   * @deprecated
    */
   dnssec(query?: SummaryDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
   dnssec(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
@@ -34,10 +31,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS queries to AS112 by EDNS (Extension Mechanisms
    * for DNS) support.
    *
-   * @example
-   * ```ts
-   * const response = await client.radar.as112.summary.edns();
-   * ```
+   * @deprecated
    */
   edns(query?: SummaryEdnsParams, options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
   edns(options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
@@ -58,11 +52,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by IP version.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.summary.ipVersion();
-   * ```
+   * @deprecated
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -86,11 +76,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by protocol.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.summary.protocol();
-   * ```
+   * @deprecated
    */
   protocol(
     query?: SummaryProtocolParams,
@@ -114,11 +100,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by type.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.summary.queryType();
-   * ```
+   * @deprecated
    */
   queryType(
     query?: SummaryQueryTypeParams,
@@ -142,11 +124,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS requests classified by response code.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.summary.responseCodes();
-   * ```
+   * @deprecated
    */
   responseCodes(
     query?: SummaryResponseCodesParams,

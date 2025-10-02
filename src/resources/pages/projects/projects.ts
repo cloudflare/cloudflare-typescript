@@ -28,7 +28,7 @@ import {
   DeploymentRollbackParams,
   Deployments,
 } from './deployments/deployments';
-import { SinglePage } from '../../../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Projects extends APIResource {
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
@@ -69,9 +69,13 @@ export class Projects extends APIResource {
   list(
     params: ProjectListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DeploymentsSinglePage, Deployment> {
-    const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/pages/projects`, DeploymentsSinglePage, options);
+  ): Core.PagePromise<DeploymentsV4PagePaginationArray, Deployment> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/pages/projects`,
+      DeploymentsV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -175,6 +179,8 @@ export class Projects extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class DeploymentsV4PagePaginationArray extends V4PagePaginationArray<Deployment> {}
 
 export class DeploymentsSinglePage extends SinglePage<Deployment> {}
 
@@ -1641,9 +1647,9 @@ export namespace ProjectCreateParams {
   }
 }
 
-export interface ProjectListParams {
+export interface ProjectListParams extends V4PagePaginationArrayParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
 }
@@ -2270,7 +2276,7 @@ export interface ProjectPurgeBuildCacheParams {
   account_id: string;
 }
 
-Projects.DeploymentsSinglePage = DeploymentsSinglePage;
+Projects.DeploymentsV4PagePaginationArray = DeploymentsV4PagePaginationArray;
 Projects.Deployments = Deployments;
 Projects.Domains = Domains;
 Projects.DomainListResponsesSinglePage = DomainListResponsesSinglePage;
@@ -2282,7 +2288,7 @@ export declare namespace Projects {
     type Stage as Stage,
     type ProjectDeleteResponse as ProjectDeleteResponse,
     type ProjectPurgeBuildCacheResponse as ProjectPurgeBuildCacheResponse,
-    DeploymentsSinglePage as DeploymentsSinglePage,
+    DeploymentsV4PagePaginationArray as DeploymentsV4PagePaginationArray,
     type ProjectCreateParams as ProjectCreateParams,
     type ProjectListParams as ProjectListParams,
     type ProjectDeleteParams as ProjectDeleteParams,

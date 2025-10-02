@@ -8,11 +8,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by bitrate over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.timeseriesGroups.bitrate();
-   * ```
+   * @deprecated
    */
   bitrate(
     query?: TimeseriesGroupBitrateParams,
@@ -37,11 +33,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by duration over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.timeseriesGroups.duration();
-   * ```
+   * @deprecated
    */
   duration(
     query?: TimeseriesGroupDurationParams,
@@ -66,11 +58,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by targeted industry over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.timeseriesGroups.industry();
-   * ```
+   * @deprecated
    */
   industry(
     query?: TimeseriesGroupIndustryParams,
@@ -95,11 +83,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by IP version over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.timeseriesGroups.ipVersion();
-   * ```
+   * @deprecated
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -124,11 +108,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by protocol over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.timeseriesGroups.protocol();
-   * ```
+   * @deprecated
    */
   protocol(
     query?: TimeseriesGroupProtocolParams,
@@ -153,11 +133,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by vector over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.timeseriesGroups.vector();
-   * ```
+   * @deprecated
    */
   vector(
     query?: TimeseriesGroupVectorParams,
@@ -182,11 +158,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by targeted vertical over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.timeseriesGroups.vertical();
-   * ```
+   * @deprecated
    */
   vertical(
     query?: TimeseriesGroupVerticalParams,
