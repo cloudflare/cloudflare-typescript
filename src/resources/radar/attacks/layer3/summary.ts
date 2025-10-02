@@ -8,11 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by bitrate.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.summary.bitrate();
-   * ```
+   * @deprecated
    */
   bitrate(
     query?: SummaryBitrateParams,
@@ -36,11 +32,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by duration.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.summary.duration();
-   * ```
+   * @deprecated
    */
   duration(
     query?: SummaryDurationParams,
@@ -64,11 +56,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by targeted industry.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.summary.industry();
-   * ```
+   * @deprecated
    */
   industry(
     query?: SummaryIndustryParams,
@@ -92,11 +80,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by IP version.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.summary.ipVersion();
-   * ```
+   * @deprecated
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -120,11 +104,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by protocol.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.summary.protocol();
-   * ```
+   * @deprecated
    */
   protocol(
     query?: SummaryProtocolParams,
@@ -148,11 +128,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by vector.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.summary.vector();
-   * ```
+   * @deprecated
    */
   vector(query?: SummaryVectorParams, options?: Core.RequestOptions): Core.APIPromise<SummaryVectorResponse>;
   vector(options?: Core.RequestOptions): Core.APIPromise<SummaryVectorResponse>;
@@ -173,11 +149,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by targeted vertical.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer3.summary.vertical();
-   * ```
+   * @deprecated
    */
   vertical(
     query?: SummaryVerticalParams,

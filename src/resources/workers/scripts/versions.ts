@@ -1635,6 +1635,11 @@ export namespace VersionCreateParams {
   export namespace Metadata {
     export interface Annotations {
       /**
+       * Associated alias for a version.
+       */
+      'workers/alias'?: string;
+
+      /**
        * Human-readable message about the version. Truncated to 100 bytes.
        */
       'workers/message'?: string;

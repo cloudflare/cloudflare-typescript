@@ -31,7 +31,11 @@ describe('resource versions', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       metadata: {
         main_module: 'worker.js',
-        annotations: { 'workers/message': 'Fixed worker code.', 'workers/tag': 'workers/tag' },
+        annotations: {
+          'workers/alias': 'staging',
+          'workers/message': 'Fixed worker code.',
+          'workers/tag': 'workers/tag',
+        },
         bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
         compatibility_date: '2021-01-01',
         compatibility_flags: ['nodejs_compat'],
