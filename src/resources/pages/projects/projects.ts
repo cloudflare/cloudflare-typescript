@@ -48,8 +48,6 @@ export class Projects extends APIResource {
    * ```ts
    * const project = await client.pages.projects.create({
    *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   name: 'my-pages-app',
-   *   production_branch: 'main',
    * });
    * ```
    */
@@ -120,11 +118,7 @@ export class Projects extends APIResource {
    * ```ts
    * const project = await client.pages.projects.edit(
    *   'this-is-my-project-01',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     name: 'my-pages-app',
-   *     production_branch: 'main',
-   *   },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
@@ -220,7 +214,7 @@ export interface Deployment {
    */
   env_vars?: {
     [key: string]: Deployment.PagesPlainTextEnvVar | null | Deployment.PagesSecretTextEnvVar | null;
-  } | null;
+  };
 
   /**
    * Type of deploy.
@@ -370,74 +364,31 @@ export namespace Deployment {
   export interface Source {
     config?: Source.Config;
 
-    /**
-     * The source control management provider.
-     */
-    type?: 'github' | 'gitlab';
+    type?: string;
   }
 
   export namespace Source {
     export interface Config {
-      /**
-       * @deprecated Use `production_deployments_enabled` and
-       * `preview_deployment_setting` for more granular control.
-       */
       deployments_enabled?: boolean;
 
-      /**
-       * The owner of the repository.
-       */
       owner?: string;
 
-      /**
-       * A list of paths that should be excluded from triggering a preview deployment.
-       * Wildcard syntax (`*`) is supported.
-       */
       path_excludes?: Array<string>;
 
-      /**
-       * A list of paths that should be watched to trigger a preview deployment. Wildcard
-       * syntax (`*`) is supported.
-       */
       path_includes?: Array<string>;
 
-      /**
-       * Whether to enable PR comments.
-       */
       pr_comments_enabled?: boolean;
 
-      /**
-       * A list of branches that should not trigger a preview deployment. Wildcard syntax
-       * (`*`) is supported. Must be used with `preview_deployment_setting` set to
-       * `custom`.
-       */
       preview_branch_excludes?: Array<string>;
 
-      /**
-       * A list of branches that should trigger a preview deployment. Wildcard syntax
-       * (`*`) is supported. Must be used with `preview_deployment_setting` set to
-       * `custom`.
-       */
       preview_branch_includes?: Array<string>;
 
-      /**
-       * Controls whether commits to preview branches trigger a preview deployment.
-       */
       preview_deployment_setting?: 'all' | 'none' | 'custom';
 
-      /**
-       * The production branch of the repository.
-       */
       production_branch?: string;
 
-      /**
-       * Whether to trigger a production deployment on commits to the production branch.
-       */
       production_deployments_enabled?: boolean;
 
-      /**
-       * The name of the repository.
-       */
       repo_name?: string;
     }
   }
@@ -445,27 +396,17 @@ export namespace Deployment {
 
 export interface Project {
   /**
-   * ID of the project.
+   * Id of the project.
    */
-  id: string;
-
-  /**
-   * Name of the project.
-   */
-  name: string;
-
-  /**
-   * Production branch of the project. Used to identify production deployments.
-   */
-  production_branch: string;
+  id?: string;
 
   /**
    * Configs for the project build process.
    */
-  build_config?: Project.BuildConfig | null;
+  build_config?: Project.BuildConfig;
 
   /**
-   * Most recent production deployment of the project.
+   * Most recent deployment to the repo.
    */
   canonical_deployment?: Deployment | null;
 
@@ -477,7 +418,7 @@ export interface Project {
   /**
    * Configs for deployments in a project.
    */
-  deployment_configs?: Project.DeploymentConfigs | null;
+  deployment_configs?: Project.DeploymentConfigs;
 
   /**
    * A list of associated custom domains for the project.
@@ -485,29 +426,19 @@ export interface Project {
   domains?: Array<string>;
 
   /**
-   * Framework the project is using.
-   */
-  framework?: string;
-
-  /**
-   * Version of the framework the project is using.
-   */
-  framework_version?: string;
-
-  /**
-   * Most recent deployment of the project.
+   * Most recent deployment to the repo.
    */
   latest_deployment?: Deployment | null;
 
   /**
-   * Name of the preview script.
+   * Name of the project.
    */
-  preview_script_name?: string;
+  name?: string;
 
   /**
-   * Name of the production script.
+   * Production branch of the project. Used to identify production deployments.
    */
-  production_script_name?: string;
+  production_branch?: string;
 
   source?: Project.Source;
 
@@ -515,11 +446,6 @@ export interface Project {
    * The Cloudflare subdomain associated with the project.
    */
   subdomain?: string;
-
-  /**
-   * Whether the project uses functions.
-   */
-  uses_functions?: boolean;
 }
 
 export namespace Project {
@@ -565,12 +491,12 @@ export namespace Project {
     /**
      * Configs for preview deploys.
      */
-    preview?: DeploymentConfigs.Preview | null;
+    preview?: DeploymentConfigs.Preview;
 
     /**
      * Configs for production deploys.
      */
-    production?: DeploymentConfigs.Production | null;
+    production?: DeploymentConfigs.Production;
   }
 
   export namespace DeploymentConfigs {
@@ -584,11 +510,6 @@ export namespace Project {
       ai_bindings?: { [key: string]: Preview.AIBindings | null } | null;
 
       /**
-       * Whether to always use the latest compatibility date for Pages Functions.
-       */
-      always_use_latest_compatibility_date?: boolean;
-
-      /**
        * Analytics Engine bindings used for Pages Functions.
        */
       analytics_engine_datasets?: { [key: string]: Preview.AnalyticsEngineDatasets | null } | null;
@@ -599,11 +520,6 @@ export namespace Project {
       browsers?: { [key: string]: Preview.Browsers | null } | null;
 
       /**
-       * The major version of the build image to use for Pages Functions.
-       */
-      build_image_major_version?: number;
-
-      /**
        * Compatibility date used for Pages Functions.
        */
       compatibility_date?: string;
@@ -611,7 +527,7 @@ export namespace Project {
       /**
        * Compatibility flags used for Pages Functions.
        */
-      compatibility_flags?: Array<string> | null;
+      compatibility_flags?: Array<string>;
 
       /**
        * D1 databases used for Pages Functions.
@@ -628,12 +544,7 @@ export namespace Project {
        */
       env_vars?: {
         [key: string]: Preview.PagesPlainTextEnvVar | null | Preview.PagesSecretTextEnvVar | null;
-      } | null;
-
-      /**
-       * Whether to fail open when the deployment config cannot be applied.
-       */
-      fail_open?: boolean;
+      };
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -644,11 +555,6 @@ export namespace Project {
        * KV namespaces used for Pages Functions.
        */
       kv_namespaces?: { [key: string]: Preview.KVNamespaces | null } | null;
-
-      /**
-       * Limits for Pages Functions.
-       */
-      limits?: Preview.Limits | null;
 
       /**
        * mTLS bindings used for Pages Functions.
@@ -676,19 +582,9 @@ export namespace Project {
       services?: { [key: string]: Preview.Services | null } | null;
 
       /**
-       * @deprecated All new projects now use the Standard usage model.
-       */
-      usage_model?: 'standard' | 'bundled' | 'unbound';
-
-      /**
        * Vectorize bindings used for Pages Functions.
        */
       vectorize_bindings?: { [key: string]: Preview.VectorizeBindings | null } | null;
-
-      /**
-       * Hash of the Wrangler configuration used for the deployment.
-       */
-      wrangler_config_hash?: string;
     }
 
     export namespace Preview {
@@ -776,16 +672,6 @@ export namespace Project {
       }
 
       /**
-       * Limits for Pages Functions.
-       */
-      export interface Limits {
-        /**
-         * CPU time limit in milliseconds.
-         */
-        cpu_ms?: number;
-      }
-
-      /**
        * mTLS binding.
        */
       export interface MTLSCertificates {
@@ -865,11 +751,6 @@ export namespace Project {
       ai_bindings?: { [key: string]: Production.AIBindings | null } | null;
 
       /**
-       * Whether to always use the latest compatibility date for Pages Functions.
-       */
-      always_use_latest_compatibility_date?: boolean;
-
-      /**
        * Analytics Engine bindings used for Pages Functions.
        */
       analytics_engine_datasets?: { [key: string]: Production.AnalyticsEngineDatasets | null } | null;
@@ -880,11 +761,6 @@ export namespace Project {
       browsers?: { [key: string]: Production.Browsers | null } | null;
 
       /**
-       * The major version of the build image to use for Pages Functions.
-       */
-      build_image_major_version?: number;
-
-      /**
        * Compatibility date used for Pages Functions.
        */
       compatibility_date?: string;
@@ -892,7 +768,7 @@ export namespace Project {
       /**
        * Compatibility flags used for Pages Functions.
        */
-      compatibility_flags?: Array<string> | null;
+      compatibility_flags?: Array<string>;
 
       /**
        * D1 databases used for Pages Functions.
@@ -909,12 +785,7 @@ export namespace Project {
        */
       env_vars?: {
         [key: string]: Production.PagesPlainTextEnvVar | null | Production.PagesSecretTextEnvVar | null;
-      } | null;
-
-      /**
-       * Whether to fail open when the deployment config cannot be applied.
-       */
-      fail_open?: boolean;
+      };
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -925,11 +796,6 @@ export namespace Project {
        * KV namespaces used for Pages Functions.
        */
       kv_namespaces?: { [key: string]: Production.KVNamespaces | null } | null;
-
-      /**
-       * Limits for Pages Functions.
-       */
-      limits?: Production.Limits | null;
 
       /**
        * mTLS bindings used for Pages Functions.
@@ -957,19 +823,9 @@ export namespace Project {
       services?: { [key: string]: Production.Services | null } | null;
 
       /**
-       * @deprecated All new projects now use the Standard usage model.
-       */
-      usage_model?: 'standard' | 'bundled' | 'unbound';
-
-      /**
        * Vectorize bindings used for Pages Functions.
        */
       vectorize_bindings?: { [key: string]: Production.VectorizeBindings | null } | null;
-
-      /**
-       * Hash of the Wrangler configuration used for the deployment.
-       */
-      wrangler_config_hash?: string;
     }
 
     export namespace Production {
@@ -1057,16 +913,6 @@ export namespace Project {
       }
 
       /**
-       * Limits for Pages Functions.
-       */
-      export interface Limits {
-        /**
-         * CPU time limit in milliseconds.
-         */
-        cpu_ms?: number;
-      }
-
-      /**
        * mTLS binding.
        */
       export interface MTLSCertificates {
@@ -1140,74 +986,31 @@ export namespace Project {
   export interface Source {
     config?: Source.Config;
 
-    /**
-     * The source control management provider.
-     */
-    type?: 'github' | 'gitlab';
+    type?: string;
   }
 
   export namespace Source {
     export interface Config {
-      /**
-       * @deprecated Use `production_deployments_enabled` and
-       * `preview_deployment_setting` for more granular control.
-       */
       deployments_enabled?: boolean;
 
-      /**
-       * The owner of the repository.
-       */
       owner?: string;
 
-      /**
-       * A list of paths that should be excluded from triggering a preview deployment.
-       * Wildcard syntax (`*`) is supported.
-       */
       path_excludes?: Array<string>;
 
-      /**
-       * A list of paths that should be watched to trigger a preview deployment. Wildcard
-       * syntax (`*`) is supported.
-       */
       path_includes?: Array<string>;
 
-      /**
-       * Whether to enable PR comments.
-       */
       pr_comments_enabled?: boolean;
 
-      /**
-       * A list of branches that should not trigger a preview deployment. Wildcard syntax
-       * (`*`) is supported. Must be used with `preview_deployment_setting` set to
-       * `custom`.
-       */
       preview_branch_excludes?: Array<string>;
 
-      /**
-       * A list of branches that should trigger a preview deployment. Wildcard syntax
-       * (`*`) is supported. Must be used with `preview_deployment_setting` set to
-       * `custom`.
-       */
       preview_branch_includes?: Array<string>;
 
-      /**
-       * Controls whether commits to preview branches trigger a preview deployment.
-       */
       preview_deployment_setting?: 'all' | 'none' | 'custom';
 
-      /**
-       * The production branch of the repository.
-       */
       production_branch?: string;
 
-      /**
-       * Whether to trigger a production deployment on commits to the production branch.
-       */
       production_deployments_enabled?: boolean;
 
-      /**
-       * The name of the repository.
-       */
       repo_name?: string;
     }
   }
@@ -1249,25 +1052,25 @@ export interface ProjectCreateParams {
   account_id: string;
 
   /**
+   * Body param: Configs for the project build process.
+   */
+  build_config?: ProjectCreateParams.BuildConfig;
+
+  /**
+   * Body param: Configs for deployments in a project.
+   */
+  deployment_configs?: ProjectCreateParams.DeploymentConfigs;
+
+  /**
    * Body param: Name of the project.
    */
-  name: string;
+  name?: string;
 
   /**
    * Body param: Production branch of the project. Used to identify production
    * deployments.
    */
-  production_branch: string;
-
-  /**
-   * Body param: Configs for the project build process.
-   */
-  build_config?: ProjectCreateParams.BuildConfig | null;
-
-  /**
-   * Body param: Configs for deployments in a project.
-   */
-  deployment_configs?: ProjectCreateParams.DeploymentConfigs | null;
+  production_branch?: string;
 
   /**
    * Body param:
@@ -1318,12 +1121,12 @@ export namespace ProjectCreateParams {
     /**
      * Configs for preview deploys.
      */
-    preview?: DeploymentConfigs.Preview | null;
+    preview?: DeploymentConfigs.Preview;
 
     /**
      * Configs for production deploys.
      */
-    production?: DeploymentConfigs.Production | null;
+    production?: DeploymentConfigs.Production;
   }
 
   export namespace DeploymentConfigs {
@@ -1337,11 +1140,6 @@ export namespace ProjectCreateParams {
       ai_bindings?: { [key: string]: Preview.AIBindings | null } | null;
 
       /**
-       * Whether to always use the latest compatibility date for Pages Functions.
-       */
-      always_use_latest_compatibility_date?: boolean;
-
-      /**
        * Analytics Engine bindings used for Pages Functions.
        */
       analytics_engine_datasets?: { [key: string]: Preview.AnalyticsEngineDatasets | null } | null;
@@ -1352,11 +1150,6 @@ export namespace ProjectCreateParams {
       browsers?: { [key: string]: Preview.Browsers | null } | null;
 
       /**
-       * The major version of the build image to use for Pages Functions.
-       */
-      build_image_major_version?: number;
-
-      /**
        * Compatibility date used for Pages Functions.
        */
       compatibility_date?: string;
@@ -1364,7 +1157,7 @@ export namespace ProjectCreateParams {
       /**
        * Compatibility flags used for Pages Functions.
        */
-      compatibility_flags?: Array<string> | null;
+      compatibility_flags?: Array<string>;
 
       /**
        * D1 databases used for Pages Functions.
@@ -1381,12 +1174,7 @@ export namespace ProjectCreateParams {
        */
       env_vars?: {
         [key: string]: Preview.PagesPlainTextEnvVar | null | Preview.PagesSecretTextEnvVar | null;
-      } | null;
-
-      /**
-       * Whether to fail open when the deployment config cannot be applied.
-       */
-      fail_open?: boolean;
+      };
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -1397,11 +1185,6 @@ export namespace ProjectCreateParams {
        * KV namespaces used for Pages Functions.
        */
       kv_namespaces?: { [key: string]: Preview.KVNamespaces | null } | null;
-
-      /**
-       * Limits for Pages Functions.
-       */
-      limits?: Preview.Limits | null;
 
       /**
        * mTLS bindings used for Pages Functions.
@@ -1429,19 +1212,9 @@ export namespace ProjectCreateParams {
       services?: { [key: string]: Preview.Services | null } | null;
 
       /**
-       * @deprecated All new projects now use the Standard usage model.
-       */
-      usage_model?: 'standard' | 'bundled' | 'unbound';
-
-      /**
        * Vectorize bindings used for Pages Functions.
        */
       vectorize_bindings?: { [key: string]: Preview.VectorizeBindings | null } | null;
-
-      /**
-       * Hash of the Wrangler configuration used for the deployment.
-       */
-      wrangler_config_hash?: string;
     }
 
     export namespace Preview {
@@ -1529,16 +1302,6 @@ export namespace ProjectCreateParams {
       }
 
       /**
-       * Limits for Pages Functions.
-       */
-      export interface Limits {
-        /**
-         * CPU time limit in milliseconds.
-         */
-        cpu_ms?: number;
-      }
-
-      /**
        * mTLS binding.
        */
       export interface MTLSCertificates {
@@ -1618,11 +1381,6 @@ export namespace ProjectCreateParams {
       ai_bindings?: { [key: string]: Production.AIBindings | null } | null;
 
       /**
-       * Whether to always use the latest compatibility date for Pages Functions.
-       */
-      always_use_latest_compatibility_date?: boolean;
-
-      /**
        * Analytics Engine bindings used for Pages Functions.
        */
       analytics_engine_datasets?: { [key: string]: Production.AnalyticsEngineDatasets | null } | null;
@@ -1633,11 +1391,6 @@ export namespace ProjectCreateParams {
       browsers?: { [key: string]: Production.Browsers | null } | null;
 
       /**
-       * The major version of the build image to use for Pages Functions.
-       */
-      build_image_major_version?: number;
-
-      /**
        * Compatibility date used for Pages Functions.
        */
       compatibility_date?: string;
@@ -1645,7 +1398,7 @@ export namespace ProjectCreateParams {
       /**
        * Compatibility flags used for Pages Functions.
        */
-      compatibility_flags?: Array<string> | null;
+      compatibility_flags?: Array<string>;
 
       /**
        * D1 databases used for Pages Functions.
@@ -1662,12 +1415,7 @@ export namespace ProjectCreateParams {
        */
       env_vars?: {
         [key: string]: Production.PagesPlainTextEnvVar | null | Production.PagesSecretTextEnvVar | null;
-      } | null;
-
-      /**
-       * Whether to fail open when the deployment config cannot be applied.
-       */
-      fail_open?: boolean;
+      };
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -1678,11 +1426,6 @@ export namespace ProjectCreateParams {
        * KV namespaces used for Pages Functions.
        */
       kv_namespaces?: { [key: string]: Production.KVNamespaces | null } | null;
-
-      /**
-       * Limits for Pages Functions.
-       */
-      limits?: Production.Limits | null;
 
       /**
        * mTLS bindings used for Pages Functions.
@@ -1710,19 +1453,9 @@ export namespace ProjectCreateParams {
       services?: { [key: string]: Production.Services | null } | null;
 
       /**
-       * @deprecated All new projects now use the Standard usage model.
-       */
-      usage_model?: 'standard' | 'bundled' | 'unbound';
-
-      /**
        * Vectorize bindings used for Pages Functions.
        */
       vectorize_bindings?: { [key: string]: Production.VectorizeBindings | null } | null;
-
-      /**
-       * Hash of the Wrangler configuration used for the deployment.
-       */
-      wrangler_config_hash?: string;
     }
 
     export namespace Production {
@@ -1810,16 +1543,6 @@ export namespace ProjectCreateParams {
       }
 
       /**
-       * Limits for Pages Functions.
-       */
-      export interface Limits {
-        /**
-         * CPU time limit in milliseconds.
-         */
-        cpu_ms?: number;
-      }
-
-      /**
        * mTLS binding.
        */
       export interface MTLSCertificates {
@@ -1893,74 +1616,31 @@ export namespace ProjectCreateParams {
   export interface Source {
     config?: Source.Config;
 
-    /**
-     * The source control management provider.
-     */
-    type?: 'github' | 'gitlab';
+    type?: string;
   }
 
   export namespace Source {
     export interface Config {
-      /**
-       * @deprecated Use `production_deployments_enabled` and
-       * `preview_deployment_setting` for more granular control.
-       */
       deployments_enabled?: boolean;
 
-      /**
-       * The owner of the repository.
-       */
       owner?: string;
 
-      /**
-       * A list of paths that should be excluded from triggering a preview deployment.
-       * Wildcard syntax (`*`) is supported.
-       */
       path_excludes?: Array<string>;
 
-      /**
-       * A list of paths that should be watched to trigger a preview deployment. Wildcard
-       * syntax (`*`) is supported.
-       */
       path_includes?: Array<string>;
 
-      /**
-       * Whether to enable PR comments.
-       */
       pr_comments_enabled?: boolean;
 
-      /**
-       * A list of branches that should not trigger a preview deployment. Wildcard syntax
-       * (`*`) is supported. Must be used with `preview_deployment_setting` set to
-       * `custom`.
-       */
       preview_branch_excludes?: Array<string>;
 
-      /**
-       * A list of branches that should trigger a preview deployment. Wildcard syntax
-       * (`*`) is supported. Must be used with `preview_deployment_setting` set to
-       * `custom`.
-       */
       preview_branch_includes?: Array<string>;
 
-      /**
-       * Controls whether commits to preview branches trigger a preview deployment.
-       */
       preview_deployment_setting?: 'all' | 'none' | 'custom';
 
-      /**
-       * The production branch of the repository.
-       */
       production_branch?: string;
 
-      /**
-       * Whether to trigger a production deployment on commits to the production branch.
-       */
       production_deployments_enabled?: boolean;
 
-      /**
-       * The name of the repository.
-       */
       repo_name?: string;
     }
   }
@@ -1987,25 +1667,25 @@ export interface ProjectEditParams {
   account_id: string;
 
   /**
+   * Body param: Configs for the project build process.
+   */
+  build_config?: ProjectEditParams.BuildConfig;
+
+  /**
+   * Body param: Configs for deployments in a project.
+   */
+  deployment_configs?: ProjectEditParams.DeploymentConfigs;
+
+  /**
    * Body param: Name of the project.
    */
-  name: string;
+  name?: string;
 
   /**
    * Body param: Production branch of the project. Used to identify production
    * deployments.
    */
-  production_branch: string;
-
-  /**
-   * Body param: Configs for the project build process.
-   */
-  build_config?: ProjectEditParams.BuildConfig | null;
-
-  /**
-   * Body param: Configs for deployments in a project.
-   */
-  deployment_configs?: ProjectEditParams.DeploymentConfigs | null;
+  production_branch?: string;
 
   /**
    * Body param:
@@ -2056,12 +1736,12 @@ export namespace ProjectEditParams {
     /**
      * Configs for preview deploys.
      */
-    preview?: DeploymentConfigs.Preview | null;
+    preview?: DeploymentConfigs.Preview;
 
     /**
      * Configs for production deploys.
      */
-    production?: DeploymentConfigs.Production | null;
+    production?: DeploymentConfigs.Production;
   }
 
   export namespace DeploymentConfigs {
@@ -2075,11 +1755,6 @@ export namespace ProjectEditParams {
       ai_bindings?: { [key: string]: Preview.AIBindings | null } | null;
 
       /**
-       * Whether to always use the latest compatibility date for Pages Functions.
-       */
-      always_use_latest_compatibility_date?: boolean;
-
-      /**
        * Analytics Engine bindings used for Pages Functions.
        */
       analytics_engine_datasets?: { [key: string]: Preview.AnalyticsEngineDatasets | null } | null;
@@ -2090,11 +1765,6 @@ export namespace ProjectEditParams {
       browsers?: { [key: string]: Preview.Browsers | null } | null;
 
       /**
-       * The major version of the build image to use for Pages Functions.
-       */
-      build_image_major_version?: number;
-
-      /**
        * Compatibility date used for Pages Functions.
        */
       compatibility_date?: string;
@@ -2102,7 +1772,7 @@ export namespace ProjectEditParams {
       /**
        * Compatibility flags used for Pages Functions.
        */
-      compatibility_flags?: Array<string> | null;
+      compatibility_flags?: Array<string>;
 
       /**
        * D1 databases used for Pages Functions.
@@ -2119,12 +1789,7 @@ export namespace ProjectEditParams {
        */
       env_vars?: {
         [key: string]: Preview.PagesPlainTextEnvVar | null | Preview.PagesSecretTextEnvVar | null;
-      } | null;
-
-      /**
-       * Whether to fail open when the deployment config cannot be applied.
-       */
-      fail_open?: boolean;
+      };
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -2135,11 +1800,6 @@ export namespace ProjectEditParams {
        * KV namespaces used for Pages Functions.
        */
       kv_namespaces?: { [key: string]: Preview.KVNamespaces | null } | null;
-
-      /**
-       * Limits for Pages Functions.
-       */
-      limits?: Preview.Limits | null;
 
       /**
        * mTLS bindings used for Pages Functions.
@@ -2167,19 +1827,9 @@ export namespace ProjectEditParams {
       services?: { [key: string]: Preview.Services | null } | null;
 
       /**
-       * @deprecated All new projects now use the Standard usage model.
-       */
-      usage_model?: 'standard' | 'bundled' | 'unbound';
-
-      /**
        * Vectorize bindings used for Pages Functions.
        */
       vectorize_bindings?: { [key: string]: Preview.VectorizeBindings | null } | null;
-
-      /**
-       * Hash of the Wrangler configuration used for the deployment.
-       */
-      wrangler_config_hash?: string;
     }
 
     export namespace Preview {
@@ -2267,16 +1917,6 @@ export namespace ProjectEditParams {
       }
 
       /**
-       * Limits for Pages Functions.
-       */
-      export interface Limits {
-        /**
-         * CPU time limit in milliseconds.
-         */
-        cpu_ms?: number;
-      }
-
-      /**
        * mTLS binding.
        */
       export interface MTLSCertificates {
@@ -2356,11 +1996,6 @@ export namespace ProjectEditParams {
       ai_bindings?: { [key: string]: Production.AIBindings | null } | null;
 
       /**
-       * Whether to always use the latest compatibility date for Pages Functions.
-       */
-      always_use_latest_compatibility_date?: boolean;
-
-      /**
        * Analytics Engine bindings used for Pages Functions.
        */
       analytics_engine_datasets?: { [key: string]: Production.AnalyticsEngineDatasets | null } | null;
@@ -2371,11 +2006,6 @@ export namespace ProjectEditParams {
       browsers?: { [key: string]: Production.Browsers | null } | null;
 
       /**
-       * The major version of the build image to use for Pages Functions.
-       */
-      build_image_major_version?: number;
-
-      /**
        * Compatibility date used for Pages Functions.
        */
       compatibility_date?: string;
@@ -2383,7 +2013,7 @@ export namespace ProjectEditParams {
       /**
        * Compatibility flags used for Pages Functions.
        */
-      compatibility_flags?: Array<string> | null;
+      compatibility_flags?: Array<string>;
 
       /**
        * D1 databases used for Pages Functions.
@@ -2400,12 +2030,7 @@ export namespace ProjectEditParams {
        */
       env_vars?: {
         [key: string]: Production.PagesPlainTextEnvVar | null | Production.PagesSecretTextEnvVar | null;
-      } | null;
-
-      /**
-       * Whether to fail open when the deployment config cannot be applied.
-       */
-      fail_open?: boolean;
+      };
 
       /**
        * Hyperdrive bindings used for Pages Functions.
@@ -2416,11 +2041,6 @@ export namespace ProjectEditParams {
        * KV namespaces used for Pages Functions.
        */
       kv_namespaces?: { [key: string]: Production.KVNamespaces | null } | null;
-
-      /**
-       * Limits for Pages Functions.
-       */
-      limits?: Production.Limits | null;
 
       /**
        * mTLS bindings used for Pages Functions.
@@ -2448,19 +2068,9 @@ export namespace ProjectEditParams {
       services?: { [key: string]: Production.Services | null } | null;
 
       /**
-       * @deprecated All new projects now use the Standard usage model.
-       */
-      usage_model?: 'standard' | 'bundled' | 'unbound';
-
-      /**
        * Vectorize bindings used for Pages Functions.
        */
       vectorize_bindings?: { [key: string]: Production.VectorizeBindings | null } | null;
-
-      /**
-       * Hash of the Wrangler configuration used for the deployment.
-       */
-      wrangler_config_hash?: string;
     }
 
     export namespace Production {
@@ -2548,16 +2158,6 @@ export namespace ProjectEditParams {
       }
 
       /**
-       * Limits for Pages Functions.
-       */
-      export interface Limits {
-        /**
-         * CPU time limit in milliseconds.
-         */
-        cpu_ms?: number;
-      }
-
-      /**
        * mTLS binding.
        */
       export interface MTLSCertificates {
@@ -2631,74 +2231,31 @@ export namespace ProjectEditParams {
   export interface Source {
     config?: Source.Config;
 
-    /**
-     * The source control management provider.
-     */
-    type?: 'github' | 'gitlab';
+    type?: string;
   }
 
   export namespace Source {
     export interface Config {
-      /**
-       * @deprecated Use `production_deployments_enabled` and
-       * `preview_deployment_setting` for more granular control.
-       */
       deployments_enabled?: boolean;
 
-      /**
-       * The owner of the repository.
-       */
       owner?: string;
 
-      /**
-       * A list of paths that should be excluded from triggering a preview deployment.
-       * Wildcard syntax (`*`) is supported.
-       */
       path_excludes?: Array<string>;
 
-      /**
-       * A list of paths that should be watched to trigger a preview deployment. Wildcard
-       * syntax (`*`) is supported.
-       */
       path_includes?: Array<string>;
 
-      /**
-       * Whether to enable PR comments.
-       */
       pr_comments_enabled?: boolean;
 
-      /**
-       * A list of branches that should not trigger a preview deployment. Wildcard syntax
-       * (`*`) is supported. Must be used with `preview_deployment_setting` set to
-       * `custom`.
-       */
       preview_branch_excludes?: Array<string>;
 
-      /**
-       * A list of branches that should trigger a preview deployment. Wildcard syntax
-       * (`*`) is supported. Must be used with `preview_deployment_setting` set to
-       * `custom`.
-       */
       preview_branch_includes?: Array<string>;
 
-      /**
-       * Controls whether commits to preview branches trigger a preview deployment.
-       */
       preview_deployment_setting?: 'all' | 'none' | 'custom';
 
-      /**
-       * The production branch of the repository.
-       */
       production_branch?: string;
 
-      /**
-       * Whether to trigger a production deployment on commits to the production branch.
-       */
       production_deployments_enabled?: boolean;
 
-      /**
-       * The name of the repository.
-       */
       repo_name?: string;
     }
   }
