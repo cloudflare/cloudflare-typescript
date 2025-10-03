@@ -1098,29 +1098,6 @@ The following tools are available in this MCP server.
 - `destination_exists_logpush_validate` (`write`): Checks if there is an existing job with a destination.
 - `origin_logpush_validate` (`write`): Validates logpull origin with logpull_options.
 
-### Resource `logs.control.retention`:
-
-- `create_control_logs_retention` (`write`): Updates log retention flag for Logpull API.
-- `get_control_logs_retention` (`read`): Gets log retention flag for Logpull API.
-
-### Resource `logs.control.cmb.config`:
-
-- `create_cmb_control_logs_config` (`write`): Updates CMB config.
-- `delete_cmb_control_logs_config` (`write`): Deletes CMB config.
-- `get_cmb_control_logs_config` (`read`): Gets CMB config.
-
-### Resource `logs.rayid`:
-
-- `get_logs_rayid` (`read`): The `/rayids` api route allows lookups by specific rayid. The rayids route will return zero, one, or more records (ray ids are not unique).
-
-### Resource `logs.received`:
-
-- `get_logs_received` (`read`): The `/received` api route allows customers to retrieve their edge HTTP logs. The basic access pattern is "give me all the logs for zone Z for minute M", where the minute M refers to the time records were received at Cloudflare's central data center. `start` is inclusive, and `end` is exclusive. Because of that, to get all data, at minutely cadence, starting at 10AM, the proper values are: `start=2018-05-20T10:00:00Z&end=2018-05-20T10:01:00Z`, then `start=2018-05-20T10:01:00Z&end=2018-05-20T10:02:00Z` and so on; the overlap will be handled properly.
-
-### Resource `logs.received.fields`:
-
-- `get_received_logs_fields` (`read`): Lists all fields available. The response is json object with key-value pairs, where keys are field names, and values are descriptions.
-
 ### Resource `origin_tls_client_auth`:
 
 - `create_origin_tls_client_auth` (`write`): Upload your own certificate you want Cloudflare to use for edge-to-origin communication to override the shared certificate. Please note that it is important to keep only one certificate active. Also, make sure to enable zone-level authenticated origin pulls by making a PUT call to settings endpoint to see the uploaded certificate in use.
@@ -1362,12 +1339,6 @@ The following tools are available in this MCP server.
 - `update_workers_subdomains` (`write`): Creates a Workers subdomain for an account.
 - `get_workers_subdomains` (`read`): Returns a Workers subdomain for an account.
 
-### Resource `workers.observability.telemetry`:
-
-- `keys_observability_workers_telemetry` (`write`): List all the keys in your telemetry events.
-- `query_observability_workers_telemetry` (`write`): Runs a temporary or saved query
-- `values_observability_workers_telemetry` (`write`): List unique values found in your events
-
 ### Resource `kv.namespaces`:
 
 - `create_kv_namespaces` (`write`): Creates a namespace under the given title. A `400` is returned if the account already owns a namespace with this title. A namespace must be explicitly deleted to be replaced.
@@ -1375,7 +1346,6 @@ The following tools are available in this MCP server.
 - `list_kv_namespaces` (`read`): Returns the namespaces owned by an account.
 - `delete_kv_namespaces` (`write`): Deletes the namespace corresponding to the given ID.
 - `bulk_delete_kv_namespaces` (`write`): Remove multiple KV pairs from the namespace. Body should be an array of up to 10,000 keys to be removed.
-- `bulk_get_kv_namespaces` (`write`): Retrieve up to 100 KV pairs from the namespace. Keys must contain text-based values. JSON values can optionally be parsed instead of being returned as a string value. Metadata can be included if `withMetadata` is true.
 - `bulk_update_kv_namespaces` (`write`): Write multiple keys and values at once. Body should be an array of up to 10,000 key-value pairs to be stored, along with optional expiration information. Existing values and expirations will be overwritten. If neither `expiration` nor `expiration_ttl` is specified, the key-value pair will never expire. If both are set, `expiration_ttl` is used and `expiration` is ignored. The entire request size must be 100 megabytes or less.
 - `get_kv_namespaces` (`read`): Get the namespace corresponding to the given ID.
 
@@ -1383,7 +1353,6 @@ The following tools are available in this MCP server.
 
 - `list_namespaces_kv_keys` (`read`): Lists a namespace's keys.
 - `bulk_delete_namespaces_kv_keys` (`write`): Remove multiple KV pairs from the namespace. Body should be an array of up to 10,000 keys to be removed.
-- `bulk_get_namespaces_kv_keys` (`write`): Retrieve up to 100 KV pairs from the namespace. Keys must contain text-based values. JSON values can optionally be parsed instead of being returned as a string value. Metadata can be included if `withMetadata` is true.
 - `bulk_update_namespaces_kv_keys` (`write`): Write multiple keys and values at once. Body should be an array of up to 10,000 key-value pairs to be stored, along with optional expiration information. Existing values and expirations will be overwritten. If neither `expiration` nor `expiration_ttl` is specified, the key-value pair will never expire. If both are set, `expiration_ttl` is used and `expiration` is ignored. The entire request size must be 100 megabytes or less.
 
 ### Resource `kv.namespaces.metadata`:
@@ -1416,9 +1385,7 @@ The following tools are available in this MCP server.
 ### Resource `queues.messages`:
 
 - `ack_queues_messages` (`write`): Acknowledge + Retry messages from a Queue
-- `bulk_push_queues_messages` (`write`): Push a batch of message to a Queue
 - `pull_queues_messages` (`write`): Pull a batch of messages from a Queue
-- `push_queues_messages` (`write`): Push a message to a Queue
 
 ### Resource `queues.purge`:
 
@@ -1431,14 +1398,6 @@ The following tools are available in this MCP server.
 - `update_queues_consumers` (`write`): Updates the consumer for a queue, or creates one if it does not exist.
 - `list_queues_consumers` (`read`): Returns the consumers for a Queue
 - `delete_queues_consumers` (`write`): Deletes the consumer for a queue.
-- `get_queues_consumers` (`read`): Fetches the consumer for a queue by consumer id
-
-### Resource `queues.subscriptions`:
-
-- `create_queues_subscriptions` (`write`): Create a new event subscription for a queue
-- `update_queues_subscriptions` (`write`): Update an existing event subscription
-- `list_queues_subscriptions` (`read`): Get a paginated list of event subscriptions with optional sorting and filtering
-- `delete_queues_subscriptions` (`write`): Delete an existing event subscription
 
 ### Resource `api_gateway.configurations`:
 
@@ -3945,10 +3904,6 @@ The following tools are available in this MCP server.
 - `get_threat_events_cloudforce_one_datasets` (`read`): Reads a dataset
 - `raw_threat_events_cloudforce_one_datasets` (`read`): Reads data for a raw event
 
-### Resource `cloudforce_one.threat_events.indicator_types`:
-
-- `list_threat_events_cloudforce_one_indicator_types` (`read`): Lists all indicator types
-
 ### Resource `cloudforce_one.threat_events.raw`:
 
 - `edit_threat_events_cloudforce_one_raw` (`write`): Updates a raw event
@@ -4060,33 +4015,6 @@ The following tools are available in this MCP server.
 - `delete_security_txt` (`write`): Delete security.txt
 - `get_security_txt` (`read`): Get security.txt
 
-### Resource `workflows`:
-
-- `update_workflows` (`write`): Create/modify Workflow
-- `list_workflows` (`read`): List all Workflows
-- `delete_workflows` (`write`): Deletes a Workflow. This only deletes the Workflow and does not delete or modify any Worker associated to this Workflow or bounded to it.
-- `get_workflows` (`read`): Get Workflow details
-
-### Resource `workflows.instances`:
-
-- `create_workflows_instances` (`write`): Create a new workflow instance
-- `list_workflows_instances` (`read`): List of workflow instances
-- `bulk_workflows_instances` (`write`): Batch create new Workflow instances
-- `get_workflows_instances` (`read`): Get logs and status from instance
-
-### Resource `workflows.instances.status`:
-
-- `edit_instances_workflows_status` (`write`): Change status of instance
-
-### Resource `workflows.instances.events`:
-
-- `create_instances_workflows_events` (`write`): Send event to instance
-
-### Resource `workflows.versions`:
-
-- `list_workflows_versions` (`read`): List deployed Workflow versions
-- `get_workflows_versions` (`read`): Get Workflow version details
-
 ### Resource `resource_sharing`:
 
 - `create_resource_sharing` (`write`): Create a new share
@@ -4109,18 +4037,6 @@ The following tools are available in this MCP server.
 - `list_resource_sharing_resources` (`read`): List share resources by share ID.
 - `delete_resource_sharing_resources` (`write`): Deletion is not immediate, an updated share resource object with a new status will be returned.
 - `get_resource_sharing_resources` (`read`): Get share resource by ID.
-
-### Resource `leaked_credential_checks`:
-
-- `create_leaked_credential_checks` (`write`): Updates the current status of Leaked Credential Checks.
-- `get_leaked_credential_checks` (`read`): Retrieves the current status of Leaked Credential Checks.
-
-### Resource `leaked_credential_checks.detections`:
-
-- `create_leaked_credential_checks_detections` (`write`): Create user-defined detection pattern for Leaked Credential Checks.
-- `update_leaked_credential_checks_detections` (`write`): Update user-defined detection pattern for Leaked Credential Checks.
-- `list_leaked_credential_checks_detections` (`read`): List user-defined detection patterns for Leaked Credential Checks.
-- `delete_leaked_credential_checks_detections` (`write`): Remove user-defined detection pattern for Leaked Credential Checks.
 
 ### Resource `content_scanning`:
 
@@ -4260,11 +4176,11 @@ The following tools are available in this MCP server.
 
 ### Resource `pipelines`:
 
-- `create_pipelines` (`write`): Create a new pipeline.
-- `update_pipelines` (`write`): Update an existing pipeline.
-- `list_pipelines` (`read`): List, filter, and paginate pipelines in an account.
-- `delete_pipelines` (`write`): Delete a pipeline.
-- `get_pipelines` (`read`): Get configuration of a pipeline.
+- `create_pipelines` (`write`): [DEPRECATED] Create a new pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `update_pipelines` (`write`): [DEPRECATED] Update an existing pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `list_pipelines` (`read`): [DEPRECATED] List, filter, and paginate pipelines in an account. Use the new /pipelines/v1/pipelines endpoint instead.
+- `delete_pipelines` (`write`): [DEPRECATED] Delete a pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `get_pipelines` (`read`): [DEPRECATED] Get configuration of a pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
 
 ### Resource `schema_validation.schemas`:
 
