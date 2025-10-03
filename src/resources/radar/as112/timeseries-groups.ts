@@ -9,11 +9,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS queries by DNSSEC (DNS Security
    * Extensions) support over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.dnssec();
-   * ```
+   * @deprecated
    */
   dnssec(
     query?: TimeseriesGroupDNSSECParams,
@@ -38,11 +34,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS queries by EDNS (Extension Mechanisms
    * for DNS) support over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.edns();
-   * ```
+   * @deprecated
    */
   edns(
     query?: TimeseriesGroupEdnsParams,
@@ -66,11 +58,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS queries by IP version over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.ipVersion();
-   * ```
+   * @deprecated
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -96,11 +84,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS requests classified by protocol over
    * time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.protocol();
-   * ```
+   * @deprecated
    */
   protocol(
     query?: TimeseriesGroupProtocolParams,
@@ -124,11 +108,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS queries by type over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.queryType();
-   * ```
+   * @deprecated
    */
   queryType(
     query?: TimeseriesGroupQueryTypeParams,
@@ -154,11 +134,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS requests classified by response code
    * over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.responseCodes();
-   * ```
+   * @deprecated
    */
   responseCodes(
     query?: TimeseriesGroupResponseCodesParams,
