@@ -524,6 +524,11 @@ export interface PolicyFilter {
   /**
    * Usage depends on specific alert type
    */
+  type?: Array<string>;
+
+  /**
+   * Usage depends on specific alert type
+   */
   where?: Array<string>;
 
   /**
@@ -739,6 +744,11 @@ export interface PolicyFilterParam {
    * Usage depends on specific alert type
    */
   tunnel_name?: Array<string>;
+
+  /**
+   * Usage depends on specific alert type
+   */
+  type?: Array<string>;
 
   /**
    * Usage depends on specific alert type
