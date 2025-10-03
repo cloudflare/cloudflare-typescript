@@ -460,6 +460,13 @@ export const tool: Tool = {
               type: 'string',
             },
           },
+          type: {
+            type: 'array',
+            description: 'Usage depends on specific alert type',
+            items: {
+              type: 'string',
+            },
+          },
           where: {
             type: 'array',
             description: 'Usage depends on specific alert type',
