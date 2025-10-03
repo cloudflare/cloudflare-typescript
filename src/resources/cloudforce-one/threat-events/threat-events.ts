@@ -30,7 +30,7 @@ import {
   EventTags,
 } from './event-tags';
 import * as IndicatorTypesAPI from './indicator-types';
-import { IndicatorTypes } from './indicator-types';
+import { IndicatorTypeListParams, IndicatorTypeListResponse, IndicatorTypes } from './indicator-types';
 import * as InsightsAPI from './insights';
 import { Insights } from './insights';
 import * as RawAPI from './raw';
@@ -820,7 +820,11 @@ export declare namespace ThreatEvents {
     type DatasetRawParams as DatasetRawParams,
   };
 
-  export { IndicatorTypes as IndicatorTypes };
+  export {
+    IndicatorTypes as IndicatorTypes,
+    type IndicatorTypeListResponse as IndicatorTypeListResponse,
+    type IndicatorTypeListParams as IndicatorTypeListParams,
+  };
 
   export {
     RawAPIRaw as Raw,
