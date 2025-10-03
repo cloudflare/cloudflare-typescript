@@ -360,80 +360,72 @@ export interface JobCreateParams {
 
 export namespace JobCreateParams {
   export interface R2SlurperS3SourceSchema {
-    bucket: string;
-
-    secret: R2SlurperS3SourceSchema.Secret;
-
-    vendor: 's3';
+    bucket?: string;
 
     endpoint?: string | null;
 
-    pathPrefix?: string | null;
+    secret?: R2SlurperS3SourceSchema.Secret;
 
-    region?: string | null;
+    vendor?: 's3';
   }
 
   export namespace R2SlurperS3SourceSchema {
     export interface Secret {
-      accessKeyId: string;
+      accessKeyId?: string;
 
-      secretAccessKey: string;
+      secretAccessKey?: string;
     }
   }
 
   export interface R2SlurperGcsSourceSchema {
-    bucket: string;
+    bucket?: string;
 
-    secret: R2SlurperGcsSourceSchema.Secret;
+    secret?: R2SlurperGcsSourceSchema.Secret;
 
-    vendor: 'gcs';
-
-    pathPrefix?: string | null;
+    vendor?: 'gcs';
   }
 
   export namespace R2SlurperGcsSourceSchema {
     export interface Secret {
-      clientEmail: string;
+      clientEmail?: string;
 
-      privateKey: string;
+      privateKey?: string;
     }
   }
 
   export interface R2SlurperR2SourceSchema {
-    bucket: string;
-
-    secret: R2SlurperR2SourceSchema.Secret;
-
-    vendor: SippyAPI.ProviderParam;
+    bucket?: string;
 
     jurisdiction?: 'default' | 'eu' | 'fedramp';
 
-    pathPrefix?: string | null;
+    secret?: R2SlurperR2SourceSchema.Secret;
+
+    vendor?: SippyAPI.ProviderParam;
   }
 
   export namespace R2SlurperR2SourceSchema {
     export interface Secret {
-      accessKeyId: string;
+      accessKeyId?: string;
 
-      secretAccessKey: string;
+      secretAccessKey?: string;
     }
   }
 
   export interface Target {
-    bucket: string;
-
-    secret: Target.Secret;
-
-    vendor: SippyAPI.ProviderParam;
+    bucket?: string;
 
     jurisdiction?: 'default' | 'eu' | 'fedramp';
+
+    secret?: Target.Secret;
+
+    vendor?: SippyAPI.ProviderParam;
   }
 
   export namespace Target {
     export interface Secret {
-      accessKeyId: string;
+      accessKeyId?: string;
 
-      secretAccessKey: string;
+      secretAccessKey?: string;
     }
   }
 }
