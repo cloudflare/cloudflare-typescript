@@ -29,6 +29,7 @@ export const tool: Tool = {
         description:
           'Refers to which event will trigger a Notification dispatch. You can use the endpoint to get available alert types which then will give you a list of possible values.',
         enum: [
+          'abuse_report_alert',
           'access_custom_certificate_expiration_type',
           'advanced_ddos_attack_l4_alert',
           'advanced_ddos_attack_l7_alert',
@@ -453,6 +454,13 @@ export const tool: Tool = {
             },
           },
           tunnel_name: {
+            type: 'array',
+            description: 'Usage depends on specific alert type',
+            items: {
+              type: 'string',
+            },
+          },
+          type: {
             type: 'array',
             description: 'Usage depends on specific alert type',
             items: {
