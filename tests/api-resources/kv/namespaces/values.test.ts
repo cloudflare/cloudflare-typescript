@@ -14,7 +14,6 @@ describe('resource values', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      metadata: '{"someMetadataKey": "someMetadataValue"}',
       value: 'Some Value',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,10 +29,10 @@ describe('resource values', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      metadata: '{"someMetadataKey": "someMetadataValue"}',
       value: 'Some Value',
       expiration: 1578435000,
       expiration_ttl: 300,
+      metadata: {},
     });
   });
 
