@@ -4260,11 +4260,11 @@ The following tools are available in this MCP server.
 
 ### Resource `pipelines`:
 
-- `create_pipelines` (`write`): Create a new pipeline.
-- `update_pipelines` (`write`): Update an existing pipeline.
-- `list_pipelines` (`read`): List, filter, and paginate pipelines in an account.
-- `delete_pipelines` (`write`): Delete a pipeline.
-- `get_pipelines` (`read`): Get configuration of a pipeline.
+- `create_pipelines` (`write`): [DEPRECATED] Create a new pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `update_pipelines` (`write`): [DEPRECATED] Update an existing pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `list_pipelines` (`read`): [DEPRECATED] List, filter, and paginate pipelines in an account. Use the new /pipelines/v1/pipelines endpoint instead.
+- `delete_pipelines` (`write`): [DEPRECATED] Delete a pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `get_pipelines` (`read`): [DEPRECATED] Get configuration of a pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
 
 ### Resource `schema_validation.schemas`:
 
