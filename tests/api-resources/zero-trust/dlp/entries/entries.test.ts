@@ -16,7 +16,6 @@ describe('resource entries', () => {
       enabled: true,
       name: 'name',
       pattern: { regex: 'regex' },
-      profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
