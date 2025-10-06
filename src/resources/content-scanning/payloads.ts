@@ -7,6 +7,24 @@ import { SinglePage } from '../../pagination';
 export class Payloads extends APIResource {
   /**
    * Add custom scan expressions for Content Scanning.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const payloadCreateResponse of client.contentScanning.payloads.create(
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [
+   *       {
+   *         payload:
+   *           'lookup_json_string(http.request.body.raw, "file")',
+   *       },
+   *     ],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     params: PayloadCreateParams,
@@ -22,6 +40,16 @@ export class Payloads extends APIResource {
 
   /**
    * Get a list of existing custom scan expressions for Content Scanning.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const payloadListResponse of client.contentScanning.payloads.list(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: PayloadListParams,
@@ -37,6 +65,17 @@ export class Payloads extends APIResource {
 
   /**
    * Delete a Content Scan Custom Expression.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const payloadDeleteResponse of client.contentScanning.payloads.delete(
+   *   'a350a054caa840c9becd89c3b4f0195b',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   delete(
     expressionId: string,
