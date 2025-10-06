@@ -3945,10 +3945,6 @@ The following tools are available in this MCP server.
 - `get_threat_events_cloudforce_one_datasets` (`read`): Reads a dataset
 - `raw_threat_events_cloudforce_one_datasets` (`read`): Reads data for a raw event
 
-### Resource `cloudforce_one.threat_events.indicator_types`:
-
-- `list_threat_events_cloudforce_one_indicator_types` (`read`): Lists all indicator types
-
 ### Resource `cloudforce_one.threat_events.raw`:
 
 - `edit_threat_events_cloudforce_one_raw` (`write`): Updates a raw event
