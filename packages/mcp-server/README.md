@@ -4120,8 +4120,11 @@ The following tools are available in this MCP server.
 
 ### Resource `content_scanning`:
 
+- `create_content_scanning` (`write`): Update the Content Scanning status.
+- `update_content_scanning` (`write`): Update the Content Scanning status.
 - `disable_content_scanning` (`write`): Disable Content Scanning.
 - `enable_content_scanning` (`write`): Enable Content Scanning.
+- `get_content_scanning` (`read`): Retrieve the current status of Content Scanning.
 
 ### Resource `content_scanning.payloads`:
 
