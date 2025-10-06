@@ -8,6 +8,13 @@ import { path } from '../../internal/utils/path';
 export class Settings extends APIResource {
   /**
    * Retrieve the current status of Content Scanning.
+   *
+   * @example
+   * ```ts
+   * const setting = await client.contentScanning.settings.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse> {
     const { zone_id } = params;
