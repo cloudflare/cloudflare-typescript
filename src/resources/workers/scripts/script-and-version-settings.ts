@@ -87,7 +87,6 @@ export interface ScriptAndVersionSettingEditResponse {
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindSecretText
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindSendEmail
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindService
-    | ScriptAndVersionSettingEditResponse.WorkersBindingKindTailConsumer
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindTextBlob
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindVectorize
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindVersionMetadata
@@ -568,23 +567,6 @@ export namespace ScriptAndVersionSettingEditResponse {
     environment?: string;
   }
 
-  export interface WorkersBindingKindTailConsumer {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * Name of Tail Worker to bind to.
-     */
-    service: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'tail_consumer';
-  }
-
   export interface WorkersBindingKindTextBlob {
     /**
      * A JavaScript variable name for the binding.
@@ -839,7 +821,6 @@ export interface ScriptAndVersionSettingGetResponse {
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindSecretText
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindSendEmail
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindService
-    | ScriptAndVersionSettingGetResponse.WorkersBindingKindTailConsumer
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindTextBlob
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindVectorize
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindVersionMetadata
@@ -1320,23 +1301,6 @@ export namespace ScriptAndVersionSettingGetResponse {
     environment?: string;
   }
 
-  export interface WorkersBindingKindTailConsumer {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * Name of Tail Worker to bind to.
-     */
-    service: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'tail_consumer';
-  }
-
   export interface WorkersBindingKindTextBlob {
     /**
      * A JavaScript variable name for the binding.
@@ -1604,7 +1568,6 @@ export namespace ScriptAndVersionSettingEditParams {
       | Settings.WorkersBindingKindSecretText
       | Settings.WorkersBindingKindSendEmail
       | Settings.WorkersBindingKindService
-      | Settings.WorkersBindingKindTailConsumer
       | Settings.WorkersBindingKindTextBlob
       | Settings.WorkersBindingKindVectorize
       | Settings.WorkersBindingKindVersionMetadata
@@ -2093,23 +2056,6 @@ export namespace ScriptAndVersionSettingEditParams {
        * Optional environment if the Worker utilizes one.
        */
       environment?: string;
-    }
-
-    export interface WorkersBindingKindTailConsumer {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * Name of Tail Worker to bind to.
-       */
-      service: string;
-
-      /**
-       * The kind of resource that the binding provides.
-       */
-      type: 'tail_consumer';
     }
 
     export interface WorkersBindingKindTextBlob {
