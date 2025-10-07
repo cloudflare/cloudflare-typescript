@@ -1442,7 +1442,7 @@ The following tools are available in this MCP server.
 
 ### Resource `api_gateway.configurations`:
 
-- `update_api_gateway_configurations` (`write`): Set configuration properties
+- `update_api_gateway_configurations` (`write`): Update configuration properties
 - `get_api_gateway_configurations` (`read`): Retrieve information about specific configuration properties
 
 ### Resource `api_gateway.discovery`:
