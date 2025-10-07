@@ -2436,11 +2436,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/api-gateway/configurations.ts">Configuration</a></code>
-- <code><a href="./src/resources/api-gateway/configurations.ts">ConfigurationUpdateResponse</a></code>
 
 Methods:
 
-- <code title="put /zones/{zone_id}/api_gateway/configuration">client.apiGateway.configurations.<a href="./src/resources/api-gateway/configurations.ts">update</a>({ ...params }) -> ConfigurationUpdateResponse</code>
+- <code title="put /zones/{zone_id}/api_gateway/configuration">client.apiGateway.configurations.<a href="./src/resources/api-gateway/configurations.ts">update</a>({ ...params }) -> Configuration</code>
 - <code title="get /zones/{zone_id}/api_gateway/configuration">client.apiGateway.configurations.<a href="./src/resources/api-gateway/configurations.ts">get</a>({ ...params }) -> Configuration</code>
 
 ## Discovery
