@@ -688,7 +688,6 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindSecretText
       | Metadata.WorkersBindingKindSendEmail
       | Metadata.WorkersBindingKindService
-      | Metadata.WorkersBindingKindTailConsumer
       | Metadata.WorkersBindingKindTextBlob
       | Metadata.WorkersBindingKindVectorize
       | Metadata.WorkersBindingKindVersionMetadata
@@ -1260,23 +1259,6 @@ export namespace ScriptUpdateParams {
        * Optional environment if the Worker utilizes one.
        */
       environment?: string;
-    }
-
-    export interface WorkersBindingKindTailConsumer {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * Name of Tail Worker to bind to.
-       */
-      service: string;
-
-      /**
-       * The kind of resource that the binding provides.
-       */
-      type: 'tail_consumer';
     }
 
     export interface WorkersBindingKindTextBlob {
