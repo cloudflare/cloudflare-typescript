@@ -3919,7 +3919,6 @@ The following tools are available in this MCP server.
 - `delete_cloudforce_one_threat_events` (`write`): The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
 - `bulk_create_cloudforce_one_threat_events` (`write`): The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
 - `edit_cloudforce_one_threat_events` (`write`): Updates an event
-- `get_cloudforce_one_threat_events` (`read`): Reads an event
 
 ### Resource `cloudforce_one.threat_events.attackers`:
 
