@@ -95,6 +95,7 @@ import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/mag
 import { MagicTransit } from './resources/magic-transit/magic-transit';
 import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
 import { NetworkInterconnects } from './resources/network-interconnects/network-interconnects';
+import { Organizations } from './resources/organizations/organizations';
 import { OriginTLSClientAuth } from './resources/origin-tls-client-auth/origin-tls-client-auth';
 import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
@@ -920,6 +921,7 @@ export class Cloudflare {
   static toFile = Uploads.toFile;
 
   accounts: API.Accounts = new API.Accounts(this);
+  organizations: API.Organizations = new API.Organizations(this);
   originCACertificates: API.OriginCACertificates = new API.OriginCACertificates(this);
   ips: API.IPs = new API.IPs(this);
   memberships: API.Memberships = new API.Memberships(this);
@@ -1017,6 +1019,7 @@ export class Cloudflare {
 }
 
 Cloudflare.Accounts = Accounts;
+Cloudflare.Organizations = Organizations;
 Cloudflare.OriginCACertificates = OriginCACertificates;
 Cloudflare.IPs = IPs;
 Cloudflare.Memberships = Memberships;
@@ -1149,6 +1152,8 @@ export declare namespace Cloudflare {
   export { type SinglePageResponse as SinglePageResponse };
 
   export { Accounts as Accounts };
+
+  export { Organizations as Organizations };
 
   export { OriginCACertificates as OriginCACertificates };
 

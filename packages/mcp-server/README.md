@@ -282,6 +282,20 @@ The following tools are available in this MCP server.
 
 - `list_logs_accounts_audit` (`read`): Gets a list of audit logs for an account. <br /> <br /> This is the beta release of Audit Logs Version 2. Since this is a beta version, there may be gaps or missing entries in the available audit logs. Be aware of the following limitations. <br /> <ul> <li>Audit logs are available only for the past 30 days. <br /></li> <li>Error handling is not yet implemented. <br /> </li> </ul>
 
+### Resource `organizations`:
+
+- `create_organizations` (`write`): Create a new organization for a user.
+- `update_organizations` (`write`): Modify organization
+- `list_organizations` (`read`): Retrieve a list of organizations a particular user has access to.
+- `delete_organizations` (`write`): Delete an organization. The organization MUST be empty before deleting.
+  It must not contain any sub-organizations, accounts, members or users.
+- `get_organizations` (`read`): Retrieve the details of a certain organization.
+
+### Resource `organizations.organization_profile`:
+
+- `update_organizations_organization_profile` (`write`): Modify organization profile
+- `get_organizations_organization_profile` (`read`): Get an organizations profile if it exists.
+
 ### Resource `origin_ca_certificates`:
 
 - `create_origin_ca_certificates` (`write`): Create an Origin CA certificate. You can use an Origin CA Key as your User Service Key or an API token when calling this endpoint ([see above](#requests)).
