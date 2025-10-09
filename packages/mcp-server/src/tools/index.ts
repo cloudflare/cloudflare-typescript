@@ -1791,7 +1791,6 @@ import create_content_scanning_payloads from './content-scanning/payloads/create
 import list_content_scanning_payloads from './content-scanning/payloads/list-content-scanning-payloads';
 import delete_content_scanning_payloads from './content-scanning/payloads/delete-content-scanning-payloads';
 import get_content_scanning_settings from './content-scanning/settings/get-content-scanning-settings';
-import create_abuse_reports from './abuse-reports/create-abuse-reports';
 import run_ai from './ai/run-ai';
 import create_ai_finetunes from './ai/finetunes/create-ai-finetunes';
 import list_ai_finetunes from './ai/finetunes/list-ai-finetunes';
@@ -3641,7 +3640,6 @@ addEndpoint(create_content_scanning_payloads);
 addEndpoint(list_content_scanning_payloads);
 addEndpoint(delete_content_scanning_payloads);
 addEndpoint(get_content_scanning_settings);
-addEndpoint(create_abuse_reports);
 addEndpoint(run_ai);
 addEndpoint(create_ai_finetunes);
 addEndpoint(list_ai_finetunes);

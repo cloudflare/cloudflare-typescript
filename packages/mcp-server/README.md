@@ -4149,10 +4149,6 @@ The following tools are available in this MCP server.
 
 - `get_content_scanning_settings` (`read`): Retrieve the current status of Content Scanning.
 
-### Resource `abuse_reports`:
-
-- `create_abuse_reports` (`write`): Submit the Abuse Report of a particular type
-
 ### Resource `ai`:
 
 - `run_ai` (`write`): This endpoint provides users with the capability to run specific AI models on-demand.

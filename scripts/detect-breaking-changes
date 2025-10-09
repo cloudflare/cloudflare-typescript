@@ -722,7 +722,6 @@ TEST_PATHS=(
 	tests/api-resources/content-scanning/content-scanning.test.ts
 	tests/api-resources/content-scanning/payloads.test.ts
 	tests/api-resources/content-scanning/settings.test.ts
-	tests/api-resources/abuse-reports.test.ts
 	tests/api-resources/ai/ai.test.ts
 	tests/api-resources/ai/finetunes/finetunes.test.ts
 	tests/api-resources/ai/finetunes/assets.test.ts
