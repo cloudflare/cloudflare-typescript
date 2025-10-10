@@ -25,7 +25,7 @@ export class Secrets extends APIResource {
    *     body: [
    *       {
    *         name: 'MY_API_KEY',
-   *         scopes: ['workers', 'ai_gateway'],
+   *         scopes: ['workers', 'ai_gateway', 'dex', 'access'],
    *         value: 'api-token-secret-123',
    *       },
    *     ],
@@ -143,7 +143,7 @@ export class Secrets extends APIResource {
    *       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
    *       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       name: 'MY_API_KEY',
-   *       scopes: ['workers', 'ai_gateway'],
+   *       scopes: ['workers', 'ai_gateway', 'dex', 'access'],
    *     },
    *   );
    * ```
