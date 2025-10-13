@@ -93,7 +93,7 @@ export const tool: Tool = {
       filters: {
         type: 'array',
         description:
-          'Specify the protocol or layer to evaluate the traffic, identity, and device posture expressions. Can only contain a single value.',
+          'Specify the protocol or layer to evaluate the traffic, identity, and device posture expressions.',
         items: {
           $ref: '#/$defs/gateway_filter',
         },

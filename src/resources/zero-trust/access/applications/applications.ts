@@ -1629,9 +1629,7 @@ export type ApplicationType =
   | 'bookmark'
   | 'dash_sso'
   | 'infrastructure'
-  | 'rdp'
-  | 'mcp'
-  | 'mcp_portal';
+  | 'rdp';
 
 /**
  * The application type.
@@ -1647,9 +1645,7 @@ export type ApplicationTypeParam =
   | 'bookmark'
   | 'dash_sso'
   | 'infrastructure'
-  | 'rdp'
-  | 'mcp'
-  | 'mcp_portal';
+  | 'rdp';
 
 export interface CORSHeaders {
   /**
@@ -2636,11 +2632,7 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | SelfHostedApplication.PublicDestination
-      | SelfHostedApplication.PrivateDestination
-      | SelfHostedApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -2749,6 +2741,10 @@ export namespace ApplicationCreateResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -2778,19 +2774,6 @@ export namespace ApplicationCreateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -3242,9 +3225,7 @@ export namespace ApplicationCreateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -3316,11 +3297,7 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserSSHApplication.PublicDestination
-      | BrowserSSHApplication.PrivateDestination
-      | BrowserSSHApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -3429,6 +3406,10 @@ export namespace ApplicationCreateResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -3458,19 +3439,6 @@ export namespace ApplicationCreateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -3675,9 +3643,7 @@ export namespace ApplicationCreateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -3749,11 +3715,7 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserVNCApplication.PublicDestination
-      | BrowserVNCApplication.PrivateDestination
-      | BrowserVNCApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -3862,6 +3824,10 @@ export namespace ApplicationCreateResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -3891,19 +3857,6 @@ export namespace ApplicationCreateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -4102,9 +4055,7 @@ export namespace ApplicationCreateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -4870,11 +4821,7 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -5001,6 +4948,10 @@ export namespace ApplicationCreateResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -5030,19 +4981,6 @@ export namespace ApplicationCreateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -5322,11 +5260,7 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | SelfHostedApplication.PublicDestination
-      | SelfHostedApplication.PrivateDestination
-      | SelfHostedApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -5435,6 +5369,10 @@ export namespace ApplicationUpdateResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -5464,19 +5402,6 @@ export namespace ApplicationUpdateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -5928,9 +5853,7 @@ export namespace ApplicationUpdateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -6002,11 +5925,7 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserSSHApplication.PublicDestination
-      | BrowserSSHApplication.PrivateDestination
-      | BrowserSSHApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -6115,6 +6034,10 @@ export namespace ApplicationUpdateResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -6144,19 +6067,6 @@ export namespace ApplicationUpdateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -6361,9 +6271,7 @@ export namespace ApplicationUpdateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -6435,11 +6343,7 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserVNCApplication.PublicDestination
-      | BrowserVNCApplication.PrivateDestination
-      | BrowserVNCApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -6548,6 +6452,10 @@ export namespace ApplicationUpdateResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -6577,19 +6485,6 @@ export namespace ApplicationUpdateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -6788,9 +6683,7 @@ export namespace ApplicationUpdateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -7556,11 +7449,7 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -7687,6 +7576,10 @@ export namespace ApplicationUpdateResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -7716,19 +7609,6 @@ export namespace ApplicationUpdateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -8008,11 +7888,7 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | SelfHostedApplication.PublicDestination
-      | SelfHostedApplication.PrivateDestination
-      | SelfHostedApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -8121,6 +7997,10 @@ export namespace ApplicationListResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -8150,19 +8030,6 @@ export namespace ApplicationListResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -8614,9 +8481,7 @@ export namespace ApplicationListResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -8688,11 +8553,7 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserSSHApplication.PublicDestination
-      | BrowserSSHApplication.PrivateDestination
-      | BrowserSSHApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -8801,6 +8662,10 @@ export namespace ApplicationListResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -8830,19 +8695,6 @@ export namespace ApplicationListResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -9047,9 +8899,7 @@ export namespace ApplicationListResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -9121,11 +8971,7 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserVNCApplication.PublicDestination
-      | BrowserVNCApplication.PrivateDestination
-      | BrowserVNCApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -9234,6 +9080,10 @@ export namespace ApplicationListResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -9263,19 +9113,6 @@ export namespace ApplicationListResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -9474,9 +9311,7 @@ export namespace ApplicationListResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -10242,11 +10077,7 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -10373,6 +10204,10 @@ export namespace ApplicationListResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -10402,19 +10237,6 @@ export namespace ApplicationListResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -10701,11 +10523,7 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | SelfHostedApplication.PublicDestination
-      | SelfHostedApplication.PrivateDestination
-      | SelfHostedApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -10814,6 +10632,10 @@ export namespace ApplicationGetResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -10843,19 +10665,6 @@ export namespace ApplicationGetResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -11307,9 +11116,7 @@ export namespace ApplicationGetResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -11381,11 +11188,7 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserSSHApplication.PublicDestination
-      | BrowserSSHApplication.PrivateDestination
-      | BrowserSSHApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -11494,6 +11297,10 @@ export namespace ApplicationGetResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -11523,19 +11330,6 @@ export namespace ApplicationGetResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -11740,9 +11534,7 @@ export namespace ApplicationGetResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -11814,11 +11606,7 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserVNCApplication.PublicDestination
-      | BrowserVNCApplication.PrivateDestination
-      | BrowserVNCApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -11927,6 +11715,10 @@ export namespace ApplicationGetResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -11956,19 +11748,6 @@ export namespace ApplicationGetResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -12167,9 +11946,7 @@ export namespace ApplicationGetResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * UUID.
@@ -12935,11 +12712,7 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -13066,6 +12839,10 @@ export namespace ApplicationGetResponse {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -13095,19 +12872,6 @@ export namespace ApplicationGetResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -13396,11 +13160,7 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | SelfHostedApplication.PublicDestination
-      | SelfHostedApplication.PrivateDestination
-      | SelfHostedApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -13515,6 +13275,10 @@ export declare namespace ApplicationCreateParams {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -13544,19 +13308,6 @@ export declare namespace ApplicationCreateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -13985,9 +13736,7 @@ export declare namespace ApplicationCreateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -14066,11 +13815,7 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | BrowserSSHApplication.PublicDestination
-      | BrowserSSHApplication.PrivateDestination
-      | BrowserSSHApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -14185,6 +13930,10 @@ export declare namespace ApplicationCreateParams {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -14214,19 +13963,6 @@ export declare namespace ApplicationCreateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -14414,9 +14150,7 @@ export declare namespace ApplicationCreateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -14495,11 +14229,7 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | BrowserVNCApplication.PublicDestination
-      | BrowserVNCApplication.PrivateDestination
-      | BrowserVNCApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -14614,6 +14344,10 @@ export declare namespace ApplicationCreateParams {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -14643,19 +14377,6 @@ export declare namespace ApplicationCreateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -14837,9 +14558,7 @@ export declare namespace ApplicationCreateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -15567,11 +15286,7 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -15704,6 +15419,10 @@ export declare namespace ApplicationCreateParams {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -15733,19 +15452,6 @@ export declare namespace ApplicationCreateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -16015,11 +15721,7 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | SelfHostedApplication.PublicDestination
-      | SelfHostedApplication.PrivateDestination
-      | SelfHostedApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -16134,6 +15836,10 @@ export declare namespace ApplicationUpdateParams {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -16163,19 +15869,6 @@ export declare namespace ApplicationUpdateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -16604,9 +16297,7 @@ export declare namespace ApplicationUpdateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -16685,11 +16376,7 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | BrowserSSHApplication.PublicDestination
-      | BrowserSSHApplication.PrivateDestination
-      | BrowserSSHApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -16804,6 +16491,10 @@ export declare namespace ApplicationUpdateParams {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -16833,19 +16524,6 @@ export declare namespace ApplicationUpdateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -17033,9 +16711,7 @@ export declare namespace ApplicationUpdateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -17114,11 +16790,7 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | BrowserVNCApplication.PublicDestination
-      | BrowserVNCApplication.PrivateDestination
-      | BrowserVNCApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -17233,6 +16905,10 @@ export declare namespace ApplicationUpdateParams {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -17262,19 +16938,6 @@ export declare namespace ApplicationUpdateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -17456,9 +17119,7 @@ export declare namespace ApplicationUpdateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp'
-      | 'mcp'
-      | 'mcp_portal';
+      | 'rdp';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -18186,11 +17847,7 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
-    >;
+    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -18323,6 +17980,10 @@ export declare namespace ApplicationUpdateParams {
       uri?: string;
     }
 
+    /**
+     * Private destinations are an early access feature and gated behind a feature
+     * flag.
+     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -18352,19 +18013,6 @@ export declare namespace ApplicationUpdateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
-    }
-
-    /**
-     * A MCP server id configured in ai-controls. Access will secure the MCP server if
-     * accessed through a MCP portal.
-     */
-    export interface ViaMcpServerPortalDestination {
-      /**
-       * The MCP server id configured in ai-controls.
-       */
-      mcp_server_id?: string;
-
-      type?: 'via_mcp_server_portal';
     }
 
     /**
