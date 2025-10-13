@@ -82,6 +82,7 @@ export {
   type RuleListParams,
   type RuleDeleteParams,
   type RuleGetParams,
+  type RuleListTenantParams,
   type RuleResetExpirationParams,
 } from './rules';
 export {
