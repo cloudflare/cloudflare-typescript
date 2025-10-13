@@ -9,13 +9,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves an aggregated summary of AI bots HTTP requests grouped by the
    * specified dimension.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.ai.timeseriesGroups.summary(
-   *     'USER_AGENT',
-   *   );
-   * ```
+   * @deprecated Use [Radar > AI > Bots > Summary](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/bots/methods/summary_v2/) instead.
    */
   summary(
     dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
@@ -44,11 +38,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves AI bots HTTP request volume over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.ai.timeseriesGroups.timeseries();
-   * ```
+   * @deprecated Use [Radar > AI > Bots > Timeseries](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/bots/methods/timeseries/) instead.
    */
   timeseries(
     query?: TimeseriesGroupTimeseriesParams,
@@ -73,13 +63,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of HTTP requests from AI bots, grouped by chosen the
    * specified dimension over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.ai.timeseriesGroups.timeseriesGroups(
-   *     'USER_AGENT',
-   *   );
-   * ```
+   * @deprecated Use [Radar > AI > Bots > Timeseries Groups](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/bots/methods/timeseries_groups/) instead.
    */
   timeseriesGroups(
     dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',

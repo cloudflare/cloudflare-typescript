@@ -6456,6 +6456,16 @@ Methods:
 
 ### Inference
 
+Types:
+
+- <code><a href="./src/resources/radar/ai/inference/inference.ts">InferenceSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/ai/inference/inference.ts">InferenceTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/inference/summary/{dimension}">client.radar.ai.inference.<a href="./src/resources/radar/ai/inference/inference.ts">summaryV2</a>(dimension, { ...params }) -> InferenceSummaryV2Response</code>
+- <code title="get /radar/ai/inference/timeseries_groups/{dimension}">client.radar.ai.inference.<a href="./src/resources/radar/ai/inference/inference.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> InferenceTimeseriesGroupsV2Response</code>
+
 #### Summary
 
 Types:
@@ -6483,6 +6493,18 @@ Methods:
 - <code title="get /radar/ai/inference/timeseries_groups/task">client.radar.ai.inference.timeseriesGroups.summary.<a href="./src/resources/radar/ai/inference/timeseries-groups/summary.ts">task</a>({ ...params }) -> SummaryTaskResponse</code>
 
 ### Bots
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/bots/bots.ts">BotSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/ai/bots/bots.ts">BotTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/ai/bots/bots.ts">BotTimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/bots/summary/{dimension}">client.radar.ai.bots.<a href="./src/resources/radar/ai/bots/bots.ts">summaryV2</a>(dimension, { ...params }) -> BotSummaryV2Response</code>
+- <code title="get /radar/ai/bots/timeseries">client.radar.ai.bots.<a href="./src/resources/radar/ai/bots/bots.ts">timeseries</a>({ ...params }) -> BotTimeseriesResponse</code>
+- <code title="get /radar/ai/bots/timeseries_groups/{dimension}">client.radar.ai.bots.<a href="./src/resources/radar/ai/bots/bots.ts">timeseriesGroups</a>(dimension, { ...params }) -> BotTimeseriesGroupsResponse</code>
 
 #### Summary
 
@@ -6702,11 +6724,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/radar/dns/dns.ts">DNSSummaryV2Response</a></code>
 - <code><a href="./src/resources/radar/dns/dns.ts">DNSTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/dns/dns.ts">DNSTimeseriesGroupsV2Response</a></code>
 
 Methods:
 
+- <code title="get /radar/dns/summary/{dimension}">client.radar.dns.<a href="./src/resources/radar/dns/dns.ts">summaryV2</a>(dimension, { ...params }) -> DNSSummaryV2Response</code>
 - <code title="get /radar/dns/timeseries">client.radar.dns.<a href="./src/resources/radar/dns/dns.ts">timeseries</a>({ ...params }) -> DNSTimeseriesResponse</code>
+- <code title="get /radar/dns/timeseries_groups/{dimension}">client.radar.dns.<a href="./src/resources/radar/dns/dns.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> DNSTimeseriesGroupsV2Response</code>
 
 ### Top
 
@@ -6781,12 +6807,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/radar/netflows/netflows.ts">NetflowSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/netflows/netflows.ts">NetflowSummaryV2Response</a></code>
 - <code><a href="./src/resources/radar/netflows/netflows.ts">NetflowTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/netflows/netflows.ts">NetflowTimeseriesGroupsResponse</a></code>
 
 Methods:
 
 - <code title="get /radar/netflows/summary">client.radar.netflows.<a href="./src/resources/radar/netflows/netflows.ts">summary</a>({ ...params }) -> NetflowSummaryResponse</code>
+- <code title="get /radar/netflows/summary/{dimension}">client.radar.netflows.<a href="./src/resources/radar/netflows/netflows.ts">summaryV2</a>(dimension, { ...params }) -> NetflowSummaryV2Response</code>
 - <code title="get /radar/netflows/timeseries">client.radar.netflows.<a href="./src/resources/radar/netflows/netflows.ts">timeseries</a>({ ...params }) -> NetflowTimeseriesResponse</code>
+- <code title="get /radar/netflows/timeseries_groups/{dimension}">client.radar.netflows.<a href="./src/resources/radar/netflows/netflows.ts">timeseriesGroups</a>(dimension, { ...params }) -> NetflowTimeseriesGroupsResponse</code>
 
 ### Top
 
@@ -6828,11 +6858,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/radar/as112/as112.ts">AS112SummaryV2Response</a></code>
 - <code><a href="./src/resources/radar/as112/as112.ts">AS112TimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/as112/as112.ts">AS112TimeseriesGroupsV2Response</a></code>
 
 Methods:
 
+- <code title="get /radar/as112/summary/{dimension}">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">summaryV2</a>(dimension, { ...params }) -> AS112SummaryV2Response</code>
 - <code title="get /radar/as112/timeseries">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">timeseries</a>({ ...params }) -> AS112TimeseriesResponse</code>
+- <code title="get /radar/as112/timeseries_groups/{dimension}">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> AS112TimeseriesGroupsV2Response</code>
 
 ### Summary
 
@@ -6899,6 +6933,16 @@ Types:
 
 ### Routing
 
+Types:
+
+- <code><a href="./src/resources/radar/email/routing/routing.ts">RoutingSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/email/routing/routing.ts">RoutingTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/email/routing/summary/{dimension}">client.radar.email.routing.<a href="./src/resources/radar/email/routing/routing.ts">summaryV2</a>(dimension, { ...params }) -> RoutingSummaryV2Response</code>
+- <code title="get /radar/email/routing/timeseries_groups/{dimension}">client.radar.email.routing.<a href="./src/resources/radar/email/routing/routing.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> RoutingTimeseriesGroupsV2Response</code>
+
 #### Summary
 
 Types:
@@ -6940,6 +6984,16 @@ Methods:
 - <code title="get /radar/email/routing/timeseries_groups/spf">client.radar.email.routing.timeseriesGroups.<a href="./src/resources/radar/email/routing/timeseries-groups.ts">spf</a>({ ...params }) -> TimeseriesGroupSPFResponse</code>
 
 ### Security
+
+Types:
+
+- <code><a href="./src/resources/radar/email/security/security.ts">SecuritySummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/email/security/security.ts">SecurityTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/email/security/summary/{dimension}">client.radar.email.security.<a href="./src/resources/radar/email/security/security.ts">summaryV2</a>(dimension, { ...params }) -> SecuritySummaryV2Response</code>
+- <code title="get /radar/email/security/timeseries_groups/{dimension}">client.radar.email.security.<a href="./src/resources/radar/email/security/security.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> SecurityTimeseriesGroupsV2Response</code>
 
 #### Top
 
@@ -7041,11 +7095,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/radar/attacks/layer3/layer3.ts">Layer3SummaryV2Response</a></code>
 - <code><a href="./src/resources/radar/attacks/layer3/layer3.ts">Layer3TimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/layer3.ts">Layer3TimeseriesGroupsV2Response</a></code>
 
 Methods:
 
+- <code title="get /radar/attacks/layer3/summary/{dimension}">client.radar.attacks.layer3.<a href="./src/resources/radar/attacks/layer3/layer3.ts">summaryV2</a>(dimension, { ...params }) -> Layer3SummaryV2Response</code>
 - <code title="get /radar/attacks/layer3/timeseries">client.radar.attacks.layer3.<a href="./src/resources/radar/attacks/layer3/layer3.ts">timeseries</a>({ ...params }) -> Layer3TimeseriesResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/{dimension}">client.radar.attacks.layer3.<a href="./src/resources/radar/attacks/layer3/layer3.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> Layer3TimeseriesGroupsV2Response</code>
 
 #### Summary
 
@@ -7121,11 +7179,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/radar/attacks/layer7/layer7.ts">Layer7SummaryV2Response</a></code>
 - <code><a href="./src/resources/radar/attacks/layer7/layer7.ts">Layer7TimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/layer7.ts">Layer7TimeseriesGroupsV2Response</a></code>
 
 Methods:
 
+- <code title="get /radar/attacks/layer7/summary/{dimension}">client.radar.attacks.layer7.<a href="./src/resources/radar/attacks/layer7/layer7.ts">summaryV2</a>(dimension, { ...params }) -> Layer7SummaryV2Response</code>
 - <code title="get /radar/attacks/layer7/timeseries">client.radar.attacks.layer7.<a href="./src/resources/radar/attacks/layer7/layer7.ts">timeseries</a>({ ...params }) -> Layer7TimeseriesResponse</code>
+- <code title="get /radar/attacks/layer7/timeseries_groups/{dimension}">client.radar.attacks.layer7.<a href="./src/resources/radar/attacks/layer7/layer7.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> Layer7TimeseriesGroupsV2Response</code>
 
 #### Summary
 
@@ -7247,15 +7309,31 @@ Methods:
 - <code title="get /radar/entities/locations">client.radar.entities.locations.<a href="./src/resources/radar/entities/locations.ts">list</a>({ ...params }) -> LocationListResponse</code>
 - <code title="get /radar/entities/locations/{location}">client.radar.entities.locations.<a href="./src/resources/radar/entities/locations.ts">get</a>(location, { ...params }) -> LocationGetResponse</code>
 
+## Geolocations
+
+Types:
+
+- <code><a href="./src/resources/radar/geolocations.ts">GeolocationListResponse</a></code>
+- <code><a href="./src/resources/radar/geolocations.ts">GeolocationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/geolocations">client.radar.geolocations.<a href="./src/resources/radar/geolocations.ts">list</a>({ ...params }) -> GeolocationListResponse</code>
+- <code title="get /radar/geolocations/{geo_id}">client.radar.geolocations.<a href="./src/resources/radar/geolocations.ts">get</a>(geoId, { ...params }) -> GeolocationGetResponse</code>
+
 ## HTTP
 
 Types:
 
+- <code><a href="./src/resources/radar/http/http.ts">HTTPSummaryV2Response</a></code>
 - <code><a href="./src/resources/radar/http/http.ts">HTTPTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/http/http.ts">HTTPTimeseriesGroupsV2Response</a></code>
 
 Methods:
 
+- <code title="get /radar/http/summary/{dimension}">client.radar.http.<a href="./src/resources/radar/http/http.ts">summaryV2</a>(dimension, { ...params }) -> HTTPSummaryV2Response</code>
 - <code title="get /radar/http/timeseries">client.radar.http.<a href="./src/resources/radar/http/http.ts">timeseries</a>({ ...params }) -> HTTPTimeseriesResponse</code>
+- <code title="get /radar/http/timeseries_groups/{dimension}">client.radar.http.<a href="./src/resources/radar/http/http.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> HTTPTimeseriesGroupsV2Response</code>
 
 ### Locations
 
@@ -7630,6 +7708,16 @@ Methods:
 - <code title="get /radar/robots_txt/top/user_agents/directive">client.radar.robotsTXT.top.userAgents.<a href="./src/resources/radar/robots-txt/top/user-agents.ts">directive</a>({ ...params }) -> UserAgentDirectiveResponse</code>
 
 ## LeakedCredentials
+
+Types:
+
+- <code><a href="./src/resources/radar/leaked-credentials/leaked-credentials.ts">LeakedCredentialSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/leaked-credentials/leaked-credentials.ts">LeakedCredentialTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/leaked_credential_checks/summary/{dimension}">client.radar.leakedCredentials.<a href="./src/resources/radar/leaked-credentials/leaked-credentials.ts">summaryV2</a>(dimension, { ...params }) -> LeakedCredentialSummaryV2Response</code>
+- <code title="get /radar/leaked_credential_checks/timeseries_groups/{dimension}">client.radar.leakedCredentials.<a href="./src/resources/radar/leaked-credentials/leaked-credentials.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> LeakedCredentialTimeseriesGroupsV2Response</code>
 
 ### Summary
 
