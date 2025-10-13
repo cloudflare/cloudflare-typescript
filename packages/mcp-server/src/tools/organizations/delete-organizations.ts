@@ -23,7 +23,6 @@ export const tool: Tool = {
     properties: {
       organization_id: {
         type: 'string',
-        title: 'Organization ID',
       },
     },
     required: ['organization_id'],

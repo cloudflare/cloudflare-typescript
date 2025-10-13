@@ -24,7 +24,6 @@ export const tool: Tool = {
     properties: {
       organization_id: {
         type: 'string',
-        title: 'Organization ID',
       },
       jq_filter: {
         type: 'string',

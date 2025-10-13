@@ -10,7 +10,11 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.arc();
+   * ```
    */
   arc(
     query: SummaryARCParams | null | undefined = {},
@@ -27,7 +31,11 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
    * validation.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.dkim();
+   * ```
    */
   dkim(
     query: SummaryDKIMParams | null | undefined = {},
@@ -44,7 +52,11 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by DMARC (Domain-based Message
    * Authentication, Reporting and Conformance) validation.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.dmarc();
+   * ```
    */
   dmarc(
     query: SummaryDMARCParams | null | undefined = {},
@@ -60,7 +72,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by malicious classification.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.malicious();
+   * ```
    */
   malicious(
     query: SummaryMaliciousParams | null | undefined = {},
@@ -76,7 +92,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the proportion of emails by spam classification (spam vs. non-spam).
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.spam();
+   * ```
    */
   spam(
     query: SummarySpamParams | null | undefined = {},
@@ -93,7 +113,11 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by SPF (Sender Policy Framework)
    * validation.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.spf();
+   * ```
    */
   spf(
     query: SummarySPFParams | null | undefined = {},
@@ -110,7 +134,11 @@ export class Summary extends APIResource {
    * Retrieves the proportion of emails by spoof classification (spoof vs.
    * non-spoof).
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.spoof();
+   * ```
    */
   spoof(
     query: SummarySpoofParams | null | undefined = {},
@@ -126,7 +154,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by threat categories.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.threatCategory();
+   * ```
    */
   threatCategory(
     query: SummaryThreatCategoryParams | null | undefined = {},
@@ -142,7 +174,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by TLS version.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.security.summary.tlsVersion();
+   * ```
    */
   tlsVersion(
     query: SummaryTLSVersionParams | null | undefined = {},
