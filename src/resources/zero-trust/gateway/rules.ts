@@ -125,6 +125,32 @@ export class Rules extends APIResource {
   }
 
   /**
+   * List Zero Trust Gateway rules for the parent account of an account in the MSP
+   * configuration.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const gatewayRule of client.zeroTrust.gateway.rules.listTenant(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  listTenant(
+    params: RuleListTenantParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<GatewayRulesSinglePage, GatewayRule> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/rules/tenant`,
+      GatewayRulesSinglePage,
+      options,
+    );
+  }
+
+  /**
    * Resets the expiration of a Zero Trust Gateway Rule if its duration elapsed and
    * it has a default duration. The Zero Trust Gateway Rule must have values for both
    * `expiration.expires_at` and `expiration.duration`.
@@ -1772,6 +1798,10 @@ export interface RuleGetParams {
   account_id: string;
 }
 
+export interface RuleListTenantParams {
+  account_id: string;
+}
+
 export interface RuleResetExpirationParams {
   account_id: string;
 }
@@ -1793,6 +1823,7 @@ export declare namespace Rules {
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
     type RuleGetParams as RuleGetParams,
+    type RuleListTenantParams as RuleListTenantParams,
     type RuleResetExpirationParams as RuleResetExpirationParams,
   };
 }
