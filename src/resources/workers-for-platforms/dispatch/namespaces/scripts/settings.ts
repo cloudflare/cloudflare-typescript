@@ -91,6 +91,7 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindSecretText
     | SettingEditResponse.WorkersBindingKindSendEmail
     | SettingEditResponse.WorkersBindingKindService
+    | SettingEditResponse.WorkersBindingKindTailConsumer
     | SettingEditResponse.WorkersBindingKindTextBlob
     | SettingEditResponse.WorkersBindingKindVectorize
     | SettingEditResponse.WorkersBindingKindVersionMetadata
@@ -571,6 +572,23 @@ export namespace SettingEditResponse {
     environment?: string;
   }
 
+  export interface WorkersBindingKindTailConsumer {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Name of Tail Worker to bind to.
+     */
+    service: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'tail_consumer';
+  }
+
   export interface WorkersBindingKindTextBlob {
     /**
      * A JavaScript variable name for the binding.
@@ -825,6 +843,7 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindSecretText
     | SettingGetResponse.WorkersBindingKindSendEmail
     | SettingGetResponse.WorkersBindingKindService
+    | SettingGetResponse.WorkersBindingKindTailConsumer
     | SettingGetResponse.WorkersBindingKindTextBlob
     | SettingGetResponse.WorkersBindingKindVectorize
     | SettingGetResponse.WorkersBindingKindVersionMetadata
@@ -1305,6 +1324,23 @@ export namespace SettingGetResponse {
     environment?: string;
   }
 
+  export interface WorkersBindingKindTailConsumer {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Name of Tail Worker to bind to.
+     */
+    service: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'tail_consumer';
+  }
+
   export interface WorkersBindingKindTextBlob {
     /**
      * A JavaScript variable name for the binding.
@@ -1572,6 +1608,7 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindSecretText
       | Settings.WorkersBindingKindSendEmail
       | Settings.WorkersBindingKindService
+      | Settings.WorkersBindingKindTailConsumer
       | Settings.WorkersBindingKindTextBlob
       | Settings.WorkersBindingKindVectorize
       | Settings.WorkersBindingKindVersionMetadata
@@ -2060,6 +2097,23 @@ export namespace SettingEditParams {
        * Optional environment if the Worker utilizes one.
        */
       environment?: string;
+    }
+
+    export interface WorkersBindingKindTailConsumer {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of Tail Worker to bind to.
+       */
+      service: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'tail_consumer';
     }
 
     export interface WorkersBindingKindTextBlob {
