@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource http', () => {
+describe('resource inference', () => {
   test('summaryV2', async () => {
-    const responsePromise = client.radar.http.summaryV2('ADM1');
+    const responsePromise = client.radar.ai.inference.summaryV2('MODEL');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,82 +23,26 @@ describe('resource http', () => {
 
   test('summaryV2: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.radar.http.summaryV2('ADM1', { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
+    await expect(
+      client.radar.ai.inference.summaryV2('MODEL', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('summaryV2: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.http.summaryV2(
-        'ADM1',
+      client.radar.ai.inference.summaryV2(
+        'MODEL',
         {
           asn: ['string'],
-          botClass: ['LIKELY_AUTOMATED'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP'],
           format: 'JSON',
-          geoId: ['string'],
-          httpProtocol: ['HTTP'],
-          httpVersion: ['HTTPv1'],
-          ipVersion: ['IPv4'],
           limitPerGroup: 10,
           location: ['string'],
           name: ['main_series'],
-          os: ['WINDOWS'],
-          tlsVersion: ['TLSv1_0'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('timeseries', async () => {
-    const responsePromise = client.radar.http.timeseries();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('timeseries: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.radar.http.timeseries({ path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
-  });
-
-  test('timeseries: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseries(
-        {
-          aggInterval: '1h',
-          asn: ['string'],
-          botClass: ['LIKELY_AUTOMATED'],
-          browserFamily: ['CHROME'],
-          continent: ['string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP'],
-          format: 'JSON',
-          geoId: ['string'],
-          httpProtocol: ['HTTP'],
-          httpVersion: ['HTTPv1'],
-          ipVersion: ['IPv4'],
-          location: ['string'],
-          name: ['main_series'],
-          normalization: 'MIN0_MAX',
-          os: ['WINDOWS'],
-          tlsVersion: ['TLSv1_0'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -106,7 +50,7 @@ describe('resource http', () => {
   });
 
   test('timeseriesGroupsV2', async () => {
-    const responsePromise = client.radar.http.timeseriesGroupsV2('ADM1');
+    const responsePromise = client.radar.ai.inference.timeseriesGroupsV2('MODEL');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -119,35 +63,27 @@ describe('resource http', () => {
   test('timeseriesGroupsV2: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.http.timeseriesGroupsV2('ADM1', { path: '/_stainless_unknown_path' }),
+      client.radar.ai.inference.timeseriesGroupsV2('MODEL', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('timeseriesGroupsV2: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.http.timeseriesGroupsV2(
-        'ADM1',
+      client.radar.ai.inference.timeseriesGroupsV2(
+        'MODEL',
         {
           aggInterval: '1h',
           asn: ['string'],
-          botClass: ['LIKELY_AUTOMATED'],
           continent: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP'],
           format: 'JSON',
-          geoId: ['string'],
-          httpProtocol: ['HTTP'],
-          httpVersion: ['HTTPv1'],
-          ipVersion: ['IPv4'],
           limitPerGroup: 10,
           location: ['string'],
           name: ['main_series'],
-          normalization: 'PERCENTAGE',
-          os: ['WINDOWS'],
-          tlsVersion: ['TLSv1_0'],
+          normalization: 'MIN0_MAX',
         },
         { path: '/_stainless_unknown_path' },
       ),
