@@ -47,6 +47,7 @@ import {
 } from './top';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class AS112 extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
@@ -54,6 +55,28 @@ export class AS112 extends APIResource {
     this._client,
   );
   top: TopAPI.Top = new TopAPI.Top(this._client);
+
+  /**
+   * Retrieves the distribution of AS112 queries by the specified dimension.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.as112.summaryV2(
+   *   'DNSSEC',
+   * );
+   * ```
+   */
+  summaryV2(
+    dimension: 'DNSSEC' | 'EDNS' | 'IP_VERSION' | 'PROTOCOL' | 'QUERY_TYPE' | 'RESPONSE_CODE',
+    query: AS112SummaryV2Params | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AS112SummaryV2Response> {
+    return (
+      this._client.get(path`/radar/as112/summary/${dimension}`, { query, ...options }) as APIPromise<{
+        result: AS112SummaryV2Response;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 
   /**
    * Retrieves the AS112 DNS queries over time.
@@ -72,6 +95,125 @@ export class AS112 extends APIResource {
         result: AS112TimeseriesResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Retrieves the distribution of AS112 queries grouped by dimension over time.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroupsV2('DNSSEC');
+   * ```
+   */
+  timeseriesGroupsV2(
+    dimension: 'DNSSEC' | 'EDNS' | 'IP_VERSION' | 'PROTOCOL' | 'QUERY_TYPE' | 'RESPONSE_CODE',
+    query: AS112TimeseriesGroupsV2Params | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AS112TimeseriesGroupsV2Response> {
+    return (
+      this._client.get(path`/radar/as112/timeseries_groups/${dimension}`, {
+        query,
+        ...options,
+      }) as APIPromise<{ result: AS112TimeseriesGroupsV2Response }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface AS112SummaryV2Response {
+  /**
+   * Metadata for the results.
+   */
+  meta: AS112SummaryV2Response.Meta;
+
+  summary_0: { [key: string]: string };
+}
+
+export namespace AS112SummaryV2Response {
+  /**
+   * Metadata for the results.
+   */
+  export interface Meta {
+    confidenceInfo: Meta.ConfidenceInfo;
+
+    dateRange: Array<Meta.DateRange>;
+
+    /**
+     * Timestamp of the last dataset update.
+     */
+    lastUpdated: string;
+
+    /**
+     * Normalization method applied to the results. Refer to
+     * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+     */
+    normalization:
+      | 'PERCENTAGE'
+      | 'MIN0_MAX'
+      | 'MIN_MAX'
+      | 'RAW_VALUES'
+      | 'PERCENTAGE_CHANGE'
+      | 'ROLLING_AVERAGE'
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
+
+    /**
+     * Measurement units for the results.
+     */
+    units: Array<Meta.Unit>;
+  }
+
+  export namespace Meta {
+    export interface ConfidenceInfo {
+      annotations: Array<ConfidenceInfo.Annotation>;
+
+      /**
+       * Provides an indication of how much confidence Cloudflare has in the data.
+       */
+      level: number;
+    }
+
+    export namespace ConfidenceInfo {
+      /**
+       * Annotation associated with the result (e.g. outage or other type of event).
+       */
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        endDate: string;
+
+        eventType: string;
+
+        /**
+         * Whether event is a single point in time or a time range.
+         */
+        isInstantaneous: boolean;
+
+        linkedUrl: string;
+
+        startDate: string;
+      }
+    }
+
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface Unit {
+      name: string;
+
+      value: string;
+    }
   }
 }
 
@@ -186,6 +328,289 @@ export namespace AS112TimeseriesResponse {
 
     values: Array<string>;
   }
+}
+
+export interface AS112TimeseriesGroupsV2Response {
+  /**
+   * Metadata for the results.
+   */
+  meta: AS112TimeseriesGroupsV2Response.Meta;
+
+  serie_0: AS112TimeseriesGroupsV2Response.Serie0;
+}
+
+export namespace AS112TimeseriesGroupsV2Response {
+  /**
+   * Metadata for the results.
+   */
+  export interface Meta {
+    /**
+     * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
+     * Refer to
+     * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
+     */
+    aggInterval: 'FIFTEEN_MINUTES' | 'ONE_HOUR' | 'ONE_DAY' | 'ONE_WEEK' | 'ONE_MONTH';
+
+    confidenceInfo: Meta.ConfidenceInfo;
+
+    dateRange: Array<Meta.DateRange>;
+
+    /**
+     * Timestamp of the last dataset update.
+     */
+    lastUpdated: string;
+
+    /**
+     * Normalization method applied to the results. Refer to
+     * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+     */
+    normalization:
+      | 'PERCENTAGE'
+      | 'MIN0_MAX'
+      | 'MIN_MAX'
+      | 'RAW_VALUES'
+      | 'PERCENTAGE_CHANGE'
+      | 'ROLLING_AVERAGE'
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
+
+    /**
+     * Measurement units for the results.
+     */
+    units: Array<Meta.Unit>;
+  }
+
+  export namespace Meta {
+    export interface ConfidenceInfo {
+      annotations: Array<ConfidenceInfo.Annotation>;
+
+      /**
+       * Provides an indication of how much confidence Cloudflare has in the data.
+       */
+      level: number;
+    }
+
+    export namespace ConfidenceInfo {
+      /**
+       * Annotation associated with the result (e.g. outage or other type of event).
+       */
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        endDate: string;
+
+        eventType: string;
+
+        /**
+         * Whether event is a single point in time or a time range.
+         */
+        isInstantaneous: boolean;
+
+        linkedUrl: string;
+
+        startDate: string;
+      }
+    }
+
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface Unit {
+      name: string;
+
+      value: string;
+    }
+  }
+
+  export interface Serie0 {
+    timestamps: Array<string>;
+
+    [k: string]: Array<string> | Array<string> | undefined;
+  }
+}
+
+export interface AS112SummaryV2Params {
+  /**
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Start of the date range.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format in which results will be returned.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Limits the number of objects per group to the top items within the specified
+   * time range. When item count exceeds the limit, extra items appear grouped under
+   * an "other" category.
+   */
+  limitPerGroup?: number;
+
+  /**
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
 }
 
 export interface AS112TimeseriesParams {
@@ -361,14 +786,198 @@ export interface AS112TimeseriesParams {
     | 'BADCOOKIE';
 }
 
+export interface AS112TimeseriesGroupsV2Params {
+  /**
+   * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
+   * Refer to
+   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
+   */
+  aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
+   * excludes results from EU, but includes results from NA.
+   */
+  continent?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Start of the date range.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format in which results will be returned.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Limits the number of objects per group to the top items within the specified
+   * time range. When item count exceeds the limit, extra items appear grouped under
+   * an "other" category.
+   */
+  limitPerGroup?: number;
+
+  /**
+   * Filters results by location. Specify a comma-separated list of alpha-2 codes.
+   * Prefix with `-` to exclude locations from results. For example, `-US,PT`
+   * excludes results from the US, but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: Array<string>;
+
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
+}
+
 AS112.Summary = Summary;
 AS112.TimeseriesGroups = TimeseriesGroups;
 AS112.Top = Top;
 
 export declare namespace AS112 {
   export {
+    type AS112SummaryV2Response as AS112SummaryV2Response,
     type AS112TimeseriesResponse as AS112TimeseriesResponse,
+    type AS112TimeseriesGroupsV2Response as AS112TimeseriesGroupsV2Response,
+    type AS112SummaryV2Params as AS112SummaryV2Params,
     type AS112TimeseriesParams as AS112TimeseriesParams,
+    type AS112TimeseriesGroupsV2Params as AS112TimeseriesGroupsV2Params,
   };
 
   export {

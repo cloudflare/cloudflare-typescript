@@ -1,7 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Ases, type AseGetResponse, type AseGetParams } from './ases/index';
-export { HTTP, type HTTPTimeseriesResponse, type HTTPTimeseriesParams } from './http';
+export {
+  HTTP,
+  type HTTPSummaryV2Response,
+  type HTTPTimeseriesResponse,
+  type HTTPTimeseriesGroupsV2Response,
+  type HTTPSummaryV2Params,
+  type HTTPTimeseriesParams,
+  type HTTPTimeseriesGroupsV2Params,
+} from './http';
 export { Locations, type LocationGetResponse, type LocationGetParams } from './locations/index';
 export {
   Summary,

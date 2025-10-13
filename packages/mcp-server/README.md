@@ -3215,6 +3215,11 @@ The following tools are available in this MCP server.
 
 - `create_ai_radar_to_markdown` (`write`): Convert Files into Markdown
 
+### Resource `radar.ai.inference`:
+
+- `summary_v2_ai_radar_inference` (`read`): Retrieves an aggregated summary of unique accounts using Workers AI inference grouped by the specified dimension.
+- `timeseries_groups_v2_ai_radar_inference` (`read`): Retrieves the distribution of unique accounts using Workers AI inference, grouped by the specified dimension over time.
+
 ### Resource `radar.ai.inference.summary`:
 
 - `model_inference_ai_radar_summary` (`read`): Retrieves the distribution of unique accounts by model.
@@ -3224,6 +3229,12 @@ The following tools are available in this MCP server.
 
 - `model_timeseries_groups_inference_ai_radar_summary` (`read`): Retrieves the distribution of unique accounts by model over time.
 - `task_timeseries_groups_inference_ai_radar_summary` (`read`): Retrieves the distribution of unique accounts by task over time.
+
+### Resource `radar.ai.bots`:
+
+- `summary_v2_ai_radar_bots` (`read`): Retrieves an aggregated summary of AI bots HTTP requests grouped by the specified dimension.
+- `timeseries_ai_radar_bots` (`read`): Retrieves AI bots HTTP request volume over time.
+- `timeseries_groups_ai_radar_bots` (`read`): Retrieves the distribution of HTTP requests from AI bots, grouped by chosen the specified dimension over time.
 
 ### Resource `radar.ai.bots.summary`:
 
@@ -3315,7 +3326,9 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.dns`:
 
+- `summary_v2_radar_dns` (`read`): Retrieves the distribution of DNS queries by the specified dimension.
 - `timeseries_radar_dns` (`read`): Retrieves normalized query volume to the 1.1.1.1 DNS resolver over time.
+- `timeseries_groups_v2_radar_dns` (`read`): Retrieves the distribution of DNS queries grouped by dimension over time.
 
 ### Resource `radar.dns.top`:
 
@@ -3351,7 +3364,9 @@ The following tools are available in this MCP server.
 ### Resource `radar.netflows`:
 
 - `summary_radar_netflows` (`read`): Retrieves the distribution of network traffic (NetFlows) by HTTP vs other protocols.
+- `summary_v2_radar_netflows` (`read`): Retrieves the distribution of network traffic (NetFlows) by the specified dimension.
 - `timeseries_radar_netflows` (`read`): Retrieves network traffic (NetFlows) over time.
+- `timeseries_groups_radar_netflows` (`read`): Retrieves the distribution of NetFlows traffic, grouped by chosen the specified dimension over time.
 
 ### Resource `radar.netflows.top`:
 
@@ -3369,7 +3384,9 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.as112`:
 
+- `summary_v2_radar_as112` (`read`): Retrieves the distribution of AS112 queries by the specified dimension.
 - `timeseries_radar_as112` (`read`): Retrieves the AS112 DNS queries over time.
+- `timeseries_groups_v2_radar_as112` (`read`): Retrieves the distribution of AS112 queries grouped by dimension over time.
 
 ### Resource `radar.as112.summary`:
 
@@ -3396,6 +3413,11 @@ The following tools are available in this MCP server.
 - `ip_version_as112_radar_top` (`read`): Retrieves the top locations of DNS queries to AS112 for an IP version.
 - `locations_as112_radar_top` (`read`): Retrieves the top locations by AS112 DNS queries.
 
+### Resource `radar.email.routing`:
+
+- `summary_v2_email_radar_routing` (`read`): Retrieves the distribution of email routing metrics by the specified dimension.
+- `timeseries_groups_v2_email_radar_routing` (`read`): Retrieves the distribution of email routing metrics grouped by dimension over time.
+
 ### Resource `radar.email.routing.summary`:
 
 - `arc_routing_email_radar_summary` (`read`): Retrieves the distribution of emails by ARC (Authenticated Received Chain) validation.
@@ -3413,6 +3435,11 @@ The following tools are available in this MCP server.
 - `encrypted_routing_email_radar_timeseries_groups` (`read`): Retrieves the distribution of emails by encryption status (encrypted vs. not-encrypted) over time.
 - `ip_version_routing_email_radar_timeseries_groups` (`read`): Retrieves the distribution of emails by IP version over time.
 - `spf_routing_email_radar_timeseries_groups` (`read`): Retrieves the distribution of emails by SPF (Sender Policy Framework) validation over time.
+
+### Resource `radar.email.security`:
+
+- `summary_v2_email_radar_security` (`read`): Retrieves the distribution of email security metrics by the specified dimension.
+- `timeseries_groups_v2_email_radar_security` (`read`): Retrieves the distribution of email security metrics grouped by dimension over time.
 
 ### Resource `radar.email.security.top.tlds`:
 
@@ -3456,7 +3483,9 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.attacks.layer3`:
 
+- `summary_v2_attacks_radar_layer3` (`read`): Retrieves the distribution of layer 3 attacks by the specified dimension.
 - `timeseries_attacks_radar_layer3` (`read`): Retrieves layer 3 attacks over time.
+- `timeseries_groups_v2_attacks_radar_layer3` (`read`): Retrieves the distribution of layer 3 attacks grouped by dimension over time.
 
 ### Resource `radar.attacks.layer3.summary`:
 
@@ -3491,7 +3520,9 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.attacks.layer7`:
 
+- `summary_v2_attacks_radar_layer7` (`read`): Retrieves the distribution of layer 7 attacks by the specified dimension.
 - `timeseries_attacks_radar_layer7` (`read`): Retrieves layer 7 attacks over time.
+- `timeseries_groups_v2_attacks_radar_layer7` (`read`): Retrieves the distribution of layer 7 attacks grouped by dimension over time.
 
 ### Resource `radar.attacks.layer7.summary`:
 
@@ -3545,9 +3576,16 @@ The following tools are available in this MCP server.
 - `list_entities_radar_locations` (`read`): Retrieves a list of locations.
 - `get_entities_radar_locations` (`read`): Retrieves the requested location information. (A confidence level below `5` indicates a low level of confidence in the traffic data - normally this happens because Cloudflare has a small amount of traffic from/to this location).
 
+### Resource `radar.geolocations`:
+
+- `list_radar_geolocations` (`read`): Retrieves a list of geolocations.
+- `get_radar_geolocations` (`read`): Retrieves the requested Geolocation information.
+
 ### Resource `radar.http`:
 
+- `summary_v2_radar_http` (`read`): Retrieves the distribution of HTTP requests by the specified dimension.
 - `timeseries_radar_http` (`read`): Retrieves the HTTP requests over time.
+- `timeseries_groups_v2_radar_http` (`read`): Retrieves the distribution of HTTP requests grouped by dimension.
 
 ### Resource `radar.http.locations`:
 
@@ -3700,6 +3738,11 @@ The following tools are available in this MCP server.
 ### Resource `radar.robots_txt.top.user_agents`:
 
 - `directive_top_robots_txt_radar_user_agents` (`read`): Retrieves the top user agents on robots.txt files.
+
+### Resource `radar.leaked_credentials`:
+
+- `summary_v2_radar_leaked_credentials` (`read`): Retrieves an aggregated summary of HTTP authentication requests grouped by the specified dimension.
+- `timeseries_groups_v2_radar_leaked_credentials` (`read`): Retrieves the distribution of HTTP authentication requests, grouped by the specified dimension over time.
 
 ### Resource `radar.leaked_credentials.summary`:
 

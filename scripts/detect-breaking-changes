@@ -609,6 +609,7 @@ TEST_PATHS=(
 	tests/api-resources/radar/entities/entities.test.ts
 	tests/api-resources/radar/entities/asns.test.ts
 	tests/api-resources/radar/entities/locations.test.ts
+	tests/api-resources/radar/geolocations.test.ts
 	tests/api-resources/radar/http/http.test.ts
 	tests/api-resources/radar/http/locations/locations.test.ts
 	tests/api-resources/radar/http/locations/bot-class.test.ts
