@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource http', () => {
+describe('resource bots', () => {
   test('summaryV2', async () => {
-    const responsePromise = client.radar.http.summaryV2('ADM1');
+    const responsePromise = client.radar.ai.bots.summaryV2('USER_AGENT');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,34 +23,29 @@ describe('resource http', () => {
 
   test('summaryV2: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.radar.http.summaryV2('ADM1', { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
+    await expect(
+      client.radar.ai.bots.summaryV2('USER_AGENT', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('summaryV2: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.http.summaryV2(
-        'ADM1',
+      client.radar.ai.bots.summaryV2(
+        'USER_AGENT',
         {
           asn: ['string'],
-          botClass: ['LIKELY_AUTOMATED'],
           continent: ['string'],
+          crawlPurpose: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP'],
           format: 'JSON',
-          geoId: ['string'],
-          httpProtocol: ['HTTP'],
-          httpVersion: ['HTTPv1'],
-          ipVersion: ['IPv4'],
+          industry: ['string'],
           limitPerGroup: 10,
           location: ['string'],
           name: ['main_series'],
-          os: ['WINDOWS'],
-          tlsVersion: ['TLSv1_0'],
+          vertical: ['string'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -58,7 +53,7 @@ describe('resource http', () => {
   });
 
   test('timeseries', async () => {
-    const responsePromise = client.radar.http.timeseries();
+    const responsePromise = client.radar.ai.bots.timeseries();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -70,7 +65,7 @@ describe('resource http', () => {
 
   test('timeseries: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.radar.http.timeseries({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.radar.ai.bots.timeseries({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -78,35 +73,30 @@ describe('resource http', () => {
   test('timeseries: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.http.timeseries(
+      client.radar.ai.bots.timeseries(
         {
           aggInterval: '1h',
           asn: ['string'],
-          botClass: ['LIKELY_AUTOMATED'],
-          browserFamily: ['CHROME'],
           continent: ['string'],
+          crawlPurpose: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP'],
           format: 'JSON',
-          geoId: ['string'],
-          httpProtocol: ['HTTP'],
-          httpVersion: ['HTTPv1'],
-          ipVersion: ['IPv4'],
+          industry: ['string'],
+          limitPerGroup: 10,
           location: ['string'],
           name: ['main_series'],
-          normalization: 'MIN0_MAX',
-          os: ['WINDOWS'],
-          tlsVersion: ['TLSv1_0'],
+          userAgent: ['string'],
+          vertical: ['string'],
         },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('timeseriesGroupsV2', async () => {
-    const responsePromise = client.radar.http.timeseriesGroupsV2('ADM1');
+  test('timeseriesGroups', async () => {
+    const responsePromise = client.radar.ai.bots.timeseriesGroups('USER_AGENT');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -116,38 +106,33 @@ describe('resource http', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('timeseriesGroupsV2: request options instead of params are passed correctly', async () => {
+  test('timeseriesGroups: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.http.timeseriesGroupsV2('ADM1', { path: '/_stainless_unknown_path' }),
+      client.radar.ai.bots.timeseriesGroups('USER_AGENT', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('timeseriesGroupsV2: request options and params are passed correctly', async () => {
+  test('timeseriesGroups: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.http.timeseriesGroupsV2(
-        'ADM1',
+      client.radar.ai.bots.timeseriesGroups(
+        'USER_AGENT',
         {
           aggInterval: '1h',
           asn: ['string'],
-          botClass: ['LIKELY_AUTOMATED'],
           continent: ['string'],
+          crawlPurpose: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP'],
           format: 'JSON',
-          geoId: ['string'],
-          httpProtocol: ['HTTP'],
-          httpVersion: ['HTTPv1'],
-          ipVersion: ['IPv4'],
+          industry: ['string'],
           limitPerGroup: 10,
           location: ['string'],
           name: ['main_series'],
-          normalization: 'PERCENTAGE',
-          os: ['WINDOWS'],
-          tlsVersion: ['TLSv1_0'],
+          normalization: 'MIN0_MAX',
+          vertical: ['string'],
         },
         { path: '/_stainless_unknown_path' },
       ),
