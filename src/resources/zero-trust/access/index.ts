@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { AIControls } from './ai-controls/index';
 export { Access } from './access';
 export {
   AccessUsersV4PagePaginationArray,
