@@ -20,6 +20,7 @@ export {
   FleetStatus,
   type LiveStat,
   type FleetStatusLiveResponse,
+  type FleetStatusOverTimeResponse,
   type FleetStatusLiveParams,
   type FleetStatusOverTimeParams,
 } from './fleet-status/index';

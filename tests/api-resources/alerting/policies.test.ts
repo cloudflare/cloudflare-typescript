@@ -35,9 +35,9 @@ describe('resource policies', () => {
       alert_type: 'universal_ssl_event_type',
       enabled: true,
       mechanisms: {
-        email: [{ id: 'test@example.com' }],
-        pagerduty: [{ id: 'e8133a15-00a4-4d69-aec1-32f70c51f6e5' }],
-        webhooks: [{ id: '14cc1190-5d2b-4b98-a696-c424cb2ad05f' }],
+        email: [{ id: 'id' }],
+        pagerduty: [{ id: 'f174e90afafe4643bbbc4a0ed4fc8415' }],
+        webhooks: [{ id: 'f174e90afafe4643bbbc4a0ed4fc8415' }],
       },
       name: 'SSL Notification Event Policy',
       alert_interval: '30m',
@@ -83,6 +83,7 @@ describe('resource policies', () => {
         traffic_exclusions: ['security_events'],
         tunnel_id: ['string'],
         tunnel_name: ['string'],
+        type: ['string'],
         where: ['string'],
         zones: ['string'],
       },
@@ -91,7 +92,7 @@ describe('resource policies', () => {
 
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
   test.skip('update: only required params', async () => {
-    const responsePromise = client.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const responsePromise = client.alerting.policies.update('0da2b59ef118439d8097bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -105,7 +106,7 @@ describe('resource policies', () => {
 
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
   test.skip('update: required and optional params', async () => {
-    const response = await client.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const response = await client.alerting.policies.update('0da2b59ef118439d8097bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_interval: '30m',
       alert_type: 'universal_ssl_event_type',
@@ -152,13 +153,14 @@ describe('resource policies', () => {
         traffic_exclusions: ['security_events'],
         tunnel_id: ['string'],
         tunnel_name: ['string'],
+        type: ['string'],
         where: ['string'],
         zones: ['string'],
       },
       mechanisms: {
-        email: [{ id: 'test@example.com' }],
-        pagerduty: [{ id: 'e8133a15-00a4-4d69-aec1-32f70c51f6e5' }],
-        webhooks: [{ id: '14cc1190-5d2b-4b98-a696-c424cb2ad05f' }],
+        email: [{ id: 'id' }],
+        pagerduty: [{ id: 'f174e90afafe4643bbbc4a0ed4fc8415' }],
+        webhooks: [{ id: 'f174e90afafe4643bbbc4a0ed4fc8415' }],
       },
       name: 'SSL Notification Event Policy',
     });
@@ -180,7 +182,7 @@ describe('resource policies', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.alerting.policies.delete('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const responsePromise = client.alerting.policies.delete('0da2b59ef118439d8097bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -193,14 +195,14 @@ describe('resource policies', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.alerting.policies.delete('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const response = await client.alerting.policies.delete('0da2b59ef118439d8097bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
   test.skip('get: only required params', async () => {
-    const responsePromise = client.alerting.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const responsePromise = client.alerting.policies.get('0da2b59ef118439d8097bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -214,7 +216,7 @@ describe('resource policies', () => {
 
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
   test.skip('get: required and optional params', async () => {
-    const response = await client.alerting.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const response = await client.alerting.policies.get('0da2b59ef118439d8097bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
