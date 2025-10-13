@@ -6036,6 +6036,7 @@ Methods:
 - <code title="get /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">list</a>({ ...params }) -> GatewayRulesSinglePage</code>
 - <code title="delete /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">delete</a>(ruleId, { ...params }) -> RuleDeleteResponse</code>
 - <code title="get /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">get</a>(ruleId, { ...params }) -> GatewayRule</code>
+- <code title="get /accounts/{account_id}/gateway/rules/tenant">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">listTenant</a>({ ...params }) -> GatewayRulesSinglePage</code>
 - <code title="post /accounts/{account_id}/gateway/rules/{rule_id}/reset_expiration">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">resetExpiration</a>(ruleId, { ...params }) -> GatewayRule</code>
 
 ### Certificates
