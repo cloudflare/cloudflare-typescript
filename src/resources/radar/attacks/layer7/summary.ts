@@ -8,11 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by HTTP method.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.httpMethod();
-   * ```
+   * @deprecated
    */
   httpMethod(
     query?: SummaryHTTPMethodParams,
@@ -37,11 +33,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by HTTP version.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.httpVersion();
-   * ```
+   * @deprecated
    */
   httpVersion(
     query?: SummaryHTTPVersionParams,
@@ -66,11 +58,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by targeted industry.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.industry();
-   * ```
+   * @deprecated
    */
   industry(
     query?: SummaryIndustryParams,
@@ -94,11 +82,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by IP version.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.ipVersion();
-   * ```
+   * @deprecated
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -122,11 +106,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by managed rules.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.managedRules();
-   * ```
+   * @deprecated
    */
   managedRules(
     query?: SummaryManagedRulesParams,
@@ -151,11 +131,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by mitigation product.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.mitigationProduct();
-   * ```
+   * @deprecated
    */
   mitigationProduct(
     query?: SummaryMitigationProductParams,
@@ -180,11 +156,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by targeted vertical.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.vertical();
-   * ```
+   * @deprecated
    */
   vertical(
     query?: SummaryVerticalParams,
