@@ -207,7 +207,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.logpush.validate.destination()`
 - `client.logpush.validate.destinationExists()`
 - `client.logpush.validate.origin()`
-- `client.logs.RayID.get()`
 - `client.originTLSClientAuth.delete()`
 - `client.originTLSClientAuth.get()`
 - `client.originTLSClientAuth.hostnames.get()`
@@ -293,12 +292,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.kv.namespaces.update()`
 - `client.kv.namespaces.delete()`
 - `client.kv.namespaces.bulkDelete()`
-- `client.kv.namespaces.bulkGet()`
 - `client.kv.namespaces.bulkUpdate()`
 - `client.kv.namespaces.get()`
 - `client.kv.namespaces.keys.list()`
 - `client.kv.namespaces.keys.bulkDelete()`
-- `client.kv.namespaces.keys.bulkGet()`
 - `client.kv.namespaces.keys.bulkUpdate()`
 - `client.kv.namespaces.metadata.get()`
 - `client.kv.namespaces.values.update()`
@@ -310,18 +307,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.edit()`
 - `client.queues.get()`
 - `client.queues.messages.ack()`
-- `client.queues.messages.bulkPush()`
 - `client.queues.messages.pull()`
-- `client.queues.messages.push()`
 - `client.queues.purge.start()`
 - `client.queues.purge.status()`
 - `client.queues.consumers.create()`
 - `client.queues.consumers.update()`
 - `client.queues.consumers.list()`
 - `client.queues.consumers.delete()`
-- `client.queues.consumers.get()`
-- `client.queues.subscriptions.update()`
-- `client.queues.subscriptions.delete()`
 - `client.apiGateway.discovery.operations.edit()`
 - `client.apiGateway.operations.delete()`
 - `client.apiGateway.operations.get()`
@@ -916,17 +908,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.botnetFeed.asn.dayReport()`
 - `client.botnetFeed.asn.fullReport()`
 - `client.botnetFeed.configs.asn.delete()`
-- `client.workflows.update()`
-- `client.workflows.delete()`
-- `client.workflows.get()`
-- `client.workflows.instances.create()`
-- `client.workflows.instances.list()`
-- `client.workflows.instances.bulk()`
-- `client.workflows.instances.get()`
-- `client.workflows.instances.status.edit()`
-- `client.workflows.instances.events.create()`
-- `client.workflows.versions.list()`
-- `client.workflows.versions.get()`
 - `client.resourceSharing.update()`
 - `client.resourceSharing.delete()`
 - `client.resourceSharing.get()`
@@ -939,8 +920,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.resourceSharing.resources.list()`
 - `client.resourceSharing.resources.delete()`
 - `client.resourceSharing.resources.get()`
-- `client.leakedCredentialChecks.detections.update()`
-- `client.leakedCredentialChecks.detections.delete()`
 - `client.contentScanning.payloads.delete()`
 - `client.abuseReports.create()`
 - `client.ai.run()`
@@ -1077,8 +1056,6 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.iam.userGroups.members.create()`
 - `client.iam.userGroups.members.update()`
 - `client.cloudConnector.rules.update()`
-- `client.workflows.instances.bulk()`
-- `client.workflows.instances.events.create()`
 - `client.contentScanning.payloads.create()`
 - `client.ai.toMarkdown.transform()`
 - `client.secretsStore.stores.create()`
@@ -1105,6 +1082,7 @@ client.example.list(undefined, { headers: { ... } });
 <summary>This affects the following methods</summary>
 
 - `client.accounts.list()`
+- `client.organizations.list()`
 - `client.ips.list()`
 - `client.memberships.list()`
 - `client.user.auditLogs.list()`
@@ -1196,7 +1174,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.bots.webCrawlers.summary()`
 - `client.radar.bots.webCrawlers.timeseriesGroups()`
 - `client.radar.datasets.list()`
+- `client.radar.dns.summaryV2()`
 - `client.radar.dns.timeseries()`
+- `client.radar.dns.timeseriesGroupsV2()`
 - `client.radar.dns.top.ases()`
 - `client.radar.dns.top.locations()`
 - `client.radar.dns.summary.cacheHit()`
@@ -1227,7 +1207,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.netflows.top.locations()`
 - `client.radar.verifiedBots.top.bots()`
 - `client.radar.verifiedBots.top.categories()`
+- `client.radar.as112.summaryV2()`
 - `client.radar.as112.timeseries()`
+- `client.radar.as112.timeseriesGroupsV2()`
 - `client.radar.as112.summary.dnssec()`
 - `client.radar.as112.summary.edns()`
 - `client.radar.as112.summary.ipVersion()`
@@ -1244,6 +1226,8 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.as112.top.edns()`
 - `client.radar.as112.top.ipVersion()`
 - `client.radar.as112.top.locations()`
+- `client.radar.email.routing.summaryV2()`
+- `client.radar.email.routing.timeseriesGroupsV2()`
 - `client.radar.email.routing.summary.arc()`
 - `client.radar.email.routing.summary.dkim()`
 - `client.radar.email.routing.summary.dmarc()`
@@ -1256,6 +1240,8 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.email.routing.timeseriesGroups.encrypted()`
 - `client.radar.email.routing.timeseriesGroups.ipVersion()`
 - `client.radar.email.routing.timeseriesGroups.spf()`
+- `client.radar.email.security.summaryV2()`
+- `client.radar.email.security.timeseriesGroupsV2()`
 - `client.radar.email.security.top.tlds.get()`
 - `client.radar.email.security.top.tlds.malicious.get()`
 - `client.radar.email.security.top.tlds.spam.get()`
@@ -1278,7 +1264,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.email.security.timeseriesGroups.spoof()`
 - `client.radar.email.security.timeseriesGroups.threatCategory()`
 - `client.radar.email.security.timeseriesGroups.tlsVersion()`
+- `client.radar.attacks.layer3.summaryV2()`
 - `client.radar.attacks.layer3.timeseries()`
+- `client.radar.attacks.layer3.timeseriesGroupsV2()`
 - `client.radar.attacks.layer3.summary.bitrate()`
 - `client.radar.attacks.layer3.summary.duration()`
 - `client.radar.attacks.layer3.summary.industry()`
@@ -1298,7 +1286,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.attacks.layer3.top.vertical()`
 - `client.radar.attacks.layer3.top.locations.origin()`
 - `client.radar.attacks.layer3.top.locations.target()`
+- `client.radar.attacks.layer7.summaryV2()`
 - `client.radar.attacks.layer7.timeseries()`
+- `client.radar.attacks.layer7.timeseriesGroupsV2()`
 - `client.radar.attacks.layer7.summary.httpMethod()`
 - `client.radar.attacks.layer7.summary.httpVersion()`
 - `client.radar.attacks.layer7.summary.industry()`
