@@ -925,7 +925,7 @@ export namespace ScriptUpdateParams {
       name: string;
 
       /**
-       * The name of the dispatch namespace.
+       * Namespace to bind to.
        */
       namespace: string;
 

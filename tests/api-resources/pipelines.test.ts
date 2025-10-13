@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource pipelines', () => {
   test('create: only required params', async () => {
     const responsePromise = client.pipelines.create({
-      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination: {
         batch: {},
         compression: {},
@@ -39,7 +39,7 @@ describe('resource pipelines', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.pipelines.create({
-      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination: {
         batch: { max_bytes: 1000, max_duration_s: 0.25, max_rows: 100 },
         compression: { type: 'gzip' },
@@ -64,7 +64,7 @@ describe('resource pipelines', () => {
 
   test('update: only required params', async () => {
     const responsePromise = client.pipelines.update('sample_pipeline', {
-      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination: { batch: {}, compression: {}, format: 'json', path: { bucket: 'bucket' }, type: 'r2' },
       name: 'sample_pipeline',
       source: [{ format: 'json', type: 'type' }],
@@ -80,7 +80,7 @@ describe('resource pipelines', () => {
 
   test('update: required and optional params', async () => {
     const response = await client.pipelines.update('sample_pipeline', {
-      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination: {
         batch: { max_bytes: 1000, max_duration_s: 0.25, max_rows: 100 },
         compression: { type: 'gzip' },
@@ -104,7 +104,7 @@ describe('resource pipelines', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.pipelines.list({ account_id: '0123105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.pipelines.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -116,7 +116,7 @@ describe('resource pipelines', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.pipelines.list({
-      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 'page',
       per_page: 'per_page',
       search: 'search',
@@ -125,7 +125,7 @@ describe('resource pipelines', () => {
 
   test('delete: only required params', async () => {
     const responsePromise = client.pipelines.delete('sample_pipeline', {
-      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -138,13 +138,13 @@ describe('resource pipelines', () => {
 
   test('delete: required and optional params', async () => {
     const response = await client.pipelines.delete('sample_pipeline', {
-      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
     const responsePromise = client.pipelines.get('sample_pipeline', {
-      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -157,7 +157,7 @@ describe('resource pipelines', () => {
 
   test('get: required and optional params', async () => {
     const response = await client.pipelines.get('sample_pipeline', {
-      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 });
