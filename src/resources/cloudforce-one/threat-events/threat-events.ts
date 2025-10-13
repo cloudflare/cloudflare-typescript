@@ -207,6 +207,26 @@ export class ThreatEvents extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Reads an event
+   *
+   * @example
+   * ```ts
+   * const threatEvent =
+   *   await client.cloudforceOne.threatEvents.get('event_id', {
+   *     account_id: 'account_id',
+   *   });
+   * ```
+   */
+  get(
+    eventId: string,
+    params: ThreatEventGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ThreatEventGetResponse> {
+    const { account_id } = params;
+    return this._client.get(`/accounts/${account_id}/cloudforce-one/events/${eventId}`, options);
+  }
 }
 
 export interface ThreatEventCreateResponse {
@@ -323,6 +343,56 @@ export interface ThreatEventDeleteResponse {
 export type ThreatEventBulkCreateResponse = number;
 
 export interface ThreatEventEditResponse {
+  attacker: string;
+
+  attackerCountry: string;
+
+  category: string;
+
+  date: string;
+
+  event: string;
+
+  indicator: string;
+
+  indicatorType: string;
+
+  indicatorTypeId: number;
+
+  killChain: number;
+
+  mitreAttack: Array<string>;
+
+  numReferenced: number;
+
+  numReferences: number;
+
+  rawId: string;
+
+  referenced: Array<string>;
+
+  referencedIds: Array<number>;
+
+  references: Array<string>;
+
+  referencesIds: Array<number>;
+
+  tags: Array<string>;
+
+  targetCountry: string;
+
+  targetIndustry: string;
+
+  tlp: string;
+
+  uuid: string;
+
+  insight?: string;
+
+  releasabilityId?: string;
+}
+
+export interface ThreatEventGetResponse {
   attacker: string;
 
   attackerCountry: string;
@@ -673,6 +743,13 @@ export namespace ThreatEventEditParams {
   }
 }
 
+export interface ThreatEventGetParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
 ThreatEvents.Attackers = Attackers;
 ThreatEvents.Categories = Categories;
 ThreatEvents.Countries = Countries;
@@ -693,11 +770,13 @@ export declare namespace ThreatEvents {
     type ThreatEventDeleteResponse as ThreatEventDeleteResponse,
     type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,
     type ThreatEventEditResponse as ThreatEventEditResponse,
+    type ThreatEventGetResponse as ThreatEventGetResponse,
     type ThreatEventCreateParams as ThreatEventCreateParams,
     type ThreatEventListParams as ThreatEventListParams,
     type ThreatEventDeleteParams as ThreatEventDeleteParams,
     type ThreatEventBulkCreateParams as ThreatEventBulkCreateParams,
     type ThreatEventEditParams as ThreatEventEditParams,
+    type ThreatEventGetParams as ThreatEventGetParams,
   };
 
   export {

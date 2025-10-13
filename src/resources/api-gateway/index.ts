@@ -4,6 +4,7 @@ export { APIGateway } from './api-gateway';
 export {
   Configurations,
   type Configuration,
+  type ConfigurationUpdateResponse,
   type ConfigurationUpdateParams,
   type ConfigurationGetParams,
 } from './configurations';
