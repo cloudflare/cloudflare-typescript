@@ -1,6 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AS112, type AS112TimeseriesResponse, type AS112TimeseriesParams } from './as112';
+export {
+  AS112,
+  type AS112SummaryV2Response,
+  type AS112TimeseriesResponse,
+  type AS112TimeseriesGroupsV2Response,
+  type AS112SummaryV2Params,
+  type AS112TimeseriesParams,
+  type AS112TimeseriesGroupsV2Params,
+} from './as112';
 export {
   Summary,
   type SummaryDNSSECResponse,
