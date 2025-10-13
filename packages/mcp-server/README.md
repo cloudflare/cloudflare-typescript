@@ -3020,6 +3020,7 @@ The following tools are available in this MCP server.
 - `list_gateway_zero_trust_rules` (`read`): List Zero Trust Gateway rules for an account.
 - `delete_gateway_zero_trust_rules` (`write`): Delete a Zero Trust Gateway rule.
 - `get_gateway_zero_trust_rules` (`read`): Get a single Zero Trust Gateway rule.
+- `list_tenant_gateway_zero_trust_rules` (`read`): List Zero Trust Gateway rules for the parent account of an account in the MSP configuration.
 - `reset_expiration_gateway_zero_trust_rules` (`write`): Resets the expiration of a Zero Trust Gateway Rule if its duration elapsed and it has a default duration. The Zero Trust Gateway Rule must have values for both `expiration.expires_at` and `expiration.duration`.
 
 ### Resource `zero_trust.gateway.certificates`:

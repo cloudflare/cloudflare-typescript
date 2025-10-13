@@ -1269,6 +1269,7 @@ import update_gateway_zero_trust_rules from './zero-trust/gateway/rules/update-g
 import list_gateway_zero_trust_rules from './zero-trust/gateway/rules/list-gateway-zero-trust-rules';
 import delete_gateway_zero_trust_rules from './zero-trust/gateway/rules/delete-gateway-zero-trust-rules';
 import get_gateway_zero_trust_rules from './zero-trust/gateway/rules/get-gateway-zero-trust-rules';
+import list_tenant_gateway_zero_trust_rules from './zero-trust/gateway/rules/list-tenant-gateway-zero-trust-rules';
 import reset_expiration_gateway_zero_trust_rules from './zero-trust/gateway/rules/reset-expiration-gateway-zero-trust-rules';
 import create_gateway_zero_trust_certificates from './zero-trust/gateway/certificates/create-gateway-zero-trust-certificates';
 import list_gateway_zero_trust_certificates from './zero-trust/gateway/certificates/list-gateway-zero-trust-certificates';
@@ -3107,6 +3108,7 @@ addEndpoint(update_gateway_zero_trust_rules);
 addEndpoint(list_gateway_zero_trust_rules);
 addEndpoint(delete_gateway_zero_trust_rules);
 addEndpoint(get_gateway_zero_trust_rules);
+addEndpoint(list_tenant_gateway_zero_trust_rules);
 addEndpoint(reset_expiration_gateway_zero_trust_rules);
 addEndpoint(create_gateway_zero_trust_certificates);
 addEndpoint(list_gateway_zero_trust_certificates);
