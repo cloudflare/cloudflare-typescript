@@ -36,9 +36,6 @@ export const tool: Tool = {
               bucket: {
                 type: 'string',
               },
-              endpoint: {
-                type: 'string',
-              },
               secret: {
                 type: 'object',
                 properties: {
@@ -49,12 +46,23 @@ export const tool: Tool = {
                     type: 'string',
                   },
                 },
+                required: ['accessKeyId', 'secretAccessKey'],
               },
               vendor: {
                 type: 'string',
                 enum: ['s3'],
               },
+              endpoint: {
+                type: 'string',
+              },
+              pathPrefix: {
+                type: 'string',
+              },
+              region: {
+                type: 'string',
+              },
             },
+            required: ['bucket', 'secret', 'vendor'],
           },
           {
             type: 'object',
@@ -72,22 +80,23 @@ export const tool: Tool = {
                     type: 'string',
                   },
                 },
+                required: ['clientEmail', 'privateKey'],
               },
               vendor: {
                 type: 'string',
                 enum: ['gcs'],
               },
+              pathPrefix: {
+                type: 'string',
+              },
             },
+            required: ['bucket', 'secret', 'vendor'],
           },
           {
             type: 'object',
             properties: {
               bucket: {
                 type: 'string',
-              },
-              jurisdiction: {
-                type: 'string',
-                enum: ['default', 'eu', 'fedramp'],
               },
               secret: {
                 type: 'object',
@@ -99,11 +108,20 @@ export const tool: Tool = {
                     type: 'string',
                   },
                 },
+                required: ['accessKeyId', 'secretAccessKey'],
               },
               vendor: {
                 $ref: '#/$defs/provider',
               },
+              jurisdiction: {
+                type: 'string',
+                enum: ['default', 'eu', 'fedramp'],
+              },
+              pathPrefix: {
+                type: 'string',
+              },
             },
+            required: ['bucket', 'secret', 'vendor'],
           },
         ],
       },
@@ -112,10 +130,6 @@ export const tool: Tool = {
         properties: {
           bucket: {
             type: 'string',
-          },
-          jurisdiction: {
-            type: 'string',
-            enum: ['default', 'eu', 'fedramp'],
           },
           secret: {
             type: 'object',
@@ -127,11 +141,17 @@ export const tool: Tool = {
                 type: 'string',
               },
             },
+            required: ['accessKeyId', 'secretAccessKey'],
           },
           vendor: {
             $ref: '#/$defs/provider',
           },
+          jurisdiction: {
+            type: 'string',
+            enum: ['default', 'eu', 'fedramp'],
+          },
         },
+        required: ['bucket', 'secret', 'vendor'],
       },
       jq_filter: {
         type: 'string',

@@ -170,7 +170,7 @@ export namespace BindingGetResponse {
     name: string;
 
     /**
-     * Namespace to bind to.
+     * The name of the dispatch namespace.
      */
     namespace: string;
 
