@@ -4,7 +4,7 @@ import { APIResource } from '../../resource';
 import * as ProjectsAPI from './projects/projects';
 import {
   Deployment,
-  DeploymentsV4PagePaginationArray,
+  DeploymentsSinglePage,
   Project,
   ProjectCreateParams,
   ProjectDeleteParams,
@@ -23,7 +23,7 @@ export class Pages extends APIResource {
 }
 
 Pages.Projects = Projects;
-Pages.DeploymentsV4PagePaginationArray = DeploymentsV4PagePaginationArray;
+Pages.DeploymentsSinglePage = DeploymentsSinglePage;
 
 export declare namespace Pages {
   export {
@@ -33,7 +33,7 @@ export declare namespace Pages {
     type Stage as Stage,
     type ProjectDeleteResponse as ProjectDeleteResponse,
     type ProjectPurgeBuildCacheResponse as ProjectPurgeBuildCacheResponse,
-    DeploymentsV4PagePaginationArray as DeploymentsV4PagePaginationArray,
+    DeploymentsSinglePage as DeploymentsSinglePage,
     type ProjectCreateParams as ProjectCreateParams,
     type ProjectListParams as ProjectListParams,
     type ProjectDeleteParams as ProjectDeleteParams,

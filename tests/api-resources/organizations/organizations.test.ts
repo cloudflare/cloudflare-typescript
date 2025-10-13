@@ -24,7 +24,7 @@ describe('resource organizations', () => {
   test('create: required and optional params', async () => {
     const response = await client.organizations.create({
       name: 'name',
-      parent: { id: 'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8' },
+      parent: { id: 'id' },
       profile: {
         business_address: 'business_address',
         business_email: 'business_email',
@@ -36,7 +36,7 @@ describe('resource organizations', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.organizations.update('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8', { name: 'name' });
+    const responsePromise = client.organizations.update('organization_id', { name: 'name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,9 +47,9 @@ describe('resource organizations', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.organizations.update('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8', {
+    const response = await client.organizations.update('organization_id', {
       name: 'name',
-      parent: { id: 'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8' },
+      parent: { id: 'id' },
       profile: {
         business_address: 'business_address',
         business_email: 'business_email',
@@ -60,43 +60,8 @@ describe('resource organizations', () => {
     });
   });
 
-  test('list', async () => {
-    const responsePromise = client.organizations.list();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.organizations.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
-  });
-
-  test('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.organizations.list(
-        {
-          id: ['a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8'],
-          containing: { account: 'account', organization: 'organization', user: 'user' },
-          name: { contains: 'contains', endsWith: 'endsWith', startsWith: 'startsWith' },
-          page_size: 0,
-          page_token: 'page_token',
-          parent: { id: 'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8' },
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
   test('delete', async () => {
-    const responsePromise = client.organizations.delete('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8');
+    const responsePromise = client.organizations.delete('organization_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -109,12 +74,12 @@ describe('resource organizations', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.organizations.delete('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8', { path: '/_stainless_unknown_path' }),
+      client.organizations.delete('organization_id', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('get', async () => {
-    const responsePromise = client.organizations.get('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8');
+    const responsePromise = client.organizations.get('organization_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -127,7 +92,7 @@ describe('resource organizations', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.organizations.get('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8', { path: '/_stainless_unknown_path' }),
+      client.organizations.get('organization_id', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });
