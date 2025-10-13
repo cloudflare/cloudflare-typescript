@@ -290,7 +290,7 @@ export interface GatewayRule {
 
   /**
    * Specify the protocol or layer to evaluate the traffic, identity, and device
-   * posture expressions. Can only contain a single value.
+   * posture expressions.
    */
   filters: Array<GatewayFilter>;
 
@@ -1553,7 +1553,7 @@ export interface RuleCreateParams {
 
   /**
    * Body param: Specify the protocol or layer to evaluate the traffic, identity, and
-   * device posture expressions. Can only contain a single value.
+   * device posture expressions.
    */
   filters?: Array<GatewayFilterParam>;
 
@@ -1684,7 +1684,7 @@ export interface RuleUpdateParams {
 
   /**
    * Body param: Specify the protocol or layer to evaluate the traffic, identity, and
-   * device posture expressions. Can only contain a single value.
+   * device posture expressions.
    */
   filters?: Array<GatewayFilterParam>;
 

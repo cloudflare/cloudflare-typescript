@@ -53,9 +53,11 @@ export {
   type ThreatEventDeleteResponse,
   type ThreatEventBulkCreateResponse,
   type ThreatEventEditResponse,
+  type ThreatEventGetResponse,
   type ThreatEventCreateParams,
   type ThreatEventListParams,
   type ThreatEventDeleteParams,
   type ThreatEventBulkCreateParams,
   type ThreatEventEditParams,
+  type ThreatEventGetParams,
 } from './threat-events';

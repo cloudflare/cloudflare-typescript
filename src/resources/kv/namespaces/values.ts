@@ -4,7 +4,7 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
-import { multipartFormRequestOptions } from '../../../internal/uploads';
+import { maybeMultipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
 export class Values extends APIResource {
@@ -25,6 +25,7 @@ export class Values extends APIResource {
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     namespace_id: '0f2ac74b498b48028cb68387c421e279',
+   *     metadata: '{"someMetadataKey": "someMetadataValue"}',
    *     value: 'Some Value',
    *   },
    * );
@@ -39,8 +40,13 @@ export class Values extends APIResource {
     return (
       this._client.put(
         path`/accounts/${account_id}/storage/kv/namespaces/${namespace_id}/values/${keyName}`,
-        multipartFormRequestOptions(
-          { query: { expiration, expiration_ttl }, body, ...options },
+        maybeMultipartFormRequestOptions(
+          {
+            query: { expiration, expiration_ttl },
+            body,
+            ...options,
+            headers: buildHeaders([{ 'Content-Type': '*/*' }, options?.headers]),
+          },
           this._client,
         ),
       ) as APIPromise<{ result: ValueUpdateResponse | null }>
@@ -116,7 +122,7 @@ export interface ValueDeleteResponse {}
 
 export interface ValueUpdateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -126,30 +132,31 @@ export interface ValueUpdateParams {
   namespace_id: string;
 
   /**
+   * Body param: Arbitrary JSON to be associated with a key/value pair.
+   */
+  metadata: string;
+
+  /**
    * Body param: A byte sequence to be stored, up to 25 MiB in length.
    */
   value: string;
 
   /**
-   * Query param: Expires the key at a certain time, measured in number of seconds
-   * since the UNIX epoch.
+   * Query param: The time, measured in number of seconds since the UNIX epoch, at
+   * which the key should expire.
    */
   expiration?: number;
 
   /**
-   * Query param: Expires the key after a number of seconds. Must be at least 60.
+   * Query param: The number of seconds for which the key should be visible before it
+   * expires. At least 60.
    */
   expiration_ttl?: number;
-
-  /**
-   * Body param: Associates arbitrary JSON data with a key/value pair.
-   */
-  metadata?: unknown;
 }
 
 export interface ValueDeleteParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 
@@ -161,7 +168,7 @@ export interface ValueDeleteParams {
 
 export interface ValueGetParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 
