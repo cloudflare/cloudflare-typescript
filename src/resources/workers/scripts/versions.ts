@@ -246,7 +246,7 @@ export namespace VersionCreateResponse {
       name: string;
 
       /**
-       * The name of the dispatch namespace.
+       * Namespace to bind to.
        */
       namespace: string;
 
@@ -982,7 +982,7 @@ export namespace VersionGetResponse {
       name: string;
 
       /**
-       * The name of the dispatch namespace.
+       * Namespace to bind to.
        */
       namespace: string;
 
@@ -1636,11 +1636,6 @@ export namespace VersionCreateParams {
   export namespace Metadata {
     export interface Annotations {
       /**
-       * Associated alias for a version.
-       */
-      'workers/alias'?: string;
-
-      /**
        * Human-readable message about the version. Truncated to 100 bytes.
        */
       'workers/message'?: string;
@@ -1746,7 +1741,7 @@ export namespace VersionCreateParams {
       name: string;
 
       /**
-       * The name of the dispatch namespace.
+       * Namespace to bind to.
        */
       namespace: string;
 

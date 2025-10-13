@@ -9,7 +9,11 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS queries by DNSSEC (DNS Security
    * Extensions) support over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.dnssec();
+   * ```
    */
   dnssec(
     query: TimeseriesGroupDNSSECParams | null | undefined = {},
@@ -26,7 +30,11 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS queries by EDNS (Extension Mechanisms
    * for DNS) support over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.edns();
+   * ```
    */
   edns(
     query: TimeseriesGroupEdnsParams | null | undefined = {},
@@ -42,7 +50,11 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS queries by IP version over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.ipVersion();
+   * ```
    */
   ipVersion(
     query: TimeseriesGroupIPVersionParams | null | undefined = {},
@@ -59,7 +71,11 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS requests classified by protocol over
    * time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.protocol();
+   * ```
    */
   protocol(
     query: TimeseriesGroupProtocolParams | null | undefined = {},
@@ -75,7 +91,11 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS queries by type over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.queryType();
+   * ```
    */
   queryType(
     query: TimeseriesGroupQueryTypeParams | null | undefined = {},
@@ -92,7 +112,11 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS requests classified by response code
    * over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.timeseriesGroups.responseCodes();
+   * ```
    */
   responseCodes(
     query: TimeseriesGroupResponseCodesParams | null | undefined = {},
