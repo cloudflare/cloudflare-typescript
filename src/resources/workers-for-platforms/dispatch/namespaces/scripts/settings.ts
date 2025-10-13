@@ -247,7 +247,7 @@ export namespace SettingEditResponse {
     name: string;
 
     /**
-     * The name of the dispatch namespace.
+     * Namespace to bind to.
      */
     namespace: string;
 
@@ -999,7 +999,7 @@ export namespace SettingGetResponse {
     name: string;
 
     /**
-     * The name of the dispatch namespace.
+     * Namespace to bind to.
      */
     namespace: string;
 
@@ -1769,7 +1769,7 @@ export namespace SettingEditParams {
       name: string;
 
       /**
-       * The name of the dispatch namespace.
+       * Namespace to bind to.
        */
       namespace: string;
 
