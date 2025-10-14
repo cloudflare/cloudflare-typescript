@@ -2840,6 +2840,14 @@ The following tools are available in this MCP server.
 - `edit_zero_trust_connectivity_settings` (`write`): Updates the Zero Trust Connectivity Settings for the given account.
 - `get_zero_trust_connectivity_settings` (`read`): Gets the Zero Trust Connectivity Settings for the given account.
 
+### Resource `zero_trust.connectivity.directory.services`:
+
+- `create_directory_connectivity_zero_trust_services` (`write`): Create connectivity service
+- `update_directory_connectivity_zero_trust_services` (`write`): Update connectivity service
+- `list_directory_connectivity_zero_trust_services` (`read`): List connectivity services
+- `delete_directory_connectivity_zero_trust_services` (`write`): Delete connectivity service
+- `get_directory_connectivity_zero_trust_services` (`read`): Get connectivity service
+
 ### Resource `zero_trust.dlp.datasets`:
 
 - `create_dlp_zero_trust_datasets` (`write`): Create a new dataset
