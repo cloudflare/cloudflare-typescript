@@ -5635,6 +5635,20 @@ Methods:
 - <code title="patch /accounts/{account_id}/zerotrust/connectivity_settings">client.zeroTrust.connectivitySettings.<a href="./src/resources/zero-trust/connectivity-settings.ts">edit</a>({ ...params }) -> ConnectivitySettingEditResponse</code>
 - <code title="get /accounts/{account_id}/zerotrust/connectivity_settings">client.zeroTrust.connectivitySettings.<a href="./src/resources/zero-trust/connectivity-settings.ts">get</a>({ ...params }) -> ConnectivitySettingGetResponse</code>
 
+## Connectivity
+
+### Directory
+
+#### Services
+
+Methods:
+
+- <code title="post /accounts/{account_id}/connectivity/directory/services">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">create</a>({ ...params }) -> void</code>
+- <code title="put /accounts/{account_id}/connectivity/directory/services/{service_id}">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">update</a>(serviceId, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/connectivity/directory/services">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">list</a>({ ...params }) -> void</code>
+- <code title="delete /accounts/{account_id}/connectivity/directory/services/{service_id}">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">delete</a>(serviceId, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/connectivity/directory/services/{service_id}">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">get</a>(serviceId, { ...params }) -> void</code>
+
 ## DLP
 
 ### Datasets

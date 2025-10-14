@@ -13,6 +13,8 @@ import * as SeatsAPI from './seats';
 import { Seat, SeatEditParams, Seats, SeatsSinglePage } from './seats';
 import * as AccessAPI from './access/access';
 import { Access } from './access/access';
+import * as ConnectivityAPI from './connectivity/connectivity';
+import { Connectivity } from './connectivity/connectivity';
 import * as DevicesAPI from './devices/devices';
 import {
   Device,
@@ -93,6 +95,7 @@ export class ZeroTrust extends APIResource {
   tunnels: TunnelsAPI.Tunnels = new TunnelsAPI.Tunnels(this._client);
   connectivitySettings: ConnectivitySettingsAPI.ConnectivitySettings =
     new ConnectivitySettingsAPI.ConnectivitySettings(this._client);
+  connectivity: ConnectivityAPI.Connectivity = new ConnectivityAPI.Connectivity(this._client);
   dlp: DLPAPI.DLP = new DLPAPI.DLP(this._client);
   gateway: GatewayAPI.Gateway = new GatewayAPI.Gateway(this._client);
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
@@ -112,6 +115,7 @@ ZeroTrust.DEX = DEX;
 ZeroTrust.Tunnels = Tunnels;
 ZeroTrust.TunnelListResponsesV4PagePaginationArray = TunnelListResponsesV4PagePaginationArray;
 ZeroTrust.ConnectivitySettings = ConnectivitySettings;
+ZeroTrust.Connectivity = Connectivity;
 ZeroTrust.DLP = DLP;
 ZeroTrust.Gateway = Gateway;
 ZeroTrust.Networks = Networks;
@@ -187,6 +191,8 @@ export declare namespace ZeroTrust {
     type ConnectivitySettingEditParams as ConnectivitySettingEditParams,
     type ConnectivitySettingGetParams as ConnectivitySettingGetParams,
   };
+
+  export { Connectivity as Connectivity };
 
   export { DLP as DLP };
 
