@@ -9,7 +9,6 @@ import {
 } from './organization-profile';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
-import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -55,11 +54,12 @@ export class Organizations extends APIResource {
    * Delete an organization. The organization MUST be empty before deleting. It must
    * not contain any sub-organizations, accounts, members or users.
    */
-  delete(organizationID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/organizations/${organizationID}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  delete(organizationID: string, options?: RequestOptions): APIPromise<OrganizationDeleteResponse> {
+    return (
+      this._client.delete(path`/organizations/${organizationID}`, options) as APIPromise<{
+        result: OrganizationDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -139,6 +139,10 @@ export namespace Organization {
 
     external_metadata: string;
   }
+}
+
+export interface OrganizationDeleteResponse {
+  id: string;
 }
 
 export interface OrganizationCreateParams {
@@ -283,6 +287,7 @@ Organizations.OrganizationProfileResource = OrganizationProfileResource;
 export declare namespace Organizations {
   export {
     type Organization as Organization,
+    type OrganizationDeleteResponse as OrganizationDeleteResponse,
     type OrganizationsSinglePage as OrganizationsSinglePage,
     type OrganizationCreateParams as OrganizationCreateParams,
     type OrganizationUpdateParams as OrganizationUpdateParams,
