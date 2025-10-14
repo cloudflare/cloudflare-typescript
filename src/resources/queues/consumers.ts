@@ -105,6 +105,30 @@ export class Consumers extends APIResource {
       options,
     );
   }
+
+  /**
+   * Fetches the consumer for a queue by consumer id
+   *
+   * @example
+   * ```ts
+   * const consumer = await client.queues.consumers.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     queue_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   },
+   * );
+   * ```
+   */
+  get(consumerID: string, params: ConsumerGetParams, options?: RequestOptions): APIPromise<Consumer> {
+    const { account_id, queue_id } = params;
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/queues/${queue_id}/consumers/${consumerID}`,
+        options,
+      ) as APIPromise<{ result: Consumer }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export type ConsumersSinglePage = SinglePage<Consumer>;
@@ -478,6 +502,18 @@ export interface ConsumerDeleteParams {
   queue_id: string;
 }
 
+export interface ConsumerGetParams {
+  /**
+   * A Resource identifier.
+   */
+  account_id: string;
+
+  /**
+   * A Resource identifier.
+   */
+  queue_id: string;
+}
+
 export declare namespace Consumers {
   export {
     type Consumer as Consumer,
@@ -487,5 +523,6 @@ export declare namespace Consumers {
     type ConsumerUpdateParams as ConsumerUpdateParams,
     type ConsumerListParams as ConsumerListParams,
     type ConsumerDeleteParams as ConsumerDeleteParams,
+    type ConsumerGetParams as ConsumerGetParams,
   };
 }
