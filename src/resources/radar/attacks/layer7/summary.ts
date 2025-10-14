@@ -8,7 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by HTTP method.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
+   * @deprecated
    */
   httpMethod(
     query: SummaryHTTPMethodParams | null | undefined = {},
@@ -24,7 +24,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by HTTP version.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
+   * @deprecated
    */
   httpVersion(
     query: SummaryHTTPVersionParams | null | undefined = {},
@@ -40,7 +40,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by targeted industry.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
+   * @deprecated
    */
   industry(
     query: SummaryIndustryParams | null | undefined = {},
@@ -56,7 +56,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by IP version.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
+   * @deprecated
    */
   ipVersion(
     query: SummaryIPVersionParams | null | undefined = {},
@@ -72,7 +72,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by managed rules.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
+   * @deprecated
    */
   managedRules(
     query: SummaryManagedRulesParams | null | undefined = {},
@@ -88,7 +88,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by mitigation product.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
+   * @deprecated
    */
   mitigationProduct(
     query: SummaryMitigationProductParams | null | undefined = {},
@@ -105,7 +105,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by targeted vertical.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
+   * @deprecated
    */
   vertical(
     query: SummaryVerticalParams | null | undefined = {},
