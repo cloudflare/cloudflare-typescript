@@ -10,7 +10,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation over time.
    *
-   * @deprecated Use [Radar Email Security Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   arc(
     query?: TimeseriesGroupARCParams,
@@ -36,7 +36,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
    * validation over time.
    *
-   * @deprecated Use [Radar Email Security Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   dkim(
     query?: TimeseriesGroupDKIMParams,
@@ -62,7 +62,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by DMARC (Domain-based Message
    * Authentication, Reporting and Conformance) validation over time.
    *
-   * @deprecated Use [Radar Email Security Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   dmarc(
     query?: TimeseriesGroupDMARCParams,
@@ -87,7 +87,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of emails by malicious classification over time.
    *
-   * @deprecated Use [Radar Email Security Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   malicious(
     query?: TimeseriesGroupMaliciousParams,
@@ -113,7 +113,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by spam classification (spam vs. non-spam)
    * over time.
    *
-   * @deprecated Use [Radar Email Security Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   spam(
     query?: TimeseriesGroupSpamParams,
@@ -139,7 +139,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by SPF (Sender Policy Framework) validation
    * over time.
    *
-   * @deprecated Use [Radar Email Security Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   spf(
     query?: TimeseriesGroupSPFParams,
@@ -165,7 +165,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by spoof classification (spoof vs.
    * non-spoof) over time.
    *
-   * @deprecated Use [Radar Email Security Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   spoof(
     query?: TimeseriesGroupSpoofParams,
@@ -190,7 +190,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of emails by threat category over time.
    *
-   * @deprecated Use [Radar Email Security Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   threatCategory(
     query?: TimeseriesGroupThreatCategoryParams,
@@ -215,7 +215,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of emails by TLS version over time.
    *
-   * @deprecated Use [Radar Email Security Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   tlsVersion(
     query?: TimeseriesGroupTLSVersionParams,
