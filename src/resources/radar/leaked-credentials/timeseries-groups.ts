@@ -9,7 +9,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of HTTP authentication requests by bot class over
    * time.
    *
-   * @deprecated
+   * @deprecated Use [Radar Leaked Credentials Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/leaked_credentials/methods/timeseries_groups_v2/) instead.
    */
   botClass(
     query?: TimeseriesGroupBotClassParams,
@@ -35,7 +35,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of HTTP authentication requests by compromised
    * credential status over time.
    *
-   * @deprecated
+   * @deprecated Use [Radar Leaked Credentials Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/leaked_credentials/methods/timeseries_groups_v2/) instead.
    */
   compromised(
     query?: TimeseriesGroupCompromisedParams,
