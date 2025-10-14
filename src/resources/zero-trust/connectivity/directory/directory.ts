@@ -4,10 +4,15 @@ import { APIResource } from '../../../../core/resource';
 import * as ServicesAPI from './services';
 import {
   ServiceCreateParams,
+  ServiceCreateResponse,
   ServiceDeleteParams,
   ServiceGetParams,
+  ServiceGetResponse,
   ServiceListParams,
+  ServiceListResponse,
+  ServiceListResponsesV4PagePaginationArray,
   ServiceUpdateParams,
+  ServiceUpdateResponse,
   Services,
 } from './services';
 
@@ -20,6 +25,11 @@ Directory.Services = Services;
 export declare namespace Directory {
   export {
     Services as Services,
+    type ServiceCreateResponse as ServiceCreateResponse,
+    type ServiceUpdateResponse as ServiceUpdateResponse,
+    type ServiceListResponse as ServiceListResponse,
+    type ServiceGetResponse as ServiceGetResponse,
+    type ServiceListResponsesV4PagePaginationArray as ServiceListResponsesV4PagePaginationArray,
     type ServiceCreateParams as ServiceCreateParams,
     type ServiceUpdateParams as ServiceUpdateParams,
     type ServiceListParams as ServiceListParams,
