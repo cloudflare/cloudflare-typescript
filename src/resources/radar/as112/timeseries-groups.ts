@@ -9,7 +9,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS queries by DNSSEC (DNS Security
    * Extensions) support over time.
    *
-   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   dnssec(
     query?: TimeseriesGroupDNSSECParams,
@@ -34,7 +34,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS queries by EDNS (Extension Mechanisms
    * for DNS) support over time.
    *
-   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   edns(
     query?: TimeseriesGroupEdnsParams,
@@ -58,7 +58,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS queries by IP version over time.
    *
-   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -84,7 +84,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS requests classified by protocol over
    * time.
    *
-   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   protocol(
     query?: TimeseriesGroupProtocolParams,
@@ -108,7 +108,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS queries by type over time.
    *
-   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   queryType(
     query?: TimeseriesGroupQueryTypeParams,
@@ -134,7 +134,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS requests classified by response code
    * over time.
    *
-   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   responseCodes(
     query?: TimeseriesGroupResponseCodesParams,

@@ -8,7 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of unique accounts by model over time.
    *
-   * @deprecated Use [Radar AI Inference Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/inference/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   model(query?: SummaryModelParams, options?: Core.RequestOptions): Core.APIPromise<SummaryModelResponse>;
   model(options?: Core.RequestOptions): Core.APIPromise<SummaryModelResponse>;
@@ -30,7 +30,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of unique accounts by task over time.
    *
-   * @deprecated Use [Radar AI Inference Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/inference/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   task(query?: SummaryTaskParams, options?: Core.RequestOptions): Core.APIPromise<SummaryTaskResponse>;
   task(options?: Core.RequestOptions): Core.APIPromise<SummaryTaskResponse>;
