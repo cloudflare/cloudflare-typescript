@@ -8678,6 +8678,14 @@ Methods:
 
 # AbuseReports
 
+Types:
+
+- <code><a href="./src/resources/abuse-reports.ts">AbuseReportCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/abuse-reports/{report_param}">client.abuseReports.<a href="./src/resources/abuse-reports.ts">create</a>(reportParam, { ...params }) -> AbuseReportCreateResponse</code>
+
 # AI
 
 Types:
