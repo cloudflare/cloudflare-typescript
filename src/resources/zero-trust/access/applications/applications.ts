@@ -18608,6 +18608,11 @@ export interface ApplicationListParams extends V4PagePaginationArrayParams {
    * Query param: Search for apps by other listed query parameters.
    */
   search?: string;
+
+  /**
+   * Query param: Target Criteria attributes in key=value format.
+   */
+  target_attributes?: string;
 }
 
 export interface ApplicationDeleteParams {

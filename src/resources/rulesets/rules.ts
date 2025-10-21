@@ -5850,7 +5850,7 @@ export namespace SetConfigRule {
     bic?: boolean;
 
     /**
-     * Whether to disable Cloudflare Apps.
+     * @deprecated Cloudflare Apps are deprected.
      */
     disable_apps?: true;
 
@@ -6087,7 +6087,7 @@ export namespace SetConfigRuleParam {
     bic?: boolean;
 
     /**
-     * Whether to disable Cloudflare Apps.
+     * @deprecated Cloudflare Apps are deprected.
      */
     disable_apps?: true;
 
@@ -11368,7 +11368,7 @@ export declare namespace RuleCreateParams {
       bic?: boolean;
 
       /**
-       * Whether to disable Cloudflare Apps.
+       * @deprecated Cloudflare Apps are deprected.
        */
       disable_apps?: true;
 
@@ -15560,7 +15560,7 @@ export declare namespace RuleEditParams {
       bic?: boolean;
 
       /**
-       * Whether to disable Cloudflare Apps.
+       * @deprecated Cloudflare Apps are deprected.
        */
       disable_apps?: true;
 
