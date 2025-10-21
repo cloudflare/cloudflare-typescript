@@ -2447,6 +2447,7 @@ Types:
 - <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionUpdateResponse</a></code>
 - <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionListResponse</a></code>
 - <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+- <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionGetResponse</a></code>
 
 Methods:
 
@@ -2454,6 +2455,7 @@ Methods:
 - <code title="patch /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">update</a>(subscriptionId, { ...params }) -> SubscriptionUpdateResponse</code>
 - <code title="get /accounts/{account_id}/event_subscriptions/subscriptions">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">list</a>({ ...params }) -> SubscriptionListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">delete</a>(subscriptionId, { ...params }) -> SubscriptionDeleteResponse</code>
+- <code title="get /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">get</a>(subscriptionId, { ...params }) -> SubscriptionGetResponse</code>
 
 # APIGateway
 
