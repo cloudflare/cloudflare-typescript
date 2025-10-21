@@ -533,6 +533,7 @@ import create_queues_subscriptions from './queues/subscriptions/create-queues-su
 import update_queues_subscriptions from './queues/subscriptions/update-queues-subscriptions';
 import list_queues_subscriptions from './queues/subscriptions/list-queues-subscriptions';
 import delete_queues_subscriptions from './queues/subscriptions/delete-queues-subscriptions';
+import get_queues_subscriptions from './queues/subscriptions/get-queues-subscriptions';
 import update_api_gateway_configurations from './api-gateway/configurations/update-api-gateway-configurations';
 import get_api_gateway_configurations from './api-gateway/configurations/get-api-gateway-configurations';
 import get_api_gateway_discovery from './api-gateway/discovery/get-api-gateway-discovery';
@@ -2414,6 +2415,7 @@ addEndpoint(create_queues_subscriptions);
 addEndpoint(update_queues_subscriptions);
 addEndpoint(list_queues_subscriptions);
 addEndpoint(delete_queues_subscriptions);
+addEndpoint(get_queues_subscriptions);
 addEndpoint(update_api_gateway_configurations);
 addEndpoint(get_api_gateway_configurations);
 addEndpoint(get_api_gateway_discovery);

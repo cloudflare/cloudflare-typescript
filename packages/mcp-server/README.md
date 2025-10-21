@@ -1453,6 +1453,7 @@ The following tools are available in this MCP server.
 - `update_queues_subscriptions` (`write`): Update an existing event subscription
 - `list_queues_subscriptions` (`read`): Get a paginated list of event subscriptions with optional sorting and filtering
 - `delete_queues_subscriptions` (`write`): Delete an existing event subscription
+- `get_queues_subscriptions` (`read`): Get details about an existing event subscription
 
 ### Resource `api_gateway.configurations`:
 

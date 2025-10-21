@@ -322,6 +322,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.consumers.get()`
 - `client.queues.subscriptions.update()`
 - `client.queues.subscriptions.delete()`
+- `client.queues.subscriptions.get()`
 - `client.apiGateway.discovery.operations.edit()`
 - `client.apiGateway.operations.delete()`
 - `client.apiGateway.operations.get()`
