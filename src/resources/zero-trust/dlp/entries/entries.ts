@@ -65,6 +65,7 @@ export class Entries extends APIResource {
    *   enabled: true,
    *   name: 'name',
    *   pattern: { regex: 'regex' },
+   *   profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    * });
    * ```
    */
@@ -636,7 +637,7 @@ export interface EntryCreateParams {
   /**
    * Body param:
    */
-  profile_id?: string;
+  profile_id: string;
 }
 
 export type EntryUpdateParams =

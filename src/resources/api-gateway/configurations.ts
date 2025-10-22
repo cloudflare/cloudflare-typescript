@@ -2,10 +2,11 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as UserSchemasAPI from './user-schemas/user-schemas';
 
 export class Configurations extends APIResource {
   /**
-   * Update configuration properties
+   * Set configuration properties
    *
    * @example
    * ```ts
@@ -18,14 +19,12 @@ export class Configurations extends APIResource {
    *   });
    * ```
    */
-  update(params: ConfigurationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
+  update(
+    params: ConfigurationUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigurationUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/api_gateway/configuration`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Configuration }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.put(`/zones/${zone_id}/api_gateway/configuration`, { body, ...options });
   }
 
   /**
@@ -40,11 +39,12 @@ export class Configurations extends APIResource {
    * ```
    */
   get(params: ConfigurationGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
-    const { zone_id } = params;
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zone_id}/api_gateway/configuration`, options) as Core.APIPromise<{
-        result: Configuration;
-      }>
+      this._client.get(`/zones/${zone_id}/api_gateway/configuration`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: Configuration }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -91,6 +91,17 @@ export namespace Configuration {
      */
     type: 'jwt';
   }
+}
+
+export interface ConfigurationUpdateResponse {
+  errors: UserSchemasAPI.Message;
+
+  messages: UserSchemasAPI.Message;
+
+  /**
+   * Whether the API call was successful.
+   */
+  success: true;
 }
 
 export interface ConfigurationUpdateParams {
@@ -148,14 +159,20 @@ export namespace ConfigurationUpdateParams {
 
 export interface ConfigurationGetParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   zone_id: string;
+
+  /**
+   * Query param: Requests information about certain properties.
+   */
+  properties?: Array<'auth_id_characteristics'>;
 }
 
 export declare namespace Configurations {
   export {
     type Configuration as Configuration,
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
     type ConfigurationUpdateParams as ConfigurationUpdateParams,
     type ConfigurationGetParams as ConfigurationGetParams,
   };

@@ -2,12 +2,7 @@
 
 export { Directory } from './directory';
 export {
-  ServiceListResponsesV4PagePaginationArray,
   Services,
-  type ServiceCreateResponse,
-  type ServiceUpdateResponse,
-  type ServiceListResponse,
-  type ServiceGetResponse,
   type ServiceCreateParams,
   type ServiceUpdateParams,
   type ServiceListParams,
