@@ -8,7 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of unique accounts by model.
    *
-   * @deprecated Use [Radar AI Inference Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/inference/methods/summary_v2/) instead.
+   * @deprecated
    */
   model(
     query: SummaryModelParams | null | undefined = {},
@@ -24,7 +24,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of unique accounts by task.
    *
-   * @deprecated Use [Radar AI Inference Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/inference/methods/summary_v2/) instead.
+   * @deprecated
    */
   task(
     query: SummaryTaskParams | null | undefined = {},

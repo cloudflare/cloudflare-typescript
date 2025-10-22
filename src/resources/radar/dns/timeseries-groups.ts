@@ -8,7 +8,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by cache status over time.
    *
-   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   cacheHit(
     query: TimeseriesGroupCacheHitParams | null | undefined = {},
@@ -25,7 +25,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of DNS responses by DNSSEC (DNS Security Extensions)
    * support over time.
    *
-   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   dnssec(
     query: TimeseriesGroupDNSSECParams | null | undefined = {},
@@ -42,7 +42,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of DNS queries by DNSSEC (DNS Security Extensions)
    * client awareness over time.
    *
-   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   dnssecAware(
     query: TimeseriesGroupDNSSECAwareParams | null | undefined = {},
@@ -59,7 +59,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of DNSSEC-validated answers by end-to-end security
    * status over time.
    *
-   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   dnssecE2E(
     query: TimeseriesGroupDNSSECE2EParams | null | undefined = {},
@@ -75,7 +75,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by IP version over time.
    *
-   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   ipVersion(
     query: TimeseriesGroupIPVersionParams | null | undefined = {},
@@ -91,7 +91,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by matching answers over time.
    *
-   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   matchingAnswer(
     query: TimeseriesGroupMatchingAnswerParams | null | undefined = {},
@@ -107,7 +107,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by DNS transport protocol over time.
    *
-   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   protocol(
     query: TimeseriesGroupProtocolParams | null | undefined = {},
@@ -123,7 +123,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by type over time.
    *
-   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   queryType(
     query: TimeseriesGroupQueryTypeParams | null | undefined = {},
@@ -139,7 +139,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by response code over time.
    *
-   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   responseCode(
     query: TimeseriesGroupResponseCodeParams | null | undefined = {},
@@ -155,7 +155,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by minimum answer TTL over time.
    *
-   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   responseTTL(
     query: TimeseriesGroupResponseTTLParams | null | undefined = {},

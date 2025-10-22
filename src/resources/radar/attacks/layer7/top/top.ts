@@ -46,7 +46,7 @@ export class Top extends APIResource {
    * This endpoint is deprecated. To continue getting this data, switch to the
    * summary by industry endpoint.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
+   * @deprecated
    */
   industry(
     query: TopIndustryParams | null | undefined = {},
@@ -63,7 +63,7 @@ export class Top extends APIResource {
    * This endpoint is deprecated. To continue getting this data, switch to the
    * summary by vertical endpoint.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
+   * @deprecated
    */
   vertical(
     query: TopVerticalParams | null | undefined = {},
