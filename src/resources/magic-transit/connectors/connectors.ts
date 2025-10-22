@@ -49,7 +49,7 @@ export class Connectors extends APIResource {
   }
 
   /**
-   * Replace Connector
+   * Replace Connector or Re-provision License Key
    *
    * @example
    * ```ts
@@ -126,7 +126,7 @@ export class Connectors extends APIResource {
   }
 
   /**
-   * Edit Connector to update specific properties
+   * Edit Connector to update specific properties or Re-provision License Key
    *
    * @example
    * ```ts
@@ -198,6 +198,8 @@ export interface ConnectorCreateResponse {
   last_heartbeat?: string;
 
   last_seen_version?: string;
+
+  license_key?: string;
 }
 
 export namespace ConnectorCreateResponse {
@@ -228,6 +230,8 @@ export interface ConnectorUpdateResponse {
   last_heartbeat?: string;
 
   last_seen_version?: string;
+
+  license_key?: string;
 }
 
 export namespace ConnectorUpdateResponse {
@@ -258,6 +262,8 @@ export interface ConnectorListResponse {
   last_heartbeat?: string;
 
   last_seen_version?: string;
+
+  license_key?: string;
 }
 
 export namespace ConnectorListResponse {
@@ -288,6 +294,8 @@ export interface ConnectorDeleteResponse {
   last_heartbeat?: string;
 
   last_seen_version?: string;
+
+  license_key?: string;
 }
 
 export namespace ConnectorDeleteResponse {
@@ -318,6 +326,8 @@ export interface ConnectorEditResponse {
   last_heartbeat?: string;
 
   last_seen_version?: string;
+
+  license_key?: string;
 }
 
 export namespace ConnectorEditResponse {
@@ -348,6 +358,8 @@ export interface ConnectorGetResponse {
   last_heartbeat?: string;
 
   last_seen_version?: string;
+
+  license_key?: string;
 }
 
 export namespace ConnectorGetResponse {
@@ -365,7 +377,8 @@ export interface ConnectorCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: Exactly one of id, serial_number, or provision_license must be
+   * provided.
    */
   device: ConnectorCreateParams.Device;
 
@@ -396,8 +409,16 @@ export interface ConnectorCreateParams {
 }
 
 export namespace ConnectorCreateParams {
+  /**
+   * Exactly one of id, serial_number, or provision_license must be provided.
+   */
   export interface Device {
     id?: string;
+
+    /**
+     * When true, create and provision a new licence key for the connector.
+     */
+    provision_license?: boolean;
 
     serial_number?: string;
   }
@@ -428,6 +449,11 @@ export interface ConnectorUpdateParams {
    * Body param:
    */
   notes?: string;
+
+  /**
+   * Body param: When true, regenerate license key for the connector.
+   */
+  provision_license?: boolean;
 
   /**
    * Body param:
@@ -474,6 +500,11 @@ export interface ConnectorEditParams {
    * Body param:
    */
   notes?: string;
+
+  /**
+   * Body param: When true, regenerate license key for the connector.
+   */
+  provision_license?: boolean;
 
   /**
    * Body param:

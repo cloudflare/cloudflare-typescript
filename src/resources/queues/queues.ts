@@ -9,6 +9,7 @@ import {
   ConsumerCreateParams,
   ConsumerDeleteParams,
   ConsumerDeleteResponse,
+  ConsumerGetParams,
   ConsumerListParams,
   ConsumerUpdateParams,
   Consumers,
@@ -18,15 +19,31 @@ import * as MessagesAPI from './messages';
 import {
   MessageAckParams,
   MessageAckResponse,
+  MessageBulkPushParams,
+  MessageBulkPushResponse,
   MessagePullParams,
   MessagePullResponse,
-  MessagePullResponsesSinglePage,
+  MessagePushParams,
+  MessagePushResponse,
   Messages,
 } from './messages';
 import * as PurgeAPI from './purge';
 import { Purge, PurgeStartParams, PurgeStatusParams, PurgeStatusResponse } from './purge';
 import * as SubscriptionsAPI from './subscriptions';
-import { Subscriptions } from './subscriptions';
+import {
+  SubscriptionCreateParams,
+  SubscriptionCreateResponse,
+  SubscriptionDeleteParams,
+  SubscriptionDeleteResponse,
+  SubscriptionGetParams,
+  SubscriptionGetResponse,
+  SubscriptionListParams,
+  SubscriptionListResponse,
+  SubscriptionListResponsesV4PagePaginationArray,
+  SubscriptionUpdateParams,
+  SubscriptionUpdateResponse,
+  Subscriptions,
+} from './subscriptions';
 import { SinglePage } from '../../pagination';
 
 export class Queues extends APIResource {
@@ -328,11 +345,11 @@ export interface QueueGetParams {
 
 Queues.QueuesSinglePage = QueuesSinglePage;
 Queues.Messages = Messages;
-Queues.MessagePullResponsesSinglePage = MessagePullResponsesSinglePage;
 Queues.Purge = Purge;
 Queues.Consumers = Consumers;
 Queues.ConsumersSinglePage = ConsumersSinglePage;
 Queues.Subscriptions = Subscriptions;
+Queues.SubscriptionListResponsesV4PagePaginationArray = SubscriptionListResponsesV4PagePaginationArray;
 
 export declare namespace Queues {
   export {
@@ -350,10 +367,13 @@ export declare namespace Queues {
   export {
     Messages as Messages,
     type MessageAckResponse as MessageAckResponse,
+    type MessageBulkPushResponse as MessageBulkPushResponse,
     type MessagePullResponse as MessagePullResponse,
-    MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
+    type MessagePushResponse as MessagePushResponse,
     type MessageAckParams as MessageAckParams,
+    type MessageBulkPushParams as MessageBulkPushParams,
     type MessagePullParams as MessagePullParams,
+    type MessagePushParams as MessagePushParams,
   };
 
   export {
@@ -372,7 +392,21 @@ export declare namespace Queues {
     type ConsumerUpdateParams as ConsumerUpdateParams,
     type ConsumerListParams as ConsumerListParams,
     type ConsumerDeleteParams as ConsumerDeleteParams,
+    type ConsumerGetParams as ConsumerGetParams,
   };
 
-  export { Subscriptions as Subscriptions };
+  export {
+    Subscriptions as Subscriptions,
+    type SubscriptionCreateResponse as SubscriptionCreateResponse,
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionListResponse as SubscriptionListResponse,
+    type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
+    SubscriptionListResponsesV4PagePaginationArray as SubscriptionListResponsesV4PagePaginationArray,
+    type SubscriptionCreateParams as SubscriptionCreateParams,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+    type SubscriptionListParams as SubscriptionListParams,
+    type SubscriptionDeleteParams as SubscriptionDeleteParams,
+    type SubscriptionGetParams as SubscriptionGetParams,
+  };
 }
