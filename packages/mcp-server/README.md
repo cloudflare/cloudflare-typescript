@@ -3986,6 +3986,7 @@ The following tools are available in this MCP server.
 - `delete_cloudforce_one_threat_events` (`write`): The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
 - `bulk_create_cloudforce_one_threat_events` (`write`): The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
 - `edit_cloudforce_one_threat_events` (`write`): Updates an event
+- `get_cloudforce_one_threat_events` (`read`): This Method is deprecated. Please use /events/dataset/:dataset_id/events/:event_id instead.
 
 ### Resource `cloudforce_one.threat_events.attackers`:
 
@@ -4010,6 +4011,10 @@ The following tools are available in this MCP server.
 - `edit_threat_events_cloudforce_one_datasets` (`write`): Updates an existing dataset
 - `get_threat_events_cloudforce_one_datasets` (`read`): Reads a dataset
 - `raw_threat_events_cloudforce_one_datasets` (`read`): Reads data for a raw event
+
+### Resource `cloudforce_one.threat_events.indicator_types`:
+
+- `list_threat_events_cloudforce_one_indicator_types` (`read`): This Method is deprecated. Please use /events/dataset/:dataset_id/indicatorTypes instead.
 
 ### Resource `cloudforce_one.threat_events.raw`:
 

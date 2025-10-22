@@ -875,6 +875,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.cloudforceOne.requests.assets.get()`
 - `client.cloudforceOne.threatEvents.delete()`
 - `client.cloudforceOne.threatEvents.edit()`
+- `client.cloudforceOne.threatEvents.get()`
 - `client.cloudforceOne.threatEvents.categories.delete()`
 - `client.cloudforceOne.threatEvents.categories.edit()`
 - `client.cloudforceOne.threatEvents.categories.get()`

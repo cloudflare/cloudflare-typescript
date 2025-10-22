@@ -30,7 +30,7 @@ import {
   EventTags,
 } from './event-tags';
 import * as IndicatorTypesAPI from './indicator-types';
-import { IndicatorTypes } from './indicator-types';
+import { IndicatorTypeListParams, IndicatorTypeListResponse, IndicatorTypes } from './indicator-types';
 import * as InsightsAPI from './insights';
 import { Insights } from './insights';
 import * as RawAPI from './raw';
@@ -206,6 +206,21 @@ export class ThreatEvents extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * This Method is deprecated. Please use
+   * /events/dataset/:dataset_id/events/:event_id instead.
+   *
+   * @deprecated
+   */
+  get(
+    eventID: string,
+    params: ThreatEventGetParams,
+    options?: RequestOptions,
+  ): APIPromise<ThreatEventGetResponse> {
+    const { account_id } = params;
+    return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/${eventID}`, options);
+  }
 }
 
 export interface ThreatEventCreateResponse {
@@ -322,6 +337,56 @@ export interface ThreatEventDeleteResponse {
 export type ThreatEventBulkCreateResponse = number;
 
 export interface ThreatEventEditResponse {
+  attacker: string;
+
+  attackerCountry: string;
+
+  category: string;
+
+  date: string;
+
+  event: string;
+
+  indicator: string;
+
+  indicatorType: string;
+
+  indicatorTypeId: number;
+
+  killChain: number;
+
+  mitreAttack: Array<string>;
+
+  numReferenced: number;
+
+  numReferences: number;
+
+  rawId: string;
+
+  referenced: Array<string>;
+
+  referencedIds: Array<number>;
+
+  references: Array<string>;
+
+  referencesIds: Array<number>;
+
+  tags: Array<string>;
+
+  targetCountry: string;
+
+  targetIndustry: string;
+
+  tlp: string;
+
+  uuid: string;
+
+  insight?: string;
+
+  releasabilityId?: string;
+}
+
+export interface ThreatEventGetResponse {
   attacker: string;
 
   attackerCountry: string;
@@ -672,6 +737,13 @@ export namespace ThreatEventEditParams {
   }
 }
 
+export interface ThreatEventGetParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
 ThreatEvents.Attackers = Attackers;
 ThreatEvents.Categories = Categories;
 ThreatEvents.Countries = Countries;
@@ -692,11 +764,13 @@ export declare namespace ThreatEvents {
     type ThreatEventDeleteResponse as ThreatEventDeleteResponse,
     type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,
     type ThreatEventEditResponse as ThreatEventEditResponse,
+    type ThreatEventGetResponse as ThreatEventGetResponse,
     type ThreatEventCreateParams as ThreatEventCreateParams,
     type ThreatEventListParams as ThreatEventListParams,
     type ThreatEventDeleteParams as ThreatEventDeleteParams,
     type ThreatEventBulkCreateParams as ThreatEventBulkCreateParams,
     type ThreatEventEditParams as ThreatEventEditParams,
+    type ThreatEventGetParams as ThreatEventGetParams,
   };
 
   export {
@@ -741,7 +815,11 @@ export declare namespace ThreatEvents {
     type DatasetRawParams as DatasetRawParams,
   };
 
-  export { IndicatorTypes as IndicatorTypes };
+  export {
+    IndicatorTypes as IndicatorTypes,
+    type IndicatorTypeListResponse as IndicatorTypeListResponse,
+    type IndicatorTypeListParams as IndicatorTypeListParams,
+  };
 
   export {
     RawAPIRaw as Raw,
