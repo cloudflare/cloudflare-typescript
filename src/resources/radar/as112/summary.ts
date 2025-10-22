@@ -9,7 +9,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS queries to AS112 by DNSSEC (DNS Security
    * Extensions) support.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   dnssec(
     query: SummaryDNSSECParams | null | undefined = {},
@@ -26,7 +26,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS queries to AS112 by EDNS (Extension Mechanisms
    * for DNS) support.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   edns(
     query: SummaryEdnsParams | null | undefined = {},
@@ -42,7 +42,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by IP version.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   ipVersion(
     query: SummaryIPVersionParams | null | undefined = {},
@@ -58,7 +58,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by protocol.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   protocol(
     query: SummaryProtocolParams | null | undefined = {},
@@ -74,7 +74,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by type.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   queryType(
     query: SummaryQueryTypeParams | null | undefined = {},
@@ -90,7 +90,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS requests classified by response code.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   responseCodes(
     query: SummaryResponseCodesParams | null | undefined = {},

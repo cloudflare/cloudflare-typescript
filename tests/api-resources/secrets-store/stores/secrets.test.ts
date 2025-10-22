@@ -12,13 +12,7 @@ describe('resource secrets', () => {
   test('create: only required params', async () => {
     const responsePromise = client.secretsStore.stores.secrets.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
-      body: [
-        {
-          name: 'MY_API_KEY',
-          scopes: ['workers', 'ai_gateway', 'dex', 'access'],
-          value: 'api-token-secret-123',
-        },
-      ],
+      body: [{ name: 'MY_API_KEY', scopes: ['workers', 'ai_gateway'], value: 'api-token-secret-123' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -35,7 +29,7 @@ describe('resource secrets', () => {
       body: [
         {
           name: 'MY_API_KEY',
-          scopes: ['workers', 'ai_gateway', 'dex', 'access'],
+          scopes: ['workers', 'ai_gateway'],
           value: 'api-token-secret-123',
           comment: 'info about my secret',
         },
@@ -65,7 +59,7 @@ describe('resource secrets', () => {
       order: 'name',
       page: 2,
       per_page: 20,
-      scopes: [['workers', 'ai_gateway', 'dex', 'access']],
+      scopes: [['workers', 'ai_gateway']],
       search: 'search',
     });
   });
@@ -117,7 +111,7 @@ describe('resource secrets', () => {
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'MY_API_KEY',
-      scopes: ['workers', 'ai_gateway', 'dex', 'access'],
+      scopes: ['workers', 'ai_gateway'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -134,7 +128,7 @@ describe('resource secrets', () => {
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'MY_API_KEY',
-      scopes: ['workers', 'ai_gateway', 'dex', 'access'],
+      scopes: ['workers', 'ai_gateway'],
       comment: 'info about my secret',
     });
   });
@@ -160,7 +154,7 @@ describe('resource secrets', () => {
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
       comment: 'info about my secret',
-      scopes: ['workers', 'ai_gateway', 'dex', 'access'],
+      scopes: ['workers', 'ai_gateway'],
     });
   });
 

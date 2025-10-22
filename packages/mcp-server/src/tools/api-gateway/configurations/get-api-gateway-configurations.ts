@@ -26,6 +26,14 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier.',
       },
+      properties: {
+        type: 'array',
+        description: 'Requests information about certain properties.',
+        items: {
+          type: 'string',
+          enum: ['auth_id_characteristics'],
+        },
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',

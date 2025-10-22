@@ -10,7 +10,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation.
    *
-   * @deprecated Use [Radar Email Security Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/summary_v2/) instead.
+   * @deprecated
    */
   arc(
     query: SummaryARCParams | null | undefined = {},
@@ -27,7 +27,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
    * validation.
    *
-   * @deprecated Use [Radar Email Security Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/summary_v2/) instead.
+   * @deprecated
    */
   dkim(
     query: SummaryDKIMParams | null | undefined = {},
@@ -44,7 +44,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by DMARC (Domain-based Message
    * Authentication, Reporting and Conformance) validation.
    *
-   * @deprecated Use [Radar Email Security Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/summary_v2/) instead.
+   * @deprecated
    */
   dmarc(
     query: SummaryDMARCParams | null | undefined = {},
@@ -60,7 +60,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by malicious classification.
    *
-   * @deprecated Use [Radar Email Security Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/summary_v2/) instead.
+   * @deprecated
    */
   malicious(
     query: SummaryMaliciousParams | null | undefined = {},
@@ -76,7 +76,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the proportion of emails by spam classification (spam vs. non-spam).
    *
-   * @deprecated Use [Radar Email Security Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/summary_v2/) instead.
+   * @deprecated
    */
   spam(
     query: SummarySpamParams | null | undefined = {},
@@ -93,7 +93,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by SPF (Sender Policy Framework)
    * validation.
    *
-   * @deprecated Use [Radar Email Security Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/summary_v2/) instead.
+   * @deprecated
    */
   spf(
     query: SummarySPFParams | null | undefined = {},
@@ -110,7 +110,7 @@ export class Summary extends APIResource {
    * Retrieves the proportion of emails by spoof classification (spoof vs.
    * non-spoof).
    *
-   * @deprecated Use [Radar Email Security Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/summary_v2/) instead.
+   * @deprecated
    */
   spoof(
     query: SummarySpoofParams | null | undefined = {},
@@ -126,7 +126,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by threat categories.
    *
-   * @deprecated Use [Radar Email Security Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/summary_v2/) instead.
+   * @deprecated
    */
   threatCategory(
     query: SummaryThreatCategoryParams | null | undefined = {},
@@ -142,7 +142,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by TLS version.
    *
-   * @deprecated Use [Radar Email Security Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/security/methods/summary_v2/) instead.
+   * @deprecated
    */
   tlsVersion(
     query: SummaryTLSVersionParams | null | undefined = {},
