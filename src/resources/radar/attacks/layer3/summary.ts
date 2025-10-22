@@ -8,7 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by bitrate.
    *
-   * @deprecated
+   * @deprecated Use [Radar Attacks Layer 3 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/summary_v2/) instead.
    */
   bitrate(
     query: SummaryBitrateParams | null | undefined = {},
@@ -24,7 +24,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by duration.
    *
-   * @deprecated
+   * @deprecated Use [Radar Attacks Layer 3 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/summary_v2/) instead.
    */
   duration(
     query: SummaryDurationParams | null | undefined = {},
@@ -40,7 +40,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by targeted industry.
    *
-   * @deprecated
+   * @deprecated Use [Radar Attacks Layer 3 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/summary_v2/) instead.
    */
   industry(
     query: SummaryIndustryParams | null | undefined = {},
@@ -56,7 +56,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by IP version.
    *
-   * @deprecated
+   * @deprecated Use [Radar Attacks Layer 3 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/summary_v2/) instead.
    */
   ipVersion(
     query: SummaryIPVersionParams | null | undefined = {},
@@ -72,7 +72,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by protocol.
    *
-   * @deprecated
+   * @deprecated Use [Radar Attacks Layer 3 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/summary_v2/) instead.
    */
   protocol(
     query: SummaryProtocolParams | null | undefined = {},
@@ -88,7 +88,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by vector.
    *
-   * @deprecated
+   * @deprecated Use [Radar Attacks Layer 3 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/summary_v2/) instead.
    */
   vector(
     query: SummaryVectorParams | null | undefined = {},
@@ -104,7 +104,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by targeted vertical.
    *
-   * @deprecated
+   * @deprecated Use [Radar Attacks Layer 3 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/summary_v2/) instead.
    */
   vertical(
     query: SummaryVerticalParams | null | undefined = {},
