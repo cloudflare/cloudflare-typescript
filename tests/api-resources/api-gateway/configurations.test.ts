@@ -47,7 +47,6 @@ describe('resource configurations', () => {
   test('get: required and optional params', async () => {
     const response = await client.apiGateway.configurations.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      properties: ['auth_id_characteristics'],
     });
   });
 });
