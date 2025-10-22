@@ -40,7 +40,7 @@ export type AbuseReportCreateParams =
 export declare namespace AbuseReportCreateParams {
   export interface AbuseReportsDmcaReport {
     /**
-     * Path param: The account ID of the submitter.
+     * Path param: Cloudflare Account ID
      */
     account_id: string;
 
@@ -181,7 +181,7 @@ export declare namespace AbuseReportCreateParams {
 
   export interface AbuseReportsTrademarkReport {
     /**
-     * Path param: The account ID of the submitter.
+     * Path param: Cloudflare Account ID
      */
     account_id: string;
 
@@ -289,7 +289,7 @@ export declare namespace AbuseReportCreateParams {
 
   export interface AbuseReportsGeneralReport {
     /**
-     * Path param: The account ID of the submitter.
+     * Path param: Cloudflare Account ID
      */
     account_id: string;
 
@@ -404,7 +404,7 @@ export declare namespace AbuseReportCreateParams {
 
   export interface AbuseReportsPhishingReport {
     /**
-     * Path param: The account ID of the submitter.
+     * Path param: Cloudflare Account ID
      */
     account_id: string;
 
@@ -504,7 +504,7 @@ export declare namespace AbuseReportCreateParams {
 
   export interface AbuseReportsCsamReport {
     /**
-     * Path param: The account ID of the submitter.
+     * Path param: Cloudflare Account ID
      */
     account_id: string;
 
@@ -610,7 +610,7 @@ export declare namespace AbuseReportCreateParams {
 
   export interface AbuseReportsThreatReport {
     /**
-     * Path param: The account ID of the submitter.
+     * Path param: Cloudflare Account ID
      */
     account_id: string;
 
@@ -703,7 +703,7 @@ export declare namespace AbuseReportCreateParams {
 
   export interface AbuseReportsRegistrarWhoisReport {
     /**
-     * Path param: The account ID of the submitter.
+     * Path param: Cloudflare Account ID
      */
     account_id: string;
 
@@ -783,7 +783,7 @@ export declare namespace AbuseReportCreateParams {
 
   export interface AbuseReportsNcseiReport {
     /**
-     * Path param: The account ID of the submitter.
+     * Path param: Cloudflare Account ID
      */
     account_id: string;
 

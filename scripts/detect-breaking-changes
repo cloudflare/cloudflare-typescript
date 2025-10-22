@@ -690,6 +690,7 @@ TEST_PATHS=(
 	tests/api-resources/cloudforce-one/threat-events/categories.test.ts
 	tests/api-resources/cloudforce-one/threat-events/countries.test.ts
 	tests/api-resources/cloudforce-one/threat-events/datasets/datasets.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicator-types.test.ts
 	tests/api-resources/cloudforce-one/threat-events/raw.test.ts
 	tests/api-resources/cloudforce-one/threat-events/relate.test.ts
 	tests/api-resources/cloudforce-one/threat-events/tags.test.ts
