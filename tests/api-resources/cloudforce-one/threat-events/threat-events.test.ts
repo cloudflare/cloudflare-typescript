@@ -179,4 +179,21 @@ describe('resource threatEvents', () => {
       tlp: 'amber',
     });
   });
+
+  // TODO: HTTP 401 from prism
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.cloudforceOne.threatEvents.get('event_id', { account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: HTTP 401 from prism
+  test.skip('get: required and optional params', async () => {
+    const response = await client.cloudforceOne.threatEvents.get('event_id', { account_id: 'account_id' });
+  });
 });

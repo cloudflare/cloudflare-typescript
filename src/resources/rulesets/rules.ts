@@ -5885,7 +5885,8 @@ export namespace SetConfigRule {
     hotlink_protection?: boolean;
 
     /**
-     * Whether to enable Mirage.
+     * @deprecated Mirage is deprecated. More information at
+     * https://developers.cloudflare.com/speed/optimization/images/mirage/.
      */
     mirage?: boolean;
 
@@ -6122,7 +6123,8 @@ export namespace SetConfigRuleParam {
     hotlink_protection?: boolean;
 
     /**
-     * Whether to enable Mirage.
+     * @deprecated Mirage is deprecated. More information at
+     * https://developers.cloudflare.com/speed/optimization/images/mirage/.
      */
     mirage?: boolean;
 
@@ -11403,7 +11405,8 @@ export declare namespace RuleCreateParams {
       hotlink_protection?: boolean;
 
       /**
-       * Whether to enable Mirage.
+       * @deprecated Mirage is deprecated. More information at
+       * https://developers.cloudflare.com/speed/optimization/images/mirage/.
        */
       mirage?: boolean;
 
@@ -15595,7 +15598,8 @@ export declare namespace RuleEditParams {
       hotlink_protection?: boolean;
 
       /**
-       * Whether to enable Mirage.
+       * @deprecated Mirage is deprecated. More information at
+       * https://developers.cloudflare.com/speed/optimization/images/mirage/.
        */
       mirage?: boolean;
 
