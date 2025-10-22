@@ -8,7 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by cache status.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   cacheHit(
     query?: SummaryCacheHitParams,
@@ -33,7 +33,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS responses by DNSSEC (DNS Security Extensions)
    * support.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   dnssec(query?: SummaryDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
   dnssec(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
@@ -55,7 +55,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS queries by DNSSEC (DNS Security Extensions)
    * client awareness.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   dnssecAware(
     query?: SummaryDNSSECAwareParams,
@@ -80,7 +80,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNSSEC-validated answers by end-to-end security
    * status.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   dnssecE2E(
     query?: SummaryDNSSECE2EParams,
@@ -104,7 +104,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by IP version.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -128,7 +128,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by matching answers.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   matchingAnswer(
     query?: SummaryMatchingAnswerParams,
@@ -152,7 +152,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by DNS transport protocol.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   protocol(
     query?: SummaryProtocolParams,
@@ -176,7 +176,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by type.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   queryType(
     query?: SummaryQueryTypeParams,
@@ -200,7 +200,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by response code.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   responseCode(
     query?: SummaryResponseCodeParams,
@@ -224,7 +224,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by minimum response TTL.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   responseTTL(
     query?: SummaryResponseTTLParams,
