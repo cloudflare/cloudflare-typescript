@@ -621,7 +621,6 @@ import update_address_maps_addressing_ips from './addressing/address-maps/ips/up
 import delete_address_maps_addressing_ips from './addressing/address-maps/ips/delete-address-maps-addressing-ips';
 import update_address_maps_addressing_zones from './addressing/address-maps/zones/update-address-maps-addressing-zones';
 import delete_address_maps_addressing_zones from './addressing/address-maps/zones/delete-address-maps-addressing-zones';
-import create_addressing_loa_documents from './addressing/loa-documents/create-addressing-loa-documents';
 import get_addressing_loa_documents from './addressing/loa-documents/get-addressing-loa-documents';
 import create_addressing_prefixes from './addressing/prefixes/create-addressing-prefixes';
 import list_addressing_prefixes from './addressing/prefixes/list-addressing-prefixes';
@@ -2505,7 +2504,6 @@ addEndpoint(update_address_maps_addressing_ips);
 addEndpoint(delete_address_maps_addressing_ips);
 addEndpoint(update_address_maps_addressing_zones);
 addEndpoint(delete_address_maps_addressing_zones);
-addEndpoint(create_addressing_loa_documents);
 addEndpoint(get_addressing_loa_documents);
 addEndpoint(create_addressing_prefixes);
 addEndpoint(list_addressing_prefixes);
