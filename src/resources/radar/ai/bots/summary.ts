@@ -8,7 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of traffic by AI user agent.
    *
-   * @deprecated Use [Radar AI Bots Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/bots/methods/summary_v2/) instead.
+   * @deprecated
    */
   userAgent(
     query?: SummaryUserAgentParams,

@@ -44,20 +44,25 @@ export class FleetStatus extends APIResource {
    *
    * @example
    * ```ts
-   * await client.zeroTrust.dex.fleetStatus.overTime({
-   *   account_id: '01a7362d577a6c3019a474fd6f485823',
-   *   from: '2023-10-11T00:00:00Z',
-   *   to: '2023-10-11T00:00:00Z',
-   * });
+   * const response =
+   *   await client.zeroTrust.dex.fleetStatus.overTime({
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     from: '2023-10-11T00:00:00Z',
+   *     to: '2023-10-11T00:00:00Z',
+   *   });
    * ```
    */
-  overTime(params: FleetStatusOverTimeParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+  overTime(
+    params: FleetStatusOverTimeParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FleetStatusOverTimeResponse> {
     const { account_id, ...query } = params;
-    return this._client.get(`/accounts/${account_id}/dex/fleet-status/over-time`, {
-      query,
-      ...options,
-      headers: { Accept: '*/*', ...options?.headers },
-    });
+    return (
+      this._client.get(`/accounts/${account_id}/dex/fleet-status/over-time`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: FleetStatusOverTimeResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -90,6 +95,53 @@ export namespace FleetStatusLiveResponse {
      * Number of unique devices
      */
     uniqueDevicesTotal?: number;
+  }
+}
+
+export interface FleetStatusOverTimeResponse {
+  deviceStats?: FleetStatusOverTimeResponse.DeviceStats;
+}
+
+export namespace FleetStatusOverTimeResponse {
+  export interface DeviceStats {
+    byMode?: Array<DeviceStats.ByMode>;
+
+    byStatus?: Array<DeviceStats.ByStatus>;
+
+    /**
+     * Number of unique devices
+     */
+    uniqueDevicesTotal?: number;
+  }
+
+  export namespace DeviceStats {
+    export interface ByMode {
+      /**
+       * Timestamp in ISO format
+       */
+      timestamp?: string;
+
+      /**
+       * Number of unique devices
+       */
+      uniqueDevicesTotal?: number;
+
+      value?: string;
+    }
+
+    export interface ByStatus {
+      /**
+       * Timestamp in ISO format
+       */
+      timestamp?: string;
+
+      /**
+       * Number of unique devices
+       */
+      uniqueDevicesTotal?: number;
+
+      value?: string;
+    }
   }
 }
 
@@ -139,6 +191,7 @@ export declare namespace FleetStatus {
   export {
     type LiveStat as LiveStat,
     type FleetStatusLiveResponse as FleetStatusLiveResponse,
+    type FleetStatusOverTimeResponse as FleetStatusOverTimeResponse,
     type FleetStatusLiveParams as FleetStatusLiveParams,
     type FleetStatusOverTimeParams as FleetStatusOverTimeParams,
   };

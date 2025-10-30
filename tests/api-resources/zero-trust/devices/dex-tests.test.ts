@@ -13,7 +13,7 @@ describe('resource dexTests', () => {
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.dexTests.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      data: {},
+      data: { host: 'https://dash.cloudflare.com', kind: 'http' },
       enabled: true,
       interval: '30m',
       name: 'HTTP dash health check',
@@ -35,7 +35,7 @@ describe('resource dexTests', () => {
       interval: '30m',
       name: 'HTTP dash health check',
       description: 'Checks the dash endpoint every 30 minutes',
-      target_policies: [{ id: 'id', default: true, name: 'name' }],
+      target_policies: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', default: true, name: 'name' }],
       targeted: true,
     });
   });
@@ -43,7 +43,7 @@ describe('resource dexTests', () => {
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.dexTests.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      data: {},
+      data: { host: 'https://dash.cloudflare.com', kind: 'http' },
       enabled: true,
       interval: '30m',
       name: 'HTTP dash health check',
@@ -65,7 +65,7 @@ describe('resource dexTests', () => {
       interval: '30m',
       name: 'HTTP dash health check',
       description: 'Checks the dash endpoint every 30 minutes',
-      target_policies: [{ id: 'id', default: true, name: 'name' }],
+      target_policies: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', default: true, name: 'name' }],
       targeted: true,
     });
   });

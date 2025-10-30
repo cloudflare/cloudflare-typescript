@@ -134,6 +134,7 @@ export namespace VersionCreateResponse {
       | Resources.WorkersBindingKindSecretText
       | Resources.WorkersBindingKindSendEmail
       | Resources.WorkersBindingKindService
+      | Resources.WorkersBindingKindTailConsumer
       | Resources.WorkersBindingKindTextBlob
       | Resources.WorkersBindingKindVectorize
       | Resources.WorkersBindingKindVersionMetadata
@@ -567,6 +568,23 @@ export namespace VersionCreateResponse {
        * Optional environment if the Worker utilizes one.
        */
       environment?: string;
+    }
+
+    export interface WorkersBindingKindTailConsumer {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of Tail Worker to bind to.
+       */
+      service: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'tail_consumer';
     }
 
     export interface WorkersBindingKindTextBlob {
@@ -852,6 +870,7 @@ export namespace VersionGetResponse {
       | Resources.WorkersBindingKindSecretText
       | Resources.WorkersBindingKindSendEmail
       | Resources.WorkersBindingKindService
+      | Resources.WorkersBindingKindTailConsumer
       | Resources.WorkersBindingKindTextBlob
       | Resources.WorkersBindingKindVectorize
       | Resources.WorkersBindingKindVersionMetadata
@@ -1287,6 +1306,23 @@ export namespace VersionGetResponse {
       environment?: string;
     }
 
+    export interface WorkersBindingKindTailConsumer {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of Tail Worker to bind to.
+       */
+      service: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'tail_consumer';
+    }
+
     export interface WorkersBindingKindTextBlob {
       /**
        * A JavaScript variable name for the binding.
@@ -1562,6 +1598,7 @@ export namespace VersionCreateParams {
       | Metadata.WorkersBindingKindSecretText
       | Metadata.WorkersBindingKindSendEmail
       | Metadata.WorkersBindingKindService
+      | Metadata.WorkersBindingKindTailConsumer
       | Metadata.WorkersBindingKindTextBlob
       | Metadata.WorkersBindingKindVectorize
       | Metadata.WorkersBindingKindVersionMetadata
@@ -2036,6 +2073,23 @@ export namespace VersionCreateParams {
        * Optional environment if the Worker utilizes one.
        */
       environment?: string;
+    }
+
+    export interface WorkersBindingKindTailConsumer {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of Tail Worker to bind to.
+       */
+      service: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'tail_consumer';
     }
 
     export interface WorkersBindingKindTextBlob {
