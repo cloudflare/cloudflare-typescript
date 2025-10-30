@@ -109,6 +109,7 @@ export const tool: Tool = {
           'exposed_infrastructure',
           'insecure_configuration',
           'weak_authentication',
+          'configuration_suggestion',
         ],
       },
       severity_query_param: {
