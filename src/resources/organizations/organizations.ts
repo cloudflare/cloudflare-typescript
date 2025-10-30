@@ -17,7 +17,8 @@ export class Organizations extends APIResource {
     new OrganizationProfileAPI.OrganizationProfileResource(this._client);
 
   /**
-   * Create a new organization for a user.
+   * Create a new organization for a user. (Currently in Closed Beta - see
+   * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   create(body: OrganizationCreateParams, options?: RequestOptions): APIPromise<Organization> {
     return (
@@ -26,7 +27,8 @@ export class Organizations extends APIResource {
   }
 
   /**
-   * Modify organization
+   * Modify organization. (Currently in Closed Beta - see
+   * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   update(
     organizationID: string,
@@ -41,7 +43,8 @@ export class Organizations extends APIResource {
   }
 
   /**
-   * Retrieve a list of organizations a particular user has access to.
+   * Retrieve a list of organizations a particular user has access to. (Currently in
+   * Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
    */
   list(
     query: OrganizationListParams | null | undefined = {},
@@ -52,7 +55,8 @@ export class Organizations extends APIResource {
 
   /**
    * Delete an organization. The organization MUST be empty before deleting. It must
-   * not contain any sub-organizations, accounts, members or users.
+   * not contain any sub-organizations, accounts, members or users. (Currently in
+   * Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
    */
   delete(organizationID: string, options?: RequestOptions): APIPromise<OrganizationDeleteResponse> {
     return (
@@ -63,7 +67,8 @@ export class Organizations extends APIResource {
   }
 
   /**
-   * Retrieve the details of a certain organization.
+   * Retrieve the details of a certain organization. (Currently in Closed Beta - see
+   * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   get(organizationID: string, options?: RequestOptions): APIPromise<Organization> {
     return (

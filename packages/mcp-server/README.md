@@ -284,17 +284,17 @@ The following tools are available in this MCP server.
 
 ### Resource `organizations`:
 
-- `create_organizations` (`write`): Create a new organization for a user.
-- `update_organizations` (`write`): Modify organization
-- `list_organizations` (`read`): Retrieve a list of organizations a particular user has access to.
+- `create_organizations` (`write`): Create a new organization for a user. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+- `update_organizations` (`write`): Modify organization. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+- `list_organizations` (`read`): Retrieve a list of organizations a particular user has access to. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
 - `delete_organizations` (`write`): Delete an organization. The organization MUST be empty before deleting.
-  It must not contain any sub-organizations, accounts, members or users.
-- `get_organizations` (`read`): Retrieve the details of a certain organization.
+  It must not contain any sub-organizations, accounts, members or users. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+- `get_organizations` (`read`): Retrieve the details of a certain organization. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
 
 ### Resource `organizations.organization_profile`:
 
-- `update_organizations_organization_profile` (`write`): Modify organization profile
-- `get_organizations_organization_profile` (`read`): Get an organizations profile if it exists.
+- `update_organizations_organization_profile` (`write`): Modify organization profile. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+- `get_organizations_organization_profile` (`read`): Get an organizations profile if it exists. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
 
 ### Resource `origin_ca_certificates`:
 
