@@ -83,9 +83,7 @@ export class DNS extends APIResource {
       | 'PROTOCOL'
       | 'QUERY_TYPE'
       | 'RESPONSE_CODE'
-      | 'RESPONSE_TTL'
-      | 'TLD'
-      | 'TLD_DNS_MAGNITUDE',
+      | 'RESPONSE_TTL',
     query: DNSSummaryV2Params | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DNSSummaryV2Response> {
@@ -136,8 +134,7 @@ export class DNS extends APIResource {
       | 'PROTOCOL'
       | 'QUERY_TYPE'
       | 'RESPONSE_CODE'
-      | 'RESPONSE_TTL'
-      | 'TLD',
+      | 'RESPONSE_TTL',
     query: DNSTimeseriesGroupsV2Params | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DNSTimeseriesGroupsV2Response> {
@@ -479,11 +476,6 @@ export interface DNSSummaryV2Params {
   asn?: Array<string>;
 
   /**
-   * Filters results based on cache status.
-   */
-  cacheHit?: Array<boolean>;
-
-  /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
    * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
    * excludes results from EU, but includes results from NA.
@@ -508,29 +500,9 @@ export interface DNSSummaryV2Params {
   dateStart?: Array<string>;
 
   /**
-   * Filters results based on DNSSEC (DNS Security Extensions) support.
-   */
-  dnssec?: Array<'INVALID' | 'INSECURE' | 'SECURE' | 'OTHER'>;
-
-  /**
-   * Filters results based on DNSSEC (DNS Security Extensions) client awareness.
-   */
-  dnssecAware?: Array<'SUPPORTED' | 'NOT_SUPPORTED'>;
-
-  /**
-   * Filters results based on DNSSEC-validated answers by end-to-end security status.
-   */
-  dnssecE2e?: Array<boolean>;
-
-  /**
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
-
-  /**
-   * Filters results by IP version (Ipv4 vs. IPv6).
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Limits the number of objects per group to the top items within the specified
@@ -547,11 +519,6 @@ export interface DNSSummaryV2Params {
   location?: Array<string>;
 
   /**
-   * Filters results based on whether the queries have a matching answer.
-   */
-  matchingAnswer?: Array<boolean>;
-
-  /**
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
@@ -559,17 +526,17 @@ export interface DNSSummaryV2Params {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: Array<boolean>;
+  nodata?: boolean;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?: Array<
+  queryType?:
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -658,13 +625,12 @@ export interface DNSSummaryV2Params {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null
-  >;
+    | null;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?: Array<
+  responseCode?:
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -683,18 +649,10 @@ export interface DNSSummaryV2Params {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE'
-  >;
+    | 'BADCOOKIE';
 
   /**
-   * Filters results by DNS response TTL.
-   */
-  responseTtl?: Array<
-    'LTE_1M' | 'GT_1M_LTE_5M' | 'GT_5M_LTE_15M' | 'GT_15M_LTE_1H' | 'GT_1H_LTE_1D' | 'GT_1D_LTE_1W' | 'GT_1W'
-  >;
-
-  /**
-   * Filters results by top-level domain.
+   * Filters results by country code top-level domain (ccTLD).
    */
   tld?: Array<string>;
 }
@@ -716,11 +674,6 @@ export interface DNSTimeseriesParams {
   asn?: Array<string>;
 
   /**
-   * Filters results based on cache status.
-   */
-  cacheHit?: Array<boolean>;
-
-  /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
    * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
    * excludes results from EU, but includes results from NA.
@@ -745,29 +698,9 @@ export interface DNSTimeseriesParams {
   dateStart?: Array<string>;
 
   /**
-   * Filters results based on DNSSEC (DNS Security Extensions) support.
-   */
-  dnssec?: Array<'INVALID' | 'INSECURE' | 'SECURE' | 'OTHER'>;
-
-  /**
-   * Filters results based on DNSSEC (DNS Security Extensions) client awareness.
-   */
-  dnssecAware?: Array<'SUPPORTED' | 'NOT_SUPPORTED'>;
-
-  /**
-   * Filters results based on DNSSEC-validated answers by end-to-end security status.
-   */
-  dnssecE2e?: Array<boolean>;
-
-  /**
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
-
-  /**
-   * Filters results by IP version (Ipv4 vs. IPv6).
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Filters results by location. Specify a comma-separated list of alpha-2 codes.
@@ -777,11 +710,6 @@ export interface DNSTimeseriesParams {
   location?: Array<string>;
 
   /**
-   * Filters results based on whether the queries have a matching answer.
-   */
-  matchingAnswer?: Array<boolean>;
-
-  /**
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
@@ -789,17 +717,17 @@ export interface DNSTimeseriesParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: Array<boolean>;
+  nodata?: boolean;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?: Array<
+  queryType?:
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -888,13 +816,12 @@ export interface DNSTimeseriesParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null
-  >;
+    | null;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?: Array<
+  responseCode?:
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -913,18 +840,10 @@ export interface DNSTimeseriesParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE'
-  >;
+    | 'BADCOOKIE';
 
   /**
-   * Filters results by DNS response TTL.
-   */
-  responseTtl?: Array<
-    'LTE_1M' | 'GT_1M_LTE_5M' | 'GT_5M_LTE_15M' | 'GT_15M_LTE_1H' | 'GT_1H_LTE_1D' | 'GT_1D_LTE_1W' | 'GT_1W'
-  >;
-
-  /**
-   * Filters results by top-level domain.
+   * Filters results by country code top-level domain (ccTLD).
    */
   tld?: Array<string>;
 }
@@ -946,11 +865,6 @@ export interface DNSTimeseriesGroupsV2Params {
   asn?: Array<string>;
 
   /**
-   * Filters results based on cache status.
-   */
-  cacheHit?: Array<boolean>;
-
-  /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
    * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
    * excludes results from EU, but includes results from NA.
@@ -975,29 +889,9 @@ export interface DNSTimeseriesGroupsV2Params {
   dateStart?: Array<string>;
 
   /**
-   * Filters results based on DNSSEC (DNS Security Extensions) support.
-   */
-  dnssec?: Array<'INVALID' | 'INSECURE' | 'SECURE' | 'OTHER'>;
-
-  /**
-   * Filters results based on DNSSEC (DNS Security Extensions) client awareness.
-   */
-  dnssecAware?: Array<'SUPPORTED' | 'NOT_SUPPORTED'>;
-
-  /**
-   * Filters results based on DNSSEC-validated answers by end-to-end security status.
-   */
-  dnssecE2e?: Array<boolean>;
-
-  /**
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
-
-  /**
-   * Filters results by IP version (Ipv4 vs. IPv6).
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Limits the number of objects per group to the top items within the specified
@@ -1014,11 +908,6 @@ export interface DNSTimeseriesGroupsV2Params {
   location?: Array<string>;
 
   /**
-   * Filters results based on whether the queries have a matching answer.
-   */
-  matchingAnswer?: Array<boolean>;
-
-  /**
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
@@ -1026,23 +915,17 @@ export interface DNSTimeseriesGroupsV2Params {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: Array<boolean>;
-
-  /**
-   * Normalization method applied to the results. Refer to
-   * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
-   */
-  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
+  nodata?: boolean;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?: Array<
+  queryType?:
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1131,13 +1014,12 @@ export interface DNSTimeseriesGroupsV2Params {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null
-  >;
+    | null;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?: Array<
+  responseCode?:
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1156,18 +1038,10 @@ export interface DNSTimeseriesGroupsV2Params {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE'
-  >;
+    | 'BADCOOKIE';
 
   /**
-   * Filters results by DNS response TTL.
-   */
-  responseTtl?: Array<
-    'LTE_1M' | 'GT_1M_LTE_5M' | 'GT_5M_LTE_15M' | 'GT_15M_LTE_1H' | 'GT_1H_LTE_1D' | 'GT_1D_LTE_1W' | 'GT_1W'
-  >;
-
-  /**
-   * Filters results by top-level domain.
+   * Filters results by country code top-level domain (ccTLD).
    */
   tld?: Array<string>;
 }

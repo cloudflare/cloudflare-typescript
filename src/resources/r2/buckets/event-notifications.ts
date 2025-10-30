@@ -18,7 +18,6 @@ export class EventNotifications extends APIResource {
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       bucket_name: 'example-bucket',
-   *       rules: [{ actions: ['PutObject', 'CopyObject'] }],
    *     },
    *   );
    * ```
@@ -295,7 +294,7 @@ export interface EventNotificationUpdateParams {
   /**
    * Body param: Array of rules to drive notifications.
    */
-  rules: Array<EventNotificationUpdateParams.Rule>;
+  rules?: Array<EventNotificationUpdateParams.Rule>;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

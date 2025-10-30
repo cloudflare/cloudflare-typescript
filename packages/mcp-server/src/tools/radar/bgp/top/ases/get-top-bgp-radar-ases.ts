@@ -75,6 +75,7 @@ export const tool: Tool = {
         description: 'Filters results by BGP network prefix.',
         items: {
           type: 'string',
+          description: 'Network prefix, IPv4 or IPv6.',
         },
       },
       updateType: {
