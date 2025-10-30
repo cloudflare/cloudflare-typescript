@@ -137,12 +137,12 @@ export interface SettingEditResponse {
   /**
    * Tags associated with the Worker.
    */
-  tags?: Array<string>;
+  tags?: Array<string> | null;
 
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScript>;
+  tail_consumers?: Array<TailAPI.ConsumerScript> | null;
 
   /**
    * Usage model for the Worker invocations.
@@ -871,12 +871,12 @@ export interface SettingGetResponse {
   /**
    * Tags associated with the Worker.
    */
-  tags?: Array<string>;
+  tags?: Array<string> | null;
 
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScript>;
+  tail_consumers?: Array<TailAPI.ConsumerScript> | null;
 
   /**
    * Usage model for the Worker invocations.
@@ -1623,12 +1623,12 @@ export namespace SettingEditParams {
     /**
      * Tags associated with the Worker.
      */
-    tags?: Array<string>;
+    tags?: Array<string> | null;
 
     /**
      * List of Workers that will consume logs from the attached Worker.
      */
-    tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
+    tail_consumers?: Array<TailAPI.ConsumerScriptParam> | null;
 
     /**
      * Usage model for the Worker invocations.
