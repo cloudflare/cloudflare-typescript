@@ -6,6 +6,7 @@ import {
   Configuration,
   ConfigurationGetParams,
   ConfigurationUpdateParams,
+  ConfigurationUpdateResponse,
   Configurations,
 } from './configurations';
 import * as SchemasAPI from './schemas';
@@ -78,6 +79,7 @@ export declare namespace APIGateway {
   export {
     Configurations as Configurations,
     type Configuration as Configuration,
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
     type ConfigurationUpdateParams as ConfigurationUpdateParams,
     type ConfigurationGetParams as ConfigurationGetParams,
   };

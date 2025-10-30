@@ -38,7 +38,7 @@ describe('resource botClass', () => {
           httpProtocol: ['HTTP'],
           httpVersion: ['HTTPv1'],
           ipVersion: ['IPv4'],
-          limit: 1,
+          limit: 5,
           location: ['string'],
           name: ['main_series'],
           os: ['WINDOWS'],

@@ -565,6 +565,25 @@ export const tool: Tool = {
                   type: 'string',
                   description: 'A JavaScript variable name for the binding.',
                 },
+                service: {
+                  type: 'string',
+                  description: 'Name of Tail Worker to bind to.',
+                },
+                type: {
+                  type: 'string',
+                  description: 'The kind of resource that the binding provides.',
+                  enum: ['tail_consumer'],
+                },
+              },
+              required: ['name', 'service', 'type'],
+            },
+            {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                  description: 'A JavaScript variable name for the binding.',
+                },
                 part: {
                   type: 'string',
                   description:

@@ -39,7 +39,22 @@ export class Colos extends APIResource {
 
 export type ColoListResponsesSinglePage = SinglePage<ColoListResponse>;
 
-export type ColoListResponse = unknown;
+export interface ColoListResponse {
+  /**
+   * Airport code
+   */
+  airportCode: string;
+
+  /**
+   * City
+   */
+  city: string;
+
+  /**
+   * Country code
+   */
+  countryCode: string;
+}
 
 export interface ColoListParams {
   /**
