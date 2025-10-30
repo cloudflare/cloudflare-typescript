@@ -4971,6 +4971,10 @@ Methods:
 
 #### Mcp
 
+##### Portals
+
+##### Servers
+
 ### GatewayCA
 
 Types:
