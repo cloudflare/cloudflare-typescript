@@ -1646,7 +1646,6 @@ The following tools are available in this MCP server.
 
 ### Resource `addressing.loa_documents`:
 
-- `create_addressing_loa_documents` (`write`): Submit LOA document (pdf format) under the account.
 - `get_addressing_loa_documents` (`read`): Download specified LOA document under the account.
 
 ### Resource `addressing.prefixes`:
@@ -1660,7 +1659,7 @@ The following tools are available in this MCP server.
 ### Resource `addressing.prefixes.service_bindings`:
 
 - `create_prefixes_addressing_service_bindings` (`write`): Creates a new Service Binding, routing traffic to IPs within the given CIDR to a service running on Cloudflare's network.
-  **Note:** This API may only be used on prefixes currently configured with a Magic Transit/Cloudflare CDN/Cloudflare Spectrum service binding, and only allows creating upgrade service bindings for the Cloudflare CDN or Cloudflare Spectrum.
+  **NOTE:** The first Service Binding created for an IP Prefix must exactly match the IP Prefix's CIDR. Subsequent Service Bindings may be created with a more-specific CIDR. Refer to the [Service Bindings Documentation](https://developers.cloudflare.com/byoip/service-bindings/) for compatibility details.
 - `list_prefixes_addressing_service_bindings` (`read`): List the Cloudflare services this prefix is currently bound to. Traffic sent to an address within an IP prefix will be routed to the Cloudflare service of the most-specific Service Binding matching the address.
   **Example:** binding `192.0.2.0/24` to Cloudflare Magic Transit and `192.0.2.1/32` to the Cloudflare CDN would route traffic for `192.0.2.1` to the CDN, and traffic for all other IPs in the prefix to Cloudflare Magic Transit.
 - `delete_prefixes_addressing_service_bindings` (`write`): Delete a Service Binding

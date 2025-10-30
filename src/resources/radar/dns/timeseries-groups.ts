@@ -1347,17 +1347,17 @@ export interface TimeseriesGroupCacheHitParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1446,12 +1446,13 @@ export interface TimeseriesGroupCacheHitParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1470,10 +1471,11 @@ export interface TimeseriesGroupCacheHitParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -1538,17 +1540,17 @@ export interface TimeseriesGroupDNSSECParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1637,12 +1639,13 @@ export interface TimeseriesGroupDNSSECParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1661,10 +1664,11 @@ export interface TimeseriesGroupDNSSECParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -1729,17 +1733,17 @@ export interface TimeseriesGroupDNSSECAwareParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1828,12 +1832,13 @@ export interface TimeseriesGroupDNSSECAwareParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1852,10 +1857,11 @@ export interface TimeseriesGroupDNSSECAwareParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -1920,17 +1926,17 @@ export interface TimeseriesGroupDNSSECE2EParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2019,12 +2025,13 @@ export interface TimeseriesGroupDNSSECE2EParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2043,10 +2050,11 @@ export interface TimeseriesGroupDNSSECE2EParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2111,17 +2119,17 @@ export interface TimeseriesGroupIPVersionParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2210,12 +2218,13 @@ export interface TimeseriesGroupIPVersionParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2234,10 +2243,11 @@ export interface TimeseriesGroupIPVersionParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2302,17 +2312,17 @@ export interface TimeseriesGroupMatchingAnswerParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2401,12 +2411,13 @@ export interface TimeseriesGroupMatchingAnswerParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2425,10 +2436,11 @@ export interface TimeseriesGroupMatchingAnswerParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2493,12 +2505,12 @@ export interface TimeseriesGroupProtocolParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2587,12 +2599,13 @@ export interface TimeseriesGroupProtocolParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2611,10 +2624,11 @@ export interface TimeseriesGroupProtocolParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2686,17 +2700,17 @@ export interface TimeseriesGroupQueryTypeParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2715,10 +2729,11 @@ export interface TimeseriesGroupQueryTypeParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2790,17 +2805,17 @@ export interface TimeseriesGroupResponseCodeParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2889,10 +2904,11 @@ export interface TimeseriesGroupResponseCodeParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2957,17 +2973,17 @@ export interface TimeseriesGroupResponseTTLParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -3056,12 +3072,13 @@ export interface TimeseriesGroupResponseTTLParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -3080,10 +3097,11 @@ export interface TimeseriesGroupResponseTTLParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
