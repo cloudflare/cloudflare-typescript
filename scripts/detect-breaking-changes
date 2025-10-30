@@ -145,6 +145,14 @@ TEST_PATHS=(
 	tests/api-resources/logpush/jobs.test.ts
 	tests/api-resources/logpush/ownership.test.ts
 	tests/api-resources/logpush/validate.test.ts
+	tests/api-resources/logs/logs.test.ts
+	tests/api-resources/logs/control/control.test.ts
+	tests/api-resources/logs/control/retention.test.ts
+	tests/api-resources/logs/control/cmb/cmb.test.ts
+	tests/api-resources/logs/control/cmb/config.test.ts
+	tests/api-resources/logs/rayid.test.ts
+	tests/api-resources/logs/received/received.test.ts
+	tests/api-resources/logs/received/fields.test.ts
 	tests/api-resources/origin-tls-client-auth/origin-tls-client-auth.test.ts
 	tests/api-resources/origin-tls-client-auth/hostnames/hostnames.test.ts
 	tests/api-resources/origin-tls-client-auth/hostnames/certificates.test.ts
@@ -185,6 +193,8 @@ TEST_PATHS=(
 	tests/api-resources/workers/account-settings.test.ts
 	tests/api-resources/workers/domains.test.ts
 	tests/api-resources/workers/subdomains.test.ts
+	tests/api-resources/workers/observability/observability.test.ts
+	tests/api-resources/workers/observability/telemetry.test.ts
 	tests/api-resources/kv/kv.test.ts
 	tests/api-resources/kv/namespaces/namespaces.test.ts
 	tests/api-resources/kv/namespaces/keys.test.ts
@@ -197,6 +207,7 @@ TEST_PATHS=(
 	tests/api-resources/queues/messages.test.ts
 	tests/api-resources/queues/purge.test.ts
 	tests/api-resources/queues/consumers.test.ts
+	tests/api-resources/queues/subscriptions.test.ts
 	tests/api-resources/api-gateway/api-gateway.test.ts
 	tests/api-resources/api-gateway/configurations.test.ts
 	tests/api-resources/api-gateway/discovery/discovery.test.ts
@@ -421,6 +432,10 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/organizations/doh.test.ts
 	tests/api-resources/zero-trust/seats.test.ts
 	tests/api-resources/zero-trust/access/access.test.ts
+	tests/api-resources/zero-trust/access/ai-controls/ai-controls.test.ts
+	tests/api-resources/zero-trust/access/ai-controls/mcp/mcp.test.ts
+	tests/api-resources/zero-trust/access/ai-controls/mcp/portals.test.ts
+	tests/api-resources/zero-trust/access/ai-controls/mcp/servers.test.ts
 	tests/api-resources/zero-trust/access/gateway-ca.test.ts
 	tests/api-resources/zero-trust/access/infrastructure/infrastructure.test.ts
 	tests/api-resources/zero-trust/access/infrastructure/targets.test.ts
@@ -679,6 +694,7 @@ TEST_PATHS=(
 	tests/api-resources/cloudforce-one/threat-events/categories.test.ts
 	tests/api-resources/cloudforce-one/threat-events/countries.test.ts
 	tests/api-resources/cloudforce-one/threat-events/datasets/datasets.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicator-types.test.ts
 	tests/api-resources/cloudforce-one/threat-events/raw.test.ts
 	tests/api-resources/cloudforce-one/threat-events/relate.test.ts
 	tests/api-resources/cloudforce-one/threat-events/tags.test.ts
@@ -702,12 +718,20 @@ TEST_PATHS=(
 	tests/api-resources/botnet-feed/configs/configs.test.ts
 	tests/api-resources/botnet-feed/configs/asn.test.ts
 	tests/api-resources/security-txt.test.ts
+	tests/api-resources/workflows/workflows.test.ts
+	tests/api-resources/workflows/instances/instances.test.ts
+	tests/api-resources/workflows/instances/status.test.ts
+	tests/api-resources/workflows/instances/events.test.ts
+	tests/api-resources/workflows/versions.test.ts
 	tests/api-resources/resource-sharing/resource-sharing.test.ts
 	tests/api-resources/resource-sharing/recipients.test.ts
 	tests/api-resources/resource-sharing/resources.test.ts
+	tests/api-resources/leaked-credential-checks/leaked-credential-checks.test.ts
+	tests/api-resources/leaked-credential-checks/detections.test.ts
 	tests/api-resources/content-scanning/content-scanning.test.ts
 	tests/api-resources/content-scanning/payloads.test.ts
 	tests/api-resources/content-scanning/settings.test.ts
+	tests/api-resources/abuse-reports.test.ts
 	tests/api-resources/ai/ai.test.ts
 	tests/api-resources/ai/finetunes/finetunes.test.ts
 	tests/api-resources/ai/finetunes/assets.test.ts

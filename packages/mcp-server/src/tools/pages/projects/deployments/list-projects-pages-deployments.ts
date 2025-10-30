@@ -33,6 +33,14 @@ export const tool: Tool = {
         description: 'What type of deployments to fetch.',
         enum: ['production', 'preview'],
       },
+      page: {
+        type: 'integer',
+        description: 'Which page of deployments to fetch.',
+      },
+      per_page: {
+        type: 'integer',
+        description: 'How many deployments to return per page.',
+      },
     },
     required: ['account_id', 'project_name'],
   },

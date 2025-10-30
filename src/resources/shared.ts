@@ -998,3 +998,5 @@ export type SubscriptionsSinglePage = SinglePage<Subscription>;
 export type TokensV4PagePaginationArray = V4PagePaginationArray<Token>;
 
 export type AuditLogsV4PagePaginationArray = V4PagePaginationArray<AuditLog>;
+
+export type CloudflareTunnelsV4PagePaginationArray = V4PagePaginationArray<CloudflareTunnel>;

@@ -50,7 +50,7 @@ describe('resource internetServices', () => {
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          limit: 5,
+          limit: 1,
           name: ['main_series'],
           serviceCategory: ['string'],
         },
