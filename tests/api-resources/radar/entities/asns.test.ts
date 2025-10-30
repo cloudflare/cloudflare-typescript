@@ -32,7 +32,7 @@ describe('resource asns', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.entities.asns.list(
-        { asn: '174,7922', format: 'JSON', limit: 5, location: 'US', offset: 0, orderBy: 'ASN' },
+        { asn: '174,7922', format: 'JSON', limit: 1, location: 'US', offset: 0, orderBy: 'ASN' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

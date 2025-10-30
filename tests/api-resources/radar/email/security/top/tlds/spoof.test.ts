@@ -41,7 +41,7 @@ describe('resource spoof', () => {
           dkim: ['PASS'],
           dmarc: ['PASS'],
           format: 'JSON',
-          limit: 5,
+          limit: 1,
           name: ['main_series'],
           spf: ['PASS'],
           tldCategory: 'CLASSIC',
