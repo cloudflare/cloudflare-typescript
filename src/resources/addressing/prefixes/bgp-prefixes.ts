@@ -15,7 +15,10 @@ export class BGPPrefixes extends APIResource {
    * const bgpPrefix =
    *   await client.addressing.prefixes.bgpPrefixes.create(
    *     '2af39739cc4e3b5910c918468bb89828',
-   *     { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   *     {
+   *       account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *       cidr: '192.0.2.0/24',
+   *     },
    *   );
    * ```
    */
@@ -196,7 +199,7 @@ export namespace BGPPrefix {
     on_demand_enabled?: boolean;
 
     /**
-     * Whether advertisement status of the prefix is locked, meaning it cannot be
+     * Whether the advertisement status of the prefix is locked, meaning it cannot be
      * changed.
      */
     on_demand_locked?: boolean;
@@ -212,7 +215,7 @@ export interface BGPPrefixCreateParams {
   /**
    * Body param: IP Prefix in Classless Inter-Domain Routing format.
    */
-  cidr?: string;
+  cidr: string;
 }
 
 export interface BGPPrefixListParams {
