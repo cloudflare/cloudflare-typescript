@@ -56,13 +56,14 @@ import {
   ScriptGetParams,
   ScriptGetResponse,
   ScriptListParams,
+  ScriptListResponse,
+  ScriptListResponsesSinglePage,
   ScriptSearchParams,
   ScriptSearchResponse,
   ScriptSetting,
   ScriptUpdateParams,
   ScriptUpdateResponse,
   Scripts,
-  ScriptsSinglePage,
 } from './scripts/scripts';
 
 export class Workers extends APIResource {
@@ -226,7 +227,7 @@ Workers.Routes = Routes;
 Workers.RouteListResponsesSinglePage = RouteListResponsesSinglePage;
 Workers.Assets = Assets;
 Workers.Scripts = Scripts;
-Workers.ScriptsSinglePage = ScriptsSinglePage;
+Workers.ScriptListResponsesSinglePage = ScriptListResponsesSinglePage;
 Workers.AccountSettings = AccountSettings;
 Workers.Domains = Domains;
 Workers.DomainsSinglePage = DomainsSinglePage;
@@ -264,10 +265,11 @@ export declare namespace Workers {
     type Script as Script,
     type ScriptSetting as ScriptSetting,
     type ScriptUpdateResponse as ScriptUpdateResponse,
+    type ScriptListResponse as ScriptListResponse,
     type ScriptDeleteResponse as ScriptDeleteResponse,
     type ScriptGetResponse as ScriptGetResponse,
     type ScriptSearchResponse as ScriptSearchResponse,
-    ScriptsSinglePage as ScriptsSinglePage,
+    ScriptListResponsesSinglePage as ScriptListResponsesSinglePage,
     type ScriptUpdateParams as ScriptUpdateParams,
     type ScriptListParams as ScriptListParams,
     type ScriptDeleteParams as ScriptDeleteParams,

@@ -8,7 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by cache status.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   cacheHit(
     query?: SummaryCacheHitParams,
@@ -33,7 +33,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS responses by DNSSEC (DNS Security Extensions)
    * support.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   dnssec(query?: SummaryDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
   dnssec(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
@@ -55,7 +55,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS queries by DNSSEC (DNS Security Extensions)
    * client awareness.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   dnssecAware(
     query?: SummaryDNSSECAwareParams,
@@ -80,7 +80,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNSSEC-validated answers by end-to-end security
    * status.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   dnssecE2E(
     query?: SummaryDNSSECE2EParams,
@@ -104,7 +104,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by IP version.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -128,7 +128,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by matching answers.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   matchingAnswer(
     query?: SummaryMatchingAnswerParams,
@@ -152,7 +152,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by DNS transport protocol.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   protocol(
     query?: SummaryProtocolParams,
@@ -176,7 +176,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by type.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   queryType(
     query?: SummaryQueryTypeParams,
@@ -200,7 +200,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by response code.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   responseCode(
     query?: SummaryResponseCodeParams,
@@ -224,7 +224,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by minimum response TTL.
    *
-   * @deprecated
+   * @deprecated Use [Radar DNS Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/summary_v2/) instead.
    */
   responseTTL(
     query?: SummaryResponseTTLParams,
@@ -1410,17 +1410,17 @@ export interface SummaryCacheHitParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1509,12 +1509,13 @@ export interface SummaryCacheHitParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1533,10 +1534,11 @@ export interface SummaryCacheHitParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -1594,17 +1596,17 @@ export interface SummaryDNSSECParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1693,12 +1695,13 @@ export interface SummaryDNSSECParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1717,10 +1720,11 @@ export interface SummaryDNSSECParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -1778,17 +1782,17 @@ export interface SummaryDNSSECAwareParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1877,12 +1881,13 @@ export interface SummaryDNSSECAwareParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1901,10 +1906,11 @@ export interface SummaryDNSSECAwareParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -1962,17 +1968,17 @@ export interface SummaryDNSSECE2EParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2061,12 +2067,13 @@ export interface SummaryDNSSECE2EParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2085,10 +2092,11 @@ export interface SummaryDNSSECE2EParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2146,17 +2154,17 @@ export interface SummaryIPVersionParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2245,12 +2253,13 @@ export interface SummaryIPVersionParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2269,10 +2278,11 @@ export interface SummaryIPVersionParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2330,17 +2340,17 @@ export interface SummaryMatchingAnswerParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2429,12 +2439,13 @@ export interface SummaryMatchingAnswerParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2453,10 +2464,11 @@ export interface SummaryMatchingAnswerParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2514,12 +2526,12 @@ export interface SummaryProtocolParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2608,12 +2620,13 @@ export interface SummaryProtocolParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2632,10 +2645,11 @@ export interface SummaryProtocolParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2700,17 +2714,17 @@ export interface SummaryQueryTypeParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2729,10 +2743,11 @@ export interface SummaryQueryTypeParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2797,17 +2812,17 @@ export interface SummaryResponseCodeParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2896,10 +2911,11 @@ export interface SummaryResponseCodeParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2957,17 +2973,17 @@ export interface SummaryResponseTTLParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -3056,12 +3072,13 @@ export interface SummaryResponseTTLParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -3080,10 +3097,11 @@ export interface SummaryResponseTTLParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }

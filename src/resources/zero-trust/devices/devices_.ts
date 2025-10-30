@@ -202,7 +202,8 @@ export interface DeviceListResponse {
   os_version_extra?: string | null;
 
   /**
-   * The public IP address of the WARP client.
+   * @deprecated **Deprecated**: IP information is provided by DEX - see
+   * https://developers.cloudflare.com/api/resources/zero_trust/subresources/dex/subresources/fleet_status/subresources/devices/methods/list/
    */
   public_ip?: string | null;
 
@@ -371,7 +372,8 @@ export interface DeviceGetResponse {
   os_version_extra?: string | null;
 
   /**
-   * The public IP address of the WARP client.
+   * @deprecated **Deprecated**: IP information is provided by DEX - see
+   * https://developers.cloudflare.com/api/resources/zero_trust/subresources/dex/subresources/fleet_status/subresources/devices/methods/list/
    */
   public_ip?: string | null;
 
