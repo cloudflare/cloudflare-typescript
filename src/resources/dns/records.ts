@@ -3701,30 +3701,30 @@ export namespace Record {
 }
 
 export type RecordResponse =
-  | RecordResponse.A
-  | RecordResponse.AAAA
-  | RecordResponse.CNAME
-  | RecordResponse.MX
-  | RecordResponse.NS
-  | RecordResponse.Openpgpkey
-  | RecordResponse.PTR
-  | RecordResponse.TXT
-  | RecordResponse.CAA
-  | RecordResponse.CERT
-  | RecordResponse.DNSKEY
-  | RecordResponse.DS
-  | RecordResponse.HTTPS
-  | RecordResponse.LOC
-  | RecordResponse.NAPTR
-  | RecordResponse.SMIMEA
-  | RecordResponse.SRV
-  | RecordResponse.SSHFP
-  | RecordResponse.SVCB
-  | RecordResponse.TLSA
-  | RecordResponse.URI;
+  | RecordResponse.ARecord
+  | RecordResponse.AAAARecord
+  | RecordResponse.CNAMERecord
+  | RecordResponse.MXRecord
+  | RecordResponse.NSRecord
+  | RecordResponse.OpenpgpkeyRecord
+  | RecordResponse.PTRRecord
+  | RecordResponse.TXTRecord
+  | RecordResponse.CAARecord
+  | RecordResponse.CERTRecord
+  | RecordResponse.DNSKEYRecord
+  | RecordResponse.DSRecord
+  | RecordResponse.HTTPSRecord
+  | RecordResponse.LOCRecord
+  | RecordResponse.NAPTRRecord
+  | RecordResponse.SMIMEARecord
+  | RecordResponse.SRVRecord
+  | RecordResponse.SSHFPRecord
+  | RecordResponse.SVCBRecord
+  | RecordResponse.TLSARecord
+  | RecordResponse.URIRecord;
 
 export namespace RecordResponse {
-  export interface A extends RecordsAPI.ARecord {
+  export interface ARecord extends RecordsAPI.ARecord {
     /**
      * Identifier.
      */
@@ -3761,7 +3761,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface AAAA extends RecordsAPI.AAAARecord {
+  export interface AAAARecord extends RecordsAPI.AAAARecord {
     /**
      * Identifier.
      */
@@ -3798,7 +3798,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface CNAME extends RecordsAPI.CNAMERecord {
+  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
     /**
      * Identifier.
      */
@@ -3835,7 +3835,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface MX extends RecordsAPI.MXRecord {
+  export interface MXRecord extends RecordsAPI.MXRecord {
     /**
      * Identifier.
      */
@@ -3872,7 +3872,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface NS extends RecordsAPI.NSRecord {
+  export interface NSRecord extends RecordsAPI.NSRecord {
     /**
      * Identifier.
      */
@@ -3909,7 +3909,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface Openpgpkey {
+  export interface OpenpgpkeyRecord {
     /**
      * Identifier.
      */
@@ -3960,7 +3960,7 @@ export namespace RecordResponse {
     /**
      * Settings for the DNS record.
      */
-    settings: Openpgpkey.Settings;
+    settings: OpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -3990,7 +3990,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export namespace Openpgpkey {
+  export namespace OpenpgpkeyRecord {
     /**
      * Settings for the DNS record.
      */
@@ -4013,7 +4013,7 @@ export namespace RecordResponse {
     }
   }
 
-  export interface PTR extends RecordsAPI.PTRRecord {
+  export interface PTRRecord extends RecordsAPI.PTRRecord {
     /**
      * Identifier.
      */
@@ -4050,7 +4050,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface TXT extends RecordsAPI.TXTRecord {
+  export interface TXTRecord extends RecordsAPI.TXTRecord {
     /**
      * Identifier.
      */
@@ -4087,7 +4087,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface CAA extends RecordsAPI.CAARecord {
+  export interface CAARecord extends RecordsAPI.CAARecord {
     /**
      * Identifier.
      */
@@ -4124,7 +4124,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface CERT extends RecordsAPI.CERTRecord {
+  export interface CERTRecord extends RecordsAPI.CERTRecord {
     /**
      * Identifier.
      */
@@ -4161,7 +4161,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface DNSKEY extends RecordsAPI.DNSKEYRecord {
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
     /**
      * Identifier.
      */
@@ -4198,7 +4198,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface DS extends RecordsAPI.DSRecord {
+  export interface DSRecord extends RecordsAPI.DSRecord {
     /**
      * Identifier.
      */
@@ -4235,7 +4235,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface HTTPS extends RecordsAPI.HTTPSRecord {
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
     /**
      * Identifier.
      */
@@ -4272,7 +4272,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface LOC extends RecordsAPI.LOCRecord {
+  export interface LOCRecord extends RecordsAPI.LOCRecord {
     /**
      * Identifier.
      */
@@ -4309,7 +4309,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface NAPTR extends RecordsAPI.NAPTRRecord {
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
     /**
      * Identifier.
      */
@@ -4346,7 +4346,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SMIMEA extends RecordsAPI.SMIMEARecord {
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
     /**
      * Identifier.
      */
@@ -4383,7 +4383,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SRV extends RecordsAPI.SRVRecord {
+  export interface SRVRecord extends RecordsAPI.SRVRecord {
     /**
      * Identifier.
      */
@@ -4420,7 +4420,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SSHFP extends RecordsAPI.SSHFPRecord {
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
     /**
      * Identifier.
      */
@@ -4457,7 +4457,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SVCB extends RecordsAPI.SVCBRecord {
+  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
     /**
      * Identifier.
      */
@@ -4494,7 +4494,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface TLSA extends RecordsAPI.TLSARecord {
+  export interface TLSARecord extends RecordsAPI.TLSARecord {
     /**
      * Identifier.
      */
@@ -4531,7 +4531,7 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface URI extends RecordsAPI.URIRecord {
+  export interface URIRecord extends RecordsAPI.URIRecord {
     /**
      * Identifier.
      */
