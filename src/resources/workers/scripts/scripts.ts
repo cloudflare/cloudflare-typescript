@@ -137,16 +137,19 @@ export class Scripts extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const script of client.workers.scripts.list({
-   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * })) {
+   * for await (const scriptListResponse of client.workers.scripts.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
    *   // ...
    * }
    * ```
    */
-  list(params: ScriptListParams, options?: Core.RequestOptions): Core.PagePromise<ScriptsSinglePage, Script> {
+  list(
+    params: ScriptListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ScriptListResponsesSinglePage, ScriptListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/workers/scripts`, ScriptsSinglePage, {
+    return this._client.getAPIList(`/accounts/${account_id}/workers/scripts`, ScriptListResponsesSinglePage, {
       query,
       ...options,
     });
@@ -218,11 +221,11 @@ export class Scripts extends APIResource {
   }
 }
 
-export class ScriptsSinglePage extends SinglePage<Script> {}
+export class ScriptListResponsesSinglePage extends SinglePage<ScriptListResponse> {}
 
 export interface Script {
   /**
-   * The id of the script in the Workers system. Usually the script name.
+   * The name used to identify the script.
    */
   id?: string;
 
@@ -292,6 +295,11 @@ export interface Script {
   named_handlers?: Array<Script.NamedHandler>;
 
   /**
+   * Observability settings for the Worker.
+   */
+  observability?: Script.Observability;
+
+  /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    */
@@ -310,9 +318,19 @@ export interface Script {
   placement_status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
 
   /**
+   * The immutable ID of the script.
+   */
+  tag?: string;
+
+  /**
+   * Tags associated with the Worker.
+   */
+  tags?: Array<string> | null;
+
+  /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScript>;
+  tail_consumers?: Array<TailAPI.ConsumerScript> | null;
 
   /**
    * Usage model for the Worker invocations.
@@ -331,6 +349,61 @@ export namespace Script {
      * The name of the export.
      */
     name?: string;
+  }
+
+  /**
+   * Observability settings for the Worker.
+   */
+  export interface Observability {
+    /**
+     * Whether observability is enabled for the Worker.
+     */
+    enabled: boolean;
+
+    /**
+     * The sampling rate for incoming requests. From 0 to 1 (1 = 100%, 0.1 = 10%).
+     * Default is 1.
+     */
+    head_sampling_rate?: number | null;
+
+    /**
+     * Log settings for the Worker.
+     */
+    logs?: Observability.Logs | null;
+  }
+
+  export namespace Observability {
+    /**
+     * Log settings for the Worker.
+     */
+    export interface Logs {
+      /**
+       * Whether logs are enabled for the Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether
+       * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+       * are enabled for the Worker.
+       */
+      invocation_logs: boolean;
+
+      /**
+       * A list of destinations where logs will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+
+      /**
+       * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
   }
 
   /**
@@ -372,7 +445,7 @@ export interface ScriptSetting {
   /**
    * Tags associated with the Worker.
    */
-  tags?: Array<string>;
+  tags?: Array<string> | null;
 
   /**
    * List of Workers that will consume logs from the attached Worker.
@@ -441,7 +514,218 @@ export interface ScriptUpdateResponse {
   startup_time_ms: number;
 
   /**
-   * The id of the script in the Workers system. Usually the script name.
+   * The name used to identify the script.
+   */
+  id?: string;
+
+  /**
+   * Date indicating targeted support in the Workers runtime. Backwards incompatible
+   * fixes to the runtime following this date will not affect this Worker.
+   */
+  compatibility_date?: string;
+
+  /**
+   * Flags that enable or disable certain features in the Workers runtime. Used to
+   * enable upcoming features or opt in or out of specific changes not included in a
+   * `compatibility_date`.
+   */
+  compatibility_flags?: Array<string>;
+
+  /**
+   * When the script was created.
+   */
+  created_on?: string;
+
+  /**
+   * The entry point for the script.
+   */
+  entry_point?: string;
+
+  /**
+   * Hashed script content, can be used in a If-None-Match header when updating.
+   */
+  etag?: string;
+
+  /**
+   * The names of handlers exported as part of the default export.
+   */
+  handlers?: Array<string>;
+
+  /**
+   * Whether a Worker contains assets.
+   */
+  has_assets?: boolean;
+
+  /**
+   * Whether a Worker contains modules.
+   */
+  has_modules?: boolean;
+
+  /**
+   * The client most recently used to deploy this Worker.
+   */
+  last_deployed_from?: string;
+
+  /**
+   * Whether Logpush is turned on for the Worker.
+   */
+  logpush?: boolean;
+
+  /**
+   * The tag of the Durable Object migration that was most recently applied for this
+   * Worker.
+   */
+  migration_tag?: string;
+
+  /**
+   * When the script was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Named exports, such as Durable Object class implementations and named
+   * entrypoints.
+   */
+  named_handlers?: Array<ScriptUpdateResponse.NamedHandler>;
+
+  /**
+   * Observability settings for the Worker.
+   */
+  observability?: ScriptUpdateResponse.Observability;
+
+  /**
+   * Configuration for
+   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   */
+  placement?: ScriptUpdateResponse.Placement;
+
+  /**
+   * @deprecated
+   */
+  placement_mode?: 'smart';
+
+  /**
+   * @deprecated
+   */
+  placement_status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+
+  /**
+   * The immutable ID of the script.
+   */
+  tag?: string;
+
+  /**
+   * Tags associated with the Worker.
+   */
+  tags?: Array<string> | null;
+
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: Array<TailAPI.ConsumerScript> | null;
+
+  /**
+   * Usage model for the Worker invocations.
+   */
+  usage_model?: 'standard' | 'bundled' | 'unbound';
+}
+
+export namespace ScriptUpdateResponse {
+  export interface NamedHandler {
+    /**
+     * The names of handlers exported as part of the named export.
+     */
+    handlers?: Array<string>;
+
+    /**
+     * The name of the export.
+     */
+    name?: string;
+  }
+
+  /**
+   * Observability settings for the Worker.
+   */
+  export interface Observability {
+    /**
+     * Whether observability is enabled for the Worker.
+     */
+    enabled: boolean;
+
+    /**
+     * The sampling rate for incoming requests. From 0 to 1 (1 = 100%, 0.1 = 10%).
+     * Default is 1.
+     */
+    head_sampling_rate?: number | null;
+
+    /**
+     * Log settings for the Worker.
+     */
+    logs?: Observability.Logs | null;
+  }
+
+  export namespace Observability {
+    /**
+     * Log settings for the Worker.
+     */
+    export interface Logs {
+      /**
+       * Whether logs are enabled for the Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether
+       * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+       * are enabled for the Worker.
+       */
+      invocation_logs: boolean;
+
+      /**
+       * A list of destinations where logs will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+
+      /**
+       * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+  }
+
+  /**
+   * Configuration for
+   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   */
+  export interface Placement {
+    /**
+     * The last time the script was analyzed for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    last_analyzed_at?: string;
+
+    /**
+     * Enables
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    mode?: 'smart';
+
+    /**
+     * Status of
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+  }
+}
+
+export interface ScriptListResponse {
+  /**
+   * The name used to identify the script.
    */
   id?: string;
 
@@ -508,13 +792,18 @@ export interface ScriptUpdateResponse {
    * Named exports, such as Durable Object class implementations and named
    * entrypoints.
    */
-  named_handlers?: Array<ScriptUpdateResponse.NamedHandler>;
+  named_handlers?: Array<ScriptListResponse.NamedHandler>;
+
+  /**
+   * Observability settings for the Worker.
+   */
+  observability?: ScriptListResponse.Observability;
 
   /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    */
-  placement?: ScriptUpdateResponse.Placement;
+  placement?: ScriptListResponse.Placement;
 
   /**
    * @deprecated
@@ -527,9 +816,24 @@ export interface ScriptUpdateResponse {
   placement_status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
 
   /**
+   * Routes associated with the Worker.
+   */
+  routes?: Array<ScriptListResponse.Route> | null;
+
+  /**
+   * The immutable ID of the script.
+   */
+  tag?: string;
+
+  /**
+   * Tags associated with the Worker.
+   */
+  tags?: Array<string> | null;
+
+  /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScript>;
+  tail_consumers?: Array<TailAPI.ConsumerScript> | null;
 
   /**
    * Usage model for the Worker invocations.
@@ -537,7 +841,7 @@ export interface ScriptUpdateResponse {
   usage_model?: 'standard' | 'bundled' | 'unbound';
 }
 
-export namespace ScriptUpdateResponse {
+export namespace ScriptListResponse {
   export interface NamedHandler {
     /**
      * The names of handlers exported as part of the named export.
@@ -548,6 +852,61 @@ export namespace ScriptUpdateResponse {
      * The name of the export.
      */
     name?: string;
+  }
+
+  /**
+   * Observability settings for the Worker.
+   */
+  export interface Observability {
+    /**
+     * Whether observability is enabled for the Worker.
+     */
+    enabled: boolean;
+
+    /**
+     * The sampling rate for incoming requests. From 0 to 1 (1 = 100%, 0.1 = 10%).
+     * Default is 1.
+     */
+    head_sampling_rate?: number | null;
+
+    /**
+     * Log settings for the Worker.
+     */
+    logs?: Observability.Logs | null;
+  }
+
+  export namespace Observability {
+    /**
+     * Log settings for the Worker.
+     */
+    export interface Logs {
+      /**
+       * Whether logs are enabled for the Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether
+       * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
+       * are enabled for the Worker.
+       */
+      invocation_logs: boolean;
+
+      /**
+       * A list of destinations where logs will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+
+      /**
+       * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
   }
 
   /**
@@ -572,6 +931,24 @@ export namespace ScriptUpdateResponse {
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      */
     status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+  }
+
+  export interface Route {
+    /**
+     * Identifier.
+     */
+    id: string;
+
+    /**
+     * Pattern to match incoming requests against.
+     * [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
+     */
+    pattern: string;
+
+    /**
+     * Name of the script to run if the route matches.
+     */
+    script?: string;
   }
 }
 
@@ -760,7 +1137,7 @@ export namespace ScriptUpdateParams {
     /**
      * List of Workers that will consume logs from the attached Worker.
      */
-    tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
+    tail_consumers?: Array<TailAPI.ConsumerScriptParam> | null;
 
     /**
      * Usage model for the Worker invocations.
@@ -1579,7 +1956,7 @@ export interface ScriptSearchParams {
   per_page?: number;
 }
 
-Scripts.ScriptsSinglePage = ScriptsSinglePage;
+Scripts.ScriptListResponsesSinglePage = ScriptListResponsesSinglePage;
 Scripts.Assets = AssetsAPIAssets;
 Scripts.Subdomain = Subdomain;
 Scripts.Schedules = Schedules;
@@ -1598,10 +1975,11 @@ export declare namespace Scripts {
     type Script as Script,
     type ScriptSetting as ScriptSetting,
     type ScriptUpdateResponse as ScriptUpdateResponse,
+    type ScriptListResponse as ScriptListResponse,
     type ScriptDeleteResponse as ScriptDeleteResponse,
     type ScriptGetResponse as ScriptGetResponse,
     type ScriptSearchResponse as ScriptSearchResponse,
-    ScriptsSinglePage as ScriptsSinglePage,
+    ScriptListResponsesSinglePage as ScriptListResponsesSinglePage,
     type ScriptUpdateParams as ScriptUpdateParams,
     type ScriptListParams as ScriptListParams,
     type ScriptDeleteParams as ScriptDeleteParams,

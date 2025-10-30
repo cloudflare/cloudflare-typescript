@@ -2108,6 +2108,7 @@ Types:
 - <code><a href="./src/resources/workers/scripts/scripts.ts">Script</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptSetting</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptListResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptDeleteResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptGetResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptSearchResponse</a></code>
@@ -2115,7 +2116,7 @@ Types:
 Methods:
 
 - <code title="put /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">update</a>(scriptName, { ...params }) -> ScriptUpdateResponse</code>
-- <code title="get /accounts/{account_id}/workers/scripts">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">list</a>({ ...params }) -> ScriptsSinglePage</code>
+- <code title="get /accounts/{account_id}/workers/scripts">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">list</a>({ ...params }) -> ScriptListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">delete</a>(scriptName, { ...params }) -> ScriptDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> string</code>
 - <code title="get /accounts/{account_id}/workers/scripts-search">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">search</a>({ ...params }) -> ScriptSearchResponse</code>
@@ -2945,13 +2946,8 @@ Methods:
 
 ## LOADocuments
 
-Types:
-
-- <code><a href="./src/resources/addressing/loa-documents.ts">LOADocumentCreateResponse</a></code>
-
 Methods:
 
-- <code title="post /accounts/{account_id}/addressing/loa_documents">client.addressing.loaDocuments.<a href="./src/resources/addressing/loa-documents.ts">create</a>({ ...params }) -> LOADocumentCreateResponse</code>
 - <code title="get /accounts/{account_id}/addressing/loa_documents/{loa_document_id}/download">client.addressing.loaDocuments.<a href="./src/resources/addressing/loa-documents.ts">get</a>(loaDocumentId, { ...params }) -> Response</code>
 
 ## Prefixes
@@ -3967,7 +3963,7 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/pages/projects/{project_name}/deployments">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">create</a>(projectName, { ...params }) -> Deployment</code>
-- <code title="get /accounts/{account_id}/pages/projects/{project_name}/deployments">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">list</a>(projectName, { ...params }) -> DeploymentsSinglePage</code>
+- <code title="get /accounts/{account_id}/pages/projects/{project_name}/deployments">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">list</a>(projectName, { ...params }) -> DeploymentsV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">delete</a>(projectName, deploymentId, { ...params }) -> DeploymentDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">get</a>(projectName, deploymentId, { ...params }) -> Deployment</code>
 - <code title="post /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}/retry">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">retry</a>(projectName, deploymentId, { ...params }) -> Deployment</code>
@@ -5609,21 +5605,13 @@ Methods:
 
 ### Cloudflared
 
-Types:
-
-- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">CloudflaredCreateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">CloudflaredListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">CloudflaredDeleteResponse</a></code>
-- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">CloudflaredEditResponse</a></code>
-- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">CloudflaredGetResponse</a></code>
-
 Methods:
 
-- <code title="post /accounts/{account_id}/cfd_tunnel">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">create</a>({ ...params }) -> CloudflaredCreateResponse</code>
-- <code title="get /accounts/{account_id}/cfd_tunnel">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">list</a>({ ...params }) -> CloudflaredListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">delete</a>(tunnelId, { ...params }) -> CloudflaredDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">edit</a>(tunnelId, { ...params }) -> CloudflaredEditResponse</code>
-- <code title="get /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">get</a>(tunnelId, { ...params }) -> CloudflaredGetResponse</code>
+- <code title="post /accounts/{account_id}/cfd_tunnel">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">create</a>({ ...params }) -> CloudflareTunnel</code>
+- <code title="get /accounts/{account_id}/cfd_tunnel">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">list</a>({ ...params }) -> CloudflareTunnelsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">delete</a>(tunnelId, { ...params }) -> CloudflareTunnel</code>
+- <code title="patch /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">edit</a>(tunnelId, { ...params }) -> CloudflareTunnel</code>
+- <code title="get /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">get</a>(tunnelId, { ...params }) -> CloudflareTunnel</code>
 
 #### Configurations
 
