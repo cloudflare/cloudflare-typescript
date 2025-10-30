@@ -2,12 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as LOADocumentsAPI from './loa-documents';
-import {
-  LOADocumentCreateParams,
-  LOADocumentCreateResponse,
-  LOADocumentGetParams,
-  LOADocuments,
-} from './loa-documents';
+import { LOADocumentGetParams, LOADocuments } from './loa-documents';
 import * as ServicesAPI from './services';
 import { ServiceListParams, ServiceListResponse, ServiceListResponsesSinglePage, Services } from './services';
 import * as AddressMapsAPI from './address-maps/address-maps';
@@ -111,12 +106,7 @@ export declare namespace Addressing {
     type AddressMapGetParams as AddressMapGetParams,
   };
 
-  export {
-    LOADocuments as LOADocuments,
-    type LOADocumentCreateResponse as LOADocumentCreateResponse,
-    type LOADocumentCreateParams as LOADocumentCreateParams,
-    type LOADocumentGetParams as LOADocumentGetParams,
-  };
+  export { LOADocuments as LOADocuments, type LOADocumentGetParams as LOADocumentGetParams };
 
   export {
     Prefixes as Prefixes,

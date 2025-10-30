@@ -5,7 +5,8 @@ import * as Core from '../../core';
 
 export class OrganizationProfileResource extends APIResource {
   /**
-   * Modify organization profile
+   * Modify organization profile. (Currently in Closed Beta - see
+   * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   update(
     organizationId: string,
@@ -20,7 +21,8 @@ export class OrganizationProfileResource extends APIResource {
   }
 
   /**
-   * Get an organizations profile if it exists.
+   * Get an organizations profile if it exists. (Currently in Closed Beta - see
+   * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   get(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<unnamed_schema_0.Result> {
     return (
