@@ -104,6 +104,31 @@ export class Subscriptions extends APIResource {
       ) as APIPromise<{ result: SubscriptionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get details about an existing event subscription
+   *
+   * @example
+   * ```ts
+   * const subscription = await client.queues.subscriptions.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  get(
+    subscriptionID: string,
+    params: SubscriptionGetParams,
+    options?: RequestOptions,
+  ): APIPromise<SubscriptionGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/event_subscriptions/subscriptions/${subscriptionID}`,
+        options,
+      ) as APIPromise<{ result: SubscriptionGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export type SubscriptionListResponsesV4PagePaginationArray = V4PagePaginationArray<SubscriptionListResponse>;
@@ -660,6 +685,144 @@ export namespace SubscriptionDeleteResponse {
   }
 }
 
+export interface SubscriptionGetResponse {
+  /**
+   * Unique identifier for the subscription
+   */
+  id: string;
+
+  /**
+   * When the subscription was created
+   */
+  created_at: string;
+
+  /**
+   * Destination configuration for the subscription
+   */
+  destination: SubscriptionGetResponse.Destination;
+
+  /**
+   * Whether the subscription is active
+   */
+  enabled: boolean;
+
+  /**
+   * List of event types this subscription handles
+   */
+  events: Array<string>;
+
+  /**
+   * When the subscription was last modified
+   */
+  modified_at: string;
+
+  /**
+   * Name of the subscription
+   */
+  name: string;
+
+  /**
+   * Source configuration for the subscription
+   */
+  source:
+    | SubscriptionGetResponse.MqEventSourceImages
+    | SubscriptionGetResponse.MqEventSourceKV
+    | SubscriptionGetResponse.MqEventSourceR2
+    | SubscriptionGetResponse.MqEventSourceSuperSlurper
+    | SubscriptionGetResponse.MqEventSourceVectorize
+    | SubscriptionGetResponse.MqEventSourceWorkersAIModel
+    | SubscriptionGetResponse.MqEventSourceWorkersBuildsWorker
+    | SubscriptionGetResponse.MqEventSourceWorkflowsWorkflow;
+}
+
+export namespace SubscriptionGetResponse {
+  /**
+   * Destination configuration for the subscription
+   */
+  export interface Destination {
+    /**
+     * ID of the target queue
+     */
+    queue_id: string;
+
+    /**
+     * Type of destination
+     */
+    type: 'queues.queue';
+  }
+
+  export interface MqEventSourceImages {
+    /**
+     * Type of source
+     */
+    type?: 'images';
+  }
+
+  export interface MqEventSourceKV {
+    /**
+     * Type of source
+     */
+    type?: 'kv';
+  }
+
+  export interface MqEventSourceR2 {
+    /**
+     * Type of source
+     */
+    type?: 'r2';
+  }
+
+  export interface MqEventSourceSuperSlurper {
+    /**
+     * Type of source
+     */
+    type?: 'superSlurper';
+  }
+
+  export interface MqEventSourceVectorize {
+    /**
+     * Type of source
+     */
+    type?: 'vectorize';
+  }
+
+  export interface MqEventSourceWorkersAIModel {
+    /**
+     * Name of the Workers AI model
+     */
+    model_name?: string;
+
+    /**
+     * Type of source
+     */
+    type?: 'workersAi.model';
+  }
+
+  export interface MqEventSourceWorkersBuildsWorker {
+    /**
+     * Type of source
+     */
+    type?: 'workersBuilds.worker';
+
+    /**
+     * Name of the worker
+     */
+    worker_name?: string;
+  }
+
+  export interface MqEventSourceWorkflowsWorkflow {
+    /**
+     * Type of source
+     */
+    type?: 'workflows.workflow';
+
+    /**
+     * Name of the workflow
+     */
+    workflow_name?: string;
+  }
+}
+
 export interface SubscriptionCreateParams {
   /**
    * Path param: A Resource identifier.
@@ -856,16 +1019,25 @@ export interface SubscriptionDeleteParams {
   account_id: string;
 }
 
+export interface SubscriptionGetParams {
+  /**
+   * A Resource identifier.
+   */
+  account_id: string;
+}
+
 export declare namespace Subscriptions {
   export {
     type SubscriptionCreateResponse as SubscriptionCreateResponse,
     type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionListResponse as SubscriptionListResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
     type SubscriptionListResponsesV4PagePaginationArray as SubscriptionListResponsesV4PagePaginationArray,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionListParams as SubscriptionListParams,
     type SubscriptionDeleteParams as SubscriptionDeleteParams,
+    type SubscriptionGetParams as SubscriptionGetParams,
   };
 }

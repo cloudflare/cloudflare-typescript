@@ -322,6 +322,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.consumers.get()`
 - `client.queues.subscriptions.update()`
 - `client.queues.subscriptions.delete()`
+- `client.queues.subscriptions.get()`
 - `client.apiGateway.discovery.operations.edit()`
 - `client.apiGateway.operations.delete()`
 - `client.apiGateway.operations.get()`
@@ -648,6 +649,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.organizations.update()`
 - `client.zeroTrust.organizations.list()`
 - `client.zeroTrust.organizations.revokeUsers()`
+- `client.zeroTrust.access.aiControls.mcp.portals.update()`
+- `client.zeroTrust.access.aiControls.mcp.portals.delete()`
+- `client.zeroTrust.access.aiControls.mcp.portals.read()`
+- `client.zeroTrust.access.aiControls.mcp.servers.update()`
+- `client.zeroTrust.access.aiControls.mcp.servers.delete()`
+- `client.zeroTrust.access.aiControls.mcp.servers.read()`
+- `client.zeroTrust.access.aiControls.mcp.servers.sync()`
 - `client.zeroTrust.access.gatewayCA.delete()`
 - `client.zeroTrust.access.infrastructure.targets.update()`
 - `client.zeroTrust.access.infrastructure.targets.delete()`
@@ -949,6 +957,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.leakedCredentialChecks.detections.update()`
 - `client.leakedCredentialChecks.detections.delete()`
 - `client.contentScanning.payloads.delete()`
+- `client.abuseReports.create()`
 - `client.ai.run()`
 - `client.ai.finetunes.assets.create()`
 - `client.securityCenter.insights.list()`
@@ -1111,6 +1120,7 @@ client.example.list(undefined, { headers: { ... } });
 <summary>This affects the following methods</summary>
 
 - `client.accounts.list()`
+- `client.organizations.list()`
 - `client.ips.list()`
 - `client.memberships.list()`
 - `client.user.auditLogs.list()`
@@ -1202,7 +1212,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.bots.webCrawlers.summary()`
 - `client.radar.bots.webCrawlers.timeseriesGroups()`
 - `client.radar.datasets.list()`
+- `client.radar.dns.summaryV2()`
 - `client.radar.dns.timeseries()`
+- `client.radar.dns.timeseriesGroupsV2()`
 - `client.radar.dns.top.ases()`
 - `client.radar.dns.top.locations()`
 - `client.radar.dns.summary.cacheHit()`
@@ -1233,7 +1245,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.netflows.top.locations()`
 - `client.radar.verifiedBots.top.bots()`
 - `client.radar.verifiedBots.top.categories()`
+- `client.radar.as112.summaryV2()`
 - `client.radar.as112.timeseries()`
+- `client.radar.as112.timeseriesGroupsV2()`
 - `client.radar.as112.summary.dnssec()`
 - `client.radar.as112.summary.edns()`
 - `client.radar.as112.summary.ipVersion()`
@@ -1250,6 +1264,8 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.as112.top.edns()`
 - `client.radar.as112.top.ipVersion()`
 - `client.radar.as112.top.locations()`
+- `client.radar.email.routing.summaryV2()`
+- `client.radar.email.routing.timeseriesGroupsV2()`
 - `client.radar.email.routing.summary.arc()`
 - `client.radar.email.routing.summary.dkim()`
 - `client.radar.email.routing.summary.dmarc()`
@@ -1262,6 +1278,8 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.email.routing.timeseriesGroups.encrypted()`
 - `client.radar.email.routing.timeseriesGroups.ipVersion()`
 - `client.radar.email.routing.timeseriesGroups.spf()`
+- `client.radar.email.security.summaryV2()`
+- `client.radar.email.security.timeseriesGroupsV2()`
 - `client.radar.email.security.top.tlds.get()`
 - `client.radar.email.security.top.tlds.malicious.get()`
 - `client.radar.email.security.top.tlds.spam.get()`
@@ -1284,7 +1302,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.email.security.timeseriesGroups.spoof()`
 - `client.radar.email.security.timeseriesGroups.threatCategory()`
 - `client.radar.email.security.timeseriesGroups.tlsVersion()`
+- `client.radar.attacks.layer3.summaryV2()`
 - `client.radar.attacks.layer3.timeseries()`
+- `client.radar.attacks.layer3.timeseriesGroupsV2()`
 - `client.radar.attacks.layer3.summary.bitrate()`
 - `client.radar.attacks.layer3.summary.duration()`
 - `client.radar.attacks.layer3.summary.industry()`
@@ -1304,7 +1324,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.attacks.layer3.top.vertical()`
 - `client.radar.attacks.layer3.top.locations.origin()`
 - `client.radar.attacks.layer3.top.locations.target()`
+- `client.radar.attacks.layer7.summaryV2()`
 - `client.radar.attacks.layer7.timeseries()`
+- `client.radar.attacks.layer7.timeseriesGroupsV2()`
 - `client.radar.attacks.layer7.summary.httpMethod()`
 - `client.radar.attacks.layer7.summary.httpVersion()`
 - `client.radar.attacks.layer7.summary.industry()`

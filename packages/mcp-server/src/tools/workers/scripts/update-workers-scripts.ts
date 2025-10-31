@@ -212,7 +212,7 @@ export const tool: Tool = {
                     },
                     namespace: {
                       type: 'string',
-                      description: 'Namespace to bind to.',
+                      description: 'The name of the dispatch namespace.',
                     },
                     type: {
                       type: 'string',
@@ -551,25 +551,6 @@ export const tool: Tool = {
                     environment: {
                       type: 'string',
                       description: 'Optional environment if the Worker utilizes one.',
-                    },
-                  },
-                  required: ['name', 'service', 'type'],
-                },
-                {
-                  type: 'object',
-                  properties: {
-                    name: {
-                      type: 'string',
-                      description: 'A JavaScript variable name for the binding.',
-                    },
-                    service: {
-                      type: 'string',
-                      description: 'Name of Tail Worker to bind to.',
-                    },
-                    type: {
-                      type: 'string',
-                      description: 'The kind of resource that the binding provides.',
-                      enum: ['tail_consumer'],
                     },
                   },
                   required: ['name', 'service', 'type'],

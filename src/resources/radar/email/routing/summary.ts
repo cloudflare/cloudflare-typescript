@@ -10,11 +10,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.summary.arc();
-   * ```
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   arc(
     query: SummaryARCParams | null | undefined = {},
@@ -31,11 +27,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
    * validation.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.summary.dkim();
-   * ```
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   dkim(
     query: SummaryDKIMParams | null | undefined = {},
@@ -52,11 +44,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by DMARC (Domain-based Message
    * Authentication, Reporting and Conformance) validation.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.summary.dmarc();
-   * ```
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   dmarc(
     query: SummaryDMARCParams | null | undefined = {},
@@ -73,11 +61,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by encryption status (encrypted vs.
    * not-encrypted).
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.summary.encrypted();
-   * ```
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   encrypted(
     query: SummaryEncryptedParams | null | undefined = {},
@@ -93,11 +77,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by IP version.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.summary.ipVersion();
-   * ```
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   ipVersion(
     query: SummaryIPVersionParams | null | undefined = {},
@@ -114,11 +94,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by SPF (Sender Policy Framework)
    * validation.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.email.routing.summary.spf();
-   * ```
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   spf(
     query: SummarySPFParams | null | undefined = {},

@@ -28,10 +28,6 @@ export const tool: Tool = {
       bucket: {
         type: 'string',
       },
-      jurisdiction: {
-        type: 'string',
-        enum: ['default', 'eu', 'fedramp'],
-      },
       secret: {
         type: 'object',
         properties: {
@@ -42,9 +38,14 @@ export const tool: Tool = {
             type: 'string',
           },
         },
+        required: ['accessKeyId', 'secretAccessKey'],
       },
       vendor: {
         $ref: '#/$defs/provider',
+      },
+      jurisdiction: {
+        type: 'string',
+        enum: ['default', 'eu', 'fedramp'],
       },
       jq_filter: {
         type: 'string',
@@ -53,7 +54,7 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
-    required: ['account_id'],
+    required: ['account_id', 'bucket', 'secret', 'vendor'],
     $defs: {
       provider: {
         type: 'string',

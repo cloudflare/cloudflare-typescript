@@ -360,7 +360,7 @@ export const tool: Tool = {
           os_version_extra: {
             type: 'string',
             description:
-              'Additional version data. For Mac or iOS, the Product Version Extra. For Linux, the kernel release version. (Mac, iOS, and Linux only).',
+              'Additional version data. For Mac or iOS, the Product Version Extra. For Linux, the distribution name and version. (Mac, iOS, and Linux only).',
           },
         },
         required: ['operating_system', 'operator', 'version'],

@@ -16,12 +16,14 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'update_organizations_organization_profile',
-  description: 'Modify organization profile',
+  description:
+    'Modify organization profile. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)',
   inputSchema: {
     type: 'object',
     properties: {
       organization_id: {
         type: 'string',
+        title: 'Organization ID',
       },
       business_address: {
         type: 'string',

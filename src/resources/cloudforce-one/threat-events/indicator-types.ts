@@ -7,15 +7,10 @@ import { path } from '../../../internal/utils/path';
 
 export class IndicatorTypes extends APIResource {
   /**
-   * Lists all indicator types
+   * This Method is deprecated. Please use /events/dataset/:dataset_id/indicatorTypes
+   * instead.
    *
-   * @example
-   * ```ts
-   * const indicatorTypes =
-   *   await client.cloudforceOne.threatEvents.indicatorTypes.list(
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
+   * @deprecated
    */
   list(params: IndicatorTypeListParams, options?: RequestOptions): APIPromise<IndicatorTypeListResponse> {
     const { account_id } = params;
