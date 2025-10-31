@@ -924,6 +924,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.iam.userGroups.members.update()`
 - `client.iam.userGroups.members.list()`
 - `client.iam.userGroups.members.delete()`
+- `client.iam.sso.update()`
+- `client.iam.sso.delete()`
+- `client.iam.sso.beginVerification()`
+- `client.iam.sso.get()`
 - `client.botnetFeed.asn.dayReport()`
 - `client.botnetFeed.asn.fullReport()`
 - `client.botnetFeed.configs.asn.delete()`

@@ -4122,6 +4122,15 @@ The following tools are available in this MCP server.
 - `list_user_groups_iam_members` (`read`): List all the members attached to a user group.
 - `delete_user_groups_iam_members` (`write`): Remove a member from User Group
 
+### Resource `iam.sso`:
+
+- `create_iam_sso` (`write`): Initialize new SSO connector
+- `update_iam_sso` (`write`): Update SSO connector state
+- `list_iam_sso` (`read`): Get all SSO connectors
+- `delete_iam_sso` (`write`): Delete SSO connector
+- `begin_verification_iam_sso` (`write`): Begin SSO connector verification
+- `get_iam_sso` (`read`): Get single SSO connector
+
 ### Resource `cloud_connector.rules`:
 
 - `update_cloud_connector_rules` (`write`): Put Rules
