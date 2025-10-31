@@ -1,14 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Layer7,
-  type Layer7SummaryV2Response,
-  type Layer7TimeseriesResponse,
-  type Layer7TimeseriesGroupsV2Response,
-  type Layer7SummaryV2Params,
-  type Layer7TimeseriesParams,
-  type Layer7TimeseriesGroupsV2Params,
-} from './layer7';
+export { Layer7, type Layer7TimeseriesResponse, type Layer7TimeseriesParams } from './layer7';
 export {
   Summary,
   type SummaryHTTPMethodResponse,

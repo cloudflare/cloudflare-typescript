@@ -31,6 +31,9 @@ export const tool: Tool = {
           bucket: {
             type: 'string',
           },
+          endpoint: {
+            type: 'string',
+          },
           secret: {
             type: 'object',
             properties: {
@@ -41,23 +44,13 @@ export const tool: Tool = {
                 type: 'string',
               },
             },
-            required: ['accessKeyId', 'secretAccessKey'],
           },
           vendor: {
             type: 'string',
             enum: ['s3'],
           },
-          endpoint: {
-            type: 'string',
-          },
-          pathPrefix: {
-            type: 'string',
-          },
-          region: {
-            type: 'string',
-          },
         },
-        required: ['account_id', 'bucket', 'secret', 'vendor'],
+        required: ['account_id'],
       },
       {
         type: 'object',
@@ -78,17 +71,13 @@ export const tool: Tool = {
                 type: 'string',
               },
             },
-            required: ['clientEmail', 'privateKey'],
           },
           vendor: {
             type: 'string',
             enum: ['gcs'],
           },
-          pathPrefix: {
-            type: 'string',
-          },
         },
-        required: ['account_id', 'bucket', 'secret', 'vendor'],
+        required: ['account_id'],
       },
       {
         type: 'object',
@@ -98,6 +87,10 @@ export const tool: Tool = {
           },
           bucket: {
             type: 'string',
+          },
+          jurisdiction: {
+            type: 'string',
+            enum: ['default', 'eu', 'fedramp'],
           },
           secret: {
             type: 'object',
@@ -109,20 +102,12 @@ export const tool: Tool = {
                 type: 'string',
               },
             },
-            required: ['accessKeyId', 'secretAccessKey'],
           },
           vendor: {
             $ref: '#/$defs/provider',
           },
-          jurisdiction: {
-            type: 'string',
-            enum: ['default', 'eu', 'fedramp'],
-          },
-          pathPrefix: {
-            type: 'string',
-          },
         },
-        required: ['account_id', 'bucket', 'secret', 'vendor'],
+        required: ['account_id'],
       },
     ],
     $defs: {

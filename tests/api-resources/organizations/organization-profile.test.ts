@@ -10,16 +10,13 @@ const client = new Cloudflare({
 
 describe('resource organizationProfile', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.organizations.organizationProfile.update(
-      'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8',
-      {
-        business_address: 'business_address',
-        business_email: 'business_email',
-        business_name: 'business_name',
-        business_phone: 'business_phone',
-        external_metadata: 'external_metadata',
-      },
-    );
+    const responsePromise = client.organizations.organizationProfile.update('organization_id', {
+      business_address: 'business_address',
+      business_email: 'business_email',
+      business_name: 'business_name',
+      business_phone: 'business_phone',
+      external_metadata: 'external_metadata',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,20 +27,17 @@ describe('resource organizationProfile', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.organizations.organizationProfile.update(
-      'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8',
-      {
-        business_address: 'business_address',
-        business_email: 'business_email',
-        business_name: 'business_name',
-        business_phone: 'business_phone',
-        external_metadata: 'external_metadata',
-      },
-    );
+    const response = await client.organizations.organizationProfile.update('organization_id', {
+      business_address: 'business_address',
+      business_email: 'business_email',
+      business_name: 'business_name',
+      business_phone: 'business_phone',
+      external_metadata: 'external_metadata',
+    });
   });
 
   test('get', async () => {
-    const responsePromise = client.organizations.organizationProfile.get('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8');
+    const responsePromise = client.organizations.organizationProfile.get('organization_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

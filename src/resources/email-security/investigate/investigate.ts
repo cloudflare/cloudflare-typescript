@@ -205,32 +205,9 @@ export namespace InvestigateListResponse {
   }
 
   export interface Finding {
-    attachment?: string | null;
-
     detail?: string | null;
 
-    detection?:
-      | 'MALICIOUS'
-      | 'MALICIOUS-BEC'
-      | 'SUSPICIOUS'
-      | 'SPOOF'
-      | 'SPAM'
-      | 'BULK'
-      | 'ENCRYPTED'
-      | 'EXTERNAL'
-      | 'UNKNOWN'
-      | 'NONE'
-      | null;
-
-    field?: string | null;
-
     name?: string | null;
-
-    portion?: string | null;
-
-    reason?: string | null;
-
-    score?: number | null;
 
     value?: string | null;
   }
@@ -350,32 +327,9 @@ export namespace InvestigateGetResponse {
   }
 
   export interface Finding {
-    attachment?: string | null;
-
     detail?: string | null;
 
-    detection?:
-      | 'MALICIOUS'
-      | 'MALICIOUS-BEC'
-      | 'SUSPICIOUS'
-      | 'SPOOF'
-      | 'SPAM'
-      | 'BULK'
-      | 'ENCRYPTED'
-      | 'EXTERNAL'
-      | 'UNKNOWN'
-      | 'NONE'
-      | null;
-
-    field?: string | null;
-
     name?: string | null;
-
-    portion?: string | null;
-
-    reason?: string | null;
-
-    score?: number | null;
 
     value?: string | null;
   }

@@ -37,7 +37,7 @@ export class Policies extends APIResource {
    * @example
    * ```ts
    * const policy = await client.alerting.policies.update(
-   *   '0da2b59ef118439d8097bdfb215203c9',
+   *   '0da2b59e-f118-439d-8097-bdfb215203c9',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
@@ -84,7 +84,7 @@ export class Policies extends APIResource {
    * @example
    * ```ts
    * const policy = await client.alerting.policies.delete(
-   *   '0da2b59ef118439d8097bdfb215203c9',
+   *   '0da2b59e-f118-439d-8097-bdfb215203c9',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
@@ -104,7 +104,7 @@ export class Policies extends APIResource {
    * @example
    * ```ts
    * const policy = await client.alerting.policies.get(
-   *   '0da2b59ef118439d8097bdfb215203c9',
+   *   '0da2b59e-f118-439d-8097-bdfb215203c9',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
@@ -210,7 +210,6 @@ export interface Policy {
    * possible values.
    */
   alert_type?:
-    | 'abuse_report_alert'
     | 'access_custom_certificate_expiration_type'
     | 'advanced_ddos_attack_l4_alert'
     | 'advanced_ddos_attack_l7_alert'
@@ -523,11 +522,6 @@ export interface PolicyFilter {
   /**
    * Usage depends on specific alert type
    */
-  type?: Array<string>;
-
-  /**
-   * Usage depends on specific alert type
-   */
   where?: Array<string>;
 
   /**
@@ -747,11 +741,6 @@ export interface PolicyFilterParam {
   /**
    * Usage depends on specific alert type
    */
-  type?: Array<string>;
-
-  /**
-   * Usage depends on specific alert type
-   */
   where?: Array<string>;
 
   /**
@@ -835,7 +824,6 @@ export interface PolicyCreateParams {
    * possible values.
    */
   alert_type:
-    | 'abuse_report_alert'
     | 'access_custom_certificate_expiration_type'
     | 'advanced_ddos_attack_l4_alert'
     | 'advanced_ddos_attack_l7_alert'
@@ -957,7 +945,6 @@ export interface PolicyUpdateParams {
    * possible values.
    */
   alert_type?:
-    | 'abuse_report_alert'
     | 'access_custom_certificate_expiration_type'
     | 'advanced_ddos_attack_l4_alert'
     | 'advanced_ddos_attack_l7_alert'

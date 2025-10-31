@@ -9,7 +9,10 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS queries to AS112 by DNSSEC (DNS Security
    * Extensions) support.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response = await client.radar.as112.summary.dnssec();
+   * ```
    */
   dnssec(
     query: SummaryDNSSECParams | null | undefined = {},
@@ -26,7 +29,10 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS queries to AS112 by EDNS (Extension Mechanisms
    * for DNS) support.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response = await client.radar.as112.summary.edns();
+   * ```
    */
   edns(
     query: SummaryEdnsParams | null | undefined = {},
@@ -42,7 +48,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by IP version.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.summary.ipVersion();
+   * ```
    */
   ipVersion(
     query: SummaryIPVersionParams | null | undefined = {},
@@ -58,7 +68,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by protocol.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.summary.protocol();
+   * ```
    */
   protocol(
     query: SummaryProtocolParams | null | undefined = {},
@@ -74,7 +88,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by type.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.summary.queryType();
+   * ```
    */
   queryType(
     query: SummaryQueryTypeParams | null | undefined = {},
@@ -90,7 +108,11 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS requests classified by response code.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.as112.summary.responseCodes();
+   * ```
    */
   responseCodes(
     query: SummaryResponseCodesParams | null | undefined = {},

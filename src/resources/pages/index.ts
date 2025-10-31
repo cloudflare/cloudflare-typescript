@@ -15,5 +15,4 @@ export {
   type ProjectGetParams,
   type ProjectPurgeBuildCacheParams,
   type DeploymentsSinglePage,
-  type DeploymentsV4PagePaginationArray,
 } from './projects/index';

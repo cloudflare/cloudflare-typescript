@@ -529,7 +529,7 @@ export const tool: Tool = {
           value: {
             type: 'integer',
             description:
-              'The number of seconds to cache resources for.\nSetting this to 0 enables "Respect Existing Headers".\n',
+              'The number of seconds to cache resources for.\nMinimum values by plan:\n- Free: 7200 seconds (2 hours)\n- Pro: 3600 seconds (1 hour)\n- Business: 1 second\n- Enterprise: 1 second\nSetting this to 0 enables "Respect Existing Headers" and is allowed for all plans.\n',
           },
         },
       },

@@ -41,10 +41,6 @@ export const tool: Tool = {
           annotations: {
             type: 'object',
             properties: {
-              'workers/alias': {
-                type: 'string',
-                description: 'Associated alias for a version.',
-              },
               'workers/message': {
                 type: 'string',
                 description: 'Human-readable message about the version. Truncated to 100 bytes.',
@@ -173,7 +169,7 @@ export const tool: Tool = {
                     },
                     namespace: {
                       type: 'string',
-                      description: 'The name of the dispatch namespace.',
+                      description: 'Namespace to bind to.',
                     },
                     type: {
                       type: 'string',
