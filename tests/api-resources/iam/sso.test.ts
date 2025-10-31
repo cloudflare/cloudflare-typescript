@@ -29,13 +29,13 @@ describe('resource sso', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       email_domain: 'example.com',
       begin_verification: true,
-      use_fedramp_language: false,
     });
   });
 
   test('update: only required params', async () => {
     const responsePromise = client.iam.sso.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      enabled: true,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,7 +50,6 @@ describe('resource sso', () => {
     const response = await client.iam.sso.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: true,
-      use_fedramp_language: false,
     });
   });
 

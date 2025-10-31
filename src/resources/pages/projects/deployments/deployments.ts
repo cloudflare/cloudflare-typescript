@@ -193,76 +193,10 @@ export interface DeploymentCreateParams {
   account_id: string;
 
   /**
-   * Body param: Headers configuration file for the deployment.
-   */
-  _headers?: Core.Uploadable;
-
-  /**
-   * Body param: Redirects configuration file for the deployment.
-   */
-  _redirects?: Core.Uploadable;
-
-  /**
-   * Body param: Routes configuration file defining routing rules.
-   */
-  '_routes.json'?: Core.Uploadable;
-
-  /**
-   * Body param: Worker bundle file in multipart/form-data format. Mutually exclusive
-   * with `_worker.js`. Cannot specify both `_worker.js` and `_worker.bundle` in the
-   * same request. Maximum size: 25 MiB.
-   */
-  '_worker.bundle'?: Core.Uploadable;
-
-  /**
-   * Body param: Worker JavaScript file. Mutually exclusive with `_worker.bundle`.
-   * Cannot specify both `_worker.js` and `_worker.bundle` in the same request.
-   */
-  '_worker.js'?: Core.Uploadable;
-
-  /**
    * Body param: The branch to build the new deployment from. The `HEAD` of the
    * branch will be used. If omitted, the production branch will be used by default.
    */
   branch?: string;
-
-  /**
-   * Body param: Boolean string indicating if the working directory has uncommitted
-   * changes.
-   */
-  commit_dirty?: 'true' | 'false';
-
-  /**
-   * Body param: Git commit SHA associated with this deployment.
-   */
-  commit_hash?: string;
-
-  /**
-   * Body param: Git commit message associated with this deployment.
-   */
-  commit_message?: string;
-
-  /**
-   * Body param: Functions routing configuration file.
-   */
-  'functions-filepath-routing-config.json'?: Core.Uploadable;
-
-  /**
-   * Body param: JSON string containing a manifest of files to deploy. Maps file
-   * paths to their content hashes. Required for direct upload deployments. Maximum
-   * 20,000 entries.
-   */
-  manifest?: string;
-
-  /**
-   * Body param: The build output directory path.
-   */
-  pages_build_output_dir?: string;
-
-  /**
-   * Body param: Hash of the Wrangler configuration file used for this deployment.
-   */
-  wrangler_config_hash?: string;
 }
 
 export interface DeploymentListParams {

@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import { SinglePage } from '../../pagination';
+import * as Shared from '../shared';
 
 export class Messages extends APIResource {
   /**
@@ -31,34 +31,73 @@ export class Messages extends APIResource {
   }
 
   /**
+   * Push a batch of message to a Queue
+   *
+   * @example
+   * ```ts
+   * const response = await client.queues.messages.bulkPush(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  bulkPush(
+    queueId: string,
+    params: MessageBulkPushParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessageBulkPushResponse> {
+    const { account_id, ...body } = params;
+    return this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/batch`, {
+      body,
+      ...options,
+    });
+  }
+
+  /**
    * Pull a batch of messages from a Queue
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const messagePullResponse of client.queues.messages.pull(
+   * const response = await client.queues.messages.pull(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
+   * );
    * ```
    */
   pull(
     queueId: string,
     params: MessagePullParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MessagePullResponsesSinglePage, MessagePullResponse> {
+  ): Core.APIPromise<MessagePullResponse> {
     const { account_id, ...body } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/queues/${queueId}/messages/pull`,
-      MessagePullResponsesSinglePage,
-      { body, method: 'post', ...options },
-    );
+    return (
+      this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/pull`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: MessagePullResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Push a message to a Queue
+   *
+   * @example
+   * ```ts
+   * const response = await client.queues.messages.push(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  push(
+    queueId: string,
+    params: MessagePushParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessagePushResponse> {
+    const { account_id, ...body } = params;
+    return this._client.post(`/accounts/${account_id}/queues/${queueId}/messages`, { body, ...options });
   }
 }
-
-export class MessagePullResponsesSinglePage extends SinglePage<MessagePullResponse> {}
 
 export interface MessageAckResponse {
   /**
@@ -74,22 +113,55 @@ export interface MessageAckResponse {
   warnings?: Array<string>;
 }
 
-export interface MessagePullResponse {
-  id?: string;
+export interface MessageBulkPushResponse {
+  errors?: Array<Shared.ResponseInfo>;
 
-  attempts?: number;
-
-  body?: string;
+  messages?: Array<string>;
 
   /**
-   * An ID that represents an "in-flight" message that has been pulled from a Queue.
-   * You must hold on to this ID and use it to acknowledge this message.
+   * Indicates if the API call was successful or not.
    */
-  lease_id?: string;
+  success?: true;
+}
 
-  metadata?: unknown;
+export interface MessagePullResponse {
+  /**
+   * The number of unacknowledged messages in the queue
+   */
+  message_backlog_count?: number;
 
-  timestamp_ms?: number;
+  messages?: Array<MessagePullResponse.Message>;
+}
+
+export namespace MessagePullResponse {
+  export interface Message {
+    id?: string;
+
+    attempts?: number;
+
+    body?: string;
+
+    /**
+     * An ID that represents an "in-flight" message that has been pulled from a Queue.
+     * You must hold on to this ID and use it to acknowledge this message.
+     */
+    lease_id?: string;
+
+    metadata?: unknown;
+
+    timestamp_ms?: number;
+  }
+}
+
+export interface MessagePushResponse {
+  errors?: Array<Shared.ResponseInfo>;
+
+  messages?: Array<string>;
+
+  /**
+   * Indicates if the API call was successful or not.
+   */
+  success?: true;
 }
 
 export interface MessageAckParams {
@@ -133,6 +205,50 @@ export namespace MessageAckParams {
   }
 }
 
+export interface MessageBulkPushParams {
+  /**
+   * Path param: A Resource identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: The number of seconds to wait for attempting to deliver this batch
+   * to consumers
+   */
+  delay_seconds?: number;
+
+  /**
+   * Body param:
+   */
+  messages?: Array<MessageBulkPushParams.MqQueueMessageText | MessageBulkPushParams.MqQueueMessageJson>;
+}
+
+export namespace MessageBulkPushParams {
+  export interface MqQueueMessageText {
+    body?: string;
+
+    content_type?: 'text';
+
+    /**
+     * The number of seconds to wait for attempting to deliver this message to
+     * consumers
+     */
+    delay_seconds?: number;
+  }
+
+  export interface MqQueueMessageJson {
+    body?: unknown;
+
+    content_type?: 'json';
+
+    /**
+     * The number of seconds to wait for attempting to deliver this message to
+     * consumers
+     */
+    delay_seconds?: number;
+  }
+}
+
 export interface MessagePullParams {
   /**
    * Path param: A Resource identifier.
@@ -151,14 +267,65 @@ export interface MessagePullParams {
   visibility_timeout_ms?: number;
 }
 
-Messages.MessagePullResponsesSinglePage = MessagePullResponsesSinglePage;
+export type MessagePushParams = MessagePushParams.MqQueueMessageText | MessagePushParams.MqQueueMessageJson;
+
+export declare namespace MessagePushParams {
+  export interface MqQueueMessageText {
+    /**
+     * Path param: A Resource identifier.
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    body?: string;
+
+    /**
+     * Body param:
+     */
+    content_type?: 'text';
+
+    /**
+     * Body param: The number of seconds to wait for attempting to deliver this message
+     * to consumers
+     */
+    delay_seconds?: number;
+  }
+
+  export interface MqQueueMessageJson {
+    /**
+     * Path param: A Resource identifier.
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    body?: unknown;
+
+    /**
+     * Body param:
+     */
+    content_type?: 'json';
+
+    /**
+     * Body param: The number of seconds to wait for attempting to deliver this message
+     * to consumers
+     */
+    delay_seconds?: number;
+  }
+}
 
 export declare namespace Messages {
   export {
     type MessageAckResponse as MessageAckResponse,
+    type MessageBulkPushResponse as MessageBulkPushResponse,
     type MessagePullResponse as MessagePullResponse,
-    MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
+    type MessagePushResponse as MessagePushResponse,
     type MessageAckParams as MessageAckParams,
+    type MessageBulkPushParams as MessageBulkPushParams,
     type MessagePullParams as MessagePullParams,
+    type MessagePushParams as MessagePushParams,
   };
 }
