@@ -243,7 +243,7 @@ export namespace ScriptAndVersionSettingEditResponse {
     name: string;
 
     /**
-     * The name of the dispatch namespace.
+     * Namespace to bind to.
      */
     namespace: string;
 
@@ -995,7 +995,7 @@ export namespace ScriptAndVersionSettingGetResponse {
     name: string;
 
     /**
-     * The name of the dispatch namespace.
+     * Namespace to bind to.
      */
     namespace: string;
 
@@ -1765,7 +1765,7 @@ export namespace ScriptAndVersionSettingEditParams {
       name: string;
 
       /**
-       * The name of the dispatch namespace.
+       * Namespace to bind to.
        */
       namespace: string;
 

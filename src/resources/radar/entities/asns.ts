@@ -195,19 +195,9 @@ export namespace ASNAsSetResponse {
     name: string;
 
     /**
-     * The AS number following hierarchical AS-SET name
-     */
-    hierarchical_asn?: number;
-
-    /**
      * The inferred AS number of the AS-SET
      */
-    inferred_asn?: number;
-
-    /**
-     * The AS number matching PeeringDB record
-     */
-    peeringdb_asn?: number;
+    asn?: number;
   }
 }
 

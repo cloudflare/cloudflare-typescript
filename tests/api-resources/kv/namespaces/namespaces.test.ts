@@ -69,7 +69,7 @@ describe('resource namespaces', () => {
       direction: 'asc',
       order: 'id',
       page: 1,
-      per_page: 5,
+      per_page: 1,
     });
   });
 
@@ -113,10 +113,33 @@ describe('resource namespaces', () => {
     });
   });
 
+  test('bulkGet: only required params', async () => {
+    const responsePromise = client.kv.namespaces.bulkGet('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      keys: ['My-Key'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkGet: required and optional params', async () => {
+    const response = await client.kv.namespaces.bulkGet('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      keys: ['My-Key'],
+      type: 'text',
+      withMetadata: true,
+    });
+  });
+
   test('bulkUpdate: only required params', async () => {
     const responsePromise = client.kv.namespaces.bulkUpdate('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{}],
+      body: [{ key: 'My-Key', value: 'Some string' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -132,12 +155,12 @@ describe('resource namespaces', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: [
         {
+          key: 'My-Key',
+          value: 'Some string',
           base64: true,
           expiration: 1578435000,
           expiration_ttl: 300,
-          key: 'My-Key',
-          metadata: { someMetadataKey: 'bar' },
-          value: 'Some string',
+          metadata: {},
         },
       ],
     });
