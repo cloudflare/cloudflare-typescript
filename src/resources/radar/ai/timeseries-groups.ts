@@ -93,7 +93,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of traffic by AI user agent over time.
    *
-   * @deprecated
+   * @deprecated Use [Radar AI Bots Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/bots/methods/timeseries_groups/) instead.
    */
   userAgent(
     query?: TimeseriesGroupUserAgentParams,

@@ -27,15 +27,17 @@ describe('resource jobs', () => {
       overwrite: true,
       source: {
         bucket: 'bucket',
-        endpoint: 'endpoint',
         secret: { accessKeyId: 'accessKeyId', secretAccessKey: 'secretAccessKey' },
         vendor: 's3',
+        endpoint: 'endpoint',
+        pathPrefix: 'pathPrefix',
+        region: 'region',
       },
       target: {
         bucket: 'bucket',
-        jurisdiction: 'default',
         secret: { accessKeyId: 'accessKeyId', secretAccessKey: 'secretAccessKey' },
         vendor: 'r2',
+        jurisdiction: 'default',
       },
     });
   });

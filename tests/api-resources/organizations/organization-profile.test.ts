@@ -11,13 +11,16 @@ const client = new Cloudflare({
 
 describe('resource organizationProfile', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.organizations.organizationProfile.update('organization_id', {
-      business_address: 'business_address',
-      business_email: 'business_email',
-      business_name: 'business_name',
-      business_phone: 'business_phone',
-      external_metadata: 'external_metadata',
-    });
+    const responsePromise = client.organizations.organizationProfile.update(
+      'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8',
+      {
+        business_address: 'business_address',
+        business_email: 'business_email',
+        business_name: 'business_name',
+        business_phone: 'business_phone',
+        external_metadata: 'external_metadata',
+      },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,17 +31,20 @@ describe('resource organizationProfile', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.organizations.organizationProfile.update('organization_id', {
-      business_address: 'business_address',
-      business_email: 'business_email',
-      business_name: 'business_name',
-      business_phone: 'business_phone',
-      external_metadata: 'external_metadata',
-    });
+    const response = await client.organizations.organizationProfile.update(
+      'a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8',
+      {
+        business_address: 'business_address',
+        business_email: 'business_email',
+        business_name: 'business_name',
+        business_phone: 'business_phone',
+        external_metadata: 'external_metadata',
+      },
+    );
   });
 
   test('get', async () => {
-    const responsePromise = client.organizations.organizationProfile.get('organization_id');
+    const responsePromise = client.organizations.organizationProfile.get('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,7 +57,9 @@ describe('resource organizationProfile', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.organizations.organizationProfile.get('organization_id', { path: '/_stainless_unknown_path' }),
+      client.organizations.organizationProfile.get('a7b9c3d2e8f4g1h5i6j0k9l2m3n7o4p8', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });
