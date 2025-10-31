@@ -711,6 +711,7 @@ TEST_PATHS=(
 	tests/api-resources/iam/resource-groups.test.ts
 	tests/api-resources/iam/user-groups/user-groups.test.ts
 	tests/api-resources/iam/user-groups/members.test.ts
+	tests/api-resources/iam/sso.test.ts
 	tests/api-resources/cloud-connector/cloud-connector.test.ts
 	tests/api-resources/cloud-connector/rules.test.ts
 	tests/api-resources/botnet-feed/botnet-feed.test.ts

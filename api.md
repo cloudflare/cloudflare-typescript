@@ -8472,6 +8472,26 @@ Methods:
 - <code title="get /accounts/{account_id}/iam/user_groups/{user_group_id}/members">client.iam.userGroups.members.<a href="./src/resources/iam/user-groups/members.ts">list</a>(userGroupId, { ...params }) -> MemberListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/iam/user_groups/{user_group_id}/members/{member_id}">client.iam.userGroups.members.<a href="./src/resources/iam/user-groups/members.ts">delete</a>(userGroupId, memberId, { ...params }) -> MemberDeleteResponse</code>
 
+## SSO
+
+Types:
+
+- <code><a href="./src/resources/iam/sso.ts">SSOCreateResponse</a></code>
+- <code><a href="./src/resources/iam/sso.ts">SSOUpdateResponse</a></code>
+- <code><a href="./src/resources/iam/sso.ts">SSOListResponse</a></code>
+- <code><a href="./src/resources/iam/sso.ts">SSODeleteResponse</a></code>
+- <code><a href="./src/resources/iam/sso.ts">SSOBeginVerificationResponse</a></code>
+- <code><a href="./src/resources/iam/sso.ts">SSOGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/sso_connectors">client.iam.sso.<a href="./src/resources/iam/sso.ts">create</a>({ ...params }) -> SSOCreateResponse</code>
+- <code title="patch /accounts/{account_id}/sso_connectors/{sso_connector_id}">client.iam.sso.<a href="./src/resources/iam/sso.ts">update</a>(ssoConnectorId, { ...params }) -> SSOUpdateResponse</code>
+- <code title="get /accounts/{account_id}/sso_connectors">client.iam.sso.<a href="./src/resources/iam/sso.ts">list</a>({ ...params }) -> SSOListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/sso_connectors/{sso_connector_id}">client.iam.sso.<a href="./src/resources/iam/sso.ts">delete</a>(ssoConnectorId, { ...params }) -> SSODeleteResponse | null</code>
+- <code title="post /accounts/{account_id}/sso_connectors/{sso_connector_id}/begin_verification">client.iam.sso.<a href="./src/resources/iam/sso.ts">beginVerification</a>(ssoConnectorId, { ...params }) -> SSOBeginVerificationResponse</code>
+- <code title="get /accounts/{account_id}/sso_connectors/{sso_connector_id}">client.iam.sso.<a href="./src/resources/iam/sso.ts">get</a>(ssoConnectorId, { ...params }) -> SSOGetResponse</code>
+
 # CloudConnector
 
 ## Rules
