@@ -1,7 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  CloudflaredListResponsesV4PagePaginationArray,
   Cloudflared,
+  type CloudflaredCreateResponse,
+  type CloudflaredListResponse,
+  type CloudflaredDeleteResponse,
+  type CloudflaredEditResponse,
+  type CloudflaredGetResponse,
   type CloudflaredCreateParams,
   type CloudflaredListParams,
   type CloudflaredDeleteParams,

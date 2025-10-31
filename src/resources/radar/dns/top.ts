@@ -281,11 +281,6 @@ export interface TopAsesParams {
   asn?: Array<string>;
 
   /**
-   * Filters results based on cache status.
-   */
-  cacheHit?: Array<boolean>;
-
-  /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
    * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
    * excludes results from EU, but includes results from NA.
@@ -310,21 +305,6 @@ export interface TopAsesParams {
   dateStart?: Array<string>;
 
   /**
-   * Filters results based on DNSSEC (DNS Security Extensions) support.
-   */
-  dnssec?: Array<'INVALID' | 'INSECURE' | 'SECURE' | 'OTHER'>;
-
-  /**
-   * Filters results based on DNSSEC (DNS Security Extensions) client awareness.
-   */
-  dnssecAware?: Array<'SUPPORTED' | 'NOT_SUPPORTED'>;
-
-  /**
-   * Filters results based on DNSSEC-validated answers by end-to-end security status.
-   */
-  dnssecE2e?: Array<boolean>;
-
-  /**
    * Filters results by domain name.
    */
   domain?: Array<string>;
@@ -333,11 +313,6 @@ export interface TopAsesParams {
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
-
-  /**
-   * Filters results by IP version (Ipv4 vs. IPv6).
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Limits the number of objects returned in the response.
@@ -352,151 +327,9 @@ export interface TopAsesParams {
   location?: Array<string>;
 
   /**
-   * Filters results based on whether the queries have a matching answer.
-   */
-  matchingAnswer?: Array<boolean>;
-
-  /**
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
-
-  /**
-   * Specifies whether the response includes empty DNS responses (NODATA).
-   */
-  nodata?: Array<boolean>;
-
-  /**
-   * Filters results by DNS transport protocol.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
-
-  /**
-   * Filters results by DNS query type.
-   */
-  queryType?: Array<
-    | 'A'
-    | 'AAAA'
-    | 'A6'
-    | 'AFSDB'
-    | 'ANY'
-    | 'APL'
-    | 'ATMA'
-    | 'AXFR'
-    | 'CAA'
-    | 'CDNSKEY'
-    | 'CDS'
-    | 'CERT'
-    | 'CNAME'
-    | 'CSYNC'
-    | 'DHCID'
-    | 'DLV'
-    | 'DNAME'
-    | 'DNSKEY'
-    | 'DOA'
-    | 'DS'
-    | 'EID'
-    | 'EUI48'
-    | 'EUI64'
-    | 'GPOS'
-    | 'GID'
-    | 'HINFO'
-    | 'HIP'
-    | 'HTTPS'
-    | 'IPSECKEY'
-    | 'ISDN'
-    | 'IXFR'
-    | 'KEY'
-    | 'KX'
-    | 'L32'
-    | 'L64'
-    | 'LOC'
-    | 'LP'
-    | 'MAILA'
-    | 'MAILB'
-    | 'MB'
-    | 'MD'
-    | 'MF'
-    | 'MG'
-    | 'MINFO'
-    | 'MR'
-    | 'MX'
-    | 'NAPTR'
-    | 'NB'
-    | 'NBSTAT'
-    | 'NID'
-    | 'NIMLOC'
-    | 'NINFO'
-    | 'NS'
-    | 'NSAP'
-    | 'NSEC'
-    | 'NSEC3'
-    | 'NSEC3PARAM'
-    | 'NULL'
-    | 'NXT'
-    | 'OPENPGPKEY'
-    | 'OPT'
-    | 'PTR'
-    | 'PX'
-    | 'RKEY'
-    | 'RP'
-    | 'RRSIG'
-    | 'RT'
-    | 'SIG'
-    | 'SINK'
-    | 'SMIMEA'
-    | 'SOA'
-    | 'SPF'
-    | 'SRV'
-    | 'SSHFP'
-    | 'SVCB'
-    | 'TA'
-    | 'TALINK'
-    | 'TKEY'
-    | 'TLSA'
-    | 'TSIG'
-    | 'TXT'
-    | 'UINFO'
-    | 'UID'
-    | 'UNSPEC'
-    | 'URI'
-    | 'WKS'
-    | 'X25'
-    | 'ZONEMD'
-    | null
-  >;
-
-  /**
-   * Filters results by DNS response code.
-   */
-  responseCode?: Array<
-    | 'NOERROR'
-    | 'FORMERR'
-    | 'SERVFAIL'
-    | 'NXDOMAIN'
-    | 'NOTIMP'
-    | 'REFUSED'
-    | 'YXDOMAIN'
-    | 'YXRRSET'
-    | 'NXRRSET'
-    | 'NOTAUTH'
-    | 'NOTZONE'
-    | 'BADSIG'
-    | 'BADKEY'
-    | 'BADTIME'
-    | 'BADMODE'
-    | 'BADNAME'
-    | 'BADALG'
-    | 'BADTRUNC'
-    | 'BADCOOKIE'
-  >;
-
-  /**
-   * Filters results by DNS response TTL.
-   */
-  responseTtl?: Array<
-    'LTE_1M' | 'GT_1M_LTE_5M' | 'GT_5M_LTE_15M' | 'GT_15M_LTE_1H' | 'GT_1H_LTE_1D' | 'GT_1D_LTE_1W' | 'GT_1W'
-  >;
 }
 
 export interface TopLocationsParams {
@@ -509,11 +342,6 @@ export interface TopLocationsParams {
   asn?: Array<string>;
 
   /**
-   * Filters results based on cache status.
-   */
-  cacheHit?: Array<boolean>;
-
-  /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
    * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
    * excludes results from EU, but includes results from NA.
@@ -538,21 +366,6 @@ export interface TopLocationsParams {
   dateStart?: Array<string>;
 
   /**
-   * Filters results based on DNSSEC (DNS Security Extensions) support.
-   */
-  dnssec?: Array<'INVALID' | 'INSECURE' | 'SECURE' | 'OTHER'>;
-
-  /**
-   * Filters results based on DNSSEC (DNS Security Extensions) client awareness.
-   */
-  dnssecAware?: Array<'SUPPORTED' | 'NOT_SUPPORTED'>;
-
-  /**
-   * Filters results based on DNSSEC-validated answers by end-to-end security status.
-   */
-  dnssecE2e?: Array<boolean>;
-
-  /**
    * Filters results by domain name.
    */
   domain?: Array<string>;
@@ -561,11 +374,6 @@ export interface TopLocationsParams {
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
-
-  /**
-   * Filters results by IP version (Ipv4 vs. IPv6).
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Limits the number of objects returned in the response.
@@ -580,156 +388,9 @@ export interface TopLocationsParams {
   location?: Array<string>;
 
   /**
-   * Filters results based on whether the queries have a matching answer.
-   */
-  matchingAnswer?: Array<boolean>;
-
-  /**
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
-
-  /**
-   * Specifies whether the response includes empty DNS responses (NODATA).
-   */
-  nodata?: Array<boolean>;
-
-  /**
-   * Filters results by DNS transport protocol.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
-
-  /**
-   * Filters results by DNS query type.
-   */
-  queryType?: Array<
-    | 'A'
-    | 'AAAA'
-    | 'A6'
-    | 'AFSDB'
-    | 'ANY'
-    | 'APL'
-    | 'ATMA'
-    | 'AXFR'
-    | 'CAA'
-    | 'CDNSKEY'
-    | 'CDS'
-    | 'CERT'
-    | 'CNAME'
-    | 'CSYNC'
-    | 'DHCID'
-    | 'DLV'
-    | 'DNAME'
-    | 'DNSKEY'
-    | 'DOA'
-    | 'DS'
-    | 'EID'
-    | 'EUI48'
-    | 'EUI64'
-    | 'GPOS'
-    | 'GID'
-    | 'HINFO'
-    | 'HIP'
-    | 'HTTPS'
-    | 'IPSECKEY'
-    | 'ISDN'
-    | 'IXFR'
-    | 'KEY'
-    | 'KX'
-    | 'L32'
-    | 'L64'
-    | 'LOC'
-    | 'LP'
-    | 'MAILA'
-    | 'MAILB'
-    | 'MB'
-    | 'MD'
-    | 'MF'
-    | 'MG'
-    | 'MINFO'
-    | 'MR'
-    | 'MX'
-    | 'NAPTR'
-    | 'NB'
-    | 'NBSTAT'
-    | 'NID'
-    | 'NIMLOC'
-    | 'NINFO'
-    | 'NS'
-    | 'NSAP'
-    | 'NSEC'
-    | 'NSEC3'
-    | 'NSEC3PARAM'
-    | 'NULL'
-    | 'NXT'
-    | 'OPENPGPKEY'
-    | 'OPT'
-    | 'PTR'
-    | 'PX'
-    | 'RKEY'
-    | 'RP'
-    | 'RRSIG'
-    | 'RT'
-    | 'SIG'
-    | 'SINK'
-    | 'SMIMEA'
-    | 'SOA'
-    | 'SPF'
-    | 'SRV'
-    | 'SSHFP'
-    | 'SVCB'
-    | 'TA'
-    | 'TALINK'
-    | 'TKEY'
-    | 'TLSA'
-    | 'TSIG'
-    | 'TXT'
-    | 'UINFO'
-    | 'UID'
-    | 'UNSPEC'
-    | 'URI'
-    | 'WKS'
-    | 'X25'
-    | 'ZONEMD'
-    | null
-  >;
-
-  /**
-   * Filters results by DNS response code.
-   */
-  responseCode?: Array<
-    | 'NOERROR'
-    | 'FORMERR'
-    | 'SERVFAIL'
-    | 'NXDOMAIN'
-    | 'NOTIMP'
-    | 'REFUSED'
-    | 'YXDOMAIN'
-    | 'YXRRSET'
-    | 'NXRRSET'
-    | 'NOTAUTH'
-    | 'NOTZONE'
-    | 'BADSIG'
-    | 'BADKEY'
-    | 'BADTIME'
-    | 'BADMODE'
-    | 'BADNAME'
-    | 'BADALG'
-    | 'BADTRUNC'
-    | 'BADCOOKIE'
-  >;
-
-  /**
-   * Filters results by DNS response TTL.
-   */
-  responseTtl?: Array<
-    'LTE_1M' | 'GT_1M_LTE_5M' | 'GT_5M_LTE_15M' | 'GT_15M_LTE_1H' | 'GT_1H_LTE_1D' | 'GT_1D_LTE_1W' | 'GT_1W'
-  >;
-
-  /**
-   * Filters results by top-level domain.
-   */
-  tld?: Array<string>;
 }
 
 export declare namespace Top {
