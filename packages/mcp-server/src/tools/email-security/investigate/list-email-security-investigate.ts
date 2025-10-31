@@ -32,9 +32,6 @@ export const tool: Tool = {
       alert_id: {
         type: 'string',
       },
-      cursor: {
-        type: 'string',
-      },
       detections_only: {
         type: 'boolean',
         description: 'Determines if the search results will include detections or not.',
@@ -66,7 +63,7 @@ export const tool: Tool = {
       },
       page: {
         type: 'integer',
-        description: 'Deprecated: Use cursor pagination instead.',
+        description: 'The page number of paginated results.',
       },
       per_page: {
         type: 'integer',

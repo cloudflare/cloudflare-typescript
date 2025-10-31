@@ -39,7 +39,7 @@ describe('resource os', () => {
           httpProtocol: ['HTTP'],
           httpVersion: ['HTTPv1'],
           ipVersion: ['IPv4'],
-          limit: 1,
+          limit: 5,
           location: ['string'],
           name: ['main_series'],
           tlsVersion: ['TLSv1_0'],

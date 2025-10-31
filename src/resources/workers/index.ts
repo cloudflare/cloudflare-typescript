@@ -38,7 +38,6 @@ export {
   type Script,
   type ScriptSetting,
   type ScriptUpdateResponse,
-  type ScriptListResponse,
   type ScriptDeleteResponse,
   type ScriptGetResponse,
   type ScriptSearchResponse,
@@ -47,7 +46,7 @@ export {
   type ScriptDeleteParams,
   type ScriptGetParams,
   type ScriptSearchParams,
-  type ScriptListResponsesSinglePage,
+  type ScriptsSinglePage,
 } from './scripts/index';
 export {
   Subdomains,

@@ -30,7 +30,7 @@ import {
   EventTags,
 } from './event-tags';
 import * as IndicatorTypesAPI from './indicator-types';
-import { IndicatorTypeListParams, IndicatorTypeListResponse, IndicatorTypes } from './indicator-types';
+import { IndicatorTypes } from './indicator-types';
 import * as InsightsAPI from './insights';
 import { Insights } from './insights';
 import * as RawAPI from './raw';
@@ -208,10 +208,15 @@ export class ThreatEvents extends APIResource {
   }
 
   /**
-   * This Method is deprecated. Please use
-   * /events/dataset/:dataset_id/events/:event_id instead.
+   * Reads an event
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const threatEvent =
+   *   await client.cloudforceOne.threatEvents.get('event_id', {
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   get(
     eventID: string,
@@ -815,11 +820,7 @@ export declare namespace ThreatEvents {
     type DatasetRawParams as DatasetRawParams,
   };
 
-  export {
-    IndicatorTypes as IndicatorTypes,
-    type IndicatorTypeListResponse as IndicatorTypeListResponse,
-    type IndicatorTypeListParams as IndicatorTypeListParams,
-  };
+  export { IndicatorTypes as IndicatorTypes };
 
   export {
     RawAPIRaw as Raw,
