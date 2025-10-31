@@ -194,6 +194,11 @@ export interface Worker {
   observability: Worker.Observability;
 
   /**
+   * Other resources that reference the Worker and depend on it existing.
+   */
+  references: Worker.References;
+
+  /**
    * Subdomain settings for the Worker.
    */
   subdomain: Worker.Subdomain;
@@ -256,6 +261,139 @@ export namespace Worker {
        * are enabled for the Worker.
        */
       invocation_logs?: boolean;
+    }
+  }
+
+  /**
+   * Other resources that reference the Worker and depend on it existing.
+   */
+  export interface References {
+    /**
+     * Other Workers that reference the Worker as an outbound for a dispatch namespace.
+     */
+    dispatch_namespace_outbounds: Array<References.DispatchNamespaceOutbound>;
+
+    /**
+     * Custom domains connected to the Worker.
+     */
+    domains: Array<References.Domain>;
+
+    /**
+     * Other Workers that reference Durable Object classes implemented by the Worker.
+     */
+    durable_objects: Array<References.DurableObject>;
+
+    /**
+     * Queues that send messages to the Worker.
+     */
+    queues: Array<References.Queue>;
+
+    /**
+     * Other Workers that reference the Worker using
+     * [service bindings](https://developers.cloudflare.com/workers/runtime-apis/bindings/service-bindings/).
+     */
+    workers: Array<References.Worker>;
+  }
+
+  export namespace References {
+    export interface DispatchNamespaceOutbound {
+      /**
+       * ID of the dispatch namespace.
+       */
+      namespace_id: string;
+
+      /**
+       * Name of the dispatch namespace.
+       */
+      namespace_name: string;
+
+      /**
+       * ID of the Worker using the dispatch namespace.
+       */
+      worker_id: string;
+
+      /**
+       * Name of the Worker using the dispatch namespace.
+       */
+      worker_name: string;
+    }
+
+    export interface Domain {
+      /**
+       * ID of the custom domain.
+       */
+      id: string;
+
+      /**
+       * ID of the TLS certificate issued for the custom domain.
+       */
+      certificate_id: string;
+
+      /**
+       * Full hostname of the custom domain, including the zone name.
+       */
+      hostname: string;
+
+      /**
+       * ID of the zone.
+       */
+      zone_id: string;
+
+      /**
+       * Name of the zone.
+       */
+      zone_name: string;
+    }
+
+    export interface DurableObject {
+      /**
+       * ID of the Durable Object namespace being used.
+       */
+      namespace_id: string;
+
+      /**
+       * Name of the Durable Object namespace being used.
+       */
+      namespace_name: string;
+
+      /**
+       * ID of the Worker using the Durable Object implementation.
+       */
+      worker_id: string;
+
+      /**
+       * Name of the Worker using the Durable Object implementation.
+       */
+      worker_name: string;
+    }
+
+    export interface Queue {
+      /**
+       * ID of the queue consumer configuration.
+       */
+      queue_consumer_id: string;
+
+      /**
+       * ID of the queue.
+       */
+      queue_id: string;
+
+      /**
+       * Name of the queue.
+       */
+      queue_name: string;
+    }
+
+    export interface Worker {
+      /**
+       * ID of the referencing Worker.
+       */
+      id: string;
+
+      /**
+       * Name of the referencing Worker.
+       */
+      name: string;
     }
   }
 

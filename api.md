@@ -129,12 +129,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/organizations/organizations.ts">Organization</a></code>
+- <code><a href="./src/resources/organizations/organizations.ts">OrganizationDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /organizations">client.organizations.<a href="./src/resources/organizations/organizations.ts">create</a>({ ...params }) -> Organization</code>
 - <code title="put /organizations/{organization_id}">client.organizations.<a href="./src/resources/organizations/organizations.ts">update</a>(organizationId, { ...params }) -> Organization</code>
-- <code title="delete /organizations/{organization_id}">client.organizations.<a href="./src/resources/organizations/organizations.ts">delete</a>(organizationId) -> void</code>
+- <code title="get /organizations">client.organizations.<a href="./src/resources/organizations/organizations.ts">list</a>({ ...params }) -> OrganizationsSinglePage</code>
+- <code title="delete /organizations/{organization_id}">client.organizations.<a href="./src/resources/organizations/organizations.ts">delete</a>(organizationId) -> OrganizationDeleteResponse</code>
 - <code title="get /organizations/{organization_id}">client.organizations.<a href="./src/resources/organizations/organizations.ts">get</a>(organizationId) -> Organization</code>
 
 ## OrganizationProfile
@@ -2106,6 +2108,7 @@ Types:
 - <code><a href="./src/resources/workers/scripts/scripts.ts">Script</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptSetting</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptListResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptDeleteResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptGetResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptSearchResponse</a></code>
@@ -2113,7 +2116,7 @@ Types:
 Methods:
 
 - <code title="put /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">update</a>(scriptName, { ...params }) -> ScriptUpdateResponse</code>
-- <code title="get /accounts/{account_id}/workers/scripts">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">list</a>({ ...params }) -> ScriptsSinglePage</code>
+- <code title="get /accounts/{account_id}/workers/scripts">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">list</a>({ ...params }) -> ScriptListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">delete</a>(scriptName, { ...params }) -> ScriptDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> string</code>
 - <code title="get /accounts/{account_id}/workers/scripts-search">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">search</a>({ ...params }) -> ScriptSearchResponse</code>
@@ -2445,6 +2448,7 @@ Types:
 - <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionUpdateResponse</a></code>
 - <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionListResponse</a></code>
 - <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+- <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionGetResponse</a></code>
 
 Methods:
 
@@ -2452,6 +2456,7 @@ Methods:
 - <code title="patch /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">update</a>(subscriptionId, { ...params }) -> SubscriptionUpdateResponse</code>
 - <code title="get /accounts/{account_id}/event_subscriptions/subscriptions">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">list</a>({ ...params }) -> SubscriptionListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">delete</a>(subscriptionId, { ...params }) -> SubscriptionDeleteResponse</code>
+- <code title="get /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">get</a>(subscriptionId, { ...params }) -> SubscriptionGetResponse</code>
 
 # APIGateway
 
@@ -2460,11 +2465,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/api-gateway/configurations.ts">Configuration</a></code>
-- <code><a href="./src/resources/api-gateway/configurations.ts">ConfigurationUpdateResponse</a></code>
 
 Methods:
 
-- <code title="put /zones/{zone_id}/api_gateway/configuration">client.apiGateway.configurations.<a href="./src/resources/api-gateway/configurations.ts">update</a>({ ...params }) -> ConfigurationUpdateResponse</code>
+- <code title="put /zones/{zone_id}/api_gateway/configuration">client.apiGateway.configurations.<a href="./src/resources/api-gateway/configurations.ts">update</a>({ ...params }) -> Configuration</code>
 - <code title="get /zones/{zone_id}/api_gateway/configuration">client.apiGateway.configurations.<a href="./src/resources/api-gateway/configurations.ts">get</a>({ ...params }) -> Configuration</code>
 
 ## Discovery
@@ -2942,13 +2946,8 @@ Methods:
 
 ## LOADocuments
 
-Types:
-
-- <code><a href="./src/resources/addressing/loa-documents.ts">LOADocumentCreateResponse</a></code>
-
 Methods:
 
-- <code title="post /accounts/{account_id}/addressing/loa_documents">client.addressing.loaDocuments.<a href="./src/resources/addressing/loa-documents.ts">create</a>({ ...params }) -> LOADocumentCreateResponse</code>
 - <code title="get /accounts/{account_id}/addressing/loa_documents/{loa_document_id}/download">client.addressing.loaDocuments.<a href="./src/resources/addressing/loa-documents.ts">get</a>(loaDocumentId, { ...params }) -> Response</code>
 
 ## Prefixes
@@ -3949,7 +3948,7 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/pages/projects">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">create</a>({ ...params }) -> Project</code>
-- <code title="get /accounts/{account_id}/pages/projects">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">list</a>({ ...params }) -> DeploymentsSinglePage</code>
+- <code title="get /accounts/{account_id}/pages/projects">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">list</a>({ ...params }) -> DeploymentsV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/pages/projects/{project_name}">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">delete</a>(projectName, { ...params }) -> ProjectDeleteResponse | null</code>
 - <code title="patch /accounts/{account_id}/pages/projects/{project_name}">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">edit</a>(projectName, { ...params }) -> Project</code>
 - <code title="get /accounts/{account_id}/pages/projects/{project_name}">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">get</a>(projectName, { ...params }) -> Project</code>
@@ -3964,7 +3963,7 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/pages/projects/{project_name}/deployments">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">create</a>(projectName, { ...params }) -> Deployment</code>
-- <code title="get /accounts/{account_id}/pages/projects/{project_name}/deployments">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">list</a>(projectName, { ...params }) -> DeploymentsSinglePage</code>
+- <code title="get /accounts/{account_id}/pages/projects/{project_name}/deployments">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">list</a>(projectName, { ...params }) -> DeploymentsV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">delete</a>(projectName, deploymentId, { ...params }) -> DeploymentDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">get</a>(projectName, deploymentId, { ...params }) -> Deployment</code>
 - <code title="post /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}/retry">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">retry</a>(projectName, deploymentId, { ...params }) -> Deployment</code>
@@ -5051,7 +5050,41 @@ Methods:
 
 ##### Portals
 
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalReadResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/ai-controls/mcp/portals">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">create</a>({ ...params }) -> PortalCreateResponse</code>
+- <code title="put /accounts/{account_id}/access/ai-controls/mcp/portals/{id}">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">update</a>(id, { ...params }) -> PortalUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/portals">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">list</a>({ ...params }) -> PortalListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/access/ai-controls/mcp/portals/{id}">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">delete</a>(id, { ...params }) -> PortalDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/portals/{id}">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">read</a>(id, { ...params }) -> PortalReadResponse</code>
+
 ##### Servers
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerReadResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerSyncResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/ai-controls/mcp/servers">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">create</a>({ ...params }) -> ServerCreateResponse</code>
+- <code title="put /accounts/{account_id}/access/ai-controls/mcp/servers/{id}">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">update</a>(id, { ...params }) -> ServerUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/servers">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">list</a>({ ...params }) -> ServerListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/access/ai-controls/mcp/servers/{id}">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">delete</a>(id, { ...params }) -> ServerDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/servers/{id}">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">read</a>(id, { ...params }) -> ServerReadResponse</code>
+- <code title="post /accounts/{account_id}/access/ai-controls/mcp/servers/{id}/sync">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">sync</a>(id, { ...params }) -> ServerSyncResponse</code>
 
 ### GatewayCA
 
@@ -5610,21 +5643,13 @@ Methods:
 
 ### Cloudflared
 
-Types:
-
-- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">CloudflaredCreateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">CloudflaredListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">CloudflaredDeleteResponse</a></code>
-- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">CloudflaredEditResponse</a></code>
-- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">CloudflaredGetResponse</a></code>
-
 Methods:
 
-- <code title="post /accounts/{account_id}/cfd_tunnel">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">create</a>({ ...params }) -> CloudflaredCreateResponse</code>
-- <code title="get /accounts/{account_id}/cfd_tunnel">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">list</a>({ ...params }) -> CloudflaredListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">delete</a>(tunnelId, { ...params }) -> CloudflaredDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">edit</a>(tunnelId, { ...params }) -> CloudflaredEditResponse</code>
-- <code title="get /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">get</a>(tunnelId, { ...params }) -> CloudflaredGetResponse</code>
+- <code title="post /accounts/{account_id}/cfd_tunnel">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">create</a>({ ...params }) -> CloudflareTunnel</code>
+- <code title="get /accounts/{account_id}/cfd_tunnel">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">list</a>({ ...params }) -> CloudflareTunnelsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">delete</a>(tunnelId, { ...params }) -> CloudflareTunnel</code>
+- <code title="patch /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">edit</a>(tunnelId, { ...params }) -> CloudflareTunnel</code>
+- <code title="get /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">get</a>(tunnelId, { ...params }) -> CloudflareTunnel</code>
 
 #### Configurations
 
@@ -5722,13 +5747,20 @@ Methods:
 
 #### Services
 
+Types:
+
+- <code><a href="./src/resources/zero-trust/connectivity/directory/services.ts">ServiceCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/connectivity/directory/services.ts">ServiceUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/connectivity/directory/services.ts">ServiceListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/connectivity/directory/services.ts">ServiceGetResponse</a></code>
+
 Methods:
 
-- <code title="post /accounts/{account_id}/connectivity/directory/services">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">create</a>({ ...params }) -> void</code>
-- <code title="put /accounts/{account_id}/connectivity/directory/services/{service_id}">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">update</a>(serviceId, { ...params }) -> void</code>
-- <code title="get /accounts/{account_id}/connectivity/directory/services">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">list</a>({ ...params }) -> void</code>
+- <code title="post /accounts/{account_id}/connectivity/directory/services">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">create</a>({ ...params }) -> ServiceCreateResponse</code>
+- <code title="put /accounts/{account_id}/connectivity/directory/services/{service_id}">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">update</a>(serviceId, { ...params }) -> ServiceUpdateResponse</code>
+- <code title="get /accounts/{account_id}/connectivity/directory/services">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">list</a>({ ...params }) -> ServiceListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/connectivity/directory/services/{service_id}">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">delete</a>(serviceId, { ...params }) -> void</code>
-- <code title="get /accounts/{account_id}/connectivity/directory/services/{service_id}">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">get</a>(serviceId, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/connectivity/directory/services/{service_id}">client.zeroTrust.connectivity.directory.services.<a href="./src/resources/zero-trust/connectivity/directory/services.ts">get</a>(serviceId, { ...params }) -> ServiceGetResponse</code>
 
 ## DLP
 
@@ -6742,11 +6774,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/radar/dns/dns.ts">DNSSummaryV2Response</a></code>
 - <code><a href="./src/resources/radar/dns/dns.ts">DNSTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/dns/dns.ts">DNSTimeseriesGroupsV2Response</a></code>
 
 Methods:
 
+- <code title="get /radar/dns/summary/{dimension}">client.radar.dns.<a href="./src/resources/radar/dns/dns.ts">summaryV2</a>(dimension, { ...params }) -> DNSSummaryV2Response</code>
 - <code title="get /radar/dns/timeseries">client.radar.dns.<a href="./src/resources/radar/dns/dns.ts">timeseries</a>({ ...params }) -> DNSTimeseriesResponse</code>
+- <code title="get /radar/dns/timeseries_groups/{dimension}">client.radar.dns.<a href="./src/resources/radar/dns/dns.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> DNSTimeseriesGroupsV2Response</code>
 
 ### Top
 
@@ -6872,11 +6908,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/radar/as112/as112.ts">AS112SummaryV2Response</a></code>
 - <code><a href="./src/resources/radar/as112/as112.ts">AS112TimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/as112/as112.ts">AS112TimeseriesGroupsV2Response</a></code>
 
 Methods:
 
+- <code title="get /radar/as112/summary/{dimension}">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">summaryV2</a>(dimension, { ...params }) -> AS112SummaryV2Response</code>
 - <code title="get /radar/as112/timeseries">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">timeseries</a>({ ...params }) -> AS112TimeseriesResponse</code>
+- <code title="get /radar/as112/timeseries_groups/{dimension}">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> AS112TimeseriesGroupsV2Response</code>
 
 ### Summary
 
@@ -6943,6 +6983,16 @@ Types:
 
 ### Routing
 
+Types:
+
+- <code><a href="./src/resources/radar/email/routing/routing.ts">RoutingSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/email/routing/routing.ts">RoutingTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/email/routing/summary/{dimension}">client.radar.email.routing.<a href="./src/resources/radar/email/routing/routing.ts">summaryV2</a>(dimension, { ...params }) -> RoutingSummaryV2Response</code>
+- <code title="get /radar/email/routing/timeseries_groups/{dimension}">client.radar.email.routing.<a href="./src/resources/radar/email/routing/routing.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> RoutingTimeseriesGroupsV2Response</code>
+
 #### Summary
 
 Types:
@@ -6984,6 +7034,16 @@ Methods:
 - <code title="get /radar/email/routing/timeseries_groups/spf">client.radar.email.routing.timeseriesGroups.<a href="./src/resources/radar/email/routing/timeseries-groups.ts">spf</a>({ ...params }) -> TimeseriesGroupSPFResponse</code>
 
 ### Security
+
+Types:
+
+- <code><a href="./src/resources/radar/email/security/security.ts">SecuritySummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/email/security/security.ts">SecurityTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/email/security/summary/{dimension}">client.radar.email.security.<a href="./src/resources/radar/email/security/security.ts">summaryV2</a>(dimension, { ...params }) -> SecuritySummaryV2Response</code>
+- <code title="get /radar/email/security/timeseries_groups/{dimension}">client.radar.email.security.<a href="./src/resources/radar/email/security/security.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> SecurityTimeseriesGroupsV2Response</code>
 
 #### Top
 
@@ -7085,11 +7145,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/radar/attacks/layer3/layer3.ts">Layer3SummaryV2Response</a></code>
 - <code><a href="./src/resources/radar/attacks/layer3/layer3.ts">Layer3TimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/layer3.ts">Layer3TimeseriesGroupsV2Response</a></code>
 
 Methods:
 
+- <code title="get /radar/attacks/layer3/summary/{dimension}">client.radar.attacks.layer3.<a href="./src/resources/radar/attacks/layer3/layer3.ts">summaryV2</a>(dimension, { ...params }) -> Layer3SummaryV2Response</code>
 - <code title="get /radar/attacks/layer3/timeseries">client.radar.attacks.layer3.<a href="./src/resources/radar/attacks/layer3/layer3.ts">timeseries</a>({ ...params }) -> Layer3TimeseriesResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/{dimension}">client.radar.attacks.layer3.<a href="./src/resources/radar/attacks/layer3/layer3.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> Layer3TimeseriesGroupsV2Response</code>
 
 #### Summary
 
@@ -7165,11 +7229,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/radar/attacks/layer7/layer7.ts">Layer7SummaryV2Response</a></code>
 - <code><a href="./src/resources/radar/attacks/layer7/layer7.ts">Layer7TimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/layer7.ts">Layer7TimeseriesGroupsV2Response</a></code>
 
 Methods:
 
+- <code title="get /radar/attacks/layer7/summary/{dimension}">client.radar.attacks.layer7.<a href="./src/resources/radar/attacks/layer7/layer7.ts">summaryV2</a>(dimension, { ...params }) -> Layer7SummaryV2Response</code>
 - <code title="get /radar/attacks/layer7/timeseries">client.radar.attacks.layer7.<a href="./src/resources/radar/attacks/layer7/layer7.ts">timeseries</a>({ ...params }) -> Layer7TimeseriesResponse</code>
+- <code title="get /radar/attacks/layer7/timeseries_groups/{dimension}">client.radar.attacks.layer7.<a href="./src/resources/radar/attacks/layer7/layer7.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> Layer7TimeseriesGroupsV2Response</code>
 
 #### Summary
 
@@ -8667,6 +8735,14 @@ Methods:
 - <code title="get /zones/{zone_id}/content-upload-scan/settings">client.contentScanning.settings.<a href="./src/resources/content-scanning/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
 
 # AbuseReports
+
+Types:
+
+- <code><a href="./src/resources/abuse-reports.ts">AbuseReportCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/abuse-reports/{report_param}">client.abuseReports.<a href="./src/resources/abuse-reports.ts">create</a>(reportParam, { ...params }) -> AbuseReportCreateResponse</code>
 
 # AI
 
