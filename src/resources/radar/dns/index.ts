@@ -1,14 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  DNS,
-  type DNSSummaryV2Response,
-  type DNSTimeseriesResponse,
-  type DNSTimeseriesGroupsV2Response,
-  type DNSSummaryV2Params,
-  type DNSTimeseriesParams,
-  type DNSTimeseriesGroupsV2Params,
-} from './dns';
+export { DNS, type DNSTimeseriesResponse, type DNSTimeseriesParams } from './dns';
 export {
   Summary,
   type SummaryCacheHitResponse,

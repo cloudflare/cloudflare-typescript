@@ -8,6 +8,7 @@ import {
   ConsumerCreateParams,
   ConsumerDeleteParams,
   ConsumerDeleteResponse,
+  ConsumerGetParams,
   ConsumerListParams,
   ConsumerUpdateParams,
   Consumers,
@@ -17,15 +18,29 @@ import * as MessagesAPI from './messages';
 import {
   MessageAckParams,
   MessageAckResponse,
+  MessageBulkPushParams,
+  MessageBulkPushResponse,
   MessagePullParams,
   MessagePullResponse,
-  MessagePullResponsesSinglePage,
+  MessagePushParams,
+  MessagePushResponse,
   Messages,
 } from './messages';
 import * as PurgeAPI from './purge';
 import { Purge, PurgeStartParams, PurgeStatusParams, PurgeStatusResponse } from './purge';
 import * as SubscriptionsAPI from './subscriptions';
-import { Subscriptions } from './subscriptions';
+import {
+  SubscriptionCreateParams,
+  SubscriptionCreateResponse,
+  SubscriptionDeleteParams,
+  SubscriptionDeleteResponse,
+  SubscriptionListParams,
+  SubscriptionListResponse,
+  SubscriptionListResponsesV4PagePaginationArray,
+  SubscriptionUpdateParams,
+  SubscriptionUpdateResponse,
+  Subscriptions,
+} from './subscriptions';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -349,10 +364,13 @@ export declare namespace Queues {
   export {
     Messages as Messages,
     type MessageAckResponse as MessageAckResponse,
+    type MessageBulkPushResponse as MessageBulkPushResponse,
     type MessagePullResponse as MessagePullResponse,
-    type MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
+    type MessagePushResponse as MessagePushResponse,
     type MessageAckParams as MessageAckParams,
+    type MessageBulkPushParams as MessageBulkPushParams,
     type MessagePullParams as MessagePullParams,
+    type MessagePushParams as MessagePushParams,
   };
 
   export {
@@ -371,7 +389,19 @@ export declare namespace Queues {
     type ConsumerUpdateParams as ConsumerUpdateParams,
     type ConsumerListParams as ConsumerListParams,
     type ConsumerDeleteParams as ConsumerDeleteParams,
+    type ConsumerGetParams as ConsumerGetParams,
   };
 
-  export { Subscriptions as Subscriptions };
+  export {
+    Subscriptions as Subscriptions,
+    type SubscriptionCreateResponse as SubscriptionCreateResponse,
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionListResponse as SubscriptionListResponse,
+    type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
+    type SubscriptionListResponsesV4PagePaginationArray as SubscriptionListResponsesV4PagePaginationArray,
+    type SubscriptionCreateParams as SubscriptionCreateParams,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+    type SubscriptionListParams as SubscriptionListParams,
+    type SubscriptionDeleteParams as SubscriptionDeleteParams,
+  };
 }

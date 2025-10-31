@@ -22,7 +22,6 @@ export const tool: Tool = {
     properties: {
       organization_id: {
         type: 'string',
-        title: 'Organization ID',
       },
       business_address: {
         type: 'string',

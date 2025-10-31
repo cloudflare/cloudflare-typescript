@@ -34,7 +34,10 @@ export class SSO extends APIResource {
    * ```ts
    * const sso = await client.iam.sso.update(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     enabled: true,
+   *   },
    * );
    * ```
    */
@@ -169,11 +172,6 @@ export interface SSOCreateResponse {
    */
   updated_on?: string;
 
-  /**
-   * Controls the display of FedRAMP language to the user during SSO login
-   */
-  use_fedramp_language?: boolean;
-
   verification?: SSOCreateResponse.Verification;
 }
 
@@ -212,11 +210,6 @@ export interface SSOUpdateResponse {
    */
   updated_on?: string;
 
-  /**
-   * Controls the display of FedRAMP language to the user during SSO login
-   */
-  use_fedramp_language?: boolean;
-
   verification?: SSOUpdateResponse.Verification;
 }
 
@@ -254,11 +247,6 @@ export interface SSOListResponse {
    * Timestamp for the last update of the SSO connector
    */
   updated_on?: string;
-
-  /**
-   * Controls the display of FedRAMP language to the user during SSO login
-   */
-  use_fedramp_language?: boolean;
 
   verification?: SSOListResponse.Verification;
 }
@@ -350,11 +338,6 @@ export interface SSOGetResponse {
    */
   updated_on?: string;
 
-  /**
-   * Controls the display of FedRAMP language to the user during SSO login
-   */
-  use_fedramp_language?: boolean;
-
   verification?: SSOGetResponse.Verification;
 }
 
@@ -388,12 +371,6 @@ export interface SSOCreateParams {
    * Body param: Begin the verification process after creation
    */
   begin_verification?: boolean;
-
-  /**
-   * Body param: Controls the display of FedRAMP language to the user during SSO
-   * login
-   */
-  use_fedramp_language?: boolean;
 }
 
 export interface SSOUpdateParams {
@@ -405,13 +382,7 @@ export interface SSOUpdateParams {
   /**
    * Body param: SSO Connector enabled state
    */
-  enabled?: boolean;
-
-  /**
-   * Body param: Controls the display of FedRAMP language to the user during SSO
-   * login
-   */
-  use_fedramp_language?: boolean;
+  enabled: boolean;
 }
 
 export interface SSOListParams {

@@ -8,10 +8,29 @@ import { path } from '../internal/utils/path';
 
 export class Pipelines extends APIResource {
   /**
-   * [DEPRECATED] Create a new pipeline. Use the new /pipelines/v1/pipelines endpoint
-   * instead.
+   * Create a new pipeline.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const pipeline = await client.pipelines.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   destination: {
+   *     batch: {},
+   *     compression: {},
+   *     credentials: {
+   *       access_key_id: '<access key id>',
+   *       endpoint:
+   *         'https://123f8a8258064ed892a347f173372359.r2.cloudflarestorage.com',
+   *       secret_access_key: '<secret key>',
+   *     },
+   *     format: 'json',
+   *     path: { bucket: 'bucket' },
+   *     type: 'r2',
+   *   },
+   *   name: 'sample_pipeline',
+   *   source: [{ format: 'json', type: 'type' }],
+   * });
+   * ```
    */
   create(params: PipelineCreateParams, options?: RequestOptions): APIPromise<PipelineCreateResponse> {
     const { account_id, ...body } = params;
@@ -23,10 +42,26 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * [DEPRECATED] Update an existing pipeline. Use the new /pipelines/v1/pipelines
-   * endpoint instead.
+   * Update an existing pipeline.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const pipeline = await client.pipelines.update(
+   *   'sample_pipeline',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     destination: {
+   *       batch: {},
+   *       compression: {},
+   *       format: 'json',
+   *       path: { bucket: 'bucket' },
+   *       type: 'r2',
+   *     },
+   *     name: 'sample_pipeline',
+   *     source: [{ format: 'json', type: 'type' }],
+   *   },
+   * );
+   * ```
    */
   update(
     pipelineName: string,
@@ -43,10 +78,14 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * [DEPRECATED] List, filter, and paginate pipelines in an account. Use the new
-   * /pipelines/v1/pipelines endpoint instead.
+   * List, filter, and paginate pipelines in an account.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const pipelines = await client.pipelines.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   list(params: PipelineListParams, options?: RequestOptions): APIPromise<PipelineListResponse> {
     const { account_id, ...query } = params;
@@ -54,10 +93,14 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * [DEPRECATED] Delete a pipeline. Use the new /pipelines/v1/pipelines endpoint
-   * instead.
+   * Delete a pipeline.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * await client.pipelines.delete('sample_pipeline', {
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   delete(pipelineName: string, params: PipelineDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;
@@ -68,10 +111,15 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * [DEPRECATED] Get configuration of a pipeline. Use the new
-   * /pipelines/v1/pipelines endpoint instead.
+   * Get configuration of a pipeline.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const pipeline = await client.pipelines.get(
+   *   'sample_pipeline',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(
     pipelineName: string,
@@ -88,8 +136,7 @@ export class Pipelines extends APIResource {
 }
 
 /**
- * @deprecated [DEPRECATED] Describes the configuration of a pipeline. Use the new
- * streams/sinks/pipelines API instead.
+ * Describes the configuration of a pipeline.
  */
 export interface PipelineCreateResponse {
   /**
@@ -187,10 +234,6 @@ export namespace PipelineCreateResponse {
     }
   }
 
-  /**
-   * @deprecated [DEPRECATED] HTTP source configuration. Use the new streams API
-   * instead.
-   */
   export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
     /**
      * Specifies the format of source data.
@@ -216,10 +259,6 @@ export namespace PipelineCreateResponse {
     }
   }
 
-  /**
-   * @deprecated [DEPRECATED] Worker binding source configuration. Use the new
-   * streams API instead.
-   */
   export interface CloudflarePipelinesWorkersPipelinesBindingSource {
     /**
      * Specifies the format of source data.
@@ -231,8 +270,7 @@ export namespace PipelineCreateResponse {
 }
 
 /**
- * @deprecated [DEPRECATED] Describes the configuration of a pipeline. Use the new
- * streams/sinks/pipelines API instead.
+ * Describes the configuration of a pipeline.
  */
 export interface PipelineUpdateResponse {
   /**
@@ -330,10 +368,6 @@ export namespace PipelineUpdateResponse {
     }
   }
 
-  /**
-   * @deprecated [DEPRECATED] HTTP source configuration. Use the new streams API
-   * instead.
-   */
   export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
     /**
      * Specifies the format of source data.
@@ -359,10 +393,6 @@ export namespace PipelineUpdateResponse {
     }
   }
 
-  /**
-   * @deprecated [DEPRECATED] Worker binding source configuration. Use the new
-   * streams API instead.
-   */
   export interface CloudflarePipelinesWorkersPipelinesBindingSource {
     /**
      * Specifies the format of source data.
@@ -408,8 +438,7 @@ export namespace PipelineListResponse {
   }
 
   /**
-   * @deprecated [DEPRECATED] Describes the configuration of a pipeline. Use the new
-   * streams/sinks/pipelines API instead.
+   * Describes the configuration of a pipeline.
    */
   export interface Result {
     /**
@@ -507,10 +536,6 @@ export namespace PipelineListResponse {
       }
     }
 
-    /**
-     * @deprecated [DEPRECATED] HTTP source configuration. Use the new streams API
-     * instead.
-     */
     export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
       /**
        * Specifies the format of source data.
@@ -536,10 +561,6 @@ export namespace PipelineListResponse {
       }
     }
 
-    /**
-     * @deprecated [DEPRECATED] Worker binding source configuration. Use the new
-     * streams API instead.
-     */
     export interface CloudflarePipelinesWorkersPipelinesBindingSource {
       /**
        * Specifies the format of source data.
@@ -552,8 +573,7 @@ export namespace PipelineListResponse {
 }
 
 /**
- * @deprecated [DEPRECATED] Describes the configuration of a pipeline. Use the new
- * streams/sinks/pipelines API instead.
+ * Describes the configuration of a pipeline.
  */
 export interface PipelineGetResponse {
   /**
@@ -651,10 +671,6 @@ export namespace PipelineGetResponse {
     }
   }
 
-  /**
-   * @deprecated [DEPRECATED] HTTP source configuration. Use the new streams API
-   * instead.
-   */
   export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
     /**
      * Specifies the format of source data.
@@ -680,10 +696,6 @@ export namespace PipelineGetResponse {
     }
   }
 
-  /**
-   * @deprecated [DEPRECATED] Worker binding source configuration. Use the new
-   * streams API instead.
-   */
   export interface CloudflarePipelinesWorkersPipelinesBindingSource {
     /**
      * Specifies the format of source data.
@@ -805,10 +817,6 @@ export namespace PipelineCreateParams {
     }
   }
 
-  /**
-   * @deprecated [DEPRECATED] HTTP source configuration. Use the new streams API
-   * instead.
-   */
   export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
     /**
      * Specifies the format of source data.
@@ -834,10 +842,6 @@ export namespace PipelineCreateParams {
     }
   }
 
-  /**
-   * @deprecated [DEPRECATED] Worker binding source configuration. Use the new
-   * streams API instead.
-   */
   export interface CloudflarePipelinesWorkersPipelinesBindingSource {
     /**
      * Specifies the format of source data.
@@ -959,10 +963,6 @@ export namespace PipelineUpdateParams {
     }
   }
 
-  /**
-   * @deprecated [DEPRECATED] HTTP source configuration. Use the new streams API
-   * instead.
-   */
   export interface CloudflarePipelinesWorkersPipelinesHTTPSource {
     /**
      * Specifies the format of source data.
@@ -988,10 +988,6 @@ export namespace PipelineUpdateParams {
     }
   }
 
-  /**
-   * @deprecated [DEPRECATED] Worker binding source configuration. Use the new
-   * streams API instead.
-   */
   export interface CloudflarePipelinesWorkersPipelinesBindingSource {
     /**
      * Specifies the format of source data.
