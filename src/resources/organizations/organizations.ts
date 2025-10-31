@@ -16,8 +16,7 @@ export class Organizations extends APIResource {
     new OrganizationProfileAPI.OrganizationProfileResource(this._client);
 
   /**
-   * Create a new organization for a user. (Currently in Closed Beta - see
-   * https://developers.cloudflare.com/fundamentals/organizations/)
+   * Create a new organization for a user.
    */
   create(body: OrganizationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Organization> {
     return (
@@ -26,8 +25,7 @@ export class Organizations extends APIResource {
   }
 
   /**
-   * Modify organization. (Currently in Closed Beta - see
-   * https://developers.cloudflare.com/fundamentals/organizations/)
+   * Modify organization
    */
   update(
     organizationId: string,
@@ -42,8 +40,7 @@ export class Organizations extends APIResource {
   }
 
   /**
-   * Retrieve a list of organizations a particular user has access to. (Currently in
-   * Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+   * Retrieve a list of organizations a particular user has access to.
    */
   list(
     query?: OrganizationListParams,
@@ -62,20 +59,17 @@ export class Organizations extends APIResource {
 
   /**
    * Delete an organization. The organization MUST be empty before deleting. It must
-   * not contain any sub-organizations, accounts, members or users. (Currently in
-   * Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+   * not contain any sub-organizations, accounts, members or users.
    */
-  delete(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<OrganizationDeleteResponse> {
-    return (
-      this._client.delete(`/organizations/${organizationId}`, options) as Core.APIPromise<{
-        result: OrganizationDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  delete(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<void> {
+    return this._client.delete(`/organizations/${organizationId}`, {
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
   }
 
   /**
-   * Retrieve the details of a certain organization. (Currently in Closed Beta - see
-   * https://developers.cloudflare.com/fundamentals/organizations/)
+   * Retrieve the details of a certain organization.
    */
   get(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<Organization> {
     return (
@@ -151,10 +145,6 @@ export namespace Organization {
 
     external_metadata: string;
   }
-}
-
-export interface OrganizationDeleteResponse {
-  id: string;
 }
 
 export interface OrganizationCreateParams {
@@ -300,7 +290,6 @@ Organizations.OrganizationProfileResource = OrganizationProfileResource;
 export declare namespace Organizations {
   export {
     type Organization as Organization,
-    type OrganizationDeleteResponse as OrganizationDeleteResponse,
     OrganizationsSinglePage as OrganizationsSinglePage,
     type OrganizationCreateParams as OrganizationCreateParams,
     type OrganizationUpdateParams as OrganizationUpdateParams,

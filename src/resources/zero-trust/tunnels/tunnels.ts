@@ -7,10 +7,16 @@ import * as CloudflaredAPI from './cloudflared/cloudflared';
 import {
   Cloudflared,
   CloudflaredCreateParams,
+  CloudflaredCreateResponse,
   CloudflaredDeleteParams,
+  CloudflaredDeleteResponse,
   CloudflaredEditParams,
+  CloudflaredEditResponse,
   CloudflaredGetParams,
+  CloudflaredGetResponse,
   CloudflaredListParams,
+  CloudflaredListResponse,
+  CloudflaredListResponsesV4PagePaginationArray,
 } from './cloudflared/cloudflared';
 import * as WARPConnectorAPI from './warp-connector/warp-connector';
 import {
@@ -268,6 +274,7 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
 
 Tunnels.TunnelListResponsesV4PagePaginationArray = TunnelListResponsesV4PagePaginationArray;
 Tunnels.Cloudflared = Cloudflared;
+Tunnels.CloudflaredListResponsesV4PagePaginationArray = CloudflaredListResponsesV4PagePaginationArray;
 Tunnels.WARPConnector = WARPConnector;
 Tunnels.WARPConnectorListResponsesV4PagePaginationArray = WARPConnectorListResponsesV4PagePaginationArray;
 
@@ -281,6 +288,12 @@ export declare namespace Tunnels {
 
   export {
     Cloudflared as Cloudflared,
+    type CloudflaredCreateResponse as CloudflaredCreateResponse,
+    type CloudflaredListResponse as CloudflaredListResponse,
+    type CloudflaredDeleteResponse as CloudflaredDeleteResponse,
+    type CloudflaredEditResponse as CloudflaredEditResponse,
+    type CloudflaredGetResponse as CloudflaredGetResponse,
+    CloudflaredListResponsesV4PagePaginationArray as CloudflaredListResponsesV4PagePaginationArray,
     type CloudflaredCreateParams as CloudflaredCreateParams,
     type CloudflaredListParams as CloudflaredListParams,
     type CloudflaredDeleteParams as CloudflaredDeleteParams,

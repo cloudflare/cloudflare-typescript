@@ -72,8 +72,6 @@ export namespace LatestListResponse {
      */
     v: string;
 
-    bonds?: Array<Item.Bond>;
-
     /**
      * Count of processors/cores
      */
@@ -879,21 +877,6 @@ export namespace LatestListResponse {
 
   export namespace Item {
     /**
-     * Snapshot Bond
-     */
-    export interface Bond {
-      /**
-       * Name of the network interface
-       */
-      name: string;
-
-      /**
-       * Current status of the network interface
-       */
-      status: string;
-    }
-
-    /**
      * Snapshot DHCP lease
      */
     export interface DHCPLease {
@@ -1296,11 +1279,6 @@ export namespace LatestListResponse {
        * Connector identifier
        */
       connector_id?: string;
-
-      /**
-       * MTU as measured between the two ends of the tunnel
-       */
-      probed_mtu?: number;
     }
   }
 }

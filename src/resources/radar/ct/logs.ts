@@ -122,12 +122,6 @@ export namespace LogGetResponse {
     api: 'RFC6962' | 'STATIC';
 
     /**
-     * The average throughput of the CT log, measured in certificates per hour
-     * (certs/hour).
-     */
-    avgThroughput: number;
-
-    /**
      * A brief description of the certificate log.
      */
     description: string;
@@ -136,11 +130,6 @@ export namespace LogGetResponse {
      * The end date and time for when the log will stop accepting certificates.
      */
     endExclusive: string;
-
-    /**
-     * Timestamp of the most recent update to the CT log.
-     */
-    lastUpdate: string;
 
     /**
      * The organization responsible for operating the certificate log.
@@ -178,18 +167,6 @@ export namespace LogGetResponse {
      * Timestamp of when the log state was last updated.
      */
     stateTimestamp: string;
-
-    /**
-     * Number of certificates that are eligible for inclusion to this log but have not
-     * been included yet. Based on certificates signed by trusted root CAs within the
-     * log's accepted date range.
-     */
-    submittableCertCount: string | null;
-
-    /**
-     * Number of certificates already included in this CT log.
-     */
-    submittedCertCount: string | null;
 
     /**
      * The URL for the certificate log.

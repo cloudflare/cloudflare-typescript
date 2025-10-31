@@ -29,6 +29,7 @@ import {
   FleetStatusLiveParams,
   FleetStatusLiveResponse,
   FleetStatusOverTimeParams,
+  FleetStatusOverTimeResponse,
   LiveStat,
 } from './fleet-status/fleet-status';
 import * as HTTPTestsAPI from './http-tests/http-tests';
@@ -53,6 +54,9 @@ export class DEX extends APIResource {
 }
 
 export interface DigitalExperienceMonitor {
+  /**
+   * API Resource UUID tag.
+   */
   id: string;
 
   /**
@@ -208,6 +212,7 @@ export declare namespace DEX {
     FleetStatus as FleetStatus,
     type LiveStat as LiveStat,
     type FleetStatusLiveResponse as FleetStatusLiveResponse,
+    type FleetStatusOverTimeResponse as FleetStatusOverTimeResponse,
     type FleetStatusLiveParams as FleetStatusLiveParams,
     type FleetStatusOverTimeParams as FleetStatusOverTimeParams,
   };

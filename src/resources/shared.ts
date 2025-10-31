@@ -998,5 +998,3 @@ export class SubscriptionsSinglePage extends SinglePage<Subscription> {}
 export class TokensV4PagePaginationArray extends V4PagePaginationArray<Token> {}
 
 export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}
-
-export class CloudflareTunnelsV4PagePaginationArray extends V4PagePaginationArray<CloudflareTunnel> {}
