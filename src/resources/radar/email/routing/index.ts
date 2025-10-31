@@ -1,12 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Routing,
-  type RoutingSummaryV2Response,
-  type RoutingTimeseriesGroupsV2Response,
-  type RoutingSummaryV2Params,
-  type RoutingTimeseriesGroupsV2Params,
-} from './routing';
+export { Routing } from './routing';
 export {
   Summary,
   type SummaryARCResponse,

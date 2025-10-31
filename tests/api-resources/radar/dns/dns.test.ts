@@ -10,50 +10,6 @@ const client = new Cloudflare({
 });
 
 describe('resource dns', () => {
-  test('summaryV2', async () => {
-    const responsePromise = client.radar.dns.summaryV2('IP_VERSION');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('summaryV2: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.dns.summaryV2('IP_VERSION', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('summaryV2: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.dns.summaryV2(
-        'IP_VERSION',
-        {
-          asn: ['string'],
-          continent: ['string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z'],
-          format: 'JSON',
-          limitPerGroup: 10,
-          location: ['string'],
-          name: ['main_series'],
-          nodata: true,
-          protocol: 'UDP',
-          queryType: 'A',
-          responseCode: 'NOERROR',
-          tld: ['string'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
   test('timeseries', async () => {
     const responsePromise = client.radar.dns.timeseries();
     const rawResponse = await responsePromise.asResponse();
@@ -84,51 +40,6 @@ describe('resource dns', () => {
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          location: ['string'],
-          name: ['main_series'],
-          nodata: true,
-          protocol: 'UDP',
-          queryType: 'A',
-          responseCode: 'NOERROR',
-          tld: ['string'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('timeseriesGroupsV2', async () => {
-    const responsePromise = client.radar.dns.timeseriesGroupsV2('IP_VERSION');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('timeseriesGroupsV2: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.dns.timeseriesGroupsV2('IP_VERSION', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('timeseriesGroupsV2: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.dns.timeseriesGroupsV2(
-        'IP_VERSION',
-        {
-          aggInterval: '1h',
-          asn: ['string'],
-          continent: ['string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z'],
-          format: 'JSON',
-          limitPerGroup: 10,
           location: ['string'],
           name: ['main_series'],
           nodata: true,

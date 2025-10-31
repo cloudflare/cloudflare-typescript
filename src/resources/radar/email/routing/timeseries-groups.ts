@@ -10,7 +10,11 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.arc();
+   * ```
    */
   arc(
     query?: TimeseriesGroupARCParams,
@@ -36,7 +40,11 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
    * validation over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.dkim();
+   * ```
    */
   dkim(
     query?: TimeseriesGroupDKIMParams,
@@ -62,7 +70,11 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by DMARC (Domain-based Message
    * Authentication, Reporting and Conformance) validation over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.dmarc();
+   * ```
    */
   dmarc(
     query?: TimeseriesGroupDMARCParams,
@@ -88,7 +100,11 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by encryption status (encrypted vs.
    * not-encrypted) over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.encrypted();
+   * ```
    */
   encrypted(
     query?: TimeseriesGroupEncryptedParams,
@@ -113,7 +129,11 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of emails by IP version over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.ipVersion();
+   * ```
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -139,7 +159,11 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of emails by SPF (Sender Policy Framework) validation
    * over time.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.email.routing.timeseriesGroups.spf();
+   * ```
    */
   spf(
     query?: TimeseriesGroupSPFParams,

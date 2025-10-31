@@ -12,7 +12,6 @@ export {
 } from './deployments/index';
 export {
   DeploymentsSinglePage,
-  DeploymentsV4PagePaginationArray,
   Projects,
   type Deployment,
   type Project,

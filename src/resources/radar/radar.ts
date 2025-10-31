@@ -33,15 +33,7 @@ import { AI } from './ai/ai';
 import * as AnnotationsAPI from './annotations/annotations';
 import { AnnotationListParams, AnnotationListResponse, Annotations } from './annotations/annotations';
 import * as AS112API from './as112/as112';
-import {
-  AS112,
-  AS112SummaryV2Params,
-  AS112SummaryV2Response,
-  AS112TimeseriesGroupsV2Params,
-  AS112TimeseriesGroupsV2Response,
-  AS112TimeseriesParams,
-  AS112TimeseriesResponse,
-} from './as112/as112';
+import { AS112, AS112TimeseriesParams, AS112TimeseriesResponse } from './as112/as112';
 import * as AttacksAPI from './attacks/attacks';
 import { Attacks } from './attacks/attacks';
 import * as BGPAPI from './bgp/bgp';
@@ -71,15 +63,7 @@ import {
   CtTimeseriesResponse,
 } from './ct/ct';
 import * as DNSAPI from './dns/dns';
-import {
-  DNS,
-  DNSSummaryV2Params,
-  DNSSummaryV2Response,
-  DNSTimeseriesGroupsV2Params,
-  DNSTimeseriesGroupsV2Response,
-  DNSTimeseriesParams,
-  DNSTimeseriesResponse,
-} from './dns/dns';
+import { DNS, DNSTimeseriesParams, DNSTimeseriesResponse } from './dns/dns';
 import * as EmailAPI from './email/email';
 import { Email, RadarEmailSeries, RadarEmailSummary } from './email/email';
 import * as EntitiesAPI from './entities/entities';
@@ -239,12 +223,8 @@ export declare namespace Radar {
 
   export {
     DNS as DNS,
-    type DNSSummaryV2Response as DNSSummaryV2Response,
     type DNSTimeseriesResponse as DNSTimeseriesResponse,
-    type DNSTimeseriesGroupsV2Response as DNSTimeseriesGroupsV2Response,
-    type DNSSummaryV2Params as DNSSummaryV2Params,
     type DNSTimeseriesParams as DNSTimeseriesParams,
-    type DNSTimeseriesGroupsV2Params as DNSTimeseriesGroupsV2Params,
   };
 
   export {
@@ -269,12 +249,8 @@ export declare namespace Radar {
 
   export {
     AS112 as AS112,
-    type AS112SummaryV2Response as AS112SummaryV2Response,
     type AS112TimeseriesResponse as AS112TimeseriesResponse,
-    type AS112TimeseriesGroupsV2Response as AS112TimeseriesGroupsV2Response,
-    type AS112SummaryV2Params as AS112SummaryV2Params,
     type AS112TimeseriesParams as AS112TimeseriesParams,
-    type AS112TimeseriesGroupsV2Params as AS112TimeseriesGroupsV2Params,
   };
 
   export {
