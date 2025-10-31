@@ -29,7 +29,7 @@ describe('resource connectors', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.magicTransit.connectors.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      device: { id: 'id', provision_license: true, serial_number: 'serial_number' },
+      device: { id: 'id', serial_number: 'serial_number' },
       activated: true,
       interrupt_window_duration_hours: 0,
       interrupt_window_hour_of_day: 0,
@@ -58,7 +58,6 @@ describe('resource connectors', () => {
       interrupt_window_duration_hours: 0,
       interrupt_window_hour_of_day: 0,
       notes: 'notes',
-      provision_license: true,
       timezone: 'timezone',
     });
   });
@@ -121,7 +120,6 @@ describe('resource connectors', () => {
       interrupt_window_duration_hours: 0,
       interrupt_window_hour_of_day: 0,
       notes: 'notes',
-      provision_license: true,
       timezone: 'timezone',
     });
   });
