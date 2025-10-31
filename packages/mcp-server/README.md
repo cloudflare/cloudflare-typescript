@@ -284,16 +284,17 @@ The following tools are available in this MCP server.
 
 ### Resource `organizations`:
 
-- `create_organizations` (`write`): Create a new organization for a user.
-- `update_organizations` (`write`): Modify organization
+- `create_organizations` (`write`): Create a new organization for a user. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+- `update_organizations` (`write`): Modify organization. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+- `list_organizations` (`read`): Retrieve a list of organizations a particular user has access to. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
 - `delete_organizations` (`write`): Delete an organization. The organization MUST be empty before deleting.
-  It must not contain any sub-organizations, accounts, members or users.
-- `get_organizations` (`read`): Retrieve the details of a certain organization.
+  It must not contain any sub-organizations, accounts, members or users. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+- `get_organizations` (`read`): Retrieve the details of a certain organization. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
 
 ### Resource `organizations.organization_profile`:
 
-- `update_organizations_organization_profile` (`write`): Modify organization profile
-- `get_organizations_organization_profile` (`read`): Get an organizations profile if it exists.
+- `update_organizations_organization_profile` (`write`): Modify organization profile. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+- `get_organizations_organization_profile` (`read`): Get an organizations profile if it exists. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
 
 ### Resource `origin_ca_certificates`:
 
@@ -1452,10 +1453,11 @@ The following tools are available in this MCP server.
 - `update_queues_subscriptions` (`write`): Update an existing event subscription
 - `list_queues_subscriptions` (`read`): Get a paginated list of event subscriptions with optional sorting and filtering
 - `delete_queues_subscriptions` (`write`): Delete an existing event subscription
+- `get_queues_subscriptions` (`read`): Get details about an existing event subscription
 
 ### Resource `api_gateway.configurations`:
 
-- `update_api_gateway_configurations` (`write`): Set configuration properties
+- `update_api_gateway_configurations` (`write`): Update configuration properties
 - `get_api_gateway_configurations` (`read`): Retrieve information about specific configuration properties
 
 ### Resource `api_gateway.discovery`:
@@ -1644,7 +1646,6 @@ The following tools are available in this MCP server.
 
 ### Resource `addressing.loa_documents`:
 
-- `create_addressing_loa_documents` (`write`): Submit LOA document (pdf format) under the account.
 - `get_addressing_loa_documents` (`read`): Download specified LOA document under the account.
 
 ### Resource `addressing.prefixes`:
@@ -1658,7 +1659,7 @@ The following tools are available in this MCP server.
 ### Resource `addressing.prefixes.service_bindings`:
 
 - `create_prefixes_addressing_service_bindings` (`write`): Creates a new Service Binding, routing traffic to IPs within the given CIDR to a service running on Cloudflare's network.
-  **Note:** This API may only be used on prefixes currently configured with a Magic Transit/Cloudflare CDN/Cloudflare Spectrum service binding, and only allows creating upgrade service bindings for the Cloudflare CDN or Cloudflare Spectrum.
+  **NOTE:** The first Service Binding created for an IP Prefix must exactly match the IP Prefix's CIDR. Subsequent Service Bindings may be created with a more-specific CIDR. Refer to the [Service Bindings Documentation](https://developers.cloudflare.com/byoip/service-bindings/) for compatibility details.
 - `list_prefixes_addressing_service_bindings` (`read`): List the Cloudflare services this prefix is currently bound to. Traffic sent to an address within an IP prefix will be routed to the Cloudflare service of the most-specific Service Binding matching the address.
   **Example:** binding `192.0.2.0/24` to Cloudflare Magic Transit and `192.0.2.1/32` to the Cloudflare CDN would route traffic for `192.0.2.1` to the CDN, and traffic for all other IPs in the prefix to Cloudflare Magic Transit.
 - `delete_prefixes_addressing_service_bindings` (`write`): Delete a Service Binding
@@ -1933,10 +1934,10 @@ The following tools are available in this MCP server.
 ### Resource `magic_transit.connectors`:
 
 - `create_magic_transit_connectors` (`write`): Add a connector to your account
-- `update_magic_transit_connectors` (`write`): Replace Connector
+- `update_magic_transit_connectors` (`write`): Replace Connector or Re-provision License Key
 - `list_magic_transit_connectors` (`read`): List Connectors
 - `delete_magic_transit_connectors` (`write`): Remove a connector from your account
-- `edit_magic_transit_connectors` (`write`): Edit Connector to update specific properties
+- `edit_magic_transit_connectors` (`write`): Edit Connector to update specific properties or Re-provision License Key
 - `get_magic_transit_connectors` (`read`): Fetch Connector
 
 ### Resource `magic_transit.connectors.events`:
@@ -2252,8 +2253,8 @@ The following tools are available in this MCP server.
 
 ### Resource `stream.downloads`:
 
-- `create_stream_downloads` (`write`): Creates a download for a video when a video is ready to view. Use `/downloads/{download_type}` instead for type-specific downloads.
-- `delete_stream_downloads` (`write`): Delete the downloads for a video. Use `/downloads/{download_type}` instead for type-specific downloads.
+- `create_stream_downloads` (`write`): Creates a download for a video when a video is ready to view. Use `/downloads/{download_type}` instead for type-specific downloads. Available types are `default` and `audio`.
+- `delete_stream_downloads` (`write`): Delete the downloads for a video. Use `/downloads/{download_type}` instead for type-specific downloads. Available types are `default` and `audio`.
 - `get_stream_downloads` (`read`): Lists the downloads created for a video.
 
 ### Resource `stream.embed`:
@@ -2614,6 +2615,23 @@ The following tools are available in this MCP server.
 ### Resource `zero_trust.seats`:
 
 - `edit_zero_trust_seats` (`write`): Removes a user from a Zero Trust seat when both `access_seat` and `gateway_seat` are set to false.
+
+### Resource `zero_trust.access.ai_controls.mcp.portals`:
+
+- `create_mcp_ai_controls_access_zero_trust_portals` (`write`): Create a new MCP Portal
+- `update_mcp_ai_controls_access_zero_trust_portals` (`write`): Update a MCP Portal
+- `list_mcp_ai_controls_access_zero_trust_portals` (`read`): List MCP Portals
+- `delete_mcp_ai_controls_access_zero_trust_portals` (`write`): Delete a MCP Portal
+- `read_mcp_ai_controls_access_zero_trust_portals` (`read`): Read details of an MCP Portal
+
+### Resource `zero_trust.access.ai_controls.mcp.servers`:
+
+- `create_mcp_ai_controls_access_zero_trust_servers` (`write`): Create a new MCP Server
+- `update_mcp_ai_controls_access_zero_trust_servers` (`write`): Update a MCP Server
+- `list_mcp_ai_controls_access_zero_trust_servers` (`read`): List MCP Servers
+- `delete_mcp_ai_controls_access_zero_trust_servers` (`write`): Delete a MCP Server
+- `read_mcp_ai_controls_access_zero_trust_servers` (`read`): Read the details of a MCP Server
+- `sync_mcp_ai_controls_access_zero_trust_servers` (`write`): Sync MCP Server Capabilities
 
 ### Resource `zero_trust.access.gateway_ca`:
 
@@ -3334,7 +3352,9 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.dns`:
 
+- `summary_v2_radar_dns` (`read`): Retrieves the distribution of DNS queries by the specified dimension.
 - `timeseries_radar_dns` (`read`): Retrieves normalized query volume to the 1.1.1.1 DNS resolver over time.
+- `timeseries_groups_v2_radar_dns` (`read`): Retrieves the distribution of DNS queries grouped by dimension over time.
 
 ### Resource `radar.dns.top`:
 
@@ -3390,7 +3410,9 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.as112`:
 
+- `summary_v2_radar_as112` (`read`): Retrieves the distribution of AS112 queries by the specified dimension.
 - `timeseries_radar_as112` (`read`): Retrieves the AS112 DNS queries over time.
+- `timeseries_groups_v2_radar_as112` (`read`): Retrieves the distribution of AS112 queries grouped by dimension over time.
 
 ### Resource `radar.as112.summary`:
 
@@ -3417,6 +3439,11 @@ The following tools are available in this MCP server.
 - `ip_version_as112_radar_top` (`read`): Retrieves the top locations of DNS queries to AS112 for an IP version.
 - `locations_as112_radar_top` (`read`): Retrieves the top locations by AS112 DNS queries.
 
+### Resource `radar.email.routing`:
+
+- `summary_v2_email_radar_routing` (`read`): Retrieves the distribution of email routing metrics by the specified dimension.
+- `timeseries_groups_v2_email_radar_routing` (`read`): Retrieves the distribution of email routing metrics grouped by dimension over time.
+
 ### Resource `radar.email.routing.summary`:
 
 - `arc_routing_email_radar_summary` (`read`): Retrieves the distribution of emails by ARC (Authenticated Received Chain) validation.
@@ -3434,6 +3461,11 @@ The following tools are available in this MCP server.
 - `encrypted_routing_email_radar_timeseries_groups` (`read`): Retrieves the distribution of emails by encryption status (encrypted vs. not-encrypted) over time.
 - `ip_version_routing_email_radar_timeseries_groups` (`read`): Retrieves the distribution of emails by IP version over time.
 - `spf_routing_email_radar_timeseries_groups` (`read`): Retrieves the distribution of emails by SPF (Sender Policy Framework) validation over time.
+
+### Resource `radar.email.security`:
+
+- `summary_v2_email_radar_security` (`read`): Retrieves the distribution of email security metrics by the specified dimension.
+- `timeseries_groups_v2_email_radar_security` (`read`): Retrieves the distribution of email security metrics grouped by dimension over time.
 
 ### Resource `radar.email.security.top.tlds`:
 
@@ -3477,7 +3509,9 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.attacks.layer3`:
 
+- `summary_v2_attacks_radar_layer3` (`read`): Retrieves the distribution of layer 3 attacks by the specified dimension.
 - `timeseries_attacks_radar_layer3` (`read`): Retrieves layer 3 attacks over time.
+- `timeseries_groups_v2_attacks_radar_layer3` (`read`): Retrieves the distribution of layer 3 attacks grouped by dimension over time.
 
 ### Resource `radar.attacks.layer3.summary`:
 
@@ -3512,7 +3546,9 @@ The following tools are available in this MCP server.
 
 ### Resource `radar.attacks.layer7`:
 
+- `summary_v2_attacks_radar_layer7` (`read`): Retrieves the distribution of layer 7 attacks by the specified dimension.
 - `timeseries_attacks_radar_layer7` (`read`): Retrieves layer 7 attacks over time.
+- `timeseries_groups_v2_attacks_radar_layer7` (`read`): Retrieves the distribution of layer 7 attacks grouped by dimension over time.
 
 ### Resource `radar.attacks.layer7.summary`:
 
@@ -3966,7 +4002,7 @@ The following tools are available in this MCP server.
 - `delete_cloudforce_one_threat_events` (`write`): The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
 - `bulk_create_cloudforce_one_threat_events` (`write`): The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
 - `edit_cloudforce_one_threat_events` (`write`): Updates an event
-- `get_cloudforce_one_threat_events` (`read`): Reads an event
+- `get_cloudforce_one_threat_events` (`read`): This Method is deprecated. Please use /events/dataset/:dataset_id/events/:event_id instead.
 
 ### Resource `cloudforce_one.threat_events.attackers`:
 
@@ -3994,7 +4030,7 @@ The following tools are available in this MCP server.
 
 ### Resource `cloudforce_one.threat_events.indicator_types`:
 
-- `list_threat_events_cloudforce_one_indicator_types` (`read`): Lists all indicator types
+- `list_threat_events_cloudforce_one_indicator_types` (`read`): This Method is deprecated. Please use /events/dataset/:dataset_id/indicatorTypes instead.
 
 ### Resource `cloudforce_one.threat_events.raw`:
 
@@ -4196,6 +4232,10 @@ The following tools are available in this MCP server.
 
 - `get_content_scanning_settings` (`read`): Retrieve the current status of Content Scanning.
 
+### Resource `abuse_reports`:
+
+- `create_abuse_reports` (`write`): Submit the Abuse Report of a particular type
+
 ### Resource `ai`:
 
 - `run_ai` (`write`): This endpoint provides users with the capability to run specific AI models on-demand.
@@ -4315,11 +4355,11 @@ The following tools are available in this MCP server.
 
 ### Resource `pipelines`:
 
-- `create_pipelines` (`write`): Create a new pipeline.
-- `update_pipelines` (`write`): Update an existing pipeline.
-- `list_pipelines` (`read`): List, filter, and paginate pipelines in an account.
-- `delete_pipelines` (`write`): Delete a pipeline.
-- `get_pipelines` (`read`): Get configuration of a pipeline.
+- `create_pipelines` (`write`): [DEPRECATED] Create a new pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `update_pipelines` (`write`): [DEPRECATED] Update an existing pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `list_pipelines` (`read`): [DEPRECATED] List, filter, and paginate pipelines in an account. Use the new /pipelines/v1/pipelines endpoint instead.
+- `delete_pipelines` (`write`): [DEPRECATED] Delete a pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `get_pipelines` (`read`): [DEPRECATED] Get configuration of a pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
 
 ### Resource `schema_validation.schemas`:
 

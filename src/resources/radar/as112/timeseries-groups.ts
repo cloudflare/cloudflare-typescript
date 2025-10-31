@@ -9,11 +9,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS queries by DNSSEC (DNS Security
    * Extensions) support over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.dnssec();
-   * ```
+   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
    */
   dnssec(
     query: TimeseriesGroupDNSSECParams | null | undefined = {},
@@ -30,11 +26,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS queries by EDNS (Extension Mechanisms
    * for DNS) support over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.edns();
-   * ```
+   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
    */
   edns(
     query: TimeseriesGroupEdnsParams | null | undefined = {},
@@ -50,11 +42,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS queries by IP version over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.ipVersion();
-   * ```
+   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
    */
   ipVersion(
     query: TimeseriesGroupIPVersionParams | null | undefined = {},
@@ -71,11 +59,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS requests classified by protocol over
    * time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.protocol();
-   * ```
+   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
    */
   protocol(
     query: TimeseriesGroupProtocolParams | null | undefined = {},
@@ -91,11 +75,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS queries by type over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.queryType();
-   * ```
+   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
    */
   queryType(
     query: TimeseriesGroupQueryTypeParams | null | undefined = {},
@@ -112,11 +92,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of AS112 DNS requests classified by response code
    * over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.as112.timeseriesGroups.responseCodes();
-   * ```
+   * @deprecated Use [Radar AS112 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/timeseries_groups_v2/) instead.
    */
   responseCodes(
     query: TimeseriesGroupResponseCodesParams | null | undefined = {},
@@ -846,12 +822,12 @@ export interface TimeseriesGroupDNSSECParams {
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -940,12 +916,13 @@ export interface TimeseriesGroupDNSSECParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -964,7 +941,8 @@ export interface TimeseriesGroupDNSSECParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 }
 
 export interface TimeseriesGroupEdnsParams {
@@ -1019,12 +997,12 @@ export interface TimeseriesGroupEdnsParams {
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1113,12 +1091,13 @@ export interface TimeseriesGroupEdnsParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1137,7 +1116,8 @@ export interface TimeseriesGroupEdnsParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 }
 
 export interface TimeseriesGroupIPVersionParams {
@@ -1192,12 +1172,12 @@ export interface TimeseriesGroupIPVersionParams {
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1286,12 +1266,13 @@ export interface TimeseriesGroupIPVersionParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1310,7 +1291,8 @@ export interface TimeseriesGroupIPVersionParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 }
 
 export interface TimeseriesGroupProtocolParams {
@@ -1365,7 +1347,7 @@ export interface TimeseriesGroupProtocolParams {
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1454,12 +1436,13 @@ export interface TimeseriesGroupProtocolParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1478,7 +1461,8 @@ export interface TimeseriesGroupProtocolParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 }
 
 export interface TimeseriesGroupQueryTypeParams {
@@ -1540,12 +1524,12 @@ export interface TimeseriesGroupQueryTypeParams {
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1564,7 +1548,8 @@ export interface TimeseriesGroupQueryTypeParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 }
 
 export interface TimeseriesGroupResponseCodesParams {
@@ -1626,12 +1611,12 @@ export interface TimeseriesGroupResponseCodesParams {
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1720,7 +1705,8 @@ export interface TimeseriesGroupResponseCodesParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 }
 
 export declare namespace TimeseriesGroups {

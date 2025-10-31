@@ -75,7 +75,7 @@ export const tool: Tool = {
         enum: ['default', 'eu', 'fedramp'],
       },
     },
-    required: ['account_id', 'bucket_name', 'queue_id'],
+    required: ['account_id', 'bucket_name', 'queue_id', 'rules'],
   },
   annotations: {
     idempotentHint: true,

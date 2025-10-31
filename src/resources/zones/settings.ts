@@ -299,13 +299,8 @@ export interface BrowserCacheTTL {
   id?: 'browser_cache_ttl';
 
   /**
-   * The number of seconds to cache resources for. Minimum values by plan:
-   *
-   * - Free: 7200 seconds (2 hours)
-   * - Pro: 3600 seconds (1 hour)
-   * - Business: 1 second
-   * - Enterprise: 1 second Setting this to 0 enables "Respect Existing Headers" and
-   *   is allowed for all plans.
+   * The number of seconds to cache resources for. Setting this to 0 enables "Respect
+   * Existing Headers".
    */
   value?: number;
 }
@@ -317,13 +312,8 @@ export interface BrowserCacheTTLParam {
   id?: 'browser_cache_ttl';
 
   /**
-   * The number of seconds to cache resources for. Minimum values by plan:
-   *
-   * - Free: 7200 seconds (2 hours)
-   * - Pro: 3600 seconds (1 hour)
-   * - Business: 1 second
-   * - Enterprise: 1 second Setting this to 0 enables "Respect Existing Headers" and
-   *   is allowed for all plans.
+   * The number of seconds to cache resources for. Setting this to 0 enables "Respect
+   * Existing Headers".
    */
   value?: number;
 }
@@ -1100,6 +1090,10 @@ export interface PseudoIPV4 {
   modified_on?: string | null;
 }
 
+/**
+ * @deprecated This page rule is deprecated. This functionality is no longer
+ * supported.
+ */
 export interface ResponseBuffering {
   /**
    * Turn on or off whether Cloudflare should wait for an entire file from the origin
@@ -1114,6 +1108,10 @@ export interface ResponseBuffering {
   value?: 'on' | 'off';
 }
 
+/**
+ * @deprecated This page rule is deprecated. This functionality is no longer
+ * supported.
+ */
 export interface ResponseBufferingParam {
   /**
    * Turn on or off whether Cloudflare should wait for an entire file from the origin
@@ -2213,10 +2211,8 @@ export namespace SettingEditResponse {
   }
 
   /**
-   * Enables or disables buffering of responses from the proxied server. Cloudflare
-   * may buffer the whole payload to deliver it at once to the client versus allowing
-   * it to be delivered in chunks. By default, the proxied server streams directly
-   * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
+   * @deprecated This zone setting is deprecated. This functionality is no longer
+   * supported.
    */
   export interface ZonesSchemasResponseBuffering {
     /**
@@ -3256,10 +3252,8 @@ export namespace SettingGetResponse {
   }
 
   /**
-   * Enables or disables buffering of responses from the proxied server. Cloudflare
-   * may buffer the whole payload to deliver it at once to the client versus allowing
-   * it to be delivered in chunks. By default, the proxied server streams directly
-   * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
+   * @deprecated This zone setting is deprecated. This functionality is no longer
+   * supported.
    */
   export interface ZonesSchemasResponseBuffering {
     /**

@@ -4,7 +4,7 @@ import { APIResource } from '../../core/resource';
 import * as ProjectsAPI from './projects/projects';
 import {
   Deployment,
-  DeploymentsSinglePage,
+  DeploymentsV4PagePaginationArray,
   Project,
   ProjectCreateParams,
   ProjectDeleteParams,
@@ -32,7 +32,7 @@ export declare namespace Pages {
     type Stage as Stage,
     type ProjectDeleteResponse as ProjectDeleteResponse,
     type ProjectPurgeBuildCacheResponse as ProjectPurgeBuildCacheResponse,
-    type DeploymentsSinglePage as DeploymentsSinglePage,
+    type DeploymentsV4PagePaginationArray as DeploymentsV4PagePaginationArray,
     type ProjectCreateParams as ProjectCreateParams,
     type ProjectListParams as ProjectListParams,
     type ProjectDeleteParams as ProjectDeleteParams,

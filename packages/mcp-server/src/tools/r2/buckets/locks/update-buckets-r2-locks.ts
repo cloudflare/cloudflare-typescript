@@ -59,7 +59,7 @@ export const tool: Tool = {
                   properties: {
                     date: {
                       type: 'string',
-                      format: 'date',
+                      format: 'date-time',
                     },
                     type: {
                       type: 'string',
