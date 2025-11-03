@@ -27,7 +27,7 @@ describe('resource search', () => {
       exclude: ['ADM1S'],
       format: 'JSON',
       include: ['ADM1S'],
-      limit: 5,
+      limit: 1,
       limitPerGroup: 0,
     });
   });
