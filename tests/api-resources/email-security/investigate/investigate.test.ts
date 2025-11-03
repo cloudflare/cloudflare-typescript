@@ -28,7 +28,6 @@ describe('resource investigate', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       action_log: true,
       alert_id: 'alert_id',
-      cursor: 'cursor',
       detections_only: true,
       domain: 'domain',
       end: '2019-12-27T18:11:19.117Z',

@@ -8,7 +8,10 @@ export class Top extends APIResource {
   /**
    * Retrieves the top user agents by HTTP requests.
    *
-   * @deprecated Use [Radar HTTP Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/summary_v2/) instead.
+   * @example
+   * ```ts
+   * const response = await client.radar.http.top.browser();
+   * ```
    */
   browser(query?: TopBrowserParams, options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>;
   browser(options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>;
@@ -29,7 +32,11 @@ export class Top extends APIResource {
   /**
    * Retrieves the top user agents, aggregated in families, by HTTP requests.
    *
-   * @deprecated Use [Radar HTTP Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/summary_v2/) instead.
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.http.top.browserFamily();
+   * ```
    */
   browserFamily(
     query?: TopBrowserFamilyParams,

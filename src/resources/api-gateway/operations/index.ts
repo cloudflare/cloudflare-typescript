@@ -20,8 +20,8 @@ export {
 } from './operations';
 export {
   SchemaValidation,
+  type SettingsMultipleRequest,
   type SchemaValidationUpdateResponse,
-  type SchemaValidationEditResponse,
   type SchemaValidationGetResponse,
   type SchemaValidationUpdateParams,
   type SchemaValidationEditParams,

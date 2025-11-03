@@ -56,8 +56,9 @@ export class Prefixes extends APIResource {
    * ```ts
    * const prefix = await client.addressing.prefixes.create({
    *   account_id: '258def64c72dae45f3e4c8516e2111f2',
-   *   asn: 13335,
+   *   asn: 209242,
    *   cidr: '192.0.2.0/24',
+   *   loa_document_id: 'd933b1530bc56c9953cf8ce166da8004',
    * });
    * ```
    */
@@ -199,7 +200,7 @@ export interface Prefix {
   /**
    * Autonomous System Number (ASN) the prefix will be advertised under.
    */
-  asn?: number;
+  asn?: number | null;
 
   /**
    * IP Prefix in Classless Inter-Domain Routing format.
@@ -209,20 +210,9 @@ export interface Prefix {
   created_at?: string;
 
   /**
-   * Whether Cloudflare is allowed to generate the LOA document on behalf of the
-   * prefix owner.
-   */
-  delegate_loa_creation?: boolean;
-
-  /**
    * Description of the prefix.
    */
   description?: string;
-
-  /**
-   * State of one kind of validation for an IP prefix.
-   */
-  irr_validation_state?: string;
 
   /**
    * Identifier for the uploaded LOA document.
@@ -246,21 +236,6 @@ export interface Prefix {
    * Prefix.
    */
   on_demand_locked?: boolean;
-
-  /**
-   * State of one kind of validation for an IP prefix.
-   */
-  ownership_validation_state?: string;
-
-  /**
-   * Token provided to demonstrate ownership of the prefix.
-   */
-  ownership_validation_token?: string;
-
-  /**
-   * State of one kind of validation for an IP prefix.
-   */
-  rpki_validation_state?: string;
 }
 
 export interface PrefixDeleteResponse {
@@ -272,6 +247,8 @@ export interface PrefixDeleteResponse {
    * Whether the API call was successful.
    */
   success: true;
+
+  result_info?: PrefixDeleteResponse.ResultInfo;
 }
 
 export namespace PrefixDeleteResponse {
@@ -306,6 +283,28 @@ export namespace PrefixDeleteResponse {
       pointer?: string;
     }
   }
+
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service.
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results.
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results.
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters.
+     */
+    total_count?: number;
+  }
 }
 
 export interface PrefixCreateParams {
@@ -317,7 +316,7 @@ export interface PrefixCreateParams {
   /**
    * Body param: Autonomous System Number (ASN) the prefix will be advertised under.
    */
-  asn: number;
+  asn: number | null;
 
   /**
    * Body param: IP Prefix in Classless Inter-Domain Routing format.
@@ -325,15 +324,9 @@ export interface PrefixCreateParams {
   cidr: string;
 
   /**
-   * Body param: Whether Cloudflare is allowed to generate the LOA document on behalf
-   * of the prefix owner.
+   * Body param: Identifier for the uploaded LOA document.
    */
-  delegate_loa_creation?: boolean;
-
-  /**
-   * Body param: Description of the prefix.
-   */
-  description?: string;
+  loa_document_id: string | null;
 }
 
 export interface PrefixListParams {
