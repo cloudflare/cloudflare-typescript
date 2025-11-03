@@ -15,7 +15,6 @@ export {
 export {
   UserSchemas,
   type Message,
-  type PublicSchema,
   type SchemaUpload,
   type UserSchemaDeleteResponse,
   type UserSchemaCreateParams,
@@ -23,5 +22,4 @@ export {
   type UserSchemaDeleteParams,
   type UserSchemaEditParams,
   type UserSchemaGetParams,
-  type PublicSchemasV4PagePaginationArray,
 } from './user-schemas';

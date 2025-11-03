@@ -43,8 +43,6 @@ import { Settings } from './settings/settings';
 import * as UserSchemasAPI from './user-schemas/user-schemas';
 import {
   Message,
-  PublicSchema,
-  PublicSchemasV4PagePaginationArray,
   SchemaUpload,
   UserSchemaCreateParams,
   UserSchemaDeleteParams,
@@ -119,10 +117,8 @@ export declare namespace APIGateway {
   export {
     UserSchemas as UserSchemas,
     type Message as Message,
-    type PublicSchema as PublicSchema,
     type SchemaUpload as SchemaUpload,
     type UserSchemaDeleteResponse as UserSchemaDeleteResponse,
-    type PublicSchemasV4PagePaginationArray as PublicSchemasV4PagePaginationArray,
     type UserSchemaCreateParams as UserSchemaCreateParams,
     type UserSchemaListParams as UserSchemaListParams,
     type UserSchemaDeleteParams as UserSchemaDeleteParams,
