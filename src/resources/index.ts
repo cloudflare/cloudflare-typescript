@@ -84,6 +84,7 @@ export { Snippets } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';
 export { Speed } from './speed/speed';
 export { Stream } from './stream/stream';
+export { TokenValidation } from './token-validation/token-validation';
 export { Turnstile } from './turnstile/turnstile';
 export { URLNormalization } from './url-normalization';
 export { URLScanner } from './url-scanner/url-scanner';
