@@ -4,6 +4,7 @@ export { APIGateway } from './api-gateway';
 export {
   Configurations,
   type Configuration,
+  type ConfigurationUpdateResponse,
   type ConfigurationUpdateParams,
   type ConfigurationGetParams,
 } from './configurations';
@@ -15,19 +16,6 @@ export {
   type DiscoveryGetParams,
 } from './discovery/index';
 export { ExpressionTemplate } from './expression-template/index';
-export {
-  OldPublicSchemasV4PagePaginationArray,
-  UserSchemas,
-  type Message,
-  type OldPublicSchema,
-  type UserSchemaCreateResponse,
-  type UserSchemaDeleteResponse,
-  type UserSchemaCreateParams,
-  type UserSchemaListParams,
-  type UserSchemaDeleteParams,
-  type UserSchemaEditParams,
-  type UserSchemaGetParams,
-} from './user-schemas/index';
 export {
   OperationListResponsesV4PagePaginationArray,
   OperationBulkCreateResponsesSinglePage,
@@ -48,3 +36,14 @@ export {
 } from './operations/index';
 export { Schemas, type SchemaListResponse, type SchemaListParams } from './schemas';
 export { Settings } from './settings/index';
+export {
+  UserSchemas,
+  type Message,
+  type SchemaUpload,
+  type UserSchemaDeleteResponse,
+  type UserSchemaCreateParams,
+  type UserSchemaListParams,
+  type UserSchemaDeleteParams,
+  type UserSchemaEditParams,
+  type UserSchemaGetParams,
+} from './user-schemas/index';

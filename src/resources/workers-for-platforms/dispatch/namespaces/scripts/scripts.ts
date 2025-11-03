@@ -175,7 +175,7 @@ export interface ScriptUpdateResponse {
   startup_time_ms: number;
 
   /**
-   * The name used to identify the script.
+   * The id of the script in the Workers system. Usually the script name.
    */
   id?: string;
 
@@ -196,11 +196,6 @@ export interface ScriptUpdateResponse {
    * When the script was created.
    */
   created_on?: string;
-
-  /**
-   * The entry point for the script.
-   */
-  entry_point?: string;
 
   /**
    * Hashed script content, can be used in a If-None-Match header when updating.
@@ -250,11 +245,6 @@ export interface ScriptUpdateResponse {
   named_handlers?: Array<ScriptUpdateResponse.NamedHandler>;
 
   /**
-   * Observability settings for the Worker.
-   */
-  observability?: ScriptUpdateResponse.Observability;
-
-  /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    */
@@ -271,19 +261,9 @@ export interface ScriptUpdateResponse {
   placement_status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
 
   /**
-   * The immutable ID of the script.
-   */
-  tag?: string;
-
-  /**
-   * Tags associated with the Worker.
-   */
-  tags?: Array<string> | null;
-
-  /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScript> | null;
+  tail_consumers?: Array<TailAPI.ConsumerScript>;
 
   /**
    * Usage model for the Worker invocations.
@@ -302,61 +282,6 @@ export namespace ScriptUpdateResponse {
      * The name of the export.
      */
     name?: string;
-  }
-
-  /**
-   * Observability settings for the Worker.
-   */
-  export interface Observability {
-    /**
-     * Whether observability is enabled for the Worker.
-     */
-    enabled: boolean;
-
-    /**
-     * The sampling rate for incoming requests. From 0 to 1 (1 = 100%, 0.1 = 10%).
-     * Default is 1.
-     */
-    head_sampling_rate?: number | null;
-
-    /**
-     * Log settings for the Worker.
-     */
-    logs?: Observability.Logs | null;
-  }
-
-  export namespace Observability {
-    /**
-     * Log settings for the Worker.
-     */
-    export interface Logs {
-      /**
-       * Whether logs are enabled for the Worker.
-       */
-      enabled: boolean;
-
-      /**
-       * Whether
-       * [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs)
-       * are enabled for the Worker.
-       */
-      invocation_logs: boolean;
-
-      /**
-       * A list of destinations where logs will be exported to.
-       */
-      destinations?: Array<string>;
-
-      /**
-       * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
-       */
-      head_sampling_rate?: number | null;
-
-      /**
-       * Whether log persistence is enabled for the Worker.
-       */
-      persist?: boolean;
-    }
   }
 
   /**
@@ -447,6 +372,7 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindSecretText
       | Metadata.WorkersBindingKindSendEmail
       | Metadata.WorkersBindingKindService
+      | Metadata.WorkersBindingKindTailConsumer
       | Metadata.WorkersBindingKindTextBlob
       | Metadata.WorkersBindingKindVectorize
       | Metadata.WorkersBindingKindVersionMetadata
@@ -526,7 +452,7 @@ export namespace ScriptUpdateParams {
     /**
      * List of Workers that will consume logs from the attached Worker.
      */
-    tail_consumers?: Array<TailAPI.ConsumerScriptParam> | null;
+    tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
 
     /**
      * Usage model for the Worker invocations.
@@ -1018,6 +944,23 @@ export namespace ScriptUpdateParams {
        * Optional environment if the Worker utilizes one.
        */
       environment?: string;
+    }
+
+    export interface WorkersBindingKindTailConsumer {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of Tail Worker to bind to.
+       */
+      service: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'tail_consumer';
     }
 
     export interface WorkersBindingKindTextBlob {

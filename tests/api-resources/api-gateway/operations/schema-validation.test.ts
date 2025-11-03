@@ -34,7 +34,10 @@ describe('resource schemaValidation', () => {
   test('edit: only required params', async () => {
     const responsePromise = client.apiGateway.operations.schemaValidation.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: { '3818d821-5901-4147-a474-f5f5aec1d54e': {}, 'b17c8043-99a0-4202-b7d9-8f7cdbee02cd': {} },
+      settings_multiple_request: {
+        '3818d821-5901-4147-a474-f5f5aec1d54e': {},
+        'b17c8043-99a0-4202-b7d9-8f7cdbee02cd': {},
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,7 +51,7 @@ describe('resource schemaValidation', () => {
   test('edit: required and optional params', async () => {
     const response = await client.apiGateway.operations.schemaValidation.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {
+      settings_multiple_request: {
         '3818d821-5901-4147-a474-f5f5aec1d54e': { mitigation_action: 'log' },
         'b17c8043-99a0-4202-b7d9-8f7cdbee02cd': { mitigation_action: 'block' },
       },

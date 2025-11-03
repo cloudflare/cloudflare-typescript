@@ -8,7 +8,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by bitrate over time.
    *
-   * @deprecated Use [Radar Attacks Layer 3 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   bitrate(
     query?: TimeseriesGroupBitrateParams,
@@ -33,7 +33,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by duration over time.
    *
-   * @deprecated Use [Radar Attacks Layer 3 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   duration(
     query?: TimeseriesGroupDurationParams,
@@ -58,7 +58,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by targeted industry over time.
    *
-   * @deprecated Use [Radar Attacks Layer 3 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   industry(
     query?: TimeseriesGroupIndustryParams,
@@ -83,7 +83,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by IP version over time.
    *
-   * @deprecated Use [Radar Attacks Layer 3 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -108,7 +108,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by protocol over time.
    *
-   * @deprecated Use [Radar Attacks Layer 3 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   protocol(
     query?: TimeseriesGroupProtocolParams,
@@ -133,7 +133,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by vector over time.
    *
-   * @deprecated Use [Radar Attacks Layer 3 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   vector(
     query?: TimeseriesGroupVectorParams,
@@ -158,7 +158,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 3 attacks by targeted vertical over time.
    *
-   * @deprecated Use [Radar Attacks Layer 3 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer3/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   vertical(
     query?: TimeseriesGroupVerticalParams,

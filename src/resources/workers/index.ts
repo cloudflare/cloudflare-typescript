@@ -34,12 +34,11 @@ export {
   type RouteGetParams,
 } from './routes';
 export {
-  ScriptListResponsesSinglePage,
+  ScriptsSinglePage,
   Scripts,
   type Script,
   type ScriptSetting,
   type ScriptUpdateResponse,
-  type ScriptListResponse,
   type ScriptDeleteResponse,
   type ScriptGetResponse,
   type ScriptSearchResponse,
