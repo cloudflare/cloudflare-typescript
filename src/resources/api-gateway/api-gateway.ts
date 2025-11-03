@@ -6,7 +6,6 @@ import {
   Configuration,
   ConfigurationGetParams,
   ConfigurationUpdateParams,
-  ConfigurationUpdateResponse,
   Configurations,
 } from './configurations';
 import * as SchemasAPI from './schemas';
@@ -44,8 +43,10 @@ import { Settings } from './settings/settings';
 import * as UserSchemasAPI from './user-schemas/user-schemas';
 import {
   Message,
-  SchemaUpload,
+  OldPublicSchema,
+  OldPublicSchemasV4PagePaginationArray,
   UserSchemaCreateParams,
+  UserSchemaCreateResponse,
   UserSchemaDeleteParams,
   UserSchemaDeleteResponse,
   UserSchemaEditParams,
@@ -70,6 +71,7 @@ APIGateway.Configurations = Configurations;
 APIGateway.Discovery = Discovery;
 APIGateway.Operations = Operations;
 APIGateway.Schemas = Schemas;
+APIGateway.Settings = Settings;
 APIGateway.UserSchemas = UserSchemas;
 APIGateway.ExpressionTemplate = ExpressionTemplate;
 
@@ -77,7 +79,6 @@ export declare namespace APIGateway {
   export {
     Configurations as Configurations,
     type Configuration as Configuration,
-    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
     type ConfigurationUpdateParams as ConfigurationUpdateParams,
     type ConfigurationGetParams as ConfigurationGetParams,
   };
@@ -114,13 +115,15 @@ export declare namespace APIGateway {
     type SchemaListParams as SchemaListParams,
   };
 
-  export { type Settings as Settings };
+  export { Settings as Settings };
 
   export {
     UserSchemas as UserSchemas,
     type Message as Message,
-    type SchemaUpload as SchemaUpload,
+    type OldPublicSchema as OldPublicSchema,
+    type UserSchemaCreateResponse as UserSchemaCreateResponse,
     type UserSchemaDeleteResponse as UserSchemaDeleteResponse,
+    type OldPublicSchemasV4PagePaginationArray as OldPublicSchemasV4PagePaginationArray,
     type UserSchemaCreateParams as UserSchemaCreateParams,
     type UserSchemaListParams as UserSchemaListParams,
     type UserSchemaDeleteParams as UserSchemaDeleteParams,
