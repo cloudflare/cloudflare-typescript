@@ -8,8 +8,7 @@ import { path } from '../../internal/utils/path';
 
 export class OrganizationProfileResource extends APIResource {
   /**
-   * Modify organization profile. (Currently in Closed Beta - see
-   * https://developers.cloudflare.com/fundamentals/organizations/)
+   * Modify organization profile
    */
   update(
     organizationID: string,
@@ -24,8 +23,7 @@ export class OrganizationProfileResource extends APIResource {
   }
 
   /**
-   * Get an organizations profile if it exists. (Currently in Closed Beta - see
-   * https://developers.cloudflare.com/fundamentals/organizations/)
+   * Get an organizations profile if it exists.
    */
   get(organizationID: string, options?: RequestOptions): APIPromise<unnamed_schema_0.Result> {
     return (

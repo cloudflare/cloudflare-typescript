@@ -116,6 +116,8 @@ export const tool: Tool = {
                 {
                   type: 'object',
                   title: 'Private destination',
+                  description:
+                    'Private destinations are an early access feature and gated behind a feature flag.',
                   properties: {
                     cidr: {
                       type: 'string',
@@ -145,22 +147,6 @@ export const tool: Tool = {
                       type: 'string',
                       description:
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
-                    },
-                  },
-                },
-                {
-                  type: 'object',
-                  title: 'Via MCP Server Portal destination',
-                  description:
-                    'A MCP server id configured in ai-controls. Access will secure the MCP server if accessed through a MCP portal.\n',
-                  properties: {
-                    mcp_server_id: {
-                      type: 'string',
-                      description: 'The MCP server id configured in ai-controls.',
-                    },
-                    type: {
-                      type: 'string',
-                      enum: ['via_mcp_server_portal'],
                     },
                   },
                 },
@@ -716,8 +702,6 @@ export const tool: Tool = {
               'dash_sso',
               'infrastructure',
               'rdp',
-              'mcp',
-              'mcp_portal',
             ],
           },
           account_id: {
@@ -806,6 +790,8 @@ export const tool: Tool = {
                 {
                   type: 'object',
                   title: 'Private destination',
+                  description:
+                    'Private destinations are an early access feature and gated behind a feature flag.',
                   properties: {
                     cidr: {
                       type: 'string',
@@ -835,22 +821,6 @@ export const tool: Tool = {
                       type: 'string',
                       description:
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
-                    },
-                  },
-                },
-                {
-                  type: 'object',
-                  title: 'Via MCP Server Portal destination',
-                  description:
-                    'A MCP server id configured in ai-controls. Access will secure the MCP server if accessed through a MCP portal.\n',
-                  properties: {
-                    mcp_server_id: {
-                      type: 'string',
-                      description: 'The MCP server id configured in ai-controls.',
-                    },
-                    type: {
-                      type: 'string',
-                      enum: ['via_mcp_server_portal'],
                     },
                   },
                 },
@@ -1145,8 +1115,6 @@ export const tool: Tool = {
               'dash_sso',
               'infrastructure',
               'rdp',
-              'mcp',
-              'mcp_portal',
             ],
           },
           account_id: {
@@ -1235,6 +1203,8 @@ export const tool: Tool = {
                 {
                   type: 'object',
                   title: 'Private destination',
+                  description:
+                    'Private destinations are an early access feature and gated behind a feature flag.',
                   properties: {
                     cidr: {
                       type: 'string',
@@ -1264,22 +1234,6 @@ export const tool: Tool = {
                       type: 'string',
                       description:
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
-                    },
-                  },
-                },
-                {
-                  type: 'object',
-                  title: 'Via MCP Server Portal destination',
-                  description:
-                    'A MCP server id configured in ai-controls. Access will secure the MCP server if accessed through a MCP portal.\n',
-                  properties: {
-                    mcp_server_id: {
-                      type: 'string',
-                      description: 'The MCP server id configured in ai-controls.',
-                    },
-                    type: {
-                      type: 'string',
-                      enum: ['via_mcp_server_portal'],
                     },
                   },
                 },
@@ -1569,8 +1523,6 @@ export const tool: Tool = {
               'dash_sso',
               'infrastructure',
               'rdp',
-              'mcp',
-              'mcp_portal',
             ],
           },
           account_id: {
@@ -2288,6 +2240,8 @@ export const tool: Tool = {
                 {
                   type: 'object',
                   title: 'Private destination',
+                  description:
+                    'Private destinations are an early access feature and gated behind a feature flag.',
                   properties: {
                     cidr: {
                       type: 'string',
@@ -2317,22 +2271,6 @@ export const tool: Tool = {
                       type: 'string',
                       description:
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
-                    },
-                  },
-                },
-                {
-                  type: 'object',
-                  title: 'Via MCP Server Portal destination',
-                  description:
-                    'A MCP server id configured in ai-controls. Access will secure the MCP server if accessed through a MCP portal.\n',
-                  properties: {
-                    mcp_server_id: {
-                      type: 'string',
-                      description: 'The MCP server id configured in ai-controls.',
-                    },
-                    type: {
-                      type: 'string',
-                      enum: ['via_mcp_server_portal'],
                     },
                   },
                 },
@@ -2621,8 +2559,6 @@ export const tool: Tool = {
           'dash_sso',
           'infrastructure',
           'rdp',
-          'mcp',
-          'mcp_portal',
         ],
       },
       allowed_idps: {

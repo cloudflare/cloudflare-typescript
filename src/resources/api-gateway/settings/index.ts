@@ -2,9 +2,6 @@
 
 export {
   SchemaValidation,
-  type SchemaValidationUpdateResponse,
-  type SchemaValidationEditResponse,
-  type SchemaValidationGetResponse,
   type SchemaValidationUpdateParams,
   type SchemaValidationEditParams,
   type SchemaValidationGetParams,

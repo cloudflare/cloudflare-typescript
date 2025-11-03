@@ -144,6 +144,9 @@ export interface EventListParams extends V4PagePaginationParams {
    */
   minConfidence?: number;
 
+  /**
+   * Network prefix, IPv4 or IPv6.
+   */
   prefix?: string;
 
   /**

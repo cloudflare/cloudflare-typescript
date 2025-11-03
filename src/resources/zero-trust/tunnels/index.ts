@@ -2,11 +2,17 @@
 
 export {
   Cloudflared,
+  type CloudflaredCreateResponse,
+  type CloudflaredListResponse,
+  type CloudflaredDeleteResponse,
+  type CloudflaredEditResponse,
+  type CloudflaredGetResponse,
   type CloudflaredCreateParams,
   type CloudflaredListParams,
   type CloudflaredDeleteParams,
   type CloudflaredEditParams,
   type CloudflaredGetParams,
+  type CloudflaredListResponsesV4PagePaginationArray,
 } from './cloudflared/index';
 export {
   Tunnels,
