@@ -21,7 +21,18 @@ export class Configuration extends APIResource {
    * const tokenConfig =
    *   await client.tokenValidation.configuration.create({
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     credentials: {},
+   *     credentials: {
+   *       keys: [
+   *         {
+   *           alg: 'ES256',
+   *           crv: 'P-256',
+   *           kid: '38013f13-c266-4eec-a72a-92ec92779f21',
+   *           kty: 'EC',
+   *           x: 'KN53JRwN3wCjm2o39bvZUX2VdrsHzS8pxOAGjm8m7EQ',
+   *           y: 'lnkkzIxaveggz-HFhcMWW15nxvOj0Z_uQsXbpK0GFcY',
+   *         },
+   *       ],
+   *     },
    *     description:
    *       'Long description for Token Validation Configuration',
    *     title: 'Example Token Validation Configuration',
@@ -152,61 +163,35 @@ export interface TokenConfig {
   /**
    * UUID.
    */
-  id?: string;
+  id: string;
 
-  created_at?: string;
+  created_at: string;
 
-  credentials?: TokenConfig.Credentials;
+  credentials: TokenConfig.Credentials;
 
-  description?: string;
+  description: string;
 
-  last_updated?: string;
+  last_updated: string;
 
-  title?: string;
+  title: string;
 
-  token_sources?: Array<string>;
+  token_sources: Array<string>;
 
-  token_type?: 'JWT';
+  token_type: 'JWT';
 }
 
 export namespace TokenConfig {
   export interface Credentials {
-    keys?: Array<Credentials.APIShieldCredentialsJWTKeyEc | Credentials.APIShieldCredentialsJWTKeyRSA>;
+    keys: Array<
+      | Credentials.APIShieldCredentialsJWTKeyRSA
+      | Credentials.APIShieldCredentialsJWTKeyEcEs256
+      | Credentials.APIShieldCredentialsJWTKeyEcEs384
+    >;
   }
 
   export namespace Credentials {
     /**
-     * Common properties of a JWT key.
-     */
-    export interface APIShieldCredentialsJWTKeyEc {
-      /**
-       * Algorithm
-       */
-      alg: 'ES256' | 'ES384';
-
-      /**
-       * Key ID
-       */
-      kid: string;
-
-      /**
-       * Key Type
-       */
-      kty: 'EC';
-
-      /**
-       * X EC coordinate
-       */
-      x: string;
-
-      /**
-       * Y EC coordinate
-       */
-      y: string;
-    }
-
-    /**
-     * Common properties of a JWT key.
+     * JSON representation of an RSA key.
      */
     export interface APIShieldCredentialsJWTKeyRSA {
       /**
@@ -234,6 +219,76 @@ export namespace TokenConfig {
        */
       n: string;
     }
+
+    /**
+     * JSON representation of an ES256 key
+     */
+    export interface APIShieldCredentialsJWTKeyEcEs256 {
+      /**
+       * Algorithm
+       */
+      alg: 'ES256';
+
+      /**
+       * Curve
+       */
+      crv: 'P-256';
+
+      /**
+       * Key ID
+       */
+      kid: string;
+
+      /**
+       * Key Type
+       */
+      kty: 'EC';
+
+      /**
+       * X EC coordinate
+       */
+      x: string;
+
+      /**
+       * Y EC coordinate
+       */
+      y: string;
+    }
+
+    /**
+     * JSON representation of an ES384 key
+     */
+    export interface APIShieldCredentialsJWTKeyEcEs384 {
+      /**
+       * Algorithm
+       */
+      alg: 'ES384';
+
+      /**
+       * Curve
+       */
+      crv: 'P-384';
+
+      /**
+       * Key ID
+       */
+      kid: string;
+
+      /**
+       * Key Type
+       */
+      kty: 'EC';
+
+      /**
+       * X EC coordinate
+       */
+      x: string;
+
+      /**
+       * Y EC coordinate
+       */
+      y: string;
+    }
   }
 }
 
@@ -241,7 +296,7 @@ export interface ConfigurationDeleteResponse {
   /**
    * UUID.
    */
-  config_id?: string;
+  id?: string;
 }
 
 export interface ConfigurationEditResponse {
@@ -286,42 +341,16 @@ export interface ConfigurationCreateParams {
 
 export namespace ConfigurationCreateParams {
   export interface Credentials {
-    keys?: Array<Credentials.APIShieldCredentialsJWTKeyEc | Credentials.APIShieldCredentialsJWTKeyRSA>;
+    keys: Array<
+      | Credentials.APIShieldCredentialsJWTKeyRSA
+      | Credentials.APIShieldCredentialsJWTKeyEcEs256
+      | Credentials.APIShieldCredentialsJWTKeyEcEs384
+    >;
   }
 
   export namespace Credentials {
     /**
-     * Common properties of a JWT key.
-     */
-    export interface APIShieldCredentialsJWTKeyEc {
-      /**
-       * Algorithm
-       */
-      alg: 'ES256' | 'ES384';
-
-      /**
-       * Key ID
-       */
-      kid: string;
-
-      /**
-       * Key Type
-       */
-      kty: 'EC';
-
-      /**
-       * X EC coordinate
-       */
-      x: string;
-
-      /**
-       * Y EC coordinate
-       */
-      y: string;
-    }
-
-    /**
-     * Common properties of a JWT key.
+     * JSON representation of an RSA key.
      */
     export interface APIShieldCredentialsJWTKeyRSA {
       /**
@@ -348,6 +377,76 @@ export namespace ConfigurationCreateParams {
        * RSA modulus
        */
       n: string;
+    }
+
+    /**
+     * JSON representation of an ES256 key
+     */
+    export interface APIShieldCredentialsJWTKeyEcEs256 {
+      /**
+       * Algorithm
+       */
+      alg: 'ES256';
+
+      /**
+       * Curve
+       */
+      crv: 'P-256';
+
+      /**
+       * Key ID
+       */
+      kid: string;
+
+      /**
+       * Key Type
+       */
+      kty: 'EC';
+
+      /**
+       * X EC coordinate
+       */
+      x: string;
+
+      /**
+       * Y EC coordinate
+       */
+      y: string;
+    }
+
+    /**
+     * JSON representation of an ES384 key
+     */
+    export interface APIShieldCredentialsJWTKeyEcEs384 {
+      /**
+       * Algorithm
+       */
+      alg: 'ES384';
+
+      /**
+       * Curve
+       */
+      crv: 'P-384';
+
+      /**
+       * Key ID
+       */
+      kid: string;
+
+      /**
+       * Key Type
+       */
+      kty: 'EC';
+
+      /**
+       * X EC coordinate
+       */
+      x: string;
+
+      /**
+       * Y EC coordinate
+       */
+      y: string;
     }
   }
 }
