@@ -82,7 +82,7 @@ export interface SettingEditParams {
   /**
    * Body param: Tags associated with the Worker.
    */
-  tags?: Array<string>;
+  tags?: Array<string> | null;
 
   /**
    * Body param: List of Workers that will consume logs from the attached Worker.

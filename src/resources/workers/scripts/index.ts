@@ -27,11 +27,12 @@ export {
   type ScriptAndVersionSettingGetParams,
 } from './script-and-version-settings';
 export {
-  ScriptsSinglePage,
+  ScriptListResponsesSinglePage,
   Scripts,
   type Script,
   type ScriptSetting,
   type ScriptUpdateResponse,
+  type ScriptListResponse,
   type ScriptDeleteResponse,
   type ScriptGetResponse,
   type ScriptSearchResponse,
