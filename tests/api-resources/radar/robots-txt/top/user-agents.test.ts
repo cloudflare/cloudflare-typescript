@@ -29,7 +29,7 @@ describe('resource userAgents', () => {
           directive: 'ALLOW',
           domainCategory: ['string'],
           format: 'JSON',
-          limit: 5,
+          limit: 1,
           name: ['main_series'],
           userAgentCategory: 'AI',
         },

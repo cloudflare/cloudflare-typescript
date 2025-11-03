@@ -110,6 +110,10 @@ export const tool: Tool = {
                       type: 'integer',
                       description: 'Timeout after which an idle keepalive connection can be discarded.',
                     },
+                    matchSNItoHost: {
+                      type: 'boolean',
+                      description: 'Auto configure the Hostname on the origin server certificate.',
+                    },
                     noHappyEyeballs: {
                       type: 'boolean',
                       description:
@@ -208,6 +212,10 @@ export const tool: Tool = {
               keepAliveTimeout: {
                 type: 'integer',
                 description: 'Timeout after which an idle keepalive connection can be discarded.',
+              },
+              matchSNItoHost: {
+                type: 'boolean',
+                description: 'Auto configure the Hostname on the origin server certificate.',
               },
               noHappyEyeballs: {
                 type: 'boolean',

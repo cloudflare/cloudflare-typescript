@@ -65,7 +65,6 @@ export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindSecretText
   | BindingGetResponse.WorkersBindingKindSendEmail
   | BindingGetResponse.WorkersBindingKindService
-  | BindingGetResponse.WorkersBindingKindTailConsumer
   | BindingGetResponse.WorkersBindingKindTextBlob
   | BindingGetResponse.WorkersBindingKindVectorize
   | BindingGetResponse.WorkersBindingKindVersionMetadata
@@ -493,23 +492,6 @@ export namespace BindingGetResponse {
      * Optional environment if the Worker utilizes one.
      */
     environment?: string;
-  }
-
-  export interface WorkersBindingKindTailConsumer {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * Name of Tail Worker to bind to.
-     */
-    service: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'tail_consumer';
   }
 
   export interface WorkersBindingKindTextBlob {
