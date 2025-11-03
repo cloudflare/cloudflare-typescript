@@ -13,7 +13,19 @@ describe('resource credentials', () => {
   test('update: only required params', async () => {
     const responsePromise = client.tokenValidation.configuration.credentials.update(
       '4a7ee8d3-dd63-4ceb-9d5f-c27831854ce7',
-      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      {
+        zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        keys: [
+          {
+            alg: 'ES256',
+            crv: 'P-256',
+            kid: '38013f13-c266-4eec-a72a-92ec92779f21',
+            kty: 'EC',
+            x: 'KN53JRwN3wCjm2o39bvZUX2VdrsHzS8pxOAGjm8m7EQ',
+            y: 'lnkkzIxaveggz-HFhcMWW15nxvOj0Z_uQsXbpK0GFcY',
+          },
+        ],
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -32,6 +44,7 @@ describe('resource credentials', () => {
         keys: [
           {
             alg: 'ES256',
+            crv: 'P-256',
             kid: '38013f13-c266-4eec-a72a-92ec92779f21',
             kty: 'EC',
             x: 'KN53JRwN3wCjm2o39bvZUX2VdrsHzS8pxOAGjm8m7EQ',
