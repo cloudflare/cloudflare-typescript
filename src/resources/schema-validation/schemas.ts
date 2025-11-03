@@ -134,6 +134,37 @@ export class Schemas extends APIResource {
 
 export class SchemaListResponsesV4PagePaginationArray extends V4PagePaginationArray<SchemaListResponse> {}
 
+export class PublicSchemasV4PagePaginationArray extends V4PagePaginationArray<PublicSchema> {}
+
+export interface PublicSchema {
+  created_at: string;
+
+  /**
+   * Kind of schema
+   */
+  kind: 'openapi_v3';
+
+  /**
+   * Name of the schema
+   */
+  name: string;
+
+  /**
+   * UUID.
+   */
+  schema_id: string;
+
+  /**
+   * Source of the schema
+   */
+  source?: string;
+
+  /**
+   * Flag whether schema is enabled for validation.
+   */
+  validation_enabled?: boolean;
+}
+
 /**
  * A schema used in schema validation
  */
@@ -348,6 +379,7 @@ Schemas.SchemaListResponsesV4PagePaginationArray = SchemaListResponsesV4PagePagi
 
 export declare namespace Schemas {
   export {
+    type PublicSchema as PublicSchema,
     type SchemaCreateResponse as SchemaCreateResponse,
     type SchemaListResponse as SchemaListResponse,
     type SchemaDeleteResponse as SchemaDeleteResponse,
