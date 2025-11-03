@@ -3,6 +3,7 @@
 export { SchemaValidation } from './schema-validation';
 export {
   Schemas,
+  type PublicSchema,
   type SchemaCreateResponse,
   type SchemaListResponse,
   type SchemaDeleteResponse,
@@ -13,6 +14,7 @@ export {
   type SchemaDeleteParams,
   type SchemaEditParams,
   type SchemaGetParams,
+  type PublicSchemasV4PagePaginationArray,
   type SchemaListResponsesV4PagePaginationArray,
 } from './schemas';
 export {

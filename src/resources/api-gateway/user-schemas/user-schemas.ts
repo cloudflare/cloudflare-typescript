@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as SchemasAPI from '../../schema-validation/schemas';
+import { PublicSchemasV4PagePaginationArray } from '../../schema-validation/schemas';
 import * as HostsAPI from './hosts';
 import { HostListParams, HostListResponse, HostListResponsesV4PagePaginationArray, Hosts } from './hosts';
 import * as OperationsAPI from './operations';
@@ -48,11 +50,11 @@ export class UserSchemas extends APIResource {
   list(
     params: UserSchemaListParams,
     options?: RequestOptions,
-  ): PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema> {
+  ): PagePromise<PublicSchemasV4PagePaginationArray, SchemasAPI.PublicSchema> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/user_schemas`,
-      V4PagePaginationArray<PublicSchema>,
+      V4PagePaginationArray<SchemasAPI.PublicSchema>,
       { query, ...options },
     );
   }
@@ -76,13 +78,17 @@ export class UserSchemas extends APIResource {
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
-  edit(schemaID: string, params: UserSchemaEditParams, options?: RequestOptions): APIPromise<PublicSchema> {
+  edit(
+    schemaID: string,
+    params: UserSchemaEditParams,
+    options?: RequestOptions,
+  ): APIPromise<SchemasAPI.PublicSchema> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/api_gateway/user_schemas/${schemaID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: PublicSchema }>
+      }) as APIPromise<{ result: SchemasAPI.PublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -91,18 +97,20 @@ export class UserSchemas extends APIResource {
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
-  get(schemaID: string, params: UserSchemaGetParams, options?: RequestOptions): APIPromise<PublicSchema> {
+  get(
+    schemaID: string,
+    params: UserSchemaGetParams,
+    options?: RequestOptions,
+  ): APIPromise<SchemasAPI.PublicSchema> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(path`/zones/${zone_id}/api_gateway/user_schemas/${schemaID}`, {
         query,
         ...options,
-      }) as APIPromise<{ result: PublicSchema }>
+      }) as APIPromise<{ result: SchemasAPI.PublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type PublicSchemasV4PagePaginationArray = V4PagePaginationArray<PublicSchema>;
 
 export type Message = Array<Message.MessageItem>;
 
@@ -124,37 +132,8 @@ export namespace Message {
   }
 }
 
-export interface PublicSchema {
-  created_at: string;
-
-  /**
-   * Kind of schema
-   */
-  kind: 'openapi_v3';
-
-  /**
-   * Name of the schema
-   */
-  name: string;
-
-  /**
-   * UUID.
-   */
-  schema_id: string;
-
-  /**
-   * Source of the schema
-   */
-  source?: string;
-
-  /**
-   * Flag whether schema is enabled for validation.
-   */
-  validation_enabled?: boolean;
-}
-
 export interface SchemaUpload {
-  schema: PublicSchema;
+  schema: SchemasAPI.PublicSchema;
 
   upload_details?: SchemaUpload.UploadDetails;
 }
@@ -282,10 +261,8 @@ UserSchemas.Hosts = Hosts;
 export declare namespace UserSchemas {
   export {
     type Message as Message,
-    type PublicSchema as PublicSchema,
     type SchemaUpload as SchemaUpload,
     type UserSchemaDeleteResponse as UserSchemaDeleteResponse,
-    type PublicSchemasV4PagePaginationArray as PublicSchemasV4PagePaginationArray,
     type UserSchemaCreateParams as UserSchemaCreateParams,
     type UserSchemaListParams as UserSchemaListParams,
     type UserSchemaDeleteParams as UserSchemaDeleteParams,
@@ -307,3 +284,5 @@ export declare namespace UserSchemas {
     type HostListParams as HostListParams,
   };
 }
+
+export { type PublicSchemasV4PagePaginationArray };

@@ -2559,7 +2559,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">Message</a></code>
-- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">PublicSchema</a></code>
 - <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">SchemaUpload</a></code>
 - <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">UserSchemaDeleteResponse</a></code>
 
@@ -9043,6 +9042,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/schema-validation/schemas.ts">PublicSchema</a></code>
 - <code><a href="./src/resources/schema-validation/schemas.ts">SchemaCreateResponse</a></code>
 - <code><a href="./src/resources/schema-validation/schemas.ts">SchemaListResponse</a></code>
 - <code><a href="./src/resources/schema-validation/schemas.ts">SchemaDeleteResponse</a></code>
