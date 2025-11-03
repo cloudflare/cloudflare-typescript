@@ -8,7 +8,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by HTTP method over time.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   httpMethod(
     query: TimeseriesGroupHTTPMethodParams | null | undefined = {},
@@ -25,7 +25,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by HTTP version over time.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   httpVersion(
     query: TimeseriesGroupHTTPVersionParams | null | undefined = {},
@@ -42,7 +42,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by targeted industry over time.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   industry(
     query: TimeseriesGroupIndustryParams | null | undefined = {},
@@ -59,7 +59,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by IP version used over time.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   ipVersion(
     query: TimeseriesGroupIPVersionParams | null | undefined = {},
@@ -76,7 +76,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by managed rules over time.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   managedRules(
     query: TimeseriesGroupManagedRulesParams | null | undefined = {},
@@ -93,7 +93,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by mitigation product over time.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   mitigationProduct(
     query: TimeseriesGroupMitigationProductParams | null | undefined = {},
@@ -110,7 +110,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by targeted vertical over time.
    *
-   * @deprecated Use [Radar Attacks Layer 7 Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   vertical(
     query: TimeseriesGroupVerticalParams | null | undefined = {},
