@@ -104,6 +104,7 @@ import { Spectrum } from './resources/spectrum/spectrum';
 import { Speed } from './resources/speed/speed';
 import { SSL } from './resources/ssl/ssl';
 import { Stream } from './resources/stream/stream';
+import { TokenValidation } from './resources/token-validation/token-validation';
 import { Turnstile } from './resources/turnstile/turnstile';
 import { URLScanner } from './resources/url-scanner/url-scanner';
 import { User } from './resources/user/user';
@@ -353,6 +354,7 @@ export class Cloudflare extends Core.APIClient {
   secretsStore: API.SecretsStore = new API.SecretsStore(this);
   pipelines: API.Pipelines = new API.Pipelines(this);
   schemaValidation: API.SchemaValidation = new API.SchemaValidation(this);
+  tokenValidation: API.TokenValidation = new API.TokenValidation(this);
 
   /**
    * Check whether the base URL is set to its default.
@@ -566,6 +568,7 @@ Cloudflare.CustomPages = CustomPages;
 Cloudflare.SecretsStore = SecretsStore;
 Cloudflare.Pipelines = Pipelines;
 Cloudflare.SchemaValidation = SchemaValidation;
+Cloudflare.TokenValidation = TokenValidation;
 
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
@@ -794,6 +797,8 @@ export declare namespace Cloudflare {
   export { Pipelines as Pipelines };
 
   export { SchemaValidation as SchemaValidation };
+
+  export { TokenValidation as TokenValidation };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;
