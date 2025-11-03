@@ -766,6 +766,10 @@ TEST_PATHS=(
 	tests/api-resources/schema-validation/schemas.test.ts
 	tests/api-resources/schema-validation/settings/settings.test.ts
 	tests/api-resources/schema-validation/settings/operations.test.ts
+	tests/api-resources/token-validation/token-validation.test.ts
+	tests/api-resources/token-validation/configuration/configuration.test.ts
+	tests/api-resources/token-validation/configuration/credentials.test.ts
+	tests/api-resources/token-validation/rules.test.ts
 	tests/index.test.ts
 )
 

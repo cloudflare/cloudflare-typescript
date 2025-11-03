@@ -1897,6 +1897,17 @@ import list_settings_schema_validation_operations from './schema-validation/sett
 import delete_settings_schema_validation_operations from './schema-validation/settings/operations/delete-settings-schema-validation-operations';
 import bulk_edit_settings_schema_validation_operations from './schema-validation/settings/operations/bulk-edit-settings-schema-validation-operations';
 import get_settings_schema_validation_operations from './schema-validation/settings/operations/get-settings-schema-validation-operations';
+import create_token_validation_configuration from './token-validation/configuration/create-token-validation-configuration';
+import list_token_validation_configuration from './token-validation/configuration/list-token-validation-configuration';
+import delete_token_validation_configuration from './token-validation/configuration/delete-token-validation-configuration';
+import edit_token_validation_configuration from './token-validation/configuration/edit-token-validation-configuration';
+import get_token_validation_configuration from './token-validation/configuration/get-token-validation-configuration';
+import update_configuration_token_validation_credentials from './token-validation/configuration/credentials/update-configuration-token-validation-credentials';
+import create_token_validation_rules from './token-validation/rules/create-token-validation-rules';
+import list_token_validation_rules from './token-validation/rules/list-token-validation-rules';
+import delete_token_validation_rules from './token-validation/rules/delete-token-validation-rules';
+import edit_token_validation_rules from './token-validation/rules/edit-token-validation-rules';
+import get_token_validation_rules from './token-validation/rules/get-token-validation-rules';
 
 export const endpoints: Endpoint[] = [];
 
@@ -3797,6 +3808,17 @@ addEndpoint(list_settings_schema_validation_operations);
 addEndpoint(delete_settings_schema_validation_operations);
 addEndpoint(bulk_edit_settings_schema_validation_operations);
 addEndpoint(get_settings_schema_validation_operations);
+addEndpoint(create_token_validation_configuration);
+addEndpoint(list_token_validation_configuration);
+addEndpoint(delete_token_validation_configuration);
+addEndpoint(edit_token_validation_configuration);
+addEndpoint(get_token_validation_configuration);
+addEndpoint(update_configuration_token_validation_credentials);
+addEndpoint(create_token_validation_rules);
+addEndpoint(list_token_validation_rules);
+addEndpoint(delete_token_validation_rules);
+addEndpoint(edit_token_validation_rules);
+addEndpoint(get_token_validation_rules);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';
