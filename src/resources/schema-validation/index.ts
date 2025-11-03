@@ -2,9 +2,14 @@
 
 export {
   PublicSchemasV4PagePaginationArray,
+  SchemaListResponsesV4PagePaginationArray,
   Schemas,
   type PublicSchema,
+  type SchemaCreateResponse,
+  type SchemaListResponse,
   type SchemaDeleteResponse,
+  type SchemaEditResponse,
+  type SchemaGetResponse,
   type SchemaCreateParams,
   type SchemaListParams,
   type SchemaDeleteParams,

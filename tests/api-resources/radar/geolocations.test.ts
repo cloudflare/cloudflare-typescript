@@ -32,7 +32,7 @@ describe('resource geolocations', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.geolocations.list(
-        { format: 'JSON', geoId: '3190509,360689', limit: 1, location: 'US,CA', offset: 0 },
+        { format: 'JSON', geoId: '3190509,360689', limit: 5, location: 'US,CA', offset: 0 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

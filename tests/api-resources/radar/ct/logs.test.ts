@@ -32,7 +32,7 @@ describe('resource logs', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.ct.logs.list(
-        { format: 'JSON', limit: 1, offset: 0 },
+        { format: 'JSON', limit: 5, offset: 0 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
