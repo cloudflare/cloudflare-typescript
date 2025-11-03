@@ -2,6 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as SchemasAPI from '../../schema-validation/schemas';
+import { PublicSchemasV4PagePaginationArray } from '../../schema-validation/schemas';
 import * as HostsAPI from './hosts';
 import { HostListParams, HostListResponse, HostListResponsesV4PagePaginationArray, Hosts } from './hosts';
 import * as OperationsAPI from './operations';
@@ -11,7 +13,7 @@ import {
   OperationListResponsesV4PagePaginationArray,
   Operations,
 } from './operations';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class UserSchemas extends APIResource {
   operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
@@ -40,7 +42,7 @@ export class UserSchemas extends APIResource {
   list(
     params: UserSchemaListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema> {
+  ): Core.PagePromise<PublicSchemasV4PagePaginationArray, SchemasAPI.PublicSchema> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/user_schemas`,
@@ -72,13 +74,13 @@ export class UserSchemas extends APIResource {
     schemaId: string,
     params: UserSchemaEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PublicSchema> {
+  ): Core.APIPromise<SchemasAPI.PublicSchema> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PublicSchema }>
+      }) as Core.APIPromise<{ result: SchemasAPI.PublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -91,18 +93,16 @@ export class UserSchemas extends APIResource {
     schemaId: string,
     params: UserSchemaGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PublicSchema> {
+  ): Core.APIPromise<SchemasAPI.PublicSchema> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: PublicSchema }>
+      }) as Core.APIPromise<{ result: SchemasAPI.PublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class PublicSchemasV4PagePaginationArray extends V4PagePaginationArray<PublicSchema> {}
 
 export type Message = Array<Message.MessageItem>;
 
@@ -124,37 +124,8 @@ export namespace Message {
   }
 }
 
-export interface PublicSchema {
-  created_at: string;
-
-  /**
-   * Kind of schema
-   */
-  kind: 'openapi_v3';
-
-  /**
-   * Name of the schema
-   */
-  name: string;
-
-  /**
-   * UUID.
-   */
-  schema_id: string;
-
-  /**
-   * Source of the schema
-   */
-  source?: string;
-
-  /**
-   * Flag whether schema is enabled for validation.
-   */
-  validation_enabled?: boolean;
-}
-
 export interface SchemaUpload {
-  schema: PublicSchema;
+  schema: SchemasAPI.PublicSchema;
 
   upload_details?: SchemaUpload.UploadDetails;
 }
@@ -276,7 +247,6 @@ export interface UserSchemaGetParams {
   omit_source?: boolean;
 }
 
-UserSchemas.PublicSchemasV4PagePaginationArray = PublicSchemasV4PagePaginationArray;
 UserSchemas.Operations = Operations;
 UserSchemas.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
 UserSchemas.Hosts = Hosts;
@@ -285,10 +255,8 @@ UserSchemas.HostListResponsesV4PagePaginationArray = HostListResponsesV4PagePagi
 export declare namespace UserSchemas {
   export {
     type Message as Message,
-    type PublicSchema as PublicSchema,
     type SchemaUpload as SchemaUpload,
     type UserSchemaDeleteResponse as UserSchemaDeleteResponse,
-    PublicSchemasV4PagePaginationArray as PublicSchemasV4PagePaginationArray,
     type UserSchemaCreateParams as UserSchemaCreateParams,
     type UserSchemaListParams as UserSchemaListParams,
     type UserSchemaDeleteParams as UserSchemaDeleteParams,
@@ -310,3 +278,5 @@ export declare namespace UserSchemas {
     type HostListParams as HostListParams,
   };
 }
+
+export { PublicSchemasV4PagePaginationArray };
