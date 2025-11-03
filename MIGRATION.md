@@ -985,6 +985,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.schemaValidation.settings.operations.update()`
 - `client.schemaValidation.settings.operations.delete()`
 - `client.schemaValidation.settings.operations.get()`
+- `client.tokenValidation.configuration.delete()`
+- `client.tokenValidation.configuration.edit()`
+- `client.tokenValidation.configuration.get()`
+- `client.tokenValidation.configuration.credentials.update()`
+- `client.tokenValidation.rules.delete()`
+- `client.tokenValidation.rules.edit()`
+- `client.tokenValidation.rules.get()`
 
 </details>
 

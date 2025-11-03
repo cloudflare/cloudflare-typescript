@@ -4382,3 +4382,23 @@ The following tools are available in this MCP server.
 - `delete_settings_schema_validation_operations` (`write`): Delete per-operation schema validation setting
 - `bulk_edit_settings_schema_validation_operations` (`write`): Bulk edit per-operation schema validation settings
 - `get_settings_schema_validation_operations` (`read`): Get per-operation schema validation setting
+
+### Resource `token_validation.configuration`:
+
+- `create_token_validation_configuration` (`write`): Create a new Token Validation configuration
+- `list_token_validation_configuration` (`read`): Lists all token validation configurations for this zone
+- `delete_token_validation_configuration` (`write`): Delete Token Configuration
+- `edit_token_validation_configuration` (`write`): Edit fields of an existing Token Configuration
+- `get_token_validation_configuration` (`read`): Get a single Token Configuration
+
+### Resource `token_validation.configuration.credentials`:
+
+- `update_configuration_token_validation_credentials` (`write`): Update Token Configuration credentials
+
+### Resource `token_validation.rules`:
+
+- `create_token_validation_rules` (`write`): Create a token validation rule.
+- `list_token_validation_rules` (`read`): List token validation rules
+- `delete_token_validation_rules` (`write`): Delete a zone token validation rule.
+- `edit_token_validation_rules` (`write`): Edit a zone token validation rule.
+- `get_token_validation_rules` (`read`): Get a zone token validation rule.
