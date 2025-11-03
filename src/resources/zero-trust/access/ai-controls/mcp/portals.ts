@@ -423,7 +423,7 @@ export interface PortalListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: Search by id, name
+   * Query param: Search by id, name, hostname
    */
   search?: string;
 }
