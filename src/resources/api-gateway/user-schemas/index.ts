@@ -13,10 +13,8 @@ export {
   type OperationListParams,
 } from './operations';
 export {
-  PublicSchemasV4PagePaginationArray,
   UserSchemas,
   type Message,
-  type PublicSchema,
   type SchemaUpload,
   type UserSchemaDeleteResponse,
   type UserSchemaCreateParams,

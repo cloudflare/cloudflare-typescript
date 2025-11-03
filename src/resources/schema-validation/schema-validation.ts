@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as SchemasAPI from './schemas';
 import {
+  PublicSchema,
   SchemaCreateParams,
   SchemaCreateResponse,
   SchemaDeleteParams,
@@ -39,6 +40,7 @@ SchemaValidation.Settings = Settings;
 export declare namespace SchemaValidation {
   export {
     Schemas as Schemas,
+    type PublicSchema as PublicSchema,
     type SchemaCreateResponse as SchemaCreateResponse,
     type SchemaListResponse as SchemaListResponse,
     type SchemaDeleteResponse as SchemaDeleteResponse,

@@ -33,11 +33,11 @@ export {
   type OperationBulkDeleteParams,
   type OperationGetParams,
 } from './operations/index';
+export { Schemas, type SchemaListResponse, type SchemaListParams } from './schemas';
+export { Settings } from './settings/index';
 export {
-  PublicSchemasV4PagePaginationArray,
   UserSchemas,
   type Message,
-  type PublicSchema,
   type SchemaUpload,
   type UserSchemaDeleteResponse,
   type UserSchemaCreateParams,
@@ -46,5 +46,3 @@ export {
   type UserSchemaEditParams,
   type UserSchemaGetParams,
 } from './user-schemas/index';
-export { Schemas, type SchemaListResponse, type SchemaListParams } from './schemas';
-export { Settings } from './settings/index';
