@@ -102,12 +102,12 @@ export class ClientCertificates extends APIResource {
     params: ClientCertificateEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ClientCertificate> {
-    const { zone_id } = params;
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(
-        `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: ClientCertificate }>
+      this._client.patch(`/zones/${zone_id}/client_certificates/${clientCertificateId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ClientCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -293,9 +293,14 @@ export interface ClientCertificateDeleteParams {
 
 export interface ClientCertificateEditParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  reactivate?: boolean;
 }
 
 export interface ClientCertificateGetParams {
