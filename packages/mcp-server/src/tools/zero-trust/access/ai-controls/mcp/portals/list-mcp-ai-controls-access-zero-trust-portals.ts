@@ -33,7 +33,7 @@ export const tool: Tool = {
       },
       search: {
         type: 'string',
-        description: 'Search by id, name',
+        description: 'Search by id, name, hostname',
       },
       jq_filter: {
         type: 'string',
