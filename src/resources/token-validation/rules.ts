@@ -186,8 +186,6 @@ export interface TokenValidationRule {
   created_at?: string;
 
   last_updated?: string;
-
-  modified_by?: string;
 }
 
 export namespace TokenValidationRule {
