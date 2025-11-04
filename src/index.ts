@@ -56,6 +56,7 @@ import { Calls } from './resources/calls/calls';
 import { CertificateAuthorities } from './resources/certificate-authorities/certificate-authorities';
 import { CloudConnector } from './resources/cloud-connector/cloud-connector';
 import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
+import { Connectivity } from './resources/connectivity/connectivity';
 import { ContentScanning } from './resources/content-scanning/content-scanning';
 import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
@@ -323,6 +324,7 @@ export class Cloudflare extends Core.APIClient {
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   turnstile: API.Turnstile = new API.Turnstile(this);
+  connectivity: API.Connectivity = new API.Connectivity(this);
   hyperdrive: API.HyperdriveResource = new API.HyperdriveResource(this);
   rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
@@ -537,6 +539,7 @@ Cloudflare.R2 = R2;
 Cloudflare.WorkersForPlatforms = WorkersForPlatforms;
 Cloudflare.ZeroTrust = ZeroTrust;
 Cloudflare.Turnstile = Turnstile;
+Cloudflare.Connectivity = Connectivity;
 Cloudflare.HyperdriveResource = HyperdriveResource;
 Cloudflare.RUM = RUM;
 Cloudflare.Vectorize = Vectorize;
@@ -735,6 +738,8 @@ export declare namespace Cloudflare {
   export { ZeroTrust as ZeroTrust };
 
   export { Turnstile as Turnstile };
+
+  export { Connectivity as Connectivity };
 
   export { HyperdriveResource as HyperdriveResource };
 
