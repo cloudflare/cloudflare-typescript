@@ -36,6 +36,7 @@ import {
 } from './routes';
 import * as SubdomainsAPI from './subdomains';
 import {
+  SubdomainDeleteParams,
   SubdomainGetParams,
   SubdomainGetResponse,
   SubdomainUpdateParams,
@@ -300,6 +301,7 @@ export declare namespace Workers {
     type SubdomainUpdateResponse as SubdomainUpdateResponse,
     type SubdomainGetResponse as SubdomainGetResponse,
     type SubdomainUpdateParams as SubdomainUpdateParams,
+    type SubdomainDeleteParams as SubdomainDeleteParams,
     type SubdomainGetParams as SubdomainGetParams,
   };
 
