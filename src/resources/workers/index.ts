@@ -54,6 +54,7 @@ export {
   type SubdomainUpdateResponse,
   type SubdomainGetResponse,
   type SubdomainUpdateParams,
+  type SubdomainDeleteParams,
   type SubdomainGetParams,
 } from './subdomains';
 export { Workers } from './workers';

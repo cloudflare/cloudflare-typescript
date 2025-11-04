@@ -1374,6 +1374,7 @@ The following tools are available in this MCP server.
 ### Resource `workers.subdomains`:
 
 - `update_workers_subdomains` (`write`): Creates a Workers subdomain for an account.
+- `delete_workers_subdomains` (`write`): Deletes a Workers subdomain for an account.
 - `get_workers_subdomains` (`read`): Returns a Workers subdomain for an account.
 
 ### Resource `workers.observability.telemetry`:
