@@ -6,7 +6,7 @@ import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
 
 export const metadata: Metadata = {
-  resource: 'zero_trust.connectivity.directory.services',
+  resource: 'connectivity.directory.services',
   operation: 'write',
   tags: [],
   httpMethod: 'delete',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export const tool: Tool = {
-  name: 'delete_directory_connectivity_zero_trust_services',
+  name: 'delete_directory_connectivity_services',
   description: 'Delete connectivity service',
   inputSchema: {
     type: 'object',
@@ -36,9 +36,7 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { service_id, ...body } = args as any;
-  const response = await client.zeroTrust.connectivity.directory.services
-    .delete(service_id, body)
-    .asResponse();
+  const response = await client.connectivity.directory.services.delete(service_id, body).asResponse();
   return asTextContentResult(await response.text());
 };
 

@@ -10,7 +10,7 @@ const client = new Cloudflare({
 
 describe('resource services', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.zeroTrust.connectivity.directory.services.create({
+    const responsePromise = client.connectivity.directory.services.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       host: {
         hostname: 'api.example.com',
@@ -29,7 +29,7 @@ describe('resource services', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.zeroTrust.connectivity.directory.services.create({
+    const response = await client.connectivity.directory.services.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       host: {
         hostname: 'api.example.com',
@@ -43,7 +43,7 @@ describe('resource services', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.zeroTrust.connectivity.directory.services.update(
+    const responsePromise = client.connectivity.directory.services.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 'account_id',
@@ -62,7 +62,7 @@ describe('resource services', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.zeroTrust.connectivity.directory.services.update(
+    const response = await client.connectivity.directory.services.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 'account_id',
@@ -76,7 +76,7 @@ describe('resource services', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.zeroTrust.connectivity.directory.services.list({
+    const responsePromise = client.connectivity.directory.services.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -89,7 +89,7 @@ describe('resource services', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.zeroTrust.connectivity.directory.services.list({
+    const response = await client.connectivity.directory.services.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
       per_page: 1,
@@ -98,7 +98,7 @@ describe('resource services', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.zeroTrust.connectivity.directory.services.delete(
+    const responsePromise = client.connectivity.directory.services.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'account_id' },
     );
@@ -112,14 +112,14 @@ describe('resource services', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.zeroTrust.connectivity.directory.services.delete(
+    const response = await client.connectivity.directory.services.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'account_id' },
     );
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.connectivity.directory.services.get(
+    const responsePromise = client.connectivity.directory.services.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'account_id' },
     );
@@ -133,7 +133,7 @@ describe('resource services', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.connectivity.directory.services.get(
+    const response = await client.connectivity.directory.services.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'account_id' },
     );

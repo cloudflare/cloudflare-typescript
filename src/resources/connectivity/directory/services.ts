@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../core/resource';
-import { APIPromise } from '../../../../core/api-promise';
+import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
   V4PagePaginationArray,
   type V4PagePaginationArrayParams,
-} from '../../../../core/pagination';
-import { buildHeaders } from '../../../../internal/headers';
-import { RequestOptions } from '../../../../internal/request-options';
-import { path } from '../../../../internal/utils/path';
+} from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class Services extends APIResource {
   /**
@@ -18,19 +18,17 @@ export class Services extends APIResource {
    * @example
    * ```ts
    * const service =
-   *   await client.zeroTrust.connectivity.directory.services.create(
-   *     {
-   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       host: {
-   *         hostname: 'api.example.com',
-   *         resolver_network: {
-   *           tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da',
-   *         },
+   *   await client.connectivity.directory.services.create({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     host: {
+   *       hostname: 'api.example.com',
+   *       resolver_network: {
+   *         tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da',
    *       },
-   *       name: 'web-server',
-   *       type: 'http',
    *     },
-   *   );
+   *     name: 'web-server',
+   *     type: 'http',
+   *   });
    * ```
    */
   create(params: ServiceCreateParams, options?: RequestOptions): APIPromise<ServiceCreateResponse> {
@@ -49,7 +47,7 @@ export class Services extends APIResource {
    * @example
    * ```ts
    * const service =
-   *   await client.zeroTrust.connectivity.directory.services.update(
+   *   await client.connectivity.directory.services.update(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: 'account_id',
@@ -85,7 +83,7 @@ export class Services extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const serviceListResponse of client.zeroTrust.connectivity.directory.services.list(
+   * for await (const serviceListResponse of client.connectivity.directory.services.list(
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
@@ -109,7 +107,7 @@ export class Services extends APIResource {
    *
    * @example
    * ```ts
-   * await client.zeroTrust.connectivity.directory.services.delete(
+   * await client.connectivity.directory.services.delete(
    *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *   { account_id: 'account_id' },
    * );
@@ -129,7 +127,7 @@ export class Services extends APIResource {
    * @example
    * ```ts
    * const service =
-   *   await client.zeroTrust.connectivity.directory.services.get(
+   *   await client.connectivity.directory.services.get(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 'account_id' },
    *   );

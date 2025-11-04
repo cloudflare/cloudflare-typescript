@@ -22,6 +22,7 @@ export { CertificateAuthorities } from './certificate-authorities/certificate-au
 export { ClientCertificates } from './client-certificates';
 export { CloudConnector } from './cloud-connector/cloud-connector';
 export { CloudforceOne } from './cloudforce-one/cloudforce-one';
+export { Connectivity } from './connectivity/connectivity';
 export { ContentScanning } from './content-scanning/content-scanning';
 export { CustomCertificates } from './custom-certificates/custom-certificates';
 export { CustomHostnames } from './custom-hostnames/custom-hostnames';
