@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Access } from './access/index';
-export { Connectivity } from './connectivity/index';
 export {
   ConnectivitySettings,
   type ConnectivitySettingEditResponse,
