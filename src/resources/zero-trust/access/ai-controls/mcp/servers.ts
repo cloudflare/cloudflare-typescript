@@ -176,9 +176,9 @@ export interface ServerCreateResponse {
 
   name: string;
 
-  prompts: Array<unknown>;
+  prompts: Array<{ [key: string]: unknown }>;
 
-  tools: Array<unknown>;
+  tools: Array<{ [key: string]: unknown }>;
 
   created_at?: string;
 
@@ -209,9 +209,9 @@ export interface ServerUpdateResponse {
 
   name: string;
 
-  prompts: Array<unknown>;
+  prompts: Array<{ [key: string]: unknown }>;
 
-  tools: Array<unknown>;
+  tools: Array<{ [key: string]: unknown }>;
 
   created_at?: string;
 
@@ -242,9 +242,9 @@ export interface ServerListResponse {
 
   name: string;
 
-  prompts: Array<unknown>;
+  prompts: Array<{ [key: string]: unknown }>;
 
-  tools: Array<unknown>;
+  tools: Array<{ [key: string]: unknown }>;
 
   created_at?: string;
 
@@ -275,9 +275,9 @@ export interface ServerDeleteResponse {
 
   name: string;
 
-  prompts: Array<unknown>;
+  prompts: Array<{ [key: string]: unknown }>;
 
-  tools: Array<unknown>;
+  tools: Array<{ [key: string]: unknown }>;
 
   created_at?: string;
 
@@ -308,9 +308,9 @@ export interface ServerReadResponse {
 
   name: string;
 
-  prompts: Array<unknown>;
+  prompts: Array<{ [key: string]: unknown }>;
 
-  tools: Array<unknown>;
+  tools: Array<{ [key: string]: unknown }>;
 
   created_at?: string;
 

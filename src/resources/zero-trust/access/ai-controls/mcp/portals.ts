@@ -257,9 +257,9 @@ export namespace PortalReadResponse {
 
     name: string;
 
-    prompts: Array<unknown>;
+    prompts: Array<{ [key: string]: unknown }>;
 
-    tools: Array<unknown>;
+    tools: Array<{ [key: string]: unknown }>;
 
     updated_prompts: Array<{ [key: string]: number | string }>;
 
