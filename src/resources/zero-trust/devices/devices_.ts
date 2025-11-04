@@ -196,8 +196,9 @@ export interface DeviceListResponse {
   os_version?: string | null;
 
   /**
-   * Additional operating system version data. For macOS or iOS, the Product Version
-   * Extra. For Linux, the kernel release version.
+   * Additional operating system version details. For Windows, the UBR (Update Build
+   * Revision). For Mac or iOS, the Product Version Extra. For Linux, the
+   * distribution name and version.
    */
   os_version_extra?: string | null;
 
@@ -366,8 +367,9 @@ export interface DeviceGetResponse {
   os_version?: string | null;
 
   /**
-   * Additional operating system version data. For macOS or iOS, the Product Version
-   * Extra. For Linux, the kernel release version.
+   * Additional operating system version details. For Windows, the UBR (Update Build
+   * Revision). For Mac or iOS, the Product Version Extra. For Linux, the
+   * distribution name and version.
    */
   os_version_extra?: string | null;
 
