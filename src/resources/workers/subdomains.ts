@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -24,6 +25,24 @@ export class Subdomains extends APIResource {
         result: SubdomainUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Deletes a Workers subdomain for an account.
+   *
+   * @example
+   * ```ts
+   * await client.workers.subdomains.delete({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  delete(params: SubdomainDeleteParams, options?: RequestOptions): APIPromise<void> {
+    const { account_id } = params;
+    return this._client.delete(path`/accounts/${account_id}/workers/subdomain`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -66,6 +85,13 @@ export interface SubdomainUpdateParams {
   subdomain: string;
 }
 
+export interface SubdomainDeleteParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
 export interface SubdomainGetParams {
   /**
    * Identifier.
@@ -78,6 +104,7 @@ export declare namespace Subdomains {
     type SubdomainUpdateResponse as SubdomainUpdateResponse,
     type SubdomainGetResponse as SubdomainGetResponse,
     type SubdomainUpdateParams as SubdomainUpdateParams,
+    type SubdomainDeleteParams as SubdomainDeleteParams,
     type SubdomainGetParams as SubdomainGetParams,
   };
 }
