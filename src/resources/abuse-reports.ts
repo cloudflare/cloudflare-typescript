@@ -25,7 +25,7 @@ export class AbuseReports extends APIResource {
   }
 
   /**
-   * List the abuse reports for a given account.
+   * List the abuse reports for a given account
    */
   list(
     params: AbuseReportListParams,
@@ -40,7 +40,7 @@ export class AbuseReports extends APIResource {
   }
 
   /**
-   * Retrieve an abuse report.
+   * Retrieve the details of an abuse report.
    */
   get(
     reportParam: string,
