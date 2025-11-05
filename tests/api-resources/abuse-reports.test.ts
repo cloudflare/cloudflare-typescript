@@ -66,4 +66,49 @@ describe('resource abuseReports', () => {
       title: 'x',
     });
   });
+
+  test('list: only required params', async () => {
+    const responsePromise = client.abuseReports.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('list: required and optional params', async () => {
+    const response = await client.abuseReports.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      created_after: '2009-11-10T23:00:00Z',
+      created_before: '2009-11-10T23:00:00Z',
+      domain: 'domain',
+      mitigation_status: 'pending',
+      page: 0,
+      per_page: 0,
+      sort: 'sort',
+      status: 'accepted',
+      type: 'PHISH',
+    });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.abuseReports.get('report_param', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.abuseReports.get('report_param', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
 });

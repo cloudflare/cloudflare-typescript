@@ -2,6 +2,7 @@
 
 import { APIResource } from '../resource';
 import * as Core from '../core';
+import { V4PagePagination, type V4PagePaginationParams } from '../pagination';
 
 export class AbuseReports extends APIResource {
   /**
@@ -20,12 +21,181 @@ export class AbuseReports extends APIResource {
       }) as Core.APIPromise<{ result: AbuseReportCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * List the abuse reports for a given account.
+   */
+  list(
+    params: AbuseReportListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AbuseReportListResponsesV4PagePagination, AbuseReportListResponse> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/abuse-reports`,
+      AbuseReportListResponsesV4PagePagination,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Retrieve an abuse report.
+   */
+  get(
+    reportParam: string,
+    params: AbuseReportGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AbuseReportGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/abuse-reports/${reportParam}`, options) as Core.APIPromise<{
+        result: AbuseReportGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
+
+export class AbuseReportListResponsesV4PagePagination extends V4PagePagination<AbuseReportListResponse> {}
 
 /**
  * The result should be 'success' for successful response
  */
 export type AbuseReportCreateResponse = string;
+
+export interface AbuseReportListResponse {
+  reports: Array<AbuseReportListResponse.Report>;
+}
+
+export namespace AbuseReportListResponse {
+  export interface Report {
+    /**
+     * Public facing ID of abuse report, aka abuse_rand.
+     */
+    id: string;
+
+    /**
+     * Creation date of report. Time in RFC 3339 format
+     * (https://www.rfc-editor.org/rfc/rfc3339.html)
+     */
+    cdate: string;
+
+    /**
+     * Domain that relates to the report.
+     */
+    domain: string;
+
+    /**
+     * A summary of the mitigations related to this report.
+     */
+    mitigation_summary: Report.MitigationSummary;
+
+    /**
+     * An enum value that represents the status of an abuse record
+     */
+    status: 'accepted' | 'in_review';
+
+    /**
+     * The abuse report type
+     */
+    type: 'PHISH' | 'GEN' | 'THREAT' | 'DMCA' | 'EMER' | 'TM' | 'REG_WHO' | 'NCSEI' | 'NETWORK';
+  }
+
+  export namespace Report {
+    /**
+     * A summary of the mitigations related to this report.
+     */
+    export interface MitigationSummary {
+      /**
+       * How many of the reported URLs were confirmed as abusive.
+       */
+      accepted_url_count: number;
+
+      /**
+       * How many mitigations are active.
+       */
+      active_count: number;
+
+      /**
+       * Whether the report has been forwarded to an external hosting provider.
+       */
+      external_host_notified: boolean;
+
+      /**
+       * How many mitigations are under review.
+       */
+      in_review_count: number;
+
+      /**
+       * How many mitigations are pending their effective date.
+       */
+      pending_count: number;
+    }
+  }
+}
+
+export interface AbuseReportGetResponse {
+  /**
+   * Public facing ID of abuse report, aka abuse_rand.
+   */
+  id: string;
+
+  /**
+   * Creation date of report. Time in RFC 3339 format
+   * (https://www.rfc-editor.org/rfc/rfc3339.html)
+   */
+  cdate: string;
+
+  /**
+   * Domain that relates to the report.
+   */
+  domain: string;
+
+  /**
+   * A summary of the mitigations related to this report.
+   */
+  mitigation_summary: AbuseReportGetResponse.MitigationSummary;
+
+  /**
+   * An enum value that represents the status of an abuse record
+   */
+  status: 'accepted' | 'in_review';
+
+  /**
+   * The abuse report type
+   */
+  type: 'PHISH' | 'GEN' | 'THREAT' | 'DMCA' | 'EMER' | 'TM' | 'REG_WHO' | 'NCSEI' | 'NETWORK';
+}
+
+export namespace AbuseReportGetResponse {
+  /**
+   * A summary of the mitigations related to this report.
+   */
+  export interface MitigationSummary {
+    /**
+     * How many of the reported URLs were confirmed as abusive.
+     */
+    accepted_url_count: number;
+
+    /**
+     * How many mitigations are active.
+     */
+    active_count: number;
+
+    /**
+     * Whether the report has been forwarded to an external hosting provider.
+     */
+    external_host_notified: boolean;
+
+    /**
+     * How many mitigations are under review.
+     */
+    in_review_count: number;
+
+    /**
+     * How many mitigations are pending their effective date.
+     */
+    pending_count: number;
+  }
+}
 
 export type AbuseReportCreateParams =
   | AbuseReportCreateParams.AbuseReportsDmcaReport
@@ -881,9 +1051,66 @@ export declare namespace AbuseReportCreateParams {
   }
 }
 
+export interface AbuseReportListParams extends V4PagePaginationParams {
+  /**
+   * Path param: Cloudflare Account ID
+   */
+  account_id: string;
+
+  /**
+   * Query param: Returns reports created after the specified date
+   */
+  created_after?: string;
+
+  /**
+   * Query param: Returns reports created before the specified date
+   */
+  created_before?: string;
+
+  /**
+   * Query param: Filter by domain name related to the abuse report
+   */
+  domain?: string;
+
+  /**
+   * Query param: Filter reports that have any mitigations in the given status.
+   */
+  mitigation_status?: 'pending' | 'active' | 'in_review' | 'cancelled' | 'removed';
+
+  /**
+   * Query param: A property to sort by, followed by the order (id, cdate, domain,
+   * type, status)
+   */
+  sort?: string;
+
+  /**
+   * Query param: Filter by the status of the report.
+   */
+  status?: 'accepted' | 'in_review';
+
+  /**
+   * Query param: Filter by the type of the report.
+   */
+  type?: 'PHISH' | 'GEN' | 'THREAT' | 'DMCA' | 'EMER' | 'TM' | 'REG_WHO' | 'NCSEI' | 'NETWORK';
+}
+
+export interface AbuseReportGetParams {
+  /**
+   * Cloudflare Account ID
+   */
+  account_id: string;
+}
+
+AbuseReports.AbuseReportListResponsesV4PagePagination = AbuseReportListResponsesV4PagePagination;
+
 export declare namespace AbuseReports {
   export {
     type AbuseReportCreateResponse as AbuseReportCreateResponse,
+    type AbuseReportListResponse as AbuseReportListResponse,
+    type AbuseReportGetResponse as AbuseReportGetResponse,
+    AbuseReportListResponsesV4PagePagination as AbuseReportListResponsesV4PagePagination,
     type AbuseReportCreateParams as AbuseReportCreateParams,
+    type AbuseReportListParams as AbuseReportListParams,
+    type AbuseReportGetParams as AbuseReportGetParams,
   };
 }
