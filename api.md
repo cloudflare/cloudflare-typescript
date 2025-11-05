@@ -8742,10 +8742,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/abuse-reports.ts">AbuseReportCreateResponse</a></code>
+- <code><a href="./src/resources/abuse-reports.ts">AbuseReportListResponse</a></code>
+- <code><a href="./src/resources/abuse-reports.ts">AbuseReportGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/abuse-reports/{report_param}">client.abuseReports.<a href="./src/resources/abuse-reports.ts">create</a>(reportParam, { ...params }) -> AbuseReportCreateResponse</code>
+- <code title="get /accounts/{account_id}/abuse-reports">client.abuseReports.<a href="./src/resources/abuse-reports.ts">list</a>({ ...params }) -> AbuseReportListResponsesV4PagePagination</code>
+- <code title="get /accounts/{account_id}/abuse-reports/{report_param}">client.abuseReports.<a href="./src/resources/abuse-reports.ts">get</a>(reportParam, { ...params }) -> AbuseReportGetResponse</code>
 
 # AI
 

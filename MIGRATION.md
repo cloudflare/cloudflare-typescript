@@ -958,6 +958,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.leakedCredentialChecks.detections.delete()`
 - `client.contentScanning.payloads.delete()`
 - `client.abuseReports.create()`
+- `client.abuseReports.get()`
 - `client.ai.run()`
 - `client.ai.finetunes.assets.create()`
 - `client.securityCenter.insights.list()`
