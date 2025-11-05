@@ -659,6 +659,12 @@ export interface DatabaseCreateParams {
   name: string;
 
   /**
+   * Body param: Specify the location to restrict the D1 database to run and store
+   * data. If this option is present, the location hint is ignored.
+   */
+  jurisdiction?: 'eu' | 'fedramp';
+
+  /**
    * Body param: Specify the region to create the D1 primary, if available. If this
    * option is omitted, the D1 will be created as close as possible to the current
    * user.
