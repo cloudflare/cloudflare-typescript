@@ -4236,6 +4236,8 @@ The following tools are available in this MCP server.
 ### Resource `abuse_reports`:
 
 - `create_abuse_reports` (`write`): Submit the Abuse Report of a particular type
+- `list_abuse_reports` (`read`): List the abuse reports for a given account.
+- `get_abuse_reports` (`read`): Retrieve an abuse report.
 
 ### Resource `ai`:
 
