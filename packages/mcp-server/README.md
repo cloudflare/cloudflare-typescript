@@ -4007,12 +4007,12 @@ The following tools are available in this MCP server.
 
 ### Resource `cloudforce_one.threat_events.attackers`:
 
-- `list_threat_events_cloudforce_one_attackers` (`read`): Lists attackers
+- `list_threat_events_cloudforce_one_attackers` (`read`): Lists attackers across multiple datasets
 
 ### Resource `cloudforce_one.threat_events.categories`:
 
 - `create_threat_events_cloudforce_one_categories` (`write`): Creates a new category
-- `list_threat_events_cloudforce_one_categories` (`read`): Lists categories
+- `list_threat_events_cloudforce_one_categories` (`read`): Lists categories across multiple datasets
 - `delete_threat_events_cloudforce_one_categories` (`write`): Deletes a category
 - `edit_threat_events_cloudforce_one_categories` (`write`): Updates a category
 - `get_threat_events_cloudforce_one_categories` (`read`): Reads a category
@@ -4053,7 +4053,7 @@ The following tools are available in this MCP server.
 
 ### Resource `cloudforce_one.threat_events.target_industries`:
 
-- `list_threat_events_cloudforce_one_target_industries` (`read`): Lists all target industries
+- `list_threat_events_cloudforce_one_target_industries` (`read`): Lists target industries across multiple datasets
 
 ### Resource `ai_gateway`:
 
