@@ -31,15 +31,6 @@ export const tool: Tool = {
         description: 'The chronological sorting order for the logs.',
         enum: ['desc', 'asc'],
       },
-      email: {
-        type: 'string',
-        description:
-          'Filter by user email. Defaults to substring matching. To force exact matching, set `email_exact=true`.\nExample (default): `email=@example.com` returns all events with that domain.\nExample (exact): `email=user@example.com&email_exact=true` returns only that user.\n',
-      },
-      email_exact: {
-        type: 'boolean',
-        description: 'When true, `email` is matched exactly instead of substring matching.',
-      },
       limit: {
         type: 'integer',
         description: 'The maximum number of log entries to retrieve.',
@@ -61,10 +52,6 @@ export const tool: Tool = {
         type: 'string',
         description: 'The latest event timestamp to query.',
         format: 'date-time',
-      },
-      user_id: {
-        type: 'string',
-        description: 'Filter by user UUID.\n',
       },
       jq_filter: {
         type: 'string',

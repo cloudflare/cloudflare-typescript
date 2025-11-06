@@ -10,7 +10,7 @@ export class TimeseriesGroups extends APIResource {
    * over time. Visit https://developers.cloudflare.com/radar/concepts/bot-classes/
    * for more information.
    *
-   * @deprecated Use [Radar HTTP Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   botClass(
     query: TimeseriesGroupBotClassParams | null | undefined = {},
@@ -26,7 +26,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by user agent over time.
    *
-   * @deprecated Use [Radar HTTP Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   browser(
     query: TimeseriesGroupBrowserParams | null | undefined = {},
@@ -42,7 +42,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by user agent family over time.
    *
-   * @deprecated Use [Radar HTTP Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   browserFamily(
     query: TimeseriesGroupBrowserFamilyParams | null | undefined = {},
@@ -58,7 +58,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by device type over time.
    *
-   * @deprecated Use [Radar HTTP Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   deviceType(
     query: TimeseriesGroupDeviceTypeParams | null | undefined = {},
@@ -75,7 +75,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of HTTP requests by HTTP protocol (HTTP vs. HTTPS)
    * over time.
    *
-   * @deprecated Use [Radar HTTP Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   httpProtocol(
     query: TimeseriesGroupHTTPProtocolParams | null | undefined = {},
@@ -91,7 +91,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by HTTP version over time.
    *
-   * @deprecated Use [Radar HTTP Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   httpVersion(
     query: TimeseriesGroupHTTPVersionParams | null | undefined = {},
@@ -107,7 +107,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by IP version over time.
    *
-   * @deprecated Use [Radar HTTP Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   ipVersion(
     query: TimeseriesGroupIPVersionParams | null | undefined = {},
@@ -123,7 +123,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by operating system over time.
    *
-   * @deprecated Use [Radar HTTP Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   os(
     query: TimeseriesGroupOSParams | null | undefined = {},
@@ -139,7 +139,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by post-quantum support over time.
    *
-   * @deprecated Use [Radar HTTP Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   postQuantum(
     query: TimeseriesGroupPostQuantumParams | null | undefined = {},
@@ -155,7 +155,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of HTTP requests by TLS version over time.
    *
-   * @deprecated Use [Radar HTTP Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/timeseries_groups_v2/) instead.
+   * @deprecated
    */
   tlsVersion(
     query: TimeseriesGroupTLSVersionParams | null | undefined = {},

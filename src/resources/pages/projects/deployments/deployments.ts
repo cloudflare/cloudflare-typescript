@@ -2,16 +2,11 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ProjectsAPI from '../projects';
-import { DeploymentsV4PagePaginationArray } from '../projects';
+import { DeploymentsSinglePage } from '../projects';
 import * as HistoryAPI from './history/history';
 import { History } from './history/history';
 import { APIPromise } from '../../../../core/api-promise';
-import {
-  PagePromise,
-  V4PagePaginationArray,
-  type V4PagePaginationArrayParams,
-} from '../../../../core/pagination';
-import { type Uploadable } from '../../../../core/uploads';
+import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../../internal/uploads';
 import { path } from '../../../../internal/utils/path';
@@ -64,11 +59,11 @@ export class Deployments extends APIResource {
     projectName: string,
     params: DeploymentListParams,
     options?: RequestOptions,
-  ): PagePromise<DeploymentsV4PagePaginationArray, ProjectsAPI.Deployment> {
+  ): PagePromise<DeploymentsSinglePage, ProjectsAPI.Deployment> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/pages/projects/${projectName}/deployments`,
-      V4PagePaginationArray<ProjectsAPI.Deployment>,
+      SinglePage<ProjectsAPI.Deployment>,
       { query, ...options },
     );
   }
@@ -202,79 +197,13 @@ export interface DeploymentCreateParams {
   account_id: string;
 
   /**
-   * Body param: Headers configuration file for the deployment.
-   */
-  _headers?: Uploadable;
-
-  /**
-   * Body param: Redirects configuration file for the deployment.
-   */
-  _redirects?: Uploadable;
-
-  /**
-   * Body param: Routes configuration file defining routing rules.
-   */
-  '_routes.json'?: Uploadable;
-
-  /**
-   * Body param: Worker bundle file in multipart/form-data format. Mutually exclusive
-   * with `_worker.js`. Cannot specify both `_worker.js` and `_worker.bundle` in the
-   * same request. Maximum size: 25 MiB.
-   */
-  '_worker.bundle'?: Uploadable;
-
-  /**
-   * Body param: Worker JavaScript file. Mutually exclusive with `_worker.bundle`.
-   * Cannot specify both `_worker.js` and `_worker.bundle` in the same request.
-   */
-  '_worker.js'?: Uploadable;
-
-  /**
    * Body param: The branch to build the new deployment from. The `HEAD` of the
    * branch will be used. If omitted, the production branch will be used by default.
    */
   branch?: string;
-
-  /**
-   * Body param: Boolean string indicating if the working directory has uncommitted
-   * changes.
-   */
-  commit_dirty?: 'true' | 'false';
-
-  /**
-   * Body param: Git commit SHA associated with this deployment.
-   */
-  commit_hash?: string;
-
-  /**
-   * Body param: Git commit message associated with this deployment.
-   */
-  commit_message?: string;
-
-  /**
-   * Body param: Functions routing configuration file.
-   */
-  'functions-filepath-routing-config.json'?: Uploadable;
-
-  /**
-   * Body param: JSON string containing a manifest of files to deploy. Maps file
-   * paths to their content hashes. Required for direct upload deployments. Maximum
-   * 20,000 entries.
-   */
-  manifest?: string;
-
-  /**
-   * Body param: The build output directory path.
-   */
-  pages_build_output_dir?: string;
-
-  /**
-   * Body param: Hash of the Wrangler configuration file used for this deployment.
-   */
-  wrangler_config_hash?: string;
 }
 
-export interface DeploymentListParams extends V4PagePaginationArrayParams {
+export interface DeploymentListParams {
   /**
    * Path param: Identifier
    */
@@ -360,4 +289,4 @@ export declare namespace Deployments {
   export { History as History };
 }
 
-export { type DeploymentsV4PagePaginationArray };
+export { type DeploymentsSinglePage };

@@ -34,8 +34,6 @@ import {
   SubscriptionCreateResponse,
   SubscriptionDeleteParams,
   SubscriptionDeleteResponse,
-  SubscriptionGetParams,
-  SubscriptionGetResponse,
   SubscriptionListParams,
   SubscriptionListResponse,
   SubscriptionListResponsesV4PagePaginationArray,
@@ -400,12 +398,10 @@ export declare namespace Queues {
     type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionListResponse as SubscriptionListResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
-    type SubscriptionGetResponse as SubscriptionGetResponse,
     type SubscriptionListResponsesV4PagePaginationArray as SubscriptionListResponsesV4PagePaginationArray,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionListParams as SubscriptionListParams,
     type SubscriptionDeleteParams as SubscriptionDeleteParams,
-    type SubscriptionGetParams as SubscriptionGetParams,
   };
 }
