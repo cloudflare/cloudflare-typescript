@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
+import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -29,73 +29,34 @@ export class Messages extends APIResource {
   }
 
   /**
-   * Push a batch of message to a Queue
-   *
-   * @example
-   * ```ts
-   * const response = await client.queues.messages.bulkPush(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
-   */
-  bulkPush(
-    queueID: string,
-    params: MessageBulkPushParams,
-    options?: RequestOptions,
-  ): APIPromise<MessageBulkPushResponse> {
-    const { account_id, ...body } = params;
-    return this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages/batch`, {
-      body,
-      ...options,
-    });
-  }
-
-  /**
    * Pull a batch of messages from a Queue
    *
    * @example
    * ```ts
-   * const response = await client.queues.messages.pull(
+   * // Automatically fetches more pages as needed.
+   * for await (const messagePullResponse of client.queues.messages.pull(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   pull(
     queueID: string,
     params: MessagePullParams,
     options?: RequestOptions,
-  ): APIPromise<MessagePullResponse> {
+  ): PagePromise<MessagePullResponsesSinglePage, MessagePullResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages/pull`, {
-        body,
-        ...options,
-      }) as APIPromise<{ result: MessagePullResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Push a message to a Queue
-   *
-   * @example
-   * ```ts
-   * const response = await client.queues.messages.push(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
-   */
-  push(
-    queueID: string,
-    params: MessagePushParams,
-    options?: RequestOptions,
-  ): APIPromise<MessagePushResponse> {
-    const { account_id, ...body } = params;
-    return this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages`, { body, ...options });
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/queues/${queueID}/messages/pull`,
+      SinglePage<MessagePullResponse>,
+      { body, method: 'post', ...options },
+    );
   }
 }
+
+export type MessagePullResponsesSinglePage = SinglePage<MessagePullResponse>;
 
 export interface MessageAckResponse {
   /**
@@ -111,55 +72,22 @@ export interface MessageAckResponse {
   warnings?: Array<string>;
 }
 
-export interface MessageBulkPushResponse {
-  errors?: Array<Shared.ResponseInfo>;
-
-  messages?: Array<string>;
-
-  /**
-   * Indicates if the API call was successful or not.
-   */
-  success?: true;
-}
-
 export interface MessagePullResponse {
-  /**
-   * The number of unacknowledged messages in the queue
-   */
-  message_backlog_count?: number;
+  id?: string;
 
-  messages?: Array<MessagePullResponse.Message>;
-}
+  attempts?: number;
 
-export namespace MessagePullResponse {
-  export interface Message {
-    id?: string;
-
-    attempts?: number;
-
-    body?: string;
-
-    /**
-     * An ID that represents an "in-flight" message that has been pulled from a Queue.
-     * You must hold on to this ID and use it to acknowledge this message.
-     */
-    lease_id?: string;
-
-    metadata?: unknown;
-
-    timestamp_ms?: number;
-  }
-}
-
-export interface MessagePushResponse {
-  errors?: Array<Shared.ResponseInfo>;
-
-  messages?: Array<string>;
+  body?: string;
 
   /**
-   * Indicates if the API call was successful or not.
+   * An ID that represents an "in-flight" message that has been pulled from a Queue.
+   * You must hold on to this ID and use it to acknowledge this message.
    */
-  success?: true;
+  lease_id?: string;
+
+  metadata?: unknown;
+
+  timestamp_ms?: number;
 }
 
 export interface MessageAckParams {
@@ -203,50 +131,6 @@ export namespace MessageAckParams {
   }
 }
 
-export interface MessageBulkPushParams {
-  /**
-   * Path param: A Resource identifier.
-   */
-  account_id: string;
-
-  /**
-   * Body param: The number of seconds to wait for attempting to deliver this batch
-   * to consumers
-   */
-  delay_seconds?: number;
-
-  /**
-   * Body param:
-   */
-  messages?: Array<MessageBulkPushParams.MqQueueMessageText | MessageBulkPushParams.MqQueueMessageJson>;
-}
-
-export namespace MessageBulkPushParams {
-  export interface MqQueueMessageText {
-    body?: string;
-
-    content_type?: 'text';
-
-    /**
-     * The number of seconds to wait for attempting to deliver this message to
-     * consumers
-     */
-    delay_seconds?: number;
-  }
-
-  export interface MqQueueMessageJson {
-    body?: unknown;
-
-    content_type?: 'json';
-
-    /**
-     * The number of seconds to wait for attempting to deliver this message to
-     * consumers
-     */
-    delay_seconds?: number;
-  }
-}
-
 export interface MessagePullParams {
   /**
    * Path param: A Resource identifier.
@@ -265,65 +149,12 @@ export interface MessagePullParams {
   visibility_timeout_ms?: number;
 }
 
-export type MessagePushParams = MessagePushParams.MqQueueMessageText | MessagePushParams.MqQueueMessageJson;
-
-export declare namespace MessagePushParams {
-  export interface MqQueueMessageText {
-    /**
-     * Path param: A Resource identifier.
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    body?: string;
-
-    /**
-     * Body param:
-     */
-    content_type?: 'text';
-
-    /**
-     * Body param: The number of seconds to wait for attempting to deliver this message
-     * to consumers
-     */
-    delay_seconds?: number;
-  }
-
-  export interface MqQueueMessageJson {
-    /**
-     * Path param: A Resource identifier.
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    body?: unknown;
-
-    /**
-     * Body param:
-     */
-    content_type?: 'json';
-
-    /**
-     * Body param: The number of seconds to wait for attempting to deliver this message
-     * to consumers
-     */
-    delay_seconds?: number;
-  }
-}
-
 export declare namespace Messages {
   export {
     type MessageAckResponse as MessageAckResponse,
-    type MessageBulkPushResponse as MessageBulkPushResponse,
     type MessagePullResponse as MessagePullResponse,
-    type MessagePushResponse as MessagePushResponse,
+    type MessagePullResponsesSinglePage as MessagePullResponsesSinglePage,
     type MessageAckParams as MessageAckParams,
-    type MessageBulkPushParams as MessageBulkPushParams,
     type MessagePullParams as MessagePullParams,
-    type MessagePushParams as MessagePushParams,
   };
 }
