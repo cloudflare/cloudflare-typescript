@@ -29,7 +29,7 @@ export const tool: Tool = {
       datasetIds: {
         type: 'array',
         description:
-          'Array of dataset IDs to query target industries from. If not provided, returns all target industries from D1 Event table.',
+          'Array of dataset IDs to query target industries from. If not provided, returns all target industries from Event tables across all datasets.',
         items: {
           type: 'string',
         },
