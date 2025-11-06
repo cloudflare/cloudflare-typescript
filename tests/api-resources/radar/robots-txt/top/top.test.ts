@@ -32,7 +32,7 @@ describe('resource top', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.robotsTXT.top.domainCategories(
-        { date: ['2019-12-27'], format: 'JSON', limit: 1, name: ['main_series'], userAgentCategory: 'AI' },
+        { date: ['2019-12-27'], format: 'JSON', limit: 5, name: ['main_series'], userAgentCategory: 'AI' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

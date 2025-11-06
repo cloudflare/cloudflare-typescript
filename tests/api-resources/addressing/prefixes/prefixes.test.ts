@@ -13,8 +13,9 @@ describe('resource prefixes', () => {
   test('create: only required params', async () => {
     const responsePromise = client.addressing.prefixes.create({
       account_id: '258def64c72dae45f3e4c8516e2111f2',
-      asn: 13335,
+      asn: 209242,
       cidr: '192.0.2.0/24',
+      loa_document_id: 'd933b1530bc56c9953cf8ce166da8004',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,10 +29,9 @@ describe('resource prefixes', () => {
   test('create: required and optional params', async () => {
     const response = await client.addressing.prefixes.create({
       account_id: '258def64c72dae45f3e4c8516e2111f2',
-      asn: 13335,
+      asn: 209242,
       cidr: '192.0.2.0/24',
-      delegate_loa_creation: true,
-      description: 'Internal test prefix',
+      loa_document_id: 'd933b1530bc56c9953cf8ce166da8004',
     });
   });
 

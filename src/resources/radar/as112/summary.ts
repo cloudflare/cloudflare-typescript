@@ -9,7 +9,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS queries to AS112 by DNSSEC (DNS Security
    * Extensions) support.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   dnssec(query?: SummaryDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
   dnssec(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
@@ -31,7 +31,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of DNS queries to AS112 by EDNS (Extension Mechanisms
    * for DNS) support.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   edns(query?: SummaryEdnsParams, options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
   edns(options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
@@ -52,7 +52,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by IP version.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -76,7 +76,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by protocol.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   protocol(
     query?: SummaryProtocolParams,
@@ -100,7 +100,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of DNS queries to AS112 by type.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   queryType(
     query?: SummaryQueryTypeParams,
@@ -124,7 +124,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of AS112 DNS requests classified by response code.
    *
-   * @deprecated Use [Radar AS112 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/as112/methods/summary_v2/) instead.
+   * @deprecated
    */
   responseCodes(
     query?: SummaryResponseCodesParams,
@@ -831,12 +831,12 @@ export interface SummaryDNSSECParams {
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?: Array<
+  queryType?:
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -925,13 +925,12 @@ export interface SummaryDNSSECParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null
-  >;
+    | null;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?: Array<
+  responseCode?:
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -950,8 +949,7 @@ export interface SummaryDNSSECParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE'
-  >;
+    | 'BADCOOKIE';
 }
 
 export interface SummaryEdnsParams {
@@ -999,12 +997,12 @@ export interface SummaryEdnsParams {
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?: Array<
+  queryType?:
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1093,13 +1091,12 @@ export interface SummaryEdnsParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null
-  >;
+    | null;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?: Array<
+  responseCode?:
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1118,8 +1115,7 @@ export interface SummaryEdnsParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE'
-  >;
+    | 'BADCOOKIE';
 }
 
 export interface SummaryIPVersionParams {
@@ -1167,12 +1163,12 @@ export interface SummaryIPVersionParams {
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?: Array<
+  queryType?:
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1261,13 +1257,12 @@ export interface SummaryIPVersionParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null
-  >;
+    | null;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?: Array<
+  responseCode?:
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1286,8 +1281,7 @@ export interface SummaryIPVersionParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE'
-  >;
+    | 'BADCOOKIE';
 }
 
 export interface SummaryProtocolParams {
@@ -1335,7 +1329,7 @@ export interface SummaryProtocolParams {
   /**
    * Filters results by DNS query type.
    */
-  queryType?: Array<
+  queryType?:
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1424,13 +1418,12 @@ export interface SummaryProtocolParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null
-  >;
+    | null;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?: Array<
+  responseCode?:
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1449,8 +1442,7 @@ export interface SummaryProtocolParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE'
-  >;
+    | 'BADCOOKIE';
 }
 
 export interface SummaryQueryTypeParams {
@@ -1505,12 +1497,12 @@ export interface SummaryQueryTypeParams {
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?: Array<
+  responseCode?:
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1529,8 +1521,7 @@ export interface SummaryQueryTypeParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE'
-  >;
+    | 'BADCOOKIE';
 }
 
 export interface SummaryResponseCodesParams {
@@ -1585,12 +1576,12 @@ export interface SummaryResponseCodesParams {
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?: Array<
+  queryType?:
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1679,8 +1670,7 @@ export interface SummaryResponseCodesParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null
-  >;
+    | null;
 }
 
 export declare namespace Summary {

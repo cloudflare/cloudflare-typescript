@@ -5,10 +5,15 @@ import * as Core from '../../../core';
 
 export class IndicatorTypes extends APIResource {
   /**
-   * This Method is deprecated. Please use /events/dataset/:dataset_id/indicatorTypes
-   * instead.
+   * Lists all indicator types
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const indicatorTypes =
+   *   await client.cloudforceOne.threatEvents.indicatorTypes.list(
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
    */
   list(
     params: IndicatorTypeListParams,

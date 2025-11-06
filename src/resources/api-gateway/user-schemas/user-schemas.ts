@@ -2,6 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as SchemasAPI from '../../schema-validation/schemas';
+import { PublicSchemasV4PagePaginationArray } from '../../schema-validation/schemas';
 import * as HostsAPI from './hosts';
 import { HostListParams, HostListResponse, HostListResponsesV4PagePaginationArray, Hosts } from './hosts';
 import * as OperationsAPI from './operations';
@@ -11,7 +13,7 @@ import {
   OperationListResponsesV4PagePaginationArray,
   Operations,
 } from './operations';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class UserSchemas extends APIResource {
   operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
@@ -22,16 +24,13 @@ export class UserSchemas extends APIResource {
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
-  create(
-    params: UserSchemaCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UserSchemaCreateResponse> {
+  create(params: UserSchemaCreateParams, options?: Core.RequestOptions): Core.APIPromise<SchemaUpload> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(
         `/zones/${zone_id}/api_gateway/user_schemas`,
         Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: UserSchemaCreateResponse }>
+      ) as Core.APIPromise<{ result: SchemaUpload }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -43,11 +42,11 @@ export class UserSchemas extends APIResource {
   list(
     params: UserSchemaListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<OldPublicSchemasV4PagePaginationArray, OldPublicSchema> {
+  ): Core.PagePromise<PublicSchemasV4PagePaginationArray, SchemasAPI.PublicSchema> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/user_schemas`,
-      OldPublicSchemasV4PagePaginationArray,
+      PublicSchemasV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -75,13 +74,13 @@ export class UserSchemas extends APIResource {
     schemaId: string,
     params: UserSchemaEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OldPublicSchema> {
+  ): Core.APIPromise<SchemasAPI.PublicSchema> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OldPublicSchema }>
+      }) as Core.APIPromise<{ result: SchemasAPI.PublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -94,18 +93,16 @@ export class UserSchemas extends APIResource {
     schemaId: string,
     params: UserSchemaGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OldPublicSchema> {
+  ): Core.APIPromise<SchemasAPI.PublicSchema> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: OldPublicSchema }>
+      }) as Core.APIPromise<{ result: SchemasAPI.PublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class OldPublicSchemasV4PagePaginationArray extends V4PagePaginationArray<OldPublicSchema> {}
 
 export type Message = Array<Message.MessageItem>;
 
@@ -127,42 +124,13 @@ export namespace Message {
   }
 }
 
-export interface OldPublicSchema {
-  created_at: string;
+export interface SchemaUpload {
+  schema: SchemasAPI.PublicSchema;
 
-  /**
-   * Kind of schema
-   */
-  kind: 'openapi_v3';
-
-  /**
-   * Name of the schema
-   */
-  name: string;
-
-  /**
-   * UUID.
-   */
-  schema_id: string;
-
-  /**
-   * Source of the schema
-   */
-  source?: string;
-
-  /**
-   * Flag whether schema is enabled for validation.
-   */
-  validation_enabled?: boolean;
+  upload_details?: SchemaUpload.UploadDetails;
 }
 
-export interface UserSchemaCreateResponse {
-  schema: OldPublicSchema;
-
-  upload_details?: UserSchemaCreateResponse.UploadDetails;
-}
-
-export namespace UserSchemaCreateResponse {
+export namespace SchemaUpload {
   export interface UploadDetails {
     /**
      * Diagnostic warning events that occurred during processing. These events are
@@ -279,7 +247,6 @@ export interface UserSchemaGetParams {
   omit_source?: boolean;
 }
 
-UserSchemas.OldPublicSchemasV4PagePaginationArray = OldPublicSchemasV4PagePaginationArray;
 UserSchemas.Operations = Operations;
 UserSchemas.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
 UserSchemas.Hosts = Hosts;
@@ -288,10 +255,8 @@ UserSchemas.HostListResponsesV4PagePaginationArray = HostListResponsesV4PagePagi
 export declare namespace UserSchemas {
   export {
     type Message as Message,
-    type OldPublicSchema as OldPublicSchema,
-    type UserSchemaCreateResponse as UserSchemaCreateResponse,
+    type SchemaUpload as SchemaUpload,
     type UserSchemaDeleteResponse as UserSchemaDeleteResponse,
-    OldPublicSchemasV4PagePaginationArray as OldPublicSchemasV4PagePaginationArray,
     type UserSchemaCreateParams as UserSchemaCreateParams,
     type UserSchemaListParams as UserSchemaListParams,
     type UserSchemaDeleteParams as UserSchemaDeleteParams,
@@ -313,3 +278,5 @@ export declare namespace UserSchemas {
     type HostListParams as HostListParams,
   };
 }
+
+export { PublicSchemasV4PagePaginationArray };
