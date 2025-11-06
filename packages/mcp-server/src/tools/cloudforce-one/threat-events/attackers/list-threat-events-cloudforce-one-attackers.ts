@@ -18,21 +18,13 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_threat_events_cloudforce_one_attackers',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nLists attackers across multiple datasets\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    items: {\n      type: 'object',\n      properties: {\n        type: {\n          type: 'string'\n        }\n      },\n      required: [        'type'\n      ]\n    },\n    type: {\n      type: 'string'\n    }\n  },\n  required: [    'items',\n    'type'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nLists attackers\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    items: {\n      type: 'object',\n      properties: {\n        type: {\n          type: 'string'\n        }\n      },\n      required: [        'type'\n      ]\n    },\n    type: {\n      type: 'string'\n    }\n  },\n  required: [    'items',\n    'type'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
         description: 'Account ID.',
-      },
-      datasetIds: {
-        type: 'array',
-        description:
-          'Array of dataset IDs to query attackers from. If not provided, returns all attackers from Event DO tables.',
-        items: {
-          type: 'string',
-        },
       },
       jq_filter: {
         type: 'string',

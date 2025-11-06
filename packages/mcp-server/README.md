@@ -284,17 +284,17 @@ The following tools are available in this MCP server.
 
 ### Resource `organizations`:
 
-- `create_organizations` (`write`): Create a new organization for a user. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
-- `update_organizations` (`write`): Modify organization. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
-- `list_organizations` (`read`): Retrieve a list of organizations a particular user has access to. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+- `create_organizations` (`write`): Create a new organization for a user.
+- `update_organizations` (`write`): Modify organization
+- `list_organizations` (`read`): Retrieve a list of organizations a particular user has access to.
 - `delete_organizations` (`write`): Delete an organization. The organization MUST be empty before deleting.
-  It must not contain any sub-organizations, accounts, members or users. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
-- `get_organizations` (`read`): Retrieve the details of a certain organization. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+  It must not contain any sub-organizations, accounts, members or users.
+- `get_organizations` (`read`): Retrieve the details of a certain organization.
 
 ### Resource `organizations.organization_profile`:
 
-- `update_organizations_organization_profile` (`write`): Modify organization profile. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
-- `get_organizations_organization_profile` (`read`): Get an organizations profile if it exists. (Currently in Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+- `update_organizations_organization_profile` (`write`): Modify organization profile
+- `get_organizations_organization_profile` (`read`): Get an organizations profile if it exists.
 
 ### Resource `origin_ca_certificates`:
 
@@ -1454,11 +1454,10 @@ The following tools are available in this MCP server.
 - `update_queues_subscriptions` (`write`): Update an existing event subscription
 - `list_queues_subscriptions` (`read`): Get a paginated list of event subscriptions with optional sorting and filtering
 - `delete_queues_subscriptions` (`write`): Delete an existing event subscription
-- `get_queues_subscriptions` (`read`): Get details about an existing event subscription
 
 ### Resource `api_gateway.configurations`:
 
-- `update_api_gateway_configurations` (`write`): Update configuration properties
+- `update_api_gateway_configurations` (`write`): Set configuration properties
 - `get_api_gateway_configurations` (`read`): Retrieve information about specific configuration properties
 
 ### Resource `api_gateway.discovery`:
@@ -1647,6 +1646,7 @@ The following tools are available in this MCP server.
 
 ### Resource `addressing.loa_documents`:
 
+- `create_addressing_loa_documents` (`write`): Submit LOA document (pdf format) under the account.
 - `get_addressing_loa_documents` (`read`): Download specified LOA document under the account.
 
 ### Resource `addressing.prefixes`:
@@ -1660,7 +1660,7 @@ The following tools are available in this MCP server.
 ### Resource `addressing.prefixes.service_bindings`:
 
 - `create_prefixes_addressing_service_bindings` (`write`): Creates a new Service Binding, routing traffic to IPs within the given CIDR to a service running on Cloudflare's network.
-  **NOTE:** The first Service Binding created for an IP Prefix must exactly match the IP Prefix's CIDR. Subsequent Service Bindings may be created with a more-specific CIDR. Refer to the [Service Bindings Documentation](https://developers.cloudflare.com/byoip/service-bindings/) for compatibility details.
+  **Note:** This API may only be used on prefixes currently configured with a Magic Transit/Cloudflare CDN/Cloudflare Spectrum service binding, and only allows creating upgrade service bindings for the Cloudflare CDN or Cloudflare Spectrum.
 - `list_prefixes_addressing_service_bindings` (`read`): List the Cloudflare services this prefix is currently bound to. Traffic sent to an address within an IP prefix will be routed to the Cloudflare service of the most-specific Service Binding matching the address.
   **Example:** binding `192.0.2.0/24` to Cloudflare Magic Transit and `192.0.2.1/32` to the Cloudflare CDN would route traffic for `192.0.2.1` to the CDN, and traffic for all other IPs in the prefix to Cloudflare Magic Transit.
 - `delete_prefixes_addressing_service_bindings` (`write`): Delete a Service Binding
@@ -1935,10 +1935,10 @@ The following tools are available in this MCP server.
 ### Resource `magic_transit.connectors`:
 
 - `create_magic_transit_connectors` (`write`): Add a connector to your account
-- `update_magic_transit_connectors` (`write`): Replace Connector or Re-provision License Key
+- `update_magic_transit_connectors` (`write`): Replace Connector
 - `list_magic_transit_connectors` (`read`): List Connectors
 - `delete_magic_transit_connectors` (`write`): Remove a connector from your account
-- `edit_magic_transit_connectors` (`write`): Edit Connector to update specific properties or Re-provision License Key
+- `edit_magic_transit_connectors` (`write`): Edit Connector to update specific properties
 - `get_magic_transit_connectors` (`read`): Fetch Connector
 
 ### Resource `magic_transit.connectors.events`:
@@ -2616,23 +2616,6 @@ The following tools are available in this MCP server.
 ### Resource `zero_trust.seats`:
 
 - `edit_zero_trust_seats` (`write`): Removes a user from a Zero Trust seat when both `access_seat` and `gateway_seat` are set to false.
-
-### Resource `zero_trust.access.ai_controls.mcp.portals`:
-
-- `create_mcp_ai_controls_access_zero_trust_portals` (`write`): Create a new MCP Portal
-- `update_mcp_ai_controls_access_zero_trust_portals` (`write`): Update a MCP Portal
-- `list_mcp_ai_controls_access_zero_trust_portals` (`read`): List MCP Portals
-- `delete_mcp_ai_controls_access_zero_trust_portals` (`write`): Delete a MCP Portal
-- `read_mcp_ai_controls_access_zero_trust_portals` (`read`): Read details of an MCP Portal
-
-### Resource `zero_trust.access.ai_controls.mcp.servers`:
-
-- `create_mcp_ai_controls_access_zero_trust_servers` (`write`): Create a new MCP Server
-- `update_mcp_ai_controls_access_zero_trust_servers` (`write`): Update a MCP Server
-- `list_mcp_ai_controls_access_zero_trust_servers` (`read`): List MCP Servers
-- `delete_mcp_ai_controls_access_zero_trust_servers` (`write`): Delete a MCP Server
-- `read_mcp_ai_controls_access_zero_trust_servers` (`read`): Read the details of a MCP Server
-- `sync_mcp_ai_controls_access_zero_trust_servers` (`write`): Sync MCP Server Capabilities
 
 ### Resource `zero_trust.access.gateway_ca`:
 
@@ -4003,16 +3986,16 @@ The following tools are available in this MCP server.
 - `delete_cloudforce_one_threat_events` (`write`): The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
 - `bulk_create_cloudforce_one_threat_events` (`write`): The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
 - `edit_cloudforce_one_threat_events` (`write`): Updates an event
-- `get_cloudforce_one_threat_events` (`read`): This Method is deprecated. Please use /events/dataset/:dataset_id/events/:event_id instead.
+- `get_cloudforce_one_threat_events` (`read`): Reads an event
 
 ### Resource `cloudforce_one.threat_events.attackers`:
 
-- `list_threat_events_cloudforce_one_attackers` (`read`): Lists attackers across multiple datasets
+- `list_threat_events_cloudforce_one_attackers` (`read`): Lists attackers
 
 ### Resource `cloudforce_one.threat_events.categories`:
 
 - `create_threat_events_cloudforce_one_categories` (`write`): Creates a new category
-- `list_threat_events_cloudforce_one_categories` (`read`): Lists categories across multiple datasets
+- `list_threat_events_cloudforce_one_categories` (`read`): Lists categories
 - `delete_threat_events_cloudforce_one_categories` (`write`): Deletes a category
 - `edit_threat_events_cloudforce_one_categories` (`write`): Updates a category
 - `get_threat_events_cloudforce_one_categories` (`read`): Reads a category
@@ -4031,7 +4014,7 @@ The following tools are available in this MCP server.
 
 ### Resource `cloudforce_one.threat_events.indicator_types`:
 
-- `list_threat_events_cloudforce_one_indicator_types` (`read`): This Method is deprecated. Please use /events/dataset/:dataset_id/indicatorTypes instead.
+- `list_threat_events_cloudforce_one_indicator_types` (`read`): Lists all indicator types
 
 ### Resource `cloudforce_one.threat_events.raw`:
 
@@ -4053,7 +4036,7 @@ The following tools are available in this MCP server.
 
 ### Resource `cloudforce_one.threat_events.target_industries`:
 
-- `list_threat_events_cloudforce_one_target_industries` (`read`): Lists target industries across multiple datasets
+- `list_threat_events_cloudforce_one_target_industries` (`read`): Lists all target industries
 
 ### Resource `ai_gateway`:
 
@@ -4233,12 +4216,6 @@ The following tools are available in this MCP server.
 
 - `get_content_scanning_settings` (`read`): Retrieve the current status of Content Scanning.
 
-### Resource `abuse_reports`:
-
-- `create_abuse_reports` (`write`): Submit the Abuse Report of a particular type
-- `list_abuse_reports` (`read`): List the abuse reports for a given account
-- `get_abuse_reports` (`read`): Retrieve the details of an abuse report.
-
 ### Resource `ai`:
 
 - `run_ai` (`write`): This endpoint provides users with the capability to run specific AI models on-demand.
@@ -4358,11 +4335,11 @@ The following tools are available in this MCP server.
 
 ### Resource `pipelines`:
 
-- `create_pipelines` (`write`): [DEPRECATED] Create a new pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
-- `update_pipelines` (`write`): [DEPRECATED] Update an existing pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
-- `list_pipelines` (`read`): [DEPRECATED] List, filter, and paginate pipelines in an account. Use the new /pipelines/v1/pipelines endpoint instead.
-- `delete_pipelines` (`write`): [DEPRECATED] Delete a pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
-- `get_pipelines` (`read`): [DEPRECATED] Get configuration of a pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `create_pipelines` (`write`): Create a new pipeline.
+- `update_pipelines` (`write`): Update an existing pipeline.
+- `list_pipelines` (`read`): List, filter, and paginate pipelines in an account.
+- `delete_pipelines` (`write`): Delete a pipeline.
+- `get_pipelines` (`read`): Get configuration of a pipeline.
 
 ### Resource `schema_validation.schemas`:
 
@@ -4385,35 +4362,3 @@ The following tools are available in this MCP server.
 - `delete_settings_schema_validation_operations` (`write`): Delete per-operation schema validation setting
 - `bulk_edit_settings_schema_validation_operations` (`write`): Bulk edit per-operation schema validation settings
 - `get_settings_schema_validation_operations` (`read`): Get per-operation schema validation setting
-
-### Resource `token_validation.configuration`:
-
-- `create_token_validation_configuration` (`write`): Create a new Token Validation configuration
-- `list_token_validation_configuration` (`read`): Lists all token validation configurations for this zone
-- `delete_token_validation_configuration` (`write`): Delete Token Configuration
-- `edit_token_validation_configuration` (`write`): Edit fields of an existing Token Configuration
-- `get_token_validation_configuration` (`read`): Get a single Token Configuration
-
-### Resource `token_validation.configuration.credentials`:
-
-- `update_configuration_token_validation_credentials` (`write`): Update Token Configuration credentials
-
-### Resource `token_validation.rules`:
-
-- `create_token_validation_rules` (`write`): Create a token validation rule.
-- `list_token_validation_rules` (`read`): List token validation rules
-- `delete_token_validation_rules` (`write`): Delete a zone token validation rule.
-- `bulk_create_token_validation_rules` (`write`): Create zone token validation rules.
-
-  A request can create multiple Token Validation Rules.
-
-- `bulk_edit_token_validation_rules` (`write`): Edit token validation rules.
-
-  A request can update multiple Token Validation Rules.
-
-  Rules can be re-ordered using the `position` field.
-
-  Returns all updated rules.
-
-- `edit_token_validation_rules` (`write`): Edit a zone token validation rule.
-- `get_token_validation_rules` (`read`): Get a zone token validation rule.

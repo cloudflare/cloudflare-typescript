@@ -205,32 +205,9 @@ export namespace InvestigateListResponse {
   }
 
   export interface Finding {
-    attachment?: string | null;
-
     detail?: string | null;
 
-    detection?:
-      | 'MALICIOUS'
-      | 'MALICIOUS-BEC'
-      | 'SUSPICIOUS'
-      | 'SPOOF'
-      | 'SPAM'
-      | 'BULK'
-      | 'ENCRYPTED'
-      | 'EXTERNAL'
-      | 'UNKNOWN'
-      | 'NONE'
-      | null;
-
-    field?: string | null;
-
     name?: string | null;
-
-    portion?: string | null;
-
-    reason?: string | null;
-
-    score?: number | null;
 
     value?: string | null;
   }
@@ -350,32 +327,9 @@ export namespace InvestigateGetResponse {
   }
 
   export interface Finding {
-    attachment?: string | null;
-
     detail?: string | null;
 
-    detection?:
-      | 'MALICIOUS'
-      | 'MALICIOUS-BEC'
-      | 'SUSPICIOUS'
-      | 'SPOOF'
-      | 'SPAM'
-      | 'BULK'
-      | 'ENCRYPTED'
-      | 'EXTERNAL'
-      | 'UNKNOWN'
-      | 'NONE'
-      | null;
-
-    field?: string | null;
-
     name?: string | null;
-
-    portion?: string | null;
-
-    reason?: string | null;
-
-    score?: number | null;
 
     value?: string | null;
   }
@@ -406,11 +360,6 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
    * Query param:
    */
   alert_id?: string;
-
-  /**
-   * Query param:
-   */
-  cursor?: string;
 
   /**
    * Query param: Determines if the search results will include detections or not.

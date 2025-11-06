@@ -4,6 +4,7 @@ export { APIGateway } from './api-gateway';
 export {
   Configurations,
   type Configuration,
+  type ConfigurationUpdateResponse,
   type ConfigurationUpdateParams,
   type ConfigurationGetParams,
 } from './configurations';
@@ -38,13 +39,11 @@ export { Settings } from './settings/index';
 export {
   UserSchemas,
   type Message,
-  type OldPublicSchema,
-  type UserSchemaCreateResponse,
+  type SchemaUpload,
   type UserSchemaDeleteResponse,
   type UserSchemaCreateParams,
   type UserSchemaListParams,
   type UserSchemaDeleteParams,
   type UserSchemaEditParams,
   type UserSchemaGetParams,
-  type OldPublicSchemasV4PagePaginationArray,
 } from './user-schemas/index';

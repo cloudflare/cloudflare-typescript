@@ -18,21 +18,13 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_threat_events_cloudforce_one_target_industries',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nLists target industries across multiple datasets\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    items: {\n      type: 'object',\n      properties: {\n        type: {\n          type: 'string'\n        }\n      },\n      required: [        'type'\n      ]\n    },\n    type: {\n      type: 'string'\n    }\n  },\n  required: [    'items',\n    'type'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nLists all target industries\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    items: {\n      type: 'object',\n      properties: {\n        type: {\n          type: 'string'\n        }\n      },\n      required: [        'type'\n      ]\n    },\n    type: {\n      type: 'string'\n    }\n  },\n  required: [    'items',\n    'type'\n  ]\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
         description: 'Account ID.',
-      },
-      datasetIds: {
-        type: 'array',
-        description:
-          'Array of dataset IDs to query target industries from. If not provided, returns all target industries from Event tables across all datasets.',
-        items: {
-          type: 'string',
-        },
       },
       jq_filter: {
         type: 'string',

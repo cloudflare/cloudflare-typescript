@@ -55,10 +55,6 @@ export const tool: Tool = {
         type: 'string',
         description: 'Search for apps by other listed query parameters.',
       },
-      target_attributes: {
-        type: 'string',
-        description: 'Target Criteria attributes in key=value format.',
-      },
     },
     required: [],
   },

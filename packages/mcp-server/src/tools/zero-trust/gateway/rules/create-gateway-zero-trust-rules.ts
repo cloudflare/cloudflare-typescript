@@ -89,7 +89,7 @@ export const tool: Tool = {
       filters: {
         type: 'array',
         description:
-          'Specify the protocol or layer to evaluate the traffic, identity, and device posture expressions. Can only contain a single value.',
+          'Specify the protocol or layer to evaluate the traffic, identity, and device posture expressions.',
         items: {
           $ref: '#/$defs/gateway_filter',
         },
@@ -126,7 +126,7 @@ export const tool: Tool = {
       rule_setting: {
         type: 'object',
         description:
-          'Defines settings for this rule. Settings apply only to specific rule types and must use compatible selectors. If Terraform detects drift, confirm the setting supports your rule type and check whether the API modifies the value. Use API-returned values in your configuration to prevent drift.',
+          'Set settings related to this rule. Each setting is only valid for specific rule types and can only be used with the appropriate selectors. If Terraform drift is observed in these setting values, verify that the setting is supported for the given rule type and that the API response reflects the requested value. If the API response returns sanitized or modified values that differ from the request, use the API-provided values in Terraform to ensure consistency.',
         properties: {
           add_headers: {
             type: 'object',

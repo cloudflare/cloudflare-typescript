@@ -322,7 +322,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.consumers.get()`
 - `client.queues.subscriptions.update()`
 - `client.queues.subscriptions.delete()`
-- `client.queues.subscriptions.get()`
 - `client.apiGateway.discovery.operations.edit()`
 - `client.apiGateway.operations.delete()`
 - `client.apiGateway.operations.get()`
@@ -649,13 +648,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.organizations.update()`
 - `client.zeroTrust.organizations.list()`
 - `client.zeroTrust.organizations.revokeUsers()`
-- `client.zeroTrust.access.aiControls.mcp.portals.update()`
-- `client.zeroTrust.access.aiControls.mcp.portals.delete()`
-- `client.zeroTrust.access.aiControls.mcp.portals.read()`
-- `client.zeroTrust.access.aiControls.mcp.servers.update()`
-- `client.zeroTrust.access.aiControls.mcp.servers.delete()`
-- `client.zeroTrust.access.aiControls.mcp.servers.read()`
-- `client.zeroTrust.access.aiControls.mcp.servers.sync()`
 - `client.zeroTrust.access.gatewayCA.delete()`
 - `client.zeroTrust.access.infrastructure.targets.update()`
 - `client.zeroTrust.access.infrastructure.targets.delete()`
@@ -957,8 +949,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.leakedCredentialChecks.detections.update()`
 - `client.leakedCredentialChecks.detections.delete()`
 - `client.contentScanning.payloads.delete()`
-- `client.abuseReports.create()`
-- `client.abuseReports.get()`
 - `client.ai.run()`
 - `client.ai.finetunes.assets.create()`
 - `client.securityCenter.insights.list()`
@@ -986,13 +976,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.schemaValidation.settings.operations.update()`
 - `client.schemaValidation.settings.operations.delete()`
 - `client.schemaValidation.settings.operations.get()`
-- `client.tokenValidation.configuration.delete()`
-- `client.tokenValidation.configuration.edit()`
-- `client.tokenValidation.configuration.get()`
-- `client.tokenValidation.configuration.credentials.update()`
-- `client.tokenValidation.rules.delete()`
-- `client.tokenValidation.rules.edit()`
-- `client.tokenValidation.rules.get()`
 
 </details>
 
@@ -1107,8 +1090,6 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.secretsStore.stores.create()`
 - `client.secretsStore.stores.secrets.create()`
 - `client.schemaValidation.settings.operations.bulkEdit()`
-- `client.tokenValidation.rules.bulkCreate()`
-- `client.tokenValidation.rules.bulkEdit()`
 
 </details>
 
