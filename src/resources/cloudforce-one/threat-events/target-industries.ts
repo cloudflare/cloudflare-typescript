@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 
 export class TargetIndustries extends APIResource {
   /**
-   * Lists target industries across multiple datasets
+   * Lists all target industries
    *
    * @example
    * ```ts
@@ -19,11 +19,8 @@ export class TargetIndustries extends APIResource {
     params: TargetIndustryListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TargetIndustryListResponse> {
-    const { account_id, ...query } = params;
-    return this._client.get(`/accounts/${account_id}/cloudforce-one/events/targetIndustries`, {
-      query,
-      ...options,
-    });
+    const { account_id } = params;
+    return this._client.get(`/accounts/${account_id}/cloudforce-one/events/targetIndustries`, options);
   }
 }
 
@@ -41,15 +38,9 @@ export namespace TargetIndustryListResponse {
 
 export interface TargetIndustryListParams {
   /**
-   * Path param: Account ID.
+   * Account ID.
    */
   account_id: string;
-
-  /**
-   * Query param: Array of dataset IDs to query target industries from. If not
-   * provided, returns all target industries from Event tables across all datasets.
-   */
-  datasetIds?: Array<string>;
 }
 
 export declare namespace TargetIndustries {

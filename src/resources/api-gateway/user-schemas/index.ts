@@ -7,11 +7,15 @@ export {
   type HostListParams,
 } from './hosts';
 export {
-  OldPublicSchemasV4PagePaginationArray,
+  OperationListResponsesV4PagePaginationArray,
+  Operations,
+  type OperationListResponse,
+  type OperationListParams,
+} from './operations';
+export {
   UserSchemas,
   type Message,
-  type OldPublicSchema,
-  type UserSchemaCreateResponse,
+  type SchemaUpload,
   type UserSchemaDeleteResponse,
   type UserSchemaCreateParams,
   type UserSchemaListParams,
@@ -19,9 +23,3 @@ export {
   type UserSchemaEditParams,
   type UserSchemaGetParams,
 } from './user-schemas';
-export {
-  OperationListResponsesV4PagePaginationArray,
-  Operations,
-  type OperationListResponse,
-  type OperationListParams,
-} from './operations';
