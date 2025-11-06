@@ -34,7 +34,7 @@ export const tool: Tool = {
       status: {
         type: 'string',
         description: 'Apply action to instance.',
-        enum: ['resume', 'pause', 'terminate'],
+        enum: ['resume', 'pause', 'terminate', 'restart'],
       },
       jq_filter: {
         type: 'string',
