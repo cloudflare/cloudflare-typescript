@@ -4403,5 +4403,17 @@ The following tools are available in this MCP server.
 - `create_token_validation_rules` (`write`): Create a token validation rule.
 - `list_token_validation_rules` (`read`): List token validation rules
 - `delete_token_validation_rules` (`write`): Delete a zone token validation rule.
+- `bulk_create_token_validation_rules` (`write`): Create zone token validation rules.
+
+  A request can create multiple Token Validation Rules.
+
+- `bulk_edit_token_validation_rules` (`write`): Edit token validation rules.
+
+  A request can update multiple Token Validation Rules.
+
+  Rules can be re-ordered using the `position` field.
+
+  Returns all updated rules.
+
 - `edit_token_validation_rules` (`write`): Edit a zone token validation rule.
 - `get_token_validation_rules` (`read`): Get a zone token validation rule.
