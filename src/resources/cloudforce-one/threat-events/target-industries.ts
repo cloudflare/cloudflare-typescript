@@ -47,7 +47,7 @@ export interface TargetIndustryListParams {
 
   /**
    * Query param: Array of dataset IDs to query target industries from. If not
-   * provided, returns all target industries from D1 Event table.
+   * provided, returns all target industries from Event tables across all datasets.
    */
   datasetIds?: Array<string>;
 }
