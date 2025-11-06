@@ -41,7 +41,7 @@ describe('resource spam', () => {
           dkim: ['PASS'],
           dmarc: ['PASS'],
           format: 'JSON',
-          limit: 1,
+          limit: 5,
           name: ['main_series'],
           spf: ['PASS'],
           tldCategory: 'CLASSIC',

@@ -209,10 +209,15 @@ export class ThreatEvents extends APIResource {
   }
 
   /**
-   * This Method is deprecated. Please use
-   * /events/dataset/:dataset_id/events/:event_id instead.
+   * Reads an event
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const threatEvent =
+   *   await client.cloudforceOne.threatEvents.get('event_id', {
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   get(
     eventId: string,

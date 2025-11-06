@@ -15,7 +15,12 @@ export {
   type AddressMapGetParams,
 } from './address-maps/index';
 export { Addressing } from './addressing';
-export { LOADocuments, type LOADocumentGetParams } from './loa-documents';
+export {
+  LOADocuments,
+  type LOADocumentCreateResponse,
+  type LOADocumentCreateParams,
+  type LOADocumentGetParams,
+} from './loa-documents';
 export {
   PrefixesSinglePage,
   Prefixes,

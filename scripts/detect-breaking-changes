@@ -432,10 +432,6 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/organizations/doh.test.ts
 	tests/api-resources/zero-trust/seats.test.ts
 	tests/api-resources/zero-trust/access/access.test.ts
-	tests/api-resources/zero-trust/access/ai-controls/ai-controls.test.ts
-	tests/api-resources/zero-trust/access/ai-controls/mcp/mcp.test.ts
-	tests/api-resources/zero-trust/access/ai-controls/mcp/portals.test.ts
-	tests/api-resources/zero-trust/access/ai-controls/mcp/servers.test.ts
 	tests/api-resources/zero-trust/access/gateway-ca.test.ts
 	tests/api-resources/zero-trust/access/infrastructure/infrastructure.test.ts
 	tests/api-resources/zero-trust/access/infrastructure/targets.test.ts
@@ -732,7 +728,6 @@ TEST_PATHS=(
 	tests/api-resources/content-scanning/content-scanning.test.ts
 	tests/api-resources/content-scanning/payloads.test.ts
 	tests/api-resources/content-scanning/settings.test.ts
-	tests/api-resources/abuse-reports.test.ts
 	tests/api-resources/ai/ai.test.ts
 	tests/api-resources/ai/finetunes/finetunes.test.ts
 	tests/api-resources/ai/finetunes/assets.test.ts
@@ -766,10 +761,6 @@ TEST_PATHS=(
 	tests/api-resources/schema-validation/schemas.test.ts
 	tests/api-resources/schema-validation/settings/settings.test.ts
 	tests/api-resources/schema-validation/settings/operations.test.ts
-	tests/api-resources/token-validation/token-validation.test.ts
-	tests/api-resources/token-validation/configuration/configuration.test.ts
-	tests/api-resources/token-validation/configuration/credentials.test.ts
-	tests/api-resources/token-validation/rules.test.ts
 	tests/index.test.ts
 )
 

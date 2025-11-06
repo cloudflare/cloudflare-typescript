@@ -10,23 +10,24 @@ export class Schemas extends APIResource {
    *
    * @example
    * ```ts
-   * const publicSchema =
-   *   await client.schemaValidation.schemas.create({
+   * const schema = await client.schemaValidation.schemas.create(
+   *   {
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     kind: 'openapi_v3',
    *     name: 'petstore schema',
    *     source: '<schema file contents>',
    *     validation_enabled: true,
-   *   });
+   *   },
+   * );
    * ```
    */
-  create(params: SchemaCreateParams, options?: Core.RequestOptions): Core.APIPromise<PublicSchema> {
+  create(params: SchemaCreateParams, options?: Core.RequestOptions): Core.APIPromise<SchemaCreateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/schema_validation/schemas`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PublicSchema }>
+      }) as Core.APIPromise<{ result: SchemaCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -36,7 +37,7 @@ export class Schemas extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const publicSchema of client.schemaValidation.schemas.list(
+   * for await (const schemaListResponse of client.schemaValidation.schemas.list(
    *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
@@ -46,11 +47,11 @@ export class Schemas extends APIResource {
   list(
     params: SchemaListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema> {
+  ): Core.PagePromise<SchemaListResponsesV4PagePaginationArray, SchemaListResponse> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/schema_validation/schemas`,
-      PublicSchemasV4PagePaginationArray,
+      SchemaListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -85,24 +86,23 @@ export class Schemas extends APIResource {
    *
    * @example
    * ```ts
-   * const publicSchema =
-   *   await client.schemaValidation.schemas.edit(
-   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   *   );
+   * const response = await client.schemaValidation.schemas.edit(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
    * ```
    */
   edit(
     schemaId: string,
     params: SchemaEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PublicSchema> {
+  ): Core.APIPromise<SchemaEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/schema_validation/schemas/${schemaId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PublicSchema }>
+      }) as Core.APIPromise<{ result: SchemaEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -111,34 +111,96 @@ export class Schemas extends APIResource {
    *
    * @example
    * ```ts
-   * const publicSchema =
-   *   await client.schemaValidation.schemas.get(
-   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   *   );
+   * const schema = await client.schemaValidation.schemas.get(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
    * ```
    */
   get(
     schemaId: string,
     params: SchemaGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PublicSchema> {
+  ): Core.APIPromise<SchemaGetResponse> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/schema_validation/schemas/${schemaId}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: PublicSchema }>
+      }) as Core.APIPromise<{ result: SchemaGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
+export class SchemaListResponsesV4PagePaginationArray extends V4PagePaginationArray<SchemaListResponse> {}
+
 export class PublicSchemasV4PagePaginationArray extends V4PagePaginationArray<PublicSchema> {}
+
+export interface PublicSchema {
+  created_at: string;
+
+  /**
+   * Kind of schema
+   */
+  kind: 'openapi_v3';
+
+  /**
+   * Name of the schema
+   */
+  name: string;
+
+  /**
+   * UUID.
+   */
+  schema_id: string;
+
+  /**
+   * Source of the schema
+   */
+  source?: string;
+
+  /**
+   * Flag whether schema is enabled for validation.
+   */
+  validation_enabled?: boolean;
+}
 
 /**
  * A schema used in schema validation
  */
-export interface PublicSchema {
+export interface SchemaCreateResponse {
+  created_at: string;
+
+  /**
+   * The kind of the schema
+   */
+  kind: 'openapi_v3';
+
+  /**
+   * A human-readable name for the schema
+   */
+  name: string;
+
+  /**
+   * A unique identifier of this schema
+   */
+  schema_id: string;
+
+  /**
+   * The raw schema, e.g., the OpenAPI schema, either as JSON or YAML
+   */
+  source: string;
+
+  /**
+   * An indicator if this schema is enabled
+   */
+  validation_enabled?: boolean;
+}
+
+/**
+ * A schema used in schema validation
+ */
+export interface SchemaListResponse {
   created_at: string;
 
   /**
@@ -171,7 +233,71 @@ export interface SchemaDeleteResponse {
   /**
    * The ID of the schema that was just deleted
    */
-  id: string;
+  schema_id: string;
+}
+
+/**
+ * A schema used in schema validation
+ */
+export interface SchemaEditResponse {
+  created_at: string;
+
+  /**
+   * The kind of the schema
+   */
+  kind: 'openapi_v3';
+
+  /**
+   * A human-readable name for the schema
+   */
+  name: string;
+
+  /**
+   * A unique identifier of this schema
+   */
+  schema_id: string;
+
+  /**
+   * The raw schema, e.g., the OpenAPI schema, either as JSON or YAML
+   */
+  source: string;
+
+  /**
+   * An indicator if this schema is enabled
+   */
+  validation_enabled?: boolean;
+}
+
+/**
+ * A schema used in schema validation
+ */
+export interface SchemaGetResponse {
+  created_at: string;
+
+  /**
+   * The kind of the schema
+   */
+  kind: 'openapi_v3';
+
+  /**
+   * A human-readable name for the schema
+   */
+  name: string;
+
+  /**
+   * A unique identifier of this schema
+   */
+  schema_id: string;
+
+  /**
+   * The raw schema, e.g., the OpenAPI schema, either as JSON or YAML
+   */
+  source: string;
+
+  /**
+   * An indicator if this schema is enabled
+   */
+  validation_enabled?: boolean;
 }
 
 export interface SchemaCreateParams {
@@ -249,13 +375,17 @@ export interface SchemaGetParams {
   omit_source?: boolean;
 }
 
-Schemas.PublicSchemasV4PagePaginationArray = PublicSchemasV4PagePaginationArray;
+Schemas.SchemaListResponsesV4PagePaginationArray = SchemaListResponsesV4PagePaginationArray;
 
 export declare namespace Schemas {
   export {
     type PublicSchema as PublicSchema,
+    type SchemaCreateResponse as SchemaCreateResponse,
+    type SchemaListResponse as SchemaListResponse,
     type SchemaDeleteResponse as SchemaDeleteResponse,
-    PublicSchemasV4PagePaginationArray as PublicSchemasV4PagePaginationArray,
+    type SchemaEditResponse as SchemaEditResponse,
+    type SchemaGetResponse as SchemaGetResponse,
+    SchemaListResponsesV4PagePaginationArray as SchemaListResponsesV4PagePaginationArray,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaListParams as SchemaListParams,
     type SchemaDeleteParams as SchemaDeleteParams,
