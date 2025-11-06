@@ -1107,6 +1107,8 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.secretsStore.stores.create()`
 - `client.secretsStore.stores.secrets.create()`
 - `client.schemaValidation.settings.operations.bulkEdit()`
+- `client.tokenValidation.rules.bulkCreate()`
+- `client.tokenValidation.rules.bulkEdit()`
 
 </details>
 

@@ -1909,6 +1909,8 @@ import update_configuration_token_validation_credentials from './token-validatio
 import create_token_validation_rules from './token-validation/rules/create-token-validation-rules';
 import list_token_validation_rules from './token-validation/rules/list-token-validation-rules';
 import delete_token_validation_rules from './token-validation/rules/delete-token-validation-rules';
+import bulk_create_token_validation_rules from './token-validation/rules/bulk-create-token-validation-rules';
+import bulk_edit_token_validation_rules from './token-validation/rules/bulk-edit-token-validation-rules';
 import edit_token_validation_rules from './token-validation/rules/edit-token-validation-rules';
 import get_token_validation_rules from './token-validation/rules/get-token-validation-rules';
 
@@ -3823,6 +3825,8 @@ addEndpoint(update_configuration_token_validation_credentials);
 addEndpoint(create_token_validation_rules);
 addEndpoint(list_token_validation_rules);
 addEndpoint(delete_token_validation_rules);
+addEndpoint(bulk_create_token_validation_rules);
+addEndpoint(bulk_edit_token_validation_rules);
 addEndpoint(edit_token_validation_rules);
 addEndpoint(get_token_validation_rules);
 

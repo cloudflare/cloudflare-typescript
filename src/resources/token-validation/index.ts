@@ -19,8 +19,11 @@ export {
   type RuleCreateParams,
   type RuleListParams,
   type RuleDeleteParams,
+  type RuleBulkCreateParams,
+  type RuleBulkEditParams,
   type RuleEditParams,
   type RuleGetParams,
   type TokenValidationRulesV4PagePaginationArray,
+  type TokenValidationRulesSinglePage,
 } from './rules';
 export { TokenValidation } from './token-validation';
