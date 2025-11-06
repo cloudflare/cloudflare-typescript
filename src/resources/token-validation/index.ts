@@ -15,12 +15,15 @@ export {
 export { TokenValidation } from './token-validation';
 export {
   TokenValidationRulesV4PagePaginationArray,
+  TokenValidationRulesSinglePage,
   Rules,
   type TokenValidationRule,
   type RuleDeleteResponse,
   type RuleCreateParams,
   type RuleListParams,
   type RuleDeleteParams,
+  type RuleBulkCreateParams,
+  type RuleBulkEditParams,
   type RuleEditParams,
   type RuleGetParams,
 } from './rules';

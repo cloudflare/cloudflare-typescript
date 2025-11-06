@@ -3,6 +3,8 @@
 import { APIResource } from '../../resource';
 import * as RulesAPI from './rules';
 import {
+  RuleBulkCreateParams,
+  RuleBulkEditParams,
   RuleCreateParams,
   RuleDeleteParams,
   RuleDeleteResponse,
@@ -11,6 +13,7 @@ import {
   RuleListParams,
   Rules,
   TokenValidationRule,
+  TokenValidationRulesSinglePage,
   TokenValidationRulesV4PagePaginationArray,
 } from './rules';
 import * as ConfigurationAPI from './configuration/configuration';
@@ -36,6 +39,7 @@ TokenValidation.Configuration = Configuration;
 TokenValidation.TokenConfigsV4PagePaginationArray = TokenConfigsV4PagePaginationArray;
 TokenValidation.Rules = Rules;
 TokenValidation.TokenValidationRulesV4PagePaginationArray = TokenValidationRulesV4PagePaginationArray;
+TokenValidation.TokenValidationRulesSinglePage = TokenValidationRulesSinglePage;
 
 export declare namespace TokenValidation {
   export {
@@ -56,9 +60,12 @@ export declare namespace TokenValidation {
     type TokenValidationRule as TokenValidationRule,
     type RuleDeleteResponse as RuleDeleteResponse,
     TokenValidationRulesV4PagePaginationArray as TokenValidationRulesV4PagePaginationArray,
+    TokenValidationRulesSinglePage as TokenValidationRulesSinglePage,
     type RuleCreateParams as RuleCreateParams,
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
+    type RuleBulkCreateParams as RuleBulkCreateParams,
+    type RuleBulkEditParams as RuleBulkEditParams,
     type RuleEditParams as RuleEditParams,
     type RuleGetParams as RuleGetParams,
   };
