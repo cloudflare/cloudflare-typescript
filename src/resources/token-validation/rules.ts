@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Rules extends APIResource {
   /**
@@ -83,6 +83,81 @@ export class Rules extends APIResource {
   }
 
   /**
+   * Create zone token validation rules.
+   *
+   * A request can create multiple Token Validation Rules.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tokenValidationRule of client.tokenValidation.rules.bulkCreate(
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [
+   *       {
+   *         action: 'log',
+   *         description:
+   *           'Long description for Token Validation Rule',
+   *         enabled: true,
+   *         expression:
+   *           'is_jwt_valid("52973293-cb04-4a97-8f55-e7d2ad1107dd") or is_jwt_valid("46eab8d1-6376-45e3-968f-2c649d77d423")',
+   *         selector: {},
+   *         title: 'Example Token Validation Rule',
+   *       },
+   *     ],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  bulkCreate(
+    params: RuleBulkCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TokenValidationRulesSinglePage, TokenValidationRule> {
+    const { zone_id, body } = params;
+    return this._client.getAPIList(
+      `/zones/${zone_id}/token_validation/rules/bulk`,
+      TokenValidationRulesSinglePage,
+      { body: body, method: 'post', ...options },
+    );
+  }
+
+  /**
+   * Edit token validation rules.
+   *
+   * A request can update multiple Token Validation Rules.
+   *
+   * Rules can be re-ordered using the `position` field.
+   *
+   * Returns all updated rules.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tokenValidationRule of client.tokenValidation.rules.bulkEdit(
+   *   {
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     body: [{ id: '0d9bf70c-92e1-4bb3-9411-34a3bcc59003' }],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  bulkEdit(
+    params: RuleBulkEditParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TokenValidationRulesSinglePage, TokenValidationRule> {
+    const { zone_id, body } = params;
+    return this._client.getAPIList(
+      `/zones/${zone_id}/token_validation/rules/bulk`,
+      TokenValidationRulesSinglePage,
+      { body: body, method: 'patch', ...options },
+    );
+  }
+
+  /**
    * Edit a zone token validation rule.
    *
    * @example
@@ -135,6 +210,8 @@ export class Rules extends APIResource {
 }
 
 export class TokenValidationRulesV4PagePaginationArray extends V4PagePaginationArray<TokenValidationRule> {}
+
+export class TokenValidationRulesSinglePage extends SinglePage<TokenValidationRule> {}
 
 /**
  * A Token Validation rule that can enforce security policies using JWT Tokens.
@@ -357,6 +434,226 @@ export interface RuleDeleteParams {
   zone_id: string;
 }
 
+export interface RuleBulkCreateParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: Array<RuleBulkCreateParams.Body>;
+}
+
+export namespace RuleBulkCreateParams {
+  /**
+   * A Token Validation rule that can enforce security policies using JWT Tokens.
+   */
+  export interface Body {
+    /**
+     * Action to take on requests that match operations included in `selector` and fail
+     * `expression`.
+     */
+    action: 'log' | 'block';
+
+    /**
+     * A human-readable description that gives more details than `title`.
+     */
+    description: string;
+
+    /**
+     * Toggle rule on or off.
+     */
+    enabled: boolean;
+
+    /**
+     * Rule expression. Requests that fail to match this expression will be subject to
+     * `action`.
+     *
+     * For details on expressions, see the
+     * [Cloudflare Docs](https://developers.cloudflare.com/api-shield/security/jwt-validation/).
+     */
+    expression: string;
+
+    /**
+     * Select operations covered by this rule.
+     *
+     * For details on selectors, see the
+     * [Cloudflare Docs](https://developers.cloudflare.com/api-shield/security/jwt-validation/).
+     */
+    selector: Body.Selector;
+
+    /**
+     * A human-readable name for the rule.
+     */
+    title: string;
+  }
+
+  export namespace Body {
+    /**
+     * Select operations covered by this rule.
+     *
+     * For details on selectors, see the
+     * [Cloudflare Docs](https://developers.cloudflare.com/api-shield/security/jwt-validation/).
+     */
+    export interface Selector {
+      /**
+       * Ignore operations that were otherwise included by `include`.
+       */
+      exclude?: Array<Selector.Exclude> | null;
+
+      /**
+       * Select all matching operations.
+       */
+      include?: Array<Selector.Include> | null;
+    }
+
+    export namespace Selector {
+      export interface Exclude {
+        /**
+         * Excluded operation IDs.
+         */
+        operation_ids?: Array<string>;
+      }
+
+      export interface Include {
+        /**
+         * Included hostnames.
+         */
+        host?: Array<string>;
+      }
+    }
+  }
+}
+
+export interface RuleBulkEditParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: Array<RuleBulkEditParams.Body>;
+}
+
+export namespace RuleBulkEditParams {
+  export interface Body {
+    /**
+     * Rule ID this patch applies to
+     */
+    id: string;
+
+    /**
+     * Action to take on requests that match operations included in `selector` and fail
+     * `expression`.
+     */
+    action?: 'log' | 'block';
+
+    /**
+     * A human-readable description that gives more details than `title`.
+     */
+    description?: string;
+
+    /**
+     * Toggle rule on or off.
+     */
+    enabled?: boolean;
+
+    /**
+     * Rule expression. Requests that fail to match this expression will be subject to
+     * `action`.
+     *
+     * For details on expressions, see the
+     * [Cloudflare Docs](https://developers.cloudflare.com/api-shield/security/jwt-validation/).
+     */
+    expression?: string;
+
+    /**
+     * Update rule order among zone rules.
+     */
+    position?: Body.APIShieldIndex | Body.APIShieldBefore | Body.APIShieldAfter;
+
+    /**
+     * Select operations covered by this rule.
+     *
+     * For details on selectors, see the
+     * [Cloudflare Docs](https://developers.cloudflare.com/api-shield/security/jwt-validation/).
+     */
+    selector?: Body.Selector;
+
+    /**
+     * A human-readable name for the rule.
+     */
+    title?: string;
+  }
+
+  export namespace Body {
+    export interface APIShieldIndex {
+      /**
+       * Move rule to this position
+       */
+      index: number;
+    }
+
+    /**
+     * Move rule to after rule with ID.
+     */
+    export interface APIShieldBefore {
+      /**
+       * Move rule to before rule with this ID.
+       */
+      before?: string;
+    }
+
+    /**
+     * Move rule to before rule with ID.
+     */
+    export interface APIShieldAfter {
+      /**
+       * Move rule to after rule with this ID.
+       */
+      after?: string;
+    }
+
+    /**
+     * Select operations covered by this rule.
+     *
+     * For details on selectors, see the
+     * [Cloudflare Docs](https://developers.cloudflare.com/api-shield/security/jwt-validation/).
+     */
+    export interface Selector {
+      /**
+       * Ignore operations that were otherwise included by `include`.
+       */
+      exclude?: Array<Selector.Exclude> | null;
+
+      /**
+       * Select all matching operations.
+       */
+      include?: Array<Selector.Include> | null;
+    }
+
+    export namespace Selector {
+      export interface Exclude {
+        /**
+         * Excluded operation IDs.
+         */
+        operation_ids?: Array<string>;
+      }
+
+      export interface Include {
+        /**
+         * Included hostnames.
+         */
+        host?: Array<string>;
+      }
+    }
+  }
+}
+
 export interface RuleEditParams {
   /**
    * Path param: Identifier.
@@ -478,15 +775,19 @@ export interface RuleGetParams {
 }
 
 Rules.TokenValidationRulesV4PagePaginationArray = TokenValidationRulesV4PagePaginationArray;
+Rules.TokenValidationRulesSinglePage = TokenValidationRulesSinglePage;
 
 export declare namespace Rules {
   export {
     type TokenValidationRule as TokenValidationRule,
     type RuleDeleteResponse as RuleDeleteResponse,
     TokenValidationRulesV4PagePaginationArray as TokenValidationRulesV4PagePaginationArray,
+    TokenValidationRulesSinglePage as TokenValidationRulesSinglePage,
     type RuleCreateParams as RuleCreateParams,
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
+    type RuleBulkCreateParams as RuleBulkCreateParams,
+    type RuleBulkEditParams as RuleBulkEditParams,
     type RuleEditParams as RuleEditParams,
     type RuleGetParams as RuleGetParams,
   };

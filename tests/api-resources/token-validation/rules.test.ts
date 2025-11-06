@@ -95,6 +95,100 @@ describe('resource rules', () => {
     });
   });
 
+  test('bulkCreate: only required params', async () => {
+    const responsePromise = client.tokenValidation.rules.bulkCreate({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: [
+        {
+          action: 'log',
+          description: 'Long description for Token Validation Rule',
+          enabled: true,
+          expression:
+            'is_jwt_valid("52973293-cb04-4a97-8f55-e7d2ad1107dd") or is_jwt_valid("46eab8d1-6376-45e3-968f-2c649d77d423")',
+          selector: {},
+          title: 'Example Token Validation Rule',
+        },
+      ],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkCreate: required and optional params', async () => {
+    const response = await client.tokenValidation.rules.bulkCreate({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: [
+        {
+          action: 'log',
+          description: 'Long description for Token Validation Rule',
+          enabled: true,
+          expression:
+            'is_jwt_valid("52973293-cb04-4a97-8f55-e7d2ad1107dd") or is_jwt_valid("46eab8d1-6376-45e3-968f-2c649d77d423")',
+          selector: {
+            exclude: [
+              {
+                operation_ids: [
+                  'f9c5615e-fe15-48ce-bec6-cfc1946f1bec',
+                  '56828eae-035a-4396-ba07-51c66d680a04',
+                ],
+              },
+            ],
+            include: [{ host: ['v1.example.com', 'v2.example.com'] }],
+          },
+          title: 'Example Token Validation Rule',
+        },
+      ],
+    });
+  });
+
+  test('bulkEdit: only required params', async () => {
+    const responsePromise = client.tokenValidation.rules.bulkEdit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: [{ id: '0d9bf70c-92e1-4bb3-9411-34a3bcc59003' }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkEdit: required and optional params', async () => {
+    const response = await client.tokenValidation.rules.bulkEdit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: [
+        {
+          id: '0d9bf70c-92e1-4bb3-9411-34a3bcc59003',
+          action: 'log',
+          description: 'Long description for Token Validation Rule',
+          enabled: true,
+          expression:
+            'is_jwt_valid("52973293-cb04-4a97-8f55-e7d2ad1107dd") or is_jwt_valid("46eab8d1-6376-45e3-968f-2c649d77d423")',
+          position: { index: 2 },
+          selector: {
+            exclude: [
+              {
+                operation_ids: [
+                  'f9c5615e-fe15-48ce-bec6-cfc1946f1bec',
+                  '56828eae-035a-4396-ba07-51c66d680a04',
+                ],
+              },
+            ],
+            include: [{ host: ['v1.example.com', 'v2.example.com'] }],
+          },
+          title: 'Example Token Validation Rule',
+        },
+      ],
+    });
+  });
+
   test('edit: only required params', async () => {
     const responsePromise = client.tokenValidation.rules.edit('4a7ee8d3-dd63-4ceb-9d5f-c27831854ce7', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',

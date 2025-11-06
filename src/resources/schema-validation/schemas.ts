@@ -171,7 +171,7 @@ export interface SchemaDeleteResponse {
   /**
    * The ID of the schema that was just deleted
    */
-  schema_id: string;
+  id: string;
 }
 
 export interface SchemaCreateParams {
