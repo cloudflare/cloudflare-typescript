@@ -210,6 +210,7 @@ export interface Policy {
    * possible values.
    */
   alert_type?:
+    | 'abuse_report_alert'
     | 'access_custom_certificate_expiration_type'
     | 'advanced_ddos_attack_l4_alert'
     | 'advanced_ddos_attack_l7_alert'
@@ -522,6 +523,11 @@ export interface PolicyFilter {
   /**
    * Usage depends on specific alert type
    */
+  type?: Array<string>;
+
+  /**
+   * Usage depends on specific alert type
+   */
   where?: Array<string>;
 
   /**
@@ -741,6 +747,11 @@ export interface PolicyFilterParam {
   /**
    * Usage depends on specific alert type
    */
+  type?: Array<string>;
+
+  /**
+   * Usage depends on specific alert type
+   */
   where?: Array<string>;
 
   /**
@@ -824,6 +835,7 @@ export interface PolicyCreateParams {
    * possible values.
    */
   alert_type:
+    | 'abuse_report_alert'
     | 'access_custom_certificate_expiration_type'
     | 'advanced_ddos_attack_l4_alert'
     | 'advanced_ddos_attack_l7_alert'
@@ -945,6 +957,7 @@ export interface PolicyUpdateParams {
    * possible values.
    */
   alert_type?:
+    | 'abuse_report_alert'
     | 'access_custom_certificate_expiration_type'
     | 'advanced_ddos_attack_l4_alert'
     | 'advanced_ddos_attack_l7_alert'

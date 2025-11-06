@@ -11,12 +11,13 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'put',
   httpPath: '/accounts/{account_id}/pipelines/{pipeline_name}',
-  operationId: 'putV4AccountsByAccount_idPipelinesByPipeline_name',
+  operationId: 'putV4AccountsByAccount_idPipelinesByPipeline_name_deprecated',
 };
 
 export const tool: Tool = {
   name: 'update_pipelines',
-  description: 'Update an existing pipeline.',
+  description:
+    '[DEPRECATED] Update an existing pipeline. Use the new /pipelines/v1/pipelines endpoint instead.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -121,6 +122,7 @@ export const tool: Tool = {
           anyOf: [
             {
               type: 'object',
+              description: '[DEPRECATED] HTTP source configuration. Use the new streams API instead.',
               properties: {
                 format: {
                   type: 'string',
@@ -152,6 +154,8 @@ export const tool: Tool = {
             },
             {
               type: 'object',
+              description:
+                '[DEPRECATED] Worker binding source configuration. Use the new streams API instead.',
               properties: {
                 format: {
                   type: 'string',
@@ -165,6 +169,7 @@ export const tool: Tool = {
               required: ['format', 'type'],
             },
           ],
+          description: '[DEPRECATED] HTTP source configuration. Use the new streams API instead.',
         },
       },
     },
