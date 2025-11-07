@@ -30,7 +30,7 @@ export class Categories extends APIResource {
   }
 
   /**
-   * Lists categories
+   * Lists categories across multiple datasets
    *
    * @example
    * ```ts
@@ -41,8 +41,11 @@ export class Categories extends APIResource {
    * ```
    */
   list(params: CategoryListParams, options?: RequestOptions): APIPromise<CategoryListResponse> {
-    const { account_id } = params;
-    return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/categories`, options);
+    const { account_id, ...query } = params;
+    return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/categories`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -203,9 +206,15 @@ export interface CategoryCreateParams {
 
 export interface CategoryListParams {
   /**
-   * Account ID.
+   * Path param: Account ID.
    */
   account_id: string;
+
+  /**
+   * Query param: Array of dataset IDs to query categories from. If not provided,
+   * returns all categories from D1 database.
+   */
+  datasetIds?: Array<string>;
 }
 
 export interface CategoryDeleteParams {

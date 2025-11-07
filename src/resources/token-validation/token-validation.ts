@@ -2,9 +2,33 @@
 
 import { APIResource } from '../../core/resource';
 import * as RulesAPI from './rules';
-import { Rules } from './rules';
+import {
+  RuleBulkCreateParams,
+  RuleBulkEditParams,
+  RuleCreateParams,
+  RuleDeleteParams,
+  RuleDeleteResponse,
+  RuleEditParams,
+  RuleGetParams,
+  RuleListParams,
+  Rules,
+  TokenValidationRule,
+  TokenValidationRulesSinglePage,
+  TokenValidationRulesV4PagePaginationArray,
+} from './rules';
 import * as ConfigurationAPI from './configuration/configuration';
-import { Configuration } from './configuration/configuration';
+import {
+  Configuration,
+  ConfigurationCreateParams,
+  ConfigurationDeleteParams,
+  ConfigurationDeleteResponse,
+  ConfigurationEditParams,
+  ConfigurationEditResponse,
+  ConfigurationGetParams,
+  ConfigurationListParams,
+  TokenConfig,
+  TokenConfigsV4PagePaginationArray,
+} from './configuration/configuration';
 
 export class TokenValidation extends APIResource {
   configuration: ConfigurationAPI.Configuration = new ConfigurationAPI.Configuration(this._client);
@@ -15,7 +39,31 @@ TokenValidation.Configuration = Configuration;
 TokenValidation.Rules = Rules;
 
 export declare namespace TokenValidation {
-  export { Configuration as Configuration };
+  export {
+    Configuration as Configuration,
+    type TokenConfig as TokenConfig,
+    type ConfigurationDeleteResponse as ConfigurationDeleteResponse,
+    type ConfigurationEditResponse as ConfigurationEditResponse,
+    type TokenConfigsV4PagePaginationArray as TokenConfigsV4PagePaginationArray,
+    type ConfigurationCreateParams as ConfigurationCreateParams,
+    type ConfigurationListParams as ConfigurationListParams,
+    type ConfigurationDeleteParams as ConfigurationDeleteParams,
+    type ConfigurationEditParams as ConfigurationEditParams,
+    type ConfigurationGetParams as ConfigurationGetParams,
+  };
 
-  export { Rules as Rules };
+  export {
+    Rules as Rules,
+    type TokenValidationRule as TokenValidationRule,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    type TokenValidationRulesV4PagePaginationArray as TokenValidationRulesV4PagePaginationArray,
+    type TokenValidationRulesSinglePage as TokenValidationRulesSinglePage,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleBulkCreateParams as RuleBulkCreateParams,
+    type RuleBulkEditParams as RuleBulkEditParams,
+    type RuleEditParams as RuleEditParams,
+    type RuleGetParams as RuleGetParams,
+  };
 }

@@ -123,7 +123,7 @@ export interface TagUpdateParams {
   /**
    * Body param: Tags associated with the Worker.
    */
-  body: Array<string>;
+  body: Array<string> | null;
 }
 
 export interface TagListParams {
