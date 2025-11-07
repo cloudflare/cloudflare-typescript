@@ -44,6 +44,20 @@ export interface AccessRequestListParams {
   direction?: 'desc' | 'asc';
 
   /**
+   * Query param: Filter by user email. Defaults to substring matching. To force
+   * exact matching, set `email_exact=true`. Example (default): `email=@example.com`
+   * returns all events with that domain. Example (exact):
+   * `email=user@example.com&email_exact=true` returns only that user.
+   */
+  email?: string;
+
+  /**
+   * Query param: When true, `email` is matched exactly instead of substring
+   * matching.
+   */
+  email_exact?: boolean;
+
+  /**
    * Query param: The maximum number of log entries to retrieve.
    */
   limit?: number;
@@ -67,6 +81,11 @@ export interface AccessRequestListParams {
    * Query param: The latest event timestamp to query.
    */
   until?: string;
+
+  /**
+   * Query param: Filter by user UUID.
+   */
+  user_id?: string;
 }
 
 export declare namespace AccessRequests {
