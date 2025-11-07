@@ -862,40 +862,102 @@ export declare namespace DatabaseImportParams {
   }
 }
 
-export interface DatabaseQueryParams {
-  /**
-   * Path param: Account identifier tag.
-   */
-  account_id: string;
+export type DatabaseQueryParams = DatabaseQueryParams.D1SingleQuery | DatabaseQueryParams.MultipleQueries;
 
-  /**
-   * Body param: Your SQL query. Supports multiple statements, joined by semicolons,
-   * which will be executed as a batch.
-   */
-  sql: string;
+export declare namespace DatabaseQueryParams {
+  export interface D1SingleQuery {
+    /**
+     * Path param: Account identifier tag.
+     */
+    account_id: string;
 
-  /**
-   * Body param:
-   */
-  params?: Array<string>;
+    /**
+     * Body param: Your SQL query. Supports multiple statements, joined by semicolons,
+     * which will be executed as a batch.
+     */
+    sql: string;
+
+    /**
+     * Body param:
+     */
+    params?: Array<string>;
+  }
+
+  export interface MultipleQueries {
+    /**
+     * Path param: Account identifier tag.
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    batch?: Array<MultipleQueries.Batch>;
+  }
+
+  export namespace MultipleQueries {
+    /**
+     * A single query with or without parameters
+     */
+    export interface Batch {
+      /**
+       * Your SQL query. Supports multiple statements, joined by semicolons, which will
+       * be executed as a batch.
+       */
+      sql: string;
+
+      params?: Array<string>;
+    }
+  }
 }
 
-export interface DatabaseRawParams {
-  /**
-   * Path param: Account identifier tag.
-   */
-  account_id: string;
+export type DatabaseRawParams = DatabaseRawParams.D1SingleQuery | DatabaseRawParams.MultipleQueries;
 
-  /**
-   * Body param: Your SQL query. Supports multiple statements, joined by semicolons,
-   * which will be executed as a batch.
-   */
-  sql: string;
+export declare namespace DatabaseRawParams {
+  export interface D1SingleQuery {
+    /**
+     * Path param: Account identifier tag.
+     */
+    account_id: string;
 
-  /**
-   * Body param:
-   */
-  params?: Array<string>;
+    /**
+     * Body param: Your SQL query. Supports multiple statements, joined by semicolons,
+     * which will be executed as a batch.
+     */
+    sql: string;
+
+    /**
+     * Body param:
+     */
+    params?: Array<string>;
+  }
+
+  export interface MultipleQueries {
+    /**
+     * Path param: Account identifier tag.
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    batch?: Array<MultipleQueries.Batch>;
+  }
+
+  export namespace MultipleQueries {
+    /**
+     * A single query with or without parameters
+     */
+    export interface Batch {
+      /**
+       * Your SQL query. Supports multiple statements, joined by semicolons, which will
+       * be executed as a batch.
+       */
+      sql: string;
+
+      params?: Array<string>;
+    }
+  }
 }
 
 Database.DatabaseListResponsesV4PagePaginationArray = DatabaseListResponsesV4PagePaginationArray;
