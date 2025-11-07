@@ -49,6 +49,7 @@ import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-enc
 import { PageRules } from './resources/page-rules';
 import { Pipelines } from './resources/pipelines';
 import { RateLimits } from './resources/rate-limits';
+import { RealtimeKit } from './resources/realtime-kit';
 import { SecurityTXT } from './resources/security-txt';
 import { URLNormalization } from './resources/url-normalization';
 import { Accounts } from './resources/accounts/accounts';
@@ -1000,6 +1001,7 @@ export class Cloudflare {
   dcvDelegation: API.DCVDelegation = new API.DCVDelegation(this);
   hostnames: API.Hostnames = new API.Hostnames(this);
   snippets: API.Snippets = new API.Snippets(this);
+  realtimeKit: API.RealtimeKit = new API.RealtimeKit(this);
   calls: API.Calls = new API.Calls(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
@@ -1100,6 +1102,7 @@ Cloudflare.Speed = Speed;
 Cloudflare.DCVDelegation = DCVDelegation;
 Cloudflare.Hostnames = Hostnames;
 Cloudflare.Snippets = Snippets;
+Cloudflare.RealtimeKit = RealtimeKit;
 Cloudflare.Calls = Calls;
 Cloudflare.CloudforceOne = CloudforceOne;
 Cloudflare.AIGateway = AIGateway;
@@ -1312,6 +1315,8 @@ export declare namespace Cloudflare {
   export { Hostnames as Hostnames };
 
   export { Snippets as Snippets };
+
+  export { RealtimeKit as RealtimeKit };
 
   export { Calls as Calls };
 
