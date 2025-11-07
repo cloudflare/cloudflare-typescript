@@ -96,14 +96,16 @@ export type IssueType =
   | 'email_security'
   | 'exposed_infrastructure'
   | 'insecure_configuration'
-  | 'weak_authentication';
+  | 'weak_authentication'
+  | 'configuration_suggestion';
 
 export type IssueTypeParam =
   | 'compliance_violation'
   | 'email_security'
   | 'exposed_infrastructure'
   | 'insecure_configuration'
-  | 'weak_authentication';
+  | 'weak_authentication'
+  | 'configuration_suggestion';
 
 export type SeverityQueryParam = 'low' | 'moderate' | 'critical';
 
@@ -138,7 +140,7 @@ export namespace IssueListResponse {
 
     issue_type?: IssuesAPI.IssueType;
 
-    payload?: unknown;
+    payload?: Issue.Payload;
 
     resolve_link?: string;
 
@@ -151,6 +153,17 @@ export namespace IssueListResponse {
     subject?: string;
 
     timestamp?: string;
+  }
+
+  export namespace Issue {
+    export interface Payload {
+      /**
+       * Method used to detect insight
+       */
+      detection_method?: string;
+
+      zone_tag?: string;
+    }
   }
 }
 

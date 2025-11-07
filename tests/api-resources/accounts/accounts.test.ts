@@ -51,6 +51,7 @@ describe('resource accounts', () => {
       id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'Demo Account',
       type: 'standard',
+      managed_by: {},
       settings: { abuse_contact_email: 'abuse_contact_email', enforce_twofactor: true },
     });
   });

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SettingsAPI from './settings';
 
 export class SchemaValidation extends APIResource {
   /**
@@ -13,7 +12,7 @@ export class SchemaValidation extends APIResource {
   update(
     params: SchemaValidationUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingsAPI.Settings> {
+  ): Core.APIPromise<SchemaValidationUpdateResponse> {
     const { zone_id, ...body } = params;
     return this._client.put(`/zones/${zone_id}/api_gateway/settings/schema_validation`, { body, ...options });
   }
@@ -26,7 +25,7 @@ export class SchemaValidation extends APIResource {
   edit(
     params: SchemaValidationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingsAPI.Settings> {
+  ): Core.APIPromise<SchemaValidationEditResponse> {
     const { zone_id, ...body } = params;
     return this._client.patch(`/zones/${zone_id}/api_gateway/settings/schema_validation`, {
       body,
@@ -42,10 +41,82 @@ export class SchemaValidation extends APIResource {
   get(
     params: SchemaValidationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingsAPI.Settings> {
+  ): Core.APIPromise<SchemaValidationGetResponse> {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/api_gateway/settings/schema_validation`, options);
   }
+}
+
+export interface SchemaValidationUpdateResponse {
+  /**
+   * The default mitigation action used when there is no mitigation action defined on
+   * the operation
+   *
+   * Mitigation actions are as follows:
+   *
+   * - `log` - log request when request does not conform to schema
+   * - `block` - deny access to the site when request does not conform to schema
+   *
+   * A special value of of `none` will skip running schema validation entirely for
+   * the request when there is no mitigation action defined on the operation
+   */
+  validation_default_mitigation_action?: 'none' | 'log' | 'block';
+
+  /**
+   * When set, this overrides both zone level and operation level mitigation actions.
+   *
+   * - `none` will skip running schema validation entirely for the request
+   * - `null` indicates that no override is in place
+   */
+  validation_override_mitigation_action?: 'none' | null;
+}
+
+export interface SchemaValidationEditResponse {
+  /**
+   * The default mitigation action used when there is no mitigation action defined on
+   * the operation
+   *
+   * Mitigation actions are as follows:
+   *
+   * - `log` - log request when request does not conform to schema
+   * - `block` - deny access to the site when request does not conform to schema
+   *
+   * A special value of of `none` will skip running schema validation entirely for
+   * the request when there is no mitigation action defined on the operation
+   */
+  validation_default_mitigation_action?: 'none' | 'log' | 'block';
+
+  /**
+   * When set, this overrides both zone level and operation level mitigation actions.
+   *
+   * - `none` will skip running schema validation entirely for the request
+   * - `null` indicates that no override is in place
+   */
+  validation_override_mitigation_action?: 'none' | null;
+}
+
+export interface SchemaValidationGetResponse {
+  /**
+   * The default mitigation action used when there is no mitigation action defined on
+   * the operation
+   *
+   * Mitigation actions are as follows:
+   *
+   * - `log` - log request when request does not conform to schema
+   * - `block` - deny access to the site when request does not conform to schema
+   *
+   * A special value of of `none` will skip running schema validation entirely for
+   * the request when there is no mitigation action defined on the operation
+   */
+  validation_default_mitigation_action?: 'none' | 'log' | 'block';
+
+  /**
+   * When set, this overrides both zone level and operation level mitigation actions.
+   *
+   * - `none` will skip running schema validation entirely for the request
+   * - `null` indicates that no override is in place
+   */
+  validation_override_mitigation_action?: 'none' | null;
 }
 
 export interface SchemaValidationUpdateParams {
@@ -122,6 +193,9 @@ export interface SchemaValidationGetParams {
 
 export declare namespace SchemaValidation {
   export {
+    type SchemaValidationUpdateResponse as SchemaValidationUpdateResponse,
+    type SchemaValidationEditResponse as SchemaValidationEditResponse,
+    type SchemaValidationGetResponse as SchemaValidationGetResponse,
     type SchemaValidationUpdateParams as SchemaValidationUpdateParams,
     type SchemaValidationEditParams as SchemaValidationEditParams,
     type SchemaValidationGetParams as SchemaValidationGetParams,
