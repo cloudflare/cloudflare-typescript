@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'delete',
   httpPath: '/accounts/{account_id}/connectivity/directory/services/{service_id}',
-  operationId: 'iris-connectivity-services-delete',
+  operationId: 'connectivity-services-delete',
 };
 
 export const tool: Tool = {

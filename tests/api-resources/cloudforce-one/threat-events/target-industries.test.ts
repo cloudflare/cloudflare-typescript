@@ -27,6 +27,7 @@ describe('resource targetIndustries', () => {
   test.skip('list: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.targetIndustries.list({
       account_id: 'account_id',
+      datasetIds: ['string'],
     });
   });
 });

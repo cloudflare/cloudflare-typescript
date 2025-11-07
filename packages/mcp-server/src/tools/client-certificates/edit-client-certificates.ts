@@ -30,6 +30,9 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier.',
       },
+      reactivate: {
+        type: 'boolean',
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',
