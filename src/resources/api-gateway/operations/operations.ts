@@ -6,11 +6,11 @@ import * as SchemaValidationAPI from './schema-validation';
 import {
   SchemaValidation,
   SchemaValidationEditParams,
+  SchemaValidationEditResponse,
   SchemaValidationGetParams,
   SchemaValidationGetResponse,
   SchemaValidationUpdateParams,
   SchemaValidationUpdateResponse,
-  SettingsMultipleRequest,
 } from './schema-validation';
 import * as UserSchemasAPI from '../user-schemas/user-schemas';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -1490,8 +1490,8 @@ export declare namespace Operations {
 
   export {
     SchemaValidation as SchemaValidation,
-    type SettingsMultipleRequest as SettingsMultipleRequest,
     type SchemaValidationUpdateResponse as SchemaValidationUpdateResponse,
+    type SchemaValidationEditResponse as SchemaValidationEditResponse,
     type SchemaValidationGetResponse as SchemaValidationGetResponse,
     type SchemaValidationUpdateParams as SchemaValidationUpdateParams,
     type SchemaValidationEditParams as SchemaValidationEditParams,
