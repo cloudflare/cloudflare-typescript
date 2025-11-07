@@ -71,6 +71,7 @@ export { R2 } from './r2/r2';
 export { RUM } from './rum/rum';
 export { Radar } from './radar/radar';
 export { RateLimits } from './rate-limits';
+export { RealtimeKit } from './realtime-kit';
 export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
 export { ResourceSharing } from './resource-sharing/resource-sharing';
