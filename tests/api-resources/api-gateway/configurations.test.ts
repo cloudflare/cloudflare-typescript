@@ -28,6 +28,7 @@ describe('resource configurations', () => {
     const response = await client.apiGateway.configurations.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       auth_id_characteristics: [{ name: 'authorization', type: 'header' }],
+      normalize: true,
     });
   });
 
@@ -47,6 +48,7 @@ describe('resource configurations', () => {
   test('get: required and optional params', async () => {
     const response = await client.apiGateway.configurations.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      normalize: true,
     });
   });
 });
