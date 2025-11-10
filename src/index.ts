@@ -20,7 +20,6 @@ import {
 } from './pagination';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
-import { AbuseReports } from './resources/abuse-reports';
 import { AuditLogs } from './resources/audit-logs';
 import { BotManagement } from './resources/bot-management';
 import { ClientCertificates } from './resources/client-certificates';
@@ -40,6 +39,7 @@ import { RateLimits } from './resources/rate-limits';
 import { RealtimeKit } from './resources/realtime-kit';
 import { SecurityTXT } from './resources/security-txt';
 import { URLNormalization } from './resources/url-normalization';
+import { AbuseReports } from './resources/abuse-reports/abuse-reports';
 import { Accounts } from './resources/accounts/accounts';
 import { ACM } from './resources/acm/acm';
 import { Addressing } from './resources/addressing/addressing';
