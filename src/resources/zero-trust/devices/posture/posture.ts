@@ -849,9 +849,8 @@ export interface OSVersionInput {
   os_distro_revision?: string;
 
   /**
-   * Additional operating system version details. For Windows, the UBR (Update Build
-   * Revision). For Mac or iOS, the Product Version Extra. For Linux, the
-   * distribution name and version.
+   * Additional version data. For Mac or iOS, the Product Version Extra. For Linux,
+   * the kernel release version. (Mac, iOS, and Linux only).
    */
   os_version_extra?: string;
 }
@@ -883,9 +882,8 @@ export interface OSVersionInputParam {
   os_distro_revision?: string;
 
   /**
-   * Additional operating system version details. For Windows, the UBR (Update Build
-   * Revision). For Mac or iOS, the Product Version Extra. For Linux, the
-   * distribution name and version.
+   * Additional version data. For Mac or iOS, the Product Version Extra. For Linux,
+   * the kernel release version. (Mac, iOS, and Linux only).
    */
   os_version_extra?: string;
 }

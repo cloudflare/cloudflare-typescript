@@ -253,9 +253,7 @@ export interface Device {
   os_version?: string;
 
   /**
-   * Additional operating system version details. For Windows, the UBR (Update Build
-   * Revision). For Mac or iOS, the Product Version Extra. For Linux, the
-   * distribution name and version.
+   * The operating system version extra parameter.
    */
   os_version_extra?: string;
 

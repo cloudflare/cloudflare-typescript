@@ -27,14 +27,11 @@ describe('resource accessRequests', () => {
     const response = await client.zeroTrust.access.logs.accessRequests.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'desc',
-      email: 'user@example.com',
-      email_exact: true,
       limit: 0,
       page: 0,
       per_page: 0,
       since: '2020-07-01T05:20:00Z',
       until: '2020-10-01T05:20:00Z',
-      user_id: 'f757c5c3-c1b2-50f7-9126-150a099b6f7e',
     });
   });
 });
