@@ -8839,10 +8839,12 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/ai/to-markdown.ts">ToMarkdownSupportedResponse</a></code>
 - <code><a href="./src/resources/ai/to-markdown.ts">ToMarkdownTransformResponse</a></code>
 
 Methods:
 
+- <code title="get /accounts/{account_id}/ai/tomarkdown/supported">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">supported</a>({ ...params }) -> ToMarkdownSupportedResponsesSinglePage</code>
 - <code title="post /accounts/{account_id}/ai/tomarkdown">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">transform</a>(file, { ...params }) -> ToMarkdownTransformResponsesSinglePage</code>
 
 # SecurityCenter
