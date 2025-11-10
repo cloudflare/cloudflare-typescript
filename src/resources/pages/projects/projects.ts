@@ -28,7 +28,7 @@ import {
   DeploymentRollbackParams,
   Deployments,
 } from './deployments/deployments';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Projects extends APIResource {
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
@@ -187,6 +187,8 @@ export class Projects extends APIResource {
 }
 
 export class DeploymentsV4PagePaginationArray extends V4PagePaginationArray<Deployment> {}
+
+export class DeploymentsSinglePage extends SinglePage<Deployment> {}
 
 export interface Deployment {
   /**

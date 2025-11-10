@@ -13,7 +13,10 @@ export class DEXTests extends APIResource {
    * const dexTest =
    *   await client.zeroTrust.devices.dexTests.create({
    *     account_id: '01a7362d577a6c3019a474fd6f485823',
-   *     data: {},
+   *     data: {
+   *       host: 'https://dash.cloudflare.com',
+   *       kind: 'http',
+   *     },
    *     enabled: true,
    *     interval: '30m',
    *     name: 'HTTP dash health check',
@@ -40,7 +43,10 @@ export class DEXTests extends APIResource {
    *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *     {
    *       account_id: '01a7362d577a6c3019a474fd6f485823',
-   *       data: {},
+   *       data: {
+   *         host: 'https://dash.cloudflare.com',
+   *         kind: 'http',
+   *       },
    *       enabled: true,
    *       interval: '30m',
    *       name: 'HTTP dash health check',
@@ -271,24 +277,24 @@ export namespace DEXTestCreateResponse {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
@@ -351,24 +357,24 @@ export namespace DEXTestUpdateResponse {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
@@ -431,24 +437,24 @@ export namespace DEXTestListResponse {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
@@ -516,24 +522,24 @@ export namespace DEXTestDeleteResponse {
       /**
        * The desired endpoint to test.
        */
-      host?: string;
+      host: string;
 
       /**
        * The type of test.
        */
-      kind?: string;
+      kind: 'http' | 'traceroute';
 
       /**
        * The HTTP request method type.
        */
-      method?: string;
+      method?: 'GET';
     }
 
     export interface TargetPolicy {
       /**
-       * The id of the DEX rule
+       * API Resource UUID tag.
        */
-      id?: string;
+      id: string;
 
       /**
        * Whether the DEX rule is the account default
@@ -597,24 +603,24 @@ export namespace DEXTestGetResponse {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
@@ -680,24 +686,24 @@ export namespace DEXTestCreateParams {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
@@ -763,24 +769,24 @@ export namespace DEXTestUpdateParams {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
