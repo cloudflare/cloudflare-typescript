@@ -8,7 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of HTTP authentication requests by bot class.
    *
-   * @deprecated Use [Radar Leaked Credentials Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/leaked_credentials/methods/summary_v2/) instead.
+   * @deprecated
    */
   botClass(
     query?: SummaryBotClassParams,
@@ -34,7 +34,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of HTTP authentication requests by compromised
    * credential status.
    *
-   * @deprecated Use [Radar Leaked Credentials Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/leaked_credentials/methods/summary_v2/) instead.
+   * @deprecated
    */
   compromised(
     query?: SummaryCompromisedParams,

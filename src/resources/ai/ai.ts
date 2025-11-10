@@ -9,9 +9,6 @@ import { TaskListParams, TaskListResponse, TaskListResponsesSinglePage, Tasks } 
 import * as ToMarkdownAPI from './to-markdown';
 import {
   ToMarkdown,
-  ToMarkdownSupportedParams,
-  ToMarkdownSupportedResponse,
-  ToMarkdownSupportedResponsesSinglePage,
   ToMarkdownTransformParams,
   ToMarkdownTransformResponse,
   ToMarkdownTransformResponsesSinglePage,
@@ -1066,7 +1063,6 @@ AI.TaskListResponsesSinglePage = TaskListResponsesSinglePage;
 AI.Models = Models;
 AI.ModelListResponsesV4PagePaginationArray = ModelListResponsesV4PagePaginationArray;
 AI.ToMarkdown = ToMarkdown;
-AI.ToMarkdownSupportedResponsesSinglePage = ToMarkdownSupportedResponsesSinglePage;
 AI.ToMarkdownTransformResponsesSinglePage = ToMarkdownTransformResponsesSinglePage;
 
 export declare namespace AI {
@@ -1103,11 +1099,8 @@ export declare namespace AI {
 
   export {
     ToMarkdown as ToMarkdown,
-    type ToMarkdownSupportedResponse as ToMarkdownSupportedResponse,
     type ToMarkdownTransformResponse as ToMarkdownTransformResponse,
-    ToMarkdownSupportedResponsesSinglePage as ToMarkdownSupportedResponsesSinglePage,
     ToMarkdownTransformResponsesSinglePage as ToMarkdownTransformResponsesSinglePage,
-    type ToMarkdownSupportedParams as ToMarkdownSupportedParams,
     type ToMarkdownTransformParams as ToMarkdownTransformParams,
   };
 }

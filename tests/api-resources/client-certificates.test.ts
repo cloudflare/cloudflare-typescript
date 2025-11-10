@@ -90,7 +90,6 @@ describe('resource clientCertificates', () => {
   test('edit: required and optional params', async () => {
     const response = await client.clientCertificates.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      reactivate: true,
     });
   });
 

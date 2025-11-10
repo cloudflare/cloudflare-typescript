@@ -3,10 +3,9 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as ProjectsAPI from '../projects';
-import { DeploymentsV4PagePaginationArray } from '../projects';
+import { DeploymentsSinglePage } from '../projects';
 import * as HistoryAPI from './history/history';
 import { History } from './history/history';
-import { type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Deployments extends APIResource {
   history: HistoryAPI.History = new HistoryAPI.History(this._client);
@@ -56,11 +55,11 @@ export class Deployments extends APIResource {
     projectName: string,
     params: DeploymentListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DeploymentsV4PagePaginationArray, ProjectsAPI.Deployment> {
+  ): Core.PagePromise<DeploymentsSinglePage, ProjectsAPI.Deployment> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/pages/projects/${projectName}/deployments`,
-      DeploymentsV4PagePaginationArray,
+      DeploymentsSinglePage,
       { query, ...options },
     );
   }
@@ -266,7 +265,7 @@ export interface DeploymentCreateParams {
   wrangler_config_hash?: string;
 }
 
-export interface DeploymentListParams extends V4PagePaginationArrayParams {
+export interface DeploymentListParams {
   /**
    * Path param: Identifier
    */
@@ -332,4 +331,4 @@ export declare namespace Deployments {
   export { History as History };
 }
 
-export { DeploymentsV4PagePaginationArray };
+export { DeploymentsSinglePage };

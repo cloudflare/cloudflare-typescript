@@ -402,11 +402,6 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   alert_id?: string;
 
   /**
-   * Query param:
-   */
-  cursor?: string;
-
-  /**
    * Query param: Determines if the search results will include detections or not.
    */
   detections_only?: boolean;
