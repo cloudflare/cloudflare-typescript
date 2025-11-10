@@ -26,6 +26,10 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier.',
       },
+      normalize: {
+        type: 'boolean',
+        description: 'Ensures that the configuration is written or retrieved in normalized fashion',
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',

@@ -21,9 +21,10 @@ export class Configurations extends APIResource {
    * ```
    */
   update(params: ConfigurationUpdateParams, options?: RequestOptions): APIPromise<Configuration> {
-    const { zone_id, ...body } = params;
+    const { zone_id, normalize, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/api_gateway/configuration`, {
+        query: { normalize },
         body,
         ...options,
       }) as APIPromise<{ result: Configuration }>
@@ -42,11 +43,12 @@ export class Configurations extends APIResource {
    * ```
    */
   get(params: ConfigurationGetParams, options?: RequestOptions): APIPromise<Configuration> {
-    const { zone_id } = params;
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(path`/zones/${zone_id}/api_gateway/configuration`, options) as APIPromise<{
-        result: Configuration;
-      }>
+      this._client.get(path`/zones/${zone_id}/api_gateway/configuration`, {
+        query,
+        ...options,
+      }) as APIPromise<{ result: Configuration }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -108,6 +110,12 @@ export interface ConfigurationUpdateParams {
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristic
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristicJWTClaim
   >;
+
+  /**
+   * Query param: Ensures that the configuration is written or retrieved in
+   * normalized fashion
+   */
+  normalize?: boolean;
 }
 
 export namespace ConfigurationUpdateParams {
@@ -150,9 +158,15 @@ export namespace ConfigurationUpdateParams {
 
 export interface ConfigurationGetParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   zone_id: string;
+
+  /**
+   * Query param: Ensures that the configuration is written or retrieved in
+   * normalized fashion
+   */
+  normalize?: boolean;
 }
 
 export declare namespace Configurations {
