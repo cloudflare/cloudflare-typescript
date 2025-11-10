@@ -5,7 +5,7 @@ export { ACM } from './acm/acm';
 export { AI } from './ai/ai';
 export { AIGateway } from './ai-gateway/ai-gateway';
 export { APIGateway } from './api-gateway/api-gateway';
-export { AbuseReports } from './abuse-reports';
+export { AbuseReports } from './abuse-reports/abuse-reports';
 export { Accounts } from './accounts/accounts';
 export { Addressing } from './addressing/addressing';
 export { Alerting } from './alerting/alerting';
