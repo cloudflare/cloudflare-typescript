@@ -8,6 +8,21 @@ import { path } from '../../internal/utils/path';
 
 export class ToMarkdown extends APIResource {
   /**
+   * Get all converted formats supported
+   */
+  supported(
+    params: ToMarkdownSupportedParams,
+    options?: RequestOptions,
+  ): PagePromise<ToMarkdownSupportedResponsesSinglePage, ToMarkdownSupportedResponse> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/ai/tomarkdown/supported`,
+      SinglePage<ToMarkdownSupportedResponse>,
+      options,
+    );
+  }
+
+  /**
    * Convert Files into Markdown
    */
   transform(
@@ -29,7 +44,15 @@ export class ToMarkdown extends APIResource {
   }
 }
 
+export type ToMarkdownSupportedResponsesSinglePage = SinglePage<ToMarkdownSupportedResponse>;
+
 export type ToMarkdownTransformResponsesSinglePage = SinglePage<ToMarkdownTransformResponse>;
+
+export interface ToMarkdownSupportedResponse {
+  extension: string;
+
+  mimeType: string;
+}
 
 export interface ToMarkdownTransformResponse {
   data: string;
@@ -43,6 +66,10 @@ export interface ToMarkdownTransformResponse {
   tokens: string;
 }
 
+export interface ToMarkdownSupportedParams {
+  account_id: string;
+}
+
 export interface ToMarkdownTransformParams {
   /**
    * Path param:
@@ -52,8 +79,11 @@ export interface ToMarkdownTransformParams {
 
 export declare namespace ToMarkdown {
   export {
+    type ToMarkdownSupportedResponse as ToMarkdownSupportedResponse,
     type ToMarkdownTransformResponse as ToMarkdownTransformResponse,
+    type ToMarkdownSupportedResponsesSinglePage as ToMarkdownSupportedResponsesSinglePage,
     type ToMarkdownTransformResponsesSinglePage as ToMarkdownTransformResponsesSinglePage,
+    type ToMarkdownSupportedParams as ToMarkdownSupportedParams,
     type ToMarkdownTransformParams as ToMarkdownTransformParams,
   };
 }
