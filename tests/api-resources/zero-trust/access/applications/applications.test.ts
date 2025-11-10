@@ -71,7 +71,7 @@ describe('resource applications', () => {
         },
         {
           cidr: 'cidr',
-          hostname: 'hostname',
+          hostname: 'private-sni.example.com',
           l4_protocol: 'tcp',
           port_range: 'port_range',
           type: 'private',
@@ -176,7 +176,7 @@ describe('resource applications', () => {
         },
         {
           cidr: 'cidr',
-          hostname: 'hostname',
+          hostname: 'private-sni.example.com',
           l4_protocol: 'tcp',
           port_range: 'port_range',
           type: 'private',
