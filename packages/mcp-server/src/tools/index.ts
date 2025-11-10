@@ -1845,6 +1845,8 @@ import get_content_scanning_settings from './content-scanning/settings/get-conte
 import create_abuse_reports from './abuse-reports/create-abuse-reports';
 import list_abuse_reports from './abuse-reports/list-abuse-reports';
 import get_abuse_reports from './abuse-reports/get-abuse-reports';
+import list_abuse_reports_mitigations from './abuse-reports/mitigations/list-abuse-reports-mitigations';
+import review_abuse_reports_mitigations from './abuse-reports/mitigations/review-abuse-reports-mitigations';
 import run_ai from './ai/run-ai';
 import create_ai_finetunes from './ai/finetunes/create-ai-finetunes';
 import list_ai_finetunes from './ai/finetunes/list-ai-finetunes';
@@ -3762,6 +3764,8 @@ addEndpoint(get_content_scanning_settings);
 addEndpoint(create_abuse_reports);
 addEndpoint(list_abuse_reports);
 addEndpoint(get_abuse_reports);
+addEndpoint(list_abuse_reports_mitigations);
+addEndpoint(review_abuse_reports_mitigations);
 addEndpoint(run_ai);
 addEndpoint(create_ai_finetunes);
 addEndpoint(list_ai_finetunes);

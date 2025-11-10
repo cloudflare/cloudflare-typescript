@@ -4239,6 +4239,11 @@ The following tools are available in this MCP server.
 - `list_abuse_reports` (`read`): List the abuse reports for a given account
 - `get_abuse_reports` (`read`): Retrieve the details of an abuse report.
 
+### Resource `abuse_reports.mitigations`:
+
+- `list_abuse_reports_mitigations` (`read`): List mitigations done to remediate the abuse report.
+- `review_abuse_reports_mitigations` (`write`): Request a review for mitigations on an account.
+
 ### Resource `ai`:
 
 - `run_ai` (`write`): This endpoint provides users with the capability to run specific AI models on-demand.
