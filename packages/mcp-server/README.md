@@ -4279,6 +4279,7 @@ The following tools are available in this MCP server.
 
 ### Resource `ai.to_markdown`:
 
+- `supported_ai_to_markdown` (`read`): Get all converted formats supported
 - `transform_ai_to_markdown` (`write`): Convert Files into Markdown
 
 ### Resource `security_center.insights`:
