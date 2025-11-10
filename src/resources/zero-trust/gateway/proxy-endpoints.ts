@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as ProxyEndpointsAPI from './proxy-endpoints';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -16,6 +15,7 @@ export class ProxyEndpoints extends APIResource {
    * const proxyEndpoint =
    *   await client.zeroTrust.gateway.proxyEndpoints.create({
    *     account_id: '699d98642c564d2e855e9661899b7252',
+   *     ips: ['192.0.2.1/32'],
    *     name: 'Devops team',
    *   });
    * ```
@@ -35,24 +35,19 @@ export class ProxyEndpoints extends APIResource {
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const proxyEndpoint of client.zeroTrust.gateway.proxyEndpoints.list(
-   *   { account_id: '699d98642c564d2e855e9661899b7252' },
-   * )) {
-   *   // ...
-   * }
+   * const proxyEndpoint =
+   *   await client.zeroTrust.gateway.proxyEndpoints.list({
+   *     account_id: '699d98642c564d2e855e9661899b7252',
+   *   });
    * ```
    */
-  list(
-    params: ProxyEndpointListParams,
-    options?: RequestOptions,
-  ): PagePromise<ProxyEndpointsSinglePage, ProxyEndpoint> {
+  list(params: ProxyEndpointListParams, options?: RequestOptions): APIPromise<ProxyEndpoint> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/gateway/proxy_endpoints`,
-      SinglePage<ProxyEndpoint>,
-      options,
-    );
+    return (
+      this._client.get(path`/accounts/${account_id}/gateway/proxy_endpoints`, options) as APIPromise<{
+        result: ProxyEndpoint;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -112,25 +107,26 @@ export class ProxyEndpoints extends APIResource {
    *
    * @example
    * ```ts
-   * const proxyEndpoint =
-   *   await client.zeroTrust.gateway.proxyEndpoints.get(
-   *     'ed35569b41ce4d1facfe683550f54086',
-   *     { account_id: '699d98642c564d2e855e9661899b7252' },
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const proxyEndpoint of client.zeroTrust.gateway.proxyEndpoints.get(
+   *   'ed35569b41ce4d1facfe683550f54086',
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   get(
     proxyEndpointID: string,
     params: ProxyEndpointGetParams,
     options?: RequestOptions,
-  ): APIPromise<ProxyEndpoint> {
+  ): PagePromise<ProxyEndpointsSinglePage, ProxyEndpoint> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        path`/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointID}`,
-        options,
-      ) as APIPromise<{ result: ProxyEndpoint }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointID}`,
+      SinglePage<ProxyEndpoint>,
+      options,
+    );
   }
 }
 
@@ -148,103 +144,46 @@ export type GatewayIPs = string;
  */
 export type GatewayIPsParam = string;
 
-export type ProxyEndpoint =
-  | ProxyEndpoint.ZeroTrustGatewayProxyEndpointIP
-  | ProxyEndpoint.ZeroTrustGatewayProxyEndpointIdentity;
+export interface ProxyEndpoint {
+  id?: string;
 
-export namespace ProxyEndpoint {
-  export interface ZeroTrustGatewayProxyEndpointIP {
-    /**
-     * Specify the list of CIDRs to restrict ingress connections.
-     */
-    ips: Array<ProxyEndpointsAPI.GatewayIPs>;
+  created_at?: string;
 
-    /**
-     * Specify the name of the proxy endpoint.
-     */
-    name: string;
+  /**
+   * Specify the list of CIDRs to restrict ingress connections.
+   */
+  ips?: Array<GatewayIPs>;
 
-    id?: string;
+  /**
+   * Specify the name of the proxy endpoint.
+   */
+  name?: string;
 
-    created_at?: string;
+  /**
+   * Specify the subdomain to use as the destination in the proxy client.
+   */
+  subdomain?: string;
 
-    /**
-     * The proxy endpoint kind
-     */
-    kind?: 'ip';
-
-    /**
-     * Specify the subdomain to use as the destination in the proxy client.
-     */
-    subdomain?: string;
-
-    updated_at?: string;
-  }
-
-  export interface ZeroTrustGatewayProxyEndpointIdentity {
-    /**
-     * The proxy endpoint kind
-     */
-    kind: 'identity';
-
-    /**
-     * Specify the name of the proxy endpoint.
-     */
-    name: string;
-
-    id?: string;
-
-    created_at?: string;
-
-    /**
-     * Specify the subdomain to use as the destination in the proxy client.
-     */
-    subdomain?: string;
-
-    updated_at?: string;
-  }
+  updated_at?: string;
 }
 
 export type ProxyEndpointDeleteResponse = unknown;
 
-export type ProxyEndpointCreateParams =
-  | ProxyEndpointCreateParams.ZeroTrustGatewayProxyEndpointIPCreate
-  | ProxyEndpointCreateParams.ZeroTrustGatewayProxyEndpointIdentityCreate;
+export interface ProxyEndpointCreateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
 
-export declare namespace ProxyEndpointCreateParams {
-  export interface ZeroTrustGatewayProxyEndpointIPCreate {
-    /**
-     * Path param:
-     */
-    account_id: string;
+  /**
+   * Body param: Specify the list of CIDRs to restrict ingress connections.
+   */
+  ips: Array<GatewayIPsParam>;
 
-    /**
-     * Body param: Specify the name of the proxy endpoint.
-     */
-    name: string;
-
-    /**
-     * Body param: The proxy endpoint kind
-     */
-    kind?: 'ip';
-  }
-
-  export interface ZeroTrustGatewayProxyEndpointIdentityCreate {
-    /**
-     * Path param:
-     */
-    account_id: string;
-
-    /**
-     * Body param: The proxy endpoint kind
-     */
-    kind: 'identity';
-
-    /**
-     * Body param: Specify the name of the proxy endpoint.
-     */
-    name: string;
-  }
+  /**
+   * Body param: Specify the name of the proxy endpoint.
+   */
+  name: string;
 }
 
 export interface ProxyEndpointListParams {

@@ -116,6 +116,8 @@ export const tool: Tool = {
                 {
                   type: 'object',
                   title: 'Private destination',
+                  description:
+                    'Private destinations are an early access feature and gated behind a feature flag.',
                   properties: {
                     cidr: {
                       type: 'string',
@@ -145,22 +147,6 @@ export const tool: Tool = {
                       type: 'string',
                       description:
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
-                    },
-                  },
-                },
-                {
-                  type: 'object',
-                  title: 'Via MCP Server Portal destination',
-                  description:
-                    'A MCP server id configured in ai-controls. Access will secure the MCP server if accessed through a MCP portal.\n',
-                  properties: {
-                    mcp_server_id: {
-                      type: 'string',
-                      description: 'The MCP server id configured in ai-controls.',
-                    },
-                    type: {
-                      type: 'string',
-                      enum: ['via_mcp_server_portal'],
                     },
                   },
                 },
@@ -716,9 +702,6 @@ export const tool: Tool = {
               'dash_sso',
               'infrastructure',
               'rdp',
-              'mcp',
-              'mcp_portal',
-              'proxy_endpoint',
             ],
           },
           account_id: {
@@ -807,6 +790,8 @@ export const tool: Tool = {
                 {
                   type: 'object',
                   title: 'Private destination',
+                  description:
+                    'Private destinations are an early access feature and gated behind a feature flag.',
                   properties: {
                     cidr: {
                       type: 'string',
@@ -836,22 +821,6 @@ export const tool: Tool = {
                       type: 'string',
                       description:
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
-                    },
-                  },
-                },
-                {
-                  type: 'object',
-                  title: 'Via MCP Server Portal destination',
-                  description:
-                    'A MCP server id configured in ai-controls. Access will secure the MCP server if accessed through a MCP portal.\n',
-                  properties: {
-                    mcp_server_id: {
-                      type: 'string',
-                      description: 'The MCP server id configured in ai-controls.',
-                    },
-                    type: {
-                      type: 'string',
-                      enum: ['via_mcp_server_portal'],
                     },
                   },
                 },
@@ -1146,9 +1115,6 @@ export const tool: Tool = {
               'dash_sso',
               'infrastructure',
               'rdp',
-              'mcp',
-              'mcp_portal',
-              'proxy_endpoint',
             ],
           },
           account_id: {
@@ -1237,6 +1203,8 @@ export const tool: Tool = {
                 {
                   type: 'object',
                   title: 'Private destination',
+                  description:
+                    'Private destinations are an early access feature and gated behind a feature flag.',
                   properties: {
                     cidr: {
                       type: 'string',
@@ -1266,22 +1234,6 @@ export const tool: Tool = {
                       type: 'string',
                       description:
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
-                    },
-                  },
-                },
-                {
-                  type: 'object',
-                  title: 'Via MCP Server Portal destination',
-                  description:
-                    'A MCP server id configured in ai-controls. Access will secure the MCP server if accessed through a MCP portal.\n',
-                  properties: {
-                    mcp_server_id: {
-                      type: 'string',
-                      description: 'The MCP server id configured in ai-controls.',
-                    },
-                    type: {
-                      type: 'string',
-                      enum: ['via_mcp_server_portal'],
                     },
                   },
                 },
@@ -1571,9 +1523,6 @@ export const tool: Tool = {
               'dash_sso',
               'infrastructure',
               'rdp',
-              'mcp',
-              'mcp_portal',
-              'proxy_endpoint',
             ],
           },
           account_id: {
@@ -2014,142 +1963,6 @@ export const tool: Tool = {
       {
         type: 'object',
         properties: {
-          type: {
-            $ref: '#/$defs/application_type',
-          },
-          account_id: {
-            type: 'string',
-            description: 'The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.',
-          },
-          zone_id: {
-            type: 'string',
-            description: 'The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.',
-          },
-          allowed_idps: {
-            type: 'array',
-            description:
-              'The identity providers your users can select when connecting to this application. Defaults to all IdPs configured in your account.',
-            items: {
-              $ref: '#/$defs/allowed_idps',
-            },
-          },
-          auto_redirect_to_identity: {
-            type: 'boolean',
-            description:
-              'When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.',
-          },
-          custom_deny_url: {
-            type: 'string',
-            description:
-              'The custom URL a user is redirected to when they are denied access to the application when failing identity-based rules.',
-          },
-          custom_non_identity_deny_url: {
-            type: 'string',
-            description:
-              'The custom URL a user is redirected to when they are denied access to the application when failing non-identity rules.',
-          },
-          custom_pages: {
-            type: 'array',
-            description: 'The custom pages that will be displayed when applicable for this application',
-            items: {
-              type: 'string',
-              description: 'The custom pages selected for application.',
-            },
-          },
-          domain: {
-            type: 'string',
-            description:
-              'The proxy endpoint domain in the format: 10 alphanumeric characters followed by .proxy.cloudflare-gateway.com',
-          },
-          name: {
-            type: 'string',
-            description: 'The name of the application.',
-          },
-          policies: {
-            type: 'array',
-            description:
-              'The policies that Access applies to the application, in ascending order of precedence. Items can reference existing policies or create new policies exclusive to the application.',
-            items: {
-              anyOf: [
-                {
-                  type: 'object',
-                  description: 'A JSON that links a reusable policy to an application.',
-                  properties: {
-                    id: {
-                      type: 'string',
-                      description: 'The UUID of the policy',
-                    },
-                    precedence: {
-                      type: 'integer',
-                      description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
-                    },
-                  },
-                },
-                {
-                  type: 'string',
-                  description: 'The UUID of the policy',
-                },
-                {
-                  type: 'object',
-                  properties: {
-                    id: {
-                      type: 'string',
-                      description: 'The UUID of the policy',
-                    },
-                    approval_groups: {
-                      type: 'array',
-                      description: 'Administrators who can approve a temporary authentication request.',
-                      items: {
-                        $ref: '#/$defs/approval_group',
-                      },
-                    },
-                    approval_required: {
-                      type: 'boolean',
-                      description:
-                        'Requires the user to request access from an administrator at the start of each session.',
-                    },
-                    isolation_required: {
-                      type: 'boolean',
-                      description:
-                        "Require this application to be served in an isolated browser for users matching this policy. 'Client Web Isolation' must be on for the account in order to use this feature.",
-                    },
-                    precedence: {
-                      type: 'integer',
-                      description:
-                        'The order of execution for this policy. Must be unique for each policy within an app.\n',
-                    },
-                    purpose_justification_prompt: {
-                      type: 'string',
-                      description: 'A custom message that will appear on the purpose justification screen.',
-                    },
-                    purpose_justification_required: {
-                      type: 'boolean',
-                      description:
-                        'Require users to enter a justification when they log in to the application.',
-                    },
-                    session_duration: {
-                      type: 'string',
-                      description:
-                        'The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.',
-                    },
-                  },
-                },
-              ],
-              description: 'A JSON that links a reusable policy to an application.',
-            },
-          },
-          session_duration: {
-            type: 'string',
-            description:
-              'The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.',
-          },
-        },
-        required: ['type'],
-      },
-      {
-        type: 'object',
-        properties: {
           account_id: {
             type: 'string',
             description: 'The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.',
@@ -2427,6 +2240,8 @@ export const tool: Tool = {
                 {
                   type: 'object',
                   title: 'Private destination',
+                  description:
+                    'Private destinations are an early access feature and gated behind a feature flag.',
                   properties: {
                     cidr: {
                       type: 'string',
@@ -2456,22 +2271,6 @@ export const tool: Tool = {
                       type: 'string',
                       description:
                         'The VNET ID to match the destination. When omitted, all VNETs will match.',
-                    },
-                  },
-                },
-                {
-                  type: 'object',
-                  title: 'Via MCP Server Portal destination',
-                  description:
-                    'A MCP server id configured in ai-controls. Access will secure the MCP server if accessed through a MCP portal.\n',
-                  properties: {
-                    mcp_server_id: {
-                      type: 'string',
-                      description: 'The MCP server id configured in ai-controls.',
-                    },
-                    type: {
-                      type: 'string',
-                      enum: ['via_mcp_server_portal'],
                     },
                   },
                 },
@@ -2760,9 +2559,6 @@ export const tool: Tool = {
           'dash_sso',
           'infrastructure',
           'rdp',
-          'mcp',
-          'mcp_portal',
-          'proxy_endpoint',
         ],
       },
       allowed_idps: {

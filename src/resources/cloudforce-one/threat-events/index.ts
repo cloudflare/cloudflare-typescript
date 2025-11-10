@@ -36,11 +36,7 @@ export {
   type EventTagCreateParams,
   type EventTagDeleteParams,
 } from './event-tags';
-export {
-  IndicatorTypes,
-  type IndicatorTypeListResponse,
-  type IndicatorTypeListParams,
-} from './indicator-types';
+export { IndicatorTypes } from './indicator-types';
 export { Insights } from './insights';
 export { Raw, type RawEditResponse, type RawGetResponse, type RawEditParams, type RawGetParams } from './raw';
 export { Relate, type RelateDeleteResponse, type RelateDeleteParams } from './relate';

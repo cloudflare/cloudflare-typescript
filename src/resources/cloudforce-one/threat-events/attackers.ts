@@ -7,7 +7,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Attackers extends APIResource {
   /**
-   * Lists attackers across multiple datasets
+   * Lists attackers
    *
    * @example
    * ```ts
@@ -18,11 +18,8 @@ export class Attackers extends APIResource {
    * ```
    */
   list(params: AttackerListParams, options?: RequestOptions): APIPromise<AttackerListResponse> {
-    const { account_id, ...query } = params;
-    return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/attackers`, {
-      query,
-      ...options,
-    });
+    const { account_id } = params;
+    return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/attackers`, options);
   }
 }
 
@@ -40,15 +37,9 @@ export namespace AttackerListResponse {
 
 export interface AttackerListParams {
   /**
-   * Path param: Account ID.
+   * Account ID.
    */
   account_id: string;
-
-  /**
-   * Query param: Array of dataset IDs to query attackers from. If not provided,
-   * returns all attackers from Event DO tables.
-   */
-  datasetIds?: Array<string>;
 }
 
 export declare namespace Attackers {

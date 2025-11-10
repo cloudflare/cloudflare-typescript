@@ -207,7 +207,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.logpush.validate.destination()`
 - `client.logpush.validate.destinationExists()`
 - `client.logpush.validate.origin()`
-- `client.logs.RayID.get()`
 - `client.originTLSClientAuth.delete()`
 - `client.originTLSClientAuth.get()`
 - `client.originTLSClientAuth.hostnames.get()`
@@ -293,12 +292,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.kv.namespaces.update()`
 - `client.kv.namespaces.delete()`
 - `client.kv.namespaces.bulkDelete()`
-- `client.kv.namespaces.bulkGet()`
 - `client.kv.namespaces.bulkUpdate()`
 - `client.kv.namespaces.get()`
 - `client.kv.namespaces.keys.list()`
 - `client.kv.namespaces.keys.bulkDelete()`
-- `client.kv.namespaces.keys.bulkGet()`
 - `client.kv.namespaces.keys.bulkUpdate()`
 - `client.kv.namespaces.metadata.get()`
 - `client.kv.namespaces.values.update()`
@@ -310,19 +307,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.edit()`
 - `client.queues.get()`
 - `client.queues.messages.ack()`
-- `client.queues.messages.bulkPush()`
 - `client.queues.messages.pull()`
-- `client.queues.messages.push()`
 - `client.queues.purge.start()`
 - `client.queues.purge.status()`
 - `client.queues.consumers.create()`
 - `client.queues.consumers.update()`
 - `client.queues.consumers.list()`
 - `client.queues.consumers.delete()`
-- `client.queues.consumers.get()`
-- `client.queues.subscriptions.update()`
-- `client.queues.subscriptions.delete()`
-- `client.queues.subscriptions.get()`
 - `client.apiGateway.discovery.operations.edit()`
 - `client.apiGateway.operations.delete()`
 - `client.apiGateway.operations.get()`
@@ -649,13 +640,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.organizations.update()`
 - `client.zeroTrust.organizations.list()`
 - `client.zeroTrust.organizations.revokeUsers()`
-- `client.zeroTrust.access.aiControls.mcp.portals.update()`
-- `client.zeroTrust.access.aiControls.mcp.portals.delete()`
-- `client.zeroTrust.access.aiControls.mcp.portals.read()`
-- `client.zeroTrust.access.aiControls.mcp.servers.update()`
-- `client.zeroTrust.access.aiControls.mcp.servers.delete()`
-- `client.zeroTrust.access.aiControls.mcp.servers.read()`
-- `client.zeroTrust.access.aiControls.mcp.servers.sync()`
 - `client.zeroTrust.access.gatewayCA.delete()`
 - `client.zeroTrust.access.infrastructure.targets.update()`
 - `client.zeroTrust.access.infrastructure.targets.delete()`
@@ -931,17 +915,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.botnetFeed.asn.dayReport()`
 - `client.botnetFeed.asn.fullReport()`
 - `client.botnetFeed.configs.asn.delete()`
-- `client.workflows.update()`
-- `client.workflows.delete()`
-- `client.workflows.get()`
-- `client.workflows.instances.create()`
-- `client.workflows.instances.list()`
-- `client.workflows.instances.bulk()`
-- `client.workflows.instances.get()`
-- `client.workflows.instances.status.edit()`
-- `client.workflows.instances.events.create()`
-- `client.workflows.versions.list()`
-- `client.workflows.versions.get()`
 - `client.resourceSharing.update()`
 - `client.resourceSharing.delete()`
 - `client.resourceSharing.get()`
@@ -954,13 +927,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.resourceSharing.resources.list()`
 - `client.resourceSharing.resources.delete()`
 - `client.resourceSharing.resources.get()`
-- `client.leakedCredentialChecks.detections.update()`
-- `client.leakedCredentialChecks.detections.delete()`
 - `client.contentScanning.payloads.delete()`
-- `client.abuseReports.create()`
-- `client.abuseReports.get()`
-- `client.abuseReports.mitigations.list()`
-- `client.abuseReports.mitigations.review()`
 - `client.ai.run()`
 - `client.ai.finetunes.assets.create()`
 - `client.securityCenter.insights.list()`
@@ -988,13 +955,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.schemaValidation.settings.operations.update()`
 - `client.schemaValidation.settings.operations.delete()`
 - `client.schemaValidation.settings.operations.get()`
-- `client.tokenValidation.configuration.delete()`
-- `client.tokenValidation.configuration.edit()`
-- `client.tokenValidation.configuration.get()`
-- `client.tokenValidation.configuration.credentials.update()`
-- `client.tokenValidation.rules.delete()`
-- `client.tokenValidation.rules.edit()`
-- `client.tokenValidation.rules.get()`
 
 </details>
 
@@ -1102,15 +1062,11 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.iam.userGroups.members.create()`
 - `client.iam.userGroups.members.update()`
 - `client.cloudConnector.rules.update()`
-- `client.workflows.instances.bulk()`
-- `client.workflows.instances.events.create()`
 - `client.contentScanning.payloads.create()`
 - `client.ai.toMarkdown.transform()`
 - `client.secretsStore.stores.create()`
 - `client.secretsStore.stores.secrets.create()`
 - `client.schemaValidation.settings.operations.bulkEdit()`
-- `client.tokenValidation.rules.bulkCreate()`
-- `client.tokenValidation.rules.bulkEdit()`
 
 </details>
 
