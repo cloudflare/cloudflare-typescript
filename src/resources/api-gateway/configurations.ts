@@ -1,13 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as UserSchemasAPI from './user-schemas/user-schemas';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Configurations extends APIResource {
   /**
-   * Update configuration properties
+   * Set configuration properties
    *
    * @example
    * ```ts
@@ -20,15 +21,12 @@ export class Configurations extends APIResource {
    *   });
    * ```
    */
-  update(params: ConfigurationUpdateParams, options?: RequestOptions): APIPromise<Configuration> {
-    const { zone_id, normalize, ...body } = params;
-    return (
-      this._client.put(path`/zones/${zone_id}/api_gateway/configuration`, {
-        query: { normalize },
-        body,
-        ...options,
-      }) as APIPromise<{ result: Configuration }>
-    )._thenUnwrap((obj) => obj.result);
+  update(
+    params: ConfigurationUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<ConfigurationUpdateResponse> {
+    const { zone_id, ...body } = params;
+    return this._client.put(path`/zones/${zone_id}/api_gateway/configuration`, { body, ...options });
   }
 
   /**
@@ -97,6 +95,17 @@ export namespace Configuration {
   }
 }
 
+export interface ConfigurationUpdateResponse {
+  errors: UserSchemasAPI.Message;
+
+  messages: UserSchemasAPI.Message;
+
+  /**
+   * Whether the API call was successful.
+   */
+  success: true;
+}
+
 export interface ConfigurationUpdateParams {
   /**
    * Path param: Identifier.
@@ -110,12 +119,6 @@ export interface ConfigurationUpdateParams {
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristic
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristicJWTClaim
   >;
-
-  /**
-   * Query param: Ensures that the configuration is written or retrieved in
-   * normalized fashion
-   */
-  normalize?: boolean;
 }
 
 export namespace ConfigurationUpdateParams {
@@ -163,15 +166,15 @@ export interface ConfigurationGetParams {
   zone_id: string;
 
   /**
-   * Query param: Ensures that the configuration is written or retrieved in
-   * normalized fashion
+   * Query param: Requests information about certain properties.
    */
-  normalize?: boolean;
+  properties?: Array<'auth_id_characteristics'>;
 }
 
 export declare namespace Configurations {
   export {
     type Configuration as Configuration,
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
     type ConfigurationUpdateParams as ConfigurationUpdateParams,
     type ConfigurationGetParams as ConfigurationGetParams,
   };

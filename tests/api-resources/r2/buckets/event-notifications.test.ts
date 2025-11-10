@@ -14,7 +14,6 @@ describe('resource eventNotifications', () => {
     const responsePromise = client.r2.buckets.eventNotifications.update('queue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
-      rules: [{ actions: ['PutObject', 'CopyObject'] }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
