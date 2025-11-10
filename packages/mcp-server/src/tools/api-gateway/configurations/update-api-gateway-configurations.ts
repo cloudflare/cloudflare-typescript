@@ -67,6 +67,10 @@ export const tool: Tool = {
           description: 'Auth ID Characteristic',
         },
       },
+      normalize: {
+        type: 'boolean',
+        description: 'Ensures that the configuration is written or retrieved in normalized fashion',
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',
