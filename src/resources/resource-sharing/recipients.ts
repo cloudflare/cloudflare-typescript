@@ -148,11 +148,6 @@ export interface RecipientCreateResponse {
    */
   modified: string;
 
-  /**
-   * Share Recipient status message.
-   */
-  status_message: string;
-
   resources?: Array<RecipientCreateResponse.Resource>;
 }
 
@@ -172,6 +167,11 @@ export namespace RecipientCreateResponse {
      * Resource Version.
      */
     resource_version: number;
+
+    /**
+     * Whether the error is terminal or will be continually retried.
+     */
+    terminal: boolean;
   }
 }
 
@@ -201,11 +201,6 @@ export interface RecipientListResponse {
    */
   modified: string;
 
-  /**
-   * Share Recipient status message.
-   */
-  status_message: string;
-
   resources?: Array<RecipientListResponse.Resource>;
 }
 
@@ -225,6 +220,11 @@ export namespace RecipientListResponse {
      * Resource Version.
      */
     resource_version: number;
+
+    /**
+     * Whether the error is terminal or will be continually retried.
+     */
+    terminal: boolean;
   }
 }
 
@@ -254,11 +254,6 @@ export interface RecipientDeleteResponse {
    */
   modified: string;
 
-  /**
-   * Share Recipient status message.
-   */
-  status_message: string;
-
   resources?: Array<RecipientDeleteResponse.Resource>;
 }
 
@@ -278,6 +273,11 @@ export namespace RecipientDeleteResponse {
      * Resource Version.
      */
     resource_version: number;
+
+    /**
+     * Whether the error is terminal or will be continually retried.
+     */
+    terminal: boolean;
   }
 }
 
@@ -307,11 +307,6 @@ export interface RecipientGetResponse {
    */
   modified: string;
 
-  /**
-   * Share Recipient status message.
-   */
-  status_message: string;
-
   resources?: Array<RecipientGetResponse.Resource>;
 }
 
@@ -331,6 +326,11 @@ export namespace RecipientGetResponse {
      * Resource Version.
      */
     resource_version: number;
+
+    /**
+     * Whether the error is terminal or will be continually retried.
+     */
+    terminal: boolean;
   }
 }
 
