@@ -8,16 +8,33 @@ export {
   type ConsumerUpdateParams,
   type ConsumerListParams,
   type ConsumerDeleteParams,
+  type ConsumerGetParams,
   type ConsumersSinglePage,
 } from './consumers';
 export {
   Messages,
   type MessageAckResponse,
+  type MessageBulkPushResponse,
   type MessagePullResponse,
+  type MessagePushResponse,
   type MessageAckParams,
+  type MessageBulkPushParams,
   type MessagePullParams,
-  type MessagePullResponsesSinglePage,
+  type MessagePushParams,
 } from './messages';
 export { Purge, type PurgeStatusResponse, type PurgeStartParams, type PurgeStatusParams } from './purge';
 export { Queues } from './queues';
-export { Subscriptions } from './subscriptions';
+export {
+  Subscriptions,
+  type SubscriptionCreateResponse,
+  type SubscriptionUpdateResponse,
+  type SubscriptionListResponse,
+  type SubscriptionDeleteResponse,
+  type SubscriptionGetResponse,
+  type SubscriptionCreateParams,
+  type SubscriptionUpdateParams,
+  type SubscriptionListParams,
+  type SubscriptionDeleteParams,
+  type SubscriptionGetParams,
+  type SubscriptionListResponsesV4PagePaginationArray,
+} from './subscriptions';
