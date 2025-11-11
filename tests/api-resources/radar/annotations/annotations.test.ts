@@ -38,7 +38,7 @@ describe('resource annotations', () => {
           dateRange: '7d',
           dateStart: '2023-09-01T11:41:33.782Z',
           format: 'JSON',
-          limit: 5,
+          limit: 1,
           location: 'US',
           offset: 0,
         },

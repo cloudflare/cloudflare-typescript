@@ -13,8 +13,11 @@ describe('resource services', () => {
   test('create: only required params', async () => {
     const responsePromise = client.connectivity.directory.services.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      host: {},
-      name: 'name',
+      host: {
+        hostname: 'api.example.com',
+        resolver_network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' },
+      },
+      name: 'web-server',
       type: 'http',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,18 +32,26 @@ describe('resource services', () => {
   test('create: required and optional params', async () => {
     const response = await client.connectivity.directory.services.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      host: { hostname: 'hostname', ipv4: 'ipv4', ipv6: 'ipv6', network: {}, resolver_network: {} },
-      name: 'name',
+      host: {
+        hostname: 'api.example.com',
+        resolver_network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da', resolver_ips: ['string'] },
+      },
+      name: 'web-server',
       type: 'http',
-      http_port: 1,
-      https_port: 1,
+      http_port: 8080,
+      https_port: 8443,
     });
   });
 
   test('update: only required params', async () => {
     const responsePromise = client.connectivity.directory.services.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id', host: {}, name: 'name', type: 'http' },
+      {
+        account_id: 'account_id',
+        host: { ipv4: '10.0.0.1', network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' } },
+        name: 'web-app',
+        type: 'http',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -56,11 +67,11 @@ describe('resource services', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 'account_id',
-        host: { hostname: 'hostname', ipv4: 'ipv4', ipv6: 'ipv6', network: {}, resolver_network: {} },
-        name: 'name',
+        host: { ipv4: '10.0.0.1', network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' } },
+        name: 'web-app',
         type: 'http',
-        http_port: 1,
-        https_port: 1,
+        http_port: 8080,
+        https_port: 8443,
       },
     );
   });

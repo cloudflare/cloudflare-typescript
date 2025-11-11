@@ -7,6 +7,8 @@ import {
   Key,
   KeyBulkDeleteParams,
   KeyBulkDeleteResponse,
+  KeyBulkGetParams,
+  KeyBulkGetResponse,
   KeyBulkUpdateParams,
   KeyBulkUpdateResponse,
   KeyListParams,
@@ -22,7 +24,7 @@ import {
   ValueGetParams,
   ValueUpdateParams,
   ValueUpdateResponse,
-  Values,
+  Values as ValuesAPIValues,
 } from './values';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -72,13 +74,13 @@ export class Namespaces extends APIResource {
     namespaceId: string,
     params: NamespaceUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceUpdateResponse | null> {
+  ): Core.APIPromise<Namespace> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NamespaceUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: Namespace }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -162,6 +164,36 @@ export class Namespaces extends APIResource {
   }
 
   /**
+   * Retrieve up to 100 KV pairs from the namespace. Keys must contain text-based
+   * values. JSON values can optionally be parsed instead of being returned as a
+   * string value. Metadata can be included if `withMetadata` is true.
+   *
+   * @example
+   * ```ts
+   * const response = await client.kv.namespaces.bulkGet(
+   *   '0f2ac74b498b48028cb68387c421e279',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     keys: ['My-Key'],
+   *   },
+   * );
+   * ```
+   */
+  bulkGet(
+    namespaceId: string,
+    params: NamespaceBulkGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NamespaceBulkGetResponse | null> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk/get`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: NamespaceBulkGetResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Write multiple keys and values at once. Body should be an array of up to 10,000
    * key-value pairs to be stored, along with optional expiration information.
    * Existing values and expirations will be overwritten. If neither `expiration` nor
@@ -175,7 +207,7 @@ export class Namespaces extends APIResource {
    *   '0f2ac74b498b48028cb68387c421e279',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{}],
+   *     body: [{ key: 'My-Key', value: 'Some string' }],
    *   },
    * );
    * ```
@@ -240,13 +272,11 @@ export interface Namespace {
   supports_url_encoding?: boolean;
 }
 
-export interface NamespaceUpdateResponse {}
-
 export interface NamespaceDeleteResponse {}
 
 export interface NamespaceBulkDeleteResponse {
   /**
-   * Number of keys successfully updated
+   * Number of keys successfully updated.
    */
   successful_key_count?: number;
 
@@ -256,9 +286,49 @@ export interface NamespaceBulkDeleteResponse {
   unsuccessful_keys?: Array<string>;
 }
 
+export type NamespaceBulkGetResponse =
+  | NamespaceBulkGetResponse.WorkersKVBulkGetResult
+  | NamespaceBulkGetResponse.WorkersKVBulkGetResultWithMetadata;
+
+export namespace NamespaceBulkGetResponse {
+  export interface WorkersKVBulkGetResult {
+    /**
+     * Requested keys are paired with their values in an object.
+     */
+    values?: { [key: string]: string | number | boolean | { [key: string]: unknown } };
+  }
+
+  export interface WorkersKVBulkGetResultWithMetadata {
+    /**
+     * Requested keys are paired with their values and metadata in an object.
+     */
+    values?: { [key: string]: WorkersKVBulkGetResultWithMetadata.Values | null };
+  }
+
+  export namespace WorkersKVBulkGetResultWithMetadata {
+    export interface Values {
+      /**
+       * The metadata associated with the key.
+       */
+      metadata: unknown;
+
+      /**
+       * The value associated with the key.
+       */
+      value: unknown;
+
+      /**
+       * Expires the key at a certain time, measured in number of seconds since the UNIX
+       * epoch.
+       */
+      expiration?: number;
+    }
+  }
+}
+
 export interface NamespaceBulkUpdateResponse {
   /**
-   * Number of keys successfully updated
+   * Number of keys successfully updated.
    */
   successful_key_count?: number;
 
@@ -270,7 +340,7 @@ export interface NamespaceBulkUpdateResponse {
 
 export interface NamespaceCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -282,7 +352,7 @@ export interface NamespaceCreateParams {
 
 export interface NamespaceUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -294,7 +364,7 @@ export interface NamespaceUpdateParams {
 
 export interface NamespaceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -311,14 +381,14 @@ export interface NamespaceListParams extends V4PagePaginationArrayParams {
 
 export interface NamespaceDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface NamespaceBulkDeleteParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -328,9 +398,31 @@ export interface NamespaceBulkDeleteParams {
   body: Array<string>;
 }
 
+export interface NamespaceBulkGetParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Array of keys to retrieve (maximum of 100).
+   */
+  keys: Array<string>;
+
+  /**
+   * Body param: Whether to parse JSON values in the response.
+   */
+  type?: 'text' | 'json';
+
+  /**
+   * Body param: Whether to include metadata in the response.
+   */
+  withMetadata?: boolean;
+}
+
 export interface NamespaceBulkUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -343,45 +435,44 @@ export interface NamespaceBulkUpdateParams {
 export namespace NamespaceBulkUpdateParams {
   export interface Body {
     /**
-     * Whether or not the server should base64 decode the value before storing it.
-     * Useful for writing values that wouldn't otherwise be valid JSON strings, such as
-     * images.
-     */
-    base64?: boolean;
-
-    /**
-     * The time, measured in number of seconds since the UNIX epoch, at which the key
-     * should expire.
-     */
-    expiration?: number;
-
-    /**
-     * The number of seconds for which the key should be visible before it expires. At
-     * least 60.
-     */
-    expiration_ttl?: number;
-
-    /**
      * A key's name. The name may be at most 512 bytes. All printable, non-whitespace
      * characters are valid.
      */
-    key?: string;
-
-    /**
-     * Arbitrary JSON that is associated with a key.
-     */
-    metadata?: { [key: string]: unknown };
+    key: string;
 
     /**
      * A UTF-8 encoded string to be stored, up to 25 MiB in length.
      */
-    value?: string;
+    value: string;
+
+    /**
+     * Indicates whether or not the server should base64 decode the value before
+     * storing it. Useful for writing values that wouldn't otherwise be valid JSON
+     * strings, such as images.
+     */
+    base64?: boolean;
+
+    /**
+     * Expires the key at a certain time, measured in number of seconds since the UNIX
+     * epoch.
+     */
+    expiration?: number;
+
+    /**
+     * Expires the key after a number of seconds. Must be at least 60.
+     */
+    expiration_ttl?: number;
+
+    /**
+     * Arbitrary JSON that is associated with a key.
+     */
+    metadata?: unknown;
   }
 }
 
 export interface NamespaceGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
@@ -390,14 +481,14 @@ Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;
 Namespaces.Keys = Keys;
 Namespaces.KeysCursorPaginationAfter = KeysCursorPaginationAfter;
 Namespaces.Metadata = Metadata;
-Namespaces.Values = Values;
+Namespaces.Values = ValuesAPIValues;
 
 export declare namespace Namespaces {
   export {
     type Namespace as Namespace,
-    type NamespaceUpdateResponse as NamespaceUpdateResponse,
     type NamespaceDeleteResponse as NamespaceDeleteResponse,
     type NamespaceBulkDeleteResponse as NamespaceBulkDeleteResponse,
+    type NamespaceBulkGetResponse as NamespaceBulkGetResponse,
     type NamespaceBulkUpdateResponse as NamespaceBulkUpdateResponse,
     NamespacesV4PagePaginationArray as NamespacesV4PagePaginationArray,
     type NamespaceCreateParams as NamespaceCreateParams,
@@ -405,6 +496,7 @@ export declare namespace Namespaces {
     type NamespaceListParams as NamespaceListParams,
     type NamespaceDeleteParams as NamespaceDeleteParams,
     type NamespaceBulkDeleteParams as NamespaceBulkDeleteParams,
+    type NamespaceBulkGetParams as NamespaceBulkGetParams,
     type NamespaceBulkUpdateParams as NamespaceBulkUpdateParams,
     type NamespaceGetParams as NamespaceGetParams,
   };
@@ -413,10 +505,12 @@ export declare namespace Namespaces {
     Keys as Keys,
     type Key as Key,
     type KeyBulkDeleteResponse as KeyBulkDeleteResponse,
+    type KeyBulkGetResponse as KeyBulkGetResponse,
     type KeyBulkUpdateResponse as KeyBulkUpdateResponse,
     KeysCursorPaginationAfter as KeysCursorPaginationAfter,
     type KeyListParams as KeyListParams,
     type KeyBulkDeleteParams as KeyBulkDeleteParams,
+    type KeyBulkGetParams as KeyBulkGetParams,
     type KeyBulkUpdateParams as KeyBulkUpdateParams,
   };
 
@@ -427,7 +521,7 @@ export declare namespace Namespaces {
   };
 
   export {
-    Values as Values,
+    ValuesAPIValues as Values,
     type ValueUpdateResponse as ValueUpdateResponse,
     type ValueDeleteResponse as ValueDeleteResponse,
     type ValueUpdateParams as ValueUpdateParams,
