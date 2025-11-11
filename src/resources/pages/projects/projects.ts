@@ -30,7 +30,6 @@ import {
 import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
-  SinglePage,
   V4PagePaginationArray,
   type V4PagePaginationArrayParams,
 } from '../../../core/pagination';
@@ -186,8 +185,6 @@ export class Projects extends APIResource {
 }
 
 export type DeploymentsV4PagePaginationArray = V4PagePaginationArray<Deployment>;
-
-export type DeploymentsSinglePage = SinglePage<Deployment>;
 
 export interface Deployment {
   /**

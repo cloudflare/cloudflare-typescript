@@ -30,6 +30,12 @@ export const tool: Tool = {
         type: 'string',
         description: 'D1 database name.',
       },
+      jurisdiction: {
+        type: 'string',
+        description:
+          'Specify the location to restrict the D1 database to run and store data. If this option is present, the location hint is ignored.',
+        enum: ['eu', 'fedramp'],
+      },
       primary_location_hint: {
         type: 'string',
         description:

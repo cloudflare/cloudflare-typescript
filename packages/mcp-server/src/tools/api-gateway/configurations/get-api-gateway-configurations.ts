@@ -26,13 +26,9 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier.',
       },
-      properties: {
-        type: 'array',
-        description: 'Requests information about certain properties.',
-        items: {
-          type: 'string',
-          enum: ['auth_id_characteristics'],
-        },
+      normalize: {
+        type: 'boolean',
+        description: 'Ensures that the configuration is written or retrieved in normalized fashion',
       },
       jq_filter: {
         type: 'string',

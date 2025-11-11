@@ -37,7 +37,6 @@ export const tool: Tool = {
       },
       prefix: {
         type: 'string',
-        description: 'Network prefix, IPv4 or IPv6.',
       },
       jq_filter: {
         type: 'string',

@@ -482,9 +482,6 @@ export interface RouteMoasParams {
    */
   origin?: number;
 
-  /**
-   * Network prefix, IPv4 or IPv6.
-   */
   prefix?: string;
 }
 
@@ -505,9 +502,6 @@ export interface RoutePfx2asParams {
    */
   origin?: number;
 
-  /**
-   * Network prefix, IPv4 or IPv6.
-   */
   prefix?: string;
 
   /**
@@ -522,9 +516,6 @@ export interface RouteRealtimeParams {
    */
   format?: 'JSON' | 'CSV';
 
-  /**
-   * Network prefix, IPv4 or IPv6.
-   */
   prefix?: string;
 }
 
