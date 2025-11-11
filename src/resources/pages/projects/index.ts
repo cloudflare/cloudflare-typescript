@@ -11,7 +11,6 @@ export {
   type DeploymentRollbackParams,
 } from './deployments/index';
 export {
-  DeploymentsSinglePage,
   DeploymentsV4PagePaginationArray,
   Projects,
   type Deployment,

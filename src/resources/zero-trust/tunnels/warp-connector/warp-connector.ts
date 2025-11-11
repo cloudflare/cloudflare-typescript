@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as Shared from '../../../shared';
 import * as TokenAPI from './token';
 import { Token, TokenGetParams, TokenGetResponse } from './token';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
@@ -139,622 +138,577 @@ export class WARPConnector extends APIResource {
 export class WARPConnectorListResponsesV4PagePaginationArray extends V4PagePaginationArray<WARPConnectorListResponse> {}
 
 /**
- * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
+ * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorCreateResponse =
-  | Shared.CloudflareTunnel
-  | WARPConnectorCreateResponse.TunnelWARPConnectorTunnel;
+export interface WARPConnectorCreateResponse {
+  /**
+   * UUID of the tunnel.
+   */
+  id?: string;
+
+  /**
+   * Cloudflare account ID
+   */
+  account_tag?: string;
+
+  /**
+   * @deprecated This field will start returning an empty array. To fetch the
+   * connections of a given tunnel, please use the dedicated endpoint
+   * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
+   */
+  connections?: Array<WARPConnectorCreateResponse.Connection>;
+
+  /**
+   * Timestamp of when the tunnel established at least one connection to Cloudflare's
+   * edge. If `null`, the tunnel is inactive.
+   */
+  conns_active_at?: string;
+
+  /**
+   * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
+   * edge). If `null`, the tunnel is active.
+   */
+  conns_inactive_at?: string;
+
+  /**
+   * Timestamp of when the resource was created.
+   */
+  created_at?: string;
+
+  /**
+   * Timestamp of when the resource was deleted. If `null`, the resource has not been
+   * deleted.
+   */
+  deleted_at?: string;
+
+  /**
+   * Metadata associated with the tunnel.
+   */
+  metadata?: unknown;
+
+  /**
+   * A user-friendly name for a tunnel.
+   */
+  name?: string;
+
+  /**
+   * The status of the tunnel. Valid values are `inactive` (tunnel has never been
+   * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
+   * state), `healthy` (tunnel is active and able to serve traffic), or `down`
+   * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
+   */
+  status?: 'inactive' | 'degraded' | 'healthy' | 'down';
+
+  /**
+   * The type of tunnel.
+   */
+  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
+}
 
 export namespace WARPConnectorCreateResponse {
-  /**
-   * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
-   */
-  export interface TunnelWARPConnectorTunnel {
+  export interface Connection {
     /**
-     * UUID of the tunnel.
+     * UUID of the Cloudflare Tunnel connection.
      */
     id?: string;
 
     /**
-     * Cloudflare account ID
+     * UUID of the Cloudflare Tunnel connector.
      */
-    account_tag?: string;
+    client_id?: string;
 
     /**
-     * @deprecated This field will start returning an empty array. To fetch the
-     * connections of a given tunnel, please use the dedicated endpoint
-     * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
+     * The cloudflared version used to establish this connection.
      */
-    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
+    client_version?: string;
 
     /**
-     * Timestamp of when the tunnel established at least one connection to Cloudflare's
-     * edge. If `null`, the tunnel is inactive.
+     * The Cloudflare data center used for this connection.
      */
-    conns_active_at?: string;
+    colo_name?: string;
 
     /**
-     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
-     * edge). If `null`, the tunnel is active.
+     * Cloudflare continues to track connections for several minutes after they
+     * disconnect. This is an optimization to improve latency and reliability of
+     * reconnecting. If `true`, the connection has disconnected but is still being
+     * tracked. If `false`, the connection is actively serving traffic.
      */
-    conns_inactive_at?: string;
+    is_pending_reconnect?: boolean;
 
     /**
-     * Timestamp of when the resource was created.
+     * Timestamp of when the connection was established.
      */
-    created_at?: string;
+    opened_at?: string;
 
     /**
-     * Timestamp of when the resource was deleted. If `null`, the resource has not been
-     * deleted.
+     * The public IP address of the host running cloudflared.
      */
-    deleted_at?: string;
+    origin_ip?: string;
 
     /**
-     * Metadata associated with the tunnel.
+     * UUID of the Cloudflare Tunnel connection.
      */
-    metadata?: unknown;
-
-    /**
-     * A user-friendly name for a tunnel.
-     */
-    name?: string;
-
-    /**
-     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
-     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
-     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
-     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
-     */
-    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
-
-    /**
-     * The type of tunnel.
-     */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
-  }
-
-  export namespace TunnelWARPConnectorTunnel {
-    export interface Connection {
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      id?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connector.
-       */
-      client_id?: string;
-
-      /**
-       * The cloudflared version used to establish this connection.
-       */
-      client_version?: string;
-
-      /**
-       * The Cloudflare data center used for this connection.
-       */
-      colo_name?: string;
-
-      /**
-       * Cloudflare continues to track connections for several minutes after they
-       * disconnect. This is an optimization to improve latency and reliability of
-       * reconnecting. If `true`, the connection has disconnected but is still being
-       * tracked. If `false`, the connection is actively serving traffic.
-       */
-      is_pending_reconnect?: boolean;
-
-      /**
-       * Timestamp of when the connection was established.
-       */
-      opened_at?: string;
-
-      /**
-       * The public IP address of the host running cloudflared.
-       */
-      origin_ip?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      uuid?: string;
-    }
+    uuid?: string;
   }
 }
 
 /**
- * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
+ * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorListResponse =
-  | Shared.CloudflareTunnel
-  | WARPConnectorListResponse.TunnelWARPConnectorTunnel;
+export interface WARPConnectorListResponse {
+  /**
+   * UUID of the tunnel.
+   */
+  id?: string;
+
+  /**
+   * Cloudflare account ID
+   */
+  account_tag?: string;
+
+  /**
+   * @deprecated This field will start returning an empty array. To fetch the
+   * connections of a given tunnel, please use the dedicated endpoint
+   * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
+   */
+  connections?: Array<WARPConnectorListResponse.Connection>;
+
+  /**
+   * Timestamp of when the tunnel established at least one connection to Cloudflare's
+   * edge. If `null`, the tunnel is inactive.
+   */
+  conns_active_at?: string;
+
+  /**
+   * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
+   * edge). If `null`, the tunnel is active.
+   */
+  conns_inactive_at?: string;
+
+  /**
+   * Timestamp of when the resource was created.
+   */
+  created_at?: string;
+
+  /**
+   * Timestamp of when the resource was deleted. If `null`, the resource has not been
+   * deleted.
+   */
+  deleted_at?: string;
+
+  /**
+   * Metadata associated with the tunnel.
+   */
+  metadata?: unknown;
+
+  /**
+   * A user-friendly name for a tunnel.
+   */
+  name?: string;
+
+  /**
+   * The status of the tunnel. Valid values are `inactive` (tunnel has never been
+   * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
+   * state), `healthy` (tunnel is active and able to serve traffic), or `down`
+   * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
+   */
+  status?: 'inactive' | 'degraded' | 'healthy' | 'down';
+
+  /**
+   * The type of tunnel.
+   */
+  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
+}
 
 export namespace WARPConnectorListResponse {
-  /**
-   * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
-   */
-  export interface TunnelWARPConnectorTunnel {
+  export interface Connection {
     /**
-     * UUID of the tunnel.
+     * UUID of the Cloudflare Tunnel connection.
      */
     id?: string;
 
     /**
-     * Cloudflare account ID
+     * UUID of the Cloudflare Tunnel connector.
      */
-    account_tag?: string;
+    client_id?: string;
 
     /**
-     * @deprecated This field will start returning an empty array. To fetch the
-     * connections of a given tunnel, please use the dedicated endpoint
-     * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
+     * The cloudflared version used to establish this connection.
      */
-    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
+    client_version?: string;
 
     /**
-     * Timestamp of when the tunnel established at least one connection to Cloudflare's
-     * edge. If `null`, the tunnel is inactive.
+     * The Cloudflare data center used for this connection.
      */
-    conns_active_at?: string;
+    colo_name?: string;
 
     /**
-     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
-     * edge). If `null`, the tunnel is active.
+     * Cloudflare continues to track connections for several minutes after they
+     * disconnect. This is an optimization to improve latency and reliability of
+     * reconnecting. If `true`, the connection has disconnected but is still being
+     * tracked. If `false`, the connection is actively serving traffic.
      */
-    conns_inactive_at?: string;
+    is_pending_reconnect?: boolean;
 
     /**
-     * Timestamp of when the resource was created.
+     * Timestamp of when the connection was established.
      */
-    created_at?: string;
+    opened_at?: string;
 
     /**
-     * Timestamp of when the resource was deleted. If `null`, the resource has not been
-     * deleted.
+     * The public IP address of the host running cloudflared.
      */
-    deleted_at?: string;
+    origin_ip?: string;
 
     /**
-     * Metadata associated with the tunnel.
+     * UUID of the Cloudflare Tunnel connection.
      */
-    metadata?: unknown;
-
-    /**
-     * A user-friendly name for a tunnel.
-     */
-    name?: string;
-
-    /**
-     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
-     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
-     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
-     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
-     */
-    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
-
-    /**
-     * The type of tunnel.
-     */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
-  }
-
-  export namespace TunnelWARPConnectorTunnel {
-    export interface Connection {
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      id?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connector.
-       */
-      client_id?: string;
-
-      /**
-       * The cloudflared version used to establish this connection.
-       */
-      client_version?: string;
-
-      /**
-       * The Cloudflare data center used for this connection.
-       */
-      colo_name?: string;
-
-      /**
-       * Cloudflare continues to track connections for several minutes after they
-       * disconnect. This is an optimization to improve latency and reliability of
-       * reconnecting. If `true`, the connection has disconnected but is still being
-       * tracked. If `false`, the connection is actively serving traffic.
-       */
-      is_pending_reconnect?: boolean;
-
-      /**
-       * Timestamp of when the connection was established.
-       */
-      opened_at?: string;
-
-      /**
-       * The public IP address of the host running cloudflared.
-       */
-      origin_ip?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      uuid?: string;
-    }
+    uuid?: string;
   }
 }
 
 /**
- * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
+ * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorDeleteResponse =
-  | Shared.CloudflareTunnel
-  | WARPConnectorDeleteResponse.TunnelWARPConnectorTunnel;
+export interface WARPConnectorDeleteResponse {
+  /**
+   * UUID of the tunnel.
+   */
+  id?: string;
+
+  /**
+   * Cloudflare account ID
+   */
+  account_tag?: string;
+
+  /**
+   * @deprecated This field will start returning an empty array. To fetch the
+   * connections of a given tunnel, please use the dedicated endpoint
+   * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
+   */
+  connections?: Array<WARPConnectorDeleteResponse.Connection>;
+
+  /**
+   * Timestamp of when the tunnel established at least one connection to Cloudflare's
+   * edge. If `null`, the tunnel is inactive.
+   */
+  conns_active_at?: string;
+
+  /**
+   * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
+   * edge). If `null`, the tunnel is active.
+   */
+  conns_inactive_at?: string;
+
+  /**
+   * Timestamp of when the resource was created.
+   */
+  created_at?: string;
+
+  /**
+   * Timestamp of when the resource was deleted. If `null`, the resource has not been
+   * deleted.
+   */
+  deleted_at?: string;
+
+  /**
+   * Metadata associated with the tunnel.
+   */
+  metadata?: unknown;
+
+  /**
+   * A user-friendly name for a tunnel.
+   */
+  name?: string;
+
+  /**
+   * The status of the tunnel. Valid values are `inactive` (tunnel has never been
+   * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
+   * state), `healthy` (tunnel is active and able to serve traffic), or `down`
+   * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
+   */
+  status?: 'inactive' | 'degraded' | 'healthy' | 'down';
+
+  /**
+   * The type of tunnel.
+   */
+  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
+}
 
 export namespace WARPConnectorDeleteResponse {
-  /**
-   * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
-   */
-  export interface TunnelWARPConnectorTunnel {
+  export interface Connection {
     /**
-     * UUID of the tunnel.
+     * UUID of the Cloudflare Tunnel connection.
      */
     id?: string;
 
     /**
-     * Cloudflare account ID
+     * UUID of the Cloudflare Tunnel connector.
      */
-    account_tag?: string;
+    client_id?: string;
 
     /**
-     * @deprecated This field will start returning an empty array. To fetch the
-     * connections of a given tunnel, please use the dedicated endpoint
-     * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
+     * The cloudflared version used to establish this connection.
      */
-    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
+    client_version?: string;
 
     /**
-     * Timestamp of when the tunnel established at least one connection to Cloudflare's
-     * edge. If `null`, the tunnel is inactive.
+     * The Cloudflare data center used for this connection.
      */
-    conns_active_at?: string;
+    colo_name?: string;
 
     /**
-     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
-     * edge). If `null`, the tunnel is active.
+     * Cloudflare continues to track connections for several minutes after they
+     * disconnect. This is an optimization to improve latency and reliability of
+     * reconnecting. If `true`, the connection has disconnected but is still being
+     * tracked. If `false`, the connection is actively serving traffic.
      */
-    conns_inactive_at?: string;
+    is_pending_reconnect?: boolean;
 
     /**
-     * Timestamp of when the resource was created.
+     * Timestamp of when the connection was established.
      */
-    created_at?: string;
+    opened_at?: string;
 
     /**
-     * Timestamp of when the resource was deleted. If `null`, the resource has not been
-     * deleted.
+     * The public IP address of the host running cloudflared.
      */
-    deleted_at?: string;
+    origin_ip?: string;
 
     /**
-     * Metadata associated with the tunnel.
+     * UUID of the Cloudflare Tunnel connection.
      */
-    metadata?: unknown;
-
-    /**
-     * A user-friendly name for a tunnel.
-     */
-    name?: string;
-
-    /**
-     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
-     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
-     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
-     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
-     */
-    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
-
-    /**
-     * The type of tunnel.
-     */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
-  }
-
-  export namespace TunnelWARPConnectorTunnel {
-    export interface Connection {
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      id?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connector.
-       */
-      client_id?: string;
-
-      /**
-       * The cloudflared version used to establish this connection.
-       */
-      client_version?: string;
-
-      /**
-       * The Cloudflare data center used for this connection.
-       */
-      colo_name?: string;
-
-      /**
-       * Cloudflare continues to track connections for several minutes after they
-       * disconnect. This is an optimization to improve latency and reliability of
-       * reconnecting. If `true`, the connection has disconnected but is still being
-       * tracked. If `false`, the connection is actively serving traffic.
-       */
-      is_pending_reconnect?: boolean;
-
-      /**
-       * Timestamp of when the connection was established.
-       */
-      opened_at?: string;
-
-      /**
-       * The public IP address of the host running cloudflared.
-       */
-      origin_ip?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      uuid?: string;
-    }
+    uuid?: string;
   }
 }
 
 /**
- * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
+ * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorEditResponse =
-  | Shared.CloudflareTunnel
-  | WARPConnectorEditResponse.TunnelWARPConnectorTunnel;
+export interface WARPConnectorEditResponse {
+  /**
+   * UUID of the tunnel.
+   */
+  id?: string;
+
+  /**
+   * Cloudflare account ID
+   */
+  account_tag?: string;
+
+  /**
+   * @deprecated This field will start returning an empty array. To fetch the
+   * connections of a given tunnel, please use the dedicated endpoint
+   * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
+   */
+  connections?: Array<WARPConnectorEditResponse.Connection>;
+
+  /**
+   * Timestamp of when the tunnel established at least one connection to Cloudflare's
+   * edge. If `null`, the tunnel is inactive.
+   */
+  conns_active_at?: string;
+
+  /**
+   * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
+   * edge). If `null`, the tunnel is active.
+   */
+  conns_inactive_at?: string;
+
+  /**
+   * Timestamp of when the resource was created.
+   */
+  created_at?: string;
+
+  /**
+   * Timestamp of when the resource was deleted. If `null`, the resource has not been
+   * deleted.
+   */
+  deleted_at?: string;
+
+  /**
+   * Metadata associated with the tunnel.
+   */
+  metadata?: unknown;
+
+  /**
+   * A user-friendly name for a tunnel.
+   */
+  name?: string;
+
+  /**
+   * The status of the tunnel. Valid values are `inactive` (tunnel has never been
+   * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
+   * state), `healthy` (tunnel is active and able to serve traffic), or `down`
+   * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
+   */
+  status?: 'inactive' | 'degraded' | 'healthy' | 'down';
+
+  /**
+   * The type of tunnel.
+   */
+  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
+}
 
 export namespace WARPConnectorEditResponse {
-  /**
-   * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
-   */
-  export interface TunnelWARPConnectorTunnel {
+  export interface Connection {
     /**
-     * UUID of the tunnel.
+     * UUID of the Cloudflare Tunnel connection.
      */
     id?: string;
 
     /**
-     * Cloudflare account ID
+     * UUID of the Cloudflare Tunnel connector.
      */
-    account_tag?: string;
+    client_id?: string;
 
     /**
-     * @deprecated This field will start returning an empty array. To fetch the
-     * connections of a given tunnel, please use the dedicated endpoint
-     * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
+     * The cloudflared version used to establish this connection.
      */
-    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
+    client_version?: string;
 
     /**
-     * Timestamp of when the tunnel established at least one connection to Cloudflare's
-     * edge. If `null`, the tunnel is inactive.
+     * The Cloudflare data center used for this connection.
      */
-    conns_active_at?: string;
+    colo_name?: string;
 
     /**
-     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
-     * edge). If `null`, the tunnel is active.
+     * Cloudflare continues to track connections for several minutes after they
+     * disconnect. This is an optimization to improve latency and reliability of
+     * reconnecting. If `true`, the connection has disconnected but is still being
+     * tracked. If `false`, the connection is actively serving traffic.
      */
-    conns_inactive_at?: string;
+    is_pending_reconnect?: boolean;
 
     /**
-     * Timestamp of when the resource was created.
+     * Timestamp of when the connection was established.
      */
-    created_at?: string;
+    opened_at?: string;
 
     /**
-     * Timestamp of when the resource was deleted. If `null`, the resource has not been
-     * deleted.
+     * The public IP address of the host running cloudflared.
      */
-    deleted_at?: string;
+    origin_ip?: string;
 
     /**
-     * Metadata associated with the tunnel.
+     * UUID of the Cloudflare Tunnel connection.
      */
-    metadata?: unknown;
-
-    /**
-     * A user-friendly name for a tunnel.
-     */
-    name?: string;
-
-    /**
-     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
-     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
-     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
-     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
-     */
-    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
-
-    /**
-     * The type of tunnel.
-     */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
-  }
-
-  export namespace TunnelWARPConnectorTunnel {
-    export interface Connection {
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      id?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connector.
-       */
-      client_id?: string;
-
-      /**
-       * The cloudflared version used to establish this connection.
-       */
-      client_version?: string;
-
-      /**
-       * The Cloudflare data center used for this connection.
-       */
-      colo_name?: string;
-
-      /**
-       * Cloudflare continues to track connections for several minutes after they
-       * disconnect. This is an optimization to improve latency and reliability of
-       * reconnecting. If `true`, the connection has disconnected but is still being
-       * tracked. If `false`, the connection is actively serving traffic.
-       */
-      is_pending_reconnect?: boolean;
-
-      /**
-       * Timestamp of when the connection was established.
-       */
-      opened_at?: string;
-
-      /**
-       * The public IP address of the host running cloudflared.
-       */
-      origin_ip?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      uuid?: string;
-    }
+    uuid?: string;
   }
 }
 
 /**
- * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
+ * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorGetResponse =
-  | Shared.CloudflareTunnel
-  | WARPConnectorGetResponse.TunnelWARPConnectorTunnel;
+export interface WARPConnectorGetResponse {
+  /**
+   * UUID of the tunnel.
+   */
+  id?: string;
+
+  /**
+   * Cloudflare account ID
+   */
+  account_tag?: string;
+
+  /**
+   * @deprecated This field will start returning an empty array. To fetch the
+   * connections of a given tunnel, please use the dedicated endpoint
+   * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
+   */
+  connections?: Array<WARPConnectorGetResponse.Connection>;
+
+  /**
+   * Timestamp of when the tunnel established at least one connection to Cloudflare's
+   * edge. If `null`, the tunnel is inactive.
+   */
+  conns_active_at?: string;
+
+  /**
+   * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
+   * edge). If `null`, the tunnel is active.
+   */
+  conns_inactive_at?: string;
+
+  /**
+   * Timestamp of when the resource was created.
+   */
+  created_at?: string;
+
+  /**
+   * Timestamp of when the resource was deleted. If `null`, the resource has not been
+   * deleted.
+   */
+  deleted_at?: string;
+
+  /**
+   * Metadata associated with the tunnel.
+   */
+  metadata?: unknown;
+
+  /**
+   * A user-friendly name for a tunnel.
+   */
+  name?: string;
+
+  /**
+   * The status of the tunnel. Valid values are `inactive` (tunnel has never been
+   * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
+   * state), `healthy` (tunnel is active and able to serve traffic), or `down`
+   * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
+   */
+  status?: 'inactive' | 'degraded' | 'healthy' | 'down';
+
+  /**
+   * The type of tunnel.
+   */
+  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
+}
 
 export namespace WARPConnectorGetResponse {
-  /**
-   * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
-   */
-  export interface TunnelWARPConnectorTunnel {
+  export interface Connection {
     /**
-     * UUID of the tunnel.
+     * UUID of the Cloudflare Tunnel connection.
      */
     id?: string;
 
     /**
-     * Cloudflare account ID
+     * UUID of the Cloudflare Tunnel connector.
      */
-    account_tag?: string;
+    client_id?: string;
 
     /**
-     * @deprecated This field will start returning an empty array. To fetch the
-     * connections of a given tunnel, please use the dedicated endpoint
-     * `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
+     * The cloudflared version used to establish this connection.
      */
-    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
+    client_version?: string;
 
     /**
-     * Timestamp of when the tunnel established at least one connection to Cloudflare's
-     * edge. If `null`, the tunnel is inactive.
+     * The Cloudflare data center used for this connection.
      */
-    conns_active_at?: string;
+    colo_name?: string;
 
     /**
-     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
-     * edge). If `null`, the tunnel is active.
+     * Cloudflare continues to track connections for several minutes after they
+     * disconnect. This is an optimization to improve latency and reliability of
+     * reconnecting. If `true`, the connection has disconnected but is still being
+     * tracked. If `false`, the connection is actively serving traffic.
      */
-    conns_inactive_at?: string;
+    is_pending_reconnect?: boolean;
 
     /**
-     * Timestamp of when the resource was created.
+     * Timestamp of when the connection was established.
      */
-    created_at?: string;
+    opened_at?: string;
 
     /**
-     * Timestamp of when the resource was deleted. If `null`, the resource has not been
-     * deleted.
+     * The public IP address of the host running cloudflared.
      */
-    deleted_at?: string;
+    origin_ip?: string;
 
     /**
-     * Metadata associated with the tunnel.
+     * UUID of the Cloudflare Tunnel connection.
      */
-    metadata?: unknown;
-
-    /**
-     * A user-friendly name for a tunnel.
-     */
-    name?: string;
-
-    /**
-     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
-     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
-     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
-     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
-     */
-    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
-
-    /**
-     * The type of tunnel.
-     */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
-  }
-
-  export namespace TunnelWARPConnectorTunnel {
-    export interface Connection {
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      id?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connector.
-       */
-      client_id?: string;
-
-      /**
-       * The cloudflared version used to establish this connection.
-       */
-      client_version?: string;
-
-      /**
-       * The Cloudflare data center used for this connection.
-       */
-      colo_name?: string;
-
-      /**
-       * Cloudflare continues to track connections for several minutes after they
-       * disconnect. This is an optimization to improve latency and reliability of
-       * reconnecting. If `true`, the connection has disconnected but is still being
-       * tracked. If `false`, the connection is actively serving traffic.
-       */
-      is_pending_reconnect?: boolean;
-
-      /**
-       * Timestamp of when the connection was established.
-       */
-      opened_at?: string;
-
-      /**
-       * The public IP address of the host running cloudflared.
-       */
-      origin_ip?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      uuid?: string;
-    }
+    uuid?: string;
   }
 }
 

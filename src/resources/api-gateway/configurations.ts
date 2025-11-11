@@ -2,11 +2,10 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as UserSchemasAPI from './user-schemas/user-schemas';
 
 export class Configurations extends APIResource {
   /**
-   * Set configuration properties
+   * Update configuration properties
    *
    * @example
    * ```ts
@@ -19,12 +18,15 @@ export class Configurations extends APIResource {
    *   });
    * ```
    */
-  update(
-    params: ConfigurationUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigurationUpdateResponse> {
-    const { zone_id, ...body } = params;
-    return this._client.put(`/zones/${zone_id}/api_gateway/configuration`, { body, ...options });
+  update(params: ConfigurationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
+    const { zone_id, normalize, ...body } = params;
+    return (
+      this._client.put(`/zones/${zone_id}/api_gateway/configuration`, {
+        query: { normalize },
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Configuration }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -93,17 +95,6 @@ export namespace Configuration {
   }
 }
 
-export interface ConfigurationUpdateResponse {
-  errors: UserSchemasAPI.Message;
-
-  messages: UserSchemasAPI.Message;
-
-  /**
-   * Whether the API call was successful.
-   */
-  success: true;
-}
-
 export interface ConfigurationUpdateParams {
   /**
    * Path param: Identifier.
@@ -117,6 +108,12 @@ export interface ConfigurationUpdateParams {
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristic
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristicJWTClaim
   >;
+
+  /**
+   * Query param: Ensures that the configuration is written or retrieved in
+   * normalized fashion
+   */
+  normalize?: boolean;
 }
 
 export namespace ConfigurationUpdateParams {
@@ -164,15 +161,15 @@ export interface ConfigurationGetParams {
   zone_id: string;
 
   /**
-   * Query param: Requests information about certain properties.
+   * Query param: Ensures that the configuration is written or retrieved in
+   * normalized fashion
    */
-  properties?: Array<'auth_id_characteristics'>;
+  normalize?: boolean;
 }
 
 export declare namespace Configurations {
   export {
     type Configuration as Configuration,
-    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
     type ConfigurationUpdateParams as ConfigurationUpdateParams,
     type ConfigurationGetParams as ConfigurationGetParams,
   };

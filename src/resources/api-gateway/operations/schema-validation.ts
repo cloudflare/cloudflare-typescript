@@ -29,13 +29,13 @@ export class SchemaValidation extends APIResource {
   edit(
     params: SchemaValidationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingsMultipleRequest> {
-    const { zone_id, settings_multiple_request } = params;
+  ): Core.APIPromise<SchemaValidationEditResponse> {
+    const { zone_id, body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/api_gateway/operations/schema_validation`, {
-        body: settings_multiple_request,
+        body: body,
         ...options,
-      }) as Core.APIPromise<{ result: SettingsMultipleRequest }>
+      }) as Core.APIPromise<{ result: SchemaValidationEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -57,48 +57,6 @@ export class SchemaValidation extends APIResource {
   }
 }
 
-export type SettingsMultipleRequest = { [key: string]: SettingsMultipleRequest.item };
-
-export namespace SettingsMultipleRequest {
-  /**
-   * Operation ID to mitigation action mappings
-   */
-  export interface item {
-    /**
-     * When set, this applies a mitigation action to this operation
-     *
-     * - `log` log request when request does not conform to schema for this operation
-     * - `block` deny access to the site when request does not conform to schema for
-     *   this operation
-     * - `none` will skip mitigation for this operation
-     * - `null` indicates that no operation level mitigation is in place, see Zone
-     *   Level Schema Validation Settings for mitigation action that will be applied
-     */
-    mitigation_action?: 'log' | 'block' | 'none' | null;
-  }
-}
-
-export type SettingsMultipleRequestParam = { [key: string]: SettingsMultipleRequestParam.item };
-
-export namespace SettingsMultipleRequestParam {
-  /**
-   * Operation ID to mitigation action mappings
-   */
-  export interface item {
-    /**
-     * When set, this applies a mitigation action to this operation
-     *
-     * - `log` log request when request does not conform to schema for this operation
-     * - `block` deny access to the site when request does not conform to schema for
-     *   this operation
-     * - `none` will skip mitigation for this operation
-     * - `null` indicates that no operation level mitigation is in place, see Zone
-     *   Level Schema Validation Settings for mitigation action that will be applied
-     */
-    mitigation_action?: 'log' | 'block' | 'none' | null;
-  }
-}
-
 export interface SchemaValidationUpdateResponse {
   /**
    * When set, this applies a mitigation action to this operation
@@ -116,6 +74,27 @@ export interface SchemaValidationUpdateResponse {
    * UUID.
    */
   operation_id?: string;
+}
+
+export type SchemaValidationEditResponse = { [key: string]: SchemaValidationEditResponse.item };
+
+export namespace SchemaValidationEditResponse {
+  /**
+   * Operation ID to mitigation action mappings
+   */
+  export interface item {
+    /**
+     * When set, this applies a mitigation action to this operation
+     *
+     * - `log` log request when request does not conform to schema for this operation
+     * - `block` deny access to the site when request does not conform to schema for
+     *   this operation
+     * - `none` will skip mitigation for this operation
+     * - `null` indicates that no operation level mitigation is in place, see Zone
+     *   Level Schema Validation Settings for mitigation action that will be applied
+     */
+    mitigation_action?: 'log' | 'block' | 'none' | null;
+  }
 }
 
 export interface SchemaValidationGetResponse {
@@ -165,7 +144,26 @@ export interface SchemaValidationEditParams {
   /**
    * Body param:
    */
-  settings_multiple_request: SettingsMultipleRequestParam;
+  body: { [key: string]: SchemaValidationEditParams.Body };
+}
+
+export namespace SchemaValidationEditParams {
+  /**
+   * Operation ID to mitigation action mappings
+   */
+  export interface Body {
+    /**
+     * When set, this applies a mitigation action to this operation
+     *
+     * - `log` log request when request does not conform to schema for this operation
+     * - `block` deny access to the site when request does not conform to schema for
+     *   this operation
+     * - `none` will skip mitigation for this operation
+     * - `null` indicates that no operation level mitigation is in place, see Zone
+     *   Level Schema Validation Settings for mitigation action that will be applied
+     */
+    mitigation_action?: 'log' | 'block' | 'none' | null;
+  }
 }
 
 export interface SchemaValidationGetParams {
@@ -177,8 +175,8 @@ export interface SchemaValidationGetParams {
 
 export declare namespace SchemaValidation {
   export {
-    type SettingsMultipleRequest as SettingsMultipleRequest,
     type SchemaValidationUpdateResponse as SchemaValidationUpdateResponse,
+    type SchemaValidationEditResponse as SchemaValidationEditResponse,
     type SchemaValidationGetResponse as SchemaValidationGetResponse,
     type SchemaValidationUpdateParams as SchemaValidationUpdateParams,
     type SchemaValidationEditParams as SchemaValidationEditParams,

@@ -10,7 +10,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation.
    *
-   * @deprecated
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   arc(query?: SummaryARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
   arc(options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
@@ -32,7 +32,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail)
    * validation.
    *
-   * @deprecated
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   dkim(query?: SummaryDKIMParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
   dkim(options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
@@ -54,7 +54,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by DMARC (Domain-based Message
    * Authentication, Reporting and Conformance) validation.
    *
-   * @deprecated
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   dmarc(query?: SummaryDMARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
   dmarc(options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
@@ -76,7 +76,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by encryption status (encrypted vs.
    * not-encrypted).
    *
-   * @deprecated
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   encrypted(
     query?: SummaryEncryptedParams,
@@ -100,7 +100,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of emails by IP version.
    *
-   * @deprecated
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -125,7 +125,7 @@ export class Summary extends APIResource {
    * Retrieves the distribution of emails by SPF (Sender Policy Framework)
    * validation.
    *
-   * @deprecated
+   * @deprecated Use [Radar Email Routing Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/email/subresources/routing/methods/summary_v2/) instead.
    */
   spf(query?: SummarySPFParams, options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
   spf(options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;

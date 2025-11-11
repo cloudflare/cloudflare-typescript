@@ -321,7 +321,7 @@ export interface GatewayRule {
 
   /**
    * Specify the protocol or layer to evaluate the traffic, identity, and device
-   * posture expressions.
+   * posture expressions. Can only contain a single value.
    */
   filters: Array<GatewayFilter>;
 
@@ -393,12 +393,10 @@ export interface GatewayRule {
   read_only?: boolean;
 
   /**
-   * Set settings related to this rule. Each setting is only valid for specific rule
-   * types and can only be used with the appropriate selectors. If Terraform drift is
-   * observed in these setting values, verify that the setting is supported for the
-   * given rule type and that the API response reflects the requested value. If the
-   * API response returns sanitized or modified values that differ from the request,
-   * use the API-provided values in Terraform to ensure consistency.
+   * Defines settings for this rule. Settings apply only to specific rule types and
+   * must use compatible selectors. If Terraform detects drift, confirm the setting
+   * supports your rule type and check whether the API modifies the value. Use
+   * API-returned values in your configuration to prevent drift.
    */
   rule_settings?: RuleSetting;
 
@@ -461,12 +459,10 @@ export namespace GatewayRule {
 }
 
 /**
- * Set settings related to this rule. Each setting is only valid for specific rule
- * types and can only be used with the appropriate selectors. If Terraform drift is
- * observed in these setting values, verify that the setting is supported for the
- * given rule type and that the API response reflects the requested value. If the
- * API response returns sanitized or modified values that differ from the request,
- * use the API-provided values in Terraform to ensure consistency.
+ * Defines settings for this rule. Settings apply only to specific rule types and
+ * must use compatible selectors. If Terraform detects drift, confirm the setting
+ * supports your rule type and check whether the API modifies the value. Use
+ * API-returned values in your configuration to prevent drift.
  */
 export interface RuleSetting {
   /**
@@ -920,12 +916,10 @@ export namespace RuleSetting {
 }
 
 /**
- * Set settings related to this rule. Each setting is only valid for specific rule
- * types and can only be used with the appropriate selectors. If Terraform drift is
- * observed in these setting values, verify that the setting is supported for the
- * given rule type and that the API response reflects the requested value. If the
- * API response returns sanitized or modified values that differ from the request,
- * use the API-provided values in Terraform to ensure consistency.
+ * Defines settings for this rule. Settings apply only to specific rule types and
+ * must use compatible selectors. If Terraform detects drift, confirm the setting
+ * supports your rule type and check whether the API modifies the value. Use
+ * API-returned values in your configuration to prevent drift.
  */
 export interface RuleSettingParam {
   /**
@@ -1584,7 +1578,7 @@ export interface RuleCreateParams {
 
   /**
    * Body param: Specify the protocol or layer to evaluate the traffic, identity, and
-   * device posture expressions.
+   * device posture expressions. Can only contain a single value.
    */
   filters?: Array<GatewayFilterParam>;
 
@@ -1606,13 +1600,10 @@ export interface RuleCreateParams {
   precedence?: number;
 
   /**
-   * Body param: Set settings related to this rule. Each setting is only valid for
-   * specific rule types and can only be used with the appropriate selectors. If
-   * Terraform drift is observed in these setting values, verify that the setting is
-   * supported for the given rule type and that the API response reflects the
-   * requested value. If the API response returns sanitized or modified values that
-   * differ from the request, use the API-provided values in Terraform to ensure
-   * consistency.
+   * Body param: Defines settings for this rule. Settings apply only to specific rule
+   * types and must use compatible selectors. If Terraform detects drift, confirm the
+   * setting supports your rule type and check whether the API modifies the value.
+   * Use API-returned values in your configuration to prevent drift.
    */
   rule_settings?: RuleSettingParam;
 
@@ -1715,7 +1706,7 @@ export interface RuleUpdateParams {
 
   /**
    * Body param: Specify the protocol or layer to evaluate the traffic, identity, and
-   * device posture expressions.
+   * device posture expressions. Can only contain a single value.
    */
   filters?: Array<GatewayFilterParam>;
 
@@ -1737,13 +1728,10 @@ export interface RuleUpdateParams {
   precedence?: number;
 
   /**
-   * Body param: Set settings related to this rule. Each setting is only valid for
-   * specific rule types and can only be used with the appropriate selectors. If
-   * Terraform drift is observed in these setting values, verify that the setting is
-   * supported for the given rule type and that the API response reflects the
-   * requested value. If the API response returns sanitized or modified values that
-   * differ from the request, use the API-provided values in Terraform to ensure
-   * consistency.
+   * Body param: Defines settings for this rule. Settings apply only to specific rule
+   * types and must use compatible selectors. If Terraform detects drift, confirm the
+   * setting supports your rule type and check whether the API modifies the value.
+   * Use API-returned values in your configuration to prevent drift.
    */
   rule_settings?: RuleSettingParam;
 
