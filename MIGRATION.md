@@ -981,7 +981,14 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.secretsStore.stores.secrets.get()`
 - `client.pipelines.update()`
 - `client.pipelines.delete()`
+- `client.pipelines.deleteV1()`
 - `client.pipelines.get()`
+- `client.pipelines.getV1()`
+- `client.pipelines.sinks.delete()`
+- `client.pipelines.sinks.get()`
+- `client.pipelines.streams.update()`
+- `client.pipelines.streams.delete()`
+- `client.pipelines.streams.get()`
 - `client.schemaValidation.schemas.delete()`
 - `client.schemaValidation.schemas.edit()`
 - `client.schemaValidation.schemas.get()`

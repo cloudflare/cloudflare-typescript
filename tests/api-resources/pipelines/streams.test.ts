@@ -8,24 +8,11 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource pipelines', () => {
+describe('resource streams', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.pipelines.create({
+    const responsePromise = client.pipelines.streams.create({
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
-      destination: {
-        batch: {},
-        compression: {},
-        credentials: {
-          access_key_id: '<access key id>',
-          endpoint: 'https://123f8a8258064ed892a347f173372359.r2.cloudflarestorage.com',
-          secret_access_key: '<secret key>',
-        },
-        format: 'json',
-        path: { bucket: 'bucket' },
-        type: 'r2',
-      },
-      name: 'sample_pipeline',
-      source: [{ format: 'json', type: 'type' }],
+      name: 'my_stream',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -37,36 +24,25 @@ describe('resource pipelines', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.pipelines.create({
+    const response = await client.pipelines.streams.create({
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
-      destination: {
-        batch: { max_bytes: 1000, max_duration_s: 0.25, max_rows: 100 },
-        compression: { type: 'gzip' },
-        credentials: {
-          access_key_id: '<access key id>',
-          endpoint: 'https://123f8a8258064ed892a347f173372359.r2.cloudflarestorage.com',
-          secret_access_key: '<secret key>',
-        },
-        format: 'json',
-        path: {
-          bucket: 'bucket',
-          filename: '${slug}${extension}',
-          filepath: '${date}/${hour}',
-          prefix: 'base',
-        },
-        type: 'r2',
+      name: 'my_stream',
+      format: { type: 'json', decimal_encoding: 'number', timestamp_format: 'rfc3339', unstructured: true },
+      http: { authentication: false, enabled: true, cors: { origins: ['string'] } },
+      schema: {
+        fields: [
+          { type: 'int32', metadata_key: 'metadata_key', name: 'name', required: true, sql_name: 'sql_name' },
+        ],
+        format: { type: 'json', decimal_encoding: 'number', timestamp_format: 'rfc3339', unstructured: true },
+        inferred: true,
       },
-      name: 'sample_pipeline',
-      source: [{ format: 'json', type: 'type', authentication: true, cors: { origins: ['*'] } }],
+      worker_binding: { enabled: true },
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.pipelines.update('sample_pipeline', {
+    const responsePromise = client.pipelines.streams.update('033e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
-      destination: { batch: {}, compression: {}, format: 'json', path: { bucket: 'bucket' }, type: 'r2' },
-      name: 'sample_pipeline',
-      source: [{ format: 'json', type: 'type' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -78,32 +54,15 @@ describe('resource pipelines', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.pipelines.update('sample_pipeline', {
+    const response = await client.pipelines.streams.update('033e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
-      destination: {
-        batch: { max_bytes: 1000, max_duration_s: 0.25, max_rows: 100 },
-        compression: { type: 'gzip' },
-        format: 'json',
-        path: {
-          bucket: 'bucket',
-          filename: '${slug}${extension}',
-          filepath: '${date}/${hour}',
-          prefix: 'base',
-        },
-        type: 'r2',
-        credentials: {
-          access_key_id: '<access key id>',
-          endpoint: 'https://123f8a8258064ed892a347f173372359.r2.cloudflarestorage.com',
-          secret_access_key: '<secret key>',
-        },
-      },
-      name: 'sample_pipeline',
-      source: [{ format: 'json', type: 'type', authentication: true, cors: { origins: ['*'] } }],
+      http: { authentication: false, enabled: true, cors: { origins: ['string'] } },
+      worker_binding: { enabled: true },
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.pipelines.list({ account_id: '0123105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.pipelines.streams.list({ account_id: '0123105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -114,16 +73,16 @@ describe('resource pipelines', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.pipelines.list({
+    const response = await client.pipelines.streams.list({
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
-      page: 'page',
-      per_page: 'per_page',
-      search: 'search',
+      page: 0,
+      per_page: 0,
+      pipeline_id: '043e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.pipelines.delete('sample_pipeline', {
+    const responsePromise = client.pipelines.streams.delete('033e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -136,13 +95,14 @@ describe('resource pipelines', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.pipelines.delete('sample_pipeline', {
+    const response = await client.pipelines.streams.delete('033e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      force: 'force',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.pipelines.get('sample_pipeline', {
+    const responsePromise = client.pipelines.streams.get('033e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -155,7 +115,7 @@ describe('resource pipelines', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.pipelines.get('sample_pipeline', {
+    const response = await client.pipelines.streams.get('033e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
     });
   });
