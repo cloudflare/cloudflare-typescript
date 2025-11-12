@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'get_url_scanner_responses',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nReturns the raw response of the network request. Find the `response_id` in the `data.requests.response.hash`.\n\n# Response Schema\n```json\n{\n  type: 'string',\n  description: 'Web resource or image.'\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nReturns the raw response of the network request. Find the `response_id` in the `data.requests.response.hash`.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/response_get_response',\n  $defs: {\n    response_get_response: {\n      type: 'string',\n      description: 'Web resource or image.'\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -46,9 +46,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { response_id, jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.urlScanner.responses.get(response_id, body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.urlScanner.responses.get(response_id, body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

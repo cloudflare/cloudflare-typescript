@@ -12,3 +12,7 @@ export async function maybeFilter(jqFilter: unknown | undefined, response: any):
 async function jq(json: any, jqFilter: string) {
   return (await initJq).json(json, jqFilter);
 }
+
+export function isJqError(error: any): error is Error {
+  return error instanceof Error && 'stderr' in error;
+}

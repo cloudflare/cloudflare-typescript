@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_captions_stream_language',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGenerate captions or subtitles for provided language via AI.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      $ref: '#/$defs/caption'\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    caption: {\n      type: 'object',\n      properties: {\n        generated: {\n          type: 'boolean',\n          description: 'Whether the caption was generated via AI.'\n        },\n        label: {\n          type: 'string',\n          description: 'The language label displayed in the native language to users.'\n        },\n        language: {\n          type: 'string',\n          description: 'The language tag in BCP 47 format.'\n        },\n        status: {\n          type: 'string',\n          description: 'The status of a generated caption.',\n          enum: [            'ready',\n            'inprogress',\n            'error'\n          ]\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGenerate captions or subtitles for provided language via AI.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/caption',\n  $defs: {\n    caption: {\n      type: 'object',\n      properties: {\n        generated: {\n          type: 'boolean',\n          description: 'Whether the caption was generated via AI.'\n        },\n        label: {\n          type: 'string',\n          description: 'The language label displayed in the native language to users.'\n        },\n        language: {\n          type: 'string',\n          description: 'The language tag in BCP 47 format.'\n        },\n        status: {\n          type: 'string',\n          description: 'The status of a generated caption.',\n          enum: [            'ready',\n            'inprogress',\n            'error'\n          ]\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -48,9 +48,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { language, jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.stream.captions.language.create(language, body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.stream.captions.language.create(language, body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

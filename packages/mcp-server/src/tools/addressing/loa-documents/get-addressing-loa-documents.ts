@@ -38,7 +38,7 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { loa_document_id, ...body } = args as any;
-  return asBinaryContentResult(await client.addressing.loaDocuments.get(loa_document_id, body));
+  return asBinaryContentResult(await client.addressing.loaDocuments.get(loa_document_id, body).asResponse());
 };
 
 export default { metadata, tool, handler };

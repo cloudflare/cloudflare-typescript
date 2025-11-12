@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_prefixes_addressing_delegations',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreate a new account delegation for a given IP prefix.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      $ref: '#/$defs/delegations'\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    delegations: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'Identifier of a Delegation.'\n        },\n        cidr: {\n          type: 'string',\n          description: 'IP Prefix in Classless Inter-Domain Routing format.'\n        },\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        delegated_account_id: {\n          type: 'string',\n          description: 'Account identifier for the account to which prefix is being delegated.'\n        },\n        modified_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        parent_prefix_id: {\n          type: 'string',\n          description: 'Identifier of an IP Prefix.'\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreate a new account delegation for a given IP prefix.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/delegations',\n  $defs: {\n    delegations: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'Identifier of a Delegation.'\n        },\n        cidr: {\n          type: 'string',\n          description: 'IP Prefix in Classless Inter-Domain Routing format.'\n        },\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        delegated_account_id: {\n          type: 'string',\n          description: 'Account identifier for the account to which prefix is being delegated.'\n        },\n        modified_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        parent_prefix_id: {\n          type: 'string',\n          description: 'Identifier of an IP Prefix.'\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -52,9 +52,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { prefix_id, jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.addressing.prefixes.delegations.create(prefix_id, body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.addressing.prefixes.delegations.create(prefix_id, body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

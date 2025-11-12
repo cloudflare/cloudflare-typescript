@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'status_network_interconnects_interconnects',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGet the current status of an interconnect object\n\n# Response Schema\n```json\n{\n  anyOf: [    {\n      type: 'object',\n      properties: {\n        state: {\n          type: 'string',\n          enum: [            'Pending'\n          ]\n        }\n      },\n      required: [        'state'\n      ]\n    },\n    {\n      type: 'object',\n      properties: {\n        state: {\n          type: 'string',\n          enum: [            'Down'\n          ]\n        },\n        reason: {\n          type: 'string',\n          description: 'Diagnostic information, if available'\n        }\n      },\n      required: [        'state'\n      ]\n    },\n    {\n      type: 'object',\n      properties: {\n        state: {\n          type: 'string',\n          enum: [            'Unhealthy'\n          ]\n        },\n        reason: {\n          type: 'string',\n          description: 'Diagnostic information, if available'\n        }\n      },\n      required: [        'state'\n      ]\n    },\n    {\n      type: 'object',\n      properties: {\n        state: {\n          type: 'string',\n          enum: [            'Healthy'\n          ]\n        }\n      },\n      required: [        'state'\n      ]\n    }\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGet the current status of an interconnect object\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/interconnect_status_response',\n  $defs: {\n    interconnect_status_response: {\n      anyOf: [        {\n          type: 'object',\n          properties: {\n            state: {\n              type: 'string',\n              enum: [                'Pending'\n              ]\n            }\n          },\n          required: [            'state'\n          ]\n        },\n        {\n          type: 'object',\n          properties: {\n            state: {\n              type: 'string',\n              enum: [                'Down'\n              ]\n            },\n            reason: {\n              type: 'string',\n              description: 'Diagnostic information, if available'\n            }\n          },\n          required: [            'state'\n          ]\n        },\n        {\n          type: 'object',\n          properties: {\n            state: {\n              type: 'string',\n              enum: [                'Unhealthy'\n              ]\n            },\n            reason: {\n              type: 'string',\n              description: 'Diagnostic information, if available'\n            }\n          },\n          required: [            'state'\n          ]\n        },\n        {\n          type: 'object',\n          properties: {\n            state: {\n              type: 'string',\n              enum: [                'Healthy'\n              ]\n            }\n          },\n          required: [            'state'\n          ]\n        }\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -45,9 +45,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { icon, jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.networkInterconnects.interconnects.status(icon, body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.networkInterconnects.interconnects.status(icon, body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'get_radar_bots',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves the requested bot information.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'object',\n      properties: {\n        bot: {\n          type: 'object',\n          properties: {\n            category: {\n              type: 'string',\n              description: 'The category of the bot.'\n            },\n            description: {\n              type: 'string',\n              description: 'A summary for the bot (e.g., purpose).'\n            },\n            kind: {\n              type: 'string',\n              description: 'The kind of the bot.'\n            },\n            name: {\n              type: 'string',\n              description: 'The name of the bot.'\n            },\n            operator: {\n              type: 'string',\n              description: 'The organization that owns and operates the bot.'\n            },\n            operatorUrl: {\n              type: 'string',\n              description: 'The link to the bot documentation.'\n            },\n            slug: {\n              type: 'string',\n              description: 'A kebab-case identifier derived from the bot name.'\n            },\n            userAgentPatterns: {\n              type: 'array',\n              items: {\n                type: 'string',\n                description: 'User agent patterns that identify the bot in web traffic.'\n              }\n            },\n            userAgents: {\n              type: 'array',\n              items: {\n                type: 'string',\n                description: 'User agent strings used by this bot in HTTP requests.'\n              }\n            }\n          },\n          required: [            'category',\n            'description',\n            'kind',\n            'name',\n            'operator',\n            'operatorUrl',\n            'slug',\n            'userAgentPatterns',\n            'userAgents'\n          ]\n        }\n      },\n      required: [        'bot'\n      ]\n    },\n    success: {\n      type: 'boolean'\n    }\n  },\n  required: [    'result',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves the requested bot information.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/bot_get_response',\n  $defs: {\n    bot_get_response: {\n      type: 'object',\n      properties: {\n        bot: {\n          type: 'object',\n          properties: {\n            category: {\n              type: 'string',\n              description: 'The category of the bot.'\n            },\n            description: {\n              type: 'string',\n              description: 'A summary for the bot (e.g., purpose).'\n            },\n            kind: {\n              type: 'string',\n              description: 'The kind of the bot.'\n            },\n            name: {\n              type: 'string',\n              description: 'The name of the bot.'\n            },\n            operator: {\n              type: 'string',\n              description: 'The organization that owns and operates the bot.'\n            },\n            operatorUrl: {\n              type: 'string',\n              description: 'The link to the bot documentation.'\n            },\n            slug: {\n              type: 'string',\n              description: 'A kebab-case identifier derived from the bot name.'\n            },\n            userAgentPatterns: {\n              type: 'array',\n              items: {\n                type: 'string',\n                description: 'User agent patterns that identify the bot in web traffic.'\n              }\n            },\n            userAgents: {\n              type: 'array',\n              items: {\n                type: 'string',\n                description: 'User agent strings used by this bot in HTTP requests.'\n              }\n            }\n          },\n          required: [            'category',\n            'description',\n            'kind',\n            'name',\n            'operator',\n            'operatorUrl',\n            'slug',\n            'userAgentPatterns',\n            'userAgents'\n          ]\n        }\n      },\n      required: [        'bot'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -47,7 +47,14 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { bot_slug, jq_filter, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(jq_filter, await client.radar.bots.get(bot_slug, body)));
+  try {
+    return asTextContentResult(await maybeFilter(jq_filter, await client.radar.bots.get(bot_slug, body)));
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

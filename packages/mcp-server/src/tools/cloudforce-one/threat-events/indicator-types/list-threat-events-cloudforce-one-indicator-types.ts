@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_threat_events_cloudforce_one_indicator_types',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nThis Method is deprecated. Please use /events/dataset/:dataset_id/indicatorTypes instead.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    items: {\n      type: 'object',\n      properties: {\n        type: {\n          type: 'string'\n        }\n      },\n      required: [        'type'\n      ]\n    },\n    type: {\n      type: 'string'\n    }\n  },\n  required: [    'items',\n    'type'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nThis Method is deprecated. Please use /events/dataset/:dataset_id/indicatorTypes instead.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/indicator_type_list_response',\n  $defs: {\n    indicator_type_list_response: {\n      type: 'object',\n      properties: {\n        items: {\n          type: 'object',\n          properties: {\n            type: {\n              type: 'string'\n            }\n          },\n          required: [            'type'\n          ]\n        },\n        type: {\n          type: 'string'\n        }\n      },\n      required: [        'items',\n        'type'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -42,9 +42,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.cloudforceOne.threatEvents.indicatorTypes.list(body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.cloudforceOne.threatEvents.indicatorTypes.list(body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

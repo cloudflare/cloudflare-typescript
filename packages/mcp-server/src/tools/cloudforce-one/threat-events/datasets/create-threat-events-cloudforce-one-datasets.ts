@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_threat_events_cloudforce_one_datasets',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates a dataset\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    isPublic: {\n      type: 'boolean'\n    },\n    name: {\n      type: 'string'\n    },\n    uuid: {\n      type: 'string'\n    }\n  },\n  required: [    'isPublic',\n    'name',\n    'uuid'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates a dataset\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/dataset_create_response',\n  $defs: {\n    dataset_create_response: {\n      type: 'object',\n      properties: {\n        isPublic: {\n          type: 'boolean'\n        },\n        name: {\n          type: 'string'\n        },\n        uuid: {\n          type: 'string'\n        }\n      },\n      required: [        'isPublic',\n        'name',\n        'uuid'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -49,9 +49,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.cloudforceOne.threatEvents.datasets.create(body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.cloudforceOne.threatEvents.datasets.create(body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

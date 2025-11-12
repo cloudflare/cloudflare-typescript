@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'pfx2as_bgp_radar_routes',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves the prefix-to-ASN mapping from global routing tables.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'object',\n      properties: {\n        meta: {\n          type: 'object',\n          properties: {\n            data_time: {\n              type: 'string'\n            },\n            query_time: {\n              type: 'string'\n            },\n            total_peers: {\n              type: 'integer'\n            }\n          },\n          required: [            'data_time',\n            'query_time',\n            'total_peers'\n          ]\n        },\n        prefix_origins: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              origin: {\n                type: 'integer'\n              },\n              peer_count: {\n                type: 'integer'\n              },\n              prefix: {\n                type: 'string'\n              },\n              rpki_validation: {\n                type: 'string'\n              }\n            },\n            required: [              'origin',\n              'peer_count',\n              'prefix',\n              'rpki_validation'\n            ]\n          }\n        }\n      },\n      required: [        'meta',\n        'prefix_origins'\n      ]\n    },\n    success: {\n      type: 'boolean'\n    }\n  },\n  required: [    'result',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves the prefix-to-ASN mapping from global routing tables.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/route_pfx2as_response',\n  $defs: {\n    route_pfx2as_response: {\n      type: 'object',\n      properties: {\n        meta: {\n          type: 'object',\n          properties: {\n            data_time: {\n              type: 'string'\n            },\n            query_time: {\n              type: 'string'\n            },\n            total_peers: {\n              type: 'integer'\n            }\n          },\n          required: [            'data_time',\n            'query_time',\n            'total_peers'\n          ]\n        },\n        prefix_origins: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              origin: {\n                type: 'integer'\n              },\n              peer_count: {\n                type: 'integer'\n              },\n              prefix: {\n                type: 'string'\n              },\n              rpki_validation: {\n                type: 'string'\n              }\n            },\n            required: [              'origin',\n              'peer_count',\n              'prefix',\n              'rpki_validation'\n            ]\n          }\n        }\n      },\n      required: [        'meta',\n        'prefix_origins'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -60,7 +60,14 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(jq_filter, await client.radar.bgp.routes.pfx2as(body)));
+  try {
+    return asTextContentResult(await maybeFilter(jq_filter, await client.radar.bgp.routes.pfx2as(body)));
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

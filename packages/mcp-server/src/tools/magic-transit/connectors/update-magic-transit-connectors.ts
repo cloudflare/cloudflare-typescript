@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_magic_transit_connectors',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nReplace Connector or Re-provision License Key\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'number'\n          },\n          message: {\n            type: 'string'\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'number'\n          },\n          message: {\n            type: 'string'\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    result: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string'\n        },\n        activated: {\n          type: 'boolean'\n        },\n        interrupt_window_duration_hours: {\n          type: 'number'\n        },\n        interrupt_window_hour_of_day: {\n          type: 'number'\n        },\n        last_updated: {\n          type: 'string'\n        },\n        notes: {\n          type: 'string'\n        },\n        timezone: {\n          type: 'string'\n        },\n        device: {\n          type: 'object',\n          properties: {\n            id: {\n              type: 'string'\n            },\n            serial_number: {\n              type: 'string'\n            }\n          },\n          required: [            'id'\n          ]\n        },\n        last_heartbeat: {\n          type: 'string'\n        },\n        last_seen_version: {\n          type: 'string'\n        },\n        license_key: {\n          type: 'string'\n        }\n      },\n      required: [        'id',\n        'activated',\n        'interrupt_window_duration_hours',\n        'interrupt_window_hour_of_day',\n        'last_updated',\n        'notes',\n        'timezone'\n      ]\n    },\n    success: {\n      type: 'boolean'\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nReplace Connector or Re-provision License Key\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/connector_update_response',\n  $defs: {\n    connector_update_response: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string'\n        },\n        activated: {\n          type: 'boolean'\n        },\n        interrupt_window_duration_hours: {\n          type: 'number'\n        },\n        interrupt_window_hour_of_day: {\n          type: 'number'\n        },\n        last_updated: {\n          type: 'string'\n        },\n        notes: {\n          type: 'string'\n        },\n        timezone: {\n          type: 'string'\n        },\n        device: {\n          type: 'object',\n          properties: {\n            id: {\n              type: 'string'\n            },\n            serial_number: {\n              type: 'string'\n            }\n          },\n          required: [            'id'\n          ]\n        },\n        last_heartbeat: {\n          type: 'string'\n        },\n        last_seen_version: {\n          type: 'string'\n        },\n        license_key: {\n          type: 'string'\n        }\n      },\n      required: [        'id',\n        'activated',\n        'interrupt_window_duration_hours',\n        'interrupt_window_hour_of_day',\n        'last_updated',\n        'notes',\n        'timezone'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -64,9 +64,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { connector_id, jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.magicTransit.connectors.update(connector_id, body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.magicTransit.connectors.update(connector_id, body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

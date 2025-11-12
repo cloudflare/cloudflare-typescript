@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_v1_pipelines',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nList/Filter Pipelines in Account.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          id: {\n            type: 'string',\n            description: 'Indicates a unique identifier for this pipeline.'\n          },\n          created_at: {\n            type: 'string'\n          },\n          modified_at: {\n            type: 'string'\n          },\n          name: {\n            type: 'string',\n            description: 'Indicates the name of the Pipeline.'\n          },\n          sql: {\n            type: 'string',\n            description: 'Specifies SQL for the Pipeline processing flow.'\n          },\n          status: {\n            type: 'string',\n            description: 'Indicates the current status of the Pipeline.'\n          }\n        },\n        required: [          'id',\n          'created_at',\n          'modified_at',\n          'name',\n          'sql',\n          'status'\n        ]\n      }\n    },\n    result_info: {\n      type: 'object',\n      properties: {\n        count: {\n          type: 'number',\n          description: 'Indicates the number of items on current page.'\n        },\n        page: {\n          type: 'number',\n          description: 'Indicates the current page number.'\n        },\n        per_page: {\n          type: 'number',\n          description: 'Indicates the number of items per page.'\n        },\n        total_count: {\n          type: 'number',\n          description: 'Indicates the total number of items.'\n        }\n      },\n      required: [        'count',\n        'page',\n        'per_page',\n        'total_count'\n      ]\n    },\n    success: {\n      type: 'boolean',\n      description: 'Indicates whether the API call was successful.'\n    }\n  },\n  required: [    'result',\n    'result_info',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nList/Filter Pipelines in Account.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/pipeline_list_v1_response'\n      }\n    },\n    result_info: {\n      type: 'object',\n      properties: {\n        count: {\n          type: 'number',\n          description: 'Indicates the number of items on current page.'\n        },\n        page: {\n          type: 'number',\n          description: 'Indicates the current page number.'\n        },\n        per_page: {\n          type: 'number',\n          description: 'Indicates the number of items per page.'\n        },\n        total_count: {\n          type: 'number',\n          description: 'Indicates the total number of items.'\n        }\n      },\n      required: [        'count',\n        'page',\n        'per_page',\n        'total_count'\n      ]\n    },\n    success: {\n      type: 'boolean',\n      description: 'Indicates whether the API call was successful.'\n    }\n  },\n  required: [    'result',\n    'result_info',\n    'success'\n  ],\n  $defs: {\n    pipeline_list_v1_response: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'Indicates a unique identifier for this pipeline.'\n        },\n        created_at: {\n          type: 'string'\n        },\n        modified_at: {\n          type: 'string'\n        },\n        name: {\n          type: 'string',\n          description: 'Indicates the name of the Pipeline.'\n        },\n        sql: {\n          type: 'string',\n          description: 'Specifies SQL for the Pipeline processing flow.'\n        },\n        status: {\n          type: 'string',\n          description: 'Indicates the current status of the Pipeline.'\n        }\n      },\n      required: [        'id',\n        'created_at',\n        'modified_at',\n        'name',\n        'sql',\n        'status'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -49,7 +49,14 @@ export const tool: Tool = {
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
   const response = await client.pipelines.listV1(body).asResponse();
-  return asTextContentResult(await maybeFilter(jq_filter, await response.json()));
+  try {
+    return asTextContentResult(await maybeFilter(jq_filter, await response.json()));
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

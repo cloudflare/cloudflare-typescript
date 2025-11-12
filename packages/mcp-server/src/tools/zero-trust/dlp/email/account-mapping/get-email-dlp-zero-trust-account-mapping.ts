@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'get_email_dlp_zero_trust_account_mapping',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGet mapping\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      type: 'object',\n      properties: {\n        addin_identifier_token: {\n          type: 'string'\n        },\n        auth_requirements: {\n          anyOf: [            {\n              type: 'object',\n              properties: {\n                allowed_microsoft_organizations: {\n                  type: 'array',\n                  items: {\n                    type: 'string'\n                  }\n                },\n                type: {\n                  type: 'string',\n                  enum: [                    'Org'\n                  ]\n                }\n              },\n              required: [                'allowed_microsoft_organizations',\n                'type'\n              ]\n            },\n            {\n              type: 'object',\n              properties: {\n                type: {\n                  type: 'string',\n                  enum: [                    'NoAuth'\n                  ]\n                }\n              },\n              required: [                'type'\n              ]\n            }\n          ]\n        }\n      },\n      required: [        'addin_identifier_token',\n        'auth_requirements'\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGet mapping\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/account_mapping_get_response',\n  $defs: {\n    account_mapping_get_response: {\n      type: 'object',\n      properties: {\n        addin_identifier_token: {\n          type: 'string'\n        },\n        auth_requirements: {\n          anyOf: [            {\n              type: 'object',\n              properties: {\n                allowed_microsoft_organizations: {\n                  type: 'array',\n                  items: {\n                    type: 'string'\n                  }\n                },\n                type: {\n                  type: 'string',\n                  enum: [                    'Org'\n                  ]\n                }\n              },\n              required: [                'allowed_microsoft_organizations',\n                'type'\n              ]\n            },\n            {\n              type: 'object',\n              properties: {\n                type: {\n                  type: 'string',\n                  enum: [                    'NoAuth'\n                  ]\n                }\n              },\n              required: [                'type'\n              ]\n            }\n          ]\n        }\n      },\n      required: [        'addin_identifier_token',\n        'auth_requirements'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -41,9 +41,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.zeroTrust.dlp.email.accountMapping.get(body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.zeroTrust.dlp.email.accountMapping.get(body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

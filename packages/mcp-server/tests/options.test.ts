@@ -171,6 +171,7 @@ describe('parseQueryOptions', () => {
   const defaultOptions = {
     client: undefined,
     includeDynamicTools: undefined,
+    includeCodeTools: undefined,
     includeAllTools: undefined,
     filters: [],
     capabilities: {
@@ -382,6 +383,27 @@ describe('parseQueryOptions', () => {
       { type: 'tag', op: 'exclude', value: 'exclude-tag' },
       { type: 'tool', op: 'exclude', value: 'exclude-tool' },
     ]);
+  });
+
+  it('code tools are enabled on http servers with default option set', () => {
+    const query = 'tools=code';
+    const result = parseQueryOptions({ ...defaultOptions, includeCodeTools: true }, query);
+
+    expect(result.includeCodeTools).toBe(true);
+  });
+
+  it('code tools are prevented on http servers when no default option set', () => {
+    const query = 'tools=code';
+    const result = parseQueryOptions(defaultOptions, query);
+
+    expect(result.includeCodeTools).toBe(undefined);
+  });
+
+  it('code tools are prevented on http servers when default option is explicitly false', () => {
+    const query = 'tools=code';
+    const result = parseQueryOptions({ ...defaultOptions, includeCodeTools: false }, query);
+
+    expect(result.includeCodeTools).toBe(false);
   });
 });
 

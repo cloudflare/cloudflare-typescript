@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_iam_sso',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nInitialize new SSO connector\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'Response of initializing a new sso connector',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          title: 'SSO Connector Identifier',\n          description: 'SSO Connector identifier tag.'\n        },\n        created_on: {\n          type: 'string',\n          description: 'Timestamp for the creation of the SSO connector',\n          format: 'date-time'\n        },\n        email_domain: {\n          type: 'string'\n        },\n        enabled: {\n          type: 'boolean'\n        },\n        updated_on: {\n          type: 'string',\n          description: 'Timestamp for the last update of the SSO connector',\n          format: 'date-time'\n        },\n        use_fedramp_language: {\n          type: 'boolean',\n          description: 'Controls the display of FedRAMP language to the user during SSO login'\n        },\n        verification: {\n          type: 'object',\n          properties: {\n            code: {\n              type: 'string',\n              description: 'DNS verification code. Add this entire string to the DNS TXT record of the email domain to validate ownership.'\n            },\n            status: {\n              type: 'string',\n              description: 'The status of the verification code from the verification process.',\n              enum: [                'awaiting',\n                'pending',\n                'failed',\n                'verified'\n              ]\n            }\n          }\n        }\n      }\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nInitialize new SSO connector\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/sso_create_response',\n  $defs: {\n    sso_create_response: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          title: 'SSO Connector Identifier',\n          description: 'SSO Connector identifier tag.'\n        },\n        created_on: {\n          type: 'string',\n          description: 'Timestamp for the creation of the SSO connector',\n          format: 'date-time'\n        },\n        email_domain: {\n          type: 'string'\n        },\n        enabled: {\n          type: 'boolean'\n        },\n        updated_on: {\n          type: 'string',\n          description: 'Timestamp for the last update of the SSO connector',\n          format: 'date-time'\n        },\n        use_fedramp_language: {\n          type: 'boolean',\n          description: 'Controls the display of FedRAMP language to the user during SSO login'\n        },\n        verification: {\n          type: 'object',\n          properties: {\n            code: {\n              type: 'string',\n              description: 'DNS verification code. Add this entire string to the DNS TXT record of the email domain to validate ownership.'\n            },\n            status: {\n              type: 'string',\n              description: 'The status of the verification code from the verification process.',\n              enum: [                'awaiting',\n                'pending',\n                'failed',\n                'verified'\n              ]\n            }\n          }\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -53,7 +53,14 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(jq_filter, await client.iam.sso.create(body)));
+  try {
+    return asTextContentResult(await maybeFilter(jq_filter, await client.iam.sso.create(body)));
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

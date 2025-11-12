@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'edit_projects_pages_domains',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetry the validation status of a single domain.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    result: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string'\n        },\n        certificate_authority: {\n          type: 'string',\n          enum: [            'google',\n            'lets_encrypt'\n          ]\n        },\n        created_on: {\n          type: 'string'\n        },\n        domain_id: {\n          type: 'string'\n        },\n        name: {\n          type: 'string'\n        },\n        status: {\n          type: 'string',\n          enum: [            'initializing',\n            'pending',\n            'active',\n            'deactivated',\n            'blocked',\n            'error'\n          ]\n        },\n        validation_data: {\n          type: 'object',\n          properties: {\n            error_message: {\n              type: 'string'\n            },\n            method: {\n              type: 'string',\n              enum: [                'http',\n                'txt'\n              ]\n            },\n            status: {\n              type: 'string',\n              enum: [                'initializing',\n                'pending',\n                'active',\n                'deactivated',\n                'error'\n              ]\n            },\n            txt_name: {\n              type: 'string'\n            },\n            txt_value: {\n              type: 'string'\n            }\n          }\n        },\n        verification_data: {\n          type: 'object',\n          properties: {\n            error_message: {\n              type: 'string'\n            },\n            status: {\n              type: 'string',\n              enum: [                'pending',\n                'active',\n                'deactivated',\n                'blocked',\n                'error'\n              ]\n            }\n          }\n        },\n        zone_tag: {\n          type: 'string'\n        }\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful',\n      enum: [        false,\n        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetry the validation status of a single domain.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/domain_edit_response',\n  $defs: {\n    domain_edit_response: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string'\n        },\n        certificate_authority: {\n          type: 'string',\n          enum: [            'google',\n            'lets_encrypt'\n          ]\n        },\n        created_on: {\n          type: 'string'\n        },\n        domain_id: {\n          type: 'string'\n        },\n        name: {\n          type: 'string'\n        },\n        status: {\n          type: 'string',\n          enum: [            'initializing',\n            'pending',\n            'active',\n            'deactivated',\n            'blocked',\n            'error'\n          ]\n        },\n        validation_data: {\n          type: 'object',\n          properties: {\n            error_message: {\n              type: 'string'\n            },\n            method: {\n              type: 'string',\n              enum: [                'http',\n                'txt'\n              ]\n            },\n            status: {\n              type: 'string',\n              enum: [                'initializing',\n                'pending',\n                'active',\n                'deactivated',\n                'error'\n              ]\n            },\n            txt_name: {\n              type: 'string'\n            },\n            txt_value: {\n              type: 'string'\n            }\n          }\n        },\n        verification_data: {\n          type: 'object',\n          properties: {\n            error_message: {\n              type: 'string'\n            },\n            status: {\n              type: 'string',\n              enum: [                'pending',\n                'active',\n                'deactivated',\n                'blocked',\n                'error'\n              ]\n            }\n          }\n        },\n        zone_tag: {\n          type: 'string'\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -52,9 +52,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { domain_name, jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.pages.projects.domains.edit(domain_name, body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.pages.projects.domains.edit(domain_name, body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

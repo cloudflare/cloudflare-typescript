@@ -87,6 +87,18 @@ export async function asBinaryContentResult(response: Response): Promise<ToolCal
   }
 }
 
+export function asErrorResult(message: string): ToolCallResult {
+  return {
+    content: [
+      {
+        type: 'text',
+        text: message,
+      },
+    ],
+    isError: true,
+  };
+}
+
 export type Metadata = {
   resource: string;
   operation: 'read' | 'write';

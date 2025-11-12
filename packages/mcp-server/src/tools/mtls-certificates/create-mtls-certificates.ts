@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_mtls_certificates',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpload a certificate that you want to use with mTLS-enabled Cloudflare services.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'Identifier.'\n        },\n        ca: {\n          type: 'boolean',\n          description: 'Indicates whether the certificate is a CA or leaf certificate.'\n        },\n        certificates: {\n          type: 'string',\n          description: 'The uploaded root CA certificate.'\n        },\n        expires_on: {\n          type: 'string',\n          description: 'When the certificate expires.',\n          format: 'date-time'\n        },\n        issuer: {\n          type: 'string',\n          description: 'The certificate authority that issued the certificate.'\n        },\n        name: {\n          type: 'string',\n          description: 'Optional unique name for the certificate. Only used for human readability.'\n        },\n        serial_number: {\n          type: 'string',\n          description: 'The certificate serial number.'\n        },\n        signature: {\n          type: 'string',\n          description: 'The type of hash used for the certificate.'\n        },\n        updated_at: {\n          type: 'string',\n          description: 'This is the time the certificate was updated.',\n          format: 'date-time'\n        },\n        uploaded_on: {\n          type: 'string',\n          description: 'This is the time the certificate was uploaded.',\n          format: 'date-time'\n        }\n      }\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpload a certificate that you want to use with mTLS-enabled Cloudflare services.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/mtls_certificate_create_response',\n  $defs: {\n    mtls_certificate_create_response: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'Identifier.'\n        },\n        ca: {\n          type: 'boolean',\n          description: 'Indicates whether the certificate is a CA or leaf certificate.'\n        },\n        certificates: {\n          type: 'string',\n          description: 'The uploaded root CA certificate.'\n        },\n        expires_on: {\n          type: 'string',\n          description: 'When the certificate expires.',\n          format: 'date-time'\n        },\n        issuer: {\n          type: 'string',\n          description: 'The certificate authority that issued the certificate.'\n        },\n        name: {\n          type: 'string',\n          description: 'Optional unique name for the certificate. Only used for human readability.'\n        },\n        serial_number: {\n          type: 'string',\n          description: 'The certificate serial number.'\n        },\n        signature: {\n          type: 'string',\n          description: 'The type of hash used for the certificate.'\n        },\n        updated_at: {\n          type: 'string',\n          description: 'This is the time the certificate was updated.',\n          format: 'date-time'\n        },\n        uploaded_on: {\n          type: 'string',\n          description: 'This is the time the certificate was uploaded.',\n          format: 'date-time'\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -57,7 +57,14 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(jq_filter, await client.mtlsCertificates.create(body)));
+  try {
+    return asTextContentResult(await maybeFilter(jq_filter, await client.mtlsCertificates.create(body)));
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

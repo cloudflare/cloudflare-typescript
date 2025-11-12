@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_entities_radar_locations',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves a list of locations.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'object',\n      properties: {\n        locations: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              alpha2: {\n                type: 'string'\n              },\n              latitude: {\n                type: 'string',\n                description: 'A numeric string.'\n              },\n              longitude: {\n                type: 'string',\n                description: 'A numeric string.'\n              },\n              name: {\n                type: 'string'\n              }\n            },\n            required: [              'alpha2',\n              'latitude',\n              'longitude',\n              'name'\n            ]\n          }\n        }\n      },\n      required: [        'locations'\n      ]\n    },\n    success: {\n      type: 'boolean'\n    }\n  },\n  required: [    'result',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves a list of locations.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/location_list_response',\n  $defs: {\n    location_list_response: {\n      type: 'object',\n      properties: {\n        locations: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              alpha2: {\n                type: 'string'\n              },\n              latitude: {\n                type: 'string',\n                description: 'A numeric string.'\n              },\n              longitude: {\n                type: 'string',\n                description: 'A numeric string.'\n              },\n              name: {\n                type: 'string'\n              }\n            },\n            required: [              'alpha2',\n              'latitude',\n              'longitude',\n              'name'\n            ]\n          }\n        }\n      },\n      required: [        'locations'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -55,7 +55,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(jq_filter, await client.radar.entities.locations.list(body)));
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.radar.entities.locations.list(body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

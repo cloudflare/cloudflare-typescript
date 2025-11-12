@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_settings_api_gateway_schema_validation',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates zone level schema validation settings on the zone\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    validation_default_mitigation_action: {\n      type: 'string',\n      description: 'The default mitigation action used when there is no mitigation action defined on the operation\\n\\nMitigation actions are as follows:\\n\\n  * `log` - log request when request does not conform to schema\\n  * `block` - deny access to the site when request does not conform to schema\\n\\nA special value of of `none` will skip running schema validation entirely for the request when there is no mitigation action defined on the operation',\n      enum: [        'none',\n        'log',\n        'block'\n      ]\n    },\n    validation_override_mitigation_action: {\n      type: 'string',\n      description: 'When set, this overrides both zone level and operation level mitigation actions.\\n\\n  - `none` will skip running schema validation entirely for the request\\n  - `null` indicates that no override is in place',\n      enum: [        'none'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates zone level schema validation settings on the zone\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/schema_validation_update_response',\n  $defs: {\n    schema_validation_update_response: {\n      type: 'object',\n      properties: {\n        validation_default_mitigation_action: {\n          type: 'string',\n          description: 'The default mitigation action used when there is no mitigation action defined on the operation\\n\\nMitigation actions are as follows:\\n\\n  * `log` - log request when request does not conform to schema\\n  * `block` - deny access to the site when request does not conform to schema\\n\\nA special value of of `none` will skip running schema validation entirely for the request when there is no mitigation action defined on the operation',\n          enum: [            'none',\n            'log',\n            'block'\n          ]\n        },\n        validation_override_mitigation_action: {\n          type: 'string',\n          description: 'When set, this overrides both zone level and operation level mitigation actions.\\n\\n  - `none` will skip running schema validation entirely for the request\\n  - `null` indicates that no override is in place',\n          enum: [            'none'\n          ]\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -54,9 +54,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.apiGateway.settings.schemaValidation.update(body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.apiGateway.settings.schemaValidation.update(body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

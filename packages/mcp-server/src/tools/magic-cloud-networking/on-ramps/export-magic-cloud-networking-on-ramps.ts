@@ -34,7 +34,9 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { onramp_id, ...body } = args as any;
-  return asBinaryContentResult(await client.magicCloudNetworking.onRamps.export(onramp_id, body));
+  return asBinaryContentResult(
+    await client.magicCloudNetworking.onRamps.export(onramp_id, body).asResponse(),
+  );
 };
 
 export default { metadata, tool, handler };

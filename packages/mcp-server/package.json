@@ -36,8 +36,10 @@
     "@valtown/deno-http-worker": "^0.0.21",
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "jq-web": "https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz",
+    "fuse.js": "^7.1.0",
+    "jq-web": "https://github.com/stainless-api/jq-web/releases/download/v0.8.8/jq-web.tar.gz",
     "qs": "^6.14.0",
+    "typescript": "5.8.3",
     "yargs": "^17.7.2",
     "zod": "^3.25.20",
     "zod-to-json-schema": "^3.24.5",
@@ -47,7 +49,7 @@
     "mcp-server": "dist/index.js"
   },
   "devDependencies": {
-    "@anthropic-ai/mcpb": "^1.1.0",
+    "@anthropic-ai/mcpb": "1.1.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/jest": "^29.4.0",
@@ -64,8 +66,7 @@
     "ts-morph": "^19.0.0",
     "ts-node": "^10.5.0",
     "tsc-multi": "https://github.com/stainless-api/tsc-multi/releases/download/v1.1.9/tsc-multi.tgz",
-    "tsconfig-paths": "^4.0.0",
-    "typescript": "5.8.3"
+    "tsconfig-paths": "^4.0.0"
   },
   "imports": {
     "cloudflare-mcp": ".",

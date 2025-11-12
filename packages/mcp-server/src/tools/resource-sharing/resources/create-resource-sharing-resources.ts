@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_resource_sharing_resources',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreate a new share resource\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'boolean',\n      description: 'Whether the API call was successful.'\n    },\n    result: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'Share Resource identifier.'\n        },\n        created: {\n          type: 'string',\n          description: 'When the share was created.',\n          format: 'date-time'\n        },\n        meta: {\n          type: 'object',\n          description: 'Resource Metadata.',\n          additionalProperties: true\n        },\n        modified: {\n          type: 'string',\n          description: 'When the share was modified.',\n          format: 'date-time'\n        },\n        resource_account_id: {\n          type: 'string',\n          description: 'Account identifier.'\n        },\n        resource_id: {\n          type: 'string',\n          description: 'Share Resource identifier.'\n        },\n        resource_type: {\n          type: 'string',\n          description: 'Resource Type.',\n          enum: [            'custom-ruleset',\n            'widget',\n            'gateway-policy',\n            'gateway-destination-ip',\n            'gateway-block-page-settings',\n            'gateway-extended-email-matching'\n          ]\n        },\n        resource_version: {\n          type: 'integer',\n          description: 'Resource Version.'\n        },\n        status: {\n          type: 'string',\n          description: 'Resource Status.',\n          enum: [            'active',\n            'deleting',\n            'deleted'\n          ]\n        }\n      },\n      required: [        'id',\n        'created',\n        'meta',\n        'modified',\n        'resource_account_id',\n        'resource_id',\n        'resource_type',\n        'resource_version',\n        'status'\n      ]\n    }\n  },\n  required: [    'errors',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreate a new share resource\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/resource_create_response',\n  $defs: {\n    resource_create_response: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'Share Resource identifier.'\n        },\n        created: {\n          type: 'string',\n          description: 'When the share was created.',\n          format: 'date-time'\n        },\n        meta: {\n          type: 'object',\n          description: 'Resource Metadata.',\n          additionalProperties: true\n        },\n        modified: {\n          type: 'string',\n          description: 'When the share was modified.',\n          format: 'date-time'\n        },\n        resource_account_id: {\n          type: 'string',\n          description: 'Account identifier.'\n        },\n        resource_id: {\n          type: 'string',\n          description: 'Share Resource identifier.'\n        },\n        resource_type: {\n          type: 'string',\n          description: 'Resource Type.',\n          enum: [            'custom-ruleset',\n            'widget',\n            'gateway-policy',\n            'gateway-destination-ip',\n            'gateway-block-page-settings',\n            'gateway-extended-email-matching'\n          ]\n        },\n        resource_version: {\n          type: 'integer',\n          description: 'Resource Version.'\n        },\n        status: {\n          type: 'string',\n          description: 'Resource Status.',\n          enum: [            'active',\n            'deleting',\n            'deleted'\n          ]\n        }\n      },\n      required: [        'id',\n        'created',\n        'meta',\n        'modified',\n        'resource_account_id',\n        'resource_id',\n        'resource_type',\n        'resource_version',\n        'status'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -69,9 +69,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { share_id, jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.resourceSharing.resources.create(share_id, body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.resourceSharing.resources.create(share_id, body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };
