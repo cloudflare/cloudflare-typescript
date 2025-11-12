@@ -29,7 +29,7 @@ export const tool: Tool = {
       datasetIds: {
         type: 'array',
         description:
-          'Array of dataset IDs to query categories from. If not provided, returns all categories from D1 database.',
+          'Array of dataset IDs to query categories from. If not provided, uses the default dataset.',
         items: {
           type: 'string',
         },
