@@ -182,7 +182,8 @@ export namespace InvestigateListResponse {
       | 'allowed_recipient'
       | 'domain_similarity'
       | 'domain_recency'
-      | 'managed_acceptable_sender';
+      | 'managed_acceptable_sender'
+      | 'outbound_ndr';
 
     blocklisted_message?: boolean;
 
@@ -195,7 +196,8 @@ export namespace InvestigateListResponse {
       | 'allowed_recipient'
       | 'domain_similarity'
       | 'domain_recency'
-      | 'managed_acceptable_sender';
+      | 'managed_acceptable_sender'
+      | 'outbound_ndr';
   }
 
   export interface Finding {
@@ -327,7 +329,8 @@ export namespace InvestigateGetResponse {
       | 'allowed_recipient'
       | 'domain_similarity'
       | 'domain_recency'
-      | 'managed_acceptable_sender';
+      | 'managed_acceptable_sender'
+      | 'outbound_ndr';
 
     blocklisted_message?: boolean;
 
@@ -340,7 +343,8 @@ export namespace InvestigateGetResponse {
       | 'allowed_recipient'
       | 'domain_similarity'
       | 'domain_recency'
-      | 'managed_acceptable_sender';
+      | 'managed_acceptable_sender'
+      | 'outbound_ndr';
   }
 
   export interface Finding {
