@@ -762,7 +762,9 @@ TEST_PATHS=(
 	tests/api-resources/secrets-store/stores/stores.test.ts
 	tests/api-resources/secrets-store/stores/secrets.test.ts
 	tests/api-resources/secrets-store/quota.test.ts
-	tests/api-resources/pipelines.test.ts
+	tests/api-resources/pipelines/pipelines.test.ts
+	tests/api-resources/pipelines/sinks.test.ts
+	tests/api-resources/pipelines/streams.test.ts
 	tests/api-resources/schema-validation/schema-validation.test.ts
 	tests/api-resources/schema-validation/schemas.test.ts
 	tests/api-resources/schema-validation/settings/settings.test.ts
