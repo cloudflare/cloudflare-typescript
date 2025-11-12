@@ -40,8 +40,8 @@ export interface AttackerListParams {
   account_id: string;
 
   /**
-   * Query param: Array of dataset IDs to query attackers from. If not provided,
-   * returns all attackers from Event DO tables.
+   * Query param: Array of dataset IDs to query attackers from. If not provided, uses
+   * the default dataset.
    */
   datasetIds?: Array<string>;
 }

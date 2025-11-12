@@ -213,7 +213,7 @@ export interface CategoryListParams {
 
   /**
    * Query param: Array of dataset IDs to query categories from. If not provided,
-   * returns all categories from D1 database.
+   * uses the default dataset.
    */
   datasetIds?: Array<string>;
 }
