@@ -4368,7 +4368,27 @@ The following tools are available in this MCP server.
 - `update_pipelines` (`write`): [DEPRECATED] Update an existing pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
 - `list_pipelines` (`read`): [DEPRECATED] List, filter, and paginate pipelines in an account. Use the new /pipelines/v1/pipelines endpoint instead.
 - `delete_pipelines` (`write`): [DEPRECATED] Delete a pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `create_v1_pipelines` (`write`): Create a new Pipeline.
+- `delete_v1_pipelines` (`write`): Delete Pipeline in Account.
 - `get_pipelines` (`read`): [DEPRECATED] Get configuration of a pipeline. Use the new /pipelines/v1/pipelines endpoint instead.
+- `get_v1_pipelines` (`read`): Get Pipelines Details.
+- `list_v1_pipelines` (`read`): List/Filter Pipelines in Account.
+- `validate_sql_pipelines` (`write`): Validate Arroyo SQL.
+
+### Resource `pipelines.sinks`:
+
+- `create_pipelines_sinks` (`write`): Create a new Sink.
+- `list_pipelines_sinks` (`read`): List/Filter Sinks in Account.
+- `delete_pipelines_sinks` (`write`): Delete Pipeline in Account.
+- `get_pipelines_sinks` (`read`): Get Sink Details.
+
+### Resource `pipelines.streams`:
+
+- `create_pipelines_streams` (`write`): Create a new Stream.
+- `update_pipelines_streams` (`write`): Update a Stream.
+- `list_pipelines_streams` (`read`): List/Filter Streams in Account.
+- `delete_pipelines_streams` (`write`): Delete Stream in Account.
+- `get_pipelines_streams` (`read`): Get Stream Details.
 
 ### Resource `schema_validation.schemas`:
 
