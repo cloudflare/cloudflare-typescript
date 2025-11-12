@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'locations_annotations_radar_outages',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves the number of outages by location.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'object',\n      properties: {\n        annotations: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              clientCountryAlpha2: {\n                type: 'string'\n              },\n              clientCountryName: {\n                type: 'string'\n              },\n              value: {\n                type: 'string',\n                description: 'A numeric string.'\n              }\n            },\n            required: [              'clientCountryAlpha2',\n              'clientCountryName',\n              'value'\n            ]\n          }\n        }\n      },\n      required: [        'annotations'\n      ]\n    },\n    success: {\n      type: 'boolean'\n    }\n  },\n  required: [    'result',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves the number of outages by location.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/outage_locations_response',\n  $defs: {\n    outage_locations_response: {\n      type: 'object',\n      properties: {\n        annotations: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              clientCountryAlpha2: {\n                type: 'string'\n              },\n              clientCountryName: {\n                type: 'string'\n              },\n              value: {\n                type: 'string',\n                description: 'A numeric string.'\n              }\n            },\n            required: [              'clientCountryAlpha2',\n              'clientCountryName',\n              'value'\n            ]\n          }\n        }\n      },\n      required: [        'annotations'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -61,9 +61,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.radar.annotations.outages.locations(body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.radar.annotations.outages.locations(body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

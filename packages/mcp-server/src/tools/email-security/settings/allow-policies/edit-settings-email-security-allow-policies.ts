@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'edit_settings_email_security_allow_policies',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdate an email allow policy\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    result: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'integer',\n          title: 'identifier',\n          description: 'The unique identifier for the allow policy.'\n        },\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        is_acceptable_sender: {\n          type: 'boolean',\n          description: 'Messages from this sender will be exempted from Spam, Spoof and Bulk dispositions.\\nNote: This will not exempt messages with Malicious or Suspicious dispositions.'\n        },\n        is_exempt_recipient: {\n          type: 'boolean',\n          description: 'Messages to this recipient will bypass all detections.'\n        },\n        is_regex: {\n          type: 'boolean'\n        },\n        is_trusted_sender: {\n          type: 'boolean',\n          description: 'Messages from this sender will bypass all detections and link following.'\n        },\n        last_modified: {\n          type: 'string',\n          format: 'date-time'\n        },\n        pattern: {\n          type: 'string'\n        },\n        pattern_type: {\n          type: 'string',\n          enum: [            'EMAIL',\n            'DOMAIN',\n            'IP',\n            'UNKNOWN'\n          ]\n        },\n        verify_sender: {\n          type: 'boolean',\n          description: 'Enforce DMARC, SPF or DKIM authentication.\\nWhen on, Email Security only honors policies that pass authentication.'\n        },\n        comments: {\n          type: 'string'\n        },\n        is_recipient: {\n          type: 'boolean'\n        },\n        is_sender: {\n          type: 'boolean'\n        },\n        is_spoof: {\n          type: 'boolean'\n        }\n      },\n      required: [        'id',\n        'created_at',\n        'is_acceptable_sender',\n        'is_exempt_recipient',\n        'is_regex',\n        'is_trusted_sender',\n        'last_modified',\n        'pattern',\n        'pattern_type',\n        'verify_sender'\n      ]\n    },\n    success: {\n      type: 'boolean'\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdate an email allow policy\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/allow_policy_edit_response',\n  $defs: {\n    allow_policy_edit_response: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'integer',\n          title: 'identifier',\n          description: 'The unique identifier for the allow policy.'\n        },\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        is_acceptable_sender: {\n          type: 'boolean',\n          description: 'Messages from this sender will be exempted from Spam, Spoof and Bulk dispositions.\\nNote: This will not exempt messages with Malicious or Suspicious dispositions.'\n        },\n        is_exempt_recipient: {\n          type: 'boolean',\n          description: 'Messages to this recipient will bypass all detections.'\n        },\n        is_regex: {\n          type: 'boolean'\n        },\n        is_trusted_sender: {\n          type: 'boolean',\n          description: 'Messages from this sender will bypass all detections and link following.'\n        },\n        last_modified: {\n          type: 'string',\n          format: 'date-time'\n        },\n        pattern: {\n          type: 'string'\n        },\n        pattern_type: {\n          type: 'string',\n          enum: [            'EMAIL',\n            'DOMAIN',\n            'IP',\n            'UNKNOWN'\n          ]\n        },\n        verify_sender: {\n          type: 'boolean',\n          description: 'Enforce DMARC, SPF or DKIM authentication.\\nWhen on, Email Security only honors policies that pass authentication.'\n        },\n        comments: {\n          type: 'string'\n        },\n        is_recipient: {\n          type: 'boolean'\n        },\n        is_sender: {\n          type: 'boolean'\n        },\n        is_spoof: {\n          type: 'boolean'\n        }\n      },\n      required: [        'id',\n        'created_at',\n        'is_acceptable_sender',\n        'is_exempt_recipient',\n        'is_regex',\n        'is_trusted_sender',\n        'last_modified',\n        'pattern',\n        'pattern_type',\n        'verify_sender'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -77,9 +77,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { policy_id, jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.emailSecurity.settings.allowPolicies.edit(policy_id, body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.emailSecurity.settings.allowPolicies.edit(policy_id, body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

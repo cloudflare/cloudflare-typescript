@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'psk_generate_magic_transit_ipsec_tunnels',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGenerates a Pre Shared Key for a specific IPsec tunnel used in the IKE session. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes. After a PSK is generated, the PSK is immediately persisted to Cloudflare's edge and cannot be retrieved later. Note the PSK in a safe place.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    result: {\n      type: 'object',\n      properties: {\n        ipsec_tunnel_id: {\n          type: 'string',\n          description: 'Identifier'\n        },\n        psk: {\n          type: 'string',\n          description: 'A randomly generated or provided string for use in the IPsec tunnel.'\n        },\n        psk_metadata: {\n          $ref: '#/$defs/psk_metadata'\n        }\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful',\n      enum: [        true\n      ]\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'result',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    psk_metadata: {\n      type: 'object',\n      description: 'The PSK metadata that includes when the PSK was generated.',\n      properties: {\n        last_generated_on: {\n          type: 'string',\n          description: 'The date and time the tunnel was last modified.',\n          format: 'date-time'\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nGenerates a Pre Shared Key for a specific IPsec tunnel used in the IKE session. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes. After a PSK is generated, the PSK is immediately persisted to Cloudflare's edge and cannot be retrieved later. Note the PSK in a safe place.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/ipsec_tunnel_psk_generate_response',\n  $defs: {\n    ipsec_tunnel_psk_generate_response: {\n      type: 'object',\n      properties: {\n        ipsec_tunnel_id: {\n          type: 'string',\n          description: 'Identifier'\n        },\n        psk: {\n          type: 'string',\n          description: 'A randomly generated or provided string for use in the IPsec tunnel.'\n        },\n        psk_metadata: {\n          $ref: '#/$defs/psk_metadata'\n        }\n      }\n    },\n    psk_metadata: {\n      type: 'object',\n      description: 'The PSK metadata that includes when the PSK was generated.',\n      properties: {\n        last_generated_on: {\n          type: 'string',\n          description: 'The date and time the tunnel was last modified.',\n          format: 'date-time'\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -48,9 +48,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { ipsec_tunnel_id, jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.magicTransit.ipsecTunnels.pskGenerate(ipsec_tunnel_id, body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.magicTransit.ipsecTunnels.pskGenerate(ipsec_tunnel_id, body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

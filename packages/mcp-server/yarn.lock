@@ -2494,9 +2494,9 @@ jest@^29.4.0:
     import-local "^3.0.2"
     jest-cli "^29.7.0"
 
-"jq-web@https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz":
-  version "0.8.6"
-  resolved "https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz#14d0e126987736e82e964d675c3838b5944faa6f"
+"jq-web@https://github.com/stainless-api/jq-web/releases/download/v0.8.8/jq-web.tar.gz":
+  version "0.8.8"
+  resolved "https://github.com/stainless-api/jq-web/releases/download/v0.8.8/jq-web.tar.gz#7849ef64bdfc28f70cbfc9888f886860e96da10d"
 
 js-tokens@^4.0.0:
   version "4.0.0"

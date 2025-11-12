@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'trend_speed_pages',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nLists the core web vital metrics trend over time for a specific page.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        $ref: '#/$defs/response_info'\n      }\n    },\n    success: {\n      type: 'boolean',\n      description: 'Whether the API call was successful.'\n    },\n    result: {\n      $ref: '#/$defs/trend'\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ],\n  $defs: {\n    response_info: {\n      type: 'object',\n      properties: {\n        code: {\n          type: 'integer'\n        },\n        message: {\n          type: 'string'\n        },\n        documentation_url: {\n          type: 'string'\n        },\n        source: {\n          type: 'object',\n          properties: {\n            pointer: {\n              type: 'string'\n            }\n          }\n        }\n      },\n      required: [        'code',\n        'message'\n      ]\n    },\n    trend: {\n      type: 'object',\n      properties: {\n        cls: {\n          type: 'array',\n          description: 'Cumulative Layout Shift trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        fcp: {\n          type: 'array',\n          description: 'First Contentful Paint trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        lcp: {\n          type: 'array',\n          description: 'Largest Contentful Paint trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        performanceScore: {\n          type: 'array',\n          description: 'The Lighthouse score trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        si: {\n          type: 'array',\n          description: 'Speed Index trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        tbt: {\n          type: 'array',\n          description: 'Total Blocking Time trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        ttfb: {\n          type: 'array',\n          description: 'Time To First Byte trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        tti: {\n          type: 'array',\n          description: 'Time To Interactive trend.',\n          items: {\n            type: 'number'\n          }\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nLists the core web vital metrics trend over time for a specific page.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/trend',\n  $defs: {\n    trend: {\n      type: 'object',\n      properties: {\n        cls: {\n          type: 'array',\n          description: 'Cumulative Layout Shift trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        fcp: {\n          type: 'array',\n          description: 'First Contentful Paint trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        lcp: {\n          type: 'array',\n          description: 'Largest Contentful Paint trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        performanceScore: {\n          type: 'array',\n          description: 'The Lighthouse score trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        si: {\n          type: 'array',\n          description: 'Speed Index trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        tbt: {\n          type: 'array',\n          description: 'Total Blocking Time trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        ttfb: {\n          type: 'array',\n          description: 'Time To First Byte trend.',\n          items: {\n            type: 'number'\n          }\n        },\n        tti: {\n          type: 'array',\n          description: 'Time To Interactive trend.',\n          items: {\n            type: 'number'\n          }\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -94,7 +94,14 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { url, jq_filter, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(jq_filter, await client.speed.pages.trend(url, body)));
+  try {
+    return asTextContentResult(await maybeFilter(jq_filter, await client.speed.pages.trend(url, body)));
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

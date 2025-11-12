@@ -40,7 +40,9 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { filename, ...body } = args as any;
-  return asBinaryContentResult(await client.zeroTrust.dex.commands.downloads.get(filename, body));
+  return asBinaryContentResult(
+    await client.zeroTrust.dex.commands.downloads.get(filename, body).asResponse(),
+  );
 };
 
 export default { metadata, tool, handler };

@@ -40,7 +40,7 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { snippet_name, ...body } = args as any;
-  return asBinaryContentResult(await client.snippets.content.get(snippet_name, body));
+  return asBinaryContentResult(await client.snippets.content.get(snippet_name, body).asResponse());
 };
 
 export default { metadata, tool, handler };

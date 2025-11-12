@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_network_interconnects_slots',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieve a list of all slots matching the specified parameters\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    items: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          id: {\n            type: 'string',\n            description: 'Slot ID'\n          },\n          facility: {\n            type: 'object',\n            properties: {\n              address: {\n                type: 'array',\n                items: {\n                  type: 'string'\n                }\n              },\n              name: {\n                type: 'string'\n              }\n            },\n            required: [              'address',\n              'name'\n            ]\n          },\n          occupied: {\n            type: 'boolean',\n            description: 'Whether the slot is occupied or not'\n          },\n          site: {\n            type: 'string'\n          },\n          speed: {\n            type: 'string'\n          },\n          account: {\n            type: 'string',\n            description: 'Customer account tag'\n          }\n        },\n        required: [          'id',\n          'facility',\n          'occupied',\n          'site',\n          'speed'\n        ]\n      }\n    },\n    next: {\n      type: 'integer'\n    }\n  },\n  required: [    'items'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieve a list of all slots matching the specified parameters\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/slot_list_response',\n  $defs: {\n    slot_list_response: {\n      type: 'object',\n      properties: {\n        items: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              id: {\n                type: 'string',\n                description: 'Slot ID'\n              },\n              facility: {\n                type: 'object',\n                properties: {\n                  address: {\n                    type: 'array',\n                    items: {\n                      type: 'string'\n                    }\n                  },\n                  name: {\n                    type: 'string'\n                  }\n                },\n                required: [                  'address',\n                  'name'\n                ]\n              },\n              occupied: {\n                type: 'boolean',\n                description: 'Whether the slot is occupied or not'\n              },\n              site: {\n                type: 'string'\n              },\n              speed: {\n                type: 'string'\n              },\n              account: {\n                type: 'string',\n                description: 'Customer account tag'\n              }\n            },\n            required: [              'id',\n              'facility',\n              'occupied',\n              'site',\n              'speed'\n            ]\n          }\n        },\n        next: {\n          type: 'integer'\n        }\n      },\n      required: [        'items'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -64,9 +64,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.networkInterconnects.slots.list(body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.networkInterconnects.slots.list(body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

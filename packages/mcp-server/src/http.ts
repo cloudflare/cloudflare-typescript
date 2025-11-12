@@ -46,12 +46,12 @@ const newServer = ({
       },
       mcpOptions,
     });
-  } catch {
+  } catch (error) {
     res.status(401).json({
       jsonrpc: '2.0',
       error: {
         code: -32000,
-        message: 'Unauthorized',
+        message: `Unauthorized: ${error instanceof Error ? error.message : error}`,
       },
     });
     return null;

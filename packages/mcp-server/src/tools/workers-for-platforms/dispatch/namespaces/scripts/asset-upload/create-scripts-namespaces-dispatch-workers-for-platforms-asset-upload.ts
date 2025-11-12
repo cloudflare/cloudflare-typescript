@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_scripts_namespaces_dispatch_workers_for_platforms_asset_upload',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nStart uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    errors: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'integer'\n          },\n          message: {\n            type: 'string'\n          },\n          documentation_url: {\n            type: 'string'\n          },\n          source: {\n            type: 'object',\n            properties: {\n              pointer: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    success: {\n      type: 'string',\n      description: 'Whether the API call was successful.',\n      enum: [        true\n      ]\n    },\n    result: {\n      type: 'object',\n      properties: {\n        buckets: {\n          type: 'array',\n          description: 'The requests to make to upload assets.',\n          items: {\n            type: 'array',\n            description: 'The set of assets to include in each request while uploading.',\n            items: {\n              type: 'string',\n              description: 'The file hash to include in this bucket.'\n            }\n          }\n        },\n        jwt: {\n          type: 'string',\n          description: 'A JWT to use as authentication for uploading assets.'\n        }\n      }\n    }\n  },\n  required: [    'errors',\n    'messages',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nStart uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/asset_upload_create_response',\n  $defs: {\n    asset_upload_create_response: {\n      type: 'object',\n      properties: {\n        buckets: {\n          type: 'array',\n          description: 'The requests to make to upload assets.',\n          items: {\n            type: 'array',\n            description: 'The set of assets to include in each request while uploading.',\n            items: {\n              type: 'string',\n              description: 'The file hash to include in this bucket.'\n            }\n          }\n        },\n        jwt: {\n          type: 'string',\n          description: 'A JWT to use as authentication for uploading assets.'\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -55,12 +55,19 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { script_name, jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(
-      jq_filter,
-      await client.workersForPlatforms.dispatch.namespaces.scripts.assetUpload.create(script_name, body),
-    ),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(
+        jq_filter,
+        await client.workersForPlatforms.dispatch.namespaces.scripts.assetUpload.create(script_name, body),
+      ),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

@@ -44,7 +44,7 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { key_name, ...body } = args as any;
-  return asBinaryContentResult(await client.kv.namespaces.values.get(key_name, body));
+  return asBinaryContentResult(await client.kv.namespaces.values.get(key_name, body).asResponse());
 };
 
 export default { metadata, tool, handler };

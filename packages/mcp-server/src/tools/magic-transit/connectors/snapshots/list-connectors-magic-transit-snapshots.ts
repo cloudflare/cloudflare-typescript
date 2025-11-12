@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'cloudflare-mcp/filtering';
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_connectors_magic_transit_snapshots',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nList Snapshots\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    result: {\n      type: 'object',\n      properties: {\n        count: {\n          type: 'number'\n        },\n        items: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              a: {\n                type: 'number',\n                description: 'Time the Snapshot was collected (seconds since the Unix epoch)'\n              },\n              t: {\n                type: 'number',\n                description: 'Time the Snapshot was recorded (seconds since the Unix epoch)'\n              }\n            },\n            required: [              'a',\n              't'\n            ]\n          }\n        },\n        cursor: {\n          type: 'string'\n        }\n      },\n      required: [        'count',\n        'items'\n      ]\n    },\n    success: {\n      type: 'boolean'\n    },\n    errors: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'number'\n          },\n          message: {\n            type: 'string'\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    },\n    messages: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          code: {\n            type: 'number'\n          },\n          message: {\n            type: 'string'\n          }\n        },\n        required: [          'code',\n          'message'\n        ]\n      }\n    }\n  },\n  required: [    'result',\n    'success'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nList Snapshots\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/snapshot_list_response',\n  $defs: {\n    snapshot_list_response: {\n      type: 'object',\n      properties: {\n        count: {\n          type: 'number'\n        },\n        items: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              a: {\n                type: 'number',\n                description: 'Time the Snapshot was collected (seconds since the Unix epoch)'\n              },\n              t: {\n                type: 'number',\n                description: 'Time the Snapshot was recorded (seconds since the Unix epoch)'\n              }\n            },\n            required: [              'a',\n              't'\n            ]\n          }\n        },\n        cursor: {\n          type: 'string'\n        }\n      },\n      required: [        'count',\n        'items'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -57,9 +57,16 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { connector_id, jq_filter, ...body } = args as any;
-  return asTextContentResult(
-    await maybeFilter(jq_filter, await client.magicTransit.connectors.snapshots.list(connector_id, body)),
-  );
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.magicTransit.connectors.snapshots.list(connector_id, body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

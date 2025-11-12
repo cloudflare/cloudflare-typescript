@@ -43,7 +43,7 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { scan_id, ...body } = args as any;
-  return asBinaryContentResult(await client.urlScanner.scans.screenshot(scan_id, body));
+  return asBinaryContentResult(await client.urlScanner.scans.screenshot(scan_id, body).asResponse());
 };
 
 export default { metadata, tool, handler };

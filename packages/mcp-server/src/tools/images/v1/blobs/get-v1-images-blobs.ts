@@ -39,7 +39,7 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const { image_id, ...body } = args as any;
-  return asBinaryContentResult(await client.images.v1.blobs.get(image_id, body));
+  return asBinaryContentResult(await client.images.v1.blobs.get(image_id, body).asResponse());
 };
 
 export default { metadata, tool, handler };
