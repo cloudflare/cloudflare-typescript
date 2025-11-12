@@ -142,6 +142,48 @@ describe('resource pipelines', () => {
     });
   });
 
+  test('createV1: only required params', async () => {
+    const responsePromise = client.pipelines.createV1({
+      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      name: 'my_pipeline',
+      sql: 'insert into sink select * from source;',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('createV1: required and optional params', async () => {
+    const response = await client.pipelines.createV1({
+      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      name: 'my_pipeline',
+      sql: 'insert into sink select * from source;',
+    });
+  });
+
+  test('deleteV1: only required params', async () => {
+    const responsePromise = client.pipelines.deleteV1('043e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('deleteV1: required and optional params', async () => {
+    const response = await client.pipelines.deleteV1('043e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.pipelines.get('sample_pipeline', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
@@ -158,6 +200,65 @@ describe('resource pipelines', () => {
   test('get: required and optional params', async () => {
     const response = await client.pipelines.get('sample_pipeline', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('getV1: only required params', async () => {
+    const responsePromise = client.pipelines.getV1('043e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getV1: required and optional params', async () => {
+    const response = await client.pipelines.getV1('043e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('listV1: only required params', async () => {
+    const responsePromise = client.pipelines.listV1({ account_id: '0123105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('listV1: required and optional params', async () => {
+    const response = await client.pipelines.listV1({
+      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      page: 0,
+      per_page: 0,
+    });
+  });
+
+  test('validateSql: only required params', async () => {
+    const responsePromise = client.pipelines.validateSql({
+      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      sql: 'insert into sink select * from source;',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('validateSql: required and optional params', async () => {
+    const response = await client.pipelines.validateSql({
+      account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      sql: 'insert into sink select * from source;',
     });
   });
 });
