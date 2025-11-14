@@ -1241,7 +1241,6 @@ import create_profiles_dlp_zero_trust_custom from './zero-trust/dlp/profiles/cus
 import update_profiles_dlp_zero_trust_custom from './zero-trust/dlp/profiles/custom/update-profiles-dlp-zero-trust-custom';
 import delete_profiles_dlp_zero_trust_custom from './zero-trust/dlp/profiles/custom/delete-profiles-dlp-zero-trust-custom';
 import get_profiles_dlp_zero_trust_custom from './zero-trust/dlp/profiles/custom/get-profiles-dlp-zero-trust-custom';
-import create_profiles_dlp_zero_trust_predefined from './zero-trust/dlp/profiles/predefined/create-profiles-dlp-zero-trust-predefined';
 import update_profiles_dlp_zero_trust_predefined from './zero-trust/dlp/profiles/predefined/update-profiles-dlp-zero-trust-predefined';
 import delete_profiles_dlp_zero_trust_predefined from './zero-trust/dlp/profiles/predefined/delete-profiles-dlp-zero-trust-predefined';
 import get_profiles_dlp_zero_trust_predefined from './zero-trust/dlp/profiles/predefined/get-profiles-dlp-zero-trust-predefined';
@@ -3174,7 +3173,6 @@ addEndpoint(create_profiles_dlp_zero_trust_custom);
 addEndpoint(update_profiles_dlp_zero_trust_custom);
 addEndpoint(delete_profiles_dlp_zero_trust_custom);
 addEndpoint(get_profiles_dlp_zero_trust_custom);
-addEndpoint(create_profiles_dlp_zero_trust_predefined);
 addEndpoint(update_profiles_dlp_zero_trust_predefined);
 addEndpoint(delete_profiles_dlp_zero_trust_predefined);
 addEndpoint(get_profiles_dlp_zero_trust_predefined);

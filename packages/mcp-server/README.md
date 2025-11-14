@@ -2979,10 +2979,13 @@ The following tools are available in this MCP server.
 
 ### Resource `zero_trust.dlp.profiles.predefined`:
 
-- `create_profiles_dlp_zero_trust_predefined` (`write`): Creates a DLP predefined profile. Only supports enabling/disabling entries.
-- `update_profiles_dlp_zero_trust_predefined` (`write`): Updates a DLP predefined profile. Only supports enabling/disabling entries.
+- `update_profiles_dlp_zero_trust_predefined` (`write`): This is similar to `update_predefined` but only returns entries that are enabled.
+  This is needed for our terraform API
+  Updates a DLP predefined profile. Only supports enabling/disabling entries.
 - `delete_profiles_dlp_zero_trust_predefined` (`write`): This is a no-op as predefined profiles can't be deleted but is needed for our generated terraform API
-- `get_profiles_dlp_zero_trust_predefined` (`read`): Fetches a predefined DLP profile by id.
+- `get_profiles_dlp_zero_trust_predefined` (`read`): This is similar to `get_predefined` but only returns entries that are enabled.
+  This is needed for our terraform API
+  Fetches a predefined DLP profile by id.
 
 ### Resource `zero_trust.dlp.limits`:
 

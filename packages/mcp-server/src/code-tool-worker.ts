@@ -1279,7 +1279,6 @@ const fuse = new Fuse(
     'client.zeroTrust.dlp.profiles.custom.delete',
     'client.zeroTrust.dlp.profiles.custom.get',
     'client.zeroTrust.dlp.profiles.custom.update',
-    'client.zeroTrust.dlp.profiles.predefined.create',
     'client.zeroTrust.dlp.profiles.predefined.delete',
     'client.zeroTrust.dlp.profiles.predefined.get',
     'client.zeroTrust.dlp.profiles.predefined.update',

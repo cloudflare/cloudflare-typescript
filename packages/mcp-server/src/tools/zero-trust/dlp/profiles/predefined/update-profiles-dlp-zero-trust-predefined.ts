@@ -10,13 +10,14 @@ export const metadata: Metadata = {
   operation: 'write',
   tags: [],
   httpMethod: 'put',
-  httpPath: '/accounts/{account_id}/dlp/profiles/predefined/{profile_id}',
-  operationId: 'dlp-profiles-update-predefined-profile',
+  httpPath: '/accounts/{account_id}/dlp/profiles/predefined/{profile_id}/config',
+  operationId: 'dlp-profiles-update-predefined-profile-config',
 };
 
 export const tool: Tool = {
   name: 'update_profiles_dlp_zero_trust_predefined',
-  description: 'Updates a DLP predefined profile. Only supports enabling/disabling entries.',
+  description:
+    'This is similar to `update_predefined` but only returns entries that are enabled.\nThis is needed for our terraform API\nUpdates a DLP predefined profile. Only supports enabling/disabling entries.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -35,8 +36,11 @@ export const tool: Tool = {
       confidence_threshold: {
         type: 'string',
       },
-      context_awareness: {
-        $ref: '#/$defs/context_awareness',
+      enabled_entries: {
+        type: 'array',
+        items: {
+          type: 'string',
+        },
       },
       entries: {
         type: 'array',
@@ -58,34 +62,6 @@ export const tool: Tool = {
       },
     },
     required: ['account_id', 'profile_id'],
-    $defs: {
-      context_awareness: {
-        type: 'object',
-        description: 'Scan the context of predefined entries to only return matches surrounded by keywords.',
-        properties: {
-          enabled: {
-            type: 'boolean',
-            description:
-              'If true, scan the context of predefined entries to only return matches surrounded by keywords.',
-          },
-          skip: {
-            $ref: '#/$defs/skip_configuration',
-          },
-        },
-        required: ['enabled', 'skip'],
-      },
-      skip_configuration: {
-        type: 'object',
-        description: 'Content types to exclude from context analysis and return all matches.',
-        properties: {
-          files: {
-            type: 'boolean',
-            description: 'If the content type is a file, skip context analysis and return all matches.',
-          },
-        },
-        required: ['files'],
-      },
-    },
   },
   annotations: {
     idempotentHint: true,
