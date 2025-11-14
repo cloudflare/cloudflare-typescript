@@ -10,13 +10,14 @@ export const metadata: Metadata = {
   operation: 'read',
   tags: [],
   httpMethod: 'get',
-  httpPath: '/accounts/{account_id}/dlp/profiles/predefined/{profile_id}',
-  operationId: 'dlp-profiles-get-predefined-profile',
+  httpPath: '/accounts/{account_id}/dlp/profiles/predefined/{profile_id}/config',
+  operationId: 'dlp-profiles-get-predefined-profile-config',
 };
 
 export const tool: Tool = {
   name: 'get_profiles_dlp_zero_trust_predefined',
-  description: 'Fetches a predefined DLP profile by id.',
+  description:
+    'This is similar to `get_predefined` but only returns entries that are enabled.\nThis is needed for our terraform API\nFetches a predefined DLP profile by id.',
   inputSchema: {
     type: 'object',
     properties: {
