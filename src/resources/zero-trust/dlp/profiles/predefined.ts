@@ -3,40 +3,16 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as CustomAPI from './custom';
-import * as ProfilesAPI from './profiles';
 
 export class Predefined extends APIResource {
   /**
-   * Creates a DLP predefined profile. Only supports enabling/disabling entries.
+   * This is similar to `update_predefined` but only returns entries that are
+   * enabled. This is needed for our terraform API Updates a DLP predefined profile.
+   * Only supports enabling/disabling entries.
    *
    * @example
    * ```ts
-   * const profile =
-   *   await client.zeroTrust.dlp.profiles.predefined.create({
-   *     account_id: 'account_id',
-   *     profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   });
-   * ```
-   */
-  create(
-    params: PredefinedCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProfilesAPI.Profile> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/dlp/profiles/predefined`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Updates a DLP predefined profile. Only supports enabling/disabling entries.
-   *
-   * @example
-   * ```ts
-   * const profile =
+   * const predefinedProfile =
    *   await client.zeroTrust.dlp.profiles.predefined.update(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 'account_id' },
@@ -47,13 +23,13 @@ export class Predefined extends APIResource {
     profileId: string,
     params: PredefinedUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProfilesAPI.Profile> {
+  ): Core.APIPromise<PredefinedProfile> {
     const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/dlp/profiles/predefined/${profileId}`, {
+      this._client.put(`/accounts/${account_id}/dlp/profiles/predefined/${profileId}/config`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
+      }) as Core.APIPromise<{ result: PredefinedProfile }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -85,11 +61,12 @@ export class Predefined extends APIResource {
   }
 
   /**
-   * Fetches a predefined DLP profile by id.
+   * This is similar to `get_predefined` but only returns entries that are enabled.
+   * This is needed for our terraform API Fetches a predefined DLP profile by id.
    *
    * @example
    * ```ts
-   * const profile =
+   * const predefinedProfile =
    *   await client.zeroTrust.dlp.profiles.predefined.get(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 'account_id' },
@@ -100,13 +77,13 @@ export class Predefined extends APIResource {
     profileId: string,
     params: PredefinedGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProfilesAPI.Profile> {
+  ): Core.APIPromise<PredefinedProfile> {
     const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${account_id}/dlp/profiles/predefined/${profileId}`,
+        `/accounts/${account_id}/dlp/profiles/predefined/${profileId}/config`,
         options,
-      ) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
+      ) as Core.APIPromise<{ result: PredefinedProfile }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -119,6 +96,13 @@ export interface PredefinedProfile {
 
   allowed_match_count: number;
 
+  confidence_threshold: string | null;
+
+  enabled_entries: Array<string>;
+
+  /**
+   * @deprecated
+   */
   entries: Array<
     | PredefinedProfile.CustomEntry
     | PredefinedProfile.PredefinedEntry
@@ -134,14 +118,6 @@ export interface PredefinedProfile {
   name: string;
 
   ai_context_enabled?: boolean;
-
-  confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
-
-  /**
-   * @deprecated Scan the context of predefined entries to only return matches
-   * surrounded by keywords.
-   */
-  context_awareness?: ProfilesAPI.ContextAwareness;
 
   ocr_enabled?: boolean;
 
@@ -282,57 +258,6 @@ export namespace PredefinedProfile {
 
 export type PredefinedDeleteResponse = unknown;
 
-export interface PredefinedCreateParams {
-  /**
-   * Path param:
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  profile_id: string;
-
-  /**
-   * Body param:
-   */
-  ai_context_enabled?: boolean;
-
-  /**
-   * Body param:
-   */
-  allowed_match_count?: number | null;
-
-  /**
-   * Body param:
-   */
-  confidence_threshold?: string | null;
-
-  /**
-   * @deprecated Body param: Scan the context of predefined entries to only return
-   * matches surrounded by keywords.
-   */
-  context_awareness?: ProfilesAPI.ContextAwarenessParam;
-
-  /**
-   * @deprecated Body param:
-   */
-  entries?: Array<PredefinedCreateParams.Entry>;
-
-  /**
-   * Body param:
-   */
-  ocr_enabled?: boolean;
-}
-
-export namespace PredefinedCreateParams {
-  export interface Entry {
-    id: string;
-
-    enabled: boolean;
-  }
-}
-
 export interface PredefinedUpdateParams {
   /**
    * Path param:
@@ -355,10 +280,9 @@ export interface PredefinedUpdateParams {
   confidence_threshold?: string | null;
 
   /**
-   * @deprecated Body param: Scan the context of predefined entries to only return
-   * matches surrounded by keywords.
+   * Body param:
    */
-  context_awareness?: ProfilesAPI.ContextAwarenessParam;
+  enabled_entries?: Array<string> | null;
 
   /**
    * @deprecated Body param:
@@ -391,7 +315,6 @@ export declare namespace Predefined {
   export {
     type PredefinedProfile as PredefinedProfile,
     type PredefinedDeleteResponse as PredefinedDeleteResponse,
-    type PredefinedCreateParams as PredefinedCreateParams,
     type PredefinedUpdateParams as PredefinedUpdateParams,
     type PredefinedDeleteParams as PredefinedDeleteParams,
     type PredefinedGetParams as PredefinedGetParams,
