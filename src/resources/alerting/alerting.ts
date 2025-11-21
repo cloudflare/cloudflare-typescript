@@ -21,6 +21,22 @@ import {
   PolicyUpdateParams,
   PolicyUpdateResponse,
 } from './policies';
+import * as SilencesAPI from './silences';
+import {
+  SilenceCreateParams,
+  SilenceCreateResponse,
+  SilenceDeleteParams,
+  SilenceDeleteResponse,
+  SilenceGetParams,
+  SilenceGetResponse,
+  SilenceListParams,
+  SilenceListResponse,
+  SilenceListResponsesSinglePage,
+  SilenceUpdateParams,
+  SilenceUpdateResponse,
+  SilenceUpdateResponsesSinglePage,
+  Silences,
+} from './silences';
 import * as DestinationsAPI from './destinations/destinations';
 import { Destinations } from './destinations/destinations';
 
@@ -29,6 +45,7 @@ export class Alerting extends APIResource {
   destinations: DestinationsAPI.Destinations = new DestinationsAPI.Destinations(this._client);
   history: HistoryAPI.HistoryResource = new HistoryAPI.HistoryResource(this._client);
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
+  silences: SilencesAPI.Silences = new SilencesAPI.Silences(this._client);
 }
 
 Alerting.AvailableAlerts = AvailableAlerts;
@@ -37,6 +54,9 @@ Alerting.HistoryResource = HistoryResource;
 Alerting.HistoriesV4PagePaginationArray = HistoriesV4PagePaginationArray;
 Alerting.Policies = Policies;
 Alerting.PoliciesSinglePage = PoliciesSinglePage;
+Alerting.Silences = Silences;
+Alerting.SilenceUpdateResponsesSinglePage = SilenceUpdateResponsesSinglePage;
+Alerting.SilenceListResponsesSinglePage = SilenceListResponsesSinglePage;
 
 export declare namespace Alerting {
   export {
@@ -68,5 +88,21 @@ export declare namespace Alerting {
     type PolicyListParams as PolicyListParams,
     type PolicyDeleteParams as PolicyDeleteParams,
     type PolicyGetParams as PolicyGetParams,
+  };
+
+  export {
+    Silences as Silences,
+    type SilenceCreateResponse as SilenceCreateResponse,
+    type SilenceUpdateResponse as SilenceUpdateResponse,
+    type SilenceListResponse as SilenceListResponse,
+    type SilenceDeleteResponse as SilenceDeleteResponse,
+    type SilenceGetResponse as SilenceGetResponse,
+    SilenceUpdateResponsesSinglePage as SilenceUpdateResponsesSinglePage,
+    SilenceListResponsesSinglePage as SilenceListResponsesSinglePage,
+    type SilenceCreateParams as SilenceCreateParams,
+    type SilenceUpdateParams as SilenceUpdateParams,
+    type SilenceListParams as SilenceListParams,
+    type SilenceDeleteParams as SilenceDeleteParams,
+    type SilenceGetParams as SilenceGetParams,
   };
 }
