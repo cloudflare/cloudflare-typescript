@@ -2314,6 +2314,14 @@ The following tools are available in this MCP server.
 - `delete_alerting_policies` (`write`): Delete a Notification policy.
 - `get_alerting_policies` (`read`): Get details for a single policy.
 
+### Resource `alerting.silences`:
+
+- `create_alerting_silences` (`write`): Creates a new silence for an account.
+- `update_alerting_silences` (`write`): Updates existing silences for an account.
+- `list_alerting_silences` (`read`): Gets a list of silences for an account.
+- `delete_alerting_silences` (`write`): Deletes an existing silence for an account.
+- `get_alerting_silences` (`read`): Gets a specific silence for an account.
+
 ### Resource `d1.database`:
 
 - `create_d1_database` (`write`): Returns the created D1 database.
