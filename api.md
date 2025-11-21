@@ -4372,6 +4372,24 @@ Methods:
 - <code title="delete /accounts/{account_id}/alerting/v3/policies/{policy_id}">client.alerting.policies.<a href="./src/resources/alerting/policies.ts">delete</a>(policyId, { ...params }) -> PolicyDeleteResponse</code>
 - <code title="get /accounts/{account_id}/alerting/v3/policies/{policy_id}">client.alerting.policies.<a href="./src/resources/alerting/policies.ts">get</a>(policyId, { ...params }) -> Policy</code>
 
+## Silences
+
+Types:
+
+- <code><a href="./src/resources/alerting/silences.ts">SilenceCreateResponse</a></code>
+- <code><a href="./src/resources/alerting/silences.ts">SilenceUpdateResponse</a></code>
+- <code><a href="./src/resources/alerting/silences.ts">SilenceListResponse</a></code>
+- <code><a href="./src/resources/alerting/silences.ts">SilenceDeleteResponse</a></code>
+- <code><a href="./src/resources/alerting/silences.ts">SilenceGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/alerting/v3/silences">client.alerting.silences.<a href="./src/resources/alerting/silences.ts">create</a>([ ...body ]) -> SilenceCreateResponse</code>
+- <code title="put /accounts/{account_id}/alerting/v3/silences">client.alerting.silences.<a href="./src/resources/alerting/silences.ts">update</a>([ ...body ]) -> SilenceUpdateResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/alerting/v3/silences">client.alerting.silences.<a href="./src/resources/alerting/silences.ts">list</a>({ ...params }) -> SilenceListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/alerting/v3/silences/{silence_id}">client.alerting.silences.<a href="./src/resources/alerting/silences.ts">delete</a>(silenceId, { ...params }) -> SilenceDeleteResponse</code>
+- <code title="get /accounts/{account_id}/alerting/v3/silences/{silence_id}">client.alerting.silences.<a href="./src/resources/alerting/silences.ts">get</a>(silenceId, { ...params }) -> SilenceGetResponse</code>
+
 # D1
 
 Types:
