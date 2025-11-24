@@ -41,6 +41,7 @@ describe('resource outages', () => {
           limit: 1,
           location: 'US',
           offset: 0,
+          origin: 'amazon-us-east-1',
         },
         { path: '/_stainless_unknown_path' },
       ),

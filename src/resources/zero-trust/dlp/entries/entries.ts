@@ -4,7 +4,7 @@ import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as CustomAPI from './custom';
 import {
-  Custom,
+  Custom as CustomAPICustom,
   CustomCreateParams,
   CustomCreateResponse,
   CustomDeleteParams,
@@ -19,7 +19,7 @@ import {
 } from './custom';
 import * as IntegrationAPI from './integration';
 import {
-  Integration,
+  Integration as IntegrationAPIIntegration,
   IntegrationCreateParams,
   IntegrationCreateResponse,
   IntegrationDeleteParams,
@@ -34,7 +34,7 @@ import {
 } from './integration';
 import * as PredefinedAPI from './predefined';
 import {
-  Predefined,
+  Predefined as PredefinedAPIPredefined,
   PredefinedCreateParams,
   PredefinedCreateResponse,
   PredefinedDeleteParams,
@@ -200,15 +200,15 @@ export interface EntryCreateResponse {
 }
 
 export type EntryUpdateResponse =
-  | EntryUpdateResponse.CustomEntry
-  | EntryUpdateResponse.PredefinedEntry
-  | EntryUpdateResponse.IntegrationEntry
-  | EntryUpdateResponse.ExactDataEntry
-  | EntryUpdateResponse.DocumentFingerprintEntry
-  | EntryUpdateResponse.WordListEntry;
+  | EntryUpdateResponse.Custom
+  | EntryUpdateResponse.Predefined
+  | EntryUpdateResponse.Integration
+  | EntryUpdateResponse.ExactData
+  | EntryUpdateResponse.DocumentFingerprint
+  | EntryUpdateResponse.WordList;
 
 export namespace EntryUpdateResponse {
-  export interface CustomEntry {
+  export interface Custom {
     id: string;
 
     created_at: string;
@@ -226,10 +226,10 @@ export namespace EntryUpdateResponse {
     profile_id?: string | null;
   }
 
-  export interface PredefinedEntry {
+  export interface Predefined {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: Predefined.Confidence;
 
     enabled: boolean;
 
@@ -239,10 +239,10 @@ export namespace EntryUpdateResponse {
 
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    variant?: Predefined.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace Predefined {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -265,7 +265,7 @@ export namespace EntryUpdateResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface Integration {
     id: string;
 
     created_at: string;
@@ -281,7 +281,7 @@ export namespace EntryUpdateResponse {
     profile_id?: string | null;
   }
 
-  export interface ExactDataEntry {
+  export interface ExactData {
     id: string;
 
     /**
@@ -303,7 +303,7 @@ export namespace EntryUpdateResponse {
     updated_at: string;
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface DocumentFingerprint {
     id: string;
 
     created_at: string;
@@ -317,7 +317,7 @@ export namespace EntryUpdateResponse {
     updated_at: string;
   }
 
-  export interface WordListEntry {
+  export interface WordList {
     id: string;
 
     created_at: string;
@@ -337,15 +337,15 @@ export namespace EntryUpdateResponse {
 }
 
 export type EntryListResponse =
-  | EntryListResponse.CustomEntry
-  | EntryListResponse.PredefinedEntry
-  | EntryListResponse.IntegrationEntry
-  | EntryListResponse.ExactDataEntry
-  | EntryListResponse.DocumentFingerprintEntry
-  | EntryListResponse.WordListEntry;
+  | EntryListResponse.Custom
+  | EntryListResponse.Predefined
+  | EntryListResponse.Integration
+  | EntryListResponse.ExactData
+  | EntryListResponse.DocumentFingerprint
+  | EntryListResponse.WordList;
 
 export namespace EntryListResponse {
-  export interface CustomEntry {
+  export interface Custom {
     id: string;
 
     created_at: string;
@@ -363,10 +363,10 @@ export namespace EntryListResponse {
     profile_id?: string | null;
   }
 
-  export interface PredefinedEntry {
+  export interface Predefined {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: Predefined.Confidence;
 
     enabled: boolean;
 
@@ -376,10 +376,10 @@ export namespace EntryListResponse {
 
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    variant?: Predefined.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace Predefined {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -402,7 +402,7 @@ export namespace EntryListResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface Integration {
     id: string;
 
     created_at: string;
@@ -418,7 +418,7 @@ export namespace EntryListResponse {
     profile_id?: string | null;
   }
 
-  export interface ExactDataEntry {
+  export interface ExactData {
     id: string;
 
     /**
@@ -440,7 +440,7 @@ export namespace EntryListResponse {
     updated_at: string;
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface DocumentFingerprint {
     id: string;
 
     created_at: string;
@@ -454,7 +454,7 @@ export namespace EntryListResponse {
     updated_at: string;
   }
 
-  export interface WordListEntry {
+  export interface WordList {
     id: string;
 
     created_at: string;
@@ -476,15 +476,15 @@ export namespace EntryListResponse {
 export type EntryDeleteResponse = unknown;
 
 export type EntryGetResponse =
-  | EntryGetResponse.CustomEntry
-  | EntryGetResponse.PredefinedEntry
-  | EntryGetResponse.IntegrationEntry
-  | EntryGetResponse.ExactDataEntry
-  | EntryGetResponse.DocumentFingerprintEntry
-  | EntryGetResponse.WordListEntry;
+  | EntryGetResponse.Custom
+  | EntryGetResponse.Predefined
+  | EntryGetResponse.Integration
+  | EntryGetResponse.ExactData
+  | EntryGetResponse.DocumentFingerprint
+  | EntryGetResponse.WordList;
 
 export namespace EntryGetResponse {
-  export interface CustomEntry {
+  export interface Custom {
     id: string;
 
     created_at: string;
@@ -502,10 +502,10 @@ export namespace EntryGetResponse {
     profile_id?: string | null;
   }
 
-  export interface PredefinedEntry {
+  export interface Predefined {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: Predefined.Confidence;
 
     enabled: boolean;
 
@@ -515,10 +515,10 @@ export namespace EntryGetResponse {
 
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    variant?: Predefined.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace Predefined {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -541,7 +541,7 @@ export namespace EntryGetResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface Integration {
     id: string;
 
     created_at: string;
@@ -557,7 +557,7 @@ export namespace EntryGetResponse {
     profile_id?: string | null;
   }
 
-  export interface ExactDataEntry {
+  export interface ExactData {
     id: string;
 
     /**
@@ -579,7 +579,7 @@ export namespace EntryGetResponse {
     updated_at: string;
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface DocumentFingerprint {
     id: string;
 
     created_at: string;
@@ -593,7 +593,7 @@ export namespace EntryGetResponse {
     updated_at: string;
   }
 
-  export interface WordListEntry {
+  export interface WordList {
     id: string;
 
     created_at: string;
@@ -720,11 +720,11 @@ export interface EntryGetParams {
 }
 
 Entries.EntryListResponsesSinglePage = EntryListResponsesSinglePage;
-Entries.Custom = Custom;
+Entries.Custom = CustomAPICustom;
 Entries.CustomListResponsesSinglePage = CustomListResponsesSinglePage;
-Entries.Predefined = Predefined;
+Entries.Predefined = PredefinedAPIPredefined;
 Entries.PredefinedListResponsesSinglePage = PredefinedListResponsesSinglePage;
-Entries.Integration = Integration;
+Entries.Integration = IntegrationAPIIntegration;
 Entries.IntegrationListResponsesSinglePage = IntegrationListResponsesSinglePage;
 
 export declare namespace Entries {
@@ -743,7 +743,7 @@ export declare namespace Entries {
   };
 
   export {
-    Custom as Custom,
+    CustomAPICustom as Custom,
     type CustomCreateResponse as CustomCreateResponse,
     type CustomUpdateResponse as CustomUpdateResponse,
     type CustomListResponse as CustomListResponse,
@@ -758,7 +758,7 @@ export declare namespace Entries {
   };
 
   export {
-    Predefined as Predefined,
+    PredefinedAPIPredefined as Predefined,
     type PredefinedCreateResponse as PredefinedCreateResponse,
     type PredefinedUpdateResponse as PredefinedUpdateResponse,
     type PredefinedListResponse as PredefinedListResponse,
@@ -773,7 +773,7 @@ export declare namespace Entries {
   };
 
   export {
-    Integration as Integration,
+    IntegrationAPIIntegration as Integration,
     type IntegrationCreateResponse as IntegrationCreateResponse,
     type IntegrationUpdateResponse as IntegrationUpdateResponse,
     type IntegrationListResponse as IntegrationListResponse,
