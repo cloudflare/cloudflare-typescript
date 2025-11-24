@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as DatasetsAPI from './datasets';
 import { type BlobLike } from '../../../../uploads';
 
 export class Upload extends APIResource {
@@ -11,7 +10,7 @@ export class Upload extends APIResource {
    *
    * @example
    * ```ts
-   * const newVersion =
+   * const upload =
    *   await client.zeroTrust.dlp.datasets.upload.create(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 'account_id' },
@@ -22,13 +21,13 @@ export class Upload extends APIResource {
     datasetId: string,
     params: UploadCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NewVersion> {
+  ): Core.APIPromise<UploadCreateResponse> {
     const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/dlp/datasets/${datasetId}/upload`,
         options,
-      ) as Core.APIPromise<{ result: NewVersion }>
+      ) as Core.APIPromise<{ result: UploadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -40,7 +39,7 @@ export class Upload extends APIResource {
    *
    * @example
    * ```ts
-   * const dataset =
+   * const response =
    *   await client.zeroTrust.dlp.datasets.upload.edit(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     0,
@@ -55,7 +54,7 @@ export class Upload extends APIResource {
     dataset: string | ArrayBufferView | ArrayBuffer | BlobLike,
     params: UploadEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetsAPI.Dataset> {
+  ): Core.APIPromise<UploadEditResponse> {
     const { account_id } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/datasets/${datasetId}/upload/${version}`, {
@@ -63,7 +62,7 @@ export class Upload extends APIResource {
         ...options,
         headers: { 'Content-Type': 'application/octet-stream', ...options?.headers },
         __binaryRequest: true,
-      }) as Core.APIPromise<{ result: DatasetsAPI.Dataset }>
+      }) as Core.APIPromise<{ result: UploadEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -94,6 +93,86 @@ export namespace NewVersion {
   }
 }
 
+export interface UploadCreateResponse {
+  encoding_version: number;
+
+  max_cells: number;
+
+  version: number;
+
+  case_sensitive?: boolean;
+
+  columns?: Array<UploadCreateResponse.Column>;
+
+  secret?: string;
+}
+
+export namespace UploadCreateResponse {
+  export interface Column {
+    entry_id: string;
+
+    header_name: string;
+
+    num_cells: number;
+
+    upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+  }
+}
+
+export interface UploadEditResponse {
+  id: string;
+
+  columns: Array<UploadEditResponse.Column>;
+
+  created_at: string;
+
+  encoding_version: number;
+
+  name: string;
+
+  num_cells: number;
+
+  secret: boolean;
+
+  status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+
+  /**
+   * Stores when the dataset was last updated.
+   *
+   * This includes name or description changes as well as uploads.
+   */
+  updated_at: string;
+
+  uploads: Array<UploadEditResponse.Upload>;
+
+  case_sensitive?: boolean;
+
+  /**
+   * The description of the dataset.
+   */
+  description?: string | null;
+}
+
+export namespace UploadEditResponse {
+  export interface Column {
+    entry_id: string;
+
+    header_name: string;
+
+    num_cells: number;
+
+    upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+  }
+
+  export interface Upload {
+    num_cells: number;
+
+    status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+
+    version: number;
+  }
+}
+
 export interface UploadCreateParams {
   account_id: string;
 }
@@ -108,6 +187,8 @@ export interface UploadEditParams {
 export declare namespace Upload {
   export {
     type NewVersion as NewVersion,
+    type UploadCreateResponse as UploadCreateResponse,
+    type UploadEditResponse as UploadEditResponse,
     type UploadCreateParams as UploadCreateParams,
     type UploadEditParams as UploadEditParams,
   };

@@ -48,7 +48,12 @@ export class PermissionGroups extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<PermissionGroupGetResponse> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/iam/permission_groups/${permissionGroupId}`, options);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/iam/permission_groups/${permissionGroupId}`,
+        options,
+      ) as Core.APIPromise<{ result: PermissionGroupGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

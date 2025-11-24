@@ -109,6 +109,23 @@ export namespace AbuseReportListResponse {
      * The abuse report type
      */
     type: 'PHISH' | 'GEN' | 'THREAT' | 'DMCA' | 'EMER' | 'TM' | 'REG_WHO' | 'NCSEI' | 'NETWORK';
+
+    /**
+     * Justification for the report.
+     */
+    justification?: string;
+
+    /**
+     * Original work / Targeted brand in the alleged abuse.
+     */
+    original_work?: string;
+
+    /**
+     * Information about the submitter of the report.
+     */
+    submitter?: Report.Submitter;
+
+    urls?: Array<string>;
   }
 
   export namespace Report {
@@ -140,6 +157,19 @@ export namespace AbuseReportListResponse {
        * How many mitigations are pending their effective date.
        */
       pending_count: number;
+    }
+
+    /**
+     * Information about the submitter of the report.
+     */
+    export interface Submitter {
+      company?: string;
+
+      email?: string;
+
+      name?: string;
+
+      telephone?: string;
     }
   }
 }
@@ -175,6 +205,23 @@ export interface AbuseReportGetResponse {
    * The abuse report type
    */
   type: 'PHISH' | 'GEN' | 'THREAT' | 'DMCA' | 'EMER' | 'TM' | 'REG_WHO' | 'NCSEI' | 'NETWORK';
+
+  /**
+   * Justification for the report.
+   */
+  justification?: string;
+
+  /**
+   * Original work / Targeted brand in the alleged abuse.
+   */
+  original_work?: string;
+
+  /**
+   * Information about the submitter of the report.
+   */
+  submitter?: AbuseReportGetResponse.Submitter;
+
+  urls?: Array<string>;
 }
 
 export namespace AbuseReportGetResponse {
@@ -206,6 +253,19 @@ export namespace AbuseReportGetResponse {
      * How many mitigations are pending their effective date.
      */
     pending_count: number;
+  }
+
+  /**
+   * Information about the submitter of the report.
+   */
+  export interface Submitter {
+    company?: string;
+
+    email?: string;
+
+    name?: string;
+
+    telephone?: string;
   }
 }
 

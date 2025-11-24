@@ -13,7 +13,6 @@ describe('resource domains', () => {
   test('update: only required params', async () => {
     const responsePromise = client.workers.domains.update({
       account_id: '9a7806061c88ada191ed06f989cc3dac',
-      environment: 'production',
       hostname: 'foo.example.com',
       service: 'foo',
       zone_id: '593c9c94de529bbbfaac7c53ced0447d',
@@ -30,10 +29,10 @@ describe('resource domains', () => {
   test('update: required and optional params', async () => {
     const response = await client.workers.domains.update({
       account_id: '9a7806061c88ada191ed06f989cc3dac',
-      environment: 'production',
       hostname: 'foo.example.com',
       service: 'foo',
       zone_id: '593c9c94de529bbbfaac7c53ced0447d',
+      environment: 'production',
     });
   });
 
