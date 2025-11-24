@@ -843,85 +843,6 @@ The following tools are available in this MCP server.
 - `delete_zone_transfers_dns_tsigs` (`write`): Delete TSIG.
 - `get_zone_transfers_dns_tsigs` (`read`): Get TSIG.
 
-### Resource `email_security.investigate`:
-
-- `list_email_security_investigate` (`read`): Returns information for each email that matches the search parameter(s).
-- `get_email_security_investigate` (`read`): Get message details
-
-### Resource `email_security.investigate.detections`:
-
-- `get_investigate_email_security_detections` (`read`): Returns detection details such as threat categories and sender information for non-benign messages.
-
-### Resource `email_security.investigate.preview`:
-
-- `create_investigate_email_security_preview` (`write`): Preview for non-detection messages
-- `get_investigate_email_security_preview` (`read`): Returns a preview of the message body as a base64 encoded PNG image for non-benign messages.
-
-### Resource `email_security.investigate.raw`:
-
-- `get_investigate_email_security_raw` (`read`): Returns the raw eml of any non-benign message.
-
-### Resource `email_security.investigate.trace`:
-
-- `get_investigate_email_security_trace` (`read`): Get email trace
-
-### Resource `email_security.investigate.move`:
-
-- `create_investigate_email_security_move` (`write`): Move a message
-- `bulk_investigate_email_security_move` (`write`): Move multiple messages
-
-### Resource `email_security.investigate.reclassify`:
-
-- `create_investigate_email_security_reclassify` (`write`): Change email classfication
-
-### Resource `email_security.investigate.release`:
-
-- `bulk_investigate_email_security_release` (`write`): Release messages from quarantine
-
-### Resource `email_security.settings.allow_policies`:
-
-- `create_settings_email_security_allow_policies` (`write`): Create an email allow policy
-- `list_settings_email_security_allow_policies` (`read`): Lists, searches, and sorts an account’s email allow policies.
-- `delete_settings_email_security_allow_policies` (`write`): Delete an email allow policy
-- `edit_settings_email_security_allow_policies` (`write`): Update an email allow policy
-- `get_settings_email_security_allow_policies` (`read`): Get an email allow policy
-
-### Resource `email_security.settings.block_senders`:
-
-- `create_settings_email_security_block_senders` (`write`): Create a blocked email sender
-- `list_settings_email_security_block_senders` (`read`): List blocked email senders
-- `delete_settings_email_security_block_senders` (`write`): Delete a blocked email sender
-- `edit_settings_email_security_block_senders` (`write`): Update a blocked email sender
-- `get_settings_email_security_block_senders` (`read`): Get a blocked email sender
-
-### Resource `email_security.settings.domains`:
-
-- `list_settings_email_security_domains` (`read`): Lists, searches, and sorts an account’s email domains.
-- `delete_settings_email_security_domains` (`write`): Unprotect an email domain
-- `bulk_delete_settings_email_security_domains` (`write`): Unprotect multiple email domains
-- `edit_settings_email_security_domains` (`write`): Update an email domain
-- `get_settings_email_security_domains` (`read`): Get an email domain
-
-### Resource `email_security.settings.impersonation_registry`:
-
-- `create_settings_email_security_impersonation_registry` (`write`): Create an entry in impersonation registry
-- `list_settings_email_security_impersonation_registry` (`read`): Lists, searches, and sorts entries in the impersonation registry.
-- `delete_settings_email_security_impersonation_registry` (`write`): Delete an entry from impersonation registry
-- `edit_settings_email_security_impersonation_registry` (`write`): Update an entry in impersonation registry
-- `get_settings_email_security_impersonation_registry` (`read`): Get an entry in impersonation registry
-
-### Resource `email_security.settings.trusted_domains`:
-
-- `create_settings_email_security_trusted_domains` (`write`): Create a trusted email domain
-- `list_settings_email_security_trusted_domains` (`read`): Lists, searches, and sorts an account’s trusted email domains.
-- `delete_settings_email_security_trusted_domains` (`write`): Delete a trusted email domain
-- `edit_settings_email_security_trusted_domains` (`write`): Update a trusted email domain
-- `get_settings_email_security_trusted_domains` (`read`): Get a trusted email domain
-
-### Resource `email_security.submissions`:
-
-- `list_email_security_submissions` (`read`): This endpoint returns information for submissions to made to reclassify emails.
-
 ### Resource `email_routing`:
 
 - `disable_email_routing` (`write`): Disable your Email Routing zone. Also removes additional MX records previously required for Email Routing to work.
@@ -2990,7 +2911,7 @@ The following tools are available in this MCP server.
 - `update_profiles_dlp_zero_trust_predefined` (`write`): This is similar to `update_predefined` but only returns entries that are enabled.
   This is needed for our terraform API
   Updates a DLP predefined profile. Only supports enabling/disabling entries.
-- `delete_profiles_dlp_zero_trust_predefined` (`write`): This is a no-op as predefined profiles can't be deleted but is needed for our generated terraform API
+- `delete_profiles_dlp_zero_trust_predefined` (`write`): This is a no-op as predefined profiles can't be deleted but is needed for our generated terraform API.
 - `get_profiles_dlp_zero_trust_predefined` (`read`): This is similar to `get_predefined` but only returns entries that are enabled.
   This is needed for our terraform API
   Fetches a predefined DLP profile by id.
@@ -3017,20 +2938,20 @@ The following tools are available in this MCP server.
 
 ### Resource `zero_trust.dlp.entries.predefined`:
 
-- `create_entries_dlp_zero_trust_predefined` (`write`): Predefined entries can't be created, this will update an existing predefined entry
-  This is needed for our generated terraform API
+- `create_entries_dlp_zero_trust_predefined` (`write`): Predefined entries can't be created, this will update an existing predefined entry.
+  This is needed for our generated terraform API.
 - `update_entries_dlp_zero_trust_predefined` (`write`): Updates a DLP entry.
 - `list_entries_dlp_zero_trust_predefined` (`read`): Lists all DLP entries in an account.
-- `delete_entries_dlp_zero_trust_predefined` (`write`): This is a no-op as predefined entires can't be deleted but is needed for our generated terraform API
+- `delete_entries_dlp_zero_trust_predefined` (`write`): This is a no-op as predefined entires can't be deleted but is needed for our generated terraform API.
 - `get_entries_dlp_zero_trust_predefined` (`read`): Fetches a DLP entry by ID.
 
 ### Resource `zero_trust.dlp.entries.integration`:
 
-- `create_entries_dlp_zero_trust_integration` (`write`): Integration entries can't be created, this will update an existing integration entry
-  This is needed for our generated terraform API
+- `create_entries_dlp_zero_trust_integration` (`write`): Integration entries can't be created, this will update an existing integration entry.
+  This is needed for our generated terraform API.
 - `update_entries_dlp_zero_trust_integration` (`write`): Updates a DLP entry.
 - `list_entries_dlp_zero_trust_integration` (`read`): Lists all DLP entries in an account.
-- `delete_entries_dlp_zero_trust_integration` (`write`): This is a no-op as integration entires can't be deleted but is needed for our generated terraform API
+- `delete_entries_dlp_zero_trust_integration` (`write`): This is a no-op as integration entires can't be deleted but is needed for our generated terraform API.
 - `get_entries_dlp_zero_trust_integration` (`read`): Fetches a DLP entry by ID.
 
 ### Resource `zero_trust.gateway`:

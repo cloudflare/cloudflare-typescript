@@ -41,9 +41,6 @@ export const tool: Tool = {
             event: {
               type: 'string',
             },
-            indicatorType: {
-              type: 'string',
-            },
             raw: {
               type: 'object',
               properties: {
@@ -78,6 +75,28 @@ export const tool: Tool = {
             indicator: {
               type: 'string',
             },
+            indicators: {
+              type: 'array',
+              description:
+                'Array of indicators for this event. Supports multiple indicators per event for complex scenarios.',
+              items: {
+                type: 'object',
+                properties: {
+                  indicatorType: {
+                    type: 'string',
+                    description: 'The type of indicator (e.g., DOMAIN, IP, JA3, HASH)',
+                  },
+                  value: {
+                    type: 'string',
+                    description: 'The indicator value (e.g., domain name, IP address, hash)',
+                  },
+                },
+                required: ['indicatorType', 'value'],
+              },
+            },
+            indicatorType: {
+              type: 'string',
+            },
             insight: {
               type: 'string',
             },
@@ -94,7 +113,7 @@ export const tool: Tool = {
               type: 'string',
             },
           },
-          required: ['category', 'date', 'event', 'indicatorType', 'raw', 'tlp'],
+          required: ['category', 'date', 'event', 'raw', 'tlp'],
         },
       },
       datasetId: {

@@ -26,10 +26,6 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifer of the account.',
       },
-      environment: {
-        type: 'string',
-        description: 'Worker environment associated with the zone and hostname.',
-      },
       hostname: {
         type: 'string',
         description: 'Hostname of the Worker Domain.',
@@ -42,6 +38,10 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier of the zone.',
       },
+      environment: {
+        type: 'string',
+        description: 'Worker environment associated with the zone and hostname.',
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',
@@ -49,7 +49,7 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
-    required: ['account_id', 'environment', 'hostname', 'service', 'zone_id'],
+    required: ['account_id', 'hostname', 'service', 'zone_id'],
   },
   annotations: {
     idempotentHint: true,

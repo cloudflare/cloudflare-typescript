@@ -190,13 +190,44 @@ export namespace TimeseriesGroupHTTPMethodResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -300,13 +331,44 @@ export namespace TimeseriesGroupHTTPVersionResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -414,13 +476,44 @@ export namespace TimeseriesGroupIndustryResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -524,13 +617,44 @@ export namespace TimeseriesGroupIPVersionResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -636,13 +760,44 @@ export namespace TimeseriesGroupManagedRulesResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -746,13 +901,44 @@ export namespace TimeseriesGroupMitigationProductResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -856,13 +1042,44 @@ export namespace TimeseriesGroupVerticalResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.

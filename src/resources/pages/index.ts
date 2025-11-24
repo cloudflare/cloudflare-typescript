@@ -6,7 +6,11 @@ export {
   type Deployment,
   type Project,
   type Stage,
+  type ProjectCreateResponse,
+  type ProjectListResponse,
   type ProjectDeleteResponse,
+  type ProjectEditResponse,
+  type ProjectGetResponse,
   type ProjectPurgeBuildCacheResponse,
   type ProjectCreateParams,
   type ProjectListParams,
@@ -14,5 +18,5 @@ export {
   type ProjectEditParams,
   type ProjectGetParams,
   type ProjectPurgeBuildCacheParams,
-  type DeploymentsV4PagePaginationArray,
+  type ProjectListResponsesV4PagePaginationArray,
 } from './projects/index';

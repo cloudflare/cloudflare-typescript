@@ -5,6 +5,9 @@ export {
   type Dataset,
   type DatasetArray,
   type DatasetCreation,
+  type DatasetCreateResponse,
+  type DatasetUpdateResponse,
+  type DatasetGetResponse,
   type DatasetCreateParams,
   type DatasetUpdateParams,
   type DatasetListParams,
@@ -12,7 +15,14 @@ export {
   type DatasetGetParams,
   type DatasetsSinglePage,
 } from './datasets';
-export { Upload, type NewVersion, type UploadCreateParams, type UploadEditParams } from './upload';
+export {
+  Upload,
+  type NewVersion,
+  type UploadCreateResponse,
+  type UploadEditResponse,
+  type UploadCreateParams,
+  type UploadEditParams,
+} from './upload';
 export {
   Versions,
   type VersionCreateResponse,

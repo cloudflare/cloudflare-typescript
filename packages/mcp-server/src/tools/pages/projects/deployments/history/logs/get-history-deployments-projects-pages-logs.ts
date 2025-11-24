@@ -18,13 +18,13 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'get_history_deployments_projects_pages_logs',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nFetch deployment logs for a project.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/log_get_response',\n  $defs: {\n    log_get_response: {\n      type: 'object',\n      properties: {\n        data: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              line: {\n                type: 'string'\n              },\n              ts: {\n                type: 'string'\n              }\n            }\n          }\n        },\n        includes_container_logs: {\n          type: 'boolean'\n        },\n        total: {\n          type: 'integer'\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nFetch deployment logs for a project.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/log_get_response',\n  $defs: {\n    log_get_response: {\n      type: 'object',\n      properties: {\n        data: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              line: {\n                type: 'string'\n              },\n              ts: {\n                type: 'string'\n              }\n            },\n            required: [              'line',\n              'ts'\n            ]\n          }\n        },\n        includes_container_logs: {\n          type: 'boolean'\n        },\n        total: {\n          type: 'integer'\n        }\n      },\n      required: [        'data',\n        'includes_container_logs',\n        'total'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       project_name: {
         type: 'string',
@@ -32,7 +32,7 @@ export const tool: Tool = {
       },
       deployment_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       jq_filter: {
         type: 'string',

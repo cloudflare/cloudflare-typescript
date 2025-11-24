@@ -37,6 +37,18 @@ export const tool: Tool = {
           'Limits the returned results to logs newer than the specified date. This can be a date string 2019-04-30 (interpreted in UTC) or an absolute timestamp that conforms to RFC3339.',
         format: 'date',
       },
+      id: {
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by their IDs.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+      },
       account_name: {
         type: 'object',
         properties: {
@@ -160,18 +172,6 @@ export const tool: Tool = {
             items: {
               type: 'string',
               enum: ['account', 'cloudflare_admin', 'system', 'user'],
-            },
-          },
-        },
-      },
-      audit_log_id: {
-        type: 'object',
-        properties: {
-          not: {
-            type: 'array',
-            description: 'Filters out audit logs by their IDs.',
-            items: {
-              type: 'string',
             },
           },
         },

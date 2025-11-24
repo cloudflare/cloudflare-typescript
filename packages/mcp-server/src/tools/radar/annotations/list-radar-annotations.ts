@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_radar_annotations',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves the latest annotations.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/annotation_list_response',\n  $defs: {\n    annotation_list_response: {\n      type: 'object',\n      properties: {\n        annotations: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              id: {\n                type: 'string'\n              },\n              asns: {\n                type: 'array',\n                items: {\n                  type: 'integer'\n                }\n              },\n              asnsDetails: {\n                type: 'array',\n                items: {\n                  type: 'object',\n                  properties: {\n                    asn: {\n                      type: 'string'\n                    },\n                    name: {\n                      type: 'string'\n                    },\n                    locations: {\n                      type: 'object',\n                      properties: {\n                        code: {\n                          type: 'string'\n                        },\n                        name: {\n                          type: 'string'\n                        }\n                      },\n                      required: [                        'code',\n                        'name'\n                      ]\n                    }\n                  },\n                  required: [                    'asn',\n                    'name'\n                  ]\n                }\n              },\n              dataSource: {\n                type: 'string'\n              },\n              eventType: {\n                type: 'string'\n              },\n              locations: {\n                type: 'array',\n                items: {\n                  type: 'string'\n                }\n              },\n              locationsDetails: {\n                type: 'array',\n                items: {\n                  type: 'object',\n                  properties: {\n                    code: {\n                      type: 'string'\n                    },\n                    name: {\n                      type: 'string'\n                    }\n                  },\n                  required: [                    'code',\n                    'name'\n                  ]\n                }\n              },\n              outage: {\n                type: 'object',\n                properties: {\n                  outageCause: {\n                    type: 'string'\n                  },\n                  outageType: {\n                    type: 'string'\n                  }\n                },\n                required: [                  'outageCause',\n                  'outageType'\n                ]\n              },\n              startDate: {\n                type: 'string'\n              },\n              description: {\n                type: 'string'\n              },\n              endDate: {\n                type: 'string'\n              },\n              linkedUrl: {\n                type: 'string'\n              },\n              scope: {\n                type: 'string'\n              }\n            },\n            required: [              'id',\n              'asns',\n              'asnsDetails',\n              'dataSource',\n              'eventType',\n              'locations',\n              'locationsDetails',\n              'outage',\n              'startDate'\n            ]\n          }\n        }\n      },\n      required: [        'annotations'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRetrieves the latest annotations.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/annotation_list_response',\n  $defs: {\n    annotation_list_response: {\n      type: 'object',\n      properties: {\n        annotations: {\n          type: 'array',\n          items: {\n            type: 'object',\n            properties: {\n              id: {\n                type: 'string'\n              },\n              asns: {\n                type: 'array',\n                items: {\n                  type: 'integer'\n                }\n              },\n              asnsDetails: {\n                type: 'array',\n                items: {\n                  type: 'object',\n                  properties: {\n                    asn: {\n                      type: 'string'\n                    },\n                    name: {\n                      type: 'string'\n                    },\n                    locations: {\n                      type: 'object',\n                      properties: {\n                        code: {\n                          type: 'string'\n                        },\n                        name: {\n                          type: 'string'\n                        }\n                      },\n                      required: [                        'code',\n                        'name'\n                      ]\n                    }\n                  },\n                  required: [                    'asn',\n                    'name'\n                  ]\n                }\n              },\n              dataSource: {\n                type: 'string'\n              },\n              eventType: {\n                type: 'string'\n              },\n              locations: {\n                type: 'array',\n                items: {\n                  type: 'string'\n                }\n              },\n              locationsDetails: {\n                type: 'array',\n                items: {\n                  type: 'object',\n                  properties: {\n                    code: {\n                      type: 'string'\n                    },\n                    name: {\n                      type: 'string'\n                    }\n                  },\n                  required: [                    'code',\n                    'name'\n                  ]\n                }\n              },\n              origins: {\n                type: 'array',\n                items: {\n                  type: 'string'\n                }\n              },\n              originsDetails: {\n                type: 'array',\n                items: {\n                  type: 'object',\n                  properties: {\n                    name: {\n                      type: 'string'\n                    },\n                    origin: {\n                      type: 'string'\n                    }\n                  },\n                  required: [                    'name',\n                    'origin'\n                  ]\n                }\n              },\n              outage: {\n                type: 'object',\n                properties: {\n                  outageCause: {\n                    type: 'string'\n                  },\n                  outageType: {\n                    type: 'string'\n                  }\n                },\n                required: [                  'outageCause',\n                  'outageType'\n                ]\n              },\n              startDate: {\n                type: 'string'\n              },\n              description: {\n                type: 'string'\n              },\n              endDate: {\n                type: 'string'\n              },\n              linkedUrl: {\n                type: 'string'\n              },\n              scope: {\n                type: 'string'\n              }\n            },\n            required: [              'id',\n              'asns',\n              'asnsDetails',\n              'dataSource',\n              'eventType',\n              'locations',\n              'locationsDetails',\n              'origins',\n              'originsDetails',\n              'outage',\n              'startDate'\n            ]\n          }\n        }\n      },\n      required: [        'annotations'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -26,6 +26,37 @@ export const tool: Tool = {
         type: 'integer',
         description:
           'Filters results by Autonomous System. Specify a single Autonomous System Number (ASN) as integer.',
+      },
+      dataSource: {
+        type: 'string',
+        description: 'Filters results by data source.',
+        enum: [
+          'ALL',
+          'AI_BOTS',
+          'AI_GATEWAY',
+          'BGP',
+          'BOTS',
+          'CONNECTION_ANOMALY',
+          'CT',
+          'DNS',
+          'DNS_MAGNITUDE',
+          'DNS_AS112',
+          'DOS',
+          'EMAIL_ROUTING',
+          'EMAIL_SECURITY',
+          'FW',
+          'FW_PG',
+          'HTTP',
+          'HTTP_CONTROL',
+          'HTTP_CRAWLER_REFERER',
+          'HTTP_ORIGINS',
+          'IQI',
+          'LEAKED_CREDENTIALS',
+          'NET',
+          'ROBOTS_TXT',
+          'SPEED',
+          'WORKERS_AI',
+        ],
       },
       dateEnd: {
         type: 'string',
@@ -40,6 +71,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'Start of the date range (inclusive).',
         format: 'date-time',
+      },
+      eventType: {
+        type: 'string',
+        description: 'Filters results by event type.',
+        enum: ['EVENT', 'GENERAL', 'OUTAGE', 'PARTIAL_PROJECTION', 'PIPELINE', 'TRAFFIC_ANOMALY'],
       },
       format: {
         type: 'string',
@@ -57,6 +93,10 @@ export const tool: Tool = {
       offset: {
         type: 'integer',
         description: 'Skips the specified number of objects before fetching the results.',
+      },
+      origin: {
+        type: 'string',
+        description: 'Filters results by origin.',
       },
       jq_filter: {
         type: 'string',

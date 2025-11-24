@@ -2,21 +2,9 @@
 
 import { APIResource } from '../../core/resource';
 import * as SubmissionsAPI from './submissions';
-import {
-  SubmissionListParams,
-  SubmissionListResponse,
-  SubmissionListResponsesV4PagePaginationArray,
-  Submissions,
-} from './submissions';
+import { Submissions } from './submissions';
 import * as InvestigateAPI from './investigate/investigate';
-import {
-  Investigate,
-  InvestigateGetParams,
-  InvestigateGetResponse,
-  InvestigateListParams,
-  InvestigateListResponse,
-  InvestigateListResponsesV4PagePaginationArray,
-} from './investigate/investigate';
+import { Investigate } from './investigate/investigate';
 import * as SettingsAPI from './settings/settings';
 import { Settings } from './settings/settings';
 
@@ -31,21 +19,9 @@ EmailSecurity.Settings = Settings;
 EmailSecurity.Submissions = Submissions;
 
 export declare namespace EmailSecurity {
-  export {
-    Investigate as Investigate,
-    type InvestigateListResponse as InvestigateListResponse,
-    type InvestigateGetResponse as InvestigateGetResponse,
-    type InvestigateListResponsesV4PagePaginationArray as InvestigateListResponsesV4PagePaginationArray,
-    type InvestigateListParams as InvestigateListParams,
-    type InvestigateGetParams as InvestigateGetParams,
-  };
+  export { Investigate as Investigate };
 
   export { Settings as Settings };
 
-  export {
-    Submissions as Submissions,
-    type SubmissionListResponse as SubmissionListResponse,
-    type SubmissionListResponsesV4PagePaginationArray as SubmissionListResponsesV4PagePaginationArray,
-    type SubmissionListParams as SubmissionListParams,
-  };
+  export { Submissions as Submissions };
 }

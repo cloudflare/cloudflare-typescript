@@ -102,22 +102,6 @@ TEST_PATHS=(
 	tests/api-resources/dns/zone-transfers/acls.test.ts
 	tests/api-resources/dns/zone-transfers/peers.test.ts
 	tests/api-resources/dns/zone-transfers/tsigs.test.ts
-	tests/api-resources/email-security/email-security.test.ts
-	tests/api-resources/email-security/investigate/investigate.test.ts
-	tests/api-resources/email-security/investigate/detections.test.ts
-	tests/api-resources/email-security/investigate/preview.test.ts
-	tests/api-resources/email-security/investigate/raw.test.ts
-	tests/api-resources/email-security/investigate/trace.test.ts
-	tests/api-resources/email-security/investigate/move.test.ts
-	tests/api-resources/email-security/investigate/reclassify.test.ts
-	tests/api-resources/email-security/investigate/release.test.ts
-	tests/api-resources/email-security/settings/settings.test.ts
-	tests/api-resources/email-security/settings/allow-policies.test.ts
-	tests/api-resources/email-security/settings/block-senders.test.ts
-	tests/api-resources/email-security/settings/domains.test.ts
-	tests/api-resources/email-security/settings/impersonation-registry.test.ts
-	tests/api-resources/email-security/settings/trusted-domains.test.ts
-	tests/api-resources/email-security/submissions.test.ts
 	tests/api-resources/email-routing/email-routing.test.ts
 	tests/api-resources/email-routing/dns.test.ts
 	tests/api-resources/email-routing/rules/rules.test.ts
