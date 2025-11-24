@@ -94,6 +94,32 @@ export interface DeviceSettings {
   disable_for_time?: number;
 
   /**
+   * Controls whether the external emergency disconnect feature is enabled.
+   */
+  external_emergency_signal_enabled?: boolean;
+
+  /**
+   * The SHA256 fingerprint (64 hexadecimal characters) of the HTTPS server
+   * certificate for the external_emergency_signal_url. If provided, the WARP client
+   * will use this value to verify the server's identity. The device will ignore any
+   * response if the server's certificate fingerprint does not exactly match this
+   * value.
+   */
+  external_emergency_signal_fingerprint?: string;
+
+  /**
+   * The interval at which the WARP client fetches the emergency disconnect signal,
+   * formatted as a duration string (e.g., "5m", "2m30s", "1h"). Minimum 30 seconds.
+   */
+  external_emergency_signal_interval?: string;
+
+  /**
+   * The HTTPS URL from which to fetch the emergency disconnect signal. Must use
+   * HTTPS and have an IPv4 or IPv6 address as the host.
+   */
+  external_emergency_signal_url?: string;
+
+  /**
    * Enable gateway proxy filtering on TCP.
    */
   gateway_proxy_enabled?: boolean;
@@ -125,6 +151,34 @@ export interface SettingUpdateParams {
    * code to bypass WARP.
    */
   disable_for_time?: number;
+
+  /**
+   * Body param: Controls whether the external emergency disconnect feature is
+   * enabled.
+   */
+  external_emergency_signal_enabled?: boolean;
+
+  /**
+   * Body param: The SHA256 fingerprint (64 hexadecimal characters) of the HTTPS
+   * server certificate for the external_emergency_signal_url. If provided, the WARP
+   * client will use this value to verify the server's identity. The device will
+   * ignore any response if the server's certificate fingerprint does not exactly
+   * match this value.
+   */
+  external_emergency_signal_fingerprint?: string;
+
+  /**
+   * Body param: The interval at which the WARP client fetches the emergency
+   * disconnect signal, formatted as a duration string (e.g., "5m", "2m30s", "1h").
+   * Minimum 30 seconds.
+   */
+  external_emergency_signal_interval?: string;
+
+  /**
+   * Body param: The HTTPS URL from which to fetch the emergency disconnect signal.
+   * Must use HTTPS and have an IPv4 or IPv6 address as the host.
+   */
+  external_emergency_signal_url?: string;
 
   /**
    * Body param: Enable gateway proxy filtering on TCP.
@@ -162,6 +216,34 @@ export interface SettingEditParams {
    * code to bypass WARP.
    */
   disable_for_time?: number;
+
+  /**
+   * Body param: Controls whether the external emergency disconnect feature is
+   * enabled.
+   */
+  external_emergency_signal_enabled?: boolean;
+
+  /**
+   * Body param: The SHA256 fingerprint (64 hexadecimal characters) of the HTTPS
+   * server certificate for the external_emergency_signal_url. If provided, the WARP
+   * client will use this value to verify the server's identity. The device will
+   * ignore any response if the server's certificate fingerprint does not exactly
+   * match this value.
+   */
+  external_emergency_signal_fingerprint?: string;
+
+  /**
+   * Body param: The interval at which the WARP client fetches the emergency
+   * disconnect signal, formatted as a duration string (e.g., "5m", "2m30s", "1h").
+   * Minimum 30 seconds.
+   */
+  external_emergency_signal_interval?: string;
+
+  /**
+   * Body param: The HTTPS URL from which to fetch the emergency disconnect signal.
+   * Must use HTTPS and have an IPv4 or IPv6 address as the host.
+   */
+  external_emergency_signal_url?: string;
 
   /**
    * Body param: Enable gateway proxy filtering on TCP.

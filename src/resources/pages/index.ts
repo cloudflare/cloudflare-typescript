@@ -1,12 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Pages } from './pages';
 export {
-  DeploymentsV4PagePaginationArray,
+  ProjectListResponsesV4PagePaginationArray,
   Projects,
   type Deployment,
   type Project,
   type Stage,
+  type ProjectCreateResponse,
+  type ProjectListResponse,
   type ProjectDeleteResponse,
+  type ProjectEditResponse,
+  type ProjectGetResponse,
   type ProjectPurgeBuildCacheResponse,
   type ProjectCreateParams,
   type ProjectListParams,
@@ -15,4 +20,3 @@ export {
   type ProjectGetParams,
   type ProjectPurgeBuildCacheParams,
 } from './projects/index';
-export { Pages } from './pages';

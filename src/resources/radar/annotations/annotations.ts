@@ -60,6 +60,10 @@ export namespace AnnotationListResponse {
 
     locationsDetails: Array<Annotation.LocationsDetail>;
 
+    origins: Array<string>;
+
+    originsDetails: Array<Annotation.OriginsDetail>;
+
     outage: Annotation.Outage;
 
     startDate: string;
@@ -96,6 +100,12 @@ export namespace AnnotationListResponse {
       name: string;
     }
 
+    export interface OriginsDetail {
+      name: string;
+
+      origin: string;
+    }
+
     export interface Outage {
       outageCause: string;
 
@@ -112,6 +122,36 @@ export interface AnnotationListParams {
   asn?: number;
 
   /**
+   * Filters results by data source.
+   */
+  dataSource?:
+    | 'ALL'
+    | 'AI_BOTS'
+    | 'AI_GATEWAY'
+    | 'BGP'
+    | 'BOTS'
+    | 'CONNECTION_ANOMALY'
+    | 'CT'
+    | 'DNS'
+    | 'DNS_MAGNITUDE'
+    | 'DNS_AS112'
+    | 'DOS'
+    | 'EMAIL_ROUTING'
+    | 'EMAIL_SECURITY'
+    | 'FW'
+    | 'FW_PG'
+    | 'HTTP'
+    | 'HTTP_CONTROL'
+    | 'HTTP_CRAWLER_REFERER'
+    | 'HTTP_ORIGINS'
+    | 'IQI'
+    | 'LEAKED_CREDENTIALS'
+    | 'NET'
+    | 'ROBOTS_TXT'
+    | 'SPEED'
+    | 'WORKERS_AI';
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: string;
@@ -125,6 +165,11 @@ export interface AnnotationListParams {
    * Start of the date range (inclusive).
    */
   dateStart?: string;
+
+  /**
+   * Filters results by event type.
+   */
+  eventType?: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
   /**
    * Format in which results will be returned.
@@ -145,6 +190,11 @@ export interface AnnotationListParams {
    * Skips the specified number of objects before fetching the results.
    */
   offset?: number;
+
+  /**
+   * Filters results by origin.
+   */
+  origin?: string;
 }
 
 Annotations.Outages = Outages;

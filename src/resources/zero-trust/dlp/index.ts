@@ -7,6 +7,9 @@ export {
   type Dataset,
   type DatasetArray,
   type DatasetCreation,
+  type DatasetCreateResponse,
+  type DatasetUpdateResponse,
+  type DatasetGetResponse,
   type DatasetCreateParams,
   type DatasetUpdateParams,
   type DatasetListParams,
@@ -43,6 +46,7 @@ export {
   type ContextAwareness,
   type Profile,
   type SkipConfiguration,
+  type ProfileGetResponse,
   type ProfileListParams,
   type ProfileGetParams,
 } from './profiles/index';

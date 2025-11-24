@@ -600,7 +600,12 @@ export interface ItemDeleteParams {
 }
 
 export namespace ItemDeleteParams {
-  export interface Item {}
+  export interface Item {
+    /**
+     * Defines the unique ID of the item in the List.
+     */
+    id: string;
+  }
 }
 
 export interface ItemGetParams {
