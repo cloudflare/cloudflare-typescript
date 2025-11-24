@@ -56,12 +56,12 @@ describe('resource projects', () => {
           mtls_certificates: { MTLS: { certificate_id: 'd7cdd17c-916f-4cb7-aabe-585eb382ec4e' } },
           placement: { mode: 'smart' },
           queue_producers: { QUEUE_PRODUCER_BINDING: { name: 'some-queue' } },
-          r2_buckets: { R2_BINDING: { jurisdiction: 'eu', name: 'some-bucket' } },
+          r2_buckets: { R2_BINDING: { name: 'some-bucket', jurisdiction: 'eu' } },
           services: {
             SERVICE_BINDING: {
+              service: 'example-worker',
               entrypoint: 'MyHandler',
               environment: 'production',
-              service: 'example-worker',
             },
           },
           usage_model: 'standard',
@@ -86,12 +86,12 @@ describe('resource projects', () => {
           mtls_certificates: { MTLS: { certificate_id: 'd7cdd17c-916f-4cb7-aabe-585eb382ec4e' } },
           placement: { mode: 'smart' },
           queue_producers: { QUEUE_PRODUCER_BINDING: { name: 'some-queue' } },
-          r2_buckets: { R2_BINDING: { jurisdiction: 'eu', name: 'some-bucket' } },
+          r2_buckets: { R2_BINDING: { name: 'some-bucket', jurisdiction: 'eu' } },
           services: {
             SERVICE_BINDING: {
+              service: 'example-worker',
               entrypoint: 'MyHandler',
               environment: 'production',
-              service: 'example-worker',
             },
           },
           usage_model: 'standard',
@@ -103,6 +103,7 @@ describe('resource projects', () => {
         config: {
           deployments_enabled: true,
           owner: 'my-org',
+          owner_id: '12345678',
           path_excludes: ['string'],
           path_includes: ['string'],
           pr_comments_enabled: true,
@@ -111,6 +112,7 @@ describe('resource projects', () => {
           preview_deployment_setting: 'all',
           production_branch: 'main',
           production_deployments_enabled: true,
+          repo_id: '12345678',
           repo_name: 'my-repo',
         },
         type: 'github',
@@ -159,8 +161,6 @@ describe('resource projects', () => {
   test('edit: only required params', async () => {
     const responsePromise = client.pages.projects.edit('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'my-pages-app',
-      production_branch: 'main',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -174,8 +174,6 @@ describe('resource projects', () => {
   test('edit: required and optional params', async () => {
     const response = await client.pages.projects.edit('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'my-pages-app',
-      production_branch: 'main',
       build_config: {
         build_caching: true,
         build_command: 'npm run build',
@@ -203,12 +201,12 @@ describe('resource projects', () => {
           mtls_certificates: { MTLS: { certificate_id: 'd7cdd17c-916f-4cb7-aabe-585eb382ec4e' } },
           placement: { mode: 'smart' },
           queue_producers: { QUEUE_PRODUCER_BINDING: { name: 'some-queue' } },
-          r2_buckets: { R2_BINDING: { jurisdiction: 'eu', name: 'some-bucket' } },
+          r2_buckets: { R2_BINDING: { name: 'some-bucket', jurisdiction: 'eu' } },
           services: {
             SERVICE_BINDING: {
+              service: 'example-worker',
               entrypoint: 'MyHandler',
               environment: 'production',
-              service: 'example-worker',
             },
           },
           usage_model: 'standard',
@@ -233,12 +231,12 @@ describe('resource projects', () => {
           mtls_certificates: { MTLS: { certificate_id: 'd7cdd17c-916f-4cb7-aabe-585eb382ec4e' } },
           placement: { mode: 'smart' },
           queue_producers: { QUEUE_PRODUCER_BINDING: { name: 'some-queue' } },
-          r2_buckets: { R2_BINDING: { jurisdiction: 'eu', name: 'some-bucket' } },
+          r2_buckets: { R2_BINDING: { name: 'some-bucket', jurisdiction: 'eu' } },
           services: {
             SERVICE_BINDING: {
+              service: 'example-worker',
               entrypoint: 'MyHandler',
               environment: 'production',
-              service: 'example-worker',
             },
           },
           usage_model: 'standard',
@@ -246,10 +244,13 @@ describe('resource projects', () => {
           wrangler_config_hash: 'abc123def456',
         },
       },
+      name: 'my-pages-app',
+      production_branch: 'main',
       source: {
         config: {
           deployments_enabled: true,
           owner: 'my-org',
+          owner_id: '12345678',
           path_excludes: ['string'],
           path_includes: ['string'],
           pr_comments_enabled: true,
@@ -258,6 +259,7 @@ describe('resource projects', () => {
           preview_deployment_setting: 'all',
           production_branch: 'main',
           production_deployments_enabled: true,
+          repo_id: '12345678',
           repo_name: 'my-repo',
         },
         type: 'github',

@@ -111,7 +111,6 @@ describe('resource deployments', () => {
     const responsePromise = client.pages.projects.deployments.retry('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -126,7 +125,6 @@ describe('resource deployments', () => {
     const response = await client.pages.projects.deployments.retry('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
-      body: {},
     });
   });
 
@@ -134,7 +132,6 @@ describe('resource deployments', () => {
     const responsePromise = client.pages.projects.deployments.rollback('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -149,7 +146,6 @@ describe('resource deployments', () => {
     const response = await client.pages.projects.deployments.rollback('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       project_name: 'this-is-my-project-01',
-      body: {},
     });
   });
 });

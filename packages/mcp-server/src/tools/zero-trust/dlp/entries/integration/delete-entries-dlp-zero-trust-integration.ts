@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'delete_entries_dlp_zero_trust_integration',
   description:
-    "This is a no-op as integration entires can't be deleted but is needed for our generated terraform API",
+    "This is a no-op as integration entires can't be deleted but is needed for our generated terraform API.",
   inputSchema: {
     type: 'object',
     properties: {

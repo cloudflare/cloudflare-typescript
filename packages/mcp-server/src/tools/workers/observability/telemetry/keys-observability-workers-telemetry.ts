@@ -93,6 +93,9 @@ export const tool: Tool = {
           required: ['key', 'operation', 'type'],
         },
       },
+      from: {
+        type: 'number',
+      },
       keyNeedle: {
         type: 'object',
         description: 'Search for a specific substring in the keys.',
@@ -124,7 +127,7 @@ export const tool: Tool = {
       },
       needle: {
         type: 'object',
-        description: 'Search for a specific substring in the event.',
+        description: 'Search for a specific substring in any of the events',
         properties: {
           value: {
             anyOf: [
@@ -148,17 +151,8 @@ export const tool: Tool = {
         },
         required: ['value'],
       },
-      timeframe: {
-        type: 'object',
-        properties: {
-          from: {
-            type: 'number',
-          },
-          to: {
-            type: 'number',
-          },
-        },
-        required: ['from', 'to'],
+      to: {
+        type: 'number',
       },
       jq_filter: {
         type: 'string',

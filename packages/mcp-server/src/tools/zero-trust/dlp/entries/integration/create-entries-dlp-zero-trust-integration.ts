@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_entries_dlp_zero_trust_integration',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nIntegration entries can't be created, this will update an existing integration entry\nThis is needed for our generated terraform API\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/integration_create_response',\n  $defs: {\n    integration_create_response: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string'\n        },\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        enabled: {\n          type: 'boolean'\n        },\n        name: {\n          type: 'string'\n        },\n        updated_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        profile_id: {\n          type: 'string'\n        }\n      },\n      required: [        'id',\n        'created_at',\n        'enabled',\n        'name',\n        'updated_at'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nIntegration entries can't be created, this will update an existing integration entry.\nThis is needed for our generated terraform API.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/integration_create_response',\n  $defs: {\n    integration_create_response: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'string'\n        },\n        created_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        enabled: {\n          type: 'boolean'\n        },\n        name: {\n          type: 'string'\n        },\n        updated_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        profile_id: {\n          type: 'string'\n        }\n      },\n      required: [        'id',\n        'created_at',\n        'enabled',\n        'name',\n        'updated_at'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -34,7 +34,7 @@ export const tool: Tool = {
       profile_id: {
         type: 'string',
         description:
-          'This field is not actually used as the owning profile for a predefined entry is already set\nto a predefined profile',
+          'This field is not used as the owning profile.\nFor predefined entries it is already set to a predefined profile.',
       },
       jq_filter: {
         type: 'string',

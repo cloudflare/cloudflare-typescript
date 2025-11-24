@@ -22,7 +22,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       page: {
         type: 'integer',
@@ -30,7 +30,7 @@ export const tool: Tool = {
       },
       per_page: {
         type: 'integer',
-        description: 'How many project to return per page.',
+        description: 'How many projects to return per page.',
       },
     },
     required: ['account_id'],

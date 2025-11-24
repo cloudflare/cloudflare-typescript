@@ -22,7 +22,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       project_name: {
         type: 'string',
@@ -30,7 +30,7 @@ export const tool: Tool = {
       },
       deployment_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
     },
     required: ['account_id', 'project_name', 'deployment_id'],

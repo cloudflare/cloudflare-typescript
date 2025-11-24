@@ -52,6 +52,8 @@ export namespace TrafficAnomalyGetResponse {
 
     locationDetails?: TrafficAnomaly.LocationDetails;
 
+    originDetails?: TrafficAnomaly.OriginDetails;
+
     visibleInDataSources?: Array<string>;
   }
 
@@ -76,6 +78,12 @@ export namespace TrafficAnomalyGetResponse {
       code: string;
 
       name: string;
+    }
+
+    export interface OriginDetails {
+      name: string;
+
+      origin: string;
     }
   }
 }
@@ -122,7 +130,17 @@ export interface TrafficAnomalyGetParams {
    */
   offset?: number;
 
+  /**
+   * Filters results by origin.
+   */
+  origin?: string;
+
   status?: 'VERIFIED' | 'UNVERIFIED';
+
+  /**
+   * Filters results by entity type (LOCATION, AS, or ORIGIN).
+   */
+  type?: Array<'LOCATION' | 'AS' | 'ORIGIN'>;
 }
 
 TrafficAnomalies.Locations = LocationsAPILocations;

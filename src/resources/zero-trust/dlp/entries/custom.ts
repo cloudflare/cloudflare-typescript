@@ -169,15 +169,15 @@ export interface CustomUpdateResponse {
 }
 
 export type CustomListResponse =
-  | CustomListResponse.CustomEntry
-  | CustomListResponse.PredefinedEntry
-  | CustomListResponse.IntegrationEntry
-  | CustomListResponse.ExactDataEntry
-  | CustomListResponse.DocumentFingerprintEntry
-  | CustomListResponse.WordListEntry;
+  | CustomListResponse.Custom
+  | CustomListResponse.Predefined
+  | CustomListResponse.Integration
+  | CustomListResponse.ExactData
+  | CustomListResponse.DocumentFingerprint
+  | CustomListResponse.WordList;
 
 export namespace CustomListResponse {
-  export interface CustomEntry {
+  export interface Custom {
     id: string;
 
     created_at: string;
@@ -195,10 +195,10 @@ export namespace CustomListResponse {
     profile_id?: string | null;
   }
 
-  export interface PredefinedEntry {
+  export interface Predefined {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: Predefined.Confidence;
 
     enabled: boolean;
 
@@ -208,10 +208,10 @@ export namespace CustomListResponse {
 
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    variant?: Predefined.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace Predefined {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -234,7 +234,7 @@ export namespace CustomListResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface Integration {
     id: string;
 
     created_at: string;
@@ -250,7 +250,7 @@ export namespace CustomListResponse {
     profile_id?: string | null;
   }
 
-  export interface ExactDataEntry {
+  export interface ExactData {
     id: string;
 
     /**
@@ -272,7 +272,7 @@ export namespace CustomListResponse {
     updated_at: string;
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface DocumentFingerprint {
     id: string;
 
     created_at: string;
@@ -286,7 +286,7 @@ export namespace CustomListResponse {
     updated_at: string;
   }
 
-  export interface WordListEntry {
+  export interface WordList {
     id: string;
 
     created_at: string;
@@ -308,15 +308,15 @@ export namespace CustomListResponse {
 export type CustomDeleteResponse = unknown;
 
 export type CustomGetResponse =
-  | CustomGetResponse.CustomEntry
-  | CustomGetResponse.PredefinedEntry
-  | CustomGetResponse.IntegrationEntry
-  | CustomGetResponse.ExactDataEntry
-  | CustomGetResponse.DocumentFingerprintEntry
-  | CustomGetResponse.WordListEntry;
+  | CustomGetResponse.Custom
+  | CustomGetResponse.Predefined
+  | CustomGetResponse.Integration
+  | CustomGetResponse.ExactData
+  | CustomGetResponse.DocumentFingerprint
+  | CustomGetResponse.WordList;
 
 export namespace CustomGetResponse {
-  export interface CustomEntry {
+  export interface Custom {
     id: string;
 
     created_at: string;
@@ -334,10 +334,10 @@ export namespace CustomGetResponse {
     profile_id?: string | null;
   }
 
-  export interface PredefinedEntry {
+  export interface Predefined {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: Predefined.Confidence;
 
     enabled: boolean;
 
@@ -347,10 +347,10 @@ export namespace CustomGetResponse {
 
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    variant?: Predefined.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace Predefined {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -373,7 +373,7 @@ export namespace CustomGetResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface Integration {
     id: string;
 
     created_at: string;
@@ -389,7 +389,7 @@ export namespace CustomGetResponse {
     profile_id?: string | null;
   }
 
-  export interface ExactDataEntry {
+  export interface ExactData {
     id: string;
 
     /**
@@ -411,7 +411,7 @@ export namespace CustomGetResponse {
     updated_at: string;
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface DocumentFingerprint {
     id: string;
 
     created_at: string;
@@ -425,7 +425,7 @@ export namespace CustomGetResponse {
     updated_at: string;
   }
 
-  export interface WordListEntry {
+  export interface WordList {
     id: string;
 
     created_at: string;

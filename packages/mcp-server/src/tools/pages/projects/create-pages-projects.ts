@@ -22,7 +22,7 @@ export const tool: Tool = {
     properties: {
       account_id: {
         type: 'string',
-        description: 'Identifier',
+        description: 'Identifier.',
       },
       name: {
         type: 'string',
@@ -142,6 +142,7 @@ export const tool: Tool = {
                     description: 'CPU time limit in milliseconds.',
                   },
                 },
+                required: ['cpu_ms'],
               },
               mtls_certificates: {
                 type: 'object',
@@ -157,6 +158,7 @@ export const tool: Tool = {
                     description: 'Placement mode.',
                   },
                 },
+                required: ['mode'],
               },
               queue_producers: {
                 type: 'object',
@@ -265,6 +267,7 @@ export const tool: Tool = {
                     description: 'CPU time limit in milliseconds.',
                   },
                 },
+                required: ['cpu_ms'],
               },
               mtls_certificates: {
                 type: 'object',
@@ -280,6 +283,7 @@ export const tool: Tool = {
                     description: 'Placement mode.',
                   },
                 },
+                required: ['mode'],
               },
               queue_producers: {
                 type: 'object',
@@ -316,6 +320,7 @@ export const tool: Tool = {
       },
       source: {
         type: 'object',
+        description: 'Configs for the project source control.',
         properties: {
           config: {
             type: 'object',
@@ -328,6 +333,10 @@ export const tool: Tool = {
               owner: {
                 type: 'string',
                 description: 'The owner of the repository.',
+              },
+              owner_id: {
+                type: 'string',
+                description: 'The owner ID of the repository.',
               },
               path_excludes: {
                 type: 'array',
@@ -379,6 +388,10 @@ export const tool: Tool = {
                 description:
                   'Whether to trigger a production deployment on commits to the production branch.',
               },
+              repo_id: {
+                type: 'string',
+                description: 'The ID of the repository.',
+              },
               repo_name: {
                 type: 'string',
                 description: 'The name of the repository.',
@@ -391,6 +404,7 @@ export const tool: Tool = {
             enum: ['github', 'gitlab'],
           },
         },
+        required: ['config', 'type'],
       },
     },
     required: ['account_id', 'name', 'production_branch'],

@@ -39,7 +39,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult((await client.ssl.certificatePacks.list(body)) as object);
+  const response = await client.ssl.certificatePacks.list(body).asResponse();
+  return asTextContentResult(await response.json());
 };
 
 export default { metadata, tool, handler };

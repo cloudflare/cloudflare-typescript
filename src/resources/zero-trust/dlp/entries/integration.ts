@@ -10,7 +10,7 @@ import { path } from '../../../../internal/utils/path';
 export class Integration extends APIResource {
   /**
    * Integration entries can't be created, this will update an existing integration
-   * entry This is needed for our generated terraform API
+   * entry. This is needed for our generated terraform API.
    *
    * @example
    * ```ts
@@ -85,7 +85,7 @@ export class Integration extends APIResource {
 
   /**
    * This is a no-op as integration entires can't be deleted but is needed for our
-   * generated terraform API
+   * generated terraform API.
    *
    * @example
    * ```ts
@@ -167,15 +167,15 @@ export interface IntegrationUpdateResponse {
 }
 
 export type IntegrationListResponse =
-  | IntegrationListResponse.CustomEntry
-  | IntegrationListResponse.PredefinedEntry
-  | IntegrationListResponse.IntegrationEntry
-  | IntegrationListResponse.ExactDataEntry
-  | IntegrationListResponse.DocumentFingerprintEntry
-  | IntegrationListResponse.WordListEntry;
+  | IntegrationListResponse.Custom
+  | IntegrationListResponse.Predefined
+  | IntegrationListResponse.Integration
+  | IntegrationListResponse.ExactData
+  | IntegrationListResponse.DocumentFingerprint
+  | IntegrationListResponse.WordList;
 
 export namespace IntegrationListResponse {
-  export interface CustomEntry {
+  export interface Custom {
     id: string;
 
     created_at: string;
@@ -193,10 +193,10 @@ export namespace IntegrationListResponse {
     profile_id?: string | null;
   }
 
-  export interface PredefinedEntry {
+  export interface Predefined {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: Predefined.Confidence;
 
     enabled: boolean;
 
@@ -206,10 +206,10 @@ export namespace IntegrationListResponse {
 
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    variant?: Predefined.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace Predefined {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -232,7 +232,7 @@ export namespace IntegrationListResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface Integration {
     id: string;
 
     created_at: string;
@@ -248,7 +248,7 @@ export namespace IntegrationListResponse {
     profile_id?: string | null;
   }
 
-  export interface ExactDataEntry {
+  export interface ExactData {
     id: string;
 
     /**
@@ -270,7 +270,7 @@ export namespace IntegrationListResponse {
     updated_at: string;
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface DocumentFingerprint {
     id: string;
 
     created_at: string;
@@ -284,7 +284,7 @@ export namespace IntegrationListResponse {
     updated_at: string;
   }
 
-  export interface WordListEntry {
+  export interface WordList {
     id: string;
 
     created_at: string;
@@ -306,15 +306,15 @@ export namespace IntegrationListResponse {
 export type IntegrationDeleteResponse = unknown;
 
 export type IntegrationGetResponse =
-  | IntegrationGetResponse.CustomEntry
-  | IntegrationGetResponse.PredefinedEntry
-  | IntegrationGetResponse.IntegrationEntry
-  | IntegrationGetResponse.ExactDataEntry
-  | IntegrationGetResponse.DocumentFingerprintEntry
-  | IntegrationGetResponse.WordListEntry;
+  | IntegrationGetResponse.Custom
+  | IntegrationGetResponse.Predefined
+  | IntegrationGetResponse.Integration
+  | IntegrationGetResponse.ExactData
+  | IntegrationGetResponse.DocumentFingerprint
+  | IntegrationGetResponse.WordList;
 
 export namespace IntegrationGetResponse {
-  export interface CustomEntry {
+  export interface Custom {
     id: string;
 
     created_at: string;
@@ -332,10 +332,10 @@ export namespace IntegrationGetResponse {
     profile_id?: string | null;
   }
 
-  export interface PredefinedEntry {
+  export interface Predefined {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: Predefined.Confidence;
 
     enabled: boolean;
 
@@ -345,10 +345,10 @@ export namespace IntegrationGetResponse {
 
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    variant?: Predefined.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace Predefined {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -371,7 +371,7 @@ export namespace IntegrationGetResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface Integration {
     id: string;
 
     created_at: string;
@@ -387,7 +387,7 @@ export namespace IntegrationGetResponse {
     profile_id?: string | null;
   }
 
-  export interface ExactDataEntry {
+  export interface ExactData {
     id: string;
 
     /**
@@ -409,7 +409,7 @@ export namespace IntegrationGetResponse {
     updated_at: string;
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface DocumentFingerprint {
     id: string;
 
     created_at: string;
@@ -423,7 +423,7 @@ export namespace IntegrationGetResponse {
     updated_at: string;
   }
 
-  export interface WordListEntry {
+  export interface WordList {
     id: string;
 
     created_at: string;
@@ -459,8 +459,8 @@ export interface IntegrationCreateParams {
   entry_id: string;
 
   /**
-   * Body param: This field is not actually used as the owning profile for a
-   * predefined entry is already set to a predefined profile
+   * Body param: This field is not used as the owning profile. For predefined entries
+   * it is already set to a predefined profile.
    */
   profile_id?: string | null;
 }

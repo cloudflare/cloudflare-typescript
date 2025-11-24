@@ -49,6 +49,7 @@ export const tool: Tool = {
           'domain_joined',
           'client_certificate',
           'client_certificate_v2',
+          'antivirus',
           'unique_client_id',
           'kolide',
           'tanium_s2s',
@@ -232,6 +233,16 @@ export const tool: Tool = {
               },
             },
             required: ['certificate_id', 'check_private_key', 'operating_system'],
+          },
+          {
+            type: 'object',
+            title: 'Antivirus',
+            properties: {
+              update_window_days: {
+                type: 'number',
+                description: 'Number of days that the antivirus should be updated within.',
+              },
+            },
           },
           {
             $ref: '#/$defs/workspace_one_input',

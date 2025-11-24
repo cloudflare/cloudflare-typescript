@@ -260,6 +260,11 @@ export interface AuditListParams extends CursorPaginationAfterParams {
   /**
    * Query param:
    */
+  id?: AuditListParams.ID;
+
+  /**
+   * Query param:
+   */
   account_name?: AuditListParams.AccountName;
 
   /**
@@ -306,11 +311,6 @@ export interface AuditListParams extends CursorPaginationAfterParams {
    * Query param:
    */
   actor_type?: AuditListParams.ActorType;
-
-  /**
-   * Query param:
-   */
-  audit_log_id?: AuditListParams.AuditLogID;
 
   /**
    * Query param: Sets sorting order.
@@ -376,6 +376,13 @@ export interface AuditListParams extends CursorPaginationAfterParams {
 }
 
 export namespace AuditListParams {
+  export interface ID {
+    /**
+     * Filters out audit logs by their IDs.
+     */
+    not?: Array<string>;
+  }
+
   export interface AccountName {
     /**
      * Filters out audit logs by the account name.
@@ -447,13 +454,6 @@ export namespace AuditListParams {
      * Filters out audit logs by the actor type.
      */
     not?: Array<'account' | 'cloudflare_admin' | 'system' | 'user'>;
-  }
-
-  export interface AuditLogID {
-    /**
-     * Filters out audit logs by their IDs.
-     */
-    not?: Array<string>;
   }
 
   export interface RawCfRayID {

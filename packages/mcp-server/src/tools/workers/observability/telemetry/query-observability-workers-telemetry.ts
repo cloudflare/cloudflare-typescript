@@ -25,48 +25,64 @@ export const tool: Tool = {
       },
       queryId: {
         type: 'string',
+        description: 'Unique identifier for the query to execute',
       },
       timeframe: {
         type: 'object',
+        description: 'Time range for the query execution',
         properties: {
           from: {
             type: 'number',
+            description: 'Start timestamp for the query timeframe (Unix timestamp in milliseconds)',
           },
           to: {
             type: 'number',
+            description: 'End timestamp for the query timeframe (Unix timestamp in milliseconds)',
           },
         },
         required: ['from', 'to'],
       },
       chart: {
         type: 'boolean',
+        description: 'Whether to include timeseties data in the response',
       },
       compare: {
         type: 'boolean',
+        description: 'Whether to include comparison data with previous time periods',
       },
       dry: {
         type: 'boolean',
+        description:
+          'Whether to perform a dry run without saving the results of the query. Useful for validation',
       },
       granularity: {
         type: 'number',
+        description:
+          'Time granularity for aggregating results (in milliseconds). Controls the bucketing of time-series data',
       },
       ignoreSeries: {
         type: 'boolean',
+        description: 'Whether to ignore time-series data in the results and return only aggregated values',
       },
       limit: {
         type: 'number',
+        description: 'Maximum number of events to return.',
       },
       offset: {
         type: 'string',
+        description: 'Cursor for pagination to retrieve the next set of results',
       },
       offsetBy: {
         type: 'number',
+        description: 'Number of events to skip for pagination. Used in conjunction with offset',
       },
       offsetDirection: {
         type: 'string',
+        description: "Direction for offset-based pagination (e.g., 'next', 'prev')",
       },
       parameters: {
         type: 'object',
+        description: 'Optional parameters to pass to the query execution',
         properties: {
           calculations: {
             type: 'array',
@@ -293,10 +309,12 @@ export const tool: Tool = {
       },
       patternType: {
         type: 'string',
+        description: 'Type of pattern to search for when using pattern-based views',
         enum: ['message', 'error'],
       },
       view: {
         type: 'string',
+        description: 'View type for presenting the query results.',
         enum: ['traces', 'events', 'calculations', 'invocations', 'requests', 'patterns'],
       },
     },
