@@ -3016,6 +3016,127 @@
       ]
     },
     {
+      "base": "r2DataCatalog.namespaces.tables",
+      "name": "list",
+      "params": [
+        {
+          "type": "param",
+          "key": "namespace",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "namespace",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "r2DataCatalog.namespaces.tables.maintenanceConfigs",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "table_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "table_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "r2DataCatalog.namespaces.tables.maintenanceConfigs",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "table_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "table_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "workersForPlatforms.dispatch.namespaces.scripts",
       "name": "update",
       "params": [

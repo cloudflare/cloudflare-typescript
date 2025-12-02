@@ -843,6 +843,85 @@ The following tools are available in this MCP server.
 - `delete_zone_transfers_dns_tsigs` (`write`): Delete TSIG.
 - `get_zone_transfers_dns_tsigs` (`read`): Get TSIG.
 
+### Resource `email_security.investigate`:
+
+- `list_email_security_investigate` (`read`): Returns information for each email that matches the search parameter(s).
+- `get_email_security_investigate` (`read`): Get message details
+
+### Resource `email_security.investigate.detections`:
+
+- `get_investigate_email_security_detections` (`read`): Returns detection details such as threat categories and sender information for non-benign messages.
+
+### Resource `email_security.investigate.preview`:
+
+- `create_investigate_email_security_preview` (`write`): Preview for non-detection messages
+- `get_investigate_email_security_preview` (`read`): Returns a preview of the message body as a base64 encoded PNG image for non-benign messages.
+
+### Resource `email_security.investigate.raw`:
+
+- `get_investigate_email_security_raw` (`read`): Returns the raw eml of any non-benign message.
+
+### Resource `email_security.investigate.trace`:
+
+- `get_investigate_email_security_trace` (`read`): Get email trace
+
+### Resource `email_security.investigate.move`:
+
+- `create_investigate_email_security_move` (`write`): Move a message
+- `bulk_investigate_email_security_move` (`write`): Move multiple messages
+
+### Resource `email_security.investigate.reclassify`:
+
+- `create_investigate_email_security_reclassify` (`write`): Change email classfication
+
+### Resource `email_security.investigate.release`:
+
+- `bulk_investigate_email_security_release` (`write`): Release messages from quarantine
+
+### Resource `email_security.settings.allow_policies`:
+
+- `create_settings_email_security_allow_policies` (`write`): Create an email allow policy
+- `list_settings_email_security_allow_policies` (`read`): Lists, searches, and sorts an account’s email allow policies.
+- `delete_settings_email_security_allow_policies` (`write`): Delete an email allow policy
+- `edit_settings_email_security_allow_policies` (`write`): Update an email allow policy
+- `get_settings_email_security_allow_policies` (`read`): Get an email allow policy
+
+### Resource `email_security.settings.block_senders`:
+
+- `create_settings_email_security_block_senders` (`write`): Create a blocked email sender
+- `list_settings_email_security_block_senders` (`read`): List blocked email senders
+- `delete_settings_email_security_block_senders` (`write`): Delete a blocked email sender
+- `edit_settings_email_security_block_senders` (`write`): Update a blocked email sender
+- `get_settings_email_security_block_senders` (`read`): Get a blocked email sender
+
+### Resource `email_security.settings.domains`:
+
+- `list_settings_email_security_domains` (`read`): Lists, searches, and sorts an account’s email domains.
+- `delete_settings_email_security_domains` (`write`): Unprotect an email domain
+- `bulk_delete_settings_email_security_domains` (`write`): Unprotect multiple email domains
+- `edit_settings_email_security_domains` (`write`): Update an email domain
+- `get_settings_email_security_domains` (`read`): Get an email domain
+
+### Resource `email_security.settings.impersonation_registry`:
+
+- `create_settings_email_security_impersonation_registry` (`write`): Create an entry in impersonation registry
+- `list_settings_email_security_impersonation_registry` (`read`): Lists, searches, and sorts entries in the impersonation registry.
+- `delete_settings_email_security_impersonation_registry` (`write`): Delete an entry from impersonation registry
+- `edit_settings_email_security_impersonation_registry` (`write`): Update an entry in impersonation registry
+- `get_settings_email_security_impersonation_registry` (`read`): Get an entry in impersonation registry
+
+### Resource `email_security.settings.trusted_domains`:
+
+- `create_settings_email_security_trusted_domains` (`write`): Create a trusted email domain
+- `list_settings_email_security_trusted_domains` (`read`): Lists, searches, and sorts an account’s trusted email domains.
+- `delete_settings_email_security_trusted_domains` (`write`): Delete a trusted email domain
+- `edit_settings_email_security_trusted_domains` (`write`): Update a trusted email domain
+- `get_settings_email_security_trusted_domains` (`read`): Get a trusted email domain
+
+### Resource `email_security.submissions`:
+
+- `list_email_security_submissions` (`read`): This endpoint returns information for submissions to made to reclassify emails.
+
 ### Resource `email_routing`:
 
 - `disable_email_routing` (`write`): Disable your Email Routing zone. Also removes additional MX records previously required for Email Routing to work.
@@ -2336,6 +2415,50 @@ The following tools are available in this MCP server.
 
 - `source_super_slurper_r2_connectivity_precheck` (`write`): Check whether tokens are valid against the source bucket
 - `target_super_slurper_r2_connectivity_precheck` (`write`): Check whether tokens are valid against the target bucket
+
+### Resource `r2_data_catalog`:
+
+- `list_r2_data_catalog` (`read`): Returns a list of R2 buckets that have been enabled as Apache Iceberg catalogs
+  for the specified account. Each catalog represents an R2 bucket configured
+  to store Iceberg metadata and data files.
+- `disable_r2_data_catalog` (`write`): Disable an R2 bucket as a catalog. This operation deactivates the catalog
+  but preserves existing metadata and data files. The catalog can be
+  re-enabled later.
+- `enable_r2_data_catalog` (`write`): Enable an R2 bucket as an Apache Iceberg catalog. This operation creates
+  the necessary catalog infrastructure and activates the bucket for storing
+  Iceberg metadata and data files.
+- `get_r2_data_catalog` (`read`): Retrieve detailed information about a specific R2 catalog by bucket name.
+  Returns catalog status, maintenance configuration, and credential status.
+
+### Resource `r2_data_catalog.maintenance_configs`:
+
+- `update_r2_data_catalog_maintenance_configs` (`write`): Update the maintenance configuration for a catalog. This allows you to
+  enable or disable compaction and adjust target file sizes for optimization.
+- `get_r2_data_catalog_maintenance_configs` (`read`): Retrieve the maintenance configuration for a specific catalog,
+  including compaction settings and credential status.
+
+### Resource `r2_data_catalog.credentials`:
+
+- `create_r2_data_catalog_credentials` (`write`): Store authentication credentials for a catalog. These credentials are used
+  to authenticate with R2 storage when performing catalog operations.
+
+### Resource `r2_data_catalog.namespaces`:
+
+- `list_r2_data_catalog_namespaces` (`read`): Returns a list of namespaces in the specified R2 catalog.
+  Supports hierarchical filtering and pagination for efficient traversal
+  of large namespace hierarchies.
+
+### Resource `r2_data_catalog.namespaces.tables`:
+
+- `list_namespaces_r2_data_catalog_tables` (`read`): Returns a list of tables in the specified namespace within an R2 catalog.
+  Supports pagination for efficient traversal of large table collections.
+
+### Resource `r2_data_catalog.namespaces.tables.maintenance_configs`:
+
+- `update_tables_namespaces_r2_data_catalog_maintenance_configs` (`write`): Update the maintenance configuration for a specific table. This allows you to
+  enable or disable compaction and adjust target file sizes for optimization.
+- `get_tables_namespaces_r2_data_catalog_maintenance_configs` (`read`): Retrieve the maintenance configuration for a specific table,
+  including compaction settings.
 
 ### Resource `workers_for_platforms.dispatch.namespaces`:
 

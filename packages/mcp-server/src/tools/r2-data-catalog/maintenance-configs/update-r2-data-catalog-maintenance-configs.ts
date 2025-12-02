@@ -1,0 +1,75 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { isJqError, maybeFilter } from 'cloudflare-mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
+
+import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import Cloudflare from 'cloudflare';
+
+export const metadata: Metadata = {
+  resource: 'r2_data_catalog.maintenance_configs',
+  operation: 'write',
+  tags: [],
+  httpMethod: 'post',
+  httpPath: '/accounts/{account_id}/r2-catalog/{bucket_name}/maintenance-configs',
+  operationId: 'update-maintenance-config',
+};
+
+export const tool: Tool = {
+  name: 'update_r2_data_catalog_maintenance_configs',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdate the maintenance configuration for a catalog. This allows you to\nenable or disable compaction and adjust target file sizes for optimization.\n\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/maintenance_config_update_response',\n  $defs: {\n    maintenance_config_update_response: {\n      type: 'object',\n      description: 'Configures maintenance for the catalog.',\n      properties: {\n        compaction: {\n          type: 'object',\n          description: 'Configures compaction for catalog maintenance.',\n          properties: {\n            state: {\n              type: 'string',\n              description: 'Specifies the state of maintenance operations.',\n              enum: [                'enabled',\n                'disabled'\n              ]\n            },\n            target_size_mb: {\n              type: 'string',\n              description: 'Sets the target file size for compaction in megabytes.',\n              enum: [                '64',\n                '128',\n                '256',\n                '512'\n              ]\n            }\n          },\n          required: [            'state',\n            'target_size_mb'\n          ]\n        }\n      }\n    }\n  }\n}\n```",
+  inputSchema: {
+    type: 'object',
+    properties: {
+      account_id: {
+        type: 'string',
+        description: 'Use this to identify the account.',
+      },
+      bucket_name: {
+        type: 'string',
+        description: 'Specifies the R2 bucket name.',
+      },
+      compaction: {
+        type: 'object',
+        description: 'Updates compaction configuration (all fields optional).',
+        properties: {
+          state: {
+            type: 'string',
+            description: 'Updates the state optionally.',
+            enum: ['enabled', 'disabled'],
+          },
+          target_size_mb: {
+            type: 'string',
+            description: 'Updates the target file size optionally.',
+            enum: ['64', '128', '256', '512'],
+          },
+        },
+      },
+      jq_filter: {
+        type: 'string',
+        title: 'jq Filter',
+        description:
+          'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
+      },
+    },
+    required: ['account_id', 'bucket_name'],
+  },
+  annotations: {},
+};
+
+export const handler = async (client: Cloudflare, args: Record<string, unknown> | undefined) => {
+  const { bucket_name, jq_filter, ...body } = args as any;
+  try {
+    return asTextContentResult(
+      await maybeFilter(jq_filter, await client.r2DataCatalog.maintenanceConfigs.update(bucket_name, body)),
+    );
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
+};
+
+export default { metadata, tool, handler };
