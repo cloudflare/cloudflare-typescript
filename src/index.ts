@@ -90,6 +90,7 @@ import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
 import { Pipelines } from './resources/pipelines/pipelines';
 import { Queues } from './resources/queues/queues';
+import { R2DataCatalog } from './resources/r2-data-catalog/r2-data-catalog';
 import { R2 } from './resources/r2/r2';
 import { Radar } from './resources/radar/radar';
 import { Registrar } from './resources/registrar/registrar';
@@ -331,6 +332,7 @@ export class Cloudflare extends Core.APIClient {
   alerting: API.Alerting = new API.Alerting(this);
   d1: API.D1Resource = new API.D1Resource(this);
   r2: API.R2 = new API.R2(this);
+  r2DataCatalog: API.R2DataCatalog = new API.R2DataCatalog(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   turnstile: API.Turnstile = new API.Turnstile(this);
@@ -572,6 +574,7 @@ Cloudflare.Stream = Stream;
 Cloudflare.Alerting = Alerting;
 Cloudflare.D1Resource = D1Resource;
 Cloudflare.R2 = R2;
+Cloudflare.R2DataCatalog = R2DataCatalog;
 Cloudflare.WorkersForPlatforms = WorkersForPlatforms;
 Cloudflare.ZeroTrust = ZeroTrust;
 Cloudflare.Turnstile = Turnstile;
@@ -769,6 +772,8 @@ export declare namespace Cloudflare {
   export { D1Resource as D1Resource };
 
   export { R2 as R2 };
+
+  export { R2DataCatalog as R2DataCatalog };
 
   export { WorkersForPlatforms as WorkersForPlatforms };
 
