@@ -68,6 +68,7 @@ export { Pages } from './pages/pages';
 export { Pipelines } from './pipelines/pipelines';
 export { Queues } from './queues/queues';
 export { R2 } from './r2/r2';
+export { R2DataCatalog } from './r2-data-catalog/r2-data-catalog';
 export { RUM } from './rum/rum';
 export { Radar } from './radar/radar';
 export { RateLimits } from './rate-limits';
