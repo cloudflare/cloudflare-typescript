@@ -474,15 +474,15 @@ export namespace EntryListResponse {
 export type EntryDeleteResponse = unknown;
 
 export type EntryGetResponse =
-  | EntryGetResponse.Custom
-  | EntryGetResponse.Predefined
-  | EntryGetResponse.Integration
-  | EntryGetResponse.ExactData
-  | EntryGetResponse.DocumentFingerprint
-  | EntryGetResponse.WordList;
+  | EntryGetResponse.CustomEntry
+  | EntryGetResponse.PredefinedEntry
+  | EntryGetResponse.IntegrationEntry
+  | EntryGetResponse.ExactDataEntry
+  | EntryGetResponse.DocumentFingerprintEntry
+  | EntryGetResponse.WordListEntry;
 
 export namespace EntryGetResponse {
-  export interface Custom {
+  export interface CustomEntry {
     id: string;
 
     created_at: string;
@@ -498,12 +498,25 @@ export namespace EntryGetResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    profiles?: Array<CustomEntry.Profile>;
   }
 
-  export interface Predefined {
+  export namespace CustomEntry {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface PredefinedEntry {
     id: string;
 
-    confidence: Predefined.Confidence;
+    confidence: PredefinedEntry.Confidence;
 
     enabled: boolean;
 
@@ -513,10 +526,12 @@ export namespace EntryGetResponse {
 
     profile_id?: string | null;
 
-    variant?: Predefined.Variant;
+    profiles?: Array<PredefinedEntry.Profile>;
+
+    variant?: PredefinedEntry.Variant;
   }
 
-  export namespace Predefined {
+  export namespace PredefinedEntry {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -530,6 +545,15 @@ export namespace EntryGetResponse {
       available: boolean;
     }
 
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+
     export interface Variant {
       topic_type: 'Intent' | 'Content';
 
@@ -539,7 +563,7 @@ export namespace EntryGetResponse {
     }
   }
 
-  export interface Integration {
+  export interface IntegrationEntry {
     id: string;
 
     created_at: string;
@@ -553,9 +577,22 @@ export namespace EntryGetResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    profiles?: Array<IntegrationEntry.Profile>;
   }
 
-  export interface ExactData {
+  export namespace IntegrationEntry {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface ExactDataEntry {
     id: string;
 
     /**
@@ -575,9 +612,22 @@ export namespace EntryGetResponse {
     type: 'exact_data';
 
     updated_at: string;
+
+    profiles?: Array<ExactDataEntry.Profile>;
   }
 
-  export interface DocumentFingerprint {
+  export namespace ExactDataEntry {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface DocumentFingerprintEntry {
     id: string;
 
     created_at: string;
@@ -589,9 +639,22 @@ export namespace EntryGetResponse {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    profiles?: Array<DocumentFingerprintEntry.Profile>;
   }
 
-  export interface WordList {
+  export namespace DocumentFingerprintEntry {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface WordListEntry {
     id: string;
 
     created_at: string;
@@ -607,6 +670,19 @@ export namespace EntryGetResponse {
     word_list: unknown;
 
     profile_id?: string | null;
+
+    profiles?: Array<WordListEntry.Profile>;
+  }
+
+  export namespace WordListEntry {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
   }
 }
 

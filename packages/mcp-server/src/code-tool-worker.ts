@@ -660,6 +660,7 @@ const fuse = new Fuse(
     'client.addressing.addressMaps.ips.update',
     'client.addressing.addressMaps.zones.delete',
     'client.addressing.addressMaps.zones.update',
+    'client.addressing.loaDocuments.create',
     'client.addressing.loaDocuments.get',
     'client.addressing.prefixes.create',
     'client.addressing.prefixes.delete',

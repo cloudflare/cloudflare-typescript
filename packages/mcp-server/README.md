@@ -1660,6 +1660,7 @@ The following tools are available in this MCP server.
 
 ### Resource `addressing.loa_documents`:
 
+- `create_addressing_loa_documents` (`write`): Submit LOA document (pdf format) under the account.
 - `get_addressing_loa_documents` (`read`): Download specified LOA document under the account.
 
 ### Resource `addressing.prefixes`:

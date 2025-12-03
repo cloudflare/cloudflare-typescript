@@ -32,7 +32,12 @@ export class ResourceGroups extends APIResource {
     options?: RequestOptions,
   ): APIPromise<ResourceGroupCreateResponse> {
     const { account_id, ...body } = params;
-    return this._client.post(path`/accounts/${account_id}/iam/resource_groups`, { body, ...options });
+    return (
+      this._client.post(path`/accounts/${account_id}/iam/resource_groups`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: ResourceGroupCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -53,10 +58,12 @@ export class ResourceGroups extends APIResource {
     options?: RequestOptions,
   ): APIPromise<ResourceGroupUpdateResponse> {
     const { account_id, ...body } = params;
-    return this._client.put(path`/accounts/${account_id}/iam/resource_groups/${resourceGroupID}`, {
-      body,
-      ...options,
-    });
+    return (
+      this._client.put(path`/accounts/${account_id}/iam/resource_groups/${resourceGroupID}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: ResourceGroupUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -127,7 +134,12 @@ export class ResourceGroups extends APIResource {
     options?: RequestOptions,
   ): APIPromise<ResourceGroupGetResponse> {
     const { account_id } = params;
-    return this._client.get(path`/accounts/${account_id}/iam/resource_groups/${resourceGroupID}`, options);
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/iam/resource_groups/${resourceGroupID}`,
+        options,
+      ) as APIPromise<{ result: ResourceGroupGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -138,19 +150,24 @@ export type ResourceGroupListResponsesSinglePage = SinglePage<ResourceGroupListR
  */
 export interface ResourceGroupCreateResponse {
   /**
-   * Identifier of the group.
+   * Identifier of the resource group.
    */
-  id?: string;
+  id: string;
+
+  /**
+   * The scope associated to the resource group
+   */
+  scope: Array<ResourceGroupCreateResponse.Scope>;
 
   /**
    * Attributes associated to the resource group.
    */
-  meta?: unknown;
+  meta?: ResourceGroupCreateResponse.Meta;
 
   /**
-   * A scope is a combination of scope objects which provides additional context.
+   * Name of the resource group.
    */
-  scope?: ResourceGroupCreateResponse.Scope;
+  name?: string;
 }
 
 export namespace ResourceGroupCreateResponse {
@@ -165,8 +182,7 @@ export namespace ResourceGroupCreateResponse {
     key: string;
 
     /**
-     * A list of scope objects for additional context. The number of Scope objects
-     * should not be zero.
+     * A list of scope objects for additional context.
      */
     objects: Array<Scope.Object>;
   }
@@ -183,6 +199,15 @@ export namespace ResourceGroupCreateResponse {
        */
       key: string;
     }
+  }
+
+  /**
+   * Attributes associated to the resource group.
+   */
+  export interface Meta {
+    key?: string;
+
+    value?: string;
   }
 }
 
