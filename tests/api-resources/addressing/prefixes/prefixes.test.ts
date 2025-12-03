@@ -32,6 +32,7 @@ describe('resource prefixes', () => {
       cidr: '192.0.2.0/24',
       delegate_loa_creation: true,
       description: 'Internal test prefix',
+      loa_document_id: 'd933b1530bc56c9953cf8ce166da8004',
     });
   });
 

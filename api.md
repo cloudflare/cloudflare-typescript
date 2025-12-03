@@ -2949,8 +2949,13 @@ Methods:
 
 ## LOADocuments
 
+Types:
+
+- <code><a href="./src/resources/addressing/loa-documents.ts">LOADocumentCreateResponse</a></code>
+
 Methods:
 
+- <code title="post /accounts/{account_id}/addressing/loa_documents">client.addressing.loaDocuments.<a href="./src/resources/addressing/loa-documents.ts">create</a>({ ...params }) -> LOADocumentCreateResponse</code>
 - <code title="get /accounts/{account_id}/addressing/loa_documents/{loa_document_id}/download">client.addressing.loaDocuments.<a href="./src/resources/addressing/loa-documents.ts">get</a>(loaDocumentId, { ...params }) -> Response</code>
 
 ## Prefixes
