@@ -335,9 +335,48 @@ export interface ThreatEventDeleteResponse {
 }
 
 /**
- * Number of created bulk events
+ * Detailed result of bulk event creation with auto-tag management
  */
-export type ThreatEventBulkCreateResponse = number;
+export interface ThreatEventBulkCreateResponse {
+  /**
+   * Number of events created
+   */
+  createdEventsCount: number;
+
+  /**
+   * Number of indicators created
+   */
+  createdIndicatorsCount: number;
+
+  /**
+   * Number of tags created in SoT
+   */
+  createdTagsCount: number;
+
+  /**
+   * Number of errors encountered
+   */
+  errorCount: number;
+
+  /**
+   * Array of error details
+   */
+  errors?: Array<ThreatEventBulkCreateResponse.Error>;
+}
+
+export namespace ThreatEventBulkCreateResponse {
+  export interface Error {
+    /**
+     * Error message
+     */
+    error: string;
+
+    /**
+     * Index of the event that caused the error
+     */
+    eventIndex: number;
+  }
+}
 
 export interface ThreatEventEditResponse {
   attacker: string;

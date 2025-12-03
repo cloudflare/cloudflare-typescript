@@ -334,6 +334,11 @@ export interface PrefixCreateParams {
    * Body param: Description of the prefix.
    */
   description?: string;
+
+  /**
+   * Body param: Identifier for the uploaded LOA document.
+   */
+  loa_document_id?: string | null;
 }
 
 export interface PrefixListParams {
