@@ -67,7 +67,8 @@ describe('resource abuseReports', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // TODO: support api token auth scheme
+  test.skip('list: only required params', async () => {
     const responsePromise = client.abuseReports.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -78,7 +79,8 @@ describe('resource abuseReports', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // TODO: support api token auth scheme
+  test.skip('list: required and optional params', async () => {
     const response = await client.abuseReports.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       created_after: '2009-11-10T23:00:00Z',
@@ -93,7 +95,8 @@ describe('resource abuseReports', () => {
     });
   });
 
-  test('get: only required params', async () => {
+  // TODO: support api token auth scheme
+  test.skip('get: only required params', async () => {
     const responsePromise = client.abuseReports.get('report_param', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -106,7 +109,8 @@ describe('resource abuseReports', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // TODO: support api token auth scheme
+  test.skip('get: required and optional params', async () => {
     const response = await client.abuseReports.get('report_param', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
