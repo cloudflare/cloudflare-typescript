@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_buckets_r2_sippy',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nSets configuration for Sippy for an existing R2 bucket.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/sippy',\n  $defs: {\n    sippy: {\n      type: 'object',\n      properties: {\n        destination: {\n          type: 'object',\n          description: 'Details about the configured destination bucket.',\n          properties: {\n            accessKeyId: {\n              type: 'string',\n              description: 'ID of the Cloudflare API token used when writing objects to this\\nbucket.\\n'\n            },\n            account: {\n              type: 'string'\n            },\n            bucket: {\n              type: 'string',\n              description: 'Name of the bucket on the provider.'\n            },\n            provider: {\n              $ref: '#/$defs/provider'\n            }\n          }\n        },\n        enabled: {\n          type: 'boolean',\n          description: 'State of Sippy for this bucket.'\n        },\n        source: {\n          type: 'object',\n          description: 'Details about the configured source bucket.',\n          properties: {\n            bucket: {\n              type: 'string',\n              description: 'Name of the bucket on the provider.'\n            },\n            provider: {\n              type: 'string',\n              enum: [                'aws',\n                'gcs'\n              ]\n            },\n            region: {\n              type: 'string',\n              description: 'Region where the bucket resides (AWS only).'\n            }\n          }\n        }\n      }\n    },\n    provider: {\n      type: 'string',\n      enum: [        'r2'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nSets configuration for Sippy for an existing R2 bucket.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/sippy',\n  $defs: {\n    sippy: {\n      type: 'object',\n      properties: {\n        destination: {\n          type: 'object',\n          description: 'Details about the configured destination bucket.',\n          properties: {\n            accessKeyId: {\n              type: 'string',\n              description: 'ID of the Cloudflare API token used when writing objects to this\\nbucket.\\n'\n            },\n            account: {\n              type: 'string'\n            },\n            bucket: {\n              type: 'string',\n              description: 'Name of the bucket on the provider.'\n            },\n            provider: {\n              $ref: '#/$defs/provider'\n            }\n          }\n        },\n        enabled: {\n          type: 'boolean',\n          description: 'State of Sippy for this bucket.'\n        },\n        source: {\n          type: 'object',\n          description: 'Details about the configured source bucket.',\n          properties: {\n            bucket: {\n              type: 'string',\n              description: 'Name of the bucket on the provider (AWS, GCS only).'\n            },\n            bucketUrl: {\n              type: 'string',\n              description: 'S3-compatible URL (Generic S3-compatible providers only).'\n            },\n            provider: {\n              type: 'string',\n              enum: [                'aws',\n                'gcs',\n                's3'\n              ]\n            },\n            region: {\n              type: 'string',\n              description: 'Region where the bucket resides (AWS only).'\n            }\n          }\n        }\n      }\n    },\n    provider: {\n      type: 'string',\n      enum: [        'r2'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     anyOf: [
@@ -135,6 +135,66 @@ export const tool: Tool = {
               provider: {
                 type: 'string',
                 enum: ['gcs'],
+              },
+            },
+          },
+          jurisdiction: {
+            type: 'string',
+            description: 'Jurisdiction where objects in this bucket are guaranteed to be stored.',
+            enum: ['default', 'eu', 'fedramp'],
+          },
+        },
+        required: ['account_id', 'bucket_name'],
+      },
+      {
+        type: 'object',
+        properties: {
+          account_id: {
+            type: 'string',
+            description: 'Account ID.',
+          },
+          bucket_name: {
+            type: 'string',
+            description: 'Name of the bucket.',
+          },
+          destination: {
+            type: 'object',
+            description: 'R2 bucket to copy objects to.',
+            properties: {
+              accessKeyId: {
+                type: 'string',
+                description:
+                  'ID of a Cloudflare API token.\nThis is the value labelled "Access Key ID" when creating an API.\ntoken from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).\n\nSippy will use this token when writing objects to R2, so it is\nbest to scope this token to the bucket you\'re enabling Sippy for.\n',
+              },
+              provider: {
+                $ref: '#/$defs/provider',
+              },
+              secretAccessKey: {
+                type: 'string',
+                description:
+                  'Value of a Cloudflare API token.\nThis is the value labelled "Secret Access Key" when creating an API.\ntoken from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).\n\nSippy will use this token when writing objects to R2, so it is\nbest to scope this token to the bucket you\'re enabling Sippy for.\n',
+              },
+            },
+          },
+          source: {
+            type: 'object',
+            description: 'General S3-compatible provider to copy objects from.',
+            properties: {
+              accessKeyId: {
+                type: 'string',
+                description: 'Access Key ID of an IAM credential (ideally scoped to a single S3 bucket).',
+              },
+              bucketUrl: {
+                type: 'string',
+                description: 'URL to the S3-compatible API of the bucket.',
+              },
+              provider: {
+                type: 'string',
+                enum: ['s3'],
+              },
+              secretAccessKey: {
+                type: 'string',
+                description: 'Secret Access Key of an IAM credential (ideally scoped to a single S3 bucket).',
               },
             },
           },

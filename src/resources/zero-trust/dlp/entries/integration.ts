@@ -306,15 +306,15 @@ export namespace IntegrationListResponse {
 export type IntegrationDeleteResponse = unknown;
 
 export type IntegrationGetResponse =
-  | IntegrationGetResponse.Custom
-  | IntegrationGetResponse.Predefined
-  | IntegrationGetResponse.Integration
-  | IntegrationGetResponse.ExactData
-  | IntegrationGetResponse.DocumentFingerprint
-  | IntegrationGetResponse.WordList;
+  | IntegrationGetResponse.CustomEntry
+  | IntegrationGetResponse.PredefinedEntry
+  | IntegrationGetResponse.IntegrationEntry
+  | IntegrationGetResponse.ExactDataEntry
+  | IntegrationGetResponse.DocumentFingerprintEntry
+  | IntegrationGetResponse.WordListEntry;
 
 export namespace IntegrationGetResponse {
-  export interface Custom {
+  export interface CustomEntry {
     id: string;
 
     created_at: string;
@@ -330,12 +330,25 @@ export namespace IntegrationGetResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    profiles?: Array<CustomEntry.Profile>;
   }
 
-  export interface Predefined {
+  export namespace CustomEntry {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface PredefinedEntry {
     id: string;
 
-    confidence: Predefined.Confidence;
+    confidence: PredefinedEntry.Confidence;
 
     enabled: boolean;
 
@@ -345,10 +358,12 @@ export namespace IntegrationGetResponse {
 
     profile_id?: string | null;
 
-    variant?: Predefined.Variant;
+    profiles?: Array<PredefinedEntry.Profile>;
+
+    variant?: PredefinedEntry.Variant;
   }
 
-  export namespace Predefined {
+  export namespace PredefinedEntry {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -362,6 +377,15 @@ export namespace IntegrationGetResponse {
       available: boolean;
     }
 
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+
     export interface Variant {
       topic_type: 'Intent' | 'Content';
 
@@ -371,7 +395,7 @@ export namespace IntegrationGetResponse {
     }
   }
 
-  export interface Integration {
+  export interface IntegrationEntry {
     id: string;
 
     created_at: string;
@@ -385,9 +409,22 @@ export namespace IntegrationGetResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    profiles?: Array<IntegrationEntry.Profile>;
   }
 
-  export interface ExactData {
+  export namespace IntegrationEntry {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface ExactDataEntry {
     id: string;
 
     /**
@@ -407,9 +444,22 @@ export namespace IntegrationGetResponse {
     type: 'exact_data';
 
     updated_at: string;
+
+    profiles?: Array<ExactDataEntry.Profile>;
   }
 
-  export interface DocumentFingerprint {
+  export namespace ExactDataEntry {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface DocumentFingerprintEntry {
     id: string;
 
     created_at: string;
@@ -421,9 +471,22 @@ export namespace IntegrationGetResponse {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    profiles?: Array<DocumentFingerprintEntry.Profile>;
   }
 
-  export interface WordList {
+  export namespace DocumentFingerprintEntry {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface WordListEntry {
     id: string;
 
     created_at: string;
@@ -439,6 +502,19 @@ export namespace IntegrationGetResponse {
     word_list: unknown;
 
     profile_id?: string | null;
+
+    profiles?: Array<WordListEntry.Profile>;
+  }
+
+  export namespace WordListEntry {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
   }
 }
 

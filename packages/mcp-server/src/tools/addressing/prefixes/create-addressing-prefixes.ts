@@ -43,6 +43,10 @@ export const tool: Tool = {
         type: 'string',
         description: 'Description of the prefix.',
       },
+      loa_document_id: {
+        type: 'string',
+        description: 'Identifier for the uploaded LOA document.',
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',
