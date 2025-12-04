@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource mitigations', () => {
-  test('list: only required params', async () => {
+  // TODO: support api token auth scheme
+  test.skip('list: only required params', async () => {
     const responsePromise = client.abuseReports.mitigations.list('report_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource mitigations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // TODO: support api token auth scheme
+  test.skip('list: required and optional params', async () => {
     const response = await client.abuseReports.mitigations.list('report_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       effective_after: '2009-11-10T23:00:00Z',
@@ -37,7 +39,8 @@ describe('resource mitigations', () => {
     });
   });
 
-  test('review: only required params', async () => {
+  // TODO: support api token auth scheme
+  test.skip('review: only required params', async () => {
     const responsePromise = client.abuseReports.mitigations.review('report_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       appeals: [{ id: 'id', reason: 'misclassified' }],
@@ -51,7 +54,8 @@ describe('resource mitigations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('review: required and optional params', async () => {
+  // TODO: support api token auth scheme
+  test.skip('review: required and optional params', async () => {
     const response = await client.abuseReports.mitigations.review('report_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       appeals: [{ id: 'id', reason: 'misclassified' }],
