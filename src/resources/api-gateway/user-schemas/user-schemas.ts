@@ -13,6 +13,9 @@ import {
 } from './operations';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
+/**
+ * @deprecated Please use the [Schema Validation](https://developers.cloudflare.com/api/resources/schema_validation/) APIs instead
+ */
 export class UserSchemas extends APIResource {
   operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
   hosts: HostsAPI.Hosts = new HostsAPI.Hosts(this._client);
