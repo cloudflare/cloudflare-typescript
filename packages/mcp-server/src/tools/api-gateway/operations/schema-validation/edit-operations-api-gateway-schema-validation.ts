@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'edit_operations_api_gateway_schema_validation',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates multiple operation-level schema validation settings on the zone\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/schema_validation_edit_response',\n  $defs: {\n    schema_validation_edit_response: {\n      type: 'object',\n      additionalProperties: true\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdates multiple operation-level schema validation settings on the zone\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/settings_multiple_request',\n  $defs: {\n    settings_multiple_request: {\n      type: 'object',\n      additionalProperties: true\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -26,9 +26,8 @@ export const tool: Tool = {
         type: 'string',
         description: 'Identifier.',
       },
-      body: {
-        type: 'object',
-        additionalProperties: true,
+      settings_multiple_request: {
+        $ref: '#/$defs/settings_multiple_request',
       },
       jq_filter: {
         type: 'string',
@@ -37,7 +36,13 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
-    required: ['zone_id', 'body'],
+    required: ['zone_id', 'settings_multiple_request'],
+    $defs: {
+      settings_multiple_request: {
+        type: 'object',
+        additionalProperties: true,
+      },
+    },
   },
   annotations: {},
 };
