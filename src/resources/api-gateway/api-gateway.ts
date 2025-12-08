@@ -71,7 +71,6 @@ APIGateway.Configurations = Configurations;
 APIGateway.Discovery = Discovery;
 APIGateway.Operations = Operations;
 APIGateway.Schemas = Schemas;
-APIGateway.Settings = Settings;
 APIGateway.UserSchemas = UserSchemas;
 APIGateway.ExpressionTemplate = ExpressionTemplate;
 
@@ -115,7 +114,7 @@ export declare namespace APIGateway {
     type SchemaListParams as SchemaListParams,
   };
 
-  export { Settings as Settings };
+  export { type Settings as Settings };
 
   export {
     UserSchemas as UserSchemas,
