@@ -240,6 +240,12 @@ export interface Version {
   source?: string;
 
   /**
+   * Time in milliseconds spent on
+   * [Worker startup](https://developers.cloudflare.com/workers/platform/limits/#worker-startup-time).
+   */
+  startup_time_ms?: number;
+
+  /**
    * @deprecated Usage model for the version.
    */
   usage_model?: 'standard' | 'bundled' | 'unbound';

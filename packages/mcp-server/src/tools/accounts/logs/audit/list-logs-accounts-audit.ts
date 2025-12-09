@@ -176,6 +176,18 @@ export const tool: Tool = {
           },
         },
       },
+      audit_log_id: {
+        type: 'object',
+        properties: {
+          not: {
+            type: 'array',
+            description: 'Filters out audit logs by their IDs.',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+      },
       cursor: {
         type: 'string',
         description:

@@ -210,6 +210,8 @@ export namespace JobListResponse {
 
     endpoint?: string | null;
 
+    keys?: Array<string> | null;
+
     pathPrefix?: string | null;
 
     vendor?: 's3';
@@ -217,6 +219,8 @@ export namespace JobListResponse {
 
   export interface GcsSourceResponseSchema {
     bucket?: string;
+
+    keys?: Array<string> | null;
 
     pathPrefix?: string | null;
 
@@ -227,6 +231,8 @@ export namespace JobListResponse {
     bucket?: string;
 
     jurisdiction?: 'default' | 'eu' | 'fedramp';
+
+    keys?: Array<string> | null;
 
     pathPrefix?: string | null;
 
@@ -271,6 +277,8 @@ export namespace JobGetResponse {
 
     endpoint?: string | null;
 
+    keys?: Array<string> | null;
+
     pathPrefix?: string | null;
 
     vendor?: 's3';
@@ -278,6 +286,8 @@ export namespace JobGetResponse {
 
   export interface GcsSourceResponseSchema {
     bucket?: string;
+
+    keys?: Array<string> | null;
 
     pathPrefix?: string | null;
 
@@ -288,6 +298,8 @@ export namespace JobGetResponse {
     bucket?: string;
 
     jurisdiction?: 'default' | 'eu' | 'fedramp';
+
+    keys?: Array<string> | null;
 
     pathPrefix?: string | null;
 

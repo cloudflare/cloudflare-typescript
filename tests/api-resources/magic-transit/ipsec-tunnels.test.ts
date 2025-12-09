@@ -33,6 +33,7 @@ describe('resource ipsecTunnels', () => {
       name: 'IPsec_1',
       automatic_return_routing: true,
       bgp: { customer_asn: 0, extra_prefixes: ['string'], md5_key: 'md5_key' },
+      custom_remote_identities: { fqdn_id: 'fqdn_id' },
       customer_endpoint: '203.0.113.1',
       description: 'Tunnel for ISP X',
       health_check: {
@@ -75,6 +76,7 @@ describe('resource ipsecTunnels', () => {
       name: 'IPsec_1',
       automatic_return_routing: true,
       bgp: { customer_asn: 0, extra_prefixes: ['string'], md5_key: 'md5_key' },
+      custom_remote_identities: { fqdn_id: 'fqdn_id' },
       customer_endpoint: '203.0.113.1',
       description: 'Tunnel for ISP X',
       health_check: {
