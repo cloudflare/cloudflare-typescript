@@ -121,7 +121,7 @@ export const handler = async (client: Cloudflare, args: Record<string, unknown> 
       await maybeFilter(jq_filter, await client.radar.attacks.layer3.summary.vertical(body)),
     );
   } catch (error) {
-    if (isJqError(error)) {
+    if (error instanceof Cloudflare.APIError || isJqError(error)) {
       return asErrorResult(error.message);
     }
     throw error;

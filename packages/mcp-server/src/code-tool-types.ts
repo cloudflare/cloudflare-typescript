@@ -11,4 +11,8 @@ export type WorkerSuccess = {
   logLines: string[];
   errLines: string[];
 };
-export type WorkerError = { message: string | undefined };
+export type WorkerError = {
+  message: string | undefined;
+  logLines: string[];
+  errLines: string[];
+};
