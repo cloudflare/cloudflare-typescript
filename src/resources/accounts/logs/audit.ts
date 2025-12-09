@@ -308,6 +308,11 @@ export interface AuditListParams extends CursorPaginationAfterParams {
   actor_type?: AuditListParams.ActorType;
 
   /**
+   * Query param:
+   */
+  audit_log_id?: AuditListParams.AuditLogID;
+
+  /**
    * Query param: Sets sorting order.
    */
   direction?: 'desc' | 'asc';
@@ -449,6 +454,13 @@ export namespace AuditListParams {
      * Filters out audit logs by the actor type.
      */
     not?: Array<'account' | 'cloudflare_admin' | 'system' | 'user'>;
+  }
+
+  export interface AuditLogID {
+    /**
+     * @deprecated Filters out audit logs by their IDs.
+     */
+    not?: Array<string>;
   }
 
   export interface RawCfRayID {
