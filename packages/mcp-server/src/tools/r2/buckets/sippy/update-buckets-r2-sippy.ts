@@ -234,7 +234,7 @@ export const handler = async (client: Cloudflare, args: Record<string, unknown> 
       await maybeFilter(jq_filter, await client.r2.buckets.sippy.update(bucket_name, body)),
     );
   } catch (error) {
-    if (isJqError(error)) {
+    if (error instanceof Cloudflare.APIError || isJqError(error)) {
       return asErrorResult(error.message);
     }
     throw error;

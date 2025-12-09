@@ -68,7 +68,7 @@ export const handler = async (client: Cloudflare, args: Record<string, unknown> 
       ),
     );
   } catch (error) {
-    if (isJqError(error)) {
+    if (error instanceof Cloudflare.APIError || isJqError(error)) {
       return asErrorResult(error.message);
     }
     throw error;

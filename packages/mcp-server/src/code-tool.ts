@@ -1,14 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { dirname } from 'node:path';
-import { pathToFileURL } from 'node:url';
-import Cloudflare, { ClientOptions } from 'cloudflare';
-import { ContentBlock, Endpoint, Metadata, ToolCallResult } from './tools/types';
-
+import { Metadata, ToolCallResult, asTextContentResult } from './tools/types';
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-
-import { WorkerInput, WorkerError, WorkerSuccess } from './code-tool-types';
-
+import { readEnv } from './server';
+import { WorkerSuccess } from './code-tool-types';
 /**
  * A tool that runs code against a copy of the SDK.
  *
@@ -18,132 +13,50 @@ import { WorkerInput, WorkerError, WorkerSuccess } from './code-tool-types';
  *
  * @param endpoints - The endpoints to include in the list.
  */
-export async function codeTool(): Promise<Endpoint> {
+export async function codeTool() {
   const metadata: Metadata = { resource: 'all', operation: 'write', tags: [] };
   const tool: Tool = {
     name: 'execute',
     description:
-      'Runs JavaScript code to interact with the API.\n\nYou are a skilled programmer writing code to interface with the service.\nDefine an async function named "run" that takes a single parameter of an initialized client named "client", and it will be run.\nWrite code within this template:\n\n```\nasync function run(client) {\n  // Fill this out\n}\n```\n\nYou will be returned anything that your function returns, plus the results of any console.log statements.\nIf any code triggers an error, the tool will return an error response, so you do not need to add error handling unless you want to output something more helpful than the raw error.\nIt is not necessary to add comments to code, unless by adding those comments you believe that you can generate better code.\nThis code will run in a container, and you will not be able to use fetch or otherwise interact with the network calls other than through the client you are given.\nAny variables you define won\'t live between successive uses of this call, so make sure to return or log any data you might need later.',
+      'Runs JavaScript code to interact with the API.\n\nYou are a skilled programmer writing code to interface with the service.\nDefine an async function named "run" that takes a single parameter of an initialized SDK client and it will be run.\nWrite code within this template:\n\n```\nasync function run(client) {\n  // Fill this out\n}\n```\n\nYou will be returned anything that your function returns, plus the results of any console.log statements.\nIf any code triggers an error, the tool will return an error response, so you do not need to add error handling unless you want to output something more helpful than the raw error.\nIt is not necessary to add comments to code, unless by adding those comments you believe that you can generate better code.\nThis code will run in a container, and you will not be able to use fetch or otherwise interact with the network calls other than through the client you are given.\nAny variables you define won\'t live between successive uses of this call, so make sure to return or log any data you might need later.',
     inputSchema: { type: 'object', properties: { code: { type: 'string' } } },
   };
+  const handler = async (_: unknown, args: any): Promise<ToolCallResult> => {
+    const code = args.code as string;
 
-  // Import dynamically to avoid failing at import time in cases where the environment is not well-supported.
-  const { newDenoHTTPWorker } = await import('@valtown/deno-http-worker');
-  const { workerPath } = await import('./code-tool-paths.cjs');
+    // this is not required, but passing a Stainless API key for the matching project_name
+    // will allow you to run code-mode queries against non-published versions of your SDK.
+    const stainlessAPIKey = readEnv('STAINLESS_API_KEY');
+    const codeModeEndpoint =
+      readEnv('CODE_MODE_ENDPOINT_URL') ?? 'https://api.stainless.com/api/ai/code-tool';
 
-  const handler = async (client: Cloudflare, args: unknown): Promise<ToolCallResult> => {
-    const baseURLHostname = new URL(client.baseURL).hostname;
-    const { code } = args as { code: string };
-
-    const worker = await newDenoHTTPWorker(pathToFileURL(workerPath), {
-      runFlags: [
-        `--node-modules-dir=manual`,
-        `--allow-read=code-tool-worker.mjs,${workerPath.replace(/([\/\\]node_modules)[\/\\].+$/, '$1')}/`,
-        `--allow-net=${baseURLHostname}`,
-        // Allow environment variables because instantiating the client will try to read from them,
-        // even though they are not set.
-        '--allow-env',
-      ],
-      printOutput: true,
-      spawnOptions: {
-        cwd: dirname(workerPath),
+    const res = await fetch(codeModeEndpoint, {
+      method: 'POST',
+      headers: {
+        ...(stainlessAPIKey && { Authorization: stainlessAPIKey }),
+        'Content-Type': 'application/json',
+        client_envs: JSON.stringify({
+          CLOUDFLARE_API_TOKEN: readEnv('CLOUDFLARE_API_TOKEN'),
+          CLOUDFLARE_API_KEY: readEnv('CLOUDFLARE_API_KEY'),
+          CLOUDFLARE_EMAIL: readEnv('CLOUDFLARE_EMAIL'),
+          CLOUDFLARE_API_USER_SERVICE_KEY: readEnv('CLOUDFLARE_API_USER_SERVICE_KEY'),
+        }),
       },
+      body: JSON.stringify({
+        project_name: 'cloudflare',
+        code,
+      }),
     });
 
-    try {
-      const resp = await new Promise<Response>((resolve, reject) => {
-        worker.addEventListener('exit', (exitCode) => {
-          reject(new Error(`Worker exited with code ${exitCode}`));
-        });
-
-        const opts: ClientOptions = {
-          baseURL: client.baseURL,
-          apiToken: client.apiToken,
-          apiKey: client.apiKey,
-          apiEmail: client.apiEmail,
-          userServiceKey: client.userServiceKey,
-          defaultHeaders: {
-            'X-Stainless-MCP': 'true',
-          },
-        };
-
-        const req = worker.request(
-          'http://localhost',
-          {
-            headers: {
-              'content-type': 'application/json',
-            },
-            method: 'POST',
-          },
-          (resp) => {
-            const body: Uint8Array[] = [];
-            resp.on('error', (err) => {
-              reject(err);
-            });
-            resp.on('data', (chunk) => {
-              body.push(chunk);
-            });
-            resp.on('end', () => {
-              resolve(
-                new Response(Buffer.concat(body).toString(), {
-                  status: resp.statusCode ?? 200,
-                  headers: resp.headers as any,
-                }),
-              );
-            });
-          },
-        );
-
-        const body = JSON.stringify({
-          opts,
-          code,
-        } satisfies WorkerInput);
-
-        req.write(body, (err) => {
-          if (err != null) {
-            reject(err);
-          }
-        });
-
-        req.end();
-      });
-
-      if (resp.status === 200) {
-        const { result, logLines, errLines } = (await resp.json()) as WorkerSuccess;
-        const returnOutput: ContentBlock | null =
-          result == null ? null : (
-            {
-              type: 'text',
-              text: typeof result === 'string' ? result : JSON.stringify(result),
-            }
-          );
-        const logOutput: ContentBlock | null =
-          logLines.length === 0 ?
-            null
-          : {
-              type: 'text',
-              text: logLines.join('\n'),
-            };
-        const errOutput: ContentBlock | null =
-          errLines.length === 0 ?
-            null
-          : {
-              type: 'text',
-              text: 'Error output:\n' + errLines.join('\n'),
-            };
-        return {
-          content: [returnOutput, logOutput, errOutput].filter((block) => block !== null),
-        };
-      } else {
-        const { message } = (await resp.json()) as WorkerError;
-        return {
-          content: message == null ? [] : [{ type: 'text', text: message }],
-          isError: true,
-        };
-      }
-    } finally {
-      worker.terminate();
+    if (!res.ok) {
+      throw new Error(
+        `${res.status}: ${
+          res.statusText
+        } error when trying to contact Code Tool server. Details: ${await res.text()}`,
+      );
     }
+
+    return asTextContentResult((await res.json()) as WorkerSuccess);
   };
 
   return { metadata, tool, handler };

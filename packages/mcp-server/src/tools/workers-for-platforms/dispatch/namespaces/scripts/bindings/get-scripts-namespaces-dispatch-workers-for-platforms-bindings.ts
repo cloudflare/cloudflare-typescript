@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Metadata, asTextContentResult } from 'cloudflare-mcp/tools/types';
+import { Metadata, asErrorResult, asTextContentResult } from 'cloudflare-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Cloudflare from 'cloudflare';
@@ -46,7 +46,14 @@ export const handler = async (client: Cloudflare, args: Record<string, unknown> 
   const response = await client.workersForPlatforms.dispatch.namespaces.scripts.bindings
     .get(script_name, body)
     .asResponse();
-  return asTextContentResult(await response.json());
+  try {
+    return asTextContentResult(await response.json());
+  } catch (error) {
+    if (error instanceof Cloudflare.APIError) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };
