@@ -248,6 +248,8 @@ export interface AIGatewayCreateResponse {
   store_id?: string | null;
 
   stripe?: AIGatewayCreateResponse.Stripe | null;
+
+  zdr?: boolean;
 }
 
 export namespace AIGatewayCreateResponse {
@@ -345,6 +347,8 @@ export interface AIGatewayUpdateResponse {
   store_id?: string | null;
 
   stripe?: AIGatewayUpdateResponse.Stripe | null;
+
+  zdr?: boolean;
 }
 
 export namespace AIGatewayUpdateResponse {
@@ -442,6 +446,8 @@ export interface AIGatewayListResponse {
   store_id?: string | null;
 
   stripe?: AIGatewayListResponse.Stripe | null;
+
+  zdr?: boolean;
 }
 
 export namespace AIGatewayListResponse {
@@ -539,6 +545,8 @@ export interface AIGatewayDeleteResponse {
   store_id?: string | null;
 
   stripe?: AIGatewayDeleteResponse.Stripe | null;
+
+  zdr?: boolean;
 }
 
 export namespace AIGatewayDeleteResponse {
@@ -636,6 +644,8 @@ export interface AIGatewayGetResponse {
   store_id?: string | null;
 
   stripe?: AIGatewayGetResponse.Stripe | null;
+
+  zdr?: boolean;
 }
 
 export namespace AIGatewayGetResponse {
@@ -753,6 +763,11 @@ export interface AIGatewayCreateParams {
    * Body param:
    */
   logpush_public_key?: string | null;
+
+  /**
+   * Body param:
+   */
+  zdr?: boolean;
 }
 
 export interface AIGatewayUpdateParams {
@@ -835,6 +850,11 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   stripe?: AIGatewayUpdateParams.Stripe | null;
+
+  /**
+   * Body param:
+   */
+  zdr?: boolean;
 }
 
 export namespace AIGatewayUpdateParams {
