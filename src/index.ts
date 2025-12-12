@@ -44,6 +44,7 @@ import { ACM } from './resources/acm/acm';
 import { Addressing } from './resources/addressing/addressing';
 import { AIGateway } from './resources/ai-gateway/ai-gateway';
 import { AI } from './resources/ai/ai';
+import { AISearch } from './resources/aisearch/aisearch';
 import { Alerting } from './resources/alerting/alerting';
 import { APIGateway } from './resources/api-gateway/api-gateway';
 import { Argo } from './resources/argo/argo';
@@ -363,6 +364,7 @@ export class Cloudflare extends Core.APIClient {
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
+  aiSearch: API.AISearch = new API.AISearch(this);
   securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
   browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
   customPages: API.CustomPages = new API.CustomPages(this);
@@ -605,6 +607,7 @@ Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
+Cloudflare.AISearch = AISearch;
 Cloudflare.SecurityCenter = SecurityCenter;
 Cloudflare.BrowserRendering = BrowserRendering;
 Cloudflare.CustomPages = CustomPages;
@@ -834,6 +837,8 @@ export declare namespace Cloudflare {
   export { AbuseReports as AbuseReports };
 
   export { AI as AI };
+
+  export { AISearch as AISearch };
 
   export { SecurityCenter as SecurityCenter };
 

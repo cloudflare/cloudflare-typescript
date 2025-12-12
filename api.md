@@ -8970,6 +8970,74 @@ Methods:
 - <code title="get /accounts/{account_id}/ai/tomarkdown/supported">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">supported</a>({ ...params }) -> ToMarkdownSupportedResponsesSinglePage</code>
 - <code title="post /accounts/{account_id}/ai/tomarkdown">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">transform</a>(file, { ...params }) -> ToMarkdownTransformResponsesSinglePage</code>
 
+# AISearch
+
+## Instances
+
+Types:
+
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceCreateResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceUpdateResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceListResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceDeleteResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceReadResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceStatsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-search/instances">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">create</a>({ ...params }) -> InstanceCreateResponse</code>
+- <code title="put /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">update</a>(id, { ...params }) -> InstanceUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/instances">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">list</a>({ ...params }) -> InstanceListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">delete</a>(id, { ...params }) -> InstanceDeleteResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">read</a>(id, { ...params }) -> InstanceReadResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/stats">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">stats</a>(id, { ...params }) -> InstanceStatsResponse</code>
+
+### Items
+
+Types:
+
+- <code><a href="./src/resources/aisearch/instances/items.ts">ItemListResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/items.ts">ItemGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/items">client.aiSearch.instances.items.<a href="./src/resources/aisearch/instances/items.ts">list</a>(id, { ...params }) -> ItemListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/items/{item_id}">client.aiSearch.instances.items.<a href="./src/resources/aisearch/instances/items.ts">get</a>(id, itemId, { ...params }) -> ItemGetResponse</code>
+
+### Jobs
+
+Types:
+
+- <code><a href="./src/resources/aisearch/instances/jobs.ts">JobCreateResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/jobs.ts">JobListResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/jobs.ts">JobGetResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/jobs.ts">JobLogsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-search/instances/{id}/jobs">client.aiSearch.instances.jobs.<a href="./src/resources/aisearch/instances/jobs.ts">create</a>(id, { ...params }) -> JobCreateResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/jobs">client.aiSearch.instances.jobs.<a href="./src/resources/aisearch/instances/jobs.ts">list</a>(id, { ...params }) -> JobListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/jobs/{job_id}">client.aiSearch.instances.jobs.<a href="./src/resources/aisearch/instances/jobs.ts">get</a>(id, jobId, { ...params }) -> JobGetResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/jobs/{job_id}/logs">client.aiSearch.instances.jobs.<a href="./src/resources/aisearch/instances/jobs.ts">logs</a>(id, jobId, { ...params }) -> JobLogsResponse</code>
+
+## Tokens
+
+Types:
+
+- <code><a href="./src/resources/aisearch/tokens.ts">TokenCreateResponse</a></code>
+- <code><a href="./src/resources/aisearch/tokens.ts">TokenUpdateResponse</a></code>
+- <code><a href="./src/resources/aisearch/tokens.ts">TokenListResponse</a></code>
+- <code><a href="./src/resources/aisearch/tokens.ts">TokenDeleteResponse</a></code>
+- <code><a href="./src/resources/aisearch/tokens.ts">TokenReadResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-search/tokens">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
+- <code title="delete /accounts/{account_id}/ai-search/tokens/{id}">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">update</a>(id, { ...params }) -> TokenUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/tokens">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">list</a>({ ...params }) -> TokenListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-search/tokens/{id}">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">delete</a>(id, { ...params }) -> TokenDeleteResponse</code>
+- <code title="delete /accounts/{account_id}/ai-search/tokens/{id}">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">read</a>(id, { ...params }) -> TokenReadResponse</code>
+
 # SecurityCenter
 
 ## Insights
