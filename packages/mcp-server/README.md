@@ -4283,6 +4283,7 @@ The following tools are available in this MCP server.
 - `update_leaked_credential_checks_detections` (`write`): Update user-defined detection pattern for Leaked Credential Checks.
 - `list_leaked_credential_checks_detections` (`read`): List user-defined detection patterns for Leaked Credential Checks.
 - `delete_leaked_credential_checks_detections` (`write`): Remove user-defined detection pattern for Leaked Credential Checks.
+- `get_leaked_credential_checks_detections` (`read`): Get user-defined detection pattern for Leaked Credential Checks.
 
 ### Resource `content_scanning`:
 

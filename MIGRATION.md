@@ -968,6 +968,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.resourceSharing.resources.get()`
 - `client.leakedCredentialChecks.detections.update()`
 - `client.leakedCredentialChecks.detections.delete()`
+- `client.leakedCredentialChecks.detections.get()`
 - `client.contentScanning.payloads.delete()`
 - `client.abuseReports.create()`
 - `client.abuseReports.get()`
