@@ -4357,6 +4357,35 @@ The following tools are available in this MCP server.
 - `supported_ai_to_markdown` (`read`): Get all converted formats supported
 - `transform_ai_to_markdown` (`write`): Convert Files into Markdown
 
+### Resource `ai_search.instances`:
+
+- `create_aisearch_instances` (`write`): Create new instances.
+- `update_aisearch_instances` (`write`): Update instances.
+- `list_aisearch_instances` (`read`): List instances.
+- `delete_aisearch_instances` (`write`): Delete instances.
+- `read_aisearch_instances` (`read`): Read instances.
+- `stats_aisearch_instances` (`read`): Stats
+
+### Resource `ai_search.instances.items`:
+
+- `list_instances_aisearch_items` (`read`): Items List.
+- `get_instances_aisearch_items` (`read`): Get Items.
+
+### Resource `ai_search.instances.jobs`:
+
+- `create_instances_aisearch_jobs` (`write`): Create new job
+- `list_instances_aisearch_jobs` (`read`): List Jobs
+- `get_instances_aisearch_jobs` (`read`): Get a Job Details
+- `logs_instances_aisearch_jobs` (`read`): List Job Logs
+
+### Resource `ai_search.tokens`:
+
+- `create_aisearch_tokens` (`write`): Create new tokens.
+- `update_aisearch_tokens` (`write`): Delete tokens.
+- `list_aisearch_tokens` (`read`): List tokens.
+- `delete_aisearch_tokens` (`write`): Delete tokens.
+- `read_aisearch_tokens` (`write`): Delete tokens.
+
 ### Resource `security_center.insights`:
 
 - `list_security_center_insights` (`read`): Get Security Center Insights
