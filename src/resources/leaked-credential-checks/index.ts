@@ -6,10 +6,12 @@ export {
   type DetectionUpdateResponse,
   type DetectionListResponse,
   type DetectionDeleteResponse,
+  type DetectionGetResponse,
   type DetectionCreateParams,
   type DetectionUpdateParams,
   type DetectionListParams,
   type DetectionDeleteParams,
+  type DetectionGetParams,
   type DetectionListResponsesSinglePage,
 } from './detections';
 export { LeakedCredentialChecks } from './leaked-credential-checks';
