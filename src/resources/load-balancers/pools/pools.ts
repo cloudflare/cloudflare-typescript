@@ -227,7 +227,7 @@ export interface Pool {
   /**
    * Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: LoadBalancersAPI.LoadShedding;
+  load_shedding?: LoadBalancersAPI.LoadShedding | null;
 
   /**
    * The longitude of the data center containing the origins used in this pool in
@@ -286,7 +286,7 @@ export interface Pool {
    * Configures origin steering for the pool. Controls how origins are selected for
    * new sessions and traffic without session affinity.
    */
-  origin_steering?: LoadBalancersAPI.OriginSteering;
+  origin_steering?: LoadBalancersAPI.OriginSteering | null;
 
   /**
    * The list of origins within this pool. Traffic directed at this pool is balanced
@@ -339,7 +339,7 @@ export interface PoolCreateParams {
   /**
    * Body param: Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: LoadBalancersAPI.LoadSheddingParam;
+  load_shedding?: LoadBalancersAPI.LoadSheddingParam | null;
 
   /**
    * Body param: The longitude of the data center containing the origins used in this
@@ -385,7 +385,7 @@ export interface PoolCreateParams {
    * Body param: Configures origin steering for the pool. Controls how origins are
    * selected for new sessions and traffic without session affinity.
    */
-  origin_steering?: LoadBalancersAPI.OriginSteeringParam;
+  origin_steering?: LoadBalancersAPI.OriginSteeringParam | null;
 }
 
 export interface PoolUpdateParams {
@@ -434,7 +434,7 @@ export interface PoolUpdateParams {
   /**
    * Body param: Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: LoadBalancersAPI.LoadSheddingParam;
+  load_shedding?: LoadBalancersAPI.LoadSheddingParam | null;
 
   /**
    * Body param: The longitude of the data center containing the origins used in this
@@ -480,7 +480,7 @@ export interface PoolUpdateParams {
    * Body param: Configures origin steering for the pool. Controls how origins are
    * selected for new sessions and traffic without session affinity.
    */
-  origin_steering?: LoadBalancersAPI.OriginSteeringParam;
+  origin_steering?: LoadBalancersAPI.OriginSteeringParam | null;
 }
 
 export interface PoolListParams {
@@ -550,7 +550,7 @@ export interface PoolEditParams {
   /**
    * Body param: Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: LoadBalancersAPI.LoadSheddingParam;
+  load_shedding?: LoadBalancersAPI.LoadSheddingParam | null;
 
   /**
    * Body param: The longitude of the data center containing the origins used in this
@@ -602,7 +602,7 @@ export interface PoolEditParams {
    * Body param: Configures origin steering for the pool. Controls how origins are
    * selected for new sessions and traffic without session affinity.
    */
-  origin_steering?: LoadBalancersAPI.OriginSteeringParam;
+  origin_steering?: LoadBalancersAPI.OriginSteeringParam | null;
 
   /**
    * Body param: The list of origins within this pool. Traffic directed at this pool

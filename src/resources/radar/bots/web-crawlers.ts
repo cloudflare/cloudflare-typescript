@@ -12,20 +12,22 @@ export class WebCrawlers extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.radar.bots.webCrawlers.summary('USER_AGENT');
+   *   await client.radar.bots.webCrawlers.summary(
+   *     'CLIENT_TYPE',
+   *   );
    * ```
    */
   summary(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
+    dimension: 'CLIENT_TYPE' | 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     query?: WebCrawlerSummaryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerSummaryResponse>;
   summary(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
+    dimension: 'CLIENT_TYPE' | 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerSummaryResponse>;
   summary(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
+    dimension: 'CLIENT_TYPE' | 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     query: WebCrawlerSummaryParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerSummaryResponse> {
@@ -48,21 +50,21 @@ export class WebCrawlers extends APIResource {
    * ```ts
    * const response =
    *   await client.radar.bots.webCrawlers.timeseriesGroups(
-   *     'USER_AGENT',
+   *     'CLIENT_TYPE',
    *   );
    * ```
    */
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
+    dimension: 'CLIENT_TYPE' | 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     query?: WebCrawlerTimeseriesGroupsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
+    dimension: 'CLIENT_TYPE' | 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
+    dimension: 'CLIENT_TYPE' | 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
     query: WebCrawlerTimeseriesGroupsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebCrawlerTimeseriesGroupsResponse> {
@@ -354,6 +356,11 @@ export interface WebCrawlerSummaryParams {
   botOperator?: Array<string>;
 
   /**
+   * Filters results by agent type.
+   */
+  clientType?: Array<'HUMAN' | 'NON_AI_BOT' | 'AI_BOT' | 'MIXED_PURPOSE'>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -410,6 +417,11 @@ export interface WebCrawlerTimeseriesGroupsParams {
    * Filters results by bot operator.
    */
   botOperator?: Array<string>;
+
+  /**
+   * Filters results by agent type.
+   */
+  clientType?: Array<'HUMAN' | 'NON_AI_BOT' | 'AI_BOT' | 'MIXED_PURPOSE'>;
 
   /**
    * End of the date range (inclusive).
