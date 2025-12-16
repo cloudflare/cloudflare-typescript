@@ -121,7 +121,7 @@ export interface PreviewCreateParams {
    * TCP, UDP, and SMTP checks. HTTP and HTTPS checks should only define the port
    * when using a non-standard port (HTTP: default 80, HTTPS: default 443).
    */
-  port?: number;
+  port?: number | null;
 
   /**
    * Body param: Assign this monitor to emulate the specified zone while probing.
