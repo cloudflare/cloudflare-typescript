@@ -10,7 +10,7 @@ const client = new Cloudflare({
 
 describe('resource webCrawlers', () => {
   test('summary', async () => {
-    const responsePromise = client.radar.bots.webCrawlers.summary('USER_AGENT');
+    const responsePromise = client.radar.bots.webCrawlers.summary('CLIENT_TYPE');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,9 +24,10 @@ describe('resource webCrawlers', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.bots.webCrawlers.summary(
-        'USER_AGENT',
+        'CLIENT_TYPE',
         {
           botOperator: ['string'],
+          clientType: ['HUMAN'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
@@ -42,7 +43,7 @@ describe('resource webCrawlers', () => {
   });
 
   test('timeseriesGroups', async () => {
-    const responsePromise = client.radar.bots.webCrawlers.timeseriesGroups('USER_AGENT');
+    const responsePromise = client.radar.bots.webCrawlers.timeseriesGroups('CLIENT_TYPE');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,10 +57,11 @@ describe('resource webCrawlers', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.bots.webCrawlers.timeseriesGroups(
-        'USER_AGENT',
+        'CLIENT_TYPE',
         {
           aggInterval: '1h',
           botOperator: ['string'],
+          clientType: ['HUMAN'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
           dateRange: ['7d'],
           dateStart: ['2019-12-27T18:11:19.117Z'],
