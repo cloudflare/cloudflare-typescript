@@ -303,6 +303,17 @@ export const tool: Tool = {
               },
             },
           },
+          forensic_copy: {
+            type: 'object',
+            description:
+              'Configure whether a copy of the HTTP request will be sent to storage when the rule matches.',
+            properties: {
+              enabled: {
+                type: 'boolean',
+                description: 'Enable sending the copy to storage.',
+              },
+            },
+          },
           ignore_cname_category_matches: {
             type: 'boolean',
             description:

@@ -231,7 +231,7 @@ export interface Monitor {
    * SMTP checks. HTTP and HTTPS checks should only define the port when using a
    * non-standard port (HTTP: default 80, HTTPS: default 443).
    */
-  port?: number;
+  port?: number | null;
 
   /**
    * Assign this monitor to emulate the specified zone while probing. This parameter
@@ -341,7 +341,7 @@ export interface MonitorCreateParams {
    * TCP, UDP, and SMTP checks. HTTP and HTTPS checks should only define the port
    * when using a non-standard port (HTTP: default 80, HTTPS: default 443).
    */
-  port?: number;
+  port?: number | null;
 
   /**
    * Body param: Assign this monitor to emulate the specified zone while probing.
@@ -447,7 +447,7 @@ export interface MonitorUpdateParams {
    * TCP, UDP, and SMTP checks. HTTP and HTTPS checks should only define the port
    * when using a non-standard port (HTTP: default 80, HTTPS: default 443).
    */
-  port?: number;
+  port?: number | null;
 
   /**
    * Body param: Assign this monitor to emulate the specified zone while probing.
@@ -567,7 +567,7 @@ export interface MonitorEditParams {
    * TCP, UDP, and SMTP checks. HTTP and HTTPS checks should only define the port
    * when using a non-standard port (HTTP: default 80, HTTPS: default 443).
    */
-  port?: number;
+  port?: number | null;
 
   /**
    * Body param: Assign this monitor to emulate the specified zone while probing.

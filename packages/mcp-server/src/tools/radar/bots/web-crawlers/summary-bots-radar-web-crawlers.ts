@@ -25,13 +25,22 @@ export const tool: Tool = {
       dimension: {
         type: 'string',
         description: 'Specifies the attribute by which to group the results.',
-        enum: ['USER_AGENT', 'REFERER', 'CRAWL_REFER_RATIO', 'VERTICAL', 'INDUSTRY'],
+        enum: ['CLIENT_TYPE', 'USER_AGENT', 'REFERER', 'CRAWL_REFER_RATIO', 'VERTICAL', 'INDUSTRY'],
       },
       botOperator: {
         type: 'array',
         description: 'Filters results by bot operator.',
         items: {
           type: 'string',
+        },
+      },
+      clientType: {
+        type: 'array',
+        description: 'Filters results by agent type.',
+        items: {
+          type: 'string',
+          description: 'The type of the client.',
+          enum: ['HUMAN', 'NON_AI_BOT', 'AI_BOT', 'MIXED_PURPOSE'],
         },
       },
       dateEnd: {

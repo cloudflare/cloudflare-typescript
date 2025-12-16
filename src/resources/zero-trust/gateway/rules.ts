@@ -532,6 +532,12 @@ export interface RuleSetting {
   egress?: RuleSetting.Egress | null;
 
   /**
+   * Configure whether a copy of the HTTP request will be sent to storage when the
+   * rule matches.
+   */
+  forensic_copy?: RuleSetting.ForensicCopy | null;
+
+  /**
    * Ignore category matches at CNAME domains in a response. When off, evaluate
    * categories in this rule against all CNAME domain categories in the response.
    * Settable only for `dns` and `dns_resolver` rules.
@@ -778,6 +784,17 @@ export namespace RuleSetting {
   }
 
   /**
+   * Configure whether a copy of the HTTP request will be sent to storage when the
+   * rule matches.
+   */
+  export interface ForensicCopy {
+    /**
+     * Enable sending the copy to storage.
+     */
+    enabled?: boolean;
+  }
+
+  /**
    * Send matching traffic to the supplied destination IP address and port. Settable
    * only for `l4` rules with the action set to `l4_override`.
    */
@@ -987,6 +1004,12 @@ export interface RuleSettingParam {
    * WARP IPs. Settable only for `egress` rules.
    */
   egress?: RuleSettingParam.Egress | null;
+
+  /**
+   * Configure whether a copy of the HTTP request will be sent to storage when the
+   * rule matches.
+   */
+  forensic_copy?: RuleSettingParam.ForensicCopy | null;
 
   /**
    * Ignore category matches at CNAME domains in a response. When off, evaluate
@@ -1232,6 +1255,17 @@ export namespace RuleSettingParam {
      * Specify the IPv6 range to use for egress.
      */
     ipv6?: string;
+  }
+
+  /**
+   * Configure whether a copy of the HTTP request will be sent to storage when the
+   * rule matches.
+   */
+  export interface ForensicCopy {
+    /**
+     * Enable sending the copy to storage.
+     */
+    enabled?: boolean;
   }
 
   /**
