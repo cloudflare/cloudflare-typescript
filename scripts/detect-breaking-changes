@@ -684,6 +684,16 @@ TEST_PATHS=(
 	tests/api-resources/snippets/snippets.test.ts
 	tests/api-resources/snippets/content.test.ts
 	tests/api-resources/snippets/rules.test.ts
+	tests/api-resources/realtime-kit/realtime-kit.test.ts
+	tests/api-resources/realtime-kit/apps.test.ts
+	tests/api-resources/realtime-kit/meetings.test.ts
+	tests/api-resources/realtime-kit/presets.test.ts
+	tests/api-resources/realtime-kit/sessions.test.ts
+	tests/api-resources/realtime-kit/recordings.test.ts
+	tests/api-resources/realtime-kit/webhooks.test.ts
+	tests/api-resources/realtime-kit/active-session.test.ts
+	tests/api-resources/realtime-kit/livestreams.test.ts
+	tests/api-resources/realtime-kit/analytics.test.ts
 	tests/api-resources/calls/calls.test.ts
 	tests/api-resources/calls/sfu.test.ts
 	tests/api-resources/calls/turn.test.ts

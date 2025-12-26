@@ -4000,6 +4000,87 @@ The following tools are available in this MCP server.
 - `list_snippets_rules` (`read`): Fetches all snippet rules belonging to the zone.
 - `delete_snippets_rules` (`write`): Deletes all snippet rules belonging to the zone.
 
+### Resource `realtime_kit.apps`:
+
+- `get_realtime_kit_apps` (`read`): Fetch all apps for your account
+- `post_realtime_kit_apps` (`write`): Create new app for your account
+
+### Resource `realtime_kit.meetings`:
+
+- `create_realtime_kit_meetings` (`write`): Create a meeting for the given App ID.
+- `add_participant_realtime_kit_meetings` (`write`): Adds a participant to the given meeting ID.
+- `delete_meeting_participant_realtime_kit_meetings` (`write`): Deletes a participant for the given meeting and participant ID.
+- `edit_participant_realtime_kit_meetings` (`write`): Updates a participant's details for the given meeting and participant ID.
+- `get_realtime_kit_meetings` (`read`): Returns all meetings for the given App ID.
+- `get_meeting_by_id_realtime_kit_meetings` (`read`): Returns a meeting details in an App for the given meeting ID.
+- `get_meeting_participant_realtime_kit_meetings` (`read`): Returns a participant details for the given meeting and participant ID.
+- `get_meeting_participants_realtime_kit_meetings` (`read`): Returns all participants detail for the given meeting ID.
+- `refresh_participant_token_realtime_kit_meetings` (`write`): Regenerates participant's authentication token for the given meeting and participant ID.
+- `replace_meeting_by_id_realtime_kit_meetings` (`write`): Replaces all the details for the given meeting ID.
+- `update_meeting_by_id_realtime_kit_meetings` (`write`): Updates a meeting in an App for the given meeting ID.
+
+### Resource `realtime_kit.presets`:
+
+- `create_realtime_kit_presets` (`write`): Creates a preset belonging to the current App
+- `update_realtime_kit_presets` (`write`): Update a preset by the provided preset ID
+- `delete_realtime_kit_presets` (`write`): Deletes a preset using the provided preset ID
+- `get_realtime_kit_presets` (`read`): Fetches all the presets belonging to an App.
+- `get_preset_by_id_realtime_kit_presets` (`read`): Fetches details of a preset using the provided preset ID
+
+### Resource `realtime_kit.sessions`:
+
+- `generate_summary_of_transcripts_realtime_kit_sessions` (`write`): Trigger Summary generation of Transcripts for the session ID.
+- `get_participant_data_from_peer_id_realtime_kit_sessions` (`read`): Returns details of the given peer ID along with call statistics for the given session ID.
+- `get_session_chat_realtime_kit_sessions` (`read`): Returns a URL to download all chat messages of the session ID in CSV format.
+- `get_session_details_realtime_kit_sessions` (`read`): Returns data of the given session ID including recording details.
+- `get_session_participant_details_realtime_kit_sessions` (`read`): Returns details of the given participant ID along with call statistics for the given session ID.
+- `get_session_participants_realtime_kit_sessions` (`read`): Returns a list of participants for the given session ID.
+- `get_session_summary_realtime_kit_sessions` (`read`): Returns a Summary URL to download the Summary of Transcripts for the session ID as plain text.
+- `get_session_transcripts_realtime_kit_sessions` (`read`): Returns a URL to download the transcript for the session ID in CSV format.
+- `get_sessions_realtime_kit_sessions` (`read`): Returns details of all sessions of an App.
+
+### Resource `realtime_kit.recordings`:
+
+- `get_active_recordings_realtime_kit_recordings` (`read`): Returns the active recording details for the given meeting ID.
+- `get_one_recording_realtime_kit_recordings` (`read`): Returns details of a recording for the given recording ID.
+- `get_recordings_realtime_kit_recordings` (`read`): Returns all recordings for an App. If the `meeting_id` parameter is passed, returns all recordings for the given meeting ID.
+- `pause_resume_stop_recording_realtime_kit_recordings` (`write`): Pause/Resume/Stop a given recording ID.
+- `start_recordings_realtime_kit_recordings` (`write`): Starts recording a meeting. The meeting can be started by an App admin directly, or a participant with permissions to start a recording, based on the type of authorization used.
+- `start_track_recording_realtime_kit_recordings` (`write`): Starts a track recording in a meeting. Track recordings consist of "layers". Layers are used to map audio/video tracks in a meeting to output destinations. More information about track recordings is available in the [Track Recordings Guide Page](https://docs.realtime.cloudflare.com/guides/capabilities/recording/recording-overview).
+
+### Resource `realtime_kit.webhooks`:
+
+- `create_webhook_realtime_kit_webhooks` (`write`): Adds a new webhook to an App.
+- `delete_webhook_realtime_kit_webhooks` (`write`): Removes a webhook for the given webhook ID.
+- `edit_webhook_realtime_kit_webhooks` (`write`): Edits the webhook details for the given webhook ID.
+- `get_webhook_by_id_realtime_kit_webhooks` (`read`): Returns webhook details for the given webhook ID.
+- `get_webhooks_realtime_kit_webhooks` (`read`): Returns details of all webhooks for an App.
+- `replace_webhook_realtime_kit_webhooks` (`write`): Replace all details for the given webhook ID.
+
+### Resource `realtime_kit.active-session`:
+
+- `create_poll_realtime_kit_active_session` (`write`): Creates a new poll in an active session for the given meeting ID.
+- `get_active_session_realtime_kit_active_session` (`read`): Returns details of an ongoing active session for the given meeting ID.
+- `kick_all_participants_realtime_kit_active_session` (`write`): Kicks all participants from an active session for the given meeting ID.
+- `kick_participants_realtime_kit_active_session` (`write`): Kicks one or more participants from an active session using user ID or custom participant ID.
+
+### Resource `realtime_kit.livestreams`:
+
+- `create_independent_livestream_realtime_kit_livestreams` (`write`): Creates a livestream for the given App ID and returns ingest server, stream key, and playback URL. You can pass custom input to the ingest server and stream key, and freely distribute the content using the playback URL on any player that supports HLS/LHLS.
+- `get_active_livestreams_for_livestream_id_realtime_kit_livestreams` (`read`): Returns details of all active livestreams for the given livestream ID. Retreive the livestream ID using the `Start livestreaming a meeting` API.
+- `get_all_livestreams_realtime_kit_livestreams` (`read`): Returns details of livestreams associated with the given App ID. It includes livestreams created by your App and RealtimeKit meetings that are livestreamed by your App. If you only want details of livestreams created by your App and not RealtimeKit meetings, you can use the `exclude_meetings` query parameter.
+- `get_livestream_analytics_complete_realtime_kit_livestreams` (`read`): Returns livestream analytics for the specified time range.
+- `get_livestream_session_details_for_session_id_realtime_kit_livestreams` (`read`): Returns livestream session details for the given livestream session ID. Retrieve the `livestream_session_id`using the `Fetch livestream session details using a session ID` API.
+- `get_livestream_session_for_livestream_id_realtime_kit_livestreams` (`read`): Returns details of a livestream with sessions for the given livestream ID. Retreive the livestream ID using the `Start livestreaming a meeting` API.
+- `get_meeting_active_livestreams_realtime_kit_livestreams` (`read`): Returns details of all active livestreams for the given meeting ID.
+- `get_org_analytics_realtime_kit_livestreams` (`read`): Returns day-wise session and recording analytics data of an App for the specified time range start_date to end_date. If start_date and end_date are not provided, the default time range is set from 30 days ago to the current date.
+- `start_livestreaming_a_meeting_realtime_kit_livestreams` (`write`): Starts livestream of a meeting associated with the given meeting ID. Retreive the meeting ID using the `Create a meeting` API.
+- `stop_livestreaming_a_meeting_realtime_kit_livestreams` (`write`): Stops the active livestream of a meeting associated with the given meeting ID. Retreive the meeting ID using the `Create a meeting` API.
+
+### Resource `realtime_kit.analytics`:
+
+- `get_org_analytics_realtime_kit_analytics` (`read`): Returns day-wise session and recording analytics data of an App for the specified time range start_date to end_date. If start_date and end_date are not provided, the default time range is set from 30 days ago to the current date.
+
 ### Resource `calls.sfu`:
 
 - `create_calls_sfu` (`write`): Creates a new Cloudflare calls app. An app is an unique enviroment where each Session can access all Tracks within the app.

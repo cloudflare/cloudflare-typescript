@@ -73,7 +73,7 @@ export { R2DataCatalog } from './r2-data-catalog/r2-data-catalog';
 export { RUM } from './rum/rum';
 export { Radar } from './radar/radar';
 export { RateLimits } from './rate-limits';
-export { RealtimeKit } from './realtime-kit';
+export { RealtimeKit } from './realtime-kit/realtime-kit';
 export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
 export { ResourceSharing } from './resource-sharing/resource-sharing';

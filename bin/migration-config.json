@@ -4287,6 +4287,1400 @@
       ]
     },
     {
+      "base": "realtimeKit.meetings",
+      "name": "addParticipant",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.meetings",
+      "name": "deleteMeetingParticipant",
+      "params": [
+        {
+          "type": "param",
+          "key": "participant_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "participant_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.meetings",
+      "name": "editParticipant",
+      "params": [
+        {
+          "type": "param",
+          "key": "participant_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "participant_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.meetings",
+      "name": "getMeetingByID",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.meetings",
+      "name": "getMeetingParticipant",
+      "params": [
+        {
+          "type": "param",
+          "key": "participant_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "participant_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.meetings",
+      "name": "getMeetingParticipants",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.meetings",
+      "name": "refreshParticipantToken",
+      "params": [
+        {
+          "type": "param",
+          "key": "participant_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "participant_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.meetings",
+      "name": "replaceMeetingByID",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.meetings",
+      "name": "updateMeetingByID",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.presets",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "preset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "preset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.presets",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "preset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "preset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.presets",
+      "name": "getPresetByID",
+      "params": [
+        {
+          "type": "param",
+          "key": "preset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "preset_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.sessions",
+      "name": "generateSummaryOfTranscripts",
+      "params": [
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.sessions",
+      "name": "getParticipantDataFromPeerID",
+      "params": [
+        {
+          "type": "param",
+          "key": "peer_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "peer_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.sessions",
+      "name": "getSessionChat",
+      "params": [
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.sessions",
+      "name": "getSessionDetails",
+      "params": [
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.sessions",
+      "name": "getSessionParticipantDetails",
+      "params": [
+        {
+          "type": "param",
+          "key": "participant_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "participant_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.sessions",
+      "name": "getSessionParticipants",
+      "params": [
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.sessions",
+      "name": "getSessionSummary",
+      "params": [
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.sessions",
+      "name": "getSessionTranscripts",
+      "params": [
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.recordings",
+      "name": "getActiveRecordings",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.recordings",
+      "name": "getOneRecording",
+      "params": [
+        {
+          "type": "param",
+          "key": "recording_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "recording_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.recordings",
+      "name": "pauseResumeStopRecording",
+      "params": [
+        {
+          "type": "param",
+          "key": "recording_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "recording_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.webhooks",
+      "name": "deleteWebhook",
+      "params": [
+        {
+          "type": "param",
+          "key": "webhook_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "webhook_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.webhooks",
+      "name": "editWebhook",
+      "params": [
+        {
+          "type": "param",
+          "key": "webhook_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "webhook_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.webhooks",
+      "name": "getWebhookByID",
+      "params": [
+        {
+          "type": "param",
+          "key": "webhook_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "webhook_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.webhooks",
+      "name": "replaceWebhook",
+      "params": [
+        {
+          "type": "param",
+          "key": "webhook_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "webhook_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.activeSession",
+      "name": "createPoll",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.activeSession",
+      "name": "getActiveSession",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.activeSession",
+      "name": "kickAllParticipants",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.activeSession",
+      "name": "kickParticipants",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.livestreams",
+      "name": "getActiveLivestreamsForLivestreamID",
+      "params": [
+        {
+          "type": "param",
+          "key": "livestream_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "livestream_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.livestreams",
+      "name": "getLivestreamSessionDetailsForSessionID",
+      "params": [
+        {
+          "type": "param",
+          "key": "livestream-session-id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "livestream-session-id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.livestreams",
+      "name": "getLivestreamSessionForLivestreamID",
+      "params": [
+        {
+          "type": "param",
+          "key": "livestream_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "livestream_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.livestreams",
+      "name": "getMeetingActiveLivestreams",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.livestreams",
+      "name": "startLivestreamingAMeeting",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "realtimeKit.livestreams",
+      "name": "stopLivestreamingAMeeting",
+      "params": [
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "cloudforceOne.requests.message",
       "name": "update",
       "params": [
