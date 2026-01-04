@@ -42,6 +42,11 @@ describe('resource instances', () => {
       embedding_model: '@cf/baai/bge-m3',
       max_num_results: 1,
       metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
+      public_endpoint_params: {
+        authorized_hosts: ['string'],
+        enabled: true,
+        rate_limit: { period_ms: 60000, requests: 1, technique: 'fixed' },
+      },
       reranking: true,
       reranking_model: '@cf/baai/bge-reranker-base',
       rewrite_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
@@ -92,6 +97,11 @@ describe('resource instances', () => {
       max_num_results: 1,
       metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
       paused: true,
+      public_endpoint_params: {
+        authorized_hosts: ['string'],
+        enabled: true,
+        rate_limit: { period_ms: 60000, requests: 1, technique: 'fixed' },
+      },
       reranking: true,
       reranking_model: '@cf/baai/bge-reranker-base',
       rewrite_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',

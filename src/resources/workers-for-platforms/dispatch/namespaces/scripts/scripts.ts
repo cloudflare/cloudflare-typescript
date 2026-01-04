@@ -257,8 +257,14 @@ export interface ScriptUpdateResponse {
   /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   * Specify either mode for Smart Placement, or one of region/hostname/host for
+   * targeted placement.
    */
-  placement?: ScriptUpdateResponse.Placement;
+  placement?:
+    | ScriptUpdateResponse.UnionMember0
+    | ScriptUpdateResponse.UnionMember1
+    | ScriptUpdateResponse.UnionMember2
+    | ScriptUpdateResponse.UnionMember3;
 
   /**
    * @deprecated
@@ -359,11 +365,13 @@ export namespace ScriptUpdateResponse {
     }
   }
 
-  /**
-   * Configuration for
-   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-   */
-  export interface Placement {
+  export interface UnionMember0 {
+    /**
+     * Enables
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    mode: 'smart';
+
     /**
      * The last time the script was analyzed for
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
@@ -371,10 +379,61 @@ export namespace ScriptUpdateResponse {
     last_analyzed_at?: string;
 
     /**
-     * Enables
+     * Status of
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      */
-    mode?: 'smart';
+    status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+  }
+
+  export interface UnionMember1 {
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+
+    /**
+     * The last time the script was analyzed for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    last_analyzed_at?: string;
+
+    /**
+     * Status of
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+  }
+
+  export interface UnionMember2 {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+
+    /**
+     * The last time the script was analyzed for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    last_analyzed_at?: string;
+
+    /**
+     * Status of
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+  }
+
+  export interface UnionMember3 {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
+
+    /**
+     * The last time the script was analyzed for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    last_analyzed_at?: string;
 
     /**
      * Status of
@@ -515,8 +574,10 @@ export namespace ScriptUpdateParams {
     /**
      * Configuration for
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     * Specify either mode for Smart Placement, or one of region/hostname/host for
+     * targeted placement.
      */
-    placement?: Metadata.Placement;
+    placement?: Metadata.UnionMember0 | Metadata.UnionMember1 | Metadata.UnionMember2 | Metadata.UnionMember3;
 
     /**
      * List of strings to use as tags for this Worker.
@@ -1263,16 +1324,33 @@ export namespace ScriptUpdateParams {
       }
     }
 
-    /**
-     * Configuration for
-     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-     */
-    export interface Placement {
+    export interface UnionMember0 {
       /**
        * Enables
        * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
        */
-      mode?: 'smart';
+      mode: 'smart';
+    }
+
+    export interface UnionMember1 {
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface UnionMember3 {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
     }
   }
 }

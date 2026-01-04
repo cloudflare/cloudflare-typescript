@@ -131,8 +131,14 @@ export interface SettingEditResponse {
   /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   * Specify either mode for Smart Placement, or one of region/hostname/host for
+   * targeted placement.
    */
-  placement?: SettingEditResponse.Placement;
+  placement?:
+    | SettingEditResponse.Mode
+    | SettingEditResponse.Region
+    | SettingEditResponse.Hostname
+    | SettingEditResponse.Host;
 
   /**
    * Tags associated with the Worker.
@@ -784,16 +790,33 @@ export namespace SettingEditResponse {
     }
   }
 
-  /**
-   * Configuration for
-   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-   */
-  export interface Placement {
+  export interface Mode {
     /**
      * Enables
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      */
-    mode?: 'smart';
+    mode: 'smart';
+  }
+
+  export interface Region {
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+  }
+
+  export interface Hostname {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+  }
+
+  export interface Host {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
   }
 }
 
@@ -865,8 +888,14 @@ export interface SettingGetResponse {
   /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   * Specify either mode for Smart Placement, or one of region/hostname/host for
+   * targeted placement.
    */
-  placement?: SettingGetResponse.Placement;
+  placement?:
+    | SettingGetResponse.Mode
+    | SettingGetResponse.Region
+    | SettingGetResponse.Hostname
+    | SettingGetResponse.Host;
 
   /**
    * Tags associated with the Worker.
@@ -1518,16 +1547,33 @@ export namespace SettingGetResponse {
     }
   }
 
-  /**
-   * Configuration for
-   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-   */
-  export interface Placement {
+  export interface Mode {
     /**
      * Enables
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      */
-    mode?: 'smart';
+    mode: 'smart';
+  }
+
+  export interface Region {
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+  }
+
+  export interface Hostname {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+  }
+
+  export interface Host {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
   }
 }
 
@@ -1617,8 +1663,10 @@ export namespace SettingEditParams {
     /**
      * Configuration for
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     * Specify either mode for Smart Placement, or one of region/hostname/host for
+     * targeted placement.
      */
-    placement?: Settings.Placement;
+    placement?: Settings.Mode | Settings.Region | Settings.Hostname | Settings.Host;
 
     /**
      * Tags associated with the Worker.
@@ -2305,16 +2353,33 @@ export namespace SettingEditParams {
       }
     }
 
-    /**
-     * Configuration for
-     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-     */
-    export interface Placement {
+    export interface Mode {
       /**
        * Enables
        * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
        */
-      mode?: 'smart';
+      mode: 'smart';
+    }
+
+    export interface Region {
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface Hostname {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface Host {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
     }
   }
 }

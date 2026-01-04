@@ -32,7 +32,8 @@ export class CustomPages extends APIResource {
       | 'managed_challenge'
       | 'ratelimit_block'
       | 'under_attack'
-      | 'waf_block',
+      | 'waf_block'
+      | 'waf_challenge',
     params: CustomPageUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageUpdateResponse> {
@@ -133,7 +134,8 @@ export class CustomPages extends APIResource {
       | 'managed_challenge'
       | 'ratelimit_block'
       | 'under_attack'
-      | 'waf_block',
+      | 'waf_block'
+      | 'waf_challenge',
     params?: CustomPageGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageGetResponse>;
@@ -147,7 +149,8 @@ export class CustomPages extends APIResource {
       | 'managed_challenge'
       | 'ratelimit_block'
       | 'under_attack'
-      | 'waf_block',
+      | 'waf_block'
+      | 'waf_challenge',
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageGetResponse>;
   get(
@@ -160,7 +163,8 @@ export class CustomPages extends APIResource {
       | 'managed_challenge'
       | 'ratelimit_block'
       | 'under_attack'
-      | 'waf_block',
+      | 'waf_block'
+      | 'waf_challenge',
     params: CustomPageGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageGetResponse> {

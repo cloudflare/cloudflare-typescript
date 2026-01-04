@@ -418,11 +418,17 @@ Methods:
 
 ## Subscriptions
 
+Types:
+
+- <code><a href="./src/resources/zones/subscriptions.ts">SubscriptionCreateResponse</a></code>
+- <code><a href="./src/resources/zones/subscriptions.ts">SubscriptionUpdateResponse</a></code>
+- <code><a href="./src/resources/zones/subscriptions.ts">SubscriptionGetResponse</a></code>
+
 Methods:
 
-- <code title="post /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">create</a>({ ...params }) -> Subscription</code>
-- <code title="put /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">update</a>({ ...params }) -> Subscription</code>
-- <code title="get /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">get</a>({ ...params }) -> Subscription</code>
+- <code title="post /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">create</a>({ ...params }) -> SubscriptionCreateResponse</code>
+- <code title="put /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">update</a>({ ...params }) -> SubscriptionUpdateResponse</code>
+- <code title="get /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">get</a>({ ...params }) -> SubscriptionGetResponse</code>
 
 ## Plans
 
