@@ -344,12 +344,7 @@ export interface ThreatEventBulkCreateResponse {
   createdEventsCount: number;
 
   /**
-   * Number of indicators created
-   */
-  createdIndicatorsCount: number;
-
-  /**
-   * Number of tags created in SoT
+   * Number of new tags created in SoT
    */
   createdTagsCount: number;
 
@@ -357,6 +352,16 @@ export interface ThreatEventBulkCreateResponse {
    * Number of errors encountered
    */
   errorCount: number;
+
+  /**
+   * Number of indicators queued for async processing
+   */
+  queuedIndicatorsCount: number;
+
+  /**
+   * Correlation ID for async indicator processing
+   */
+  createBulkEventsRequestId?: string;
 
   /**
    * Array of error details
@@ -762,6 +767,16 @@ export interface ThreatEventEditParams {
    * Body param:
    */
   category?: string;
+
+  /**
+   * Body param:
+   */
+  createdAt?: string;
+
+  /**
+   * Body param:
+   */
+  datasetId?: string;
 
   /**
    * Body param:

@@ -93,6 +93,9 @@ export {
 } from './settings';
 export {
   Subscriptions,
+  type SubscriptionCreateResponse,
+  type SubscriptionUpdateResponse,
+  type SubscriptionGetResponse,
   type SubscriptionCreateParams,
   type SubscriptionUpdateParams,
   type SubscriptionGetParams,

@@ -168,6 +168,8 @@ describe('resource threatEvents', () => {
       attacker: 'Flying Yeti',
       attackerCountry: 'CN',
       category: 'Domain Resolution',
+      createdAt: '2025-12-19T00:00:00Z',
+      datasetId: '9b769969-a211-466c-8ac3-cb91266a066a',
       date: '2022-04-01T00:00:00Z',
       event: 'An attacker registered the domain domain.com',
       indicator: 'domain2.com',
