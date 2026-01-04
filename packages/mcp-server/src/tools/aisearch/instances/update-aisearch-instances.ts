@@ -107,6 +107,35 @@ export const tool: Tool = {
       paused: {
         type: 'boolean',
       },
+      public_endpoint_params: {
+        type: 'object',
+        properties: {
+          authorized_hosts: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+          },
+          enabled: {
+            type: 'boolean',
+          },
+          rate_limit: {
+            type: 'object',
+            properties: {
+              period_ms: {
+                type: 'integer',
+              },
+              requests: {
+                type: 'integer',
+              },
+              technique: {
+                type: 'string',
+                enum: ['fixed', 'sliding'],
+              },
+            },
+          },
+        },
+      },
       reranking: {
         type: 'boolean',
       },

@@ -272,6 +272,10 @@ export interface InstanceCreateResponse {
 
   paused?: boolean;
 
+  public_endpoint_id?: string;
+
+  public_endpoint_params?: InstanceCreateResponse.PublicEndpointParams;
+
   reranking?: boolean;
 
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
@@ -356,6 +360,24 @@ export namespace InstanceCreateResponse {
     created_from_aisearch_wizard?: boolean;
 
     worker_domain?: string;
+  }
+
+  export interface PublicEndpointParams {
+    authorized_hosts?: Array<string>;
+
+    enabled?: boolean;
+
+    rate_limit?: PublicEndpointParams.RateLimit;
+  }
+
+  export namespace PublicEndpointParams {
+    export interface RateLimit {
+      period_ms?: number;
+
+      requests?: number;
+
+      technique?: 'fixed' | 'sliding';
+    }
   }
 
   export interface SourceParams {
@@ -497,6 +519,10 @@ export interface InstanceUpdateResponse {
 
   paused?: boolean;
 
+  public_endpoint_id?: string;
+
+  public_endpoint_params?: InstanceUpdateResponse.PublicEndpointParams;
+
   reranking?: boolean;
 
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
@@ -581,6 +607,24 @@ export namespace InstanceUpdateResponse {
     created_from_aisearch_wizard?: boolean;
 
     worker_domain?: string;
+  }
+
+  export interface PublicEndpointParams {
+    authorized_hosts?: Array<string>;
+
+    enabled?: boolean;
+
+    rate_limit?: PublicEndpointParams.RateLimit;
+  }
+
+  export namespace PublicEndpointParams {
+    export interface RateLimit {
+      period_ms?: number;
+
+      requests?: number;
+
+      technique?: 'fixed' | 'sliding';
+    }
   }
 
   export interface SourceParams {
@@ -722,6 +766,10 @@ export interface InstanceListResponse {
 
   paused?: boolean;
 
+  public_endpoint_id?: string;
+
+  public_endpoint_params?: InstanceListResponse.PublicEndpointParams;
+
   reranking?: boolean;
 
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
@@ -806,6 +854,24 @@ export namespace InstanceListResponse {
     created_from_aisearch_wizard?: boolean;
 
     worker_domain?: string;
+  }
+
+  export interface PublicEndpointParams {
+    authorized_hosts?: Array<string>;
+
+    enabled?: boolean;
+
+    rate_limit?: PublicEndpointParams.RateLimit;
+  }
+
+  export namespace PublicEndpointParams {
+    export interface RateLimit {
+      period_ms?: number;
+
+      requests?: number;
+
+      technique?: 'fixed' | 'sliding';
+    }
   }
 
   export interface SourceParams {
@@ -947,6 +1013,10 @@ export interface InstanceDeleteResponse {
 
   paused?: boolean;
 
+  public_endpoint_id?: string;
+
+  public_endpoint_params?: InstanceDeleteResponse.PublicEndpointParams;
+
   reranking?: boolean;
 
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
@@ -1031,6 +1101,24 @@ export namespace InstanceDeleteResponse {
     created_from_aisearch_wizard?: boolean;
 
     worker_domain?: string;
+  }
+
+  export interface PublicEndpointParams {
+    authorized_hosts?: Array<string>;
+
+    enabled?: boolean;
+
+    rate_limit?: PublicEndpointParams.RateLimit;
+  }
+
+  export namespace PublicEndpointParams {
+    export interface RateLimit {
+      period_ms?: number;
+
+      requests?: number;
+
+      technique?: 'fixed' | 'sliding';
+    }
   }
 
   export interface SourceParams {
@@ -1172,6 +1260,10 @@ export interface InstanceReadResponse {
 
   paused?: boolean;
 
+  public_endpoint_id?: string;
+
+  public_endpoint_params?: InstanceReadResponse.PublicEndpointParams;
+
   reranking?: boolean;
 
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
@@ -1256,6 +1348,24 @@ export namespace InstanceReadResponse {
     created_from_aisearch_wizard?: boolean;
 
     worker_domain?: string;
+  }
+
+  export interface PublicEndpointParams {
+    authorized_hosts?: Array<string>;
+
+    enabled?: boolean;
+
+    rate_limit?: PublicEndpointParams.RateLimit;
+  }
+
+  export namespace PublicEndpointParams {
+    export interface RateLimit {
+      period_ms?: number;
+
+      requests?: number;
+
+      technique?: 'fixed' | 'sliding';
+    }
   }
 
   export interface SourceParams {
@@ -1428,6 +1538,11 @@ export interface InstanceCreateParams {
   /**
    * Body param:
    */
+  public_endpoint_params?: InstanceCreateParams.PublicEndpointParams;
+
+  /**
+   * Body param:
+   */
   reranking?: boolean;
 
   /**
@@ -1487,6 +1602,24 @@ export namespace InstanceCreateParams {
     created_from_aisearch_wizard?: boolean;
 
     worker_domain?: string;
+  }
+
+  export interface PublicEndpointParams {
+    authorized_hosts?: Array<string>;
+
+    enabled?: boolean;
+
+    rate_limit?: PublicEndpointParams.RateLimit;
+  }
+
+  export namespace PublicEndpointParams {
+    export interface RateLimit {
+      period_ms?: number;
+
+      requests?: number;
+
+      technique?: 'fixed' | 'sliding';
+    }
   }
 
   export interface SourceParams {
@@ -1636,6 +1769,11 @@ export interface InstanceUpdateParams {
   /**
    * Body param:
    */
+  public_endpoint_params?: InstanceUpdateParams.PublicEndpointParams;
+
+  /**
+   * Body param:
+   */
   reranking?: boolean;
 
   /**
@@ -1751,6 +1889,24 @@ export namespace InstanceUpdateParams {
     created_from_aisearch_wizard?: boolean;
 
     worker_domain?: string;
+  }
+
+  export interface PublicEndpointParams {
+    authorized_hosts?: Array<string>;
+
+    enabled?: boolean;
+
+    rate_limit?: PublicEndpointParams.RateLimit;
+  }
+
+  export namespace PublicEndpointParams {
+    export interface RateLimit {
+      period_ms?: number;
+
+      requests?: number;
+
+      technique?: 'fixed' | 'sliding';
+    }
   }
 
   export interface SourceParams {

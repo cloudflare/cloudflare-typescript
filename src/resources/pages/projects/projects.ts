@@ -403,9 +403,32 @@ export namespace Deployment {
   export namespace Source {
     export interface Config {
       /**
+       * @deprecated Use `production_deployments_enabled` and
+       * `preview_deployment_setting` for more granular control.
+       */
+      deployments_enabled: boolean;
+
+      /**
        * The owner of the repository.
        */
       owner: string;
+
+      /**
+       * The owner ID of the repository.
+       */
+      owner_id: string;
+
+      /**
+       * A list of paths that should be excluded from triggering a preview deployment.
+       * Wildcard syntax (`*`) is supported.
+       */
+      path_excludes: Array<string>;
+
+      /**
+       * A list of paths that should be watched to trigger a preview deployment. Wildcard
+       * syntax (`*`) is supported.
+       */
+      path_includes: Array<string>;
 
       /**
        * Whether to enable PR comments.
@@ -413,66 +436,43 @@ export namespace Deployment {
       pr_comments_enabled: boolean;
 
       /**
-       * The production branch of the repository.
-       */
-      production_branch: string;
-
-      /**
-       * The name of the repository.
-       */
-      repo_name: string;
-
-      /**
-       * @deprecated Use `production_deployments_enabled` and
-       * `preview_deployment_setting` for more granular control.
-       */
-      deployments_enabled?: boolean;
-
-      /**
-       * The owner ID of the repository.
-       */
-      owner_id?: string;
-
-      /**
-       * A list of paths that should be excluded from triggering a preview deployment.
-       * Wildcard syntax (`*`) is supported.
-       */
-      path_excludes?: Array<string>;
-
-      /**
-       * A list of paths that should be watched to trigger a preview deployment. Wildcard
-       * syntax (`*`) is supported.
-       */
-      path_includes?: Array<string>;
-
-      /**
        * A list of branches that should not trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_excludes?: Array<string>;
+      preview_branch_excludes: Array<string>;
 
       /**
        * A list of branches that should trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_includes?: Array<string>;
+      preview_branch_includes: Array<string>;
 
       /**
        * Controls whether commits to preview branches trigger a preview deployment.
        */
-      preview_deployment_setting?: 'all' | 'none' | 'custom';
+      preview_deployment_setting: 'all' | 'none' | 'custom';
+
+      /**
+       * The production branch of the repository.
+       */
+      production_branch: string;
 
       /**
        * Whether to trigger a production deployment on commits to the production branch.
        */
-      production_deployments_enabled?: boolean;
+      production_deployments_enabled: boolean;
 
       /**
        * The ID of the repository.
        */
-      repo_id?: string;
+      repo_id: string;
+
+      /**
+       * The name of the repository.
+       */
+      repo_name: string;
     }
   }
 }
@@ -773,9 +773,32 @@ export namespace Project {
     export namespace Source {
       export interface Config {
         /**
+         * @deprecated Use `production_deployments_enabled` and
+         * `preview_deployment_setting` for more granular control.
+         */
+        deployments_enabled: boolean;
+
+        /**
          * The owner of the repository.
          */
         owner: string;
+
+        /**
+         * The owner ID of the repository.
+         */
+        owner_id: string;
+
+        /**
+         * A list of paths that should be excluded from triggering a preview deployment.
+         * Wildcard syntax (`*`) is supported.
+         */
+        path_excludes: Array<string>;
+
+        /**
+         * A list of paths that should be watched to trigger a preview deployment. Wildcard
+         * syntax (`*`) is supported.
+         */
+        path_includes: Array<string>;
 
         /**
          * Whether to enable PR comments.
@@ -783,66 +806,43 @@ export namespace Project {
         pr_comments_enabled: boolean;
 
         /**
-         * The production branch of the repository.
-         */
-        production_branch: string;
-
-        /**
-         * The name of the repository.
-         */
-        repo_name: string;
-
-        /**
-         * @deprecated Use `production_deployments_enabled` and
-         * `preview_deployment_setting` for more granular control.
-         */
-        deployments_enabled?: boolean;
-
-        /**
-         * The owner ID of the repository.
-         */
-        owner_id?: string;
-
-        /**
-         * A list of paths that should be excluded from triggering a preview deployment.
-         * Wildcard syntax (`*`) is supported.
-         */
-        path_excludes?: Array<string>;
-
-        /**
-         * A list of paths that should be watched to trigger a preview deployment. Wildcard
-         * syntax (`*`) is supported.
-         */
-        path_includes?: Array<string>;
-
-        /**
          * A list of branches that should not trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_excludes?: Array<string>;
+        preview_branch_excludes: Array<string>;
 
         /**
          * A list of branches that should trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_includes?: Array<string>;
+        preview_branch_includes: Array<string>;
 
         /**
          * Controls whether commits to preview branches trigger a preview deployment.
          */
-        preview_deployment_setting?: 'all' | 'none' | 'custom';
+        preview_deployment_setting: 'all' | 'none' | 'custom';
+
+        /**
+         * The production branch of the repository.
+         */
+        production_branch: string;
 
         /**
          * Whether to trigger a production deployment on commits to the production branch.
          */
-        production_deployments_enabled?: boolean;
+        production_deployments_enabled: boolean;
 
         /**
          * The ID of the repository.
          */
-        repo_id?: string;
+        repo_id: string;
+
+        /**
+         * The name of the repository.
+         */
+        repo_name: string;
       }
     }
   }
@@ -1639,9 +1639,32 @@ export namespace Project {
     export namespace Source {
       export interface Config {
         /**
+         * @deprecated Use `production_deployments_enabled` and
+         * `preview_deployment_setting` for more granular control.
+         */
+        deployments_enabled: boolean;
+
+        /**
          * The owner of the repository.
          */
         owner: string;
+
+        /**
+         * The owner ID of the repository.
+         */
+        owner_id: string;
+
+        /**
+         * A list of paths that should be excluded from triggering a preview deployment.
+         * Wildcard syntax (`*`) is supported.
+         */
+        path_excludes: Array<string>;
+
+        /**
+         * A list of paths that should be watched to trigger a preview deployment. Wildcard
+         * syntax (`*`) is supported.
+         */
+        path_includes: Array<string>;
 
         /**
          * Whether to enable PR comments.
@@ -1649,66 +1672,43 @@ export namespace Project {
         pr_comments_enabled: boolean;
 
         /**
-         * The production branch of the repository.
-         */
-        production_branch: string;
-
-        /**
-         * The name of the repository.
-         */
-        repo_name: string;
-
-        /**
-         * @deprecated Use `production_deployments_enabled` and
-         * `preview_deployment_setting` for more granular control.
-         */
-        deployments_enabled?: boolean;
-
-        /**
-         * The owner ID of the repository.
-         */
-        owner_id?: string;
-
-        /**
-         * A list of paths that should be excluded from triggering a preview deployment.
-         * Wildcard syntax (`*`) is supported.
-         */
-        path_excludes?: Array<string>;
-
-        /**
-         * A list of paths that should be watched to trigger a preview deployment. Wildcard
-         * syntax (`*`) is supported.
-         */
-        path_includes?: Array<string>;
-
-        /**
          * A list of branches that should not trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_excludes?: Array<string>;
+        preview_branch_excludes: Array<string>;
 
         /**
          * A list of branches that should trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_includes?: Array<string>;
+        preview_branch_includes: Array<string>;
 
         /**
          * Controls whether commits to preview branches trigger a preview deployment.
          */
-        preview_deployment_setting?: 'all' | 'none' | 'custom';
+        preview_deployment_setting: 'all' | 'none' | 'custom';
+
+        /**
+         * The production branch of the repository.
+         */
+        production_branch: string;
 
         /**
          * Whether to trigger a production deployment on commits to the production branch.
          */
-        production_deployments_enabled?: boolean;
+        production_deployments_enabled: boolean;
 
         /**
          * The ID of the repository.
          */
-        repo_id?: string;
+        repo_id: string;
+
+        /**
+         * The name of the repository.
+         */
+        repo_name: string;
       }
     }
   }
@@ -1763,9 +1763,32 @@ export namespace Project {
   export namespace Source {
     export interface Config {
       /**
+       * @deprecated Use `production_deployments_enabled` and
+       * `preview_deployment_setting` for more granular control.
+       */
+      deployments_enabled: boolean;
+
+      /**
        * The owner of the repository.
        */
       owner: string;
+
+      /**
+       * The owner ID of the repository.
+       */
+      owner_id: string;
+
+      /**
+       * A list of paths that should be excluded from triggering a preview deployment.
+       * Wildcard syntax (`*`) is supported.
+       */
+      path_excludes: Array<string>;
+
+      /**
+       * A list of paths that should be watched to trigger a preview deployment. Wildcard
+       * syntax (`*`) is supported.
+       */
+      path_includes: Array<string>;
 
       /**
        * Whether to enable PR comments.
@@ -1773,66 +1796,43 @@ export namespace Project {
       pr_comments_enabled: boolean;
 
       /**
-       * The production branch of the repository.
-       */
-      production_branch: string;
-
-      /**
-       * The name of the repository.
-       */
-      repo_name: string;
-
-      /**
-       * @deprecated Use `production_deployments_enabled` and
-       * `preview_deployment_setting` for more granular control.
-       */
-      deployments_enabled?: boolean;
-
-      /**
-       * The owner ID of the repository.
-       */
-      owner_id?: string;
-
-      /**
-       * A list of paths that should be excluded from triggering a preview deployment.
-       * Wildcard syntax (`*`) is supported.
-       */
-      path_excludes?: Array<string>;
-
-      /**
-       * A list of paths that should be watched to trigger a preview deployment. Wildcard
-       * syntax (`*`) is supported.
-       */
-      path_includes?: Array<string>;
-
-      /**
        * A list of branches that should not trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_excludes?: Array<string>;
+      preview_branch_excludes: Array<string>;
 
       /**
        * A list of branches that should trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_includes?: Array<string>;
+      preview_branch_includes: Array<string>;
 
       /**
        * Controls whether commits to preview branches trigger a preview deployment.
        */
-      preview_deployment_setting?: 'all' | 'none' | 'custom';
+      preview_deployment_setting: 'all' | 'none' | 'custom';
+
+      /**
+       * The production branch of the repository.
+       */
+      production_branch: string;
 
       /**
        * Whether to trigger a production deployment on commits to the production branch.
        */
-      production_deployments_enabled?: boolean;
+      production_deployments_enabled: boolean;
 
       /**
        * The ID of the repository.
        */
-      repo_id?: string;
+      repo_id: string;
+
+      /**
+       * The name of the repository.
+       */
+      repo_name: string;
     }
   }
 }
@@ -2158,9 +2158,32 @@ export namespace ProjectCreateResponse {
     export namespace Source {
       export interface Config {
         /**
+         * @deprecated Use `production_deployments_enabled` and
+         * `preview_deployment_setting` for more granular control.
+         */
+        deployments_enabled: boolean;
+
+        /**
          * The owner of the repository.
          */
         owner: string;
+
+        /**
+         * The owner ID of the repository.
+         */
+        owner_id: string;
+
+        /**
+         * A list of paths that should be excluded from triggering a preview deployment.
+         * Wildcard syntax (`*`) is supported.
+         */
+        path_excludes: Array<string>;
+
+        /**
+         * A list of paths that should be watched to trigger a preview deployment. Wildcard
+         * syntax (`*`) is supported.
+         */
+        path_includes: Array<string>;
 
         /**
          * Whether to enable PR comments.
@@ -2168,66 +2191,43 @@ export namespace ProjectCreateResponse {
         pr_comments_enabled: boolean;
 
         /**
-         * The production branch of the repository.
-         */
-        production_branch: string;
-
-        /**
-         * The name of the repository.
-         */
-        repo_name: string;
-
-        /**
-         * @deprecated Use `production_deployments_enabled` and
-         * `preview_deployment_setting` for more granular control.
-         */
-        deployments_enabled?: boolean;
-
-        /**
-         * The owner ID of the repository.
-         */
-        owner_id?: string;
-
-        /**
-         * A list of paths that should be excluded from triggering a preview deployment.
-         * Wildcard syntax (`*`) is supported.
-         */
-        path_excludes?: Array<string>;
-
-        /**
-         * A list of paths that should be watched to trigger a preview deployment. Wildcard
-         * syntax (`*`) is supported.
-         */
-        path_includes?: Array<string>;
-
-        /**
          * A list of branches that should not trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_excludes?: Array<string>;
+        preview_branch_excludes: Array<string>;
 
         /**
          * A list of branches that should trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_includes?: Array<string>;
+        preview_branch_includes: Array<string>;
 
         /**
          * Controls whether commits to preview branches trigger a preview deployment.
          */
-        preview_deployment_setting?: 'all' | 'none' | 'custom';
+        preview_deployment_setting: 'all' | 'none' | 'custom';
+
+        /**
+         * The production branch of the repository.
+         */
+        production_branch: string;
 
         /**
          * Whether to trigger a production deployment on commits to the production branch.
          */
-        production_deployments_enabled?: boolean;
+        production_deployments_enabled: boolean;
 
         /**
          * The ID of the repository.
          */
-        repo_id?: string;
+        repo_id: string;
+
+        /**
+         * The name of the repository.
+         */
+        repo_name: string;
       }
     }
   }
@@ -3024,9 +3024,32 @@ export namespace ProjectCreateResponse {
     export namespace Source {
       export interface Config {
         /**
+         * @deprecated Use `production_deployments_enabled` and
+         * `preview_deployment_setting` for more granular control.
+         */
+        deployments_enabled: boolean;
+
+        /**
          * The owner of the repository.
          */
         owner: string;
+
+        /**
+         * The owner ID of the repository.
+         */
+        owner_id: string;
+
+        /**
+         * A list of paths that should be excluded from triggering a preview deployment.
+         * Wildcard syntax (`*`) is supported.
+         */
+        path_excludes: Array<string>;
+
+        /**
+         * A list of paths that should be watched to trigger a preview deployment. Wildcard
+         * syntax (`*`) is supported.
+         */
+        path_includes: Array<string>;
 
         /**
          * Whether to enable PR comments.
@@ -3034,66 +3057,43 @@ export namespace ProjectCreateResponse {
         pr_comments_enabled: boolean;
 
         /**
-         * The production branch of the repository.
-         */
-        production_branch: string;
-
-        /**
-         * The name of the repository.
-         */
-        repo_name: string;
-
-        /**
-         * @deprecated Use `production_deployments_enabled` and
-         * `preview_deployment_setting` for more granular control.
-         */
-        deployments_enabled?: boolean;
-
-        /**
-         * The owner ID of the repository.
-         */
-        owner_id?: string;
-
-        /**
-         * A list of paths that should be excluded from triggering a preview deployment.
-         * Wildcard syntax (`*`) is supported.
-         */
-        path_excludes?: Array<string>;
-
-        /**
-         * A list of paths that should be watched to trigger a preview deployment. Wildcard
-         * syntax (`*`) is supported.
-         */
-        path_includes?: Array<string>;
-
-        /**
          * A list of branches that should not trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_excludes?: Array<string>;
+        preview_branch_excludes: Array<string>;
 
         /**
          * A list of branches that should trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_includes?: Array<string>;
+        preview_branch_includes: Array<string>;
 
         /**
          * Controls whether commits to preview branches trigger a preview deployment.
          */
-        preview_deployment_setting?: 'all' | 'none' | 'custom';
+        preview_deployment_setting: 'all' | 'none' | 'custom';
+
+        /**
+         * The production branch of the repository.
+         */
+        production_branch: string;
 
         /**
          * Whether to trigger a production deployment on commits to the production branch.
          */
-        production_deployments_enabled?: boolean;
+        production_deployments_enabled: boolean;
 
         /**
          * The ID of the repository.
          */
-        repo_id?: string;
+        repo_id: string;
+
+        /**
+         * The name of the repository.
+         */
+        repo_name: string;
       }
     }
   }
@@ -3148,9 +3148,32 @@ export namespace ProjectCreateResponse {
   export namespace Source {
     export interface Config {
       /**
+       * @deprecated Use `production_deployments_enabled` and
+       * `preview_deployment_setting` for more granular control.
+       */
+      deployments_enabled: boolean;
+
+      /**
        * The owner of the repository.
        */
       owner: string;
+
+      /**
+       * The owner ID of the repository.
+       */
+      owner_id: string;
+
+      /**
+       * A list of paths that should be excluded from triggering a preview deployment.
+       * Wildcard syntax (`*`) is supported.
+       */
+      path_excludes: Array<string>;
+
+      /**
+       * A list of paths that should be watched to trigger a preview deployment. Wildcard
+       * syntax (`*`) is supported.
+       */
+      path_includes: Array<string>;
 
       /**
        * Whether to enable PR comments.
@@ -3158,66 +3181,43 @@ export namespace ProjectCreateResponse {
       pr_comments_enabled: boolean;
 
       /**
-       * The production branch of the repository.
-       */
-      production_branch: string;
-
-      /**
-       * The name of the repository.
-       */
-      repo_name: string;
-
-      /**
-       * @deprecated Use `production_deployments_enabled` and
-       * `preview_deployment_setting` for more granular control.
-       */
-      deployments_enabled?: boolean;
-
-      /**
-       * The owner ID of the repository.
-       */
-      owner_id?: string;
-
-      /**
-       * A list of paths that should be excluded from triggering a preview deployment.
-       * Wildcard syntax (`*`) is supported.
-       */
-      path_excludes?: Array<string>;
-
-      /**
-       * A list of paths that should be watched to trigger a preview deployment. Wildcard
-       * syntax (`*`) is supported.
-       */
-      path_includes?: Array<string>;
-
-      /**
        * A list of branches that should not trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_excludes?: Array<string>;
+      preview_branch_excludes: Array<string>;
 
       /**
        * A list of branches that should trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_includes?: Array<string>;
+      preview_branch_includes: Array<string>;
 
       /**
        * Controls whether commits to preview branches trigger a preview deployment.
        */
-      preview_deployment_setting?: 'all' | 'none' | 'custom';
+      preview_deployment_setting: 'all' | 'none' | 'custom';
+
+      /**
+       * The production branch of the repository.
+       */
+      production_branch: string;
 
       /**
        * Whether to trigger a production deployment on commits to the production branch.
        */
-      production_deployments_enabled?: boolean;
+      production_deployments_enabled: boolean;
 
       /**
        * The ID of the repository.
        */
-      repo_id?: string;
+      repo_id: string;
+
+      /**
+       * The name of the repository.
+       */
+      repo_name: string;
     }
   }
 }
@@ -3518,9 +3518,32 @@ export namespace ProjectListResponse {
     export namespace Source {
       export interface Config {
         /**
+         * @deprecated Use `production_deployments_enabled` and
+         * `preview_deployment_setting` for more granular control.
+         */
+        deployments_enabled: boolean;
+
+        /**
          * The owner of the repository.
          */
         owner: string;
+
+        /**
+         * The owner ID of the repository.
+         */
+        owner_id: string;
+
+        /**
+         * A list of paths that should be excluded from triggering a preview deployment.
+         * Wildcard syntax (`*`) is supported.
+         */
+        path_excludes: Array<string>;
+
+        /**
+         * A list of paths that should be watched to trigger a preview deployment. Wildcard
+         * syntax (`*`) is supported.
+         */
+        path_includes: Array<string>;
 
         /**
          * Whether to enable PR comments.
@@ -3528,66 +3551,43 @@ export namespace ProjectListResponse {
         pr_comments_enabled: boolean;
 
         /**
-         * The production branch of the repository.
-         */
-        production_branch: string;
-
-        /**
-         * The name of the repository.
-         */
-        repo_name: string;
-
-        /**
-         * @deprecated Use `production_deployments_enabled` and
-         * `preview_deployment_setting` for more granular control.
-         */
-        deployments_enabled?: boolean;
-
-        /**
-         * The owner ID of the repository.
-         */
-        owner_id?: string;
-
-        /**
-         * A list of paths that should be excluded from triggering a preview deployment.
-         * Wildcard syntax (`*`) is supported.
-         */
-        path_excludes?: Array<string>;
-
-        /**
-         * A list of paths that should be watched to trigger a preview deployment. Wildcard
-         * syntax (`*`) is supported.
-         */
-        path_includes?: Array<string>;
-
-        /**
          * A list of branches that should not trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_excludes?: Array<string>;
+        preview_branch_excludes: Array<string>;
 
         /**
          * A list of branches that should trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_includes?: Array<string>;
+        preview_branch_includes: Array<string>;
 
         /**
          * Controls whether commits to preview branches trigger a preview deployment.
          */
-        preview_deployment_setting?: 'all' | 'none' | 'custom';
+        preview_deployment_setting: 'all' | 'none' | 'custom';
+
+        /**
+         * The production branch of the repository.
+         */
+        production_branch: string;
 
         /**
          * Whether to trigger a production deployment on commits to the production branch.
          */
-        production_deployments_enabled?: boolean;
+        production_deployments_enabled: boolean;
 
         /**
          * The ID of the repository.
          */
-        repo_id?: string;
+        repo_id: string;
+
+        /**
+         * The name of the repository.
+         */
+        repo_name: string;
       }
     }
   }
@@ -4384,9 +4384,32 @@ export namespace ProjectListResponse {
     export namespace Source {
       export interface Config {
         /**
+         * @deprecated Use `production_deployments_enabled` and
+         * `preview_deployment_setting` for more granular control.
+         */
+        deployments_enabled: boolean;
+
+        /**
          * The owner of the repository.
          */
         owner: string;
+
+        /**
+         * The owner ID of the repository.
+         */
+        owner_id: string;
+
+        /**
+         * A list of paths that should be excluded from triggering a preview deployment.
+         * Wildcard syntax (`*`) is supported.
+         */
+        path_excludes: Array<string>;
+
+        /**
+         * A list of paths that should be watched to trigger a preview deployment. Wildcard
+         * syntax (`*`) is supported.
+         */
+        path_includes: Array<string>;
 
         /**
          * Whether to enable PR comments.
@@ -4394,66 +4417,43 @@ export namespace ProjectListResponse {
         pr_comments_enabled: boolean;
 
         /**
-         * The production branch of the repository.
-         */
-        production_branch: string;
-
-        /**
-         * The name of the repository.
-         */
-        repo_name: string;
-
-        /**
-         * @deprecated Use `production_deployments_enabled` and
-         * `preview_deployment_setting` for more granular control.
-         */
-        deployments_enabled?: boolean;
-
-        /**
-         * The owner ID of the repository.
-         */
-        owner_id?: string;
-
-        /**
-         * A list of paths that should be excluded from triggering a preview deployment.
-         * Wildcard syntax (`*`) is supported.
-         */
-        path_excludes?: Array<string>;
-
-        /**
-         * A list of paths that should be watched to trigger a preview deployment. Wildcard
-         * syntax (`*`) is supported.
-         */
-        path_includes?: Array<string>;
-
-        /**
          * A list of branches that should not trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_excludes?: Array<string>;
+        preview_branch_excludes: Array<string>;
 
         /**
          * A list of branches that should trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_includes?: Array<string>;
+        preview_branch_includes: Array<string>;
 
         /**
          * Controls whether commits to preview branches trigger a preview deployment.
          */
-        preview_deployment_setting?: 'all' | 'none' | 'custom';
+        preview_deployment_setting: 'all' | 'none' | 'custom';
+
+        /**
+         * The production branch of the repository.
+         */
+        production_branch: string;
 
         /**
          * Whether to trigger a production deployment on commits to the production branch.
          */
-        production_deployments_enabled?: boolean;
+        production_deployments_enabled: boolean;
 
         /**
          * The ID of the repository.
          */
-        repo_id?: string;
+        repo_id: string;
+
+        /**
+         * The name of the repository.
+         */
+        repo_name: string;
       }
     }
   }
@@ -4508,9 +4508,32 @@ export namespace ProjectListResponse {
   export namespace Source {
     export interface Config {
       /**
+       * @deprecated Use `production_deployments_enabled` and
+       * `preview_deployment_setting` for more granular control.
+       */
+      deployments_enabled: boolean;
+
+      /**
        * The owner of the repository.
        */
       owner: string;
+
+      /**
+       * The owner ID of the repository.
+       */
+      owner_id: string;
+
+      /**
+       * A list of paths that should be excluded from triggering a preview deployment.
+       * Wildcard syntax (`*`) is supported.
+       */
+      path_excludes: Array<string>;
+
+      /**
+       * A list of paths that should be watched to trigger a preview deployment. Wildcard
+       * syntax (`*`) is supported.
+       */
+      path_includes: Array<string>;
 
       /**
        * Whether to enable PR comments.
@@ -4518,66 +4541,43 @@ export namespace ProjectListResponse {
       pr_comments_enabled: boolean;
 
       /**
-       * The production branch of the repository.
-       */
-      production_branch: string;
-
-      /**
-       * The name of the repository.
-       */
-      repo_name: string;
-
-      /**
-       * @deprecated Use `production_deployments_enabled` and
-       * `preview_deployment_setting` for more granular control.
-       */
-      deployments_enabled?: boolean;
-
-      /**
-       * The owner ID of the repository.
-       */
-      owner_id?: string;
-
-      /**
-       * A list of paths that should be excluded from triggering a preview deployment.
-       * Wildcard syntax (`*`) is supported.
-       */
-      path_excludes?: Array<string>;
-
-      /**
-       * A list of paths that should be watched to trigger a preview deployment. Wildcard
-       * syntax (`*`) is supported.
-       */
-      path_includes?: Array<string>;
-
-      /**
        * A list of branches that should not trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_excludes?: Array<string>;
+      preview_branch_excludes: Array<string>;
 
       /**
        * A list of branches that should trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_includes?: Array<string>;
+      preview_branch_includes: Array<string>;
 
       /**
        * Controls whether commits to preview branches trigger a preview deployment.
        */
-      preview_deployment_setting?: 'all' | 'none' | 'custom';
+      preview_deployment_setting: 'all' | 'none' | 'custom';
+
+      /**
+       * The production branch of the repository.
+       */
+      production_branch: string;
 
       /**
        * Whether to trigger a production deployment on commits to the production branch.
        */
-      production_deployments_enabled?: boolean;
+      production_deployments_enabled: boolean;
 
       /**
        * The ID of the repository.
        */
-      repo_id?: string;
+      repo_id: string;
+
+      /**
+       * The name of the repository.
+       */
+      repo_name: string;
     }
   }
 }
@@ -4880,9 +4880,32 @@ export namespace ProjectEditResponse {
     export namespace Source {
       export interface Config {
         /**
+         * @deprecated Use `production_deployments_enabled` and
+         * `preview_deployment_setting` for more granular control.
+         */
+        deployments_enabled: boolean;
+
+        /**
          * The owner of the repository.
          */
         owner: string;
+
+        /**
+         * The owner ID of the repository.
+         */
+        owner_id: string;
+
+        /**
+         * A list of paths that should be excluded from triggering a preview deployment.
+         * Wildcard syntax (`*`) is supported.
+         */
+        path_excludes: Array<string>;
+
+        /**
+         * A list of paths that should be watched to trigger a preview deployment. Wildcard
+         * syntax (`*`) is supported.
+         */
+        path_includes: Array<string>;
 
         /**
          * Whether to enable PR comments.
@@ -4890,66 +4913,43 @@ export namespace ProjectEditResponse {
         pr_comments_enabled: boolean;
 
         /**
-         * The production branch of the repository.
-         */
-        production_branch: string;
-
-        /**
-         * The name of the repository.
-         */
-        repo_name: string;
-
-        /**
-         * @deprecated Use `production_deployments_enabled` and
-         * `preview_deployment_setting` for more granular control.
-         */
-        deployments_enabled?: boolean;
-
-        /**
-         * The owner ID of the repository.
-         */
-        owner_id?: string;
-
-        /**
-         * A list of paths that should be excluded from triggering a preview deployment.
-         * Wildcard syntax (`*`) is supported.
-         */
-        path_excludes?: Array<string>;
-
-        /**
-         * A list of paths that should be watched to trigger a preview deployment. Wildcard
-         * syntax (`*`) is supported.
-         */
-        path_includes?: Array<string>;
-
-        /**
          * A list of branches that should not trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_excludes?: Array<string>;
+        preview_branch_excludes: Array<string>;
 
         /**
          * A list of branches that should trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_includes?: Array<string>;
+        preview_branch_includes: Array<string>;
 
         /**
          * Controls whether commits to preview branches trigger a preview deployment.
          */
-        preview_deployment_setting?: 'all' | 'none' | 'custom';
+        preview_deployment_setting: 'all' | 'none' | 'custom';
+
+        /**
+         * The production branch of the repository.
+         */
+        production_branch: string;
 
         /**
          * Whether to trigger a production deployment on commits to the production branch.
          */
-        production_deployments_enabled?: boolean;
+        production_deployments_enabled: boolean;
 
         /**
          * The ID of the repository.
          */
-        repo_id?: string;
+        repo_id: string;
+
+        /**
+         * The name of the repository.
+         */
+        repo_name: string;
       }
     }
   }
@@ -5746,9 +5746,32 @@ export namespace ProjectEditResponse {
     export namespace Source {
       export interface Config {
         /**
+         * @deprecated Use `production_deployments_enabled` and
+         * `preview_deployment_setting` for more granular control.
+         */
+        deployments_enabled: boolean;
+
+        /**
          * The owner of the repository.
          */
         owner: string;
+
+        /**
+         * The owner ID of the repository.
+         */
+        owner_id: string;
+
+        /**
+         * A list of paths that should be excluded from triggering a preview deployment.
+         * Wildcard syntax (`*`) is supported.
+         */
+        path_excludes: Array<string>;
+
+        /**
+         * A list of paths that should be watched to trigger a preview deployment. Wildcard
+         * syntax (`*`) is supported.
+         */
+        path_includes: Array<string>;
 
         /**
          * Whether to enable PR comments.
@@ -5756,66 +5779,43 @@ export namespace ProjectEditResponse {
         pr_comments_enabled: boolean;
 
         /**
-         * The production branch of the repository.
-         */
-        production_branch: string;
-
-        /**
-         * The name of the repository.
-         */
-        repo_name: string;
-
-        /**
-         * @deprecated Use `production_deployments_enabled` and
-         * `preview_deployment_setting` for more granular control.
-         */
-        deployments_enabled?: boolean;
-
-        /**
-         * The owner ID of the repository.
-         */
-        owner_id?: string;
-
-        /**
-         * A list of paths that should be excluded from triggering a preview deployment.
-         * Wildcard syntax (`*`) is supported.
-         */
-        path_excludes?: Array<string>;
-
-        /**
-         * A list of paths that should be watched to trigger a preview deployment. Wildcard
-         * syntax (`*`) is supported.
-         */
-        path_includes?: Array<string>;
-
-        /**
          * A list of branches that should not trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_excludes?: Array<string>;
+        preview_branch_excludes: Array<string>;
 
         /**
          * A list of branches that should trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_includes?: Array<string>;
+        preview_branch_includes: Array<string>;
 
         /**
          * Controls whether commits to preview branches trigger a preview deployment.
          */
-        preview_deployment_setting?: 'all' | 'none' | 'custom';
+        preview_deployment_setting: 'all' | 'none' | 'custom';
+
+        /**
+         * The production branch of the repository.
+         */
+        production_branch: string;
 
         /**
          * Whether to trigger a production deployment on commits to the production branch.
          */
-        production_deployments_enabled?: boolean;
+        production_deployments_enabled: boolean;
 
         /**
          * The ID of the repository.
          */
-        repo_id?: string;
+        repo_id: string;
+
+        /**
+         * The name of the repository.
+         */
+        repo_name: string;
       }
     }
   }
@@ -5870,9 +5870,32 @@ export namespace ProjectEditResponse {
   export namespace Source {
     export interface Config {
       /**
+       * @deprecated Use `production_deployments_enabled` and
+       * `preview_deployment_setting` for more granular control.
+       */
+      deployments_enabled: boolean;
+
+      /**
        * The owner of the repository.
        */
       owner: string;
+
+      /**
+       * The owner ID of the repository.
+       */
+      owner_id: string;
+
+      /**
+       * A list of paths that should be excluded from triggering a preview deployment.
+       * Wildcard syntax (`*`) is supported.
+       */
+      path_excludes: Array<string>;
+
+      /**
+       * A list of paths that should be watched to trigger a preview deployment. Wildcard
+       * syntax (`*`) is supported.
+       */
+      path_includes: Array<string>;
 
       /**
        * Whether to enable PR comments.
@@ -5880,66 +5903,43 @@ export namespace ProjectEditResponse {
       pr_comments_enabled: boolean;
 
       /**
-       * The production branch of the repository.
-       */
-      production_branch: string;
-
-      /**
-       * The name of the repository.
-       */
-      repo_name: string;
-
-      /**
-       * @deprecated Use `production_deployments_enabled` and
-       * `preview_deployment_setting` for more granular control.
-       */
-      deployments_enabled?: boolean;
-
-      /**
-       * The owner ID of the repository.
-       */
-      owner_id?: string;
-
-      /**
-       * A list of paths that should be excluded from triggering a preview deployment.
-       * Wildcard syntax (`*`) is supported.
-       */
-      path_excludes?: Array<string>;
-
-      /**
-       * A list of paths that should be watched to trigger a preview deployment. Wildcard
-       * syntax (`*`) is supported.
-       */
-      path_includes?: Array<string>;
-
-      /**
        * A list of branches that should not trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_excludes?: Array<string>;
+      preview_branch_excludes: Array<string>;
 
       /**
        * A list of branches that should trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_includes?: Array<string>;
+      preview_branch_includes: Array<string>;
 
       /**
        * Controls whether commits to preview branches trigger a preview deployment.
        */
-      preview_deployment_setting?: 'all' | 'none' | 'custom';
+      preview_deployment_setting: 'all' | 'none' | 'custom';
+
+      /**
+       * The production branch of the repository.
+       */
+      production_branch: string;
 
       /**
        * Whether to trigger a production deployment on commits to the production branch.
        */
-      production_deployments_enabled?: boolean;
+      production_deployments_enabled: boolean;
 
       /**
        * The ID of the repository.
        */
-      repo_id?: string;
+      repo_id: string;
+
+      /**
+       * The name of the repository.
+       */
+      repo_name: string;
     }
   }
 }
@@ -6240,9 +6240,32 @@ export namespace ProjectGetResponse {
     export namespace Source {
       export interface Config {
         /**
+         * @deprecated Use `production_deployments_enabled` and
+         * `preview_deployment_setting` for more granular control.
+         */
+        deployments_enabled: boolean;
+
+        /**
          * The owner of the repository.
          */
         owner: string;
+
+        /**
+         * The owner ID of the repository.
+         */
+        owner_id: string;
+
+        /**
+         * A list of paths that should be excluded from triggering a preview deployment.
+         * Wildcard syntax (`*`) is supported.
+         */
+        path_excludes: Array<string>;
+
+        /**
+         * A list of paths that should be watched to trigger a preview deployment. Wildcard
+         * syntax (`*`) is supported.
+         */
+        path_includes: Array<string>;
 
         /**
          * Whether to enable PR comments.
@@ -6250,66 +6273,43 @@ export namespace ProjectGetResponse {
         pr_comments_enabled: boolean;
 
         /**
-         * The production branch of the repository.
-         */
-        production_branch: string;
-
-        /**
-         * The name of the repository.
-         */
-        repo_name: string;
-
-        /**
-         * @deprecated Use `production_deployments_enabled` and
-         * `preview_deployment_setting` for more granular control.
-         */
-        deployments_enabled?: boolean;
-
-        /**
-         * The owner ID of the repository.
-         */
-        owner_id?: string;
-
-        /**
-         * A list of paths that should be excluded from triggering a preview deployment.
-         * Wildcard syntax (`*`) is supported.
-         */
-        path_excludes?: Array<string>;
-
-        /**
-         * A list of paths that should be watched to trigger a preview deployment. Wildcard
-         * syntax (`*`) is supported.
-         */
-        path_includes?: Array<string>;
-
-        /**
          * A list of branches that should not trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_excludes?: Array<string>;
+        preview_branch_excludes: Array<string>;
 
         /**
          * A list of branches that should trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_includes?: Array<string>;
+        preview_branch_includes: Array<string>;
 
         /**
          * Controls whether commits to preview branches trigger a preview deployment.
          */
-        preview_deployment_setting?: 'all' | 'none' | 'custom';
+        preview_deployment_setting: 'all' | 'none' | 'custom';
+
+        /**
+         * The production branch of the repository.
+         */
+        production_branch: string;
 
         /**
          * Whether to trigger a production deployment on commits to the production branch.
          */
-        production_deployments_enabled?: boolean;
+        production_deployments_enabled: boolean;
 
         /**
          * The ID of the repository.
          */
-        repo_id?: string;
+        repo_id: string;
+
+        /**
+         * The name of the repository.
+         */
+        repo_name: string;
       }
     }
   }
@@ -7106,9 +7106,32 @@ export namespace ProjectGetResponse {
     export namespace Source {
       export interface Config {
         /**
+         * @deprecated Use `production_deployments_enabled` and
+         * `preview_deployment_setting` for more granular control.
+         */
+        deployments_enabled: boolean;
+
+        /**
          * The owner of the repository.
          */
         owner: string;
+
+        /**
+         * The owner ID of the repository.
+         */
+        owner_id: string;
+
+        /**
+         * A list of paths that should be excluded from triggering a preview deployment.
+         * Wildcard syntax (`*`) is supported.
+         */
+        path_excludes: Array<string>;
+
+        /**
+         * A list of paths that should be watched to trigger a preview deployment. Wildcard
+         * syntax (`*`) is supported.
+         */
+        path_includes: Array<string>;
 
         /**
          * Whether to enable PR comments.
@@ -7116,66 +7139,43 @@ export namespace ProjectGetResponse {
         pr_comments_enabled: boolean;
 
         /**
-         * The production branch of the repository.
-         */
-        production_branch: string;
-
-        /**
-         * The name of the repository.
-         */
-        repo_name: string;
-
-        /**
-         * @deprecated Use `production_deployments_enabled` and
-         * `preview_deployment_setting` for more granular control.
-         */
-        deployments_enabled?: boolean;
-
-        /**
-         * The owner ID of the repository.
-         */
-        owner_id?: string;
-
-        /**
-         * A list of paths that should be excluded from triggering a preview deployment.
-         * Wildcard syntax (`*`) is supported.
-         */
-        path_excludes?: Array<string>;
-
-        /**
-         * A list of paths that should be watched to trigger a preview deployment. Wildcard
-         * syntax (`*`) is supported.
-         */
-        path_includes?: Array<string>;
-
-        /**
          * A list of branches that should not trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_excludes?: Array<string>;
+        preview_branch_excludes: Array<string>;
 
         /**
          * A list of branches that should trigger a preview deployment. Wildcard syntax
          * (`*`) is supported. Must be used with `preview_deployment_setting` set to
          * `custom`.
          */
-        preview_branch_includes?: Array<string>;
+        preview_branch_includes: Array<string>;
 
         /**
          * Controls whether commits to preview branches trigger a preview deployment.
          */
-        preview_deployment_setting?: 'all' | 'none' | 'custom';
+        preview_deployment_setting: 'all' | 'none' | 'custom';
+
+        /**
+         * The production branch of the repository.
+         */
+        production_branch: string;
 
         /**
          * Whether to trigger a production deployment on commits to the production branch.
          */
-        production_deployments_enabled?: boolean;
+        production_deployments_enabled: boolean;
 
         /**
          * The ID of the repository.
          */
-        repo_id?: string;
+        repo_id: string;
+
+        /**
+         * The name of the repository.
+         */
+        repo_name: string;
       }
     }
   }
@@ -7230,9 +7230,32 @@ export namespace ProjectGetResponse {
   export namespace Source {
     export interface Config {
       /**
+       * @deprecated Use `production_deployments_enabled` and
+       * `preview_deployment_setting` for more granular control.
+       */
+      deployments_enabled: boolean;
+
+      /**
        * The owner of the repository.
        */
       owner: string;
+
+      /**
+       * The owner ID of the repository.
+       */
+      owner_id: string;
+
+      /**
+       * A list of paths that should be excluded from triggering a preview deployment.
+       * Wildcard syntax (`*`) is supported.
+       */
+      path_excludes: Array<string>;
+
+      /**
+       * A list of paths that should be watched to trigger a preview deployment. Wildcard
+       * syntax (`*`) is supported.
+       */
+      path_includes: Array<string>;
 
       /**
        * Whether to enable PR comments.
@@ -7240,66 +7263,43 @@ export namespace ProjectGetResponse {
       pr_comments_enabled: boolean;
 
       /**
-       * The production branch of the repository.
-       */
-      production_branch: string;
-
-      /**
-       * The name of the repository.
-       */
-      repo_name: string;
-
-      /**
-       * @deprecated Use `production_deployments_enabled` and
-       * `preview_deployment_setting` for more granular control.
-       */
-      deployments_enabled?: boolean;
-
-      /**
-       * The owner ID of the repository.
-       */
-      owner_id?: string;
-
-      /**
-       * A list of paths that should be excluded from triggering a preview deployment.
-       * Wildcard syntax (`*`) is supported.
-       */
-      path_excludes?: Array<string>;
-
-      /**
-       * A list of paths that should be watched to trigger a preview deployment. Wildcard
-       * syntax (`*`) is supported.
-       */
-      path_includes?: Array<string>;
-
-      /**
        * A list of branches that should not trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_excludes?: Array<string>;
+      preview_branch_excludes: Array<string>;
 
       /**
        * A list of branches that should trigger a preview deployment. Wildcard syntax
        * (`*`) is supported. Must be used with `preview_deployment_setting` set to
        * `custom`.
        */
-      preview_branch_includes?: Array<string>;
+      preview_branch_includes: Array<string>;
 
       /**
        * Controls whether commits to preview branches trigger a preview deployment.
        */
-      preview_deployment_setting?: 'all' | 'none' | 'custom';
+      preview_deployment_setting: 'all' | 'none' | 'custom';
+
+      /**
+       * The production branch of the repository.
+       */
+      production_branch: string;
 
       /**
        * Whether to trigger a production deployment on commits to the production branch.
        */
-      production_deployments_enabled?: boolean;
+      production_deployments_enabled: boolean;
 
       /**
        * The ID of the repository.
        */
-      repo_id?: string;
+      repo_id: string;
+
+      /**
+       * The name of the repository.
+       */
+      repo_name: string;
     }
   }
 }

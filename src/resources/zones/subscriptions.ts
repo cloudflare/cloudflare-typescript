@@ -14,15 +14,15 @@ export class Subscriptions extends APIResource {
    * ```ts
    * const subscription =
    *   await client.zones.subscriptions.create({
-   *     zone_id: '506e3185e9c882d175a2d0cb0093d9f2',
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   });
    * ```
    */
-  create(params: SubscriptionCreateParams, options?: RequestOptions): APIPromise<Shared.Subscription> {
+  create(params: SubscriptionCreateParams, options?: RequestOptions): APIPromise<SubscriptionCreateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/subscription`, { body, ...options }) as APIPromise<{
-        result: Shared.Subscription;
+        result: SubscriptionCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -34,15 +34,15 @@ export class Subscriptions extends APIResource {
    * ```ts
    * const subscription =
    *   await client.zones.subscriptions.update({
-   *     zone_id: '506e3185e9c882d175a2d0cb0093d9f2',
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   });
    * ```
    */
-  update(params: SubscriptionUpdateParams, options?: RequestOptions): APIPromise<Shared.Subscription> {
+  update(params: SubscriptionUpdateParams, options?: RequestOptions): APIPromise<SubscriptionUpdateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/subscription`, { body, ...options }) as APIPromise<{
-        result: Shared.Subscription;
+        result: SubscriptionUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -53,23 +53,152 @@ export class Subscriptions extends APIResource {
    * @example
    * ```ts
    * const subscription = await client.zones.subscriptions.get({
-   *   zone_id: '506e3185e9c882d175a2d0cb0093d9f2',
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    * });
    * ```
    */
-  get(params: SubscriptionGetParams, options?: RequestOptions): APIPromise<Shared.Subscription> {
+  get(params: SubscriptionGetParams, options?: RequestOptions): APIPromise<SubscriptionGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/subscription`, options) as APIPromise<{
-        result: Shared.Subscription;
+        result: SubscriptionGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
+export interface SubscriptionCreateResponse {
+  /**
+   * Subscription identifier tag.
+   */
+  id?: string;
+
+  /**
+   * The monetary unit in which pricing information is displayed.
+   */
+  currency?: string;
+
+  /**
+   * The end of the current period and also when the next billing is due.
+   */
+  current_period_end?: string;
+
+  /**
+   * When the current billing period started. May match initial_period_start if this
+   * is the first period.
+   */
+  current_period_start?: string;
+
+  /**
+   * How often the subscription is renewed automatically.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly' | 'not-applicable';
+
+  /**
+   * The price of the subscription that will be billed, in US dollars.
+   */
+  price?: number;
+
+  /**
+   * The rate plan applied to the subscription.
+   */
+  rate_plan?: Shared.RatePlan;
+
+  /**
+   * The state that the subscription is in.
+   */
+  state?: 'Trial' | 'Provisioned' | 'Paid' | 'AwaitingPayment' | 'Cancelled' | 'Failed' | 'Expired';
+}
+
+export interface SubscriptionUpdateResponse {
+  /**
+   * Subscription identifier tag.
+   */
+  id?: string;
+
+  /**
+   * The monetary unit in which pricing information is displayed.
+   */
+  currency?: string;
+
+  /**
+   * The end of the current period and also when the next billing is due.
+   */
+  current_period_end?: string;
+
+  /**
+   * When the current billing period started. May match initial_period_start if this
+   * is the first period.
+   */
+  current_period_start?: string;
+
+  /**
+   * How often the subscription is renewed automatically.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly' | 'not-applicable';
+
+  /**
+   * The price of the subscription that will be billed, in US dollars.
+   */
+  price?: number;
+
+  /**
+   * The rate plan applied to the subscription.
+   */
+  rate_plan?: Shared.RatePlan;
+
+  /**
+   * The state that the subscription is in.
+   */
+  state?: 'Trial' | 'Provisioned' | 'Paid' | 'AwaitingPayment' | 'Cancelled' | 'Failed' | 'Expired';
+}
+
+export interface SubscriptionGetResponse {
+  /**
+   * Subscription identifier tag.
+   */
+  id?: string;
+
+  /**
+   * The monetary unit in which pricing information is displayed.
+   */
+  currency?: string;
+
+  /**
+   * The end of the current period and also when the next billing is due.
+   */
+  current_period_end?: string;
+
+  /**
+   * When the current billing period started. May match initial_period_start if this
+   * is the first period.
+   */
+  current_period_start?: string;
+
+  /**
+   * How often the subscription is renewed automatically.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly' | 'not-applicable';
+
+  /**
+   * The price of the subscription that will be billed, in US dollars.
+   */
+  price?: number;
+
+  /**
+   * The rate plan applied to the subscription.
+   */
+  rate_plan?: Shared.RatePlan;
+
+  /**
+   * The state that the subscription is in.
+   */
+  state?: 'Trial' | 'Provisioned' | 'Paid' | 'AwaitingPayment' | 'Cancelled' | 'Failed' | 'Expired';
+}
+
 export interface SubscriptionCreateParams {
   /**
-   * Path param: Subscription identifier tag.
+   * Path param: Identifier
    */
   zone_id: string;
 
@@ -86,7 +215,7 @@ export interface SubscriptionCreateParams {
 
 export interface SubscriptionUpdateParams {
   /**
-   * Path param: Subscription identifier tag.
+   * Path param: Identifier
    */
   zone_id: string;
 
@@ -103,13 +232,16 @@ export interface SubscriptionUpdateParams {
 
 export interface SubscriptionGetParams {
   /**
-   * Subscription identifier tag.
+   * Identifier
    */
   zone_id: string;
 }
 
 export declare namespace Subscriptions {
   export {
+    type SubscriptionCreateResponse as SubscriptionCreateResponse,
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionGetParams as SubscriptionGetParams,
