@@ -322,6 +322,11 @@ export namespace QueryResult {
     rows_written?: number;
 
     /**
+     * The three letters airport code of the colo that handled the query.
+     */
+    served_by_colo?: string;
+
+    /**
      * Denotes if the query has been handled by the database primary instance.
      */
     served_by_primary?: boolean;
@@ -522,6 +527,11 @@ export namespace DatabaseImportResponse {
       rows_written?: number;
 
       /**
+       * The three letters airport code of the colo that handled the query.
+       */
+      served_by_colo?: string;
+
+      /**
        * Denotes if the query has been handled by the database primary instance.
        */
       served_by_primary?: boolean;
@@ -600,6 +610,11 @@ export namespace DatabaseRawResponse {
      * Number of rows written during the SQL query execution, including indices.
      */
     rows_written?: number;
+
+    /**
+     * The three letters airport code of the colo that handled the query.
+     */
+    served_by_colo?: string;
 
     /**
      * Denotes if the query has been handled by the database primary instance.

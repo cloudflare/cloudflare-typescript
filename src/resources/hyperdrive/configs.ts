@@ -185,7 +185,8 @@ export interface ConfigCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The name of the Hyperdrive configuration. Used to identify the
+   * configuration in the Cloudflare dashboard and API.
    */
   name: string;
 
@@ -234,7 +235,8 @@ export namespace ConfigCreateParams {
     password: string;
 
     /**
-     * Defines the port (default: 5432 for Postgres) of your origin database.
+     * Defines the port of your origin database. Defaults to 5432 for PostgreSQL or
+     * 3306 for MySQL if not specified.
      */
     port: number;
 
@@ -303,14 +305,14 @@ export namespace ConfigCreateParams {
     disabled?: boolean;
 
     /**
-     * Specify the maximum duration items should persist in the cache. Not returned if
-     * set to the default (60).
+     * Specify the maximum duration (in seconds) items should persist in the cache.
+     * Defaults to 60 seconds if not specified.
      */
     max_age?: number;
 
     /**
-     * Specify the number of seconds the cache may serve a stale response. Omitted if
-     * set to the default (15).
+     * Specify the number of seconds the cache may serve a stale response. Defaults to
+     * 15 seconds if not specified.
      */
     stale_while_revalidate?: number;
   }
@@ -340,7 +342,8 @@ export interface ConfigUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The name of the Hyperdrive configuration. Used to identify the
+   * configuration in the Cloudflare dashboard and API.
    */
   name: string;
 
@@ -389,7 +392,8 @@ export namespace ConfigUpdateParams {
     password: string;
 
     /**
-     * Defines the port (default: 5432 for Postgres) of your origin database.
+     * Defines the port of your origin database. Defaults to 5432 for PostgreSQL or
+     * 3306 for MySQL if not specified.
      */
     port: number;
 
@@ -458,14 +462,14 @@ export namespace ConfigUpdateParams {
     disabled?: boolean;
 
     /**
-     * Specify the maximum duration items should persist in the cache. Not returned if
-     * set to the default (60).
+     * Specify the maximum duration (in seconds) items should persist in the cache.
+     * Defaults to 60 seconds if not specified.
      */
     max_age?: number;
 
     /**
-     * Specify the number of seconds the cache may serve a stale response. Omitted if
-     * set to the default (15).
+     * Specify the number of seconds the cache may serve a stale response. Defaults to
+     * 15 seconds if not specified.
      */
     stale_while_revalidate?: number;
   }
@@ -521,7 +525,8 @@ export interface ConfigEditParams {
   mtls?: ConfigEditParams.MTLS;
 
   /**
-   * Body param:
+   * Body param: The name of the Hyperdrive configuration. Used to identify the
+   * configuration in the Cloudflare dashboard and API.
    */
   name?: string;
 
@@ -555,14 +560,14 @@ export namespace ConfigEditParams {
     disabled?: boolean;
 
     /**
-     * Specify the maximum duration items should persist in the cache. Not returned if
-     * set to the default (60).
+     * Specify the maximum duration (in seconds) items should persist in the cache.
+     * Defaults to 60 seconds if not specified.
      */
     max_age?: number;
 
     /**
-     * Specify the number of seconds the cache may serve a stale response. Omitted if
-     * set to the default (15).
+     * Specify the number of seconds the cache may serve a stale response. Defaults to
+     * 15 seconds if not specified.
      */
     stale_while_revalidate?: number;
   }
@@ -614,7 +619,8 @@ export namespace ConfigEditParams {
     host: string;
 
     /**
-     * Defines the port (default: 5432 for Postgres) of your origin database.
+     * Defines the port of your origin database. Defaults to 5432 for PostgreSQL or
+     * 3306 for MySQL if not specified.
      */
     port: number;
   }

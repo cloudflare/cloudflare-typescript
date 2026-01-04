@@ -39,6 +39,13 @@ export const tool: Tool = {
       category: {
         type: 'string',
       },
+      createdAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      datasetId: {
+        type: 'string',
+      },
       date: {
         type: 'string',
         format: 'date-time',

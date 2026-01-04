@@ -34,6 +34,7 @@ export const tool: Tool = {
           'ratelimit_block',
           'under_attack',
           'waf_block',
+          'waf_challenge',
         ],
       },
       state: {

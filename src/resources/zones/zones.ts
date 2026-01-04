@@ -94,8 +94,11 @@ import {
 import * as SubscriptionsAPI from './subscriptions';
 import {
   SubscriptionCreateParams,
+  SubscriptionCreateResponse,
   SubscriptionGetParams,
+  SubscriptionGetResponse,
   SubscriptionUpdateParams,
+  SubscriptionUpdateResponse,
   Subscriptions,
 } from './subscriptions';
 import { APIPromise } from '../../core/api-promise';
@@ -744,6 +747,9 @@ export declare namespace Zones {
 
   export {
     Subscriptions as Subscriptions,
+    type SubscriptionCreateResponse as SubscriptionCreateResponse,
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionGetParams as SubscriptionGetParams,

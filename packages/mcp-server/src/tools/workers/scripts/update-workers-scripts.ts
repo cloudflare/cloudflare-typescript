@@ -869,29 +869,100 @@ export const tool: Tool = {
             required: ['enabled'],
           },
           placement: {
-            type: 'object',
+            anyOf: [
+              {
+                type: 'object',
+                properties: {
+                  mode: {
+                    type: 'string',
+                    description:
+                      'Enables [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
+                    enum: ['smart'],
+                  },
+                  last_analyzed_at: {
+                    type: 'string',
+                    description:
+                      'The last time the script was analyzed for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
+                    format: 'date-time',
+                  },
+                  status: {
+                    type: 'string',
+                    description:
+                      'Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
+                    enum: ['SUCCESS', 'UNSUPPORTED_APPLICATION', 'INSUFFICIENT_INVOCATIONS'],
+                  },
+                },
+                required: ['mode'],
+              },
+              {
+                type: 'object',
+                properties: {
+                  region: {
+                    type: 'string',
+                    description: "Cloud region for targeted placement in format 'provider:region'.",
+                  },
+                  last_analyzed_at: {
+                    type: 'string',
+                    description:
+                      'The last time the script was analyzed for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
+                    format: 'date-time',
+                  },
+                  status: {
+                    type: 'string',
+                    description:
+                      'Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
+                    enum: ['SUCCESS', 'UNSUPPORTED_APPLICATION', 'INSUFFICIENT_INVOCATIONS'],
+                  },
+                },
+                required: ['region'],
+              },
+              {
+                type: 'object',
+                properties: {
+                  hostname: {
+                    type: 'string',
+                    description: 'HTTP hostname for targeted placement.',
+                  },
+                  last_analyzed_at: {
+                    type: 'string',
+                    description:
+                      'The last time the script was analyzed for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
+                    format: 'date-time',
+                  },
+                  status: {
+                    type: 'string',
+                    description:
+                      'Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
+                    enum: ['SUCCESS', 'UNSUPPORTED_APPLICATION', 'INSUFFICIENT_INVOCATIONS'],
+                  },
+                },
+                required: ['hostname'],
+              },
+              {
+                type: 'object',
+                properties: {
+                  host: {
+                    type: 'string',
+                    description: 'TCP host and port for targeted placement.',
+                  },
+                  last_analyzed_at: {
+                    type: 'string',
+                    description:
+                      'The last time the script was analyzed for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
+                    format: 'date-time',
+                  },
+                  status: {
+                    type: 'string',
+                    description:
+                      'Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
+                    enum: ['SUCCESS', 'UNSUPPORTED_APPLICATION', 'INSUFFICIENT_INVOCATIONS'],
+                  },
+                },
+                required: ['host'],
+              },
+            ],
             description:
-              'Configuration for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
-            properties: {
-              last_analyzed_at: {
-                type: 'string',
-                description:
-                  'The last time the script was analyzed for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
-                format: 'date-time',
-              },
-              mode: {
-                type: 'string',
-                description:
-                  'Enables [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
-                enum: ['smart'],
-              },
-              status: {
-                type: 'string',
-                description:
-                  'Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
-                enum: ['SUCCESS', 'UNSUPPORTED_APPLICATION', 'INSUFFICIENT_INVOCATIONS'],
-              },
-            },
+              'Configuration for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement). Specify either mode for Smart Placement, or one of region/hostname/host for targeted placement.',
           },
           tags: {
             type: 'array',

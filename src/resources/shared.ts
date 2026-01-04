@@ -553,7 +553,7 @@ export interface RatePlan {
   scope?: string;
 
   /**
-   * The list of sets this rate plan applies to.
+   * The list of sets this rate plan applies to. Returns array of strings.
    */
   sets?: Array<string>;
 }
@@ -603,7 +603,7 @@ export interface RatePlanParam {
   scope?: string;
 
   /**
-   * The list of sets this rate plan applies to.
+   * The list of sets this rate plan applies to. Returns array of strings.
    */
   sets?: Array<string>;
 }

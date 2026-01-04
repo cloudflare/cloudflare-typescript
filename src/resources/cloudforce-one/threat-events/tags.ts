@@ -48,6 +48,8 @@ export interface TagCreateResponse {
 
   categoryName?: string;
 
+  categoryUuid?: string;
+
   externalReferenceLinks?: Array<string>;
 
   internalDescription?: string;

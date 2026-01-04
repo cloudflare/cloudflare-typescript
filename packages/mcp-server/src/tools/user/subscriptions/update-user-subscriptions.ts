@@ -85,7 +85,7 @@ export const tool: Tool = {
           },
           sets: {
             type: 'array',
-            description: 'The list of sets this rate plan applies to.',
+            description: 'The list of sets this rate plan applies to. Returns array of strings.',
             items: {
               type: 'string',
             },

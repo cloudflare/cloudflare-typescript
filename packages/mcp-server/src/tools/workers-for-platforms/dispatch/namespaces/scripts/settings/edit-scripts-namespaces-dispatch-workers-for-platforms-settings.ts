@@ -789,17 +789,52 @@ export const tool: Tool = {
             required: ['enabled'],
           },
           placement: {
-            type: 'object',
-            description:
-              'Configuration for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
-            properties: {
-              mode: {
-                type: 'string',
-                description:
-                  'Enables [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
-                enum: ['smart'],
+            anyOf: [
+              {
+                type: 'object',
+                properties: {
+                  mode: {
+                    type: 'string',
+                    description:
+                      'Enables [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).',
+                    enum: ['smart'],
+                  },
+                },
+                required: ['mode'],
               },
-            },
+              {
+                type: 'object',
+                properties: {
+                  region: {
+                    type: 'string',
+                    description: "Cloud region for targeted placement in format 'provider:region'.",
+                  },
+                },
+                required: ['region'],
+              },
+              {
+                type: 'object',
+                properties: {
+                  hostname: {
+                    type: 'string',
+                    description: 'HTTP hostname for targeted placement.',
+                  },
+                },
+                required: ['hostname'],
+              },
+              {
+                type: 'object',
+                properties: {
+                  host: {
+                    type: 'string',
+                    description: 'TCP host and port for targeted placement.',
+                  },
+                },
+                required: ['host'],
+              },
+            ],
+            description:
+              'Configuration for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement). Specify either mode for Smart Placement, or one of region/hostname/host for targeted placement.',
           },
           tags: {
             type: 'array',
