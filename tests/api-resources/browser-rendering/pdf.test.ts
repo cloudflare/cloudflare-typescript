@@ -12,6 +12,7 @@ describe('resource pdf', () => {
   test('create: required and optional params', async () => {
     const response = await client.browserRendering.pdf.create({
       account_id: 'account_id',
+      html: 'x',
       cacheTTL: 86400,
       actionTimeout: 120000,
       addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],
@@ -45,7 +46,6 @@ describe('resource pdf', () => {
         timeout: 60000,
         waitUntil: 'load',
       },
-      html: 'x',
       pdfOptions: {
         displayHeaderFooter: true,
         footerTemplate: 'footerTemplate',
@@ -68,7 +68,6 @@ describe('resource pdf', () => {
       rejectResourceTypes: ['document'],
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
-      url: 'https://example.com',
       userAgent: 'userAgent',
       viewport: {
         height: 0,
