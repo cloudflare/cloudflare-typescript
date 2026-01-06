@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource links', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.browserRendering.links.create({ account_id: 'account_id' });
+    const responsePromise = client.browserRendering.links.create({ account_id: 'account_id', html: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,6 +24,7 @@ describe('resource links', () => {
   test('create: required and optional params', async () => {
     const response = await client.browserRendering.links.create({
       account_id: 'account_id',
+      html: 'x',
       cacheTTL: 86400,
       actionTimeout: 120000,
       addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],
@@ -58,12 +59,10 @@ describe('resource links', () => {
         timeout: 60000,
         waitUntil: 'load',
       },
-      html: 'x',
       rejectRequestPattern: ['string'],
       rejectResourceTypes: ['document'],
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
-      url: 'https://example.com',
       userAgent: 'userAgent',
       viewport: {
         height: 0,

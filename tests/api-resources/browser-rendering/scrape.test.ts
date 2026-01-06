@@ -14,6 +14,7 @@ describe('resource scrape', () => {
     const responsePromise = client.browserRendering.scrape.create({
       account_id: 'account_id',
       elements: [{ selector: 'selector' }],
+      html: 'x',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,6 +29,7 @@ describe('resource scrape', () => {
     const response = await client.browserRendering.scrape.create({
       account_id: 'account_id',
       elements: [{ selector: 'selector' }],
+      html: 'x',
       cacheTTL: 86400,
       actionTimeout: 120000,
       addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],
@@ -61,12 +63,10 @@ describe('resource scrape', () => {
         timeout: 60000,
         waitUntil: 'load',
       },
-      html: 'x',
       rejectRequestPattern: ['string'],
       rejectResourceTypes: ['document'],
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
-      url: 'https://example.com',
       userAgent: 'userAgent',
       viewport: {
         height: 0,
