@@ -19,315 +19,627 @@ export const tool: Tool = {
   description: 'Get meta attributes like height, width, text and others of selected elements.',
   inputSchema: {
     type: 'object',
-    properties: {
-      account_id: {
-        type: 'string',
-        description: 'Account ID.',
-      },
-      elements: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            selector: {
-              type: 'string',
-            },
-          },
-          required: ['selector'],
-        },
-      },
-      cacheTTL: {
-        type: 'number',
-        description: 'Cache TTL default is 5s. Set to 0 to disable.',
-      },
-      actionTimeout: {
-        type: 'number',
-        description:
-          'The maximum duration allowed for the browser action to complete after the page has loaded (such as taking screenshots, extracting content, or generating PDFs). If this time limit is exceeded, the action stops and returns a timeout error.',
-      },
-      addScriptTag: {
-        type: 'array',
-        description: 'Adds a `<script>` tag into the page with the desired URL or content.',
-        items: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string',
-            },
-            content: {
-              type: 'string',
-            },
-            type: {
-              type: 'string',
-            },
-            url: {
-              type: 'string',
-            },
-          },
-        },
-      },
-      addStyleTag: {
-        type: 'array',
-        description:
-          'Adds a `<link rel="stylesheet">` tag into the page with the desired URL or a `<style type="text/css">` tag with the content.',
-        items: {
-          type: 'object',
-          properties: {
-            content: {
-              type: 'string',
-            },
-            url: {
-              type: 'string',
-            },
-          },
-        },
-      },
-      allowRequestPattern: {
-        type: 'array',
-        description: "Only allow requests that match the provided regex patterns, eg. '/^.*\\.(css)'.",
-        items: {
-          type: 'string',
-        },
-      },
-      allowResourceTypes: {
-        type: 'array',
-        description: "Only allow requests that match the provided resource types, eg. 'image' or 'script'.",
-        items: {
-          type: 'string',
-          enum: [
-            'document',
-            'stylesheet',
-            'image',
-            'media',
-            'font',
-            'script',
-            'texttrack',
-            'xhr',
-            'fetch',
-            'prefetch',
-            'eventsource',
-            'websocket',
-            'manifest',
-            'signedexchange',
-            'ping',
-            'cspviolationreport',
-            'preflight',
-            'other',
-          ],
-        },
-      },
-      authenticate: {
+    anyOf: [
+      {
         type: 'object',
-        description: 'Provide credentials for HTTP authentication.',
         properties: {
-          password: {
+          account_id: {
             type: 'string',
+            description: 'Account ID.',
           },
-          username: {
-            type: 'string',
-          },
-        },
-        required: ['password', 'username'],
-      },
-      bestAttempt: {
-        type: 'boolean',
-        description: "Attempt to proceed when 'awaited' events fail or timeout.",
-      },
-      cookies: {
-        type: 'array',
-        description: 'Check [options](https://pptr.dev/api/puppeteer.page.setcookie).',
-        items: {
-          type: 'object',
-          properties: {
-            name: {
-              type: 'string',
-            },
-            value: {
-              type: 'string',
-            },
-            domain: {
-              type: 'string',
-            },
-            expires: {
-              type: 'number',
-            },
-            httpOnly: {
-              type: 'boolean',
-            },
-            partitionKey: {
-              type: 'string',
-            },
-            path: {
-              type: 'string',
-            },
-            priority: {
-              type: 'string',
-              enum: ['Low', 'Medium', 'High'],
-            },
-            sameParty: {
-              type: 'boolean',
-            },
-            sameSite: {
-              type: 'string',
-              enum: ['Strict', 'Lax', 'None'],
-            },
-            secure: {
-              type: 'boolean',
-            },
-            sourcePort: {
-              type: 'number',
-            },
-            sourceScheme: {
-              type: 'string',
-              enum: ['Unset', 'NonSecure', 'Secure'],
-            },
-            url: {
-              type: 'string',
-            },
-          },
-          required: ['name', 'value'],
-        },
-      },
-      emulateMediaType: {
-        type: 'string',
-      },
-      gotoOptions: {
-        type: 'object',
-        description: 'Check [options](https://pptr.dev/api/puppeteer.gotooptions).',
-        properties: {
-          referer: {
-            type: 'string',
-          },
-          referrerPolicy: {
-            type: 'string',
-          },
-          timeout: {
-            type: 'number',
-          },
-          waitUntil: {
-            anyOf: [
-              {
-                type: 'string',
-                enum: ['load', 'domcontentloaded', 'networkidle0', 'networkidle2'],
-              },
-              {
-                type: 'array',
-                items: {
+          elements: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                selector: {
                   type: 'string',
-                  enum: ['load', 'domcontentloaded', 'networkidle0', 'networkidle2'],
                 },
               },
-            ],
+              required: ['selector'],
+            },
+          },
+          html: {
+            type: 'string',
+            description:
+              'Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either `html` or `url` must be set.',
+          },
+          cacheTTL: {
+            type: 'number',
+            description: 'Cache TTL default is 5s. Set to 0 to disable.',
+          },
+          actionTimeout: {
+            type: 'number',
+            description:
+              'The maximum duration allowed for the browser action to complete after the page has loaded (such as taking screenshots, extracting content, or generating PDFs). If this time limit is exceeded, the action stops and returns a timeout error.',
+          },
+          addScriptTag: {
+            type: 'array',
+            description: 'Adds a `<script>` tag into the page with the desired URL or content.',
+            items: {
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'string',
+                },
+                content: {
+                  type: 'string',
+                },
+                type: {
+                  type: 'string',
+                },
+                url: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+          addStyleTag: {
+            type: 'array',
+            description:
+              'Adds a `<link rel="stylesheet">` tag into the page with the desired URL or a `<style type="text/css">` tag with the content.',
+            items: {
+              type: 'object',
+              properties: {
+                content: {
+                  type: 'string',
+                },
+                url: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+          allowRequestPattern: {
+            type: 'array',
+            description: "Only allow requests that match the provided regex patterns, eg. '/^.*\\.(css)'.",
+            items: {
+              type: 'string',
+            },
+          },
+          allowResourceTypes: {
+            type: 'array',
+            description:
+              "Only allow requests that match the provided resource types, eg. 'image' or 'script'.",
+            items: {
+              type: 'string',
+              enum: [
+                'document',
+                'stylesheet',
+                'image',
+                'media',
+                'font',
+                'script',
+                'texttrack',
+                'xhr',
+                'fetch',
+                'prefetch',
+                'eventsource',
+                'websocket',
+                'manifest',
+                'signedexchange',
+                'ping',
+                'cspviolationreport',
+                'preflight',
+                'other',
+              ],
+            },
+          },
+          authenticate: {
+            type: 'object',
+            description: 'Provide credentials for HTTP authentication.',
+            properties: {
+              password: {
+                type: 'string',
+              },
+              username: {
+                type: 'string',
+              },
+            },
+            required: ['password', 'username'],
+          },
+          bestAttempt: {
+            type: 'boolean',
+            description: "Attempt to proceed when 'awaited' events fail or timeout.",
+          },
+          cookies: {
+            type: 'array',
+            description: 'Check [options](https://pptr.dev/api/puppeteer.page.setcookie).',
+            items: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                },
+                value: {
+                  type: 'string',
+                },
+                domain: {
+                  type: 'string',
+                },
+                expires: {
+                  type: 'number',
+                },
+                httpOnly: {
+                  type: 'boolean',
+                },
+                partitionKey: {
+                  type: 'string',
+                },
+                path: {
+                  type: 'string',
+                },
+                priority: {
+                  type: 'string',
+                  enum: ['Low', 'Medium', 'High'],
+                },
+                sameParty: {
+                  type: 'boolean',
+                },
+                sameSite: {
+                  type: 'string',
+                  enum: ['Strict', 'Lax', 'None'],
+                },
+                secure: {
+                  type: 'boolean',
+                },
+                sourcePort: {
+                  type: 'number',
+                },
+                sourceScheme: {
+                  type: 'string',
+                  enum: ['Unset', 'NonSecure', 'Secure'],
+                },
+                url: {
+                  type: 'string',
+                },
+              },
+              required: ['name', 'value'],
+            },
+          },
+          emulateMediaType: {
+            type: 'string',
+          },
+          gotoOptions: {
+            type: 'object',
+            description: 'Check [options](https://pptr.dev/api/puppeteer.gotooptions).',
+            properties: {
+              referer: {
+                type: 'string',
+              },
+              referrerPolicy: {
+                type: 'string',
+              },
+              timeout: {
+                type: 'number',
+              },
+              waitUntil: {
+                anyOf: [
+                  {
+                    type: 'string',
+                    enum: ['load', 'domcontentloaded', 'networkidle0', 'networkidle2'],
+                  },
+                  {
+                    type: 'array',
+                    items: {
+                      type: 'string',
+                      enum: ['load', 'domcontentloaded', 'networkidle0', 'networkidle2'],
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          rejectRequestPattern: {
+            type: 'array',
+            description:
+              "Block undesired requests that match the provided regex patterns, eg. '/^.*\\.(css)'.",
+            items: {
+              type: 'string',
+            },
+          },
+          rejectResourceTypes: {
+            type: 'array',
+            description:
+              "Block undesired requests that match the provided resource types, eg. 'image' or 'script'.",
+            items: {
+              type: 'string',
+              enum: [
+                'document',
+                'stylesheet',
+                'image',
+                'media',
+                'font',
+                'script',
+                'texttrack',
+                'xhr',
+                'fetch',
+                'prefetch',
+                'eventsource',
+                'websocket',
+                'manifest',
+                'signedexchange',
+                'ping',
+                'cspviolationreport',
+                'preflight',
+                'other',
+              ],
+            },
+          },
+          setExtraHTTPHeaders: {
+            type: 'object',
+            additionalProperties: true,
+          },
+          setJavaScriptEnabled: {
+            type: 'boolean',
+          },
+          userAgent: {
+            type: 'string',
+          },
+          viewport: {
+            type: 'object',
+            description: 'Check [options](https://pptr.dev/api/puppeteer.page.setviewport).',
+            properties: {
+              height: {
+                type: 'number',
+              },
+              width: {
+                type: 'number',
+              },
+              deviceScaleFactor: {
+                type: 'number',
+              },
+              hasTouch: {
+                type: 'boolean',
+              },
+              isLandscape: {
+                type: 'boolean',
+              },
+              isMobile: {
+                type: 'boolean',
+              },
+            },
+            required: ['height', 'width'],
+          },
+          waitForSelector: {
+            type: 'object',
+            description:
+              'Wait for the selector to appear in page. Check [options](https://pptr.dev/api/puppeteer.page.waitforselector).',
+            properties: {
+              selector: {
+                type: 'string',
+              },
+              hidden: {
+                type: 'string',
+                enum: [true],
+              },
+              timeout: {
+                type: 'number',
+              },
+              visible: {
+                type: 'string',
+                enum: [true],
+              },
+            },
+            required: ['selector'],
+          },
+          waitForTimeout: {
+            type: 'number',
+            description: 'Waits for a specified timeout before continuing.',
           },
         },
+        required: ['account_id', 'elements', 'html'],
       },
-      html: {
-        type: 'string',
-        description:
-          'Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either `html` or `url` must be set.',
-      },
-      rejectRequestPattern: {
-        type: 'array',
-        description: "Block undesired requests that match the provided regex patterns, eg. '/^.*\\.(css)'.",
-        items: {
-          type: 'string',
-        },
-      },
-      rejectResourceTypes: {
-        type: 'array',
-        description:
-          "Block undesired requests that match the provided resource types, eg. 'image' or 'script'.",
-        items: {
-          type: 'string',
-          enum: [
-            'document',
-            'stylesheet',
-            'image',
-            'media',
-            'font',
-            'script',
-            'texttrack',
-            'xhr',
-            'fetch',
-            'prefetch',
-            'eventsource',
-            'websocket',
-            'manifest',
-            'signedexchange',
-            'ping',
-            'cspviolationreport',
-            'preflight',
-            'other',
-          ],
-        },
-      },
-      setExtraHTTPHeaders: {
+      {
         type: 'object',
-        additionalProperties: true,
-      },
-      setJavaScriptEnabled: {
-        type: 'boolean',
-      },
-      url: {
-        type: 'string',
-        description: 'URL to navigate to, eg. `https://example.com`.',
-      },
-      userAgent: {
-        type: 'string',
-      },
-      viewport: {
-        type: 'object',
-        description: 'Check [options](https://pptr.dev/api/puppeteer.page.setviewport).',
         properties: {
-          height: {
-            type: 'number',
+          account_id: {
+            type: 'string',
+            description: 'Account ID.',
           },
-          width: {
-            type: 'number',
+          elements: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                selector: {
+                  type: 'string',
+                },
+              },
+              required: ['selector'],
+            },
           },
-          deviceScaleFactor: {
-            type: 'number',
+          url: {
+            type: 'string',
+            description: 'URL to navigate to, eg. `https://example.com`.',
           },
-          hasTouch: {
+          cacheTTL: {
+            type: 'number',
+            description: 'Cache TTL default is 5s. Set to 0 to disable.',
+          },
+          actionTimeout: {
+            type: 'number',
+            description:
+              'The maximum duration allowed for the browser action to complete after the page has loaded (such as taking screenshots, extracting content, or generating PDFs). If this time limit is exceeded, the action stops and returns a timeout error.',
+          },
+          addScriptTag: {
+            type: 'array',
+            description: 'Adds a `<script>` tag into the page with the desired URL or content.',
+            items: {
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'string',
+                },
+                content: {
+                  type: 'string',
+                },
+                type: {
+                  type: 'string',
+                },
+                url: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+          addStyleTag: {
+            type: 'array',
+            description:
+              'Adds a `<link rel="stylesheet">` tag into the page with the desired URL or a `<style type="text/css">` tag with the content.',
+            items: {
+              type: 'object',
+              properties: {
+                content: {
+                  type: 'string',
+                },
+                url: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+          allowRequestPattern: {
+            type: 'array',
+            description: "Only allow requests that match the provided regex patterns, eg. '/^.*\\.(css)'.",
+            items: {
+              type: 'string',
+            },
+          },
+          allowResourceTypes: {
+            type: 'array',
+            description:
+              "Only allow requests that match the provided resource types, eg. 'image' or 'script'.",
+            items: {
+              type: 'string',
+              enum: [
+                'document',
+                'stylesheet',
+                'image',
+                'media',
+                'font',
+                'script',
+                'texttrack',
+                'xhr',
+                'fetch',
+                'prefetch',
+                'eventsource',
+                'websocket',
+                'manifest',
+                'signedexchange',
+                'ping',
+                'cspviolationreport',
+                'preflight',
+                'other',
+              ],
+            },
+          },
+          authenticate: {
+            type: 'object',
+            description: 'Provide credentials for HTTP authentication.',
+            properties: {
+              password: {
+                type: 'string',
+              },
+              username: {
+                type: 'string',
+              },
+            },
+            required: ['password', 'username'],
+          },
+          bestAttempt: {
+            type: 'boolean',
+            description: "Attempt to proceed when 'awaited' events fail or timeout.",
+          },
+          cookies: {
+            type: 'array',
+            description: 'Check [options](https://pptr.dev/api/puppeteer.page.setcookie).',
+            items: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                },
+                value: {
+                  type: 'string',
+                },
+                domain: {
+                  type: 'string',
+                },
+                expires: {
+                  type: 'number',
+                },
+                httpOnly: {
+                  type: 'boolean',
+                },
+                partitionKey: {
+                  type: 'string',
+                },
+                path: {
+                  type: 'string',
+                },
+                priority: {
+                  type: 'string',
+                  enum: ['Low', 'Medium', 'High'],
+                },
+                sameParty: {
+                  type: 'boolean',
+                },
+                sameSite: {
+                  type: 'string',
+                  enum: ['Strict', 'Lax', 'None'],
+                },
+                secure: {
+                  type: 'boolean',
+                },
+                sourcePort: {
+                  type: 'number',
+                },
+                sourceScheme: {
+                  type: 'string',
+                  enum: ['Unset', 'NonSecure', 'Secure'],
+                },
+                url: {
+                  type: 'string',
+                },
+              },
+              required: ['name', 'value'],
+            },
+          },
+          emulateMediaType: {
+            type: 'string',
+          },
+          gotoOptions: {
+            type: 'object',
+            description: 'Check [options](https://pptr.dev/api/puppeteer.gotooptions).',
+            properties: {
+              referer: {
+                type: 'string',
+              },
+              referrerPolicy: {
+                type: 'string',
+              },
+              timeout: {
+                type: 'number',
+              },
+              waitUntil: {
+                anyOf: [
+                  {
+                    type: 'string',
+                    enum: ['load', 'domcontentloaded', 'networkidle0', 'networkidle2'],
+                  },
+                  {
+                    type: 'array',
+                    items: {
+                      type: 'string',
+                      enum: ['load', 'domcontentloaded', 'networkidle0', 'networkidle2'],
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          rejectRequestPattern: {
+            type: 'array',
+            description:
+              "Block undesired requests that match the provided regex patterns, eg. '/^.*\\.(css)'.",
+            items: {
+              type: 'string',
+            },
+          },
+          rejectResourceTypes: {
+            type: 'array',
+            description:
+              "Block undesired requests that match the provided resource types, eg. 'image' or 'script'.",
+            items: {
+              type: 'string',
+              enum: [
+                'document',
+                'stylesheet',
+                'image',
+                'media',
+                'font',
+                'script',
+                'texttrack',
+                'xhr',
+                'fetch',
+                'prefetch',
+                'eventsource',
+                'websocket',
+                'manifest',
+                'signedexchange',
+                'ping',
+                'cspviolationreport',
+                'preflight',
+                'other',
+              ],
+            },
+          },
+          setExtraHTTPHeaders: {
+            type: 'object',
+            additionalProperties: true,
+          },
+          setJavaScriptEnabled: {
             type: 'boolean',
           },
-          isLandscape: {
-            type: 'boolean',
+          userAgent: {
+            type: 'string',
           },
-          isMobile: {
-            type: 'boolean',
+          viewport: {
+            type: 'object',
+            description: 'Check [options](https://pptr.dev/api/puppeteer.page.setviewport).',
+            properties: {
+              height: {
+                type: 'number',
+              },
+              width: {
+                type: 'number',
+              },
+              deviceScaleFactor: {
+                type: 'number',
+              },
+              hasTouch: {
+                type: 'boolean',
+              },
+              isLandscape: {
+                type: 'boolean',
+              },
+              isMobile: {
+                type: 'boolean',
+              },
+            },
+            required: ['height', 'width'],
+          },
+          waitForSelector: {
+            type: 'object',
+            description:
+              'Wait for the selector to appear in page. Check [options](https://pptr.dev/api/puppeteer.page.waitforselector).',
+            properties: {
+              selector: {
+                type: 'string',
+              },
+              hidden: {
+                type: 'string',
+                enum: [true],
+              },
+              timeout: {
+                type: 'number',
+              },
+              visible: {
+                type: 'string',
+                enum: [true],
+              },
+            },
+            required: ['selector'],
+          },
+          waitForTimeout: {
+            type: 'number',
+            description: 'Waits for a specified timeout before continuing.',
           },
         },
-        required: ['height', 'width'],
+        required: ['account_id', 'elements', 'url'],
       },
-      waitForSelector: {
-        type: 'object',
-        description:
-          'Wait for the selector to appear in page. Check [options](https://pptr.dev/api/puppeteer.page.waitforselector).',
-        properties: {
-          selector: {
-            type: 'string',
-          },
-          hidden: {
-            type: 'string',
-            enum: [true],
-          },
-          timeout: {
-            type: 'number',
-          },
-          visible: {
-            type: 'string',
-            enum: [true],
-          },
-        },
-        required: ['selector'],
-      },
-      waitForTimeout: {
-        type: 'number',
-        description: 'Waits for a specified timeout before continuing.',
-      },
-    },
-    required: ['account_id', 'elements'],
+    ],
   },
   annotations: {},
 };
