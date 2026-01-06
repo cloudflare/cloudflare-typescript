@@ -34,11 +34,12 @@ export {
   type RouteGetParams,
 } from './routes';
 export {
-  ScriptsSinglePage,
+  ScriptListResponsesSinglePage,
   Scripts,
   type Script,
   type ScriptSetting,
   type ScriptUpdateResponse,
+  type ScriptListResponse,
   type ScriptDeleteResponse,
   type ScriptGetResponse,
   type ScriptSearchResponse,
@@ -53,6 +54,7 @@ export {
   type SubdomainUpdateResponse,
   type SubdomainGetResponse,
   type SubdomainUpdateParams,
+  type SubdomainDeleteParams,
   type SubdomainGetParams,
 } from './subdomains';
 export { Workers } from './workers';

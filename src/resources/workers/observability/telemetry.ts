@@ -121,6 +121,8 @@ export interface TelemetryQueryResponse {
   invocations?: { [key: string]: Array<TelemetryQueryResponse.Invocation> };
 
   patterns?: Array<TelemetryQueryResponse.Pattern>;
+
+  traces?: Array<TelemetryQueryResponse.Trace>;
 }
 
 export namespace TelemetryQueryResponse {
@@ -145,6 +147,9 @@ export namespace TelemetryQueryResponse {
 
     status: 'STARTED' | 'COMPLETED';
 
+    /**
+     * Time range for the query execution
+     */
     timeframe: Run.Timeframe;
 
     userId: string;
@@ -376,14 +381,17 @@ export namespace TelemetryQueryResponse {
       }
     }
 
+    /**
+     * Time range for the query execution
+     */
     export interface Timeframe {
       /**
-       * Set the start time for your query using UNIX time in milliseconds.
+       * Start timestamp for the query timeframe (Unix timestamp in milliseconds)
        */
       from: number;
 
       /**
-       * Set the end time for your query using UNIX time in milliseconds.
+       * End timestamp for the query timeframe (Unix timestamp in milliseconds)
        */
       to: number;
     }
@@ -403,6 +411,12 @@ export namespace TelemetryQueryResponse {
        * Number of rows scanned from the table.
        */
       rows_read: number;
+
+      /**
+       * The level of Adaptive Bit Rate (ABR) sampling used for the query. If empty the
+       * ABR level is 1
+       */
+      abr_level?: number;
     }
   }
 
@@ -425,6 +439,12 @@ export namespace TelemetryQueryResponse {
      * Number of rows scanned from the table.
      */
     rows_read: number;
+
+    /**
+     * The level of Adaptive Bit Rate (ABR) sampling used for the query. If empty the
+     * ABR level is 1
+     */
+    abr_level?: number;
   }
 
   export interface Calculation {
@@ -579,6 +599,12 @@ export namespace TelemetryQueryResponse {
       timestamp: number;
 
       /**
+       * Cloudflare Containers event information enriches your logs so you can easily
+       * identify and debug issues.
+       */
+      $containers?: unknown;
+
+      /**
        * Cloudflare Workers event information enriches your logs so you can easily
        * identify and debug issues.
        */
@@ -641,6 +667,8 @@ export namespace TelemetryQueryResponse {
 
         traceId?: string;
 
+        transactionName?: string;
+
         trigger?: string;
 
         type?: string;
@@ -661,11 +689,11 @@ export namespace TelemetryQueryResponse {
           | 'websocket'
           | 'unknown';
 
-        outcome: string;
-
         requestId: string;
 
         scriptName: string;
+
+        durableObjectId?: string;
 
         entrypoint?: string;
 
@@ -684,6 +712,8 @@ export namespace TelemetryQueryResponse {
         };
 
         executionModel?: 'durableObject' | 'stateless';
+
+        outcome?: string;
 
         scriptVersion?: UnionMember0.ScriptVersion;
 
@@ -726,6 +756,8 @@ export namespace TelemetryQueryResponse {
         diagnosticsChannelEvents?: Array<UnionMember1.DiagnosticsChannelEvent>;
 
         dispatchNamespace?: string;
+
+        durableObjectId?: string;
 
         entrypoint?: string;
 
@@ -831,6 +863,12 @@ export namespace TelemetryQueryResponse {
     timestamp: number;
 
     /**
+     * Cloudflare Containers event information enriches your logs so you can easily
+     * identify and debug issues.
+     */
+    $containers?: unknown;
+
+    /**
      * Cloudflare Workers event information enriches your logs so you can easily
      * identify and debug issues.
      */
@@ -893,6 +931,8 @@ export namespace TelemetryQueryResponse {
 
       traceId?: string;
 
+      transactionName?: string;
+
       trigger?: string;
 
       type?: string;
@@ -913,11 +953,11 @@ export namespace TelemetryQueryResponse {
         | 'websocket'
         | 'unknown';
 
-      outcome: string;
-
       requestId: string;
 
       scriptName: string;
+
+      durableObjectId?: string;
 
       entrypoint?: string;
 
@@ -936,6 +976,8 @@ export namespace TelemetryQueryResponse {
       };
 
       executionModel?: 'durableObject' | 'stateless';
+
+      outcome?: string;
 
       scriptVersion?: UnionMember0.ScriptVersion;
 
@@ -978,6 +1020,8 @@ export namespace TelemetryQueryResponse {
       diagnosticsChannelEvents?: Array<UnionMember1.DiagnosticsChannelEvent>;
 
       dispatchNamespace?: string;
+
+      durableObjectId?: string;
 
       entrypoint?: string;
 
@@ -1048,6 +1092,26 @@ export namespace TelemetryQueryResponse {
       }
     }
   }
+
+  export interface Trace {
+    rootSpanName: string;
+
+    rootTransactionName: string;
+
+    service: Array<string>;
+
+    spans: number;
+
+    traceDurationMs: number;
+
+    traceEndMs: number;
+
+    traceId: string;
+
+    traceStartMs: number;
+
+    errors?: Array<string>;
+  }
 }
 
 export interface TelemetryValuesResponse {
@@ -1077,6 +1141,11 @@ export interface TelemetryKeysParams {
   filters?: Array<TelemetryKeysParams.Filter>;
 
   /**
+   * Body param:
+   */
+  from?: number;
+
+  /**
    * Body param: Search for a specific substring in the keys.
    */
   keyNeedle?: TelemetryKeysParams.KeyNeedle;
@@ -1087,14 +1156,14 @@ export interface TelemetryKeysParams {
   limit?: number;
 
   /**
-   * Body param: Search for a specific substring in the event.
+   * Body param: Search for a specific substring in any of the events
    */
   needle?: TelemetryKeysParams.Needle;
 
   /**
    * Body param:
    */
-  timeframe?: TelemetryKeysParams.Timeframe;
+  to?: number;
 }
 
 export namespace TelemetryKeysParams {
@@ -1148,7 +1217,7 @@ export namespace TelemetryKeysParams {
   }
 
   /**
-   * Search for a specific substring in the event.
+   * Search for a specific substring in any of the events
    */
   export interface Needle {
     value: string | number | boolean;
@@ -1156,12 +1225,6 @@ export namespace TelemetryKeysParams {
     isRegex?: boolean;
 
     matchCase?: boolean;
-  }
-
-  export interface Timeframe {
-    from: number;
-
-    to: number;
   }
 }
 
@@ -1172,83 +1235,99 @@ export interface TelemetryQueryParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: Unique identifier for the query to execute
    */
   queryId: string;
 
   /**
-   * Body param:
+   * Body param: Time range for the query execution
    */
   timeframe: TelemetryQueryParams.Timeframe;
 
   /**
-   * Body param:
+   * Body param: Whether to include timeseties data in the response
    */
   chart?: boolean;
 
   /**
-   * Body param:
+   * Body param: Whether to include comparison data with previous time periods
    */
   compare?: boolean;
 
   /**
-   * Body param:
+   * Body param: Whether to perform a dry run without saving the results of the
+   * query. Useful for validation
    */
   dry?: boolean;
 
   /**
-   * Body param:
+   * Body param: Time granularity for aggregating results (in milliseconds). Controls
+   * the bucketing of time-series data
    */
   granularity?: number;
 
   /**
-   * Body param:
+   * Body param: Whether to ignore time-series data in the results and return only
+   * aggregated values
    */
   ignoreSeries?: boolean;
 
   /**
-   * Body param:
+   * Body param: Maximum number of events to return.
    */
   limit?: number;
 
   /**
-   * Body param:
+   * Body param: Cursor for pagination to retrieve the next set of results
    */
   offset?: string;
 
   /**
-   * Body param:
+   * Body param: Number of events to skip for pagination. Used in conjunction with
+   * offset
    */
   offsetBy?: number;
 
   /**
-   * Body param:
+   * Body param: Direction for offset-based pagination (e.g., 'next', 'prev')
    */
   offsetDirection?: string;
 
   /**
-   * Body param:
+   * Body param: Optional parameters to pass to the query execution
    */
   parameters?: TelemetryQueryParams.Parameters;
 
   /**
-   * Body param:
+   * Body param: Type of pattern to search for when using pattern-based views
    */
   patternType?: 'message' | 'error';
 
   /**
-   * Body param:
+   * Body param: View type for presenting the query results.
    */
   view?: 'traces' | 'events' | 'calculations' | 'invocations' | 'requests' | 'patterns';
 }
 
 export namespace TelemetryQueryParams {
+  /**
+   * Time range for the query execution
+   */
   export interface Timeframe {
+    /**
+     * Start timestamp for the query timeframe (Unix timestamp in milliseconds)
+     */
     from: number;
 
+    /**
+     * End timestamp for the query timeframe (Unix timestamp in milliseconds)
+     */
     to: number;
   }
 
+  /**
+   * Optional parameters to pass to the query execution
+   */
   export interface Parameters {
     /**
      * Create Calculations to compute as part of the query.

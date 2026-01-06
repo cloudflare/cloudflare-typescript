@@ -3,6 +3,9 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 
+/**
+ * @deprecated Please use the [Schema Validation Operations Settings](https://developers.cloudflare.com/api/resources/schema_validation/subresources/settings/subresources/operations/) APIs instead
+ */
 export class SchemaValidation extends APIResource {
   /**
    * Updates operation-level schema validation settings on the zone

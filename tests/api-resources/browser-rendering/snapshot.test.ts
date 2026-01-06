@@ -25,7 +25,7 @@ describe('resource snapshot', () => {
     const response = await client.browserRendering.snapshot.create({
       account_id: 'account_id',
       cacheTTL: 86400,
-      actionTimeout: 300000,
+      actionTimeout: 120000,
       addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],
       addStyleTag: [{ content: 'content', url: 'url' }],
       allowRequestPattern: ['string'],
@@ -82,8 +82,8 @@ describe('resource snapshot', () => {
         isLandscape: true,
         isMobile: true,
       },
-      waitForSelector: { selector: 'selector', hidden: true, timeout: 60000, visible: true },
-      waitForTimeout: 60000,
+      waitForSelector: { selector: 'selector', hidden: true, timeout: 120000, visible: true },
+      waitForTimeout: 120000,
     });
   });
 });

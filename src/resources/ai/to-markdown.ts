@@ -7,6 +7,21 @@ import { type BlobLike } from '../../uploads';
 
 export class ToMarkdown extends APIResource {
   /**
+   * Get all converted formats supported
+   */
+  supported(
+    params: ToMarkdownSupportedParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ToMarkdownSupportedResponsesSinglePage, ToMarkdownSupportedResponse> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/ai/tomarkdown/supported`,
+      ToMarkdownSupportedResponsesSinglePage,
+      options,
+    );
+  }
+
+  /**
    * Convert Files into Markdown
    */
   transform(
@@ -29,7 +44,15 @@ export class ToMarkdown extends APIResource {
   }
 }
 
+export class ToMarkdownSupportedResponsesSinglePage extends SinglePage<ToMarkdownSupportedResponse> {}
+
 export class ToMarkdownTransformResponsesSinglePage extends SinglePage<ToMarkdownTransformResponse> {}
+
+export interface ToMarkdownSupportedResponse {
+  extension: string;
+
+  mimeType: string;
+}
 
 export interface ToMarkdownTransformResponse {
   data: string;
@@ -43,6 +66,10 @@ export interface ToMarkdownTransformResponse {
   tokens: string;
 }
 
+export interface ToMarkdownSupportedParams {
+  account_id: string;
+}
+
 export interface ToMarkdownTransformParams {
   /**
    * Path param:
@@ -50,12 +77,16 @@ export interface ToMarkdownTransformParams {
   account_id: string;
 }
 
+ToMarkdown.ToMarkdownSupportedResponsesSinglePage = ToMarkdownSupportedResponsesSinglePage;
 ToMarkdown.ToMarkdownTransformResponsesSinglePage = ToMarkdownTransformResponsesSinglePage;
 
 export declare namespace ToMarkdown {
   export {
+    type ToMarkdownSupportedResponse as ToMarkdownSupportedResponse,
     type ToMarkdownTransformResponse as ToMarkdownTransformResponse,
+    ToMarkdownSupportedResponsesSinglePage as ToMarkdownSupportedResponsesSinglePage,
     ToMarkdownTransformResponsesSinglePage as ToMarkdownTransformResponsesSinglePage,
+    type ToMarkdownSupportedParams as ToMarkdownSupportedParams,
     type ToMarkdownTransformParams as ToMarkdownTransformParams,
   };
 }

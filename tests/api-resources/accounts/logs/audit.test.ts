@@ -32,6 +32,7 @@ describe('resource audit', () => {
       account_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
       before: '2024-10-31',
       since: '2024-10-30',
+      id: { not: ['f174be97-19b1-40d6-954d-70cd5fbd52db'] },
       account_name: { not: ['string'] },
       action_result: { not: ['success'] },
       action_type: { not: ['create'] },

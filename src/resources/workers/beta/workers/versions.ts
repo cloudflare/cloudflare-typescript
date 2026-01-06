@@ -176,7 +176,6 @@ export interface Version {
     | Version.WorkersBindingKindSecretText
     | Version.WorkersBindingKindSendEmail
     | Version.WorkersBindingKindService
-    | Version.WorkersBindingKindTailConsumer
     | Version.WorkersBindingKindTextBlob
     | Version.WorkersBindingKindVectorize
     | Version.WorkersBindingKindVersionMetadata
@@ -239,6 +238,12 @@ export interface Version {
    * The client used to create the version.
    */
   source?: string;
+
+  /**
+   * Time in milliseconds spent on
+   * [Worker startup](https://developers.cloudflare.com/workers/platform/limits/#worker-startup-time).
+   */
+  startup_time_ms?: number;
 
   /**
    * @deprecated Usage model for the version.
@@ -409,7 +414,7 @@ export namespace Version {
     name: string;
 
     /**
-     * Namespace to bind to.
+     * The name of the dispatch namespace.
      */
     namespace: string;
 
@@ -734,23 +739,6 @@ export namespace Version {
     environment?: string;
   }
 
-  export interface WorkersBindingKindTailConsumer {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * Name of Tail Worker to bind to.
-     */
-    service: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'tail_consumer';
-  }
-
   export interface WorkersBindingKindTextBlob {
     /**
      * A JavaScript variable name for the binding.
@@ -1039,7 +1027,6 @@ export interface VersionCreateParams {
     | VersionCreateParams.WorkersBindingKindSecretText
     | VersionCreateParams.WorkersBindingKindSendEmail
     | VersionCreateParams.WorkersBindingKindService
-    | VersionCreateParams.WorkersBindingKindTailConsumer
     | VersionCreateParams.WorkersBindingKindTextBlob
     | VersionCreateParams.WorkersBindingKindVectorize
     | VersionCreateParams.WorkersBindingKindVersionMetadata
@@ -1263,7 +1250,7 @@ export namespace VersionCreateParams {
     name: string;
 
     /**
-     * Namespace to bind to.
+     * The name of the dispatch namespace.
      */
     namespace: string;
 
@@ -1591,23 +1578,6 @@ export namespace VersionCreateParams {
      * Optional environment if the Worker utilizes one.
      */
     environment?: string;
-  }
-
-  export interface WorkersBindingKindTailConsumer {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * Name of Tail Worker to bind to.
-     */
-    service: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'tail_consumer';
   }
 
   export interface WorkersBindingKindTextBlob {

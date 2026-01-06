@@ -9,16 +9,7 @@ export class ToMarkdown extends APIResource {
   /**
    * Convert Files into Markdown
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const toMarkdownCreateResponse of client.radar.ai.toMarkdown.create(
-   *   fs.createReadStream('path/to/file'),
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated Use [AI > To Markdown](https://developers.cloudflare.com/api/resources/ai/subresources/to_markdown/) instead.
    */
   create(
     body: string | ArrayBufferView | ArrayBuffer | BlobLike,

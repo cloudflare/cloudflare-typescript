@@ -37,7 +37,7 @@ describe('resource domain', () => {
           date: ['2019-12-27'],
           format: 'JSON',
           includeTopLocations: true,
-          limit: 5,
+          limit: 1,
           name: ['main_series'],
           rankingType: 'POPULAR',
         },

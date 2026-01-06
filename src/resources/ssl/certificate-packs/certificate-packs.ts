@@ -194,11 +194,43 @@ export type Status =
  */
 export type ValidationMethod = 'http' | 'cname' | 'txt';
 
+/**
+ * A certificate pack with all its properties.
+ */
 export interface CertificatePackCreateResponse {
   /**
    * Identifier.
    */
-  id?: string;
+  id: string;
+
+  /**
+   * Array of certificates in this pack.
+   */
+  certificates: Array<CertificatePackCreateResponse.Certificate>;
+
+  /**
+   * Comma separated list of valid host names for the certificate packs. Must contain
+   * the zone apex, may not contain more than 50 hosts, and may not be empty.
+   */
+  hosts: Array<Host>;
+
+  /**
+   * Status of certificate pack.
+   */
+  status: Status;
+
+  /**
+   * Type of certificate pack.
+   */
+  type:
+    | 'mh_custom'
+    | 'managed_hostname'
+    | 'sni_custom'
+    | 'universal'
+    | 'advanced'
+    | 'total_tls'
+    | 'keyless'
+    | 'legacy_custom';
 
   /**
    * Certificate Authority selected for the order. For information on any certificate
@@ -214,28 +246,9 @@ export interface CertificatePackCreateResponse {
   cloudflare_branding?: boolean;
 
   /**
-   * Comma separated list of valid host names for the certificate packs. Must contain
-   * the zone apex, may not contain more than 50 hosts, and may not be empty.
+   * Identifier of the primary certificate in a pack.
    */
-  hosts?: Array<Host>;
-
-  /**
-   * Status of certificate pack.
-   */
-  status?: Status;
-
-  /**
-   * Type of certificate pack.
-   */
-  type?:
-    | 'mh_custom'
-    | 'managed_hostname'
-    | 'sni_custom'
-    | 'universal'
-    | 'advanced'
-    | 'total_tls'
-    | 'keyless'
-    | 'legacy_custom';
+  primary_certificate?: string;
 
   /**
    * Domain validation errors that have been received by the certificate authority
@@ -249,8 +262,7 @@ export interface CertificatePackCreateResponse {
   validation_method?: 'txt' | 'http' | 'email';
 
   /**
-   * Certificates' validation records. Only present when certificate pack is in
-   * "pending_validation" status
+   * Certificates' validation records.
    */
   validation_records?: Array<CertificatePackCreateResponse.ValidationRecord>;
 
@@ -261,6 +273,80 @@ export interface CertificatePackCreateResponse {
 }
 
 export namespace CertificatePackCreateResponse {
+  /**
+   * An individual certificate within a certificate pack.
+   */
+  export interface Certificate {
+    /**
+     * Certificate identifier.
+     */
+    id: string;
+
+    /**
+     * Hostnames covered by this certificate.
+     */
+    hosts: Array<string>;
+
+    /**
+     * Certificate status.
+     */
+    status: string;
+
+    /**
+     * Certificate bundle method.
+     */
+    bundle_method?: string;
+
+    /**
+     * When the certificate from the authority expires.
+     */
+    expires_on?: string;
+
+    /**
+     * Specify the region where your private key can be held locally.
+     */
+    geo_restrictions?: Certificate.GeoRestrictions;
+
+    /**
+     * The certificate authority that issued the certificate.
+     */
+    issuer?: string;
+
+    /**
+     * When the certificate was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The order/priority in which the certificate will be used.
+     */
+    priority?: number;
+
+    /**
+     * The type of hash used for the certificate.
+     */
+    signature?: string;
+
+    /**
+     * When the certificate was uploaded to Cloudflare.
+     */
+    uploaded_on?: string;
+
+    /**
+     * Identifier.
+     */
+    zone_id?: string;
+  }
+
+  export namespace Certificate {
+    /**
+     * Specify the region where your private key can be held locally.
+     */
+    export interface GeoRestrictions {
+      label?: 'us' | 'eu' | 'highest_security';
+    }
+  }
+
   export interface ValidationError {
     /**
      * A domain validation error.
@@ -303,20 +389,43 @@ export namespace CertificatePackCreateResponse {
   }
 }
 
-export type CertificatePackListResponse = unknown;
-
-export interface CertificatePackDeleteResponse {
+/**
+ * A certificate pack with all its properties.
+ */
+export interface CertificatePackListResponse {
   /**
    * Identifier.
    */
-  id?: string;
-}
+  id: string;
 
-export interface CertificatePackEditResponse {
   /**
-   * Identifier.
+   * Array of certificates in this pack.
    */
-  id?: string;
+  certificates: Array<CertificatePackListResponse.Certificate>;
+
+  /**
+   * Comma separated list of valid host names for the certificate packs. Must contain
+   * the zone apex, may not contain more than 50 hosts, and may not be empty.
+   */
+  hosts: Array<Host>;
+
+  /**
+   * Status of certificate pack.
+   */
+  status: Status;
+
+  /**
+   * Type of certificate pack.
+   */
+  type:
+    | 'mh_custom'
+    | 'managed_hostname'
+    | 'sni_custom'
+    | 'universal'
+    | 'advanced'
+    | 'total_tls'
+    | 'keyless'
+    | 'legacy_custom';
 
   /**
    * Certificate Authority selected for the order. For information on any certificate
@@ -332,34 +441,15 @@ export interface CertificatePackEditResponse {
   cloudflare_branding?: boolean;
 
   /**
-   * Comma separated list of valid host names for the certificate packs. Must contain
-   * the zone apex, may not contain more than 50 hosts, and may not be empty.
+   * Identifier of the primary certificate in a pack.
    */
-  hosts?: Array<Host>;
-
-  /**
-   * Status of certificate pack.
-   */
-  status?: Status;
-
-  /**
-   * Type of certificate pack.
-   */
-  type?:
-    | 'mh_custom'
-    | 'managed_hostname'
-    | 'sni_custom'
-    | 'universal'
-    | 'advanced'
-    | 'total_tls'
-    | 'keyless'
-    | 'legacy_custom';
+  primary_certificate?: string;
 
   /**
    * Domain validation errors that have been received by the certificate authority
    * (CA).
    */
-  validation_errors?: Array<CertificatePackEditResponse.ValidationError>;
+  validation_errors?: Array<CertificatePackListResponse.ValidationError>;
 
   /**
    * Validation Method selected for the order.
@@ -367,10 +457,9 @@ export interface CertificatePackEditResponse {
   validation_method?: 'txt' | 'http' | 'email';
 
   /**
-   * Certificates' validation records. Only present when certificate pack is in
-   * "pending_validation" status
+   * Certificates' validation records.
    */
-  validation_records?: Array<CertificatePackEditResponse.ValidationRecord>;
+  validation_records?: Array<CertificatePackListResponse.ValidationRecord>;
 
   /**
    * Validity Days selected for the order.
@@ -378,7 +467,81 @@ export interface CertificatePackEditResponse {
   validity_days?: 14 | 30 | 90 | 365;
 }
 
-export namespace CertificatePackEditResponse {
+export namespace CertificatePackListResponse {
+  /**
+   * An individual certificate within a certificate pack.
+   */
+  export interface Certificate {
+    /**
+     * Certificate identifier.
+     */
+    id: string;
+
+    /**
+     * Hostnames covered by this certificate.
+     */
+    hosts: Array<string>;
+
+    /**
+     * Certificate status.
+     */
+    status: string;
+
+    /**
+     * Certificate bundle method.
+     */
+    bundle_method?: string;
+
+    /**
+     * When the certificate from the authority expires.
+     */
+    expires_on?: string;
+
+    /**
+     * Specify the region where your private key can be held locally.
+     */
+    geo_restrictions?: Certificate.GeoRestrictions;
+
+    /**
+     * The certificate authority that issued the certificate.
+     */
+    issuer?: string;
+
+    /**
+     * When the certificate was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The order/priority in which the certificate will be used.
+     */
+    priority?: number;
+
+    /**
+     * The type of hash used for the certificate.
+     */
+    signature?: string;
+
+    /**
+     * When the certificate was uploaded to Cloudflare.
+     */
+    uploaded_on?: string;
+
+    /**
+     * Identifier.
+     */
+    zone_id?: string;
+  }
+
+  export namespace Certificate {
+    /**
+     * Specify the region where your private key can be held locally.
+     */
+    export interface GeoRestrictions {
+      label?: 'us' | 'eu' | 'highest_security';
+    }
+  }
+
   export interface ValidationError {
     /**
      * A domain validation error.
@@ -421,7 +584,402 @@ export namespace CertificatePackEditResponse {
   }
 }
 
-export type CertificatePackGetResponse = unknown;
+export interface CertificatePackDeleteResponse {
+  /**
+   * Identifier.
+   */
+  id?: string;
+}
+
+/**
+ * A certificate pack with all its properties.
+ */
+export interface CertificatePackEditResponse {
+  /**
+   * Identifier.
+   */
+  id: string;
+
+  /**
+   * Array of certificates in this pack.
+   */
+  certificates: Array<CertificatePackEditResponse.Certificate>;
+
+  /**
+   * Comma separated list of valid host names for the certificate packs. Must contain
+   * the zone apex, may not contain more than 50 hosts, and may not be empty.
+   */
+  hosts: Array<Host>;
+
+  /**
+   * Status of certificate pack.
+   */
+  status: Status;
+
+  /**
+   * Type of certificate pack.
+   */
+  type:
+    | 'mh_custom'
+    | 'managed_hostname'
+    | 'sni_custom'
+    | 'universal'
+    | 'advanced'
+    | 'total_tls'
+    | 'keyless'
+    | 'legacy_custom';
+
+  /**
+   * Certificate Authority selected for the order. For information on any certificate
+   * authority specific details or restrictions
+   * [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
+   */
+  certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
+
+  /**
+   * Whether or not to add Cloudflare Branding for the order. This will add a
+   * subdomain of sni.cloudflaressl.com as the Common Name if set to true.
+   */
+  cloudflare_branding?: boolean;
+
+  /**
+   * Identifier of the primary certificate in a pack.
+   */
+  primary_certificate?: string;
+
+  /**
+   * Domain validation errors that have been received by the certificate authority
+   * (CA).
+   */
+  validation_errors?: Array<CertificatePackEditResponse.ValidationError>;
+
+  /**
+   * Validation Method selected for the order.
+   */
+  validation_method?: 'txt' | 'http' | 'email';
+
+  /**
+   * Certificates' validation records.
+   */
+  validation_records?: Array<CertificatePackEditResponse.ValidationRecord>;
+
+  /**
+   * Validity Days selected for the order.
+   */
+  validity_days?: 14 | 30 | 90 | 365;
+}
+
+export namespace CertificatePackEditResponse {
+  /**
+   * An individual certificate within a certificate pack.
+   */
+  export interface Certificate {
+    /**
+     * Certificate identifier.
+     */
+    id: string;
+
+    /**
+     * Hostnames covered by this certificate.
+     */
+    hosts: Array<string>;
+
+    /**
+     * Certificate status.
+     */
+    status: string;
+
+    /**
+     * Certificate bundle method.
+     */
+    bundle_method?: string;
+
+    /**
+     * When the certificate from the authority expires.
+     */
+    expires_on?: string;
+
+    /**
+     * Specify the region where your private key can be held locally.
+     */
+    geo_restrictions?: Certificate.GeoRestrictions;
+
+    /**
+     * The certificate authority that issued the certificate.
+     */
+    issuer?: string;
+
+    /**
+     * When the certificate was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The order/priority in which the certificate will be used.
+     */
+    priority?: number;
+
+    /**
+     * The type of hash used for the certificate.
+     */
+    signature?: string;
+
+    /**
+     * When the certificate was uploaded to Cloudflare.
+     */
+    uploaded_on?: string;
+
+    /**
+     * Identifier.
+     */
+    zone_id?: string;
+  }
+
+  export namespace Certificate {
+    /**
+     * Specify the region where your private key can be held locally.
+     */
+    export interface GeoRestrictions {
+      label?: 'us' | 'eu' | 'highest_security';
+    }
+  }
+
+  export interface ValidationError {
+    /**
+     * A domain validation error.
+     */
+    message?: string;
+  }
+
+  /**
+   * Certificate's required validation record.
+   */
+  export interface ValidationRecord {
+    /**
+     * The set of email addresses that the certificate authority (CA) will use to
+     * complete domain validation.
+     */
+    emails?: Array<string>;
+
+    /**
+     * The content that the certificate authority (CA) will expect to find at the
+     * http_url during the domain validation.
+     */
+    http_body?: string;
+
+    /**
+     * The url that will be checked during domain validation.
+     */
+    http_url?: string;
+
+    /**
+     * The hostname that the certificate authority (CA) will check for a TXT record
+     * during domain validation .
+     */
+    txt_name?: string;
+
+    /**
+     * The TXT record that the certificate authority (CA) will check during domain
+     * validation.
+     */
+    txt_value?: string;
+  }
+}
+
+/**
+ * A certificate pack with all its properties.
+ */
+export interface CertificatePackGetResponse {
+  /**
+   * Identifier.
+   */
+  id: string;
+
+  /**
+   * Array of certificates in this pack.
+   */
+  certificates: Array<CertificatePackGetResponse.Certificate>;
+
+  /**
+   * Comma separated list of valid host names for the certificate packs. Must contain
+   * the zone apex, may not contain more than 50 hosts, and may not be empty.
+   */
+  hosts: Array<Host>;
+
+  /**
+   * Status of certificate pack.
+   */
+  status: Status;
+
+  /**
+   * Type of certificate pack.
+   */
+  type:
+    | 'mh_custom'
+    | 'managed_hostname'
+    | 'sni_custom'
+    | 'universal'
+    | 'advanced'
+    | 'total_tls'
+    | 'keyless'
+    | 'legacy_custom';
+
+  /**
+   * Certificate Authority selected for the order. For information on any certificate
+   * authority specific details or restrictions
+   * [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
+   */
+  certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
+
+  /**
+   * Whether or not to add Cloudflare Branding for the order. This will add a
+   * subdomain of sni.cloudflaressl.com as the Common Name if set to true.
+   */
+  cloudflare_branding?: boolean;
+
+  /**
+   * Identifier of the primary certificate in a pack.
+   */
+  primary_certificate?: string;
+
+  /**
+   * Domain validation errors that have been received by the certificate authority
+   * (CA).
+   */
+  validation_errors?: Array<CertificatePackGetResponse.ValidationError>;
+
+  /**
+   * Validation Method selected for the order.
+   */
+  validation_method?: 'txt' | 'http' | 'email';
+
+  /**
+   * Certificates' validation records.
+   */
+  validation_records?: Array<CertificatePackGetResponse.ValidationRecord>;
+
+  /**
+   * Validity Days selected for the order.
+   */
+  validity_days?: 14 | 30 | 90 | 365;
+}
+
+export namespace CertificatePackGetResponse {
+  /**
+   * An individual certificate within a certificate pack.
+   */
+  export interface Certificate {
+    /**
+     * Certificate identifier.
+     */
+    id: string;
+
+    /**
+     * Hostnames covered by this certificate.
+     */
+    hosts: Array<string>;
+
+    /**
+     * Certificate status.
+     */
+    status: string;
+
+    /**
+     * Certificate bundle method.
+     */
+    bundle_method?: string;
+
+    /**
+     * When the certificate from the authority expires.
+     */
+    expires_on?: string;
+
+    /**
+     * Specify the region where your private key can be held locally.
+     */
+    geo_restrictions?: Certificate.GeoRestrictions;
+
+    /**
+     * The certificate authority that issued the certificate.
+     */
+    issuer?: string;
+
+    /**
+     * When the certificate was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The order/priority in which the certificate will be used.
+     */
+    priority?: number;
+
+    /**
+     * The type of hash used for the certificate.
+     */
+    signature?: string;
+
+    /**
+     * When the certificate was uploaded to Cloudflare.
+     */
+    uploaded_on?: string;
+
+    /**
+     * Identifier.
+     */
+    zone_id?: string;
+  }
+
+  export namespace Certificate {
+    /**
+     * Specify the region where your private key can be held locally.
+     */
+    export interface GeoRestrictions {
+      label?: 'us' | 'eu' | 'highest_security';
+    }
+  }
+
+  export interface ValidationError {
+    /**
+     * A domain validation error.
+     */
+    message?: string;
+  }
+
+  /**
+   * Certificate's required validation record.
+   */
+  export interface ValidationRecord {
+    /**
+     * The set of email addresses that the certificate authority (CA) will use to
+     * complete domain validation.
+     */
+    emails?: Array<string>;
+
+    /**
+     * The content that the certificate authority (CA) will expect to find at the
+     * http_url during the domain validation.
+     */
+    http_body?: string;
+
+    /**
+     * The url that will be checked during domain validation.
+     */
+    http_url?: string;
+
+    /**
+     * The hostname that the certificate authority (CA) will check for a TXT record
+     * during domain validation .
+     */
+    txt_name?: string;
+
+    /**
+     * The TXT record that the certificate authority (CA) will check during domain
+     * validation.
+     */
+    txt_value?: string;
+  }
+}
 
 export interface CertificatePackCreateParams {
   /**

@@ -34,24 +34,24 @@ export class Logs extends APIResource {
 }
 
 export interface LogGetResponse {
-  data?: Array<LogGetResponse.Data>;
+  data: Array<LogGetResponse.Data>;
 
-  includes_container_logs?: boolean;
+  includes_container_logs: boolean;
 
-  total?: number;
+  total: number;
 }
 
 export namespace LogGetResponse {
   export interface Data {
-    line?: string;
+    line: string;
 
-    ts?: string;
+    ts: string;
   }
 }
 
 export interface LogGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

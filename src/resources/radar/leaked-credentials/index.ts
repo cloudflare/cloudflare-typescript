@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { LeakedCredentials } from './leaked-credentials';
+export {
+  LeakedCredentials,
+  type LeakedCredentialSummaryV2Response,
+  type LeakedCredentialTimeseriesGroupsV2Response,
+  type LeakedCredentialSummaryV2Params,
+  type LeakedCredentialTimeseriesGroupsV2Params,
+} from './leaked-credentials';
 export {
   Summary,
   type SummaryBotClassResponse,

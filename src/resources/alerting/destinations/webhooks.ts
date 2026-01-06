@@ -35,7 +35,7 @@ export class Webhooks extends APIResource {
    * ```ts
    * const webhook =
    *   await client.alerting.destinations.webhooks.update(
-   *     'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+   *     'b115d5ec15c641ee8b7692c449b5227b',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       name: 'Slack Webhook',
@@ -90,7 +90,7 @@ export class Webhooks extends APIResource {
    * ```ts
    * const webhook =
    *   await client.alerting.destinations.webhooks.delete(
-   *     'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+   *     'b115d5ec15c641ee8b7692c449b5227b',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -114,7 +114,7 @@ export class Webhooks extends APIResource {
    * ```ts
    * const webhooks =
    *   await client.alerting.destinations.webhooks.get(
-   *     'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+   *     'b115d5ec15c641ee8b7692c449b5227b',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```

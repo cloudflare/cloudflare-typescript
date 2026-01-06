@@ -8,7 +8,7 @@ import { SinglePage } from '../../../../pagination';
 export class Integration extends APIResource {
   /**
    * Integration entries can't be created, this will update an existing integration
-   * entry This is needed for our generated terraform API
+   * entry. This is needed for our generated terraform API.
    *
    * @example
    * ```ts
@@ -86,7 +86,7 @@ export class Integration extends APIResource {
 
   /**
    * This is a no-op as integration entires can't be deleted but is needed for our
-   * generated terraform API
+   * generated terraform API.
    *
    * @example
    * ```ts
@@ -192,6 +192,8 @@ export namespace IntegrationListResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
   export interface PredefinedEntry {
@@ -206,6 +208,8 @@ export namespace IntegrationListResponse {
     type: 'predefined';
 
     profile_id?: string | null;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
     variant?: PredefinedEntry.Variant;
   }
@@ -247,6 +251,8 @@ export namespace IntegrationListResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
   export interface ExactDataEntry {
@@ -269,6 +275,8 @@ export namespace IntegrationListResponse {
     type: 'exact_data';
 
     updated_at: string;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
   export interface DocumentFingerprintEntry {
@@ -283,6 +291,8 @@ export namespace IntegrationListResponse {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
   export interface WordListEntry {
@@ -301,21 +311,23 @@ export namespace IntegrationListResponse {
     word_list: unknown;
 
     profile_id?: string | null;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 }
 
 export type IntegrationDeleteResponse = unknown;
 
 export type IntegrationGetResponse =
-  | IntegrationGetResponse.CustomEntry
-  | IntegrationGetResponse.PredefinedEntry
-  | IntegrationGetResponse.IntegrationEntry
-  | IntegrationGetResponse.ExactDataEntry
-  | IntegrationGetResponse.DocumentFingerprintEntry
-  | IntegrationGetResponse.WordListEntry;
+  | IntegrationGetResponse.UnionMember0
+  | IntegrationGetResponse.UnionMember1
+  | IntegrationGetResponse.UnionMember2
+  | IntegrationGetResponse.UnionMember3
+  | IntegrationGetResponse.UnionMember4
+  | IntegrationGetResponse.UnionMember5;
 
 export namespace IntegrationGetResponse {
-  export interface CustomEntry {
+  export interface UnionMember0 {
     id: string;
 
     created_at: string;
@@ -331,12 +343,27 @@ export namespace IntegrationGetResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    profiles?: Array<UnionMember0.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface PredefinedEntry {
+  export namespace UnionMember0 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface UnionMember1 {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: UnionMember1.Confidence;
 
     enabled: boolean;
 
@@ -346,10 +373,14 @@ export namespace IntegrationGetResponse {
 
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    profiles?: Array<UnionMember1.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+
+    variant?: UnionMember1.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace UnionMember1 {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -363,6 +394,15 @@ export namespace IntegrationGetResponse {
       available: boolean;
     }
 
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+
     export interface Variant {
       topic_type: 'Intent' | 'Content';
 
@@ -372,7 +412,7 @@ export namespace IntegrationGetResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface UnionMember2 {
     id: string;
 
     created_at: string;
@@ -386,9 +426,24 @@ export namespace IntegrationGetResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    profiles?: Array<UnionMember2.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface ExactDataEntry {
+  export namespace UnionMember2 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface UnionMember3 {
     id: string;
 
     /**
@@ -408,9 +463,24 @@ export namespace IntegrationGetResponse {
     type: 'exact_data';
 
     updated_at: string;
+
+    profiles?: Array<UnionMember3.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface DocumentFingerprintEntry {
+  export namespace UnionMember3 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface UnionMember4 {
     id: string;
 
     created_at: string;
@@ -422,9 +492,24 @@ export namespace IntegrationGetResponse {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    profiles?: Array<UnionMember4.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface WordListEntry {
+  export namespace UnionMember4 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface UnionMember5 {
     id: string;
 
     created_at: string;
@@ -440,6 +525,21 @@ export namespace IntegrationGetResponse {
     word_list: unknown;
 
     profile_id?: string | null;
+
+    profiles?: Array<UnionMember5.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+  }
+
+  export namespace UnionMember5 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
   }
 }
 
@@ -460,8 +560,8 @@ export interface IntegrationCreateParams {
   entry_id: string;
 
   /**
-   * Body param: This field is not actually used as the owning profile for a
-   * predefined entry is already set to a predefined profile
+   * Body param: This field is not used as the owning profile. For predefined entries
+   * it is already set to a predefined profile.
    */
   profile_id?: string | null;
 }

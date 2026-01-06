@@ -34,13 +34,16 @@ describe('resource annotations', () => {
       client.radar.annotations.list(
         {
           asn: 174,
+          dataSource: 'ALL',
           dateEnd: '2023-09-01T11:41:33.782Z',
           dateRange: '7d',
           dateStart: '2023-09-01T11:41:33.782Z',
+          eventType: 'OUTAGE',
           format: 'JSON',
-          limit: 5,
+          limit: 1,
           location: 'US',
           offset: 0,
+          origin: 'amazon-us-east-1',
         },
         { path: '/_stainless_unknown_path' },
       ),

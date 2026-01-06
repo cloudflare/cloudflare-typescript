@@ -10,6 +10,49 @@ const client = new Cloudflare({
 });
 
 describe('resource layer7', () => {
+  test('summaryV2', async () => {
+    const responsePromise = client.radar.attacks.layer7.summaryV2('HTTP_METHOD');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('summaryV2: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.attacks.layer7.summaryV2('HTTP_METHOD', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('summaryV2: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.attacks.layer7.summaryV2(
+        'HTTP_METHOD',
+        {
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
+          format: 'JSON',
+          httpMethod: ['GET'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
+          limitPerGroup: 10,
+          location: ['string'],
+          mitigationProduct: ['DDOS'],
+          name: ['main_series'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
   test('timeseries', async () => {
     const responsePromise = client.radar.attacks.layer7.timeseries();
     const rawResponse = await responsePromise.asResponse();
@@ -47,6 +90,51 @@ describe('resource layer7', () => {
           mitigationProduct: ['DDOS'],
           name: ['main_series'],
           normalization: 'MIN0_MAX',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('timeseriesGroupsV2', async () => {
+    const responsePromise = client.radar.attacks.layer7.timeseriesGroupsV2('HTTP_METHOD');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('timeseriesGroupsV2: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.attacks.layer7.timeseriesGroupsV2('HTTP_METHOD', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('timeseriesGroupsV2: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.attacks.layer7.timeseriesGroupsV2(
+        'HTTP_METHOD',
+        {
+          aggInterval: '1h',
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
+          format: 'JSON',
+          httpMethod: ['GET'],
+          httpVersion: ['HTTPv1'],
+          ipVersion: ['IPv4'],
+          limitPerGroup: 10,
+          location: ['string'],
+          mitigationProduct: ['DDOS'],
+          name: ['main_series'],
+          normalization: 'PERCENTAGE',
         },
         { path: '/_stainless_unknown_path' },
       ),
