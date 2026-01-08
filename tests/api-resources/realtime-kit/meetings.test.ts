@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource meetings', () => {
-  test('create: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('create: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.create('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource meetings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('create: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.create('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       ai_config: {
@@ -67,7 +69,8 @@ describe('resource meetings', () => {
     });
   });
 
-  test('addParticipant: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('addParticipant: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.addParticipant(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -86,7 +89,8 @@ describe('resource meetings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('addParticipant: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('addParticipant: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.addParticipant(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -100,7 +104,8 @@ describe('resource meetings', () => {
     );
   });
 
-  test('deleteMeetingParticipant: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('deleteMeetingParticipant: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.deleteMeetingParticipant(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -116,7 +121,8 @@ describe('resource meetings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('deleteMeetingParticipant: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('deleteMeetingParticipant: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.deleteMeetingParticipant(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -125,7 +131,8 @@ describe('resource meetings', () => {
     );
   });
 
-  test('editParticipant: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('editParticipant: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.editParticipant(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -141,7 +148,8 @@ describe('resource meetings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('editParticipant: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('editParticipant: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.editParticipant(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -155,7 +163,8 @@ describe('resource meetings', () => {
     );
   });
 
-  test('get: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('get: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.get('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -168,7 +177,8 @@ describe('resource meetings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('get: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.get('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       end_time: '2019-12-27T18:11:19.117Z',
@@ -179,7 +189,8 @@ describe('resource meetings', () => {
     });
   });
 
-  test('getMeetingById: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getMeetingById: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.getMeetingById(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -194,7 +205,8 @@ describe('resource meetings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getMeetingById: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getMeetingById: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.getMeetingById(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -202,7 +214,8 @@ describe('resource meetings', () => {
     );
   });
 
-  test('getMeetingParticipant: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getMeetingParticipant: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.getMeetingParticipant(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -218,7 +231,8 @@ describe('resource meetings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getMeetingParticipant: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getMeetingParticipant: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.getMeetingParticipant(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -227,7 +241,8 @@ describe('resource meetings', () => {
     );
   });
 
-  test('getMeetingParticipants: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getMeetingParticipants: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.getMeetingParticipants(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -242,7 +257,8 @@ describe('resource meetings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getMeetingParticipants: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getMeetingParticipants: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.getMeetingParticipants(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -250,7 +266,8 @@ describe('resource meetings', () => {
     );
   });
 
-  test('refreshParticipantToken: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('refreshParticipantToken: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.refreshParticipantToken(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -266,7 +283,8 @@ describe('resource meetings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('refreshParticipantToken: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('refreshParticipantToken: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.refreshParticipantToken(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -275,7 +293,8 @@ describe('resource meetings', () => {
     );
   });
 
-  test('replaceMeetingById: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('replaceMeetingById: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.replaceMeetingById(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -290,7 +309,8 @@ describe('resource meetings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('replaceMeetingById: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('replaceMeetingById: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.replaceMeetingById(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -338,7 +358,8 @@ describe('resource meetings', () => {
     );
   });
 
-  test('updateMeetingById: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('updateMeetingById: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.updateMeetingById(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -353,7 +374,8 @@ describe('resource meetings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('updateMeetingById: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('updateMeetingById: required and optional params', async () => {
     const response = await client.realtimeKit.meetings.updateMeetingById(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

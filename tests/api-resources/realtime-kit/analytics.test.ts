@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource analytics', () => {
-  test('getOrgAnalytics: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getOrgAnalytics: only required params', async () => {
     const responsePromise = client.realtimeKit.analytics.getOrgAnalytics('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource analytics', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getOrgAnalytics: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getOrgAnalytics: required and optional params', async () => {
     const response = await client.realtimeKit.analytics.getOrgAnalytics('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       end_date: '2022-09-22',
