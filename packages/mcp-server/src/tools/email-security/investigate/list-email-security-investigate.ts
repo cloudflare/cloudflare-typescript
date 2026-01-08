@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'list_email_security_investigate',
-  description: 'Returns information for each email that matches the search parameter(s).',
+  description:
+    'Returns information for each email that matches the search parameter(s).\nIf the search takes too long, the endpoint returns 202 with a Location header\npointing to a polling endpoint where results can be retrieved once ready.',
   inputSchema: {
     type: 'object',
     properties: {

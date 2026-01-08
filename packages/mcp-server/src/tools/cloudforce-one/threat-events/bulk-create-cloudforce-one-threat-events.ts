@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'bulk_create_cloudforce_one_threat_events',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nThe `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/threat_event_bulk_create_response',\n  $defs: {\n    threat_event_bulk_create_response: {\n      type: 'object',\n      description: 'Detailed result of bulk event creation with auto-tag management',\n      properties: {\n        createdEventsCount: {\n          type: 'number',\n          description: 'Number of events created'\n        },\n        createdTagsCount: {\n          type: 'number',\n          description: 'Number of new tags created in SoT'\n        },\n        errorCount: {\n          type: 'number',\n          description: 'Number of errors encountered'\n        },\n        queuedIndicatorsCount: {\n          type: 'number',\n          description: 'Number of indicators queued for async processing'\n        },\n        createBulkEventsRequestId: {\n          type: 'string',\n          description: 'Correlation ID for async indicator processing'\n        },\n        errors: {\n          type: 'array',\n          description: 'Array of error details',\n          items: {\n            type: 'object',\n            properties: {\n              error: {\n                type: 'string',\n                description: 'Error message'\n              },\n              eventIndex: {\n                type: 'number',\n                description: 'Index of the event that caused the error'\n              }\n            },\n            required: [              'error',\n              'eventIndex'\n            ]\n          }\n        }\n      },\n      required: [        'createdEventsCount',\n        'createdTagsCount',\n        'errorCount',\n        'queuedIndicatorsCount'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nThe `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/threat_event_bulk_create_response',\n  $defs: {\n    threat_event_bulk_create_response: {\n      type: 'object',\n      description: 'Detailed result of bulk event creation with auto-tag management',\n      properties: {\n        createdEventsCount: {\n          type: 'number',\n          description: 'Number of events created'\n        },\n        createdTagsCount: {\n          type: 'number',\n          description: 'Number of new tags created in SoT'\n        },\n        errorCount: {\n          type: 'number',\n          description: 'Number of errors encountered'\n        },\n        queuedIndicatorsCount: {\n          type: 'number',\n          description: 'Number of indicators queued for async processing'\n        },\n        skippedEventsCount: {\n          type: 'number',\n          description: 'Number of events skipped due to duplicate UUID (only when preserveUuid=true)'\n        },\n        createBulkEventsRequestId: {\n          type: 'string',\n          description: 'Correlation ID for async indicator processing'\n        },\n        errors: {\n          type: 'array',\n          description: 'Array of error details',\n          items: {\n            type: 'object',\n            properties: {\n              error: {\n                type: 'string',\n                description: 'Error message'\n              },\n              eventIndex: {\n                type: 'number',\n                description: 'Index of the event that caused the error'\n              }\n            },\n            required: [              'error',\n              'eventIndex'\n            ]\n          }\n        }\n      },\n      required: [        'createdEventsCount',\n        'createdTagsCount',\n        'errorCount',\n        'queuedIndicatorsCount',\n        'skippedEventsCount'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -112,12 +112,22 @@ export const tool: Tool = {
             targetIndustry: {
               type: 'string',
             },
+            uuid: {
+              type: 'string',
+              description:
+                'Optional UUID for the event. Only used when preserveUuid=true in bulk create. Must be a valid UUID format.',
+            },
           },
           required: ['category', 'date', 'event', 'raw', 'tlp'],
         },
       },
       datasetId: {
         type: 'string',
+      },
+      preserveUuid: {
+        type: 'boolean',
+        description:
+          'When true, use provided UUIDs from event data instead of generating new ones. Used for migration scenarios where original UUIDs must be preserved. Duplicate UUIDs will be skipped.',
       },
       jq_filter: {
         type: 'string',

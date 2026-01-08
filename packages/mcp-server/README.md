@@ -846,6 +846,8 @@ The following tools are available in this MCP server.
 ### Resource `email_security.investigate`:
 
 - `list_email_security_investigate` (`read`): Returns information for each email that matches the search parameter(s).
+  If the search takes too long, the endpoint returns 202 with a Location header
+  pointing to a polling endpoint where results can be retrieved once ready.
 - `get_email_security_investigate` (`read`): Get message details
 
 ### Resource `email_security.investigate.detections`:

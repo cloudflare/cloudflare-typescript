@@ -48,6 +48,7 @@ describe('resource threatEvents', () => {
       tags: ['malware'],
       targetCountry: 'US',
       targetIndustry: 'Agriculture',
+      uuid: '12345678-1234-1234-1234-1234567890ab',
     });
   });
 
@@ -69,6 +70,7 @@ describe('resource threatEvents', () => {
       account_id: 'account_id',
       datasetId: ['string'],
       forceRefresh: true,
+      format: 'json',
       order: 'asc',
       orderBy: 'orderBy',
       page: 0,
@@ -142,9 +144,11 @@ describe('resource threatEvents', () => {
           tags: ['malware'],
           targetCountry: 'US',
           targetIndustry: 'Agriculture',
+          uuid: '12345678-1234-1234-1234-1234567890ab',
         },
       ],
       datasetId: 'durableObjectName',
+      preserveUuid: true,
     });
   });
 
