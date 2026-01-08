@@ -107,6 +107,11 @@ export const tool: Tool = {
       targetIndustry: {
         type: 'string',
       },
+      uuid: {
+        type: 'string',
+        description:
+          'Optional UUID for the event. Only used when preserveUuid=true in bulk create. Must be a valid UUID format.',
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',

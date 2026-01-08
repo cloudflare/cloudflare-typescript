@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_r2_data_catalog_maintenance_configs',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdate the maintenance configuration for a catalog. This allows you to\nenable or disable compaction and adjust target file sizes for optimization.\n\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/maintenance_config_update_response',\n  $defs: {\n    maintenance_config_update_response: {\n      type: 'object',\n      description: 'Configures maintenance for the catalog.',\n      properties: {\n        compaction: {\n          type: 'object',\n          description: 'Configures compaction for catalog maintenance.',\n          properties: {\n            state: {\n              type: 'string',\n              description: 'Specifies the state of maintenance operations.',\n              enum: [                'enabled',\n                'disabled'\n              ]\n            },\n            target_size_mb: {\n              type: 'string',\n              description: 'Sets the target file size for compaction in megabytes.',\n              enum: [                '64',\n                '128',\n                '256',\n                '512'\n              ]\n            }\n          },\n          required: [            'state',\n            'target_size_mb'\n          ]\n        }\n      }\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nUpdate the maintenance configuration for a catalog. This allows you to\nenable or disable compaction and adjust target file sizes for optimization.\n\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/maintenance_config_update_response',\n  $defs: {\n    maintenance_config_update_response: {\n      type: 'object',\n      description: 'Configures maintenance for the catalog.',\n      properties: {\n        compaction: {\n          type: 'object',\n          description: 'Configures compaction for catalog maintenance.',\n          properties: {\n            state: {\n              type: 'string',\n              description: 'Specifies the state of maintenance operations.',\n              enum: [                'enabled',\n                'disabled'\n              ]\n            },\n            target_size_mb: {\n              type: 'string',\n              description: 'Sets the target file size for compaction in megabytes.',\n              enum: [                '64',\n                '128',\n                '256',\n                '512'\n              ]\n            }\n          },\n          required: [            'state',\n            'target_size_mb'\n          ]\n        },\n        snapshot_expiration: {\n          type: 'object',\n          description: 'Configures snapshot expiration settings.',\n          properties: {\n            max_snapshot_age: {\n              type: 'string',\n              description: 'Specifies the maximum age for snapshots. The system deletes snapshots older than this age.\\nFormat: <number><unit> where unit is d (days), h (hours), m (minutes), or s (seconds).\\nExamples: \"7d\" (7 days), \"48h\" (48 hours), \"2880m\" (2,880 minutes).\\n'\n            },\n            min_snapshots_to_keep: {\n              type: 'integer',\n              description: 'Specifies the minimum number of snapshots to retain.'\n            },\n            state: {\n              type: 'string',\n              description: 'Specifies the state of maintenance operations.',\n              enum: [                'enabled',\n                'disabled'\n              ]\n            }\n          },\n          required: [            'max_snapshot_age',\n            'min_snapshots_to_keep',\n            'state'\n          ]\n        }\n      }\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -43,6 +43,25 @@ export const tool: Tool = {
             type: 'string',
             description: 'Updates the target file size optionally.',
             enum: ['64', '128', '256', '512'],
+          },
+        },
+      },
+      snapshot_expiration: {
+        type: 'object',
+        description: 'Updates snapshot expiration configuration (all fields optional).',
+        properties: {
+          max_snapshot_age: {
+            type: 'string',
+            description: 'Updates the maximum age for snapshots optionally.',
+          },
+          min_snapshots_to_keep: {
+            type: 'integer',
+            description: 'Updates the minimum number of snapshots to retain optionally.',
+          },
+          state: {
+            type: 'string',
+            description: 'Updates the state optionally.',
+            enum: ['enabled', 'disabled'],
           },
         },
       },

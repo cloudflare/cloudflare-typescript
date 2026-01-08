@@ -177,6 +177,11 @@ export namespace R2DataCatalogListResponse {
        * Configures compaction for catalog maintenance.
        */
       compaction?: MaintenanceConfig.Compaction;
+
+      /**
+       * Configures snapshot expiration settings.
+       */
+      snapshot_expiration?: MaintenanceConfig.SnapshotExpiration;
     }
 
     export namespace MaintenanceConfig {
@@ -193,6 +198,29 @@ export namespace R2DataCatalogListResponse {
          * Sets the target file size for compaction in megabytes.
          */
         target_size_mb: '64' | '128' | '256' | '512';
+      }
+
+      /**
+       * Configures snapshot expiration settings.
+       */
+      export interface SnapshotExpiration {
+        /**
+         * Specifies the maximum age for snapshots. The system deletes snapshots older than
+         * this age. Format: <number><unit> where unit is d (days), h (hours), m (minutes),
+         * or s (seconds). Examples: "7d" (7 days), "48h" (48 hours), "2880m" (2,880
+         * minutes).
+         */
+        max_snapshot_age: string;
+
+        /**
+         * Specifies the minimum number of snapshots to retain.
+         */
+        min_snapshots_to_keep: number;
+
+        /**
+         * Specifies the state of maintenance operations.
+         */
+        state: 'enabled' | 'disabled';
       }
     }
   }
@@ -257,6 +285,11 @@ export namespace R2DataCatalogGetResponse {
      * Configures compaction for catalog maintenance.
      */
     compaction?: MaintenanceConfig.Compaction;
+
+    /**
+     * Configures snapshot expiration settings.
+     */
+    snapshot_expiration?: MaintenanceConfig.SnapshotExpiration;
   }
 
   export namespace MaintenanceConfig {
@@ -273,6 +306,29 @@ export namespace R2DataCatalogGetResponse {
        * Sets the target file size for compaction in megabytes.
        */
       target_size_mb: '64' | '128' | '256' | '512';
+    }
+
+    /**
+     * Configures snapshot expiration settings.
+     */
+    export interface SnapshotExpiration {
+      /**
+       * Specifies the maximum age for snapshots. The system deletes snapshots older than
+       * this age. Format: <number><unit> where unit is d (days), h (hours), m (minutes),
+       * or s (seconds). Examples: "7d" (7 days), "48h" (48 hours), "2880m" (2,880
+       * minutes).
+       */
+      max_snapshot_age: string;
+
+      /**
+       * Specifies the minimum number of snapshots to retain.
+       */
+      min_snapshots_to_keep: number;
+
+      /**
+       * Specifies the state of maintenance operations.
+       */
+      state: 'enabled' | 'disabled';
     }
   }
 }

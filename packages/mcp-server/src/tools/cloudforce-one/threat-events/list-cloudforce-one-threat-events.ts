@@ -35,6 +35,10 @@ export const tool: Tool = {
       forceRefresh: {
         type: 'boolean',
       },
+      format: {
+        type: 'string',
+        enum: ['json', 'stix2'],
+      },
       order: {
         type: 'string',
         enum: ['asc', 'desc'],

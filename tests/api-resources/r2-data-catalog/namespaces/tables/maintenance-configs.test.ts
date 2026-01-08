@@ -30,6 +30,7 @@ describe('resource maintenanceConfigs', () => {
       bucket_name: 'my-data-bucket',
       namespace: 'my_namespace%1Fsub_namespace',
       compaction: { state: 'enabled', target_size_mb: '256' },
+      snapshot_expiration: { max_snapshot_age: '14d', min_snapshots_to_keep: 5, state: 'enabled' },
     });
   });
 
