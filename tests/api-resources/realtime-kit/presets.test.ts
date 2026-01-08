@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource presets', () => {
-  test('create: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('create: only required params', async () => {
     const responsePromise = client.realtimeKit.presets.create('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       config: {
@@ -49,7 +50,8 @@ describe('resource presets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('create: required and optional params', async () => {
     const response = await client.realtimeKit.presets.create('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       config: {
@@ -126,7 +128,8 @@ describe('resource presets', () => {
     });
   });
 
-  test('update: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('update: only required params', async () => {
     const responsePromise = client.realtimeKit.presets.update('app_id', 'preset_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -139,7 +142,8 @@ describe('resource presets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('update: required and optional params', async () => {
     const response = await client.realtimeKit.presets.update('app_id', 'preset_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       config: {
@@ -212,7 +216,8 @@ describe('resource presets', () => {
     });
   });
 
-  test('delete: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('delete: only required params', async () => {
     const responsePromise = client.realtimeKit.presets.delete('app_id', 'preset_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -225,13 +230,15 @@ describe('resource presets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('delete: required and optional params', async () => {
     const response = await client.realtimeKit.presets.delete('app_id', 'preset_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('get: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('get: only required params', async () => {
     const responsePromise = client.realtimeKit.presets.get('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -244,7 +251,8 @@ describe('resource presets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('get: required and optional params', async () => {
     const response = await client.realtimeKit.presets.get('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page_no: 0,
@@ -252,7 +260,8 @@ describe('resource presets', () => {
     });
   });
 
-  test('getPresetById: only required params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getPresetById: only required params', async () => {
     const responsePromise = client.realtimeKit.presets.getPresetById('app_id', 'preset_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -265,7 +274,8 @@ describe('resource presets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getPresetById: required and optional params', async () => {
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getPresetById: required and optional params', async () => {
     const response = await client.realtimeKit.presets.getPresetById('app_id', 'preset_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
