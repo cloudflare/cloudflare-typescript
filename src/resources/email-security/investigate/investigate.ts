@@ -42,7 +42,9 @@ export class Investigate extends APIResource {
   release: ReleaseAPI.Release = new ReleaseAPI.Release(this._client);
 
   /**
-   * Returns information for each email that matches the search parameter(s).
+   * Returns information for each email that matches the search parameter(s). If the
+   * search takes too long, the endpoint returns 202 with a Location header pointing
+   * to a polling endpoint where results can be retrieved once ready.
    *
    * @example
    * ```ts

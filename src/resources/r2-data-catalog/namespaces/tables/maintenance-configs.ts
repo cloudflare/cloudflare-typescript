@@ -21,6 +21,11 @@ export class MaintenanceConfigs extends APIResource {
    *         state: 'enabled',
    *         target_size_mb: '256',
    *       },
+   *       snapshot_expiration: {
+   *         max_snapshot_age: '14d',
+   *         min_snapshots_to_keep: 5,
+   *         state: 'enabled',
+   *       },
    *     },
    *   );
    * ```
@@ -81,6 +86,11 @@ export interface MaintenanceConfigUpdateResponse {
    * Configures compaction settings for table optimization.
    */
   compaction?: MaintenanceConfigUpdateResponse.Compaction;
+
+  /**
+   * Configures snapshot expiration settings.
+   */
+  snapshot_expiration?: MaintenanceConfigUpdateResponse.SnapshotExpiration;
 }
 
 export namespace MaintenanceConfigUpdateResponse {
@@ -97,6 +107,29 @@ export namespace MaintenanceConfigUpdateResponse {
      * Sets the target file size for compaction in megabytes.
      */
     target_size_mb: '64' | '128' | '256' | '512';
+  }
+
+  /**
+   * Configures snapshot expiration settings.
+   */
+  export interface SnapshotExpiration {
+    /**
+     * Specifies the maximum age for snapshots. The system deletes snapshots older than
+     * this age. Format: <number><unit> where unit is d (days), h (hours), m (minutes),
+     * or s (seconds). Examples: "7d" (7 days), "48h" (48 hours), "2880m" (2,880
+     * minutes).
+     */
+    max_snapshot_age: string;
+
+    /**
+     * Specifies the minimum number of snapshots to retain.
+     */
+    min_snapshots_to_keep: number;
+
+    /**
+     * Specifies the state of maintenance operations.
+     */
+    state: 'enabled' | 'disabled';
   }
 }
 
@@ -119,6 +152,11 @@ export namespace MaintenanceConfigGetResponse {
      * Configures compaction settings for table optimization.
      */
     compaction?: MaintenanceConfig.Compaction;
+
+    /**
+     * Configures snapshot expiration settings.
+     */
+    snapshot_expiration?: MaintenanceConfig.SnapshotExpiration;
   }
 
   export namespace MaintenanceConfig {
@@ -136,6 +174,29 @@ export namespace MaintenanceConfigGetResponse {
        */
       target_size_mb: '64' | '128' | '256' | '512';
     }
+
+    /**
+     * Configures snapshot expiration settings.
+     */
+    export interface SnapshotExpiration {
+      /**
+       * Specifies the maximum age for snapshots. The system deletes snapshots older than
+       * this age. Format: <number><unit> where unit is d (days), h (hours), m (minutes),
+       * or s (seconds). Examples: "7d" (7 days), "48h" (48 hours), "2880m" (2,880
+       * minutes).
+       */
+      max_snapshot_age: string;
+
+      /**
+       * Specifies the minimum number of snapshots to retain.
+       */
+      min_snapshots_to_keep: number;
+
+      /**
+       * Specifies the state of maintenance operations.
+       */
+      state: 'enabled' | 'disabled';
+    }
   }
 }
 
@@ -149,6 +210,11 @@ export interface MaintenanceConfigUpdateParams {
    * Body param: Updates compaction configuration (all fields optional).
    */
   compaction?: MaintenanceConfigUpdateParams.Compaction;
+
+  /**
+   * Body param: Updates snapshot expiration configuration (all fields optional).
+   */
+  snapshot_expiration?: MaintenanceConfigUpdateParams.SnapshotExpiration;
 }
 
 export namespace MaintenanceConfigUpdateParams {
@@ -165,6 +231,26 @@ export namespace MaintenanceConfigUpdateParams {
      * Updates the target file size optionally.
      */
     target_size_mb?: '64' | '128' | '256' | '512';
+  }
+
+  /**
+   * Updates snapshot expiration configuration (all fields optional).
+   */
+  export interface SnapshotExpiration {
+    /**
+     * Updates the maximum age for snapshots optionally.
+     */
+    max_snapshot_age?: string;
+
+    /**
+     * Updates the minimum number of snapshots to retain optionally.
+     */
+    min_snapshots_to_keep?: number;
+
+    /**
+     * Updates the state optionally.
+     */
+    state?: 'enabled' | 'disabled';
   }
 }
 
