@@ -359,6 +359,11 @@ export interface ThreatEventBulkCreateResponse {
   queuedIndicatorsCount: number;
 
   /**
+   * Number of events skipped due to duplicate UUID (only when preserveUuid=true)
+   */
+  skippedEventsCount: number;
+
+  /**
    * Correlation ID for async indicator processing
    */
   createBulkEventsRequestId?: string;
@@ -573,6 +578,12 @@ export interface ThreatEventCreateParams {
    * Body param:
    */
   targetIndustry?: string;
+
+  /**
+   * Body param: Optional UUID for the event. Only used when preserveUuid=true in
+   * bulk create. Must be a valid UUID format.
+   */
+  uuid?: string;
 }
 
 export namespace ThreatEventCreateParams {
@@ -612,6 +623,11 @@ export interface ThreatEventListParams {
    * Query param:
    */
   forceRefresh?: boolean;
+
+  /**
+   * Query param:
+   */
+  format?: 'json' | 'stix2';
 
   /**
    * Query param:
@@ -683,6 +699,13 @@ export interface ThreatEventBulkCreateParams {
    * Body param:
    */
   datasetId: string;
+
+  /**
+   * Body param: When true, use provided UUIDs from event data instead of generating
+   * new ones. Used for migration scenarios where original UUIDs must be preserved.
+   * Duplicate UUIDs will be skipped.
+   */
+  preserveUuid?: boolean;
 }
 
 export namespace ThreatEventBulkCreateParams {
@@ -722,6 +745,12 @@ export namespace ThreatEventBulkCreateParams {
     targetCountry?: string;
 
     targetIndustry?: string;
+
+    /**
+     * Optional UUID for the event. Only used when preserveUuid=true in bulk create.
+     * Must be a valid UUID format.
+     */
+    uuid?: string;
   }
 
   export namespace Data {
