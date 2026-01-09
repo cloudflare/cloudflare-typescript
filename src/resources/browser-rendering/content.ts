@@ -9,6 +9,15 @@ export class Content extends APIResource {
   /**
    * Fetches rendered HTML content from provided URL or HTML. Check available options
    * like `gotoOptions` and `waitFor*` to control page load behaviour.
+   *
+   * @example
+   * ```ts
+   * const content =
+   *   await client.browserRendering.content.create({
+   *     account_id: 'account_id',
+   *     url: 'https://www.example.com/',
+   *   });
+   * ```
    */
   create(params: ContentCreateParams, options?: RequestOptions): APIPromise<ContentCreateResponse> {
     const { account_id, cacheTTL, ...body } = params;

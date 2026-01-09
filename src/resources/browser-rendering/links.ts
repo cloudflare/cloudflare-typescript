@@ -8,6 +8,14 @@ import { path } from '../../internal/utils/path';
 export class Links extends APIResource {
   /**
    * Get links from a web page.
+   *
+   * @example
+   * ```ts
+   * const links = await client.browserRendering.links.create({
+   *   account_id: 'account_id',
+   *   html: '<h1>Hello World!</h1>',
+   * });
+   * ```
    */
   create(params: LinkCreateParams, options?: RequestOptions): APIPromise<LinkCreateResponse> {
     const { account_id, cacheTTL, ...body } = params;
