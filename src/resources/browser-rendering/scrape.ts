@@ -6,6 +6,17 @@ import * as Core from '../../core';
 export class Scrape extends APIResource {
   /**
    * Get meta attributes like height, width, text and others of selected elements.
+   *
+   * @example
+   * ```ts
+   * const scrapes = await client.browserRendering.scrape.create(
+   *   {
+   *     account_id: 'account_id',
+   *     elements: [{ selector: 'h1' }],
+   *     html: '<h1>Hello World!</h1>',
+   *   },
+   * );
+   * ```
    */
   create(params: ScrapeCreateParams, options?: Core.RequestOptions): Core.APIPromise<ScrapeCreateResponse> {
     const { account_id, cacheTTL, ...body } = params;

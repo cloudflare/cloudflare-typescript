@@ -14,7 +14,7 @@ describe('resource scrape', () => {
     const responsePromise = client.browserRendering.scrape.create({
       account_id: 'account_id',
       elements: [{ selector: 'selector' }],
-      html: 'x',
+      html: '<h1>Hello World!</h1>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource scrape', () => {
     const response = await client.browserRendering.scrape.create({
       account_id: 'account_id',
       elements: [{ selector: 'selector' }],
-      html: 'x',
+      html: '<h1>Hello World!</h1>',
       cacheTTL: 86400,
       actionTimeout: 120000,
       addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],

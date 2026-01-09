@@ -7,6 +7,15 @@ export class Markdown extends APIResource {
   /**
    * Gets markdown of a webpage from provided URL or HTML. Control page loading with
    * `gotoOptions` and `waitFor*` options.
+   *
+   * @example
+   * ```ts
+   * const markdown =
+   *   await client.browserRendering.markdown.create({
+   *     account_id: 'account_id',
+   *     url: 'https://www.example.com/',
+   *   });
+   * ```
    */
   create(
     params: MarkdownCreateParams,

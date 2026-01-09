@@ -8,6 +8,15 @@ export class Snapshot extends APIResource {
    * Returns the page's HTML content and screenshot. Control page loading with
    * `gotoOptions` and `waitFor*` options. Customize screenshots with `viewport`,
    * `fullPage`, `clip` and others.
+   *
+   * @example
+   * ```ts
+   * const snapshot =
+   *   await client.browserRendering.snapshot.create({
+   *     account_id: 'account_id',
+   *     html: '<h1>Hello World!</h1>',
+   *   });
+   * ```
    */
   create(
     params: SnapshotCreateParams,

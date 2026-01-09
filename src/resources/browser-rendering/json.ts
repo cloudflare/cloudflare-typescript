@@ -7,6 +7,14 @@ export class Json extends APIResource {
   /**
    * Gets json from a webpage from a provided URL or HTML. Pass `prompt` or `schema`
    * in the body. Control page loading with `gotoOptions` and `waitFor*` options.
+   *
+   * @example
+   * ```ts
+   * const json = await client.browserRendering.json.create({
+   *   account_id: 'account_id',
+   *   html: '<h1>Hello World!</h1>',
+   * });
+   * ```
    */
   create(params: JsonCreateParams, options?: Core.RequestOptions): Core.APIPromise<JsonCreateResponse> {
     const { account_id, cacheTTL, ...body } = params;
