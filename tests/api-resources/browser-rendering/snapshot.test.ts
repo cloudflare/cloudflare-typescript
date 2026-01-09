@@ -11,7 +11,10 @@ const client = new Cloudflare({
 
 describe('resource snapshot', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.browserRendering.snapshot.create({ account_id: 'account_id', html: 'x' });
+    const responsePromise = client.browserRendering.snapshot.create({
+      account_id: 'account_id',
+      html: '<h1>Hello World!</h1>',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +27,7 @@ describe('resource snapshot', () => {
   test('create: required and optional params', async () => {
     const response = await client.browserRendering.snapshot.create({
       account_id: 'account_id',
-      html: 'x',
+      html: '<h1>Hello World!</h1>',
       cacheTTL: 86400,
       actionTimeout: 120000,
       addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],

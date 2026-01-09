@@ -8,6 +8,15 @@ export class Screenshot extends APIResource {
    * Takes a screenshot of a webpage from provided URL or HTML. Control page loading
    * with `gotoOptions` and `waitFor*` options. Customize screenshots with
    * `viewport`, `fullPage`, `clip` and others.
+   *
+   * @example
+   * ```ts
+   * const screenshot =
+   *   await client.browserRendering.screenshot.create({
+   *     account_id: 'account_id',
+   *     html: '<h1>Hello World!</h1>',
+   *   });
+   * ```
    */
   create(
     params: ScreenshotCreateParams,
