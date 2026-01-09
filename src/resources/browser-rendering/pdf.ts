@@ -10,6 +10,17 @@ export class PDF extends APIResource {
   /**
    * Fetches rendered PDF from provided URL or HTML. Check available options like
    * `gotoOptions` and `waitFor*` to control page load behaviour.
+   *
+   * @example
+   * ```ts
+   * const pdf = await client.browserRendering.pdf.create({
+   *   account_id: 'account_id',
+   *   html: '<h1>Hello World!</h1>',
+   * });
+   *
+   * const content = await pdf.blob();
+   * console.log(content);
+   * ```
    */
   create(params: PDFCreateParams, options?: RequestOptions): APIPromise<Response> {
     const { account_id, cacheTTL, ...body } = params;

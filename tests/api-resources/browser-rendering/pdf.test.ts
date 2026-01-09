@@ -12,7 +12,7 @@ describe('resource pdf', () => {
   test('create: required and optional params', async () => {
     const response = await client.browserRendering.pdf.create({
       account_id: 'account_id',
-      html: 'x',
+      html: '<h1>Hello World!</h1>',
       cacheTTL: 86400,
       actionTimeout: 120000,
       addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],
