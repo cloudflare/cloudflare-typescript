@@ -2,9 +2,21 @@
 
 import { APIResource } from '../../../resource';
 import * as RoutingAPI from './routing/routing';
-import { Routing } from './routing/routing';
+import {
+  Routing,
+  RoutingSummaryV2Params,
+  RoutingSummaryV2Response,
+  RoutingTimeseriesGroupsV2Params,
+  RoutingTimeseriesGroupsV2Response,
+} from './routing/routing';
 import * as SecurityAPI from './security/security';
-import { Security } from './security/security';
+import {
+  Security,
+  SecuritySummaryV2Params,
+  SecuritySummaryV2Response,
+  SecurityTimeseriesGroupsV2Params,
+  SecurityTimeseriesGroupsV2Response,
+} from './security/security';
 
 export class Email extends APIResource {
   routing: RoutingAPI.Routing = new RoutingAPI.Routing(this._client);
@@ -42,7 +54,19 @@ Email.Security = Security;
 export declare namespace Email {
   export { type RadarEmailSeries as RadarEmailSeries, type RadarEmailSummary as RadarEmailSummary };
 
-  export { Routing as Routing };
+  export {
+    Routing as Routing,
+    type RoutingSummaryV2Response as RoutingSummaryV2Response,
+    type RoutingTimeseriesGroupsV2Response as RoutingTimeseriesGroupsV2Response,
+    type RoutingSummaryV2Params as RoutingSummaryV2Params,
+    type RoutingTimeseriesGroupsV2Params as RoutingTimeseriesGroupsV2Params,
+  };
 
-  export { Security as Security };
+  export {
+    Security as Security,
+    type SecuritySummaryV2Response as SecuritySummaryV2Response,
+    type SecurityTimeseriesGroupsV2Response as SecurityTimeseriesGroupsV2Response,
+    type SecuritySummaryV2Params as SecuritySummaryV2Params,
+    type SecurityTimeseriesGroupsV2Params as SecurityTimeseriesGroupsV2Params,
+  };
 }

@@ -6,6 +6,13 @@ import * as Core from '../../core';
 export class Settings extends APIResource {
   /**
    * Retrieve the current status of Content Scanning.
+   *
+   * @example
+   * ```ts
+   * const setting = await client.contentScanning.settings.get({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
    */
   get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
     const { zone_id } = params;

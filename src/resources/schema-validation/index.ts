@@ -1,13 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  SchemaListResponsesV4PagePaginationArray,
+  PublicSchemasV4PagePaginationArray,
   Schemas,
-  type SchemaCreateResponse,
-  type SchemaListResponse,
+  type PublicSchema,
   type SchemaDeleteResponse,
-  type SchemaEditResponse,
-  type SchemaGetResponse,
   type SchemaCreateParams,
   type SchemaListParams,
   type SchemaDeleteParams,

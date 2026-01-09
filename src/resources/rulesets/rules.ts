@@ -5850,7 +5850,7 @@ export namespace SetConfigRule {
     bic?: boolean;
 
     /**
-     * Whether to disable Cloudflare Apps.
+     * @deprecated Cloudflare Apps are deprected.
      */
     disable_apps?: true;
 
@@ -5885,7 +5885,8 @@ export namespace SetConfigRule {
     hotlink_protection?: boolean;
 
     /**
-     * Whether to enable Mirage.
+     * @deprecated Mirage is deprecated. More information at
+     * https://developers.cloudflare.com/speed/optimization/images/mirage/.
      */
     mirage?: boolean;
 
@@ -6087,7 +6088,7 @@ export namespace SetConfigRuleParam {
     bic?: boolean;
 
     /**
-     * Whether to disable Cloudflare Apps.
+     * @deprecated Cloudflare Apps are deprected.
      */
     disable_apps?: true;
 
@@ -6122,7 +6123,8 @@ export namespace SetConfigRuleParam {
     hotlink_protection?: boolean;
 
     /**
-     * Whether to enable Mirage.
+     * @deprecated Mirage is deprecated. More information at
+     * https://developers.cloudflare.com/speed/optimization/images/mirage/.
      */
     mirage?: boolean;
 
@@ -11368,7 +11370,7 @@ export declare namespace RuleCreateParams {
       bic?: boolean;
 
       /**
-       * Whether to disable Cloudflare Apps.
+       * @deprecated Cloudflare Apps are deprected.
        */
       disable_apps?: true;
 
@@ -11403,7 +11405,8 @@ export declare namespace RuleCreateParams {
       hotlink_protection?: boolean;
 
       /**
-       * Whether to enable Mirage.
+       * @deprecated Mirage is deprecated. More information at
+       * https://developers.cloudflare.com/speed/optimization/images/mirage/.
        */
       mirage?: boolean;
 
@@ -15560,7 +15563,7 @@ export declare namespace RuleEditParams {
       bic?: boolean;
 
       /**
-       * Whether to disable Cloudflare Apps.
+       * @deprecated Cloudflare Apps are deprected.
        */
       disable_apps?: true;
 
@@ -15595,7 +15598,8 @@ export declare namespace RuleEditParams {
       hotlink_protection?: boolean;
 
       /**
-       * Whether to enable Mirage.
+       * @deprecated Mirage is deprecated. More information at
+       * https://developers.cloudflare.com/speed/optimization/images/mirage/.
        */
       mirage?: boolean;
 

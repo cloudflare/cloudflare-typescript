@@ -46,7 +46,7 @@ describe('resource httpProtocol', () => {
           geoId: ['string'],
           httpVersion: ['HTTPv1'],
           ipVersion: ['IPv4'],
-          limit: 5,
+          limit: 1,
           location: ['string'],
           name: ['main_series'],
           os: ['WINDOWS'],

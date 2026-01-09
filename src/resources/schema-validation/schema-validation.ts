@@ -3,17 +3,14 @@
 import { APIResource } from '../../resource';
 import * as SchemasAPI from './schemas';
 import {
+  PublicSchema,
+  PublicSchemasV4PagePaginationArray,
   SchemaCreateParams,
-  SchemaCreateResponse,
   SchemaDeleteParams,
   SchemaDeleteResponse,
   SchemaEditParams,
-  SchemaEditResponse,
   SchemaGetParams,
-  SchemaGetResponse,
   SchemaListParams,
-  SchemaListResponse,
-  SchemaListResponsesV4PagePaginationArray,
   Schemas,
 } from './schemas';
 import * as SettingsAPI from './settings/settings';
@@ -33,18 +30,15 @@ export class SchemaValidation extends APIResource {
 }
 
 SchemaValidation.Schemas = Schemas;
-SchemaValidation.SchemaListResponsesV4PagePaginationArray = SchemaListResponsesV4PagePaginationArray;
+SchemaValidation.PublicSchemasV4PagePaginationArray = PublicSchemasV4PagePaginationArray;
 SchemaValidation.Settings = Settings;
 
 export declare namespace SchemaValidation {
   export {
     Schemas as Schemas,
-    type SchemaCreateResponse as SchemaCreateResponse,
-    type SchemaListResponse as SchemaListResponse,
+    type PublicSchema as PublicSchema,
     type SchemaDeleteResponse as SchemaDeleteResponse,
-    type SchemaEditResponse as SchemaEditResponse,
-    type SchemaGetResponse as SchemaGetResponse,
-    SchemaListResponsesV4PagePaginationArray as SchemaListResponsesV4PagePaginationArray,
+    PublicSchemasV4PagePaginationArray as PublicSchemasV4PagePaginationArray,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaListParams as SchemaListParams,
     type SchemaDeleteParams as SchemaDeleteParams,

@@ -3,9 +3,13 @@
 export {
   Netflows,
   type NetflowSummaryResponse,
+  type NetflowSummaryV2Response,
   type NetflowTimeseriesResponse,
+  type NetflowTimeseriesGroupsResponse,
   type NetflowSummaryParams,
+  type NetflowSummaryV2Params,
   type NetflowTimeseriesParams,
+  type NetflowTimeseriesGroupsParams,
 } from './netflows';
 export {
   Top,

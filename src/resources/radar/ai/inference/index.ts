@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Inference } from './inference';
+export {
+  Inference,
+  type InferenceSummaryV2Response,
+  type InferenceTimeseriesGroupsV2Response,
+  type InferenceSummaryV2Params,
+  type InferenceTimeseriesGroupsV2Params,
+} from './inference';
 export {
   Summary,
   type SummaryModelResponse,

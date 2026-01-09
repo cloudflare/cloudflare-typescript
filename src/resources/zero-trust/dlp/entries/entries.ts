@@ -4,7 +4,7 @@ import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as CustomAPI from './custom';
 import {
-  Custom,
+  Custom as CustomAPICustom,
   CustomCreateParams,
   CustomCreateResponse,
   CustomDeleteParams,
@@ -19,7 +19,7 @@ import {
 } from './custom';
 import * as IntegrationAPI from './integration';
 import {
-  Integration,
+  Integration as IntegrationAPIIntegration,
   IntegrationCreateParams,
   IntegrationCreateResponse,
   IntegrationDeleteParams,
@@ -34,7 +34,7 @@ import {
 } from './integration';
 import * as PredefinedAPI from './predefined';
 import {
-  Predefined,
+  Predefined as PredefinedAPIPredefined,
   PredefinedCreateParams,
   PredefinedCreateResponse,
   PredefinedDeleteParams,
@@ -65,7 +65,6 @@ export class Entries extends APIResource {
    *   enabled: true,
    *   name: 'name',
    *   pattern: { regex: 'regex' },
-   *   profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    * });
    * ```
    */
@@ -201,15 +200,15 @@ export interface EntryCreateResponse {
 }
 
 export type EntryUpdateResponse =
-  | EntryUpdateResponse.CustomEntry
-  | EntryUpdateResponse.PredefinedEntry
-  | EntryUpdateResponse.IntegrationEntry
-  | EntryUpdateResponse.ExactDataEntry
-  | EntryUpdateResponse.DocumentFingerprintEntry
-  | EntryUpdateResponse.WordListEntry;
+  | EntryUpdateResponse.Custom
+  | EntryUpdateResponse.Predefined
+  | EntryUpdateResponse.Integration
+  | EntryUpdateResponse.ExactData
+  | EntryUpdateResponse.DocumentFingerprint
+  | EntryUpdateResponse.WordList;
 
 export namespace EntryUpdateResponse {
-  export interface CustomEntry {
+  export interface Custom {
     id: string;
 
     created_at: string;
@@ -227,10 +226,10 @@ export namespace EntryUpdateResponse {
     profile_id?: string | null;
   }
 
-  export interface PredefinedEntry {
+  export interface Predefined {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: Predefined.Confidence;
 
     enabled: boolean;
 
@@ -240,10 +239,10 @@ export namespace EntryUpdateResponse {
 
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    variant?: Predefined.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace Predefined {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -266,7 +265,7 @@ export namespace EntryUpdateResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface Integration {
     id: string;
 
     created_at: string;
@@ -282,7 +281,7 @@ export namespace EntryUpdateResponse {
     profile_id?: string | null;
   }
 
-  export interface ExactDataEntry {
+  export interface ExactData {
     id: string;
 
     /**
@@ -304,7 +303,7 @@ export namespace EntryUpdateResponse {
     updated_at: string;
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface DocumentFingerprint {
     id: string;
 
     created_at: string;
@@ -318,7 +317,7 @@ export namespace EntryUpdateResponse {
     updated_at: string;
   }
 
-  export interface WordListEntry {
+  export interface WordList {
     id: string;
 
     created_at: string;
@@ -362,6 +361,8 @@ export namespace EntryListResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
   export interface PredefinedEntry {
@@ -376,6 +377,8 @@ export namespace EntryListResponse {
     type: 'predefined';
 
     profile_id?: string | null;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
     variant?: PredefinedEntry.Variant;
   }
@@ -417,6 +420,8 @@ export namespace EntryListResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
   export interface ExactDataEntry {
@@ -439,6 +444,8 @@ export namespace EntryListResponse {
     type: 'exact_data';
 
     updated_at: string;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
   export interface DocumentFingerprintEntry {
@@ -453,6 +460,8 @@ export namespace EntryListResponse {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
   export interface WordListEntry {
@@ -471,21 +480,23 @@ export namespace EntryListResponse {
     word_list: unknown;
 
     profile_id?: string | null;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 }
 
 export type EntryDeleteResponse = unknown;
 
 export type EntryGetResponse =
-  | EntryGetResponse.CustomEntry
-  | EntryGetResponse.PredefinedEntry
-  | EntryGetResponse.IntegrationEntry
-  | EntryGetResponse.ExactDataEntry
-  | EntryGetResponse.DocumentFingerprintEntry
-  | EntryGetResponse.WordListEntry;
+  | EntryGetResponse.UnionMember0
+  | EntryGetResponse.UnionMember1
+  | EntryGetResponse.UnionMember2
+  | EntryGetResponse.UnionMember3
+  | EntryGetResponse.UnionMember4
+  | EntryGetResponse.UnionMember5;
 
 export namespace EntryGetResponse {
-  export interface CustomEntry {
+  export interface UnionMember0 {
     id: string;
 
     created_at: string;
@@ -501,12 +512,27 @@ export namespace EntryGetResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    profiles?: Array<UnionMember0.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface PredefinedEntry {
+  export namespace UnionMember0 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface UnionMember1 {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: UnionMember1.Confidence;
 
     enabled: boolean;
 
@@ -516,10 +542,14 @@ export namespace EntryGetResponse {
 
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    profiles?: Array<UnionMember1.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+
+    variant?: UnionMember1.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace UnionMember1 {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -533,6 +563,15 @@ export namespace EntryGetResponse {
       available: boolean;
     }
 
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+
     export interface Variant {
       topic_type: 'Intent' | 'Content';
 
@@ -542,7 +581,7 @@ export namespace EntryGetResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface UnionMember2 {
     id: string;
 
     created_at: string;
@@ -556,9 +595,24 @@ export namespace EntryGetResponse {
     updated_at: string;
 
     profile_id?: string | null;
+
+    profiles?: Array<UnionMember2.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface ExactDataEntry {
+  export namespace UnionMember2 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface UnionMember3 {
     id: string;
 
     /**
@@ -578,9 +632,24 @@ export namespace EntryGetResponse {
     type: 'exact_data';
 
     updated_at: string;
+
+    profiles?: Array<UnionMember3.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface DocumentFingerprintEntry {
+  export namespace UnionMember3 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface UnionMember4 {
     id: string;
 
     created_at: string;
@@ -592,9 +661,24 @@ export namespace EntryGetResponse {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    profiles?: Array<UnionMember4.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface WordListEntry {
+  export namespace UnionMember4 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface UnionMember5 {
     id: string;
 
     created_at: string;
@@ -610,6 +694,21 @@ export namespace EntryGetResponse {
     word_list: unknown;
 
     profile_id?: string | null;
+
+    profiles?: Array<UnionMember5.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+  }
+
+  export namespace UnionMember5 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
   }
 }
 
@@ -637,7 +736,7 @@ export interface EntryCreateParams {
   /**
    * Body param:
    */
-  profile_id: string;
+  profile_id?: string;
 }
 
 export type EntryUpdateParams =
@@ -721,11 +820,11 @@ export interface EntryGetParams {
 }
 
 Entries.EntryListResponsesSinglePage = EntryListResponsesSinglePage;
-Entries.Custom = Custom;
+Entries.Custom = CustomAPICustom;
 Entries.CustomListResponsesSinglePage = CustomListResponsesSinglePage;
-Entries.Predefined = Predefined;
+Entries.Predefined = PredefinedAPIPredefined;
 Entries.PredefinedListResponsesSinglePage = PredefinedListResponsesSinglePage;
-Entries.Integration = Integration;
+Entries.Integration = IntegrationAPIIntegration;
 Entries.IntegrationListResponsesSinglePage = IntegrationListResponsesSinglePage;
 
 export declare namespace Entries {
@@ -744,7 +843,7 @@ export declare namespace Entries {
   };
 
   export {
-    Custom as Custom,
+    CustomAPICustom as Custom,
     type CustomCreateResponse as CustomCreateResponse,
     type CustomUpdateResponse as CustomUpdateResponse,
     type CustomListResponse as CustomListResponse,
@@ -759,7 +858,7 @@ export declare namespace Entries {
   };
 
   export {
-    Predefined as Predefined,
+    PredefinedAPIPredefined as Predefined,
     type PredefinedCreateResponse as PredefinedCreateResponse,
     type PredefinedUpdateResponse as PredefinedUpdateResponse,
     type PredefinedListResponse as PredefinedListResponse,
@@ -774,7 +873,7 @@ export declare namespace Entries {
   };
 
   export {
-    Integration as Integration,
+    IntegrationAPIIntegration as Integration,
     type IntegrationCreateResponse as IntegrationCreateResponse,
     type IntegrationUpdateResponse as IntegrationUpdateResponse,
     type IntegrationListResponse as IntegrationListResponse,

@@ -37,7 +37,7 @@ describe('resource locations', () => {
           dateRange: '7d',
           dateStart: '2023-09-01T11:41:33.782Z',
           format: 'JSON',
-          limit: 5,
+          limit: 1,
           status: 'VERIFIED',
         },
         { path: '/_stainless_unknown_path' },

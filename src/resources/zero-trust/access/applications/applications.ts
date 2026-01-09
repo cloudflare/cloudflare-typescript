@@ -1667,7 +1667,10 @@ export type ApplicationType =
   | 'bookmark'
   | 'dash_sso'
   | 'infrastructure'
-  | 'rdp';
+  | 'rdp'
+  | 'mcp'
+  | 'mcp_portal'
+  | 'proxy_endpoint';
 
 /**
  * The application type.
@@ -1683,7 +1686,10 @@ export type ApplicationTypeParam =
   | 'bookmark'
   | 'dash_sso'
   | 'infrastructure'
-  | 'rdp';
+  | 'rdp'
+  | 'mcp'
+  | 'mcp_portal'
+  | 'proxy_endpoint';
 
 export interface CORSHeaders {
   /**
@@ -2583,6 +2589,7 @@ export type ApplicationCreateResponse =
   | ApplicationCreateResponse.AppLauncherApplication
   | ApplicationCreateResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationCreateResponse.BrowserIsolationPermissionsApplication
+  | ApplicationCreateResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationCreateResponse.BookmarkApplication
   | ApplicationCreateResponse.InfrastructureApplication
   | ApplicationCreateResponse.BrowserRdpApplication;
@@ -2670,7 +2677,11 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
+    destinations?: Array<
+      | SelfHostedApplication.PublicDestination
+      | SelfHostedApplication.PrivateDestination
+      | SelfHostedApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -2779,10 +2790,6 @@ export namespace ApplicationCreateResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -2812,6 +2819,19 @@ export namespace ApplicationCreateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -3263,7 +3283,10 @@ export namespace ApplicationCreateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -3335,7 +3358,11 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserSSHApplication.PublicDestination
+      | BrowserSSHApplication.PrivateDestination
+      | BrowserSSHApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -3444,10 +3471,6 @@ export namespace ApplicationCreateResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -3477,6 +3500,19 @@ export namespace ApplicationCreateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -3681,7 +3717,10 @@ export namespace ApplicationCreateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -3753,7 +3792,11 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserVNCApplication.PublicDestination
+      | BrowserVNCApplication.PrivateDestination
+      | BrowserVNCApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -3862,10 +3905,6 @@ export namespace ApplicationCreateResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -3895,6 +3934,19 @@ export namespace ApplicationCreateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -4093,7 +4145,10 @@ export namespace ApplicationCreateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -4608,6 +4663,155 @@ export namespace ApplicationCreateResponse {
     }
   }
 
+  export interface GatewayIdentityProxyEndpointApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * The proxy endpoint domain in the format: 10 alphanumeric characters followed by
+     * .proxy.cloudflare-gateway.com
+     */
+    domain?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    policies?: Array<GatewayIdentityProxyEndpointApplication.Policy>;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+  }
+
+  export namespace GatewayIdentityProxyEndpointApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+  }
+
   export interface BookmarkApplication {
     /**
      * UUID.
@@ -4859,7 +5063,11 @@ export namespace ApplicationCreateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserRdpApplication.PublicDestination
+      | BrowserRdpApplication.PrivateDestination
+      | BrowserRdpApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -4986,10 +5194,6 @@ export namespace ApplicationCreateResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -5019,6 +5223,19 @@ export namespace ApplicationCreateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -5211,6 +5428,7 @@ export type ApplicationUpdateResponse =
   | ApplicationUpdateResponse.AppLauncherApplication
   | ApplicationUpdateResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationUpdateResponse.BrowserIsolationPermissionsApplication
+  | ApplicationUpdateResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationUpdateResponse.BookmarkApplication
   | ApplicationUpdateResponse.InfrastructureApplication
   | ApplicationUpdateResponse.BrowserRdpApplication;
@@ -5298,7 +5516,11 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
+    destinations?: Array<
+      | SelfHostedApplication.PublicDestination
+      | SelfHostedApplication.PrivateDestination
+      | SelfHostedApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -5407,10 +5629,6 @@ export namespace ApplicationUpdateResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -5440,6 +5658,19 @@ export namespace ApplicationUpdateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -5891,7 +6122,10 @@ export namespace ApplicationUpdateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -5963,7 +6197,11 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserSSHApplication.PublicDestination
+      | BrowserSSHApplication.PrivateDestination
+      | BrowserSSHApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -6072,10 +6310,6 @@ export namespace ApplicationUpdateResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -6105,6 +6339,19 @@ export namespace ApplicationUpdateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -6309,7 +6556,10 @@ export namespace ApplicationUpdateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -6381,7 +6631,11 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserVNCApplication.PublicDestination
+      | BrowserVNCApplication.PrivateDestination
+      | BrowserVNCApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -6490,10 +6744,6 @@ export namespace ApplicationUpdateResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -6523,6 +6773,19 @@ export namespace ApplicationUpdateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -6721,7 +6984,10 @@ export namespace ApplicationUpdateResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -7236,6 +7502,155 @@ export namespace ApplicationUpdateResponse {
     }
   }
 
+  export interface GatewayIdentityProxyEndpointApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * The proxy endpoint domain in the format: 10 alphanumeric characters followed by
+     * .proxy.cloudflare-gateway.com
+     */
+    domain?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    policies?: Array<GatewayIdentityProxyEndpointApplication.Policy>;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+  }
+
+  export namespace GatewayIdentityProxyEndpointApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+  }
+
   export interface BookmarkApplication {
     /**
      * UUID.
@@ -7487,7 +7902,11 @@ export namespace ApplicationUpdateResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserRdpApplication.PublicDestination
+      | BrowserRdpApplication.PrivateDestination
+      | BrowserRdpApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -7614,10 +8033,6 @@ export namespace ApplicationUpdateResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -7647,6 +8062,19 @@ export namespace ApplicationUpdateResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -7839,6 +8267,7 @@ export type ApplicationListResponse =
   | ApplicationListResponse.AppLauncherApplication
   | ApplicationListResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationListResponse.BrowserIsolationPermissionsApplication
+  | ApplicationListResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationListResponse.BookmarkApplication
   | ApplicationListResponse.InfrastructureApplication
   | ApplicationListResponse.BrowserRdpApplication;
@@ -7926,7 +8355,11 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
+    destinations?: Array<
+      | SelfHostedApplication.PublicDestination
+      | SelfHostedApplication.PrivateDestination
+      | SelfHostedApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -8035,10 +8468,6 @@ export namespace ApplicationListResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -8068,6 +8497,19 @@ export namespace ApplicationListResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -8519,7 +8961,10 @@ export namespace ApplicationListResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -8591,7 +9036,11 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserSSHApplication.PublicDestination
+      | BrowserSSHApplication.PrivateDestination
+      | BrowserSSHApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -8700,10 +9149,6 @@ export namespace ApplicationListResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -8733,6 +9178,19 @@ export namespace ApplicationListResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -8937,7 +9395,10 @@ export namespace ApplicationListResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -9009,7 +9470,11 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserVNCApplication.PublicDestination
+      | BrowserVNCApplication.PrivateDestination
+      | BrowserVNCApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -9118,10 +9583,6 @@ export namespace ApplicationListResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -9151,6 +9612,19 @@ export namespace ApplicationListResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -9349,7 +9823,10 @@ export namespace ApplicationListResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -9864,6 +10341,155 @@ export namespace ApplicationListResponse {
     }
   }
 
+  export interface GatewayIdentityProxyEndpointApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * The proxy endpoint domain in the format: 10 alphanumeric characters followed by
+     * .proxy.cloudflare-gateway.com
+     */
+    domain?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    policies?: Array<GatewayIdentityProxyEndpointApplication.Policy>;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+  }
+
+  export namespace GatewayIdentityProxyEndpointApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+  }
+
   export interface BookmarkApplication {
     /**
      * UUID.
@@ -10115,7 +10741,11 @@ export namespace ApplicationListResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserRdpApplication.PublicDestination
+      | BrowserRdpApplication.PrivateDestination
+      | BrowserRdpApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -10242,10 +10872,6 @@ export namespace ApplicationListResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -10275,6 +10901,19 @@ export namespace ApplicationListResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -10474,6 +11113,7 @@ export type ApplicationGetResponse =
   | ApplicationGetResponse.AppLauncherApplication
   | ApplicationGetResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationGetResponse.BrowserIsolationPermissionsApplication
+  | ApplicationGetResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationGetResponse.BookmarkApplication
   | ApplicationGetResponse.InfrastructureApplication
   | ApplicationGetResponse.BrowserRdpApplication;
@@ -10561,7 +11201,11 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
+    destinations?: Array<
+      | SelfHostedApplication.PublicDestination
+      | SelfHostedApplication.PrivateDestination
+      | SelfHostedApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -10670,10 +11314,6 @@ export namespace ApplicationGetResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -10703,6 +11343,19 @@ export namespace ApplicationGetResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -11154,7 +11807,10 @@ export namespace ApplicationGetResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -11226,7 +11882,11 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserSSHApplication.PublicDestination
+      | BrowserSSHApplication.PrivateDestination
+      | BrowserSSHApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -11335,10 +11995,6 @@ export namespace ApplicationGetResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -11368,6 +12024,19 @@ export namespace ApplicationGetResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -11572,7 +12241,10 @@ export namespace ApplicationGetResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -11644,7 +12316,11 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserVNCApplication.PublicDestination
+      | BrowserVNCApplication.PrivateDestination
+      | BrowserVNCApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -11753,10 +12429,6 @@ export namespace ApplicationGetResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -11786,6 +12458,19 @@ export namespace ApplicationGetResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -11984,7 +12669,10 @@ export namespace ApplicationGetResponse {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * UUID.
@@ -12499,6 +13187,155 @@ export namespace ApplicationGetResponse {
     }
   }
 
+  export interface GatewayIdentityProxyEndpointApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * The proxy endpoint domain in the format: 10 alphanumeric characters followed by
+     * .proxy.cloudflare-gateway.com
+     */
+    domain?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    policies?: Array<GatewayIdentityProxyEndpointApplication.Policy>;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+  }
+
+  export namespace GatewayIdentityProxyEndpointApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+  }
+
   export interface BookmarkApplication {
     /**
      * UUID.
@@ -12750,7 +13587,11 @@ export namespace ApplicationGetResponse {
      * allow for more flexibility in defining different types of domains. If
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
-    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserRdpApplication.PublicDestination
+      | BrowserRdpApplication.PrivateDestination
+      | BrowserRdpApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -12877,10 +13718,6 @@ export namespace ApplicationGetResponse {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -12910,6 +13747,19 @@ export namespace ApplicationGetResponse {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     export interface Policy {
@@ -13104,6 +13954,7 @@ export type ApplicationCreateParams =
   | ApplicationCreateParams.AppLauncherApplication
   | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationCreateParams.BrowserIsolationPermissionsApplication
+  | ApplicationCreateParams.GatewayIdentityProxyEndpointApplication
   | ApplicationCreateParams.AccessBookmarkProps
   | ApplicationCreateParams.InfrastructureApplication
   | ApplicationCreateParams.BrowserRdpApplication;
@@ -13198,7 +14049,11 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
+    destinations?: Array<
+      | SelfHostedApplication.PublicDestination
+      | SelfHostedApplication.PrivateDestination
+      | SelfHostedApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -13313,10 +14168,6 @@ export declare namespace ApplicationCreateParams {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -13346,6 +14197,19 @@ export declare namespace ApplicationCreateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -13774,7 +14638,10 @@ export declare namespace ApplicationCreateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -13853,7 +14720,11 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserSSHApplication.PublicDestination
+      | BrowserSSHApplication.PrivateDestination
+      | BrowserSSHApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -13968,10 +14839,6 @@ export declare namespace ApplicationCreateParams {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -14001,6 +14868,19 @@ export declare namespace ApplicationCreateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -14188,7 +15068,10 @@ export declare namespace ApplicationCreateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -14267,7 +15150,11 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserVNCApplication.PublicDestination
+      | BrowserVNCApplication.PrivateDestination
+      | BrowserVNCApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -14382,10 +15269,6 @@ export declare namespace ApplicationCreateParams {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -14415,6 +15298,19 @@ export declare namespace ApplicationCreateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -14596,7 +15492,10 @@ export declare namespace ApplicationCreateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -15062,6 +15961,150 @@ export declare namespace ApplicationCreateParams {
     }
   }
 
+  export interface GatewayIdentityProxyEndpointApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: ApplicationTypeParam;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<AllowedIdPsParam>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: The proxy endpoint domain in the format: 10 alphanumeric characters
+     * followed by .proxy.cloudflare-gateway.com
+     */
+    domain?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
+     */
+    policies?: Array<
+      | GatewayIdentityProxyEndpointApplication.AccessAppPolicyLink
+      | string
+      | GatewayIdentityProxyEndpointApplication.UnionMember2
+    >;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+  }
+
+  export namespace GatewayIdentityProxyEndpointApplication {
+    /**
+     * A JSON that links a reusable policy to an application.
+     */
+    export interface AccessAppPolicyLink {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+    }
+  }
+
   export interface AccessBookmarkProps {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -15324,7 +16367,11 @@ export declare namespace ApplicationCreateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserRdpApplication.PublicDestination
+      | BrowserRdpApplication.PrivateDestination
+      | BrowserRdpApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -15457,10 +16504,6 @@ export declare namespace ApplicationCreateParams {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -15490,6 +16533,19 @@ export declare namespace ApplicationCreateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -15665,6 +16721,7 @@ export type ApplicationUpdateParams =
   | ApplicationUpdateParams.AppLauncherApplication
   | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationUpdateParams.BrowserIsolationPermissionsApplication
+  | ApplicationUpdateParams.GatewayIdentityProxyEndpointApplication
   | ApplicationUpdateParams.AccessBookmarkProps
   | ApplicationUpdateParams.InfrastructureApplication
   | ApplicationUpdateParams.BrowserRdpApplication;
@@ -15759,7 +16816,11 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<SelfHostedApplication.PublicDestination | SelfHostedApplication.PrivateDestination>;
+    destinations?: Array<
+      | SelfHostedApplication.PublicDestination
+      | SelfHostedApplication.PrivateDestination
+      | SelfHostedApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -15874,10 +16935,6 @@ export declare namespace ApplicationUpdateParams {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -15907,6 +16964,19 @@ export declare namespace ApplicationUpdateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -16335,7 +17405,10 @@ export declare namespace ApplicationUpdateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -16414,7 +17487,11 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<BrowserSSHApplication.PublicDestination | BrowserSSHApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserSSHApplication.PublicDestination
+      | BrowserSSHApplication.PrivateDestination
+      | BrowserSSHApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -16529,10 +17606,6 @@ export declare namespace ApplicationUpdateParams {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -16562,6 +17635,19 @@ export declare namespace ApplicationUpdateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -16749,7 +17835,10 @@ export declare namespace ApplicationUpdateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -16828,7 +17917,11 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<BrowserVNCApplication.PublicDestination | BrowserVNCApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserVNCApplication.PublicDestination
+      | BrowserVNCApplication.PrivateDestination
+      | BrowserVNCApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -16943,10 +18036,6 @@ export declare namespace ApplicationUpdateParams {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -16976,6 +18065,19 @@ export declare namespace ApplicationUpdateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -17157,7 +18259,10 @@ export declare namespace ApplicationUpdateParams {
       | 'bookmark'
       | 'dash_sso'
       | 'infrastructure'
-      | 'rdp';
+      | 'rdp'
+      | 'mcp'
+      | 'mcp_portal'
+      | 'proxy_endpoint';
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -17623,6 +18728,150 @@ export declare namespace ApplicationUpdateParams {
     }
   }
 
+  export interface GatewayIdentityProxyEndpointApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: ApplicationTypeParam;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<AllowedIdPsParam>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: The proxy endpoint domain in the format: 10 alphanumeric characters
+     * followed by .proxy.cloudflare-gateway.com
+     */
+    domain?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
+     */
+    policies?: Array<
+      | GatewayIdentityProxyEndpointApplication.AccessAppPolicyLink
+      | string
+      | GatewayIdentityProxyEndpointApplication.UnionMember2
+    >;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+  }
+
+  export namespace GatewayIdentityProxyEndpointApplication {
+    /**
+     * A JSON that links a reusable policy to an application.
+     */
+    export interface AccessAppPolicyLink {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+    }
+  }
+
   export interface AccessBookmarkProps {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -17885,7 +19134,11 @@ export declare namespace ApplicationUpdateParams {
      * of domains. If `destinations` are provided, then `self_hosted_domains` will be
      * ignored.
      */
-    destinations?: Array<BrowserRdpApplication.PublicDestination | BrowserRdpApplication.PrivateDestination>;
+    destinations?: Array<
+      | BrowserRdpApplication.PublicDestination
+      | BrowserRdpApplication.PrivateDestination
+      | BrowserRdpApplication.ViaMcpServerPortalDestination
+    >;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -18018,10 +19271,6 @@ export declare namespace ApplicationUpdateParams {
       uri?: string;
     }
 
-    /**
-     * Private destinations are an early access feature and gated behind a feature
-     * flag.
-     */
     export interface PrivateDestination {
       /**
        * The CIDR range of the destination. Single IPs will be computed as /32.
@@ -18051,6 +19300,19 @@ export declare namespace ApplicationUpdateParams {
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
       vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
     }
 
     /**
@@ -18256,6 +19518,11 @@ export interface ApplicationListParams extends V4PagePaginationArrayParams {
    * Query param: Search for apps by other listed query parameters.
    */
   search?: string;
+
+  /**
+   * Query param: Target Criteria attributes in key=value format.
+   */
+  target_attributes?: string;
 }
 
 export interface ApplicationDeleteParams {

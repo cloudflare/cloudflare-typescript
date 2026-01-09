@@ -70,6 +70,11 @@ export interface LOADocumentCreateResponse {
    */
   account_id?: string;
 
+  /**
+   * Whether the LOA has been auto-generated for the prefix owner by Cloudflare.
+   */
+  auto_generated?: boolean;
+
   created?: string;
 
   /**

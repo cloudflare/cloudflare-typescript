@@ -8,6 +8,17 @@ export class PDF extends APIResource {
   /**
    * Fetches rendered PDF from provided URL or HTML. Check available options like
    * `gotoOptions` and `waitFor*` to control page load behaviour.
+   *
+   * @example
+   * ```ts
+   * const pdf = await client.browserRendering.pdf.create({
+   *   account_id: 'account_id',
+   *   html: '<h1>Hello World!</h1>',
+   * });
+   *
+   * const content = await pdf.blob();
+   * console.log(content);
+   * ```
    */
   create(params: PDFCreateParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
     const { account_id, cacheTTL, ...body } = params;
@@ -21,374 +32,738 @@ export class PDF extends APIResource {
   }
 }
 
-export interface PDFCreateParams {
-  /**
-   * Path param: Account ID.
-   */
-  account_id: string;
+export type PDFCreateParams = PDFCreateParams.Variant0 | PDFCreateParams.Variant1;
 
-  /**
-   * Query param: Cache TTL default is 5s. Set to 0 to disable.
-   */
-  cacheTTL?: number;
+export declare namespace PDFCreateParams {
+  export interface Variant0 {
+    /**
+     * Path param: Account ID.
+     */
+    account_id: string;
 
-  /**
-   * Body param: The maximum duration allowed for the browser action to complete
-   * after the page has loaded (such as taking screenshots, extracting content, or
-   * generating PDFs). If this time limit is exceeded, the action stops and returns a
-   * timeout error.
-   */
-  actionTimeout?: number;
+    /**
+     * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
+     * `html` or `url` must be set.
+     */
+    html: string;
 
-  /**
-   * Body param: Adds a `<script>` tag into the page with the desired URL or content.
-   */
-  addScriptTag?: Array<PDFCreateParams.AddScriptTag>;
+    /**
+     * Query param: Cache TTL default is 5s. Set to 0 to disable.
+     */
+    cacheTTL?: number;
 
-  /**
-   * Body param: Adds a `<link rel="stylesheet">` tag into the page with the desired
-   * URL or a `<style type="text/css">` tag with the content.
-   */
-  addStyleTag?: Array<PDFCreateParams.AddStyleTag>;
+    /**
+     * Body param: The maximum duration allowed for the browser action to complete
+     * after the page has loaded (such as taking screenshots, extracting content, or
+     * generating PDFs). If this time limit is exceeded, the action stops and returns a
+     * timeout error.
+     */
+    actionTimeout?: number;
 
-  /**
-   * Body param: Only allow requests that match the provided regex patterns, eg.
-   * '/^.\*\.(css)'.
-   */
-  allowRequestPattern?: Array<string>;
+    /**
+     * Body param: Adds a `<script>` tag into the page with the desired URL or content.
+     */
+    addScriptTag?: Array<Variant0.AddScriptTag>;
 
-  /**
-   * Body param: Only allow requests that match the provided resource types, eg.
-   * 'image' or 'script'.
-   */
-  allowResourceTypes?: Array<
-    | 'document'
-    | 'stylesheet'
-    | 'image'
-    | 'media'
-    | 'font'
-    | 'script'
-    | 'texttrack'
-    | 'xhr'
-    | 'fetch'
-    | 'prefetch'
-    | 'eventsource'
-    | 'websocket'
-    | 'manifest'
-    | 'signedexchange'
-    | 'ping'
-    | 'cspviolationreport'
-    | 'preflight'
-    | 'other'
-  >;
+    /**
+     * Body param: Adds a `<link rel="stylesheet">` tag into the page with the desired
+     * URL or a `<style type="text/css">` tag with the content.
+     */
+    addStyleTag?: Array<Variant0.AddStyleTag>;
 
-  /**
-   * Body param: Provide credentials for HTTP authentication.
-   */
-  authenticate?: PDFCreateParams.Authenticate;
+    /**
+     * Body param: Only allow requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    allowRequestPattern?: Array<string>;
 
-  /**
-   * Body param: Attempt to proceed when 'awaited' events fail or timeout.
-   */
-  bestAttempt?: boolean;
+    /**
+     * Body param: Only allow requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    allowResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
 
-  /**
-   * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
-   */
-  cookies?: Array<PDFCreateParams.Cookie>;
+    /**
+     * Body param: Provide credentials for HTTP authentication.
+     */
+    authenticate?: Variant0.Authenticate;
 
-  /**
-   * Body param:
-   */
-  emulateMediaType?: string;
+    /**
+     * Body param: Attempt to proceed when 'awaited' events fail or timeout.
+     */
+    bestAttempt?: boolean;
 
-  /**
-   * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
-   */
-  gotoOptions?: PDFCreateParams.GotoOptions;
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+     */
+    cookies?: Array<Variant0.Cookie>;
 
-  /**
-   * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
-   * `html` or `url` must be set.
-   */
-  html?: string;
+    /**
+     * Body param:
+     */
+    emulateMediaType?: string;
 
-  /**
-   * Body param: Check [options](https://pptr.dev/api/puppeteer.pdfoptions).
-   */
-  pdfOptions?: PDFCreateParams.PDFOptions;
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+     */
+    gotoOptions?: Variant0.GotoOptions;
 
-  /**
-   * Body param: Block undesired requests that match the provided regex patterns, eg.
-   * '/^.\*\.(css)'.
-   */
-  rejectRequestPattern?: Array<string>;
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.pdfoptions).
+     */
+    pdfOptions?: Variant0.PDFOptions;
 
-  /**
-   * Body param: Block undesired requests that match the provided resource types, eg.
-   * 'image' or 'script'.
-   */
-  rejectResourceTypes?: Array<
-    | 'document'
-    | 'stylesheet'
-    | 'image'
-    | 'media'
-    | 'font'
-    | 'script'
-    | 'texttrack'
-    | 'xhr'
-    | 'fetch'
-    | 'prefetch'
-    | 'eventsource'
-    | 'websocket'
-    | 'manifest'
-    | 'signedexchange'
-    | 'ping'
-    | 'cspviolationreport'
-    | 'preflight'
-    | 'other'
-  >;
+    /**
+     * Body param: Block undesired requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    rejectRequestPattern?: Array<string>;
 
-  /**
-   * Body param:
-   */
-  setExtraHTTPHeaders?: { [key: string]: string };
+    /**
+     * Body param: Block undesired requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    rejectResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
 
-  /**
-   * Body param:
-   */
-  setJavaScriptEnabled?: boolean;
+    /**
+     * Body param:
+     */
+    setExtraHTTPHeaders?: { [key: string]: string };
 
-  /**
-   * Body param: URL to navigate to, eg. `https://example.com`.
-   */
-  url?: string;
+    /**
+     * Body param:
+     */
+    setJavaScriptEnabled?: boolean;
 
-  /**
-   * Body param:
-   */
-  userAgent?: string;
+    /**
+     * Body param:
+     */
+    userAgent?: string;
 
-  /**
-   * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
-   */
-  viewport?: PDFCreateParams.Viewport;
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+     */
+    viewport?: Variant0.Viewport;
 
-  /**
-   * Body param: Wait for the selector to appear in page. Check
-   * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
-   */
-  waitForSelector?: PDFCreateParams.WaitForSelector;
+    /**
+     * Body param: Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+     */
+    waitForSelector?: Variant0.WaitForSelector;
 
-  /**
-   * Body param: Waits for a specified timeout before continuing.
-   */
-  waitForTimeout?: number;
-}
-
-export namespace PDFCreateParams {
-  export interface AddScriptTag {
-    id?: string;
-
-    content?: string;
-
-    type?: string;
-
-    url?: string;
+    /**
+     * Body param: Waits for a specified timeout before continuing.
+     */
+    waitForTimeout?: number;
   }
 
-  export interface AddStyleTag {
-    content?: string;
+  export namespace Variant0 {
+    export interface AddScriptTag {
+      id?: string;
 
-    url?: string;
-  }
+      content?: string;
 
-  /**
-   * Provide credentials for HTTP authentication.
-   */
-  export interface Authenticate {
-    password: string;
+      type?: string;
 
-    username: string;
-  }
+      url?: string;
+    }
 
-  export interface Cookie {
-    name: string;
+    export interface AddStyleTag {
+      content?: string;
 
-    value: string;
-
-    domain?: string;
-
-    expires?: number;
-
-    httpOnly?: boolean;
-
-    partitionKey?: string;
-
-    path?: string;
-
-    priority?: 'Low' | 'Medium' | 'High';
-
-    sameParty?: boolean;
-
-    sameSite?: 'Strict' | 'Lax' | 'None';
-
-    secure?: boolean;
-
-    sourcePort?: number;
-
-    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
-
-    url?: string;
-  }
-
-  /**
-   * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
-   */
-  export interface GotoOptions {
-    referer?: string;
-
-    referrerPolicy?: string;
-
-    timeout?: number;
-
-    waitUntil?:
-      | 'load'
-      | 'domcontentloaded'
-      | 'networkidle0'
-      | 'networkidle2'
-      | Array<'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2'>;
-  }
-
-  /**
-   * Check [options](https://pptr.dev/api/puppeteer.pdfoptions).
-   */
-  export interface PDFOptions {
-    /**
-     * Whether to show the header and footer.
-     */
-    displayHeaderFooter?: boolean;
+      url?: string;
+    }
 
     /**
-     * HTML template for the print footer.
+     * Provide credentials for HTTP authentication.
      */
-    footerTemplate?: string;
+    export interface Authenticate {
+      password: string;
+
+      username: string;
+    }
+
+    export interface Cookie {
+      name: string;
+
+      value: string;
+
+      domain?: string;
+
+      expires?: number;
+
+      httpOnly?: boolean;
+
+      partitionKey?: string;
+
+      path?: string;
+
+      priority?: 'Low' | 'Medium' | 'High';
+
+      sameParty?: boolean;
+
+      sameSite?: 'Strict' | 'Lax' | 'None';
+
+      secure?: boolean;
+
+      sourcePort?: number;
+
+      sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+
+      url?: string;
+    }
 
     /**
-     * Paper format. Takes priority over width and height if set.
+     * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
      */
-    format?: 'letter' | 'legal' | 'tabloid' | 'ledger' | 'a0' | 'a1' | 'a2' | 'a3' | 'a4' | 'a5' | 'a6';
+    export interface GotoOptions {
+      referer?: string;
+
+      referrerPolicy?: string;
+
+      timeout?: number;
+
+      waitUntil?:
+        | 'load'
+        | 'domcontentloaded'
+        | 'networkidle0'
+        | 'networkidle2'
+        | Array<'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2'>;
+    }
 
     /**
-     * HTML template for the print header.
+     * Check [options](https://pptr.dev/api/puppeteer.pdfoptions).
      */
-    headerTemplate?: string;
+    export interface PDFOptions {
+      /**
+       * Whether to show the header and footer.
+       */
+      displayHeaderFooter?: boolean;
+
+      /**
+       * HTML template for the print footer.
+       */
+      footerTemplate?: string;
+
+      /**
+       * Paper format. Takes priority over width and height if set.
+       */
+      format?: 'letter' | 'legal' | 'tabloid' | 'ledger' | 'a0' | 'a1' | 'a2' | 'a3' | 'a4' | 'a5' | 'a6';
+
+      /**
+       * HTML template for the print header.
+       */
+      headerTemplate?: string;
+
+      /**
+       * Sets the height of paper. Can be a number or string with unit.
+       */
+      height?: string | number;
+
+      /**
+       * Whether to print in landscape orientation.
+       */
+      landscape?: boolean;
+
+      /**
+       * Set the PDF margins. Useful when setting header and footer.
+       */
+      margin?: PDFOptions.Margin;
+
+      /**
+       * Hides default white background and allows generating pdfs with transparency.
+       */
+      omitBackground?: boolean;
+
+      /**
+       * Generate document outline.
+       */
+      outline?: boolean;
+
+      /**
+       * Paper ranges to print, e.g. '1-5, 8, 11-13'.
+       */
+      pageRanges?: string;
+
+      /**
+       * Give CSS @page size priority over other size declarations.
+       */
+      preferCSSPageSize?: boolean;
+
+      /**
+       * Set to true to print background graphics.
+       */
+      printBackground?: boolean;
+
+      /**
+       * Scales the rendering of the web page. Amount must be between 0.1 and 2.
+       */
+      scale?: number;
+
+      /**
+       * Generate tagged (accessible) PDF.
+       */
+      tagged?: boolean;
+
+      /**
+       * Timeout in milliseconds.
+       */
+      timeout?: number;
+
+      /**
+       * Sets the width of paper. Can be a number or string with unit.
+       */
+      width?: string | number;
+    }
+
+    export namespace PDFOptions {
+      /**
+       * Set the PDF margins. Useful when setting header and footer.
+       */
+      export interface Margin {
+        bottom?: string | number;
+
+        left?: string | number;
+
+        right?: string | number;
+
+        top?: string | number;
+      }
+    }
 
     /**
-     * Sets the height of paper. Can be a number or string with unit.
+     * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
      */
-    height?: string | number;
+    export interface Viewport {
+      height: number;
+
+      width: number;
+
+      deviceScaleFactor?: number;
+
+      hasTouch?: boolean;
+
+      isLandscape?: boolean;
+
+      isMobile?: boolean;
+    }
 
     /**
-     * Whether to print in landscape orientation.
+     * Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
      */
-    landscape?: boolean;
+    export interface WaitForSelector {
+      selector: string;
 
-    /**
-     * Set the PDF margins. Useful when setting header and footer.
-     */
-    margin?: PDFOptions.Margin;
+      hidden?: true;
 
-    /**
-     * Hides default white background and allows generating pdfs with transparency.
-     */
-    omitBackground?: boolean;
+      timeout?: number;
 
-    /**
-     * Generate document outline.
-     */
-    outline?: boolean;
-
-    /**
-     * Paper ranges to print, e.g. '1-5, 8, 11-13'.
-     */
-    pageRanges?: string;
-
-    /**
-     * Give CSS @page size priority over other size declarations.
-     */
-    preferCSSPageSize?: boolean;
-
-    /**
-     * Set to true to print background graphics.
-     */
-    printBackground?: boolean;
-
-    /**
-     * Scales the rendering of the web page. Amount must be between 0.1 and 2.
-     */
-    scale?: number;
-
-    /**
-     * Generate tagged (accessible) PDF.
-     */
-    tagged?: boolean;
-
-    /**
-     * Timeout in milliseconds.
-     */
-    timeout?: number;
-
-    /**
-     * Sets the width of paper. Can be a number or string with unit.
-     */
-    width?: string | number;
-  }
-
-  export namespace PDFOptions {
-    /**
-     * Set the PDF margins. Useful when setting header and footer.
-     */
-    export interface Margin {
-      bottom?: string | number;
-
-      left?: string | number;
-
-      right?: string | number;
-
-      top?: string | number;
+      visible?: true;
     }
   }
 
-  /**
-   * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
-   */
-  export interface Viewport {
-    height: number;
+  export interface Variant1 {
+    /**
+     * Path param: Account ID.
+     */
+    account_id: string;
 
-    width: number;
+    /**
+     * Body param: URL to navigate to, eg. `https://example.com`.
+     */
+    url: string;
 
-    deviceScaleFactor?: number;
+    /**
+     * Query param: Cache TTL default is 5s. Set to 0 to disable.
+     */
+    cacheTTL?: number;
 
-    hasTouch?: boolean;
+    /**
+     * Body param: The maximum duration allowed for the browser action to complete
+     * after the page has loaded (such as taking screenshots, extracting content, or
+     * generating PDFs). If this time limit is exceeded, the action stops and returns a
+     * timeout error.
+     */
+    actionTimeout?: number;
 
-    isLandscape?: boolean;
+    /**
+     * Body param: Adds a `<script>` tag into the page with the desired URL or content.
+     */
+    addScriptTag?: Array<Variant1.AddScriptTag>;
 
-    isMobile?: boolean;
+    /**
+     * Body param: Adds a `<link rel="stylesheet">` tag into the page with the desired
+     * URL or a `<style type="text/css">` tag with the content.
+     */
+    addStyleTag?: Array<Variant1.AddStyleTag>;
+
+    /**
+     * Body param: Only allow requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    allowRequestPattern?: Array<string>;
+
+    /**
+     * Body param: Only allow requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    allowResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
+
+    /**
+     * Body param: Provide credentials for HTTP authentication.
+     */
+    authenticate?: Variant1.Authenticate;
+
+    /**
+     * Body param: Attempt to proceed when 'awaited' events fail or timeout.
+     */
+    bestAttempt?: boolean;
+
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+     */
+    cookies?: Array<Variant1.Cookie>;
+
+    /**
+     * Body param:
+     */
+    emulateMediaType?: string;
+
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+     */
+    gotoOptions?: Variant1.GotoOptions;
+
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.pdfoptions).
+     */
+    pdfOptions?: Variant1.PDFOptions;
+
+    /**
+     * Body param: Block undesired requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    rejectRequestPattern?: Array<string>;
+
+    /**
+     * Body param: Block undesired requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    rejectResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
+
+    /**
+     * Body param:
+     */
+    setExtraHTTPHeaders?: { [key: string]: string };
+
+    /**
+     * Body param:
+     */
+    setJavaScriptEnabled?: boolean;
+
+    /**
+     * Body param:
+     */
+    userAgent?: string;
+
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+     */
+    viewport?: Variant1.Viewport;
+
+    /**
+     * Body param: Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+     */
+    waitForSelector?: Variant1.WaitForSelector;
+
+    /**
+     * Body param: Waits for a specified timeout before continuing.
+     */
+    waitForTimeout?: number;
   }
 
-  /**
-   * Wait for the selector to appear in page. Check
-   * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
-   */
-  export interface WaitForSelector {
-    selector: string;
+  export namespace Variant1 {
+    export interface AddScriptTag {
+      id?: string;
 
-    hidden?: true;
+      content?: string;
 
-    timeout?: number;
+      type?: string;
 
-    visible?: true;
+      url?: string;
+    }
+
+    export interface AddStyleTag {
+      content?: string;
+
+      url?: string;
+    }
+
+    /**
+     * Provide credentials for HTTP authentication.
+     */
+    export interface Authenticate {
+      password: string;
+
+      username: string;
+    }
+
+    export interface Cookie {
+      name: string;
+
+      value: string;
+
+      domain?: string;
+
+      expires?: number;
+
+      httpOnly?: boolean;
+
+      partitionKey?: string;
+
+      path?: string;
+
+      priority?: 'Low' | 'Medium' | 'High';
+
+      sameParty?: boolean;
+
+      sameSite?: 'Strict' | 'Lax' | 'None';
+
+      secure?: boolean;
+
+      sourcePort?: number;
+
+      sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+
+      url?: string;
+    }
+
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+     */
+    export interface GotoOptions {
+      referer?: string;
+
+      referrerPolicy?: string;
+
+      timeout?: number;
+
+      waitUntil?:
+        | 'load'
+        | 'domcontentloaded'
+        | 'networkidle0'
+        | 'networkidle2'
+        | Array<'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2'>;
+    }
+
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.pdfoptions).
+     */
+    export interface PDFOptions {
+      /**
+       * Whether to show the header and footer.
+       */
+      displayHeaderFooter?: boolean;
+
+      /**
+       * HTML template for the print footer.
+       */
+      footerTemplate?: string;
+
+      /**
+       * Paper format. Takes priority over width and height if set.
+       */
+      format?: 'letter' | 'legal' | 'tabloid' | 'ledger' | 'a0' | 'a1' | 'a2' | 'a3' | 'a4' | 'a5' | 'a6';
+
+      /**
+       * HTML template for the print header.
+       */
+      headerTemplate?: string;
+
+      /**
+       * Sets the height of paper. Can be a number or string with unit.
+       */
+      height?: string | number;
+
+      /**
+       * Whether to print in landscape orientation.
+       */
+      landscape?: boolean;
+
+      /**
+       * Set the PDF margins. Useful when setting header and footer.
+       */
+      margin?: PDFOptions.Margin;
+
+      /**
+       * Hides default white background and allows generating pdfs with transparency.
+       */
+      omitBackground?: boolean;
+
+      /**
+       * Generate document outline.
+       */
+      outline?: boolean;
+
+      /**
+       * Paper ranges to print, e.g. '1-5, 8, 11-13'.
+       */
+      pageRanges?: string;
+
+      /**
+       * Give CSS @page size priority over other size declarations.
+       */
+      preferCSSPageSize?: boolean;
+
+      /**
+       * Set to true to print background graphics.
+       */
+      printBackground?: boolean;
+
+      /**
+       * Scales the rendering of the web page. Amount must be between 0.1 and 2.
+       */
+      scale?: number;
+
+      /**
+       * Generate tagged (accessible) PDF.
+       */
+      tagged?: boolean;
+
+      /**
+       * Timeout in milliseconds.
+       */
+      timeout?: number;
+
+      /**
+       * Sets the width of paper. Can be a number or string with unit.
+       */
+      width?: string | number;
+    }
+
+    export namespace PDFOptions {
+      /**
+       * Set the PDF margins. Useful when setting header and footer.
+       */
+      export interface Margin {
+        bottom?: string | number;
+
+        left?: string | number;
+
+        right?: string | number;
+
+        top?: string | number;
+      }
+    }
+
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+     */
+    export interface Viewport {
+      height: number;
+
+      width: number;
+
+      deviceScaleFactor?: number;
+
+      hasTouch?: boolean;
+
+      isLandscape?: boolean;
+
+      isMobile?: boolean;
+    }
+
+    /**
+     * Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+     */
+    export interface WaitForSelector {
+      selector: string;
+
+      hidden?: true;
+
+      timeout?: number;
+
+      visible?: true;
+    }
   }
 }
 

@@ -78,6 +78,10 @@ export namespace OutageGetResponse {
 
     locationsDetails: Array<Annotation.LocationsDetail>;
 
+    origins: Array<string>;
+
+    originsDetails: Array<Annotation.OriginsDetail>;
+
     outage: Annotation.Outage;
 
     startDate: string;
@@ -112,6 +116,12 @@ export namespace OutageGetResponse {
       code: string;
 
       name: string;
+    }
+
+    export interface OriginsDetail {
+      name: string;
+
+      origin: string;
     }
 
     export interface Outage {
@@ -180,6 +190,11 @@ export interface OutageGetParams {
    * Skips the specified number of objects before fetching the results.
    */
   offset?: number;
+
+  /**
+   * Filters results by origin.
+   */
+  origin?: string;
 }
 
 export interface OutageLocationsParams {

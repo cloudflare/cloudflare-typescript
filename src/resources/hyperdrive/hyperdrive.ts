@@ -30,7 +30,8 @@ export namespace Configuration {
     host: string;
 
     /**
-     * Defines the port (default: 5432 for Postgres) of your origin database.
+     * Defines the port of your origin database. Defaults to 5432 for PostgreSQL or
+     * 3306 for MySQL if not specified.
      */
     port: number;
 
@@ -85,6 +86,10 @@ export interface Hyperdrive {
    */
   id: string;
 
+  /**
+   * The name of the Hyperdrive configuration. Used to identify the configuration in
+   * the Cloudflare dashboard and API.
+   */
   name: string;
 
   origin: Hyperdrive.PublicDatabase | Hyperdrive.AccessProtectedDatabaseBehindCloudflareTunnel;
@@ -123,7 +128,8 @@ export namespace Hyperdrive {
     host: string;
 
     /**
-     * Defines the port (default: 5432 for Postgres) of your origin database.
+     * Defines the port of your origin database. Defaults to 5432 for PostgreSQL or
+     * 3306 for MySQL if not specified.
      */
     port: number;
 
@@ -180,14 +186,14 @@ export namespace Hyperdrive {
     disabled?: boolean;
 
     /**
-     * Specify the maximum duration items should persist in the cache. Not returned if
-     * set to the default (60).
+     * Specify the maximum duration (in seconds) items should persist in the cache.
+     * Defaults to 60 seconds if not specified.
      */
     max_age?: number;
 
     /**
-     * Specify the number of seconds the cache may serve a stale response. Omitted if
-     * set to the default (15).
+     * Specify the number of seconds the cache may serve a stale response. Defaults to
+     * 15 seconds if not specified.
      */
     stale_while_revalidate?: number;
   }

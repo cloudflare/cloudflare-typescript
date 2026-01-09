@@ -12,7 +12,10 @@ export class Domains extends APIResource {
    * ```ts
    * const domain = await client.pages.projects.domains.create(
    *   'this-is-my-project-01',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     name: 'this-is-my-domain-01.com',
+   *   },
    * );
    * ```
    */
@@ -20,13 +23,13 @@ export class Domains extends APIResource {
     projectName: string,
     params: DomainCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainCreateResponse | null> {
+  ): Core.APIPromise<DomainCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pages/projects/${projectName}/domains`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DomainCreateResponse | null }>
+      }) as Core.APIPromise<{ result: DomainCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -92,10 +95,7 @@ export class Domains extends APIResource {
    * const response = await client.pages.projects.domains.edit(
    *   'this-is-my-project-01',
    *   'this-is-my-domain-01.com',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: {},
-   *   },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
@@ -104,13 +104,13 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainEditResponse | null> {
-    const { account_id, body } = params;
+  ): Core.APIPromise<DomainEditResponse> {
+    const { account_id } = params;
     return (
-      this._client.patch(`/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: DomainEditResponse | null }>
+      this._client.patch(
+        `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
+        options,
+      ) as Core.APIPromise<{ result: DomainEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -131,13 +131,13 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainGetResponse | null> {
+  ): Core.APIPromise<DomainGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
         options,
-      ) as Core.APIPromise<{ result: DomainGetResponse | null }>
+      ) as Core.APIPromise<{ result: DomainGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -145,32 +145,35 @@ export class Domains extends APIResource {
 export class DomainListResponsesSinglePage extends SinglePage<DomainListResponse> {}
 
 export interface DomainCreateResponse {
-  id?: string;
+  id: string;
 
-  certificate_authority?: 'google' | 'lets_encrypt';
+  certificate_authority: 'google' | 'lets_encrypt';
 
-  created_on?: string;
+  created_on: string;
 
-  domain_id?: string;
+  domain_id: string;
 
-  name?: string;
+  /**
+   * The domain name.
+   */
+  name: string;
 
-  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  status: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
 
-  validation_data?: DomainCreateResponse.ValidationData;
+  validation_data: DomainCreateResponse.ValidationData;
 
-  verification_data?: DomainCreateResponse.VerificationData;
+  verification_data: DomainCreateResponse.VerificationData;
 
-  zone_tag?: string;
+  zone_tag: string;
 }
 
 export namespace DomainCreateResponse {
   export interface ValidationData {
+    method: 'http' | 'txt';
+
+    status: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
     error_message?: string;
-
-    method?: 'http' | 'txt';
-
-    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
 
     txt_name?: string;
 
@@ -178,39 +181,42 @@ export namespace DomainCreateResponse {
   }
 
   export interface VerificationData {
-    error_message?: string;
+    status: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
 
-    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+    error_message?: string;
   }
 }
 
 export interface DomainListResponse {
-  id?: string;
+  id: string;
 
-  certificate_authority?: 'google' | 'lets_encrypt';
+  certificate_authority: 'google' | 'lets_encrypt';
 
-  created_on?: string;
+  created_on: string;
 
-  domain_id?: string;
+  domain_id: string;
 
-  name?: string;
+  /**
+   * The domain name.
+   */
+  name: string;
 
-  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  status: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
 
-  validation_data?: DomainListResponse.ValidationData;
+  validation_data: DomainListResponse.ValidationData;
 
-  verification_data?: DomainListResponse.VerificationData;
+  verification_data: DomainListResponse.VerificationData;
 
-  zone_tag?: string;
+  zone_tag: string;
 }
 
 export namespace DomainListResponse {
   export interface ValidationData {
+    method: 'http' | 'txt';
+
+    status: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
     error_message?: string;
-
-    method?: 'http' | 'txt';
-
-    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
 
     txt_name?: string;
 
@@ -218,41 +224,44 @@ export namespace DomainListResponse {
   }
 
   export interface VerificationData {
-    error_message?: string;
+    status: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
 
-    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+    error_message?: string;
   }
 }
 
 export type DomainDeleteResponse = unknown;
 
 export interface DomainEditResponse {
-  id?: string;
+  id: string;
 
-  certificate_authority?: 'google' | 'lets_encrypt';
+  certificate_authority: 'google' | 'lets_encrypt';
 
-  created_on?: string;
+  created_on: string;
 
-  domain_id?: string;
+  domain_id: string;
 
-  name?: string;
+  /**
+   * The domain name.
+   */
+  name: string;
 
-  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  status: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
 
-  validation_data?: DomainEditResponse.ValidationData;
+  validation_data: DomainEditResponse.ValidationData;
 
-  verification_data?: DomainEditResponse.VerificationData;
+  verification_data: DomainEditResponse.VerificationData;
 
-  zone_tag?: string;
+  zone_tag: string;
 }
 
 export namespace DomainEditResponse {
   export interface ValidationData {
+    method: 'http' | 'txt';
+
+    status: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
     error_message?: string;
-
-    method?: 'http' | 'txt';
-
-    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
 
     txt_name?: string;
 
@@ -260,39 +269,42 @@ export namespace DomainEditResponse {
   }
 
   export interface VerificationData {
-    error_message?: string;
+    status: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
 
-    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+    error_message?: string;
   }
 }
 
 export interface DomainGetResponse {
-  id?: string;
+  id: string;
 
-  certificate_authority?: 'google' | 'lets_encrypt';
+  certificate_authority: 'google' | 'lets_encrypt';
 
-  created_on?: string;
+  created_on: string;
 
-  domain_id?: string;
+  domain_id: string;
 
-  name?: string;
+  /**
+   * The domain name.
+   */
+  name: string;
 
-  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  status: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
 
-  validation_data?: DomainGetResponse.ValidationData;
+  validation_data: DomainGetResponse.ValidationData;
 
-  verification_data?: DomainGetResponse.VerificationData;
+  verification_data: DomainGetResponse.VerificationData;
 
-  zone_tag?: string;
+  zone_tag: string;
 }
 
 export namespace DomainGetResponse {
   export interface ValidationData {
+    method: 'http' | 'txt';
+
+    status: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
     error_message?: string;
-
-    method?: 'http' | 'txt';
-
-    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
 
     txt_name?: string;
 
@@ -300,53 +312,48 @@ export namespace DomainGetResponse {
   }
 
   export interface VerificationData {
-    error_message?: string;
+    status: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
 
-    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+    error_message?: string;
   }
 }
 
 export interface DomainCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The domain name.
    */
-  name?: string;
+  name: string;
 }
 
 export interface DomainListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface DomainDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface DomainEditParams {
   /**
-   * Path param: Identifier
+   * Identifier.
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface DomainGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
