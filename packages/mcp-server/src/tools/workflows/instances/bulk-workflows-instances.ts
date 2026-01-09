@@ -38,7 +38,32 @@ export const tool: Tool = {
             },
             instance_retention: {
               type: 'object',
-              additionalProperties: true,
+              properties: {
+                error_retention: {
+                  anyOf: [
+                    {
+                      type: 'integer',
+                      description: 'Duration in milliseconds.',
+                    },
+                    {
+                      type: 'string',
+                    },
+                  ],
+                  description: "Duration in milliseconds or as a string like '5 minutes'",
+                },
+                success_retention: {
+                  anyOf: [
+                    {
+                      type: 'integer',
+                      description: 'Duration in milliseconds.',
+                    },
+                    {
+                      type: 'string',
+                    },
+                  ],
+                  description: "Duration in milliseconds or as a string like '5 minutes'",
+                },
+              },
             },
             params: {
               type: 'object',
