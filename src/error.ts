@@ -30,13 +30,18 @@ export class APIError<
   }
 
   private static makeMessage(status: number | undefined, error: any, message: string | undefined) {
-    const msg =
-      error?.message ?
-        typeof error.message === 'string' ?
-          error.message
-        : JSON.stringify(error.message)
-      : error ? JSON.stringify(error)
-      : message;
+    let msg;
+    if (error?.message) {
+      if (typeof error.message === 'string') {
+        msg = error.message;
+      } else {
+        msg = JSON.stringify(error.message);
+      }
+    } else if (error) {
+      msg = JSON.stringify(error);
+    } else {
+      msg = message;
+    }
 
     if (status && msg) {
       return `${status} ${msg}`;
