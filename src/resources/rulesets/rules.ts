@@ -5882,6 +5882,16 @@ export namespace SetConfigRule {
     polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
     /**
+     * The request body buffering mode.
+     */
+    request_body_buffering?: 'none' | 'standard' | 'full';
+
+    /**
+     * The response body buffering mode.
+     */
+    response_body_buffering?: 'none' | 'standard';
+
+    /**
      * Whether to enable Rocket Loader.
      */
     rocket_loader?: boolean;
@@ -6118,6 +6128,16 @@ export namespace SetConfigRuleParam {
      * The Polish level to configure.
      */
     polish?: 'off' | 'lossless' | 'lossy' | 'webp';
+
+    /**
+     * The request body buffering mode.
+     */
+    request_body_buffering?: 'none' | 'standard' | 'full';
+
+    /**
+     * The response body buffering mode.
+     */
+    response_body_buffering?: 'none' | 'standard';
 
     /**
      * Whether to enable Rocket Loader.
@@ -11402,6 +11422,16 @@ export declare namespace RuleCreateParams {
       polish?: 'off' | 'lossless' | 'lossy' | 'webp';
 
       /**
+       * The request body buffering mode.
+       */
+      request_body_buffering?: 'none' | 'standard' | 'full';
+
+      /**
+       * The response body buffering mode.
+       */
+      response_body_buffering?: 'none' | 'standard';
+
+      /**
        * Whether to enable Rocket Loader.
        */
       rocket_loader?: boolean;
@@ -15683,6 +15713,16 @@ export declare namespace RuleEditParams {
        * The Polish level to configure.
        */
       polish?: 'off' | 'lossless' | 'lossy' | 'webp';
+
+      /**
+       * The request body buffering mode.
+       */
+      request_body_buffering?: 'none' | 'standard' | 'full';
+
+      /**
+       * The response body buffering mode.
+       */
+      response_body_buffering?: 'none' | 'standard';
 
       /**
        * Whether to enable Rocket Loader.
