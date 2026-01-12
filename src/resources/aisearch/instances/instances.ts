@@ -264,6 +264,8 @@ export interface InstanceCreateResponse {
 
   engine_version?: number;
 
+  hybrid_search_enabled?: boolean;
+
   last_activity?: string;
 
   max_num_results?: number;
@@ -510,6 +512,8 @@ export interface InstanceUpdateResponse {
   enable?: boolean;
 
   engine_version?: number;
+
+  hybrid_search_enabled?: boolean;
 
   last_activity?: string;
 
@@ -758,6 +762,8 @@ export interface InstanceListResponse {
 
   engine_version?: number;
 
+  hybrid_search_enabled?: boolean;
+
   last_activity?: string;
 
   max_num_results?: number;
@@ -1005,6 +1011,8 @@ export interface InstanceDeleteResponse {
 
   engine_version?: number;
 
+  hybrid_search_enabled?: boolean;
+
   last_activity?: string;
 
   max_num_results?: number;
@@ -1251,6 +1259,8 @@ export interface InstanceReadResponse {
   enable?: boolean;
 
   engine_version?: number;
+
+  hybrid_search_enabled?: boolean;
 
   last_activity?: string;
 
@@ -1530,6 +1540,11 @@ export interface InstanceCreateParams {
   /**
    * Body param:
    */
+  hybrid_search_enabled?: boolean;
+
+  /**
+   * Body param:
+   */
   max_num_results?: number;
 
   /**
@@ -1752,6 +1767,11 @@ export interface InstanceUpdateParams {
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
     | '';
+
+  /**
+   * Body param:
+   */
+  hybrid_search_enabled?: boolean;
 
   /**
    * Body param:
