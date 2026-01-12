@@ -93,6 +93,9 @@ export const tool: Tool = {
           '',
         ],
       },
+      hybrid_search_enabled: {
+        type: 'boolean',
+      },
       max_num_results: {
         type: 'integer',
       },

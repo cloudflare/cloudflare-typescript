@@ -39,6 +39,7 @@ describe('resource instances', () => {
       chunk_overlap: 0,
       chunk_size: 64,
       embedding_model: '@cf/baai/bge-m3',
+      hybrid_search_enabled: true,
       max_num_results: 1,
       metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
       public_endpoint_params: {
@@ -93,6 +94,7 @@ describe('resource instances', () => {
       chunk_overlap: 0,
       chunk_size: 64,
       embedding_model: '@cf/baai/bge-m3',
+      hybrid_search_enabled: true,
       max_num_results: 1,
       metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
       paused: true,
