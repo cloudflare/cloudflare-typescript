@@ -3421,6 +3421,18 @@ export const tool: Tool = {
                 description: 'The Polish level to configure.',
                 enum: ['off', 'lossless', 'lossy', 'webp'],
               },
+              request_body_buffering: {
+                type: 'string',
+                title: 'Request body buffering',
+                description: 'The request body buffering mode.',
+                enum: ['none', 'standard', 'full'],
+              },
+              response_body_buffering: {
+                type: 'string',
+                title: 'Response body buffering',
+                description: 'The response body buffering mode.',
+                enum: ['none', 'standard'],
+              },
               rocket_loader: {
                 type: 'boolean',
                 title: 'Rocket Loader',
