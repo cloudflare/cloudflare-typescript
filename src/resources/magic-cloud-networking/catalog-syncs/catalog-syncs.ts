@@ -186,6 +186,7 @@ export namespace CatalogSyncCreateResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -309,6 +310,12 @@ export namespace CatalogSyncCreateResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
@@ -394,6 +401,7 @@ export namespace CatalogSyncUpdateResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -517,6 +525,12 @@ export namespace CatalogSyncUpdateResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
@@ -602,6 +616,7 @@ export namespace CatalogSyncListResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -725,6 +740,12 @@ export namespace CatalogSyncListResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
@@ -814,6 +835,7 @@ export namespace CatalogSyncEditResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -937,6 +959,12 @@ export namespace CatalogSyncEditResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
@@ -1022,6 +1050,7 @@ export namespace CatalogSyncGetResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -1145,6 +1174,12 @@ export namespace CatalogSyncGetResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
