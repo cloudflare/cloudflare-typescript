@@ -459,6 +459,7 @@ export namespace CloudIntegrationDiscoverResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -582,6 +583,12 @@ export namespace CloudIntegrationDiscoverResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
@@ -639,6 +646,7 @@ export namespace CloudIntegrationDiscoverResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -762,6 +770,12 @@ export namespace CloudIntegrationDiscoverResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
@@ -829,6 +843,7 @@ export namespace CloudIntegrationDiscoverAllResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -952,6 +967,12 @@ export namespace CloudIntegrationDiscoverAllResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
@@ -1009,6 +1030,7 @@ export namespace CloudIntegrationDiscoverAllResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -1132,6 +1154,12 @@ export namespace CloudIntegrationDiscoverAllResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
