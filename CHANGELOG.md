@@ -105,7 +105,7 @@ All record type interfaces renamed from `*Record` to short names:
 
 ---
 
-### New Resources
+### Features
 
 #### Abuse Reports (`client.abuseReports`)
 - **Reports**: `create`, `list`, `get`
@@ -150,10 +150,6 @@ All record type interfaces renamed from `*Record` to short names:
 - **Rules**: `create`, `list`, `delete`, `bulkCreate`, `bulkEdit`, `edit`, `get`
 - JWT validation with RS256/384/512, PS256/384/512, ES256, ES384
 
----
-
-### New Sub-Resources
-
 #### Alerting Silences (`client.alerting.silences`)
 - `create`, `update`, `list`, `delete`, `get`
 
@@ -167,10 +163,6 @@ All record type interfaces renamed from `*Record` to short names:
 #### Zero-Trust AI Controls / MCP (`client.zeroTrust.access.aiControls.mcp`)
 - **Portals**: `create`, `update`, `list`, `delete`, `read`
 - **Servers**: `create`, `update`, `list`, `delete`, `read`, `sync`
-
----
-
-### Enhancements
 
 #### Accounts
 - `managed_by` field with `parent_org_id`, `parent_org_name`
