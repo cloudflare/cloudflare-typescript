@@ -1912,13 +1912,7 @@ export interface CustomCreateParams {
    * Body param: Entries from other profiles (e.g. pre-defined Cloudflare profiles,
    * or your Microsoft Information Protection profiles).
    */
-  shared_entries?: Array<
-    | CustomCreateParams.Custom
-    | CustomCreateParams.Predefined
-    | CustomCreateParams.Integration
-    | CustomCreateParams.ExactData
-    | CustomCreateParams.UnionMember4
-  >;
+  shared_entries?: Array<CustomCreateParams.SharedEntry>;
 }
 
 export namespace CustomCreateParams {
@@ -1938,44 +1932,10 @@ export namespace CustomCreateParams {
     words: Array<string>;
   }
 
-  export interface Custom {
+  export interface SharedEntry {
     enabled: boolean;
 
     entry_id: string;
-
-    entry_type: 'custom';
-  }
-
-  export interface Predefined {
-    enabled: boolean;
-
-    entry_id: string;
-
-    entry_type: 'predefined';
-  }
-
-  export interface Integration {
-    enabled: boolean;
-
-    entry_id: string;
-
-    entry_type: 'integration';
-  }
-
-  export interface ExactData {
-    enabled: boolean;
-
-    entry_id: string;
-
-    entry_type: 'exact_data';
-  }
-
-  export interface UnionMember4 {
-    enabled: boolean;
-
-    entry_id: string;
-
-    entry_type: 'document_fingerprint';
   }
 }
 
@@ -2030,12 +1990,7 @@ export interface CustomUpdateParams {
   /**
    * Body param: Other entries, e.g. predefined or integration.
    */
-  shared_entries?: Array<
-    | CustomUpdateParams.Predefined
-    | CustomUpdateParams.Integration
-    | CustomUpdateParams.ExactData
-    | CustomUpdateParams.UnionMember3
-  >;
+  shared_entries?: Array<CustomUpdateParams.SharedEntry>;
 }
 
 export namespace CustomUpdateParams {
@@ -2057,36 +2012,10 @@ export namespace CustomUpdateParams {
     pattern: CustomAPI.PatternParam;
   }
 
-  export interface Predefined {
+  export interface SharedEntry {
     enabled: boolean;
 
     entry_id: string;
-
-    entry_type: 'predefined';
-  }
-
-  export interface Integration {
-    enabled: boolean;
-
-    entry_id: string;
-
-    entry_type: 'integration';
-  }
-
-  export interface ExactData {
-    enabled: boolean;
-
-    entry_id: string;
-
-    entry_type: 'exact_data';
-  }
-
-  export interface UnionMember3 {
-    enabled: boolean;
-
-    entry_id: string;
-
-    entry_type: 'document_fingerprint';
   }
 }
 
