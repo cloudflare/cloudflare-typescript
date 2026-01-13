@@ -34,9 +34,7 @@ describe('resource custom', () => {
       description: 'description',
       entries: [{ enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } }],
       ocr_enabled: true,
-      shared_entries: [
-        { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'custom' },
-      ],
+      shared_entries: [{ enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }],
     });
   });
 
@@ -74,9 +72,7 @@ describe('resource custom', () => {
           },
         ],
         ocr_enabled: true,
-        shared_entries: [
-          { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'predefined' },
-        ],
+        shared_entries: [{ enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }],
       },
     );
   });
