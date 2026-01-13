@@ -27,6 +27,11 @@ export const tool: Tool = {
         type: 'string',
         enum: ['AWS', 'AZURE', 'GOOGLE'],
       },
+      dynamic_routing: {
+        type: 'boolean',
+        description:
+          'if set to true, install_routes_in_cloud and install_routes_in_magic_wan should be set to false',
+      },
       install_routes_in_cloud: {
         type: 'boolean',
       },
@@ -55,6 +60,10 @@ export const tool: Tool = {
           type: 'string',
         },
       },
+      cloud_asn: {
+        type: 'integer',
+        description: "the ASN to use on the cloud side. If unset or zero, the cloud's default will be used.",
+      },
       description: {
         type: 'string',
       },
@@ -80,6 +89,7 @@ export const tool: Tool = {
     required: [
       'account_id',
       'cloud_type',
+      'dynamic_routing',
       'install_routes_in_cloud',
       'install_routes_in_magic_wan',
       'name',
