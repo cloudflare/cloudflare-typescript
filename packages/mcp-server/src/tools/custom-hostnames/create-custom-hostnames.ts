@@ -29,6 +29,12 @@ export const tool: Tool = {
         type: 'string',
         description: 'The custom hostname that will point to your hostname via CNAME.',
       },
+      custom_metadata: {
+        type: 'object',
+        description:
+          'Unique key/value metadata for this hostname. These are per-hostname (customer) settings.',
+        additionalProperties: true,
+      },
       ssl: {
         type: 'object',
         description: 'SSL properties used when creating the custom hostname.',
@@ -116,14 +122,8 @@ export const tool: Tool = {
           },
         },
       },
-      custom_metadata: {
-        type: 'object',
-        description:
-          'Unique key/value metadata for this hostname. These are per-hostname (customer) settings.',
-        additionalProperties: true,
-      },
     },
-    required: ['zone_id', 'hostname', 'ssl'],
+    required: ['zone_id', 'hostname'],
     $defs: {
       bundle_method: {
         type: 'string',
