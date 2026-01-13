@@ -94,72 +94,16 @@ export const tool: Tool = {
         type: 'array',
         description: 'Other entries, e.g. predefined or integration.',
         items: {
-          anyOf: [
-            {
-              type: 'object',
-              properties: {
-                enabled: {
-                  type: 'boolean',
-                },
-                entry_id: {
-                  type: 'string',
-                },
-                entry_type: {
-                  type: 'string',
-                  enum: ['predefined'],
-                },
-              },
-              required: ['enabled', 'entry_id', 'entry_type'],
+          type: 'object',
+          properties: {
+            enabled: {
+              type: 'boolean',
             },
-            {
-              type: 'object',
-              properties: {
-                enabled: {
-                  type: 'boolean',
-                },
-                entry_id: {
-                  type: 'string',
-                },
-                entry_type: {
-                  type: 'string',
-                  enum: ['integration'],
-                },
-              },
-              required: ['enabled', 'entry_id', 'entry_type'],
+            entry_id: {
+              type: 'string',
             },
-            {
-              type: 'object',
-              properties: {
-                enabled: {
-                  type: 'boolean',
-                },
-                entry_id: {
-                  type: 'string',
-                },
-                entry_type: {
-                  type: 'string',
-                  enum: ['exact_data'],
-                },
-              },
-              required: ['enabled', 'entry_id', 'entry_type'],
-            },
-            {
-              type: 'object',
-              properties: {
-                enabled: {
-                  type: 'boolean',
-                },
-                entry_id: {
-                  type: 'string',
-                },
-                entry_type: {
-                  type: 'string',
-                  enum: ['document_fingerprint'],
-                },
-              },
-              required: ['enabled', 'entry_id', 'entry_type'],
-            },
-          ],
+          },
+          required: ['enabled', 'entry_id'],
         },
       },
     },
