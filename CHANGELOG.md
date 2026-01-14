@@ -4,6 +4,14 @@
 
 Full Changelog: [v5.2.0...v5.3.0](https://github.com/cloudflare/cloudflare-typescript/compare/v5.2.0...v5.3.0)
 
+In this release, you'll see a large number of breaking changes. This is primarily due to a change in OpenAPI definitions, 
+which our libraries are based off of, and codegen updates that we rely on to read those OpenAPI definitions and produce 
+our SDK libraries. As the codegen is always evolving and improving, so are our code bases.
+
+Some breaking changes were introduced due to bug fixes, also listed below.
+
+Please ensure you read through the list of changes below before moving to this version - this will help you understand 
+any down or upstream issues it may cause to your environments.
 ---
 
 ### Breaking Changes
