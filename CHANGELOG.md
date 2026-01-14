@@ -1,8 +1,8 @@
 # Changelog
 
-## 5.3.0 (2026-01-12)
+## 6.0.0 (2026-01-14)
 
-Full Changelog: [v5.2.0...v5.3.0](https://github.com/cloudflare/cloudflare-typescript/compare/v5.2.0...v5.3.0)
+Full Changelog: [v5.2.0...v6.0.0](https://github.com/cloudflare/cloudflare-typescript/compare/v5.2.0...v6.0.0)
 
 In this release, you'll see a large number of breaking changes. This is primarily due to a change in OpenAPI definitions, 
 which our libraries are based off of, and codegen updates that we rely on to read those OpenAPI definitions and produce 
