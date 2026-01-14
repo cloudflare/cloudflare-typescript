@@ -45,8 +45,11 @@ describe('resource instances', () => {
       metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
       public_endpoint_params: {
         authorized_hosts: ['string'],
+        chat_completions_endpoint: { disabled: true },
         enabled: true,
+        mcp: { disabled: true },
         rate_limit: { period_ms: 60000, requests: 1, technique: 'fixed' },
+        search_endpoint: { disabled: true },
       },
       reranking: true,
       reranking_model: '@cf/baai/bge-reranker-base',
@@ -101,8 +104,11 @@ describe('resource instances', () => {
       paused: true,
       public_endpoint_params: {
         authorized_hosts: ['string'],
+        chat_completions_endpoint: { disabled: true },
         enabled: true,
+        mcp: { disabled: true },
         rate_limit: { period_ms: 60000, requests: 1, technique: 'fixed' },
+        search_endpoint: { disabled: true },
       },
       reranking: true,
       reranking_model: '@cf/baai/bge-reranker-base',
