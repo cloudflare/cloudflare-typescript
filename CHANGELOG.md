@@ -4,117 +4,369 @@
 
 Full Changelog: [v5.2.0...v6.0.0](https://github.com/cloudflare/cloudflare-typescript/compare/v5.2.0...v6.0.0)
 
+In this release, you'll see a large number of breaking changes. This is primarily due to a change in OpenAPI definitions,
+which our libraries are based off of, and codegen updates that we rely on to read those OpenAPI definitions and produce
+our SDK libraries. As the codegen is always evolving and improving, so are our code bases.
+
+Some breaking changes were introduced due to bug fixes, also listed below.
+
+Please ensure you read through the list of changes below before moving to this version - this will help you understand
+any down or upstream issues it may cause to your environments.
+---
+
+### Breaking Changes
+
+#### Addressing - Parameter Requirements Changed
+- `BGPPrefixCreateParams.cidr`: optional → **required**
+- `PrefixCreateParams.asn`: `number | null` → `number`
+- `PrefixCreateParams.loa_document_id`: required → **optional**
+- `ServiceBindingCreateParams.cidr`: optional → **required**
+- `ServiceBindingCreateParams.service_id`: optional → **required**
+
+#### API Gateway
+- `ConfigurationUpdateResponse` removed
+- `PublicSchema` → `OldPublicSchema`
+- `SchemaUpload` → `UserSchemaCreateResponse`
+- `ConfigurationUpdateParams.properties` removed; use `normalize`
+
+#### CloudforceOne - Response Type Changes
+- `ThreatEventBulkCreateResponse`: `number` → complex object with counts and errors
+
+#### D1 Database - Query Parameters
+- `DatabaseQueryParams`: simple interface → union type (`D1SingleQuery | MultipleQueries`)
+- `DatabaseRawParams`: same change
+- Supports batch queries via `batch` array
+
+#### DNS Records - Type Renames (21 types)
+All record type interfaces renamed from `*Record` to short names:
+- `RecordResponse.ARecord` → `RecordResponse.A`
+- `RecordResponse.AAAARecord` → `RecordResponse.AAAA`
+- `RecordResponse.CNAMERecord` → `RecordResponse.CNAME`
+- `RecordResponse.MXRecord` → `RecordResponse.MX`
+- `RecordResponse.NSRecord` → `RecordResponse.NS`
+- `RecordResponse.PTRRecord` → `RecordResponse.PTR`
+- `RecordResponse.TXTRecord` → `RecordResponse.TXT`
+- `RecordResponse.CAARecord` → `RecordResponse.CAA`
+- `RecordResponse.CERTRecord` → `RecordResponse.CERT`
+- `RecordResponse.DNSKEYRecord` → `RecordResponse.DNSKEY`
+- `RecordResponse.DSRecord` → `RecordResponse.DS`
+- `RecordResponse.HTTPSRecord` → `RecordResponse.HTTPS`
+- `RecordResponse.LOCRecord` → `RecordResponse.LOC`
+- `RecordResponse.NAPTRRecord` → `RecordResponse.NAPTR`
+- `RecordResponse.SMIMEARecord` → `RecordResponse.SMIMEA`
+- `RecordResponse.SRVRecord` → `RecordResponse.SRV`
+- `RecordResponse.SSHFPRecord` → `RecordResponse.SSHFP`
+- `RecordResponse.SVCBRecord` → `RecordResponse.SVCB`
+- `RecordResponse.TLSARecord` → `RecordResponse.TLSA`
+- `RecordResponse.URIRecord` → `RecordResponse.URI`
+- `RecordResponse.OpenpgpkeyRecord` → `RecordResponse.Openpgpkey`
+
+#### IAM Resource Groups
+- `ResourceGroupCreateResponse.scope`: optional single → **required array**
+- `ResourceGroupCreateResponse.id`: optional → **required**
+
+#### Origin CA Certificates - Parameter Requirements Changed
+- `OriginCACertificateCreateParams.csr`: optional → **required**
+- `OriginCACertificateCreateParams.hostnames`: optional → **required**
+- `OriginCACertificateCreateParams.request_type`: optional → **required**
+
+#### Pages
+- Renamed: `DeploymentsSinglePage` → `DeploymentListResponsesV4PagePaginationArray`
+- Domain response fields: many optional → **required**
+
+#### Pipelines - v0 to v1 Migration
+- Entire v0 API deprecated; use v1 methods (`createV1`, `listV1`, etc.)
+- New sub-resources: `Sinks`, `Streams`
+
+#### R2
+- `EventNotificationUpdateParams.rules`: optional → **required**
+- Super Slurper: `bucket`, `secret` now required in source params
+
+#### Radar
+- `dataSource`: `string` → typed enum (23 values)
+- `eventType`: `string` → typed enum (6 values)
+- V2 methods require `dimension` parameter (breaking signature change)
+
+#### Resource Sharing
+- Removed: `status_message` field from all recipient response types
+
+#### Schema Validation
+- Consolidated `SchemaCreateResponse`, `SchemaListResponse`, `SchemaEditResponse`, `SchemaGetResponse` → `PublicSchema`
+- Renamed: `SchemaListResponsesV4PagePaginationArray` → `PublicSchemasV4PagePaginationArray`
+
+#### Spectrum
+- Renamed union members: `AppListResponse.UnionMember0` → `SpectrumConfigAppConfig`
+- Renamed union members: `AppListResponse.UnionMember1` → `SpectrumConfigPaygoAppConfig`
+
+#### Workers
+- Removed: `WorkersBindingKindTailConsumer` type (all occurrences)
+- Renamed: `ScriptsSinglePage` → `ScriptListResponsesSinglePage`
+- Removed: `DeploymentsSinglePage`
+
+#### Zero-Trust DLP
+- `datasets.create()`, `update()`, `get()` return types changed
+- `PredefinedGetResponse` union members renamed to `UnionMember0-5`
+
+#### Zero-Trust Tunnels
+- Removed: `CloudflaredCreateResponse`, `CloudflaredListResponse`, `CloudflaredDeleteResponse`, `CloudflaredEditResponse`, `CloudflaredGetResponse`
+- Removed: `CloudflaredListResponsesV4PagePaginationArray`
+
+---
+
 ### Features
 
-* chore: skip unsupported auth tests ([197e273](https://github.com/cloudflare/cloudflare-typescript/commit/197e2734b250b8903154424f78ec349283a722fa))
-* chore: use 'next' branch for go_sdk_version ([652540b](https://github.com/cloudflare/cloudflare-typescript/commit/652540bb8eacd91ea5b4badc6bb95f47f5a9ced6))
-* chore(abuse_report): unsupported auth scheme ([60a21a6](https://github.com/cloudflare/cloudflare-typescript/commit/60a21a6fc81c1c501201346d5e142872ccfd7020))
-* chore(abuse): rename path parameter ([17ef838](https://github.com/cloudflare/cloudflare-typescript/commit/17ef8389e97ed1cee8d1ec409cbafcd888709476))
-* docs: Deprecate API Shield Schema Validation resources ([8a4b20f](https://github.com/cloudflare/cloudflare-typescript/commit/8a4b20f7a572422f74179fbdb4f1c4fb555e3e40))
-* docs: WC-4152 Expose subdomain delete for workers ([4f7cc1f](https://github.com/cloudflare/cloudflare-typescript/commit/4f7cc1f2b8861a5b8abc193d287f78264a425062))
-* docs(zero_trust_gateway_policy): add /rules/tenants endpoint to Gateway API docs ([6c245b1](https://github.com/cloudflare/cloudflare-typescript/commit/6c245b1cca94a535b6f05a4485297a4ee85a1bd0))
-* feat: add connectivity directory service APIs to openapi.stainless.yml ([b6a8bcc](https://github.com/cloudflare/cloudflare-typescript/commit/b6a8bcc336a153139b5b35ba1650f165a00b0870))
-* feat: Add token validation to stainless config ([b8fe183](https://github.com/cloudflare/cloudflare-typescript/commit/b8fe1835defa2e6f01f3d6b1e58eccdaee01cf8d))
-* feat: DLP-3878 Switch DLP Predefined Profile endpoints ([1455208](https://github.com/cloudflare/cloudflare-typescript/commit/1455208ccec14499d600636d884debd4ce2ef5a3))
-* feat: SDKs for Organizations and OrganizationsProfile ([1525ebb](https://github.com/cloudflare/cloudflare-typescript/commit/1525ebb750a46674a544bdabfc4a7cf76684ea68))
-* feat(abuse_reports): add abuse mitigations in Client API ([2af848f](https://github.com/cloudflare/cloudflare-typescript/commit/2af848fca4de28af8223e0135df4f90f22eabedf))
-* feat(abuse_reports): Expose new abuse report endpoints. GET and LIST. ([9c2df6c](https://github.com/cloudflare/cloudflare-typescript/commit/9c2df6c5afac47fd9d34afa4d27b8d9e4747586f))
-* feat(api): add mcp portals endpoints ([65d94fe](https://github.com/cloudflare/cloudflare-typescript/commit/65d94fed33ffbd6cbed96139d67b93cbbe7f3628))
-* feat(api): RAG-395: add AI Search endpoints ([de5e7d8](https://github.com/cloudflare/cloudflare-typescript/commit/de5e7d8970415fbc00ac052879384eb3e6258163))
-* feat(iam): Add SSO Connectors resource to SDKs ([3d3e064](https://github.com/cloudflare/cloudflare-typescript/commit/3d3e064ee6b863d182059abaf1aecc901cf2a79d))
-* feat(leaked_credentials_check): Add GET endpoint for leaked_credentials_check/detections ([f3c162e](https://github.com/cloudflare/cloudflare-typescript/commit/f3c162e17cb4f538ac331c0f38fbe0eba44eb888))
-* feat(mcp_portals): enable sdks generation ([5e65ba4](https://github.com/cloudflare/cloudflare-typescript/commit/5e65ba4af138e066ffc4e5dfefc6a9b74d695992))
-* feat(pipelines): Configure SDKs/Terraform to use the new Pipelines, Streams, Sinks routes ([da48453](https://github.com/cloudflare/cloudflare-typescript/commit/da48453528e6b6721589e15673f0d3672f3083c7))
-* feat(r2_data_catalog): Configure SDKs/Terraform to use R2 Data Catalog routes ([da8a861](https://github.com/cloudflare/cloudflare-typescript/commit/da8a8612215ea86c5425464a95d08ddceed96146))
-* feat(radar): add new group by dimension endpoints; deprecate to_markdown endpoint ([51e1bed](https://github.com/cloudflare/cloudflare-typescript/commit/51e1bed5989367f20771c6c6c80d3bea77cbf0f1))
-* feat(silences): add a new alert silencing api ([60a4ce6](https://github.com/cloudflare/cloudflare-typescript/commit/60a4ce691805f0576c0f03f4e72f998b9fec7b8d))
-* feat(tomarkdown): add new markdown supported endpoint ([69c0700](https://github.com/cloudflare/cloudflare-typescript/commit/69c0700d980a049c8a7bb1ec9c1354f4e31e5582))
-* fix: Correctly reflect schema validation model &lt;-&gt; openapi mapping ([bb86151](https://github.com/cloudflare/cloudflare-typescript/commit/bb861516774b159d80e0f46a5f3abc5a4c9f9d49))
-* fix: move wvpc ([69208f2](https://github.com/cloudflare/cloudflare-typescript/commit/69208f2fd28937e848a38e48e9cb90ae01499c8f))
-* fix: tabbing on realtime-kit api resources ([b4bcacd](https://github.com/cloudflare/cloudflare-typescript/commit/b4bcacdc0cdc28068d72e36e278a0f8d54477340))
-* fix: unsupported auth scheme ([a58f817](https://github.com/cloudflare/cloudflare-typescript/commit/a58f817e7b59141b16733eb920d60d24f808c427))
-* fix(ai_controls): incorrect use of standalone_api ([f61e213](https://github.com/cloudflare/cloudflare-typescript/commit/f61e213d5e6d245be4b8378ca2c7907f33dbade7))
+#### Abuse Reports (`client.abuseReports`)
+- **Reports**: `create`, `list`, `get`
+- **Mitigations**: sub-resource for abuse mitigations
 
+#### AI Search (`client.aisearch`)
+- **Instances**: `create`, `update`, `list`, `delete`, `read`, `stats`
+- **Items**: `list`, `get`
+- **Jobs**: `create`, `list`, `get`, `logs`
+- **Tokens**: `create`, `update`, `list`, `delete`, `read`
+
+#### Connectivity (`client.connectivity`)
+- **Directory Services**: `create`, `update`, `list`, `delete`, `get`
+- Supports IPv4, IPv6, dual-stack, and hostname configurations
+
+#### Organizations (`client.organizations`)
+- **Organizations**: `create`, `update`, `list`, `delete`, `get`
+- **OrganizationProfile**: `update`, `get`
+- Hierarchical organization support with parent/child relationships
+
+#### R2 Data Catalog (`client.r2DataCatalog`)
+- **Catalog**: `list`, `enable`, `disable`, `get`
+- **Credentials**: `create`
+- **MaintenanceConfigs**: `update`, `get`
+- **Namespaces**: `list`
+- **Tables**: `list`, maintenance config management
+- Apache Iceberg integration
+
+#### Realtime Kit (`client.realtimeKit`)
+- **Apps**: `get`, `post`
+- **Meetings**: `create`, `get`, participant management
+- **Livestreams**: 10+ methods for streaming
+- **Recordings**: start, pause, stop, get
+- **Sessions**: transcripts, summaries, chat
+- **Webhooks**: full CRUD
+- **ActiveSession**: polls, kick participants
+- **Analytics**: organization analytics
+
+#### Token Validation (`client.tokenValidation`)
+- **Configuration**: `create`, `list`, `delete`, `edit`, `get`
+- **Credentials**: `update`
+- **Rules**: `create`, `list`, `delete`, `bulkCreate`, `bulkEdit`, `edit`, `get`
+- JWT validation with RS256/384/512, PS256/384/512, ES256, ES384
+
+#### Alerting Silences (`client.alerting.silences`)
+- `create`, `update`, `list`, `delete`, `get`
+
+#### IAM SSO (`client.iam.sso`)
+- `create`, `update`, `list`, `delete`, `get`, `beginVerification`
+
+#### Pipelines v1 (`client.pipelines`)
+- **Sinks**: `create`, `list`, `delete`, `get`
+- **Streams**: `create`, `update`, `list`, `delete`, `get`
+
+#### Zero-Trust AI Controls / MCP (`client.zeroTrust.access.aiControls.mcp`)
+- **Portals**: `create`, `update`, `list`, `delete`, `read`
+- **Servers**: `create`, `update`, `list`, `delete`, `read`, `sync`
+
+#### Accounts
+- `managed_by` field with `parent_org_id`, `parent_org_name`
+
+#### Addressing LOA Documents
+- `auto_generated` field on `LOADocumentCreateResponse`
+
+#### Addressing Prefixes
+- `delegate_loa_creation`, `irr_validation_state`, `ownership_validation_state`, `ownership_validation_token`, `rpki_validation_state`
+
+#### AI
+- Added `toMarkdown.supported()` method to get all supported conversion formats
+
+#### AI Gateway
+- `zdr` field added to all responses and params
+
+#### Alerting
+- New alert type: `abuse_report_alert`
+- `type` field added to PolicyFilter
+
+#### Browser Rendering
+- `ContentCreateParams`: refined to discriminated union (`Variant0 | Variant1`)
+- Split into URL-based and HTML-based parameter variants for better type safety
+
+#### Client Certificates
+- `reactivate` parameter in edit
+
+#### CloudforceOne
+- `ThreatEventCreateParams.indicatorType`: required → optional
+- `hasChildren` field added to all threat event response types
+- `datasetIds` query parameter on `AttackerListParams`, `CategoryListParams`, `TargetIndustryListParams`
+- `categoryUuid` field on `TagCreateResponse`
+- `indicators` array for multi-indicator support per event
+- `uuid` and `preserveUuid` fields for UUID preservation in bulk create
+- `format` query parameter (`'json' | 'stix2'`) on `ThreatEventListParams`
+- `createdAt`, `datasetId` fields on `ThreatEventEditParams`
+
+#### Content Scanning
+- Added `create()`, `update()`, `get()` methods
+
+#### Custom Pages
+- New page types: `basic_challenge`, `under_attack`, `waf_challenge`
+
+#### D1
+- `served_by_colo` - colo that handled query
+- `jurisdiction` - `'eu' | 'fedramp'`
+
+#### Email Security
+- New fields on `InvestigateListResponse`/`InvestigateGetResponse`: `envelope_from`, `envelope_to`, `postfix_id_outbound`, `replyto`
+- New detection classification: `'outbound_ndr'`
+- Enhanced `Finding` interface with `attachment`, `detection`, `field`, `portion`, `reason`, `score`
+- Added `cursor` query parameter to `InvestigateListParams`
+
+#### Gateway Lists
+- New list types: `CATEGORY`, `LOCATION`, `DEVICE`
+
+#### Intel
+- New issue type: `'configuration_suggestion'`
+- `payload` field: `unknown` → typed `Payload` interface with `detection_method`, `zone_tag`
+
+#### Leaked Credential Checks
+- Added `detections.get()` method
+
+#### Logpush
+- New datasets: `dex_application_tests`, `dex_device_state_events`, `ipsec_logs`, `warp_config_changes`, `warp_toggle_changes`
+
+#### Load Balancers
+- `Monitor.port`: `number` → `number | null`
+- `Pool.load_shedding`: `LoadShedding` → `LoadShedding | null`
+- `Pool.origin_steering`: `OriginSteering` → `OriginSteering | null`
+
+#### Magic Transit
+- `license_key` field on connectors
+- `provision_license` parameter for auto-provisioning
+- IPSec: `custom_remote_identities` with FQDN support
+- Snapshots: Bond interface, `probed_mtu` field
+
+#### Pages
+- New response types: `ProjectCreateResponse`, `ProjectListResponse`, `ProjectEditResponse`, `ProjectGetResponse`
+- Deployment methods return specific response types instead of generic `Deployment`
+
+#### Queues
+- Added `subscriptions.get()` method
+- Enhanced `SubscriptionGetResponse` with typed event source interfaces
+- New event source types: Images, KV, R2, Vectorize, Workers AI, Workers Builds, Workflows
+
+#### R2
+- Sippy: new provider `s3` (S3-compatible endpoints)
+- Sippy: `bucketUrl` field for S3-compatible sources
+- Super Slurper: `keys` field on source response schemas (specify specific keys to migrate)
+- Super Slurper: `pathPrefix` field on source schemas
+- Super Slurper: `region` field on S3 source params
+
+#### Radar
+- Added `geolocations.list()`, `geolocations.get()` methods
+- Added V2 dimension-based methods (`summaryV2`, `timeseriesGroupsV2`) to radar sub-resources
+
+#### Resource Sharing
+- Added `terminal` boolean field to Resource Error interfaces
+
+#### Rules
+- Added `id` field to `ItemDeleteParams.Item`
+
+#### Rulesets
+- New buffering fields on `SetConfigRule`: `request_body_buffering`, `response_body_buffering`
+
+#### Secrets Store
+- New scopes: `'dex'`, `'access'` (in addition to `'workers'`, `'ai_gateway'`)
+
+#### SSL Certificate Packs
+- Response types now proper interfaces (was `unknown`)
+- Fields now required: `id`, `certificates`, `hosts`, `status`, `type`
+
+#### Security Center
+- `payload` field: `unknown` → typed `Payload` interface with `detection_method`, `zone_tag`
+
+#### Shared Types
+- Added: `CloudflareTunnelsV4PagePaginationArray` pagination class
+
+#### Workers
+- Added `subdomains.delete()` method
+- `Worker.references` - track external dependencies (domains, Durable Objects, queues)
+- `Worker.startup_time_ms` - startup timing
+- `Script.observability` - observability settings with logging
+- `Script.tag`, `Script.tags` - immutable ID and tags
+- Placement: support for region, hostname, host-based placement
+- `tags`, `tail_consumers` now accept `| null`
+- Telemetry: `traces` field, `$containers` event info, `durableObjectId`, `transactionName`, `abr_level` fields
+
+#### Workers for Platforms
+- `ScriptUpdateResponse`: new fields `entry_point`, `observability`, `tag`, `tags`
+- `placement` field now union of 4 variants (smart mode, region, hostname, host)
+- `tags`, `tail_consumers` now nullable
+- `TagUpdateParams.body` now accepts `null`
+
+#### Workflows
+- `instance_retention`: `unknown` → typed `InstanceRetention` interface with `error_retention`, `success_retention`
+- New status option: `'restart'` added to `StatusEditParams.status`
+
+#### Zero-Trust Devices
+- External emergency disconnect settings (4 new fields)
+- `antivirus` device posture check type
+- `os_version_extra` documentation improvements
+
+#### Zones
+- New response types: `SubscriptionCreateResponse`, `SubscriptionUpdateResponse`, `SubscriptionGetResponse`
+
+#### Zero-Trust Access Applications
+- New `ApplicationType` values: `'mcp'`, `'mcp_portal'`, `'proxy_endpoint'`
+- New destination type: `ViaMcpServerPortalDestination` for MCP server access
+
+#### Zero-Trust Gateway
+- Added `rules.listTenant()` method
+
+#### Zero-Trust Gateway - Proxy Endpoints
+- `ProxyEndpoint`: interface → discriminated union (`ZeroTrustGatewayProxyEndpointIP | ZeroTrustGatewayProxyEndpointIdentity`)
+- `ProxyEndpointCreateParams`: interface → union type
+- Added `kind` field: `'ip' | 'identity'`
+
+#### Zero-Trust Tunnels
+- `WARPConnector*Response`: union type → interface
+
+---
+
+### Deprecations
+
+- **API Gateway**: `UserSchemas`, `Settings`, `SchemaValidation` resources
+- **Audit Logs**: `auditLogId.not` (use `id.not`)
+- **CloudforceOne**: `ThreatEvents.get()`, `IndicatorTypes.list()`
+- **Devices**: `public_ip` field (use DEX API)
+- **Email Security**: `item_count` field in Move responses
+- **Pipelines**: v0 methods (use v1)
+- **Radar**: old `summary()` and `timeseriesGroups()` methods (use V2)
+- **Rulesets**: `disable_apps`, `mirage` fields
+- **WARP Connector**: `connections` field
+- **Workers**: `environment` parameter in Domains
+- **Zones**: `ResponseBuffering` page rule
+
+---
 
 ### Bug Fixes
 
-* **mcp:** correct code tool API endpoint ([599703c](https://github.com/cloudflare/cloudflare-typescript/commit/599703c45672dc899455d74b124018efd4b75095))
-* **mcp:** return correct lines on typescript errors ([5d6f999](https://github.com/cloudflare/cloudflare-typescript/commit/5d6f9998ed9999aaa95e1bda8cf50929f3555cf1))
-* **organization_profile:** bad reference ([d84ea77](https://github.com/cloudflare/cloudflare-typescript/commit/d84ea77094400055c06554812b84c2f0c8d00cc4))
-* **workers_kv_namespace:** lint ([292666a](https://github.com/cloudflare/cloudflare-typescript/commit/292666ab8f00f6a9445a6f682463a99c56a1209e))
-* **workers:** tests ([2ee37f7](https://github.com/cloudflare/cloudflare-typescript/commit/2ee37f7adf5a4637d65f61fc225e135eec2579fc))
+- **mcp:** correct code tool API endpoint ([599703c](https://github.com/cloudflare/cloudflare-typescript/commit/599703c45672dc899455d74b124018efd4b75095))
+- **mcp:** return correct lines on typescript errors ([5d6f999](https://github.com/cloudflare/cloudflare-typescript/commit/5d6f9998ed9999aaa95e1bda8cf50929f3555cf1))
+- **organization_profile:** fix bad reference ([d84ea77](https://github.com/cloudflare/cloudflare-typescript/commit/d84ea77094400055c06554812b84c2f0c8d00cc4))
+- **schema_validation:** correctly reflect model to openapi mapping ([bb86151](https://github.com/cloudflare/cloudflare-typescript/commit/bb861516774b159d80e0f46a5f3abc5a4c9f9d49))
+- **workers:** fix tests ([2ee37f7](https://github.com/cloudflare/cloudflare-typescript/commit/2ee37f7adf5a4637d65f61fc225e135eec2579fc))
 
+---
 
-### Chores
+### Documentation
 
-* **api:** update composite API spec ([5ae550d](https://github.com/cloudflare/cloudflare-typescript/commit/5ae550d78746cc41a25dd6db89c6f25a7136e1f2))
-* **api:** update composite API spec ([20ef6cd](https://github.com/cloudflare/cloudflare-typescript/commit/20ef6cd4b818b7ac9996edc9f2a46dbfc3fca9a3))
-* **api:** update composite API spec ([7ed3d4a](https://github.com/cloudflare/cloudflare-typescript/commit/7ed3d4aee9ef867c96899e0e54af151ae6fb5057))
-* **api:** update composite API spec ([94fe2d3](https://github.com/cloudflare/cloudflare-typescript/commit/94fe2d3666cfc4ef255563d1963bf357dbb2c389))
-* **api:** update composite API spec ([0f4fab6](https://github.com/cloudflare/cloudflare-typescript/commit/0f4fab674e15a2536ed3dbe2f0b392b9a9a5c44e))
-* **api:** update composite API spec ([6d9c3bc](https://github.com/cloudflare/cloudflare-typescript/commit/6d9c3bc4bc08b57454cbf91a16d4cf8d8b90f7c8))
-* **api:** update composite API spec ([0fb4878](https://github.com/cloudflare/cloudflare-typescript/commit/0fb48781f9cebd1ba1e96269658e6a23048ac60c))
-* **api:** update composite API spec ([8950ae0](https://github.com/cloudflare/cloudflare-typescript/commit/8950ae015085f47e7307a750605a49951a17004c))
-* **api:** update composite API spec ([cde9ca3](https://github.com/cloudflare/cloudflare-typescript/commit/cde9ca383b9769b768ec991bc992d3c4ce4244c7))
-* **api:** update composite API spec ([c11f355](https://github.com/cloudflare/cloudflare-typescript/commit/c11f355c09b3fe4a138a3f46ea15913783b686ea))
-* **api:** update composite API spec ([aab704a](https://github.com/cloudflare/cloudflare-typescript/commit/aab704a129ec67f8f648e4135d039fdfaf21476a))
-* **api:** update composite API spec ([3b947ea](https://github.com/cloudflare/cloudflare-typescript/commit/3b947eaa015bede038c6e35f48ec5cc50c823cb1))
-* **api:** update composite API spec ([46d7288](https://github.com/cloudflare/cloudflare-typescript/commit/46d728817b1c747f321b5a9d7f0315c1f71cd372))
-* **api:** update composite API spec ([cc7a8f2](https://github.com/cloudflare/cloudflare-typescript/commit/cc7a8f29b4efc237015cafe19899d7d3aa0bb0c7))
-* **api:** update composite API spec ([48b9bb1](https://github.com/cloudflare/cloudflare-typescript/commit/48b9bb161e450f3dda3f22e7fd7190dce75e0420))
-* **api:** update composite API spec ([5d0014f](https://github.com/cloudflare/cloudflare-typescript/commit/5d0014f6d32fe9901eb2945c94ffc04379137e49))
-* **api:** update composite API spec ([03ae4b8](https://github.com/cloudflare/cloudflare-typescript/commit/03ae4b84873650562e2dbc40aba3a4f0f9864c2e))
-* **api:** update composite API spec ([f82de0b](https://github.com/cloudflare/cloudflare-typescript/commit/f82de0bedfabc9459ee82b4ff10d2c6a15877e6e))
-* **api:** update composite API spec ([75042a6](https://github.com/cloudflare/cloudflare-typescript/commit/75042a644534f41542a5c09fbfd7e289fd825c88))
-* **api:** update composite API spec ([7389bd9](https://github.com/cloudflare/cloudflare-typescript/commit/7389bd94b48c3c0817105b42b9ed436985658b51))
-* **api:** update composite API spec ([87c3dea](https://github.com/cloudflare/cloudflare-typescript/commit/87c3dea8f2bbacae5e8b1b9b4380ade08443f50c))
-* **api:** update composite API spec ([1bd7c7b](https://github.com/cloudflare/cloudflare-typescript/commit/1bd7c7bce8db84158c093da699517cb568f22aec))
-* **api:** update composite API spec ([b99365d](https://github.com/cloudflare/cloudflare-typescript/commit/b99365d7e53a4812e734aab460d0d18cbfcef0bf))
-* **api:** update composite API spec ([dcf9465](https://github.com/cloudflare/cloudflare-typescript/commit/dcf9465e8c4b550094392a229b5e65fcf4fa5793))
-* **api:** update composite API spec ([746ab5a](https://github.com/cloudflare/cloudflare-typescript/commit/746ab5a3a68bf4e4737135eab6c43c55134de9cc))
-* **api:** update composite API spec ([db9f9a7](https://github.com/cloudflare/cloudflare-typescript/commit/db9f9a76376fedf3357d5ef28cb3a1e553040896))
-* **api:** update composite API spec ([39b1aad](https://github.com/cloudflare/cloudflare-typescript/commit/39b1aadf426dc97d7697d974246df048b7dbcb8f))
-* **api:** update composite API spec ([4d93882](https://github.com/cloudflare/cloudflare-typescript/commit/4d93882587158be4f76ef24834418700a7cb9abc))
-* **api:** update composite API spec ([783df8b](https://github.com/cloudflare/cloudflare-typescript/commit/783df8bcde461513af52ac351c4da81ad64f1ebd))
-* **api:** update composite API spec ([3b021f5](https://github.com/cloudflare/cloudflare-typescript/commit/3b021f51fdcfeffcff386895a388bf93f534801d))
-* **api:** update composite API spec ([3bf2761](https://github.com/cloudflare/cloudflare-typescript/commit/3bf27611d7ece97613e48b9b07ea348b0eb96ea8))
-* **api:** update composite API spec ([5d7e12a](https://github.com/cloudflare/cloudflare-typescript/commit/5d7e12ace86da7bf5ecef5e30c41de0b38104e3f))
-* **api:** update composite API spec ([feae1eb](https://github.com/cloudflare/cloudflare-typescript/commit/feae1eb7f4c8c2e3e92921fcc8ca42fe3d112f6b))
-* **api:** update composite API spec ([85054bb](https://github.com/cloudflare/cloudflare-typescript/commit/85054bbe70f3f960f9225d95138ebf7dbae5be85))
-* **api:** update composite API spec ([6abdaea](https://github.com/cloudflare/cloudflare-typescript/commit/6abdaea9029bc1ba737735a37caf61f73a3da1a1))
-* **api:** update composite API spec ([ca47e4f](https://github.com/cloudflare/cloudflare-typescript/commit/ca47e4f7cbf60fcbdbc02176ad40a2a38d53398d))
-* **api:** update composite API spec ([3fd0772](https://github.com/cloudflare/cloudflare-typescript/commit/3fd077217ead06ee7b9bbeb428c7746ef1e81c47))
-* **api:** update composite API spec ([f8fb6b7](https://github.com/cloudflare/cloudflare-typescript/commit/f8fb6b7715ddf8a5002b74846e1da422708ab5c7))
-* **api:** update composite API spec ([2b9d23f](https://github.com/cloudflare/cloudflare-typescript/commit/2b9d23ffaf763308ac2d1b1b73e4a2a07befa3df))
-* **api:** update composite API spec ([de5a825](https://github.com/cloudflare/cloudflare-typescript/commit/de5a8257254f63cd4e8283e9b74ae767188b481f))
-* **api:** update composite API spec ([dace316](https://github.com/cloudflare/cloudflare-typescript/commit/dace316802a908c5ad4e39917f94123533cf9385))
-* **api:** update composite API spec ([bce7409](https://github.com/cloudflare/cloudflare-typescript/commit/bce74096ac47bbe9390a55a10c5b110858254701))
-* **api:** update composite API spec ([453cde7](https://github.com/cloudflare/cloudflare-typescript/commit/453cde7d9e4819de5e9b1e1ff09182d6458c9ae9))
-* **api:** update composite API spec ([425ac96](https://github.com/cloudflare/cloudflare-typescript/commit/425ac965263044ca8670ba64b634b0654b8a8e8d))
-* **api:** update composite API spec ([9d722e3](https://github.com/cloudflare/cloudflare-typescript/commit/9d722e3721d106005e99c28249a8af239759b772))
-* **api:** update composite API spec ([05849a2](https://github.com/cloudflare/cloudflare-typescript/commit/05849a2897127d6a02faf87cafb477cff2e280e9))
-* **api:** update composite API spec ([3e326ac](https://github.com/cloudflare/cloudflare-typescript/commit/3e326ac0b798a9d597e5301b41d2c09ea895ab02))
-* **api:** update composite API spec ([d90e82e](https://github.com/cloudflare/cloudflare-typescript/commit/d90e82e5b5f30a7d88c4db3378d5dffe3b33b237))
-* **api:** update composite API spec ([eab4237](https://github.com/cloudflare/cloudflare-typescript/commit/eab423750586be24ad6d046406f01f35e31219e1))
-* **api:** update composite API spec ([27de8a7](https://github.com/cloudflare/cloudflare-typescript/commit/27de8a7f35993007d0bcf6a4b21ddb5cf8a8df4d))
-* **api:** update composite API spec ([01726ea](https://github.com/cloudflare/cloudflare-typescript/commit/01726eaaaac033cd197a9936715bc693fe9c7367))
-* **api:** update composite API spec ([f2fb434](https://github.com/cloudflare/cloudflare-typescript/commit/f2fb434f2b49188e92ad32cb1ce41915e86b6ab6))
-* **api:** update composite API spec ([c69bd5f](https://github.com/cloudflare/cloudflare-typescript/commit/c69bd5ffa2e5ea44f312ce664a5ca26e2796ae81))
-* **api:** update composite API spec ([5a3ebb5](https://github.com/cloudflare/cloudflare-typescript/commit/5a3ebb5c1f8a675771a9476abbda8beb27490c01))
-* **api:** update composite API spec ([4a0aea8](https://github.com/cloudflare/cloudflare-typescript/commit/4a0aea87200bd30b1b09b406710b4862b00b3b92))
-* **api:** update composite API spec ([7659e28](https://github.com/cloudflare/cloudflare-typescript/commit/7659e28ce4666c8a55a2a7204fbd1f5bcc427a08))
-* **api:** update composite API spec ([85292a4](https://github.com/cloudflare/cloudflare-typescript/commit/85292a4ec46bd9f041ebc8adc801c83363dd5f81))
-* **api:** update composite API spec ([6989586](https://github.com/cloudflare/cloudflare-typescript/commit/6989586bcfad199dc4830401b9a3cad2430d03f7))
-* **api:** update composite API spec ([e03893d](https://github.com/cloudflare/cloudflare-typescript/commit/e03893d493406963e3d8c3f251a7207708965f1d))
-* **api:** update composite API spec ([9ef31e6](https://github.com/cloudflare/cloudflare-typescript/commit/9ef31e6d1e14825b35aca8e7cea42adb2b269760))
-* **api:** update composite API spec ([62a57d7](https://github.com/cloudflare/cloudflare-typescript/commit/62a57d7db9faab86fd4705d768db2d70fe0a26e8))
-* **api:** update composite API spec ([7e73c8e](https://github.com/cloudflare/cloudflare-typescript/commit/7e73c8e99ade2c33a76b342249cb524fbf1dcb7c))
-* **api:** update composite API spec ([3c9f5d9](https://github.com/cloudflare/cloudflare-typescript/commit/3c9f5d92fac9a2c33ad8eec18e14ffb598b5aaba))
-* **api:** update composite API spec ([0653b54](https://github.com/cloudflare/cloudflare-typescript/commit/0653b540392b35b66375b2464d0a0d1da8c7fe44))
-* **api:** update composite API spec ([1939ed5](https://github.com/cloudflare/cloudflare-typescript/commit/1939ed54c1af2d1b606c297e073a3e79ee491288))
-* **internal:** codegen related update ([800b65e](https://github.com/cloudflare/cloudflare-typescript/commit/800b65e77560cc6da02722b61137460c3802e281))
-* **internal:** codegen related update ([e1d1127](https://github.com/cloudflare/cloudflare-typescript/commit/e1d1127fb95807db56aec0bdd81e8fe3f13dff4e))
-* **internal:** codegen related update ([714c7c6](https://github.com/cloudflare/cloudflare-typescript/commit/714c7c69757972331f7378db922af7b26f27f47c))
+- Added deprecation notices with migration paths
+- **api_gateway:** deprecate API Shield Schema Validation resources ([8a4b20f](https://github.com/cloudflare/cloudflare-typescript/commit/8a4b20f7a572422f74179fbdb4f1c4fb555e3e40))
+- Improved JSDoc examples across all resources
+- **workers:** expose subdomain delete documentation ([4f7cc1f](https://github.com/cloudflare/cloudflare-typescript/commit/4f7cc1f2b8861a5b8abc193d287f78264a425062))
 
 ## 5.2.0 (2025-09-30)
 
