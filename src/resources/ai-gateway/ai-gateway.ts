@@ -230,6 +230,8 @@ export interface AIGatewayCreateResponse {
 
   dlp?: AIGatewayCreateResponse.UnionMember0 | AIGatewayCreateResponse.UnionMember1;
 
+  is_default?: boolean;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -328,6 +330,8 @@ export interface AIGatewayUpdateResponse {
   authentication?: boolean;
 
   dlp?: AIGatewayUpdateResponse.UnionMember0 | AIGatewayUpdateResponse.UnionMember1;
+
+  is_default?: boolean;
 
   log_management?: number | null;
 
@@ -428,6 +432,8 @@ export interface AIGatewayListResponse {
 
   dlp?: AIGatewayListResponse.UnionMember0 | AIGatewayListResponse.UnionMember1;
 
+  is_default?: boolean;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -527,6 +533,8 @@ export interface AIGatewayDeleteResponse {
 
   dlp?: AIGatewayDeleteResponse.UnionMember0 | AIGatewayDeleteResponse.UnionMember1;
 
+  is_default?: boolean;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -625,6 +633,8 @@ export interface AIGatewayGetResponse {
   authentication?: boolean;
 
   dlp?: AIGatewayGetResponse.UnionMember0 | AIGatewayGetResponse.UnionMember1;
+
+  is_default?: boolean;
 
   log_management?: number | null;
 
@@ -742,6 +752,11 @@ export interface AIGatewayCreateParams {
   /**
    * Body param:
    */
+  is_default?: boolean;
+
+  /**
+   * Body param:
+   */
   log_management?: number | null;
 
   /**
@@ -810,6 +825,11 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   dlp?: AIGatewayUpdateParams.UnionMember0 | AIGatewayUpdateParams.UnionMember1;
+
+  /**
+   * Body param:
+   */
+  is_default?: boolean;
 
   /**
    * Body param:
