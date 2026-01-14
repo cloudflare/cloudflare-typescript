@@ -367,18 +367,45 @@ export namespace InstanceCreateResponse {
   export interface PublicEndpointParams {
     authorized_hosts?: Array<string>;
 
+    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
+
     enabled?: boolean;
 
+    mcp?: PublicEndpointParams.Mcp;
+
     rate_limit?: PublicEndpointParams.RateLimit;
+
+    search_endpoint?: PublicEndpointParams.SearchEndpoint;
   }
 
   export namespace PublicEndpointParams {
+    export interface ChatCompletionsEndpoint {
+      /**
+       * Disable chat completions endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
+    export interface Mcp {
+      /**
+       * Disable MCP endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
     export interface RateLimit {
       period_ms?: number;
 
       requests?: number;
 
       technique?: 'fixed' | 'sliding';
+    }
+
+    export interface SearchEndpoint {
+      /**
+       * Disable search endpoint for this public endpoint
+       */
+      disabled?: boolean;
     }
   }
 
@@ -616,18 +643,45 @@ export namespace InstanceUpdateResponse {
   export interface PublicEndpointParams {
     authorized_hosts?: Array<string>;
 
+    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
+
     enabled?: boolean;
 
+    mcp?: PublicEndpointParams.Mcp;
+
     rate_limit?: PublicEndpointParams.RateLimit;
+
+    search_endpoint?: PublicEndpointParams.SearchEndpoint;
   }
 
   export namespace PublicEndpointParams {
+    export interface ChatCompletionsEndpoint {
+      /**
+       * Disable chat completions endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
+    export interface Mcp {
+      /**
+       * Disable MCP endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
     export interface RateLimit {
       period_ms?: number;
 
       requests?: number;
 
       technique?: 'fixed' | 'sliding';
+    }
+
+    export interface SearchEndpoint {
+      /**
+       * Disable search endpoint for this public endpoint
+       */
+      disabled?: boolean;
     }
   }
 
@@ -865,18 +919,45 @@ export namespace InstanceListResponse {
   export interface PublicEndpointParams {
     authorized_hosts?: Array<string>;
 
+    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
+
     enabled?: boolean;
 
+    mcp?: PublicEndpointParams.Mcp;
+
     rate_limit?: PublicEndpointParams.RateLimit;
+
+    search_endpoint?: PublicEndpointParams.SearchEndpoint;
   }
 
   export namespace PublicEndpointParams {
+    export interface ChatCompletionsEndpoint {
+      /**
+       * Disable chat completions endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
+    export interface Mcp {
+      /**
+       * Disable MCP endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
     export interface RateLimit {
       period_ms?: number;
 
       requests?: number;
 
       technique?: 'fixed' | 'sliding';
+    }
+
+    export interface SearchEndpoint {
+      /**
+       * Disable search endpoint for this public endpoint
+       */
+      disabled?: boolean;
     }
   }
 
@@ -1114,18 +1195,45 @@ export namespace InstanceDeleteResponse {
   export interface PublicEndpointParams {
     authorized_hosts?: Array<string>;
 
+    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
+
     enabled?: boolean;
 
+    mcp?: PublicEndpointParams.Mcp;
+
     rate_limit?: PublicEndpointParams.RateLimit;
+
+    search_endpoint?: PublicEndpointParams.SearchEndpoint;
   }
 
   export namespace PublicEndpointParams {
+    export interface ChatCompletionsEndpoint {
+      /**
+       * Disable chat completions endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
+    export interface Mcp {
+      /**
+       * Disable MCP endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
     export interface RateLimit {
       period_ms?: number;
 
       requests?: number;
 
       technique?: 'fixed' | 'sliding';
+    }
+
+    export interface SearchEndpoint {
+      /**
+       * Disable search endpoint for this public endpoint
+       */
+      disabled?: boolean;
     }
   }
 
@@ -1363,18 +1471,45 @@ export namespace InstanceReadResponse {
   export interface PublicEndpointParams {
     authorized_hosts?: Array<string>;
 
+    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
+
     enabled?: boolean;
 
+    mcp?: PublicEndpointParams.Mcp;
+
     rate_limit?: PublicEndpointParams.RateLimit;
+
+    search_endpoint?: PublicEndpointParams.SearchEndpoint;
   }
 
   export namespace PublicEndpointParams {
+    export interface ChatCompletionsEndpoint {
+      /**
+       * Disable chat completions endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
+    export interface Mcp {
+      /**
+       * Disable MCP endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
     export interface RateLimit {
       period_ms?: number;
 
       requests?: number;
 
       technique?: 'fixed' | 'sliding';
+    }
+
+    export interface SearchEndpoint {
+      /**
+       * Disable search endpoint for this public endpoint
+       */
+      disabled?: boolean;
     }
   }
 
@@ -1622,18 +1757,45 @@ export namespace InstanceCreateParams {
   export interface PublicEndpointParams {
     authorized_hosts?: Array<string>;
 
+    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
+
     enabled?: boolean;
 
+    mcp?: PublicEndpointParams.Mcp;
+
     rate_limit?: PublicEndpointParams.RateLimit;
+
+    search_endpoint?: PublicEndpointParams.SearchEndpoint;
   }
 
   export namespace PublicEndpointParams {
+    export interface ChatCompletionsEndpoint {
+      /**
+       * Disable chat completions endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
+    export interface Mcp {
+      /**
+       * Disable MCP endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
     export interface RateLimit {
       period_ms?: number;
 
       requests?: number;
 
       technique?: 'fixed' | 'sliding';
+    }
+
+    export interface SearchEndpoint {
+      /**
+       * Disable search endpoint for this public endpoint
+       */
+      disabled?: boolean;
     }
   }
 
@@ -1914,18 +2076,45 @@ export namespace InstanceUpdateParams {
   export interface PublicEndpointParams {
     authorized_hosts?: Array<string>;
 
+    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
+
     enabled?: boolean;
 
+    mcp?: PublicEndpointParams.Mcp;
+
     rate_limit?: PublicEndpointParams.RateLimit;
+
+    search_endpoint?: PublicEndpointParams.SearchEndpoint;
   }
 
   export namespace PublicEndpointParams {
+    export interface ChatCompletionsEndpoint {
+      /**
+       * Disable chat completions endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
+    export interface Mcp {
+      /**
+       * Disable MCP endpoint for this public endpoint
+       */
+      disabled?: boolean;
+    }
+
     export interface RateLimit {
       period_ms?: number;
 
       requests?: number;
 
       technique?: 'fixed' | 'sliding';
+    }
+
+    export interface SearchEndpoint {
+      /**
+       * Disable search endpoint for this public endpoint
+       */
+      disabled?: boolean;
     }
   }
 

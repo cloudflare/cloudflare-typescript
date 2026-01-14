@@ -119,8 +119,26 @@ export const tool: Tool = {
               type: 'string',
             },
           },
+          chat_completions_endpoint: {
+            type: 'object',
+            properties: {
+              disabled: {
+                type: 'boolean',
+                description: 'Disable chat completions endpoint for this public endpoint',
+              },
+            },
+          },
           enabled: {
             type: 'boolean',
+          },
+          mcp: {
+            type: 'object',
+            properties: {
+              disabled: {
+                type: 'boolean',
+                description: 'Disable MCP endpoint for this public endpoint',
+              },
+            },
           },
           rate_limit: {
             type: 'object',
@@ -134,6 +152,15 @@ export const tool: Tool = {
               technique: {
                 type: 'string',
                 enum: ['fixed', 'sliding'],
+              },
+            },
+          },
+          search_endpoint: {
+            type: 'object',
+            properties: {
+              disabled: {
+                type: 'boolean',
+                description: 'Disable search endpoint for this public endpoint',
               },
             },
           },
