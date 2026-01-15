@@ -163,6 +163,8 @@ export interface OnRampCreateResponse {
 
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE';
 
+  dynamic_routing: boolean;
+
   install_routes_in_cloud: boolean;
 
   install_routes_in_magic_wan: boolean;
@@ -176,6 +178,8 @@ export interface OnRampCreateResponse {
   attached_hubs?: Array<string>;
 
   attached_vpcs?: Array<string>;
+
+  cloud_asn?: number;
 
   description?: string;
 
@@ -976,6 +980,7 @@ export namespace OnRampCreateResponse {
         | 1015
         | 1016
         | 1017
+        | 1018
         | 2001
         | 2002
         | 2003
@@ -1099,6 +1104,12 @@ export namespace OnRampCreateResponse {
         | 102064
         | 102065
         | 102066
+        | 102067
+        | 102068
+        | 102069
+        | 102070
+        | 102071
+        | 102072
         | 103001
         | 103002
         | 103003
@@ -1721,6 +1732,8 @@ export interface OnRampUpdateResponse {
 
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE';
 
+  dynamic_routing: boolean;
+
   install_routes_in_cloud: boolean;
 
   install_routes_in_magic_wan: boolean;
@@ -1734,6 +1747,8 @@ export interface OnRampUpdateResponse {
   attached_hubs?: Array<string>;
 
   attached_vpcs?: Array<string>;
+
+  cloud_asn?: number;
 
   description?: string;
 
@@ -2534,6 +2549,7 @@ export namespace OnRampUpdateResponse {
         | 1015
         | 1016
         | 1017
+        | 1018
         | 2001
         | 2002
         | 2003
@@ -2657,6 +2673,12 @@ export namespace OnRampUpdateResponse {
         | 102064
         | 102065
         | 102066
+        | 102067
+        | 102068
+        | 102069
+        | 102070
+        | 102071
+        | 102072
         | 103001
         | 103002
         | 103003
@@ -3279,6 +3301,8 @@ export interface OnRampListResponse {
 
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE';
 
+  dynamic_routing: boolean;
+
   install_routes_in_cloud: boolean;
 
   install_routes_in_magic_wan: boolean;
@@ -3292,6 +3316,8 @@ export interface OnRampListResponse {
   attached_hubs?: Array<string>;
 
   attached_vpcs?: Array<string>;
+
+  cloud_asn?: number;
 
   description?: string;
 
@@ -4092,6 +4118,7 @@ export namespace OnRampListResponse {
         | 1015
         | 1016
         | 1017
+        | 1018
         | 2001
         | 2002
         | 2003
@@ -4215,6 +4242,12 @@ export namespace OnRampListResponse {
         | 102064
         | 102065
         | 102066
+        | 102067
+        | 102068
+        | 102069
+        | 102070
+        | 102071
+        | 102072
         | 103001
         | 103002
         | 103003
@@ -4864,6 +4897,7 @@ export namespace OnRampApplyResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -4987,6 +5021,12 @@ export namespace OnRampApplyResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
@@ -5044,6 +5084,7 @@ export namespace OnRampApplyResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -5167,6 +5208,12 @@ export namespace OnRampApplyResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
@@ -5211,6 +5258,8 @@ export interface OnRampEditResponse {
 
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE';
 
+  dynamic_routing: boolean;
+
   install_routes_in_cloud: boolean;
 
   install_routes_in_magic_wan: boolean;
@@ -5224,6 +5273,8 @@ export interface OnRampEditResponse {
   attached_hubs?: Array<string>;
 
   attached_vpcs?: Array<string>;
+
+  cloud_asn?: number;
 
   description?: string;
 
@@ -6024,6 +6075,7 @@ export namespace OnRampEditResponse {
         | 1015
         | 1016
         | 1017
+        | 1018
         | 2001
         | 2002
         | 2003
@@ -6147,6 +6199,12 @@ export namespace OnRampEditResponse {
         | 102064
         | 102065
         | 102066
+        | 102067
+        | 102068
+        | 102069
+        | 102070
+        | 102071
+        | 102072
         | 103001
         | 103002
         | 103003
@@ -6769,6 +6827,8 @@ export interface OnRampGetResponse {
 
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE';
 
+  dynamic_routing: boolean;
+
   install_routes_in_cloud: boolean;
 
   install_routes_in_magic_wan: boolean;
@@ -6782,6 +6842,8 @@ export interface OnRampGetResponse {
   attached_hubs?: Array<string>;
 
   attached_vpcs?: Array<string>;
+
+  cloud_asn?: number;
 
   description?: string;
 
@@ -7582,6 +7644,7 @@ export namespace OnRampGetResponse {
         | 1015
         | 1016
         | 1017
+        | 1018
         | 2001
         | 2002
         | 2003
@@ -7705,6 +7768,12 @@ export namespace OnRampGetResponse {
         | 102064
         | 102065
         | 102066
+        | 102067
+        | 102068
+        | 102069
+        | 102070
+        | 102071
+        | 102072
         | 103001
         | 103002
         | 103003
@@ -8350,6 +8419,7 @@ export namespace OnRampPlanResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -8473,6 +8543,12 @@ export namespace OnRampPlanResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
@@ -8530,6 +8606,7 @@ export namespace OnRampPlanResponse {
       | 1015
       | 1016
       | 1017
+      | 1018
       | 2001
       | 2002
       | 2003
@@ -8653,6 +8730,12 @@ export namespace OnRampPlanResponse {
       | 102064
       | 102065
       | 102066
+      | 102067
+      | 102068
+      | 102069
+      | 102070
+      | 102071
+      | 102072
       | 103001
       | 103002
       | 103003
@@ -8704,6 +8787,12 @@ export interface OnRampCreateParams {
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE';
 
   /**
+   * Body param: if set to true, install_routes_in_cloud and
+   * install_routes_in_magic_wan should be set to false
+   */
+  dynamic_routing: boolean;
+
+  /**
    * Body param:
    */
   install_routes_in_cloud: boolean;
@@ -8737,6 +8826,12 @@ export interface OnRampCreateParams {
    * Body param:
    */
   attached_vpcs?: Array<string>;
+
+  /**
+   * Body param: the ASN to use on the cloud side. If unset or zero, the cloud's
+   * default will be used.
+   */
+  cloud_asn?: number;
 
   /**
    * Body param:

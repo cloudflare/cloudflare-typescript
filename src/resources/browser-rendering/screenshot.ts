@@ -8,6 +8,15 @@ export class Screenshot extends APIResource {
    * Takes a screenshot of a webpage from provided URL or HTML. Control page loading
    * with `gotoOptions` and `waitFor*` options. Customize screenshots with
    * `viewport`, `fullPage`, `clip` and others.
+   *
+   * @example
+   * ```ts
+   * const screenshot =
+   *   await client.browserRendering.screenshot.create({
+   *     account_id: 'account_id',
+   *     html: '<h1>Hello World!</h1>',
+   *   });
+   * ```
    */
   create(
     params: ScreenshotCreateParams,
@@ -26,7 +35,7 @@ export interface ScreenshotCreateResponse {
   /**
    * Response status
    */
-  status: boolean;
+  success: boolean;
 
   errors?: Array<ScreenshotCreateResponse.Error>;
 }
@@ -45,321 +54,632 @@ export namespace ScreenshotCreateResponse {
   }
 }
 
-export interface ScreenshotCreateParams {
-  /**
-   * Path param: Account ID.
-   */
-  account_id: string;
+export type ScreenshotCreateParams = ScreenshotCreateParams.Variant0 | ScreenshotCreateParams.Variant1;
 
-  /**
-   * Query param: Cache TTL default is 5s. Set to 0 to disable.
-   */
-  cacheTTL?: number;
+export declare namespace ScreenshotCreateParams {
+  export interface Variant0 {
+    /**
+     * Path param: Account ID.
+     */
+    account_id: string;
 
-  /**
-   * Body param: The maximum duration allowed for the browser action to complete
-   * after the page has loaded (such as taking screenshots, extracting content, or
-   * generating PDFs). If this time limit is exceeded, the action stops and returns a
-   * timeout error.
-   */
-  actionTimeout?: number;
+    /**
+     * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
+     * `html` or `url` must be set.
+     */
+    html: string;
 
-  /**
-   * Body param: Adds a `<script>` tag into the page with the desired URL or content.
-   */
-  addScriptTag?: Array<ScreenshotCreateParams.AddScriptTag>;
+    /**
+     * Query param: Cache TTL default is 5s. Set to 0 to disable.
+     */
+    cacheTTL?: number;
 
-  /**
-   * Body param: Adds a `<link rel="stylesheet">` tag into the page with the desired
-   * URL or a `<style type="text/css">` tag with the content.
-   */
-  addStyleTag?: Array<ScreenshotCreateParams.AddStyleTag>;
+    /**
+     * Body param: The maximum duration allowed for the browser action to complete
+     * after the page has loaded (such as taking screenshots, extracting content, or
+     * generating PDFs). If this time limit is exceeded, the action stops and returns a
+     * timeout error.
+     */
+    actionTimeout?: number;
 
-  /**
-   * Body param: Only allow requests that match the provided regex patterns, eg.
-   * '/^.\*\.(css)'.
-   */
-  allowRequestPattern?: Array<string>;
+    /**
+     * Body param: Adds a `<script>` tag into the page with the desired URL or content.
+     */
+    addScriptTag?: Array<Variant0.AddScriptTag>;
 
-  /**
-   * Body param: Only allow requests that match the provided resource types, eg.
-   * 'image' or 'script'.
-   */
-  allowResourceTypes?: Array<
-    | 'document'
-    | 'stylesheet'
-    | 'image'
-    | 'media'
-    | 'font'
-    | 'script'
-    | 'texttrack'
-    | 'xhr'
-    | 'fetch'
-    | 'prefetch'
-    | 'eventsource'
-    | 'websocket'
-    | 'manifest'
-    | 'signedexchange'
-    | 'ping'
-    | 'cspviolationreport'
-    | 'preflight'
-    | 'other'
-  >;
+    /**
+     * Body param: Adds a `<link rel="stylesheet">` tag into the page with the desired
+     * URL or a `<style type="text/css">` tag with the content.
+     */
+    addStyleTag?: Array<Variant0.AddStyleTag>;
 
-  /**
-   * Body param: Provide credentials for HTTP authentication.
-   */
-  authenticate?: ScreenshotCreateParams.Authenticate;
+    /**
+     * Body param: Only allow requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    allowRequestPattern?: Array<string>;
 
-  /**
-   * Body param: Attempt to proceed when 'awaited' events fail or timeout.
-   */
-  bestAttempt?: boolean;
+    /**
+     * Body param: Only allow requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    allowResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
 
-  /**
-   * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
-   */
-  cookies?: Array<ScreenshotCreateParams.Cookie>;
+    /**
+     * Body param: Provide credentials for HTTP authentication.
+     */
+    authenticate?: Variant0.Authenticate;
 
-  /**
-   * Body param:
-   */
-  emulateMediaType?: string;
+    /**
+     * Body param: Attempt to proceed when 'awaited' events fail or timeout.
+     */
+    bestAttempt?: boolean;
 
-  /**
-   * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
-   */
-  gotoOptions?: ScreenshotCreateParams.GotoOptions;
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+     */
+    cookies?: Array<Variant0.Cookie>;
 
-  /**
-   * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
-   * `html` or `url` must be set.
-   */
-  html?: string;
+    /**
+     * Body param:
+     */
+    emulateMediaType?: string;
 
-  /**
-   * Body param: Block undesired requests that match the provided regex patterns, eg.
-   * '/^.\*\.(css)'.
-   */
-  rejectRequestPattern?: Array<string>;
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+     */
+    gotoOptions?: Variant0.GotoOptions;
 
-  /**
-   * Body param: Block undesired requests that match the provided resource types, eg.
-   * 'image' or 'script'.
-   */
-  rejectResourceTypes?: Array<
-    | 'document'
-    | 'stylesheet'
-    | 'image'
-    | 'media'
-    | 'font'
-    | 'script'
-    | 'texttrack'
-    | 'xhr'
-    | 'fetch'
-    | 'prefetch'
-    | 'eventsource'
-    | 'websocket'
-    | 'manifest'
-    | 'signedexchange'
-    | 'ping'
-    | 'cspviolationreport'
-    | 'preflight'
-    | 'other'
-  >;
+    /**
+     * Body param: Block undesired requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    rejectRequestPattern?: Array<string>;
 
-  /**
-   * Body param: Check [options](https://pptr.dev/api/puppeteer.screenshotoptions).
-   */
-  screenshotOptions?: ScreenshotCreateParams.ScreenshotOptions;
+    /**
+     * Body param: Block undesired requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    rejectResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
 
-  /**
-   * Body param:
-   */
-  scrollPage?: boolean;
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.screenshotoptions).
+     */
+    screenshotOptions?: Variant0.ScreenshotOptions;
 
-  /**
-   * Body param:
-   */
-  selector?: string;
+    /**
+     * Body param:
+     */
+    scrollPage?: boolean;
 
-  /**
-   * Body param:
-   */
-  setExtraHTTPHeaders?: { [key: string]: string };
+    /**
+     * Body param:
+     */
+    selector?: string;
 
-  /**
-   * Body param:
-   */
-  setJavaScriptEnabled?: boolean;
+    /**
+     * Body param:
+     */
+    setExtraHTTPHeaders?: { [key: string]: string };
 
-  /**
-   * Body param: URL to navigate to, eg. `https://example.com`.
-   */
-  url?: string;
+    /**
+     * Body param:
+     */
+    setJavaScriptEnabled?: boolean;
 
-  /**
-   * Body param:
-   */
-  userAgent?: string;
+    /**
+     * Body param:
+     */
+    userAgent?: string;
 
-  /**
-   * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
-   */
-  viewport?: ScreenshotCreateParams.Viewport;
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+     */
+    viewport?: Variant0.Viewport;
 
-  /**
-   * Body param: Wait for the selector to appear in page. Check
-   * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
-   */
-  waitForSelector?: ScreenshotCreateParams.WaitForSelector;
+    /**
+     * Body param: Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+     */
+    waitForSelector?: Variant0.WaitForSelector;
 
-  /**
-   * Body param: Waits for a specified timeout before continuing.
-   */
-  waitForTimeout?: number;
-}
-
-export namespace ScreenshotCreateParams {
-  export interface AddScriptTag {
-    id?: string;
-
-    content?: string;
-
-    type?: string;
-
-    url?: string;
+    /**
+     * Body param: Waits for a specified timeout before continuing.
+     */
+    waitForTimeout?: number;
   }
 
-  export interface AddStyleTag {
-    content?: string;
+  export namespace Variant0 {
+    export interface AddScriptTag {
+      id?: string;
 
-    url?: string;
-  }
+      content?: string;
 
-  /**
-   * Provide credentials for HTTP authentication.
-   */
-  export interface Authenticate {
-    password: string;
+      type?: string;
 
-    username: string;
-  }
+      url?: string;
+    }
 
-  export interface Cookie {
-    name: string;
+    export interface AddStyleTag {
+      content?: string;
 
-    value: string;
+      url?: string;
+    }
 
-    domain?: string;
+    /**
+     * Provide credentials for HTTP authentication.
+     */
+    export interface Authenticate {
+      password: string;
 
-    expires?: number;
+      username: string;
+    }
 
-    httpOnly?: boolean;
+    export interface Cookie {
+      name: string;
 
-    partitionKey?: string;
+      value: string;
 
-    path?: string;
+      domain?: string;
 
-    priority?: 'Low' | 'Medium' | 'High';
+      expires?: number;
 
-    sameParty?: boolean;
+      httpOnly?: boolean;
 
-    sameSite?: 'Strict' | 'Lax' | 'None';
+      partitionKey?: string;
 
-    secure?: boolean;
+      path?: string;
 
-    sourcePort?: number;
+      priority?: 'Low' | 'Medium' | 'High';
 
-    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+      sameParty?: boolean;
 
-    url?: string;
-  }
+      sameSite?: 'Strict' | 'Lax' | 'None';
 
-  /**
-   * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
-   */
-  export interface GotoOptions {
-    referer?: string;
+      secure?: boolean;
 
-    referrerPolicy?: string;
+      sourcePort?: number;
 
-    timeout?: number;
+      sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
 
-    waitUntil?:
-      | 'load'
-      | 'domcontentloaded'
-      | 'networkidle0'
-      | 'networkidle2'
-      | Array<'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2'>;
-  }
+      url?: string;
+    }
 
-  /**
-   * Check [options](https://pptr.dev/api/puppeteer.screenshotoptions).
-   */
-  export interface ScreenshotOptions {
-    captureBeyondViewport?: boolean;
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+     */
+    export interface GotoOptions {
+      referer?: string;
 
-    clip?: ScreenshotOptions.Clip;
+      referrerPolicy?: string;
 
-    encoding?: 'binary' | 'base64';
+      timeout?: number;
 
-    fromSurface?: boolean;
+      waitUntil?:
+        | 'load'
+        | 'domcontentloaded'
+        | 'networkidle0'
+        | 'networkidle2'
+        | Array<'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2'>;
+    }
 
-    fullPage?: boolean;
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.screenshotoptions).
+     */
+    export interface ScreenshotOptions {
+      captureBeyondViewport?: boolean;
 
-    omitBackground?: boolean;
+      clip?: ScreenshotOptions.Clip;
 
-    optimizeForSpeed?: boolean;
+      encoding?: 'binary' | 'base64';
 
-    quality?: number;
+      fromSurface?: boolean;
 
-    type?: 'png' | 'jpeg' | 'webp';
-  }
+      fullPage?: boolean;
 
-  export namespace ScreenshotOptions {
-    export interface Clip {
+      omitBackground?: boolean;
+
+      optimizeForSpeed?: boolean;
+
+      quality?: number;
+
+      type?: 'png' | 'jpeg' | 'webp';
+    }
+
+    export namespace ScreenshotOptions {
+      export interface Clip {
+        height: number;
+
+        width: number;
+
+        x: number;
+
+        y: number;
+
+        scale?: number;
+      }
+    }
+
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+     */
+    export interface Viewport {
       height: number;
 
       width: number;
 
-      x: number;
+      deviceScaleFactor?: number;
 
-      y: number;
+      hasTouch?: boolean;
 
-      scale?: number;
+      isLandscape?: boolean;
+
+      isMobile?: boolean;
+    }
+
+    /**
+     * Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+     */
+    export interface WaitForSelector {
+      selector: string;
+
+      hidden?: true;
+
+      timeout?: number;
+
+      visible?: true;
     }
   }
 
-  /**
-   * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
-   */
-  export interface Viewport {
-    height: number;
+  export interface Variant1 {
+    /**
+     * Path param: Account ID.
+     */
+    account_id: string;
 
-    width: number;
+    /**
+     * Body param: URL to navigate to, eg. `https://example.com`.
+     */
+    url: string;
 
-    deviceScaleFactor?: number;
+    /**
+     * Query param: Cache TTL default is 5s. Set to 0 to disable.
+     */
+    cacheTTL?: number;
 
-    hasTouch?: boolean;
+    /**
+     * Body param: The maximum duration allowed for the browser action to complete
+     * after the page has loaded (such as taking screenshots, extracting content, or
+     * generating PDFs). If this time limit is exceeded, the action stops and returns a
+     * timeout error.
+     */
+    actionTimeout?: number;
 
-    isLandscape?: boolean;
+    /**
+     * Body param: Adds a `<script>` tag into the page with the desired URL or content.
+     */
+    addScriptTag?: Array<Variant1.AddScriptTag>;
 
-    isMobile?: boolean;
+    /**
+     * Body param: Adds a `<link rel="stylesheet">` tag into the page with the desired
+     * URL or a `<style type="text/css">` tag with the content.
+     */
+    addStyleTag?: Array<Variant1.AddStyleTag>;
+
+    /**
+     * Body param: Only allow requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    allowRequestPattern?: Array<string>;
+
+    /**
+     * Body param: Only allow requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    allowResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
+
+    /**
+     * Body param: Provide credentials for HTTP authentication.
+     */
+    authenticate?: Variant1.Authenticate;
+
+    /**
+     * Body param: Attempt to proceed when 'awaited' events fail or timeout.
+     */
+    bestAttempt?: boolean;
+
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+     */
+    cookies?: Array<Variant1.Cookie>;
+
+    /**
+     * Body param:
+     */
+    emulateMediaType?: string;
+
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+     */
+    gotoOptions?: Variant1.GotoOptions;
+
+    /**
+     * Body param: Block undesired requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    rejectRequestPattern?: Array<string>;
+
+    /**
+     * Body param: Block undesired requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    rejectResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
+
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.screenshotoptions).
+     */
+    screenshotOptions?: Variant1.ScreenshotOptions;
+
+    /**
+     * Body param:
+     */
+    scrollPage?: boolean;
+
+    /**
+     * Body param:
+     */
+    selector?: string;
+
+    /**
+     * Body param:
+     */
+    setExtraHTTPHeaders?: { [key: string]: string };
+
+    /**
+     * Body param:
+     */
+    setJavaScriptEnabled?: boolean;
+
+    /**
+     * Body param:
+     */
+    userAgent?: string;
+
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+     */
+    viewport?: Variant1.Viewport;
+
+    /**
+     * Body param: Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+     */
+    waitForSelector?: Variant1.WaitForSelector;
+
+    /**
+     * Body param: Waits for a specified timeout before continuing.
+     */
+    waitForTimeout?: number;
   }
 
-  /**
-   * Wait for the selector to appear in page. Check
-   * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
-   */
-  export interface WaitForSelector {
-    selector: string;
+  export namespace Variant1 {
+    export interface AddScriptTag {
+      id?: string;
 
-    hidden?: true;
+      content?: string;
 
-    timeout?: number;
+      type?: string;
 
-    visible?: true;
+      url?: string;
+    }
+
+    export interface AddStyleTag {
+      content?: string;
+
+      url?: string;
+    }
+
+    /**
+     * Provide credentials for HTTP authentication.
+     */
+    export interface Authenticate {
+      password: string;
+
+      username: string;
+    }
+
+    export interface Cookie {
+      name: string;
+
+      value: string;
+
+      domain?: string;
+
+      expires?: number;
+
+      httpOnly?: boolean;
+
+      partitionKey?: string;
+
+      path?: string;
+
+      priority?: 'Low' | 'Medium' | 'High';
+
+      sameParty?: boolean;
+
+      sameSite?: 'Strict' | 'Lax' | 'None';
+
+      secure?: boolean;
+
+      sourcePort?: number;
+
+      sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+
+      url?: string;
+    }
+
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+     */
+    export interface GotoOptions {
+      referer?: string;
+
+      referrerPolicy?: string;
+
+      timeout?: number;
+
+      waitUntil?:
+        | 'load'
+        | 'domcontentloaded'
+        | 'networkidle0'
+        | 'networkidle2'
+        | Array<'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2'>;
+    }
+
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.screenshotoptions).
+     */
+    export interface ScreenshotOptions {
+      captureBeyondViewport?: boolean;
+
+      clip?: ScreenshotOptions.Clip;
+
+      encoding?: 'binary' | 'base64';
+
+      fromSurface?: boolean;
+
+      fullPage?: boolean;
+
+      omitBackground?: boolean;
+
+      optimizeForSpeed?: boolean;
+
+      quality?: number;
+
+      type?: 'png' | 'jpeg' | 'webp';
+    }
+
+    export namespace ScreenshotOptions {
+      export interface Clip {
+        height: number;
+
+        width: number;
+
+        x: number;
+
+        y: number;
+
+        scale?: number;
+      }
+    }
+
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+     */
+    export interface Viewport {
+      height: number;
+
+      width: number;
+
+      deviceScaleFactor?: number;
+
+      hasTouch?: boolean;
+
+      isLandscape?: boolean;
+
+      isMobile?: boolean;
+    }
+
+    /**
+     * Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+     */
+    export interface WaitForSelector {
+      selector: string;
+
+      hidden?: true;
+
+      timeout?: number;
+
+      visible?: true;
+    }
   }
 }
 

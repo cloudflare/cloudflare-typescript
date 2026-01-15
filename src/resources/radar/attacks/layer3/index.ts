@@ -1,6 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Layer3, type Layer3TimeseriesResponse, type Layer3TimeseriesParams } from './layer3';
+export {
+  Layer3,
+  type Layer3SummaryV2Response,
+  type Layer3TimeseriesResponse,
+  type Layer3TimeseriesGroupsV2Response,
+  type Layer3SummaryV2Params,
+  type Layer3TimeseriesParams,
+  type Layer3TimeseriesGroupsV2Params,
+} from './layer3';
 export {
   Summary,
   type SummaryBitrateResponse,

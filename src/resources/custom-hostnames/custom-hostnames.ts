@@ -39,7 +39,6 @@ export class CustomHostnames extends APIResource {
    * const customHostname = await client.customHostnames.create({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   hostname: 'app.example.com',
-   *   ssl: {},
    * });
    * ```
    */
@@ -1720,15 +1719,15 @@ export interface CustomHostnameCreateParams {
   hostname: string;
 
   /**
-   * Body param: SSL properties used when creating the custom hostname.
-   */
-  ssl: CustomHostnameCreateParams.SSL;
-
-  /**
    * Body param: Unique key/value metadata for this hostname. These are per-hostname
    * (customer) settings.
    */
   custom_metadata?: { [key: string]: string };
+
+  /**
+   * Body param: SSL properties used when creating the custom hostname.
+   */
+  ssl?: CustomHostnameCreateParams.SSL;
 }
 
 export namespace CustomHostnameCreateParams {

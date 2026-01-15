@@ -17,7 +17,7 @@ export class Integrations extends APIResource {
    *       config: {
    *         api_url: 'https://as123.awmdm.com/API',
    *         auth_url:
-   *           'https://na.uemauth.vmwservices.com/connect/token',
+   *           'https://na.uemauth.workspaceone.com/connect/token',
    *         client_id: 'example client id',
    *         client_secret: 'example client secret',
    *       },

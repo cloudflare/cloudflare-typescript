@@ -14,7 +14,6 @@ describe('resource customHostnames', () => {
     const responsePromise = client.customHostnames.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       hostname: 'app.example.com',
-      ssl: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,6 +28,7 @@ describe('resource customHostnames', () => {
     const response = await client.customHostnames.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       hostname: 'app.example.com',
+      custom_metadata: { foo: 'string' },
       ssl: {
         bundle_method: 'ubiquitous',
         certificate_authority: 'google',
@@ -56,7 +56,6 @@ describe('resource customHostnames', () => {
         type: 'dv',
         wildcard: false,
       },
-      custom_metadata: { foo: 'string' },
     });
   });
 

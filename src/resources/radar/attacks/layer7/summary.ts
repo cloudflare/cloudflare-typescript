@@ -8,11 +8,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by HTTP method.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.httpMethod();
-   * ```
+   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
    */
   httpMethod(
     query?: SummaryHTTPMethodParams,
@@ -37,11 +33,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by HTTP version.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.httpVersion();
-   * ```
+   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
    */
   httpVersion(
     query?: SummaryHTTPVersionParams,
@@ -66,11 +58,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by targeted industry.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.industry();
-   * ```
+   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
    */
   industry(
     query?: SummaryIndustryParams,
@@ -94,11 +82,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by IP version.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.ipVersion();
-   * ```
+   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
    */
   ipVersion(
     query?: SummaryIPVersionParams,
@@ -122,11 +106,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by managed rules.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.managedRules();
-   * ```
+   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
    */
   managedRules(
     query?: SummaryManagedRulesParams,
@@ -151,11 +131,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by mitigation product.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.mitigationProduct();
-   * ```
+   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
    */
   mitigationProduct(
     query?: SummaryMitigationProductParams,
@@ -180,11 +156,7 @@ export class Summary extends APIResource {
   /**
    * Retrieves the distribution of layer 7 attacks by targeted vertical.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.attacks.layer7.summary.vertical();
-   * ```
+   * @deprecated Use [Radar Attacks Layer 7 Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/attacks/subresources/layer7/methods/summary_v2/) instead.
    */
   vertical(
     query?: SummaryVerticalParams,
@@ -264,13 +236,44 @@ export namespace SummaryHTTPMethodResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -361,13 +364,44 @@ export namespace SummaryHTTPVersionResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -466,13 +500,44 @@ export namespace SummaryIndustryResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -563,13 +628,44 @@ export namespace SummaryIPVersionResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -666,13 +762,44 @@ export namespace SummaryManagedRulesResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -763,13 +890,44 @@ export namespace SummaryMitigationProductResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -860,13 +1018,44 @@ export namespace SummaryVerticalResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.

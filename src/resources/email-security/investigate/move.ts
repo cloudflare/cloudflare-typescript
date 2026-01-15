@@ -72,7 +72,12 @@ export class MoveBulkResponsesSinglePage extends SinglePage<MoveBulkResponse> {}
 export interface MoveCreateResponse {
   completed_timestamp: string;
 
+  /**
+   * @deprecated
+   */
   item_count: number;
+
+  success: boolean;
 
   destination?: string | null;
 
@@ -88,7 +93,12 @@ export interface MoveCreateResponse {
 export interface MoveBulkResponse {
   completed_timestamp: string;
 
+  /**
+   * @deprecated
+   */
   item_count: number;
+
+  success: boolean;
 
   destination?: string | null;
 

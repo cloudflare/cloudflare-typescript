@@ -11,7 +11,12 @@ const client = new Cloudflare({
 
 describe('resource connectivityPrecheck', () => {
   test('source: only required params', async () => {
-    const responsePromise = client.r2.superSlurper.connectivityPrecheck.source({ account_id: 'account_id' });
+    const responsePromise = client.r2.superSlurper.connectivityPrecheck.source({
+      account_id: 'account_id',
+      bucket: 'bucket',
+      secret: { accessKeyId: 'accessKeyId', secretAccessKey: 'secretAccessKey' },
+      vendor: 's3',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,14 +30,21 @@ describe('resource connectivityPrecheck', () => {
     const response = await client.r2.superSlurper.connectivityPrecheck.source({
       account_id: 'account_id',
       bucket: 'bucket',
-      endpoint: 'endpoint',
       secret: { accessKeyId: 'accessKeyId', secretAccessKey: 'secretAccessKey' },
       vendor: 's3',
+      endpoint: 'endpoint',
+      pathPrefix: 'pathPrefix',
+      region: 'region',
     });
   });
 
   test('target: only required params', async () => {
-    const responsePromise = client.r2.superSlurper.connectivityPrecheck.target({ account_id: 'account_id' });
+    const responsePromise = client.r2.superSlurper.connectivityPrecheck.target({
+      account_id: 'account_id',
+      bucket: 'bucket',
+      secret: { accessKeyId: 'accessKeyId', secretAccessKey: 'secretAccessKey' },
+      vendor: 'r2',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,9 +58,9 @@ describe('resource connectivityPrecheck', () => {
     const response = await client.r2.superSlurper.connectivityPrecheck.target({
       account_id: 'account_id',
       bucket: 'bucket',
-      jurisdiction: 'default',
       secret: { accessKeyId: 'accessKeyId', secretAccessKey: 'secretAccessKey' },
       vendor: 'r2',
+      jurisdiction: 'default',
     });
   });
 });

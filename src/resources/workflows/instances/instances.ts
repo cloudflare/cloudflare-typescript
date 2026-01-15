@@ -321,12 +321,26 @@ export interface InstanceCreateParams {
   /**
    * Body param:
    */
-  instance_retention?: unknown;
+  instance_retention?: InstanceCreateParams.InstanceRetention;
 
   /**
    * Body param:
    */
   params?: unknown;
+}
+
+export namespace InstanceCreateParams {
+  export interface InstanceRetention {
+    /**
+     * Duration in milliseconds or as a string like '5 minutes'
+     */
+    error_retention?: number | string;
+
+    /**
+     * Duration in milliseconds or as a string like '5 minutes'
+     */
+    success_retention?: number | string;
+  }
 }
 
 export interface InstanceListParams extends V4PagePaginationArrayParams {
@@ -386,9 +400,23 @@ export namespace InstanceBulkParams {
   export interface Body {
     instance_id?: string;
 
-    instance_retention?: unknown;
+    instance_retention?: Body.InstanceRetention;
 
     params?: unknown;
+  }
+
+  export namespace Body {
+    export interface InstanceRetention {
+      /**
+       * Duration in milliseconds or as a string like '5 minutes'
+       */
+      error_retention?: number | string;
+
+      /**
+       * Duration in milliseconds or as a string like '5 minutes'
+       */
+      success_retention?: number | string;
+    }
   }
 }
 

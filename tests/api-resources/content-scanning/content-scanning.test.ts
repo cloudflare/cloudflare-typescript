@@ -10,6 +10,48 @@ const client = new Cloudflare({
 });
 
 describe('resource contentScanning', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.contentScanning.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      value: 'enabled',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: required and optional params', async () => {
+    const response = await client.contentScanning.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      value: 'enabled',
+    });
+  });
+
+  test('update: only required params', async () => {
+    const responsePromise = client.contentScanning.update({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      value: 'enabled',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.contentScanning.update({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      value: 'enabled',
+    });
+  });
+
   test('disable: only required params', async () => {
     const responsePromise = client.contentScanning.disable({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
@@ -38,5 +80,20 @@ describe('resource contentScanning', () => {
 
   test('enable: required and optional params', async () => {
     const response = await client.contentScanning.enable({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.contentScanning.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.contentScanning.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

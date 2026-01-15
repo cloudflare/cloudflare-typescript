@@ -405,8 +405,7 @@ export namespace Video {
     errorReasonText?: string;
 
     /**
-     * Indicates the size of the entire upload in bytes. The value must be a
-     * non-negative integer.
+     * Indicates the progress as a percentage between 0 and 100.
      */
     pctComplete?: string;
 

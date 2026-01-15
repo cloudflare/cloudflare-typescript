@@ -9,13 +9,7 @@ export {
   type ConnectionGetParams,
 } from './connections';
 export {
-  CloudflaredListResponsesV4PagePaginationArray,
   Cloudflared,
-  type CloudflaredCreateResponse,
-  type CloudflaredListResponse,
-  type CloudflaredDeleteResponse,
-  type CloudflaredEditResponse,
-  type CloudflaredGetResponse,
   type CloudflaredCreateParams,
   type CloudflaredListParams,
   type CloudflaredDeleteParams,

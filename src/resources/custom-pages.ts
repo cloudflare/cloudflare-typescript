@@ -24,13 +24,16 @@ export class CustomPages extends APIResource {
    */
   update(
     identifier:
-      | 'waf_block'
-      | 'ip_block'
-      | 'country_challenge'
-      | '500_errors'
       | '1000_errors'
+      | '500_errors'
+      | 'basic_challenge'
+      | 'country_challenge'
+      | 'ip_block'
       | 'managed_challenge'
-      | 'ratelimit_block',
+      | 'ratelimit_block'
+      | 'under_attack'
+      | 'waf_block'
+      | 'waf_challenge',
     params: CustomPageUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageUpdateResponse> {
@@ -123,36 +126,45 @@ export class CustomPages extends APIResource {
    */
   get(
     identifier:
-      | 'waf_block'
-      | 'ip_block'
-      | 'country_challenge'
-      | '500_errors'
       | '1000_errors'
+      | '500_errors'
+      | 'basic_challenge'
+      | 'country_challenge'
+      | 'ip_block'
       | 'managed_challenge'
-      | 'ratelimit_block',
+      | 'ratelimit_block'
+      | 'under_attack'
+      | 'waf_block'
+      | 'waf_challenge',
     params?: CustomPageGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageGetResponse>;
   get(
     identifier:
-      | 'waf_block'
-      | 'ip_block'
-      | 'country_challenge'
-      | '500_errors'
       | '1000_errors'
+      | '500_errors'
+      | 'basic_challenge'
+      | 'country_challenge'
+      | 'ip_block'
       | 'managed_challenge'
-      | 'ratelimit_block',
+      | 'ratelimit_block'
+      | 'under_attack'
+      | 'waf_block'
+      | 'waf_challenge',
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageGetResponse>;
   get(
     identifier:
-      | 'waf_block'
-      | 'ip_block'
-      | 'country_challenge'
-      | '500_errors'
       | '1000_errors'
+      | '500_errors'
+      | 'basic_challenge'
+      | 'country_challenge'
+      | 'ip_block'
       | 'managed_challenge'
-      | 'ratelimit_block',
+      | 'ratelimit_block'
+      | 'under_attack'
+      | 'waf_block'
+      | 'waf_challenge',
     params: CustomPageGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageGetResponse> {

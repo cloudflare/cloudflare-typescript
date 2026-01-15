@@ -87,7 +87,6 @@ export interface ScriptAndVersionSettingEditResponse {
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindSecretText
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindSendEmail
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindService
-    | ScriptAndVersionSettingEditResponse.WorkersBindingKindTailConsumer
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindTextBlob
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindVectorize
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindVersionMetadata
@@ -128,18 +127,24 @@ export interface ScriptAndVersionSettingEditResponse {
   /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   * Specify either mode for Smart Placement, or one of region/hostname/host for
+   * targeted placement.
    */
-  placement?: ScriptAndVersionSettingEditResponse.Placement;
+  placement?:
+    | ScriptAndVersionSettingEditResponse.Mode
+    | ScriptAndVersionSettingEditResponse.Region
+    | ScriptAndVersionSettingEditResponse.Hostname
+    | ScriptAndVersionSettingEditResponse.Host;
 
   /**
    * Tags associated with the Worker.
    */
-  tags?: Array<string>;
+  tags?: Array<string> | null;
 
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScript>;
+  tail_consumers?: Array<TailAPI.ConsumerScript> | null;
 
   /**
    * Usage model for the Worker invocations.
@@ -243,7 +248,7 @@ export namespace ScriptAndVersionSettingEditResponse {
     name: string;
 
     /**
-     * Namespace to bind to.
+     * The name of the dispatch namespace.
      */
     namespace: string;
 
@@ -568,23 +573,6 @@ export namespace ScriptAndVersionSettingEditResponse {
     environment?: string;
   }
 
-  export interface WorkersBindingKindTailConsumer {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * Name of Tail Worker to bind to.
-     */
-    service: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'tail_consumer';
-  }
-
   export interface WorkersBindingKindTextBlob {
     /**
      * A JavaScript variable name for the binding.
@@ -798,16 +786,33 @@ export namespace ScriptAndVersionSettingEditResponse {
     }
   }
 
-  /**
-   * Configuration for
-   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-   */
-  export interface Placement {
+  export interface Mode {
     /**
      * Enables
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      */
-    mode?: 'smart';
+    mode: 'smart';
+  }
+
+  export interface Region {
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+  }
+
+  export interface Hostname {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+  }
+
+  export interface Host {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
   }
 }
 
@@ -839,7 +844,6 @@ export interface ScriptAndVersionSettingGetResponse {
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindSecretText
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindSendEmail
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindService
-    | ScriptAndVersionSettingGetResponse.WorkersBindingKindTailConsumer
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindTextBlob
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindVectorize
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindVersionMetadata
@@ -880,18 +884,24 @@ export interface ScriptAndVersionSettingGetResponse {
   /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   * Specify either mode for Smart Placement, or one of region/hostname/host for
+   * targeted placement.
    */
-  placement?: ScriptAndVersionSettingGetResponse.Placement;
+  placement?:
+    | ScriptAndVersionSettingGetResponse.Mode
+    | ScriptAndVersionSettingGetResponse.Region
+    | ScriptAndVersionSettingGetResponse.Hostname
+    | ScriptAndVersionSettingGetResponse.Host;
 
   /**
    * Tags associated with the Worker.
    */
-  tags?: Array<string>;
+  tags?: Array<string> | null;
 
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScript>;
+  tail_consumers?: Array<TailAPI.ConsumerScript> | null;
 
   /**
    * Usage model for the Worker invocations.
@@ -995,7 +1005,7 @@ export namespace ScriptAndVersionSettingGetResponse {
     name: string;
 
     /**
-     * Namespace to bind to.
+     * The name of the dispatch namespace.
      */
     namespace: string;
 
@@ -1320,23 +1330,6 @@ export namespace ScriptAndVersionSettingGetResponse {
     environment?: string;
   }
 
-  export interface WorkersBindingKindTailConsumer {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * Name of Tail Worker to bind to.
-     */
-    service: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'tail_consumer';
-  }
-
   export interface WorkersBindingKindTextBlob {
     /**
      * A JavaScript variable name for the binding.
@@ -1550,16 +1543,33 @@ export namespace ScriptAndVersionSettingGetResponse {
     }
   }
 
-  /**
-   * Configuration for
-   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-   */
-  export interface Placement {
+  export interface Mode {
     /**
      * Enables
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      */
-    mode?: 'smart';
+    mode: 'smart';
+  }
+
+  export interface Region {
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+  }
+
+  export interface Hostname {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+  }
+
+  export interface Host {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
   }
 }
 
@@ -1604,7 +1614,6 @@ export namespace ScriptAndVersionSettingEditParams {
       | Settings.WorkersBindingKindSecretText
       | Settings.WorkersBindingKindSendEmail
       | Settings.WorkersBindingKindService
-      | Settings.WorkersBindingKindTailConsumer
       | Settings.WorkersBindingKindTextBlob
       | Settings.WorkersBindingKindVectorize
       | Settings.WorkersBindingKindVersionMetadata
@@ -1650,18 +1659,20 @@ export namespace ScriptAndVersionSettingEditParams {
     /**
      * Configuration for
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     * Specify either mode for Smart Placement, or one of region/hostname/host for
+     * targeted placement.
      */
-    placement?: Settings.Placement;
+    placement?: Settings.Mode | Settings.Region | Settings.Hostname | Settings.Host;
 
     /**
      * Tags associated with the Worker.
      */
-    tags?: Array<string>;
+    tags?: Array<string> | null;
 
     /**
      * List of Workers that will consume logs from the attached Worker.
      */
-    tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
+    tail_consumers?: Array<TailAPI.ConsumerScriptParam> | null;
 
     /**
      * Usage model for the Worker invocations.
@@ -1765,7 +1776,7 @@ export namespace ScriptAndVersionSettingEditParams {
       name: string;
 
       /**
-       * Namespace to bind to.
+       * The name of the dispatch namespace.
        */
       namespace: string;
 
@@ -2095,23 +2106,6 @@ export namespace ScriptAndVersionSettingEditParams {
       environment?: string;
     }
 
-    export interface WorkersBindingKindTailConsumer {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * Name of Tail Worker to bind to.
-       */
-      service: string;
-
-      /**
-       * The kind of resource that the binding provides.
-       */
-      type: 'tail_consumer';
-    }
-
     export interface WorkersBindingKindTextBlob {
       /**
        * A JavaScript variable name for the binding.
@@ -2355,16 +2349,33 @@ export namespace ScriptAndVersionSettingEditParams {
       }
     }
 
-    /**
-     * Configuration for
-     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-     */
-    export interface Placement {
+    export interface Mode {
       /**
        * Enables
        * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
        */
-      mode?: 'smart';
+      mode: 'smart';
+    }
+
+    export interface Region {
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface Hostname {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface Host {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
     }
   }
 }

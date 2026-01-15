@@ -401,6 +401,11 @@ export interface DomainListParams extends V4PagePaginationArrayParams {
   domain?: Array<string>;
 
   /**
+   * Query param: Filters response to domains with the provided integration ID.
+   */
+  integration_id?: string;
+
+  /**
    * Query param: The field to sort by.
    */
   order?: 'domain' | 'created_at';

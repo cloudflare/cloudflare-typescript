@@ -553,7 +553,7 @@ export interface RatePlan {
   scope?: string;
 
   /**
-   * The list of sets this rate plan applies to.
+   * The list of sets this rate plan applies to. Returns array of strings.
    */
   sets?: Array<string>;
 }
@@ -603,7 +603,7 @@ export interface RatePlanParam {
   scope?: string;
 
   /**
-   * The list of sets this rate plan applies to.
+   * The list of sets this rate plan applies to. Returns array of strings.
    */
   sets?: Array<string>;
 }
@@ -998,3 +998,5 @@ export class SubscriptionsSinglePage extends SinglePage<Subscription> {}
 export class TokensV4PagePaginationArray extends V4PagePaginationArray<Token> {}
 
 export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}
+
+export class CloudflareTunnelsV4PagePaginationArray extends V4PagePaginationArray<CloudflareTunnel> {}

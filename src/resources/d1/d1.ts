@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import * as DatabaseAPI from './database';
+import * as DatabaseAPI from './database/database';
 import {
   Database,
   DatabaseCreateParams,
@@ -23,7 +23,7 @@ import {
   DatabaseUpdateParams,
   QueryResult,
   QueryResultsSinglePage,
-} from './database';
+} from './database/database';
 
 export class D1Resource extends APIResource {
   database: DatabaseAPI.Database = new DatabaseAPI.Database(this._client);

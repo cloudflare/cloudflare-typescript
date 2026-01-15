@@ -176,12 +176,32 @@ export interface Account {
   created_on?: string;
 
   /**
+   * Parent container details
+   */
+  managed_by?: Account.ManagedBy;
+
+  /**
    * Account settings
    */
   settings?: Account.Settings;
 }
 
 export namespace Account {
+  /**
+   * Parent container details
+   */
+  export interface ManagedBy {
+    /**
+     * ID of the parent Organization, if one exists
+     */
+    parent_org_id?: string;
+
+    /**
+     * Name of the parent Organization, if one exists
+     */
+    parent_org_name?: string;
+  }
+
   /**
    * Account settings
    */
@@ -258,12 +278,22 @@ export interface AccountUpdateParams {
   type: 'standard' | 'enterprise';
 
   /**
+   * Body param: Parent container details
+   */
+  managed_by?: AccountUpdateParams.ManagedBy;
+
+  /**
    * Body param: Account settings
    */
   settings?: AccountUpdateParams.Settings;
 }
 
 export namespace AccountUpdateParams {
+  /**
+   * Parent container details
+   */
+  export interface ManagedBy {}
+
   /**
    * Account settings
    */

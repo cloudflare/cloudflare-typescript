@@ -12,7 +12,6 @@ export class Domains extends APIResource {
    * ```ts
    * const domain = await client.workers.domains.update({
    *   account_id: '9a7806061c88ada191ed06f989cc3dac',
-   *   environment: 'production',
    *   hostname: 'foo.example.com',
    *   service: 'foo',
    *   zone_id: '593c9c94de529bbbfaac7c53ced0447d',
@@ -98,7 +97,7 @@ export interface Domain {
   id?: string;
 
   /**
-   * Worker environment associated with the zone and hostname.
+   * @deprecated Worker environment associated with the zone and hostname.
    */
   environment?: string;
 
@@ -130,11 +129,6 @@ export interface DomainUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Worker environment associated with the zone and hostname.
-   */
-  environment: string;
-
-  /**
    * Body param: Hostname of the Worker Domain.
    */
   hostname: string;
@@ -148,6 +142,12 @@ export interface DomainUpdateParams {
    * Body param: Identifier of the zone.
    */
   zone_id: string;
+
+  /**
+   * @deprecated Body param: Worker environment associated with the zone and
+   * hostname.
+   */
+  environment?: string;
 }
 
 export interface DomainListParams {

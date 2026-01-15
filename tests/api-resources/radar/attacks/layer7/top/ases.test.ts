@@ -41,7 +41,7 @@ describe('resource ases', () => {
           httpMethod: ['GET'],
           httpVersion: ['HTTPv1'],
           ipVersion: ['IPv4'],
-          limit: 5,
+          limit: 1,
           location: ['string'],
           mitigationProduct: ['DDOS'],
           name: ['main_series'],

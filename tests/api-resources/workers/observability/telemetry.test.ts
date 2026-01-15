@@ -26,10 +26,11 @@ describe('resource telemetry', () => {
       account_id: 'account_id',
       datasets: ['string'],
       filters: [{ key: 'key', operation: 'includes', type: 'string', value: 'string' }],
+      from: 0,
       keyNeedle: { value: 'string', isRegex: true, matchCase: true },
       limit: 0,
       needle: { value: 'string', isRegex: true, matchCase: true },
-      timeframe: { from: 0, to: 0 },
+      to: 0,
     });
   });
 
@@ -58,7 +59,7 @@ describe('resource telemetry', () => {
       dry: true,
       granularity: 0,
       ignoreSeries: true,
-      limit: 100,
+      limit: 2000,
       offset: 'offset',
       offsetBy: 0,
       offsetDirection: 'offsetDirection',

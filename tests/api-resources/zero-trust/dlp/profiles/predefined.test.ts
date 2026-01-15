@@ -10,33 +10,6 @@ const client = new Cloudflare({
 });
 
 describe('resource predefined', () => {
-  test('create: only required params', async () => {
-    const responsePromise = client.zeroTrust.dlp.profiles.predefined.create({
-      account_id: 'account_id',
-      profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('create: required and optional params', async () => {
-    const response = await client.zeroTrust.dlp.profiles.predefined.create({
-      account_id: 'account_id',
-      profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      ai_context_enabled: true,
-      allowed_match_count: 5,
-      confidence_threshold: 'confidence_threshold',
-      context_awareness: { enabled: true, skip: { files: true } },
-      entries: [{ id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', enabled: true }],
-      ocr_enabled: true,
-    });
-  });
-
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.profiles.predefined.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -59,7 +32,7 @@ describe('resource predefined', () => {
         ai_context_enabled: true,
         allowed_match_count: 5,
         confidence_threshold: 'confidence_threshold',
-        context_awareness: { enabled: true, skip: { files: true } },
+        enabled_entries: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         entries: [{ id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', enabled: true }],
         ocr_enabled: true,
       },

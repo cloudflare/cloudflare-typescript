@@ -51,7 +51,10 @@ describe('resource categories', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('list: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.categories.list({ account_id: 'account_id' });
+    const response = await client.cloudforceOne.threatEvents.categories.list({
+      account_id: 'account_id',
+      datasetIds: ['string'],
+    });
   });
 
   // TODO: HTTP 401 from prism

@@ -8,11 +8,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by cache status over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.cacheHit();
-   * ```
+   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
    */
   cacheHit(
     query?: TimeseriesGroupCacheHitParams,
@@ -37,11 +33,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of DNS responses by DNSSEC (DNS Security Extensions)
    * support over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.dnssec();
-   * ```
+   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
    */
   dnssec(
     query?: TimeseriesGroupDNSSECParams,
@@ -66,11 +58,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of DNS queries by DNSSEC (DNS Security Extensions)
    * client awareness over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.dnssecAware();
-   * ```
+   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
    */
   dnssecAware(
     query?: TimeseriesGroupDNSSECAwareParams,
@@ -96,11 +84,7 @@ export class TimeseriesGroups extends APIResource {
    * Retrieves the distribution of DNSSEC-validated answers by end-to-end security
    * status over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.dnssecE2E();
-   * ```
+   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
    */
   dnssecE2E(
     query?: TimeseriesGroupDNSSECE2EParams,
@@ -124,11 +108,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by IP version over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.ipVersion();
-   * ```
+   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -152,11 +132,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by matching answers over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.matchingAnswer();
-   * ```
+   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
    */
   matchingAnswer(
     query?: TimeseriesGroupMatchingAnswerParams,
@@ -181,11 +157,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by DNS transport protocol over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.protocol();
-   * ```
+   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
    */
   protocol(
     query?: TimeseriesGroupProtocolParams,
@@ -209,11 +181,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by type over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.queryType();
-   * ```
+   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
    */
   queryType(
     query?: TimeseriesGroupQueryTypeParams,
@@ -237,11 +205,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by response code over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.responseCode();
-   * ```
+   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
    */
   responseCode(
     query?: TimeseriesGroupResponseCodeParams,
@@ -266,11 +230,7 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Retrieves the distribution of DNS queries by minimum answer TTL over time.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.dns.timeseriesGroups.responseTTL();
-   * ```
+   * @deprecated Use [Radar DNS Timeseries Groups By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/dns/methods/timeseries_groups_v2/) instead.
    */
   responseTTL(
     query?: TimeseriesGroupResponseTTLParams,
@@ -358,13 +318,44 @@ export namespace TimeseriesGroupCacheHitResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -468,13 +459,44 @@ export namespace TimeseriesGroupDNSSECResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -582,13 +604,44 @@ export namespace TimeseriesGroupDNSSECAwareResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -692,13 +745,44 @@ export namespace TimeseriesGroupDNSSECE2EResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -802,13 +886,44 @@ export namespace TimeseriesGroupIPVersionResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -912,13 +1027,44 @@ export namespace TimeseriesGroupMatchingAnswerResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -1022,13 +1168,44 @@ export namespace TimeseriesGroupProtocolResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -1136,13 +1313,44 @@ export namespace TimeseriesGroupQueryTypeResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -1246,13 +1454,44 @@ export namespace TimeseriesGroupResponseCodeResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -1356,13 +1595,44 @@ export namespace TimeseriesGroupResponseTTLResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -1471,17 +1741,17 @@ export interface TimeseriesGroupCacheHitParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1570,12 +1840,13 @@ export interface TimeseriesGroupCacheHitParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1594,10 +1865,11 @@ export interface TimeseriesGroupCacheHitParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -1662,17 +1934,17 @@ export interface TimeseriesGroupDNSSECParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1761,12 +2033,13 @@ export interface TimeseriesGroupDNSSECParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1785,10 +2058,11 @@ export interface TimeseriesGroupDNSSECParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -1853,17 +2127,17 @@ export interface TimeseriesGroupDNSSECAwareParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -1952,12 +2226,13 @@ export interface TimeseriesGroupDNSSECAwareParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -1976,10 +2251,11 @@ export interface TimeseriesGroupDNSSECAwareParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2044,17 +2320,17 @@ export interface TimeseriesGroupDNSSECE2EParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2143,12 +2419,13 @@ export interface TimeseriesGroupDNSSECE2EParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2167,10 +2444,11 @@ export interface TimeseriesGroupDNSSECE2EParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2235,17 +2513,17 @@ export interface TimeseriesGroupIPVersionParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2334,12 +2612,13 @@ export interface TimeseriesGroupIPVersionParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2358,10 +2637,11 @@ export interface TimeseriesGroupIPVersionParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2426,17 +2706,17 @@ export interface TimeseriesGroupMatchingAnswerParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2525,12 +2805,13 @@ export interface TimeseriesGroupMatchingAnswerParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2549,10 +2830,11 @@ export interface TimeseriesGroupMatchingAnswerParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2617,12 +2899,12 @@ export interface TimeseriesGroupProtocolParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -2711,12 +2993,13 @@ export interface TimeseriesGroupProtocolParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2735,10 +3018,11 @@ export interface TimeseriesGroupProtocolParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2810,17 +3094,17 @@ export interface TimeseriesGroupQueryTypeParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -2839,10 +3123,11 @@ export interface TimeseriesGroupQueryTypeParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -2914,17 +3199,17 @@ export interface TimeseriesGroupResponseCodeParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -3013,10 +3298,11 @@ export interface TimeseriesGroupResponseCodeParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }
@@ -3081,17 +3367,17 @@ export interface TimeseriesGroupResponseTTLParams {
   /**
    * Specifies whether the response includes empty DNS responses (NODATA).
    */
-  nodata?: boolean;
+  nodata?: Array<boolean>;
 
   /**
    * Filters results by DNS transport protocol.
    */
-  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  protocol?: Array<'UDP' | 'TCP' | 'HTTPS' | 'TLS'>;
 
   /**
    * Filters results by DNS query type.
    */
-  queryType?:
+  queryType?: Array<
     | 'A'
     | 'AAAA'
     | 'A6'
@@ -3180,12 +3466,13 @@ export interface TimeseriesGroupResponseTTLParams {
     | 'WKS'
     | 'X25'
     | 'ZONEMD'
-    | null;
+    | null
+  >;
 
   /**
    * Filters results by DNS response code.
    */
-  responseCode?:
+  responseCode?: Array<
     | 'NOERROR'
     | 'FORMERR'
     | 'SERVFAIL'
@@ -3204,10 +3491,11 @@ export interface TimeseriesGroupResponseTTLParams {
     | 'BADNAME'
     | 'BADALG'
     | 'BADTRUNC'
-    | 'BADCOOKIE';
+    | 'BADCOOKIE'
+  >;
 
   /**
-   * Filters results by country code top-level domain (ccTLD).
+   * Filters results by top-level domain.
    */
   tld?: Array<string>;
 }

@@ -122,7 +122,7 @@ export namespace InsightListResponse {
 
     issue_type?: IssuesAPI.IssueType;
 
-    payload?: unknown;
+    payload?: Issue.Payload;
 
     resolve_link?: string;
 
@@ -135,6 +135,17 @@ export namespace InsightListResponse {
     subject?: string;
 
     timestamp?: string;
+  }
+
+  export namespace Issue {
+    export interface Payload {
+      /**
+       * Method used to detect insight
+       */
+      detection_method?: string;
+
+      zone_tag?: string;
+    }
   }
 }
 

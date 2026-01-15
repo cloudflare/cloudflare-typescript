@@ -16,6 +16,8 @@ TEST_PATHS=(
 	tests/api-resources/accounts/tokens/value.test.ts
 	tests/api-resources/accounts/logs/logs.test.ts
 	tests/api-resources/accounts/logs/audit.test.ts
+	tests/api-resources/organizations/organizations.test.ts
+	tests/api-resources/organizations/organization-profile.test.ts
 	tests/api-resources/origin-ca-certificates.test.ts
 	tests/api-resources/ips.test.ts
 	tests/api-resources/memberships.test.ts
@@ -369,8 +371,10 @@ TEST_PATHS=(
 	tests/api-resources/alerting/destinations/webhooks.test.ts
 	tests/api-resources/alerting/history.test.ts
 	tests/api-resources/alerting/policies.test.ts
+	tests/api-resources/alerting/silences.test.ts
 	tests/api-resources/d1/d1.test.ts
-	tests/api-resources/d1/database.test.ts
+	tests/api-resources/d1/database/database.test.ts
+	tests/api-resources/d1/database/time-travel.test.ts
 	tests/api-resources/r2/r2.test.ts
 	tests/api-resources/r2/buckets/buckets.test.ts
 	tests/api-resources/r2/buckets/lifecycle.test.ts
@@ -387,6 +391,12 @@ TEST_PATHS=(
 	tests/api-resources/r2/super-slurper/jobs/jobs.test.ts
 	tests/api-resources/r2/super-slurper/jobs/logs.test.ts
 	tests/api-resources/r2/super-slurper/connectivity-precheck.test.ts
+	tests/api-resources/r2-data-catalog/r2-data-catalog.test.ts
+	tests/api-resources/r2-data-catalog/maintenance-configs.test.ts
+	tests/api-resources/r2-data-catalog/credentials.test.ts
+	tests/api-resources/r2-data-catalog/namespaces/namespaces.test.ts
+	tests/api-resources/r2-data-catalog/namespaces/tables/tables.test.ts
+	tests/api-resources/r2-data-catalog/namespaces/tables/maintenance-configs.test.ts
 	tests/api-resources/workers-for-platforms/workers-for-platforms.test.ts
 	tests/api-resources/workers-for-platforms/dispatch/dispatch.test.ts
 	tests/api-resources/workers-for-platforms/dispatch/namespaces/namespaces.test.ts
@@ -430,6 +440,10 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/organizations/doh.test.ts
 	tests/api-resources/zero-trust/seats.test.ts
 	tests/api-resources/zero-trust/access/access.test.ts
+	tests/api-resources/zero-trust/access/ai-controls/ai-controls.test.ts
+	tests/api-resources/zero-trust/access/ai-controls/mcp/mcp.test.ts
+	tests/api-resources/zero-trust/access/ai-controls/mcp/portals.test.ts
+	tests/api-resources/zero-trust/access/ai-controls/mcp/servers.test.ts
 	tests/api-resources/zero-trust/access/gateway-ca.test.ts
 	tests/api-resources/zero-trust/access/infrastructure/infrastructure.test.ts
 	tests/api-resources/zero-trust/access/infrastructure/targets.test.ts
@@ -529,6 +543,9 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/risk-scoring/integrations/references.test.ts
 	tests/api-resources/turnstile/turnstile.test.ts
 	tests/api-resources/turnstile/widgets.test.ts
+	tests/api-resources/connectivity/connectivity.test.ts
+	tests/api-resources/connectivity/directory/directory.test.ts
+	tests/api-resources/connectivity/directory/services.test.ts
 	tests/api-resources/hyperdrive/hyperdrive.test.ts
 	tests/api-resources/hyperdrive/configs.test.ts
 	tests/api-resources/rum/rum.test.ts
@@ -607,6 +624,7 @@ TEST_PATHS=(
 	tests/api-resources/radar/entities/entities.test.ts
 	tests/api-resources/radar/entities/asns.test.ts
 	tests/api-resources/radar/entities/locations.test.ts
+	tests/api-resources/radar/geolocations.test.ts
 	tests/api-resources/radar/http/http.test.ts
 	tests/api-resources/radar/http/locations/locations.test.ts
 	tests/api-resources/radar/http/locations/bot-class.test.ts
@@ -667,6 +685,16 @@ TEST_PATHS=(
 	tests/api-resources/snippets/snippets.test.ts
 	tests/api-resources/snippets/content.test.ts
 	tests/api-resources/snippets/rules.test.ts
+	tests/api-resources/realtime-kit/realtime-kit.test.ts
+	tests/api-resources/realtime-kit/apps.test.ts
+	tests/api-resources/realtime-kit/meetings.test.ts
+	tests/api-resources/realtime-kit/presets.test.ts
+	tests/api-resources/realtime-kit/sessions.test.ts
+	tests/api-resources/realtime-kit/recordings.test.ts
+	tests/api-resources/realtime-kit/webhooks.test.ts
+	tests/api-resources/realtime-kit/active-session.test.ts
+	tests/api-resources/realtime-kit/livestreams.test.ts
+	tests/api-resources/realtime-kit/analytics.test.ts
 	tests/api-resources/calls/calls.test.ts
 	tests/api-resources/calls/sfu.test.ts
 	tests/api-resources/calls/turn.test.ts
@@ -701,6 +729,7 @@ TEST_PATHS=(
 	tests/api-resources/iam/resource-groups.test.ts
 	tests/api-resources/iam/user-groups/user-groups.test.ts
 	tests/api-resources/iam/user-groups/members.test.ts
+	tests/api-resources/iam/sso.test.ts
 	tests/api-resources/cloud-connector/cloud-connector.test.ts
 	tests/api-resources/cloud-connector/rules.test.ts
 	tests/api-resources/botnet-feed/botnet-feed.test.ts
@@ -721,7 +750,8 @@ TEST_PATHS=(
 	tests/api-resources/content-scanning/content-scanning.test.ts
 	tests/api-resources/content-scanning/payloads.test.ts
 	tests/api-resources/content-scanning/settings.test.ts
-	tests/api-resources/abuse-reports.test.ts
+	tests/api-resources/abuse-reports/abuse-reports.test.ts
+	tests/api-resources/abuse-reports/mitigations.test.ts
 	tests/api-resources/ai/ai.test.ts
 	tests/api-resources/ai/finetunes/finetunes.test.ts
 	tests/api-resources/ai/finetunes/assets.test.ts
@@ -731,6 +761,11 @@ TEST_PATHS=(
 	tests/api-resources/ai/models/models.test.ts
 	tests/api-resources/ai/models/schema.test.ts
 	tests/api-resources/ai/to-markdown.test.ts
+	tests/api-resources/aisearch/aisearch.test.ts
+	tests/api-resources/aisearch/instances/instances.test.ts
+	tests/api-resources/aisearch/instances/items.test.ts
+	tests/api-resources/aisearch/instances/jobs.test.ts
+	tests/api-resources/aisearch/tokens.test.ts
 	tests/api-resources/security-center/security-center.test.ts
 	tests/api-resources/security-center/insights/insights.test.ts
 	tests/api-resources/security-center/insights/class.test.ts
@@ -750,11 +785,17 @@ TEST_PATHS=(
 	tests/api-resources/secrets-store/stores/stores.test.ts
 	tests/api-resources/secrets-store/stores/secrets.test.ts
 	tests/api-resources/secrets-store/quota.test.ts
-	tests/api-resources/pipelines.test.ts
+	tests/api-resources/pipelines/pipelines.test.ts
+	tests/api-resources/pipelines/sinks.test.ts
+	tests/api-resources/pipelines/streams.test.ts
 	tests/api-resources/schema-validation/schema-validation.test.ts
 	tests/api-resources/schema-validation/schemas.test.ts
 	tests/api-resources/schema-validation/settings/settings.test.ts
 	tests/api-resources/schema-validation/settings/operations.test.ts
+	tests/api-resources/token-validation/token-validation.test.ts
+	tests/api-resources/token-validation/configuration/configuration.test.ts
+	tests/api-resources/token-validation/configuration/credentials.test.ts
+	tests/api-resources/token-validation/rules.test.ts
 	tests/index.test.ts
 )
 

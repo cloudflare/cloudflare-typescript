@@ -42,7 +42,9 @@ export class Investigate extends APIResource {
   release: ReleaseAPI.Release = new ReleaseAPI.Release(this._client);
 
   /**
-   * Returns information for each email that matches the search parameter(s).
+   * Returns information for each email that matches the search parameter(s). If the
+   * search takes too long, the endpoint returns 202 with a Location header pointing
+   * to a polling endpoint where results can be retrieved once ready.
    *
    * @example
    * ```ts
@@ -135,6 +137,10 @@ export interface InvestigateListResponse {
 
   edf_hash?: string | null;
 
+  envelope_from?: string | null;
+
+  envelope_to?: Array<string> | null;
+
   final_disposition?:
     | 'MALICIOUS'
     | 'MALICIOUS-BEC'
@@ -157,6 +163,10 @@ export interface InvestigateListResponse {
   htmltext_structure_hash?: string | null;
 
   message_id?: string | null;
+
+  postfix_id_outbound?: string | null;
+
+  replyto?: string | null;
 
   sent_date?: string | null;
 
@@ -182,7 +192,8 @@ export namespace InvestigateListResponse {
       | 'allowed_recipient'
       | 'domain_similarity'
       | 'domain_recency'
-      | 'managed_acceptable_sender';
+      | 'managed_acceptable_sender'
+      | 'outbound_ndr';
 
     blocklisted_message?: boolean;
 
@@ -195,13 +206,37 @@ export namespace InvestigateListResponse {
       | 'allowed_recipient'
       | 'domain_similarity'
       | 'domain_recency'
-      | 'managed_acceptable_sender';
+      | 'managed_acceptable_sender'
+      | 'outbound_ndr';
   }
 
   export interface Finding {
+    attachment?: string | null;
+
     detail?: string | null;
 
+    detection?:
+      | 'MALICIOUS'
+      | 'MALICIOUS-BEC'
+      | 'SUSPICIOUS'
+      | 'SPOOF'
+      | 'SPAM'
+      | 'BULK'
+      | 'ENCRYPTED'
+      | 'EXTERNAL'
+      | 'UNKNOWN'
+      | 'NONE'
+      | null;
+
+    field?: string | null;
+
     name?: string | null;
+
+    portion?: string | null;
+
+    reason?: string | null;
+
+    score?: number | null;
 
     value?: string | null;
   }
@@ -257,6 +292,10 @@ export interface InvestigateGetResponse {
 
   edf_hash?: string | null;
 
+  envelope_from?: string | null;
+
+  envelope_to?: Array<string> | null;
+
   final_disposition?:
     | 'MALICIOUS'
     | 'MALICIOUS-BEC'
@@ -279,6 +318,10 @@ export interface InvestigateGetResponse {
   htmltext_structure_hash?: string | null;
 
   message_id?: string | null;
+
+  postfix_id_outbound?: string | null;
+
+  replyto?: string | null;
 
   sent_date?: string | null;
 
@@ -304,7 +347,8 @@ export namespace InvestigateGetResponse {
       | 'allowed_recipient'
       | 'domain_similarity'
       | 'domain_recency'
-      | 'managed_acceptable_sender';
+      | 'managed_acceptable_sender'
+      | 'outbound_ndr';
 
     blocklisted_message?: boolean;
 
@@ -317,13 +361,37 @@ export namespace InvestigateGetResponse {
       | 'allowed_recipient'
       | 'domain_similarity'
       | 'domain_recency'
-      | 'managed_acceptable_sender';
+      | 'managed_acceptable_sender'
+      | 'outbound_ndr';
   }
 
   export interface Finding {
+    attachment?: string | null;
+
     detail?: string | null;
 
+    detection?:
+      | 'MALICIOUS'
+      | 'MALICIOUS-BEC'
+      | 'SUSPICIOUS'
+      | 'SPOOF'
+      | 'SPAM'
+      | 'BULK'
+      | 'ENCRYPTED'
+      | 'EXTERNAL'
+      | 'UNKNOWN'
+      | 'NONE'
+      | null;
+
+    field?: string | null;
+
     name?: string | null;
+
+    portion?: string | null;
+
+    reason?: string | null;
+
+    score?: number | null;
 
     value?: string | null;
   }
@@ -354,6 +422,11 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
    * Query param:
    */
   alert_id?: string;
+
+  /**
+   * Query param:
+   */
+  cursor?: string;
 
   /**
    * Query param: Determines if the search results will include detections or not.

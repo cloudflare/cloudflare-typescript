@@ -1,8 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { AI } from './ai';
-export { Bots } from './bots/index';
-export { Inference } from './inference/index';
+export {
+  Bots,
+  type BotSummaryV2Response,
+  type BotTimeseriesResponse,
+  type BotTimeseriesGroupsResponse,
+  type BotSummaryV2Params,
+  type BotTimeseriesParams,
+  type BotTimeseriesGroupsParams,
+} from './bots/index';
+export {
+  Inference,
+  type InferenceSummaryV2Response,
+  type InferenceTimeseriesGroupsV2Response,
+  type InferenceSummaryV2Params,
+  type InferenceTimeseriesGroupsV2Params,
+} from './inference/index';
 export {
   TimeseriesGroups,
   type TimeseriesGroupSummaryResponse,
