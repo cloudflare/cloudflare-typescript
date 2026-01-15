@@ -373,7 +373,8 @@ TEST_PATHS=(
 	tests/api-resources/alerting/policies.test.ts
 	tests/api-resources/alerting/silences.test.ts
 	tests/api-resources/d1/d1.test.ts
-	tests/api-resources/d1/database.test.ts
+	tests/api-resources/d1/database/database.test.ts
+	tests/api-resources/d1/database/time-travel.test.ts
 	tests/api-resources/r2/r2.test.ts
 	tests/api-resources/r2/buckets/buckets.test.ts
 	tests/api-resources/r2/buckets/lifecycle.test.ts

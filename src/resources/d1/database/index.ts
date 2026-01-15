@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { D1Resource } from './d1';
 export {
   DatabaseListResponsesV4PagePaginationArray,
   QueryResultsSinglePage,
@@ -22,4 +21,11 @@ export {
   type DatabaseImportParams,
   type DatabaseQueryParams,
   type DatabaseRawParams,
-} from './database/index';
+} from './database';
+export {
+  TimeTravel,
+  type TimeTravelGetBookmarkResponse,
+  type TimeTravelRestoreResponse,
+  type TimeTravelGetBookmarkParams,
+  type TimeTravelRestoreParams,
+} from './time-travel';
