@@ -2341,6 +2341,12 @@ The following tools are available in this MCP server.
 - `query_d1_database` (`write`): Returns the query result as an object.
 - `raw_d1_database` (`write`): Returns the query result rows as arrays rather than objects. This is a performance-optimized version of the /query endpoint.
 
+### Resource `d1.database.time_travel`:
+
+- `get_bookmark_database_d1_time_travel` (`read`): Retrieves the current bookmark, or the nearest bookmark at or before a provided timestamp.
+  Bookmarks can be used with the restore endpoint to revert the database to a previous point in time.
+- `restore_database_d1_time_travel` (`write`): Restores a D1 database to a previous point in time either via a bookmark or a timestamp.
+
 ### Resource `r2.buckets`:
 
 - `create_r2_buckets` (`write`): Creates a new R2 bucket.

@@ -562,6 +562,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.d1.database.import()`
 - `client.d1.database.query()`
 - `client.d1.database.raw()`
+- `client.d1.database.timeTravel.getBookmark()`
+- `client.d1.database.timeTravel.restore()`
 - `client.r2.buckets.delete()`
 - `client.r2.buckets.edit()`
 - `client.r2.buckets.get()`
