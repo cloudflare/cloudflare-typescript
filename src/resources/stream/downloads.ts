@@ -6,7 +6,8 @@ import * as Core from '../../core';
 export class Downloads extends APIResource {
   /**
    * Creates a download for a video when a video is ready to view. Use
-   * `/downloads/{download_type}` instead for type-specific downloads.
+   * `/downloads/{download_type}` instead for type-specific downloads. Available
+   * types are `default` and `audio`.
    *
    * @example
    * ```ts
@@ -35,7 +36,7 @@ export class Downloads extends APIResource {
 
   /**
    * Delete the downloads for a video. Use `/downloads/{download_type}` instead for
-   * type-specific downloads.
+   * type-specific downloads. Available types are `default` and `audio`.
    *
    * @example
    * ```ts
@@ -84,11 +85,82 @@ export class Downloads extends APIResource {
   }
 }
 
-export type DownloadCreateResponse = unknown;
+export interface DownloadCreateResponse {
+  /**
+   * Indicates the progress as a percentage between 0 and 100.
+   */
+  percentComplete?: number;
+
+  /**
+   * The status of a generated download.
+   */
+  status?: 'ready' | 'inprogress' | 'error';
+
+  /**
+   * The URL to access the generated download.
+   */
+  url?: string;
+}
 
 export type DownloadDeleteResponse = string;
 
-export type DownloadGetResponse = unknown;
+/**
+ * An object with download type keys. Each key is optional and only present if that
+ * download type has been created.
+ */
+export interface DownloadGetResponse {
+  /**
+   * The audio-only download. Only present if this download type has been created.
+   */
+  audio?: DownloadGetResponse.Audio;
+
+  /**
+   * The default video download. Only present if this download type has been created.
+   */
+  default?: DownloadGetResponse.Default;
+}
+
+export namespace DownloadGetResponse {
+  /**
+   * The audio-only download. Only present if this download type has been created.
+   */
+  export interface Audio {
+    /**
+     * Indicates the progress as a percentage between 0 and 100.
+     */
+    percentComplete?: number;
+
+    /**
+     * The status of a generated download.
+     */
+    status?: 'ready' | 'inprogress' | 'error';
+
+    /**
+     * The URL to access the generated download.
+     */
+    url?: string;
+  }
+
+  /**
+   * The default video download. Only present if this download type has been created.
+   */
+  export interface Default {
+    /**
+     * Indicates the progress as a percentage between 0 and 100.
+     */
+    percentComplete?: number;
+
+    /**
+     * The status of a generated download.
+     */
+    status?: 'ready' | 'inprogress' | 'error';
+
+    /**
+     * The URL to access the generated download.
+     */
+    url?: string;
+  }
+}
 
 export interface DownloadCreateParams {
   /**

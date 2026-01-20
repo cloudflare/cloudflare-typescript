@@ -220,6 +220,8 @@ export namespace JobListResponse {
 
     endpoint?: string | null;
 
+    keys?: Array<string> | null;
+
     pathPrefix?: string | null;
 
     vendor?: 's3';
@@ -227,6 +229,8 @@ export namespace JobListResponse {
 
   export interface GcsSourceResponseSchema {
     bucket?: string;
+
+    keys?: Array<string> | null;
 
     pathPrefix?: string | null;
 
@@ -237,6 +241,8 @@ export namespace JobListResponse {
     bucket?: string;
 
     jurisdiction?: 'default' | 'eu' | 'fedramp';
+
+    keys?: Array<string> | null;
 
     pathPrefix?: string | null;
 
@@ -281,6 +287,8 @@ export namespace JobGetResponse {
 
     endpoint?: string | null;
 
+    keys?: Array<string> | null;
+
     pathPrefix?: string | null;
 
     vendor?: 's3';
@@ -288,6 +296,8 @@ export namespace JobGetResponse {
 
   export interface GcsSourceResponseSchema {
     bucket?: string;
+
+    keys?: Array<string> | null;
 
     pathPrefix?: string | null;
 
@@ -298,6 +308,8 @@ export namespace JobGetResponse {
     bucket?: string;
 
     jurisdiction?: 'default' | 'eu' | 'fedramp';
+
+    keys?: Array<string> | null;
 
     pathPrefix?: string | null;
 
@@ -360,72 +372,80 @@ export interface JobCreateParams {
 
 export namespace JobCreateParams {
   export interface R2SlurperS3SourceSchema {
-    bucket?: string;
+    bucket: string;
+
+    secret: R2SlurperS3SourceSchema.Secret;
+
+    vendor: 's3';
 
     endpoint?: string | null;
 
-    secret?: R2SlurperS3SourceSchema.Secret;
+    pathPrefix?: string | null;
 
-    vendor?: 's3';
+    region?: string | null;
   }
 
   export namespace R2SlurperS3SourceSchema {
     export interface Secret {
-      accessKeyId?: string;
+      accessKeyId: string;
 
-      secretAccessKey?: string;
+      secretAccessKey: string;
     }
   }
 
   export interface R2SlurperGcsSourceSchema {
-    bucket?: string;
+    bucket: string;
 
-    secret?: R2SlurperGcsSourceSchema.Secret;
+    secret: R2SlurperGcsSourceSchema.Secret;
 
-    vendor?: 'gcs';
+    vendor: 'gcs';
+
+    pathPrefix?: string | null;
   }
 
   export namespace R2SlurperGcsSourceSchema {
     export interface Secret {
-      clientEmail?: string;
+      clientEmail: string;
 
-      privateKey?: string;
+      privateKey: string;
     }
   }
 
   export interface R2SlurperR2SourceSchema {
-    bucket?: string;
+    bucket: string;
+
+    secret: R2SlurperR2SourceSchema.Secret;
+
+    vendor: SippyAPI.ProviderParam;
 
     jurisdiction?: 'default' | 'eu' | 'fedramp';
 
-    secret?: R2SlurperR2SourceSchema.Secret;
-
-    vendor?: SippyAPI.ProviderParam;
+    pathPrefix?: string | null;
   }
 
   export namespace R2SlurperR2SourceSchema {
     export interface Secret {
-      accessKeyId?: string;
+      accessKeyId: string;
 
-      secretAccessKey?: string;
+      secretAccessKey: string;
     }
   }
 
   export interface Target {
-    bucket?: string;
+    bucket: string;
+
+    secret: Target.Secret;
+
+    vendor: SippyAPI.ProviderParam;
 
     jurisdiction?: 'default' | 'eu' | 'fedramp';
-
-    secret?: Target.Secret;
-
-    vendor?: SippyAPI.ProviderParam;
   }
 
   export namespace Target {
     export interface Secret {
-      accessKeyId?: string;
+      accessKeyId: string;
 
-      secretAccessKey?: string;
+      secretAccessKey: string;
     }
   }
 }

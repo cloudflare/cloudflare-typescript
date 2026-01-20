@@ -20,7 +20,6 @@ import {
 } from './pagination';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
-import { AbuseReports } from './resources/abuse-reports';
 import { AuditLogs } from './resources/audit-logs';
 import { BotManagement } from './resources/bot-management';
 import { ClientCertificates } from './resources/client-certificates';
@@ -35,15 +34,16 @@ import { Memberships } from './resources/memberships';
 import { OriginCACertificates } from './resources/origin-ca-certificates';
 import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption';
 import { PageRules } from './resources/page-rules';
-import { Pipelines } from './resources/pipelines';
 import { RateLimits } from './resources/rate-limits';
 import { SecurityTXT } from './resources/security-txt';
 import { URLNormalization } from './resources/url-normalization';
+import { AbuseReports } from './resources/abuse-reports/abuse-reports';
 import { Accounts } from './resources/accounts/accounts';
 import { ACM } from './resources/acm/acm';
 import { Addressing } from './resources/addressing/addressing';
 import { AIGateway } from './resources/ai-gateway/ai-gateway';
 import { AI } from './resources/ai/ai';
+import { AISearch } from './resources/aisearch/aisearch';
 import { Alerting } from './resources/alerting/alerting';
 import { APIGateway } from './resources/api-gateway/api-gateway';
 import { Argo } from './resources/argo/argo';
@@ -56,6 +56,7 @@ import { Calls } from './resources/calls/calls';
 import { CertificateAuthorities } from './resources/certificate-authorities/certificate-authorities';
 import { CloudConnector } from './resources/cloud-connector/cloud-connector';
 import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
+import { Connectivity } from './resources/connectivity/connectivity';
 import { ContentScanning } from './resources/content-scanning/content-scanning';
 import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
@@ -83,12 +84,16 @@ import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/mag
 import { MagicTransit } from './resources/magic-transit/magic-transit';
 import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
 import { NetworkInterconnects } from './resources/network-interconnects/network-interconnects';
+import { Organizations } from './resources/organizations/organizations';
 import { OriginTLSClientAuth } from './resources/origin-tls-client-auth/origin-tls-client-auth';
 import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
+import { Pipelines } from './resources/pipelines/pipelines';
 import { Queues } from './resources/queues/queues';
+import { R2DataCatalog } from './resources/r2-data-catalog/r2-data-catalog';
 import { R2 } from './resources/r2/r2';
 import { Radar } from './resources/radar/radar';
+import { RealtimeKit } from './resources/realtime-kit/realtime-kit';
 import { Registrar } from './resources/registrar/registrar';
 import { RequestTracers } from './resources/request-tracers/request-tracers';
 import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
@@ -103,6 +108,7 @@ import { Spectrum } from './resources/spectrum/spectrum';
 import { Speed } from './resources/speed/speed';
 import { SSL } from './resources/ssl/ssl';
 import { Stream } from './resources/stream/stream';
+import { TokenValidation } from './resources/token-validation/token-validation';
 import { Turnstile } from './resources/turnstile/turnstile';
 import { URLScanner } from './resources/url-scanner/url-scanner';
 import { User } from './resources/user/user';
@@ -266,6 +272,7 @@ export class Cloudflare extends Core.APIClient {
   }
 
   accounts: API.Accounts = new API.Accounts(this);
+  organizations: API.Organizations = new API.Organizations(this);
   originCACertificates: API.OriginCACertificates = new API.OriginCACertificates(this);
   ips: API.IPs = new API.IPs(this);
   memberships: API.Memberships = new API.Memberships(this);
@@ -326,9 +333,11 @@ export class Cloudflare extends Core.APIClient {
   alerting: API.Alerting = new API.Alerting(this);
   d1: API.D1Resource = new API.D1Resource(this);
   r2: API.R2 = new API.R2(this);
+  r2DataCatalog: API.R2DataCatalog = new API.R2DataCatalog(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   turnstile: API.Turnstile = new API.Turnstile(this);
+  connectivity: API.Connectivity = new API.Connectivity(this);
   hyperdrive: API.HyperdriveResource = new API.HyperdriveResource(this);
   rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
@@ -341,6 +350,7 @@ export class Cloudflare extends Core.APIClient {
   dcvDelegation: API.DCVDelegation = new API.DCVDelegation(this);
   hostnames: API.Hostnames = new API.Hostnames(this);
   snippets: API.Snippets = new API.Snippets(this);
+  realtimeKit: API.RealtimeKit = new API.RealtimeKit(this);
   calls: API.Calls = new API.Calls(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
@@ -354,12 +364,14 @@ export class Cloudflare extends Core.APIClient {
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
+  aiSearch: API.AISearch = new API.AISearch(this);
   securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
   browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
   customPages: API.CustomPages = new API.CustomPages(this);
   secretsStore: API.SecretsStore = new API.SecretsStore(this);
   pipelines: API.Pipelines = new API.Pipelines(this);
   schemaValidation: API.SchemaValidation = new API.SchemaValidation(this);
+  tokenValidation: API.TokenValidation = new API.TokenValidation(this);
 
   /**
    * Check whether the base URL is set to its default.
@@ -503,6 +515,7 @@ export class Cloudflare extends Core.APIClient {
 }
 
 Cloudflare.Accounts = Accounts;
+Cloudflare.Organizations = Organizations;
 Cloudflare.OriginCACertificates = OriginCACertificates;
 Cloudflare.IPs = IPs;
 Cloudflare.Memberships = Memberships;
@@ -563,9 +576,11 @@ Cloudflare.Stream = Stream;
 Cloudflare.Alerting = Alerting;
 Cloudflare.D1Resource = D1Resource;
 Cloudflare.R2 = R2;
+Cloudflare.R2DataCatalog = R2DataCatalog;
 Cloudflare.WorkersForPlatforms = WorkersForPlatforms;
 Cloudflare.ZeroTrust = ZeroTrust;
 Cloudflare.Turnstile = Turnstile;
+Cloudflare.Connectivity = Connectivity;
 Cloudflare.HyperdriveResource = HyperdriveResource;
 Cloudflare.RUM = RUM;
 Cloudflare.Vectorize = Vectorize;
@@ -578,6 +593,7 @@ Cloudflare.Speed = Speed;
 Cloudflare.DCVDelegation = DCVDelegation;
 Cloudflare.Hostnames = Hostnames;
 Cloudflare.Snippets = Snippets;
+Cloudflare.RealtimeKit = RealtimeKit;
 Cloudflare.Calls = Calls;
 Cloudflare.CloudforceOne = CloudforceOne;
 Cloudflare.AIGateway = AIGateway;
@@ -591,12 +607,14 @@ Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
+Cloudflare.AISearch = AISearch;
 Cloudflare.SecurityCenter = SecurityCenter;
 Cloudflare.BrowserRendering = BrowserRendering;
 Cloudflare.CustomPages = CustomPages;
 Cloudflare.SecretsStore = SecretsStore;
 Cloudflare.Pipelines = Pipelines;
 Cloudflare.SchemaValidation = SchemaValidation;
+Cloudflare.TokenValidation = TokenValidation;
 
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
@@ -635,6 +653,8 @@ export declare namespace Cloudflare {
   export { type SinglePageResponse as SinglePageResponse };
 
   export { Accounts as Accounts };
+
+  export { Organizations as Organizations };
 
   export { OriginCACertificates as OriginCACertificates };
 
@@ -756,11 +776,15 @@ export declare namespace Cloudflare {
 
   export { R2 as R2 };
 
+  export { R2DataCatalog as R2DataCatalog };
+
   export { WorkersForPlatforms as WorkersForPlatforms };
 
   export { ZeroTrust as ZeroTrust };
 
   export { Turnstile as Turnstile };
+
+  export { Connectivity as Connectivity };
 
   export { HyperdriveResource as HyperdriveResource };
 
@@ -785,6 +809,8 @@ export declare namespace Cloudflare {
   export { Hostnames as Hostnames };
 
   export { Snippets as Snippets };
+
+  export { RealtimeKit as RealtimeKit };
 
   export { Calls as Calls };
 
@@ -812,6 +838,8 @@ export declare namespace Cloudflare {
 
   export { AI as AI };
 
+  export { AISearch as AISearch };
+
   export { SecurityCenter as SecurityCenter };
 
   export { BrowserRendering as BrowserRendering };
@@ -823,6 +851,8 @@ export declare namespace Cloudflare {
   export { Pipelines as Pipelines };
 
   export { SchemaValidation as SchemaValidation };
+
+  export { TokenValidation as TokenValidation };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

@@ -87,7 +87,6 @@ export class ThreatEvents extends APIResource {
    *     category: 'Domain Resolution',
    *     date: '2022-04-01T00:00:00Z',
    *     event: 'An attacker registered the domain domain.com',
-   *     indicatorType: 'domain',
    *     raw: { data: { foo: 'bar' } },
    *     tlp: 'amber',
    *   });
@@ -165,7 +164,6 @@ export class ThreatEvents extends APIResource {
    *         date: '2022-04-01T00:00:00Z',
    *         event:
    *           'An attacker registered the domain domain.com',
-   *         indicatorType: 'domain',
    *         raw: { data: { foo: 'bar' } },
    *         tlp: 'amber',
    *       },
@@ -209,15 +207,10 @@ export class ThreatEvents extends APIResource {
   }
 
   /**
-   * Reads an event
+   * This Method is deprecated. Please use
+   * /events/dataset/:dataset_id/events/:event_id instead.
    *
-   * @example
-   * ```ts
-   * const threatEvent =
-   *   await client.cloudforceOne.threatEvents.get('event_id', {
-   *     account_id: 'account_id',
-   *   });
-   * ```
+   * @deprecated
    */
   get(
     eventId: string,
@@ -239,6 +232,8 @@ export interface ThreatEventCreateResponse {
   date: string;
 
   event: string;
+
+  hasChildren: boolean;
 
   indicator: string;
 
@@ -293,6 +288,8 @@ export namespace ThreatEventListResponse {
 
     event: string;
 
+    hasChildren: boolean;
+
     indicator: string;
 
     indicatorType: string;
@@ -338,9 +335,58 @@ export interface ThreatEventDeleteResponse {
 }
 
 /**
- * Number of created bulk events
+ * Detailed result of bulk event creation with auto-tag management
  */
-export type ThreatEventBulkCreateResponse = number;
+export interface ThreatEventBulkCreateResponse {
+  /**
+   * Number of events created
+   */
+  createdEventsCount: number;
+
+  /**
+   * Number of new tags created in SoT
+   */
+  createdTagsCount: number;
+
+  /**
+   * Number of errors encountered
+   */
+  errorCount: number;
+
+  /**
+   * Number of indicators queued for async processing
+   */
+  queuedIndicatorsCount: number;
+
+  /**
+   * Number of events skipped due to duplicate UUID (only when preserveUuid=true)
+   */
+  skippedEventsCount: number;
+
+  /**
+   * Correlation ID for async indicator processing
+   */
+  createBulkEventsRequestId?: string;
+
+  /**
+   * Array of error details
+   */
+  errors?: Array<ThreatEventBulkCreateResponse.Error>;
+}
+
+export namespace ThreatEventBulkCreateResponse {
+  export interface Error {
+    /**
+     * Error message
+     */
+    error: string;
+
+    /**
+     * Index of the event that caused the error
+     */
+    eventIndex: number;
+  }
+}
 
 export interface ThreatEventEditResponse {
   attacker: string;
@@ -352,6 +398,8 @@ export interface ThreatEventEditResponse {
   date: string;
 
   event: string;
+
+  hasChildren: boolean;
 
   indicator: string;
 
@@ -402,6 +450,8 @@ export interface ThreatEventGetResponse {
   date: string;
 
   event: string;
+
+  hasChildren: boolean;
 
   indicator: string;
 
@@ -466,11 +516,6 @@ export interface ThreatEventCreateParams {
   /**
    * Body param:
    */
-  indicatorType: string;
-
-  /**
-   * Body param:
-   */
   raw: ThreatEventCreateParams.Raw;
 
   /**
@@ -504,6 +549,17 @@ export interface ThreatEventCreateParams {
   indicator?: string;
 
   /**
+   * Body param: Array of indicators for this event. Supports multiple indicators per
+   * event for complex scenarios.
+   */
+  indicators?: Array<ThreatEventCreateParams.Indicator>;
+
+  /**
+   * Body param:
+   */
+  indicatorType?: string;
+
+  /**
    * Body param:
    */
   insight?: string;
@@ -522,6 +578,12 @@ export interface ThreatEventCreateParams {
    * Body param:
    */
   targetIndustry?: string;
+
+  /**
+   * Body param: Optional UUID for the event. Only used when preserveUuid=true in
+   * bulk create. Must be a valid UUID format.
+   */
+  uuid?: string;
 }
 
 export namespace ThreatEventCreateParams {
@@ -531,6 +593,18 @@ export namespace ThreatEventCreateParams {
     source?: string;
 
     tlp?: string;
+  }
+
+  export interface Indicator {
+    /**
+     * The type of indicator (e.g., DOMAIN, IP, JA3, HASH)
+     */
+    indicatorType: string;
+
+    /**
+     * The indicator value (e.g., domain name, IP address, hash)
+     */
+    value: string;
   }
 }
 
@@ -549,6 +623,11 @@ export interface ThreatEventListParams {
    * Query param:
    */
   forceRefresh?: boolean;
+
+  /**
+   * Query param:
+   */
+  format?: 'json' | 'stix2';
 
   /**
    * Query param:
@@ -620,6 +699,13 @@ export interface ThreatEventBulkCreateParams {
    * Body param:
    */
   datasetId: string;
+
+  /**
+   * Body param: When true, use provided UUIDs from event data instead of generating
+   * new ones. Used for migration scenarios where original UUIDs must be preserved.
+   * Duplicate UUIDs will be skipped.
+   */
+  preserveUuid?: boolean;
 }
 
 export namespace ThreatEventBulkCreateParams {
@@ -629,8 +715,6 @@ export namespace ThreatEventBulkCreateParams {
     date: string;
 
     event: string;
-
-    indicatorType: string;
 
     raw: Data.Raw;
 
@@ -646,6 +730,14 @@ export namespace ThreatEventBulkCreateParams {
 
     indicator?: string;
 
+    /**
+     * Array of indicators for this event. Supports multiple indicators per event for
+     * complex scenarios.
+     */
+    indicators?: Array<Data.Indicator>;
+
+    indicatorType?: string;
+
     insight?: string;
 
     tags?: Array<string>;
@@ -653,6 +745,12 @@ export namespace ThreatEventBulkCreateParams {
     targetCountry?: string;
 
     targetIndustry?: string;
+
+    /**
+     * Optional UUID for the event. Only used when preserveUuid=true in bulk create.
+     * Must be a valid UUID format.
+     */
+    uuid?: string;
   }
 
   export namespace Data {
@@ -662,6 +760,18 @@ export namespace ThreatEventBulkCreateParams {
       source?: string;
 
       tlp?: string;
+    }
+
+    export interface Indicator {
+      /**
+       * The type of indicator (e.g., DOMAIN, IP, JA3, HASH)
+       */
+      indicatorType: string;
+
+      /**
+       * The indicator value (e.g., domain name, IP address, hash)
+       */
+      value: string;
     }
   }
 }
@@ -686,6 +796,16 @@ export interface ThreatEventEditParams {
    * Body param:
    */
   category?: string;
+
+  /**
+   * Body param:
+   */
+  createdAt?: string;
+
+  /**
+   * Body param:
+   */
+  datasetId?: string;
 
   /**
    * Body param:

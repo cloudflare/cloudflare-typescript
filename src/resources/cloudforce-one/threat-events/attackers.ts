@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 
 export class Attackers extends APIResource {
   /**
-   * Lists attackers
+   * Lists attackers across multiple datasets
    *
    * @example
    * ```ts
@@ -16,8 +16,8 @@ export class Attackers extends APIResource {
    * ```
    */
   list(params: AttackerListParams, options?: Core.RequestOptions): Core.APIPromise<AttackerListResponse> {
-    const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/cloudforce-one/events/attackers`, options);
+    const { account_id, ...query } = params;
+    return this._client.get(`/accounts/${account_id}/cloudforce-one/events/attackers`, { query, ...options });
   }
 }
 
@@ -35,9 +35,15 @@ export namespace AttackerListResponse {
 
 export interface AttackerListParams {
   /**
-   * Account ID.
+   * Path param: Account ID.
    */
   account_id: string;
+
+  /**
+   * Query param: Array of dataset IDs to query attackers from. If not provided, uses
+   * the default dataset.
+   */
+  datasetIds?: Array<string>;
 }
 
 export declare namespace Attackers {

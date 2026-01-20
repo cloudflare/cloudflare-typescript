@@ -235,6 +235,8 @@ export interface AIGatewayCreateResponse {
 
   dlp?: AIGatewayCreateResponse.UnionMember0 | AIGatewayCreateResponse.UnionMember1;
 
+  is_default?: boolean;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -248,6 +250,8 @@ export interface AIGatewayCreateResponse {
   store_id?: string | null;
 
   stripe?: AIGatewayCreateResponse.Stripe | null;
+
+  zdr?: boolean;
 }
 
 export namespace AIGatewayCreateResponse {
@@ -332,6 +336,8 @@ export interface AIGatewayUpdateResponse {
 
   dlp?: AIGatewayUpdateResponse.UnionMember0 | AIGatewayUpdateResponse.UnionMember1;
 
+  is_default?: boolean;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -345,6 +351,8 @@ export interface AIGatewayUpdateResponse {
   store_id?: string | null;
 
   stripe?: AIGatewayUpdateResponse.Stripe | null;
+
+  zdr?: boolean;
 }
 
 export namespace AIGatewayUpdateResponse {
@@ -429,6 +437,8 @@ export interface AIGatewayListResponse {
 
   dlp?: AIGatewayListResponse.UnionMember0 | AIGatewayListResponse.UnionMember1;
 
+  is_default?: boolean;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -442,6 +452,8 @@ export interface AIGatewayListResponse {
   store_id?: string | null;
 
   stripe?: AIGatewayListResponse.Stripe | null;
+
+  zdr?: boolean;
 }
 
 export namespace AIGatewayListResponse {
@@ -526,6 +538,8 @@ export interface AIGatewayDeleteResponse {
 
   dlp?: AIGatewayDeleteResponse.UnionMember0 | AIGatewayDeleteResponse.UnionMember1;
 
+  is_default?: boolean;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -539,6 +553,8 @@ export interface AIGatewayDeleteResponse {
   store_id?: string | null;
 
   stripe?: AIGatewayDeleteResponse.Stripe | null;
+
+  zdr?: boolean;
 }
 
 export namespace AIGatewayDeleteResponse {
@@ -623,6 +639,8 @@ export interface AIGatewayGetResponse {
 
   dlp?: AIGatewayGetResponse.UnionMember0 | AIGatewayGetResponse.UnionMember1;
 
+  is_default?: boolean;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -636,6 +654,8 @@ export interface AIGatewayGetResponse {
   store_id?: string | null;
 
   stripe?: AIGatewayGetResponse.Stripe | null;
+
+  zdr?: boolean;
 }
 
 export namespace AIGatewayGetResponse {
@@ -737,6 +757,11 @@ export interface AIGatewayCreateParams {
   /**
    * Body param:
    */
+  is_default?: boolean;
+
+  /**
+   * Body param:
+   */
   log_management?: number | null;
 
   /**
@@ -753,6 +778,11 @@ export interface AIGatewayCreateParams {
    * Body param:
    */
   logpush_public_key?: string | null;
+
+  /**
+   * Body param:
+   */
+  zdr?: boolean;
 }
 
 export interface AIGatewayUpdateParams {
@@ -804,6 +834,11 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
+  is_default?: boolean;
+
+  /**
+   * Body param:
+   */
   log_management?: number | null;
 
   /**
@@ -835,6 +870,11 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   stripe?: AIGatewayUpdateParams.Stripe | null;
+
+  /**
+   * Body param:
+   */
+  zdr?: boolean;
 }
 
 export namespace AIGatewayUpdateParams {

@@ -6,7 +6,6 @@ import {
   Configuration,
   ConfigurationGetParams,
   ConfigurationUpdateParams,
-  ConfigurationUpdateResponse,
   Configurations,
 } from './configurations';
 import * as SchemasAPI from './schemas';
@@ -44,10 +43,10 @@ import { Settings } from './settings/settings';
 import * as UserSchemasAPI from './user-schemas/user-schemas';
 import {
   Message,
-  PublicSchema,
-  PublicSchemasV4PagePaginationArray,
-  SchemaUpload,
+  OldPublicSchema,
+  OldPublicSchemasV4PagePaginationArray,
   UserSchemaCreateParams,
+  UserSchemaCreateResponse,
   UserSchemaDeleteParams,
   UserSchemaDeleteResponse,
   UserSchemaEditParams,
@@ -75,14 +74,13 @@ APIGateway.OperationListResponsesV4PagePaginationArray = OperationListResponsesV
 APIGateway.OperationBulkCreateResponsesSinglePage = OperationBulkCreateResponsesSinglePage;
 APIGateway.Schemas = Schemas;
 APIGateway.UserSchemas = UserSchemas;
-APIGateway.PublicSchemasV4PagePaginationArray = PublicSchemasV4PagePaginationArray;
+APIGateway.OldPublicSchemasV4PagePaginationArray = OldPublicSchemasV4PagePaginationArray;
 APIGateway.ExpressionTemplate = ExpressionTemplate;
 
 export declare namespace APIGateway {
   export {
     Configurations as Configurations,
     type Configuration as Configuration,
-    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
     type ConfigurationUpdateParams as ConfigurationUpdateParams,
     type ConfigurationGetParams as ConfigurationGetParams,
   };
@@ -124,10 +122,10 @@ export declare namespace APIGateway {
   export {
     UserSchemas as UserSchemas,
     type Message as Message,
-    type PublicSchema as PublicSchema,
-    type SchemaUpload as SchemaUpload,
+    type OldPublicSchema as OldPublicSchema,
+    type UserSchemaCreateResponse as UserSchemaCreateResponse,
     type UserSchemaDeleteResponse as UserSchemaDeleteResponse,
-    PublicSchemasV4PagePaginationArray as PublicSchemasV4PagePaginationArray,
+    OldPublicSchemasV4PagePaginationArray as OldPublicSchemasV4PagePaginationArray,
     type UserSchemaCreateParams as UserSchemaCreateParams,
     type UserSchemaListParams as UserSchemaListParams,
     type UserSchemaDeleteParams as UserSchemaDeleteParams,

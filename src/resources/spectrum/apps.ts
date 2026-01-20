@@ -358,10 +358,12 @@ export namespace AppUpdateResponse {
   }
 }
 
-export type AppListResponse = Array<AppListResponse.UnionMember0> | Array<AppListResponse.UnionMember1>;
+export type AppListResponse =
+  | AppListResponse.SpectrumConfigAppConfig
+  | AppListResponse.SpectrumConfigPaygoAppConfig;
 
 export namespace AppListResponse {
-  export interface UnionMember0 {
+  export interface SpectrumConfigAppConfig {
     /**
      * App identifier.
      */
@@ -448,7 +450,7 @@ export namespace AppListResponse {
     tls?: 'off' | 'flexible' | 'full' | 'strict';
   }
 
-  export interface UnionMember1 {
+  export interface SpectrumConfigPaygoAppConfig {
     /**
      * App identifier.
      */

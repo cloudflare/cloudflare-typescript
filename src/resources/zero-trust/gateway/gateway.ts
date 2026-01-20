@@ -77,6 +77,7 @@ import {
   RuleDeleteResponse,
   RuleGetParams,
   RuleListParams,
+  RuleListTenantParams,
   RuleResetExpirationParams,
   RuleSetting,
   RuleUpdateParams,
@@ -355,6 +356,7 @@ export declare namespace Gateway {
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
     type RuleGetParams as RuleGetParams,
+    type RuleListTenantParams as RuleListTenantParams,
     type RuleResetExpirationParams as RuleResetExpirationParams,
   };
 

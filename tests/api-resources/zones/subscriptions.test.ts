@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource subscriptions', () => {
   test('create: only required params', async () => {
     const responsePromise = client.zones.subscriptions.create({
-      zone_id: '506e3185e9c882d175a2d0cb0093d9f2',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,7 +25,7 @@ describe('resource subscriptions', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.zones.subscriptions.create({
-      zone_id: '506e3185e9c882d175a2d0cb0093d9f2',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       frequency: 'monthly',
       rate_plan: {
         id: 'free',
@@ -41,7 +41,7 @@ describe('resource subscriptions', () => {
 
   test('update: only required params', async () => {
     const responsePromise = client.zones.subscriptions.update({
-      zone_id: '506e3185e9c882d175a2d0cb0093d9f2',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -54,7 +54,7 @@ describe('resource subscriptions', () => {
 
   test('update: required and optional params', async () => {
     const response = await client.zones.subscriptions.update({
-      zone_id: '506e3185e9c882d175a2d0cb0093d9f2',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       frequency: 'monthly',
       rate_plan: {
         id: 'free',
@@ -69,7 +69,7 @@ describe('resource subscriptions', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.zones.subscriptions.get({ zone_id: '506e3185e9c882d175a2d0cb0093d9f2' });
+    const responsePromise = client.zones.subscriptions.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,6 +80,6 @@ describe('resource subscriptions', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zones.subscriptions.get({ zone_id: '506e3185e9c882d175a2d0cb0093d9f2' });
+    const response = await client.zones.subscriptions.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

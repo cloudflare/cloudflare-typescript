@@ -8,10 +8,7 @@ export class Top extends APIResource {
   /**
    * Retrieves the top user agents by HTTP requests.
    *
-   * @example
-   * ```ts
-   * const response = await client.radar.http.top.browser();
-   * ```
+   * @deprecated Use [Radar HTTP Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/summary_v2/) instead.
    */
   browser(query?: TopBrowserParams, options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>;
   browser(options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>;
@@ -32,11 +29,7 @@ export class Top extends APIResource {
   /**
    * Retrieves the top user agents, aggregated in families, by HTTP requests.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.radar.http.top.browserFamily();
-   * ```
+   * @deprecated Use [Radar HTTP Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/http/methods/summary_v2/) instead.
    */
   browserFamily(
     query?: TopBrowserFamilyParams,
@@ -116,13 +109,44 @@ export namespace TopBrowserResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.
@@ -219,13 +243,44 @@ export namespace TopBrowserFamilyResponse {
        * Annotation associated with the result (e.g. outage or other type of event).
        */
       export interface Annotation {
-        dataSource: string;
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
 
         description: string;
 
         endDate: string;
 
-        eventType: string;
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
 
         /**
          * Whether event is a single point in time or a time range.

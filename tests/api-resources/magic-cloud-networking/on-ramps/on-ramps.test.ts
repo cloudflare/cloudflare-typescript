@@ -14,6 +14,7 @@ describe('resource onRamps', () => {
     const responsePromise = client.magicCloudNetworking.onRamps.create({
       account_id: 'account_id',
       cloud_type: 'AWS',
+      dynamic_routing: true,
       install_routes_in_cloud: true,
       install_routes_in_magic_wan: true,
       name: 'name',
@@ -32,6 +33,7 @@ describe('resource onRamps', () => {
     const response = await client.magicCloudNetworking.onRamps.create({
       account_id: 'account_id',
       cloud_type: 'AWS',
+      dynamic_routing: true,
       install_routes_in_cloud: true,
       install_routes_in_magic_wan: true,
       name: 'name',
@@ -39,6 +41,7 @@ describe('resource onRamps', () => {
       adopted_hub_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       attached_hubs: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
       attached_vpcs: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+      cloud_asn: 0,
       description: 'description',
       hub_provider_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       manage_hub_to_hub_attachments: true,

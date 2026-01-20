@@ -12,8 +12,9 @@ describe('resource pdf', () => {
   test('create: required and optional params', async () => {
     const response = await client.browserRendering.pdf.create({
       account_id: 'account_id',
+      html: '<h1>Hello World!</h1>',
       cacheTTL: 86400,
-      actionTimeout: 300000,
+      actionTimeout: 120000,
       addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],
       addStyleTag: [{ content: 'content', url: 'url' }],
       allowRequestPattern: ['string'],
@@ -45,7 +46,6 @@ describe('resource pdf', () => {
         timeout: 60000,
         waitUntil: 'load',
       },
-      html: 'x',
       pdfOptions: {
         displayHeaderFooter: true,
         footerTemplate: 'footerTemplate',
@@ -68,7 +68,6 @@ describe('resource pdf', () => {
       rejectResourceTypes: ['document'],
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
-      url: 'https://example.com',
       userAgent: 'userAgent',
       viewport: {
         height: 0,
@@ -78,8 +77,8 @@ describe('resource pdf', () => {
         isLandscape: true,
         isMobile: true,
       },
-      waitForSelector: { selector: 'selector', hidden: true, timeout: 60000, visible: true },
-      waitForTimeout: 60000,
+      waitForSelector: { selector: 'selector', hidden: true, timeout: 120000, visible: true },
+      waitForTimeout: 120000,
     });
   });
 });

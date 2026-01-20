@@ -255,6 +255,11 @@ export interface AuditListParams extends CursorPaginationAfterParams {
   /**
    * Query param:
    */
+  id?: AuditListParams.ID;
+
+  /**
+   * Query param:
+   */
   account_name?: AuditListParams.AccountName;
 
   /**
@@ -371,6 +376,13 @@ export interface AuditListParams extends CursorPaginationAfterParams {
 }
 
 export namespace AuditListParams {
+  export interface ID {
+    /**
+     * Filters out audit logs by their IDs.
+     */
+    not?: Array<string>;
+  }
+
   export interface AccountName {
     /**
      * Filters out audit logs by the account name.
@@ -446,7 +458,7 @@ export namespace AuditListParams {
 
   export interface AuditLogID {
     /**
-     * Filters out audit logs by their IDs.
+     * @deprecated Filters out audit logs by their IDs.
      */
     not?: Array<string>;
   }

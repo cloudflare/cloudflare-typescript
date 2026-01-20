@@ -8,6 +8,8 @@ import {
   DetectionCreateResponse,
   DetectionDeleteParams,
   DetectionDeleteResponse,
+  DetectionGetParams,
+  DetectionGetResponse,
   DetectionListParams,
   DetectionListResponse,
   DetectionListResponsesSinglePage,
@@ -123,10 +125,12 @@ export declare namespace LeakedCredentialChecks {
     type DetectionUpdateResponse as DetectionUpdateResponse,
     type DetectionListResponse as DetectionListResponse,
     type DetectionDeleteResponse as DetectionDeleteResponse,
+    type DetectionGetResponse as DetectionGetResponse,
     DetectionListResponsesSinglePage as DetectionListResponsesSinglePage,
     type DetectionCreateParams as DetectionCreateParams,
     type DetectionUpdateParams as DetectionUpdateParams,
     type DetectionListParams as DetectionListParams,
     type DetectionDeleteParams as DetectionDeleteParams,
+    type DetectionGetParams as DetectionGetParams,
   };
 }

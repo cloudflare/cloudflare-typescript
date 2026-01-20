@@ -189,6 +189,11 @@ export namespace ConfigurationUpdateResponse {
         keepAliveTimeout?: number;
 
         /**
+         * Auto configure the Hostname on the origin server certificate.
+         */
+        matchSNItoHost?: boolean;
+
+        /**
          * Disable the “happy eyeballs” algorithm for IPv4/IPv6 fallback if your local
          * network has misconfigured one of the protocols.
          */
@@ -297,6 +302,11 @@ export namespace ConfigurationUpdateResponse {
        * Timeout after which an idle keepalive connection can be discarded.
        */
       keepAliveTimeout?: number;
+
+      /**
+       * Auto configure the Hostname on the origin server certificate.
+       */
+      matchSNItoHost?: boolean;
 
       /**
        * Disable the “happy eyeballs” algorithm for IPv4/IPv6 fallback if your local
@@ -492,6 +502,11 @@ export namespace ConfigurationGetResponse {
         keepAliveTimeout?: number;
 
         /**
+         * Auto configure the Hostname on the origin server certificate.
+         */
+        matchSNItoHost?: boolean;
+
+        /**
          * Disable the “happy eyeballs” algorithm for IPv4/IPv6 fallback if your local
          * network has misconfigured one of the protocols.
          */
@@ -600,6 +615,11 @@ export namespace ConfigurationGetResponse {
        * Timeout after which an idle keepalive connection can be discarded.
        */
       keepAliveTimeout?: number;
+
+      /**
+       * Auto configure the Hostname on the origin server certificate.
+       */
+      matchSNItoHost?: boolean;
 
       /**
        * Disable the “happy eyeballs” algorithm for IPv4/IPv6 fallback if your local
@@ -773,6 +793,11 @@ export namespace ConfigurationUpdateParams {
         keepAliveTimeout?: number;
 
         /**
+         * Auto configure the Hostname on the origin server certificate.
+         */
+        matchSNItoHost?: boolean;
+
+        /**
          * Disable the “happy eyeballs” algorithm for IPv4/IPv6 fallback if your local
          * network has misconfigured one of the protocols.
          */
@@ -881,6 +906,11 @@ export namespace ConfigurationUpdateParams {
        * Timeout after which an idle keepalive connection can be discarded.
        */
       keepAliveTimeout?: number;
+
+      /**
+       * Auto configure the Hostname on the origin server certificate.
+       */
+      matchSNItoHost?: boolean;
 
       /**
        * Disable the “happy eyeballs” algorithm for IPv4/IPv6 fallback if your local

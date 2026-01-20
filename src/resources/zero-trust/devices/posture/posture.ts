@@ -290,6 +290,7 @@ export type DeviceInput =
   | DeviceInput.TeamsDevicesApplicationInputRequest
   | ClientCertificateInput
   | DeviceInput.TeamsDevicesClientCertificateV2InputRequest
+  | DeviceInput.TeamsDevicesAntivirusInputRequest
   | WorkspaceOneInput
   | CrowdstrikeInput
   | IntuneInput
@@ -401,6 +402,13 @@ export namespace DeviceInput {
     }
   }
 
+  export interface TeamsDevicesAntivirusInputRequest {
+    /**
+     * Number of days that the antivirus should be updated within.
+     */
+    update_window_days?: number;
+  }
+
   export interface TeamsDevicesCustomS2sInputRequest {
     /**
      * Posture Integration ID.
@@ -435,6 +443,7 @@ export type DeviceInputParam =
   | DeviceInputParam.TeamsDevicesApplicationInputRequest
   | ClientCertificateInputParam
   | DeviceInputParam.TeamsDevicesClientCertificateV2InputRequest
+  | DeviceInputParam.TeamsDevicesAntivirusInputRequest
   | WorkspaceOneInputParam
   | CrowdstrikeInputParam
   | IntuneInputParam
@@ -546,6 +555,13 @@ export namespace DeviceInputParam {
     }
   }
 
+  export interface TeamsDevicesAntivirusInputRequest {
+    /**
+     * Number of days that the antivirus should be updated within.
+     */
+    update_window_days?: number;
+  }
+
   export interface TeamsDevicesCustomS2sInputRequest {
     /**
      * Posture Integration ID.
@@ -628,6 +644,7 @@ export interface DevicePostureRule {
     | 'domain_joined'
     | 'client_certificate'
     | 'client_certificate_v2'
+    | 'antivirus'
     | 'unique_client_id'
     | 'kolide'
     | 'tanium_s2s'
@@ -849,8 +866,9 @@ export interface OSVersionInput {
   os_distro_revision?: string;
 
   /**
-   * Additional version data. For Mac or iOS, the Product Version Extra. For Linux,
-   * the kernel release version. (Mac, iOS, and Linux only).
+   * Additional operating system version details. For Windows, the UBR (Update Build
+   * Revision). For Mac or iOS, the Product Version Extra. For Linux, the
+   * distribution name and version.
    */
   os_version_extra?: string;
 }
@@ -882,8 +900,9 @@ export interface OSVersionInputParam {
   os_distro_revision?: string;
 
   /**
-   * Additional version data. For Mac or iOS, the Product Version Extra. For Linux,
-   * the kernel release version. (Mac, iOS, and Linux only).
+   * Additional operating system version details. For Windows, the UBR (Update Build
+   * Revision). For Mac or iOS, the Product Version Extra. For Linux, the
+   * distribution name and version.
    */
   os_version_extra?: string;
 }
@@ -1168,6 +1187,7 @@ export interface PostureCreateParams {
     | 'domain_joined'
     | 'client_certificate'
     | 'client_certificate_v2'
+    | 'antivirus'
     | 'unique_client_id'
     | 'kolide'
     | 'tanium_s2s'
@@ -1234,6 +1254,7 @@ export interface PostureUpdateParams {
     | 'domain_joined'
     | 'client_certificate'
     | 'client_certificate_v2'
+    | 'antivirus'
     | 'unique_client_id'
     | 'kolide'
     | 'tanium_s2s'

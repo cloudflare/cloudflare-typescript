@@ -96,12 +96,22 @@ export class VersionListResponsesV4PagePagination extends V4PagePagination<Versi
 export interface VersionCreateResponse {
   resources: VersionCreateResponse.Resources;
 
+  /**
+   * Unique identifier for the version.
+   */
   id?: string;
 
   metadata?: VersionCreateResponse.Metadata;
 
+  /**
+   * Sequential version number.
+   */
   number?: number;
 
+  /**
+   * Time in milliseconds spent on
+   * [Worker startup](https://developers.cloudflare.com/workers/platform/limits/#worker-startup-time).
+   */
   startup_time_ms?: number;
 }
 
@@ -134,7 +144,6 @@ export namespace VersionCreateResponse {
       | Resources.WorkersBindingKindSecretText
       | Resources.WorkersBindingKindSendEmail
       | Resources.WorkersBindingKindService
-      | Resources.WorkersBindingKindTailConsumer
       | Resources.WorkersBindingKindTextBlob
       | Resources.WorkersBindingKindVectorize
       | Resources.WorkersBindingKindVersionMetadata
@@ -146,6 +155,9 @@ export namespace VersionCreateResponse {
 
     script?: Resources.Script;
 
+    /**
+     * Runtime configuration for the Worker.
+     */
     script_runtime?: Resources.ScriptRuntime;
   }
 
@@ -245,7 +257,7 @@ export namespace VersionCreateResponse {
       name: string;
 
       /**
-       * Namespace to bind to.
+       * The name of the dispatch namespace.
        */
       namespace: string;
 
@@ -570,23 +582,6 @@ export namespace VersionCreateResponse {
       environment?: string;
     }
 
-    export interface WorkersBindingKindTailConsumer {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * Name of Tail Worker to bind to.
-       */
-      service: string;
-
-      /**
-       * The kind of resource that the binding provides.
-       */
-      type: 'tail_consumer';
-    }
-
     export interface WorkersBindingKindTextBlob {
       /**
        * A JavaScript variable name for the binding.
@@ -736,53 +731,116 @@ export namespace VersionCreateResponse {
     }
 
     export interface Script {
+      /**
+       * Hashed script content
+       */
       etag?: string;
 
+      /**
+       * The names of handlers exported as part of the default export.
+       */
       handlers?: Array<string>;
 
+      /**
+       * The client most recently used to deploy this Worker.
+       */
       last_deployed_from?: string;
 
+      /**
+       * Named exports, such as Durable Object class implementations and named
+       * entrypoints.
+       */
       named_handlers?: Array<Script.NamedHandler>;
     }
 
     export namespace Script {
       export interface NamedHandler {
+        /**
+         * The names of handlers exported as part of the named export.
+         */
         handlers?: Array<string>;
 
+        /**
+         * The name of the exported class or entrypoint.
+         */
         name?: string;
       }
     }
 
+    /**
+     * Runtime configuration for the Worker.
+     */
     export interface ScriptRuntime {
+      /**
+       * Date indicating targeted support in the Workers runtime. Backwards incompatible
+       * fixes to the runtime following this date will not affect this Worker.
+       */
       compatibility_date?: string;
 
+      /**
+       * Flags that enable or disable certain features in the Workers runtime.
+       */
       compatibility_flags?: Array<string>;
 
+      /**
+       * Resource limits for the Worker.
+       */
       limits?: ScriptRuntime.Limits;
 
+      /**
+       * The tag of the Durable Object migration that was most recently applied for this
+       * Worker.
+       */
       migration_tag?: string;
 
+      /**
+       * Usage model for the Worker invocations.
+       */
       usage_model?: 'bundled' | 'unbound' | 'standard';
     }
 
     export namespace ScriptRuntime {
+      /**
+       * Resource limits for the Worker.
+       */
       export interface Limits {
+        /**
+         * The amount of CPU time this Worker can use in milliseconds.
+         */
         cpu_ms?: number;
       }
     }
   }
 
   export interface Metadata {
+    /**
+     * Email of the user who created the version.
+     */
     author_email?: string;
 
+    /**
+     * Identifier of the user who created the version.
+     */
     author_id?: string;
 
+    /**
+     * When the version was created.
+     */
     created_on?: string;
 
+    /**
+     * Whether the version can be previewed.
+     */
     hasPreview?: boolean;
 
+    /**
+     * When the version was last modified.
+     */
     modified_on?: string;
 
+    /**
+     * The source of the version upload.
+     */
     source?:
       | 'unknown'
       | 'api'
@@ -798,25 +856,49 @@ export namespace VersionCreateResponse {
 }
 
 export interface VersionListResponse {
+  /**
+   * Unique identifier for the version.
+   */
   id?: string;
 
   metadata?: VersionListResponse.Metadata;
 
+  /**
+   * Sequential version number.
+   */
   number?: number;
 }
 
 export namespace VersionListResponse {
   export interface Metadata {
+    /**
+     * Email of the user who created the version.
+     */
     author_email?: string;
 
+    /**
+     * Identifier of the user who created the version.
+     */
     author_id?: string;
 
+    /**
+     * When the version was created.
+     */
     created_on?: string;
 
+    /**
+     * Whether the version can be previewed.
+     */
     hasPreview?: boolean;
 
+    /**
+     * When the version was last modified.
+     */
     modified_on?: string;
 
+    /**
+     * The source of the version upload.
+     */
     source?:
       | 'unknown'
       | 'api'
@@ -834,10 +916,16 @@ export namespace VersionListResponse {
 export interface VersionGetResponse {
   resources: VersionGetResponse.Resources;
 
+  /**
+   * Unique identifier for the version.
+   */
   id?: string;
 
   metadata?: VersionGetResponse.Metadata;
 
+  /**
+   * Sequential version number.
+   */
   number?: number;
 }
 
@@ -870,7 +958,6 @@ export namespace VersionGetResponse {
       | Resources.WorkersBindingKindSecretText
       | Resources.WorkersBindingKindSendEmail
       | Resources.WorkersBindingKindService
-      | Resources.WorkersBindingKindTailConsumer
       | Resources.WorkersBindingKindTextBlob
       | Resources.WorkersBindingKindVectorize
       | Resources.WorkersBindingKindVersionMetadata
@@ -882,6 +969,9 @@ export namespace VersionGetResponse {
 
     script?: Resources.Script;
 
+    /**
+     * Runtime configuration for the Worker.
+     */
     script_runtime?: Resources.ScriptRuntime;
   }
 
@@ -981,7 +1071,7 @@ export namespace VersionGetResponse {
       name: string;
 
       /**
-       * Namespace to bind to.
+       * The name of the dispatch namespace.
        */
       namespace: string;
 
@@ -1306,23 +1396,6 @@ export namespace VersionGetResponse {
       environment?: string;
     }
 
-    export interface WorkersBindingKindTailConsumer {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * Name of Tail Worker to bind to.
-       */
-      service: string;
-
-      /**
-       * The kind of resource that the binding provides.
-       */
-      type: 'tail_consumer';
-    }
-
     export interface WorkersBindingKindTextBlob {
       /**
        * A JavaScript variable name for the binding.
@@ -1472,53 +1545,116 @@ export namespace VersionGetResponse {
     }
 
     export interface Script {
+      /**
+       * Hashed script content
+       */
       etag?: string;
 
+      /**
+       * The names of handlers exported as part of the default export.
+       */
       handlers?: Array<string>;
 
+      /**
+       * The client most recently used to deploy this Worker.
+       */
       last_deployed_from?: string;
 
+      /**
+       * Named exports, such as Durable Object class implementations and named
+       * entrypoints.
+       */
       named_handlers?: Array<Script.NamedHandler>;
     }
 
     export namespace Script {
       export interface NamedHandler {
+        /**
+         * The names of handlers exported as part of the named export.
+         */
         handlers?: Array<string>;
 
+        /**
+         * The name of the exported class or entrypoint.
+         */
         name?: string;
       }
     }
 
+    /**
+     * Runtime configuration for the Worker.
+     */
     export interface ScriptRuntime {
+      /**
+       * Date indicating targeted support in the Workers runtime. Backwards incompatible
+       * fixes to the runtime following this date will not affect this Worker.
+       */
       compatibility_date?: string;
 
+      /**
+       * Flags that enable or disable certain features in the Workers runtime.
+       */
       compatibility_flags?: Array<string>;
 
+      /**
+       * Resource limits for the Worker.
+       */
       limits?: ScriptRuntime.Limits;
 
+      /**
+       * The tag of the Durable Object migration that was most recently applied for this
+       * Worker.
+       */
       migration_tag?: string;
 
+      /**
+       * Usage model for the Worker invocations.
+       */
       usage_model?: 'bundled' | 'unbound' | 'standard';
     }
 
     export namespace ScriptRuntime {
+      /**
+       * Resource limits for the Worker.
+       */
       export interface Limits {
+        /**
+         * The amount of CPU time this Worker can use in milliseconds.
+         */
         cpu_ms?: number;
       }
     }
   }
 
   export interface Metadata {
+    /**
+     * Email of the user who created the version.
+     */
     author_email?: string;
 
+    /**
+     * Identifier of the user who created the version.
+     */
     author_id?: string;
 
+    /**
+     * When the version was created.
+     */
     created_on?: string;
 
+    /**
+     * Whether the version can be previewed.
+     */
     hasPreview?: boolean;
 
+    /**
+     * When the version was last modified.
+     */
     modified_on?: string;
 
+    /**
+     * The source of the version upload.
+     */
     source?:
       | 'unknown'
       | 'api'
@@ -1598,7 +1734,6 @@ export namespace VersionCreateParams {
       | Metadata.WorkersBindingKindSecretText
       | Metadata.WorkersBindingKindSendEmail
       | Metadata.WorkersBindingKindService
-      | Metadata.WorkersBindingKindTailConsumer
       | Metadata.WorkersBindingKindTextBlob
       | Metadata.WorkersBindingKindVectorize
       | Metadata.WorkersBindingKindVersionMetadata
@@ -1634,6 +1769,11 @@ export namespace VersionCreateParams {
 
   export namespace Metadata {
     export interface Annotations {
+      /**
+       * Associated alias for a version.
+       */
+      'workers/alias'?: string;
+
       /**
        * Human-readable message about the version. Truncated to 100 bytes.
        */
@@ -1740,7 +1880,7 @@ export namespace VersionCreateParams {
       name: string;
 
       /**
-       * Namespace to bind to.
+       * The name of the dispatch namespace.
        */
       namespace: string;
 
@@ -2068,23 +2208,6 @@ export namespace VersionCreateParams {
        * Optional environment if the Worker utilizes one.
        */
       environment?: string;
-    }
-
-    export interface WorkersBindingKindTailConsumer {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * Name of Tail Worker to bind to.
-       */
-      service: string;
-
-      /**
-       * The kind of resource that the binding provides.
-       */
-      type: 'tail_consumer';
     }
 
     export interface WorkersBindingKindTextBlob {

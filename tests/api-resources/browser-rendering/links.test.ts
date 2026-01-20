@@ -11,7 +11,10 @@ const client = new Cloudflare({
 
 describe('resource links', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.browserRendering.links.create({ account_id: 'account_id' });
+    const responsePromise = client.browserRendering.links.create({
+      account_id: 'account_id',
+      html: '<h1>Hello World!</h1>',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,8 +27,9 @@ describe('resource links', () => {
   test('create: required and optional params', async () => {
     const response = await client.browserRendering.links.create({
       account_id: 'account_id',
+      html: '<h1>Hello World!</h1>',
       cacheTTL: 86400,
-      actionTimeout: 300000,
+      actionTimeout: 120000,
       addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],
       addStyleTag: [{ content: 'content', url: 'url' }],
       allowRequestPattern: ['string'],
@@ -58,12 +62,10 @@ describe('resource links', () => {
         timeout: 60000,
         waitUntil: 'load',
       },
-      html: 'x',
       rejectRequestPattern: ['string'],
       rejectResourceTypes: ['document'],
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
-      url: 'https://example.com',
       userAgent: 'userAgent',
       viewport: {
         height: 0,
@@ -74,8 +76,8 @@ describe('resource links', () => {
         isMobile: true,
       },
       visibleLinksOnly: true,
-      waitForSelector: { selector: 'selector', hidden: true, timeout: 60000, visible: true },
-      waitForTimeout: 60000,
+      waitForSelector: { selector: 'selector', hidden: true, timeout: 120000, visible: true },
+      waitForTimeout: 120000,
     });
   });
 });

@@ -40,7 +40,7 @@ describe('resource bgp', () => {
           dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           name: ['main_series'],
-          prefix: ['1.1.1.0/24'],
+          prefix: ['string'],
           updateType: ['ANNOUNCEMENT'],
         },
         { path: '/_stainless_unknown_path' },

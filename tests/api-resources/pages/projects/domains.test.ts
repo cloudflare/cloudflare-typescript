@@ -13,6 +13,7 @@ describe('resource domains', () => {
   test('create: only required params', async () => {
     const responsePromise = client.pages.projects.domains.create('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'this-is-my-domain-01.com',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,7 +27,7 @@ describe('resource domains', () => {
   test('create: required and optional params', async () => {
     const response = await client.pages.projects.domains.create('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'example.com',
+      name: 'this-is-my-domain-01.com',
     });
   });
 
@@ -76,7 +77,7 @@ describe('resource domains', () => {
     const responsePromise = client.pages.projects.domains.edit(
       'this-is-my-project-01',
       'this-is-my-domain-01.com',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -91,7 +92,7 @@ describe('resource domains', () => {
     const response = await client.pages.projects.domains.edit(
       'this-is-my-project-01',
       'this-is-my-domain-01.com',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 

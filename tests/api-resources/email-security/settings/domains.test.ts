@@ -30,6 +30,7 @@ describe('resource domains', () => {
       allowed_delivery_mode: 'DIRECT',
       direction: 'asc',
       domain: ['string'],
+      integration_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       order: 'domain',
       page: 1,
       per_page: 1,

@@ -7,6 +7,15 @@ export class Content extends APIResource {
   /**
    * Fetches rendered HTML content from provided URL or HTML. Check available options
    * like `gotoOptions` and `waitFor*` to control page load behaviour.
+   *
+   * @example
+   * ```ts
+   * const content =
+   *   await client.browserRendering.content.create({
+   *     account_id: 'account_id',
+   *     url: 'https://www.example.com/',
+   *   });
+   * ```
    */
   create(params: ContentCreateParams, options?: Core.RequestOptions): Core.APIPromise<ContentCreateResponse> {
     const { account_id, cacheTTL, ...body } = params;
@@ -25,269 +34,528 @@ export class Content extends APIResource {
  */
 export type ContentCreateResponse = string;
 
-export interface ContentCreateParams {
-  /**
-   * Path param: Account ID.
-   */
-  account_id: string;
+export type ContentCreateParams = ContentCreateParams.Variant0 | ContentCreateParams.Variant1;
 
-  /**
-   * Query param: Cache TTL default is 5s. Set to 0 to disable.
-   */
-  cacheTTL?: number;
+export declare namespace ContentCreateParams {
+  export interface Variant0 {
+    /**
+     * Path param: Account ID.
+     */
+    account_id: string;
 
-  /**
-   * Body param: The maximum duration allowed for the browser action to complete
-   * after the page has loaded (such as taking screenshots, extracting content, or
-   * generating PDFs). If this time limit is exceeded, the action stops and returns a
-   * timeout error.
-   */
-  actionTimeout?: number;
+    /**
+     * Body param: URL to navigate to, eg. `https://example.com`.
+     */
+    url: string;
 
-  /**
-   * Body param: Adds a `<script>` tag into the page with the desired URL or content.
-   */
-  addScriptTag?: Array<ContentCreateParams.AddScriptTag>;
+    /**
+     * Query param: Cache TTL default is 5s. Set to 0 to disable.
+     */
+    cacheTTL?: number;
 
-  /**
-   * Body param: Adds a `<link rel="stylesheet">` tag into the page with the desired
-   * URL or a `<style type="text/css">` tag with the content.
-   */
-  addStyleTag?: Array<ContentCreateParams.AddStyleTag>;
+    /**
+     * Body param: The maximum duration allowed for the browser action to complete
+     * after the page has loaded (such as taking screenshots, extracting content, or
+     * generating PDFs). If this time limit is exceeded, the action stops and returns a
+     * timeout error.
+     */
+    actionTimeout?: number;
 
-  /**
-   * Body param: Only allow requests that match the provided regex patterns, eg.
-   * '/^.\*\.(css)'.
-   */
-  allowRequestPattern?: Array<string>;
+    /**
+     * Body param: Adds a `<script>` tag into the page with the desired URL or content.
+     */
+    addScriptTag?: Array<Variant0.AddScriptTag>;
 
-  /**
-   * Body param: Only allow requests that match the provided resource types, eg.
-   * 'image' or 'script'.
-   */
-  allowResourceTypes?: Array<
-    | 'document'
-    | 'stylesheet'
-    | 'image'
-    | 'media'
-    | 'font'
-    | 'script'
-    | 'texttrack'
-    | 'xhr'
-    | 'fetch'
-    | 'prefetch'
-    | 'eventsource'
-    | 'websocket'
-    | 'manifest'
-    | 'signedexchange'
-    | 'ping'
-    | 'cspviolationreport'
-    | 'preflight'
-    | 'other'
-  >;
+    /**
+     * Body param: Adds a `<link rel="stylesheet">` tag into the page with the desired
+     * URL or a `<style type="text/css">` tag with the content.
+     */
+    addStyleTag?: Array<Variant0.AddStyleTag>;
 
-  /**
-   * Body param: Provide credentials for HTTP authentication.
-   */
-  authenticate?: ContentCreateParams.Authenticate;
+    /**
+     * Body param: Only allow requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    allowRequestPattern?: Array<string>;
 
-  /**
-   * Body param: Attempt to proceed when 'awaited' events fail or timeout.
-   */
-  bestAttempt?: boolean;
+    /**
+     * Body param: Only allow requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    allowResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
 
-  /**
-   * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
-   */
-  cookies?: Array<ContentCreateParams.Cookie>;
+    /**
+     * Body param: Provide credentials for HTTP authentication.
+     */
+    authenticate?: Variant0.Authenticate;
 
-  /**
-   * Body param:
-   */
-  emulateMediaType?: string;
+    /**
+     * Body param: Attempt to proceed when 'awaited' events fail or timeout.
+     */
+    bestAttempt?: boolean;
 
-  /**
-   * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
-   */
-  gotoOptions?: ContentCreateParams.GotoOptions;
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+     */
+    cookies?: Array<Variant0.Cookie>;
 
-  /**
-   * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
-   * `html` or `url` must be set.
-   */
-  html?: string;
+    /**
+     * Body param:
+     */
+    emulateMediaType?: string;
 
-  /**
-   * Body param: Block undesired requests that match the provided regex patterns, eg.
-   * '/^.\*\.(css)'.
-   */
-  rejectRequestPattern?: Array<string>;
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+     */
+    gotoOptions?: Variant0.GotoOptions;
 
-  /**
-   * Body param: Block undesired requests that match the provided resource types, eg.
-   * 'image' or 'script'.
-   */
-  rejectResourceTypes?: Array<
-    | 'document'
-    | 'stylesheet'
-    | 'image'
-    | 'media'
-    | 'font'
-    | 'script'
-    | 'texttrack'
-    | 'xhr'
-    | 'fetch'
-    | 'prefetch'
-    | 'eventsource'
-    | 'websocket'
-    | 'manifest'
-    | 'signedexchange'
-    | 'ping'
-    | 'cspviolationreport'
-    | 'preflight'
-    | 'other'
-  >;
+    /**
+     * Body param: Block undesired requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    rejectRequestPattern?: Array<string>;
 
-  /**
-   * Body param:
-   */
-  setExtraHTTPHeaders?: { [key: string]: string };
+    /**
+     * Body param: Block undesired requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    rejectResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
 
-  /**
-   * Body param:
-   */
-  setJavaScriptEnabled?: boolean;
+    /**
+     * Body param:
+     */
+    setExtraHTTPHeaders?: { [key: string]: string };
 
-  /**
-   * Body param: URL to navigate to, eg. `https://example.com`.
-   */
-  url?: string;
+    /**
+     * Body param:
+     */
+    setJavaScriptEnabled?: boolean;
 
-  /**
-   * Body param:
-   */
-  userAgent?: string;
+    /**
+     * Body param:
+     */
+    userAgent?: string;
 
-  /**
-   * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
-   */
-  viewport?: ContentCreateParams.Viewport;
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+     */
+    viewport?: Variant0.Viewport;
 
-  /**
-   * Body param: Wait for the selector to appear in page. Check
-   * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
-   */
-  waitForSelector?: ContentCreateParams.WaitForSelector;
+    /**
+     * Body param: Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+     */
+    waitForSelector?: Variant0.WaitForSelector;
 
-  /**
-   * Body param: Waits for a specified timeout before continuing.
-   */
-  waitForTimeout?: number;
-}
-
-export namespace ContentCreateParams {
-  export interface AddScriptTag {
-    id?: string;
-
-    content?: string;
-
-    type?: string;
-
-    url?: string;
+    /**
+     * Body param: Waits for a specified timeout before continuing.
+     */
+    waitForTimeout?: number;
   }
 
-  export interface AddStyleTag {
-    content?: string;
+  export namespace Variant0 {
+    export interface AddScriptTag {
+      id?: string;
 
-    url?: string;
+      content?: string;
+
+      type?: string;
+
+      url?: string;
+    }
+
+    export interface AddStyleTag {
+      content?: string;
+
+      url?: string;
+    }
+
+    /**
+     * Provide credentials for HTTP authentication.
+     */
+    export interface Authenticate {
+      password: string;
+
+      username: string;
+    }
+
+    export interface Cookie {
+      name: string;
+
+      value: string;
+
+      domain?: string;
+
+      expires?: number;
+
+      httpOnly?: boolean;
+
+      partitionKey?: string;
+
+      path?: string;
+
+      priority?: 'Low' | 'Medium' | 'High';
+
+      sameParty?: boolean;
+
+      sameSite?: 'Strict' | 'Lax' | 'None';
+
+      secure?: boolean;
+
+      sourcePort?: number;
+
+      sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+
+      url?: string;
+    }
+
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+     */
+    export interface GotoOptions {
+      referer?: string;
+
+      referrerPolicy?: string;
+
+      timeout?: number;
+
+      waitUntil?:
+        | 'load'
+        | 'domcontentloaded'
+        | 'networkidle0'
+        | 'networkidle2'
+        | Array<'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2'>;
+    }
+
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+     */
+    export interface Viewport {
+      height: number;
+
+      width: number;
+
+      deviceScaleFactor?: number;
+
+      hasTouch?: boolean;
+
+      isLandscape?: boolean;
+
+      isMobile?: boolean;
+    }
+
+    /**
+     * Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+     */
+    export interface WaitForSelector {
+      selector: string;
+
+      hidden?: true;
+
+      timeout?: number;
+
+      visible?: true;
+    }
   }
 
-  /**
-   * Provide credentials for HTTP authentication.
-   */
-  export interface Authenticate {
-    password: string;
+  export interface Variant1 {
+    /**
+     * Path param: Account ID.
+     */
+    account_id: string;
 
-    username: string;
+    /**
+     * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
+     * `html` or `url` must be set.
+     */
+    html: string;
+
+    /**
+     * Query param: Cache TTL default is 5s. Set to 0 to disable.
+     */
+    cacheTTL?: number;
+
+    /**
+     * Body param: The maximum duration allowed for the browser action to complete
+     * after the page has loaded (such as taking screenshots, extracting content, or
+     * generating PDFs). If this time limit is exceeded, the action stops and returns a
+     * timeout error.
+     */
+    actionTimeout?: number;
+
+    /**
+     * Body param: Adds a `<script>` tag into the page with the desired URL or content.
+     */
+    addScriptTag?: Array<Variant1.AddScriptTag>;
+
+    /**
+     * Body param: Adds a `<link rel="stylesheet">` tag into the page with the desired
+     * URL or a `<style type="text/css">` tag with the content.
+     */
+    addStyleTag?: Array<Variant1.AddStyleTag>;
+
+    /**
+     * Body param: Only allow requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    allowRequestPattern?: Array<string>;
+
+    /**
+     * Body param: Only allow requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    allowResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
+
+    /**
+     * Body param: Provide credentials for HTTP authentication.
+     */
+    authenticate?: Variant1.Authenticate;
+
+    /**
+     * Body param: Attempt to proceed when 'awaited' events fail or timeout.
+     */
+    bestAttempt?: boolean;
+
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+     */
+    cookies?: Array<Variant1.Cookie>;
+
+    /**
+     * Body param:
+     */
+    emulateMediaType?: string;
+
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+     */
+    gotoOptions?: Variant1.GotoOptions;
+
+    /**
+     * Body param: Block undesired requests that match the provided regex patterns, eg.
+     * '/^.\*\.(css)'.
+     */
+    rejectRequestPattern?: Array<string>;
+
+    /**
+     * Body param: Block undesired requests that match the provided resource types, eg.
+     * 'image' or 'script'.
+     */
+    rejectResourceTypes?: Array<
+      | 'document'
+      | 'stylesheet'
+      | 'image'
+      | 'media'
+      | 'font'
+      | 'script'
+      | 'texttrack'
+      | 'xhr'
+      | 'fetch'
+      | 'prefetch'
+      | 'eventsource'
+      | 'websocket'
+      | 'manifest'
+      | 'signedexchange'
+      | 'ping'
+      | 'cspviolationreport'
+      | 'preflight'
+      | 'other'
+    >;
+
+    /**
+     * Body param:
+     */
+    setExtraHTTPHeaders?: { [key: string]: string };
+
+    /**
+     * Body param:
+     */
+    setJavaScriptEnabled?: boolean;
+
+    /**
+     * Body param:
+     */
+    userAgent?: string;
+
+    /**
+     * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+     */
+    viewport?: Variant1.Viewport;
+
+    /**
+     * Body param: Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+     */
+    waitForSelector?: Variant1.WaitForSelector;
+
+    /**
+     * Body param: Waits for a specified timeout before continuing.
+     */
+    waitForTimeout?: number;
   }
 
-  export interface Cookie {
-    name: string;
+  export namespace Variant1 {
+    export interface AddScriptTag {
+      id?: string;
 
-    value: string;
+      content?: string;
 
-    domain?: string;
+      type?: string;
 
-    expires?: number;
+      url?: string;
+    }
 
-    httpOnly?: boolean;
+    export interface AddStyleTag {
+      content?: string;
 
-    partitionKey?: string;
+      url?: string;
+    }
 
-    path?: string;
+    /**
+     * Provide credentials for HTTP authentication.
+     */
+    export interface Authenticate {
+      password: string;
 
-    priority?: 'Low' | 'Medium' | 'High';
+      username: string;
+    }
 
-    sameParty?: boolean;
+    export interface Cookie {
+      name: string;
 
-    sameSite?: 'Strict' | 'Lax' | 'None';
+      value: string;
 
-    secure?: boolean;
+      domain?: string;
 
-    sourcePort?: number;
+      expires?: number;
 
-    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+      httpOnly?: boolean;
 
-    url?: string;
-  }
+      partitionKey?: string;
 
-  /**
-   * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
-   */
-  export interface GotoOptions {
-    referer?: string;
+      path?: string;
 
-    referrerPolicy?: string;
+      priority?: 'Low' | 'Medium' | 'High';
 
-    timeout?: number;
+      sameParty?: boolean;
 
-    waitUntil?:
-      | 'load'
-      | 'domcontentloaded'
-      | 'networkidle0'
-      | 'networkidle2'
-      | Array<'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2'>;
-  }
+      sameSite?: 'Strict' | 'Lax' | 'None';
 
-  /**
-   * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
-   */
-  export interface Viewport {
-    height: number;
+      secure?: boolean;
 
-    width: number;
+      sourcePort?: number;
 
-    deviceScaleFactor?: number;
+      sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
 
-    hasTouch?: boolean;
+      url?: string;
+    }
 
-    isLandscape?: boolean;
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+     */
+    export interface GotoOptions {
+      referer?: string;
 
-    isMobile?: boolean;
-  }
+      referrerPolicy?: string;
 
-  /**
-   * Wait for the selector to appear in page. Check
-   * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
-   */
-  export interface WaitForSelector {
-    selector: string;
+      timeout?: number;
 
-    hidden?: true;
+      waitUntil?:
+        | 'load'
+        | 'domcontentloaded'
+        | 'networkidle0'
+        | 'networkidle2'
+        | Array<'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2'>;
+    }
 
-    timeout?: number;
+    /**
+     * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+     */
+    export interface Viewport {
+      height: number;
 
-    visible?: true;
+      width: number;
+
+      deviceScaleFactor?: number;
+
+      hasTouch?: boolean;
+
+      isLandscape?: boolean;
+
+      isMobile?: boolean;
+    }
+
+    /**
+     * Wait for the selector to appear in page. Check
+     * [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+     */
+    export interface WaitForSelector {
+      selector: string;
+
+      hidden?: true;
+
+      timeout?: number;
+
+      visible?: true;
+    }
   }
 }
 

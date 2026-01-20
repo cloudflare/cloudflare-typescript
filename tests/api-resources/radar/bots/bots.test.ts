@@ -38,7 +38,7 @@ describe('resource bots', () => {
           botVerificationStatus: 'VERIFIED',
           format: 'JSON',
           kind: 'AGENT',
-          limit: 5,
+          limit: 1,
           offset: 0,
         },
         { path: '/_stainless_unknown_path' },

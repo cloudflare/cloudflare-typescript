@@ -79,6 +79,7 @@ describe('resource rules', () => {
           ],
         },
         egress: { ipv4: '192.0.2.2', ipv4_fallback: '192.0.2.3', ipv6: '2001:DB8::/64' },
+        forensic_copy: { enabled: true },
         ignore_cname_category_matches: true,
         insecure_disable_dnssec_validation: false,
         ip_categories: true,
@@ -183,6 +184,7 @@ describe('resource rules', () => {
           ],
         },
         egress: { ipv4: '192.0.2.2', ipv4_fallback: '192.0.2.3', ipv6: '2001:DB8::/64' },
+        forensic_copy: { enabled: true },
         ignore_cname_category_matches: true,
         insecure_disable_dnssec_validation: false,
         ip_categories: true,
@@ -271,6 +273,25 @@ describe('resource rules', () => {
 
   test('get: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.rules.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
+  });
+
+  test('listTenant: only required params', async () => {
+    const responsePromise = client.zeroTrust.gateway.rules.listTenant({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('listTenant: required and optional params', async () => {
+    const response = await client.zeroTrust.gateway.rules.listTenant({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });

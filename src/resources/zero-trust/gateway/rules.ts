@@ -125,6 +125,32 @@ export class Rules extends APIResource {
   }
 
   /**
+   * List Zero Trust Gateway rules for the parent account of an account in the MSP
+   * configuration.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const gatewayRule of client.zeroTrust.gateway.rules.listTenant(
+   *   { account_id: '699d98642c564d2e855e9661899b7252' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  listTenant(
+    params: RuleListTenantParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<GatewayRulesSinglePage, GatewayRule> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/rules/tenant`,
+      GatewayRulesSinglePage,
+      options,
+    );
+  }
+
+  /**
    * Resets the expiration of a Zero Trust Gateway Rule if its duration elapsed and
    * it has a default duration. The Zero Trust Gateway Rule must have values for both
    * `expiration.expires_at` and `expiration.duration`.
@@ -295,7 +321,7 @@ export interface GatewayRule {
 
   /**
    * Specify the protocol or layer to evaluate the traffic, identity, and device
-   * posture expressions.
+   * posture expressions. Can only contain a single value.
    */
   filters: Array<GatewayFilter>;
 
@@ -367,12 +393,10 @@ export interface GatewayRule {
   read_only?: boolean;
 
   /**
-   * Set settings related to this rule. Each setting is only valid for specific rule
-   * types and can only be used with the appropriate selectors. If Terraform drift is
-   * observed in these setting values, verify that the setting is supported for the
-   * given rule type and that the API response reflects the requested value. If the
-   * API response returns sanitized or modified values that differ from the request,
-   * use the API-provided values in Terraform to ensure consistency.
+   * Defines settings for this rule. Settings apply only to specific rule types and
+   * must use compatible selectors. If Terraform detects drift, confirm the setting
+   * supports your rule type and check whether the API modifies the value. Use
+   * API-returned values in your configuration to prevent drift.
    */
   rule_settings?: RuleSetting;
 
@@ -435,12 +459,10 @@ export namespace GatewayRule {
 }
 
 /**
- * Set settings related to this rule. Each setting is only valid for specific rule
- * types and can only be used with the appropriate selectors. If Terraform drift is
- * observed in these setting values, verify that the setting is supported for the
- * given rule type and that the API response reflects the requested value. If the
- * API response returns sanitized or modified values that differ from the request,
- * use the API-provided values in Terraform to ensure consistency.
+ * Defines settings for this rule. Settings apply only to specific rule types and
+ * must use compatible selectors. If Terraform detects drift, confirm the setting
+ * supports your rule type and check whether the API modifies the value. Use
+ * API-returned values in your configuration to prevent drift.
  */
 export interface RuleSetting {
   /**
@@ -513,6 +535,12 @@ export interface RuleSetting {
    * WARP IPs. Settable only for `egress` rules.
    */
   egress?: RuleSetting.Egress | null;
+
+  /**
+   * Configure whether a copy of the HTTP request will be sent to storage when the
+   * rule matches.
+   */
+  forensic_copy?: RuleSetting.ForensicCopy | null;
 
   /**
    * Ignore category matches at CNAME domains in a response. When off, evaluate
@@ -761,6 +789,17 @@ export namespace RuleSetting {
   }
 
   /**
+   * Configure whether a copy of the HTTP request will be sent to storage when the
+   * rule matches.
+   */
+  export interface ForensicCopy {
+    /**
+     * Enable sending the copy to storage.
+     */
+    enabled?: boolean;
+  }
+
+  /**
    * Send matching traffic to the supplied destination IP address and port. Settable
    * only for `l4` rules with the action set to `l4_override`.
    */
@@ -894,12 +933,10 @@ export namespace RuleSetting {
 }
 
 /**
- * Set settings related to this rule. Each setting is only valid for specific rule
- * types and can only be used with the appropriate selectors. If Terraform drift is
- * observed in these setting values, verify that the setting is supported for the
- * given rule type and that the API response reflects the requested value. If the
- * API response returns sanitized or modified values that differ from the request,
- * use the API-provided values in Terraform to ensure consistency.
+ * Defines settings for this rule. Settings apply only to specific rule types and
+ * must use compatible selectors. If Terraform detects drift, confirm the setting
+ * supports your rule type and check whether the API modifies the value. Use
+ * API-returned values in your configuration to prevent drift.
  */
 export interface RuleSettingParam {
   /**
@@ -972,6 +1009,12 @@ export interface RuleSettingParam {
    * WARP IPs. Settable only for `egress` rules.
    */
   egress?: RuleSettingParam.Egress | null;
+
+  /**
+   * Configure whether a copy of the HTTP request will be sent to storage when the
+   * rule matches.
+   */
+  forensic_copy?: RuleSettingParam.ForensicCopy | null;
 
   /**
    * Ignore category matches at CNAME domains in a response. When off, evaluate
@@ -1217,6 +1260,17 @@ export namespace RuleSettingParam {
      * Specify the IPv6 range to use for egress.
      */
     ipv6?: string;
+  }
+
+  /**
+   * Configure whether a copy of the HTTP request will be sent to storage when the
+   * rule matches.
+   */
+  export interface ForensicCopy {
+    /**
+     * Enable sending the copy to storage.
+     */
+    enabled?: boolean;
   }
 
   /**
@@ -1558,7 +1612,7 @@ export interface RuleCreateParams {
 
   /**
    * Body param: Specify the protocol or layer to evaluate the traffic, identity, and
-   * device posture expressions.
+   * device posture expressions. Can only contain a single value.
    */
   filters?: Array<GatewayFilterParam>;
 
@@ -1580,13 +1634,10 @@ export interface RuleCreateParams {
   precedence?: number;
 
   /**
-   * Body param: Set settings related to this rule. Each setting is only valid for
-   * specific rule types and can only be used with the appropriate selectors. If
-   * Terraform drift is observed in these setting values, verify that the setting is
-   * supported for the given rule type and that the API response reflects the
-   * requested value. If the API response returns sanitized or modified values that
-   * differ from the request, use the API-provided values in Terraform to ensure
-   * consistency.
+   * Body param: Defines settings for this rule. Settings apply only to specific rule
+   * types and must use compatible selectors. If Terraform detects drift, confirm the
+   * setting supports your rule type and check whether the API modifies the value.
+   * Use API-returned values in your configuration to prevent drift.
    */
   rule_settings?: RuleSettingParam;
 
@@ -1689,7 +1740,7 @@ export interface RuleUpdateParams {
 
   /**
    * Body param: Specify the protocol or layer to evaluate the traffic, identity, and
-   * device posture expressions.
+   * device posture expressions. Can only contain a single value.
    */
   filters?: Array<GatewayFilterParam>;
 
@@ -1711,13 +1762,10 @@ export interface RuleUpdateParams {
   precedence?: number;
 
   /**
-   * Body param: Set settings related to this rule. Each setting is only valid for
-   * specific rule types and can only be used with the appropriate selectors. If
-   * Terraform drift is observed in these setting values, verify that the setting is
-   * supported for the given rule type and that the API response reflects the
-   * requested value. If the API response returns sanitized or modified values that
-   * differ from the request, use the API-provided values in Terraform to ensure
-   * consistency.
+   * Body param: Defines settings for this rule. Settings apply only to specific rule
+   * types and must use compatible selectors. If Terraform detects drift, confirm the
+   * setting supports your rule type and check whether the API modifies the value.
+   * Use API-returned values in your configuration to prevent drift.
    */
   rule_settings?: RuleSettingParam;
 
@@ -1772,6 +1820,10 @@ export interface RuleGetParams {
   account_id: string;
 }
 
+export interface RuleListTenantParams {
+  account_id: string;
+}
+
 export interface RuleResetExpirationParams {
   account_id: string;
 }
@@ -1793,6 +1845,7 @@ export declare namespace Rules {
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
     type RuleGetParams as RuleGetParams,
+    type RuleListTenantParams as RuleListTenantParams,
     type RuleResetExpirationParams as RuleResetExpirationParams,
   };
 }
