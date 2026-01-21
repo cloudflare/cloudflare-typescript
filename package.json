@@ -6,7 +6,10 @@
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:cloudflare/cloudflare-typescript",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloudflare/cloudflare-typescript.git"
+  },
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [

@@ -55,5 +55,6 @@ else
   TAG="latest"
 fi
 
+npm ci
 # Publish with the appropriate tag
 npm publish --provenance --tag "$TAG"
