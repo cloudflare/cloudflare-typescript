@@ -10,6 +10,7 @@ on:
 
 permissions:
   id-token: write # required for OIDC
+  contents: write
 
 jobs:
   publish:
