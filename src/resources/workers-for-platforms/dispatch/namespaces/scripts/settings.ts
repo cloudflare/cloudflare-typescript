@@ -1594,7 +1594,7 @@ export interface SettingEditParams {
   dispatch_namespace: string;
 
   /**
-   * Body param:
+   * Body param
    */
   settings?: SettingEditParams.Settings;
 }

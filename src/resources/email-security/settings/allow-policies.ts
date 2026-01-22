@@ -399,7 +399,7 @@ export interface AllowPolicyCreateParams {
   is_exempt_recipient: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   is_regex: boolean;
 
@@ -410,12 +410,12 @@ export interface AllowPolicyCreateParams {
   is_trusted_sender: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern: string;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -426,22 +426,22 @@ export interface AllowPolicyCreateParams {
   verify_sender: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   comments?: string | null;
 
   /**
-   * @deprecated Body param:
+   * @deprecated Body param
    */
   is_recipient?: boolean;
 
   /**
-   * @deprecated Body param:
+   * @deprecated Body param
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Body param:
+   * @deprecated Body param
    */
   is_spoof?: boolean;
 }
@@ -458,32 +458,32 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param:
+   * Query param
    */
   is_acceptable_sender?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   is_exempt_recipient?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   is_recipient?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   is_sender?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   is_spoof?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   is_trusted_sender?: boolean;
 
@@ -493,12 +493,12 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   order?: 'pattern' | 'created_at';
 
   /**
-   * Query param:
+   * Query param
    */
   pattern?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -510,7 +510,7 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   search?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   verify_sender?: boolean;
 }
@@ -529,7 +529,7 @@ export interface AllowPolicyEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   comments?: string | null;
 
@@ -546,7 +546,7 @@ export interface AllowPolicyEditParams {
   is_exempt_recipient?: boolean | null;
 
   /**
-   * Body param:
+   * Body param
    */
   is_regex?: boolean | null;
 
@@ -557,12 +557,12 @@ export interface AllowPolicyEditParams {
   is_trusted_sender?: boolean | null;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN' | null;
 

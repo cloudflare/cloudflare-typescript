@@ -62,7 +62,7 @@ export interface DomainHistoryGetParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   domain?: string;
 }

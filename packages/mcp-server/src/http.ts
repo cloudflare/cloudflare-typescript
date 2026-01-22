@@ -4,37 +4,20 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 
 import express from 'express';
-import { fromError } from 'zod-validation-error/v3';
-import { McpOptions, parseQueryOptions } from './options';
+import { McpOptions } from './options';
 import { ClientOptions, initMcpServer, newMcpServer } from './server';
 import { parseAuthHeaders } from './headers';
 
 const newServer = ({
   clientOptions,
-  mcpOptions: defaultMcpOptions,
   req,
   res,
 }: {
   clientOptions: ClientOptions;
-  mcpOptions: McpOptions;
   req: express.Request;
   res: express.Response;
 }): McpServer | null => {
   const server = newMcpServer();
-
-  let mcpOptions: McpOptions;
-  try {
-    mcpOptions = parseQueryOptions(defaultMcpOptions, req.query);
-  } catch (error) {
-    res.status(400).json({
-      jsonrpc: '2.0',
-      error: {
-        code: -32000,
-        message: `Invalid request: ${fromError(error)}`,
-      },
-    });
-    return null;
-  }
 
   try {
     const authOptions = parseAuthHeaders(req);
@@ -44,7 +27,6 @@ const newServer = ({
         ...clientOptions,
         ...authOptions,
       },
-      mcpOptions,
     });
   } catch (error) {
     res.status(401).json({
@@ -66,11 +48,8 @@ const post =
     const server = newServer({ ...options, req, res });
     // If we return null, we already set the authorization error.
     if (server === null) return;
-    const transport = new StreamableHTTPServerTransport({
-      // Stateless server
-      sessionIdGenerator: undefined,
-    });
-    await server.connect(transport);
+    const transport = new StreamableHTTPServerTransport();
+    await server.connect(transport as any);
     await transport.handleRequest(req, res, req.body);
   };
 

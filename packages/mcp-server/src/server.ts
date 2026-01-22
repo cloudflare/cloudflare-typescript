@@ -2,33 +2,20 @@
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { Endpoint, endpoints, HandlerFunction, query } from './tools';
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
   SetLevelRequestSchema,
-  Implementation,
-  Tool,
 } from '@modelcontextprotocol/sdk/types.js';
 import { ClientOptions } from 'cloudflare';
 import Cloudflare from 'cloudflare';
-import {
-  applyCompatibilityTransformations,
-  ClientCapabilities,
-  defaultClientCapabilities,
-  knownClients,
-  parseEmbeddedJSON,
-} from './compat';
-import { dynamicTools } from './dynamic-tools';
 import { codeTool } from './code-tool';
 import docsSearchTool from './docs-search-tool';
 import { McpOptions } from './options';
+import { HandlerFunction, McpTool } from './types';
 
 export { McpOptions } from './options';
-export { ClientType } from './compat';
-export { Filter } from './tools';
 export { ClientOptions } from 'cloudflare';
-export { endpoints } from './tools';
 
 export const newMcpServer = () =>
   new McpServer(
@@ -52,25 +39,6 @@ export function initMcpServer(params: {
   mcpOptions?: McpOptions;
 }) {
   const server = params.server instanceof McpServer ? params.server.server : params.server;
-  const mcpOptions = params.mcpOptions ?? {};
-
-  let providedEndpoints: Endpoint[] | null = null;
-  let endpointMap: Record<string, Endpoint> | null = null;
-
-  const initTools = async (implementation?: Implementation) => {
-    if (implementation && (!mcpOptions.client || mcpOptions.client === 'infer')) {
-      mcpOptions.client =
-        implementation.name.toLowerCase().includes('claude') ? 'claude'
-        : implementation.name.toLowerCase().includes('cursor') ? 'cursor'
-        : undefined;
-      mcpOptions.capabilities = {
-        ...(mcpOptions.client && knownClients[mcpOptions.client]),
-        ...mcpOptions.capabilities,
-      };
-    }
-    providedEndpoints ??= await selectTools(endpoints, mcpOptions);
-    endpointMap ??= Object.fromEntries(providedEndpoints.map((endpoint) => [endpoint.tool.name, endpoint]));
-  };
 
   const logAtLevel =
     (level: 'debug' | 'info' | 'warning' | 'error') =>
@@ -96,26 +64,23 @@ export function initMcpServer(params: {
     },
   });
 
+  const providedTools = selectTools(params.mcpOptions);
+  const toolMap = Object.fromEntries(providedTools.map((mcpTool) => [mcpTool.tool.name, mcpTool]));
+
   server.setRequestHandler(ListToolsRequestSchema, async () => {
-    if (providedEndpoints === null) {
-      await initTools(server.getClientVersion());
-    }
     return {
-      tools: providedEndpoints!.map((endpoint) => endpoint.tool),
+      tools: providedTools.map((mcpTool) => mcpTool.tool),
     };
   });
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
-    if (endpointMap === null) {
-      await initTools(server.getClientVersion());
-    }
     const { name, arguments: args } = request.params;
-    const endpoint = endpointMap![name];
-    if (!endpoint) {
+    const mcpTool = toolMap[name];
+    if (!mcpTool) {
       throw new Error(`Unknown tool: ${name}`);
     }
 
-    return executeHandler(endpoint.tool, endpoint.handler, client, args, mcpOptions.capabilities);
+    return executeHandler(mcpTool.handler, client, args);
   });
 
   server.setRequestHandler(SetLevelRequestSchema, async (request) => {
@@ -145,47 +110,22 @@ export function initMcpServer(params: {
 /**
  * Selects the tools to include in the MCP Server based on the provided options.
  */
-export async function selectTools(endpoints: Endpoint[], options?: McpOptions): Promise<Endpoint[]> {
-  const filteredEndpoints = query(options?.filters ?? [], endpoints);
-
-  let includedTools = filteredEndpoints.slice();
-
-  if (includedTools.length > 0) {
-    if (options?.includeDynamicTools) {
-      includedTools = dynamicTools(includedTools);
-    }
-  } else {
-    if (options?.includeAllTools) {
-      includedTools = endpoints.slice();
-    } else if (options?.includeDynamicTools) {
-      includedTools = dynamicTools(endpoints);
-    } else if (options?.includeCodeTools) {
-      includedTools = [await codeTool()];
-    } else {
-      includedTools = endpoints.slice();
-    }
-  }
+export function selectTools(options?: McpOptions): McpTool[] {
+  const includedTools = [codeTool()];
   if (options?.includeDocsTools ?? true) {
     includedTools.push(docsSearchTool);
   }
-  const capabilities = { ...defaultClientCapabilities, ...options?.capabilities };
-  return applyCompatibilityTransformations(includedTools, capabilities);
+  return includedTools;
 }
 
 /**
  * Runs the provided handler with the given client and arguments.
  */
 export async function executeHandler(
-  tool: Tool,
   handler: HandlerFunction,
   client: Cloudflare,
   args: Record<string, unknown> | undefined,
-  compatibilityOptions?: Partial<ClientCapabilities>,
 ) {
-  const options = { ...defaultClientCapabilities, ...compatibilityOptions };
-  if (!options.validJson && args) {
-    args = parseEmbeddedJSON(args, tool.inputSchema);
-  }
   return await handler(client, args || {});
 }
 

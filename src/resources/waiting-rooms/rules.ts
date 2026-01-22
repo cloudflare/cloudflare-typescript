@@ -209,7 +209,7 @@ export interface RuleCreateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   rules: RuleCreateParams.Rules;
 }
@@ -245,7 +245,7 @@ export interface RuleUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   rules: Array<RuleUpdateParams.Rule>;
 }
@@ -290,7 +290,7 @@ export interface RuleEditParams {
   zone_id: string;
 
   /**
-   * Path param:
+   * Path param
    */
   waiting_room_id: string;
 

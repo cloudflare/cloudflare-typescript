@@ -43,27 +43,27 @@ export interface LogoCreateResponse {
 
 export interface LogoCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   match_type?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   tag?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   threshold?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   image?: Uploadable;
 }

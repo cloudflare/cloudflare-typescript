@@ -1421,7 +1421,7 @@ export interface OperationBulkCreateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<OperationBulkCreateParams.Body>;
 }

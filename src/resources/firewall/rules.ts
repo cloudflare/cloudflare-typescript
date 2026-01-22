@@ -236,7 +236,7 @@ export interface RuleCreateParams {
   action: RuleCreateParams.Action;
 
   /**
-   * Body param:
+   * Body param
    */
   filter: FiltersAPI.FirewallFilterParam;
 }
@@ -309,7 +309,7 @@ export interface RuleUpdateParams {
   action: RuleUpdateParams.Action;
 
   /**
-   * Body param:
+   * Body param
    */
   filter: FiltersAPI.FirewallFilterParam;
 }
@@ -417,7 +417,7 @@ export interface RuleBulkEditParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
@@ -429,7 +429,7 @@ export interface RuleBulkUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }

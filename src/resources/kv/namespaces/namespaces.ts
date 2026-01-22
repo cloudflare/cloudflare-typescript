@@ -395,7 +395,7 @@ export interface NamespaceBulkDeleteParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<string>;
 }
@@ -429,7 +429,7 @@ export interface NamespaceBulkUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<NamespaceBulkUpdateParams.Body>;
 }

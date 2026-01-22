@@ -28,22 +28,22 @@ export type EventCreateResponse = unknown;
 
 export interface EventCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Path param:
+   * Path param
    */
   workflow_name: string;
 
   /**
-   * Path param:
+   * Path param
    */
   instance_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body?: unknown;
 }

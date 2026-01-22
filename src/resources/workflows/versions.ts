@@ -65,7 +65,7 @@ export interface VersionGetResponse {
 
 export interface VersionListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 }

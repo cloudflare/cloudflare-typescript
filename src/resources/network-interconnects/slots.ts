@@ -121,12 +121,12 @@ export interface SlotListParams {
   address_contains?: string | null;
 
   /**
-   * Query param:
+   * Query param
    */
   cursor?: number | null;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: number | null;
 

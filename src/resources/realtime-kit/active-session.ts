@@ -390,12 +390,12 @@ export interface ActiveSessionKickParticipantsParams {
   app_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   custom_participant_ids: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   participant_ids: Array<string>;
 }

@@ -440,7 +440,7 @@ export type RegistrationUnrevokeResponse = unknown;
 
 export interface RegistrationListParams extends CursorPaginationParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -450,7 +450,7 @@ export interface RegistrationListParams extends CursorPaginationParams {
   id?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   device?: RegistrationListParams.Device;
 
@@ -493,7 +493,7 @@ export interface RegistrationListParams extends CursorPaginationParams {
   status?: 'active' | 'all' | 'revoked';
 
   /**
-   * Query param:
+   * Query param
    */
   user?: RegistrationListParams.User;
 }
@@ -520,7 +520,7 @@ export interface RegistrationDeleteParams {
 
 export interface RegistrationBulkDeleteParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -532,7 +532,7 @@ export interface RegistrationBulkDeleteParams {
 
 export interface RegistrationGetParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -545,7 +545,7 @@ export interface RegistrationGetParams {
 
 export interface RegistrationRevokeParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -557,7 +557,7 @@ export interface RegistrationRevokeParams {
 
 export interface RegistrationUnrevokeParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

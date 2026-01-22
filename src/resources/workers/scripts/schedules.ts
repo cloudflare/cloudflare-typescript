@@ -96,7 +96,7 @@ export interface ScheduleUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<ScheduleUpdateParams.Body>;
 }

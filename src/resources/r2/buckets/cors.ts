@@ -172,7 +172,7 @@ export interface CORSUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   rules?: Array<CORSUpdateParams.Rule>;
 

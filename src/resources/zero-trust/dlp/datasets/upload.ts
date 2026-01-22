@@ -181,12 +181,12 @@ export interface UploadCreateParams {
 
 export interface UploadEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Path param:
+   * Path param
    */
   dataset_id: string;
 }

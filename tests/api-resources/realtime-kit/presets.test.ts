@@ -16,7 +16,10 @@ describe('resource presets', () => {
       config: {
         max_screenshare_count: 0,
         max_video_streams: { desktop: 0, mobile: 0 },
-        media: { screenshare: { frame_rate: 0, quality: 'hd' }, video: { frame_rate: 30, quality: 'hd' } },
+        media: {
+          screenshare: { frame_rate: 0, quality: 'hd' },
+          video: { frame_rate: 30, quality: 'hd' },
+        },
         view_type: 'GROUP_CALL',
       },
       name: 'name',
@@ -25,8 +28,20 @@ describe('resource presets', () => {
           border_radius: 'rounded',
           border_width: 'thin',
           colors: {
-            background: { '600': '600', '700': '700', '800': '800', '900': '900', '1000': '1000' },
-            brand: { '300': '300', '400': '400', '500': '500', '600': '600', '700': '700' },
+            background: {
+              '600': '600',
+              '700': '700',
+              '800': '800',
+              '900': '900',
+              '1000': '1000',
+            },
+            brand: {
+              '300': '300',
+              '400': '400',
+              '500': '500',
+              '600': '600',
+              '700': '700',
+            },
             danger: 'danger',
             success: 'success',
             text: 'text',
@@ -69,8 +84,20 @@ describe('resource presets', () => {
           border_radius: 'rounded',
           border_width: 'thin',
           colors: {
-            background: { '600': '600', '700': '700', '800': '800', '900': '900', '1000': '1000' },
-            brand: { '300': '300', '400': '400', '500': '500', '600': '600', '700': '700' },
+            background: {
+              '600': '600',
+              '700': '700',
+              '800': '800',
+              '900': '900',
+              '1000': '1000',
+            },
+            brand: {
+              '300': '300',
+              '400': '400',
+              '500': '500',
+              '600': '600',
+              '700': '700',
+            },
             danger: 'danger',
             success: 'success',
             text: 'text',
@@ -93,8 +120,17 @@ describe('resource presets', () => {
         can_record: true,
         can_spotlight: true,
         chat: {
-          private: { can_receive: true, can_send: true, files: true, text: true },
-          public: { can_send: true, files: true, text: true },
+          private: {
+            can_receive: true,
+            can_send: true,
+            files: true,
+            text: true,
+          },
+          public: {
+            can_send: true,
+            files: true,
+            text: true,
+          },
         },
         connected_meetings: {
           can_alter_connected_meetings: true,
@@ -118,7 +154,11 @@ describe('resource presets', () => {
           can_start: true,
           config: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         },
-        polls: { can_create: true, can_view: true, can_vote: true },
+        polls: {
+          can_create: true,
+          can_view: true,
+          can_vote: true,
+        },
         recorder_type: 'RECORDER',
         show_participant_list: true,
         waiting_room_type: 'SKIP',
@@ -150,7 +190,10 @@ describe('resource presets', () => {
       config: {
         max_screenshare_count: 0,
         max_video_streams: { desktop: 0, mobile: 0 },
-        media: { screenshare: { frame_rate: 0, quality: 'hd' }, video: { frame_rate: 30, quality: 'hd' } },
+        media: {
+          screenshare: { frame_rate: 0, quality: 'hd' },
+          video: { frame_rate: 30, quality: 'hd' },
+        },
         view_type: 'GROUP_CALL',
       },
       name: 'name',
@@ -163,8 +206,17 @@ describe('resource presets', () => {
         can_record: true,
         can_spotlight: true,
         chat: {
-          private: { can_receive: true, can_send: true, files: true, text: true },
-          public: { can_send: true, files: true, text: true },
+          private: {
+            can_receive: true,
+            can_send: true,
+            files: true,
+            text: true,
+          },
+          public: {
+            can_send: true,
+            files: true,
+            text: true,
+          },
         },
         connected_meetings: {
           can_alter_connected_meetings: true,
@@ -189,7 +241,11 @@ describe('resource presets', () => {
           can_start: true,
           config: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         },
-        polls: { can_create: true, can_view: true, can_vote: true },
+        polls: {
+          can_create: true,
+          can_view: true,
+          can_vote: true,
+        },
         recorder_type: 'RECORDER',
         show_participant_list: true,
         waiting_room_type: 'SKIP',
@@ -200,8 +256,20 @@ describe('resource presets', () => {
           border_radius: 'rounded',
           border_width: 'thin',
           colors: {
-            background: { '600': '600', '700': '700', '800': '800', '900': '900', '1000': '1000' },
-            brand: { '300': '300', '400': '400', '500': '500', '600': '600', '700': '700' },
+            background: {
+              '600': '600',
+              '700': '700',
+              '800': '800',
+              '900': '900',
+              '1000': '1000',
+            },
+            brand: {
+              '300': '300',
+              '400': '400',
+              '500': '500',
+              '600': '600',
+              '700': '700',
+            },
             danger: 'danger',
             success: 'success',
             text: 'text',

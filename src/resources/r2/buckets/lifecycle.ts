@@ -224,7 +224,7 @@ export interface LifecycleUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   rules?: Array<LifecycleUpdateParams.Rule>;
 

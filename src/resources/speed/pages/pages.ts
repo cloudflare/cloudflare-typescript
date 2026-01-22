@@ -146,7 +146,7 @@ export interface PageTrendParams {
     | 'us-west1';
 
   /**
-   * Query param:
+   * Query param
    */
   start: string;
 
@@ -156,7 +156,7 @@ export interface PageTrendParams {
   tz: string;
 
   /**
-   * Query param:
+   * Query param
    */
   end?: string;
 }

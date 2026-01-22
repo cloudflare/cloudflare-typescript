@@ -74,7 +74,7 @@ export interface EventTagCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   tags: Array<string>;
 }

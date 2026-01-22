@@ -275,7 +275,7 @@ export interface SiteCreateParams {
   connector_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
@@ -309,7 +309,7 @@ export interface SiteUpdateParams {
   connector_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
@@ -361,7 +361,7 @@ export interface SiteEditParams {
   connector_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 

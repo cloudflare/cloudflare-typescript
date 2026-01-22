@@ -463,7 +463,7 @@ export interface SecretCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<SecretCreateParams.Body>;
 }

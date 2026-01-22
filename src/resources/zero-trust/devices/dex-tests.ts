@@ -628,7 +628,7 @@ export namespace DEXTestGetResponse {
 
 export interface DEXTestCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -664,7 +664,7 @@ export interface DEXTestCreateParams {
   target_policies?: Array<DEXTestCreateParams.TargetPolicy>;
 
   /**
-   * Body param:
+   * Body param
    */
   targeted?: boolean;
 }
@@ -711,7 +711,7 @@ export namespace DEXTestCreateParams {
 
 export interface DEXTestUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -747,7 +747,7 @@ export interface DEXTestUpdateParams {
   target_policies?: Array<DEXTestUpdateParams.TargetPolicy>;
 
   /**
-   * Body param:
+   * Body param
    */
   targeted?: boolean;
 }

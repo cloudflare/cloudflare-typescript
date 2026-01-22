@@ -244,7 +244,7 @@ export interface BGPPrefixEditParams {
   auto_advertise_withdraw?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   on_demand?: BGPPrefixEditParams.OnDemand;
 }

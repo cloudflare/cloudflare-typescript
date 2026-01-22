@@ -137,7 +137,7 @@ export interface LockUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   rules?: Array<LockUpdateParams.Rule>;
 

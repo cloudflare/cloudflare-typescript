@@ -40,7 +40,13 @@ describe('resource scripts', () => {
           },
           jwt: 'jwt',
         },
-        bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
+        bindings: [
+          {
+            name: 'MY_ENV_VAR',
+            text: 'my_data',
+            type: 'plain_text',
+          },
+        ],
         body_part: 'worker.js',
         compatibility_date: '2021-01-01',
         compatibility_flags: ['nodejs_compat'],
@@ -56,7 +62,13 @@ describe('resource scripts', () => {
           new_tag: 'v2',
           old_tag: 'v1',
           renamed_classes: [{ from: 'from', to: 'to' }],
-          transferred_classes: [{ from: 'from', from_script: 'from_script', to: 'to' }],
+          transferred_classes: [
+            {
+              from: 'from',
+              from_script: 'from_script',
+              to: 'to',
+            },
+          ],
         },
         observability: {
           enabled: true,
@@ -72,7 +84,11 @@ describe('resource scripts', () => {
         placement: { mode: 'smart' },
         tags: ['string'],
         tail_consumers: [
-          { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
+          {
+            service: 'my-log-consumer',
+            environment: 'production',
+            namespace: 'my-namespace',
+          },
         ],
         usage_model: 'standard',
       },

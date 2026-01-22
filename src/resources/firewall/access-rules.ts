@@ -697,7 +697,7 @@ export interface AccessRuleListParams extends V4PagePaginationArrayParams {
   zone_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   configuration?: AccessRuleListParams.Configuration;
 

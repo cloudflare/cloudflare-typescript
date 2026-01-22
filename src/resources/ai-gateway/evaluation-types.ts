@@ -55,17 +55,17 @@ export interface EvaluationTypeListResponse {
 
 export interface EvaluationTypeListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   order_by?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   order_by_direction?: 'asc' | 'desc';
 }

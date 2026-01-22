@@ -309,7 +309,7 @@ export interface TokenCreateParams {
   policies: Array<Shared.TokenPolicyParam>;
 
   /**
-   * Body param:
+   * Body param
    */
   condition?: TokenCreateParams.Condition;
 
@@ -368,7 +368,7 @@ export interface TokenUpdateParams {
   policies: Array<Shared.TokenPolicyParam>;
 
   /**
-   * Body param:
+   * Body param
    */
   condition?: TokenUpdateParams.Condition;
 

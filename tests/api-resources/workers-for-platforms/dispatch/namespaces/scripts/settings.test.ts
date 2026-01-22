@@ -32,7 +32,13 @@ describe('resource settings', () => {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         dispatch_namespace: 'my-dispatch-namespace',
         settings: {
-          bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
+          bindings: [
+            {
+              name: 'MY_ENV_VAR',
+              text: 'my_data',
+              type: 'plain_text',
+            },
+          ],
           compatibility_date: '2021-01-01',
           compatibility_flags: ['nodejs_compat'],
           limits: { cpu_ms: 50 },
@@ -44,7 +50,13 @@ describe('resource settings', () => {
             new_tag: 'v2',
             old_tag: 'v1',
             renamed_classes: [{ from: 'from', to: 'to' }],
-            transferred_classes: [{ from: 'from', from_script: 'from_script', to: 'to' }],
+            transferred_classes: [
+              {
+                from: 'from',
+                from_script: 'from_script',
+                to: 'to',
+              },
+            ],
           },
           observability: {
             enabled: true,
@@ -60,7 +72,11 @@ describe('resource settings', () => {
           placement: { mode: 'smart' },
           tags: ['my-team', 'my-public-api'],
           tail_consumers: [
-            { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
+            {
+              service: 'my-log-consumer',
+              environment: 'production',
+              namespace: 'my-namespace',
+            },
           ],
           usage_model: 'standard',
         },

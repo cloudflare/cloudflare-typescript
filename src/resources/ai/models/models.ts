@@ -36,7 +36,7 @@ export type ModelListResponse = unknown;
 
 export interface ModelListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

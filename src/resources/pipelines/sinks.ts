@@ -1218,12 +1218,12 @@ export interface SinkCreateParams {
     | SinkCreateParams.CloudflarePipelinesR2DataCatalogTable;
 
   /**
-   * Body param:
+   * Body param
    */
   format?: SinkCreateParams.Json | SinkCreateParams.Parquet;
 
   /**
-   * Body param:
+   * Body param
    */
   schema?: SinkCreateParams.Schema;
 }
@@ -1569,7 +1569,7 @@ export interface SinkListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   pipeline_id?: string;
 }

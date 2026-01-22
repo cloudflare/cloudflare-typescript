@@ -51,7 +51,7 @@ export interface UploadCreateParams {
   base64: true;
 
   /**
-   * Body param:
+   * Body param
    */
   body: { [key: string]: string };
 }

@@ -436,7 +436,7 @@ export interface RuleBulkCreateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<RuleBulkCreateParams.Body>;
 }
@@ -529,7 +529,7 @@ export interface RuleBulkEditParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<RuleBulkEditParams.Body>;
 }

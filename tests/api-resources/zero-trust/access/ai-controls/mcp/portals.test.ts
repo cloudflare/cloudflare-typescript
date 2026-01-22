@@ -37,8 +37,20 @@ describe('resource portals', () => {
           server_id: 'my-mcp-server',
           default_disabled: true,
           on_behalf: true,
-          updated_prompts: [{ name: 'name', description: 'description', enabled: true }],
-          updated_tools: [{ name: 'name', description: 'description', enabled: true }],
+          updated_prompts: [
+            {
+              name: 'name',
+              description: 'description',
+              enabled: true,
+            },
+          ],
+          updated_tools: [
+            {
+              name: 'name',
+              description: 'description',
+              enabled: true,
+            },
+          ],
         },
       ],
     });
@@ -68,8 +80,20 @@ describe('resource portals', () => {
           server_id: 'my-mcp-server',
           default_disabled: true,
           on_behalf: true,
-          updated_prompts: [{ name: 'name', description: 'description', enabled: true }],
-          updated_tools: [{ name: 'name', description: 'description', enabled: true }],
+          updated_prompts: [
+            {
+              name: 'name',
+              description: 'description',
+              enabled: true,
+            },
+          ],
+          updated_tools: [
+            {
+              name: 'name',
+              description: 'description',
+              enabled: true,
+            },
+          ],
         },
       ],
     });
