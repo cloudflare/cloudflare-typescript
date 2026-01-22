@@ -210,9 +210,11 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.logs.RayID.get()`
 - `client.originTLSClientAuth.delete()`
 - `client.originTLSClientAuth.get()`
+- `client.originTLSClientAuth.zoneCertificates.delete()`
+- `client.originTLSClientAuth.zoneCertificates.get()`
 - `client.originTLSClientAuth.hostnames.get()`
-- `client.originTLSClientAuth.hostnames.certificates.delete()`
-- `client.originTLSClientAuth.hostnames.certificates.get()`
+- `client.originTLSClientAuth.hostnameCertificates.delete()`
+- `client.originTLSClientAuth.hostnameCertificates.get()`
 - `client.pageRules.update()`
 - `client.pageRules.delete()`
 - `client.pageRules.edit()`
