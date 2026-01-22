@@ -347,17 +347,17 @@ export type JobResumeResponse = string;
 
 export interface JobCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   overwrite?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   source?:
     | JobCreateParams.R2SlurperS3SourceSchema
@@ -365,7 +365,7 @@ export interface JobCreateParams {
     | JobCreateParams.R2SlurperR2SourceSchema;
 
   /**
-   * Body param:
+   * Body param
    */
   target?: JobCreateParams.Target;
 }
@@ -452,17 +452,17 @@ export namespace JobCreateParams {
 
 export interface JobListParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   offset?: number;
 }

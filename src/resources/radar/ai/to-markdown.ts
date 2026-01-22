@@ -47,7 +47,7 @@ export interface ToMarkdownCreateResponse {
 
 export interface ToMarkdownCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 }

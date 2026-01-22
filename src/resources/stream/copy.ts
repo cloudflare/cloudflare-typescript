@@ -88,7 +88,7 @@ export interface CopyCreateParams {
   thumbnailTimestampPct?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   watermark?: CopyCreateParams.Watermark;
 

@@ -48,7 +48,10 @@ describe('resource services', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 'account_id',
-        host: { ipv4: '10.0.0.1', network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' } },
+        host: {
+          ipv4: '10.0.0.1',
+          network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' },
+        },
         name: 'web-app',
         type: 'http',
       },
@@ -67,7 +70,10 @@ describe('resource services', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 'account_id',
-        host: { ipv4: '10.0.0.1', network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' } },
+        host: {
+          ipv4: '10.0.0.1',
+          network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' },
+        },
         name: 'web-app',
         type: 'http',
         http_port: 8080,

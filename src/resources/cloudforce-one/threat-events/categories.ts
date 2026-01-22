@@ -185,22 +185,22 @@ export interface CategoryCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   killChain: number;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   mitreAttack?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   shortname?: string;
 }
@@ -232,22 +232,22 @@ export interface CategoryEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   killChain?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   mitreAttack?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   shortname?: string;
 }

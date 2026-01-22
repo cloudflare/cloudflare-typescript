@@ -44,81 +44,81 @@ export class Queries extends APIResource {
 
 export interface QueryCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   query_scan?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   query_tag?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   max_time?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   min_time?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   body_scan?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   string_matches?: unknown;
 
   /**
-   * Body param:
+   * Body param
    */
   body_tag?: string;
 }
 
 export interface QueryDeleteParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   scan?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   tag?: string;
 }
 
 export interface QueryBulkParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   queries?: Array<{ [key: string]: unknown }>;
 }

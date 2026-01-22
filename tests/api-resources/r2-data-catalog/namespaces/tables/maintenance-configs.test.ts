@@ -34,7 +34,11 @@ describe('resource maintenanceConfigs', () => {
       {
         account_id: '0123456789abcdef0123456789abcdef',
         compaction: { state: 'enabled', target_size_mb: '256' },
-        snapshot_expiration: { max_snapshot_age: '14d', min_snapshots_to_keep: 5, state: 'enabled' },
+        snapshot_expiration: {
+          max_snapshot_age: '14d',
+          min_snapshots_to_keep: 5,
+          state: 'enabled',
+        },
       },
     );
   });

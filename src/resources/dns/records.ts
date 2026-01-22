@@ -9924,12 +9924,12 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
   zone_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   comment?: RecordListParams.Comment;
 
   /**
-   * Query param:
+   * Query param
    */
   content?: RecordListParams.Content;
 
@@ -9947,7 +9947,7 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
   match?: 'any' | 'all';
 
   /**
-   * Query param:
+   * Query param
    */
   name?: RecordListParams.Name;
 
@@ -9972,7 +9972,7 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
   search?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   tag?: RecordListParams.Tag;
 
@@ -10146,17 +10146,17 @@ export interface RecordBatchParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   deletes?: Array<RecordBatchParams.Delete>;
 
   /**
-   * Body param:
+   * Body param
    */
   patches?: Array<BatchPatchParam>;
 
   /**
-   * Body param:
+   * Body param
    */
   posts?: Array<
     | ARecordParam
@@ -10183,7 +10183,7 @@ export interface RecordBatchParams {
   >;
 
   /**
-   * Body param:
+   * Body param
    */
   puts?: Array<BatchPutParam>;
 }
@@ -12282,7 +12282,7 @@ export interface RecordScanParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
@@ -12301,7 +12301,7 @@ export interface RecordScanReviewParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   accepts?: Array<
     | ARecordParam
@@ -12328,7 +12328,7 @@ export interface RecordScanReviewParams {
   >;
 
   /**
-   * Body param:
+   * Body param
    */
   rejects?: Array<RecordScanReviewParams.Reject>;
 }

@@ -102,7 +102,7 @@ export interface ConfigurationUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_id_characteristics: Array<
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristic

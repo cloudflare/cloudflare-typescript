@@ -322,12 +322,12 @@ export interface IntegrationGetResponse {
 
 export interface IntegrationCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   integration_type: 'Okta';
 
@@ -346,7 +346,7 @@ export interface IntegrationCreateParams {
 
 export interface IntegrationUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

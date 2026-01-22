@@ -208,57 +208,57 @@ export interface InsightListParams extends V4PagePaginationParams {
   zone_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   dismissed?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_class?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_class~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_type?: Array<IssuesAPI.IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_type~neq'?: Array<IssuesAPI.IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   product?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'product~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   severity?: Array<IssuesAPI.SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'severity~neq'?: Array<IssuesAPI.SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   subject?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'subject~neq'?: Array<string>;
 }
@@ -277,7 +277,7 @@ export interface InsightDismissParams {
   zone_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dismiss?: boolean;
 }

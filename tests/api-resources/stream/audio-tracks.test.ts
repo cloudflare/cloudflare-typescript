@@ -74,7 +74,11 @@ describe('resource audioTracks', () => {
     const response = await client.stream.audioTracks.edit(
       'ea95132c15732412d22c1476fa83f27a',
       'ea95132c15732412d22c1476fa83f27a',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', default: true, label: 'director commentary' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        default: true,
+        label: 'director commentary',
+      },
     );
   });
 

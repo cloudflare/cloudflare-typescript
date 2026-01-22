@@ -41,44 +41,44 @@ export interface LogoMatchGetResponse {
 
 export interface LogoMatchDownloadParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   logo_id?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   offset?: string;
 }
 
 export interface LogoMatchGetParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   logo_id?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   offset?: string;
 }

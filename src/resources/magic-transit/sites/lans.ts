@@ -375,7 +375,7 @@ export interface LANCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   physport: number;
 
@@ -386,17 +386,17 @@ export interface LANCreateParams {
   ha_link?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   nat?: NatParam;
 
   /**
-   * Body param:
+   * Body param
    */
   routed_subnets?: Array<RoutedSubnetParam>;
 
@@ -421,22 +421,22 @@ export interface LANUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   nat?: NatParam;
 
   /**
-   * Body param:
+   * Body param
    */
   physport?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   routed_subnets?: Array<RoutedSubnetParam>;
 
@@ -475,22 +475,22 @@ export interface LANEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   nat?: NatParam;
 
   /**
-   * Body param:
+   * Body param
    */
   physport?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   routed_subnets?: Array<RoutedSubnetParam>;
 

@@ -32,7 +32,13 @@ describe('resource datasets', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.datasets.list(
-        { datasetType: 'RANKING_BUCKET', date: '2024-09-19', format: 'JSON', limit: 1, offset: 0 },
+        {
+          datasetType: 'RANKING_BUCKET',
+          date: '2024-09-19',
+          format: 'JSON',
+          limit: 1,
+          offset: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

@@ -272,7 +272,7 @@ export interface IncomingGetResponse {
 
 export interface IncomingCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 
@@ -295,7 +295,7 @@ export interface IncomingCreateParams {
 
 export interface IncomingUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 

@@ -152,7 +152,7 @@ export type CachePurgeParams =
 export declare namespace CachePurgeParams {
   export interface CachePurgeFlexPurgeByTags {
     /**
-     * Path param:
+     * Path param
      */
     zone_id: string;
 
@@ -166,7 +166,7 @@ export declare namespace CachePurgeParams {
 
   export interface CachePurgeFlexPurgeByHostnames {
     /**
-     * Path param:
+     * Path param
      */
     zone_id: string;
 
@@ -179,7 +179,7 @@ export declare namespace CachePurgeParams {
 
   export interface CachePurgeFlexPurgeByPrefixes {
     /**
-     * Path param:
+     * Path param
      */
     zone_id: string;
 
@@ -192,7 +192,7 @@ export declare namespace CachePurgeParams {
 
   export interface CachePurgeEverything {
     /**
-     * Path param:
+     * Path param
      */
     zone_id: string;
 
@@ -205,7 +205,7 @@ export declare namespace CachePurgeParams {
 
   export interface CachePurgeSingleFile {
     /**
-     * Path param:
+     * Path param
      */
     zone_id: string;
 
@@ -218,7 +218,7 @@ export declare namespace CachePurgeParams {
 
   export interface CachePurgeSingleFileWithURLAndHeaders {
     /**
-     * Path param:
+     * Path param
      */
     zone_id: string;
 

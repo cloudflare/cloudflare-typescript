@@ -130,7 +130,7 @@ export namespace LoggingSetting {
 
 export interface LoggingUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

@@ -211,7 +211,7 @@ export interface HostnameUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   config: Array<HostnameUpdateParams.Config>;
 }

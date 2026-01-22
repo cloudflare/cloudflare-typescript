@@ -36,7 +36,13 @@ describe('resource versions', () => {
         },
         jwt: 'jwt',
       },
-      bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
+      bindings: [
+        {
+          name: 'MY_ENV_VAR',
+          text: 'my_data',
+          type: 'plain_text',
+        },
+      ],
       compatibility_date: '2021-01-01',
       compatibility_flags: ['nodejs_compat'],
       limits: { cpu_ms: 50 },
@@ -48,7 +54,13 @@ describe('resource versions', () => {
         new_tag: 'v2',
         old_tag: 'v1',
         renamed_classes: [{ from: 'from', to: 'to' }],
-        transferred_classes: [{ from: 'from', from_script: 'from_script', to: 'to' }],
+        transferred_classes: [
+          {
+            from: 'from',
+            from_script: 'from_script',
+            to: 'to',
+          },
+        ],
       },
       modules: [
         {

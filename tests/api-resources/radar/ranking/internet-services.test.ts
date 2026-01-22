@@ -32,7 +32,12 @@ describe('resource internetServices', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.ranking.internetServices.categories(
-        { date: ['2019-12-27'], format: 'JSON', limit: 5, name: ['main_series'] },
+        {
+          date: ['2019-12-27'],
+          format: 'JSON',
+          limit: 5,
+          name: ['main_series'],
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

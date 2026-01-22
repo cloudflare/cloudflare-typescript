@@ -34,12 +34,12 @@ export type ForceAXFR = string;
 
 export interface ForceAXFRCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }

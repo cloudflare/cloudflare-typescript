@@ -30,7 +30,14 @@ describe('resource markdown', () => {
       url: 'https://example.com/',
       cacheTTL: 86400,
       actionTimeout: 120000,
-      addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],
+      addScriptTag: [
+        {
+          id: 'id',
+          content: 'content',
+          type: 'type',
+          url: 'url',
+        },
+      ],
       addStyleTag: [{ content: 'content', url: 'url' }],
       allowRequestPattern: ['string'],
       allowResourceTypes: ['document'],
@@ -74,7 +81,12 @@ describe('resource markdown', () => {
         isLandscape: true,
         isMobile: true,
       },
-      waitForSelector: { selector: 'selector', hidden: true, timeout: 120000, visible: true },
+      waitForSelector: {
+        selector: 'selector',
+        hidden: true,
+        timeout: 120000,
+        visible: true,
+      },
       waitForTimeout: 120000,
     });
   });

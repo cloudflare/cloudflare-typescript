@@ -283,7 +283,7 @@ export interface ViewListParams extends V4PagePaginationArrayParams {
   match?: 'any' | 'all';
 
   /**
-   * Query param:
+   * Query param
    */
   name?: ViewListParams.Name;
 

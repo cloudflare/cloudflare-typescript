@@ -32,7 +32,7 @@ export type RevokeCreateResponse = unknown | string;
 
 export interface RevokeCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

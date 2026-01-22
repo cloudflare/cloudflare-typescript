@@ -70,82 +70,82 @@ export interface TagCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   value: string;
 
   /**
-   * Body param:
+   * Body param
    */
   activeDuration?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   actorCategory?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   aliasGroupNames?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   aliasGroupNamesInternal?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   analyticPriority?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   attributionConfidence?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   attributionOrganization?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   categoryUuid?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   externalReferenceLinks?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   internalDescription?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   motive?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   opsecLevel?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   originCountryISO?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   priority?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   sophisticationLevel?: string;
 }

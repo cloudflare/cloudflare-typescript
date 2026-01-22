@@ -425,17 +425,17 @@ export interface CNICreateParams {
   account: string;
 
   /**
-   * Body param:
+   * Body param
    */
   interconnect: string;
 
   /**
-   * Body param:
+   * Body param
    */
   magic: CNICreateParams.Magic;
 
   /**
-   * Body param:
+   * Body param
    */
   bgp?: CNICreateParams.BGP;
 }
@@ -491,7 +491,7 @@ export interface CNIUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   id: string;
 
@@ -513,7 +513,7 @@ export interface CNIUpdateParams {
   interconnect: string;
 
   /**
-   * Body param:
+   * Body param
    */
   magic: CNIUpdateParams.Magic;
 
@@ -523,7 +523,7 @@ export interface CNIUpdateParams {
   p2p_ip: string;
 
   /**
-   * Body param:
+   * Body param
    */
   bgp?: CNIUpdateParams.BGP;
 }
@@ -579,12 +579,12 @@ export interface CNIListParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   cursor?: number | null;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: number | null;
 

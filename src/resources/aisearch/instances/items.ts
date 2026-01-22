@@ -92,17 +92,17 @@ export interface ItemGetResponse {
 
 export interface ItemListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   search?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   status?: 'queued' | 'running' | 'completed' | 'error' | 'skipped';
 }

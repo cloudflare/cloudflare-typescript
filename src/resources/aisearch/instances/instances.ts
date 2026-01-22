@@ -1584,7 +1584,7 @@ export interface InstanceStatsResponse {
 
 export interface InstanceCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -1594,27 +1594,27 @@ export interface InstanceCreateParams {
   id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   source: string;
 
   /**
-   * Body param:
+   * Body param
    */
   token_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   type: 'r2' | 'web-crawler';
 
   /**
-   * Body param:
+   * Body param
    */
   ai_gateway_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   ai_search_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
@@ -1645,22 +1645,22 @@ export interface InstanceCreateParams {
     | '';
 
   /**
-   * Body param:
+   * Body param
    */
   chunk?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   chunk_overlap?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   chunk_size?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   embedding_model?:
     | '@cf/baai/bge-m3'
@@ -1673,37 +1673,37 @@ export interface InstanceCreateParams {
     | '';
 
   /**
-   * Body param:
+   * Body param
    */
   hybrid_search_enabled?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   max_num_results?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   metadata?: InstanceCreateParams.Metadata;
 
   /**
-   * Body param:
+   * Body param
    */
   public_endpoint_params?: InstanceCreateParams.PublicEndpointParams;
 
   /**
-   * Body param:
+   * Body param
    */
   reranking?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
 
   /**
-   * Body param:
+   * Body param
    */
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
@@ -1734,17 +1734,17 @@ export interface InstanceCreateParams {
     | '';
 
   /**
-   * Body param:
+   * Body param
    */
   rewrite_query?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   score_threshold?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   source_params?: InstanceCreateParams.SourceParams;
 }
@@ -1852,17 +1852,17 @@ export namespace InstanceCreateParams {
 
 export interface InstanceUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   ai_gateway_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   ai_search_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
@@ -1893,32 +1893,32 @@ export interface InstanceUpdateParams {
     | '';
 
   /**
-   * Body param:
+   * Body param
    */
   cache?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   cache_threshold?: 'super_strict_match' | 'close_enough' | 'flexible_friend' | 'anything_goes';
 
   /**
-   * Body param:
+   * Body param
    */
   chunk?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   chunk_overlap?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   chunk_size?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   embedding_model?:
     | '@cf/baai/bge-m3'
@@ -1931,42 +1931,42 @@ export interface InstanceUpdateParams {
     | '';
 
   /**
-   * Body param:
+   * Body param
    */
   hybrid_search_enabled?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   max_num_results?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   metadata?: InstanceUpdateParams.Metadata;
 
   /**
-   * Body param:
+   * Body param
    */
   paused?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   public_endpoint_params?: InstanceUpdateParams.PublicEndpointParams;
 
   /**
-   * Body param:
+   * Body param
    */
   reranking?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
 
   /**
-   * Body param:
+   * Body param
    */
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
@@ -1997,27 +1997,27 @@ export interface InstanceUpdateParams {
     | '';
 
   /**
-   * Body param:
+   * Body param
    */
   rewrite_query?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   score_threshold?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   source_params?: InstanceUpdateParams.SourceParams;
 
   /**
-   * Body param:
+   * Body param
    */
   summarization?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   summarization_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
@@ -2048,22 +2048,22 @@ export interface InstanceUpdateParams {
     | '';
 
   /**
-   * Body param:
+   * Body param
    */
   system_prompt_ai_search?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   system_prompt_index_summarization?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   system_prompt_rewrite_query?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   token_id?: string;
 }
@@ -2171,7 +2171,7 @@ export namespace InstanceUpdateParams {
 
 export interface InstanceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

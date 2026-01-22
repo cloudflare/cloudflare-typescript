@@ -677,7 +677,7 @@ export interface RouteBulkUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   routes: Array<RouteBulkUpdateParams.Route>;
 }

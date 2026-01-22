@@ -262,17 +262,17 @@ export interface ImpersonationRegistryCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   email: string;
 
   /**
-   * Body param:
+   * Body param
    */
   is_email_regex: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 }
@@ -294,7 +294,7 @@ export interface ImpersonationRegistryListParams extends V4PagePaginationArrayPa
   order?: 'name' | 'email' | 'created_at';
 
   /**
-   * Query param:
+   * Query param
    */
   provenance?: 'A1S_INTERNAL' | 'SNOOPY-CASB_OFFICE_365' | 'SNOOPY-OFFICE_365' | 'SNOOPY-GOOGLE_DIRECTORY';
 
@@ -320,17 +320,17 @@ export interface ImpersonationRegistryEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   email?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   is_email_regex?: boolean | null;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string | null;
 }

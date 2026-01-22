@@ -419,12 +419,12 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   action_log?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   alert_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   cursor?: string;
 
@@ -454,12 +454,12 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED';
 
   /**
-   * Query param:
+   * Query param
    */
   message_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   metric?: string;
 
@@ -493,12 +493,12 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   query?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   recipient?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   sender?: string;
 
@@ -509,7 +509,7 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   start?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   subject?: string;
 }
