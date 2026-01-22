@@ -143,7 +143,7 @@ export interface CertificateSettingsParam {
 
 export interface SettingUpdateParams {
   /**
-   * Body param:
+   * Body param
    */
   settings: Array<CertificateSettingsParam>;
 

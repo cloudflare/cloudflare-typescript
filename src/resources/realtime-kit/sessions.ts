@@ -1393,12 +1393,12 @@ export interface SessionGetSessionParticipantsParams {
   search?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   sort_by?: 'joinedAt' | 'duration';
 
   /**
-   * Query param:
+   * Query param
    */
   sort_order?: 'ASC' | 'DESC';
 
@@ -1458,7 +1458,7 @@ export interface SessionGetSessionsParams {
   page_no?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   participants?: string;
 
@@ -1474,12 +1474,12 @@ export interface SessionGetSessionsParams {
   search?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   sort_by?: 'minutesConsumed' | 'createdAt';
 
   /**
-   * Query param:
+   * Query param
    */
   sort_order?: 'ASC' | 'DESC';
 
@@ -1490,7 +1490,7 @@ export interface SessionGetSessionsParams {
   start_time?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   status?: 'LIVE' | 'ENDED';
 }

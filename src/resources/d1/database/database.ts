@@ -782,7 +782,7 @@ export interface DatabaseExportParams {
   current_bookmark?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dump_options?: DatabaseExportParams.DumpOptions;
 }
@@ -898,7 +898,7 @@ export declare namespace DatabaseQueryParams {
     sql: string;
 
     /**
-     * Body param:
+     * Body param
      */
     params?: Array<string>;
   }
@@ -910,7 +910,7 @@ export declare namespace DatabaseQueryParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     batch?: Array<MultipleQueries.Batch>;
   }
@@ -947,7 +947,7 @@ export declare namespace DatabaseRawParams {
     sql: string;
 
     /**
-     * Body param:
+     * Body param
      */
     params?: Array<string>;
   }
@@ -959,7 +959,7 @@ export declare namespace DatabaseRawParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     batch?: Array<MultipleQueries.Batch>;
   }

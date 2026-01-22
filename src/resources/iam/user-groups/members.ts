@@ -217,7 +217,7 @@ export interface MemberCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<MemberCreateParams.Body>;
 }

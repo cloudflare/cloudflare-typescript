@@ -150,7 +150,7 @@ export interface PayloadCreateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<PayloadCreateParams.Body>;
 }

@@ -277,7 +277,7 @@ export namespace DefaultGetResponse {
 
 export interface DefaultEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -359,7 +359,7 @@ export interface DefaultEditParams {
   sccm_vpn_boundary_support?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   service_mode_v2?: DefaultEditParams.ServiceModeV2;
 

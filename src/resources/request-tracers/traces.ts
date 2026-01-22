@@ -126,7 +126,7 @@ export interface TraceCreateParams {
   url: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body?: TraceCreateParams.Body;
 

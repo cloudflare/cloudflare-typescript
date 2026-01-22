@@ -368,7 +368,7 @@ export interface UARuleCreateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   configuration: UARuleCreateParams.Configuration;
 

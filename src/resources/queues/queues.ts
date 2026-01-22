@@ -247,7 +247,7 @@ export interface QueueCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   queue_name: string;
 }
@@ -259,12 +259,12 @@ export interface QueueUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   queue_name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   settings?: QueueUpdateParams.Settings;
 }
@@ -309,12 +309,12 @@ export interface QueueEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   queue_name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   settings?: QueueEditParams.Settings;
 }

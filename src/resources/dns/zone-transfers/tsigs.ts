@@ -149,7 +149,7 @@ export interface TSIGDeleteResponse {
 
 export interface TSIGCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -171,7 +171,7 @@ export interface TSIGCreateParams {
 
 export interface TSIGUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

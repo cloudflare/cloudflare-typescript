@@ -346,7 +346,7 @@ export interface OrganizationCreateParams {
   is_ui_read_only?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   login_design?: LoginDesignParam;
 
@@ -411,7 +411,7 @@ export interface OrganizationUpdateParams {
   auto_redirect_to_identity?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   custom_pages?: OrganizationUpdateParams.CustomPages;
 
@@ -423,7 +423,7 @@ export interface OrganizationUpdateParams {
   is_ui_read_only?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   login_design?: LoginDesignParam;
 

@@ -86,7 +86,7 @@ export interface BehaviourUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   behaviors: { [key: string]: BehaviourUpdateParams.Behaviors };
 }

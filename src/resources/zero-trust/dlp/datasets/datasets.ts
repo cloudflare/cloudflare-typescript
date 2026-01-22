@@ -344,12 +344,12 @@ export namespace DatasetGetResponse {
 
 export interface DatasetCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
@@ -386,7 +386,7 @@ export interface DatasetCreateParams {
 
 export interface DatasetUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

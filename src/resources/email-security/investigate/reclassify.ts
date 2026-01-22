@@ -45,7 +45,7 @@ export interface ReclassifyCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   expected_disposition: 'NONE' | 'BULK' | 'MALICIOUS' | 'SPAM' | 'SPOOF' | 'SUSPICIOUS';
 
@@ -55,7 +55,7 @@ export interface ReclassifyCreateParams {
   eml_content?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   escalated_submission_id?: string;
 }

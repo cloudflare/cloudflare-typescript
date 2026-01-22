@@ -13,7 +13,13 @@ describe('resource rules', () => {
     const responsePromise = client.zeroTrust.dlp.email.rules.create({
       account_id: 'account_id',
       action: { action: 'Block' },
-      conditions: [{ operator: 'InList', selector: 'Recipients', value: ['string'] }],
+      conditions: [
+        {
+          operator: 'InList',
+          selector: 'Recipients',
+          value: ['string'],
+        },
+      ],
       enabled: true,
       name: 'name',
     });
@@ -30,7 +36,13 @@ describe('resource rules', () => {
     const response = await client.zeroTrust.dlp.email.rules.create({
       account_id: 'account_id',
       action: { action: 'Block', message: 'message' },
-      conditions: [{ operator: 'InList', selector: 'Recipients', value: ['string'] }],
+      conditions: [
+        {
+          operator: 'InList',
+          selector: 'Recipients',
+          value: ['string'],
+        },
+      ],
       enabled: true,
       name: 'name',
       description: 'description',
@@ -41,7 +53,13 @@ describe('resource rules', () => {
     const responsePromise = client.zeroTrust.dlp.email.rules.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 'account_id',
       action: { action: 'Block' },
-      conditions: [{ operator: 'InList', selector: 'Recipients', value: ['string'] }],
+      conditions: [
+        {
+          operator: 'InList',
+          selector: 'Recipients',
+          value: ['string'],
+        },
+      ],
       enabled: true,
       name: 'name',
     });
@@ -58,7 +76,13 @@ describe('resource rules', () => {
     const response = await client.zeroTrust.dlp.email.rules.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 'account_id',
       action: { action: 'Block', message: 'message' },
-      conditions: [{ operator: 'InList', selector: 'Recipients', value: ['string'] }],
+      conditions: [
+        {
+          operator: 'InList',
+          selector: 'Recipients',
+          value: ['string'],
+        },
+      ],
       enabled: true,
       name: 'name',
       description: 'description',

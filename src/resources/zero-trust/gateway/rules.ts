@@ -1549,7 +1549,7 @@ export type RuleDeleteResponse = unknown;
 
 export interface RuleCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -1677,7 +1677,7 @@ export namespace RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

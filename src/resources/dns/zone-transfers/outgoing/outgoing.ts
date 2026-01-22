@@ -334,7 +334,7 @@ export interface OutgoingGetResponse {
 
 export interface OutgoingCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 
@@ -351,7 +351,7 @@ export interface OutgoingCreateParams {
 
 export interface OutgoingUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 
@@ -372,36 +372,36 @@ export interface OutgoingDeleteParams {
 
 export interface OutgoingDisableParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
 
 export interface OutgoingEnableParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
 
 export interface OutgoingForceNotifyParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }

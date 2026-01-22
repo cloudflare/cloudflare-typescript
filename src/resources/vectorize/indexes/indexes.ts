@@ -552,7 +552,7 @@ export interface IndexCreateParams {
   config: IndexDimensionConfigurationParam | IndexCreateParams.VectorizeIndexPresetConfiguration;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 

@@ -14,7 +14,11 @@ describe('resource entries', () => {
     const responsePromise = client.zeroTrust.dlp.datasets.versions.entries.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       await toFile(Buffer.from('# my file contents'), 'README.md'),
-      { account_id: 'account_id', dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', version: 0 },
+      {
+        account_id: 'account_id',
+        dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        version: 0,
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,7 +34,11 @@ describe('resource entries', () => {
     const response = await client.zeroTrust.dlp.datasets.versions.entries.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       await toFile(Buffer.from('# my file contents'), 'README.md'),
-      { account_id: 'account_id', dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', version: 0 },
+      {
+        account_id: 'account_id',
+        dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        version: 0,
+      },
     );
   });
 });

@@ -259,7 +259,7 @@ export declare namespace ConsumerCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     dead_letter_queue?: string;
 
@@ -269,12 +269,12 @@ export declare namespace ConsumerCreateParams {
     script_name?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     settings?: MqWorkerConsumer.Settings;
 
     /**
-     * Body param:
+     * Body param
      */
     type?: 'worker';
   }
@@ -318,17 +318,17 @@ export declare namespace ConsumerCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     dead_letter_queue?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     settings?: MqHTTPConsumer.Settings;
 
     /**
-     * Body param:
+     * Body param
      */
     type?: 'http_pull';
   }
@@ -377,7 +377,7 @@ export declare namespace ConsumerUpdateParams {
     queue_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     dead_letter_queue?: string;
 
@@ -387,12 +387,12 @@ export declare namespace ConsumerUpdateParams {
     script_name?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     settings?: MqWorkerConsumer.Settings;
 
     /**
-     * Body param:
+     * Body param
      */
     type?: 'worker';
   }
@@ -441,17 +441,17 @@ export declare namespace ConsumerUpdateParams {
     queue_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     dead_letter_queue?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     settings?: MqHTTPConsumer.Settings;
 
     /**
-     * Body param:
+     * Body param
      */
     type?: 'http_pull';
   }

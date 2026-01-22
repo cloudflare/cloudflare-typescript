@@ -30,7 +30,13 @@ describe('resource versions', () => {
     const response = await client.zeroTrust.dlp.datasets.versions.create(0, {
       account_id: 'account_id',
       dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      body: [{ entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', header_name: 'header_name', num_cells: 0 }],
+      body: [
+        {
+          entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          header_name: 'header_name',
+          num_cells: 0,
+        },
+      ],
     });
   });
 });

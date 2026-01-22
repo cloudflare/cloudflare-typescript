@@ -119,7 +119,7 @@ export interface MoveCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   destination:
     | 'Inbox'
@@ -136,7 +136,7 @@ export interface MoveBulkParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   destination:
     | 'Inbox'
@@ -146,7 +146,7 @@ export interface MoveBulkParams {
     | 'RecoverableItemsPurges';
 
   /**
-   * Body param:
+   * Body param
    */
   postfix_ids: Array<string>;
 }

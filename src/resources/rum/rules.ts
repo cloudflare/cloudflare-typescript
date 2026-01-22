@@ -226,7 +226,7 @@ export interface RuleCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   host?: string;
 
@@ -241,7 +241,7 @@ export interface RuleCreateParams {
   is_paused?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   paths?: Array<string>;
 }
@@ -258,7 +258,7 @@ export interface RuleUpdateParams {
   ruleset_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   host?: string;
 
@@ -273,7 +273,7 @@ export interface RuleUpdateParams {
   is_paused?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   paths?: Array<string>;
 }

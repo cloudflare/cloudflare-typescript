@@ -78,17 +78,17 @@ export interface RawEditParams {
   event_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   data?: unknown;
 
   /**
-   * Body param:
+   * Body param
    */
   source?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   tlp?: string;
 }

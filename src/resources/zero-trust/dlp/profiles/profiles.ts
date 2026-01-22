@@ -1167,7 +1167,7 @@ export namespace ProfileGetResponse {
 
 export interface ProfileListParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

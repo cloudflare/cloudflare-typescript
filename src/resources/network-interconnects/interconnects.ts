@@ -330,22 +330,22 @@ export declare namespace InterconnectCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     account: string;
 
     /**
-     * Body param:
+     * Body param
      */
     slot_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     type: string;
 
     /**
-     * Body param:
+     * Body param
      */
     speed?: string | null;
   }
@@ -357,7 +357,7 @@ export declare namespace InterconnectCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     account: string;
 
@@ -384,7 +384,7 @@ export declare namespace InterconnectCreateParams {
     pairing_key: string;
 
     /**
-     * Body param:
+     * Body param
      */
     type: string;
   }
@@ -397,12 +397,12 @@ export interface InterconnectListParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   cursor?: number | null;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: number | null;
 

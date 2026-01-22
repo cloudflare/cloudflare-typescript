@@ -155,7 +155,7 @@ export declare namespace MemberCreateParams {
     roles: Array<string>;
 
     /**
-     * Body param:
+     * Body param
      */
     status?: 'accepted' | 'pending';
   }
@@ -177,7 +177,7 @@ export declare namespace MemberCreateParams {
     policies: Array<IAMCreateMemberWithPolicies.Policy>;
 
     /**
-     * Body param:
+     * Body param
      */
     status?: 'accepted' | 'pending';
   }

@@ -170,7 +170,7 @@ export interface CredentialUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   keys: Array<
     | CredentialUpdateParams.APIShieldCredentialsJWTKeyRSA

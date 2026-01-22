@@ -202,7 +202,7 @@ export interface IPUpdateParams {
   address_map_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }

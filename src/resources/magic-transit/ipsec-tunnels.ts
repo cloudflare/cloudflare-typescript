@@ -1621,12 +1621,12 @@ export interface IPSECTunnelCreateParams {
   automatic_return_routing?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   bgp?: IPSECTunnelCreateParams.BGP;
 
   /**
-   * Body param:
+   * Body param
    */
   custom_remote_identities?: IPSECTunnelCreateParams.CustomRemoteIdentities;
 
@@ -1642,7 +1642,7 @@ export interface IPSECTunnelCreateParams {
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   health_check?: IPSECTunnelCreateParams.HealthCheck;
 
@@ -1807,12 +1807,12 @@ export interface IPSECTunnelUpdateParams {
   automatic_return_routing?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   bgp?: IPSECTunnelUpdateParams.BGP;
 
   /**
-   * Body param:
+   * Body param
    */
   custom_remote_identities?: IPSECTunnelUpdateParams.CustomRemoteIdentities;
 
@@ -1828,7 +1828,7 @@ export interface IPSECTunnelUpdateParams {
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   health_check?: IPSECTunnelUpdateParams.HealthCheck;
 
@@ -1995,7 +1995,7 @@ export interface IPSECTunnelBulkUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 
@@ -2026,7 +2026,7 @@ export interface IPSECTunnelPSKGenerateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }

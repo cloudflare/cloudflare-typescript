@@ -60,12 +60,12 @@ export interface AddressSpaceEditResponse {
 
 export interface AddressSpaceUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   prefixes: Array<string>;
 }
@@ -76,12 +76,12 @@ export interface AddressSpaceListParams {
 
 export interface AddressSpaceEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   prefixes: Array<string>;
 }

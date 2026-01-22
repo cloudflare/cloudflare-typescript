@@ -508,7 +508,7 @@ export interface CfInterconnectUpdateParams {
   gre?: CfInterconnectUpdateParams.GRE;
 
   /**
-   * Body param:
+   * Body param
    */
   health_check?: MagicTransitAPI.HealthCheckParam;
 
@@ -573,7 +573,7 @@ export interface CfInterconnectBulkUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 

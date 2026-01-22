@@ -1911,7 +1911,7 @@ export interface PresetCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   config: PresetCreateParams.Config;
 
@@ -1921,12 +1921,12 @@ export interface PresetCreateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   ui: PresetCreateParams.UI;
 
   /**
-   * Body param:
+   * Body param
    */
   permissions?: PresetCreateParams.Permissions;
 }
@@ -2339,7 +2339,7 @@ export interface PresetUpdateParams {
   app_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   config?: PresetUpdateParams.Config;
 
@@ -2349,12 +2349,12 @@ export interface PresetUpdateParams {
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   permissions?: PresetUpdateParams.Permissions;
 
   /**
-   * Body param:
+   * Body param
    */
   ui?: PresetUpdateParams.UI;
 }

@@ -168,7 +168,7 @@ export interface TracerouteCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   targets: Array<string>;
 
@@ -179,7 +179,7 @@ export interface TracerouteCreateParams {
   colos?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   options?: TracerouteCreateParams.Options;
 }

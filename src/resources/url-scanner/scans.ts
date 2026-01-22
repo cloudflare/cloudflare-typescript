@@ -1313,7 +1313,7 @@ export interface ScanCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   url: string;
 
@@ -1518,7 +1518,7 @@ export interface ScanCreateParams {
     | 'ZW';
 
   /**
-   * Body param:
+   * Body param
    */
   customagent?: string;
 
@@ -1528,7 +1528,7 @@ export interface ScanCreateParams {
   customHeaders?: { [key: string]: string };
 
   /**
-   * Body param:
+   * Body param
    */
   referer?: string;
 

@@ -43,8 +43,14 @@ describe('resource tokens', () => {
         {
           effect: 'allow',
           permission_groups: [
-            { id: 'c8fed203ed3043cba015a93ad1616f1f', meta: { key: 'key', value: 'value' } },
-            { id: '82e64a83756745bbbb1c9c2701bf816b', meta: { key: 'key', value: 'value' } },
+            {
+              id: 'c8fed203ed3043cba015a93ad1616f1f',
+              meta: { key: 'key', value: 'value' },
+            },
+            {
+              id: '82e64a83756745bbbb1c9c2701bf816b',
+              meta: { key: 'key', value: 'value' },
+            },
           ],
           resources: { foo: 'string' },
         },
@@ -94,8 +100,14 @@ describe('resource tokens', () => {
         {
           effect: 'allow',
           permission_groups: [
-            { id: 'c8fed203ed3043cba015a93ad1616f1f', meta: { key: 'key', value: 'value' } },
-            { id: '82e64a83756745bbbb1c9c2701bf816b', meta: { key: 'key', value: 'value' } },
+            {
+              id: 'c8fed203ed3043cba015a93ad1616f1f',
+              meta: { key: 'key', value: 'value' },
+            },
+            {
+              id: '82e64a83756745bbbb1c9c2701bf816b',
+              meta: { key: 'key', value: 'value' },
+            },
           ],
           resources: { foo: 'string' },
         },

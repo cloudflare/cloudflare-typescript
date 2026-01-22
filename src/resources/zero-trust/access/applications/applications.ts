@@ -13977,7 +13977,7 @@ export declare namespace ApplicationCreateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -14392,7 +14392,7 @@ export declare namespace ApplicationCreateParams {
     policies?: Array<SaaSApplication.AccessAppPolicyLink | string | SaaSApplication.UnionMember2>;
 
     /**
-     * Body param:
+     * Body param
      */
     saas_app?: SAMLSaaSAppParam | OIDCSaaSAppParam;
 
@@ -14648,7 +14648,7 @@ export declare namespace ApplicationCreateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -15078,7 +15078,7 @@ export declare namespace ApplicationCreateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -16114,7 +16114,7 @@ export declare namespace ApplicationCreateParams {
 
   export interface InfrastructureApplication {
     /**
-     * Body param:
+     * Body param
      */
     target_criteria: Array<InfrastructureApplication.TargetCriterion>;
 
@@ -16243,7 +16243,7 @@ export declare namespace ApplicationCreateParams {
     domain: string;
 
     /**
-     * Body param:
+     * Body param
      */
     target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
 
@@ -16295,7 +16295,7 @@ export declare namespace ApplicationCreateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -16744,7 +16744,7 @@ export declare namespace ApplicationUpdateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -17159,7 +17159,7 @@ export declare namespace ApplicationUpdateParams {
     policies?: Array<SaaSApplication.AccessAppPolicyLink | string | SaaSApplication.UnionMember2>;
 
     /**
-     * Body param:
+     * Body param
      */
     saas_app?: SAMLSaaSAppParam | OIDCSaaSAppParam;
 
@@ -17415,7 +17415,7 @@ export declare namespace ApplicationUpdateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -17845,7 +17845,7 @@ export declare namespace ApplicationUpdateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -18881,7 +18881,7 @@ export declare namespace ApplicationUpdateParams {
 
   export interface InfrastructureApplication {
     /**
-     * Body param:
+     * Body param
      */
     target_criteria: Array<InfrastructureApplication.TargetCriterion>;
 
@@ -19010,7 +19010,7 @@ export declare namespace ApplicationUpdateParams {
     domain: string;
 
     /**
-     * Body param:
+     * Body param
      */
     target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
 
@@ -19062,7 +19062,7 @@ export declare namespace ApplicationUpdateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 

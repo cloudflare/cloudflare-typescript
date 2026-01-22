@@ -143,7 +143,7 @@ export interface ACLDeleteResponse {
 
 export interface ACLCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -164,7 +164,7 @@ export interface ACLCreateParams {
 
 export interface ACLUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

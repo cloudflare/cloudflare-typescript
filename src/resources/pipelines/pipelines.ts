@@ -1011,7 +1011,7 @@ export interface PipelineCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   destination: PipelineCreateParams.Destination;
 
@@ -1021,7 +1021,7 @@ export interface PipelineCreateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   source: Array<
     | PipelineCreateParams.CloudflarePipelinesWorkersPipelinesHTTPSource
@@ -1165,7 +1165,7 @@ export interface PipelineUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   destination: PipelineUpdateParams.Destination;
 
@@ -1175,7 +1175,7 @@ export interface PipelineUpdateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   source: Array<
     | PipelineUpdateParams.CloudflarePipelinesWorkersPipelinesHTTPSource

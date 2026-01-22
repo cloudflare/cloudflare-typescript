@@ -297,7 +297,7 @@ export interface ClientCertificateEditParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   reactivate?: boolean;
 }

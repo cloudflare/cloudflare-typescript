@@ -125,7 +125,7 @@ export declare namespace JsonCreateParams {
     custom_ai?: Array<Variant0.CustomAI>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -135,7 +135,7 @@ export declare namespace JsonCreateParams {
     gotoOptions?: Variant0.GotoOptions;
 
     /**
-     * Body param:
+     * Body param
      */
     prompt?: string;
 
@@ -171,22 +171,22 @@ export declare namespace JsonCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     response_format?: Variant0.ResponseFormat;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -425,7 +425,7 @@ export declare namespace JsonCreateParams {
     custom_ai?: Array<Variant1.CustomAI>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -435,7 +435,7 @@ export declare namespace JsonCreateParams {
     gotoOptions?: Variant1.GotoOptions;
 
     /**
-     * Body param:
+     * Body param
      */
     prompt?: string;
 
@@ -471,22 +471,22 @@ export declare namespace JsonCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     response_format?: Variant1.ResponseFormat;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 

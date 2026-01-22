@@ -406,7 +406,7 @@ export interface EventUpdateParams {
   zone_id: string;
 
   /**
-   * Path param:
+   * Path param
    */
   waiting_room_id: string;
 
@@ -536,7 +536,7 @@ export interface EventEditParams {
   zone_id: string;
 
   /**
-   * Path param:
+   * Path param
    */
   waiting_room_id: string;
 

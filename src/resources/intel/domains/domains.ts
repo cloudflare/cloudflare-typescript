@@ -152,7 +152,7 @@ export interface DomainGetParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   domain?: string;
 }

@@ -275,7 +275,7 @@ export interface SilenceCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<SilenceCreateParams.Body>;
 }
@@ -306,7 +306,7 @@ export interface SilenceUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<SilenceUpdateParams.Body>;
 }

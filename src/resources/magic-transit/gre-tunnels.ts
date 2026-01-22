@@ -1431,7 +1431,7 @@ export interface GRETunnelCreateParams {
   automatic_return_routing?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   bgp?: GRETunnelCreateParams.BGP;
 
@@ -1441,7 +1441,7 @@ export interface GRETunnelCreateParams {
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   health_check?: GRETunnelCreateParams.HealthCheck;
 
@@ -1603,7 +1603,7 @@ export interface GRETunnelUpdateParams {
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   health_check?: GRETunnelUpdateParams.HealthCheck;
 
@@ -1721,7 +1721,7 @@ export interface GRETunnelBulkUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 

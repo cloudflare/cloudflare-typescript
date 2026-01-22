@@ -372,7 +372,7 @@ export type LocationDeleteResponse = unknown;
 
 export interface LocationCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -424,7 +424,7 @@ export namespace LocationCreateParams {
 
 export interface LocationUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

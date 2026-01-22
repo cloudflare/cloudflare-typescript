@@ -1860,17 +1860,17 @@ export namespace CustomGetResponse {
 
 export interface CustomCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   ai_context_enabled?: boolean;
 
@@ -1881,7 +1881,7 @@ export interface CustomCreateParams {
   allowed_match_count?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   confidence_threshold?: string | null;
 
@@ -1897,12 +1897,12 @@ export interface CustomCreateParams {
   description?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   entries?: Array<CustomCreateParams.DLPNewCustomEntry | CustomCreateParams.DLPNewWordListEntry>;
 
   /**
-   * Body param:
+   * Body param
    */
   ocr_enabled?: boolean;
 
@@ -1939,27 +1939,27 @@ export namespace CustomCreateParams {
 
 export interface CustomUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   ai_context_enabled?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   allowed_match_count?: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   confidence_threshold?: string | null;
 
@@ -1981,7 +1981,7 @@ export interface CustomUpdateParams {
   entries?: Array<CustomUpdateParams.DLPNewCustomEntryWithID | CustomUpdateParams.DLPNewCustomEntry> | null;
 
   /**
-   * Body param:
+   * Body param
    */
   ocr_enabled?: boolean;
 

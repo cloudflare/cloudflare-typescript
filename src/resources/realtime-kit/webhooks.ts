@@ -578,7 +578,7 @@ export interface WebhookEditWebhookParams {
   app_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled?: boolean;
 

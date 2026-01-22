@@ -112,7 +112,7 @@ export interface RuleUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   rules?: Array<RuleUpdateParams.Rule>;
 }

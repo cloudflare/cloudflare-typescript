@@ -2541,7 +2541,7 @@ export interface MeetingGetMeetingByIDParams {
   app_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   name?: string;
 }

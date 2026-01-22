@@ -159,7 +159,7 @@ export interface PeerDeleteResponse {
 
 export interface PeerCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -171,7 +171,7 @@ export interface PeerCreateParams {
 
 export interface PeerUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

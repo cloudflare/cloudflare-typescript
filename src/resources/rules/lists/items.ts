@@ -429,7 +429,7 @@ export interface ItemCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<
     | ItemCreateParams.ListsListItemIPComment
@@ -497,7 +497,7 @@ export interface ItemUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<
     | ItemUpdateParams.ListsListItemIPComment
@@ -585,7 +585,7 @@ export interface ItemDeleteParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   items?: Array<ItemDeleteParams.Item>;
 }

@@ -43,12 +43,12 @@ export interface StatusEditResponse {
 
 export interface StatusEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Path param:
+   * Path param
    */
   workflow_name: string;
 

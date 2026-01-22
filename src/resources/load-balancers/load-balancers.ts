@@ -1607,7 +1607,7 @@ export interface LoadBalancerDeleteResponse {
 
 export interface LoadBalancerCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 
@@ -1781,7 +1781,7 @@ export interface LoadBalancerCreateParams {
 
 export interface LoadBalancerUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 
@@ -1968,7 +1968,7 @@ export interface LoadBalancerDeleteParams {
 
 export interface LoadBalancerEditParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 

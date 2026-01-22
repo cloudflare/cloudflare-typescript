@@ -1583,7 +1583,7 @@ export interface ScriptAndVersionSettingEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   settings?: ScriptAndVersionSettingEditParams.Settings;
 }

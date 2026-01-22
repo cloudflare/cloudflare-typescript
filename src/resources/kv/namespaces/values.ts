@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { type Uploadable } from '../../../core/uploads';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
@@ -128,7 +129,7 @@ export interface ValueUpdateParams {
   /**
    * Body param: A byte sequence to be stored, up to 25 MiB in length.
    */
-  value: string;
+  value: string | Uploadable;
 
   /**
    * Query param: Expires the key at a certain time, measured in number of seconds
