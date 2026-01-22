@@ -71,12 +71,12 @@ export interface AccountSettingUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   default_usage_model?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   green_compute?: boolean;
 }

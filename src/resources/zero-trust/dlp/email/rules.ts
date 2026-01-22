@@ -404,12 +404,12 @@ export namespace RuleGetResponse {
 
 export interface RuleCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   action: RuleCreateParams.Action;
 
@@ -419,17 +419,17 @@ export interface RuleCreateParams {
   conditions: Array<RuleCreateParams.Condition>;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string | null;
 }
@@ -452,12 +452,12 @@ export namespace RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   action: RuleUpdateParams.Action;
 
@@ -467,17 +467,17 @@ export interface RuleUpdateParams {
   conditions: Array<RuleUpdateParams.Condition>;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string | null;
 }
@@ -508,12 +508,12 @@ export interface RuleDeleteParams {
 
 export interface RuleBulkEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   new_priorities: { [key: string]: number };
 }

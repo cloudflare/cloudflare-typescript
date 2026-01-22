@@ -441,7 +441,7 @@ export interface AddressMapCreateParams {
   enabled?: boolean | null;
 
   /**
-   * Body param:
+   * Body param
    */
   ips?: Array<string>;
 

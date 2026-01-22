@@ -84,7 +84,13 @@ describe('resource operations', () => {
   test('bulkCreate: only required params', async () => {
     const responsePromise = client.apiGateway.operations.bulkCreate({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{ endpoint: '/api/v1/users/{var1}', host: 'www.example.com', method: 'GET' }],
+      body: [
+        {
+          endpoint: '/api/v1/users/{var1}',
+          host: 'www.example.com',
+          method: 'GET',
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -98,7 +104,13 @@ describe('resource operations', () => {
   test('bulkCreate: required and optional params', async () => {
     const response = await client.apiGateway.operations.bulkCreate({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{ endpoint: '/api/v1/users/{var1}', host: 'www.example.com', method: 'GET' }],
+      body: [
+        {
+          endpoint: '/api/v1/users/{var1}',
+          host: 'www.example.com',
+          method: 'GET',
+        },
+      ],
     });
   });
 

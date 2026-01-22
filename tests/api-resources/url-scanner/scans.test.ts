@@ -49,7 +49,11 @@ describe('resource scans', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.urlScanner.scans.list({ account_id: 'account_id', q: 'q', size: 100 });
+    const response = await client.urlScanner.scans.list({
+      account_id: 'account_id',
+      q: 'q',
+      size: 100,
+    });
   });
 
   test('bulkCreate: only required params', async () => {

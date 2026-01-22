@@ -72,7 +72,7 @@ export interface ToMarkdownSupportedParams {
 
 export interface ToMarkdownTransformParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 }

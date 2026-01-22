@@ -62,12 +62,12 @@ export class Excludes extends APIResource {
 
 export interface ExcludeUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<PoliciesAPI.SplitTunnelExcludeParam>;
 }

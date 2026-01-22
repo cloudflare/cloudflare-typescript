@@ -30,7 +30,14 @@ describe('resource snapshot', () => {
       html: '<h1>Hello World!</h1>',
       cacheTTL: 86400,
       actionTimeout: 120000,
-      addScriptTag: [{ id: 'id', content: 'content', type: 'type', url: 'url' }],
+      addScriptTag: [
+        {
+          id: 'id',
+          content: 'content',
+          type: 'type',
+          url: 'url',
+        },
+      ],
       addStyleTag: [{ content: 'content', url: 'url' }],
       allowRequestPattern: ['string'],
       allowResourceTypes: ['document'],
@@ -65,7 +72,13 @@ describe('resource snapshot', () => {
       rejectResourceTypes: ['document'],
       screenshotOptions: {
         captureBeyondViewport: true,
-        clip: { height: 0, width: 0, x: 0, y: 0, scale: 0 },
+        clip: {
+          height: 0,
+          width: 0,
+          x: 0,
+          y: 0,
+          scale: 0,
+        },
         fromSurface: true,
         fullPage: true,
         omitBackground: true,
@@ -84,7 +97,12 @@ describe('resource snapshot', () => {
         isLandscape: true,
         isMobile: true,
       },
-      waitForSelector: { selector: 'selector', hidden: true, timeout: 120000, visible: true },
+      waitForSelector: {
+        selector: 'selector',
+        hidden: true,
+        timeout: 120000,
+        visible: true,
+      },
       waitForTimeout: 120000,
     });
   });

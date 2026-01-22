@@ -35,12 +35,12 @@ export interface AuditLogListParams extends V4PagePaginationArrayParams {
   id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   action?: AuditLogListParams.Action;
 
   /**
-   * Query param:
+   * Query param
    */
   actor?: AuditLogListParams.Actor;
 
@@ -72,7 +72,7 @@ export interface AuditLogListParams extends V4PagePaginationArrayParams {
   since?: (string & {}) | (string & {});
 
   /**
-   * Query param:
+   * Query param
    */
   zone?: AuditLogListParams.Zone;
 }

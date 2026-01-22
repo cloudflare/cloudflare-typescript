@@ -120,7 +120,7 @@ export interface DirectUploadCreateParams {
   thumbnailTimestampPct?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   watermark?: DirectUploadCreateParams.Watermark;
 

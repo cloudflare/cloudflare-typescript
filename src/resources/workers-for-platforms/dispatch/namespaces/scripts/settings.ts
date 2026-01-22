@@ -1584,7 +1584,7 @@ export interface SettingEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   settings?: SettingEditParams.Settings;
 }

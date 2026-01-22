@@ -219,12 +219,12 @@ export interface DeploymentCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   strategy: 'percentage';
 
   /**
-   * Body param:
+   * Body param
    */
   versions: Array<DeploymentCreateParams.Version>;
 
@@ -236,7 +236,7 @@ export interface DeploymentCreateParams {
   force?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   annotations?: DeploymentCreateParams.Annotations;
 }

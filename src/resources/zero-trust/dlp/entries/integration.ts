@@ -545,17 +545,17 @@ export namespace IntegrationGetResponse {
 
 export interface IntegrationCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   entry_id: string;
 
@@ -568,12 +568,12 @@ export interface IntegrationCreateParams {
 
 export interface IntegrationUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 }

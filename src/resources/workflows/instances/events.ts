@@ -28,12 +28,12 @@ export type EventCreateResponse = unknown;
 
 export interface EventCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body?: unknown;
 }

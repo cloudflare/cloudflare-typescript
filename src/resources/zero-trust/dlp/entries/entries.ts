@@ -714,27 +714,27 @@ export namespace EntryGetResponse {
 
 export interface EntryCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern: ProfilesCustomAPI.PatternParam;
 
   /**
-   * Body param:
+   * Body param
    */
   profile_id?: string;
 }
@@ -747,61 +747,61 @@ export type EntryUpdateParams =
 export declare namespace EntryUpdateParams {
   export interface Variant0 {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     name: string;
 
     /**
-     * Body param:
+     * Body param
      */
     pattern: ProfilesCustomAPI.PatternParam;
 
     /**
-     * Body param:
+     * Body param
      */
     type: 'custom';
 
     /**
-     * Body param:
+     * Body param
      */
     enabled?: boolean;
   }
 
   export interface Variant1 {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     type: 'predefined';
 
     /**
-     * Body param:
+     * Body param
      */
     enabled?: boolean;
   }
 
   export interface Variant2 {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     type: 'integration';
 
     /**
-     * Body param:
+     * Body param
      */
     enabled?: boolean;
   }

@@ -35,7 +35,7 @@ export interface PrebuiltPolicyListResponse {
 
 export interface PrebuiltPolicyListParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

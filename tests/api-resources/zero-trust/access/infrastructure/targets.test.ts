@@ -42,7 +42,11 @@ describe('resource targets', () => {
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', hostname: 'infra-access-target', ip: {} },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        hostname: 'infra-access-target',
+        ip: {},
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -173,7 +177,12 @@ describe('resource targets', () => {
   test('bulkUpdate: only required params', async () => {
     const responsePromise = client.zeroTrust.access.infrastructure.targets.bulkUpdate({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{ hostname: 'infra-access-target', ip: {} }],
+      body: [
+        {
+          hostname: 'infra-access-target',
+          ip: {},
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

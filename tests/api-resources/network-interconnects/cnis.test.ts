@@ -15,7 +15,11 @@ describe('resource cnis', () => {
       account_id: 'account_id',
       account: 'account',
       interconnect: 'interconnect',
-      magic: { conduit_name: 'conduit_name', description: 'description', mtu: 0 },
+      magic: {
+        conduit_name: 'conduit_name',
+        description: 'description',
+        mtu: 0,
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,8 +35,16 @@ describe('resource cnis', () => {
       account_id: 'account_id',
       account: 'account',
       interconnect: 'interconnect',
-      magic: { conduit_name: 'conduit_name', description: 'description', mtu: 0 },
-      bgp: { customer_asn: 0, extra_prefixes: ['string'], md5_key: 'md5_key' },
+      magic: {
+        conduit_name: 'conduit_name',
+        description: 'description',
+        mtu: 0,
+      },
+      bgp: {
+        customer_asn: 0,
+        extra_prefixes: ['string'],
+        md5_key: 'md5_key',
+      },
     });
   });
 
@@ -43,7 +55,11 @@ describe('resource cnis', () => {
       account: 'account',
       cust_ip: '192.168.3.4/31',
       interconnect: 'interconnect',
-      magic: { conduit_name: 'conduit_name', description: 'description', mtu: 0 },
+      magic: {
+        conduit_name: 'conduit_name',
+        description: 'description',
+        mtu: 0,
+      },
       p2p_ip: '192.168.3.4/31',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -62,9 +78,17 @@ describe('resource cnis', () => {
       account: 'account',
       cust_ip: '192.168.3.4/31',
       interconnect: 'interconnect',
-      magic: { conduit_name: 'conduit_name', description: 'description', mtu: 0 },
+      magic: {
+        conduit_name: 'conduit_name',
+        description: 'description',
+        mtu: 0,
+      },
       p2p_ip: '192.168.3.4/31',
-      bgp: { customer_asn: 0, extra_prefixes: ['string'], md5_key: 'md5_key' },
+      bgp: {
+        customer_asn: 0,
+        extra_prefixes: ['string'],
+        md5_key: 'md5_key',
+      },
     });
   });
 

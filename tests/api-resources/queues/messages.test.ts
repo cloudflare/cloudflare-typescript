@@ -59,7 +59,13 @@ describe('resource messages', () => {
     const response = await client.queues.messages.bulkPush('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       delay_seconds: 0,
-      messages: [{ body: 'body', content_type: 'text', delay_seconds: 0 }],
+      messages: [
+        {
+          body: 'body',
+          content_type: 'text',
+          delay_seconds: 0,
+        },
+      ],
     });
   });
 

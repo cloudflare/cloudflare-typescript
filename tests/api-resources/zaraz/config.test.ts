@@ -30,12 +30,32 @@ describe('resource config', () => {
       },
       triggers: {
         foo: {
-          excludeRules: [{ id: 'id', match: 'match', op: 'CONTAINS', value: 'value' }],
-          loadRules: [{ id: 'id', match: 'match', op: 'CONTAINS', value: 'value' }],
+          excludeRules: [
+            {
+              id: 'id',
+              match: 'match',
+              op: 'CONTAINS',
+              value: 'value',
+            },
+          ],
+          loadRules: [
+            {
+              id: 'id',
+              match: 'match',
+              op: 'CONTAINS',
+              value: 'value',
+            },
+          ],
           name: 'name',
         },
       },
-      variables: { foo: { name: 'name', type: 'string', value: 'value' } },
+      variables: {
+        foo: {
+          name: 'name',
+          type: 'string',
+          value: 'value',
+        },
+      },
       zarazVersion: 0,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -88,7 +108,12 @@ describe('resource config', () => {
           },
           defaultPurpose: 'defaultPurpose',
           neoEvents: [
-            { actionType: 'actionType', blockingTriggers: ['string'], data: {}, firingTriggers: ['string'] },
+            {
+              actionType: 'actionType',
+              blockingTriggers: ['string'],
+              data: {},
+              firingTriggers: ['string'],
+            },
           ],
           vendorName: 'vendorName',
           vendorPolicyUrl: 'vendorPolicyUrl',
@@ -96,16 +121,40 @@ describe('resource config', () => {
       },
       triggers: {
         foo: {
-          excludeRules: [{ id: 'id', match: 'match', op: 'CONTAINS', value: 'value' }],
-          loadRules: [{ id: 'id', match: 'match', op: 'CONTAINS', value: 'value' }],
+          excludeRules: [
+            {
+              id: 'id',
+              match: 'match',
+              op: 'CONTAINS',
+              value: 'value',
+            },
+          ],
+          loadRules: [
+            {
+              id: 'id',
+              match: 'match',
+              op: 'CONTAINS',
+              value: 'value',
+            },
+          ],
           name: 'name',
           description: 'description',
           system: 'pageload',
         },
       },
-      variables: { foo: { name: 'name', type: 'string', value: 'value' } },
+      variables: {
+        foo: {
+          name: 'name',
+          type: 'string',
+          value: 'value',
+        },
+      },
       zarazVersion: 0,
-      analytics: { defaultPurpose: 'defaultPurpose', enabled: true, sessionExpTime: 60 },
+      analytics: {
+        defaultPurpose: 'defaultPurpose',
+        enabled: true,
+        sessionExpTime: 60,
+      },
       consent: {
         enabled: true,
         buttonTextTranslations: {
@@ -125,7 +174,11 @@ describe('resource config', () => {
         hideModal: true,
         purposes: { foo: { description: 'description', name: 'name' } },
         purposesWithTranslations: {
-          foo: { description: { foo: 'string' }, name: { foo: 'string' }, order: 0 },
+          foo: {
+            description: { foo: 'string' },
+            name: { foo: 'string' },
+            order: 0,
+          },
         },
         tcfCompliant: true,
       },

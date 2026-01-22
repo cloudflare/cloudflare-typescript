@@ -120,7 +120,7 @@ export interface ValueUpdateParams {
   /**
    * Body param: A byte sequence to be stored, up to 25 MiB in length.
    */
-  value: string;
+  value: string | Core.Uploadable;
 
   /**
    * Query param: Expires the key at a certain time, measured in number of seconds

@@ -8,6 +8,15 @@ The REST API documentation can be found on [developers.cloudflare.com](https://d
 
 It is generated with [Stainless](https://www.stainless.com/).
 
+## MCP Server
+
+Use the Cloudflare MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
+
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=cloudflare-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsImNsb3VkZmxhcmUtbWNwIl19)
+[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22cloudflare-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22cloudflare-mcp%22%5D%7D)
+
+> Note: You may need to set environment variables in your MCP client.
+
 ## Installation
 
 ```sh
@@ -74,36 +83,31 @@ import Cloudflare, { toFile } from 'cloudflare';
 const client = new Cloudflare();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.apiGateway.userSchemas.create({
-  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  file: fs.createReadStream('/path/to/file'),
-  kind: 'openapi_v3',
+await client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  value: fs.createReadStream('/path/to/file'),
 });
 
 // Or if you have the web `File` API you can pass a `File` instance:
-await client.apiGateway.userSchemas.create({
-  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  file: new File(['my bytes'], 'file'),
-  kind: 'openapi_v3',
+await client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  value: new File(['my bytes'], 'file'),
 });
 
 // You can also pass a `fetch` `Response`:
-await client.apiGateway.userSchemas.create({
-  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  file: await fetch('https://somesite/file'),
-  kind: 'openapi_v3',
+await client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  value: await fetch('https://somesite/file'),
 });
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.apiGateway.userSchemas.create({
-  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  file: await toFile(Buffer.from('my bytes'), 'file'),
-  kind: 'openapi_v3',
+await client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  value: await toFile(Buffer.from('my bytes'), 'file'),
 });
-await client.apiGateway.userSchemas.create({
-  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
-  kind: 'openapi_v3',
+await client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  value: await toFile(new Uint8Array([0, 1, 2]), 'file'),
 });
 ```
 
@@ -115,15 +119,17 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const zone = await client.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }).catch(async (err) => {
-  if (err instanceof Cloudflare.APIError) {
-    console.log(err.status); // 400
-    console.log(err.name); // BadRequestError
-    console.log(err.headers); // {server: 'nginx', ...}
-  } else {
-    throw err;
-  }
-});
+const zone = await client.zones
+  .get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' })
+  .catch(async (err) => {
+    if (err instanceof Cloudflare.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 ```
 
 Error codes are as follows:
@@ -225,13 +231,21 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 const client = new Cloudflare();
 
 const response = await client.zones
-  .create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' })
+  .create({
+    account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    name: 'example.com',
+    type: 'full',
+  })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: zone, response: raw } = await client.zones
-  .create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' })
+  .create({
+    account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    name: 'example.com',
+    type: 'full',
+  })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(zone.id);

@@ -1020,12 +1020,12 @@ export interface LivestreamStartLivestreamingAMeetingParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   video_config?: LivestreamStartLivestreamingAMeetingParams.VideoConfig;
 }

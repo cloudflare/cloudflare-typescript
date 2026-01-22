@@ -191,21 +191,21 @@ export interface ConfigCreateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   origin:
     | ConfigCreateParams.PublicDatabase
     | ConfigCreateParams.AccessProtectedDatabaseBehindCloudflareTunnel;
 
   /**
-   * Body param:
+   * Body param
    */
   caching?:
     | ConfigCreateParams.HyperdriveHyperdriveCachingCommon
     | ConfigCreateParams.HyperdriveHyperdriveCachingEnabled;
 
   /**
-   * Body param:
+   * Body param
    */
   mtls?: ConfigCreateParams.MTLS;
 
@@ -348,21 +348,21 @@ export interface ConfigUpdateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   origin:
     | ConfigUpdateParams.PublicDatabase
     | ConfigUpdateParams.AccessProtectedDatabaseBehindCloudflareTunnel;
 
   /**
-   * Body param:
+   * Body param
    */
   caching?:
     | ConfigUpdateParams.HyperdriveHyperdriveCachingCommon
     | ConfigUpdateParams.HyperdriveHyperdriveCachingEnabled;
 
   /**
-   * Body param:
+   * Body param
    */
   mtls?: ConfigUpdateParams.MTLS;
 
@@ -513,14 +513,14 @@ export interface ConfigEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   caching?:
     | ConfigEditParams.HyperdriveHyperdriveCachingCommon
     | ConfigEditParams.HyperdriveHyperdriveCachingEnabled;
 
   /**
-   * Body param:
+   * Body param
    */
   mtls?: ConfigEditParams.MTLS;
 
@@ -531,7 +531,7 @@ export interface ConfigEditParams {
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   origin?:
     | ConfigEditParams.HyperdriveHyperdriveDatabase

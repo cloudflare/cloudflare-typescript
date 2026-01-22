@@ -65,7 +65,7 @@ export interface ASNDayReportParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   date?: string;
 }

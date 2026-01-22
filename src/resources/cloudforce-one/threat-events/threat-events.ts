@@ -499,52 +499,52 @@ export interface ThreatEventCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   category: string;
 
   /**
-   * Body param:
+   * Body param
    */
   date: string;
 
   /**
-   * Body param:
+   * Body param
    */
   event: string;
 
   /**
-   * Body param:
+   * Body param
    */
   raw: ThreatEventCreateParams.Raw;
 
   /**
-   * Body param:
+   * Body param
    */
   tlp: string;
 
   /**
-   * Body param:
+   * Body param
    */
   accountId?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   attacker?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   attackerCountry?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   datasetId?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   indicator?: string;
 
@@ -555,27 +555,27 @@ export interface ThreatEventCreateParams {
   indicators?: Array<ThreatEventCreateParams.Indicator>;
 
   /**
-   * Body param:
+   * Body param
    */
   indicatorType?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   insight?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   tags?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   targetCountry?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   targetIndustry?: string;
 
@@ -615,42 +615,42 @@ export interface ThreatEventListParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   datasetId?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   forceRefresh?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   format?: 'json' | 'stix2';
 
   /**
-   * Query param:
+   * Query param
    */
   order?: 'asc' | 'desc';
 
   /**
-   * Query param:
+   * Query param
    */
   orderBy?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   page?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   pageSize?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   search?: Array<ThreatEventListParams.Search>;
 }
@@ -691,12 +691,12 @@ export interface ThreatEventBulkCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   data: Array<ThreatEventBulkCreateParams.Data>;
 
   /**
-   * Body param:
+   * Body param
    */
   datasetId: string;
 
@@ -783,72 +783,72 @@ export interface ThreatEventEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   attacker?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   attackerCountry?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   category?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   createdAt?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   datasetId?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   date?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   event?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   indicator?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   indicatorType?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   insight?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   raw?: ThreatEventEditParams.Raw;
 
   /**
-   * Body param:
+   * Body param
    */
   targetCountry?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   targetIndustry?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   tlp?: string;
 }

@@ -102,22 +102,22 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
   end?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   original_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
 
   /**
-   * Query param:
+   * Query param
    */
   outcome_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
 
   /**
-   * Query param:
+   * Query param
    */
   query?: string | null;
 
   /**
-   * Query param:
+   * Query param
    */
   requested_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
 
@@ -128,17 +128,17 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
   start?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   status?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   submission_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   type?: 'TEAM' | 'USER';
 }

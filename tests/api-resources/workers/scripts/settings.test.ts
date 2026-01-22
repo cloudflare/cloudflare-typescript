@@ -39,7 +39,13 @@ describe('resource settings', () => {
         },
       },
       tags: ['my-team', 'my-public-api'],
-      tail_consumers: [{ service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' }],
+      tail_consumers: [
+        {
+          service: 'my-log-consumer',
+          environment: 'production',
+          namespace: 'my-namespace',
+        },
+      ],
     });
   });
 

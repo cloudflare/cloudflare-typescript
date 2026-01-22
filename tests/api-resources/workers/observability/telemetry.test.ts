@@ -25,11 +25,26 @@ describe('resource telemetry', () => {
     const response = await client.workers.observability.telemetry.keys({
       account_id: 'account_id',
       datasets: ['string'],
-      filters: [{ key: 'key', operation: 'includes', type: 'string', value: 'string' }],
+      filters: [
+        {
+          key: 'key',
+          operation: 'includes',
+          type: 'string',
+          value: 'string',
+        },
+      ],
       from: 0,
-      keyNeedle: { value: 'string', isRegex: true, matchCase: true },
+      keyNeedle: {
+        value: 'string',
+        isRegex: true,
+        matchCase: true,
+      },
       limit: 0,
-      needle: { value: 'string', isRegex: true, matchCase: true },
+      needle: {
+        value: 'string',
+        isRegex: true,
+        matchCase: true,
+      },
       to: 0,
     });
   });
@@ -64,14 +79,38 @@ describe('resource telemetry', () => {
       offsetBy: 0,
       offsetDirection: 'offsetDirection',
       parameters: {
-        calculations: [{ operator: 'uniq', alias: 'alias', key: 'key', keyType: 'string' }],
+        calculations: [
+          {
+            operator: 'uniq',
+            alias: 'alias',
+            key: 'key',
+            keyType: 'string',
+          },
+        ],
         datasets: ['string'],
         filterCombination: 'and',
-        filters: [{ key: 'key', operation: 'includes', type: 'string', value: 'string' }],
+        filters: [
+          {
+            key: 'key',
+            operation: 'includes',
+            type: 'string',
+            value: 'string',
+          },
+        ],
         groupBys: [{ type: 'string', value: 'value' }],
-        havings: [{ key: 'key', operation: 'eq', value: 0 }],
+        havings: [
+          {
+            key: 'key',
+            operation: 'eq',
+            value: 0,
+          },
+        ],
         limit: 0,
-        needle: { value: 'string', isRegex: true, matchCase: true },
+        needle: {
+          value: 'string',
+          isRegex: true,
+          matchCase: true,
+        },
         orderBy: { value: 'value', order: 'asc' },
       },
       patternType: 'message',
@@ -103,9 +142,20 @@ describe('resource telemetry', () => {
       key: 'key',
       timeframe: { from: 0, to: 0 },
       type: 'string',
-      filters: [{ key: 'key', operation: 'includes', type: 'string', value: 'string' }],
+      filters: [
+        {
+          key: 'key',
+          operation: 'includes',
+          type: 'string',
+          value: 'string',
+        },
+      ],
       limit: 0,
-      needle: { value: 'string', isRegex: true, matchCase: true },
+      needle: {
+        value: 'string',
+        isRegex: true,
+        matchCase: true,
+      },
     });
   });
 });

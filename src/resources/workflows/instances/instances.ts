@@ -309,22 +309,22 @@ export namespace InstanceGetResponse {
 
 export interface InstanceCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   instance_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   instance_retention?: InstanceCreateParams.InstanceRetention;
 
   /**
-   * Body param:
+   * Body param
    */
   params?: unknown;
 }
@@ -345,7 +345,7 @@ export namespace InstanceCreateParams {
 
 export interface InstanceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -371,7 +371,7 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param:
+   * Query param
    */
   status?:
     | 'queued'
@@ -386,12 +386,12 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
 
 export interface InstanceBulkParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body?: Array<InstanceBulkParams.Body>;
 }

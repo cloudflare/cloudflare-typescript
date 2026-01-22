@@ -32,7 +32,11 @@ describe('resource workers', () => {
       observability: {
         enabled: true,
         head_sampling_rate: 1,
-        logs: { enabled: true, head_sampling_rate: 1, invocation_logs: true },
+        logs: {
+          enabled: true,
+          head_sampling_rate: 1,
+          invocation_logs: true,
+        },
       },
       subdomain: { enabled: true, previews_enabled: true },
       tags: ['my-team', 'my-public-api'],
@@ -62,7 +66,11 @@ describe('resource workers', () => {
       observability: {
         enabled: true,
         head_sampling_rate: 1,
-        logs: { enabled: true, head_sampling_rate: 1, invocation_logs: true },
+        logs: {
+          enabled: true,
+          head_sampling_rate: 1,
+          invocation_logs: true,
+        },
       },
       subdomain: { enabled: true, previews_enabled: true },
       tags: ['my-team', 'my-public-api'],
@@ -137,7 +145,11 @@ describe('resource workers', () => {
       observability: {
         enabled: true,
         head_sampling_rate: 1,
-        logs: { enabled: true, head_sampling_rate: 1, invocation_logs: true },
+        logs: {
+          enabled: true,
+          head_sampling_rate: 1,
+          invocation_logs: true,
+        },
       },
       subdomain: { enabled: true, previews_enabled: true },
       tags: ['my-team', 'my-public-api'],

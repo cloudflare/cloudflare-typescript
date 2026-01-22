@@ -68,11 +68,13 @@ export type AIRunResponse =
   | Array<AIRunResponse.TextClassification>
   | Core.Uploadable
   | AIRunResponse.Audio
+  | Core.Uploadable
   | AIRunResponse.TextEmbeddings
   | AIRunResponse.AutomaticSpeechRecognition
   | Array<AIRunResponse.ImageClassification>
   | Array<AIRunResponse.ObjectDetection>
-  | AIRunResponse.UnionMember7
+  | AIRunResponse.UnionMember8
+  | Core.Uploadable
   | AIRunResponse.Translation
   | AIRunResponse.Summarization
   | AIRunResponse.ImageToText
@@ -195,7 +197,7 @@ export namespace AIRunResponse {
     }
   }
 
-  export interface UnionMember7 {
+  export interface UnionMember8 {
     /**
      * The generated text response from the model
      */
@@ -204,15 +206,15 @@ export namespace AIRunResponse {
     /**
      * An array of tool calls requests made during the response generation
      */
-    tool_calls?: Array<UnionMember7.ToolCall>;
+    tool_calls?: Array<UnionMember8.ToolCall>;
 
     /**
      * Usage statistics for the inference request
      */
-    usage?: UnionMember7.Usage;
+    usage?: UnionMember8.Usage;
   }
 
-  export namespace UnionMember7 {
+  export namespace UnionMember8 {
     export interface ToolCall {
       /**
        * The arguments passed to be passed to the tool call request
@@ -295,7 +297,7 @@ export type AIRunParams =
 export declare namespace AIRunParams {
   export interface TextClassification {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -307,7 +309,7 @@ export declare namespace AIRunParams {
 
   export interface TextToImage {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -376,7 +378,7 @@ export declare namespace AIRunParams {
 
   export interface TextToSpeech {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -394,7 +396,7 @@ export declare namespace AIRunParams {
 
   export interface TextEmbeddings {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -406,7 +408,7 @@ export declare namespace AIRunParams {
 
   export interface AutomaticSpeechRecognition {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -430,7 +432,7 @@ export declare namespace AIRunParams {
 
   export interface ImageClassification {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -443,7 +445,7 @@ export declare namespace AIRunParams {
 
   export interface ObjectDetection {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -456,7 +458,7 @@ export declare namespace AIRunParams {
 
   export interface Prompt {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -499,7 +501,7 @@ export declare namespace AIRunParams {
     repetition_penalty?: number;
 
     /**
-     * Body param:
+     * Body param
      */
     response_format?: Prompt.ResponseFormat;
 
@@ -545,7 +547,7 @@ export declare namespace AIRunParams {
 
   export interface Messages {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -561,7 +563,7 @@ export declare namespace AIRunParams {
     frequency_penalty?: number;
 
     /**
-     * Body param:
+     * Body param
      */
     functions?: Array<Messages.Function>;
 
@@ -587,7 +589,7 @@ export declare namespace AIRunParams {
     repetition_penalty?: number;
 
     /**
-     * Body param:
+     * Body param
      */
     response_format?: Messages.ResponseFormat;
 
@@ -779,7 +781,7 @@ export declare namespace AIRunParams {
 
   export interface Translation {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -803,7 +805,7 @@ export declare namespace AIRunParams {
 
   export interface Summarization {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -820,7 +822,7 @@ export declare namespace AIRunParams {
 
   export interface ImageToText {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -890,7 +892,7 @@ export declare namespace AIRunParams {
 
   export interface Variant12 {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -959,7 +961,7 @@ export declare namespace AIRunParams {
 
   export interface Variant13 {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -1042,7 +1044,7 @@ export declare namespace AIRunParams {
 
   export interface MultimodalEmbeddings {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -1052,7 +1054,7 @@ export declare namespace AIRunParams {
     image?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     text?: Array<string>;
   }

@@ -15,7 +15,10 @@ describe('resource content', () => {
     const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.content.update(
       'my-dispatch-namespace',
       'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', metadata: {} },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        metadata: {},
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

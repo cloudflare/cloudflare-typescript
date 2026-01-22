@@ -131,7 +131,7 @@ export declare namespace SnapshotCreateParams {
     cookies?: Array<Variant0.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -172,22 +172,22 @@ export declare namespace SnapshotCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     screenshotOptions?: Variant0.ScreenshotOptions;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -428,7 +428,7 @@ export declare namespace SnapshotCreateParams {
     cookies?: Array<Variant1.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -469,22 +469,22 @@ export declare namespace SnapshotCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     screenshotOptions?: Variant1.ScreenshotOptions;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 

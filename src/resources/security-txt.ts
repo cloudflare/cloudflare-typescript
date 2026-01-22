@@ -177,47 +177,47 @@ export interface SecurityTXTUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   acknowledgments?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   canonical?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   contact?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   encryption?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   expires?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   hiring?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   policy?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   preferredLanguages?: string;
 }

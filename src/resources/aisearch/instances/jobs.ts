@@ -176,7 +176,7 @@ export interface JobCreateParams {
 
 export interface JobListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 }
@@ -187,17 +187,17 @@ export interface JobGetParams {
 
 export interface JobLogsParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   page?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   per_page?: number;
 }

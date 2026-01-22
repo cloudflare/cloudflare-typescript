@@ -289,7 +289,7 @@ export namespace PortalReadResponse {
 
 export interface PortalCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -299,22 +299,22 @@ export interface PortalCreateParams {
   id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   hostname: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   servers?: Array<PortalCreateParams.Server>;
 }
@@ -356,27 +356,27 @@ export namespace PortalCreateParams {
 
 export interface PortalUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   hostname?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   servers?: Array<PortalUpdateParams.Server>;
 }
@@ -418,7 +418,7 @@ export namespace PortalUpdateParams {
 
 export interface PortalListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

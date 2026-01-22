@@ -494,7 +494,7 @@ export interface CertificateGetResponse {
 
 export interface CertificateCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -518,24 +518,24 @@ export interface CertificateDeleteParams {
 
 export interface CertificateActivateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
 
 export interface CertificateDeactivateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }

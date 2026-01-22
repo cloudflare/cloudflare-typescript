@@ -333,7 +333,7 @@ export type ServerSyncResponse = unknown;
 
 export interface ServerCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -343,56 +343,56 @@ export interface ServerCreateParams {
   id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
   /**
-   * Body param:
+   * Body param
    */
   hostname: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_credentials?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string | null;
 }
 
 export interface ServerUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_credentials?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 }
 
 export interface ServerListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

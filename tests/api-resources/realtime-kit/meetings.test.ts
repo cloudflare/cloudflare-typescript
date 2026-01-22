@@ -29,14 +29,26 @@ describe('resource meetings', () => {
     const response = await client.realtimeKit.meetings.create('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       ai_config: {
-        summarization: { summary_type: 'general', text_format: 'plain_text', word_limit: 150 },
-        transcription: { keywords: ['string'], language: 'en-US', profanity_filter: true },
+        summarization: {
+          summary_type: 'general',
+          text_format: 'plain_text',
+          word_limit: 150,
+        },
+        transcription: {
+          keywords: ['string'],
+          language: 'en-US',
+          profanity_filter: true,
+        },
       },
       live_stream_on_start: true,
       persist_chat: true,
       record_on_start: true,
       recording_config: {
-        audio_config: { channel: 'mono', codec: 'MP3', export_file: true },
+        audio_config: {
+          channel: 'mono',
+          codec: 'MP3',
+          export_file: true,
+        },
         file_name_prefix: 'file_name_prefix',
         live_streaming_config: { rtmp_url: 'rtmp://a.rtmp.youtube.com/live2' },
         max_seconds: 60,
@@ -59,7 +71,11 @@ describe('resource meetings', () => {
           codec: 'H264',
           export_file: true,
           height: 720,
-          watermark: { position: 'left top', size: { height: 1, width: 1 }, url: 'https://example.com' },
+          watermark: {
+            position: 'left top',
+            size: { height: 1, width: 1 },
+            url: 'https://example.com',
+          },
           width: 1280,
         },
       },
@@ -262,7 +278,11 @@ describe('resource meetings', () => {
     const response = await client.realtimeKit.meetings.getMeetingParticipants(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', page_no: 0, per_page: 0 },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        page_no: 0,
+        per_page: 0,
+      },
     );
   });
 
@@ -317,14 +337,26 @@ describe('resource meetings', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         ai_config: {
-          summarization: { summary_type: 'general', text_format: 'plain_text', word_limit: 150 },
-          transcription: { keywords: ['string'], language: 'en-US', profanity_filter: true },
+          summarization: {
+            summary_type: 'general',
+            text_format: 'plain_text',
+            word_limit: 150,
+          },
+          transcription: {
+            keywords: ['string'],
+            language: 'en-US',
+            profanity_filter: true,
+          },
         },
         live_stream_on_start: true,
         persist_chat: true,
         record_on_start: true,
         recording_config: {
-          audio_config: { channel: 'mono', codec: 'MP3', export_file: true },
+          audio_config: {
+            channel: 'mono',
+            codec: 'MP3',
+            export_file: true,
+          },
           file_name_prefix: 'file_name_prefix',
           live_streaming_config: { rtmp_url: 'rtmp://a.rtmp.youtube.com/live2' },
           max_seconds: 60,
@@ -347,7 +379,11 @@ describe('resource meetings', () => {
             codec: 'H264',
             export_file: true,
             height: 720,
-            watermark: { position: 'left top', size: { height: 1, width: 1 }, url: 'https://example.com' },
+            watermark: {
+              position: 'left top',
+              size: { height: 1, width: 1 },
+              url: 'https://example.com',
+            },
             width: 1280,
           },
         },
@@ -382,8 +418,16 @@ describe('resource meetings', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         ai_config: {
-          summarization: { summary_type: 'general', text_format: 'plain_text', word_limit: 150 },
-          transcription: { keywords: ['string'], language: 'en-US', profanity_filter: true },
+          summarization: {
+            summary_type: 'general',
+            text_format: 'plain_text',
+            word_limit: 150,
+          },
+          transcription: {
+            keywords: ['string'],
+            language: 'en-US',
+            profanity_filter: true,
+          },
         },
         live_stream_on_start: true,
         persist_chat: true,

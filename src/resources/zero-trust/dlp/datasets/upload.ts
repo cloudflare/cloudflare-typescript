@@ -179,7 +179,7 @@ export interface UploadCreateParams {
 
 export interface UploadEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 }

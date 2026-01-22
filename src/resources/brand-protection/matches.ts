@@ -41,54 +41,54 @@ export interface MatchGetResponse {
 
 export interface MatchDownloadParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   include_domain_id?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   offset?: number;
 }
 
 export interface MatchGetParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   include_domain_id?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   offset?: number;
 }

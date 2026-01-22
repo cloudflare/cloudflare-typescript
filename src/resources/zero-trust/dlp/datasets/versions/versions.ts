@@ -60,12 +60,12 @@ export interface VersionCreateResponse {
 
 export interface VersionCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<VersionCreateParams.ExistingColumn | VersionCreateParams.NewColumn>;
 }

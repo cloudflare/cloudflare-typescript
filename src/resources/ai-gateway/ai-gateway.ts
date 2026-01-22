@@ -710,7 +710,7 @@ export namespace AIGatewayGetResponse {
 
 export interface AIGatewayCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -720,159 +720,159 @@ export interface AIGatewayCreateParams {
   id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   cache_invalidate_on_update: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   cache_ttl: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   collect_logs: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   rate_limiting_interval: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   rate_limiting_limit: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   rate_limiting_technique: 'fixed' | 'sliding';
 
   /**
-   * Body param:
+   * Body param
    */
   authentication?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   is_default?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   log_management?: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
 
   /**
-   * Body param:
+   * Body param
    */
   logpush?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   logpush_public_key?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   zdr?: boolean;
 }
 
 export interface AIGatewayUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   cache_invalidate_on_update: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   cache_ttl: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   collect_logs: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   rate_limiting_interval: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   rate_limiting_limit: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   rate_limiting_technique: 'fixed' | 'sliding';
 
   /**
-   * Body param:
+   * Body param
    */
   authentication?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   dlp?: AIGatewayUpdateParams.UnionMember0 | AIGatewayUpdateParams.UnionMember1;
 
   /**
-   * Body param:
+   * Body param
    */
   is_default?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   log_management?: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
 
   /**
-   * Body param:
+   * Body param
    */
   logpush?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   logpush_public_key?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   otel?: Array<AIGatewayUpdateParams.Otel> | null;
 
   /**
-   * Body param:
+   * Body param
    */
   store_id?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   stripe?: AIGatewayUpdateParams.Stripe | null;
 
   /**
-   * Body param:
+   * Body param
    */
   zdr?: boolean;
 }
@@ -929,7 +929,7 @@ export namespace AIGatewayUpdateParams {
 
 export interface AIGatewayListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

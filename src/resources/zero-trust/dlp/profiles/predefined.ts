@@ -596,37 +596,37 @@ export namespace PredefinedGetResponse {
 
 export interface PredefinedUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   ai_context_enabled?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   allowed_match_count?: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   confidence_threshold?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled_entries?: Array<string> | null;
 
   /**
-   * @deprecated Body param:
+   * @deprecated Body param
    */
   entries?: Array<PredefinedUpdateParams.Entry>;
 
   /**
-   * Body param:
+   * Body param
    */
   ocr_enabled?: boolean;
 }

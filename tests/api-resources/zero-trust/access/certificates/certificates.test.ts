@@ -57,7 +57,11 @@ describe('resource certificates', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.zeroTrust.access.certificates.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { associated_hostnames: ['admin.example.com'], account_id: 'account_id', name: 'Allow devs' },
+      {
+        associated_hostnames: ['admin.example.com'],
+        account_id: 'account_id',
+        name: 'Allow devs',
+      },
     );
   });
 

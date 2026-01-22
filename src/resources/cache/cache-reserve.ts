@@ -244,7 +244,7 @@ export interface CacheReserveClearParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
