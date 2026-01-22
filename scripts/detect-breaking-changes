@@ -154,8 +154,9 @@ TEST_PATHS=(
 	tests/api-resources/logs/received/received.test.ts
 	tests/api-resources/logs/received/fields.test.ts
 	tests/api-resources/origin-tls-client-auth/origin-tls-client-auth.test.ts
-	tests/api-resources/origin-tls-client-auth/hostnames/hostnames.test.ts
-	tests/api-resources/origin-tls-client-auth/hostnames/certificates.test.ts
+	tests/api-resources/origin-tls-client-auth/zone-certificates.test.ts
+	tests/api-resources/origin-tls-client-auth/hostnames.test.ts
+	tests/api-resources/origin-tls-client-auth/hostname-certificates.test.ts
 	tests/api-resources/origin-tls-client-auth/settings.test.ts
 	tests/api-resources/page-rules.test.ts
 	tests/api-resources/rate-limits.test.ts
