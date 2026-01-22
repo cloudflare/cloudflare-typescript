@@ -27,6 +27,7 @@ import { CustomNameservers } from './resources/custom-nameservers';
 import { CustomPages } from './resources/custom-pages';
 import { DCVDelegation } from './resources/dcv-delegation';
 import { Filters } from './resources/filters';
+import { Fraud } from './resources/fraud';
 import { IPs } from './resources/ips';
 import { KeylessCertificates } from './resources/keyless-certificates';
 import { ManagedTransforms } from './resources/managed-transforms';
@@ -335,6 +336,7 @@ export class Cloudflare extends Core.APIClient {
   urlScanner: API.URLScanner = new API.URLScanner(this);
   radar: API.Radar = new API.Radar(this);
   botManagement: API.BotManagement = new API.BotManagement(this);
+  fraud: API.Fraud = new API.Fraud(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
   zaraz: API.Zaraz = new API.Zaraz(this);
   speed: API.Speed = new API.Speed(this);
@@ -553,6 +555,7 @@ Cloudflare.Vectorize = Vectorize;
 Cloudflare.URLScanner = URLScanner;
 Cloudflare.Radar = Radar;
 Cloudflare.BotManagement = BotManagement;
+Cloudflare.Fraud = Fraud;
 Cloudflare.OriginPostQuantumEncryption = OriginPostQuantumEncryption;
 Cloudflare.Zaraz = Zaraz;
 Cloudflare.Speed = Speed;
@@ -763,6 +766,8 @@ export declare namespace Cloudflare {
   export { Radar as Radar };
 
   export { BotManagement as BotManagement };
+
+  export { Fraud as Fraud };
 
   export { OriginPostQuantumEncryption as OriginPostQuantumEncryption };
 

@@ -39,6 +39,7 @@ export { EmailRouting } from './email-routing/email-routing';
 export { EmailSecurity } from './email-security/email-security';
 export { Filters } from './filters';
 export { Firewall } from './firewall/firewall';
+export { Fraud } from './fraud';
 export { Healthchecks } from './healthchecks/healthchecks';
 export { Hostnames } from './hostnames/hostnames';
 export { HyperdriveResource } from './hyperdrive/hyperdrive';
