@@ -11,7 +11,7 @@ import {
   DomainHistoryResource,
 } from './domain-history';
 import * as IPListsAPI from './ip-lists';
-import { IPList, IPListGetParams, IPLists, IPListsSinglePage } from './ip-lists';
+import { IPList, IPLists } from './ip-lists';
 import * as IPsAPI from './ips';
 import { IP, IPGetParams, IPGetResponse, IPs } from './ips';
 import * as MiscategorizationsAPI from './miscategorizations';
@@ -95,12 +95,7 @@ export declare namespace Intel {
 
   export { IPs as IPs, type IP as IP, type IPGetResponse as IPGetResponse, type IPGetParams as IPGetParams };
 
-  export {
-    IPLists as IPLists,
-    type IPList as IPList,
-    type IPListsSinglePage as IPListsSinglePage,
-    type IPListGetParams as IPListGetParams,
-  };
+  export { IPLists as IPLists, type IPList as IPList };
 
   export {
     Miscategorizations as Miscategorizations,

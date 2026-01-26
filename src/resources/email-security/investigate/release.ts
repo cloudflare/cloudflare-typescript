@@ -38,6 +38,8 @@ export class Release extends APIResource {
 export type ReleaseBulkResponsesSinglePage = SinglePage<ReleaseBulkResponse>;
 
 export interface ReleaseBulkResponse {
+  id: string;
+
   /**
    * The identifier of the message.
    */

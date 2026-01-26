@@ -100,10 +100,14 @@ export interface PredefinedProfile {
 
   confidence_threshold: string | null;
 
+  /**
+   * Entries to enable for this predefined profile. Any entries not provided will be
+   * disabled.
+   */
   enabled_entries: Array<string>;
 
   /**
-   * @deprecated
+   * @deprecated This field has been deprecated for `enabled_entries`.
    */
   entries: Array<
     | PredefinedProfile.CustomEntry
@@ -268,10 +272,14 @@ export interface PredefinedUpdateResponse {
 
   confidence_threshold: string | null;
 
+  /**
+   * Entries to enable for this predefined profile. Any entries not provided will be
+   * disabled.
+   */
   enabled_entries: Array<string>;
 
   /**
-   * @deprecated
+   * @deprecated This field has been deprecated for `enabled_entries`.
    */
   entries: Array<
     | PredefinedUpdateResponse.CustomEntry
@@ -438,10 +446,14 @@ export interface PredefinedGetResponse {
 
   confidence_threshold: string | null;
 
+  /**
+   * Entries to enable for this predefined profile. Any entries not provided will be
+   * disabled.
+   */
   enabled_entries: Array<string>;
 
   /**
-   * @deprecated
+   * @deprecated This field has been deprecated for `enabled_entries`.
    */
   entries: Array<
     | PredefinedGetResponse.CustomEntry
