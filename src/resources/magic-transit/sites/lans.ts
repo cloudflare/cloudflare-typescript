@@ -14,10 +14,7 @@ export class LANs extends APIResource {
    * // Automatically fetches more pages as needed.
    * for await (const lan of client.magicTransit.sites.lans.create(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     physport: 1,
-   *   },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
    * }
@@ -242,6 +239,8 @@ export interface LAN {
    */
   id?: string;
 
+  bond_id?: number;
+
   /**
    * mark true to use this LAN for HA probing. only works for site with HA turned on.
    * only one LAN can be set as the ha_link.
@@ -377,7 +376,7 @@ export interface LANCreateParams {
   /**
    * Body param
    */
-  physport: number;
+  bond_id?: number;
 
   /**
    * Body param: mark true to use this LAN for HA probing. only works for site with
@@ -394,6 +393,11 @@ export interface LANCreateParams {
    * Body param
    */
   nat?: NatParam;
+
+  /**
+   * Body param
+   */
+  physport?: number;
 
   /**
    * Body param
@@ -419,6 +423,11 @@ export interface LANUpdateParams {
    * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param
+   */
+  bond_id?: number;
 
   /**
    * Body param
@@ -473,6 +482,11 @@ export interface LANEditParams {
    * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param
+   */
+  bond_id?: number;
 
   /**
    * Body param

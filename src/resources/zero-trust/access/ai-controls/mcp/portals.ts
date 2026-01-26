@@ -156,6 +156,11 @@ export interface PortalCreateResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 }
 
 export interface PortalUpdateResponse {
@@ -177,6 +182,11 @@ export interface PortalUpdateResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 }
 
 export interface PortalListResponse {
@@ -198,6 +208,11 @@ export interface PortalListResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 }
 
 export interface PortalDeleteResponse {
@@ -219,6 +234,11 @@ export interface PortalDeleteResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 }
 
 export interface PortalReadResponse {
@@ -242,6 +262,11 @@ export interface PortalReadResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 }
 
 export namespace PortalReadResponse {
@@ -274,6 +299,8 @@ export namespace PortalReadResponse {
     description?: string | null;
 
     error?: string;
+
+    last_successful_sync?: string;
 
     last_synced?: string;
 
@@ -312,6 +339,11 @@ export interface PortalCreateParams {
    * Body param
    */
   description?: string;
+
+  /**
+   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   /**
    * Body param
@@ -374,6 +406,11 @@ export interface PortalUpdateParams {
    * Body param
    */
   name?: string;
+
+  /**
+   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   /**
    * Body param

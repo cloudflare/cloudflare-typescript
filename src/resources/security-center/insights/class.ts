@@ -8,7 +8,7 @@ import { CloudflareError } from '../../../error';
 
 export class Class extends APIResource {
   /**
-   * Get Security Center Insight Counts by Class
+   * Retrieves Security Center Insight Counts by Class
    */
   get(params?: ClassGetParams, options?: Core.RequestOptions): Core.APIPromise<ClassGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<ClassGetResponse>;

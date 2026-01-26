@@ -230,12 +230,18 @@ export namespace InstanceGetResponse {
     export interface Config {
       retries: Config.Retries;
 
-      timeout: unknown | number;
+      /**
+       * Specifies the timeout duration.
+       */
+      timeout: string | number;
     }
 
     export namespace Config {
       export interface Retries {
-        delay: unknown | number;
+        /**
+         * Specifies the delay duration.
+         */
+        delay: string | number;
 
         limit: number;
 
@@ -332,12 +338,12 @@ export interface InstanceCreateParams {
 export namespace InstanceCreateParams {
   export interface InstanceRetention {
     /**
-     * Duration in milliseconds or as a string like '5 minutes'
+     * Specifies the duration in milliseconds or as a string like '5 minutes'.
      */
     error_retention?: number | string;
 
     /**
-     * Duration in milliseconds or as a string like '5 minutes'
+     * Specifies the duration in milliseconds or as a string like '5 minutes'.
      */
     success_retention?: number | string;
   }
@@ -408,12 +414,12 @@ export namespace InstanceBulkParams {
   export namespace Body {
     export interface InstanceRetention {
       /**
-       * Duration in milliseconds or as a string like '5 minutes'
+       * Specifies the duration in milliseconds or as a string like '5 minutes'.
        */
       error_retention?: number | string;
 
       /**
-       * Duration in milliseconds or as a string like '5 minutes'
+       * Specifies the duration in milliseconds or as a string like '5 minutes'.
        */
       success_retention?: number | string;
     }

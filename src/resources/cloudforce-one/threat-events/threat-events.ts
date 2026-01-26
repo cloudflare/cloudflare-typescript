@@ -229,6 +229,8 @@ export interface ThreatEventCreateResponse {
 
   category: string;
 
+  datasetId: string;
+
   date: string;
 
   event: string;
@@ -283,6 +285,8 @@ export namespace ThreatEventListResponse {
     attackerCountry: string;
 
     category: string;
+
+    datasetId: string;
 
     date: string;
 
@@ -359,14 +363,15 @@ export interface ThreatEventBulkCreateResponse {
   queuedIndicatorsCount: number;
 
   /**
-   * Number of events skipped due to duplicate UUID (only when preserveUuid=true)
-   */
-  skippedEventsCount: number;
-
-  /**
    * Correlation ID for async indicator processing
    */
   createBulkEventsRequestId?: string;
+
+  /**
+   * Array of created events with UUIDs and shard locations. Only present when
+   * includeCreatedEvents=true
+   */
+  createdEvents?: Array<ThreatEventBulkCreateResponse.CreatedEvent>;
 
   /**
    * Array of error details
@@ -375,6 +380,23 @@ export interface ThreatEventBulkCreateResponse {
 }
 
 export namespace ThreatEventBulkCreateResponse {
+  export interface CreatedEvent {
+    /**
+     * Original index in the input data array
+     */
+    eventIndex: number;
+
+    /**
+     * Dataset ID of the shard where the event was created
+     */
+    shardId: string;
+
+    /**
+     * UUID of the created event
+     */
+    uuid: string;
+  }
+
   export interface Error {
     /**
      * Error message
@@ -394,6 +416,8 @@ export interface ThreatEventEditResponse {
   attackerCountry: string;
 
   category: string;
+
+  datasetId: string;
 
   date: string;
 
@@ -446,6 +470,8 @@ export interface ThreatEventGetResponse {
   attackerCountry: string;
 
   category: string;
+
+  datasetId: string;
 
   date: string;
 
@@ -578,12 +604,6 @@ export interface ThreatEventCreateParams {
    * Body param
    */
   targetIndustry?: string;
-
-  /**
-   * Body param: Optional UUID for the event. Only used when preserveUuid=true in
-   * bulk create. Must be a valid UUID format.
-   */
-  uuid?: string;
 }
 
 export namespace ThreatEventCreateParams {
@@ -615,6 +635,14 @@ export interface ThreatEventListParams {
   account_id: string;
 
   /**
+   * Query param: Cursor for pagination. When provided, filters are embedded in the
+   * cursor so you only need to pass cursor and pageSize. Returned in the previous
+   * response's result_info.cursor field. Use cursor-based pagination for deep
+   * pagination (beyond 100,000 records) or for optimal performance.
+   */
+  cursor?: string;
+
+  /**
    * Query param
    */
   datasetId?: Array<string>;
@@ -640,12 +668,14 @@ export interface ThreatEventListParams {
   orderBy?: string;
 
   /**
-   * Query param
+   * Query param: Page number (1-indexed) for offset-based pagination. Limited to
+   * offset of 100,000 records. For deep pagination, use cursor-based pagination
+   * instead.
    */
   page?: number;
 
   /**
-   * Query param
+   * Query param: Number of results per page. Maximum 25,000.
    */
   pageSize?: number;
 
@@ -701,11 +731,10 @@ export interface ThreatEventBulkCreateParams {
   datasetId: string;
 
   /**
-   * Body param: When true, use provided UUIDs from event data instead of generating
-   * new ones. Used for migration scenarios where original UUIDs must be preserved.
-   * Duplicate UUIDs will be skipped.
+   * Body param: When true, response includes array of created event UUIDs and shard
+   * IDs. Useful for tracking which events were created and where.
    */
-  preserveUuid?: boolean;
+  includeCreatedEvents?: boolean;
 }
 
 export namespace ThreatEventBulkCreateParams {
@@ -745,12 +774,6 @@ export namespace ThreatEventBulkCreateParams {
     targetCountry?: string;
 
     targetIndustry?: string;
-
-    /**
-     * Optional UUID for the event. Only used when preserveUuid=true in bulk create.
-     * Must be a valid UUID format.
-     */
-    uuid?: string;
   }
 
   export namespace Data {

@@ -15,7 +15,6 @@ describe('resource instances', () => {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       id: 'my-ai-search',
       source: 'source',
-      token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       type: 'r2',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -32,14 +31,13 @@ describe('resource instances', () => {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       id: 'my-ai-search',
       source: 'source',
-      token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       type: 'r2',
       ai_gateway_id: 'ai_gateway_id',
       ai_search_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
       chunk: true,
       chunk_overlap: 0,
       chunk_size: 64,
-      embedding_model: '@cf/baai/bge-m3',
+      embedding_model: '@cf/qwen/qwen3-embedding-0.6b',
       hybrid_search_enabled: true,
       max_num_results: 1,
       metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
@@ -61,14 +59,15 @@ describe('resource instances', () => {
       rewrite_query: true,
       score_threshold: 0,
       source_params: {
-        exclude_items: ['/admin/*', '/private/**', '*\\temp\\*'],
-        include_items: ['/blog/*', '/docs/**/*.html', '*\\blog\\*.html'],
+        exclude_items: ['/admin/**', '/private/**', '**\\temp\\**'],
+        include_items: ['/blog/**', '/docs/**/*.html', '**\\blog\\**.html'],
         prefix: 'prefix',
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
           parse_options: {
             include_headers: { foo: 'string' },
             include_images: true,
+            specific_sitemaps: ['https://example.com/sitemap.xml', 'https://example.com/blog-sitemap.xml'],
             use_browser_rendering: true,
           },
           parse_type: 'sitemap',
@@ -79,6 +78,7 @@ describe('resource instances', () => {
           },
         },
       },
+      token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
@@ -105,7 +105,7 @@ describe('resource instances', () => {
       chunk: true,
       chunk_overlap: 0,
       chunk_size: 64,
-      embedding_model: '@cf/baai/bge-m3',
+      embedding_model: '@cf/qwen/qwen3-embedding-0.6b',
       hybrid_search_enabled: true,
       max_num_results: 1,
       metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
@@ -128,14 +128,15 @@ describe('resource instances', () => {
       rewrite_query: true,
       score_threshold: 0,
       source_params: {
-        exclude_items: ['/admin/*', '/private/**', '*\\temp\\*'],
-        include_items: ['/blog/*', '/docs/**/*.html', '*\\blog\\*.html'],
+        exclude_items: ['/admin/**', '/private/**', '**\\temp\\**'],
+        include_items: ['/blog/**', '/docs/**/*.html', '**\\blog\\**.html'],
         prefix: 'prefix',
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
           parse_options: {
             include_headers: { foo: 'string' },
             include_images: true,
+            specific_sitemaps: ['https://example.com/sitemap.xml', 'https://example.com/blog-sitemap.xml'],
             use_browser_rendering: true,
           },
           parse_type: 'sitemap',

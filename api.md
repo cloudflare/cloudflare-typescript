@@ -3314,10 +3314,6 @@ Types:
 
 - <code><a href="./src/resources/intel/ip-lists.ts">IPList</a></code>
 
-Methods:
-
-- <code title="get /accounts/{account_id}/intel/ip-list">client.intel.ipLists.<a href="./src/resources/intel/ip-lists.ts">get</a>({ ...params }) -> IPListsSinglePage</code>
-
 ## Miscategorizations
 
 Types:
@@ -7956,6 +7952,15 @@ Methods:
 - <code title="get /zones/{zone_id}/bot_management">client.botManagement.<a href="./src/resources/bot-management.ts">get</a>({ ...params }) -> BotManagementGetResponse</code>
 
 # Fraud
+
+Types:
+
+- <code><a href="./src/resources/fraud.ts">FraudSettings</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/fraud_detection/settings">client.fraud.<a href="./src/resources/fraud.ts">update</a>({ ...params }) -> FraudSettings</code>
+- <code title="get /zones/{zone_id}/fraud_detection/settings">client.fraud.<a href="./src/resources/fraud.ts">get</a>({ ...params }) -> FraudSettings</code>
 
 # OriginPostQuantumEncryption
 
