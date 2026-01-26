@@ -120,6 +120,7 @@ describe('resource applications', () => {
       session_duration: '24h',
       skip_interstitial: true,
       tags: ['engineers'],
+      use_clientless_isolation_app_launcher_url: false,
     });
   });
 
@@ -233,6 +234,7 @@ describe('resource applications', () => {
       session_duration: '24h',
       skip_interstitial: true,
       tags: ['engineers'],
+      use_clientless_isolation_app_launcher_url: false,
     });
   });
 
