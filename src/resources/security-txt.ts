@@ -5,7 +5,7 @@ import * as Core from '../core';
 
 export class SecurityTXT extends APIResource {
   /**
-   * Update security.txt
+   * Updates security.txt
    *
    * @example
    * ```ts
@@ -23,7 +23,7 @@ export class SecurityTXT extends APIResource {
   }
 
   /**
-   * Delete security.txt
+   * Deletes security.txt
    *
    * @example
    * ```ts
@@ -41,7 +41,7 @@ export class SecurityTXT extends APIResource {
   }
 
   /**
-   * Get security.txt
+   * Retrieves security.txt
    *
    * @example
    * ```ts

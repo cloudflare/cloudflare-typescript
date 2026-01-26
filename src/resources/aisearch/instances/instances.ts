@@ -40,7 +40,6 @@ export class Instances extends APIResource {
    *   account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
    *   id: 'my-ai-search',
    *   source: 'source',
-   *   token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *   type: 'r2',
    * });
    * ```
@@ -202,8 +201,6 @@ export interface InstanceCreateResponse {
 
   source: string;
 
-  token_id: string;
-
   type: 'r2' | 'web-crawler';
 
   vectorize_name: string;
@@ -251,10 +248,10 @@ export interface InstanceCreateResponse {
   created_by?: string;
 
   embedding_model?:
+    | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
-    | '@cf/qwen/qwen3-embedding-0.6b'
     | 'google-ai-studio/gemini-embedding-001'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
@@ -356,6 +353,8 @@ export interface InstanceCreateResponse {
 
   system_prompt_rewrite_query?: string;
 
+  token_id?: string;
+
   vectorize_active_namespace?: string;
 }
 
@@ -413,14 +412,16 @@ export namespace InstanceCreateResponse {
 
   export interface SourceParams {
     /**
-     * List of path patterns to exclude. Supports wildcards (e.g., _/admin/_,
-     * /private/\*_, _\private\*)
+     * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /admin/** matches
+     * /admin/users and /admin/settings/advanced)
      */
     exclude_items?: Array<string>;
 
     /**
-     * List of path patterns to include. Supports wildcards (e.g., _/blog/_.html,
-     * /docs/\*_, _\blog\*.html)
+     * List of path patterns to include. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /blog/** matches
+     * /blog/post and /blog/2024/post)
      */
     include_items?: Array<string>;
 
@@ -445,6 +446,12 @@ export namespace InstanceCreateResponse {
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
+
+        /**
+         * List of specific sitemap URLs to use for crawling. Only valid when parse_type is
+         * 'sitemap'.
+         */
+        specific_sitemaps?: Array<string>;
 
         use_browser_rendering?: boolean;
       }
@@ -477,8 +484,6 @@ export interface InstanceUpdateResponse {
   modified_at: string;
 
   source: string;
-
-  token_id: string;
 
   type: 'r2' | 'web-crawler';
 
@@ -527,10 +532,10 @@ export interface InstanceUpdateResponse {
   created_by?: string;
 
   embedding_model?:
+    | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
-    | '@cf/qwen/qwen3-embedding-0.6b'
     | 'google-ai-studio/gemini-embedding-001'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
@@ -632,6 +637,8 @@ export interface InstanceUpdateResponse {
 
   system_prompt_rewrite_query?: string;
 
+  token_id?: string;
+
   vectorize_active_namespace?: string;
 }
 
@@ -689,14 +696,16 @@ export namespace InstanceUpdateResponse {
 
   export interface SourceParams {
     /**
-     * List of path patterns to exclude. Supports wildcards (e.g., _/admin/_,
-     * /private/\*_, _\private\*)
+     * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /admin/** matches
+     * /admin/users and /admin/settings/advanced)
      */
     exclude_items?: Array<string>;
 
     /**
-     * List of path patterns to include. Supports wildcards (e.g., _/blog/_.html,
-     * /docs/\*_, _\blog\*.html)
+     * List of path patterns to include. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /blog/** matches
+     * /blog/post and /blog/2024/post)
      */
     include_items?: Array<string>;
 
@@ -721,6 +730,12 @@ export namespace InstanceUpdateResponse {
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
+
+        /**
+         * List of specific sitemap URLs to use for crawling. Only valid when parse_type is
+         * 'sitemap'.
+         */
+        specific_sitemaps?: Array<string>;
 
         use_browser_rendering?: boolean;
       }
@@ -753,8 +768,6 @@ export interface InstanceListResponse {
   modified_at: string;
 
   source: string;
-
-  token_id: string;
 
   type: 'r2' | 'web-crawler';
 
@@ -803,10 +816,10 @@ export interface InstanceListResponse {
   created_by?: string;
 
   embedding_model?:
+    | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
-    | '@cf/qwen/qwen3-embedding-0.6b'
     | 'google-ai-studio/gemini-embedding-001'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
@@ -908,6 +921,8 @@ export interface InstanceListResponse {
 
   system_prompt_rewrite_query?: string;
 
+  token_id?: string;
+
   vectorize_active_namespace?: string;
 }
 
@@ -965,14 +980,16 @@ export namespace InstanceListResponse {
 
   export interface SourceParams {
     /**
-     * List of path patterns to exclude. Supports wildcards (e.g., _/admin/_,
-     * /private/\*_, _\private\*)
+     * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /admin/** matches
+     * /admin/users and /admin/settings/advanced)
      */
     exclude_items?: Array<string>;
 
     /**
-     * List of path patterns to include. Supports wildcards (e.g., _/blog/_.html,
-     * /docs/\*_, _\blog\*.html)
+     * List of path patterns to include. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /blog/** matches
+     * /blog/post and /blog/2024/post)
      */
     include_items?: Array<string>;
 
@@ -997,6 +1014,12 @@ export namespace InstanceListResponse {
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
+
+        /**
+         * List of specific sitemap URLs to use for crawling. Only valid when parse_type is
+         * 'sitemap'.
+         */
+        specific_sitemaps?: Array<string>;
 
         use_browser_rendering?: boolean;
       }
@@ -1029,8 +1052,6 @@ export interface InstanceDeleteResponse {
   modified_at: string;
 
   source: string;
-
-  token_id: string;
 
   type: 'r2' | 'web-crawler';
 
@@ -1079,10 +1100,10 @@ export interface InstanceDeleteResponse {
   created_by?: string;
 
   embedding_model?:
+    | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
-    | '@cf/qwen/qwen3-embedding-0.6b'
     | 'google-ai-studio/gemini-embedding-001'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
@@ -1184,6 +1205,8 @@ export interface InstanceDeleteResponse {
 
   system_prompt_rewrite_query?: string;
 
+  token_id?: string;
+
   vectorize_active_namespace?: string;
 }
 
@@ -1241,14 +1264,16 @@ export namespace InstanceDeleteResponse {
 
   export interface SourceParams {
     /**
-     * List of path patterns to exclude. Supports wildcards (e.g., _/admin/_,
-     * /private/\*_, _\private\*)
+     * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /admin/** matches
+     * /admin/users and /admin/settings/advanced)
      */
     exclude_items?: Array<string>;
 
     /**
-     * List of path patterns to include. Supports wildcards (e.g., _/blog/_.html,
-     * /docs/\*_, _\blog\*.html)
+     * List of path patterns to include. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /blog/** matches
+     * /blog/post and /blog/2024/post)
      */
     include_items?: Array<string>;
 
@@ -1273,6 +1298,12 @@ export namespace InstanceDeleteResponse {
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
+
+        /**
+         * List of specific sitemap URLs to use for crawling. Only valid when parse_type is
+         * 'sitemap'.
+         */
+        specific_sitemaps?: Array<string>;
 
         use_browser_rendering?: boolean;
       }
@@ -1305,8 +1336,6 @@ export interface InstanceReadResponse {
   modified_at: string;
 
   source: string;
-
-  token_id: string;
 
   type: 'r2' | 'web-crawler';
 
@@ -1355,10 +1384,10 @@ export interface InstanceReadResponse {
   created_by?: string;
 
   embedding_model?:
+    | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
-    | '@cf/qwen/qwen3-embedding-0.6b'
     | 'google-ai-studio/gemini-embedding-001'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
@@ -1460,6 +1489,8 @@ export interface InstanceReadResponse {
 
   system_prompt_rewrite_query?: string;
 
+  token_id?: string;
+
   vectorize_active_namespace?: string;
 }
 
@@ -1517,14 +1548,16 @@ export namespace InstanceReadResponse {
 
   export interface SourceParams {
     /**
-     * List of path patterns to exclude. Supports wildcards (e.g., _/admin/_,
-     * /private/\*_, _\private\*)
+     * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /admin/** matches
+     * /admin/users and /admin/settings/advanced)
      */
     exclude_items?: Array<string>;
 
     /**
-     * List of path patterns to include. Supports wildcards (e.g., _/blog/_.html,
-     * /docs/\*_, _\blog\*.html)
+     * List of path patterns to include. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /blog/** matches
+     * /blog/post and /blog/2024/post)
      */
     include_items?: Array<string>;
 
@@ -1549,6 +1582,12 @@ export namespace InstanceReadResponse {
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
+
+        /**
+         * List of specific sitemap URLs to use for crawling. Only valid when parse_type is
+         * 'sitemap'.
+         */
+        specific_sitemaps?: Array<string>;
 
         use_browser_rendering?: boolean;
       }
@@ -1597,11 +1636,6 @@ export interface InstanceCreateParams {
    * Body param
    */
   source: string;
-
-  /**
-   * Body param
-   */
-  token_id: string;
 
   /**
    * Body param
@@ -1663,10 +1697,10 @@ export interface InstanceCreateParams {
    * Body param
    */
   embedding_model?:
+    | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
-    | '@cf/qwen/qwen3-embedding-0.6b'
     | 'google-ai-studio/gemini-embedding-001'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
@@ -1747,6 +1781,11 @@ export interface InstanceCreateParams {
    * Body param
    */
   source_params?: InstanceCreateParams.SourceParams;
+
+  /**
+   * Body param
+   */
+  token_id?: string;
 }
 
 export namespace InstanceCreateParams {
@@ -1803,14 +1842,16 @@ export namespace InstanceCreateParams {
 
   export interface SourceParams {
     /**
-     * List of path patterns to exclude. Supports wildcards (e.g., _/admin/_,
-     * /private/\*_, _\private\*)
+     * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /admin/** matches
+     * /admin/users and /admin/settings/advanced)
      */
     exclude_items?: Array<string>;
 
     /**
-     * List of path patterns to include. Supports wildcards (e.g., _/blog/_.html,
-     * /docs/\*_, _\blog\*.html)
+     * List of path patterns to include. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /blog/** matches
+     * /blog/post and /blog/2024/post)
      */
     include_items?: Array<string>;
 
@@ -1835,6 +1876,12 @@ export namespace InstanceCreateParams {
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
+
+        /**
+         * List of specific sitemap URLs to use for crawling. Only valid when parse_type is
+         * 'sitemap'.
+         */
+        specific_sitemaps?: Array<string>;
 
         use_browser_rendering?: boolean;
       }
@@ -1921,10 +1968,10 @@ export interface InstanceUpdateParams {
    * Body param
    */
   embedding_model?:
+    | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
-    | '@cf/qwen/qwen3-embedding-0.6b'
     | 'google-ai-studio/gemini-embedding-001'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
@@ -2122,14 +2169,16 @@ export namespace InstanceUpdateParams {
 
   export interface SourceParams {
     /**
-     * List of path patterns to exclude. Supports wildcards (e.g., _/admin/_,
-     * /private/\*_, _\private\*)
+     * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /admin/** matches
+     * /admin/users and /admin/settings/advanced)
      */
     exclude_items?: Array<string>;
 
     /**
-     * List of path patterns to include. Supports wildcards (e.g., _/blog/_.html,
-     * /docs/\*_, _\blog\*.html)
+     * List of path patterns to include. Uses micromatch glob syntax: \* matches within
+     * a path segment, ** matches across path segments (e.g., /blog/** matches
+     * /blog/post and /blog/2024/post)
      */
     include_items?: Array<string>;
 
@@ -2154,6 +2203,12 @@ export namespace InstanceUpdateParams {
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
+
+        /**
+         * List of specific sitemap URLs to use for crawling. Only valid when parse_type is
+         * 'sitemap'.
+         */
+        specific_sitemaps?: Array<string>;
 
         use_browser_rendering?: boolean;
       }

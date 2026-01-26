@@ -33,6 +33,7 @@ describe('resource portals', () => {
       hostname: 'exmaple.com',
       name: 'My MCP Portal',
       description: 'This is my custom MCP Portal',
+      secure_web_gateway: false,
       servers: [
         {
           server_id: 'my-mcp-server',
@@ -76,6 +77,7 @@ describe('resource portals', () => {
       description: 'This is my custom MCP Portal',
       hostname: 'exmaple.com',
       name: 'My MCP Portal',
+      secure_web_gateway: false,
       servers: [
         {
           server_id: 'my-mcp-server',

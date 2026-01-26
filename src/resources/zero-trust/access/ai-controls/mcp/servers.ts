@@ -188,6 +188,8 @@ export interface ServerCreateResponse {
 
   error?: string;
 
+  last_successful_sync?: string;
+
   last_synced?: string;
 
   modified_at?: string;
@@ -220,6 +222,8 @@ export interface ServerUpdateResponse {
   description?: string | null;
 
   error?: string;
+
+  last_successful_sync?: string;
 
   last_synced?: string;
 
@@ -254,6 +258,8 @@ export interface ServerListResponse {
 
   error?: string;
 
+  last_successful_sync?: string;
+
   last_synced?: string;
 
   modified_at?: string;
@@ -287,6 +293,8 @@ export interface ServerDeleteResponse {
 
   error?: string;
 
+  last_successful_sync?: string;
+
   last_synced?: string;
 
   modified_at?: string;
@@ -319,6 +327,8 @@ export interface ServerReadResponse {
   description?: string | null;
 
   error?: string;
+
+  last_successful_sync?: string;
 
   last_synced?: string;
 

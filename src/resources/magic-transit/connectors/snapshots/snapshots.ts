@@ -1352,6 +1352,16 @@ export namespace SnapshotGetResponse {
      * MTU as measured between the two ends of the tunnel
      */
     probed_mtu?: number;
+
+    /**
+     * Number of recent healthy pings for this tunnel
+     */
+    recent_healthy_pings?: number;
+
+    /**
+     * Number of recent unhealthy pings for this tunnel
+     */
+    recent_unhealthy_pings?: number;
   }
 }
 
