@@ -1,5 +1,31 @@
 # Changelog
 
+## 6.0.0-beta.2 (2026-01-26)
+
+Full Changelog: [v6.0.0-beta.1...v6.0.0-beta.2](https://github.com/cloudflare/cloudflare-typescript/compare/v6.0.0-beta.1...v6.0.0-beta.2)
+
+### Features
+
+* feat(fraud): public docs for fraud API ([dac4aa5](https://github.com/cloudflare/cloudflare-typescript/commit/dac4aa5614efd1bcfecb1665359e22bc7cf13a66))
+* refactor(terraform): restructure origin_tls_client_auth to peer subresources ([89f79e9](https://github.com/cloudflare/cloudflare-typescript/commit/89f79e9494e67c4f034f948be7c2e3be0575b292))
+
+
+### Bug Fixes
+
+* add write ([e6638ba](https://github.com/cloudflare/cloudflare-typescript/commit/e6638ba1cde0c6745c81d759cb78372d74e4286c))
+* node version, unset auth token var ([5a81485](https://github.com/cloudflare/cloudflare-typescript/commit/5a81485c28a9f8b7c71c5ac111b00c0661324427))
+* npm publish url and run ci ([0b5a90f](https://github.com/cloudflare/cloudflare-typescript/commit/0b5a90f52790955187d5972ef101d5432ae1fbba))
+* publish script ([e106752](https://github.com/cloudflare/cloudflare-typescript/commit/e1067522c6ab0a4d53298331c00ad7f4c877034c))
+* registry url ([82932e9](https://github.com/cloudflare/cloudflare-typescript/commit/82932e9640ee9ee7d6e5461789cc7496c27fa4e0))
+* typo ([5d30b47](https://github.com/cloudflare/cloudflare-typescript/commit/5d30b47f2f321360016f6168c487cc089c7ba3e5))
+* use npm publish and oidc ([da94040](https://github.com/cloudflare/cloudflare-typescript/commit/da94040946c9f7ef5a7ad300a6d763232b28fe86))
+
+
+### Chores
+
+* **api:** update composite API spec ([ffa2c6c](https://github.com/cloudflare/cloudflare-typescript/commit/ffa2c6c290c72983dbbe2cda71a8a7cd12fb5b28))
+* **internal:** codegen related update ([cb76fc9](https://github.com/cloudflare/cloudflare-typescript/commit/cb76fc9caad2f3cfeec4ef1ebb40faa18ffa60da))
+
 ## 6.0.0-beta.1 (2026-01-20)
 > **Disclaimer:** Please note that v6.0.0-beta.1 is in Beta and we are still testing it for stability.
 
