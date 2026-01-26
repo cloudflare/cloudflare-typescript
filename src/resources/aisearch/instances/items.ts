@@ -39,7 +39,7 @@ export class Items extends APIResource {
   }
 
   /**
-   * Get Items.
+   * Get Item.
    *
    * @example
    * ```ts

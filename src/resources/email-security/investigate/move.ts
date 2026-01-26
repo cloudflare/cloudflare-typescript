@@ -46,7 +46,6 @@ export class Move extends APIResource {
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     destination: 'Inbox',
-   *     postfix_ids: ['4Njp3P0STMz2c02Q'],
    *   },
    * )) {
    *   // ...
@@ -146,9 +145,15 @@ export interface MoveBulkParams {
     | 'RecoverableItemsPurges';
 
   /**
-   * Body param
+   * Body param: List of message IDs to move.
    */
-  postfix_ids: Array<string>;
+  ids?: Array<string>;
+
+  /**
+   * @deprecated Body param: Deprecated: Use `ids` instead. List of message IDs to
+   * move.
+   */
+  postfix_ids?: Array<string>;
 }
 
 export declare namespace Move {

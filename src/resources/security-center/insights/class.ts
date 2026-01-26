@@ -9,7 +9,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Class extends APIResource {
   /**
-   * Get Security Center Insight Counts by Class
+   * Retrieves Security Center Insight Counts by Class
    */
   get(
     params: ClassGetParams | null | undefined = {},

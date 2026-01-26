@@ -9,7 +9,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Issues extends APIResource {
   /**
-   * Get Security Center Issues
+   * Retrieves Security Center Issues
    *
    * @deprecated
    */
@@ -26,7 +26,7 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Get Security Center Issue Counts by Class
+   * Retrieves Security Center Issue Counts by Class
    *
    * @deprecated
    */
@@ -41,7 +41,7 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Archive Security Center Insight
+   * Archives Security Center Insight
    *
    * @deprecated
    */
@@ -58,7 +58,7 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Get Security Center Issue Counts by Severity
+   * Retrieves Security Center Issue Counts by Severity
    *
    * @deprecated
    */
@@ -73,7 +73,7 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Get Security Center Issue Counts by Type
+   * Retrieves Security Center Issue Counts by Type
    *
    * @deprecated
    */
@@ -112,19 +112,19 @@ export type SeverityQueryParamParam = 'low' | 'moderate' | 'critical';
 
 export interface IssueListResponse {
   /**
-   * Total number of results
+   * Indicates the total number of results.
    */
   count?: number;
 
   issues?: Array<IssueListResponse.Issue>;
 
   /**
-   * Current page within paginated list of results
+   * Specifies the current page within paginated list of results.
    */
   page?: number;
 
   /**
-   * Number of results per page of results
+   * Sets the number of results per page of results.
    */
   per_page?: number;
 }
@@ -157,7 +157,7 @@ export namespace IssueListResponse {
   export namespace Issue {
     export interface Payload {
       /**
-       * Method used to detect insight
+       * Describes the method used to detect insight.
        */
       detection_method?: string;
 

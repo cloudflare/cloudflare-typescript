@@ -52,7 +52,6 @@ describe('resource threatEvents', () => {
       tags: ['malware'],
       targetCountry: 'US',
       targetIndustry: 'Agriculture',
-      uuid: '12345678-1234-1234-1234-1234567890ab',
     });
   });
 
@@ -72,6 +71,8 @@ describe('resource threatEvents', () => {
   test.skip('list: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.list({
       account_id: 'account_id',
+      cursor:
+        'eyJ2ZXJzaW9uIjoxLCJwb3NpdGlvbiI6eyJkYXRlIjoiMjAyNC0wMS0xMlQxMDowMDowMFoiLCJ1dWlkIjoiYWJjMTIzIn19',
       datasetId: ['string'],
       forceRefresh: true,
       format: 'json',
@@ -158,11 +159,10 @@ describe('resource threatEvents', () => {
           tags: ['malware'],
           targetCountry: 'US',
           targetIndustry: 'Agriculture',
-          uuid: '12345678-1234-1234-1234-1234567890ab',
         },
       ],
       datasetId: 'durableObjectName',
-      preserveUuid: true,
+      includeCreatedEvents: true,
     });
   });
 
