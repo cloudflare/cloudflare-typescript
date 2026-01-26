@@ -524,6 +524,14 @@ export namespace Application {
     skip_interstitial?: boolean;
 
     updated_at?: string;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -985,6 +993,14 @@ export namespace Application {
     skip_interstitial?: boolean;
 
     updated_at?: string;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -1149,6 +1165,14 @@ export namespace Application {
     skip_interstitial?: boolean;
 
     updated_at?: string;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -2734,6 +2758,14 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -3415,6 +3447,14 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -3849,6 +3889,14 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -4805,6 +4853,8 @@ export namespace ApplicationCreateResponse {
      */
     name?: string;
 
+    policies?: Array<BookmarkApplication.Policy>;
+
     /**
      * The tags you want assigned to an application. Tags are used to filter
      * applications in the App Launcher dashboard.
@@ -4815,6 +4865,89 @@ export namespace ApplicationCreateResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+  }
+
+  export namespace BookmarkApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
   }
 
   export interface InfrastructureApplication {
@@ -5120,6 +5253,14 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserRdpApplication {
@@ -5573,6 +5714,14 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -6254,6 +6403,14 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -6688,6 +6845,14 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -7644,6 +7809,8 @@ export namespace ApplicationUpdateResponse {
      */
     name?: string;
 
+    policies?: Array<BookmarkApplication.Policy>;
+
     /**
      * The tags you want assigned to an application. Tags are used to filter
      * applications in the App Launcher dashboard.
@@ -7654,6 +7821,89 @@ export namespace ApplicationUpdateResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+  }
+
+  export namespace BookmarkApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
   }
 
   export interface InfrastructureApplication {
@@ -7959,6 +8209,14 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserRdpApplication {
@@ -8412,6 +8670,14 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -9093,6 +9359,14 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -9527,6 +9801,14 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -10483,6 +10765,8 @@ export namespace ApplicationListResponse {
      */
     name?: string;
 
+    policies?: Array<BookmarkApplication.Policy>;
+
     /**
      * The tags you want assigned to an application. Tags are used to filter
      * applications in the App Launcher dashboard.
@@ -10493,6 +10777,89 @@ export namespace ApplicationListResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+  }
+
+  export namespace BookmarkApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
   }
 
   export interface InfrastructureApplication {
@@ -10798,6 +11165,14 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserRdpApplication {
@@ -11258,6 +11633,14 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -11939,6 +12322,14 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -12373,6 +12764,14 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -13329,6 +13728,8 @@ export namespace ApplicationGetResponse {
      */
     name?: string;
 
+    policies?: Array<BookmarkApplication.Policy>;
+
     /**
      * The tags you want assigned to an application. Tags are used to filter
      * applications in the App Launcher dashboard.
@@ -13339,6 +13740,89 @@ export namespace ApplicationGetResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+  }
+
+  export namespace BookmarkApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
   }
 
   export interface InfrastructureApplication {
@@ -13644,6 +14128,14 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserRdpApplication {
@@ -13917,7 +14409,7 @@ export type ApplicationCreateParams =
   | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationCreateParams.BrowserIsolationPermissionsApplication
   | ApplicationCreateParams.GatewayIdentityProxyEndpointApplication
-  | ApplicationCreateParams.AccessBookmarkProps
+  | ApplicationCreateParams.BookmarkApplication
   | ApplicationCreateParams.InfrastructureApplication
   | ApplicationCreateParams.BrowserRdpApplication;
 
@@ -14112,6 +14604,14 @@ export declare namespace ApplicationCreateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -14783,6 +15283,14 @@ export declare namespace ApplicationCreateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -15213,6 +15721,14 @@ export declare namespace ApplicationCreateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -16067,7 +16583,7 @@ export declare namespace ApplicationCreateParams {
     }
   }
 
-  export interface AccessBookmarkProps {
+  export interface BookmarkApplication {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -16101,6 +16617,13 @@ export declare namespace ApplicationCreateParams {
     name?: string;
 
     /**
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
+     */
+    policies?: Array<BookmarkApplication.AccessAppPolicyLink | string | BookmarkApplication.UnionMember2>;
+
+    /**
      * Body param: The tags you want assigned to an application. Tags are used to
      * filter applications in the App Launcher dashboard.
      */
@@ -16110,6 +16633,72 @@ export declare namespace ApplicationCreateParams {
      * Body param: The application type.
      */
     type?: ApplicationTypeParam;
+  }
+
+  export namespace BookmarkApplication {
+    /**
+     * A JSON that links a reusable policy to an application.
+     */
+    export interface AccessAppPolicyLink {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+    }
   }
 
   export interface InfrastructureApplication {
@@ -16430,6 +17019,14 @@ export declare namespace ApplicationCreateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserRdpApplication {
@@ -16684,7 +17281,7 @@ export type ApplicationUpdateParams =
   | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationUpdateParams.BrowserIsolationPermissionsApplication
   | ApplicationUpdateParams.GatewayIdentityProxyEndpointApplication
-  | ApplicationUpdateParams.AccessBookmarkProps
+  | ApplicationUpdateParams.BookmarkApplication
   | ApplicationUpdateParams.InfrastructureApplication
   | ApplicationUpdateParams.BrowserRdpApplication;
 
@@ -16879,6 +17476,14 @@ export declare namespace ApplicationUpdateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -17550,6 +18155,14 @@ export declare namespace ApplicationUpdateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -17980,6 +18593,14 @@ export declare namespace ApplicationUpdateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -18834,7 +19455,7 @@ export declare namespace ApplicationUpdateParams {
     }
   }
 
-  export interface AccessBookmarkProps {
+  export interface BookmarkApplication {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -18868,6 +19489,13 @@ export declare namespace ApplicationUpdateParams {
     name?: string;
 
     /**
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
+     */
+    policies?: Array<BookmarkApplication.AccessAppPolicyLink | string | BookmarkApplication.UnionMember2>;
+
+    /**
      * Body param: The tags you want assigned to an application. Tags are used to
      * filter applications in the App Launcher dashboard.
      */
@@ -18877,6 +19505,72 @@ export declare namespace ApplicationUpdateParams {
      * Body param: The application type.
      */
     type?: ApplicationTypeParam;
+  }
+
+  export namespace BookmarkApplication {
+    /**
+     * A JSON that links a reusable policy to an application.
+     */
+    export interface AccessAppPolicyLink {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+    }
   }
 
   export interface InfrastructureApplication {
@@ -19197,6 +19891,14 @@ export declare namespace ApplicationUpdateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserRdpApplication {
