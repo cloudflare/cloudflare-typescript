@@ -148,7 +148,7 @@ Types:
 Methods:
 
 - <code title="put /organizations/{organization_id}/profile">client.organizations.organizationProfile.<a href="./src/resources/organizations/organization-profile.ts">update</a>(organizationID, { ...params }) -> void</code>
-- <code title="get /organizations/{organization_id}/profile">client.organizations.organizationProfile.<a href="./src/resources/organizations/organization-profile.ts">get</a>(organizationID) -> unnamed_schema_0.Result</code>
+- <code title="get /organizations/{organization_id}/profile">client.organizations.organizationProfile.<a href="./src/resources/organizations/organization-profile.ts">get</a>(organizationID) -> organizations_api_ProfileResponse.Result</code>
 
 # OriginCACertificates
 
