@@ -8729,6 +8729,46 @@ Methods:
 - <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations/{id}">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">delete</a>(id, { ...params }) -> EvaluationDeleteResponse</code>
 - <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations/{id}">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">get</a>(id, { ...params }) -> EvaluationGetResponse</code>
 
+## DynamicRouting
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingUpdateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingCreateDeploymentResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingCreateVersionResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingGetResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingGetVersionResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingListDeploymentsResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingListVersionsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">create</a>(gatewayID, { ...params }) -> DynamicRoutingCreateResponse</code>
+- <code title="patch /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">update</a>(id, { ...params }) -> DynamicRoutingUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">list</a>(gatewayID, { ...params }) -> DynamicRoutingListResponse</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">delete</a>(id, { ...params }) -> DynamicRoutingDeleteResponse</code>
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/deployments">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">createDeployment</a>(id, { ...params }) -> DynamicRoutingCreateDeploymentResponse</code>
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">createVersion</a>(id, { ...params }) -> DynamicRoutingCreateVersionResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">get</a>(id, { ...params }) -> DynamicRoutingGetResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions/{version_id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">getVersion</a>(versionID, { ...params }) -> DynamicRoutingGetVersionResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/deployments">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">listDeployments</a>(id, { ...params }) -> DynamicRoutingListDeploymentsResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">listVersions</a>(id, { ...params }) -> DynamicRoutingListVersionsResponse</code>
+
+## ProviderConfigs
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/provider-configs.ts">ProviderConfigCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/provider-configs.ts">ProviderConfigListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/provider_configs">client.aiGateway.providerConfigs.<a href="./src/resources/ai-gateway/provider-configs.ts">create</a>(gatewayID, { ...params }) -> ProviderConfigCreateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/provider_configs">client.aiGateway.providerConfigs.<a href="./src/resources/ai-gateway/provider-configs.ts">list</a>(gatewayID, { ...params }) -> ProviderConfigListResponsesV4PagePaginationArray</code>
+
 ## URLs
 
 Types:

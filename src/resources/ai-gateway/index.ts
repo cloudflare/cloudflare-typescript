@@ -16,6 +16,29 @@ export {
   type DatasetListResponsesV4PagePaginationArray,
 } from './datasets';
 export {
+  DynamicRouting,
+  type DynamicRoutingCreateResponse,
+  type DynamicRoutingUpdateResponse,
+  type DynamicRoutingListResponse,
+  type DynamicRoutingDeleteResponse,
+  type DynamicRoutingCreateDeploymentResponse,
+  type DynamicRoutingCreateVersionResponse,
+  type DynamicRoutingGetResponse,
+  type DynamicRoutingGetVersionResponse,
+  type DynamicRoutingListDeploymentsResponse,
+  type DynamicRoutingListVersionsResponse,
+  type DynamicRoutingCreateParams,
+  type DynamicRoutingUpdateParams,
+  type DynamicRoutingListParams,
+  type DynamicRoutingDeleteParams,
+  type DynamicRoutingCreateDeploymentParams,
+  type DynamicRoutingCreateVersionParams,
+  type DynamicRoutingGetParams,
+  type DynamicRoutingGetVersionParams,
+  type DynamicRoutingListDeploymentsParams,
+  type DynamicRoutingListVersionsParams,
+} from './dynamic-routing';
+export {
   EvaluationTypes,
   type EvaluationTypeListResponse,
   type EvaluationTypeListParams,
@@ -49,4 +72,12 @@ export {
   type LogResponseParams,
   type LogListResponsesV4PagePaginationArray,
 } from './logs';
+export {
+  ProviderConfigs,
+  type ProviderConfigCreateResponse,
+  type ProviderConfigListResponse,
+  type ProviderConfigCreateParams,
+  type ProviderConfigListParams,
+  type ProviderConfigListResponsesV4PagePaginationArray,
+} from './provider-configs';
 export { URLs, type URLGetResponse, type URLGetParams } from './urls';
