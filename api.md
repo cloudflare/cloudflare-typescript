@@ -9239,7 +9239,9 @@ Types:
 - <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceUpdateResponse</a></code>
 - <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceListResponse</a></code>
 - <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceDeleteResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceChatCompletionsResponse</a></code>
 - <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceReadResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceSearchResponse</a></code>
 - <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceStatsResponse</a></code>
 
 Methods:
@@ -9248,7 +9250,9 @@ Methods:
 - <code title="put /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">update</a>(id, { ...params }) -> InstanceUpdateResponse</code>
 - <code title="get /accounts/{account_id}/ai-search/instances">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">list</a>({ ...params }) -> InstanceListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">delete</a>(id, { ...params }) -> InstanceDeleteResponse</code>
+- <code title="post /accounts/{account_id}/ai-search/instances/{id}/chat/completions">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">chatCompletions</a>(id, { ...params }) -> InstanceChatCompletionsResponse</code>
 - <code title="get /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">read</a>(id, { ...params }) -> InstanceReadResponse</code>
+- <code title="post /accounts/{account_id}/ai-search/instances/{id}/search">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">search</a>(id, { ...params }) -> InstanceSearchResponse</code>
 - <code title="get /accounts/{account_id}/ai-search/instances/{id}/stats">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">stats</a>(id, { ...params }) -> InstanceStatsResponse</code>
 
 ### Items
