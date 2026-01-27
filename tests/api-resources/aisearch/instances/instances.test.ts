@@ -197,6 +197,52 @@ describe('resource instances', () => {
     });
   });
 
+  test('chatCompletions: only required params', async () => {
+    const responsePromise = client.aiSearch.instances.chatCompletions('my-ai-search', {
+      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      messages: [{ content: 'content', role: 'system' }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('chatCompletions: required and optional params', async () => {
+    const response = await client.aiSearch.instances.chatCompletions('my-ai-search', {
+      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      messages: [{ content: 'content', role: 'system' }],
+      ai_search_options: {
+        query_rewrite: {
+          enabled: true,
+          model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+          rewrite_prompt: 'rewrite_prompt',
+        },
+        reranking: {
+          enabled: true,
+          match_threshold: 0,
+          model: '@cf/baai/bge-reranker-base',
+        },
+        retrieval: {
+          context_expansion: 0,
+          filters: {
+            key: 'key',
+            type: 'eq',
+            value: 'string',
+          },
+          match_threshold: 0,
+          max_num_results: 1,
+          retrieval_type: 'vector',
+        },
+      },
+      model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+      stream: true,
+    });
+  });
+
   test('read: only required params', async () => {
     const responsePromise = client.aiSearch.instances.read('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
@@ -213,6 +259,50 @@ describe('resource instances', () => {
   test('read: required and optional params', async () => {
     const response = await client.aiSearch.instances.read('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+    });
+  });
+
+  test('search: only required params', async () => {
+    const responsePromise = client.aiSearch.instances.search('my-ai-search', {
+      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      messages: [{ content: 'content', role: 'system' }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('search: required and optional params', async () => {
+    const response = await client.aiSearch.instances.search('my-ai-search', {
+      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      messages: [{ content: 'content', role: 'system' }],
+      ai_search_options: {
+        query_rewrite: {
+          enabled: true,
+          model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+          rewrite_prompt: 'rewrite_prompt',
+        },
+        reranking: {
+          enabled: true,
+          match_threshold: 0,
+          model: '@cf/baai/bge-reranker-base',
+        },
+        retrieval: {
+          context_expansion: 0,
+          filters: {
+            key: 'key',
+            type: 'eq',
+            value: 'string',
+          },
+          match_threshold: 0,
+          max_num_results: 1,
+          retrieval_type: 'vector',
+        },
+      },
     });
   });
 
