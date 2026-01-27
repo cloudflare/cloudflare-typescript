@@ -724,6 +724,8 @@ TEST_PATHS=(
 	tests/api-resources/ai-gateway/logs.test.ts
 	tests/api-resources/ai-gateway/datasets.test.ts
 	tests/api-resources/ai-gateway/evaluations.test.ts
+	tests/api-resources/ai-gateway/dynamic-routing.test.ts
+	tests/api-resources/ai-gateway/provider-configs.test.ts
 	tests/api-resources/ai-gateway/urls.test.ts
 	tests/api-resources/iam/iam.test.ts
 	tests/api-resources/iam/permission-groups.test.ts
