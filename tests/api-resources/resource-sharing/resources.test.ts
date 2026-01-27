@@ -41,7 +41,10 @@ describe('resource resources', () => {
     const responsePromise = client.resourceSharing.resources.update(
       '3fd85f74b32742f1bff64a85009dda07',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', meta: {} },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        meta: {},
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -56,7 +59,10 @@ describe('resource resources', () => {
     const response = await client.resourceSharing.resources.update(
       '3fd85f74b32742f1bff64a85009dda07',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', meta: {} },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        meta: {},
+      },
     );
   });
 

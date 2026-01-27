@@ -53,7 +53,11 @@ export class Datasets extends APIResource {
    * const response =
    *   await client.cloudforceOne.threatEvents.datasets.edit(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 'account_id', isPublic: true, name: 'x' },
+   *     {
+   *       account_id: 'account_id',
+   *       isPublic: true,
+   *       name: 'x',
+   *     },
    *   );
    * ```
    */

@@ -188,7 +188,7 @@ export interface ClipCreateParams {
   thumbnailTimestampPct?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   watermark?: ClipCreateParams.Watermark;
 }

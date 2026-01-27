@@ -182,7 +182,7 @@ export interface OperationBulkEditParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: { [key: string]: OperationBulkEditParams.Body };
 }

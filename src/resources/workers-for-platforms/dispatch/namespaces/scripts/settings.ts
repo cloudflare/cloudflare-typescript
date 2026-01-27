@@ -131,14 +131,17 @@ export interface SettingEditResponse {
   /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-   * Specify either mode for Smart Placement, or one of region/hostname/host for
-   * targeted placement.
+   * Specify mode='smart' for Smart Placement, or one of region/hostname/host.
    */
   placement?:
     | SettingEditResponse.Mode
     | SettingEditResponse.Region
     | SettingEditResponse.Hostname
-    | SettingEditResponse.Host;
+    | SettingEditResponse.Host
+    | SettingEditResponse.UnionMember4
+    | SettingEditResponse.UnionMember5
+    | SettingEditResponse.UnionMember6
+    | SettingEditResponse.UnionMember7;
 
   /**
    * Tags associated with the Worker.
@@ -818,6 +821,77 @@ export namespace SettingEditResponse {
      */
     host: string;
   }
+
+  export interface UnionMember4 {
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+  }
+
+  export interface UnionMember5 {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+  }
+
+  export interface UnionMember6 {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
+
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+  }
+
+  export interface UnionMember7 {
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * Array of placement targets (currently limited to single target).
+     */
+    target: Array<UnionMember7.Region | UnionMember7.Hostname | UnionMember7.Host>;
+  }
+
+  export namespace UnionMember7 {
+    export interface Region {
+      /**
+       * Cloud region in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface Hostname {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface Host {
+      /**
+       * TCP host:port for targeted placement.
+       */
+      host: string;
+    }
+  }
 }
 
 export interface SettingGetResponse {
@@ -888,14 +962,17 @@ export interface SettingGetResponse {
   /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-   * Specify either mode for Smart Placement, or one of region/hostname/host for
-   * targeted placement.
+   * Specify mode='smart' for Smart Placement, or one of region/hostname/host.
    */
   placement?:
     | SettingGetResponse.Mode
     | SettingGetResponse.Region
     | SettingGetResponse.Hostname
-    | SettingGetResponse.Host;
+    | SettingGetResponse.Host
+    | SettingGetResponse.UnionMember4
+    | SettingGetResponse.UnionMember5
+    | SettingGetResponse.UnionMember6
+    | SettingGetResponse.UnionMember7;
 
   /**
    * Tags associated with the Worker.
@@ -1575,6 +1652,77 @@ export namespace SettingGetResponse {
      */
     host: string;
   }
+
+  export interface UnionMember4 {
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+  }
+
+  export interface UnionMember5 {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+  }
+
+  export interface UnionMember6 {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
+
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+  }
+
+  export interface UnionMember7 {
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * Array of placement targets (currently limited to single target).
+     */
+    target: Array<UnionMember7.Region | UnionMember7.Hostname | UnionMember7.Host>;
+  }
+
+  export namespace UnionMember7 {
+    export interface Region {
+      /**
+       * Cloud region in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface Hostname {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface Host {
+      /**
+       * TCP host:port for targeted placement.
+       */
+      host: string;
+    }
+  }
 }
 
 export interface SettingEditParams {
@@ -1584,7 +1732,7 @@ export interface SettingEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   settings?: SettingEditParams.Settings;
 }
@@ -1663,10 +1811,17 @@ export namespace SettingEditParams {
     /**
      * Configuration for
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-     * Specify either mode for Smart Placement, or one of region/hostname/host for
-     * targeted placement.
+     * Specify mode='smart' for Smart Placement, or one of region/hostname/host.
      */
-    placement?: Settings.Mode | Settings.Region | Settings.Hostname | Settings.Host;
+    placement?:
+      | Settings.Mode
+      | Settings.Region
+      | Settings.Hostname
+      | Settings.Host
+      | Settings.UnionMember4
+      | Settings.UnionMember5
+      | Settings.UnionMember6
+      | Settings.UnionMember7;
 
     /**
      * Tags associated with the Worker.
@@ -2380,6 +2535,77 @@ export namespace SettingEditParams {
        * TCP host and port for targeted placement.
        */
       host: string;
+    }
+
+    export interface UnionMember4 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface UnionMember5 {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember6 {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember7 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Array of placement targets (currently limited to single target).
+       */
+      target: Array<UnionMember7.Region | UnionMember7.Hostname | UnionMember7.Host>;
+    }
+
+    export namespace UnionMember7 {
+      export interface Region {
+        /**
+         * Cloud region in format 'provider:region'.
+         */
+        region: string;
+      }
+
+      export interface Hostname {
+        /**
+         * HTTP hostname for targeted placement.
+         */
+        hostname: string;
+      }
+
+      export interface Host {
+        /**
+         * TCP host:port for targeted placement.
+         */
+        host: string;
+      }
     }
   }
 }

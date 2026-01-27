@@ -212,7 +212,7 @@ export type ProxyEndpointCreateParams =
 export declare namespace ProxyEndpointCreateParams {
   export interface ZeroTrustGatewayProxyEndpointIPCreate {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -229,7 +229,7 @@ export declare namespace ProxyEndpointCreateParams {
 
   export interface ZeroTrustGatewayProxyEndpointIdentityCreate {
     /**
-     * Path param:
+     * Path param
      */
     account_id: string;
 
@@ -255,7 +255,7 @@ export interface ProxyEndpointDeleteParams {
 
 export interface ProxyEndpointEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

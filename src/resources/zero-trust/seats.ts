@@ -66,7 +66,7 @@ export interface SeatEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<SeatEditParams.Body>;
 }

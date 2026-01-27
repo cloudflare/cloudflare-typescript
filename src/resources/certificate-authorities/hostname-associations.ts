@@ -67,7 +67,7 @@ export interface HostnameAssociationUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   hostnames?: Array<HostnameAssociationParam>;
 

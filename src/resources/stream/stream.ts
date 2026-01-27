@@ -423,7 +423,7 @@ export interface StreamCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 

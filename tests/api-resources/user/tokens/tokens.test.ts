@@ -42,8 +42,14 @@ describe('resource tokens', () => {
         {
           effect: 'allow',
           permission_groups: [
-            { id: 'c8fed203ed3043cba015a93ad1616f1f', meta: { key: 'key', value: 'value' } },
-            { id: '82e64a83756745bbbb1c9c2701bf816b', meta: { key: 'key', value: 'value' } },
+            {
+              id: 'c8fed203ed3043cba015a93ad1616f1f',
+              meta: { key: 'key', value: 'value' },
+            },
+            {
+              id: '82e64a83756745bbbb1c9c2701bf816b',
+              meta: { key: 'key', value: 'value' },
+            },
           ],
           resources: { foo: 'string' },
         },
@@ -91,8 +97,14 @@ describe('resource tokens', () => {
         {
           effect: 'allow',
           permission_groups: [
-            { id: 'c8fed203ed3043cba015a93ad1616f1f', meta: { key: 'key', value: 'value' } },
-            { id: '82e64a83756745bbbb1c9c2701bf816b', meta: { key: 'key', value: 'value' } },
+            {
+              id: 'c8fed203ed3043cba015a93ad1616f1f',
+              meta: { key: 'key', value: 'value' },
+            },
+            {
+              id: '82e64a83756745bbbb1c9c2701bf816b',
+              meta: { key: 'key', value: 'value' },
+            },
           ],
           resources: { foo: 'string' },
         },
@@ -134,7 +146,11 @@ describe('resource tokens', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.user.tokens.list(
-        { direction: 'desc', page: 1, per_page: 5 },
+        {
+          direction: 'desc',
+          page: 1,
+          per_page: 5,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

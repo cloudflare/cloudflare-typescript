@@ -45,12 +45,12 @@ export interface Advertisement {
 
 export interface AdvertisementEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }

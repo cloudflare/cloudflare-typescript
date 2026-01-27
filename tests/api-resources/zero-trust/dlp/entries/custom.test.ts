@@ -40,7 +40,12 @@ describe('resource custom', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.entries.custom.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id', enabled: true, name: 'name', pattern: { regex: 'regex' } },
+      {
+        account_id: 'account_id',
+        enabled: true,
+        name: 'name',
+        pattern: { regex: 'regex' },
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

@@ -181,7 +181,7 @@ export namespace DeviceNetwork {
 
 export interface NetworkCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -225,7 +225,7 @@ export namespace NetworkCreateParams {
 
 export interface NetworkUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

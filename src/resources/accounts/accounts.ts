@@ -273,7 +273,7 @@ export interface AccountUpdateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   type: 'standard' | 'enterprise';
 

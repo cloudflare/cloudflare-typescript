@@ -156,6 +156,11 @@ export interface PortalCreateResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 }
 
 export interface PortalUpdateResponse {
@@ -177,6 +182,11 @@ export interface PortalUpdateResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 }
 
 export interface PortalListResponse {
@@ -198,6 +208,11 @@ export interface PortalListResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 }
 
 export interface PortalDeleteResponse {
@@ -219,6 +234,11 @@ export interface PortalDeleteResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 }
 
 export interface PortalReadResponse {
@@ -242,6 +262,11 @@ export interface PortalReadResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 }
 
 export namespace PortalReadResponse {
@@ -275,6 +300,8 @@ export namespace PortalReadResponse {
 
     error?: string;
 
+    last_successful_sync?: string;
+
     last_synced?: string;
 
     modified_at?: string;
@@ -289,7 +316,7 @@ export namespace PortalReadResponse {
 
 export interface PortalCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -299,22 +326,27 @@ export interface PortalCreateParams {
   id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   hostname: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
+
+  /**
+   * Body param
    */
   servers?: Array<PortalCreateParams.Server>;
 }
@@ -356,27 +388,32 @@ export namespace PortalCreateParams {
 
 export interface PortalUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   hostname?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
+
+  /**
+   * Body param
    */
   servers?: Array<PortalUpdateParams.Server>;
 }
@@ -418,7 +455,7 @@ export namespace PortalUpdateParams {
 
 export interface PortalListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

@@ -877,7 +877,7 @@ export interface ConfigurationGetResponse {
 
 export interface ConfigurationUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -889,7 +889,7 @@ export interface ConfigurationUpdateParams {
 
 export interface ConfigurationEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

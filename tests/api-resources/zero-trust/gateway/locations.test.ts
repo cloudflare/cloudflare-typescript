@@ -32,7 +32,11 @@ describe('resource locations', () => {
       dns_destination_ips_id: '0e4a32c6-6fb8-4858-9296-98f51631e8e6',
       ecs_support: false,
       endpoints: {
-        doh: { enabled: true, networks: [{ network: '2001:85a3::/64' }], require_token: true },
+        doh: {
+          enabled: true,
+          networks: [{ network: '2001:85a3::/64' }],
+          require_token: true,
+        },
         dot: { enabled: true, networks: [{ network: '2001:85a3::/64' }] },
         ipv4: { enabled: true },
         ipv6: { enabled: true, networks: [{ network: '2001:85a3::/64' }] },
@@ -63,7 +67,11 @@ describe('resource locations', () => {
       dns_destination_ips_id: '0e4a32c6-6fb8-4858-9296-98f51631e8e6',
       ecs_support: false,
       endpoints: {
-        doh: { enabled: true, networks: [{ network: '2001:85a3::/64' }], require_token: true },
+        doh: {
+          enabled: true,
+          networks: [{ network: '2001:85a3::/64' }],
+          require_token: true,
+        },
         dot: { enabled: true, networks: [{ network: '2001:85a3::/64' }] },
         ipv4: { enabled: true },
         ipv6: { enabled: true, networks: [{ network: '2001:85a3::/64' }] },

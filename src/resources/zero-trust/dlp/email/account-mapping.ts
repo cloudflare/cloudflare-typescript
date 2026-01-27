@@ -94,12 +94,12 @@ export namespace AccountMappingGetResponse {
 
 export interface AccountMappingCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_requirements: AccountMappingCreateParams.UnionMember0 | AccountMappingCreateParams.Type;
 }

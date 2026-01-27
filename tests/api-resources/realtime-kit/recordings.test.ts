@@ -127,7 +127,11 @@ describe('resource recordings', () => {
     const response = await client.realtimeKit.recordings.startRecordings('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       allow_multiple_recordings: false,
-      audio_config: { channel: 'stereo', codec: 'AAC', export_file: true },
+      audio_config: {
+        channel: 'stereo',
+        codec: 'AAC',
+        export_file: true,
+      },
       file_name_prefix: 'string',
       interactive_config: { type: 'ID3' },
       max_seconds: 60,
@@ -153,7 +157,11 @@ describe('resource recordings', () => {
         codec: 'H264',
         export_file: true,
         height: 720,
-        watermark: { position: 'left top', size: { height: 1, width: 1 }, url: 'http://example.com' },
+        watermark: {
+          position: 'left top',
+          size: { height: 1, width: 1 },
+          url: 'http://example.com',
+        },
         width: 1280,
       },
     });
@@ -163,7 +171,10 @@ describe('resource recordings', () => {
   test.skip('startTrackRecording: only required params', async () => {
     const responsePromise = client.realtimeKit.recordings.startTrackRecording('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      layers: { default: {}, 'default-video': {} },
+      layers: {
+        default: {},
+        'default-video': {},
+      },
       meeting_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();

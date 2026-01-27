@@ -1416,86 +1416,86 @@ export namespace CloudIntegrationInitialSetupResponse {
 
 export interface CloudIntegrationCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
   /**
-   * Body param:
+   * Body param
    */
   friendly_name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Header param:
+   * Header param
    */
   forwarded?: string;
 }
 
 export interface CloudIntegrationUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   aws_arn?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   azure_subscription_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   azure_tenant_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   friendly_name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   gcp_project_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   gcp_service_account_email?: string;
 }
 
 export interface CloudIntegrationListParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   cloudflare?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   desc?: boolean;
 
@@ -1505,7 +1505,7 @@ export interface CloudIntegrationListParams {
   order_by?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   status?: boolean;
 }
@@ -1516,12 +1516,12 @@ export interface CloudIntegrationDeleteParams {
 
 export interface CloudIntegrationDiscoverParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   v2?: boolean;
 }
@@ -1532,54 +1532,54 @@ export interface CloudIntegrationDiscoverAllParams {
 
 export interface CloudIntegrationEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   aws_arn?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   azure_subscription_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   azure_tenant_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   friendly_name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   gcp_project_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   gcp_service_account_email?: string;
 }
 
 export interface CloudIntegrationGetParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   status?: boolean;
 }

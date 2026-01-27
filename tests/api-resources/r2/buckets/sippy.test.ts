@@ -28,7 +28,11 @@ describe('resource sippy', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.r2.buckets.sippy.update('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      destination: { accessKeyId: 'accessKeyId', provider: 'r2', secretAccessKey: 'secretAccessKey' },
+      destination: {
+        accessKeyId: 'accessKeyId',
+        provider: 'r2',
+        secretAccessKey: 'secretAccessKey',
+      },
       source: {
         accessKeyId: 'accessKeyId',
         bucket: 'bucket',

@@ -62,12 +62,12 @@ export interface PayloadLogGetResponse {
 
 export interface PayloadLogUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   public_key?: string | null;
 }

@@ -30,7 +30,11 @@ describe('resource traces', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       method: 'PUT',
       url: 'https://some.zone/some_path',
-      body: { base64: 'c29tZV9yZXF1ZXN0X2JvZHk=', json: {}, plain_text: 'plain_text' },
+      body: {
+        base64: 'c29tZV9yZXF1ZXN0X2JvZHk=',
+        json: {},
+        plain_text: 'plain_text',
+      },
       context: {
         bot_score: 0,
         geoloc: {

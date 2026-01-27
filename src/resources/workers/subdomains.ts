@@ -80,7 +80,7 @@ export interface SubdomainUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   subdomain: string;
 }

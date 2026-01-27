@@ -64,12 +64,12 @@ export class FallbackDomains extends APIResource {
 
 export interface FallbackDomainUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   domains: Array<PoliciesAPI.FallbackDomainParam>;
 }

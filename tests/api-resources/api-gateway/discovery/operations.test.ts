@@ -42,7 +42,10 @@ describe('resource operations', () => {
   test('bulkEdit: only required params', async () => {
     const responsePromise = client.apiGateway.discovery.operations.bulkEdit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: { '3818d821-5901-4147-a474-f5f5aec1d54e': {}, 'b17c8043-99a0-4202-b7d9-8f7cdbee02cd': {} },
+      body: {
+        '3818d821-5901-4147-a474-f5f5aec1d54e': {},
+        'b17c8043-99a0-4202-b7d9-8f7cdbee02cd': {},
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

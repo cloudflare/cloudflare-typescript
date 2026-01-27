@@ -14,10 +14,7 @@ export class LANs extends APIResource {
    * // Automatically fetches more pages as needed.
    * for await (const lan of client.magicTransit.sites.lans.create(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     physport: 1,
-   *   },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
    * }
@@ -242,6 +239,8 @@ export interface LAN {
    */
   id?: string;
 
+  bond_id?: number;
+
   /**
    * mark true to use this LAN for HA probing. only works for site with HA turned on.
    * only one LAN can be set as the ha_link.
@@ -375,9 +374,9 @@ export interface LANCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
-  physport: number;
+  bond_id?: number;
 
   /**
    * Body param: mark true to use this LAN for HA probing. only works for site with
@@ -386,17 +385,22 @@ export interface LANCreateParams {
   ha_link?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   nat?: NatParam;
 
   /**
-   * Body param:
+   * Body param
+   */
+  physport?: number;
+
+  /**
+   * Body param
    */
   routed_subnets?: Array<RoutedSubnetParam>;
 
@@ -421,22 +425,27 @@ export interface LANUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
+   */
+  bond_id?: number;
+
+  /**
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   nat?: NatParam;
 
   /**
-   * Body param:
+   * Body param
    */
   physport?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   routed_subnets?: Array<RoutedSubnetParam>;
 
@@ -475,22 +484,27 @@ export interface LANEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
+   */
+  bond_id?: number;
+
+  /**
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   nat?: NatParam;
 
   /**
-   * Body param:
+   * Body param
    */
   physport?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   routed_subnets?: Array<RoutedSubnetParam>;
 

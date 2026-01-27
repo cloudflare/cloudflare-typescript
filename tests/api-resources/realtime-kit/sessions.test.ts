@@ -119,7 +119,11 @@ describe('resource sessions', () => {
       'app_id',
       'session_id',
       'participant_id',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', filters: 'device_info', include_peer_events: true },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        filters: 'device_info',
+        include_peer_events: true,
+      },
     );
   });
 

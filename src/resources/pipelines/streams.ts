@@ -944,22 +944,22 @@ export interface StreamCreateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   format?: StreamCreateParams.Json | StreamCreateParams.Parquet;
 
   /**
-   * Body param:
+   * Body param
    */
   http?: StreamCreateParams.HTTP;
 
   /**
-   * Body param:
+   * Body param
    */
   schema?: StreamCreateParams.Schema;
 
   /**
-   * Body param:
+   * Body param
    */
   worker_binding?: StreamCreateParams.WorkerBinding;
 }
@@ -1178,12 +1178,12 @@ export interface StreamUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   http?: StreamUpdateParams.HTTP;
 
   /**
-   * Body param:
+   * Body param
    */
   worker_binding?: StreamUpdateParams.WorkerBinding;
 }

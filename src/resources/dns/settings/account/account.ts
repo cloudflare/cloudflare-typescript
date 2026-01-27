@@ -315,7 +315,7 @@ export interface AccountEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   zone_defaults?: AccountEditParams.ZoneDefaults;
 }

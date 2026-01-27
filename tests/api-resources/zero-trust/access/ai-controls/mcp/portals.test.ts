@@ -33,13 +33,26 @@ describe('resource portals', () => {
       hostname: 'exmaple.com',
       name: 'My MCP Portal',
       description: 'This is my custom MCP Portal',
+      secure_web_gateway: false,
       servers: [
         {
           server_id: 'my-mcp-server',
           default_disabled: true,
           on_behalf: true,
-          updated_prompts: [{ name: 'name', description: 'description', enabled: true }],
-          updated_tools: [{ name: 'name', description: 'description', enabled: true }],
+          updated_prompts: [
+            {
+              name: 'name',
+              description: 'description',
+              enabled: true,
+            },
+          ],
+          updated_tools: [
+            {
+              name: 'name',
+              description: 'description',
+              enabled: true,
+            },
+          ],
         },
       ],
     });
@@ -64,13 +77,26 @@ describe('resource portals', () => {
       description: 'This is my custom MCP Portal',
       hostname: 'exmaple.com',
       name: 'My MCP Portal',
+      secure_web_gateway: false,
       servers: [
         {
           server_id: 'my-mcp-server',
           default_disabled: true,
           on_behalf: true,
-          updated_prompts: [{ name: 'name', description: 'description', enabled: true }],
-          updated_tools: [{ name: 'name', description: 'description', enabled: true }],
+          updated_prompts: [
+            {
+              name: 'name',
+              description: 'description',
+              enabled: true,
+            },
+          ],
+          updated_tools: [
+            {
+              name: 'name',
+              description: 'description',
+              enabled: true,
+            },
+          ],
         },
       ],
     });

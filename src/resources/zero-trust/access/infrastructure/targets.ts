@@ -149,7 +149,12 @@ export class Targets extends APIResource {
    * for await (const targetBulkUpdateResponse of client.zeroTrust.access.infrastructure.targets.bulkUpdate(
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{ hostname: 'infra-access-target', ip: {} }],
+   *     body: [
+   *       {
+   *         hostname: 'infra-access-target',
+   *         ip: {},
+   *       },
+   *     ],
    *   },
    * )) {
    *   // ...
@@ -868,7 +873,7 @@ export interface TargetBulkUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<TargetBulkUpdateParams.Body>;
 }

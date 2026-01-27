@@ -345,7 +345,7 @@ export interface VariantCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   id: string;
 

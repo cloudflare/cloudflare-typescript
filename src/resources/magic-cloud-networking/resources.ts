@@ -1228,22 +1228,22 @@ export type ResourcePolicyPreviewResponse = string;
 
 export interface ResourceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   cloudflare?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   desc?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   managed?: boolean;
 
@@ -1253,27 +1253,27 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
   order_by?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   provider_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   region?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_group?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_id?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_type?: Array<
     | 'aws_customer_gateway'
@@ -1336,24 +1336,24 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
   >;
 
   /**
-   * Query param:
+   * Query param
    */
   search?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   v2?: boolean;
 }
 
 export interface ResourceExportParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   desc?: boolean;
 
@@ -1363,27 +1363,27 @@ export interface ResourceExportParams {
   order_by?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   provider_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   region?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_group?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_id?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_type?: Array<
     | 'aws_customer_gateway'
@@ -1446,36 +1446,36 @@ export interface ResourceExportParams {
   >;
 
   /**
-   * Query param:
+   * Query param
    */
   search?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   v2?: boolean;
 }
 
 export interface ResourceGetParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   v2?: boolean;
 }
 
 export interface ResourcePolicyPreviewParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   policy: string;
 }

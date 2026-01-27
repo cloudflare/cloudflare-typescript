@@ -1806,7 +1806,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">ZoneAuthenticatedOriginPull</a></code>
 - <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">OriginTLSClientAuthCreateResponse</a></code>
 - <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">OriginTLSClientAuthListResponse</a></code>
 - <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">OriginTLSClientAuthDeleteResponse</a></code>
@@ -1819,34 +1818,51 @@ Methods:
 - <code title="delete /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">delete</a>(certificateId, { ...params }) -> OriginTLSClientAuthDeleteResponse</code>
 - <code title="get /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">get</a>(certificateId, { ...params }) -> OriginTLSClientAuthGetResponse</code>
 
+## ZoneCertificates
+
+Types:
+
+- <code><a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">ZoneAuthenticatedOriginPull</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">ZoneCertificateCreateResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">ZoneCertificateListResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">ZoneCertificateDeleteResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">ZoneCertificateGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/origin_tls_client_auth">client.originTLSClientAuth.zoneCertificates.<a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">create</a>({ ...params }) -> ZoneCertificateCreateResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth">client.originTLSClientAuth.zoneCertificates.<a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">list</a>({ ...params }) -> ZoneCertificateListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.zoneCertificates.<a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">delete</a>(certificateId, { ...params }) -> ZoneCertificateDeleteResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.zoneCertificates.<a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">get</a>(certificateId, { ...params }) -> ZoneCertificateGetResponse</code>
+
 ## Hostnames
 
 Types:
 
-- <code><a href="./src/resources/origin-tls-client-auth/hostnames/hostnames.ts">AuthenticatedOriginPull</a></code>
-- <code><a href="./src/resources/origin-tls-client-auth/hostnames/hostnames.ts">HostnameUpdateResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostnames.ts">AuthenticatedOriginPull</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostnames.ts">HostnameUpdateResponse</a></code>
 
 Methods:
 
-- <code title="put /zones/{zone_id}/origin_tls_client_auth/hostnames">client.originTLSClientAuth.hostnames.<a href="./src/resources/origin-tls-client-auth/hostnames/hostnames.ts">update</a>({ ...params }) -> HostnameUpdateResponsesSinglePage</code>
-- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/{hostname}">client.originTLSClientAuth.hostnames.<a href="./src/resources/origin-tls-client-auth/hostnames/hostnames.ts">get</a>(hostname, { ...params }) -> AuthenticatedOriginPull</code>
+- <code title="put /zones/{zone_id}/origin_tls_client_auth/hostnames">client.originTLSClientAuth.hostnames.<a href="./src/resources/origin-tls-client-auth/hostnames.ts">update</a>({ ...params }) -> HostnameUpdateResponsesSinglePage</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/{hostname}">client.originTLSClientAuth.hostnames.<a href="./src/resources/origin-tls-client-auth/hostnames.ts">get</a>(hostname, { ...params }) -> AuthenticatedOriginPull</code>
 
-### Certificates
+## HostnameCertificates
 
 Types:
 
-- <code><a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">Certificate</a></code>
-- <code><a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">CertificateCreateResponse</a></code>
-- <code><a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">CertificateListResponse</a></code>
-- <code><a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">CertificateDeleteResponse</a></code>
-- <code><a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">CertificateGetResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">Certificate</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">HostnameCertificateCreateResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">HostnameCertificateListResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">HostnameCertificateDeleteResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">HostnameCertificateGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates">client.originTLSClientAuth.hostnames.certificates.<a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">create</a>({ ...params }) -> CertificateCreateResponse</code>
-- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates">client.originTLSClientAuth.hostnames.certificates.<a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">list</a>({ ...params }) -> CertificateListResponsesSinglePage</code>
-- <code title="delete /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}">client.originTLSClientAuth.hostnames.certificates.<a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">delete</a>(certificateId, { ...params }) -> CertificateDeleteResponse</code>
-- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}">client.originTLSClientAuth.hostnames.certificates.<a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">get</a>(certificateId, { ...params }) -> CertificateGetResponse</code>
+- <code title="post /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates">client.originTLSClientAuth.hostnameCertificates.<a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">create</a>({ ...params }) -> HostnameCertificateCreateResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates">client.originTLSClientAuth.hostnameCertificates.<a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">list</a>({ ...params }) -> HostnameCertificateListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}">client.originTLSClientAuth.hostnameCertificates.<a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">delete</a>(certificateId, { ...params }) -> HostnameCertificateDeleteResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}">client.originTLSClientAuth.hostnameCertificates.<a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">get</a>(certificateId, { ...params }) -> HostnameCertificateGetResponse</code>
 
 ## Settings
 
@@ -3297,10 +3313,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/intel/ip-lists.ts">IPList</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/intel/ip-list">client.intel.ipLists.<a href="./src/resources/intel/ip-lists.ts">get</a>({ ...params }) -> IPListsSinglePage</code>
 
 ## Miscategorizations
 
@@ -7939,6 +7951,17 @@ Methods:
 - <code title="put /zones/{zone_id}/bot_management">client.botManagement.<a href="./src/resources/bot-management.ts">update</a>({ ...params }) -> BotManagementUpdateResponse</code>
 - <code title="get /zones/{zone_id}/bot_management">client.botManagement.<a href="./src/resources/bot-management.ts">get</a>({ ...params }) -> BotManagementGetResponse</code>
 
+# Fraud
+
+Types:
+
+- <code><a href="./src/resources/fraud.ts">FraudSettings</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/fraud_detection/settings">client.fraud.<a href="./src/resources/fraud.ts">update</a>({ ...params }) -> FraudSettings</code>
+- <code title="get /zones/{zone_id}/fraud_detection/settings">client.fraud.<a href="./src/resources/fraud.ts">get</a>({ ...params }) -> FraudSettings</code>
+
 # OriginPostQuantumEncryption
 
 Types:
@@ -8706,6 +8729,46 @@ Methods:
 - <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations/{id}">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">delete</a>(gatewayId, id, { ...params }) -> EvaluationDeleteResponse</code>
 - <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations/{id}">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">get</a>(gatewayId, id, { ...params }) -> EvaluationGetResponse</code>
 
+## DynamicRouting
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingUpdateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingCreateDeploymentResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingCreateVersionResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingGetResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingGetVersionResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingListDeploymentsResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingListVersionsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">create</a>(gatewayId, { ...params }) -> DynamicRoutingCreateResponse</code>
+- <code title="patch /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">update</a>(gatewayId, id, { ...params }) -> DynamicRoutingUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">list</a>(gatewayId, { ...params }) -> DynamicRoutingListResponse</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">delete</a>(gatewayId, id, { ...params }) -> DynamicRoutingDeleteResponse</code>
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/deployments">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">createDeployment</a>(gatewayId, id, { ...params }) -> DynamicRoutingCreateDeploymentResponse</code>
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">createVersion</a>(gatewayId, id, { ...params }) -> DynamicRoutingCreateVersionResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">get</a>(gatewayId, id, { ...params }) -> DynamicRoutingGetResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions/{version_id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">getVersion</a>(gatewayId, id, versionId, { ...params }) -> DynamicRoutingGetVersionResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/deployments">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">listDeployments</a>(gatewayId, id, { ...params }) -> DynamicRoutingListDeploymentsResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">listVersions</a>(gatewayId, id, { ...params }) -> DynamicRoutingListVersionsResponse</code>
+
+## ProviderConfigs
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/provider-configs.ts">ProviderConfigCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/provider-configs.ts">ProviderConfigListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/provider_configs">client.aiGateway.providerConfigs.<a href="./src/resources/ai-gateway/provider-configs.ts">create</a>(gatewayId, { ...params }) -> ProviderConfigCreateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/provider_configs">client.aiGateway.providerConfigs.<a href="./src/resources/ai-gateway/provider-configs.ts">list</a>(gatewayId, { ...params }) -> ProviderConfigListResponsesV4PagePaginationArray</code>
+
 ## URLs
 
 Types:
@@ -9176,7 +9239,9 @@ Types:
 - <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceUpdateResponse</a></code>
 - <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceListResponse</a></code>
 - <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceDeleteResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceChatCompletionsResponse</a></code>
 - <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceReadResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceSearchResponse</a></code>
 - <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceStatsResponse</a></code>
 
 Methods:
@@ -9185,7 +9250,9 @@ Methods:
 - <code title="put /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">update</a>(id, { ...params }) -> InstanceUpdateResponse</code>
 - <code title="get /accounts/{account_id}/ai-search/instances">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">list</a>({ ...params }) -> InstanceListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">delete</a>(id, { ...params }) -> InstanceDeleteResponse</code>
+- <code title="post /accounts/{account_id}/ai-search/instances/{id}/chat/completions">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">chatCompletions</a>(id, { ...params }) -> InstanceChatCompletionsResponse</code>
 - <code title="get /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">read</a>(id, { ...params }) -> InstanceReadResponse</code>
+- <code title="post /accounts/{account_id}/ai-search/instances/{id}/search">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">search</a>(id, { ...params }) -> InstanceSearchResponse</code>
 - <code title="get /accounts/{account_id}/ai-search/instances/{id}/stats">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">stats</a>(id, { ...params }) -> InstanceStatsResponse</code>
 
 ### Items

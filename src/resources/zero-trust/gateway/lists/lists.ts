@@ -239,7 +239,7 @@ export type ListDeleteResponse = unknown;
 
 export interface ListCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -280,7 +280,7 @@ export namespace ListCreateParams {
 
 export interface ListUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -316,7 +316,7 @@ export namespace ListUpdateParams {
 
 export interface ListListParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -332,7 +332,7 @@ export interface ListDeleteParams {
 
 export interface ListEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

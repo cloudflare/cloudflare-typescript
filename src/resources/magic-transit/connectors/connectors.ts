@@ -383,27 +383,27 @@ export interface ConnectorCreateParams {
   device: ConnectorCreateParams.Device;
 
   /**
-   * Body param:
+   * Body param
    */
   activated?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   interrupt_window_duration_hours?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   interrupt_window_hour_of_day?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   notes?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   timezone?: string;
 }
@@ -431,22 +431,22 @@ export interface ConnectorUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   activated?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   interrupt_window_duration_hours?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   interrupt_window_hour_of_day?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   notes?: string;
 
@@ -456,7 +456,7 @@ export interface ConnectorUpdateParams {
   provision_license?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   timezone?: string;
 }
@@ -482,22 +482,22 @@ export interface ConnectorEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   activated?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   interrupt_window_duration_hours?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   interrupt_window_hour_of_day?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   notes?: string;
 
@@ -507,7 +507,7 @@ export interface ConnectorEditParams {
   provision_license?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   timezone?: string;
 }

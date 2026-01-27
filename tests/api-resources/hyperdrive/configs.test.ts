@@ -163,7 +163,12 @@ describe('resource configs', () => {
         sslmode: 'verify-full',
       },
       name: 'example-hyperdrive',
-      origin: { database: 'postgres', password: 'password', scheme: 'postgres', user: 'postgres' },
+      origin: {
+        database: 'postgres',
+        password: 'password',
+        scheme: 'postgres',
+        user: 'postgres',
+      },
       origin_connection_limit: 60,
     });
   });

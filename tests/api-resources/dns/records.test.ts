@@ -98,7 +98,12 @@ describe('resource records', () => {
         present: 'present',
         startswith: 'Hello, w',
       },
-      content: { contains: '7.0.0.', endswith: '.0.1', exact: '127.0.0.1', startswith: '127.0.' },
+      content: {
+        contains: '7.0.0.',
+        endswith: '.0.1',
+        exact: '127.0.0.1',
+        startswith: '127.0.',
+      },
       direction: 'asc',
       match: 'any',
       name: {
@@ -309,7 +314,10 @@ describe('resource records', () => {
   });
 
   test('scan: required and optional params', async () => {
-    const response = await client.dns.records.scan({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} });
+    const response = await client.dns.records.scan({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
+    });
   });
 
   test('scanList: only required params', async () => {

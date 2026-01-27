@@ -13,7 +13,10 @@ describe('resource accounts', () => {
   test('update: only required params', async () => {
     const responsePromise = client.addressing.addressMaps.accounts.update(
       '055817b111884e0227e1be16a0be6ee0',
-      { account_id: '258def64c72dae45f3e4c8516e2111f2', body: {} },
+      {
+        account_id: '258def64c72dae45f3e4c8516e2111f2',
+        body: {},
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

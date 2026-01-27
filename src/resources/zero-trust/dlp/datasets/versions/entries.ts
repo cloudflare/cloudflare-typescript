@@ -56,7 +56,7 @@ export interface EntryCreateResponse {
 
 export interface EntryCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 }

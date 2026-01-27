@@ -1220,64 +1220,64 @@ export type CatalogSyncRefreshResponse = string;
 
 export interface CatalogSyncCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   destination_type: 'NONE' | 'ZERO_TRUST_LIST';
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   update_mode: 'AUTO' | 'MANUAL';
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   policy?: string;
 
   /**
-   * Header param:
+   * Header param
    */
   forwarded?: string;
 }
 
 export interface CatalogSyncUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   policy?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   update_mode?: 'AUTO' | 'MANUAL';
 }
@@ -1288,39 +1288,39 @@ export interface CatalogSyncListParams {
 
 export interface CatalogSyncDeleteParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   delete_destination?: boolean;
 }
 
 export interface CatalogSyncEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   policy?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   update_mode?: 'AUTO' | 'MANUAL';
 }

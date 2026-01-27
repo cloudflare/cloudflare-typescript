@@ -156,7 +156,7 @@ export namespace Configuration {
 
 export interface ConfigCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -172,12 +172,12 @@ export interface ConfigCreateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   router_ips?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   warp_devices?: Array<ConfigCreateParams.WARPDevice>;
 }
@@ -207,7 +207,7 @@ export namespace ConfigCreateParams {
 
 export interface ConfigUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -223,12 +223,12 @@ export interface ConfigUpdateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   router_ips?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   warp_devices?: Array<ConfigUpdateParams.WARPDevice>;
 }
@@ -262,7 +262,7 @@ export interface ConfigDeleteParams {
 
 export interface ConfigEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -278,12 +278,12 @@ export interface ConfigEditParams {
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   router_ips?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   warp_devices?: Array<ConfigEditParams.WARPDevice>;
 }

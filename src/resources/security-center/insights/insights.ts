@@ -19,7 +19,7 @@ export class Insights extends APIResource {
   type: TypeAPI.Type = new TypeAPI.Type(this._client);
 
   /**
-   * Get Security Center Insights
+   * Retrieves Security Center Insights
    */
   list(
     params?: InsightListParams,
@@ -60,7 +60,7 @@ export class Insights extends APIResource {
   }
 
   /**
-   * Archive Security Center Insight
+   * Archives Security Center Insight
    */
   dismiss(
     issueId: string,
@@ -95,19 +95,19 @@ export class InsightListResponsesV4PagePagination extends V4PagePagination<Insig
 
 export interface InsightListResponse {
   /**
-   * Total number of results
+   * Indicates the total number of results.
    */
   count?: number;
 
   issues?: Array<InsightListResponse.Issue>;
 
   /**
-   * Current page within paginated list of results
+   * Specifies the current page within paginated list of results.
    */
   page?: number;
 
   /**
-   * Number of results per page of results
+   * Sets the number of results per page of results.
    */
   per_page?: number;
 }
@@ -140,7 +140,7 @@ export namespace InsightListResponse {
   export namespace Issue {
     export interface Payload {
       /**
-       * Method used to detect insight
+       * Describes the method used to detect insight.
        */
       detection_method?: string;
 
@@ -208,57 +208,57 @@ export interface InsightListParams extends V4PagePaginationParams {
   zone_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   dismissed?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_class?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_class~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_type?: Array<IssuesAPI.IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_type~neq'?: Array<IssuesAPI.IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   product?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'product~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   severity?: Array<IssuesAPI.SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'severity~neq'?: Array<IssuesAPI.SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   subject?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'subject~neq'?: Array<string>;
 }
@@ -277,7 +277,7 @@ export interface InsightDismissParams {
   zone_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dismiss?: boolean;
 }
