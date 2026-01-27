@@ -17,6 +17,30 @@ import {
   DatasetUpdateResponse,
   Datasets,
 } from './datasets';
+import * as DynamicRoutingAPI from './dynamic-routing';
+import {
+  DynamicRouting,
+  DynamicRoutingCreateDeploymentParams,
+  DynamicRoutingCreateDeploymentResponse,
+  DynamicRoutingCreateParams,
+  DynamicRoutingCreateResponse,
+  DynamicRoutingCreateVersionParams,
+  DynamicRoutingCreateVersionResponse,
+  DynamicRoutingDeleteParams,
+  DynamicRoutingDeleteResponse,
+  DynamicRoutingGetParams,
+  DynamicRoutingGetResponse,
+  DynamicRoutingGetVersionParams,
+  DynamicRoutingGetVersionResponse,
+  DynamicRoutingListDeploymentsParams,
+  DynamicRoutingListDeploymentsResponse,
+  DynamicRoutingListParams,
+  DynamicRoutingListResponse,
+  DynamicRoutingListVersionsParams,
+  DynamicRoutingListVersionsResponse,
+  DynamicRoutingUpdateParams,
+  DynamicRoutingUpdateResponse,
+} from './dynamic-routing';
 import * as EvaluationTypesAPI from './evaluation-types';
 import {
   EvaluationTypeListParams,
@@ -54,6 +78,15 @@ import {
   LogResponseResponse,
   Logs,
 } from './logs';
+import * as ProviderConfigsAPI from './provider-configs';
+import {
+  ProviderConfigCreateParams,
+  ProviderConfigCreateResponse,
+  ProviderConfigListParams,
+  ProviderConfigListResponse,
+  ProviderConfigListResponsesV4PagePaginationArray,
+  ProviderConfigs,
+} from './provider-configs';
 import * as URLsAPI from './urls';
 import { URLGetParams, URLGetResponse, URLs } from './urls';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -63,6 +96,8 @@ export class AIGateway extends APIResource {
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   evaluations: EvaluationsAPI.Evaluations = new EvaluationsAPI.Evaluations(this._client);
+  dynamicRouting: DynamicRoutingAPI.DynamicRouting = new DynamicRoutingAPI.DynamicRouting(this._client);
+  providerConfigs: ProviderConfigsAPI.ProviderConfigs = new ProviderConfigsAPI.ProviderConfigs(this._client);
   urls: URLsAPI.URLs = new URLsAPI.URLs(this._client);
 
   /**
@@ -956,6 +991,9 @@ AIGateway.Datasets = Datasets;
 AIGateway.DatasetListResponsesV4PagePaginationArray = DatasetListResponsesV4PagePaginationArray;
 AIGateway.Evaluations = Evaluations;
 AIGateway.EvaluationListResponsesV4PagePaginationArray = EvaluationListResponsesV4PagePaginationArray;
+AIGateway.DynamicRouting = DynamicRouting;
+AIGateway.ProviderConfigs = ProviderConfigs;
+AIGateway.ProviderConfigListResponsesV4PagePaginationArray = ProviderConfigListResponsesV4PagePaginationArray;
 AIGateway.URLs = URLs;
 
 export declare namespace AIGateway {
@@ -1023,6 +1061,39 @@ export declare namespace AIGateway {
     type EvaluationListParams as EvaluationListParams,
     type EvaluationDeleteParams as EvaluationDeleteParams,
     type EvaluationGetParams as EvaluationGetParams,
+  };
+
+  export {
+    DynamicRouting as DynamicRouting,
+    type DynamicRoutingCreateResponse as DynamicRoutingCreateResponse,
+    type DynamicRoutingUpdateResponse as DynamicRoutingUpdateResponse,
+    type DynamicRoutingListResponse as DynamicRoutingListResponse,
+    type DynamicRoutingDeleteResponse as DynamicRoutingDeleteResponse,
+    type DynamicRoutingCreateDeploymentResponse as DynamicRoutingCreateDeploymentResponse,
+    type DynamicRoutingCreateVersionResponse as DynamicRoutingCreateVersionResponse,
+    type DynamicRoutingGetResponse as DynamicRoutingGetResponse,
+    type DynamicRoutingGetVersionResponse as DynamicRoutingGetVersionResponse,
+    type DynamicRoutingListDeploymentsResponse as DynamicRoutingListDeploymentsResponse,
+    type DynamicRoutingListVersionsResponse as DynamicRoutingListVersionsResponse,
+    type DynamicRoutingCreateParams as DynamicRoutingCreateParams,
+    type DynamicRoutingUpdateParams as DynamicRoutingUpdateParams,
+    type DynamicRoutingListParams as DynamicRoutingListParams,
+    type DynamicRoutingDeleteParams as DynamicRoutingDeleteParams,
+    type DynamicRoutingCreateDeploymentParams as DynamicRoutingCreateDeploymentParams,
+    type DynamicRoutingCreateVersionParams as DynamicRoutingCreateVersionParams,
+    type DynamicRoutingGetParams as DynamicRoutingGetParams,
+    type DynamicRoutingGetVersionParams as DynamicRoutingGetVersionParams,
+    type DynamicRoutingListDeploymentsParams as DynamicRoutingListDeploymentsParams,
+    type DynamicRoutingListVersionsParams as DynamicRoutingListVersionsParams,
+  };
+
+  export {
+    ProviderConfigs as ProviderConfigs,
+    type ProviderConfigCreateResponse as ProviderConfigCreateResponse,
+    type ProviderConfigListResponse as ProviderConfigListResponse,
+    ProviderConfigListResponsesV4PagePaginationArray as ProviderConfigListResponsesV4PagePaginationArray,
+    type ProviderConfigCreateParams as ProviderConfigCreateParams,
+    type ProviderConfigListParams as ProviderConfigListParams,
   };
 
   export { URLs as URLs, type URLGetResponse as URLGetResponse, type URLGetParams as URLGetParams };
