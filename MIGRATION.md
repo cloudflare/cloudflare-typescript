@@ -1046,7 +1046,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.ai.finetunes.assets.create()`
 - `client.aiSearch.instances.update()`
 - `client.aiSearch.instances.delete()`
+- `client.aiSearch.instances.chatCompletions()`
 - `client.aiSearch.instances.read()`
+- `client.aiSearch.instances.search()`
 - `client.aiSearch.instances.stats()`
 - `client.aiSearch.instances.items.list()`
 - `client.aiSearch.instances.items.get()`
