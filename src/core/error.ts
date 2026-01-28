@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { castToError } from '../internal/errors';
-import * as Shared from '../resources/shared';
 
 export class CloudflareError extends Error {}
 
@@ -17,16 +16,11 @@ export class APIError<
   /** JSON body of the response that caused the error */
   readonly error: TError;
 
-  readonly errors: Array<Shared.ErrorData>;
-
   constructor(status: TStatus, error: TError, message: string | undefined, headers: THeaders) {
     super(`${APIError.makeMessage(status, error, message)}`);
     this.status = status;
     this.headers = headers;
     this.error = error;
-
-    const data = error as Record<string, any>;
-    this.errors = data?.['errors'] ?? [];
   }
 
   private static makeMessage(status: number | undefined, error: any, message: string | undefined) {
