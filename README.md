@@ -44,7 +44,7 @@ const zone = await client.zones.create({
   type: 'full',
 });
 
-console.log(zone.id);
+console.log(zone.errors);
 ```
 
 ### Request & Response types
@@ -64,59 +64,10 @@ const params: Cloudflare.ZoneCreateParams = {
   name: 'example.com',
   type: 'full',
 };
-const zone: Cloudflare.Zone = await client.zones.create(params);
+const zone: Cloudflare.ZoneCreateResponse = await client.zones.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
-
-## File uploads
-
-Request parameters that correspond to file uploads can be passed in many different forms:
-
-- `File` (or an object with the same structure)
-- a `fetch` `Response` (or an object with the same structure)
-- an `fs.ReadStream`
-- the return value of our `toFile` helper
-
-```ts
-import fs from 'fs';
-import Cloudflare, { toFile } from 'cloudflare';
-
-const client = new Cloudflare();
-
-// If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.kv.namespaces.values.update('My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  namespace_id: '0f2ac74b498b48028cb68387c421e279',
-  value: fs.createReadStream('/path/to/file'),
-});
-
-// Or if you have the web `File` API you can pass a `File` instance:
-await client.kv.namespaces.values.update('My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  namespace_id: '0f2ac74b498b48028cb68387c421e279',
-  value: new File(['my bytes'], 'file'),
-});
-
-// You can also pass a `fetch` `Response`:
-await client.kv.namespaces.values.update('My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  namespace_id: '0f2ac74b498b48028cb68387c421e279',
-  value: await fetch('https://somesite/file'),
-});
-
-// Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.kv.namespaces.values.update('My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  namespace_id: '0f2ac74b498b48028cb68387c421e279',
-  value: await toFile(Buffer.from('my bytes'), 'file'),
-});
-await client.kv.namespaces.values.update('My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  namespace_id: '0f2ac74b498b48028cb68387c421e279',
-  value: await toFile(new Uint8Array([0, 1, 2]), 'file'),
-});
-```
 
 ## Handling errors
 
@@ -200,13 +151,13 @@ List methods in the Cloudflare API are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
-async function fetchAllAccounts(params) {
-  const allAccounts = [];
+async function fetchAllAccountListResponses(params) {
+  const allAccountListResponses = [];
   // Automatically fetches more pages as needed.
-  for await (const account of client.accounts.list()) {
-    allAccounts.push(account);
+  for await (const accountListResponse of client.accounts.list()) {
+    allAccountListResponses.push(accountListResponse);
   }
-  return allAccounts;
+  return allAccountListResponses;
 }
 ```
 
@@ -214,8 +165,8 @@ Alternatively, you can request a single page at a time:
 
 ```ts
 let page = await client.accounts.list();
-for (const account of page.result) {
-  console.log(account);
+for (const accountListResponse of page.result) {
+  console.log(accountListResponse);
 }
 
 // Convenience methods are provided for manually paginating:
@@ -257,7 +208,7 @@ const { data: zone, response: raw } = await client.zones
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(zone.id);
+console.log(zone.errors);
 ```
 
 ### Logging
