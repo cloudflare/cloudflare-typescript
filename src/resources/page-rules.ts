@@ -469,7 +469,6 @@ export namespace PageRule {
     /**
      * Turn off
      * [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/),
-     * [Mirage](https://developers.cloudflare.com/speed/optimization/images/mirage/),
      * and [Polish](https://developers.cloudflare.com/images/polish/).
      */
     id?: 'disable_performance';
@@ -952,7 +951,6 @@ export namespace PageRuleCreateParams {
     /**
      * Turn off
      * [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/),
-     * [Mirage](https://developers.cloudflare.com/speed/optimization/images/mirage/),
      * and [Polish](https://developers.cloudflare.com/images/polish/).
      */
     id?: 'disable_performance';
@@ -1360,7 +1358,6 @@ export namespace PageRuleUpdateParams {
     /**
      * Turn off
      * [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/),
-     * [Mirage](https://developers.cloudflare.com/speed/optimization/images/mirage/),
      * and [Polish](https://developers.cloudflare.com/images/polish/).
      */
     id?: 'disable_performance';
@@ -1803,7 +1800,6 @@ export namespace PageRuleEditParams {
     /**
      * Turn off
      * [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/),
-     * [Mirage](https://developers.cloudflare.com/speed/optimization/images/mirage/),
      * and [Polish](https://developers.cloudflare.com/images/polish/).
      */
     id?: 'disable_performance';

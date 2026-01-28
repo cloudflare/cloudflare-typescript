@@ -796,6 +796,11 @@ export interface MinTLSVersion {
   modified_on?: string | null;
 }
 
+/**
+ * @deprecated Mirage is deprecated. This functionality is no longer supported. See
+ * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-11-03
+ * for further details.
+ */
 export interface Mirage {
   /**
    * Cloudflare Mirage reduces bandwidth used by images in mobile browsers. It can
@@ -810,6 +815,11 @@ export interface Mirage {
   value?: 'on' | 'off';
 }
 
+/**
+ * @deprecated Mirage is deprecated. This functionality is no longer supported. See
+ * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-11-03
+ * for further details.
+ */
 export interface MirageParam {
   /**
    * Cloudflare Mirage reduces bandwidth used by images in mobile browsers. It can
