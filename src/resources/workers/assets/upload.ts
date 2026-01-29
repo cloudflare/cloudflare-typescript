@@ -1,0 +1,61 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+import { multipartFormRequestOptions } from '../../../internal/uploads';
+import { path } from '../../../internal/utils/path';
+
+export class Upload extends APIResource {
+  /**
+   * Upload assets ahead of creating a Worker version. To learn more about the direct
+   * uploads of assets, see
+   * https://developers.cloudflare.com/workers/static-assets/direct-upload/.
+   *
+   * @example
+   * ```ts
+   * const upload = await client.workers.assets.upload.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   base64: true,
+   *   body: { foo: 'string' },
+   * });
+   * ```
+   */
+  create(params: UploadCreateParams, options?: RequestOptions): APIPromise<UploadCreateResponse> {
+    const { account_id, base64, body } = params;
+    return (
+      this._client.post(
+        path`/accounts/${account_id}/workers/assets/upload`,
+        multipartFormRequestOptions({ query: { base64 }, body: body, ...options }, this._client),
+      ) as APIPromise<{ result: UploadCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface UploadCreateResponse {
+  /**
+   * A "completion" JWT which can be redeemed when creating a Worker version.
+   */
+  jwt?: string;
+}
+
+export interface UploadCreateParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Whether the file contents are base64-encoded. Must be `true`.
+   */
+  base64: true;
+
+  /**
+   * Body param
+   */
+  body: { [key: string]: string };
+}
+
+export declare namespace Upload {
+  export { type UploadCreateResponse as UploadCreateResponse, type UploadCreateParams as UploadCreateParams };
+}

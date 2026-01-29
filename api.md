@@ -1,35 +1,9638 @@
-# DNS
-
-## Records
+# Shared
 
 Types:
 
-- <code><a href="./src/resources/dns/records.ts">RecordListResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">list</a>({ ...params }) -> RecordListResponsesV4PagePaginationArray</code>
-
-# Zones
-
-Types:
-
-- <code><a href="./src/resources/zones.ts">ZoneCreateResponse</a></code>
-- <code><a href="./src/resources/zones.ts">ZoneEditResponse</a></code>
-- <code><a href="./src/resources/zones.ts">ZoneGetResponse</a></code>
-
-Methods:
-
-- <code title="post /zones">client.zones.<a href="./src/resources/zones.ts">create</a>({ ...params }) -> ZoneCreateResponse</code>
-- <code title="patch /zones/{zone_id}">client.zones.<a href="./src/resources/zones.ts">edit</a>({ ...params }) -> ZoneEditResponse</code>
-- <code title="get /zones/{zone_id}">client.zones.<a href="./src/resources/zones.ts">get</a>({ ...params }) -> ZoneGetResponse</code>
+- <code><a href="./src/resources/shared.ts">ASN</a></code>
+- <code><a href="./src/resources/shared.ts">AuditLog</a></code>
+- <code><a href="./src/resources/shared.ts">CertificateCA</a></code>
+- <code><a href="./src/resources/shared.ts">CertificateRequestType</a></code>
+- <code><a href="./src/resources/shared.ts">CloudflareTunnel</a></code>
+- <code><a href="./src/resources/shared.ts">ErrorData</a></code>
+- <code><a href="./src/resources/shared.ts">Identifier</a></code>
+- <code><a href="./src/resources/shared.ts">LoadBalancerPreview</a></code>
+- <code><a href="./src/resources/shared.ts">Member</a></code>
+- <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
+- <code><a href="./src/resources/shared.ts">Permission</a></code>
+- <code><a href="./src/resources/shared.ts">PermissionGrant</a></code>
+- <code><a href="./src/resources/shared.ts">RatePlan</a></code>
+- <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
+- <code><a href="./src/resources/shared.ts">Result</a></code>
+- <code><a href="./src/resources/shared.ts">Role</a></code>
+- <code><a href="./src/resources/shared.ts">SortDirection</a></code>
+- <code><a href="./src/resources/shared.ts">Subscription</a></code>
+- <code><a href="./src/resources/shared.ts">SubscriptionComponent</a></code>
+- <code><a href="./src/resources/shared.ts">SubscriptionZone</a></code>
+- <code><a href="./src/resources/shared.ts">Token</a></code>
+- <code><a href="./src/resources/shared.ts">TokenConditionCIDRList</a></code>
+- <code><a href="./src/resources/shared.ts">TokenPolicy</a></code>
+- <code><a href="./src/resources/shared.ts">TokenValue</a></code>
 
 # Accounts
 
 Types:
 
-- <code><a href="./src/resources/accounts.ts">AccountListResponse</a></code>
+- <code><a href="./src/resources/accounts/accounts.ts">Account</a></code>
+- <code><a href="./src/resources/accounts/accounts.ts">AccountDeleteResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts">client.accounts.<a href="./src/resources/accounts.ts">list</a>({ ...params }) -> AccountListResponsesV4PagePaginationArray</code>
+- <code title="post /accounts">client.accounts.<a href="./src/resources/accounts/accounts.ts">create</a>({ ...params }) -> Account</code>
+- <code title="put /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts/accounts.ts">update</a>({ ...params }) -> Account</code>
+- <code title="get /accounts">client.accounts.<a href="./src/resources/accounts/accounts.ts">list</a>({ ...params }) -> AccountsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts/accounts.ts">delete</a>({ ...params }) -> AccountDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts/accounts.ts">get</a>({ ...params }) -> Account</code>
+
+## Members
+
+Types:
+
+- <code><a href="./src/resources/accounts/members.ts">Status</a></code>
+- <code><a href="./src/resources/accounts/members.ts">MemberDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">create</a>({ ...params }) -> Member</code>
+- <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberID, { ...params }) -> Member</code>
+- <code title="get /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">list</a>({ ...params }) -> MembersV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">delete</a>(memberID, { ...params }) -> MemberDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberID, { ...params }) -> Member</code>
+
+## Roles
+
+Methods:
+
+- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RolesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleID, { ...params }) -> Role</code>
+
+## Subscriptions
+
+Types:
+
+- <code><a href="./src/resources/accounts/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">create</a>({ ...params }) -> Subscription</code>
+- <code title="put /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">update</a>(subscriptionIdentifier, { ...params }) -> Subscription</code>
+- <code title="delete /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">delete</a>(subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
+- <code title="get /accounts/{account_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">get</a>({ ...params }) -> SubscriptionsSinglePage</code>
+
+## Tokens
+
+Types:
+
+- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenCreateResponse</a></code>
+- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenDeleteResponse</a></code>
+- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenVerifyResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/tokens">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
+- <code title="put /accounts/{account_id}/tokens/{token_id}">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">update</a>(tokenID, { ...params }) -> Token</code>
+- <code title="get /accounts/{account_id}/tokens">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">list</a>({ ...params }) -> TokensV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/tokens/{token_id}">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">delete</a>(tokenID, { ...params }) -> TokenDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/tokens/{token_id}">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">get</a>(tokenID, { ...params }) -> Token</code>
+- <code title="get /accounts/{account_id}/tokens/verify">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">verify</a>({ ...params }) -> TokenVerifyResponse</code>
+
+### PermissionGroups
+
+Types:
+
+- <code><a href="./src/resources/accounts/tokens/permission-groups.ts">PermissionGroupListResponse</a></code>
+- <code><a href="./src/resources/accounts/tokens/permission-groups.ts">PermissionGroupGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/tokens/permission_groups">client.accounts.tokens.permissionGroups.<a href="./src/resources/accounts/tokens/permission-groups.ts">list</a>({ ...params }) -> PermissionGroupListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/tokens/permission_groups">client.accounts.tokens.permissionGroups.<a href="./src/resources/accounts/tokens/permission-groups.ts">get</a>({ ...params }) -> PermissionGroupGetResponse</code>
+
+### Value
+
+Methods:
+
+- <code title="put /accounts/{account_id}/tokens/{token_id}/value">client.accounts.tokens.value.<a href="./src/resources/accounts/tokens/value.ts">update</a>(tokenID, { ...params }) -> TokenValue</code>
+
+## Logs
+
+### Audit
+
+Types:
+
+- <code><a href="./src/resources/accounts/logs/audit.ts">AuditListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/logs/audit">client.accounts.logs.audit.<a href="./src/resources/accounts/logs/audit.ts">list</a>({ ...params }) -> AuditListResponsesCursorPaginationAfter</code>
+
+# Organizations
+
+Types:
+
+- <code><a href="./src/resources/organizations/organizations.ts">Organization</a></code>
+- <code><a href="./src/resources/organizations/organizations.ts">OrganizationDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /organizations">client.organizations.<a href="./src/resources/organizations/organizations.ts">create</a>({ ...params }) -> Organization</code>
+- <code title="put /organizations/{organization_id}">client.organizations.<a href="./src/resources/organizations/organizations.ts">update</a>(organizationID, { ...params }) -> Organization</code>
+- <code title="get /organizations">client.organizations.<a href="./src/resources/organizations/organizations.ts">list</a>({ ...params }) -> OrganizationsSinglePage</code>
+- <code title="delete /organizations/{organization_id}">client.organizations.<a href="./src/resources/organizations/organizations.ts">delete</a>(organizationID) -> OrganizationDeleteResponse</code>
+- <code title="get /organizations/{organization_id}">client.organizations.<a href="./src/resources/organizations/organizations.ts">get</a>(organizationID) -> Organization</code>
+
+## OrganizationProfile
+
+Types:
+
+- <code><a href="./src/resources/organizations/organization-profile.ts">OrganizationProfile</a></code>
+
+Methods:
+
+- <code title="put /organizations/{organization_id}/profile">client.organizations.organizationProfile.<a href="./src/resources/organizations/organization-profile.ts">update</a>(organizationID, { ...params }) -> void</code>
+- <code title="get /organizations/{organization_id}/profile">client.organizations.organizationProfile.<a href="./src/resources/organizations/organization-profile.ts">get</a>(organizationID) -> organizations_api_ProfileResponse.Result</code>
+
+# OriginCACertificates
+
+Types:
+
+- <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificate</a></code>
+- <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificateDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /certificates">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">create</a>({ ...params }) -> OriginCACertificate</code>
+- <code title="get /certificates">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">list</a>({ ...params }) -> OriginCACertificatesV4PagePaginationArray</code>
+- <code title="delete /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">delete</a>(certificateID) -> OriginCACertificateDeleteResponse</code>
+- <code title="get /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">get</a>(certificateID) -> OriginCACertificate</code>
+
+# IPs
+
+Types:
+
+- <code><a href="./src/resources/ips.ts">IPsArray</a></code>
+- <code><a href="./src/resources/ips.ts">IPListResponse</a></code>
+
+Methods:
+
+- <code title="get /ips">client.ips.<a href="./src/resources/ips.ts">list</a>({ ...params }) -> IPListResponse</code>
+
+# Memberships
+
+Types:
+
+- <code><a href="./src/resources/memberships.ts">Membership</a></code>
+- <code><a href="./src/resources/memberships.ts">MembershipUpdateResponse</a></code>
+- <code><a href="./src/resources/memberships.ts">MembershipDeleteResponse</a></code>
+- <code><a href="./src/resources/memberships.ts">MembershipGetResponse</a></code>
+
+Methods:
+
+- <code title="put /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(membershipID, { ...params }) -> MembershipUpdateResponse</code>
+- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipsV4PagePaginationArray</code>
+- <code title="delete /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">delete</a>(membershipID) -> MembershipDeleteResponse</code>
+- <code title="get /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">get</a>(membershipID) -> MembershipGetResponse</code>
+
+# User
+
+Types:
+
+- <code><a href="./src/resources/user/user.ts">UserEditResponse</a></code>
+- <code><a href="./src/resources/user/user.ts">UserGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /user">client.user.<a href="./src/resources/user/user.ts">edit</a>({ ...params }) -> UserEditResponse</code>
+- <code title="get /user">client.user.<a href="./src/resources/user/user.ts">get</a>() -> UserGetResponse</code>
+
+## AuditLogs
+
+Methods:
+
+- <code title="get /user/audit_logs">client.user.auditLogs.<a href="./src/resources/user/audit-logs.ts">list</a>({ ...params }) -> AuditLogsV4PagePaginationArray</code>
+
+## Billing
+
+### History
+
+Types:
+
+- <code><a href="./src/resources/user/billing/history.ts">BillingHistory</a></code>
+
+Methods:
+
+- <code title="get /user/billing/history">client.user.billing.history.<a href="./src/resources/user/billing/history.ts">list</a>({ ...params }) -> BillingHistoriesV4PagePaginationArray</code>
+
+### Profile
+
+Types:
+
+- <code><a href="./src/resources/user/billing/profile.ts">ProfileGetResponse</a></code>
+
+Methods:
+
+- <code title="get /user/billing/profile">client.user.billing.profile.<a href="./src/resources/user/billing/profile.ts">get</a>() -> ProfileGetResponse</code>
+
+## Invites
+
+Types:
+
+- <code><a href="./src/resources/user/invites.ts">Invite</a></code>
+
+Methods:
+
+- <code title="get /user/invites">client.user.invites.<a href="./src/resources/user/invites.ts">list</a>() -> InvitesSinglePage</code>
+- <code title="patch /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">edit</a>(inviteID, { ...params }) -> Invite</code>
+- <code title="get /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">get</a>(inviteID) -> Invite</code>
+
+## Organizations
+
+Types:
+
+- <code><a href="./src/resources/user/organizations.ts">Organization</a></code>
+- <code><a href="./src/resources/user/organizations.ts">OrganizationDeleteResponse</a></code>
+- <code><a href="./src/resources/user/organizations.ts">OrganizationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /user/organizations">client.user.organizations.<a href="./src/resources/user/organizations.ts">list</a>({ ...params }) -> OrganizationsV4PagePaginationArray</code>
+- <code title="delete /user/organizations/{organization_id}">client.user.organizations.<a href="./src/resources/user/organizations.ts">delete</a>(organizationID) -> OrganizationDeleteResponse</code>
+- <code title="get /user/organizations/{organization_id}">client.user.organizations.<a href="./src/resources/user/organizations.ts">get</a>(organizationID) -> OrganizationGetResponse</code>
+
+## Subscriptions
+
+Types:
+
+- <code><a href="./src/resources/user/subscriptions.ts">SubscriptionUpdateResponse</a></code>
+- <code><a href="./src/resources/user/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /user/subscriptions/{identifier}">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">update</a>(identifier, { ...params }) -> SubscriptionUpdateResponse</code>
+- <code title="delete /user/subscriptions/{identifier}">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">delete</a>(identifier) -> SubscriptionDeleteResponse</code>
+- <code title="get /user/subscriptions">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">get</a>() -> SubscriptionsSinglePage</code>
+
+## Tokens
+
+Types:
+
+- <code><a href="./src/resources/user/tokens/tokens.ts">TokenCreateResponse</a></code>
+- <code><a href="./src/resources/user/tokens/tokens.ts">TokenDeleteResponse</a></code>
+- <code><a href="./src/resources/user/tokens/tokens.ts">TokenVerifyResponse</a></code>
+
+Methods:
+
+- <code title="post /user/tokens">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
+- <code title="put /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">update</a>(tokenID, { ...params }) -> Token</code>
+- <code title="get /user/tokens">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">list</a>({ ...params }) -> TokensV4PagePaginationArray</code>
+- <code title="delete /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">delete</a>(tokenID) -> TokenDeleteResponse | null</code>
+- <code title="get /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">get</a>(tokenID) -> Token</code>
+- <code title="get /user/tokens/verify">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">verify</a>() -> TokenVerifyResponse</code>
+
+### PermissionGroups
+
+Types:
+
+- <code><a href="./src/resources/user/tokens/permission-groups.ts">PermissionGroupListResponse</a></code>
+
+Methods:
+
+- <code title="get /user/tokens/permission_groups">client.user.tokens.permissionGroups.<a href="./src/resources/user/tokens/permission-groups.ts">list</a>({ ...params }) -> PermissionGroupListResponsesSinglePage</code>
+
+### Value
+
+Methods:
+
+- <code title="put /user/tokens/{token_id}/value">client.user.tokens.value.<a href="./src/resources/user/tokens/value.ts">update</a>(tokenID, { ...params }) -> TokenValue</code>
+
+# Zones
+
+Types:
+
+- <code><a href="./src/resources/zones/zones.ts">Type</a></code>
+- <code><a href="./src/resources/zones/zones.ts">Zone</a></code>
+- <code><a href="./src/resources/zones/zones.ts">ZoneDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones">client.zones.<a href="./src/resources/zones/zones.ts">create</a>({ ...params }) -> Zone</code>
+- <code title="get /zones">client.zones.<a href="./src/resources/zones/zones.ts">list</a>({ ...params }) -> ZonesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}">client.zones.<a href="./src/resources/zones/zones.ts">delete</a>({ ...params }) -> ZoneDeleteResponse | null</code>
+- <code title="patch /zones/{zone_id}">client.zones.<a href="./src/resources/zones/zones.ts">edit</a>({ ...params }) -> Zone</code>
+- <code title="get /zones/{zone_id}">client.zones.<a href="./src/resources/zones/zones.ts">get</a>({ ...params }) -> Zone</code>
+
+## ActivationCheck
+
+Types:
+
+- <code><a href="./src/resources/zones/activation-check.ts">ActivationCheckTriggerResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/activation_check">client.zones.activationCheck.<a href="./src/resources/zones/activation-check.ts">trigger</a>({ ...params }) -> ActivationCheckTriggerResponse</code>
+
+## Settings
+
+Types:
+
+- <code><a href="./src/resources/zones/settings.ts">AdvancedDDoS</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Aegis</a></code>
+- <code><a href="./src/resources/zones/settings.ts">AlwaysOnline</a></code>
+- <code><a href="./src/resources/zones/settings.ts">AlwaysUseHTTPS</a></code>
+- <code><a href="./src/resources/zones/settings.ts">AutomaticHTTPSRewrites</a></code>
+- <code><a href="./src/resources/zones/settings.ts">AutomaticPlatformOptimization</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Brotli</a></code>
+- <code><a href="./src/resources/zones/settings.ts">BrowserCacheTTL</a></code>
+- <code><a href="./src/resources/zones/settings.ts">BrowserCheck</a></code>
+- <code><a href="./src/resources/zones/settings.ts">CacheLevel</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ChallengeTTL</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Ciphers</a></code>
+- <code><a href="./src/resources/zones/settings.ts">DevelopmentMode</a></code>
+- <code><a href="./src/resources/zones/settings.ts">EarlyHints</a></code>
+- <code><a href="./src/resources/zones/settings.ts">EmailObfuscation</a></code>
+- <code><a href="./src/resources/zones/settings.ts">FontSettings</a></code>
+- <code><a href="./src/resources/zones/settings.ts">H2Prioritization</a></code>
+- <code><a href="./src/resources/zones/settings.ts">HotlinkProtection</a></code>
+- <code><a href="./src/resources/zones/settings.ts">HTTP2</a></code>
+- <code><a href="./src/resources/zones/settings.ts">HTTP3</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ImageResizing</a></code>
+- <code><a href="./src/resources/zones/settings.ts">IPGeolocation</a></code>
+- <code><a href="./src/resources/zones/settings.ts">IPV6</a></code>
+- <code><a href="./src/resources/zones/settings.ts">MinTLSVersion</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Mirage</a></code>
+- <code><a href="./src/resources/zones/settings.ts">NEL</a></code>
+- <code><a href="./src/resources/zones/settings.ts">OpportunisticEncryption</a></code>
+- <code><a href="./src/resources/zones/settings.ts">OpportunisticOnion</a></code>
+- <code><a href="./src/resources/zones/settings.ts">OrangeToOrange</a></code>
+- <code><a href="./src/resources/zones/settings.ts">OriginErrorPagePassThru</a></code>
+- <code><a href="./src/resources/zones/settings.ts">OriginMaxHTTPVersion</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Polish</a></code>
+- <code><a href="./src/resources/zones/settings.ts">PrefetchPreload</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ProxyReadTimeout</a></code>
+- <code><a href="./src/resources/zones/settings.ts">PseudoIPV4</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ResponseBuffering</a></code>
+- <code><a href="./src/resources/zones/settings.ts">RocketLoader</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SecurityHeaders</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SecurityLevel</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ServerSideExcludes</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SortQueryStringForCache</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SSL</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SSLRecommender</a></code>
+- <code><a href="./src/resources/zones/settings.ts">TLS1_3</a></code>
+- <code><a href="./src/resources/zones/settings.ts">TLSClientAuth</a></code>
+- <code><a href="./src/resources/zones/settings.ts">TrueClientIPHeader</a></code>
+- <code><a href="./src/resources/zones/settings.ts">WAF</a></code>
+- <code><a href="./src/resources/zones/settings.ts">WebP</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Websocket</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ZeroRTT</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SettingEditResponse</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SettingGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/settings/{setting_id}">client.zones.settings.<a href="./src/resources/zones/settings.ts">edit</a>(settingID, { ...params }) -> SettingEditResponse</code>
+- <code title="get /zones/{zone_id}/settings/{setting_id}">client.zones.settings.<a href="./src/resources/zones/settings.ts">get</a>(settingID, { ...params }) -> SettingGetResponse</code>
+
+## CustomNameservers
+
+Types:
+
+- <code><a href="./src/resources/zones/custom-nameservers.ts">CustomNameserverUpdateResponse</a></code>
+- <code><a href="./src/resources/zones/custom-nameservers.ts">CustomNameserverGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/custom_ns">client.zones.customNameservers.<a href="./src/resources/zones/custom-nameservers.ts">update</a>({ ...params }) -> CustomNameserverUpdateResponsesSinglePage</code>
+- <code title="get /zones/{zone_id}/custom_ns">client.zones.customNameservers.<a href="./src/resources/zones/custom-nameservers.ts">get</a>({ ...params }) -> CustomNameserverGetResponse</code>
+
+## Holds
+
+Types:
+
+- <code><a href="./src/resources/zones/holds.ts">ZoneHold</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">create</a>({ ...params }) -> ZoneHold</code>
+- <code title="delete /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">delete</a>({ ...params }) -> ZoneHold</code>
+- <code title="patch /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">edit</a>({ ...params }) -> ZoneHold</code>
+- <code title="get /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">get</a>({ ...params }) -> ZoneHold</code>
+
+## Subscriptions
+
+Types:
+
+- <code><a href="./src/resources/zones/subscriptions.ts">SubscriptionCreateResponse</a></code>
+- <code><a href="./src/resources/zones/subscriptions.ts">SubscriptionUpdateResponse</a></code>
+- <code><a href="./src/resources/zones/subscriptions.ts">SubscriptionGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">create</a>({ ...params }) -> SubscriptionCreateResponse</code>
+- <code title="put /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">update</a>({ ...params }) -> SubscriptionUpdateResponse</code>
+- <code title="get /zones/{zone_id}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">get</a>({ ...params }) -> SubscriptionGetResponse</code>
+
+## Plans
+
+Types:
+
+- <code><a href="./src/resources/zones/plans.ts">AvailableRatePlan</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/available_plans">client.zones.plans.<a href="./src/resources/zones/plans.ts">list</a>({ ...params }) -> AvailableRatePlansSinglePage</code>
+- <code title="get /zones/{zone_id}/available_plans/{plan_identifier}">client.zones.plans.<a href="./src/resources/zones/plans.ts">get</a>(planIdentifier, { ...params }) -> AvailableRatePlan</code>
+
+## RatePlans
+
+Types:
+
+- <code><a href="./src/resources/zones/rate-plans.ts">RatePlanGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/available_rate_plans">client.zones.ratePlans.<a href="./src/resources/zones/rate-plans.ts">get</a>({ ...params }) -> RatePlanGetResponsesSinglePage</code>
+
+# LoadBalancers
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">AdaptiveRouting</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">CheckRegion</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">DefaultPools</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">FilterOptions</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">Header</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">Host</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">LoadBalancer</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">LoadShedding</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">LocationStrategy</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">NotificationFilter</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">Origin</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">OriginSteering</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">RandomSteering</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">Rules</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">SessionAffinity</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">SessionAffinityAttributes</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">SteeringPolicy</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">LoadBalancerDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/load_balancers">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">create</a>({ ...params }) -> LoadBalancer</code>
+- <code title="put /zones/{zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">update</a>(loadBalancerID, { ...params }) -> LoadBalancer</code>
+- <code title="get /zones/{zone_id}/load_balancers">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">list</a>({ ...params }) -> LoadBalancersSinglePage</code>
+- <code title="delete /zones/{zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">delete</a>(loadBalancerID, { ...params }) -> LoadBalancerDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">edit</a>(loadBalancerID, { ...params }) -> LoadBalancer</code>
+- <code title="get /zones/{zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">get</a>(loadBalancerID, { ...params }) -> LoadBalancer</code>
+
+## Monitors
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">Monitor</a></code>
+- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/load_balancers/monitors">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">create</a>({ ...params }) -> Monitor</code>
+- <code title="put /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">update</a>(monitorID, { ...params }) -> Monitor</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitors">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">list</a>({ ...params }) -> MonitorsSinglePage</code>
+- <code title="delete /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">delete</a>(monitorID, { ...params }) -> MonitorDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">edit</a>(monitorID, { ...params }) -> Monitor</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">get</a>(monitorID, { ...params }) -> Monitor</code>
+
+### Previews
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/monitors/previews.ts">PreviewCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/load_balancers/monitors/{monitor_id}/preview">client.loadBalancers.monitors.previews.<a href="./src/resources/load-balancers/monitors/previews.ts">create</a>(monitorID, { ...params }) -> PreviewCreateResponse</code>
+
+### References
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/monitors/references.ts">ReferenceGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/load_balancers/monitors/{monitor_id}/references">client.loadBalancers.monitors.references.<a href="./src/resources/load-balancers/monitors/references.ts">get</a>(monitorID, { ...params }) -> ReferenceGetResponsesSinglePage</code>
+
+## MonitorGroups
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/monitor-groups.ts">MonitorGroup</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/load_balancers/monitor_groups">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">create</a>({ ...params }) -> MonitorGroup</code>
+- <code title="put /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">update</a>(monitorGroupID, { ...params }) -> MonitorGroup</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitor_groups">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">list</a>({ ...params }) -> MonitorGroupsSinglePage</code>
+- <code title="delete /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">delete</a>(monitorGroupID, { ...params }) -> MonitorGroup</code>
+- <code title="patch /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">edit</a>(monitorGroupID, { ...params }) -> MonitorGroup</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}">client.loadBalancers.monitorGroups.<a href="./src/resources/load-balancers/monitor-groups.ts">get</a>(monitorGroupID, { ...params }) -> MonitorGroup</code>
+
+## Pools
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/pools/pools.ts">Pool</a></code>
+- <code><a href="./src/resources/load-balancers/pools/pools.ts">PoolDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/load_balancers/pools">client.loadBalancers.pools.<a href="./src/resources/load-balancers/pools/pools.ts">create</a>({ ...params }) -> Pool</code>
+- <code title="put /accounts/{account_id}/load_balancers/pools/{pool_id}">client.loadBalancers.pools.<a href="./src/resources/load-balancers/pools/pools.ts">update</a>(poolID, { ...params }) -> Pool</code>
+- <code title="get /accounts/{account_id}/load_balancers/pools">client.loadBalancers.pools.<a href="./src/resources/load-balancers/pools/pools.ts">list</a>({ ...params }) -> PoolsSinglePage</code>
+- <code title="delete /accounts/{account_id}/load_balancers/pools/{pool_id}">client.loadBalancers.pools.<a href="./src/resources/load-balancers/pools/pools.ts">delete</a>(poolID, { ...params }) -> PoolDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/load_balancers/pools">client.loadBalancers.pools.<a href="./src/resources/load-balancers/pools/pools.ts">bulkEdit</a>({ ...params }) -> PoolsSinglePage</code>
+- <code title="patch /accounts/{account_id}/load_balancers/pools/{pool_id}">client.loadBalancers.pools.<a href="./src/resources/load-balancers/pools/pools.ts">edit</a>(poolID, { ...params }) -> Pool</code>
+- <code title="get /accounts/{account_id}/load_balancers/pools/{pool_id}">client.loadBalancers.pools.<a href="./src/resources/load-balancers/pools/pools.ts">get</a>(poolID, { ...params }) -> Pool</code>
+
+### Health
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/pools/health.ts">HealthCreateResponse</a></code>
+- <code><a href="./src/resources/load-balancers/pools/health.ts">HealthGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/load_balancers/pools/{pool_id}/preview">client.loadBalancers.pools.health.<a href="./src/resources/load-balancers/pools/health.ts">create</a>(poolID, { ...params }) -> HealthCreateResponse</code>
+- <code title="get /accounts/{account_id}/load_balancers/pools/{pool_id}/health">client.loadBalancers.pools.health.<a href="./src/resources/load-balancers/pools/health.ts">get</a>(poolID, { ...params }) -> HealthGetResponse</code>
+
+### References
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/pools/references.ts">ReferenceGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/load_balancers/pools/{pool_id}/references">client.loadBalancers.pools.references.<a href="./src/resources/load-balancers/pools/references.ts">get</a>(poolID, { ...params }) -> ReferenceGetResponsesSinglePage</code>
+
+## Previews
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/previews.ts">PreviewGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/load_balancers/preview/{preview_id}">client.loadBalancers.previews.<a href="./src/resources/load-balancers/previews.ts">get</a>(previewID, { ...params }) -> PreviewGetResponse</code>
+
+## Regions
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/regions.ts">RegionListResponse</a></code>
+- <code><a href="./src/resources/load-balancers/regions.ts">RegionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/load_balancers/regions">client.loadBalancers.regions.<a href="./src/resources/load-balancers/regions.ts">list</a>({ ...params }) -> RegionListResponse</code>
+- <code title="get /accounts/{account_id}/load_balancers/regions/{region_id}">client.loadBalancers.regions.<a href="./src/resources/load-balancers/regions.ts">get</a>(regionID, { ...params }) -> RegionGetResponse</code>
+
+## Searches
+
+Types:
+
+- <code><a href="./src/resources/load-balancers/searches.ts">SearchListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/load_balancers/search">client.loadBalancers.searches.<a href="./src/resources/load-balancers/searches.ts">list</a>({ ...params }) -> SearchListResponsesV4PagePagination</code>
+
+# Cache
+
+Types:
+
+- <code><a href="./src/resources/cache/cache.ts">CachePurgeResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/purge_cache">client.cache.<a href="./src/resources/cache/cache.ts">purge</a>({ ...params }) -> CachePurgeResponse | null</code>
+
+## CacheReserve
+
+Types:
+
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserve</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClear</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">State</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClearResponse</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveEditResponse</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveGetResponse</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveStatusResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/cache/cache_reserve_clear">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">clear</a>({ ...params }) -> CacheReserveClearResponse</code>
+- <code title="patch /zones/{zone_id}/cache/cache_reserve">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">edit</a>({ ...params }) -> CacheReserveEditResponse</code>
+- <code title="get /zones/{zone_id}/cache/cache_reserve">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">get</a>({ ...params }) -> CacheReserveGetResponse</code>
+- <code title="get /zones/{zone_id}/cache/cache_reserve_clear">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">status</a>({ ...params }) -> CacheReserveStatusResponse</code>
+
+## SmartTieredCache
+
+Types:
+
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheDeleteResponse</a></code>
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheEditResponse</a></code>
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheGetResponse</a></code>
+
+Methods:
+
+- <code title="delete /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">delete</a>({ ...params }) -> SmartTieredCacheDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">edit</a>({ ...params }) -> SmartTieredCacheEditResponse</code>
+- <code title="get /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">get</a>({ ...params }) -> SmartTieredCacheGetResponse</code>
+
+## Variants
+
+Types:
+
+- <code><a href="./src/resources/cache/variants.ts">CacheVariant</a></code>
+- <code><a href="./src/resources/cache/variants.ts">VariantDeleteResponse</a></code>
+- <code><a href="./src/resources/cache/variants.ts">VariantEditResponse</a></code>
+- <code><a href="./src/resources/cache/variants.ts">VariantGetResponse</a></code>
+
+Methods:
+
+- <code title="delete /zones/{zone_id}/cache/variants">client.cache.variants.<a href="./src/resources/cache/variants.ts">delete</a>({ ...params }) -> VariantDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/cache/variants">client.cache.variants.<a href="./src/resources/cache/variants.ts">edit</a>({ ...params }) -> VariantEditResponse</code>
+- <code title="get /zones/{zone_id}/cache/variants">client.cache.variants.<a href="./src/resources/cache/variants.ts">get</a>({ ...params }) -> VariantGetResponse</code>
+
+## RegionalTieredCache
+
+Types:
+
+- <code><a href="./src/resources/cache/regional-tiered-cache.ts">RegionalTieredCache</a></code>
+- <code><a href="./src/resources/cache/regional-tiered-cache.ts">RegionalTieredCacheEditResponse</a></code>
+- <code><a href="./src/resources/cache/regional-tiered-cache.ts">RegionalTieredCacheGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/cache/regional_tiered_cache">client.cache.regionalTieredCache.<a href="./src/resources/cache/regional-tiered-cache.ts">edit</a>({ ...params }) -> RegionalTieredCacheEditResponse</code>
+- <code title="get /zones/{zone_id}/cache/regional_tiered_cache">client.cache.regionalTieredCache.<a href="./src/resources/cache/regional-tiered-cache.ts">get</a>({ ...params }) -> RegionalTieredCacheGetResponse</code>
+
+# SSL
+
+## Analyze
+
+Types:
+
+- <code><a href="./src/resources/ssl/analyze.ts">AnalyzeCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/ssl/analyze">client.ssl.analyze.<a href="./src/resources/ssl/analyze.ts">create</a>({ ...params }) -> AnalyzeCreateResponse</code>
+
+## CertificatePacks
+
+Types:
+
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Host</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">RequestValidity</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Status</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">ValidationMethod</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackCreateResponse</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackListResponse</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackDeleteResponse</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackEditResponse</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/ssl/certificate_packs/order">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">create</a>({ ...params }) -> CertificatePackCreateResponse</code>
+- <code title="get /zones/{zone_id}/ssl/certificate_packs">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">list</a>({ ...params }) -> CertificatePackListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">delete</a>(certificatePackID, { ...params }) -> CertificatePackDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">edit</a>(certificatePackID, { ...params }) -> CertificatePackEditResponse</code>
+- <code title="get /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">get</a>(certificatePackID, { ...params }) -> CertificatePackGetResponse</code>
+
+### Quota
+
+Types:
+
+- <code><a href="./src/resources/ssl/certificate-packs/quota.ts">QuotaGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/ssl/certificate_packs/quota">client.ssl.certificatePacks.quota.<a href="./src/resources/ssl/certificate-packs/quota.ts">get</a>({ ...params }) -> QuotaGetResponse</code>
+
+## Recommendations
+
+Types:
+
+- <code><a href="./src/resources/ssl/recommendations.ts">RecommendationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/ssl/recommendation">client.ssl.recommendations.<a href="./src/resources/ssl/recommendations.ts">get</a>({ ...params }) -> RecommendationGetResponse</code>
+
+## Universal
+
+### Settings
+
+Types:
+
+- <code><a href="./src/resources/ssl/universal/settings.ts">UniversalSSLSettings</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/ssl/universal/settings">client.ssl.universal.settings.<a href="./src/resources/ssl/universal/settings.ts">edit</a>({ ...params }) -> UniversalSSLSettings</code>
+- <code title="get /zones/{zone_id}/ssl/universal/settings">client.ssl.universal.settings.<a href="./src/resources/ssl/universal/settings.ts">get</a>({ ...params }) -> UniversalSSLSettings</code>
+
+## Verification
+
+Types:
+
+- <code><a href="./src/resources/ssl/verification.ts">Verification</a></code>
+- <code><a href="./src/resources/ssl/verification.ts">VerificationEditResponse</a></code>
+- <code><a href="./src/resources/ssl/verification.ts">VerificationGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/ssl/verification/{certificate_pack_id}">client.ssl.verification.<a href="./src/resources/ssl/verification.ts">edit</a>(certificatePackID, { ...params }) -> VerificationEditResponse</code>
+- <code title="get /zones/{zone_id}/ssl/verification">client.ssl.verification.<a href="./src/resources/ssl/verification.ts">get</a>({ ...params }) -> VerificationGetResponse</code>
+
+# ACM
+
+## TotalTLS
+
+Types:
+
+- <code><a href="./src/resources/acm/total-tls.ts">CertificateAuthority</a></code>
+- <code><a href="./src/resources/acm/total-tls.ts">TotalTLSCreateResponse</a></code>
+- <code><a href="./src/resources/acm/total-tls.ts">TotalTLSGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/acm/total_tls">client.acm.totalTLS.<a href="./src/resources/acm/total-tls.ts">create</a>({ ...params }) -> TotalTLSCreateResponse</code>
+- <code title="get /zones/{zone_id}/acm/total_tls">client.acm.totalTLS.<a href="./src/resources/acm/total-tls.ts">get</a>({ ...params }) -> TotalTLSGetResponse</code>
+
+# Argo
+
+## SmartRouting
+
+Types:
+
+- <code><a href="./src/resources/argo/smart-routing.ts">SmartRoutingEditResponse</a></code>
+- <code><a href="./src/resources/argo/smart-routing.ts">SmartRoutingGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/argo/smart_routing">client.argo.smartRouting.<a href="./src/resources/argo/smart-routing.ts">edit</a>({ ...params }) -> SmartRoutingEditResponse</code>
+- <code title="get /zones/{zone_id}/argo/smart_routing">client.argo.smartRouting.<a href="./src/resources/argo/smart-routing.ts">get</a>({ ...params }) -> SmartRoutingGetResponse</code>
+
+## TieredCaching
+
+Types:
+
+- <code><a href="./src/resources/argo/tiered-caching.ts">TieredCachingEditResponse</a></code>
+- <code><a href="./src/resources/argo/tiered-caching.ts">TieredCachingGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/argo/tiered_caching">client.argo.tieredCaching.<a href="./src/resources/argo/tiered-caching.ts">edit</a>({ ...params }) -> TieredCachingEditResponse</code>
+- <code title="get /zones/{zone_id}/argo/tiered_caching">client.argo.tieredCaching.<a href="./src/resources/argo/tiered-caching.ts">get</a>({ ...params }) -> TieredCachingGetResponse</code>
+
+# CertificateAuthorities
+
+## HostnameAssociations
+
+Types:
+
+- <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">HostnameAssociation</a></code>
+- <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">TLSHostnameAssociation</a></code>
+- <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">HostnameAssociationUpdateResponse</a></code>
+- <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">HostnameAssociationGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/certificate_authorities/hostname_associations">client.certificateAuthorities.hostnameAssociations.<a href="./src/resources/certificate-authorities/hostname-associations.ts">update</a>({ ...params }) -> HostnameAssociationUpdateResponse</code>
+- <code title="get /zones/{zone_id}/certificate_authorities/hostname_associations">client.certificateAuthorities.hostnameAssociations.<a href="./src/resources/certificate-authorities/hostname-associations.ts">get</a>({ ...params }) -> HostnameAssociationGetResponse</code>
+
+# ClientCertificates
+
+Types:
+
+- <code><a href="./src/resources/client-certificates.ts">ClientCertificate</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/client_certificates">client.clientCertificates.<a href="./src/resources/client-certificates.ts">create</a>({ ...params }) -> ClientCertificate</code>
+- <code title="get /zones/{zone_id}/client_certificates">client.clientCertificates.<a href="./src/resources/client-certificates.ts">list</a>({ ...params }) -> ClientCertificatesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/client_certificates/{client_certificate_id}">client.clientCertificates.<a href="./src/resources/client-certificates.ts">delete</a>(clientCertificateID, { ...params }) -> ClientCertificate</code>
+- <code title="patch /zones/{zone_id}/client_certificates/{client_certificate_id}">client.clientCertificates.<a href="./src/resources/client-certificates.ts">edit</a>(clientCertificateID, { ...params }) -> ClientCertificate</code>
+- <code title="get /zones/{zone_id}/client_certificates/{client_certificate_id}">client.clientCertificates.<a href="./src/resources/client-certificates.ts">get</a>(clientCertificateID, { ...params }) -> ClientCertificate</code>
+
+# CustomCertificates
+
+Types:
+
+- <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificate</a></code>
+- <code><a href="./src/resources/custom-certificates/custom-certificates.ts">GeoRestrictions</a></code>
+- <code><a href="./src/resources/custom-certificates/custom-certificates.ts">Status</a></code>
+- <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificateDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/custom_certificates">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">create</a>({ ...params }) -> CustomCertificate</code>
+- <code title="get /zones/{zone_id}/custom_certificates">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">list</a>({ ...params }) -> CustomCertificatesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">delete</a>(customCertificateID, { ...params }) -> CustomCertificateDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">edit</a>(customCertificateID, { ...params }) -> CustomCertificate</code>
+- <code title="get /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">get</a>(customCertificateID, { ...params }) -> CustomCertificate</code>
+
+## Prioritize
+
+Methods:
+
+- <code title="put /zones/{zone_id}/custom_certificates/prioritize">client.customCertificates.prioritize.<a href="./src/resources/custom-certificates/prioritize.ts">update</a>({ ...params }) -> CustomCertificatesSinglePage</code>
+
+# CustomHostnames
+
+Types:
+
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">BundleMethod</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostname</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">DCVMethod</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">DomainValidationType</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostnameCreateResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostnameListResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostnameDeleteResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostnameEditResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostnameGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/custom_hostnames">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">create</a>({ ...params }) -> CustomHostnameCreateResponse</code>
+- <code title="get /zones/{zone_id}/custom_hostnames">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">list</a>({ ...params }) -> CustomHostnameListResponsesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">delete</a>(customHostnameID, { ...params }) -> CustomHostnameDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">edit</a>(customHostnameID, { ...params }) -> CustomHostnameEditResponse</code>
+- <code title="get /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">get</a>(customHostnameID, { ...params }) -> CustomHostnameGetResponse</code>
+
+## FallbackOrigin
+
+Types:
+
+- <code><a href="./src/resources/custom-hostnames/fallback-origin.ts">FallbackOriginUpdateResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/fallback-origin.ts">FallbackOriginDeleteResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/fallback-origin.ts">FallbackOriginGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/custom_hostnames/fallback_origin">client.customHostnames.fallbackOrigin.<a href="./src/resources/custom-hostnames/fallback-origin.ts">update</a>({ ...params }) -> FallbackOriginUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/custom_hostnames/fallback_origin">client.customHostnames.fallbackOrigin.<a href="./src/resources/custom-hostnames/fallback-origin.ts">delete</a>({ ...params }) -> FallbackOriginDeleteResponse</code>
+- <code title="get /zones/{zone_id}/custom_hostnames/fallback_origin">client.customHostnames.fallbackOrigin.<a href="./src/resources/custom-hostnames/fallback-origin.ts">get</a>({ ...params }) -> FallbackOriginGetResponse</code>
+
+## CertificatePack
+
+### Certificates
+
+Types:
+
+- <code><a href="./src/resources/custom-hostnames/certificate-pack/certificates.ts">CertificateUpdateResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/certificate-pack/certificates.ts">CertificateDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/custom_hostnames/{custom_hostname_id}/certificate_pack/{certificate_pack_id}/certificates/{certificate_id}">client.customHostnames.certificatePack.certificates.<a href="./src/resources/custom-hostnames/certificate-pack/certificates.ts">update</a>(certificateID, { ...params }) -> CertificateUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/custom_hostnames/{custom_hostname_id}/certificate_pack/{certificate_pack_id}/certificates/{certificate_id}">client.customHostnames.certificatePack.certificates.<a href="./src/resources/custom-hostnames/certificate-pack/certificates.ts">delete</a>(certificateID, { ...params }) -> CertificateDeleteResponse</code>
+
+# CustomNameservers
+
+Types:
+
+- <code><a href="./src/resources/custom-nameservers.ts">CustomNameserver</a></code>
+- <code><a href="./src/resources/custom-nameservers.ts">CustomNameserverDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/custom_ns">client.customNameservers.<a href="./src/resources/custom-nameservers.ts">create</a>({ ...params }) -> CustomNameserver</code>
+- <code title="delete /accounts/{account_id}/custom_ns/{custom_ns_id}">client.customNameservers.<a href="./src/resources/custom-nameservers.ts">delete</a>(customNSID, { ...params }) -> CustomNameserverDeleteResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/custom_ns">client.customNameservers.<a href="./src/resources/custom-nameservers.ts">get</a>({ ...params }) -> CustomNameserversSinglePage</code>
+
+# DNSFirewall
+
+Types:
+
+- <code><a href="./src/resources/dns-firewall/dns-firewall.ts">AttackMitigation</a></code>
+- <code><a href="./src/resources/dns-firewall/dns-firewall.ts">FirewallIPs</a></code>
+- <code><a href="./src/resources/dns-firewall/dns-firewall.ts">UpstreamIPs</a></code>
+- <code><a href="./src/resources/dns-firewall/dns-firewall.ts">DNSFirewallCreateResponse</a></code>
+- <code><a href="./src/resources/dns-firewall/dns-firewall.ts">DNSFirewallListResponse</a></code>
+- <code><a href="./src/resources/dns-firewall/dns-firewall.ts">DNSFirewallDeleteResponse</a></code>
+- <code><a href="./src/resources/dns-firewall/dns-firewall.ts">DNSFirewallEditResponse</a></code>
+- <code><a href="./src/resources/dns-firewall/dns-firewall.ts">DNSFirewallGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dns_firewall">client.dnsFirewall.<a href="./src/resources/dns-firewall/dns-firewall.ts">create</a>({ ...params }) -> DNSFirewallCreateResponse</code>
+- <code title="get /accounts/{account_id}/dns_firewall">client.dnsFirewall.<a href="./src/resources/dns-firewall/dns-firewall.ts">list</a>({ ...params }) -> DNSFirewallListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/dns_firewall/{dns_firewall_id}">client.dnsFirewall.<a href="./src/resources/dns-firewall/dns-firewall.ts">delete</a>(dnsFirewallID, { ...params }) -> DNSFirewallDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/dns_firewall/{dns_firewall_id}">client.dnsFirewall.<a href="./src/resources/dns-firewall/dns-firewall.ts">edit</a>(dnsFirewallID, { ...params }) -> DNSFirewallEditResponse</code>
+- <code title="get /accounts/{account_id}/dns_firewall/{dns_firewall_id}">client.dnsFirewall.<a href="./src/resources/dns-firewall/dns-firewall.ts">get</a>(dnsFirewallID, { ...params }) -> DNSFirewallGetResponse</code>
+
+## Analytics
+
+### Reports
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dns_firewall/{dns_firewall_id}/dns_analytics/report">client.dnsFirewall.analytics.reports.<a href="./src/resources/dns-firewall/analytics/reports/reports.ts">get</a>(dnsFirewallID, { ...params }) -> Report</code>
+
+#### Bytimes
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dns_firewall/{dns_firewall_id}/dns_analytics/report/bytime">client.dnsFirewall.analytics.reports.bytimes.<a href="./src/resources/dns-firewall/analytics/reports/bytimes.ts">get</a>(dnsFirewallID, { ...params }) -> ByTime</code>
+
+## ReverseDNS
+
+Types:
+
+- <code><a href="./src/resources/dns-firewall/reverse-dns.ts">ReverseDNSEditResponse</a></code>
+- <code><a href="./src/resources/dns-firewall/reverse-dns.ts">ReverseDNSGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns">client.dnsFirewall.reverseDNS.<a href="./src/resources/dns-firewall/reverse-dns.ts">edit</a>(dnsFirewallID, { ...params }) -> ReverseDNSEditResponse</code>
+- <code title="get /accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns">client.dnsFirewall.reverseDNS.<a href="./src/resources/dns-firewall/reverse-dns.ts">get</a>(dnsFirewallID, { ...params }) -> ReverseDNSGetResponse</code>
+
+# DNS
+
+## DNSSEC
+
+Types:
+
+- <code><a href="./src/resources/dns/dnssec.ts">DNSSEC</a></code>
+- <code><a href="./src/resources/dns/dnssec.ts">DNSSECDeleteResponse</a></code>
+
+Methods:
+
+- <code title="delete /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec.ts">delete</a>({ ...params }) -> DNSSECDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec.ts">edit</a>({ ...params }) -> DNSSEC</code>
+- <code title="get /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec.ts">get</a>({ ...params }) -> DNSSEC</code>
+
+## Records
+
+Types:
+
+- <code><a href="./src/resources/dns/records.ts">ARecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">AAAARecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">BatchPatch</a></code>
+- <code><a href="./src/resources/dns/records.ts">BatchPut</a></code>
+- <code><a href="./src/resources/dns/records.ts">CAARecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">CERTRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">CNAMERecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">DNSKEYRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">DSRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">HTTPSRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">LOCRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">MXRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">NAPTRRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">NSRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">PTRRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">Record</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordResponse</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordTags</a></code>
+- <code><a href="./src/resources/dns/records.ts">SMIMEARecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">SRVRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">SSHFPRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">SVCBRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">TLSARecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">TTL</a></code>
+- <code><a href="./src/resources/dns/records.ts">TXTRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">URIRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordBatchResponse</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordExportResponse</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordImportResponse</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordScanResponse</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordScanReviewResponse</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordScanTriggerResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">create</a>({ ...params }) -> RecordResponse</code>
+- <code title="put /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">update</a>(dnsRecordID, { ...params }) -> RecordResponse</code>
+- <code title="get /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">list</a>({ ...params }) -> RecordResponsesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">delete</a>(dnsRecordID, { ...params }) -> RecordDeleteResponse</code>
+- <code title="post /zones/{zone_id}/dns_records/batch">client.dns.records.<a href="./src/resources/dns/records.ts">batch</a>({ ...params }) -> RecordBatchResponse</code>
+- <code title="patch /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">edit</a>(dnsRecordID, { ...params }) -> RecordResponse</code>
+- <code title="get /zones/{zone_id}/dns_records/export">client.dns.records.<a href="./src/resources/dns/records.ts">export</a>({ ...params }) -> string</code>
+- <code title="get /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">get</a>(dnsRecordID, { ...params }) -> RecordResponse</code>
+- <code title="post /zones/{zone_id}/dns_records/import">client.dns.records.<a href="./src/resources/dns/records.ts">import</a>({ ...params }) -> RecordImportResponse</code>
+- <code title="post /zones/{zone_id}/dns_records/scan">client.dns.records.<a href="./src/resources/dns/records.ts">scan</a>({ ...params }) -> RecordScanResponse</code>
+- <code title="get /zones/{zone_id}/dns_records/scan/review">client.dns.records.<a href="./src/resources/dns/records.ts">scanList</a>({ ...params }) -> RecordResponsesSinglePage</code>
+- <code title="post /zones/{zone_id}/dns_records/scan/review">client.dns.records.<a href="./src/resources/dns/records.ts">scanReview</a>({ ...params }) -> RecordScanReviewResponse</code>
+- <code title="post /zones/{zone_id}/dns_records/scan/trigger">client.dns.records.<a href="./src/resources/dns/records.ts">scanTrigger</a>({ ...params }) -> RecordScanTriggerResponse</code>
+
+## Settings
+
+### Zone
+
+Types:
+
+- <code><a href="./src/resources/dns/settings/zone.ts">ZoneEditResponse</a></code>
+- <code><a href="./src/resources/dns/settings/zone.ts">ZoneGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/dns_settings">client.dns.settings.zone.<a href="./src/resources/dns/settings/zone.ts">edit</a>({ ...params }) -> ZoneEditResponse</code>
+- <code title="get /zones/{zone_id}/dns_settings">client.dns.settings.zone.<a href="./src/resources/dns/settings/zone.ts">get</a>({ ...params }) -> ZoneGetResponse</code>
+
+### Account
+
+Types:
+
+- <code><a href="./src/resources/dns/settings/account/account.ts">AccountEditResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/account.ts">AccountGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/dns_settings">client.dns.settings.account.<a href="./src/resources/dns/settings/account/account.ts">edit</a>({ ...params }) -> AccountEditResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings">client.dns.settings.account.<a href="./src/resources/dns/settings/account/account.ts">get</a>({ ...params }) -> AccountGetResponse</code>
+
+#### Views
+
+Types:
+
+- <code><a href="./src/resources/dns/settings/account/views.ts">ViewCreateResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/views.ts">ViewListResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/views.ts">ViewDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/views.ts">ViewEditResponse</a></code>
+- <code><a href="./src/resources/dns/settings/account/views.ts">ViewGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dns_settings/views">client.dns.settings.account.views.<a href="./src/resources/dns/settings/account/views.ts">create</a>({ ...params }) -> ViewCreateResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings/views">client.dns.settings.account.views.<a href="./src/resources/dns/settings/account/views.ts">list</a>({ ...params }) -> ViewListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.account.views.<a href="./src/resources/dns/settings/account/views.ts">delete</a>(viewID, { ...params }) -> ViewDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.account.views.<a href="./src/resources/dns/settings/account/views.ts">edit</a>(viewID, { ...params }) -> ViewEditResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.account.views.<a href="./src/resources/dns/settings/account/views.ts">get</a>(viewID, { ...params }) -> ViewGetResponse</code>
+
+## Analytics
+
+### Reports
+
+Types:
+
+- <code><a href="./src/resources/dns/analytics/reports/reports.ts">Report</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/dns_analytics/report">client.dns.analytics.reports.<a href="./src/resources/dns/analytics/reports/reports.ts">get</a>({ ...params }) -> Report</code>
+
+#### Bytimes
+
+Types:
+
+- <code><a href="./src/resources/dns/analytics/reports/bytimes.ts">ByTime</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/dns_analytics/report/bytime">client.dns.analytics.reports.bytimes.<a href="./src/resources/dns/analytics/reports/bytimes.ts">get</a>({ ...params }) -> ByTime</code>
+
+## ZoneTransfers
+
+### ForceAXFR
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/force-axfr.ts">ForceAXFR</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/secondary_dns/force_axfr">client.dns.zoneTransfers.forceAXFR.<a href="./src/resources/dns/zone-transfers/force-axfr.ts">create</a>({ ...params }) -> ForceAXFR</code>
+
+### Incoming
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/incoming.ts">Incoming</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/incoming.ts">IncomingCreateResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/incoming.ts">IncomingUpdateResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/incoming.ts">IncomingDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/incoming.ts">IncomingGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/secondary_dns/incoming">client.dns.zoneTransfers.incoming.<a href="./src/resources/dns/zone-transfers/incoming.ts">create</a>({ ...params }) -> IncomingCreateResponse</code>
+- <code title="put /zones/{zone_id}/secondary_dns/incoming">client.dns.zoneTransfers.incoming.<a href="./src/resources/dns/zone-transfers/incoming.ts">update</a>({ ...params }) -> IncomingUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/secondary_dns/incoming">client.dns.zoneTransfers.incoming.<a href="./src/resources/dns/zone-transfers/incoming.ts">delete</a>({ ...params }) -> IncomingDeleteResponse</code>
+- <code title="get /zones/{zone_id}/secondary_dns/incoming">client.dns.zoneTransfers.incoming.<a href="./src/resources/dns/zone-transfers/incoming.ts">get</a>({ ...params }) -> IncomingGetResponse</code>
+
+### Outgoing
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">DisableTransfer</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">EnableTransfer</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">Outgoing</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingStatus</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingCreateResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingUpdateResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingForceNotifyResponse</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">OutgoingGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/secondary_dns/outgoing">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">create</a>({ ...params }) -> OutgoingCreateResponse</code>
+- <code title="put /zones/{zone_id}/secondary_dns/outgoing">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">update</a>({ ...params }) -> OutgoingUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/secondary_dns/outgoing">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">delete</a>({ ...params }) -> OutgoingDeleteResponse</code>
+- <code title="post /zones/{zone_id}/secondary_dns/outgoing/disable">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">disable</a>({ ...params }) -> DisableTransfer</code>
+- <code title="post /zones/{zone_id}/secondary_dns/outgoing/enable">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">enable</a>({ ...params }) -> EnableTransfer</code>
+- <code title="post /zones/{zone_id}/secondary_dns/outgoing/force_notify">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">forceNotify</a>({ ...params }) -> OutgoingForceNotifyResponse</code>
+- <code title="get /zones/{zone_id}/secondary_dns/outgoing">client.dns.zoneTransfers.outgoing.<a href="./src/resources/dns/zone-transfers/outgoing/outgoing.ts">get</a>({ ...params }) -> OutgoingGetResponse</code>
+
+#### Status
+
+Methods:
+
+- <code title="get /zones/{zone_id}/secondary_dns/outgoing/status">client.dns.zoneTransfers.outgoing.status.<a href="./src/resources/dns/zone-transfers/outgoing/status.ts">get</a>({ ...params }) -> EnableTransfer</code>
+
+### ACLs
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/acls.ts">ACL</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/acls.ts">ACLDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/secondary_dns/acls">client.dns.zoneTransfers.acls.<a href="./src/resources/dns/zone-transfers/acls.ts">create</a>({ ...params }) -> ACL</code>
+- <code title="put /accounts/{account_id}/secondary_dns/acls/{acl_id}">client.dns.zoneTransfers.acls.<a href="./src/resources/dns/zone-transfers/acls.ts">update</a>(aclID, { ...params }) -> ACL</code>
+- <code title="get /accounts/{account_id}/secondary_dns/acls">client.dns.zoneTransfers.acls.<a href="./src/resources/dns/zone-transfers/acls.ts">list</a>({ ...params }) -> ACLsSinglePage</code>
+- <code title="delete /accounts/{account_id}/secondary_dns/acls/{acl_id}">client.dns.zoneTransfers.acls.<a href="./src/resources/dns/zone-transfers/acls.ts">delete</a>(aclID, { ...params }) -> ACLDeleteResponse</code>
+- <code title="get /accounts/{account_id}/secondary_dns/acls/{acl_id}">client.dns.zoneTransfers.acls.<a href="./src/resources/dns/zone-transfers/acls.ts">get</a>(aclID, { ...params }) -> ACL</code>
+
+### Peers
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/peers.ts">Peer</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/peers.ts">PeerDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/secondary_dns/peers">client.dns.zoneTransfers.peers.<a href="./src/resources/dns/zone-transfers/peers.ts">create</a>({ ...params }) -> Peer</code>
+- <code title="put /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.dns.zoneTransfers.peers.<a href="./src/resources/dns/zone-transfers/peers.ts">update</a>(peerID, { ...params }) -> Peer</code>
+- <code title="get /accounts/{account_id}/secondary_dns/peers">client.dns.zoneTransfers.peers.<a href="./src/resources/dns/zone-transfers/peers.ts">list</a>({ ...params }) -> PeersSinglePage</code>
+- <code title="delete /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.dns.zoneTransfers.peers.<a href="./src/resources/dns/zone-transfers/peers.ts">delete</a>(peerID, { ...params }) -> PeerDeleteResponse</code>
+- <code title="get /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.dns.zoneTransfers.peers.<a href="./src/resources/dns/zone-transfers/peers.ts">get</a>(peerID, { ...params }) -> Peer</code>
+
+### TSIGs
+
+Types:
+
+- <code><a href="./src/resources/dns/zone-transfers/tsigs.ts">TSIG</a></code>
+- <code><a href="./src/resources/dns/zone-transfers/tsigs.ts">TSIGDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/secondary_dns/tsigs">client.dns.zoneTransfers.tsigs.<a href="./src/resources/dns/zone-transfers/tsigs.ts">create</a>({ ...params }) -> TSIG</code>
+- <code title="put /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.dns.zoneTransfers.tsigs.<a href="./src/resources/dns/zone-transfers/tsigs.ts">update</a>(tsigID, { ...params }) -> TSIG</code>
+- <code title="get /accounts/{account_id}/secondary_dns/tsigs">client.dns.zoneTransfers.tsigs.<a href="./src/resources/dns/zone-transfers/tsigs.ts">list</a>({ ...params }) -> TSIGsSinglePage</code>
+- <code title="delete /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.dns.zoneTransfers.tsigs.<a href="./src/resources/dns/zone-transfers/tsigs.ts">delete</a>(tsigID, { ...params }) -> TSIGDeleteResponse</code>
+- <code title="get /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.dns.zoneTransfers.tsigs.<a href="./src/resources/dns/zone-transfers/tsigs.ts">get</a>(tsigID, { ...params }) -> TSIG</code>
+
+# EmailSecurity
+
+## Investigate
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/investigate.ts">InvestigateListResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/investigate.ts">InvestigateGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate/investigate.ts">list</a>({ ...params }) -> InvestigateListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate/investigate.ts">get</a>(postfixID, { ...params }) -> InvestigateGetResponse</code>
+
+### Detections
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/detections.ts">DetectionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/detections">client.emailSecurity.investigate.detections.<a href="./src/resources/email-security/investigate/detections.ts">get</a>(postfixID, { ...params }) -> DetectionGetResponse</code>
+
+### Preview
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/preview.ts">PreviewCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/preview.ts">PreviewGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/investigate/preview">client.emailSecurity.investigate.preview.<a href="./src/resources/email-security/investigate/preview.ts">create</a>({ ...params }) -> PreviewCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/preview">client.emailSecurity.investigate.preview.<a href="./src/resources/email-security/investigate/preview.ts">get</a>(postfixID, { ...params }) -> PreviewGetResponse</code>
+
+### Raw
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/raw.ts">RawGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/raw">client.emailSecurity.investigate.raw.<a href="./src/resources/email-security/investigate/raw.ts">get</a>(postfixID, { ...params }) -> RawGetResponse</code>
+
+### Trace
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/trace.ts">TraceGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/trace">client.emailSecurity.investigate.trace.<a href="./src/resources/email-security/investigate/trace.ts">get</a>(postfixID, { ...params }) -> TraceGetResponse</code>
+
+### Move
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/move.ts">MoveCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/move.ts">MoveBulkResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/investigate/{postfix_id}/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">create</a>(postfixID, { ...params }) -> MoveCreateResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/email-security/investigate/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">bulk</a>({ ...params }) -> MoveBulkResponsesSinglePage</code>
+
+### Reclassify
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/reclassify.ts">ReclassifyCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/investigate/{postfix_id}/reclassify">client.emailSecurity.investigate.reclassify.<a href="./src/resources/email-security/investigate/reclassify.ts">create</a>(postfixID, { ...params }) -> ReclassifyCreateResponse</code>
+
+### Release
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/release.ts">ReleaseBulkResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/investigate/release">client.emailSecurity.investigate.release.<a href="./src/resources/email-security/investigate/release.ts">bulk</a>([ ...body ]) -> ReleaseBulkResponsesSinglePage</code>
+
+## Settings
+
+### AllowPolicies
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/allow_policies">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">create</a>({ ...params }) -> AllowPolicyCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/allow_policies">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">list</a>({ ...params }) -> AllowPolicyListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">delete</a>(policyID, { ...params }) -> AllowPolicyDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">edit</a>(policyID, { ...params }) -> AllowPolicyEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">get</a>(policyID, { ...params }) -> AllowPolicyGetResponse</code>
+
+### BlockSenders
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/block_senders">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">create</a>({ ...params }) -> BlockSenderCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/block_senders">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">list</a>({ ...params }) -> BlockSenderListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">delete</a>(patternID, { ...params }) -> BlockSenderDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">edit</a>(patternID, { ...params }) -> BlockSenderEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">get</a>(patternID, { ...params }) -> BlockSenderGetResponse</code>
+
+### Domains
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainBulkDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/settings/domains">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">list</a>({ ...params }) -> DomainListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">delete</a>(domainID, { ...params }) -> DomainDeleteResponse</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/domains">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">bulkDelete</a>({ ...params }) -> DomainBulkDeleteResponsesSinglePage</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">edit</a>(domainID, { ...params }) -> DomainEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">get</a>(domainID, { ...params }) -> DomainGetResponse</code>
+
+### ImpersonationRegistry
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/impersonation_registry">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">create</a>({ ...params }) -> ImpersonationRegistryCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/impersonation_registry">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">list</a>({ ...params }) -> ImpersonationRegistryListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">delete</a>(displayNameID, { ...params }) -> ImpersonationRegistryDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">edit</a>(displayNameID, { ...params }) -> ImpersonationRegistryEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">get</a>(displayNameID, { ...params }) -> ImpersonationRegistryGetResponse</code>
+
+### TrustedDomains
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/trusted_domains">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">create</a>({ ...params }) -> TrustedDomainCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/trusted_domains">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">list</a>({ ...params }) -> TrustedDomainListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">delete</a>(trustedDomainID, { ...params }) -> TrustedDomainDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">edit</a>(trustedDomainID, { ...params }) -> TrustedDomainEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">get</a>(trustedDomainID, { ...params }) -> TrustedDomainGetResponse</code>
+
+## Submissions
+
+Types:
+
+- <code><a href="./src/resources/email-security/submissions.ts">SubmissionListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/submissions">client.emailSecurity.submissions.<a href="./src/resources/email-security/submissions.ts">list</a>({ ...params }) -> SubmissionListResponsesV4PagePaginationArray</code>
+
+# EmailRouting
+
+Types:
+
+- <code><a href="./src/resources/email-routing/email-routing.ts">Settings</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/email/routing/disable">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">disable</a>({ ...params }) -> Settings</code>
+- <code title="post /zones/{zone_id}/email/routing/enable">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">enable</a>({ ...params }) -> Settings</code>
+- <code title="get /zones/{zone_id}/email/routing">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">get</a>({ ...params }) -> Settings</code>
+
+## DNS
+
+Types:
+
+- <code><a href="./src/resources/email-routing/dns.ts">DNSRecord</a></code>
+- <code><a href="./src/resources/email-routing/dns.ts">DNSGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">create</a>({ ...params }) -> Settings</code>
+- <code title="delete /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">delete</a>({ ...params }) -> DNSRecordsSinglePage</code>
+- <code title="patch /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">edit</a>({ ...params }) -> Settings</code>
+- <code title="get /zones/{zone_id}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">get</a>({ ...params }) -> DNSGetResponse</code>
+
+## Rules
+
+Types:
+
+- <code><a href="./src/resources/email-routing/rules/rules.ts">Action</a></code>
+- <code><a href="./src/resources/email-routing/rules/rules.ts">EmailRoutingRule</a></code>
+- <code><a href="./src/resources/email-routing/rules/rules.ts">Matcher</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/email/routing/rules">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">create</a>({ ...params }) -> EmailRoutingRule</code>
+- <code title="put /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">update</a>(ruleIdentifier, { ...params }) -> EmailRoutingRule</code>
+- <code title="get /zones/{zone_id}/email/routing/rules">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">list</a>({ ...params }) -> EmailRoutingRulesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">delete</a>(ruleIdentifier, { ...params }) -> EmailRoutingRule</code>
+- <code title="get /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">get</a>(ruleIdentifier, { ...params }) -> EmailRoutingRule</code>
+
+### CatchAlls
+
+Types:
+
+- <code><a href="./src/resources/email-routing/rules/catch-alls.ts">CatchAllAction</a></code>
+- <code><a href="./src/resources/email-routing/rules/catch-alls.ts">CatchAllMatcher</a></code>
+- <code><a href="./src/resources/email-routing/rules/catch-alls.ts">CatchAllUpdateResponse</a></code>
+- <code><a href="./src/resources/email-routing/rules/catch-alls.ts">CatchAllGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/email/routing/rules/catch_all">client.emailRouting.rules.catchAlls.<a href="./src/resources/email-routing/rules/catch-alls.ts">update</a>({ ...params }) -> CatchAllUpdateResponse</code>
+- <code title="get /zones/{zone_id}/email/routing/rules/catch_all">client.emailRouting.rules.catchAlls.<a href="./src/resources/email-routing/rules/catch-alls.ts">get</a>({ ...params }) -> CatchAllGetResponse</code>
+
+## Addresses
+
+Types:
+
+- <code><a href="./src/resources/email-routing/addresses.ts">Address</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email/routing/addresses">client.emailRouting.addresses.<a href="./src/resources/email-routing/addresses.ts">create</a>({ ...params }) -> Address</code>
+- <code title="get /accounts/{account_id}/email/routing/addresses">client.emailRouting.addresses.<a href="./src/resources/email-routing/addresses.ts">list</a>({ ...params }) -> AddressesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email/routing/addresses/{destination_address_identifier}">client.emailRouting.addresses.<a href="./src/resources/email-routing/addresses.ts">delete</a>(destinationAddressIdentifier, { ...params }) -> Address</code>
+- <code title="get /accounts/{account_id}/email/routing/addresses/{destination_address_identifier}">client.emailRouting.addresses.<a href="./src/resources/email-routing/addresses.ts">get</a>(destinationAddressIdentifier, { ...params }) -> Address</code>
+
+# Filters
+
+Types:
+
+- <code><a href="./src/resources/filters.ts">FirewallFilter</a></code>
+- <code><a href="./src/resources/filters.ts">FilterDeleteResponse</a></code>
+- <code><a href="./src/resources/filters.ts">FilterBulkDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/filters">client.filters.<a href="./src/resources/filters.ts">create</a>([ ...body ]) -> FirewallFiltersSinglePage</code>
+- <code title="put /zones/{zone_id}/filters/{filter_id}">client.filters.<a href="./src/resources/filters.ts">update</a>(filterID, { ...params }) -> FirewallFilter</code>
+- <code title="get /zones/{zone_id}/filters">client.filters.<a href="./src/resources/filters.ts">list</a>({ ...params }) -> FirewallFiltersV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/filters/{filter_id}">client.filters.<a href="./src/resources/filters.ts">delete</a>(filterID, { ...params }) -> FilterDeleteResponse</code>
+- <code title="delete /zones/{zone_id}/filters">client.filters.<a href="./src/resources/filters.ts">bulkDelete</a>({ ...params }) -> FilterBulkDeleteResponse | null</code>
+- <code title="put /zones/{zone_id}/filters">client.filters.<a href="./src/resources/filters.ts">bulkUpdate</a>([ ...body ]) -> FirewallFiltersSinglePage</code>
+- <code title="get /zones/{zone_id}/filters/{filter_id}">client.filters.<a href="./src/resources/filters.ts">get</a>(filterID, { ...params }) -> FirewallFilter</code>
+
+# Firewall
+
+## Lockdowns
+
+Types:
+
+- <code><a href="./src/resources/firewall/lockdowns.ts">Configuration</a></code>
+- <code><a href="./src/resources/firewall/lockdowns.ts">Lockdown</a></code>
+- <code><a href="./src/resources/firewall/lockdowns.ts">LockdownCIDRConfiguration</a></code>
+- <code><a href="./src/resources/firewall/lockdowns.ts">LockdownIPConfiguration</a></code>
+- <code><a href="./src/resources/firewall/lockdowns.ts">LockdownURL</a></code>
+- <code><a href="./src/resources/firewall/lockdowns.ts">LockdownDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/firewall/lockdowns">client.firewall.lockdowns.<a href="./src/resources/firewall/lockdowns.ts">create</a>({ ...params }) -> Lockdown</code>
+- <code title="put /zones/{zone_id}/firewall/lockdowns/{lock_downs_id}">client.firewall.lockdowns.<a href="./src/resources/firewall/lockdowns.ts">update</a>(lockDownsID, { ...params }) -> Lockdown</code>
+- <code title="get /zones/{zone_id}/firewall/lockdowns">client.firewall.lockdowns.<a href="./src/resources/firewall/lockdowns.ts">list</a>({ ...params }) -> LockdownsV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/firewall/lockdowns/{lock_downs_id}">client.firewall.lockdowns.<a href="./src/resources/firewall/lockdowns.ts">delete</a>(lockDownsID, { ...params }) -> LockdownDeleteResponse</code>
+- <code title="get /zones/{zone_id}/firewall/lockdowns/{lock_downs_id}">client.firewall.lockdowns.<a href="./src/resources/firewall/lockdowns.ts">get</a>(lockDownsID, { ...params }) -> Lockdown</code>
+
+## Rules
+
+Types:
+
+- <code><a href="./src/resources/firewall/rules.ts">DeletedFilter</a></code>
+- <code><a href="./src/resources/firewall/rules.ts">FirewallRule</a></code>
+- <code><a href="./src/resources/firewall/rules.ts">Product</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/firewall/rules">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">create</a>({ ...params }) -> FirewallRulesSinglePage</code>
+- <code title="put /zones/{zone_id}/firewall/rules/{rule_id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">update</a>(ruleID, { ...params }) -> FirewallRule</code>
+- <code title="get /zones/{zone_id}/firewall/rules">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">list</a>({ ...params }) -> FirewallRulesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/firewall/rules/{rule_id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">delete</a>(ruleID, { ...params }) -> FirewallRule</code>
+- <code title="delete /zones/{zone_id}/firewall/rules">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">bulkDelete</a>({ ...params }) -> FirewallRulesSinglePage</code>
+- <code title="patch /zones/{zone_id}/firewall/rules">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">bulkEdit</a>({ ...params }) -> FirewallRulesSinglePage</code>
+- <code title="put /zones/{zone_id}/firewall/rules">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">bulkUpdate</a>({ ...params }) -> FirewallRulesSinglePage</code>
+- <code title="patch /zones/{zone_id}/firewall/rules/{rule_id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">edit</a>(ruleID, { ...params }) -> FirewallRulesSinglePage</code>
+- <code title="get /zones/{zone_id}/firewall/rules/{rule_id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">get</a>(ruleID, { ...params }) -> FirewallRule</code>
+
+## AccessRules
+
+Types:
+
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleCIDRConfiguration</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleIPConfiguration</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">ASNConfiguration</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">CountryConfiguration</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">IPV6Configuration</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleCreateResponse</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleListResponse</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleDeleteResponse</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleEditResponse</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleGetResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/firewall/access_rules/rules">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">create</a>({ ...params }) -> AccessRuleCreateResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/firewall/access_rules/rules">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">list</a>({ ...params }) -> AccessRuleListResponsesV4PagePaginationArray</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/firewall/access_rules/rules/{rule_id}">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">delete</a>(ruleID, { ...params }) -> AccessRuleDeleteResponse | null</code>
+- <code title="patch /{accounts_or_zones}/{account_or_zone_id}/firewall/access_rules/rules/{rule_id}">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">edit</a>(ruleID, { ...params }) -> AccessRuleEditResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/firewall/access_rules/rules/{rule_id}">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">get</a>(ruleID, { ...params }) -> AccessRuleGetResponse</code>
+
+## UARules
+
+Types:
+
+- <code><a href="./src/resources/firewall/ua-rules.ts">UARuleCreateResponse</a></code>
+- <code><a href="./src/resources/firewall/ua-rules.ts">UARuleUpdateResponse</a></code>
+- <code><a href="./src/resources/firewall/ua-rules.ts">UARuleListResponse</a></code>
+- <code><a href="./src/resources/firewall/ua-rules.ts">UARuleDeleteResponse</a></code>
+- <code><a href="./src/resources/firewall/ua-rules.ts">UARuleGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/firewall/ua_rules">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">create</a>({ ...params }) -> UARuleCreateResponse</code>
+- <code title="put /zones/{zone_id}/firewall/ua_rules/{ua_rule_id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">update</a>(uaRuleID, { ...params }) -> UARuleUpdateResponse</code>
+- <code title="get /zones/{zone_id}/firewall/ua_rules">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">list</a>({ ...params }) -> UARuleListResponsesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/firewall/ua_rules/{ua_rule_id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">delete</a>(uaRuleID, { ...params }) -> UARuleDeleteResponse</code>
+- <code title="get /zones/{zone_id}/firewall/ua_rules/{ua_rule_id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">get</a>(uaRuleID, { ...params }) -> UARuleGetResponse</code>
+
+## WAF
+
+### Overrides
+
+Types:
+
+- <code><a href="./src/resources/firewall/waf/overrides.ts">Override</a></code>
+- <code><a href="./src/resources/firewall/waf/overrides.ts">OverrideURL</a></code>
+- <code><a href="./src/resources/firewall/waf/overrides.ts">RewriteAction</a></code>
+- <code><a href="./src/resources/firewall/waf/overrides.ts">WAFRule</a></code>
+- <code><a href="./src/resources/firewall/waf/overrides.ts">OverrideDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/firewall/waf/overrides">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">create</a>({ ...params }) -> Override</code>
+- <code title="put /zones/{zone_id}/firewall/waf/overrides/{overrides_id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">update</a>(overridesID, { ...params }) -> Override</code>
+- <code title="get /zones/{zone_id}/firewall/waf/overrides">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">list</a>({ ...params }) -> OverridesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/firewall/waf/overrides/{overrides_id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">delete</a>(overridesID, { ...params }) -> OverrideDeleteResponse</code>
+- <code title="get /zones/{zone_id}/firewall/waf/overrides/{overrides_id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">get</a>(overridesID, { ...params }) -> Override</code>
+
+### Packages
+
+Types:
+
+- <code><a href="./src/resources/firewall/waf/packages/packages.ts">PackageListResponse</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/packages.ts">PackageGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/firewall/waf/packages">client.firewall.waf.packages.<a href="./src/resources/firewall/waf/packages/packages.ts">list</a>({ ...params }) -> PackageListResponsesV4PagePaginationArray</code>
+- <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}">client.firewall.waf.packages.<a href="./src/resources/firewall/waf/packages/packages.ts">get</a>(packageID, { ...params }) -> PackageGetResponse</code>
+
+#### Groups
+
+Types:
+
+- <code><a href="./src/resources/firewall/waf/packages/groups.ts">Group</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/groups.ts">GroupEditResponse</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/groups.ts">GroupGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/groups">client.firewall.waf.packages.groups.<a href="./src/resources/firewall/waf/packages/groups.ts">list</a>(packageID, { ...params }) -> GroupsV4PagePaginationArray</code>
+- <code title="patch /zones/{zone_id}/firewall/waf/packages/{package_id}/groups/{group_id}">client.firewall.waf.packages.groups.<a href="./src/resources/firewall/waf/packages/groups.ts">edit</a>(groupID, { ...params }) -> GroupEditResponse</code>
+- <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/groups/{group_id}">client.firewall.waf.packages.groups.<a href="./src/resources/firewall/waf/packages/groups.ts">get</a>(groupID, { ...params }) -> GroupGetResponse</code>
+
+#### Rules
+
+Types:
+
+- <code><a href="./src/resources/firewall/waf/packages/rules.ts">AllowedModesAnomaly</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/rules.ts">WAFRuleGroup</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleListResponse</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleEditResponse</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/rules">client.firewall.waf.packages.rules.<a href="./src/resources/firewall/waf/packages/rules.ts">list</a>(packageID, { ...params }) -> RuleListResponsesV4PagePaginationArray</code>
+- <code title="patch /zones/{zone_id}/firewall/waf/packages/{package_id}/rules/{rule_id}">client.firewall.waf.packages.rules.<a href="./src/resources/firewall/waf/packages/rules.ts">edit</a>(ruleID, { ...params }) -> RuleEditResponse</code>
+- <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/rules/{rule_id}">client.firewall.waf.packages.rules.<a href="./src/resources/firewall/waf/packages/rules.ts">get</a>(ruleID, { ...params }) -> RuleGetResponse</code>
+
+# Healthchecks
+
+Types:
+
+- <code><a href="./src/resources/healthchecks/healthchecks.ts">CheckRegion</a></code>
+- <code><a href="./src/resources/healthchecks/healthchecks.ts">Healthcheck</a></code>
+- <code><a href="./src/resources/healthchecks/healthchecks.ts">HTTPConfiguration</a></code>
+- <code><a href="./src/resources/healthchecks/healthchecks.ts">QueryHealthcheck</a></code>
+- <code><a href="./src/resources/healthchecks/healthchecks.ts">TCPConfiguration</a></code>
+- <code><a href="./src/resources/healthchecks/healthchecks.ts">HealthcheckDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/healthchecks">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">create</a>({ ...params }) -> Healthcheck</code>
+- <code title="put /zones/{zone_id}/healthchecks/{healthcheck_id}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">update</a>(healthcheckID, { ...params }) -> Healthcheck</code>
+- <code title="get /zones/{zone_id}/healthchecks">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">list</a>({ ...params }) -> HealthchecksV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/healthchecks/{healthcheck_id}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">delete</a>(healthcheckID, { ...params }) -> HealthcheckDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/healthchecks/{healthcheck_id}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">edit</a>(healthcheckID, { ...params }) -> Healthcheck</code>
+- <code title="get /zones/{zone_id}/healthchecks/{healthcheck_id}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">get</a>(healthcheckID, { ...params }) -> Healthcheck</code>
+
+## Previews
+
+Types:
+
+- <code><a href="./src/resources/healthchecks/previews.ts">PreviewDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/healthchecks/preview">client.healthchecks.previews.<a href="./src/resources/healthchecks/previews.ts">create</a>({ ...params }) -> Healthcheck</code>
+- <code title="delete /zones/{zone_id}/healthchecks/preview/{healthcheck_id}">client.healthchecks.previews.<a href="./src/resources/healthchecks/previews.ts">delete</a>(healthcheckID, { ...params }) -> PreviewDeleteResponse</code>
+- <code title="get /zones/{zone_id}/healthchecks/preview/{healthcheck_id}">client.healthchecks.previews.<a href="./src/resources/healthchecks/previews.ts">get</a>(healthcheckID, { ...params }) -> Healthcheck</code>
+
+# KeylessCertificates
+
+Types:
+
+- <code><a href="./src/resources/keyless-certificates.ts">KeylessCertificate</a></code>
+- <code><a href="./src/resources/keyless-certificates.ts">Tunnel</a></code>
+- <code><a href="./src/resources/keyless-certificates.ts">KeylessCertificateDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/keyless_certificates">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">create</a>({ ...params }) -> KeylessCertificate</code>
+- <code title="get /zones/{zone_id}/keyless_certificates">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">list</a>({ ...params }) -> KeylessCertificatesSinglePage</code>
+- <code title="delete /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">delete</a>(keylessCertificateID, { ...params }) -> KeylessCertificateDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">edit</a>(keylessCertificateID, { ...params }) -> KeylessCertificate</code>
+- <code title="get /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">get</a>(keylessCertificateID, { ...params }) -> KeylessCertificate</code>
+
+# Logpush
+
+## Datasets
+
+### Fields
+
+Types:
+
+- <code><a href="./src/resources/logpush/datasets/fields.ts">FieldGetResponse</a></code>
+
+Methods:
+
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/logpush/datasets/{dataset_id}/fields">client.logpush.datasets.fields.<a href="./src/resources/logpush/datasets/fields.ts">get</a>(datasetID, { ...params }) -> FieldGetResponse</code>
+
+### Jobs
+
+Methods:
+
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/logpush/datasets/{dataset_id}/jobs">client.logpush.datasets.jobs.<a href="./src/resources/logpush/datasets/jobs.ts">get</a>(datasetID, { ...params }) -> LogpushJobsSinglePage</code>
+
+## Edge
+
+Types:
+
+- <code><a href="./src/resources/logpush/edge.ts">InstantLogpushJob</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/logpush/edge/jobs">client.logpush.edge.<a href="./src/resources/logpush/edge.ts">create</a>({ ...params }) -> InstantLogpushJob | null</code>
+- <code title="get /zones/{zone_id}/logpush/edge/jobs">client.logpush.edge.<a href="./src/resources/logpush/edge.ts">get</a>({ ...params }) -> InstantLogpushJobsSinglePage</code>
+
+## Jobs
+
+Types:
+
+- <code><a href="./src/resources/logpush/jobs.ts">LogpushJob</a></code>
+- <code><a href="./src/resources/logpush/jobs.ts">OutputOptions</a></code>
+- <code><a href="./src/resources/logpush/jobs.ts">JobDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">create</a>({ ...params }) -> LogpushJob | null</code>
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">update</a>(jobID, { ...params }) -> LogpushJob | null</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">list</a>({ ...params }) -> LogpushJobsSinglePage</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">delete</a>(jobID, { ...params }) -> JobDeleteResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">get</a>(jobID, { ...params }) -> LogpushJob | null</code>
+
+## Ownership
+
+Types:
+
+- <code><a href="./src/resources/logpush/ownership.ts">OwnershipValidation</a></code>
+- <code><a href="./src/resources/logpush/ownership.ts">OwnershipCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/logpush/ownership">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">create</a>({ ...params }) -> OwnershipCreateResponse | null</code>
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/logpush/ownership/validate">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">validate</a>({ ...params }) -> OwnershipValidation | null</code>
+
+## Validate
+
+Types:
+
+- <code><a href="./src/resources/logpush/validate.ts">ValidateDestinationResponse</a></code>
+- <code><a href="./src/resources/logpush/validate.ts">ValidateDestinationExistsResponse</a></code>
+- <code><a href="./src/resources/logpush/validate.ts">ValidateOriginResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/logpush/validate/destination">client.logpush.validate.<a href="./src/resources/logpush/validate.ts">destination</a>({ ...params }) -> ValidateDestinationResponse | null</code>
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/logpush/validate/destination/exists">client.logpush.validate.<a href="./src/resources/logpush/validate.ts">destinationExists</a>({ ...params }) -> ValidateDestinationExistsResponse | null</code>
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/logpush/validate/origin">client.logpush.validate.<a href="./src/resources/logpush/validate.ts">origin</a>({ ...params }) -> ValidateOriginResponse | null</code>
+
+# Logs
+
+## Control
+
+### Retention
+
+Types:
+
+- <code><a href="./src/resources/logs/control/retention.ts">RetentionCreateResponse</a></code>
+- <code><a href="./src/resources/logs/control/retention.ts">RetentionGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/logs/control/retention/flag">client.logs.control.retention.<a href="./src/resources/logs/control/retention.ts">create</a>({ ...params }) -> RetentionCreateResponse | null</code>
+- <code title="get /zones/{zone_id}/logs/control/retention/flag">client.logs.control.retention.<a href="./src/resources/logs/control/retention.ts">get</a>({ ...params }) -> RetentionGetResponse | null</code>
+
+### Cmb
+
+#### Config
+
+Types:
+
+- <code><a href="./src/resources/logs/control/cmb/config.ts">CmbConfig</a></code>
+- <code><a href="./src/resources/logs/control/cmb/config.ts">ConfigDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/logs/control/cmb/config">client.logs.control.cmb.config.<a href="./src/resources/logs/control/cmb/config.ts">create</a>({ ...params }) -> CmbConfig | null</code>
+- <code title="delete /accounts/{account_id}/logs/control/cmb/config">client.logs.control.cmb.config.<a href="./src/resources/logs/control/cmb/config.ts">delete</a>({ ...params }) -> ConfigDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/logs/control/cmb/config">client.logs.control.cmb.config.<a href="./src/resources/logs/control/cmb/config.ts">get</a>({ ...params }) -> CmbConfig | null</code>
+
+## RayID
+
+Types:
+
+- <code><a href="./src/resources/logs/rayid.ts">RayIDGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/logs/rayids/{ray_id}">client.logs.RayID.<a href="./src/resources/logs/rayid.ts">get</a>(RayID, { ...params }) -> RayIDGetResponse</code>
+
+## Received
+
+Types:
+
+- <code><a href="./src/resources/logs/received/received.ts">ReceivedGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/logs/received">client.logs.received.<a href="./src/resources/logs/received/received.ts">get</a>({ ...params }) -> ReceivedGetResponse</code>
+
+### Fields
+
+Types:
+
+- <code><a href="./src/resources/logs/received/fields.ts">FieldGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/logs/received/fields">client.logs.received.fields.<a href="./src/resources/logs/received/fields.ts">get</a>({ ...params }) -> FieldGetResponse</code>
+
+# OriginTLSClientAuth
+
+Types:
+
+- <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">OriginTLSClientAuthCreateResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">OriginTLSClientAuthListResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">OriginTLSClientAuthDeleteResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">OriginTLSClientAuthGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/origin_tls_client_auth">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">create</a>({ ...params }) -> OriginTLSClientAuthCreateResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">list</a>({ ...params }) -> OriginTLSClientAuthListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">delete</a>(certificateID, { ...params }) -> OriginTLSClientAuthDeleteResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">get</a>(certificateID, { ...params }) -> OriginTLSClientAuthGetResponse</code>
+
+## ZoneCertificates
+
+Types:
+
+- <code><a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">ZoneAuthenticatedOriginPull</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">ZoneCertificateCreateResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">ZoneCertificateListResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">ZoneCertificateDeleteResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">ZoneCertificateGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/origin_tls_client_auth">client.originTLSClientAuth.zoneCertificates.<a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">create</a>({ ...params }) -> ZoneCertificateCreateResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth">client.originTLSClientAuth.zoneCertificates.<a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">list</a>({ ...params }) -> ZoneCertificateListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.zoneCertificates.<a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">delete</a>(certificateID, { ...params }) -> ZoneCertificateDeleteResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.zoneCertificates.<a href="./src/resources/origin-tls-client-auth/zone-certificates.ts">get</a>(certificateID, { ...params }) -> ZoneCertificateGetResponse</code>
+
+## Hostnames
+
+Types:
+
+- <code><a href="./src/resources/origin-tls-client-auth/hostnames.ts">AuthenticatedOriginPull</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostnames.ts">HostnameUpdateResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/origin_tls_client_auth/hostnames">client.originTLSClientAuth.hostnames.<a href="./src/resources/origin-tls-client-auth/hostnames.ts">update</a>({ ...params }) -> HostnameUpdateResponsesSinglePage</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/{hostname}">client.originTLSClientAuth.hostnames.<a href="./src/resources/origin-tls-client-auth/hostnames.ts">get</a>(hostname, { ...params }) -> AuthenticatedOriginPull</code>
+
+## HostnameCertificates
+
+Types:
+
+- <code><a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">Certificate</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">HostnameCertificateCreateResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">HostnameCertificateListResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">HostnameCertificateDeleteResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">HostnameCertificateGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates">client.originTLSClientAuth.hostnameCertificates.<a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">create</a>({ ...params }) -> HostnameCertificateCreateResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates">client.originTLSClientAuth.hostnameCertificates.<a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">list</a>({ ...params }) -> HostnameCertificateListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}">client.originTLSClientAuth.hostnameCertificates.<a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">delete</a>(certificateID, { ...params }) -> HostnameCertificateDeleteResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}">client.originTLSClientAuth.hostnameCertificates.<a href="./src/resources/origin-tls-client-auth/hostname-certificates.ts">get</a>(certificateID, { ...params }) -> HostnameCertificateGetResponse</code>
+
+## Settings
+
+Types:
+
+- <code><a href="./src/resources/origin-tls-client-auth/settings.ts">SettingUpdateResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/settings.ts">SettingGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/origin_tls_client_auth/settings">client.originTLSClientAuth.settings.<a href="./src/resources/origin-tls-client-auth/settings.ts">update</a>({ ...params }) -> SettingUpdateResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/settings">client.originTLSClientAuth.settings.<a href="./src/resources/origin-tls-client-auth/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
+
+# PageRules
+
+Types:
+
+- <code><a href="./src/resources/page-rules.ts">PageRule</a></code>
+- <code><a href="./src/resources/page-rules.ts">Target</a></code>
+- <code><a href="./src/resources/page-rules.ts">PageRuleListResponse</a></code>
+- <code><a href="./src/resources/page-rules.ts">PageRuleDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/pagerules">client.pageRules.<a href="./src/resources/page-rules.ts">create</a>({ ...params }) -> PageRule</code>
+- <code title="put /zones/{zone_id}/pagerules/{pagerule_id}">client.pageRules.<a href="./src/resources/page-rules.ts">update</a>(pageruleID, { ...params }) -> PageRule</code>
+- <code title="get /zones/{zone_id}/pagerules">client.pageRules.<a href="./src/resources/page-rules.ts">list</a>({ ...params }) -> PageRuleListResponse</code>
+- <code title="delete /zones/{zone_id}/pagerules/{pagerule_id}">client.pageRules.<a href="./src/resources/page-rules.ts">delete</a>(pageruleID, { ...params }) -> PageRuleDeleteResponse | null</code>
+- <code title="patch /zones/{zone_id}/pagerules/{pagerule_id}">client.pageRules.<a href="./src/resources/page-rules.ts">edit</a>(pageruleID, { ...params }) -> PageRule</code>
+- <code title="get /zones/{zone_id}/pagerules/{pagerule_id}">client.pageRules.<a href="./src/resources/page-rules.ts">get</a>(pageruleID, { ...params }) -> PageRule</code>
+
+# RateLimits
+
+Types:
+
+- <code><a href="./src/resources/rate-limits.ts">Action</a></code>
+- <code><a href="./src/resources/rate-limits.ts">RateLimit</a></code>
+- <code><a href="./src/resources/rate-limits.ts">RateLimitDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/rate_limits">client.rateLimits.<a href="./src/resources/rate-limits.ts">create</a>({ ...params }) -> RateLimit</code>
+- <code title="get /zones/{zone_id}/rate_limits">client.rateLimits.<a href="./src/resources/rate-limits.ts">list</a>({ ...params }) -> RateLimitsV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/rate_limits/{rate_limit_id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">delete</a>(rateLimitID, { ...params }) -> RateLimitDeleteResponse</code>
+- <code title="put /zones/{zone_id}/rate_limits/{rate_limit_id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">edit</a>(rateLimitID, { ...params }) -> RateLimit</code>
+- <code title="get /zones/{zone_id}/rate_limits/{rate_limit_id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">get</a>(rateLimitID, { ...params }) -> RateLimit</code>
+
+# WaitingRooms
+
+Types:
+
+- <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">AdditionalRoutes</a></code>
+- <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">CookieAttributes</a></code>
+- <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">Query</a></code>
+- <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">WaitingRoom</a></code>
+- <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">WaitingRoomDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/waiting_rooms">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">create</a>({ ...params }) -> WaitingRoom</code>
+- <code title="put /zones/{zone_id}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">update</a>(waitingRoomID, { ...params }) -> WaitingRoom</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/waiting_rooms">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">list</a>({ ...params }) -> WaitingRoomsV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">delete</a>(waitingRoomID, { ...params }) -> WaitingRoomDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">edit</a>(waitingRoomID, { ...params }) -> WaitingRoom</code>
+- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">get</a>(waitingRoomID, { ...params }) -> WaitingRoom</code>
+
+## Page
+
+Types:
+
+- <code><a href="./src/resources/waiting-rooms/page.ts">PagePreviewResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/waiting_rooms/preview">client.waitingRooms.page.<a href="./src/resources/waiting-rooms/page.ts">preview</a>({ ...params }) -> PagePreviewResponse</code>
+
+## Events
+
+Types:
+
+- <code><a href="./src/resources/waiting-rooms/events/events.ts">Event</a></code>
+- <code><a href="./src/resources/waiting-rooms/events/events.ts">EventDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">create</a>(waitingRoomID, { ...params }) -> Event</code>
+- <code title="put /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">update</a>(eventID, { ...params }) -> Event</code>
+- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">list</a>(waitingRoomID, { ...params }) -> EventsV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">delete</a>(eventID, { ...params }) -> EventDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">edit</a>(eventID, { ...params }) -> Event</code>
+- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">get</a>(eventID, { ...params }) -> Event</code>
+
+### Details
+
+Types:
+
+- <code><a href="./src/resources/waiting-rooms/events/details.ts">EventQuery</a></code>
+- <code><a href="./src/resources/waiting-rooms/events/details.ts">DetailGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}/details">client.waitingRooms.events.details.<a href="./src/resources/waiting-rooms/events/details.ts">get</a>(eventID, { ...params }) -> DetailGetResponse</code>
+
+## Rules
+
+Types:
+
+- <code><a href="./src/resources/waiting-rooms/rules.ts">WaitingRoomRule</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">create</a>(waitingRoomID, { ...params }) -> WaitingRoomRulesSinglePage</code>
+- <code title="put /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">update</a>(waitingRoomID, [ ...rules ]) -> WaitingRoomRulesSinglePage</code>
+- <code title="delete /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules/{rule_id}">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">delete</a>(ruleID, { ...params }) -> WaitingRoomRulesSinglePage</code>
+- <code title="patch /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules/{rule_id}">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">edit</a>(ruleID, { ...params }) -> WaitingRoomRulesSinglePage</code>
+- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">get</a>(waitingRoomID, { ...params }) -> WaitingRoomRulesSinglePage</code>
+
+## Statuses
+
+Types:
+
+- <code><a href="./src/resources/waiting-rooms/statuses.ts">StatusGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/status">client.waitingRooms.statuses.<a href="./src/resources/waiting-rooms/statuses.ts">get</a>(waitingRoomID, { ...params }) -> StatusGetResponse</code>
+
+## Settings
+
+Types:
+
+- <code><a href="./src/resources/waiting-rooms/settings.ts">Setting</a></code>
+- <code><a href="./src/resources/waiting-rooms/settings.ts">SettingUpdateResponse</a></code>
+- <code><a href="./src/resources/waiting-rooms/settings.ts">SettingEditResponse</a></code>
+- <code><a href="./src/resources/waiting-rooms/settings.ts">SettingGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/waiting_rooms/settings">client.waitingRooms.settings.<a href="./src/resources/waiting-rooms/settings.ts">update</a>({ ...params }) -> SettingUpdateResponse</code>
+- <code title="patch /zones/{zone_id}/waiting_rooms/settings">client.waitingRooms.settings.<a href="./src/resources/waiting-rooms/settings.ts">edit</a>({ ...params }) -> SettingEditResponse</code>
+- <code title="get /zones/{zone_id}/waiting_rooms/settings">client.waitingRooms.settings.<a href="./src/resources/waiting-rooms/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
+
+# Web3
+
+## Hostnames
+
+Types:
+
+- <code><a href="./src/resources/web3/hostnames/hostnames.ts">Hostname</a></code>
+- <code><a href="./src/resources/web3/hostnames/hostnames.ts">HostnameDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/web3/hostnames">client.web3.hostnames.<a href="./src/resources/web3/hostnames/hostnames.ts">create</a>({ ...params }) -> Hostname</code>
+- <code title="get /zones/{zone_id}/web3/hostnames">client.web3.hostnames.<a href="./src/resources/web3/hostnames/hostnames.ts">list</a>({ ...params }) -> HostnamesSinglePage</code>
+- <code title="delete /zones/{zone_id}/web3/hostnames/{identifier}">client.web3.hostnames.<a href="./src/resources/web3/hostnames/hostnames.ts">delete</a>(identifier, { ...params }) -> HostnameDeleteResponse | null</code>
+- <code title="patch /zones/{zone_id}/web3/hostnames/{identifier}">client.web3.hostnames.<a href="./src/resources/web3/hostnames/hostnames.ts">edit</a>(identifier, { ...params }) -> Hostname</code>
+- <code title="get /zones/{zone_id}/web3/hostnames/{identifier}">client.web3.hostnames.<a href="./src/resources/web3/hostnames/hostnames.ts">get</a>(identifier, { ...params }) -> Hostname</code>
+
+### IPFSUniversalPaths
+
+#### ContentLists
+
+Types:
+
+- <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/content-lists.ts">ContentList</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list">client.web3.hostnames.ipfsUniversalPaths.contentLists.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/content-lists.ts">update</a>(identifier, { ...params }) -> ContentList</code>
+- <code title="get /zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list">client.web3.hostnames.ipfsUniversalPaths.contentLists.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/content-lists.ts">get</a>(identifier, { ...params }) -> ContentList</code>
+
+##### Entries
+
+Types:
+
+- <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">EntryCreateResponse</a></code>
+- <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">EntryUpdateResponse</a></code>
+- <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">EntryListResponse</a></code>
+- <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">EntryDeleteResponse</a></code>
+- <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">EntryGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">create</a>(identifier, { ...params }) -> EntryCreateResponse</code>
+- <code title="put /zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">update</a>(contentListEntryIdentifier, { ...params }) -> EntryUpdateResponse</code>
+- <code title="get /zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">list</a>(identifier, { ...params }) -> EntryListResponse | null</code>
+- <code title="delete /zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">delete</a>(contentListEntryIdentifier, { ...params }) -> EntryDeleteResponse | null</code>
+- <code title="get /zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">get</a>(contentListEntryIdentifier, { ...params }) -> EntryGetResponse</code>
+
+# Workers
+
+Types:
+
+- <code><a href="./src/resources/workers/workers.ts">MigrationStep</a></code>
+- <code><a href="./src/resources/workers/workers.ts">SingleStepMigration</a></code>
+- <code><a href="./src/resources/workers/workers.ts">WorkerMetadata</a></code>
+
+## Beta
+
+### Workers
+
+Types:
+
+- <code><a href="./src/resources/workers/beta/workers/workers.ts">Worker</a></code>
+- <code><a href="./src/resources/workers/beta/workers/workers.ts">WorkerDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/workers">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">create</a>({ ...params }) -> Worker</code>
+- <code title="put /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">update</a>(workerID, { ...params }) -> Worker</code>
+- <code title="get /accounts/{account_id}/workers/workers">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">list</a>({ ...params }) -> WorkersV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">delete</a>(workerID, { ...params }) -> WorkerDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">edit</a>(workerID, { ...params }) -> Worker</code>
+- <code title="get /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">get</a>(workerID, { ...params }) -> Worker</code>
+
+#### Versions
+
+Types:
+
+- <code><a href="./src/resources/workers/beta/workers/versions.ts">Version</a></code>
+- <code><a href="./src/resources/workers/beta/workers/versions.ts">VersionDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/workers/{worker_id}/versions">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">create</a>(workerID, { ...params }) -> Version</code>
+- <code title="get /accounts/{account_id}/workers/workers/{worker_id}/versions">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">list</a>(workerID, { ...params }) -> VersionsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/workers/workers/{worker_id}/versions/{version_id}">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">delete</a>(versionID, { ...params }) -> VersionDeleteResponse</code>
+- <code title="get /accounts/{account_id}/workers/workers/{worker_id}/versions/{version_id}">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">get</a>(versionID, { ...params }) -> Version</code>
+
+## Routes
+
+Types:
+
+- <code><a href="./src/resources/workers/routes.ts">RouteCreateResponse</a></code>
+- <code><a href="./src/resources/workers/routes.ts">RouteUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/routes.ts">RouteListResponse</a></code>
+- <code><a href="./src/resources/workers/routes.ts">RouteDeleteResponse</a></code>
+- <code><a href="./src/resources/workers/routes.ts">RouteGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/workers/routes">client.workers.routes.<a href="./src/resources/workers/routes.ts">create</a>({ ...params }) -> RouteCreateResponse</code>
+- <code title="put /zones/{zone_id}/workers/routes/{route_id}">client.workers.routes.<a href="./src/resources/workers/routes.ts">update</a>(routeID, { ...params }) -> RouteUpdateResponse</code>
+- <code title="get /zones/{zone_id}/workers/routes">client.workers.routes.<a href="./src/resources/workers/routes.ts">list</a>({ ...params }) -> RouteListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/workers/routes/{route_id}">client.workers.routes.<a href="./src/resources/workers/routes.ts">delete</a>(routeID, { ...params }) -> RouteDeleteResponse</code>
+- <code title="get /zones/{zone_id}/workers/routes/{route_id}">client.workers.routes.<a href="./src/resources/workers/routes.ts">get</a>(routeID, { ...params }) -> RouteGetResponse</code>
+
+## Assets
+
+### Upload
+
+Types:
+
+- <code><a href="./src/resources/workers/assets/upload.ts">UploadCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/assets/upload">client.workers.assets.upload.<a href="./src/resources/workers/assets/upload.ts">create</a>({ ...params }) -> UploadCreateResponse</code>
+
+## Scripts
+
+Types:
+
+- <code><a href="./src/resources/workers/scripts/scripts.ts">Script</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptSetting</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptListResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptDeleteResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptGetResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptSearchResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">update</a>(scriptName, { ...params }) -> ScriptUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">list</a>({ ...params }) -> ScriptListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">delete</a>(scriptName, { ...params }) -> ScriptDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> string</code>
+- <code title="get /accounts/{account_id}/workers/scripts-search">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">search</a>({ ...params }) -> ScriptSearchResponse</code>
+
+### Assets
+
+#### Upload
+
+Types:
+
+- <code><a href="./src/resources/workers/scripts/assets/upload.ts">UploadCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/scripts/{script_name}/assets-upload-session">client.workers.scripts.assets.upload.<a href="./src/resources/workers/scripts/assets/upload.ts">create</a>(scriptName, { ...params }) -> UploadCreateResponse</code>
+
+### Subdomain
+
+Types:
+
+- <code><a href="./src/resources/workers/scripts/subdomain.ts">SubdomainCreateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/subdomain.ts">SubdomainDeleteResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/subdomain.ts">SubdomainGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/scripts/{script_name}/subdomain">client.workers.scripts.subdomain.<a href="./src/resources/workers/scripts/subdomain.ts">create</a>(scriptName, { ...params }) -> SubdomainCreateResponse</code>
+- <code title="delete /accounts/{account_id}/workers/scripts/{script_name}/subdomain">client.workers.scripts.subdomain.<a href="./src/resources/workers/scripts/subdomain.ts">delete</a>(scriptName, { ...params }) -> SubdomainDeleteResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/subdomain">client.workers.scripts.subdomain.<a href="./src/resources/workers/scripts/subdomain.ts">get</a>(scriptName, { ...params }) -> SubdomainGetResponse</code>
+
+### Schedules
+
+Types:
+
+- <code><a href="./src/resources/workers/scripts/schedules.ts">ScheduleUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/schedules.ts">ScheduleGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/scripts/{script_name}/schedules">client.workers.scripts.schedules.<a href="./src/resources/workers/scripts/schedules.ts">update</a>(scriptName, [ ...body ]) -> ScheduleUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/schedules">client.workers.scripts.schedules.<a href="./src/resources/workers/scripts/schedules.ts">get</a>(scriptName, { ...params }) -> ScheduleGetResponse</code>
+
+### Tail
+
+Types:
+
+- <code><a href="./src/resources/workers/scripts/tail.ts">ConsumerScript</a></code>
+- <code><a href="./src/resources/workers/scripts/tail.ts">TailCreateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/tail.ts">TailDeleteResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/tail.ts">TailGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/scripts/{script_name}/tails">client.workers.scripts.tail.<a href="./src/resources/workers/scripts/tail.ts">create</a>(scriptName, { ...params }) -> TailCreateResponse</code>
+- <code title="delete /accounts/{account_id}/workers/scripts/{script_name}/tails/{id}">client.workers.scripts.tail.<a href="./src/resources/workers/scripts/tail.ts">delete</a>(id, { ...params }) -> TailDeleteResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/tails">client.workers.scripts.tail.<a href="./src/resources/workers/scripts/tail.ts">get</a>(scriptName, { ...params }) -> TailGetResponse</code>
+
+### Content
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/scripts/{script_name}/content">client.workers.scripts.content.<a href="./src/resources/workers/scripts/content.ts">update</a>(scriptName, { ...params }) -> Script</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/content/v2">client.workers.scripts.content.<a href="./src/resources/workers/scripts/content.ts">get</a>(scriptName, { ...params }) -> Response</code>
+
+### Settings
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/workers/scripts/{script_name}/script-settings">client.workers.scripts.settings.<a href="./src/resources/workers/scripts/settings.ts">edit</a>(scriptName, { ...params }) -> ScriptSetting</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/script-settings">client.workers.scripts.settings.<a href="./src/resources/workers/scripts/settings.ts">get</a>(scriptName, { ...params }) -> ScriptSetting</code>
+
+### Deployments
+
+Types:
+
+- <code><a href="./src/resources/workers/scripts/deployments.ts">Deployment</a></code>
+- <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentListResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/scripts/{script_name}/deployments">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">create</a>(scriptName, { ...params }) -> Deployment</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/deployments">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">list</a>(scriptName, { ...params }) -> DeploymentListResponse</code>
+- <code title="delete /accounts/{account_id}/workers/scripts/{script_name}/deployments/{deployment_id}">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">delete</a>(deploymentID, { ...params }) -> DeploymentDeleteResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/deployments/{deployment_id}">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">get</a>(deploymentID, { ...params }) -> Deployment</code>
+
+### Versions
+
+Types:
+
+- <code><a href="./src/resources/workers/scripts/versions.ts">VersionCreateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/versions.ts">VersionListResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/versions.ts">VersionGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/scripts/{script_name}/versions">client.workers.scripts.versions.<a href="./src/resources/workers/scripts/versions.ts">create</a>(scriptName, { ...params }) -> VersionCreateResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/versions">client.workers.scripts.versions.<a href="./src/resources/workers/scripts/versions.ts">list</a>(scriptName, { ...params }) -> VersionListResponsesV4PagePagination</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/versions/{version_id}">client.workers.scripts.versions.<a href="./src/resources/workers/scripts/versions.ts">get</a>(versionID, { ...params }) -> VersionGetResponse</code>
+
+### Secrets
+
+Types:
+
+- <code><a href="./src/resources/workers/scripts/secrets.ts">SecretUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/secrets.ts">SecretListResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/secrets.ts">SecretDeleteResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/secrets.ts">SecretGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/scripts/{script_name}/secrets">client.workers.scripts.secrets.<a href="./src/resources/workers/scripts/secrets.ts">update</a>(scriptName, { ...params }) -> SecretUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/secrets">client.workers.scripts.secrets.<a href="./src/resources/workers/scripts/secrets.ts">list</a>(scriptName, { ...params }) -> SecretListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/workers/scripts/{script_name}/secrets/{secret_name}">client.workers.scripts.secrets.<a href="./src/resources/workers/scripts/secrets.ts">delete</a>(secretName, { ...params }) -> SecretDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/secrets/{secret_name}">client.workers.scripts.secrets.<a href="./src/resources/workers/scripts/secrets.ts">get</a>(secretName, { ...params }) -> SecretGetResponse</code>
+
+### ScriptAndVersionSettings
+
+Types:
+
+- <code><a href="./src/resources/workers/scripts/script-and-version-settings.ts">ScriptAndVersionSettingEditResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/script-and-version-settings.ts">ScriptAndVersionSettingGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/workers/scripts/{script_name}/settings">client.workers.scripts.scriptAndVersionSettings.<a href="./src/resources/workers/scripts/script-and-version-settings.ts">edit</a>(scriptName, { ...params }) -> ScriptAndVersionSettingEditResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/settings">client.workers.scripts.scriptAndVersionSettings.<a href="./src/resources/workers/scripts/script-and-version-settings.ts">get</a>(scriptName, { ...params }) -> ScriptAndVersionSettingGetResponse</code>
+
+## AccountSettings
+
+Types:
+
+- <code><a href="./src/resources/workers/account-settings.ts">AccountSettingUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/account-settings.ts">AccountSettingGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/account-settings">client.workers.accountSettings.<a href="./src/resources/workers/account-settings.ts">update</a>({ ...params }) -> AccountSettingUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workers/account-settings">client.workers.accountSettings.<a href="./src/resources/workers/account-settings.ts">get</a>({ ...params }) -> AccountSettingGetResponse</code>
+
+## Domains
+
+Types:
+
+- <code><a href="./src/resources/workers/domains.ts">Domain</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/domains">client.workers.domains.<a href="./src/resources/workers/domains.ts">update</a>({ ...params }) -> Domain</code>
+- <code title="get /accounts/{account_id}/workers/domains">client.workers.domains.<a href="./src/resources/workers/domains.ts">list</a>({ ...params }) -> DomainsSinglePage</code>
+- <code title="delete /accounts/{account_id}/workers/domains/{domain_id}">client.workers.domains.<a href="./src/resources/workers/domains.ts">delete</a>(domainID, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/workers/domains/{domain_id}">client.workers.domains.<a href="./src/resources/workers/domains.ts">get</a>(domainID, { ...params }) -> Domain</code>
+
+## Subdomains
+
+Types:
+
+- <code><a href="./src/resources/workers/subdomains.ts">SubdomainUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/subdomains.ts">SubdomainGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/subdomain">client.workers.subdomains.<a href="./src/resources/workers/subdomains.ts">update</a>({ ...params }) -> SubdomainUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/workers/subdomain">client.workers.subdomains.<a href="./src/resources/workers/subdomains.ts">delete</a>({ ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/workers/subdomain">client.workers.subdomains.<a href="./src/resources/workers/subdomains.ts">get</a>({ ...params }) -> SubdomainGetResponse</code>
+
+## Observability
+
+### Telemetry
+
+Types:
+
+- <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryKeysResponse</a></code>
+- <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryQueryResponse</a></code>
+- <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryValuesResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/observability/telemetry/keys">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">keys</a>({ ...params }) -> TelemetryKeysResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/workers/observability/telemetry/query">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">query</a>({ ...params }) -> TelemetryQueryResponse</code>
+- <code title="post /accounts/{account_id}/workers/observability/telemetry/values">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">values</a>({ ...params }) -> TelemetryValuesResponsesSinglePage</code>
+
+# KV
+
+## Namespaces
+
+Types:
+
+- <code><a href="./src/resources/kv/namespaces/namespaces.ts">Namespace</a></code>
+- <code><a href="./src/resources/kv/namespaces/namespaces.ts">NamespaceDeleteResponse</a></code>
+- <code><a href="./src/resources/kv/namespaces/namespaces.ts">NamespaceBulkDeleteResponse</a></code>
+- <code><a href="./src/resources/kv/namespaces/namespaces.ts">NamespaceBulkGetResponse</a></code>
+- <code><a href="./src/resources/kv/namespaces/namespaces.ts">NamespaceBulkUpdateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/storage/kv/namespaces">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">create</a>({ ...params }) -> Namespace</code>
+- <code title="put /accounts/{account_id}/storage/kv/namespaces/{namespace_id}">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">update</a>(namespaceID, { ...params }) -> Namespace</code>
+- <code title="get /accounts/{account_id}/storage/kv/namespaces">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">list</a>({ ...params }) -> NamespacesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/storage/kv/namespaces/{namespace_id}">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">delete</a>(namespaceID, { ...params }) -> NamespaceDeleteResponse | null</code>
+- <code title="post /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk/delete">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">bulkDelete</a>(namespaceID, [ ...body ]) -> NamespaceBulkDeleteResponse | null</code>
+- <code title="post /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk/get">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">bulkGet</a>(namespaceID, { ...params }) -> NamespaceBulkGetResponse | null</code>
+- <code title="put /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">bulkUpdate</a>(namespaceID, [ ...body ]) -> NamespaceBulkUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">get</a>(namespaceID, { ...params }) -> Namespace</code>
+
+### Keys
+
+Types:
+
+- <code><a href="./src/resources/kv/namespaces/keys.ts">Key</a></code>
+- <code><a href="./src/resources/kv/namespaces/keys.ts">KeyBulkDeleteResponse</a></code>
+- <code><a href="./src/resources/kv/namespaces/keys.ts">KeyBulkGetResponse</a></code>
+- <code><a href="./src/resources/kv/namespaces/keys.ts">KeyBulkUpdateResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/keys">client.kv.namespaces.keys.<a href="./src/resources/kv/namespaces/keys.ts">list</a>(namespaceID, { ...params }) -> KeysCursorPaginationAfter</code>
+- <code title="post /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk/delete">client.kv.namespaces.keys.<a href="./src/resources/kv/namespaces/keys.ts">bulkDelete</a>(namespaceID, [ ...body ]) -> KeyBulkDeleteResponse | null</code>
+- <code title="post /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk/get">client.kv.namespaces.keys.<a href="./src/resources/kv/namespaces/keys.ts">bulkGet</a>(namespaceID, { ...params }) -> KeyBulkGetResponse | null</code>
+- <code title="put /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk">client.kv.namespaces.keys.<a href="./src/resources/kv/namespaces/keys.ts">bulkUpdate</a>(namespaceID, [ ...body ]) -> KeyBulkUpdateResponse | null</code>
+
+### Metadata
+
+Types:
+
+- <code><a href="./src/resources/kv/namespaces/metadata.ts">MetadataGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/metadata/{key_name}">client.kv.namespaces.metadata.<a href="./src/resources/kv/namespaces/metadata.ts">get</a>(keyName, { ...params }) -> MetadataGetResponse</code>
+
+### Values
+
+Types:
+
+- <code><a href="./src/resources/kv/namespaces/values.ts">ValueUpdateResponse</a></code>
+- <code><a href="./src/resources/kv/namespaces/values.ts">ValueDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/values/{key_name}">client.kv.namespaces.values.<a href="./src/resources/kv/namespaces/values.ts">update</a>(keyName, { ...params }) -> ValueUpdateResponse | null</code>
+- <code title="delete /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/values/{key_name}">client.kv.namespaces.values.<a href="./src/resources/kv/namespaces/values.ts">delete</a>(keyName, { ...params }) -> ValueDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/values/{key_name}">client.kv.namespaces.values.<a href="./src/resources/kv/namespaces/values.ts">get</a>(keyName, { ...params }) -> Response</code>
+
+# DurableObjects
+
+## Namespaces
+
+Types:
+
+- <code><a href="./src/resources/durable-objects/namespaces/namespaces.ts">Namespace</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/workers/durable_objects/namespaces">client.durableObjects.namespaces.<a href="./src/resources/durable-objects/namespaces/namespaces.ts">list</a>({ ...params }) -> NamespacesV4PagePaginationArray</code>
+
+### Objects
+
+Types:
+
+- <code><a href="./src/resources/durable-objects/namespaces/objects.ts">DurableObject</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/workers/durable_objects/namespaces/{id}/objects">client.durableObjects.namespaces.objects.<a href="./src/resources/durable-objects/namespaces/objects.ts">list</a>(id, { ...params }) -> DurableObjectsCursorPaginationAfter</code>
+
+# Queues
+
+Types:
+
+- <code><a href="./src/resources/queues/queues.ts">Queue</a></code>
+- <code><a href="./src/resources/queues/queues.ts">QueueDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/queues">client.queues.<a href="./src/resources/queues/queues.ts">create</a>({ ...params }) -> Queue</code>
+- <code title="put /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">update</a>(queueID, { ...params }) -> Queue</code>
+- <code title="get /accounts/{account_id}/queues">client.queues.<a href="./src/resources/queues/queues.ts">list</a>({ ...params }) -> QueuesSinglePage</code>
+- <code title="delete /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">delete</a>(queueID, { ...params }) -> QueueDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">edit</a>(queueID, { ...params }) -> Queue</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">get</a>(queueID, { ...params }) -> Queue</code>
+
+## Messages
+
+Types:
+
+- <code><a href="./src/resources/queues/messages.ts">MessageAckResponse</a></code>
+- <code><a href="./src/resources/queues/messages.ts">MessageBulkPushResponse</a></code>
+- <code><a href="./src/resources/queues/messages.ts">MessagePullResponse</a></code>
+- <code><a href="./src/resources/queues/messages.ts">MessagePushResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/queues/{queue_id}/messages/ack">client.queues.messages.<a href="./src/resources/queues/messages.ts">ack</a>(queueID, { ...params }) -> MessageAckResponse</code>
+- <code title="post /accounts/{account_id}/queues/{queue_id}/messages/batch">client.queues.messages.<a href="./src/resources/queues/messages.ts">bulkPush</a>(queueID, { ...params }) -> MessageBulkPushResponse</code>
+- <code title="post /accounts/{account_id}/queues/{queue_id}/messages/pull">client.queues.messages.<a href="./src/resources/queues/messages.ts">pull</a>(queueID, { ...params }) -> MessagePullResponse</code>
+- <code title="post /accounts/{account_id}/queues/{queue_id}/messages">client.queues.messages.<a href="./src/resources/queues/messages.ts">push</a>(queueID, { ...params }) -> MessagePushResponse</code>
+
+## Purge
+
+Types:
+
+- <code><a href="./src/resources/queues/purge.ts">PurgeStatusResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/queues/{queue_id}/purge">client.queues.purge.<a href="./src/resources/queues/purge.ts">start</a>(queueID, { ...params }) -> Queue</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}/purge">client.queues.purge.<a href="./src/resources/queues/purge.ts">status</a>(queueID, { ...params }) -> PurgeStatusResponse</code>
+
+## Consumers
+
+Types:
+
+- <code><a href="./src/resources/queues/consumers.ts">Consumer</a></code>
+- <code><a href="./src/resources/queues/consumers.ts">ConsumerDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">create</a>(queueID, { ...params }) -> Consumer</code>
+- <code title="put /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">update</a>(consumerID, { ...params }) -> Consumer</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">list</a>(queueID, { ...params }) -> ConsumersSinglePage</code>
+- <code title="delete /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">delete</a>(consumerID, { ...params }) -> ConsumerDeleteResponse</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">get</a>(consumerID, { ...params }) -> Consumer</code>
+
+## Subscriptions
+
+Types:
+
+- <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionCreateResponse</a></code>
+- <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionUpdateResponse</a></code>
+- <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionListResponse</a></code>
+- <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+- <code><a href="./src/resources/queues/subscriptions.ts">SubscriptionGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/event_subscriptions/subscriptions">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">create</a>({ ...params }) -> SubscriptionCreateResponse</code>
+- <code title="patch /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">update</a>(subscriptionID, { ...params }) -> SubscriptionUpdateResponse</code>
+- <code title="get /accounts/{account_id}/event_subscriptions/subscriptions">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">list</a>({ ...params }) -> SubscriptionListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">delete</a>(subscriptionID, { ...params }) -> SubscriptionDeleteResponse</code>
+- <code title="get /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}">client.queues.subscriptions.<a href="./src/resources/queues/subscriptions.ts">get</a>(subscriptionID, { ...params }) -> SubscriptionGetResponse</code>
+
+# APIGateway
+
+## Configurations
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/configurations.ts">Configuration</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/configuration">client.apiGateway.configurations.<a href="./src/resources/api-gateway/configurations.ts">update</a>({ ...params }) -> Configuration</code>
+- <code title="get /zones/{zone_id}/api_gateway/configuration">client.apiGateway.configurations.<a href="./src/resources/api-gateway/configurations.ts">get</a>({ ...params }) -> Configuration</code>
+
+## Discovery
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/discovery/discovery.ts">DiscoveryOperation</a></code>
+- <code><a href="./src/resources/api-gateway/discovery/discovery.ts">DiscoveryGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/discovery">client.apiGateway.discovery.<a href="./src/resources/api-gateway/discovery/discovery.ts">get</a>({ ...params }) -> DiscoveryGetResponse</code>
+
+### Operations
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/discovery/operations.ts">OperationBulkEditResponse</a></code>
+- <code><a href="./src/resources/api-gateway/discovery/operations.ts">OperationEditResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/discovery/operations">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">list</a>({ ...params }) -> DiscoveryOperationsV4PagePaginationArray</code>
+- <code title="patch /zones/{zone_id}/api_gateway/discovery/operations">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">bulkEdit</a>({ ...params }) -> OperationBulkEditResponse</code>
+- <code title="patch /zones/{zone_id}/api_gateway/discovery/operations/{operation_id}">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">edit</a>(operationID, { ...params }) -> OperationEditResponse</code>
+
+## Operations
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">APIShield</a></code>
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationCreateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationListResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationDeleteResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationBulkCreateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationBulkDeleteResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/api_gateway/operations/item">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">create</a>({ ...params }) -> OperationCreateResponse</code>
+- <code title="get /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">list</a>({ ...params }) -> OperationListResponsesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/api_gateway/operations/{operation_id}">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">delete</a>(operationID, { ...params }) -> OperationDeleteResponse</code>
+- <code title="post /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">bulkCreate</a>([ ...body ]) -> OperationBulkCreateResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">bulkDelete</a>({ ...params }) -> OperationBulkDeleteResponse</code>
+- <code title="get /zones/{zone_id}/api_gateway/operations/{operation_id}">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">get</a>(operationID, { ...params }) -> OperationGetResponse</code>
+
+### SchemaValidation
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/operations/schema-validation.ts">SettingsMultipleRequest</a></code>
+- <code><a href="./src/resources/api-gateway/operations/schema-validation.ts">SchemaValidationUpdateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/schema-validation.ts">SchemaValidationGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/operations/{operation_id}/schema_validation">client.apiGateway.operations.schemaValidation.<a href="./src/resources/api-gateway/operations/schema-validation.ts">update</a>(operationID, { ...params }) -> SchemaValidationUpdateResponse</code>
+- <code title="patch /zones/{zone_id}/api_gateway/operations/schema_validation">client.apiGateway.operations.schemaValidation.<a href="./src/resources/api-gateway/operations/schema-validation.ts">edit</a>({ ...params }) -> SettingsMultipleRequest</code>
+- <code title="get /zones/{zone_id}/api_gateway/operations/{operation_id}/schema_validation">client.apiGateway.operations.schemaValidation.<a href="./src/resources/api-gateway/operations/schema-validation.ts">get</a>(operationID, { ...params }) -> SchemaValidationGetResponse</code>
+
+## Schemas
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/schemas.ts">SchemaListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/schemas">client.apiGateway.schemas.<a href="./src/resources/api-gateway/schemas.ts">list</a>({ ...params }) -> SchemaListResponse</code>
+
+## Settings
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/settings/settings.ts">Settings</a></code>
+
+### SchemaValidation
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">update</a>({ ...params }) -> Settings</code>
+- <code title="patch /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">edit</a>({ ...params }) -> Settings</code>
+- <code title="get /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">get</a>({ ...params }) -> Settings</code>
+
+## UserSchemas
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">Message</a></code>
+- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">OldPublicSchema</a></code>
+- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">UserSchemaCreateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">UserSchemaDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/api_gateway/user_schemas">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">create</a>({ ...params }) -> UserSchemaCreateResponse</code>
+- <code title="get /zones/{zone_id}/api_gateway/user_schemas">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">list</a>({ ...params }) -> OldPublicSchemasV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/api_gateway/user_schemas/{schema_id}">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">delete</a>(schemaID, { ...params }) -> UserSchemaDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/api_gateway/user_schemas/{schema_id}">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">edit</a>(schemaID, { ...params }) -> OldPublicSchema</code>
+- <code title="get /zones/{zone_id}/api_gateway/user_schemas/{schema_id}">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">get</a>(schemaID, { ...params }) -> OldPublicSchema</code>
+
+### Operations
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/user-schemas/operations.ts">OperationListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/user_schemas/{schema_id}/operations">client.apiGateway.userSchemas.operations.<a href="./src/resources/api-gateway/user-schemas/operations.ts">list</a>(schemaID, { ...params }) -> OperationListResponsesV4PagePaginationArray</code>
+
+### Hosts
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/user-schemas/hosts.ts">HostListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/user_schemas/hosts">client.apiGateway.userSchemas.hosts.<a href="./src/resources/api-gateway/user-schemas/hosts.ts">list</a>({ ...params }) -> HostListResponsesV4PagePaginationArray</code>
+
+## ExpressionTemplate
+
+### Fallthrough
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/expression-template/fallthrough.ts">FallthroughCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/api_gateway/expression-template/fallthrough">client.apiGateway.expressionTemplate.fallthrough.<a href="./src/resources/api-gateway/expression-template/fallthrough.ts">create</a>({ ...params }) -> FallthroughCreateResponse</code>
+
+# ManagedTransforms
+
+Types:
+
+- <code><a href="./src/resources/managed-transforms.ts">ManagedTransformListResponse</a></code>
+- <code><a href="./src/resources/managed-transforms.ts">ManagedTransformEditResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/managed_headers">client.managedTransforms.<a href="./src/resources/managed-transforms.ts">list</a>({ ...params }) -> ManagedTransformListResponse</code>
+- <code title="delete /zones/{zone_id}/managed_headers">client.managedTransforms.<a href="./src/resources/managed-transforms.ts">delete</a>({ ...params }) -> void</code>
+- <code title="patch /zones/{zone_id}/managed_headers">client.managedTransforms.<a href="./src/resources/managed-transforms.ts">edit</a>({ ...params }) -> ManagedTransformEditResponse</code>
+
+# PageShield
+
+Types:
+
+- <code><a href="./src/resources/page-shield/page-shield.ts">Setting</a></code>
+- <code><a href="./src/resources/page-shield/page-shield.ts">PageShieldUpdateResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/page_shield">client.pageShield.<a href="./src/resources/page-shield/page-shield.ts">update</a>({ ...params }) -> PageShieldUpdateResponse</code>
+- <code title="get /zones/{zone_id}/page_shield">client.pageShield.<a href="./src/resources/page-shield/page-shield.ts">get</a>({ ...params }) -> Setting | null</code>
+
+## Policies
+
+Types:
+
+- <code><a href="./src/resources/page-shield/policies.ts">Policy</a></code>
+- <code><a href="./src/resources/page-shield/policies.ts">PolicyCreateResponse</a></code>
+- <code><a href="./src/resources/page-shield/policies.ts">PolicyUpdateResponse</a></code>
+- <code><a href="./src/resources/page-shield/policies.ts">PolicyListResponse</a></code>
+- <code><a href="./src/resources/page-shield/policies.ts">PolicyGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/page_shield/policies">client.pageShield.policies.<a href="./src/resources/page-shield/policies.ts">create</a>({ ...params }) -> PolicyCreateResponse | null</code>
+- <code title="put /zones/{zone_id}/page_shield/policies/{policy_id}">client.pageShield.policies.<a href="./src/resources/page-shield/policies.ts">update</a>(policyID, { ...params }) -> PolicyUpdateResponse | null</code>
+- <code title="get /zones/{zone_id}/page_shield/policies">client.pageShield.policies.<a href="./src/resources/page-shield/policies.ts">list</a>({ ...params }) -> PolicyListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/page_shield/policies/{policy_id}">client.pageShield.policies.<a href="./src/resources/page-shield/policies.ts">delete</a>(policyID, { ...params }) -> void</code>
+- <code title="get /zones/{zone_id}/page_shield/policies/{policy_id}">client.pageShield.policies.<a href="./src/resources/page-shield/policies.ts">get</a>(policyID, { ...params }) -> PolicyGetResponse | null</code>
+
+## Connections
+
+Types:
+
+- <code><a href="./src/resources/page-shield/connections.ts">Connection</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/page_shield/connections">client.pageShield.connections.<a href="./src/resources/page-shield/connections.ts">list</a>({ ...params }) -> ConnectionsSinglePage</code>
+- <code title="get /zones/{zone_id}/page_shield/connections/{connection_id}">client.pageShield.connections.<a href="./src/resources/page-shield/connections.ts">get</a>(connectionID, { ...params }) -> Connection | null</code>
+
+## Scripts
+
+Types:
+
+- <code><a href="./src/resources/page-shield/scripts.ts">Script</a></code>
+- <code><a href="./src/resources/page-shield/scripts.ts">ScriptGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/page_shield/scripts">client.pageShield.scripts.<a href="./src/resources/page-shield/scripts.ts">list</a>({ ...params }) -> ScriptsSinglePage</code>
+- <code title="get /zones/{zone_id}/page_shield/scripts/{script_id}">client.pageShield.scripts.<a href="./src/resources/page-shield/scripts.ts">get</a>(scriptID, { ...params }) -> ScriptGetResponse | null</code>
+
+## Cookies
+
+Types:
+
+- <code><a href="./src/resources/page-shield/cookies.ts">CookieListResponse</a></code>
+- <code><a href="./src/resources/page-shield/cookies.ts">CookieGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/page_shield/cookies">client.pageShield.cookies.<a href="./src/resources/page-shield/cookies.ts">list</a>({ ...params }) -> CookieListResponsesSinglePage</code>
+- <code title="get /zones/{zone_id}/page_shield/cookies/{cookie_id}">client.pageShield.cookies.<a href="./src/resources/page-shield/cookies.ts">get</a>(cookieID, { ...params }) -> CookieGetResponse | null</code>
+
+# Rulesets
+
+Types:
+
+- <code><a href="./src/resources/rulesets/rulesets.ts">Kind</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">Phase</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">Ruleset</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">RulesetCreateResponse</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">RulesetUpdateResponse</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">RulesetListResponse</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">RulesetGetResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">create</a>({ ...params }) -> RulesetCreateResponse</code>
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">update</a>(rulesetID, { ...params }) -> RulesetUpdateResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">list</a>({ ...params }) -> RulesetListResponsesCursorPagination</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">delete</a>(rulesetID, { ...params }) -> void</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">get</a>(rulesetID, { ...params }) -> RulesetGetResponse</code>
+
+## Phases
+
+Types:
+
+- <code><a href="./src/resources/rulesets/phases/phases.ts">PhaseUpdateResponse</a></code>
+- <code><a href="./src/resources/rulesets/phases/phases.ts">PhaseGetResponse</a></code>
+
+Methods:
+
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint">client.rulesets.phases.<a href="./src/resources/rulesets/phases/phases.ts">update</a>(rulesetPhase, { ...params }) -> PhaseUpdateResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint">client.rulesets.phases.<a href="./src/resources/rulesets/phases/phases.ts">get</a>(rulesetPhase, { ...params }) -> PhaseGetResponse</code>
+
+### Versions
+
+Types:
+
+- <code><a href="./src/resources/rulesets/phases/versions.ts">VersionListResponse</a></code>
+- <code><a href="./src/resources/rulesets/phases/versions.ts">VersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint/versions">client.rulesets.phases.versions.<a href="./src/resources/rulesets/phases/versions.ts">list</a>(rulesetPhase, { ...params }) -> VersionListResponsesSinglePage</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint/versions/{ruleset_version}">client.rulesets.phases.versions.<a href="./src/resources/rulesets/phases/versions.ts">get</a>(rulesetVersion, { ...params }) -> VersionGetResponse</code>
+
+## Rules
+
+Types:
+
+- <code><a href="./src/resources/rulesets/rules.ts">BlockRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">CompressResponseRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">DDoSDynamicRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">ExecuteRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">ForceConnectionCloseRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">LogCustomFieldRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">LogRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">Logging</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">ManagedChallengeRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RedirectRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RewriteRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RouteRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RulesetRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">ScoreRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">ServeErrorRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">SetCacheSettingsRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">SetConfigRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">SkipRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RuleCreateResponse</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RuleDeleteResponse</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RuleEditResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/rules">client.rulesets.rules.<a href="./src/resources/rulesets/rules.ts">create</a>(rulesetID, { ...params }) -> RuleCreateResponse</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/rules/{rule_id}">client.rulesets.rules.<a href="./src/resources/rulesets/rules.ts">delete</a>(ruleID, { ...params }) -> RuleDeleteResponse</code>
+- <code title="patch /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/rules/{rule_id}">client.rulesets.rules.<a href="./src/resources/rulesets/rules.ts">edit</a>(ruleID, { ...params }) -> RuleEditResponse</code>
+
+## Versions
+
+Types:
+
+- <code><a href="./src/resources/rulesets/versions.ts">VersionListResponse</a></code>
+- <code><a href="./src/resources/rulesets/versions.ts">VersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/versions">client.rulesets.versions.<a href="./src/resources/rulesets/versions.ts">list</a>(rulesetID, { ...params }) -> VersionListResponsesSinglePage</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}">client.rulesets.versions.<a href="./src/resources/rulesets/versions.ts">delete</a>(rulesetVersion, { ...params }) -> void</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}">client.rulesets.versions.<a href="./src/resources/rulesets/versions.ts">get</a>(rulesetVersion, { ...params }) -> VersionGetResponse</code>
+
+# URLNormalization
+
+Types:
+
+- <code><a href="./src/resources/url-normalization.ts">URLNormalizationUpdateResponse</a></code>
+- <code><a href="./src/resources/url-normalization.ts">URLNormalizationGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/url_normalization">client.urlNormalization.<a href="./src/resources/url-normalization.ts">update</a>({ ...params }) -> URLNormalizationUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/url_normalization">client.urlNormalization.<a href="./src/resources/url-normalization.ts">delete</a>({ ...params }) -> void</code>
+- <code title="get /zones/{zone_id}/url_normalization">client.urlNormalization.<a href="./src/resources/url-normalization.ts">get</a>({ ...params }) -> URLNormalizationGetResponse</code>
+
+# Spectrum
+
+Types:
+
+- <code><a href="./src/resources/spectrum/spectrum.ts">DNS</a></code>
+- <code><a href="./src/resources/spectrum/spectrum.ts">EdgeIPs</a></code>
+- <code><a href="./src/resources/spectrum/spectrum.ts">OriginDNS</a></code>
+- <code><a href="./src/resources/spectrum/spectrum.ts">OriginPort</a></code>
+
+## Analytics
+
+### Aggregates
+
+#### Currents
+
+Types:
+
+- <code><a href="./src/resources/spectrum/analytics/aggregates/currents.ts">CurrentGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/spectrum/analytics/aggregate/current">client.spectrum.analytics.aggregates.currents.<a href="./src/resources/spectrum/analytics/aggregates/currents.ts">get</a>({ ...params }) -> CurrentGetResponse</code>
+
+### Events
+
+Types:
+
+- <code><a href="./src/resources/spectrum/analytics/events/events.ts">Dimension</a></code>
+
+#### Bytimes
+
+Types:
+
+- <code><a href="./src/resources/spectrum/analytics/events/bytimes.ts">BytimeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/spectrum/analytics/events/bytime">client.spectrum.analytics.events.bytimes.<a href="./src/resources/spectrum/analytics/events/bytimes.ts">get</a>({ ...params }) -> BytimeGetResponse</code>
+
+#### Summaries
+
+Types:
+
+- <code><a href="./src/resources/spectrum/analytics/events/summaries.ts">SummaryGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/spectrum/analytics/events/summary">client.spectrum.analytics.events.summaries.<a href="./src/resources/spectrum/analytics/events/summaries.ts">get</a>({ ...params }) -> SummaryGetResponse</code>
+
+## Apps
+
+Types:
+
+- <code><a href="./src/resources/spectrum/apps.ts">AppCreateResponse</a></code>
+- <code><a href="./src/resources/spectrum/apps.ts">AppUpdateResponse</a></code>
+- <code><a href="./src/resources/spectrum/apps.ts">AppListResponse</a></code>
+- <code><a href="./src/resources/spectrum/apps.ts">AppDeleteResponse</a></code>
+- <code><a href="./src/resources/spectrum/apps.ts">AppGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/spectrum/apps">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">create</a>({ ...params }) -> AppCreateResponse</code>
+- <code title="put /zones/{zone_id}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">update</a>(appID, { ...params }) -> AppUpdateResponse</code>
+- <code title="get /zones/{zone_id}/spectrum/apps">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">list</a>({ ...params }) -> AppListResponsesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">delete</a>(appID, { ...params }) -> AppDeleteResponse | null</code>
+- <code title="get /zones/{zone_id}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">get</a>(appID, { ...params }) -> AppGetResponse</code>
+
+# Addressing
+
+## RegionalHostnames
+
+Types:
+
+- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameCreateResponse</a></code>
+- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameListResponse</a></code>
+- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameDeleteResponse</a></code>
+- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameEditResponse</a></code>
+- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/addressing/regional_hostnames">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">create</a>({ ...params }) -> RegionalHostnameCreateResponse</code>
+- <code title="get /zones/{zone_id}/addressing/regional_hostnames">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">list</a>({ ...params }) -> RegionalHostnameListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/addressing/regional_hostnames/{hostname}">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">delete</a>(hostname, { ...params }) -> RegionalHostnameDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/addressing/regional_hostnames/{hostname}">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">edit</a>(hostname, { ...params }) -> RegionalHostnameEditResponse</code>
+- <code title="get /zones/{zone_id}/addressing/regional_hostnames/{hostname}">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">get</a>(hostname, { ...params }) -> RegionalHostnameGetResponse</code>
+
+### Regions
+
+Types:
+
+- <code><a href="./src/resources/addressing/regional-hostnames/regions.ts">RegionListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/addressing/regional_hostnames/regions">client.addressing.regionalHostnames.regions.<a href="./src/resources/addressing/regional-hostnames/regions.ts">list</a>({ ...params }) -> RegionListResponsesSinglePage</code>
+
+## Services
+
+Types:
+
+- <code><a href="./src/resources/addressing/services.ts">ServiceListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/addressing/services">client.addressing.services.<a href="./src/resources/addressing/services.ts">list</a>({ ...params }) -> ServiceListResponsesSinglePage</code>
+
+## AddressMaps
+
+Types:
+
+- <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMap</a></code>
+- <code><a href="./src/resources/addressing/address-maps/address-maps.ts">Kind</a></code>
+- <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMapCreateResponse</a></code>
+- <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMapDeleteResponse</a></code>
+- <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMapGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/addressing/address_maps">client.addressing.addressMaps.<a href="./src/resources/addressing/address-maps/address-maps.ts">create</a>({ ...params }) -> AddressMapCreateResponse</code>
+- <code title="get /accounts/{account_id}/addressing/address_maps">client.addressing.addressMaps.<a href="./src/resources/addressing/address-maps/address-maps.ts">list</a>({ ...params }) -> AddressMapsSinglePage</code>
+- <code title="delete /accounts/{account_id}/addressing/address_maps/{address_map_id}">client.addressing.addressMaps.<a href="./src/resources/addressing/address-maps/address-maps.ts">delete</a>(addressMapID, { ...params }) -> AddressMapDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/addressing/address_maps/{address_map_id}">client.addressing.addressMaps.<a href="./src/resources/addressing/address-maps/address-maps.ts">edit</a>(addressMapID, { ...params }) -> AddressMap</code>
+- <code title="get /accounts/{account_id}/addressing/address_maps/{address_map_id}">client.addressing.addressMaps.<a href="./src/resources/addressing/address-maps/address-maps.ts">get</a>(addressMapID, { ...params }) -> AddressMapGetResponse</code>
+
+### Accounts
+
+Types:
+
+- <code><a href="./src/resources/addressing/address-maps/accounts.ts">AccountUpdateResponse</a></code>
+- <code><a href="./src/resources/addressing/address-maps/accounts.ts">AccountDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/addressing/address_maps/{address_map_id}/accounts/{account_id}">client.addressing.addressMaps.accounts.<a href="./src/resources/addressing/address-maps/accounts.ts">update</a>(addressMapID, { ...params }) -> AccountUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/addressing/address_maps/{address_map_id}/accounts/{account_id}">client.addressing.addressMaps.accounts.<a href="./src/resources/addressing/address-maps/accounts.ts">delete</a>(addressMapID, { ...params }) -> AccountDeleteResponse</code>
+
+### IPs
+
+Types:
+
+- <code><a href="./src/resources/addressing/address-maps/ips.ts">IPUpdateResponse</a></code>
+- <code><a href="./src/resources/addressing/address-maps/ips.ts">IPDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/addressing/address_maps/{address_map_id}/ips/{ip_address}">client.addressing.addressMaps.ips.<a href="./src/resources/addressing/address-maps/ips.ts">update</a>(ipAddress, { ...params }) -> IPUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/addressing/address_maps/{address_map_id}/ips/{ip_address}">client.addressing.addressMaps.ips.<a href="./src/resources/addressing/address-maps/ips.ts">delete</a>(ipAddress, { ...params }) -> IPDeleteResponse</code>
+
+### Zones
+
+Types:
+
+- <code><a href="./src/resources/addressing/address-maps/zones.ts">ZoneUpdateResponse</a></code>
+- <code><a href="./src/resources/addressing/address-maps/zones.ts">ZoneDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/addressing/address_maps/{address_map_id}/zones/{zone_id}">client.addressing.addressMaps.zones.<a href="./src/resources/addressing/address-maps/zones.ts">update</a>(addressMapID, { ...params }) -> ZoneUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/addressing/address_maps/{address_map_id}/zones/{zone_id}">client.addressing.addressMaps.zones.<a href="./src/resources/addressing/address-maps/zones.ts">delete</a>(addressMapID, { ...params }) -> ZoneDeleteResponse</code>
+
+## LOADocuments
+
+Types:
+
+- <code><a href="./src/resources/addressing/loa-documents.ts">LOADocumentCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/addressing/loa_documents">client.addressing.loaDocuments.<a href="./src/resources/addressing/loa-documents.ts">create</a>({ ...params }) -> LOADocumentCreateResponse</code>
+- <code title="get /accounts/{account_id}/addressing/loa_documents/{loa_document_id}/download">client.addressing.loaDocuments.<a href="./src/resources/addressing/loa-documents.ts">get</a>(loaDocumentID, { ...params }) -> Response</code>
+
+## Prefixes
+
+Types:
+
+- <code><a href="./src/resources/addressing/prefixes/prefixes.ts">Prefix</a></code>
+- <code><a href="./src/resources/addressing/prefixes/prefixes.ts">PrefixDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/addressing/prefixes">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">create</a>({ ...params }) -> Prefix</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">list</a>({ ...params }) -> PrefixesSinglePage</code>
+- <code title="delete /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">delete</a>(prefixID, { ...params }) -> PrefixDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">edit</a>(prefixID, { ...params }) -> Prefix</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">get</a>(prefixID, { ...params }) -> Prefix</code>
+
+### ServiceBindings
+
+Types:
+
+- <code><a href="./src/resources/addressing/prefixes/service-bindings.ts">ServiceBinding</a></code>
+- <code><a href="./src/resources/addressing/prefixes/service-bindings.ts">ServiceBindingDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings">client.addressing.prefixes.serviceBindings.<a href="./src/resources/addressing/prefixes/service-bindings.ts">create</a>(prefixID, { ...params }) -> ServiceBinding</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings">client.addressing.prefixes.serviceBindings.<a href="./src/resources/addressing/prefixes/service-bindings.ts">list</a>(prefixID, { ...params }) -> ServiceBindingsSinglePage</code>
+- <code title="delete /accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings/{binding_id}">client.addressing.prefixes.serviceBindings.<a href="./src/resources/addressing/prefixes/service-bindings.ts">delete</a>(bindingID, { ...params }) -> ServiceBindingDeleteResponse</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings/{binding_id}">client.addressing.prefixes.serviceBindings.<a href="./src/resources/addressing/prefixes/service-bindings.ts">get</a>(bindingID, { ...params }) -> ServiceBinding</code>
+
+### BGPPrefixes
+
+Types:
+
+- <code><a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">BGPPrefix</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">create</a>(prefixID, { ...params }) -> BGPPrefix</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">list</a>(prefixID, { ...params }) -> BGPPrefixesSinglePage</code>
+- <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">edit</a>(bgpPrefixID, { ...params }) -> BGPPrefix</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}">client.addressing.prefixes.bgpPrefixes.<a href="./src/resources/addressing/prefixes/bgp-prefixes.ts">get</a>(bgpPrefixID, { ...params }) -> BGPPrefix</code>
+
+### AdvertisementStatus
+
+Types:
+
+- <code><a href="./src/resources/addressing/prefixes/advertisement-status.ts">AdvertisementStatusEditResponse</a></code>
+- <code><a href="./src/resources/addressing/prefixes/advertisement-status.ts">AdvertisementStatusGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/status">client.addressing.prefixes.advertisementStatus.<a href="./src/resources/addressing/prefixes/advertisement-status.ts">edit</a>(prefixID, { ...params }) -> AdvertisementStatusEditResponse</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/status">client.addressing.prefixes.advertisementStatus.<a href="./src/resources/addressing/prefixes/advertisement-status.ts">get</a>(prefixID, { ...params }) -> AdvertisementStatusGetResponse</code>
+
+### Delegations
+
+Types:
+
+- <code><a href="./src/resources/addressing/prefixes/delegations.ts">Delegations</a></code>
+- <code><a href="./src/resources/addressing/prefixes/delegations.ts">DelegationDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/addressing/prefixes/{prefix_id}/delegations">client.addressing.prefixes.delegations.<a href="./src/resources/addressing/prefixes/delegations.ts">create</a>(prefixID, { ...params }) -> Delegations</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}/delegations">client.addressing.prefixes.delegations.<a href="./src/resources/addressing/prefixes/delegations.ts">list</a>(prefixID, { ...params }) -> DelegationsSinglePage</code>
+- <code title="delete /accounts/{account_id}/addressing/prefixes/{prefix_id}/delegations/{delegation_id}">client.addressing.prefixes.delegations.<a href="./src/resources/addressing/prefixes/delegations.ts">delete</a>(delegationID, { ...params }) -> DelegationDeleteResponse</code>
+
+# AuditLogs
+
+Methods:
+
+- <code title="get /accounts/{account_id}/audit_logs">client.auditLogs.<a href="./src/resources/audit-logs.ts">list</a>({ ...params }) -> AuditLogsV4PagePaginationArray</code>
+
+# Billing
+
+## Profiles
+
+Types:
+
+- <code><a href="./src/resources/billing/profiles.ts">ProfileGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/billing/profile">client.billing.profiles.<a href="./src/resources/billing/profiles.ts">get</a>({ ...params }) -> ProfileGetResponse</code>
+
+# BrandProtection
+
+Types:
+
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">Info</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">Submit</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">BrandProtectionSubmitResponse</a></code>
+- <code><a href="./src/resources/brand-protection/brand-protection.ts">BrandProtectionURLInfoResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/brand-protection/submit">client.brandProtection.<a href="./src/resources/brand-protection/brand-protection.ts">submit</a>({ ...params }) -> BrandProtectionSubmitResponse</code>
+- <code title="get /accounts/{account_id}/brand-protection/url-info">client.brandProtection.<a href="./src/resources/brand-protection/brand-protection.ts">urlInfo</a>({ ...params }) -> BrandProtectionURLInfoResponsesSinglePage</code>
+
+## Queries
+
+Methods:
+
+- <code title="post /accounts/{account_id}/brand-protection/queries">client.brandProtection.queries.<a href="./src/resources/brand-protection/queries.ts">create</a>({ ...params }) -> void</code>
+- <code title="delete /accounts/{account_id}/brand-protection/queries">client.brandProtection.queries.<a href="./src/resources/brand-protection/queries.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /accounts/{account_id}/brand-protection/queries/bulk">client.brandProtection.queries.<a href="./src/resources/brand-protection/queries.ts">bulk</a>({ ...params }) -> void</code>
+
+## Matches
+
+Types:
+
+- <code><a href="./src/resources/brand-protection/matches.ts">MatchDownloadResponse</a></code>
+- <code><a href="./src/resources/brand-protection/matches.ts">MatchGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/brand-protection/matches/download">client.brandProtection.matches.<a href="./src/resources/brand-protection/matches.ts">download</a>({ ...params }) -> MatchDownloadResponse</code>
+- <code title="get /accounts/{account_id}/brand-protection/matches">client.brandProtection.matches.<a href="./src/resources/brand-protection/matches.ts">get</a>({ ...params }) -> MatchGetResponse</code>
+
+## Logos
+
+Types:
+
+- <code><a href="./src/resources/brand-protection/logos.ts">LogoCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/brand-protection/logos">client.brandProtection.logos.<a href="./src/resources/brand-protection/logos.ts">create</a>({ ...params }) -> LogoCreateResponse</code>
+- <code title="delete /accounts/{account_id}/brand-protection/logos/{logo_id}">client.brandProtection.logos.<a href="./src/resources/brand-protection/logos.ts">delete</a>(logoID, { ...params }) -> void</code>
+
+## LogoMatches
+
+Types:
+
+- <code><a href="./src/resources/brand-protection/logo-matches.ts">LogoMatchDownloadResponse</a></code>
+- <code><a href="./src/resources/brand-protection/logo-matches.ts">LogoMatchGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/brand-protection/logo-matches/download">client.brandProtection.logoMatches.<a href="./src/resources/brand-protection/logo-matches.ts">download</a>({ ...params }) -> LogoMatchDownloadResponse</code>
+- <code title="get /accounts/{account_id}/brand-protection/logo-matches">client.brandProtection.logoMatches.<a href="./src/resources/brand-protection/logo-matches.ts">get</a>({ ...params }) -> LogoMatchGetResponse</code>
+
+# Diagnostics
+
+## Traceroutes
+
+Types:
+
+- <code><a href="./src/resources/diagnostics/traceroutes.ts">Traceroute</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/diagnostics/traceroute">client.diagnostics.traceroutes.<a href="./src/resources/diagnostics/traceroutes.ts">create</a>({ ...params }) -> TraceroutesSinglePage</code>
+
+## EndpointHealthchecks
+
+Types:
+
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheck</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckCreateResponse</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckUpdateResponse</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckListResponse</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckDeleteResponse</a></code>
+- <code><a href="./src/resources/diagnostics/endpoint-healthchecks.ts">EndpointHealthcheckGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/diagnostics/endpoint-healthchecks">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">create</a>({ ...params }) -> EndpointHealthcheckCreateResponse</code>
+- <code title="put /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">update</a>(id, { ...params }) -> EndpointHealthcheckUpdateResponse</code>
+- <code title="get /accounts/{account_id}/diagnostics/endpoint-healthchecks">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">list</a>({ ...params }) -> EndpointHealthcheckListResponse</code>
+- <code title="delete /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">delete</a>(id, { ...params }) -> EndpointHealthcheckDeleteResponse</code>
+- <code title="get /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}">client.diagnostics.endpointHealthchecks.<a href="./src/resources/diagnostics/endpoint-healthchecks.ts">get</a>(id, { ...params }) -> EndpointHealthcheckGetResponse</code>
+
+# Images
+
+## V1
+
+Types:
+
+- <code><a href="./src/resources/images/v1/v1.ts">Image</a></code>
+- <code><a href="./src/resources/images/v1/v1.ts">V1ListResponse</a></code>
+- <code><a href="./src/resources/images/v1/v1.ts">V1DeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/images/v1">client.images.v1.<a href="./src/resources/images/v1/v1.ts">create</a>({ ...params }) -> Image</code>
+- <code title="get /accounts/{account_id}/images/v1">client.images.v1.<a href="./src/resources/images/v1/v1.ts">list</a>({ ...params }) -> V1ListResponsesV4PagePagination</code>
+- <code title="delete /accounts/{account_id}/images/v1/{image_id}">client.images.v1.<a href="./src/resources/images/v1/v1.ts">delete</a>(imageID, { ...params }) -> V1DeleteResponse</code>
+- <code title="patch /accounts/{account_id}/images/v1/{image_id}">client.images.v1.<a href="./src/resources/images/v1/v1.ts">edit</a>(imageID, { ...params }) -> Image</code>
+- <code title="get /accounts/{account_id}/images/v1/{image_id}">client.images.v1.<a href="./src/resources/images/v1/v1.ts">get</a>(imageID, { ...params }) -> Image</code>
+
+### Keys
+
+Types:
+
+- <code><a href="./src/resources/images/v1/keys.ts">Key</a></code>
+- <code><a href="./src/resources/images/v1/keys.ts">KeyUpdateResponse</a></code>
+- <code><a href="./src/resources/images/v1/keys.ts">KeyListResponse</a></code>
+- <code><a href="./src/resources/images/v1/keys.ts">KeyDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/images/v1/keys/{signing_key_name}">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">update</a>(signingKeyName, { ...params }) -> KeyUpdateResponse</code>
+- <code title="get /accounts/{account_id}/images/v1/keys">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">list</a>({ ...params }) -> KeyListResponse</code>
+- <code title="delete /accounts/{account_id}/images/v1/keys/{signing_key_name}">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">delete</a>(signingKeyName, { ...params }) -> KeyDeleteResponse</code>
+
+### Stats
+
+Types:
+
+- <code><a href="./src/resources/images/v1/stats.ts">Stat</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/images/v1/stats">client.images.v1.stats.<a href="./src/resources/images/v1/stats.ts">get</a>({ ...params }) -> Stat</code>
+
+### Variants
+
+Types:
+
+- <code><a href="./src/resources/images/v1/variants.ts">Variant</a></code>
+- <code><a href="./src/resources/images/v1/variants.ts">VariantCreateResponse</a></code>
+- <code><a href="./src/resources/images/v1/variants.ts">VariantDeleteResponse</a></code>
+- <code><a href="./src/resources/images/v1/variants.ts">VariantEditResponse</a></code>
+- <code><a href="./src/resources/images/v1/variants.ts">VariantGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/images/v1/variants">client.images.v1.variants.<a href="./src/resources/images/v1/variants.ts">create</a>({ ...params }) -> VariantCreateResponse</code>
+- <code title="get /accounts/{account_id}/images/v1/variants">client.images.v1.variants.<a href="./src/resources/images/v1/variants.ts">list</a>({ ...params }) -> Variant</code>
+- <code title="delete /accounts/{account_id}/images/v1/variants/{variant_id}">client.images.v1.variants.<a href="./src/resources/images/v1/variants.ts">delete</a>(variantID, { ...params }) -> VariantDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/images/v1/variants/{variant_id}">client.images.v1.variants.<a href="./src/resources/images/v1/variants.ts">edit</a>(variantID, { ...params }) -> VariantEditResponse</code>
+- <code title="get /accounts/{account_id}/images/v1/variants/{variant_id}">client.images.v1.variants.<a href="./src/resources/images/v1/variants.ts">get</a>(variantID, { ...params }) -> VariantGetResponse</code>
+
+### Blobs
+
+Methods:
+
+- <code title="get /accounts/{account_id}/images/v1/{image_id}/blob">client.images.v1.blobs.<a href="./src/resources/images/v1/blobs.ts">get</a>(imageID, { ...params }) -> Response</code>
+
+## V2
+
+Types:
+
+- <code><a href="./src/resources/images/v2/v2.ts">V2ListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/images/v2">client.images.v2.<a href="./src/resources/images/v2/v2.ts">list</a>({ ...params }) -> V2ListResponse</code>
+
+### DirectUploads
+
+Types:
+
+- <code><a href="./src/resources/images/v2/direct-uploads.ts">DirectUploadCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/images/v2/direct_upload">client.images.v2.directUploads.<a href="./src/resources/images/v2/direct-uploads.ts">create</a>({ ...params }) -> DirectUploadCreateResponse</code>
+
+# Intel
+
+## ASN
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/asn/{asn}">client.intel.asn.<a href="./src/resources/intel/asn/asn.ts">get</a>(asn, { ...params }) -> ASN</code>
+
+### Subnets
+
+Types:
+
+- <code><a href="./src/resources/intel/asn/subnets.ts">SubnetGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/asn/{asn}/subnets">client.intel.asn.subnets.<a href="./src/resources/intel/asn/subnets.ts">get</a>(asn, { ...params }) -> SubnetGetResponse</code>
+
+## DNS
+
+Types:
+
+- <code><a href="./src/resources/intel/dns.ts">DNS</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/dns">client.intel.dns.<a href="./src/resources/intel/dns.ts">list</a>({ ...params }) -> DNSV4PagePagination</code>
+
+## Domains
+
+Types:
+
+- <code><a href="./src/resources/intel/domains/domains.ts">Domain</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/domain">client.intel.domains.<a href="./src/resources/intel/domains/domains.ts">get</a>({ ...params }) -> Domain</code>
+
+### Bulks
+
+Types:
+
+- <code><a href="./src/resources/intel/domains/bulks.ts">BulkGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/domain/bulk">client.intel.domains.bulks.<a href="./src/resources/intel/domains/bulks.ts">get</a>({ ...params }) -> BulkGetResponse | null</code>
+
+## DomainHistory
+
+Types:
+
+- <code><a href="./src/resources/intel/domain-history.ts">DomainHistory</a></code>
+- <code><a href="./src/resources/intel/domain-history.ts">DomainHistoryGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/domain-history">client.intel.domainHistory.<a href="./src/resources/intel/domain-history.ts">get</a>({ ...params }) -> DomainHistoryGetResponse | null</code>
+
+## IPs
+
+Types:
+
+- <code><a href="./src/resources/intel/ips.ts">IP</a></code>
+- <code><a href="./src/resources/intel/ips.ts">IPGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/ip">client.intel.ips.<a href="./src/resources/intel/ips.ts">get</a>({ ...params }) -> IPGetResponse | null</code>
+
+## IPLists
+
+Types:
+
+- <code><a href="./src/resources/intel/ip-lists.ts">IPList</a></code>
+
+## Miscategorizations
+
+Types:
+
+- <code><a href="./src/resources/intel/miscategorizations.ts">MiscategorizationCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/intel/miscategorization">client.intel.miscategorizations.<a href="./src/resources/intel/miscategorizations.ts">create</a>({ ...params }) -> MiscategorizationCreateResponse</code>
+
+## Whois
+
+Types:
+
+- <code><a href="./src/resources/intel/whois.ts">Whois</a></code>
+- <code><a href="./src/resources/intel/whois.ts">WhoisGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/whois">client.intel.whois.<a href="./src/resources/intel/whois.ts">get</a>({ ...params }) -> WhoisGetResponse</code>
+
+## IndicatorFeeds
+
+Types:
+
+- <code><a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">IndicatorFeedCreateResponse</a></code>
+- <code><a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">IndicatorFeedUpdateResponse</a></code>
+- <code><a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">IndicatorFeedListResponse</a></code>
+- <code><a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">IndicatorFeedDataResponse</a></code>
+- <code><a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">IndicatorFeedGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/intel/indicator-feeds">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">create</a>({ ...params }) -> IndicatorFeedCreateResponse</code>
+- <code title="put /accounts/{account_id}/intel/indicator-feeds/{feed_id}">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">update</a>(feedID, { ...params }) -> IndicatorFeedUpdateResponse</code>
+- <code title="get /accounts/{account_id}/intel/indicator-feeds">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">list</a>({ ...params }) -> IndicatorFeedListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/intel/indicator-feeds/{feed_id}/data">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">data</a>(feedID, { ...params }) -> string</code>
+- <code title="get /accounts/{account_id}/intel/indicator-feeds/{feed_id}">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">get</a>(feedID, { ...params }) -> IndicatorFeedGetResponse</code>
+
+### Snapshots
+
+Types:
+
+- <code><a href="./src/resources/intel/indicator-feeds/snapshots.ts">SnapshotUpdateResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/intel/indicator-feeds/{feed_id}/snapshot">client.intel.indicatorFeeds.snapshots.<a href="./src/resources/intel/indicator-feeds/snapshots.ts">update</a>(feedID, { ...params }) -> SnapshotUpdateResponse</code>
+
+### Permissions
+
+Types:
+
+- <code><a href="./src/resources/intel/indicator-feeds/permissions.ts">PermissionCreateResponse</a></code>
+- <code><a href="./src/resources/intel/indicator-feeds/permissions.ts">PermissionListResponse</a></code>
+- <code><a href="./src/resources/intel/indicator-feeds/permissions.ts">PermissionDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/intel/indicator-feeds/permissions/add">client.intel.indicatorFeeds.permissions.<a href="./src/resources/intel/indicator-feeds/permissions.ts">create</a>({ ...params }) -> PermissionCreateResponse</code>
+- <code title="get /accounts/{account_id}/intel/indicator-feeds/permissions/view">client.intel.indicatorFeeds.permissions.<a href="./src/resources/intel/indicator-feeds/permissions.ts">list</a>({ ...params }) -> PermissionListResponse</code>
+- <code title="put /accounts/{account_id}/intel/indicator-feeds/permissions/remove">client.intel.indicatorFeeds.permissions.<a href="./src/resources/intel/indicator-feeds/permissions.ts">delete</a>({ ...params }) -> PermissionDeleteResponse</code>
+
+### Downloads
+
+## Sinkholes
+
+Types:
+
+- <code><a href="./src/resources/intel/sinkholes.ts">Sinkhole</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/sinkholes">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes.ts">list</a>({ ...params }) -> SinkholesSinglePage</code>
+
+## AttackSurfaceReport
+
+### IssueTypes
+
+Types:
+
+- <code><a href="./src/resources/intel/attack-surface-report/issue-types.ts">IssueTypeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/attack-surface-report/issue-types">client.intel.attackSurfaceReport.issueTypes.<a href="./src/resources/intel/attack-surface-report/issue-types.ts">get</a>({ ...params }) -> IssueTypeGetResponsesSinglePage</code>
+
+### Issues
+
+Types:
+
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueType</a></code>
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">SeverityQueryParam</a></code>
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueListResponse</a></code>
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueClassResponse</a></code>
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueDismissResponse</a></code>
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueSeverityResponse</a></code>
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueTypeResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/attack-surface-report/issues">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">list</a>({ ...params }) -> IssueListResponsesV4PagePagination</code>
+- <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/class">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">class</a>({ ...params }) -> IssueClassResponse</code>
+- <code title="put /accounts/{account_id}/intel/attack-surface-report/{issue_id}/dismiss">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">dismiss</a>(issueID, { ...params }) -> IssueDismissResponse</code>
+- <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/severity">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">severity</a>({ ...params }) -> IssueSeverityResponse</code>
+- <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/type">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">type</a>({ ...params }) -> IssueTypeResponse</code>
+
+# MagicTransit
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheck</a></code>
+- <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheckRate</a></code>
+- <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheckType</a></code>
+
+## Apps
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/apps.ts">AppCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/apps.ts">AppUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/apps.ts">AppListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/apps.ts">AppDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/apps.ts">AppEditResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/apps">client.magicTransit.apps.<a href="./src/resources/magic-transit/apps.ts">create</a>({ ...params }) -> AppCreateResponse | null</code>
+- <code title="put /accounts/{account_id}/magic/apps/{account_app_id}">client.magicTransit.apps.<a href="./src/resources/magic-transit/apps.ts">update</a>(accountAppID, { ...params }) -> AppUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/magic/apps">client.magicTransit.apps.<a href="./src/resources/magic-transit/apps.ts">list</a>({ ...params }) -> AppListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/apps/{account_app_id}">client.magicTransit.apps.<a href="./src/resources/magic-transit/apps.ts">delete</a>(accountAppID, { ...params }) -> AppDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/magic/apps/{account_app_id}">client.magicTransit.apps.<a href="./src/resources/magic-transit/apps.ts">edit</a>(accountAppID, { ...params }) -> AppEditResponse | null</code>
+
+## CfInterconnects
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/cf-interconnects.ts">CfInterconnectUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/cf-interconnects.ts">CfInterconnectListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/cf-interconnects.ts">CfInterconnectBulkUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/cf-interconnects.ts">CfInterconnectGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/magic/cf_interconnects/{cf_interconnect_id}">client.magicTransit.cfInterconnects.<a href="./src/resources/magic-transit/cf-interconnects.ts">update</a>(cfInterconnectID, { ...params }) -> CfInterconnectUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/cf_interconnects">client.magicTransit.cfInterconnects.<a href="./src/resources/magic-transit/cf-interconnects.ts">list</a>({ ...params }) -> CfInterconnectListResponse</code>
+- <code title="put /accounts/{account_id}/magic/cf_interconnects">client.magicTransit.cfInterconnects.<a href="./src/resources/magic-transit/cf-interconnects.ts">bulkUpdate</a>({ ...params }) -> CfInterconnectBulkUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/cf_interconnects/{cf_interconnect_id}">client.magicTransit.cfInterconnects.<a href="./src/resources/magic-transit/cf-interconnects.ts">get</a>(cfInterconnectID, { ...params }) -> CfInterconnectGetResponse</code>
+
+## GRETunnels
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/gre-tunnels.ts">GRETunnelCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/gre-tunnels.ts">GRETunnelUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/gre-tunnels.ts">GRETunnelListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/gre-tunnels.ts">GRETunnelDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/gre-tunnels.ts">GRETunnelBulkUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/gre-tunnels.ts">GRETunnelGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/gre_tunnels">client.magicTransit.greTunnels.<a href="./src/resources/magic-transit/gre-tunnels.ts">create</a>({ ...params }) -> GRETunnelCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/gre_tunnels/{gre_tunnel_id}">client.magicTransit.greTunnels.<a href="./src/resources/magic-transit/gre-tunnels.ts">update</a>(greTunnelID, { ...params }) -> GRETunnelUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/gre_tunnels">client.magicTransit.greTunnels.<a href="./src/resources/magic-transit/gre-tunnels.ts">list</a>({ ...params }) -> GRETunnelListResponse</code>
+- <code title="delete /accounts/{account_id}/magic/gre_tunnels/{gre_tunnel_id}">client.magicTransit.greTunnels.<a href="./src/resources/magic-transit/gre-tunnels.ts">delete</a>(greTunnelID, { ...params }) -> GRETunnelDeleteResponse</code>
+- <code title="put /accounts/{account_id}/magic/gre_tunnels">client.magicTransit.greTunnels.<a href="./src/resources/magic-transit/gre-tunnels.ts">bulkUpdate</a>({ ...params }) -> GRETunnelBulkUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/gre_tunnels/{gre_tunnel_id}">client.magicTransit.greTunnels.<a href="./src/resources/magic-transit/gre-tunnels.ts">get</a>(greTunnelID, { ...params }) -> GRETunnelGetResponse</code>
+
+## IPSECTunnels
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">PSKMetadata</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelBulkUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelGetResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelPSKGenerateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/ipsec_tunnels">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">create</a>({ ...params }) -> IPSECTunnelCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">update</a>(ipsecTunnelID, { ...params }) -> IPSECTunnelUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/ipsec_tunnels">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">list</a>({ ...params }) -> IPSECTunnelListResponse</code>
+- <code title="delete /accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">delete</a>(ipsecTunnelID, { ...params }) -> IPSECTunnelDeleteResponse</code>
+- <code title="put /accounts/{account_id}/magic/ipsec_tunnels">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">bulkUpdate</a>({ ...params }) -> IPSECTunnelBulkUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">get</a>(ipsecTunnelID, { ...params }) -> IPSECTunnelGetResponse</code>
+- <code title="post /accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}/psk_generate">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">pskGenerate</a>(ipsecTunnelID, { ...params }) -> IPSECTunnelPSKGenerateResponse</code>
+
+## Routes
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/routes.ts">Scope</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteBulkUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteEmptyResponse</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/routes">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">create</a>({ ...params }) -> RouteCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/routes/{route_id}">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">update</a>(routeID, { ...params }) -> RouteUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/routes">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">list</a>({ ...params }) -> RouteListResponse</code>
+- <code title="delete /accounts/{account_id}/magic/routes/{route_id}">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">delete</a>(routeID, { ...params }) -> RouteDeleteResponse</code>
+- <code title="put /accounts/{account_id}/magic/routes">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">bulkUpdate</a>({ ...params }) -> RouteBulkUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/magic/routes">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">empty</a>({ ...params }) -> RouteEmptyResponse</code>
+- <code title="get /accounts/{account_id}/magic/routes/{route_id}">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">get</a>(routeID, { ...params }) -> RouteGetResponse</code>
+
+## Sites
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">Site</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteLocation</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/sites">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">create</a>({ ...params }) -> Site</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">update</a>(siteID, { ...params }) -> Site</code>
+- <code title="get /accounts/{account_id}/magic/sites">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">list</a>({ ...params }) -> SitesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">delete</a>(siteID, { ...params }) -> Site</code>
+- <code title="patch /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">edit</a>(siteID, { ...params }) -> Site</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">get</a>(siteID, { ...params }) -> Site</code>
+
+### ACLs
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACL</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLConfiguration</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">AllowedProtocol</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">Subnet</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/sites/{site_id}/acls">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">create</a>(siteID, { ...params }) -> ACL</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_id}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">update</a>(aclID, { ...params }) -> ACL</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/acls">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">list</a>(siteID, { ...params }) -> ACLsSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_id}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">delete</a>(aclID, { ...params }) -> ACL</code>
+- <code title="patch /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_id}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">edit</a>(aclID, { ...params }) -> ACL</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_id}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">get</a>(aclID, { ...params }) -> ACL</code>
+
+### LANs
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">DHCPRelay</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">DHCPServer</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LAN</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LANStaticAddressing</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">Nat</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">RoutedSubnet</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/sites/{site_id}/lans">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">create</a>(siteID, { ...params }) -> LANsSinglePage</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">update</a>(lanID, { ...params }) -> LAN</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/lans">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">list</a>(siteID, { ...params }) -> LANsSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">delete</a>(lanID, { ...params }) -> LAN</code>
+- <code title="patch /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">edit</a>(lanID, { ...params }) -> LAN</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">get</a>(lanID, { ...params }) -> LAN</code>
+
+### WANs
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WAN</a></code>
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WANStaticAddressing</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/sites/{site_id}/wans">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">create</a>(siteID, { ...params }) -> WANsSinglePage</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">update</a>(wanID, { ...params }) -> WAN</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/wans">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">list</a>(siteID, { ...params }) -> WANsSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">delete</a>(wanID, { ...params }) -> WAN</code>
+- <code title="patch /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">edit</a>(wanID, { ...params }) -> WAN</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">get</a>(wanID, { ...params }) -> WAN</code>
+
+## Connectors
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorEditResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/connectors.ts">ConnectorGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/connectors">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">create</a>({ ...params }) -> ConnectorCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">update</a>(connectorID, { ...params }) -> ConnectorUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">list</a>({ ...params }) -> ConnectorListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">delete</a>(connectorID, { ...params }) -> ConnectorDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">edit</a>(connectorID, { ...params }) -> ConnectorEditResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">get</a>(connectorID, { ...params }) -> ConnectorGetResponse</code>
+
+### Events
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/connectors/events/events.ts">EventListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/events/events.ts">EventGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events">client.magicTransit.connectors.events.<a href="./src/resources/magic-transit/connectors/events/events.ts">list</a>(connectorID, { ...params }) -> EventListResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events/{event_t}.{event_n}">client.magicTransit.connectors.events.<a href="./src/resources/magic-transit/connectors/events/events.ts">get</a>(eventN, { ...params }) -> EventGetResponse</code>
+
+#### Latest
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/connectors/events/latest.ts">LatestListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events/latest">client.magicTransit.connectors.events.latest.<a href="./src/resources/magic-transit/connectors/events/latest.ts">list</a>(connectorID, { ...params }) -> LatestListResponse</code>
+
+### Snapshots
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/connectors/snapshots/snapshots.ts">SnapshotListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/snapshots/snapshots.ts">SnapshotGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/snapshots">client.magicTransit.connectors.snapshots.<a href="./src/resources/magic-transit/connectors/snapshots/snapshots.ts">list</a>(connectorID, { ...params }) -> SnapshotListResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/snapshots/{snapshot_t}">client.magicTransit.connectors.snapshots.<a href="./src/resources/magic-transit/connectors/snapshots/snapshots.ts">get</a>(snapshotT, { ...params }) -> SnapshotGetResponse</code>
+
+#### Latest
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/connectors/snapshots/latest.ts">LatestListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/snapshots/latest">client.magicTransit.connectors.snapshots.latest.<a href="./src/resources/magic-transit/connectors/snapshots/latest.ts">list</a>(connectorID, { ...params }) -> LatestListResponse</code>
+
+## PCAPs
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/pcaps/pcaps.ts">PCAP</a></code>
+- <code><a href="./src/resources/magic-transit/pcaps/pcaps.ts">PCAPFilter</a></code>
+- <code><a href="./src/resources/magic-transit/pcaps/pcaps.ts">PCAPCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/pcaps/pcaps.ts">PCAPListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/pcaps/pcaps.ts">PCAPGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pcaps">client.magicTransit.pcaps.<a href="./src/resources/magic-transit/pcaps/pcaps.ts">create</a>({ ...params }) -> PCAPCreateResponse</code>
+- <code title="get /accounts/{account_id}/pcaps">client.magicTransit.pcaps.<a href="./src/resources/magic-transit/pcaps/pcaps.ts">list</a>({ ...params }) -> PCAPListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/pcaps/{pcap_id}">client.magicTransit.pcaps.<a href="./src/resources/magic-transit/pcaps/pcaps.ts">get</a>(pcapID, { ...params }) -> PCAPGetResponse</code>
+- <code title="put /accounts/{account_id}/pcaps/{pcap_id}/stop">client.magicTransit.pcaps.<a href="./src/resources/magic-transit/pcaps/pcaps.ts">stop</a>(pcapID, { ...params }) -> void</code>
+
+### Ownership
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/pcaps/ownership.ts">Ownership</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pcaps/ownership">client.magicTransit.pcaps.ownership.<a href="./src/resources/magic-transit/pcaps/ownership.ts">create</a>({ ...params }) -> Ownership</code>
+- <code title="delete /accounts/{account_id}/pcaps/ownership/{ownership_id}">client.magicTransit.pcaps.ownership.<a href="./src/resources/magic-transit/pcaps/ownership.ts">delete</a>(ownershipID, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/pcaps/ownership">client.magicTransit.pcaps.ownership.<a href="./src/resources/magic-transit/pcaps/ownership.ts">get</a>({ ...params }) -> OwnershipsSinglePage</code>
+- <code title="post /accounts/{account_id}/pcaps/ownership/validate">client.magicTransit.pcaps.ownership.<a href="./src/resources/magic-transit/pcaps/ownership.ts">validate</a>({ ...params }) -> Ownership</code>
+
+### Download
+
+Methods:
+
+- <code title="get /accounts/{account_id}/pcaps/{pcap_id}/download">client.magicTransit.pcaps.download.<a href="./src/resources/magic-transit/pcaps/download.ts">get</a>(pcapID, { ...params }) -> Response</code>
+
+# MagicNetworkMonitoring
+
+## VPCFlows
+
+### Tokens
+
+Types:
+
+- <code><a href="./src/resources/magic-network-monitoring/vpc-flows/tokens.ts">TokenCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/mnm/vpc-flows/token">client.magicNetworkMonitoring.vpcFlows.tokens.<a href="./src/resources/magic-network-monitoring/vpc-flows/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
+
+## Configs
+
+Types:
+
+- <code><a href="./src/resources/magic-network-monitoring/configs/configs.ts">Configuration</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/mnm/config">client.magicNetworkMonitoring.configs.<a href="./src/resources/magic-network-monitoring/configs/configs.ts">create</a>({ ...params }) -> Configuration</code>
+- <code title="put /accounts/{account_id}/mnm/config">client.magicNetworkMonitoring.configs.<a href="./src/resources/magic-network-monitoring/configs/configs.ts">update</a>({ ...params }) -> Configuration</code>
+- <code title="delete /accounts/{account_id}/mnm/config">client.magicNetworkMonitoring.configs.<a href="./src/resources/magic-network-monitoring/configs/configs.ts">delete</a>({ ...params }) -> Configuration</code>
+- <code title="patch /accounts/{account_id}/mnm/config">client.magicNetworkMonitoring.configs.<a href="./src/resources/magic-network-monitoring/configs/configs.ts">edit</a>({ ...params }) -> Configuration</code>
+- <code title="get /accounts/{account_id}/mnm/config">client.magicNetworkMonitoring.configs.<a href="./src/resources/magic-network-monitoring/configs/configs.ts">get</a>({ ...params }) -> Configuration</code>
+
+### Full
+
+Methods:
+
+- <code title="get /accounts/{account_id}/mnm/config/full">client.magicNetworkMonitoring.configs.full.<a href="./src/resources/magic-network-monitoring/configs/full.ts">get</a>({ ...params }) -> Configuration</code>
+
+## Rules
+
+Types:
+
+- <code><a href="./src/resources/magic-network-monitoring/rules/rules.ts">MagicNetworkMonitoringRule</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">create</a>({ ...params }) -> MagicNetworkMonitoringRule | null</code>
+- <code title="put /accounts/{account_id}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">update</a>({ ...params }) -> MagicNetworkMonitoringRule | null</code>
+- <code title="get /accounts/{account_id}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">list</a>({ ...params }) -> MagicNetworkMonitoringRulesSinglePage</code>
+- <code title="delete /accounts/{account_id}/mnm/rules/{rule_id}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">delete</a>(ruleID, { ...params }) -> MagicNetworkMonitoringRule | null</code>
+- <code title="patch /accounts/{account_id}/mnm/rules/{rule_id}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">edit</a>(ruleID, { ...params }) -> MagicNetworkMonitoringRule | null</code>
+- <code title="get /accounts/{account_id}/mnm/rules/{rule_id}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">get</a>(ruleID, { ...params }) -> MagicNetworkMonitoringRule | null</code>
+
+### Advertisements
+
+Types:
+
+- <code><a href="./src/resources/magic-network-monitoring/rules/advertisements.ts">Advertisement</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/mnm/rules/{rule_id}/advertisement">client.magicNetworkMonitoring.rules.advertisements.<a href="./src/resources/magic-network-monitoring/rules/advertisements.ts">edit</a>(ruleID, { ...params }) -> Advertisement | null</code>
+
+# MagicCloudNetworking
+
+## CatalogSyncs
+
+Types:
+
+- <code><a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">CatalogSyncCreateResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">CatalogSyncUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">CatalogSyncListResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">CatalogSyncDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">CatalogSyncEditResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">CatalogSyncGetResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">CatalogSyncRefreshResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/cloud/catalog-syncs">client.magicCloudNetworking.catalogSyncs.<a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">create</a>({ ...params }) -> CatalogSyncCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/cloud/catalog-syncs/{sync_id}">client.magicCloudNetworking.catalogSyncs.<a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">update</a>(syncID, { ...params }) -> CatalogSyncUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/cloud/catalog-syncs">client.magicCloudNetworking.catalogSyncs.<a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">list</a>({ ...params }) -> CatalogSyncListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/cloud/catalog-syncs/{sync_id}">client.magicCloudNetworking.catalogSyncs.<a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">delete</a>(syncID, { ...params }) -> CatalogSyncDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/magic/cloud/catalog-syncs/{sync_id}">client.magicCloudNetworking.catalogSyncs.<a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">edit</a>(syncID, { ...params }) -> CatalogSyncEditResponse</code>
+- <code title="get /accounts/{account_id}/magic/cloud/catalog-syncs/{sync_id}">client.magicCloudNetworking.catalogSyncs.<a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">get</a>(syncID, { ...params }) -> CatalogSyncGetResponse</code>
+- <code title="post /accounts/{account_id}/magic/cloud/catalog-syncs/{sync_id}/refresh">client.magicCloudNetworking.catalogSyncs.<a href="./src/resources/magic-cloud-networking/catalog-syncs/catalog-syncs.ts">refresh</a>(syncID, { ...params }) -> CatalogSyncRefreshResponse</code>
+
+### PrebuiltPolicies
+
+Types:
+
+- <code><a href="./src/resources/magic-cloud-networking/catalog-syncs/prebuilt-policies.ts">PrebuiltPolicyListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/magic/cloud/catalog-syncs/prebuilt-policies">client.magicCloudNetworking.catalogSyncs.prebuiltPolicies.<a href="./src/resources/magic-cloud-networking/catalog-syncs/prebuilt-policies.ts">list</a>({ ...params }) -> PrebuiltPolicyListResponsesSinglePage</code>
+
+## OnRamps
+
+Types:
+
+- <code><a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">OnRampCreateResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">OnRampUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">OnRampListResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">OnRampDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">OnRampApplyResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">OnRampEditResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">OnRampGetResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">OnRampPlanResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/cloud/onramps">client.magicCloudNetworking.onRamps.<a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">create</a>({ ...params }) -> OnRampCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/cloud/onramps/{onramp_id}">client.magicCloudNetworking.onRamps.<a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">update</a>(onrampID, { ...params }) -> OnRampUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/cloud/onramps">client.magicCloudNetworking.onRamps.<a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">list</a>({ ...params }) -> OnRampListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/cloud/onramps/{onramp_id}">client.magicCloudNetworking.onRamps.<a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">delete</a>(onrampID, { ...params }) -> OnRampDeleteResponse</code>
+- <code title="post /accounts/{account_id}/magic/cloud/onramps/{onramp_id}/apply">client.magicCloudNetworking.onRamps.<a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">apply</a>(onrampID, { ...params }) -> OnRampApplyResponse</code>
+- <code title="patch /accounts/{account_id}/magic/cloud/onramps/{onramp_id}">client.magicCloudNetworking.onRamps.<a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">edit</a>(onrampID, { ...params }) -> OnRampEditResponse</code>
+- <code title="post /accounts/{account_id}/magic/cloud/onramps/{onramp_id}/export">client.magicCloudNetworking.onRamps.<a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">export</a>(onrampID, { ...params }) -> Response</code>
+- <code title="get /accounts/{account_id}/magic/cloud/onramps/{onramp_id}">client.magicCloudNetworking.onRamps.<a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">get</a>(onrampID, { ...params }) -> OnRampGetResponse</code>
+- <code title="post /accounts/{account_id}/magic/cloud/onramps/{onramp_id}/plan">client.magicCloudNetworking.onRamps.<a href="./src/resources/magic-cloud-networking/on-ramps/on-ramps.ts">plan</a>(onrampID, { ...params }) -> OnRampPlanResponse</code>
+
+### AddressSpaces
+
+Types:
+
+- <code><a href="./src/resources/magic-cloud-networking/on-ramps/address-spaces.ts">AddressSpaceUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/on-ramps/address-spaces.ts">AddressSpaceListResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/on-ramps/address-spaces.ts">AddressSpaceEditResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/magic/cloud/onramps/magic_wan_address_space">client.magicCloudNetworking.onRamps.addressSpaces.<a href="./src/resources/magic-cloud-networking/on-ramps/address-spaces.ts">update</a>({ ...params }) -> AddressSpaceUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/cloud/onramps/magic_wan_address_space">client.magicCloudNetworking.onRamps.addressSpaces.<a href="./src/resources/magic-cloud-networking/on-ramps/address-spaces.ts">list</a>({ ...params }) -> AddressSpaceListResponse</code>
+- <code title="patch /accounts/{account_id}/magic/cloud/onramps/magic_wan_address_space">client.magicCloudNetworking.onRamps.addressSpaces.<a href="./src/resources/magic-cloud-networking/on-ramps/address-spaces.ts">edit</a>({ ...params }) -> AddressSpaceEditResponse</code>
+
+## CloudIntegrations
+
+Types:
+
+- <code><a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">CloudIntegrationCreateResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">CloudIntegrationUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">CloudIntegrationListResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">CloudIntegrationDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">CloudIntegrationDiscoverResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">CloudIntegrationDiscoverAllResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">CloudIntegrationEditResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">CloudIntegrationGetResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">CloudIntegrationInitialSetupResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/cloud/providers">client.magicCloudNetworking.cloudIntegrations.<a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">create</a>({ ...params }) -> CloudIntegrationCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/cloud/providers/{provider_id}">client.magicCloudNetworking.cloudIntegrations.<a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">update</a>(providerID, { ...params }) -> CloudIntegrationUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/cloud/providers">client.magicCloudNetworking.cloudIntegrations.<a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">list</a>({ ...params }) -> CloudIntegrationListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/cloud/providers/{provider_id}">client.magicCloudNetworking.cloudIntegrations.<a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">delete</a>(providerID, { ...params }) -> CloudIntegrationDeleteResponse</code>
+- <code title="post /accounts/{account_id}/magic/cloud/providers/{provider_id}/discover">client.magicCloudNetworking.cloudIntegrations.<a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">discover</a>(providerID, { ...params }) -> CloudIntegrationDiscoverResponse</code>
+- <code title="post /accounts/{account_id}/magic/cloud/providers/discover">client.magicCloudNetworking.cloudIntegrations.<a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">discoverAll</a>({ ...params }) -> CloudIntegrationDiscoverAllResponse</code>
+- <code title="patch /accounts/{account_id}/magic/cloud/providers/{provider_id}">client.magicCloudNetworking.cloudIntegrations.<a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">edit</a>(providerID, { ...params }) -> CloudIntegrationEditResponse</code>
+- <code title="get /accounts/{account_id}/magic/cloud/providers/{provider_id}">client.magicCloudNetworking.cloudIntegrations.<a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">get</a>(providerID, { ...params }) -> CloudIntegrationGetResponse</code>
+- <code title="get /accounts/{account_id}/magic/cloud/providers/{provider_id}/initial_setup">client.magicCloudNetworking.cloudIntegrations.<a href="./src/resources/magic-cloud-networking/cloud-integrations.ts">initialSetup</a>(providerID, { ...params }) -> CloudIntegrationInitialSetupResponse</code>
+
+## Resources
+
+Types:
+
+- <code><a href="./src/resources/magic-cloud-networking/resources.ts">ResourceListResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/resources.ts">ResourceGetResponse</a></code>
+- <code><a href="./src/resources/magic-cloud-networking/resources.ts">ResourcePolicyPreviewResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/magic/cloud/resources">client.magicCloudNetworking.resources.<a href="./src/resources/magic-cloud-networking/resources.ts">list</a>({ ...params }) -> ResourceListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/magic/cloud/resources/export">client.magicCloudNetworking.resources.<a href="./src/resources/magic-cloud-networking/resources.ts">export</a>({ ...params }) -> Response</code>
+- <code title="get /accounts/{account_id}/magic/cloud/resources/{resource_id}">client.magicCloudNetworking.resources.<a href="./src/resources/magic-cloud-networking/resources.ts">get</a>(resourceID, { ...params }) -> ResourceGetResponse</code>
+- <code title="post /accounts/{account_id}/magic/cloud/resources/policy-preview">client.magicCloudNetworking.resources.<a href="./src/resources/magic-cloud-networking/resources.ts">policyPreview</a>({ ...params }) -> ResourcePolicyPreviewResponse</code>
+
+# NetworkInterconnects
+
+## CNIs
+
+Types:
+
+- <code><a href="./src/resources/network-interconnects/cnis.ts">CNICreateResponse</a></code>
+- <code><a href="./src/resources/network-interconnects/cnis.ts">CNIUpdateResponse</a></code>
+- <code><a href="./src/resources/network-interconnects/cnis.ts">CNIListResponse</a></code>
+- <code><a href="./src/resources/network-interconnects/cnis.ts">CNIGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cni/cnis">client.networkInterconnects.cnis.<a href="./src/resources/network-interconnects/cnis.ts">create</a>({ ...params }) -> CNICreateResponse</code>
+- <code title="put /accounts/{account_id}/cni/cnis/{cni}">client.networkInterconnects.cnis.<a href="./src/resources/network-interconnects/cnis.ts">update</a>(cni, { ...params }) -> CNIUpdateResponse</code>
+- <code title="get /accounts/{account_id}/cni/cnis">client.networkInterconnects.cnis.<a href="./src/resources/network-interconnects/cnis.ts">list</a>({ ...params }) -> CNIListResponse</code>
+- <code title="delete /accounts/{account_id}/cni/cnis/{cni}">client.networkInterconnects.cnis.<a href="./src/resources/network-interconnects/cnis.ts">delete</a>(cni, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/cni/cnis/{cni}">client.networkInterconnects.cnis.<a href="./src/resources/network-interconnects/cnis.ts">get</a>(cni, { ...params }) -> CNIGetResponse</code>
+
+## Interconnects
+
+Types:
+
+- <code><a href="./src/resources/network-interconnects/interconnects.ts">InterconnectCreateResponse</a></code>
+- <code><a href="./src/resources/network-interconnects/interconnects.ts">InterconnectListResponse</a></code>
+- <code><a href="./src/resources/network-interconnects/interconnects.ts">InterconnectGetResponse</a></code>
+- <code><a href="./src/resources/network-interconnects/interconnects.ts">InterconnectStatusResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cni/interconnects">client.networkInterconnects.interconnects.<a href="./src/resources/network-interconnects/interconnects.ts">create</a>({ ...params }) -> InterconnectCreateResponse</code>
+- <code title="get /accounts/{account_id}/cni/interconnects">client.networkInterconnects.interconnects.<a href="./src/resources/network-interconnects/interconnects.ts">list</a>({ ...params }) -> InterconnectListResponse</code>
+- <code title="delete /accounts/{account_id}/cni/interconnects/{icon}">client.networkInterconnects.interconnects.<a href="./src/resources/network-interconnects/interconnects.ts">delete</a>(icon, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/cni/interconnects/{icon}">client.networkInterconnects.interconnects.<a href="./src/resources/network-interconnects/interconnects.ts">get</a>(icon, { ...params }) -> InterconnectGetResponse</code>
+- <code title="get /accounts/{account_id}/cni/interconnects/{icon}/loa">client.networkInterconnects.interconnects.<a href="./src/resources/network-interconnects/interconnects.ts">loa</a>(icon, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/cni/interconnects/{icon}/status">client.networkInterconnects.interconnects.<a href="./src/resources/network-interconnects/interconnects.ts">status</a>(icon, { ...params }) -> InterconnectStatusResponse</code>
+
+## Settings
+
+Types:
+
+- <code><a href="./src/resources/network-interconnects/settings.ts">SettingUpdateResponse</a></code>
+- <code><a href="./src/resources/network-interconnects/settings.ts">SettingGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/cni/settings">client.networkInterconnects.settings.<a href="./src/resources/network-interconnects/settings.ts">update</a>({ ...params }) -> SettingUpdateResponse</code>
+- <code title="get /accounts/{account_id}/cni/settings">client.networkInterconnects.settings.<a href="./src/resources/network-interconnects/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
+
+## Slots
+
+Types:
+
+- <code><a href="./src/resources/network-interconnects/slots.ts">SlotListResponse</a></code>
+- <code><a href="./src/resources/network-interconnects/slots.ts">SlotGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cni/slots">client.networkInterconnects.slots.<a href="./src/resources/network-interconnects/slots.ts">list</a>({ ...params }) -> SlotListResponse</code>
+- <code title="get /accounts/{account_id}/cni/slots/{slot}">client.networkInterconnects.slots.<a href="./src/resources/network-interconnects/slots.ts">get</a>(slot, { ...params }) -> SlotGetResponse</code>
+
+# MTLSCertificates
+
+Types:
+
+- <code><a href="./src/resources/mtls-certificates/mtls-certificates.ts">MTLSCertificate</a></code>
+- <code><a href="./src/resources/mtls-certificates/mtls-certificates.ts">MTLSCertificateCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/mtls_certificates">client.mtlsCertificates.<a href="./src/resources/mtls-certificates/mtls-certificates.ts">create</a>({ ...params }) -> MTLSCertificateCreateResponse</code>
+- <code title="get /accounts/{account_id}/mtls_certificates">client.mtlsCertificates.<a href="./src/resources/mtls-certificates/mtls-certificates.ts">list</a>({ ...params }) -> MTLSCertificatesSinglePage</code>
+- <code title="delete /accounts/{account_id}/mtls_certificates/{mtls_certificate_id}">client.mtlsCertificates.<a href="./src/resources/mtls-certificates/mtls-certificates.ts">delete</a>(mtlsCertificateID, { ...params }) -> MTLSCertificate</code>
+- <code title="get /accounts/{account_id}/mtls_certificates/{mtls_certificate_id}">client.mtlsCertificates.<a href="./src/resources/mtls-certificates/mtls-certificates.ts">get</a>(mtlsCertificateID, { ...params }) -> MTLSCertificate</code>
+
+## Associations
+
+Types:
+
+- <code><a href="./src/resources/mtls-certificates/associations.ts">CertificateAsssociation</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/mtls_certificates/{mtls_certificate_id}/associations">client.mtlsCertificates.associations.<a href="./src/resources/mtls-certificates/associations.ts">get</a>(mtlsCertificateID, { ...params }) -> CertificateAsssociationsSinglePage</code>
+
+# Pages
+
+## Projects
+
+Types:
+
+- <code><a href="./src/resources/pages/projects/projects.ts">Deployment</a></code>
+- <code><a href="./src/resources/pages/projects/projects.ts">Project</a></code>
+- <code><a href="./src/resources/pages/projects/projects.ts">Stage</a></code>
+- <code><a href="./src/resources/pages/projects/projects.ts">ProjectCreateResponse</a></code>
+- <code><a href="./src/resources/pages/projects/projects.ts">ProjectListResponse</a></code>
+- <code><a href="./src/resources/pages/projects/projects.ts">ProjectDeleteResponse</a></code>
+- <code><a href="./src/resources/pages/projects/projects.ts">ProjectEditResponse</a></code>
+- <code><a href="./src/resources/pages/projects/projects.ts">ProjectGetResponse</a></code>
+- <code><a href="./src/resources/pages/projects/projects.ts">ProjectPurgeBuildCacheResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pages/projects">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">create</a>({ ...params }) -> ProjectCreateResponse</code>
+- <code title="get /accounts/{account_id}/pages/projects">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">list</a>({ ...params }) -> ProjectListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/pages/projects/{project_name}">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">delete</a>(projectName, { ...params }) -> ProjectDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/pages/projects/{project_name}">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">edit</a>(projectName, { ...params }) -> ProjectEditResponse</code>
+- <code title="get /accounts/{account_id}/pages/projects/{project_name}">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">get</a>(projectName, { ...params }) -> ProjectGetResponse</code>
+- <code title="post /accounts/{account_id}/pages/projects/{project_name}/purge_build_cache">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">purgeBuildCache</a>(projectName, { ...params }) -> ProjectPurgeBuildCacheResponse | null</code>
+
+### Deployments
+
+Types:
+
+- <code><a href="./src/resources/pages/projects/deployments/deployments.ts">DeploymentCreateResponse</a></code>
+- <code><a href="./src/resources/pages/projects/deployments/deployments.ts">DeploymentListResponse</a></code>
+- <code><a href="./src/resources/pages/projects/deployments/deployments.ts">DeploymentDeleteResponse</a></code>
+- <code><a href="./src/resources/pages/projects/deployments/deployments.ts">DeploymentGetResponse</a></code>
+- <code><a href="./src/resources/pages/projects/deployments/deployments.ts">DeploymentRetryResponse</a></code>
+- <code><a href="./src/resources/pages/projects/deployments/deployments.ts">DeploymentRollbackResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pages/projects/{project_name}/deployments">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">create</a>(projectName, { ...params }) -> DeploymentCreateResponse</code>
+- <code title="get /accounts/{account_id}/pages/projects/{project_name}/deployments">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">list</a>(projectName, { ...params }) -> DeploymentListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">delete</a>(deploymentID, { ...params }) -> DeploymentDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">get</a>(deploymentID, { ...params }) -> DeploymentGetResponse</code>
+- <code title="post /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}/retry">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">retry</a>(deploymentID, { ...params }) -> DeploymentRetryResponse</code>
+- <code title="post /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}/rollback">client.pages.projects.deployments.<a href="./src/resources/pages/projects/deployments/deployments.ts">rollback</a>(deploymentID, { ...params }) -> DeploymentRollbackResponse</code>
+
+#### History
+
+##### Logs
+
+Types:
+
+- <code><a href="./src/resources/pages/projects/deployments/history/logs.ts">LogGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}/history/logs">client.pages.projects.deployments.history.logs.<a href="./src/resources/pages/projects/deployments/history/logs.ts">get</a>(deploymentID, { ...params }) -> LogGetResponse</code>
+
+### Domains
+
+Types:
+
+- <code><a href="./src/resources/pages/projects/domains.ts">DomainCreateResponse</a></code>
+- <code><a href="./src/resources/pages/projects/domains.ts">DomainListResponse</a></code>
+- <code><a href="./src/resources/pages/projects/domains.ts">DomainDeleteResponse</a></code>
+- <code><a href="./src/resources/pages/projects/domains.ts">DomainEditResponse</a></code>
+- <code><a href="./src/resources/pages/projects/domains.ts">DomainGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pages/projects/{project_name}/domains">client.pages.projects.domains.<a href="./src/resources/pages/projects/domains.ts">create</a>(projectName, { ...params }) -> DomainCreateResponse</code>
+- <code title="get /accounts/{account_id}/pages/projects/{project_name}/domains">client.pages.projects.domains.<a href="./src/resources/pages/projects/domains.ts">list</a>(projectName, { ...params }) -> DomainListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/pages/projects/{project_name}/domains/{domain_name}">client.pages.projects.domains.<a href="./src/resources/pages/projects/domains.ts">delete</a>(domainName, { ...params }) -> DomainDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/pages/projects/{project_name}/domains/{domain_name}">client.pages.projects.domains.<a href="./src/resources/pages/projects/domains.ts">edit</a>(domainName, { ...params }) -> DomainEditResponse</code>
+- <code title="get /accounts/{account_id}/pages/projects/{project_name}/domains/{domain_name}">client.pages.projects.domains.<a href="./src/resources/pages/projects/domains.ts">get</a>(domainName, { ...params }) -> DomainGetResponse</code>
+
+# Registrar
+
+## Domains
+
+Types:
+
+- <code><a href="./src/resources/registrar/domains.ts">Domain</a></code>
+- <code><a href="./src/resources/registrar/domains.ts">DomainUpdateResponse</a></code>
+- <code><a href="./src/resources/registrar/domains.ts">DomainGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/registrar/domains/{domain_name}">client.registrar.domains.<a href="./src/resources/registrar/domains.ts">update</a>(domainName, { ...params }) -> DomainUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/registrar/domains">client.registrar.domains.<a href="./src/resources/registrar/domains.ts">list</a>({ ...params }) -> DomainsSinglePage</code>
+- <code title="get /accounts/{account_id}/registrar/domains/{domain_name}">client.registrar.domains.<a href="./src/resources/registrar/domains.ts">get</a>(domainName, { ...params }) -> DomainGetResponse | null</code>
+
+# RequestTracers
+
+## Traces
+
+Types:
+
+- <code><a href="./src/resources/request-tracers/traces.ts">Trace</a></code>
+- <code><a href="./src/resources/request-tracers/traces.ts">TraceItem</a></code>
+- <code><a href="./src/resources/request-tracers/traces.ts">TraceCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/request-tracer/trace">client.requestTracers.traces.<a href="./src/resources/request-tracers/traces.ts">create</a>({ ...params }) -> TraceCreateResponse</code>
+
+# Rules
+
+## Lists
+
+Types:
+
+- <code><a href="./src/resources/rules/lists/lists.ts">Hostname</a></code>
+- <code><a href="./src/resources/rules/lists/lists.ts">ListsList</a></code>
+- <code><a href="./src/resources/rules/lists/lists.ts">Redirect</a></code>
+- <code><a href="./src/resources/rules/lists/lists.ts">ListCreateResponse</a></code>
+- <code><a href="./src/resources/rules/lists/lists.ts">ListUpdateResponse</a></code>
+- <code><a href="./src/resources/rules/lists/lists.ts">ListDeleteResponse</a></code>
+- <code><a href="./src/resources/rules/lists/lists.ts">ListGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/rules/lists">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">create</a>({ ...params }) -> ListCreateResponse</code>
+- <code title="put /accounts/{account_id}/rules/lists/{list_id}">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">update</a>(listID, { ...params }) -> ListUpdateResponse</code>
+- <code title="get /accounts/{account_id}/rules/lists">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">list</a>({ ...params }) -> ListsListsSinglePage</code>
+- <code title="delete /accounts/{account_id}/rules/lists/{list_id}">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">delete</a>(listID, { ...params }) -> ListDeleteResponse</code>
+- <code title="get /accounts/{account_id}/rules/lists/{list_id}">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">get</a>(listID, { ...params }) -> ListGetResponse</code>
+
+### BulkOperations
+
+Types:
+
+- <code><a href="./src/resources/rules/lists/bulk-operations.ts">BulkOperationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/rules/lists/bulk_operations/{operation_id}">client.rules.lists.bulkOperations.<a href="./src/resources/rules/lists/bulk-operations.ts">get</a>(operationID, { ...params }) -> BulkOperationGetResponse</code>
+
+### Items
+
+Types:
+
+- <code><a href="./src/resources/rules/lists/items.ts">ListCursor</a></code>
+- <code><a href="./src/resources/rules/lists/items.ts">ListItem</a></code>
+- <code><a href="./src/resources/rules/lists/items.ts">ItemCreateResponse</a></code>
+- <code><a href="./src/resources/rules/lists/items.ts">ItemUpdateResponse</a></code>
+- <code><a href="./src/resources/rules/lists/items.ts">ItemListResponse</a></code>
+- <code><a href="./src/resources/rules/lists/items.ts">ItemDeleteResponse</a></code>
+- <code><a href="./src/resources/rules/lists/items.ts">ItemGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/rules/lists/{list_id}/items">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">create</a>(listID, [ ...body ]) -> ItemCreateResponse</code>
+- <code title="put /accounts/{account_id}/rules/lists/{list_id}/items">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">update</a>(listID, [ ...body ]) -> ItemUpdateResponse</code>
+- <code title="get /accounts/{account_id}/rules/lists/{list_id}/items">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">list</a>(listID, { ...params }) -> ItemListResponsesCursorPaginationAfter</code>
+- <code title="delete /accounts/{account_id}/rules/lists/{list_id}/items">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">delete</a>(listID, { ...params }) -> ItemDeleteResponse</code>
+- <code title="get /accounts/{account_id}/rules/lists/{list_id}/items/{item_id}">client.rules.lists.items.<a href="./src/resources/rules/lists/items.ts">get</a>(itemID, { ...params }) -> ItemGetResponse</code>
+
+# Stream
+
+Types:
+
+- <code><a href="./src/resources/stream/stream.ts">AllowedOrigins</a></code>
+- <code><a href="./src/resources/stream/stream.ts">Video</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/stream">client.stream.<a href="./src/resources/stream/stream.ts">create</a>({ ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/stream">client.stream.<a href="./src/resources/stream/stream.ts">list</a>({ ...params }) -> VideosSinglePage</code>
+- <code title="delete /accounts/{account_id}/stream/{identifier}">client.stream.<a href="./src/resources/stream/stream.ts">delete</a>(identifier, { ...params }) -> void</code>
+- <code title="post /accounts/{account_id}/stream/{identifier}">client.stream.<a href="./src/resources/stream/stream.ts">edit</a>(identifier, { ...params }) -> Video</code>
+- <code title="get /accounts/{account_id}/stream/{identifier}">client.stream.<a href="./src/resources/stream/stream.ts">get</a>(identifier, { ...params }) -> Video</code>
+
+## AudioTracks
+
+Types:
+
+- <code><a href="./src/resources/stream/audio-tracks.ts">Audio</a></code>
+- <code><a href="./src/resources/stream/audio-tracks.ts">AudioTrackDeleteResponse</a></code>
+
+Methods:
+
+- <code title="delete /accounts/{account_id}/stream/{identifier}/audio/{audio_identifier}">client.stream.audioTracks.<a href="./src/resources/stream/audio-tracks.ts">delete</a>(audioIdentifier, { ...params }) -> AudioTrackDeleteResponse</code>
+- <code title="post /accounts/{account_id}/stream/{identifier}/audio/copy">client.stream.audioTracks.<a href="./src/resources/stream/audio-tracks.ts">copy</a>(identifier, { ...params }) -> Audio</code>
+- <code title="patch /accounts/{account_id}/stream/{identifier}/audio/{audio_identifier}">client.stream.audioTracks.<a href="./src/resources/stream/audio-tracks.ts">edit</a>(audioIdentifier, { ...params }) -> Audio</code>
+- <code title="get /accounts/{account_id}/stream/{identifier}/audio">client.stream.audioTracks.<a href="./src/resources/stream/audio-tracks.ts">get</a>(identifier, { ...params }) -> AudioSinglePage</code>
+
+## Videos
+
+Types:
+
+- <code><a href="./src/resources/stream/videos.ts">VideoStorageUsageResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/stream/storage-usage">client.stream.videos.<a href="./src/resources/stream/videos.ts">storageUsage</a>({ ...params }) -> VideoStorageUsageResponse</code>
+
+## Clip
+
+Types:
+
+- <code><a href="./src/resources/stream/clip.ts">Clip</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/stream/clip">client.stream.clip.<a href="./src/resources/stream/clip.ts">create</a>({ ...params }) -> Clip</code>
+
+## Copy
+
+Methods:
+
+- <code title="post /accounts/{account_id}/stream/copy">client.stream.copy.<a href="./src/resources/stream/copy.ts">create</a>({ ...params }) -> Video</code>
+
+## DirectUpload
+
+Types:
+
+- <code><a href="./src/resources/stream/direct-upload.ts">DirectUploadCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/stream/direct_upload">client.stream.directUpload.<a href="./src/resources/stream/direct-upload.ts">create</a>({ ...params }) -> DirectUploadCreateResponse</code>
+
+## Keys
+
+Types:
+
+- <code><a href="./src/resources/stream/keys.ts">Keys</a></code>
+- <code><a href="./src/resources/stream/keys.ts">KeyDeleteResponse</a></code>
+- <code><a href="./src/resources/stream/keys.ts">KeyGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/stream/keys">client.stream.keys.<a href="./src/resources/stream/keys.ts">create</a>({ ...params }) -> Keys</code>
+- <code title="delete /accounts/{account_id}/stream/keys/{identifier}">client.stream.keys.<a href="./src/resources/stream/keys.ts">delete</a>(identifier, { ...params }) -> KeyDeleteResponse</code>
+- <code title="get /accounts/{account_id}/stream/keys">client.stream.keys.<a href="./src/resources/stream/keys.ts">get</a>({ ...params }) -> KeyGetResponsesSinglePage</code>
+
+## LiveInputs
+
+Types:
+
+- <code><a href="./src/resources/stream/live-inputs/live-inputs.ts">LiveInput</a></code>
+- <code><a href="./src/resources/stream/live-inputs/live-inputs.ts">LiveInputListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/stream/live_inputs">client.stream.liveInputs.<a href="./src/resources/stream/live-inputs/live-inputs.ts">create</a>({ ...params }) -> LiveInput</code>
+- <code title="put /accounts/{account_id}/stream/live_inputs/{live_input_identifier}">client.stream.liveInputs.<a href="./src/resources/stream/live-inputs/live-inputs.ts">update</a>(liveInputIdentifier, { ...params }) -> LiveInput</code>
+- <code title="get /accounts/{account_id}/stream/live_inputs">client.stream.liveInputs.<a href="./src/resources/stream/live-inputs/live-inputs.ts">list</a>({ ...params }) -> LiveInputListResponse</code>
+- <code title="delete /accounts/{account_id}/stream/live_inputs/{live_input_identifier}">client.stream.liveInputs.<a href="./src/resources/stream/live-inputs/live-inputs.ts">delete</a>(liveInputIdentifier, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/stream/live_inputs/{live_input_identifier}">client.stream.liveInputs.<a href="./src/resources/stream/live-inputs/live-inputs.ts">get</a>(liveInputIdentifier, { ...params }) -> LiveInput</code>
+
+### Outputs
+
+Types:
+
+- <code><a href="./src/resources/stream/live-inputs/outputs.ts">Output</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/stream/live_inputs/{live_input_identifier}/outputs">client.stream.liveInputs.outputs.<a href="./src/resources/stream/live-inputs/outputs.ts">create</a>(liveInputIdentifier, { ...params }) -> Output</code>
+- <code title="put /accounts/{account_id}/stream/live_inputs/{live_input_identifier}/outputs/{output_identifier}">client.stream.liveInputs.outputs.<a href="./src/resources/stream/live-inputs/outputs.ts">update</a>(outputIdentifier, { ...params }) -> Output</code>
+- <code title="get /accounts/{account_id}/stream/live_inputs/{live_input_identifier}/outputs">client.stream.liveInputs.outputs.<a href="./src/resources/stream/live-inputs/outputs.ts">list</a>(liveInputIdentifier, { ...params }) -> OutputsSinglePage</code>
+- <code title="delete /accounts/{account_id}/stream/live_inputs/{live_input_identifier}/outputs/{output_identifier}">client.stream.liveInputs.outputs.<a href="./src/resources/stream/live-inputs/outputs.ts">delete</a>(outputIdentifier, { ...params }) -> void</code>
+
+## Watermarks
+
+Types:
+
+- <code><a href="./src/resources/stream/watermarks.ts">Watermark</a></code>
+- <code><a href="./src/resources/stream/watermarks.ts">WatermarkDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">create</a>({ ...params }) -> Watermark</code>
+- <code title="get /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">list</a>({ ...params }) -> WatermarksSinglePage</code>
+- <code title="delete /accounts/{account_id}/stream/watermarks/{identifier}">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">delete</a>(identifier, { ...params }) -> WatermarkDeleteResponse</code>
+- <code title="get /accounts/{account_id}/stream/watermarks/{identifier}">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">get</a>(identifier, { ...params }) -> Watermark</code>
+
+## Webhooks
+
+Types:
+
+- <code><a href="./src/resources/stream/webhooks.ts">WebhookUpdateResponse</a></code>
+- <code><a href="./src/resources/stream/webhooks.ts">WebhookDeleteResponse</a></code>
+- <code><a href="./src/resources/stream/webhooks.ts">WebhookGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/stream/webhook">client.stream.webhooks.<a href="./src/resources/stream/webhooks.ts">update</a>({ ...params }) -> WebhookUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/stream/webhook">client.stream.webhooks.<a href="./src/resources/stream/webhooks.ts">delete</a>({ ...params }) -> WebhookDeleteResponse</code>
+- <code title="get /accounts/{account_id}/stream/webhook">client.stream.webhooks.<a href="./src/resources/stream/webhooks.ts">get</a>({ ...params }) -> WebhookGetResponse</code>
+
+## Captions
+
+Types:
+
+- <code><a href="./src/resources/stream/captions/captions.ts">Caption</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/stream/{identifier}/captions">client.stream.captions.<a href="./src/resources/stream/captions/captions.ts">get</a>(identifier, { ...params }) -> CaptionsSinglePage</code>
+
+### Language
+
+Types:
+
+- <code><a href="./src/resources/stream/captions/language/language.ts">LanguageDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/stream/{identifier}/captions/{language}/generate">client.stream.captions.language.<a href="./src/resources/stream/captions/language/language.ts">create</a>(language, { ...params }) -> Caption</code>
+- <code title="put /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.language.<a href="./src/resources/stream/captions/language/language.ts">update</a>(language, { ...params }) -> Caption</code>
+- <code title="delete /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.language.<a href="./src/resources/stream/captions/language/language.ts">delete</a>(language, { ...params }) -> LanguageDeleteResponse</code>
+- <code title="get /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.language.<a href="./src/resources/stream/captions/language/language.ts">get</a>(language, { ...params }) -> Caption</code>
+
+#### Vtt
+
+Types:
+
+- <code><a href="./src/resources/stream/captions/language/vtt.ts">VttGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/stream/{identifier}/captions/{language}/vtt">client.stream.captions.language.vtt.<a href="./src/resources/stream/captions/language/vtt.ts">get</a>(language, { ...params }) -> string</code>
+
+## Downloads
+
+Types:
+
+- <code><a href="./src/resources/stream/downloads.ts">DownloadCreateResponse</a></code>
+- <code><a href="./src/resources/stream/downloads.ts">DownloadDeleteResponse</a></code>
+- <code><a href="./src/resources/stream/downloads.ts">DownloadGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/stream/{identifier}/downloads">client.stream.downloads.<a href="./src/resources/stream/downloads.ts">create</a>(identifier, { ...params }) -> DownloadCreateResponse</code>
+- <code title="delete /accounts/{account_id}/stream/{identifier}/downloads">client.stream.downloads.<a href="./src/resources/stream/downloads.ts">delete</a>(identifier, { ...params }) -> DownloadDeleteResponse</code>
+- <code title="get /accounts/{account_id}/stream/{identifier}/downloads">client.stream.downloads.<a href="./src/resources/stream/downloads.ts">get</a>(identifier, { ...params }) -> DownloadGetResponse</code>
+
+## Embed
+
+Types:
+
+- <code><a href="./src/resources/stream/embed.ts">EmbedGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/stream/{identifier}/embed">client.stream.embed.<a href="./src/resources/stream/embed.ts">get</a>(identifier, { ...params }) -> string</code>
+
+## Token
+
+Types:
+
+- <code><a href="./src/resources/stream/token.ts">TokenCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/stream/{identifier}/token">client.stream.token.<a href="./src/resources/stream/token.ts">create</a>(identifier, { ...params }) -> TokenCreateResponse</code>
+
+# Alerting
+
+## AvailableAlerts
+
+Types:
+
+- <code><a href="./src/resources/alerting/available-alerts.ts">AvailableAlertListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/alerting/v3/available_alerts">client.alerting.availableAlerts.<a href="./src/resources/alerting/available-alerts.ts">list</a>({ ...params }) -> AvailableAlertListResponse</code>
+
+## Destinations
+
+### Eligible
+
+Types:
+
+- <code><a href="./src/resources/alerting/destinations/eligible.ts">EligibleGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/alerting/v3/destinations/eligible">client.alerting.destinations.eligible.<a href="./src/resources/alerting/destinations/eligible.ts">get</a>({ ...params }) -> EligibleGetResponse</code>
+
+### Pagerduty
+
+Types:
+
+- <code><a href="./src/resources/alerting/destinations/pagerduty.ts">Pagerduty</a></code>
+- <code><a href="./src/resources/alerting/destinations/pagerduty.ts">PagerdutyCreateResponse</a></code>
+- <code><a href="./src/resources/alerting/destinations/pagerduty.ts">PagerdutyDeleteResponse</a></code>
+- <code><a href="./src/resources/alerting/destinations/pagerduty.ts">PagerdutyLinkResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/alerting/v3/destinations/pagerduty/connect">client.alerting.destinations.pagerduty.<a href="./src/resources/alerting/destinations/pagerduty.ts">create</a>({ ...params }) -> PagerdutyCreateResponse</code>
+- <code title="delete /accounts/{account_id}/alerting/v3/destinations/pagerduty">client.alerting.destinations.pagerduty.<a href="./src/resources/alerting/destinations/pagerduty.ts">delete</a>({ ...params }) -> PagerdutyDeleteResponse</code>
+- <code title="get /accounts/{account_id}/alerting/v3/destinations/pagerduty">client.alerting.destinations.pagerduty.<a href="./src/resources/alerting/destinations/pagerduty.ts">get</a>({ ...params }) -> PagerdutiesSinglePage</code>
+- <code title="get /accounts/{account_id}/alerting/v3/destinations/pagerduty/connect/{token_id}">client.alerting.destinations.pagerduty.<a href="./src/resources/alerting/destinations/pagerduty.ts">link</a>(tokenID, { ...params }) -> PagerdutyLinkResponse</code>
+
+### Webhooks
+
+Types:
+
+- <code><a href="./src/resources/alerting/destinations/webhooks.ts">Webhooks</a></code>
+- <code><a href="./src/resources/alerting/destinations/webhooks.ts">WebhookCreateResponse</a></code>
+- <code><a href="./src/resources/alerting/destinations/webhooks.ts">WebhookUpdateResponse</a></code>
+- <code><a href="./src/resources/alerting/destinations/webhooks.ts">WebhookDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/alerting/v3/destinations/webhooks">client.alerting.destinations.webhooks.<a href="./src/resources/alerting/destinations/webhooks.ts">create</a>({ ...params }) -> WebhookCreateResponse</code>
+- <code title="put /accounts/{account_id}/alerting/v3/destinations/webhooks/{webhook_id}">client.alerting.destinations.webhooks.<a href="./src/resources/alerting/destinations/webhooks.ts">update</a>(webhookID, { ...params }) -> WebhookUpdateResponse</code>
+- <code title="get /accounts/{account_id}/alerting/v3/destinations/webhooks">client.alerting.destinations.webhooks.<a href="./src/resources/alerting/destinations/webhooks.ts">list</a>({ ...params }) -> WebhooksSinglePage</code>
+- <code title="delete /accounts/{account_id}/alerting/v3/destinations/webhooks/{webhook_id}">client.alerting.destinations.webhooks.<a href="./src/resources/alerting/destinations/webhooks.ts">delete</a>(webhookID, { ...params }) -> WebhookDeleteResponse</code>
+- <code title="get /accounts/{account_id}/alerting/v3/destinations/webhooks/{webhook_id}">client.alerting.destinations.webhooks.<a href="./src/resources/alerting/destinations/webhooks.ts">get</a>(webhookID, { ...params }) -> Webhooks</code>
+
+## History
+
+Types:
+
+- <code><a href="./src/resources/alerting/history.ts">History</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/alerting/v3/history">client.alerting.history.<a href="./src/resources/alerting/history.ts">list</a>({ ...params }) -> HistoriesV4PagePaginationArray</code>
+
+## Policies
+
+Types:
+
+- <code><a href="./src/resources/alerting/policies.ts">Mechanism</a></code>
+- <code><a href="./src/resources/alerting/policies.ts">Policy</a></code>
+- <code><a href="./src/resources/alerting/policies.ts">PolicyFilter</a></code>
+- <code><a href="./src/resources/alerting/policies.ts">PolicyCreateResponse</a></code>
+- <code><a href="./src/resources/alerting/policies.ts">PolicyUpdateResponse</a></code>
+- <code><a href="./src/resources/alerting/policies.ts">PolicyDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/alerting/v3/policies">client.alerting.policies.<a href="./src/resources/alerting/policies.ts">create</a>({ ...params }) -> PolicyCreateResponse</code>
+- <code title="put /accounts/{account_id}/alerting/v3/policies/{policy_id}">client.alerting.policies.<a href="./src/resources/alerting/policies.ts">update</a>(policyID, { ...params }) -> PolicyUpdateResponse</code>
+- <code title="get /accounts/{account_id}/alerting/v3/policies">client.alerting.policies.<a href="./src/resources/alerting/policies.ts">list</a>({ ...params }) -> PoliciesSinglePage</code>
+- <code title="delete /accounts/{account_id}/alerting/v3/policies/{policy_id}">client.alerting.policies.<a href="./src/resources/alerting/policies.ts">delete</a>(policyID, { ...params }) -> PolicyDeleteResponse</code>
+- <code title="get /accounts/{account_id}/alerting/v3/policies/{policy_id}">client.alerting.policies.<a href="./src/resources/alerting/policies.ts">get</a>(policyID, { ...params }) -> Policy</code>
+
+## Silences
+
+Types:
+
+- <code><a href="./src/resources/alerting/silences.ts">SilenceCreateResponse</a></code>
+- <code><a href="./src/resources/alerting/silences.ts">SilenceUpdateResponse</a></code>
+- <code><a href="./src/resources/alerting/silences.ts">SilenceListResponse</a></code>
+- <code><a href="./src/resources/alerting/silences.ts">SilenceDeleteResponse</a></code>
+- <code><a href="./src/resources/alerting/silences.ts">SilenceGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/alerting/v3/silences">client.alerting.silences.<a href="./src/resources/alerting/silences.ts">create</a>([ ...body ]) -> SilenceCreateResponse</code>
+- <code title="put /accounts/{account_id}/alerting/v3/silences">client.alerting.silences.<a href="./src/resources/alerting/silences.ts">update</a>([ ...body ]) -> SilenceUpdateResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/alerting/v3/silences">client.alerting.silences.<a href="./src/resources/alerting/silences.ts">list</a>({ ...params }) -> SilenceListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/alerting/v3/silences/{silence_id}">client.alerting.silences.<a href="./src/resources/alerting/silences.ts">delete</a>(silenceID, { ...params }) -> SilenceDeleteResponse</code>
+- <code title="get /accounts/{account_id}/alerting/v3/silences/{silence_id}">client.alerting.silences.<a href="./src/resources/alerting/silences.ts">get</a>(silenceID, { ...params }) -> SilenceGetResponse</code>
+
+# D1
+
+Types:
+
+- <code><a href="./src/resources/d1/d1.ts">D1</a></code>
+
+## Database
+
+Types:
+
+- <code><a href="./src/resources/d1/database/database.ts">QueryResult</a></code>
+- <code><a href="./src/resources/d1/database/database.ts">DatabaseListResponse</a></code>
+- <code><a href="./src/resources/d1/database/database.ts">DatabaseDeleteResponse</a></code>
+- <code><a href="./src/resources/d1/database/database.ts">DatabaseExportResponse</a></code>
+- <code><a href="./src/resources/d1/database/database.ts">DatabaseImportResponse</a></code>
+- <code><a href="./src/resources/d1/database/database.ts">DatabaseRawResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/d1/database">client.d1.database.<a href="./src/resources/d1/database/database.ts">create</a>({ ...params }) -> D1</code>
+- <code title="put /accounts/{account_id}/d1/database/{database_id}">client.d1.database.<a href="./src/resources/d1/database/database.ts">update</a>(databaseID, { ...params }) -> D1</code>
+- <code title="get /accounts/{account_id}/d1/database">client.d1.database.<a href="./src/resources/d1/database/database.ts">list</a>({ ...params }) -> DatabaseListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/d1/database/{database_id}">client.d1.database.<a href="./src/resources/d1/database/database.ts">delete</a>(databaseID, { ...params }) -> DatabaseDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/d1/database/{database_id}">client.d1.database.<a href="./src/resources/d1/database/database.ts">edit</a>(databaseID, { ...params }) -> D1</code>
+- <code title="post /accounts/{account_id}/d1/database/{database_id}/export">client.d1.database.<a href="./src/resources/d1/database/database.ts">export</a>(databaseID, { ...params }) -> DatabaseExportResponse</code>
+- <code title="get /accounts/{account_id}/d1/database/{database_id}">client.d1.database.<a href="./src/resources/d1/database/database.ts">get</a>(databaseID, { ...params }) -> D1</code>
+- <code title="post /accounts/{account_id}/d1/database/{database_id}/import">client.d1.database.<a href="./src/resources/d1/database/database.ts">import</a>(databaseID, { ...params }) -> DatabaseImportResponse</code>
+- <code title="post /accounts/{account_id}/d1/database/{database_id}/query">client.d1.database.<a href="./src/resources/d1/database/database.ts">query</a>(databaseID, { ...params }) -> QueryResultsSinglePage</code>
+- <code title="post /accounts/{account_id}/d1/database/{database_id}/raw">client.d1.database.<a href="./src/resources/d1/database/database.ts">raw</a>(databaseID, { ...params }) -> DatabaseRawResponsesSinglePage</code>
+
+### TimeTravel
+
+Types:
+
+- <code><a href="./src/resources/d1/database/time-travel.ts">TimeTravelGetBookmarkResponse</a></code>
+- <code><a href="./src/resources/d1/database/time-travel.ts">TimeTravelRestoreResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/d1/database/{database_id}/time_travel/bookmark">client.d1.database.timeTravel.<a href="./src/resources/d1/database/time-travel.ts">getBookmark</a>(databaseID, { ...params }) -> TimeTravelGetBookmarkResponse</code>
+- <code title="post /accounts/{account_id}/d1/database/{database_id}/time_travel/restore">client.d1.database.timeTravel.<a href="./src/resources/d1/database/time-travel.ts">restore</a>(databaseID, { ...params }) -> TimeTravelRestoreResponse</code>
+
+# R2
+
+## Buckets
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/buckets.ts">Bucket</a></code>
+- <code><a href="./src/resources/r2/buckets/buckets.ts">BucketListResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/buckets.ts">BucketDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/r2/buckets">client.r2.buckets.<a href="./src/resources/r2/buckets/buckets.ts">create</a>({ ...params }) -> Bucket</code>
+- <code title="get /accounts/{account_id}/r2/buckets">client.r2.buckets.<a href="./src/resources/r2/buckets/buckets.ts">list</a>({ ...params }) -> BucketListResponse</code>
+- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}">client.r2.buckets.<a href="./src/resources/r2/buckets/buckets.ts">delete</a>(bucketName, { ...params }) -> BucketDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/r2/buckets/{bucket_name}">client.r2.buckets.<a href="./src/resources/r2/buckets/buckets.ts">edit</a>(bucketName, { ...params }) -> Bucket</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}">client.r2.buckets.<a href="./src/resources/r2/buckets/buckets.ts">get</a>(bucketName, { ...params }) -> Bucket</code>
+
+### Lifecycle
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/lifecycle.ts">LifecycleUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/lifecycle.ts">LifecycleGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle">client.r2.buckets.lifecycle.<a href="./src/resources/r2/buckets/lifecycle.ts">update</a>(bucketName, { ...params }) -> LifecycleUpdateResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle">client.r2.buckets.lifecycle.<a href="./src/resources/r2/buckets/lifecycle.ts">get</a>(bucketName, { ...params }) -> LifecycleGetResponse</code>
+
+### CORS
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/cors.ts">CORSUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/cors.ts">CORSDeleteResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/cors.ts">CORSGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/cors">client.r2.buckets.cors.<a href="./src/resources/r2/buckets/cors.ts">update</a>(bucketName, { ...params }) -> CORSUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/cors">client.r2.buckets.cors.<a href="./src/resources/r2/buckets/cors.ts">delete</a>(bucketName, { ...params }) -> CORSDeleteResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/cors">client.r2.buckets.cors.<a href="./src/resources/r2/buckets/cors.ts">get</a>(bucketName, { ...params }) -> CORSGetResponse</code>
+
+### Domains
+
+#### Custom
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomCreateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomListResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomDeleteResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">create</a>(bucketName, { ...params }) -> CustomCreateResponse</code>
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain}">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">update</a>(domain, { ...params }) -> CustomUpdateResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">list</a>(bucketName, { ...params }) -> CustomListResponse</code>
+- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain}">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">delete</a>(domain, { ...params }) -> CustomDeleteResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain}">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">get</a>(domain, { ...params }) -> CustomGetResponse</code>
+
+#### Managed
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/domains/managed.ts">ManagedUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/domains/managed.ts">ManagedListResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed">client.r2.buckets.domains.managed.<a href="./src/resources/r2/buckets/domains/managed.ts">update</a>(bucketName, { ...params }) -> ManagedUpdateResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed">client.r2.buckets.domains.managed.<a href="./src/resources/r2/buckets/domains/managed.ts">list</a>(bucketName, { ...params }) -> ManagedListResponse</code>
+
+### EventNotifications
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/event-notifications.ts">EventNotificationUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/event-notifications.ts">EventNotificationListResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/event-notifications.ts">EventNotificationDeleteResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/event-notifications.ts">EventNotificationGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.buckets.eventNotifications.<a href="./src/resources/r2/buckets/event-notifications.ts">update</a>(queueID, { ...params }) -> EventNotificationUpdateResponse</code>
+- <code title="get /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration">client.r2.buckets.eventNotifications.<a href="./src/resources/r2/buckets/event-notifications.ts">list</a>(bucketName, { ...params }) -> EventNotificationListResponse</code>
+- <code title="delete /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.buckets.eventNotifications.<a href="./src/resources/r2/buckets/event-notifications.ts">delete</a>(queueID, { ...params }) -> EventNotificationDeleteResponse</code>
+- <code title="get /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.buckets.eventNotifications.<a href="./src/resources/r2/buckets/event-notifications.ts">get</a>(queueID, { ...params }) -> EventNotificationGetResponse</code>
+
+### Locks
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/locks.ts">LockUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/locks.ts">LockGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/lock">client.r2.buckets.locks.<a href="./src/resources/r2/buckets/locks.ts">update</a>(bucketName, { ...params }) -> LockUpdateResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/lock">client.r2.buckets.locks.<a href="./src/resources/r2/buckets/locks.ts">get</a>(bucketName, { ...params }) -> LockGetResponse</code>
+
+### Metrics
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/metrics.ts">MetricListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/r2/metrics">client.r2.buckets.metrics.<a href="./src/resources/r2/buckets/metrics.ts">list</a>({ ...params }) -> MetricListResponse</code>
+
+### Sippy
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/sippy.ts">Provider</a></code>
+- <code><a href="./src/resources/r2/buckets/sippy.ts">Sippy</a></code>
+- <code><a href="./src/resources/r2/buckets/sippy.ts">SippyDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.buckets.sippy.<a href="./src/resources/r2/buckets/sippy.ts">update</a>(bucketName, { ...params }) -> Sippy</code>
+- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.buckets.sippy.<a href="./src/resources/r2/buckets/sippy.ts">delete</a>(bucketName, { ...params }) -> SippyDeleteResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.buckets.sippy.<a href="./src/resources/r2/buckets/sippy.ts">get</a>(bucketName, { ...params }) -> Sippy</code>
+
+## TemporaryCredentials
+
+Types:
+
+- <code><a href="./src/resources/r2/temporary-credentials.ts">TemporaryCredential</a></code>
+- <code><a href="./src/resources/r2/temporary-credentials.ts">TemporaryCredentialCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/r2/temp-access-credentials">client.r2.temporaryCredentials.<a href="./src/resources/r2/temporary-credentials.ts">create</a>({ ...params }) -> TemporaryCredentialCreateResponse</code>
+
+## SuperSlurper
+
+### Jobs
+
+Types:
+
+- <code><a href="./src/resources/r2/super-slurper/jobs/jobs.ts">JobCreateResponse</a></code>
+- <code><a href="./src/resources/r2/super-slurper/jobs/jobs.ts">JobListResponse</a></code>
+- <code><a href="./src/resources/r2/super-slurper/jobs/jobs.ts">JobAbortResponse</a></code>
+- <code><a href="./src/resources/r2/super-slurper/jobs/jobs.ts">JobAbortAllResponse</a></code>
+- <code><a href="./src/resources/r2/super-slurper/jobs/jobs.ts">JobGetResponse</a></code>
+- <code><a href="./src/resources/r2/super-slurper/jobs/jobs.ts">JobPauseResponse</a></code>
+- <code><a href="./src/resources/r2/super-slurper/jobs/jobs.ts">JobProgressResponse</a></code>
+- <code><a href="./src/resources/r2/super-slurper/jobs/jobs.ts">JobResumeResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/slurper/jobs">client.r2.superSlurper.jobs.<a href="./src/resources/r2/super-slurper/jobs/jobs.ts">create</a>({ ...params }) -> JobCreateResponse</code>
+- <code title="get /accounts/{account_id}/slurper/jobs">client.r2.superSlurper.jobs.<a href="./src/resources/r2/super-slurper/jobs/jobs.ts">list</a>({ ...params }) -> JobListResponsesSinglePage</code>
+- <code title="put /accounts/{account_id}/slurper/jobs/{job_id}/abort">client.r2.superSlurper.jobs.<a href="./src/resources/r2/super-slurper/jobs/jobs.ts">abort</a>(jobID, { ...params }) -> JobAbortResponse</code>
+- <code title="put /accounts/{account_id}/slurper/jobs/abortAll">client.r2.superSlurper.jobs.<a href="./src/resources/r2/super-slurper/jobs/jobs.ts">abortAll</a>({ ...params }) -> JobAbortAllResponse</code>
+- <code title="get /accounts/{account_id}/slurper/jobs/{job_id}">client.r2.superSlurper.jobs.<a href="./src/resources/r2/super-slurper/jobs/jobs.ts">get</a>(jobID, { ...params }) -> JobGetResponse</code>
+- <code title="put /accounts/{account_id}/slurper/jobs/{job_id}/pause">client.r2.superSlurper.jobs.<a href="./src/resources/r2/super-slurper/jobs/jobs.ts">pause</a>(jobID, { ...params }) -> JobPauseResponse</code>
+- <code title="get /accounts/{account_id}/slurper/jobs/{job_id}/progress">client.r2.superSlurper.jobs.<a href="./src/resources/r2/super-slurper/jobs/jobs.ts">progress</a>(jobID, { ...params }) -> JobProgressResponse</code>
+- <code title="put /accounts/{account_id}/slurper/jobs/{job_id}/resume">client.r2.superSlurper.jobs.<a href="./src/resources/r2/super-slurper/jobs/jobs.ts">resume</a>(jobID, { ...params }) -> JobResumeResponse</code>
+
+#### Logs
+
+Types:
+
+- <code><a href="./src/resources/r2/super-slurper/jobs/logs.ts">LogListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/slurper/jobs/{job_id}/logs">client.r2.superSlurper.jobs.logs.<a href="./src/resources/r2/super-slurper/jobs/logs.ts">list</a>(jobID, { ...params }) -> LogListResponsesSinglePage</code>
+
+### ConnectivityPrecheck
+
+Types:
+
+- <code><a href="./src/resources/r2/super-slurper/connectivity-precheck.ts">ConnectivityPrecheckSourceResponse</a></code>
+- <code><a href="./src/resources/r2/super-slurper/connectivity-precheck.ts">ConnectivityPrecheckTargetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/slurper/source/connectivity-precheck">client.r2.superSlurper.connectivityPrecheck.<a href="./src/resources/r2/super-slurper/connectivity-precheck.ts">source</a>({ ...params }) -> ConnectivityPrecheckSourceResponse</code>
+- <code title="put /accounts/{account_id}/slurper/target/connectivity-precheck">client.r2.superSlurper.connectivityPrecheck.<a href="./src/resources/r2/super-slurper/connectivity-precheck.ts">target</a>({ ...params }) -> ConnectivityPrecheckTargetResponse</code>
+
+# R2DataCatalog
+
+Types:
+
+- <code><a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">R2DataCatalogListResponse</a></code>
+- <code><a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">R2DataCatalogEnableResponse</a></code>
+- <code><a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">R2DataCatalogGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/r2-catalog">client.r2DataCatalog.<a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">list</a>({ ...params }) -> R2DataCatalogListResponse</code>
+- <code title="post /accounts/{account_id}/r2-catalog/{bucket_name}/disable">client.r2DataCatalog.<a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">disable</a>(bucketName, { ...params }) -> void</code>
+- <code title="post /accounts/{account_id}/r2-catalog/{bucket_name}/enable">client.r2DataCatalog.<a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">enable</a>(bucketName, { ...params }) -> R2DataCatalogEnableResponse</code>
+- <code title="get /accounts/{account_id}/r2-catalog/{bucket_name}">client.r2DataCatalog.<a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">get</a>(bucketName, { ...params }) -> R2DataCatalogGetResponse</code>
+
+## MaintenanceConfigs
+
+Types:
+
+- <code><a href="./src/resources/r2-data-catalog/maintenance-configs.ts">MaintenanceConfigUpdateResponse</a></code>
+- <code><a href="./src/resources/r2-data-catalog/maintenance-configs.ts">MaintenanceConfigGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/r2-catalog/{bucket_name}/maintenance-configs">client.r2DataCatalog.maintenanceConfigs.<a href="./src/resources/r2-data-catalog/maintenance-configs.ts">update</a>(bucketName, { ...params }) -> MaintenanceConfigUpdateResponse</code>
+- <code title="get /accounts/{account_id}/r2-catalog/{bucket_name}/maintenance-configs">client.r2DataCatalog.maintenanceConfigs.<a href="./src/resources/r2-data-catalog/maintenance-configs.ts">get</a>(bucketName, { ...params }) -> MaintenanceConfigGetResponse</code>
+
+## Credentials
+
+Types:
+
+- <code><a href="./src/resources/r2-data-catalog/credentials.ts">CredentialCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/r2-catalog/{bucket_name}/credential">client.r2DataCatalog.credentials.<a href="./src/resources/r2-data-catalog/credentials.ts">create</a>(bucketName, { ...params }) -> CredentialCreateResponse | null</code>
+
+## Namespaces
+
+Types:
+
+- <code><a href="./src/resources/r2-data-catalog/namespaces/namespaces.ts">NamespaceListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/r2-catalog/{bucket_name}/namespaces">client.r2DataCatalog.namespaces.<a href="./src/resources/r2-data-catalog/namespaces/namespaces.ts">list</a>(bucketName, { ...params }) -> NamespaceListResponse</code>
+
+### Tables
+
+Types:
+
+- <code><a href="./src/resources/r2-data-catalog/namespaces/tables/tables.ts">TableListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/r2-catalog/{bucket_name}/namespaces/{namespace}/tables">client.r2DataCatalog.namespaces.tables.<a href="./src/resources/r2-data-catalog/namespaces/tables/tables.ts">list</a>(namespace, { ...params }) -> TableListResponse</code>
+
+#### MaintenanceConfigs
+
+Types:
+
+- <code><a href="./src/resources/r2-data-catalog/namespaces/tables/maintenance-configs.ts">MaintenanceConfigUpdateResponse</a></code>
+- <code><a href="./src/resources/r2-data-catalog/namespaces/tables/maintenance-configs.ts">MaintenanceConfigGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/r2-catalog/{bucket_name}/namespaces/{namespace}/tables/{table_name}/maintenance-configs">client.r2DataCatalog.namespaces.tables.maintenanceConfigs.<a href="./src/resources/r2-data-catalog/namespaces/tables/maintenance-configs.ts">update</a>(tableName, { ...params }) -> MaintenanceConfigUpdateResponse</code>
+- <code title="get /accounts/{account_id}/r2-catalog/{bucket_name}/namespaces/{namespace}/tables/{table_name}/maintenance-configs">client.r2DataCatalog.namespaces.tables.maintenanceConfigs.<a href="./src/resources/r2-data-catalog/namespaces/tables/maintenance-configs.ts">get</a>(tableName, { ...params }) -> MaintenanceConfigGetResponse</code>
+
+# WorkersForPlatforms
+
+## Dispatch
+
+### Namespaces
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">NamespaceCreateResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">NamespaceListResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">NamespaceDeleteResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">NamespaceGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/dispatch/namespaces">client.workersForPlatforms.dispatch.namespaces.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">create</a>({ ...params }) -> NamespaceCreateResponse</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces">client.workersForPlatforms.dispatch.namespaces.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">list</a>({ ...params }) -> NamespaceListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}">client.workersForPlatforms.dispatch.namespaces.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">delete</a>(dispatchNamespace, { ...params }) -> NamespaceDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}">client.workersForPlatforms.dispatch.namespaces.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">get</a>(dispatchNamespace, { ...params }) -> NamespaceGetResponse</code>
+
+#### Scripts
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">Script</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">ScriptUpdateResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">ScriptDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workersForPlatforms.dispatch.namespaces.scripts.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">update</a>(scriptName, { ...params }) -> ScriptUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workersForPlatforms.dispatch.namespaces.scripts.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">delete</a>(scriptName, { ...params }) -> ScriptDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workersForPlatforms.dispatch.namespaces.scripts.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> Script</code>
+
+##### AssetUpload
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/asset-upload.ts">AssetUploadCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/assets-upload-session">client.workersForPlatforms.dispatch.namespaces.scripts.assetUpload.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/asset-upload.ts">create</a>(scriptName, { ...params }) -> AssetUploadCreateResponse</code>
+
+##### Content
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/content">client.workersForPlatforms.dispatch.namespaces.scripts.content.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content.ts">update</a>(scriptName, { ...params }) -> Script</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/content">client.workersForPlatforms.dispatch.namespaces.scripts.content.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content.ts">get</a>(scriptName, { ...params }) -> Response</code>
+
+##### Settings
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/settings.ts">SettingEditResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/settings.ts">SettingGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/settings">client.workersForPlatforms.dispatch.namespaces.scripts.settings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/settings.ts">edit</a>(scriptName, { ...params }) -> SettingEditResponse</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/settings">client.workersForPlatforms.dispatch.namespaces.scripts.settings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/settings.ts">get</a>(scriptName, { ...params }) -> SettingGetResponse</code>
+
+##### Bindings
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/bindings.ts">BindingGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/bindings">client.workersForPlatforms.dispatch.namespaces.scripts.bindings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/bindings.ts">get</a>(scriptName, { ...params }) -> BindingGetResponsesSinglePage</code>
+
+##### Secrets
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretUpdateResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretListResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretDeleteResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets">client.workersForPlatforms.dispatch.namespaces.scripts.secrets.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">update</a>(scriptName, { ...params }) -> SecretUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets">client.workersForPlatforms.dispatch.namespaces.scripts.secrets.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">list</a>(scriptName, { ...params }) -> SecretListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets/{secret_name}">client.workersForPlatforms.dispatch.namespaces.scripts.secrets.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">delete</a>(secretName, { ...params }) -> SecretDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets/{secret_name}">client.workersForPlatforms.dispatch.namespaces.scripts.secrets.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">get</a>(secretName, { ...params }) -> SecretGetResponse</code>
+
+##### Tags
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">TagUpdateResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">TagListResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">TagDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/tags">client.workersForPlatforms.dispatch.namespaces.scripts.tags.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">update</a>(scriptName, [ ...body ]) -> TagUpdateResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/tags">client.workersForPlatforms.dispatch.namespaces.scripts.tags.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">list</a>(scriptName, { ...params }) -> TagListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/tags/{tag}">client.workersForPlatforms.dispatch.namespaces.scripts.tags.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">delete</a>(tag, { ...params }) -> TagDeleteResponse | null</code>
+
+# ZeroTrust
+
+## Devices
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/devices.ts">Device</a></code>
+- <code><a href="./src/resources/zero-trust/devices/devices.ts">DeviceGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/devices">client.zeroTrust.devices.<a href="./src/resources/zero-trust/devices/devices.ts">list</a>({ ...params }) -> DevicesSinglePage</code>
+- <code title="get /accounts/{account_id}/devices/{device_id}">client.zeroTrust.devices.<a href="./src/resources/zero-trust/devices/devices.ts">get</a>(deviceID, { ...params }) -> DeviceGetResponse | null</code>
+
+### Devices
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/devices_.ts">DeviceListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/devices_.ts">DeviceDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/devices_.ts">DeviceGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/devices_.ts">DeviceRevokeResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/devices/physical-devices">client.zeroTrust.devices.devices.<a href="./src/resources/zero-trust/devices/devices_.ts">list</a>({ ...params }) -> DeviceListResponsesCursorPagination</code>
+- <code title="delete /accounts/{account_id}/devices/physical-devices/{device_id}">client.zeroTrust.devices.devices.<a href="./src/resources/zero-trust/devices/devices_.ts">delete</a>(deviceID, { ...params }) -> DeviceDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/physical-devices/{device_id}">client.zeroTrust.devices.devices.<a href="./src/resources/zero-trust/devices/devices_.ts">get</a>(deviceID, { ...params }) -> DeviceGetResponse</code>
+- <code title="post /accounts/{account_id}/devices/physical-devices/{device_id}/revoke">client.zeroTrust.devices.devices.<a href="./src/resources/zero-trust/devices/devices_.ts">revoke</a>(deviceID, { ...params }) -> DeviceRevokeResponse | null</code>
+
+### Resilience
+
+#### GlobalWARPOverride
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/resilience/global-warp-override.ts">GlobalWARPOverrideCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/resilience/global-warp-override.ts">GlobalWARPOverrideGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/resilience/disconnect">client.zeroTrust.devices.resilience.globalWARPOverride.<a href="./src/resources/zero-trust/devices/resilience/global-warp-override.ts">create</a>({ ...params }) -> GlobalWARPOverrideCreateResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/resilience/disconnect">client.zeroTrust.devices.resilience.globalWARPOverride.<a href="./src/resources/zero-trust/devices/resilience/global-warp-override.ts">get</a>({ ...params }) -> GlobalWARPOverrideGetResponse | null</code>
+
+### Registrations
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationBulkDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationRevokeResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/registrations.ts">RegistrationUnrevokeResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/devices/registrations">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">list</a>({ ...params }) -> RegistrationListResponsesCursorPagination</code>
+- <code title="delete /accounts/{account_id}/devices/registrations/{registration_id}">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">delete</a>(registrationID, { ...params }) -> RegistrationDeleteResponse | null</code>
+- <code title="delete /accounts/{account_id}/devices/registrations">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">bulkDelete</a>({ ...params }) -> RegistrationBulkDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/registrations/{registration_id}">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">get</a>(registrationID, { ...params }) -> RegistrationGetResponse</code>
+- <code title="post /accounts/{account_id}/devices/registrations/revoke">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">revoke</a>({ ...params }) -> RegistrationRevokeResponse | null</code>
+- <code title="post /accounts/{account_id}/devices/registrations/unrevoke">client.zeroTrust.devices.registrations.<a href="./src/resources/zero-trust/devices/registrations.ts">unrevoke</a>({ ...params }) -> RegistrationUnrevokeResponse | null</code>
+
+### DEXTests
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">SchemaData</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">SchemaHTTP</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dex/devices/dex_tests">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">create</a>({ ...params }) -> DEXTestCreateResponse</code>
+- <code title="put /accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">update</a>(dexTestID, { ...params }) -> DEXTestUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dex/devices/dex_tests">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">list</a>({ ...params }) -> DEXTestListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">delete</a>(dexTestID, { ...params }) -> DEXTestDeleteResponse</code>
+- <code title="get /accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">get</a>(dexTestID, { ...params }) -> DEXTestGetResponse</code>
+
+### Networks
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/networks.ts">DeviceNetwork</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/networks">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">create</a>({ ...params }) -> DeviceNetwork | null</code>
+- <code title="put /accounts/{account_id}/devices/networks/{network_id}">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">update</a>(networkID, { ...params }) -> DeviceNetwork | null</code>
+- <code title="get /accounts/{account_id}/devices/networks">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">list</a>({ ...params }) -> DeviceNetworksSinglePage</code>
+- <code title="delete /accounts/{account_id}/devices/networks/{network_id}">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">delete</a>(networkID, { ...params }) -> DeviceNetworksSinglePage</code>
+- <code title="get /accounts/{account_id}/devices/networks/{network_id}">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">get</a>(networkID, { ...params }) -> DeviceNetwork | null</code>
+
+### FleetStatus
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/fleet-status.ts">FleetStatusGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/devices/{device_id}/fleet-status/live">client.zeroTrust.devices.fleetStatus.<a href="./src/resources/zero-trust/devices/fleet-status.ts">get</a>(deviceID, { ...params }) -> FleetStatusGetResponse</code>
+
+### Policies
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">DevicePolicyCertificates</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">FallbackDomain</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">FallbackDomainPolicy</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">SettingsPolicy</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">SplitTunnelExclude</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">SplitTunnelInclude</a></code>
+
+#### Default
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/policies/default/default.ts">DefaultEditResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default/default.ts">DefaultGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.default.<a href="./src/resources/zero-trust/devices/policies/default/default.ts">edit</a>({ ...params }) -> DefaultEditResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.default.<a href="./src/resources/zero-trust/devices/policies/default/default.ts">get</a>({ ...params }) -> DefaultGetResponse | null</code>
+
+##### Excludes
+
+Methods:
+
+- <code title="put /accounts/{account_id}/devices/policy/exclude">client.zeroTrust.devices.policies.default.excludes.<a href="./src/resources/zero-trust/devices/policies/default/excludes.ts">update</a>([ ...body ]) -> SplitTunnelExcludesSinglePage</code>
+- <code title="get /accounts/{account_id}/devices/policy/exclude">client.zeroTrust.devices.policies.default.excludes.<a href="./src/resources/zero-trust/devices/policies/default/excludes.ts">get</a>({ ...params }) -> SplitTunnelExcludesSinglePage</code>
+
+##### Includes
+
+Methods:
+
+- <code title="put /accounts/{account_id}/devices/policy/include">client.zeroTrust.devices.policies.default.includes.<a href="./src/resources/zero-trust/devices/policies/default/includes.ts">update</a>([ ...body ]) -> SplitTunnelIncludesSinglePage</code>
+- <code title="get /accounts/{account_id}/devices/policy/include">client.zeroTrust.devices.policies.default.includes.<a href="./src/resources/zero-trust/devices/policies/default/includes.ts">get</a>({ ...params }) -> SplitTunnelIncludesSinglePage</code>
+
+##### FallbackDomains
+
+Methods:
+
+- <code title="put /accounts/{account_id}/devices/policy/fallback_domains">client.zeroTrust.devices.policies.default.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/default/fallback-domains.ts">update</a>([ ...domains ]) -> FallbackDomainsSinglePage</code>
+- <code title="get /accounts/{account_id}/devices/policy/fallback_domains">client.zeroTrust.devices.policies.default.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/default/fallback-domains.ts">get</a>({ ...params }) -> FallbackDomainsSinglePage</code>
+
+##### Certificates
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/devices/policy/certificates">client.zeroTrust.devices.policies.default.certificates.<a href="./src/resources/zero-trust/devices/policies/default/certificates.ts">edit</a>({ ...params }) -> DevicePolicyCertificates | null</code>
+- <code title="get /zones/{zone_id}/devices/policy/certificates">client.zeroTrust.devices.policies.default.certificates.<a href="./src/resources/zero-trust/devices/policies/default/certificates.ts">get</a>({ ...params }) -> DevicePolicyCertificates | null</code>
+
+#### Custom
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.custom.<a href="./src/resources/zero-trust/devices/policies/custom/custom.ts">create</a>({ ...params }) -> SettingsPolicy | null</code>
+- <code title="get /accounts/{account_id}/devices/policies">client.zeroTrust.devices.policies.custom.<a href="./src/resources/zero-trust/devices/policies/custom/custom.ts">list</a>({ ...params }) -> SettingsPoliciesSinglePage</code>
+- <code title="delete /accounts/{account_id}/devices/policy/{policy_id}">client.zeroTrust.devices.policies.custom.<a href="./src/resources/zero-trust/devices/policies/custom/custom.ts">delete</a>(policyID, { ...params }) -> SettingsPoliciesSinglePage</code>
+- <code title="patch /accounts/{account_id}/devices/policy/{policy_id}">client.zeroTrust.devices.policies.custom.<a href="./src/resources/zero-trust/devices/policies/custom/custom.ts">edit</a>(policyID, { ...params }) -> SettingsPolicy | null</code>
+- <code title="get /accounts/{account_id}/devices/policy/{policy_id}">client.zeroTrust.devices.policies.custom.<a href="./src/resources/zero-trust/devices/policies/custom/custom.ts">get</a>(policyID, { ...params }) -> SettingsPolicy | null</code>
+
+##### Excludes
+
+Methods:
+
+- <code title="put /accounts/{account_id}/devices/policy/{policy_id}/exclude">client.zeroTrust.devices.policies.custom.excludes.<a href="./src/resources/zero-trust/devices/policies/custom/excludes.ts">update</a>(policyID, [ ...body ]) -> SplitTunnelExcludesSinglePage</code>
+- <code title="get /accounts/{account_id}/devices/policy/{policy_id}/exclude">client.zeroTrust.devices.policies.custom.excludes.<a href="./src/resources/zero-trust/devices/policies/custom/excludes.ts">get</a>(policyID, { ...params }) -> SplitTunnelExcludesSinglePage</code>
+
+##### Includes
+
+Methods:
+
+- <code title="put /accounts/{account_id}/devices/policy/{policy_id}/include">client.zeroTrust.devices.policies.custom.includes.<a href="./src/resources/zero-trust/devices/policies/custom/includes.ts">update</a>(policyID, [ ...body ]) -> SplitTunnelIncludesSinglePage</code>
+- <code title="get /accounts/{account_id}/devices/policy/{policy_id}/include">client.zeroTrust.devices.policies.custom.includes.<a href="./src/resources/zero-trust/devices/policies/custom/includes.ts">get</a>(policyID, { ...params }) -> SplitTunnelIncludesSinglePage</code>
+
+##### FallbackDomains
+
+Methods:
+
+- <code title="put /accounts/{account_id}/devices/policy/{policy_id}/fallback_domains">client.zeroTrust.devices.policies.custom.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/custom/fallback-domains.ts">update</a>(policyID, [ ...domains ]) -> FallbackDomainsSinglePage</code>
+- <code title="get /accounts/{account_id}/devices/policy/{policy_id}/fallback_domains">client.zeroTrust.devices.policies.custom.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/custom/fallback-domains.ts">get</a>(policyID, { ...params }) -> FallbackDomainsSinglePage</code>
+
+### Posture
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">CarbonblackInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">ClientCertificateInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">CrowdstrikeInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DeviceInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DeviceMatch</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DevicePostureRule</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DiskEncryptionInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DomainJoinedInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">FileInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">FirewallInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">IntuneInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">KolideInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">OSVersionInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">SentineloneInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">SentineloneS2sInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">TaniumInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">UniqueClientIDInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">WorkspaceOneInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">PostureDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/posture">client.zeroTrust.devices.posture.<a href="./src/resources/zero-trust/devices/posture/posture.ts">create</a>({ ...params }) -> DevicePostureRule | null</code>
+- <code title="put /accounts/{account_id}/devices/posture/{rule_id}">client.zeroTrust.devices.posture.<a href="./src/resources/zero-trust/devices/posture/posture.ts">update</a>(ruleID, { ...params }) -> DevicePostureRule | null</code>
+- <code title="get /accounts/{account_id}/devices/posture">client.zeroTrust.devices.posture.<a href="./src/resources/zero-trust/devices/posture/posture.ts">list</a>({ ...params }) -> DevicePostureRulesSinglePage</code>
+- <code title="delete /accounts/{account_id}/devices/posture/{rule_id}">client.zeroTrust.devices.posture.<a href="./src/resources/zero-trust/devices/posture/posture.ts">delete</a>(ruleID, { ...params }) -> PostureDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/posture/{rule_id}">client.zeroTrust.devices.posture.<a href="./src/resources/zero-trust/devices/posture/posture.ts">get</a>(ruleID, { ...params }) -> DevicePostureRule | null</code>
+
+#### Integrations
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">Integration</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">IntegrationDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/posture/integration">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">create</a>({ ...params }) -> Integration | null</code>
+- <code title="get /accounts/{account_id}/devices/posture/integration">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">list</a>({ ...params }) -> IntegrationsSinglePage</code>
+- <code title="delete /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">delete</a>(integrationID, { ...params }) -> IntegrationDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">edit</a>(integrationID, { ...params }) -> Integration | null</code>
+- <code title="get /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">get</a>(integrationID, { ...params }) -> Integration | null</code>
+
+### Revoke
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/revoke.ts">RevokeCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/revoke">client.zeroTrust.devices.revoke.<a href="./src/resources/zero-trust/devices/revoke.ts">create</a>([ ...body ]) -> RevokeCreateResponse | null</code>
+
+### Settings
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/settings.ts">DeviceSettings</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/devices/settings">client.zeroTrust.devices.settings.<a href="./src/resources/zero-trust/devices/settings.ts">update</a>({ ...params }) -> DeviceSettings | null</code>
+- <code title="delete /accounts/{account_id}/devices/settings">client.zeroTrust.devices.settings.<a href="./src/resources/zero-trust/devices/settings.ts">delete</a>({ ...params }) -> DeviceSettings | null</code>
+- <code title="patch /accounts/{account_id}/devices/settings">client.zeroTrust.devices.settings.<a href="./src/resources/zero-trust/devices/settings.ts">edit</a>({ ...params }) -> DeviceSettings | null</code>
+- <code title="get /accounts/{account_id}/devices/settings">client.zeroTrust.devices.settings.<a href="./src/resources/zero-trust/devices/settings.ts">get</a>({ ...params }) -> DeviceSettings | null</code>
+
+### Unrevoke
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/unrevoke.ts">UnrevokeCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/unrevoke">client.zeroTrust.devices.unrevoke.<a href="./src/resources/zero-trust/devices/unrevoke.ts">create</a>([ ...body ]) -> UnrevokeCreateResponse | null</code>
+
+### OverrideCodes
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/override-codes.ts">OverrideCodeListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/override-codes.ts">OverrideCodeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/devices/{device_id}/override_codes">client.zeroTrust.devices.overrideCodes.<a href="./src/resources/zero-trust/devices/override-codes.ts">list</a>(deviceID, { ...params }) -> OverrideCodeListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/devices/registrations/{registration_id}/override_codes">client.zeroTrust.devices.overrideCodes.<a href="./src/resources/zero-trust/devices/override-codes.ts">get</a>(registrationID, { ...params }) -> OverrideCodeGetResponse</code>
+
+## IdentityProviders
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">AzureAD</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">GenericOAuthConfig</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">IdentityProvider</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">IdentityProviderSCIMConfig</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">IdentityProviderType</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">IdentityProviderListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">IdentityProviderDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">create</a>({ ...params }) -> IdentityProvider</code>
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">update</a>(identityProviderID, { ...params }) -> IdentityProvider</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">list</a>({ ...params }) -> IdentityProviderListResponsesV4PagePaginationArray</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">delete</a>(identityProviderID, { ...params }) -> IdentityProviderDeleteResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers/identity-providers.ts">get</a>(identityProviderID, { ...params }) -> IdentityProvider</code>
+
+### SCIM
+
+#### Groups
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/identity_providers/{identity_provider_id}/scim/groups">client.zeroTrust.identityProviders.scim.groups.<a href="./src/resources/zero-trust/identity-providers/scim/groups.ts">list</a>(identityProviderID, { ...params }) -> ZeroTrustGroupsV4PagePaginationArray</code>
+
+#### Users
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/identity_providers/{identity_provider_id}/scim/users">client.zeroTrust.identityProviders.scim.users.<a href="./src/resources/zero-trust/identity-providers/scim/users.ts">list</a>(identityProviderID, { ...params }) -> AccessUsersV4PagePaginationArray</code>
+
+## Organizations
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/organizations/organizations.ts">LoginDesign</a></code>
+- <code><a href="./src/resources/zero-trust/organizations/organizations.ts">Organization</a></code>
+- <code><a href="./src/resources/zero-trust/organizations/organizations.ts">OrganizationRevokeUsersResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">create</a>({ ...params }) -> Organization</code>
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">update</a>({ ...params }) -> Organization</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">list</a>({ ...params }) -> Organization</code>
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/organizations/revoke_user">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">revokeUsers</a>({ ...params }) -> OrganizationRevokeUsersResponse</code>
+
+### DOH
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/organizations/doh.ts">DOHUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/organizations/doh.ts">DOHGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/access/organizations/doh">client.zeroTrust.organizations.doh.<a href="./src/resources/zero-trust/organizations/doh.ts">update</a>({ ...params }) -> DOHUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/organizations/doh">client.zeroTrust.organizations.doh.<a href="./src/resources/zero-trust/organizations/doh.ts">get</a>({ ...params }) -> DOHGetResponse</code>
+
+## Seats
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/seats.ts">Seat</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/access/seats">client.zeroTrust.seats.<a href="./src/resources/zero-trust/seats.ts">edit</a>([ ...body ]) -> SeatsSinglePage</code>
+
+## Access
+
+### AIControls
+
+#### Mcp
+
+##### Portals
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalReadResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/ai-controls/mcp/portals">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">create</a>({ ...params }) -> PortalCreateResponse</code>
+- <code title="put /accounts/{account_id}/access/ai-controls/mcp/portals/{id}">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">update</a>(id, { ...params }) -> PortalUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/portals">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">list</a>({ ...params }) -> PortalListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/access/ai-controls/mcp/portals/{id}">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">delete</a>(id, { ...params }) -> PortalDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/portals/{id}">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">read</a>(id, { ...params }) -> PortalReadResponse</code>
+
+##### Servers
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerReadResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerSyncResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/ai-controls/mcp/servers">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">create</a>({ ...params }) -> ServerCreateResponse</code>
+- <code title="put /accounts/{account_id}/access/ai-controls/mcp/servers/{id}">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">update</a>(id, { ...params }) -> ServerUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/servers">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">list</a>({ ...params }) -> ServerListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/access/ai-controls/mcp/servers/{id}">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">delete</a>(id, { ...params }) -> ServerDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/servers/{id}">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">read</a>(id, { ...params }) -> ServerReadResponse</code>
+- <code title="post /accounts/{account_id}/access/ai-controls/mcp/servers/{id}/sync">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">sync</a>(id, { ...params }) -> ServerSyncResponse</code>
+
+### GatewayCA
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/gateway-ca.ts">GatewayCACreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/gateway-ca.ts">GatewayCAListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/gateway-ca.ts">GatewayCADeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/gateway_ca">client.zeroTrust.access.gatewayCA.<a href="./src/resources/zero-trust/access/gateway-ca.ts">create</a>({ ...params }) -> GatewayCACreateResponse</code>
+- <code title="get /accounts/{account_id}/access/gateway_ca">client.zeroTrust.access.gatewayCA.<a href="./src/resources/zero-trust/access/gateway-ca.ts">list</a>({ ...params }) -> GatewayCAListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/access/gateway_ca/{certificate_id}">client.zeroTrust.access.gatewayCA.<a href="./src/resources/zero-trust/access/gateway-ca.ts">delete</a>(certificateID, { ...params }) -> GatewayCADeleteResponse</code>
+
+### Infrastructure
+
+#### Targets
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/infrastructure/targets.ts">TargetCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/infrastructure/targets.ts">TargetUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/infrastructure/targets.ts">TargetListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/infrastructure/targets.ts">TargetBulkUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/infrastructure/targets.ts">TargetGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/infrastructure/targets">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">create</a>({ ...params }) -> TargetCreateResponse</code>
+- <code title="put /accounts/{account_id}/infrastructure/targets/{target_id}">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">update</a>(targetID, { ...params }) -> TargetUpdateResponse</code>
+- <code title="get /accounts/{account_id}/infrastructure/targets">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">list</a>({ ...params }) -> TargetListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/infrastructure/targets/{target_id}">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">delete</a>(targetID, { ...params }) -> void</code>
+- <code title="delete /accounts/{account_id}/infrastructure/targets/batch">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">bulkDelete</a>({ ...params }) -> void</code>
+- <code title="post /accounts/{account_id}/infrastructure/targets/batch_delete">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">bulkDeleteV2</a>({ ...params }) -> void</code>
+- <code title="put /accounts/{account_id}/infrastructure/targets/batch">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">bulkUpdate</a>([ ...body ]) -> TargetBulkUpdateResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/infrastructure/targets/{target_id}">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">get</a>(targetID, { ...params }) -> TargetGetResponse</code>
+
+### Applications
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedHeaders</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedIdPs</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedMethods</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedOrigins</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AppID</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Application</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationPolicy</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationSCIMConfig</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationType</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CORSHeaders</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Decision</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">OIDCSaaSApp</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaaSAppNameIDFormat</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SAMLSaaSApp</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SCIMConfigAuthenticationHTTPBasic</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SCIMConfigAuthenticationOAuthBearerToken</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SCIMConfigAuthenticationOauth2</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SCIMConfigMapping</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SelfHostedDomains</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationRevokeTokensResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/apps">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">create</a>({ ...params }) -> ApplicationCreateResponse</code>
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">update</a>(appID, { ...params }) -> ApplicationUpdateResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/apps">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">list</a>({ ...params }) -> ApplicationListResponsesV4PagePaginationArray</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">delete</a>(appID, { ...params }) -> ApplicationDeleteResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">get</a>(appID, { ...params }) -> ApplicationGetResponse</code>
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/revoke_tokens">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">revokeTokens</a>(appID, { ...params }) -> ApplicationRevokeTokensResponse | null</code>
+
+#### CAs
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CA</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CADeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">create</a>(appID, { ...params }) -> CA</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/apps/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">list</a>({ ...params }) -> CAsV4PagePaginationArray</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">delete</a>(appID, { ...params }) -> CADeleteResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">get</a>(appID, { ...params }) -> CA</code>
+
+#### UserPolicyChecks
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/applications/user-policy-checks.ts">UserPolicyCheckGeo</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/user-policy-checks.ts">UserPolicyCheckListResponse</a></code>
+
+Methods:
+
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/user_policy_checks">client.zeroTrust.access.applications.userPolicyChecks.<a href="./src/resources/zero-trust/access/applications/user-policy-checks.ts">list</a>(appID, { ...params }) -> UserPolicyCheckListResponse</code>
+
+#### Policies
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">AccessDevicePostureRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">AccessRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">AnyValidServiceTokenRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">AuthenticationMethodRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">AzureGroupRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">CertificateRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">CountryRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">DomainRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">EmailListRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">EmailRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">EveryoneRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">ExternalEvaluationRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">GitHubOrganizationRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">GroupRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">GSuiteGroupRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">IPListRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">IPRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">OktaGroupRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">SAMLGroupRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">ServiceTokenRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyGetResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">create</a>(appID, { ...params }) -> PolicyCreateResponse</code>
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">update</a>(policyID, { ...params }) -> PolicyUpdateResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">list</a>(appID, { ...params }) -> PolicyListResponsesV4PagePaginationArray</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">delete</a>(policyID, { ...params }) -> PolicyDeleteResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">get</a>(policyID, { ...params }) -> PolicyGetResponse</code>
+
+#### PolicyTests
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/applications/policy-tests/policy-tests.ts">PolicyTestCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policy-tests/policy-tests.ts">PolicyTestGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/policy-tests">client.zeroTrust.access.applications.policyTests.<a href="./src/resources/zero-trust/access/applications/policy-tests/policy-tests.ts">create</a>({ ...params }) -> PolicyTestCreateResponse</code>
+- <code title="get /accounts/{account_id}/access/policy-tests/{policy_test_id}">client.zeroTrust.access.applications.policyTests.<a href="./src/resources/zero-trust/access/applications/policy-tests/policy-tests.ts">get</a>(policyTestID, { ...params }) -> PolicyTestGetResponse</code>
+
+##### Users
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/applications/policy-tests/users.ts">UserListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/policy-tests/{policy_test_id}/users">client.zeroTrust.access.applications.policyTests.users.<a href="./src/resources/zero-trust/access/applications/policy-tests/users.ts">list</a>(policyTestID, { ...params }) -> UserListResponsesV4PagePaginationArray</code>
+
+#### Settings
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/applications/settings.ts">SettingUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/settings.ts">SettingEditResponse</a></code>
+
+Methods:
+
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/settings">client.zeroTrust.access.applications.settings.<a href="./src/resources/zero-trust/access/applications/settings.ts">update</a>(appID, { ...params }) -> SettingUpdateResponse</code>
+- <code title="patch /{accounts_or_zones}/{account_or_zone_id}/access/apps/{app_id}/settings">client.zeroTrust.access.applications.settings.<a href="./src/resources/zero-trust/access/applications/settings.ts">edit</a>(appID, { ...params }) -> SettingEditResponse</code>
+
+### Certificates
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">AssociatedHostnames</a></code>
+- <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">Certificate</a></code>
+- <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">CertificateDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/certificates">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">create</a>({ ...params }) -> Certificate</code>
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/access/certificates/{certificate_id}">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">update</a>(certificateID, { ...params }) -> Certificate</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/certificates">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">list</a>({ ...params }) -> CertificatesV4PagePaginationArray</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/access/certificates/{certificate_id}">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">delete</a>(certificateID, { ...params }) -> CertificateDeleteResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/certificates/{certificate_id}">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">get</a>(certificateID, { ...params }) -> Certificate</code>
+
+#### Settings
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/certificates/settings.ts">CertificateSettings</a></code>
+
+Methods:
+
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/access/certificates/settings">client.zeroTrust.access.certificates.settings.<a href="./src/resources/zero-trust/access/certificates/settings.ts">update</a>({ ...params }) -> CertificateSettingsSinglePage</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/certificates/settings">client.zeroTrust.access.certificates.settings.<a href="./src/resources/zero-trust/access/certificates/settings.ts">get</a>({ ...params }) -> CertificateSettingsSinglePage</code>
+
+### Groups
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/groups.ts">ZeroTrustGroup</a></code>
+- <code><a href="./src/resources/zero-trust/access/groups.ts">GroupCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/groups.ts">GroupUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/groups.ts">GroupListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/groups.ts">GroupDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/groups.ts">GroupGetResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/groups">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">create</a>({ ...params }) -> GroupCreateResponse</code>
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/access/groups/{group_id}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">update</a>(groupID, { ...params }) -> GroupUpdateResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/groups">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">list</a>({ ...params }) -> GroupListResponsesV4PagePaginationArray</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/access/groups/{group_id}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">delete</a>(groupID, { ...params }) -> GroupDeleteResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/groups/{group_id}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">get</a>(groupID, { ...params }) -> GroupGetResponse</code>
+
+### ServiceTokens
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceToken</a></code>
+- <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceTokenCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceTokenRotateResponse</a></code>
+
+Methods:
+
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/access/service_tokens">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">create</a>({ ...params }) -> ServiceTokenCreateResponse</code>
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/access/service_tokens/{service_token_id}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">update</a>(serviceTokenID, { ...params }) -> ServiceToken</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/service_tokens">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">list</a>({ ...params }) -> ServiceTokensV4PagePaginationArray</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/access/service_tokens/{service_token_id}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">delete</a>(serviceTokenID, { ...params }) -> ServiceToken</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/access/service_tokens/{service_token_id}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">get</a>(serviceTokenID, { ...params }) -> ServiceToken</code>
+- <code title="post /accounts/{account_id}/access/service_tokens/{service_token_id}/refresh">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">refresh</a>(serviceTokenID, { ...params }) -> ServiceToken</code>
+- <code title="post /accounts/{account_id}/access/service_tokens/{service_token_id}/rotate">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">rotate</a>(serviceTokenID, { ...params }) -> ServiceTokenRotateResponse</code>
+
+### Bookmarks
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/bookmarks.ts">Bookmark</a></code>
+- <code><a href="./src/resources/zero-trust/access/bookmarks.ts">BookmarkDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/bookmarks/{bookmark_id}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">create</a>(bookmarkID, { ...params }) -> Bookmark</code>
+- <code title="put /accounts/{account_id}/access/bookmarks/{bookmark_id}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">update</a>(bookmarkID, { ...params }) -> Bookmark</code>
+- <code title="get /accounts/{account_id}/access/bookmarks">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">list</a>({ ...params }) -> BookmarksSinglePage</code>
+- <code title="delete /accounts/{account_id}/access/bookmarks/{bookmark_id}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">delete</a>(bookmarkID, { ...params }) -> BookmarkDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/bookmarks/{bookmark_id}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">get</a>(bookmarkID, { ...params }) -> Bookmark</code>
+
+### Keys
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/keys.ts">KeyUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/keys.ts">KeyGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/keys.ts">KeyRotateResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/access/keys">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">update</a>({ ...params }) -> KeyUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/keys">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">get</a>({ ...params }) -> KeyGetResponse</code>
+- <code title="post /accounts/{account_id}/access/keys/rotate">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">rotate</a>({ ...params }) -> KeyRotateResponse</code>
+
+### Logs
+
+#### AccessRequests
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/logs/access-requests.ts">AccessRequestListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/logs/access_requests">client.zeroTrust.access.logs.accessRequests.<a href="./src/resources/zero-trust/access/logs/access-requests.ts">list</a>({ ...params }) -> AccessRequestListResponse</code>
+
+#### SCIM
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/logs/scim/scim.ts">AccessRequest</a></code>
+
+##### Updates
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/logs/scim/updates.ts">UpdateListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/logs/scim/updates">client.zeroTrust.access.logs.scim.updates.<a href="./src/resources/zero-trust/access/logs/scim/updates.ts">list</a>({ ...params }) -> UpdateListResponsesV4PagePaginationArray</code>
+
+### Users
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">AccessUser</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">UserListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/users">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">list</a>({ ...params }) -> UserListResponsesV4PagePaginationArray</code>
+
+#### ActiveSessions
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/users/active-sessions.ts">ActiveSessionListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/active-sessions.ts">ActiveSessionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/users/{user_id}/active_sessions">client.zeroTrust.access.users.activeSessions.<a href="./src/resources/zero-trust/access/users/active-sessions.ts">list</a>(userID, { ...params }) -> ActiveSessionListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/access/users/{user_id}/active_sessions/{nonce}">client.zeroTrust.access.users.activeSessions.<a href="./src/resources/zero-trust/access/users/active-sessions.ts">get</a>(nonce, { ...params }) -> ActiveSessionGetResponse</code>
+
+#### LastSeenIdentity
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/users/last-seen-identity.ts">Identity</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/users/{user_id}/last_seen_identity">client.zeroTrust.access.users.lastSeenIdentity.<a href="./src/resources/zero-trust/access/users/last-seen-identity.ts">get</a>(userID, { ...params }) -> Identity</code>
+
+#### FailedLogins
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/users/failed-logins.ts">FailedLoginListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/users/{user_id}/failed_logins">client.zeroTrust.access.users.failedLogins.<a href="./src/resources/zero-trust/access/users/failed-logins.ts">list</a>(userID, { ...params }) -> FailedLoginListResponsesSinglePage</code>
+
+### CustomPages
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/custom-pages.ts">CustomPage</a></code>
+- <code><a href="./src/resources/zero-trust/access/custom-pages.ts">CustomPageWithoutHTML</a></code>
+- <code><a href="./src/resources/zero-trust/access/custom-pages.ts">CustomPageDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/custom_pages">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">create</a>({ ...params }) -> CustomPageWithoutHTML</code>
+- <code title="put /accounts/{account_id}/access/custom_pages/{custom_page_id}">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">update</a>(customPageID, { ...params }) -> CustomPageWithoutHTML</code>
+- <code title="get /accounts/{account_id}/access/custom_pages">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">list</a>({ ...params }) -> CustomPageWithoutHTMLsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/access/custom_pages/{custom_page_id}">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">delete</a>(customPageID, { ...params }) -> CustomPageDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/custom_pages/{custom_page_id}">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">get</a>(customPageID, { ...params }) -> CustomPage</code>
+
+### Tags
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/tags.ts">Tag</a></code>
+- <code><a href="./src/resources/zero-trust/access/tags.ts">TagDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/tags">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">create</a>({ ...params }) -> Tag</code>
+- <code title="put /accounts/{account_id}/access/tags/{tag_name}">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">update</a>(tagName, { ...params }) -> Tag</code>
+- <code title="get /accounts/{account_id}/access/tags">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">list</a>({ ...params }) -> TagsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/access/tags/{tag_name}">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">delete</a>(tagName, { ...params }) -> TagDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/tags/{tag_name}">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">get</a>(tagName, { ...params }) -> Tag</code>
+
+### Policies
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/policies.ts">ApprovalGroup</a></code>
+- <code><a href="./src/resources/zero-trust/access/policies.ts">Policy</a></code>
+- <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/policies">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">create</a>({ ...params }) -> PolicyCreateResponse</code>
+- <code title="put /accounts/{account_id}/access/policies/{policy_id}">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">update</a>(policyID, { ...params }) -> PolicyUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/policies">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">list</a>({ ...params }) -> PolicyListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/access/policies/{policy_id}">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">delete</a>(policyID, { ...params }) -> PolicyDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/policies/{policy_id}">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">get</a>(policyID, { ...params }) -> PolicyGetResponse</code>
+
+## DEX
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/dex.ts">DigitalExperienceMonitor</a></code>
+- <code><a href="./src/resources/zero-trust/dex/dex.ts">NetworkPath</a></code>
+- <code><a href="./src/resources/zero-trust/dex/dex.ts">NetworkPathResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dex/dex.ts">Percentiles</a></code>
+
+### WARPChangeEvents
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/warp-change-events.ts">WARPChangeEventGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/warp-change-events">client.zeroTrust.dex.warpChangeEvents.<a href="./src/resources/zero-trust/dex/warp-change-events.ts">get</a>({ ...params }) -> WARPChangeEventGetResponse</code>
+
+### Commands
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/commands/commands.ts">CommandCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dex/commands/commands.ts">CommandListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dex/commands">client.zeroTrust.dex.commands.<a href="./src/resources/zero-trust/dex/commands/commands.ts">create</a>({ ...params }) -> CommandCreateResponse</code>
+- <code title="get /accounts/{account_id}/dex/commands">client.zeroTrust.dex.commands.<a href="./src/resources/zero-trust/dex/commands/commands.ts">list</a>({ ...params }) -> CommandListResponsesV4PagePagination</code>
+
+#### Devices
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/commands/devices.ts">DeviceListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/commands/devices">client.zeroTrust.dex.commands.devices.<a href="./src/resources/zero-trust/dex/commands/devices.ts">list</a>({ ...params }) -> DeviceListResponsesV4PagePagination</code>
+
+#### Downloads
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/commands/{command_id}/downloads/{filename}">client.zeroTrust.dex.commands.downloads.<a href="./src/resources/zero-trust/dex/commands/downloads.ts">get</a>(filename, { ...params }) -> Response</code>
+
+#### Quota
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/commands/quota.ts">QuotaGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/commands/quota">client.zeroTrust.dex.commands.quota.<a href="./src/resources/zero-trust/dex/commands/quota.ts">get</a>({ ...params }) -> QuotaGetResponse</code>
+
+### Colos
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/colos.ts">ColoListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/colos">client.zeroTrust.dex.colos.<a href="./src/resources/zero-trust/dex/colos.ts">list</a>({ ...params }) -> ColoListResponsesSinglePage</code>
+
+### FleetStatus
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/fleet-status/fleet-status.ts">LiveStat</a></code>
+- <code><a href="./src/resources/zero-trust/dex/fleet-status/fleet-status.ts">FleetStatusLiveResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/fleet-status/live">client.zeroTrust.dex.fleetStatus.<a href="./src/resources/zero-trust/dex/fleet-status/fleet-status.ts">live</a>({ ...params }) -> FleetStatusLiveResponse</code>
+- <code title="get /accounts/{account_id}/dex/fleet-status/over-time">client.zeroTrust.dex.fleetStatus.<a href="./src/resources/zero-trust/dex/fleet-status/fleet-status.ts">overTime</a>({ ...params }) -> void</code>
+
+#### Devices
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/fleet-status/devices.ts">DeviceListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/fleet-status/devices">client.zeroTrust.dex.fleetStatus.devices.<a href="./src/resources/zero-trust/dex/fleet-status/devices.ts">list</a>({ ...params }) -> DeviceListResponsesV4PagePaginationArray</code>
+
+### HTTPTests
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/http-tests/http-tests.ts">HTTPDetails</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/http-tests/{test_id}">client.zeroTrust.dex.httpTests.<a href="./src/resources/zero-trust/dex/http-tests/http-tests.ts">get</a>(testID, { ...params }) -> HTTPDetails</code>
+
+#### Percentiles
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/http-tests/percentiles.ts">HTTPDetailsPercentiles</a></code>
+- <code><a href="./src/resources/zero-trust/dex/http-tests/percentiles.ts">TestStatOverTime</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/http-tests/{test_id}/percentiles">client.zeroTrust.dex.httpTests.percentiles.<a href="./src/resources/zero-trust/dex/http-tests/percentiles.ts">get</a>(testID, { ...params }) -> HTTPDetailsPercentiles</code>
+
+### Tests
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/tests/tests.ts">AggregateTimePeriod</a></code>
+- <code><a href="./src/resources/zero-trust/dex/tests/tests.ts">Tests</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/tests/overview">client.zeroTrust.dex.tests.<a href="./src/resources/zero-trust/dex/tests/tests.ts">list</a>({ ...params }) -> TestsV4PagePagination</code>
+
+#### UniqueDevices
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/tests/unique-devices.ts">UniqueDevices</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/tests/unique-devices">client.zeroTrust.dex.tests.uniqueDevices.<a href="./src/resources/zero-trust/dex/tests/unique-devices.ts">list</a>({ ...params }) -> UniqueDevices</code>
+
+### TracerouteTestResults
+
+#### NetworkPath
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/traceroute-test-results/network-path.ts">NetworkPathGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/traceroute-test-results/{test_result_id}/network-path">client.zeroTrust.dex.tracerouteTestResults.networkPath.<a href="./src/resources/zero-trust/dex/traceroute-test-results/network-path.ts">get</a>(testResultID, { ...params }) -> NetworkPathGetResponse</code>
+
+### TracerouteTests
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/traceroute-tests.ts">Traceroute</a></code>
+- <code><a href="./src/resources/zero-trust/dex/traceroute-tests.ts">TracerouteTestPercentilesResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/traceroute-tests/{test_id}">client.zeroTrust.dex.tracerouteTests.<a href="./src/resources/zero-trust/dex/traceroute-tests.ts">get</a>(testID, { ...params }) -> Traceroute</code>
+- <code title="get /accounts/{account_id}/dex/traceroute-tests/{test_id}/network-path">client.zeroTrust.dex.tracerouteTests.<a href="./src/resources/zero-trust/dex/traceroute-tests.ts">networkPath</a>(testID, { ...params }) -> NetworkPathResponse</code>
+- <code title="get /accounts/{account_id}/dex/traceroute-tests/{test_id}/percentiles">client.zeroTrust.dex.tracerouteTests.<a href="./src/resources/zero-trust/dex/traceroute-tests.ts">percentiles</a>(testID, { ...params }) -> TracerouteTestPercentilesResponse</code>
+
+## Tunnels
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">Connection</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">TunnelListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/tunnels">client.zeroTrust.tunnels.<a href="./src/resources/zero-trust/tunnels/tunnels.ts">list</a>({ ...params }) -> TunnelListResponsesV4PagePaginationArray</code>
+
+### Cloudflared
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cfd_tunnel">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">create</a>({ ...params }) -> CloudflareTunnel</code>
+- <code title="get /accounts/{account_id}/cfd_tunnel">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">list</a>({ ...params }) -> CloudflareTunnelsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">delete</a>(tunnelID, { ...params }) -> CloudflareTunnel</code>
+- <code title="patch /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">edit</a>(tunnelID, { ...params }) -> CloudflareTunnel</code>
+- <code title="get /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.cloudflared.<a href="./src/resources/zero-trust/tunnels/cloudflared/cloudflared.ts">get</a>(tunnelID, { ...params }) -> CloudflareTunnel</code>
+
+#### Configurations
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/configurations.ts">ConfigurationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/configurations.ts">ConfigurationGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/cfd_tunnel/{tunnel_id}/configurations">client.zeroTrust.tunnels.cloudflared.configurations.<a href="./src/resources/zero-trust/tunnels/cloudflared/configurations.ts">update</a>(tunnelID, { ...params }) -> ConfigurationUpdateResponse</code>
+- <code title="get /accounts/{account_id}/cfd_tunnel/{tunnel_id}/configurations">client.zeroTrust.tunnels.cloudflared.configurations.<a href="./src/resources/zero-trust/tunnels/cloudflared/configurations.ts">get</a>(tunnelID, { ...params }) -> ConfigurationGetResponse</code>
+
+#### Connections
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/connections.ts">Client</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/connections.ts">ConnectionDeleteResponse</a></code>
+
+Methods:
+
+- <code title="delete /accounts/{account_id}/cfd_tunnel/{tunnel_id}/connections">client.zeroTrust.tunnels.cloudflared.connections.<a href="./src/resources/zero-trust/tunnels/cloudflared/connections.ts">delete</a>(tunnelID, { ...params }) -> ConnectionDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/cfd_tunnel/{tunnel_id}/connections">client.zeroTrust.tunnels.cloudflared.connections.<a href="./src/resources/zero-trust/tunnels/cloudflared/connections.ts">get</a>(tunnelID, { ...params }) -> ClientsSinglePage</code>
+
+#### Token
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/token.ts">TokenGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cfd_tunnel/{tunnel_id}/token">client.zeroTrust.tunnels.cloudflared.token.<a href="./src/resources/zero-trust/tunnels/cloudflared/token.ts">get</a>(tunnelID, { ...params }) -> TokenGetResponse</code>
+
+#### Connectors
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cfd_tunnel/{tunnel_id}/connectors/{connector_id}">client.zeroTrust.tunnels.cloudflared.connectors.<a href="./src/resources/zero-trust/tunnels/cloudflared/connectors.ts">get</a>(connectorID, { ...params }) -> Client</code>
+
+#### Management
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/cloudflared/management.ts">ManagementCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cfd_tunnel/{tunnel_id}/management">client.zeroTrust.tunnels.cloudflared.management.<a href="./src/resources/zero-trust/tunnels/cloudflared/management.ts">create</a>(tunnelID, { ...params }) -> ManagementCreateResponse</code>
+
+### WARPConnector
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/warp-connector.ts">WARPConnectorCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/warp-connector.ts">WARPConnectorListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/warp-connector.ts">WARPConnectorDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/warp-connector.ts">WARPConnectorEditResponse</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/warp-connector.ts">WARPConnectorGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/warp_connector">client.zeroTrust.tunnels.warpConnector.<a href="./src/resources/zero-trust/tunnels/warp-connector/warp-connector.ts">create</a>({ ...params }) -> WARPConnectorCreateResponse</code>
+- <code title="get /accounts/{account_id}/warp_connector">client.zeroTrust.tunnels.warpConnector.<a href="./src/resources/zero-trust/tunnels/warp-connector/warp-connector.ts">list</a>({ ...params }) -> WARPConnectorListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/warp_connector/{tunnel_id}">client.zeroTrust.tunnels.warpConnector.<a href="./src/resources/zero-trust/tunnels/warp-connector/warp-connector.ts">delete</a>(tunnelID, { ...params }) -> WARPConnectorDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/warp_connector/{tunnel_id}">client.zeroTrust.tunnels.warpConnector.<a href="./src/resources/zero-trust/tunnels/warp-connector/warp-connector.ts">edit</a>(tunnelID, { ...params }) -> WARPConnectorEditResponse</code>
+- <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}">client.zeroTrust.tunnels.warpConnector.<a href="./src/resources/zero-trust/tunnels/warp-connector/warp-connector.ts">get</a>(tunnelID, { ...params }) -> WARPConnectorGetResponse</code>
+
+#### Token
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/token.ts">TokenGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}/token">client.zeroTrust.tunnels.warpConnector.token.<a href="./src/resources/zero-trust/tunnels/warp-connector/token.ts">get</a>(tunnelID, { ...params }) -> TokenGetResponse</code>
+
+## ConnectivitySettings
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/connectivity-settings.ts">ConnectivitySettingEditResponse</a></code>
+- <code><a href="./src/resources/zero-trust/connectivity-settings.ts">ConnectivitySettingGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/zerotrust/connectivity_settings">client.zeroTrust.connectivitySettings.<a href="./src/resources/zero-trust/connectivity-settings.ts">edit</a>({ ...params }) -> ConnectivitySettingEditResponse</code>
+- <code title="get /accounts/{account_id}/zerotrust/connectivity_settings">client.zeroTrust.connectivitySettings.<a href="./src/resources/zero-trust/connectivity-settings.ts">get</a>({ ...params }) -> ConnectivitySettingGetResponse</code>
+
+## DLP
+
+### Datasets
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/datasets/datasets.ts">Dataset</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/datasets/datasets.ts">DatasetArray</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/datasets/datasets.ts">DatasetCreation</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/datasets/datasets.ts">DatasetCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/datasets/datasets.ts">DatasetUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/datasets/datasets.ts">DatasetGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/datasets">client.zeroTrust.dlp.datasets.<a href="./src/resources/zero-trust/dlp/datasets/datasets.ts">create</a>({ ...params }) -> DatasetCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/datasets/{dataset_id}">client.zeroTrust.dlp.datasets.<a href="./src/resources/zero-trust/dlp/datasets/datasets.ts">update</a>(datasetID, { ...params }) -> DatasetUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/datasets">client.zeroTrust.dlp.datasets.<a href="./src/resources/zero-trust/dlp/datasets/datasets.ts">list</a>({ ...params }) -> DatasetsSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/datasets/{dataset_id}">client.zeroTrust.dlp.datasets.<a href="./src/resources/zero-trust/dlp/datasets/datasets.ts">delete</a>(datasetID, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/dlp/datasets/{dataset_id}">client.zeroTrust.dlp.datasets.<a href="./src/resources/zero-trust/dlp/datasets/datasets.ts">get</a>(datasetID, { ...params }) -> DatasetGetResponse</code>
+
+#### Upload
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/datasets/upload.ts">NewVersion</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/datasets/upload.ts">UploadCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/datasets/upload.ts">UploadEditResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/upload">client.zeroTrust.dlp.datasets.upload.<a href="./src/resources/zero-trust/dlp/datasets/upload.ts">create</a>(datasetID, { ...params }) -> UploadCreateResponse</code>
+- <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/upload/{version}">client.zeroTrust.dlp.datasets.upload.<a href="./src/resources/zero-trust/dlp/datasets/upload.ts">edit</a>(version, dataset, { ...params }) -> UploadEditResponse</code>
+
+#### Versions
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/datasets/versions/versions.ts">VersionCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/versions/{version}">client.zeroTrust.dlp.datasets.versions.<a href="./src/resources/zero-trust/dlp/datasets/versions/versions.ts">create</a>(version, [ ...body ]) -> VersionCreateResponsesSinglePage</code>
+
+##### Entries
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/datasets/versions/entries.ts">EntryCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/versions/{version}/entries/{entry_id}">client.zeroTrust.dlp.datasets.versions.entries.<a href="./src/resources/zero-trust/dlp/datasets/versions/entries.ts">create</a>(entryID, datasetVersionEntry, { ...params }) -> EntryCreateResponse</code>
+
+### Patterns
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/patterns.ts">PatternValidateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/patterns/validate">client.zeroTrust.dlp.patterns.<a href="./src/resources/zero-trust/dlp/patterns.ts">validate</a>({ ...params }) -> PatternValidateResponse</code>
+
+### PayloadLogs
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/payload-logs.ts">PayloadLogUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/payload-logs.ts">PayloadLogGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/dlp/payload_log">client.zeroTrust.dlp.payloadLogs.<a href="./src/resources/zero-trust/dlp/payload-logs.ts">update</a>({ ...params }) -> PayloadLogUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/payload_log">client.zeroTrust.dlp.payloadLogs.<a href="./src/resources/zero-trust/dlp/payload-logs.ts">get</a>({ ...params }) -> PayloadLogGetResponse</code>
+
+### Email
+
+#### AccountMapping
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/email/account-mapping.ts">AccountMappingCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/email/account-mapping.ts">AccountMappingGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/email/account_mapping">client.zeroTrust.dlp.email.accountMapping.<a href="./src/resources/zero-trust/dlp/email/account-mapping.ts">create</a>({ ...params }) -> AccountMappingCreateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/email/account_mapping">client.zeroTrust.dlp.email.accountMapping.<a href="./src/resources/zero-trust/dlp/email/account-mapping.ts">get</a>({ ...params }) -> AccountMappingGetResponse</code>
+
+#### Rules
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/email/rules.ts">RuleCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/email/rules.ts">RuleUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/email/rules.ts">RuleListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/email/rules.ts">RuleDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/email/rules.ts">RuleBulkEditResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/email/rules.ts">RuleGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/email/rules">client.zeroTrust.dlp.email.rules.<a href="./src/resources/zero-trust/dlp/email/rules.ts">create</a>({ ...params }) -> RuleCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/email/rules/{rule_id}">client.zeroTrust.dlp.email.rules.<a href="./src/resources/zero-trust/dlp/email/rules.ts">update</a>(ruleID, { ...params }) -> RuleUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/email/rules">client.zeroTrust.dlp.email.rules.<a href="./src/resources/zero-trust/dlp/email/rules.ts">list</a>({ ...params }) -> RuleListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/email/rules/{rule_id}">client.zeroTrust.dlp.email.rules.<a href="./src/resources/zero-trust/dlp/email/rules.ts">delete</a>(ruleID, { ...params }) -> RuleDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/dlp/email/rules">client.zeroTrust.dlp.email.rules.<a href="./src/resources/zero-trust/dlp/email/rules.ts">bulkEdit</a>({ ...params }) -> RuleBulkEditResponse</code>
+- <code title="get /accounts/{account_id}/dlp/email/rules/{rule_id}">client.zeroTrust.dlp.email.rules.<a href="./src/resources/zero-trust/dlp/email/rules.ts">get</a>(ruleID, { ...params }) -> RuleGetResponse</code>
+
+### Profiles
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">ContextAwareness</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">Profile</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">SkipConfiguration</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">ProfileGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dlp/profiles">client.zeroTrust.dlp.profiles.<a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">list</a>({ ...params }) -> ProfilesSinglePage</code>
+- <code title="get /accounts/{account_id}/dlp/profiles/{profile_id}">client.zeroTrust.dlp.profiles.<a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">get</a>(profileID, { ...params }) -> ProfileGetResponse</code>
+
+#### Custom
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/profiles/custom.ts">CustomProfile</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/custom.ts">Pattern</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/custom.ts">CustomCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/custom.ts">CustomUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/custom.ts">CustomDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/custom.ts">CustomGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/profiles/custom">client.zeroTrust.dlp.profiles.custom.<a href="./src/resources/zero-trust/dlp/profiles/custom.ts">create</a>({ ...params }) -> CustomCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/profiles/custom/{profile_id}">client.zeroTrust.dlp.profiles.custom.<a href="./src/resources/zero-trust/dlp/profiles/custom.ts">update</a>(profileID, { ...params }) -> CustomUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/dlp/profiles/custom/{profile_id}">client.zeroTrust.dlp.profiles.custom.<a href="./src/resources/zero-trust/dlp/profiles/custom.ts">delete</a>(profileID, { ...params }) -> CustomDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/profiles/custom/{profile_id}">client.zeroTrust.dlp.profiles.custom.<a href="./src/resources/zero-trust/dlp/profiles/custom.ts">get</a>(profileID, { ...params }) -> CustomGetResponse</code>
+
+#### Predefined
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">PredefinedProfile</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">PredefinedUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">PredefinedDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">PredefinedGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/dlp/profiles/predefined/{profile_id}/config">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">update</a>(profileID, { ...params }) -> PredefinedUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">delete</a>(profileID, { ...params }) -> PredefinedDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/profiles/predefined/{profile_id}/config">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">get</a>(profileID, { ...params }) -> PredefinedGetResponse</code>
+
+### Limits
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/limits.ts">LimitListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dlp/limits">client.zeroTrust.dlp.limits.<a href="./src/resources/zero-trust/dlp/limits.ts">list</a>({ ...params }) -> LimitListResponse</code>
+
+### Entries
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/entries/entries.ts">EntryCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/entries.ts">EntryUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/entries.ts">EntryListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/entries.ts">EntryDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/entries.ts">EntryGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries/entries.ts">create</a>({ ...params }) -> EntryCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries/entries.ts">update</a>(entryID, { ...params }) -> EntryUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries/entries.ts">list</a>({ ...params }) -> EntryListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries/entries.ts">delete</a>(entryID, { ...params }) -> EntryDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries/entries.ts">get</a>(entryID, { ...params }) -> EntryGetResponse</code>
+
+#### Custom
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">create</a>({ ...params }) -> CustomCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/entries/custom/{entry_id}">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">update</a>(entryID, { ...params }) -> CustomUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">list</a>({ ...params }) -> CustomListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">delete</a>(entryID, { ...params }) -> CustomDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">get</a>(entryID, { ...params }) -> CustomGetResponse</code>
+
+#### Predefined
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/entries/predefined">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">create</a>({ ...params }) -> PredefinedCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/entries/predefined/{entry_id}">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">update</a>(entryID, { ...params }) -> PredefinedUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">list</a>({ ...params }) -> PredefinedListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/entries/predefined/{entry_id}">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">delete</a>(entryID, { ...params }) -> PredefinedDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">get</a>(entryID, { ...params }) -> PredefinedGetResponse</code>
+
+#### Integration
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/entries/integration">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">create</a>({ ...params }) -> IntegrationCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/entries/integration/{entry_id}">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">update</a>(entryID, { ...params }) -> IntegrationUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">list</a>({ ...params }) -> IntegrationListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/entries/integration/{entry_id}">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">delete</a>(entryID, { ...params }) -> IntegrationDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">get</a>(entryID, { ...params }) -> IntegrationGetResponse</code>
+
+## Gateway
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/gateway.ts">GatewayCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/gateway.ts">GatewayListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/gateway">client.zeroTrust.gateway.<a href="./src/resources/zero-trust/gateway/gateway.ts">create</a>({ ...params }) -> GatewayCreateResponse</code>
+- <code title="get /accounts/{account_id}/gateway">client.zeroTrust.gateway.<a href="./src/resources/zero-trust/gateway/gateway.ts">list</a>({ ...params }) -> GatewayListResponse</code>
+
+### AuditSSHSettings
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/audit-ssh-settings.ts">GatewaySettings</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/gateway/audit_ssh_settings">client.zeroTrust.gateway.auditSSHSettings.<a href="./src/resources/zero-trust/gateway/audit-ssh-settings.ts">update</a>({ ...params }) -> GatewaySettings</code>
+- <code title="get /accounts/{account_id}/gateway/audit_ssh_settings">client.zeroTrust.gateway.auditSSHSettings.<a href="./src/resources/zero-trust/gateway/audit-ssh-settings.ts">get</a>({ ...params }) -> GatewaySettings</code>
+- <code title="post /accounts/{account_id}/gateway/audit_ssh_settings/rotate_seed">client.zeroTrust.gateway.auditSSHSettings.<a href="./src/resources/zero-trust/gateway/audit-ssh-settings.ts">rotateSeed</a>({ ...params }) -> GatewaySettings</code>
+
+### Categories
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/categories.ts">Category</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/gateway/categories">client.zeroTrust.gateway.categories.<a href="./src/resources/zero-trust/gateway/categories.ts">list</a>({ ...params }) -> CategoriesSinglePage</code>
+
+### AppTypes
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/app-types.ts">AppType</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/gateway/app_types">client.zeroTrust.gateway.appTypes.<a href="./src/resources/zero-trust/gateway/app-types.ts">list</a>({ ...params }) -> AppTypesSinglePage</code>
+
+### Configurations
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ActivityLogSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">AntiVirusSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">BlockPageSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">BodyScanningSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">BrowserIsolationSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">CustomCertificateSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ExtendedEmailMatching</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">FipsSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">GatewayConfigurationSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">NotificationSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ProtocolDetection</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">TLSSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ConfigurationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ConfigurationEditResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ConfigurationGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">update</a>({ ...params }) -> ConfigurationUpdateResponse</code>
+- <code title="patch /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">edit</a>({ ...params }) -> ConfigurationEditResponse</code>
+- <code title="get /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">get</a>({ ...params }) -> ConfigurationGetResponse</code>
+
+#### CustomCertificate
+
+Methods:
+
+- <code title="get /accounts/{account_id}/gateway/configuration/custom_certificate">client.zeroTrust.gateway.configurations.customCertificate.<a href="./src/resources/zero-trust/gateway/configurations/custom-certificate.ts">get</a>({ ...params }) -> CustomCertificateSettings | null</code>
+
+### Lists
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">GatewayItem</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">GatewayList</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/gateway/lists">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">create</a>({ ...params }) -> ListCreateResponse</code>
+- <code title="put /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">update</a>(listID, { ...params }) -> GatewayList</code>
+- <code title="get /accounts/{account_id}/gateway/lists">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">list</a>({ ...params }) -> GatewayListsSinglePage</code>
+- <code title="delete /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">delete</a>(listID, { ...params }) -> ListDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">edit</a>(listID, { ...params }) -> GatewayList</code>
+- <code title="get /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">get</a>(listID, { ...params }) -> GatewayList</code>
+
+#### Items
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/lists/items.ts">ItemListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/gateway/lists/{list_id}/items">client.zeroTrust.gateway.lists.items.<a href="./src/resources/zero-trust/gateway/lists/items.ts">list</a>(listID, { ...params }) -> ItemListResponsesSinglePage</code>
+
+### Locations
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">DOHEndpoint</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">DOTEndpoint</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">Endpoint</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">IPNetwork</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">IPV4Endpoint</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">IPV6Endpoint</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">IPV6Network</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">Location</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">LocationDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/gateway/locations">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">create</a>({ ...params }) -> Location</code>
+- <code title="put /accounts/{account_id}/gateway/locations/{location_id}">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">update</a>(locationID, { ...params }) -> Location</code>
+- <code title="get /accounts/{account_id}/gateway/locations">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">list</a>({ ...params }) -> LocationsSinglePage</code>
+- <code title="delete /accounts/{account_id}/gateway/locations/{location_id}">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">delete</a>(locationID, { ...params }) -> LocationDeleteResponse</code>
+- <code title="get /accounts/{account_id}/gateway/locations/{location_id}">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">get</a>(locationID, { ...params }) -> Location</code>
+
+### Logging
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/logging.ts">LoggingSetting</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/gateway/logging">client.zeroTrust.gateway.logging.<a href="./src/resources/zero-trust/gateway/logging.ts">update</a>({ ...params }) -> LoggingSetting</code>
+- <code title="get /accounts/{account_id}/gateway/logging">client.zeroTrust.gateway.logging.<a href="./src/resources/zero-trust/gateway/logging.ts">get</a>({ ...params }) -> LoggingSetting</code>
+
+### ProxyEndpoints
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">GatewayIPs</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">ProxyEndpoint</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">ProxyEndpointDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/gateway/proxy_endpoints">client.zeroTrust.gateway.proxyEndpoints.<a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">create</a>({ ...params }) -> ProxyEndpoint</code>
+- <code title="get /accounts/{account_id}/gateway/proxy_endpoints">client.zeroTrust.gateway.proxyEndpoints.<a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">list</a>({ ...params }) -> ProxyEndpointsSinglePage</code>
+- <code title="delete /accounts/{account_id}/gateway/proxy_endpoints/{proxy_endpoint_id}">client.zeroTrust.gateway.proxyEndpoints.<a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">delete</a>(proxyEndpointID, { ...params }) -> ProxyEndpointDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/gateway/proxy_endpoints/{proxy_endpoint_id}">client.zeroTrust.gateway.proxyEndpoints.<a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">edit</a>(proxyEndpointID, { ...params }) -> ProxyEndpoint</code>
+- <code title="get /accounts/{account_id}/gateway/proxy_endpoints/{proxy_endpoint_id}">client.zeroTrust.gateway.proxyEndpoints.<a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">get</a>(proxyEndpointID, { ...params }) -> ProxyEndpoint</code>
+
+### Rules
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/rules.ts">DNSResolverSettingsV4</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/rules.ts">DNSResolverSettingsV6</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/rules.ts">GatewayFilter</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/rules.ts">GatewayRule</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/rules.ts">RuleSetting</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/rules.ts">Schedule</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/rules.ts">RuleDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">create</a>({ ...params }) -> GatewayRule</code>
+- <code title="put /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">update</a>(ruleID, { ...params }) -> GatewayRule</code>
+- <code title="get /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">list</a>({ ...params }) -> GatewayRulesSinglePage</code>
+- <code title="delete /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">delete</a>(ruleID, { ...params }) -> RuleDeleteResponse</code>
+- <code title="get /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">get</a>(ruleID, { ...params }) -> GatewayRule</code>
+- <code title="get /accounts/{account_id}/gateway/rules/tenant">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">listTenant</a>({ ...params }) -> GatewayRulesSinglePage</code>
+- <code title="post /accounts/{account_id}/gateway/rules/{rule_id}/reset_expiration">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">resetExpiration</a>(ruleID, { ...params }) -> GatewayRule</code>
+
+### Certificates
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateActivateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateDeactivateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/gateway/certificates">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">create</a>({ ...params }) -> CertificateCreateResponse</code>
+- <code title="get /accounts/{account_id}/gateway/certificates">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">list</a>({ ...params }) -> CertificateListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/gateway/certificates/{certificate_id}">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">delete</a>(certificateID, { ...params }) -> CertificateDeleteResponse</code>
+- <code title="post /accounts/{account_id}/gateway/certificates/{certificate_id}/activate">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">activate</a>(certificateID, { ...params }) -> CertificateActivateResponse</code>
+- <code title="post /accounts/{account_id}/gateway/certificates/{certificate_id}/deactivate">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">deactivate</a>(certificateID, { ...params }) -> CertificateDeactivateResponse</code>
+- <code title="get /accounts/{account_id}/gateway/certificates/{certificate_id}">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">get</a>(certificateID, { ...params }) -> CertificateGetResponse</code>
+
+## Networks
+
+### Routes
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/networks/routes/routes.ts">NetworkRoute</a></code>
+- <code><a href="./src/resources/zero-trust/networks/routes/routes.ts">Route</a></code>
+- <code><a href="./src/resources/zero-trust/networks/routes/routes.ts">Teamnet</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/teamnet/routes">client.zeroTrust.networks.routes.<a href="./src/resources/zero-trust/networks/routes/routes.ts">create</a>({ ...params }) -> Route</code>
+- <code title="get /accounts/{account_id}/teamnet/routes">client.zeroTrust.networks.routes.<a href="./src/resources/zero-trust/networks/routes/routes.ts">list</a>({ ...params }) -> TeamnetsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/teamnet/routes/{route_id}">client.zeroTrust.networks.routes.<a href="./src/resources/zero-trust/networks/routes/routes.ts">delete</a>(routeID, { ...params }) -> Route</code>
+- <code title="patch /accounts/{account_id}/teamnet/routes/{route_id}">client.zeroTrust.networks.routes.<a href="./src/resources/zero-trust/networks/routes/routes.ts">edit</a>(routeID, { ...params }) -> Route</code>
+- <code title="get /accounts/{account_id}/teamnet/routes/{route_id}">client.zeroTrust.networks.routes.<a href="./src/resources/zero-trust/networks/routes/routes.ts">get</a>(routeID, { ...params }) -> Route</code>
+
+#### IPs
+
+Methods:
+
+- <code title="get /accounts/{account_id}/teamnet/routes/ip/{ip}">client.zeroTrust.networks.routes.ips.<a href="./src/resources/zero-trust/networks/routes/ips.ts">get</a>(ip, { ...params }) -> Teamnet</code>
+
+#### Networks
+
+Methods:
+
+- <code title="post /accounts/{account_id}/teamnet/routes/network/{ip_network_encoded}">client.zeroTrust.networks.routes.networks.<a href="./src/resources/zero-trust/networks/routes/networks.ts">create</a>(ipNetworkEncoded, { ...params }) -> Route</code>
+- <code title="delete /accounts/{account_id}/teamnet/routes/network/{ip_network_encoded}">client.zeroTrust.networks.routes.networks.<a href="./src/resources/zero-trust/networks/routes/networks.ts">delete</a>(ipNetworkEncoded, { ...params }) -> Route</code>
+- <code title="patch /accounts/{account_id}/teamnet/routes/network/{ip_network_encoded}">client.zeroTrust.networks.routes.networks.<a href="./src/resources/zero-trust/networks/routes/networks.ts">edit</a>(ipNetworkEncoded, { ...params }) -> Route</code>
+
+### VirtualNetworks
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/networks/virtual-networks.ts">VirtualNetwork</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/teamnet/virtual_networks">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">create</a>({ ...params }) -> VirtualNetwork</code>
+- <code title="get /accounts/{account_id}/teamnet/virtual_networks">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">list</a>({ ...params }) -> VirtualNetworksSinglePage</code>
+- <code title="delete /accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">delete</a>(virtualNetworkID, { ...params }) -> VirtualNetwork</code>
+- <code title="patch /accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">edit</a>(virtualNetworkID, { ...params }) -> VirtualNetwork</code>
+- <code title="get /accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">get</a>(virtualNetworkID, { ...params }) -> VirtualNetwork</code>
+
+### Subnets
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/networks/subnets/subnets.ts">SubnetListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/zerotrust/subnets">client.zeroTrust.networks.subnets.<a href="./src/resources/zero-trust/networks/subnets/subnets.ts">list</a>({ ...params }) -> SubnetListResponsesV4PagePaginationArray</code>
+
+#### CloudflareSource
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/networks/subnets/cloudflare-source.ts">CloudflareSourceUpdateResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/zerotrust/subnets/cloudflare_source/{address_family}">client.zeroTrust.networks.subnets.cloudflareSource.<a href="./src/resources/zero-trust/networks/subnets/cloudflare-source.ts">update</a>(addressFamily, { ...params }) -> CloudflareSourceUpdateResponse</code>
+
+### HostnameRoutes
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/networks/hostname-routes.ts">HostnameRoute</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/zerotrust/routes/hostname">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">create</a>({ ...params }) -> HostnameRoute</code>
+- <code title="get /accounts/{account_id}/zerotrust/routes/hostname">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">list</a>({ ...params }) -> HostnameRoutesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">delete</a>(hostnameRouteID, { ...params }) -> HostnameRoute</code>
+- <code title="patch /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">edit</a>(hostnameRouteID, { ...params }) -> HostnameRoute</code>
+- <code title="get /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">get</a>(hostnameRouteID, { ...params }) -> HostnameRoute</code>
+
+## RiskScoring
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/risk-scoring/risk-scoring.ts">RiskScoringGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/risk-scoring/risk-scoring.ts">RiskScoringResetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/zt_risk_scoring/{user_id}">client.zeroTrust.riskScoring.<a href="./src/resources/zero-trust/risk-scoring/risk-scoring.ts">get</a>(userID, { ...params }) -> RiskScoringGetResponse</code>
+- <code title="post /accounts/{account_id}/zt_risk_scoring/{user_id}/reset">client.zeroTrust.riskScoring.<a href="./src/resources/zero-trust/risk-scoring/risk-scoring.ts">reset</a>(userID, { ...params }) -> RiskScoringResetResponse | null</code>
+
+### Behaviours
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/risk-scoring/behaviours.ts">BehaviourUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/risk-scoring/behaviours.ts">BehaviourGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/zt_risk_scoring/behaviors">client.zeroTrust.riskScoring.behaviours.<a href="./src/resources/zero-trust/risk-scoring/behaviours.ts">update</a>({ ...params }) -> BehaviourUpdateResponse</code>
+- <code title="get /accounts/{account_id}/zt_risk_scoring/behaviors">client.zeroTrust.riskScoring.behaviours.<a href="./src/resources/zero-trust/risk-scoring/behaviours.ts">get</a>({ ...params }) -> BehaviourGetResponse</code>
+
+### Summary
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/risk-scoring/summary.ts">SummaryGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/zt_risk_scoring/summary">client.zeroTrust.riskScoring.summary.<a href="./src/resources/zero-trust/risk-scoring/summary.ts">get</a>({ ...params }) -> SummaryGetResponse</code>
+
+### Integrations
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/risk-scoring/integrations/integrations.ts">IntegrationCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/risk-scoring/integrations/integrations.ts">IntegrationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/risk-scoring/integrations/integrations.ts">IntegrationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/risk-scoring/integrations/integrations.ts">IntegrationDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/risk-scoring/integrations/integrations.ts">IntegrationGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/zt_risk_scoring/integrations">client.zeroTrust.riskScoring.integrations.<a href="./src/resources/zero-trust/risk-scoring/integrations/integrations.ts">create</a>({ ...params }) -> IntegrationCreateResponse</code>
+- <code title="put /accounts/{account_id}/zt_risk_scoring/integrations/{integration_id}">client.zeroTrust.riskScoring.integrations.<a href="./src/resources/zero-trust/risk-scoring/integrations/integrations.ts">update</a>(integrationID, { ...params }) -> IntegrationUpdateResponse</code>
+- <code title="get /accounts/{account_id}/zt_risk_scoring/integrations">client.zeroTrust.riskScoring.integrations.<a href="./src/resources/zero-trust/risk-scoring/integrations/integrations.ts">list</a>({ ...params }) -> IntegrationListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/zt_risk_scoring/integrations/{integration_id}">client.zeroTrust.riskScoring.integrations.<a href="./src/resources/zero-trust/risk-scoring/integrations/integrations.ts">delete</a>(integrationID, { ...params }) -> IntegrationDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/zt_risk_scoring/integrations/{integration_id}">client.zeroTrust.riskScoring.integrations.<a href="./src/resources/zero-trust/risk-scoring/integrations/integrations.ts">get</a>(integrationID, { ...params }) -> IntegrationGetResponse</code>
+
+#### References
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/risk-scoring/integrations/references.ts">ReferenceGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/zt_risk_scoring/integrations/reference_id/{reference_id}">client.zeroTrust.riskScoring.integrations.references.<a href="./src/resources/zero-trust/risk-scoring/integrations/references.ts">get</a>(referenceID, { ...params }) -> ReferenceGetResponse</code>
+
+# Turnstile
+
+## Widgets
+
+Types:
+
+- <code><a href="./src/resources/turnstile/widgets.ts">Widget</a></code>
+- <code><a href="./src/resources/turnstile/widgets.ts">WidgetDomain</a></code>
+- <code><a href="./src/resources/turnstile/widgets.ts">WidgetListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/challenges/widgets">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">create</a>({ ...params }) -> Widget</code>
+- <code title="put /accounts/{account_id}/challenges/widgets/{sitekey}">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">update</a>(sitekey, { ...params }) -> Widget</code>
+- <code title="get /accounts/{account_id}/challenges/widgets">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">list</a>({ ...params }) -> WidgetListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/challenges/widgets/{sitekey}">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">delete</a>(sitekey, { ...params }) -> Widget</code>
+- <code title="get /accounts/{account_id}/challenges/widgets/{sitekey}">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">get</a>(sitekey, { ...params }) -> Widget</code>
+- <code title="post /accounts/{account_id}/challenges/widgets/{sitekey}/rotate_secret">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">rotateSecret</a>(sitekey, { ...params }) -> Widget</code>
+
+# Connectivity
+
+## Directory
+
+### Services
+
+Types:
+
+- <code><a href="./src/resources/connectivity/directory/services.ts">ServiceCreateResponse</a></code>
+- <code><a href="./src/resources/connectivity/directory/services.ts">ServiceUpdateResponse</a></code>
+- <code><a href="./src/resources/connectivity/directory/services.ts">ServiceListResponse</a></code>
+- <code><a href="./src/resources/connectivity/directory/services.ts">ServiceGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/connectivity/directory/services">client.connectivity.directory.services.<a href="./src/resources/connectivity/directory/services.ts">create</a>({ ...params }) -> ServiceCreateResponse</code>
+- <code title="put /accounts/{account_id}/connectivity/directory/services/{service_id}">client.connectivity.directory.services.<a href="./src/resources/connectivity/directory/services.ts">update</a>(serviceID, { ...params }) -> ServiceUpdateResponse</code>
+- <code title="get /accounts/{account_id}/connectivity/directory/services">client.connectivity.directory.services.<a href="./src/resources/connectivity/directory/services.ts">list</a>({ ...params }) -> ServiceListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/connectivity/directory/services/{service_id}">client.connectivity.directory.services.<a href="./src/resources/connectivity/directory/services.ts">delete</a>(serviceID, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/connectivity/directory/services/{service_id}">client.connectivity.directory.services.<a href="./src/resources/connectivity/directory/services.ts">get</a>(serviceID, { ...params }) -> ServiceGetResponse</code>
+
+# Hyperdrive
+
+Types:
+
+- <code><a href="./src/resources/hyperdrive/hyperdrive.ts">Configuration</a></code>
+- <code><a href="./src/resources/hyperdrive/hyperdrive.ts">Hyperdrive</a></code>
+
+## Configs
+
+Types:
+
+- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">create</a>({ ...params }) -> Hyperdrive</code>
+- <code title="put /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">update</a>(hyperdriveID, { ...params }) -> Hyperdrive</code>
+- <code title="get /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">list</a>({ ...params }) -> HyperdrivesSinglePage</code>
+- <code title="delete /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">delete</a>(hyperdriveID, { ...params }) -> ConfigDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">edit</a>(hyperdriveID, { ...params }) -> Hyperdrive</code>
+- <code title="get /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">get</a>(hyperdriveID, { ...params }) -> Hyperdrive</code>
+
+# RUM
+
+## SiteInfo
+
+Types:
+
+- <code><a href="./src/resources/rum/site-info.ts">Site</a></code>
+- <code><a href="./src/resources/rum/site-info.ts">SiteInfoDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/rum/site_info">client.rum.siteInfo.<a href="./src/resources/rum/site-info.ts">create</a>({ ...params }) -> Site</code>
+- <code title="put /accounts/{account_id}/rum/site_info/{site_id}">client.rum.siteInfo.<a href="./src/resources/rum/site-info.ts">update</a>(siteID, { ...params }) -> Site</code>
+- <code title="get /accounts/{account_id}/rum/site_info/list">client.rum.siteInfo.<a href="./src/resources/rum/site-info.ts">list</a>({ ...params }) -> SitesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/rum/site_info/{site_id}">client.rum.siteInfo.<a href="./src/resources/rum/site-info.ts">delete</a>(siteID, { ...params }) -> SiteInfoDeleteResponse</code>
+- <code title="get /accounts/{account_id}/rum/site_info/{site_id}">client.rum.siteInfo.<a href="./src/resources/rum/site-info.ts">get</a>(siteID, { ...params }) -> Site</code>
+
+## Rules
+
+Types:
+
+- <code><a href="./src/resources/rum/rules.ts">RUMRule</a></code>
+- <code><a href="./src/resources/rum/rules.ts">RuleListResponse</a></code>
+- <code><a href="./src/resources/rum/rules.ts">RuleDeleteResponse</a></code>
+- <code><a href="./src/resources/rum/rules.ts">RuleBulkCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/rum/v2/{ruleset_id}/rule">client.rum.rules.<a href="./src/resources/rum/rules.ts">create</a>(rulesetID, { ...params }) -> RUMRule</code>
+- <code title="put /accounts/{account_id}/rum/v2/{ruleset_id}/rule/{rule_id}">client.rum.rules.<a href="./src/resources/rum/rules.ts">update</a>(ruleID, { ...params }) -> RUMRule</code>
+- <code title="get /accounts/{account_id}/rum/v2/{ruleset_id}/rules">client.rum.rules.<a href="./src/resources/rum/rules.ts">list</a>(rulesetID, { ...params }) -> RuleListResponse</code>
+- <code title="delete /accounts/{account_id}/rum/v2/{ruleset_id}/rule/{rule_id}">client.rum.rules.<a href="./src/resources/rum/rules.ts">delete</a>(ruleID, { ...params }) -> RuleDeleteResponse</code>
+- <code title="post /accounts/{account_id}/rum/v2/{ruleset_id}/rules">client.rum.rules.<a href="./src/resources/rum/rules.ts">bulkCreate</a>(rulesetID, { ...params }) -> RuleBulkCreateResponse</code>
+
+# Vectorize
+
+## Indexes
+
+Types:
+
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">CreateIndex</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexDeleteVectorsByID</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexDimensionConfiguration</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexInsert</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexQuery</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexUpsert</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexDeleteResponse</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexDeleteByIDsResponse</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexGetByIDsResponse</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexInfoResponse</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexInsertResponse</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexListVectorsResponse</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexQueryResponse</a></code>
+- <code><a href="./src/resources/vectorize/indexes/indexes.ts">IndexUpsertResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/vectorize/v2/indexes">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">create</a>({ ...params }) -> CreateIndex | null</code>
+- <code title="get /accounts/{account_id}/vectorize/v2/indexes">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">list</a>({ ...params }) -> CreateIndicesSinglePage</code>
+- <code title="delete /accounts/{account_id}/vectorize/v2/indexes/{index_name}">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">delete</a>(indexName, { ...params }) -> IndexDeleteResponse | null</code>
+- <code title="post /accounts/{account_id}/vectorize/v2/indexes/{index_name}/delete_by_ids">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">deleteByIDs</a>(indexName, { ...params }) -> IndexDeleteByIDsResponse | null</code>
+- <code title="get /accounts/{account_id}/vectorize/v2/indexes/{index_name}">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">get</a>(indexName, { ...params }) -> CreateIndex | null</code>
+- <code title="post /accounts/{account_id}/vectorize/v2/indexes/{index_name}/get_by_ids">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">getByIDs</a>(indexName, { ...params }) -> IndexGetByIDsResponse | null</code>
+- <code title="get /accounts/{account_id}/vectorize/v2/indexes/{index_name}/info">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">info</a>(indexName, { ...params }) -> IndexInfoResponse | null</code>
+- <code title="post /accounts/{account_id}/vectorize/v2/indexes/{index_name}/insert">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">insert</a>(indexName, { ...params }) -> IndexInsertResponse | null</code>
+- <code title="get /accounts/{account_id}/vectorize/v2/indexes/{index_name}/list">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">listVectors</a>(indexName, { ...params }) -> IndexListVectorsResponse | null</code>
+- <code title="post /accounts/{account_id}/vectorize/v2/indexes/{index_name}/query">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">query</a>(indexName, { ...params }) -> IndexQueryResponse | null</code>
+- <code title="post /accounts/{account_id}/vectorize/v2/indexes/{index_name}/upsert">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes/indexes.ts">upsert</a>(indexName, { ...params }) -> IndexUpsertResponse | null</code>
+
+### MetadataIndex
+
+Types:
+
+- <code><a href="./src/resources/vectorize/indexes/metadata-index.ts">MetadataIndexCreateResponse</a></code>
+- <code><a href="./src/resources/vectorize/indexes/metadata-index.ts">MetadataIndexListResponse</a></code>
+- <code><a href="./src/resources/vectorize/indexes/metadata-index.ts">MetadataIndexDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/vectorize/v2/indexes/{index_name}/metadata_index/create">client.vectorize.indexes.metadataIndex.<a href="./src/resources/vectorize/indexes/metadata-index.ts">create</a>(indexName, { ...params }) -> MetadataIndexCreateResponse | null</code>
+- <code title="get /accounts/{account_id}/vectorize/v2/indexes/{index_name}/metadata_index/list">client.vectorize.indexes.metadataIndex.<a href="./src/resources/vectorize/indexes/metadata-index.ts">list</a>(indexName, { ...params }) -> MetadataIndexListResponse | null</code>
+- <code title="post /accounts/{account_id}/vectorize/v2/indexes/{index_name}/metadata_index/delete">client.vectorize.indexes.metadataIndex.<a href="./src/resources/vectorize/indexes/metadata-index.ts">delete</a>(indexName, { ...params }) -> MetadataIndexDeleteResponse | null</code>
+
+# URLScanner
+
+Types:
+
+- <code><a href="./src/resources/url-scanner/url-scanner.ts">URLScannerDomain</a></code>
+- <code><a href="./src/resources/url-scanner/url-scanner.ts">URLScannerTask</a></code>
+
+## Responses
+
+Types:
+
+- <code><a href="./src/resources/url-scanner/responses.ts">ResponseGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/urlscanner/v2/responses/{response_id}">client.urlScanner.responses.<a href="./src/resources/url-scanner/responses.ts">get</a>(responseID, { ...params }) -> string</code>
+
+## Scans
+
+Types:
+
+- <code><a href="./src/resources/url-scanner/scans.ts">ScanCreateResponse</a></code>
+- <code><a href="./src/resources/url-scanner/scans.ts">ScanListResponse</a></code>
+- <code><a href="./src/resources/url-scanner/scans.ts">ScanBulkCreateResponse</a></code>
+- <code><a href="./src/resources/url-scanner/scans.ts">ScanDOMResponse</a></code>
+- <code><a href="./src/resources/url-scanner/scans.ts">ScanGetResponse</a></code>
+- <code><a href="./src/resources/url-scanner/scans.ts">ScanHARResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/urlscanner/v2/scan">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">create</a>({ ...params }) -> ScanCreateResponse</code>
+- <code title="get /accounts/{account_id}/urlscanner/v2/search">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">list</a>({ ...params }) -> ScanListResponse</code>
+- <code title="post /accounts/{account_id}/urlscanner/v2/bulk">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">bulkCreate</a>([ ...body ]) -> ScanBulkCreateResponse</code>
+- <code title="get /accounts/{account_id}/urlscanner/v2/dom/{scan_id}">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">dom</a>(scanID, { ...params }) -> string</code>
+- <code title="get /accounts/{account_id}/urlscanner/v2/result/{scan_id}">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">get</a>(scanID, { ...params }) -> ScanGetResponse</code>
+- <code title="get /accounts/{account_id}/urlscanner/v2/har/{scan_id}">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">har</a>(scanID, { ...params }) -> ScanHARResponse</code>
+- <code title="get /accounts/{account_id}/urlscanner/v2/screenshots/{scan_id}.png">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">screenshot</a>(scanID, { ...params }) -> Response</code>
+
+# Radar
+
+## AI
+
+### ToMarkdown
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/to-markdown.ts">ToMarkdownCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai/tomarkdown">client.radar.ai.toMarkdown.<a href="./src/resources/radar/ai/to-markdown.ts">create</a>(body, { ...params }) -> ToMarkdownCreateResponsesSinglePage</code>
+
+### Inference
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/inference/inference.ts">InferenceSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/ai/inference/inference.ts">InferenceTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/inference/summary/{dimension}">client.radar.ai.inference.<a href="./src/resources/radar/ai/inference/inference.ts">summaryV2</a>(dimension, { ...params }) -> InferenceSummaryV2Response</code>
+- <code title="get /radar/ai/inference/timeseries_groups/{dimension}">client.radar.ai.inference.<a href="./src/resources/radar/ai/inference/inference.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> InferenceTimeseriesGroupsV2Response</code>
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/inference/summary.ts">SummaryModelResponse</a></code>
+- <code><a href="./src/resources/radar/ai/inference/summary.ts">SummaryTaskResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/inference/summary/model">client.radar.ai.inference.summary.<a href="./src/resources/radar/ai/inference/summary.ts">model</a>({ ...params }) -> SummaryModelResponse</code>
+- <code title="get /radar/ai/inference/summary/task">client.radar.ai.inference.summary.<a href="./src/resources/radar/ai/inference/summary.ts">task</a>({ ...params }) -> SummaryTaskResponse</code>
+
+#### TimeseriesGroups
+
+##### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/inference/timeseries-groups/summary.ts">SummaryModelResponse</a></code>
+- <code><a href="./src/resources/radar/ai/inference/timeseries-groups/summary.ts">SummaryTaskResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/inference/timeseries_groups/model">client.radar.ai.inference.timeseriesGroups.summary.<a href="./src/resources/radar/ai/inference/timeseries-groups/summary.ts">model</a>({ ...params }) -> SummaryModelResponse</code>
+- <code title="get /radar/ai/inference/timeseries_groups/task">client.radar.ai.inference.timeseriesGroups.summary.<a href="./src/resources/radar/ai/inference/timeseries-groups/summary.ts">task</a>({ ...params }) -> SummaryTaskResponse</code>
+
+### Bots
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/bots/bots.ts">BotSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/ai/bots/bots.ts">BotTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/ai/bots/bots.ts">BotTimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/bots/summary/{dimension}">client.radar.ai.bots.<a href="./src/resources/radar/ai/bots/bots.ts">summaryV2</a>(dimension, { ...params }) -> BotSummaryV2Response</code>
+- <code title="get /radar/ai/bots/timeseries">client.radar.ai.bots.<a href="./src/resources/radar/ai/bots/bots.ts">timeseries</a>({ ...params }) -> BotTimeseriesResponse</code>
+- <code title="get /radar/ai/bots/timeseries_groups/{dimension}">client.radar.ai.bots.<a href="./src/resources/radar/ai/bots/bots.ts">timeseriesGroups</a>(dimension, { ...params }) -> BotTimeseriesGroupsResponse</code>
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/bots/summary.ts">SummaryUserAgentResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/bots/summary/user_agent">client.radar.ai.bots.summary.<a href="./src/resources/radar/ai/bots/summary.ts">userAgent</a>({ ...params }) -> SummaryUserAgentResponse</code>
+
+### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/timeseries-groups.ts">TimeseriesGroupSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/ai/timeseries-groups.ts">TimeseriesGroupTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/ai/timeseries-groups.ts">TimeseriesGroupTimeseriesGroupsResponse</a></code>
+- <code><a href="./src/resources/radar/ai/timeseries-groups.ts">TimeseriesGroupUserAgentResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/bots/summary/{dimension}">client.radar.ai.timeseriesGroups.<a href="./src/resources/radar/ai/timeseries-groups.ts">summary</a>(dimension, { ...params }) -> TimeseriesGroupSummaryResponse</code>
+- <code title="get /radar/ai/bots/timeseries">client.radar.ai.timeseriesGroups.<a href="./src/resources/radar/ai/timeseries-groups.ts">timeseries</a>({ ...params }) -> TimeseriesGroupTimeseriesResponse</code>
+- <code title="get /radar/ai/bots/timeseries_groups/{dimension}">client.radar.ai.timeseriesGroups.<a href="./src/resources/radar/ai/timeseries-groups.ts">timeseriesGroups</a>(dimension, { ...params }) -> TimeseriesGroupTimeseriesGroupsResponse</code>
+- <code title="get /radar/ai/bots/timeseries_groups/user_agent">client.radar.ai.timeseriesGroups.<a href="./src/resources/radar/ai/timeseries-groups.ts">userAgent</a>({ ...params }) -> TimeseriesGroupUserAgentResponse</code>
+
+## Ct
+
+Types:
+
+- <code><a href="./src/resources/radar/ct/ct.ts">CtSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/ct/ct.ts">CtTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/ct/ct.ts">CtTimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ct/summary/{dimension}">client.radar.ct.<a href="./src/resources/radar/ct/ct.ts">summary</a>(dimension, { ...params }) -> CtSummaryResponse</code>
+- <code title="get /radar/ct/timeseries">client.radar.ct.<a href="./src/resources/radar/ct/ct.ts">timeseries</a>({ ...params }) -> CtTimeseriesResponse</code>
+- <code title="get /radar/ct/timeseries_groups/{dimension}">client.radar.ct.<a href="./src/resources/radar/ct/ct.ts">timeseriesGroups</a>(dimension, { ...params }) -> CtTimeseriesGroupsResponse</code>
+
+### Authorities
+
+Types:
+
+- <code><a href="./src/resources/radar/ct/authorities.ts">AuthorityListResponse</a></code>
+- <code><a href="./src/resources/radar/ct/authorities.ts">AuthorityGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ct/authorities">client.radar.ct.authorities.<a href="./src/resources/radar/ct/authorities.ts">list</a>({ ...params }) -> AuthorityListResponse</code>
+- <code title="get /radar/ct/authorities/{ca_slug}">client.radar.ct.authorities.<a href="./src/resources/radar/ct/authorities.ts">get</a>(caSlug, { ...params }) -> AuthorityGetResponse</code>
+
+### Logs
+
+Types:
+
+- <code><a href="./src/resources/radar/ct/logs.ts">LogListResponse</a></code>
+- <code><a href="./src/resources/radar/ct/logs.ts">LogGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ct/logs">client.radar.ct.logs.<a href="./src/resources/radar/ct/logs.ts">list</a>({ ...params }) -> LogListResponse</code>
+- <code title="get /radar/ct/logs/{log_slug}">client.radar.ct.logs.<a href="./src/resources/radar/ct/logs.ts">get</a>(logSlug, { ...params }) -> LogGetResponse</code>
+
+## Annotations
+
+Types:
+
+- <code><a href="./src/resources/radar/annotations/annotations.ts">AnnotationListResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/annotations">client.radar.annotations.<a href="./src/resources/radar/annotations/annotations.ts">list</a>({ ...params }) -> AnnotationListResponse</code>
+
+### Outages
+
+Types:
+
+- <code><a href="./src/resources/radar/annotations/outages.ts">OutageGetResponse</a></code>
+- <code><a href="./src/resources/radar/annotations/outages.ts">OutageLocationsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/annotations/outages">client.radar.annotations.outages.<a href="./src/resources/radar/annotations/outages.ts">get</a>({ ...params }) -> OutageGetResponse</code>
+- <code title="get /radar/annotations/outages/locations">client.radar.annotations.outages.<a href="./src/resources/radar/annotations/outages.ts">locations</a>({ ...params }) -> OutageLocationsResponse</code>
+
+## BGP
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/bgp.ts">BGPTimeseriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/timeseries">client.radar.bgp.<a href="./src/resources/radar/bgp/bgp.ts">timeseries</a>({ ...params }) -> BGPTimeseriesResponse</code>
+
+### Leaks
+
+#### Events
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/leaks/events.ts">EventListResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/leaks/events">client.radar.bgp.leaks.events.<a href="./src/resources/radar/bgp/leaks/events.ts">list</a>({ ...params }) -> EventListResponsesV4PagePagination</code>
+
+### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/top/top.ts">TopPrefixesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/top/prefixes">client.radar.bgp.top.<a href="./src/resources/radar/bgp/top/top.ts">prefixes</a>({ ...params }) -> TopPrefixesResponse</code>
+
+#### Ases
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/top/ases.ts">AseGetResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/top/ases.ts">AsePrefixesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/top/ases">client.radar.bgp.top.ases.<a href="./src/resources/radar/bgp/top/ases.ts">get</a>({ ...params }) -> AseGetResponse</code>
+- <code title="get /radar/bgp/top/ases/prefixes">client.radar.bgp.top.ases.<a href="./src/resources/radar/bgp/top/ases.ts">prefixes</a>({ ...params }) -> AsePrefixesResponse</code>
+
+### Hijacks
+
+#### Events
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/hijacks/events.ts">EventListResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/hijacks/events">client.radar.bgp.hijacks.events.<a href="./src/resources/radar/bgp/hijacks/events.ts">list</a>({ ...params }) -> EventListResponsesV4PagePagination</code>
+
+### Routes
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/routes.ts">RouteAsesResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes.ts">RouteMoasResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes.ts">RoutePfx2asResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes.ts">RouteRealtimeResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes.ts">RouteStatsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/routes/ases">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">ases</a>({ ...params }) -> RouteAsesResponse</code>
+- <code title="get /radar/bgp/routes/moas">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">moas</a>({ ...params }) -> RouteMoasResponse</code>
+- <code title="get /radar/bgp/routes/pfx2as">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">pfx2as</a>({ ...params }) -> RoutePfx2asResponse</code>
+- <code title="get /radar/bgp/routes/realtime">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">realtime</a>({ ...params }) -> RouteRealtimeResponse</code>
+- <code title="get /radar/bgp/routes/stats">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">stats</a>({ ...params }) -> RouteStatsResponse</code>
+
+### IPs
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/ips.ts">IPTimeseriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/ips/timeseries">client.radar.bgp.ips.<a href="./src/resources/radar/bgp/ips.ts">timeseries</a>({ ...params }) -> IPTimeseriesResponse</code>
+
+## Bots
+
+Types:
+
+- <code><a href="./src/resources/radar/bots/bots.ts">BotListResponse</a></code>
+- <code><a href="./src/resources/radar/bots/bots.ts">BotGetResponse</a></code>
+- <code><a href="./src/resources/radar/bots/bots.ts">BotSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/bots/bots.ts">BotTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/bots/bots.ts">BotTimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bots">client.radar.bots.<a href="./src/resources/radar/bots/bots.ts">list</a>({ ...params }) -> BotListResponse</code>
+- <code title="get /radar/bots/{bot_slug}">client.radar.bots.<a href="./src/resources/radar/bots/bots.ts">get</a>(botSlug, { ...params }) -> BotGetResponse</code>
+- <code title="get /radar/bots/summary/{dimension}">client.radar.bots.<a href="./src/resources/radar/bots/bots.ts">summary</a>(dimension, { ...params }) -> BotSummaryResponse</code>
+- <code title="get /radar/bots/timeseries">client.radar.bots.<a href="./src/resources/radar/bots/bots.ts">timeseries</a>({ ...params }) -> BotTimeseriesResponse</code>
+- <code title="get /radar/bots/timeseries_groups/{dimension}">client.radar.bots.<a href="./src/resources/radar/bots/bots.ts">timeseriesGroups</a>(dimension, { ...params }) -> BotTimeseriesGroupsResponse</code>
+
+### WebCrawlers
+
+Types:
+
+- <code><a href="./src/resources/radar/bots/web-crawlers.ts">WebCrawlerSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/bots/web-crawlers.ts">WebCrawlerTimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bots/crawlers/summary/{dimension}">client.radar.bots.webCrawlers.<a href="./src/resources/radar/bots/web-crawlers.ts">summary</a>(dimension, { ...params }) -> WebCrawlerSummaryResponse</code>
+- <code title="get /radar/bots/crawlers/timeseries_groups/{dimension}">client.radar.bots.webCrawlers.<a href="./src/resources/radar/bots/web-crawlers.ts">timeseriesGroups</a>(dimension, { ...params }) -> WebCrawlerTimeseriesGroupsResponse</code>
+
+## Datasets
+
+Types:
+
+- <code><a href="./src/resources/radar/datasets.ts">DatasetListResponse</a></code>
+- <code><a href="./src/resources/radar/datasets.ts">DatasetDownloadResponse</a></code>
+- <code><a href="./src/resources/radar/datasets.ts">DatasetGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/datasets">client.radar.datasets.<a href="./src/resources/radar/datasets.ts">list</a>({ ...params }) -> DatasetListResponse</code>
+- <code title="post /radar/datasets/download">client.radar.datasets.<a href="./src/resources/radar/datasets.ts">download</a>({ ...params }) -> DatasetDownloadResponse</code>
+- <code title="get /radar/datasets/{alias}">client.radar.datasets.<a href="./src/resources/radar/datasets.ts">get</a>(alias) -> string</code>
+
+## DNS
+
+Types:
+
+- <code><a href="./src/resources/radar/dns/dns.ts">DNSSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/dns/dns.ts">DNSTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/dns/dns.ts">DNSTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/dns/summary/{dimension}">client.radar.dns.<a href="./src/resources/radar/dns/dns.ts">summaryV2</a>(dimension, { ...params }) -> DNSSummaryV2Response</code>
+- <code title="get /radar/dns/timeseries">client.radar.dns.<a href="./src/resources/radar/dns/dns.ts">timeseries</a>({ ...params }) -> DNSTimeseriesResponse</code>
+- <code title="get /radar/dns/timeseries_groups/{dimension}">client.radar.dns.<a href="./src/resources/radar/dns/dns.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> DNSTimeseriesGroupsV2Response</code>
+
+### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/dns/top.ts">TopAsesResponse</a></code>
+- <code><a href="./src/resources/radar/dns/top.ts">TopLocationsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/dns/top/ases">client.radar.dns.top.<a href="./src/resources/radar/dns/top.ts">ases</a>({ ...params }) -> TopAsesResponse</code>
+- <code title="get /radar/dns/top/locations">client.radar.dns.top.<a href="./src/resources/radar/dns/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
+
+### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryCacheHitResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryDNSSECAwareResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryDNSSECE2EResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryMatchingAnswerResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryQueryTypeResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryResponseCodeResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryResponseTTLResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/dns/summary/cache_hit">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">cacheHit</a>({ ...params }) -> SummaryCacheHitResponse</code>
+- <code title="get /radar/dns/summary/dnssec">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">dnssec</a>({ ...params }) -> SummaryDNSSECResponse</code>
+- <code title="get /radar/dns/summary/dnssec_aware">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">dnssecAware</a>({ ...params }) -> SummaryDNSSECAwareResponse</code>
+- <code title="get /radar/dns/summary/dnssec_e2e">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">dnssecE2E</a>({ ...params }) -> SummaryDNSSECE2EResponse</code>
+- <code title="get /radar/dns/summary/ip_version">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/dns/summary/matching_answer">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">matchingAnswer</a>({ ...params }) -> SummaryMatchingAnswerResponse</code>
+- <code title="get /radar/dns/summary/protocol">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">protocol</a>({ ...params }) -> SummaryProtocolResponse</code>
+- <code title="get /radar/dns/summary/query_type">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">queryType</a>({ ...params }) -> SummaryQueryTypeResponse</code>
+- <code title="get /radar/dns/summary/response_code">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">responseCode</a>({ ...params }) -> SummaryResponseCodeResponse</code>
+- <code title="get /radar/dns/summary/response_ttl">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">responseTTL</a>({ ...params }) -> SummaryResponseTTLResponse</code>
+
+### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupCacheHitResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupDNSSECAwareResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupDNSSECE2EResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupMatchingAnswerResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupQueryTypeResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupResponseCodeResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupResponseTTLResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/dns/timeseries_groups/cache_hit">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">cacheHit</a>({ ...params }) -> TimeseriesGroupCacheHitResponse</code>
+- <code title="get /radar/dns/timeseries_groups/dnssec">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">dnssec</a>({ ...params }) -> TimeseriesGroupDNSSECResponse</code>
+- <code title="get /radar/dns/timeseries_groups/dnssec_aware">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">dnssecAware</a>({ ...params }) -> TimeseriesGroupDNSSECAwareResponse</code>
+- <code title="get /radar/dns/timeseries_groups/dnssec_e2e">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">dnssecE2E</a>({ ...params }) -> TimeseriesGroupDNSSECE2EResponse</code>
+- <code title="get /radar/dns/timeseries_groups/ip_version">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/dns/timeseries_groups/matching_answer">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">matchingAnswer</a>({ ...params }) -> TimeseriesGroupMatchingAnswerResponse</code>
+- <code title="get /radar/dns/timeseries_groups/protocol">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">protocol</a>({ ...params }) -> TimeseriesGroupProtocolResponse</code>
+- <code title="get /radar/dns/timeseries_groups/query_type">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">queryType</a>({ ...params }) -> TimeseriesGroupQueryTypeResponse</code>
+- <code title="get /radar/dns/timeseries_groups/response_code">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">responseCode</a>({ ...params }) -> TimeseriesGroupResponseCodeResponse</code>
+- <code title="get /radar/dns/timeseries_groups/response_ttl">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">responseTTL</a>({ ...params }) -> TimeseriesGroupResponseTTLResponse</code>
+
+## Netflows
+
+Types:
+
+- <code><a href="./src/resources/radar/netflows/netflows.ts">NetflowSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/netflows/netflows.ts">NetflowSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/netflows/netflows.ts">NetflowTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/netflows/netflows.ts">NetflowTimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/netflows/summary">client.radar.netflows.<a href="./src/resources/radar/netflows/netflows.ts">summary</a>({ ...params }) -> NetflowSummaryResponse</code>
+- <code title="get /radar/netflows/summary/{dimension}">client.radar.netflows.<a href="./src/resources/radar/netflows/netflows.ts">summaryV2</a>(dimension, { ...params }) -> NetflowSummaryV2Response</code>
+- <code title="get /radar/netflows/timeseries">client.radar.netflows.<a href="./src/resources/radar/netflows/netflows.ts">timeseries</a>({ ...params }) -> NetflowTimeseriesResponse</code>
+- <code title="get /radar/netflows/timeseries_groups/{dimension}">client.radar.netflows.<a href="./src/resources/radar/netflows/netflows.ts">timeseriesGroups</a>(dimension, { ...params }) -> NetflowTimeseriesGroupsResponse</code>
+
+### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/netflows/top.ts">TopAsesResponse</a></code>
+- <code><a href="./src/resources/radar/netflows/top.ts">TopLocationsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/netflows/top/ases">client.radar.netflows.top.<a href="./src/resources/radar/netflows/top.ts">ases</a>({ ...params }) -> TopAsesResponse</code>
+- <code title="get /radar/netflows/top/locations">client.radar.netflows.top.<a href="./src/resources/radar/netflows/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
+
+## Search
+
+Types:
+
+- <code><a href="./src/resources/radar/search.ts">SearchGlobalResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/search/global">client.radar.search.<a href="./src/resources/radar/search.ts">global</a>({ ...params }) -> SearchGlobalResponse</code>
+
+## VerifiedBots
+
+### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/verified-bots/top.ts">TopBotsResponse</a></code>
+- <code><a href="./src/resources/radar/verified-bots/top.ts">TopCategoriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/verified_bots/top/bots">client.radar.verifiedBots.top.<a href="./src/resources/radar/verified-bots/top.ts">bots</a>({ ...params }) -> TopBotsResponse</code>
+- <code title="get /radar/verified_bots/top/categories">client.radar.verifiedBots.top.<a href="./src/resources/radar/verified-bots/top.ts">categories</a>({ ...params }) -> TopCategoriesResponse</code>
+
+## AS112
+
+Types:
+
+- <code><a href="./src/resources/radar/as112/as112.ts">AS112SummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/as112/as112.ts">AS112TimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/as112/as112.ts">AS112TimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/as112/summary/{dimension}">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">summaryV2</a>(dimension, { ...params }) -> AS112SummaryV2Response</code>
+- <code title="get /radar/as112/timeseries">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">timeseries</a>({ ...params }) -> AS112TimeseriesResponse</code>
+- <code title="get /radar/as112/timeseries_groups/{dimension}">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> AS112TimeseriesGroupsV2Response</code>
+
+### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryEdnsResponse</a></code>
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryQueryTypeResponse</a></code>
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryResponseCodesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/as112/summary/dnssec">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">dnssec</a>({ ...params }) -> SummaryDNSSECResponse</code>
+- <code title="get /radar/as112/summary/edns">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">edns</a>({ ...params }) -> SummaryEdnsResponse</code>
+- <code title="get /radar/as112/summary/ip_version">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/as112/summary/protocol">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">protocol</a>({ ...params }) -> SummaryProtocolResponse</code>
+- <code title="get /radar/as112/summary/query_type">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">queryType</a>({ ...params }) -> SummaryQueryTypeResponse</code>
+- <code title="get /radar/as112/summary/response_codes">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">responseCodes</a>({ ...params }) -> SummaryResponseCodesResponse</code>
+
+### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupEdnsResponse</a></code>
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupQueryTypeResponse</a></code>
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupResponseCodesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/as112/timeseries_groups/dnssec">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">dnssec</a>({ ...params }) -> TimeseriesGroupDNSSECResponse</code>
+- <code title="get /radar/as112/timeseries_groups/edns">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">edns</a>({ ...params }) -> TimeseriesGroupEdnsResponse</code>
+- <code title="get /radar/as112/timeseries_groups/ip_version">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/as112/timeseries_groups/protocol">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">protocol</a>({ ...params }) -> TimeseriesGroupProtocolResponse</code>
+- <code title="get /radar/as112/timeseries_groups/query_type">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">queryType</a>({ ...params }) -> TimeseriesGroupQueryTypeResponse</code>
+- <code title="get /radar/as112/timeseries_groups/response_codes">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">responseCodes</a>({ ...params }) -> TimeseriesGroupResponseCodesResponse</code>
+
+### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/as112/top.ts">TopDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/as112/top.ts">TopEdnsResponse</a></code>
+- <code><a href="./src/resources/radar/as112/top.ts">TopIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/as112/top.ts">TopLocationsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/as112/top/locations/dnssec/{dnssec}">client.radar.as112.top.<a href="./src/resources/radar/as112/top.ts">dnssec</a>(dnssec, { ...params }) -> TopDNSSECResponse</code>
+- <code title="get /radar/as112/top/locations/edns/{edns}">client.radar.as112.top.<a href="./src/resources/radar/as112/top.ts">edns</a>(edns, { ...params }) -> TopEdnsResponse</code>
+- <code title="get /radar/as112/top/locations/ip_version/{ip_version}">client.radar.as112.top.<a href="./src/resources/radar/as112/top.ts">ipVersion</a>(ipVersion, { ...params }) -> TopIPVersionResponse</code>
+- <code title="get /radar/as112/top/locations">client.radar.as112.top.<a href="./src/resources/radar/as112/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
+
+## Email
+
+Types:
+
+- <code><a href="./src/resources/radar/email/email.ts">RadarEmailSeries</a></code>
+- <code><a href="./src/resources/radar/email/email.ts">RadarEmailSummary</a></code>
+
+### Routing
+
+Types:
+
+- <code><a href="./src/resources/radar/email/routing/routing.ts">RoutingSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/email/routing/routing.ts">RoutingTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/email/routing/summary/{dimension}">client.radar.email.routing.<a href="./src/resources/radar/email/routing/routing.ts">summaryV2</a>(dimension, { ...params }) -> RoutingSummaryV2Response</code>
+- <code title="get /radar/email/routing/timeseries_groups/{dimension}">client.radar.email.routing.<a href="./src/resources/radar/email/routing/routing.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> RoutingTimeseriesGroupsV2Response</code>
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/email/routing/summary.ts">SummaryARCResponse</a></code>
+- <code><a href="./src/resources/radar/email/routing/summary.ts">SummaryDKIMResponse</a></code>
+- <code><a href="./src/resources/radar/email/routing/summary.ts">SummaryDMARCResponse</a></code>
+- <code><a href="./src/resources/radar/email/routing/summary.ts">SummaryEncryptedResponse</a></code>
+- <code><a href="./src/resources/radar/email/routing/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/email/routing/summary.ts">SummarySPFResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/email/routing/summary/arc">client.radar.email.routing.summary.<a href="./src/resources/radar/email/routing/summary.ts">arc</a>({ ...params }) -> SummaryARCResponse</code>
+- <code title="get /radar/email/routing/summary/dkim">client.radar.email.routing.summary.<a href="./src/resources/radar/email/routing/summary.ts">dkim</a>({ ...params }) -> SummaryDKIMResponse</code>
+- <code title="get /radar/email/routing/summary/dmarc">client.radar.email.routing.summary.<a href="./src/resources/radar/email/routing/summary.ts">dmarc</a>({ ...params }) -> SummaryDMARCResponse</code>
+- <code title="get /radar/email/routing/summary/encrypted">client.radar.email.routing.summary.<a href="./src/resources/radar/email/routing/summary.ts">encrypted</a>({ ...params }) -> SummaryEncryptedResponse</code>
+- <code title="get /radar/email/routing/summary/ip_version">client.radar.email.routing.summary.<a href="./src/resources/radar/email/routing/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/email/routing/summary/spf">client.radar.email.routing.summary.<a href="./src/resources/radar/email/routing/summary.ts">spf</a>({ ...params }) -> SummarySPFResponse</code>
+
+#### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/email/routing/timeseries-groups.ts">TimeseriesGroupARCResponse</a></code>
+- <code><a href="./src/resources/radar/email/routing/timeseries-groups.ts">TimeseriesGroupDKIMResponse</a></code>
+- <code><a href="./src/resources/radar/email/routing/timeseries-groups.ts">TimeseriesGroupDMARCResponse</a></code>
+- <code><a href="./src/resources/radar/email/routing/timeseries-groups.ts">TimeseriesGroupEncryptedResponse</a></code>
+- <code><a href="./src/resources/radar/email/routing/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/email/routing/timeseries-groups.ts">TimeseriesGroupSPFResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/email/routing/timeseries_groups/arc">client.radar.email.routing.timeseriesGroups.<a href="./src/resources/radar/email/routing/timeseries-groups.ts">arc</a>({ ...params }) -> TimeseriesGroupARCResponse</code>
+- <code title="get /radar/email/routing/timeseries_groups/dkim">client.radar.email.routing.timeseriesGroups.<a href="./src/resources/radar/email/routing/timeseries-groups.ts">dkim</a>({ ...params }) -> TimeseriesGroupDKIMResponse</code>
+- <code title="get /radar/email/routing/timeseries_groups/dmarc">client.radar.email.routing.timeseriesGroups.<a href="./src/resources/radar/email/routing/timeseries-groups.ts">dmarc</a>({ ...params }) -> TimeseriesGroupDMARCResponse</code>
+- <code title="get /radar/email/routing/timeseries_groups/encrypted">client.radar.email.routing.timeseriesGroups.<a href="./src/resources/radar/email/routing/timeseries-groups.ts">encrypted</a>({ ...params }) -> TimeseriesGroupEncryptedResponse</code>
+- <code title="get /radar/email/routing/timeseries_groups/ip_version">client.radar.email.routing.timeseriesGroups.<a href="./src/resources/radar/email/routing/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/email/routing/timeseries_groups/spf">client.radar.email.routing.timeseriesGroups.<a href="./src/resources/radar/email/routing/timeseries-groups.ts">spf</a>({ ...params }) -> TimeseriesGroupSPFResponse</code>
+
+### Security
+
+Types:
+
+- <code><a href="./src/resources/radar/email/security/security.ts">SecuritySummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/email/security/security.ts">SecurityTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/email/security/summary/{dimension}">client.radar.email.security.<a href="./src/resources/radar/email/security/security.ts">summaryV2</a>(dimension, { ...params }) -> SecuritySummaryV2Response</code>
+- <code title="get /radar/email/security/timeseries_groups/{dimension}">client.radar.email.security.<a href="./src/resources/radar/email/security/security.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> SecurityTimeseriesGroupsV2Response</code>
+
+#### Top
+
+##### Tlds
+
+Types:
+
+- <code><a href="./src/resources/radar/email/security/top/tlds/tlds.ts">TldGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/email/security/top/tlds">client.radar.email.security.top.tlds.<a href="./src/resources/radar/email/security/top/tlds/tlds.ts">get</a>({ ...params }) -> TldGetResponse</code>
+
+###### Malicious
+
+Types:
+
+- <code><a href="./src/resources/radar/email/security/top/tlds/malicious.ts">MaliciousGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/email/security/top/tlds/malicious/{malicious}">client.radar.email.security.top.tlds.malicious.<a href="./src/resources/radar/email/security/top/tlds/malicious.ts">get</a>(malicious, { ...params }) -> MaliciousGetResponse</code>
+
+###### Spam
+
+Types:
+
+- <code><a href="./src/resources/radar/email/security/top/tlds/spam.ts">SpamGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/email/security/top/tlds/spam/{spam}">client.radar.email.security.top.tlds.spam.<a href="./src/resources/radar/email/security/top/tlds/spam.ts">get</a>(spam, { ...params }) -> SpamGetResponse</code>
+
+###### Spoof
+
+Types:
+
+- <code><a href="./src/resources/radar/email/security/top/tlds/spoof.ts">SpoofGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/email/security/top/tlds/spoof/{spoof}">client.radar.email.security.top.tlds.spoof.<a href="./src/resources/radar/email/security/top/tlds/spoof.ts">get</a>(spoof, { ...params }) -> SpoofGetResponse</code>
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummaryARCResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummaryDKIMResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummaryDMARCResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummaryMaliciousResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummarySpamResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummarySPFResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummarySpoofResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummaryThreatCategoryResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummaryTLSVersionResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/email/security/summary/arc">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">arc</a>({ ...params }) -> SummaryARCResponse</code>
+- <code title="get /radar/email/security/summary/dkim">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">dkim</a>({ ...params }) -> SummaryDKIMResponse</code>
+- <code title="get /radar/email/security/summary/dmarc">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">dmarc</a>({ ...params }) -> SummaryDMARCResponse</code>
+- <code title="get /radar/email/security/summary/malicious">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">malicious</a>({ ...params }) -> SummaryMaliciousResponse</code>
+- <code title="get /radar/email/security/summary/spam">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">spam</a>({ ...params }) -> SummarySpamResponse</code>
+- <code title="get /radar/email/security/summary/spf">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">spf</a>({ ...params }) -> SummarySPFResponse</code>
+- <code title="get /radar/email/security/summary/spoof">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">spoof</a>({ ...params }) -> SummarySpoofResponse</code>
+- <code title="get /radar/email/security/summary/threat_category">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">threatCategory</a>({ ...params }) -> SummaryThreatCategoryResponse</code>
+- <code title="get /radar/email/security/summary/tls_version">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">tlsVersion</a>({ ...params }) -> SummaryTLSVersionResponse</code>
+
+#### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/email/security/timeseries-groups.ts">TimeseriesGroupARCResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/timeseries-groups.ts">TimeseriesGroupDKIMResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/timeseries-groups.ts">TimeseriesGroupDMARCResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/timeseries-groups.ts">TimeseriesGroupMaliciousResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/timeseries-groups.ts">TimeseriesGroupSpamResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/timeseries-groups.ts">TimeseriesGroupSPFResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/timeseries-groups.ts">TimeseriesGroupSpoofResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/timeseries-groups.ts">TimeseriesGroupThreatCategoryResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/timeseries-groups.ts">TimeseriesGroupTLSVersionResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/email/security/timeseries_groups/arc">client.radar.email.security.timeseriesGroups.<a href="./src/resources/radar/email/security/timeseries-groups.ts">arc</a>({ ...params }) -> TimeseriesGroupARCResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/dkim">client.radar.email.security.timeseriesGroups.<a href="./src/resources/radar/email/security/timeseries-groups.ts">dkim</a>({ ...params }) -> TimeseriesGroupDKIMResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/dmarc">client.radar.email.security.timeseriesGroups.<a href="./src/resources/radar/email/security/timeseries-groups.ts">dmarc</a>({ ...params }) -> TimeseriesGroupDMARCResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/malicious">client.radar.email.security.timeseriesGroups.<a href="./src/resources/radar/email/security/timeseries-groups.ts">malicious</a>({ ...params }) -> TimeseriesGroupMaliciousResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/spam">client.radar.email.security.timeseriesGroups.<a href="./src/resources/radar/email/security/timeseries-groups.ts">spam</a>({ ...params }) -> TimeseriesGroupSpamResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/spf">client.radar.email.security.timeseriesGroups.<a href="./src/resources/radar/email/security/timeseries-groups.ts">spf</a>({ ...params }) -> TimeseriesGroupSPFResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/spoof">client.radar.email.security.timeseriesGroups.<a href="./src/resources/radar/email/security/timeseries-groups.ts">spoof</a>({ ...params }) -> TimeseriesGroupSpoofResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/threat_category">client.radar.email.security.timeseriesGroups.<a href="./src/resources/radar/email/security/timeseries-groups.ts">threatCategory</a>({ ...params }) -> TimeseriesGroupThreatCategoryResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/tls_version">client.radar.email.security.timeseriesGroups.<a href="./src/resources/radar/email/security/timeseries-groups.ts">tlsVersion</a>({ ...params }) -> TimeseriesGroupTLSVersionResponse</code>
+
+## Attacks
+
+### Layer3
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer3/layer3.ts">Layer3SummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/layer3.ts">Layer3TimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/layer3.ts">Layer3TimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer3/summary/{dimension}">client.radar.attacks.layer3.<a href="./src/resources/radar/attacks/layer3/layer3.ts">summaryV2</a>(dimension, { ...params }) -> Layer3SummaryV2Response</code>
+- <code title="get /radar/attacks/layer3/timeseries">client.radar.attacks.layer3.<a href="./src/resources/radar/attacks/layer3/layer3.ts">timeseries</a>({ ...params }) -> Layer3TimeseriesResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/{dimension}">client.radar.attacks.layer3.<a href="./src/resources/radar/attacks/layer3/layer3.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> Layer3TimeseriesGroupsV2Response</code>
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryBitrateResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryDurationResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryIndustryResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryVectorResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryVerticalResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer3/summary/bitrate">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">bitrate</a>({ ...params }) -> SummaryBitrateResponse</code>
+- <code title="get /radar/attacks/layer3/summary/duration">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">duration</a>({ ...params }) -> SummaryDurationResponse</code>
+- <code title="get /radar/attacks/layer3/summary/industry">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">industry</a>({ ...params }) -> SummaryIndustryResponse</code>
+- <code title="get /radar/attacks/layer3/summary/ip_version">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/attacks/layer3/summary/protocol">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">protocol</a>({ ...params }) -> SummaryProtocolResponse</code>
+- <code title="get /radar/attacks/layer3/summary/vector">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">vector</a>({ ...params }) -> SummaryVectorResponse</code>
+- <code title="get /radar/attacks/layer3/summary/vertical">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">vertical</a>({ ...params }) -> SummaryVerticalResponse</code>
+
+#### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupBitrateResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupDurationResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupIndustryResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupVectorResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupVerticalResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer3/timeseries_groups/bitrate">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">bitrate</a>({ ...params }) -> TimeseriesGroupBitrateResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/duration">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">duration</a>({ ...params }) -> TimeseriesGroupDurationResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/industry">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">industry</a>({ ...params }) -> TimeseriesGroupIndustryResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/ip_version">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/protocol">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">protocol</a>({ ...params }) -> TimeseriesGroupProtocolResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/vector">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">vector</a>({ ...params }) -> TimeseriesGroupVectorResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/vertical">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">vertical</a>({ ...params }) -> TimeseriesGroupVerticalResponse</code>
+
+#### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer3/top/top.ts">TopAttacksResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/top/top.ts">TopIndustryResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/top/top.ts">TopVerticalResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer3/top/attacks">client.radar.attacks.layer3.top.<a href="./src/resources/radar/attacks/layer3/top/top.ts">attacks</a>({ ...params }) -> TopAttacksResponse</code>
+- <code title="get /radar/attacks/layer3/top/industry">client.radar.attacks.layer3.top.<a href="./src/resources/radar/attacks/layer3/top/top.ts">industry</a>({ ...params }) -> TopIndustryResponse</code>
+- <code title="get /radar/attacks/layer3/top/vertical">client.radar.attacks.layer3.top.<a href="./src/resources/radar/attacks/layer3/top/top.ts">vertical</a>({ ...params }) -> TopVerticalResponse</code>
+
+##### Locations
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer3/top/locations.ts">LocationOriginResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/top/locations.ts">LocationTargetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer3/top/locations/origin">client.radar.attacks.layer3.top.locations.<a href="./src/resources/radar/attacks/layer3/top/locations.ts">origin</a>({ ...params }) -> LocationOriginResponse</code>
+- <code title="get /radar/attacks/layer3/top/locations/target">client.radar.attacks.layer3.top.locations.<a href="./src/resources/radar/attacks/layer3/top/locations.ts">target</a>({ ...params }) -> LocationTargetResponse</code>
+
+### Layer7
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer7/layer7.ts">Layer7SummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/layer7.ts">Layer7TimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/layer7.ts">Layer7TimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer7/summary/{dimension}">client.radar.attacks.layer7.<a href="./src/resources/radar/attacks/layer7/layer7.ts">summaryV2</a>(dimension, { ...params }) -> Layer7SummaryV2Response</code>
+- <code title="get /radar/attacks/layer7/timeseries">client.radar.attacks.layer7.<a href="./src/resources/radar/attacks/layer7/layer7.ts">timeseries</a>({ ...params }) -> Layer7TimeseriesResponse</code>
+- <code title="get /radar/attacks/layer7/timeseries_groups/{dimension}">client.radar.attacks.layer7.<a href="./src/resources/radar/attacks/layer7/layer7.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> Layer7TimeseriesGroupsV2Response</code>
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryHTTPMethodResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryHTTPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryIndustryResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryManagedRulesResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryMitigationProductResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryVerticalResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer7/summary/http_method">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">httpMethod</a>({ ...params }) -> SummaryHTTPMethodResponse</code>
+- <code title="get /radar/attacks/layer7/summary/http_version">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">httpVersion</a>({ ...params }) -> SummaryHTTPVersionResponse</code>
+- <code title="get /radar/attacks/layer7/summary/industry">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">industry</a>({ ...params }) -> SummaryIndustryResponse</code>
+- <code title="get /radar/attacks/layer7/summary/ip_version">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/attacks/layer7/summary/managed_rules">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">managedRules</a>({ ...params }) -> SummaryManagedRulesResponse</code>
+- <code title="get /radar/attacks/layer7/summary/mitigation_product">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">mitigationProduct</a>({ ...params }) -> SummaryMitigationProductResponse</code>
+- <code title="get /radar/attacks/layer7/summary/vertical">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">vertical</a>({ ...params }) -> SummaryVerticalResponse</code>
+
+#### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupHTTPMethodResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupHTTPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupIndustryResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupManagedRulesResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupMitigationProductResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupVerticalResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer7/timeseries_groups/http_method">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">httpMethod</a>({ ...params }) -> TimeseriesGroupHTTPMethodResponse</code>
+- <code title="get /radar/attacks/layer7/timeseries_groups/http_version">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">httpVersion</a>({ ...params }) -> TimeseriesGroupHTTPVersionResponse</code>
+- <code title="get /radar/attacks/layer7/timeseries_groups/industry">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">industry</a>({ ...params }) -> TimeseriesGroupIndustryResponse</code>
+- <code title="get /radar/attacks/layer7/timeseries_groups/ip_version">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/attacks/layer7/timeseries_groups/managed_rules">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">managedRules</a>({ ...params }) -> TimeseriesGroupManagedRulesResponse</code>
+- <code title="get /radar/attacks/layer7/timeseries_groups/mitigation_product">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">mitigationProduct</a>({ ...params }) -> TimeseriesGroupMitigationProductResponse</code>
+- <code title="get /radar/attacks/layer7/timeseries_groups/vertical">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">vertical</a>({ ...params }) -> TimeseriesGroupVerticalResponse</code>
+
+#### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer7/top/top.ts">TopAttacksResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/top/top.ts">TopIndustryResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/top/top.ts">TopVerticalResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer7/top/attacks">client.radar.attacks.layer7.top.<a href="./src/resources/radar/attacks/layer7/top/top.ts">attacks</a>({ ...params }) -> TopAttacksResponse</code>
+- <code title="get /radar/attacks/layer7/top/industry">client.radar.attacks.layer7.top.<a href="./src/resources/radar/attacks/layer7/top/top.ts">industry</a>({ ...params }) -> TopIndustryResponse</code>
+- <code title="get /radar/attacks/layer7/top/vertical">client.radar.attacks.layer7.top.<a href="./src/resources/radar/attacks/layer7/top/top.ts">vertical</a>({ ...params }) -> TopVerticalResponse</code>
+
+##### Locations
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer7/top/locations.ts">LocationOriginResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/top/locations.ts">LocationTargetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer7/top/locations/origin">client.radar.attacks.layer7.top.locations.<a href="./src/resources/radar/attacks/layer7/top/locations.ts">origin</a>({ ...params }) -> LocationOriginResponse</code>
+- <code title="get /radar/attacks/layer7/top/locations/target">client.radar.attacks.layer7.top.locations.<a href="./src/resources/radar/attacks/layer7/top/locations.ts">target</a>({ ...params }) -> LocationTargetResponse</code>
+
+##### Ases
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer7/top/ases.ts">AseOriginResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer7/top/ases/origin">client.radar.attacks.layer7.top.ases.<a href="./src/resources/radar/attacks/layer7/top/ases.ts">origin</a>({ ...params }) -> AseOriginResponse</code>
+
+## Entities
+
+Types:
+
+- <code><a href="./src/resources/radar/entities/entities.ts">EntityGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/entities/ip">client.radar.entities.<a href="./src/resources/radar/entities/entities.ts">get</a>({ ...params }) -> EntityGetResponse</code>
+
+### ASNs
+
+Types:
+
+- <code><a href="./src/resources/radar/entities/asns.ts">ASNListResponse</a></code>
+- <code><a href="./src/resources/radar/entities/asns.ts">ASNAsSetResponse</a></code>
+- <code><a href="./src/resources/radar/entities/asns.ts">ASNGetResponse</a></code>
+- <code><a href="./src/resources/radar/entities/asns.ts">ASNIPResponse</a></code>
+- <code><a href="./src/resources/radar/entities/asns.ts">ASNRelResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/entities/asns">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">list</a>({ ...params }) -> ASNListResponse</code>
+- <code title="get /radar/entities/asns/{asn}/as_set">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">asSet</a>(asn, { ...params }) -> ASNAsSetResponse</code>
+- <code title="get /radar/entities/asns/{asn}">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">get</a>(asn, { ...params }) -> ASNGetResponse</code>
+- <code title="get /radar/entities/asns/ip">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">ip</a>({ ...params }) -> ASNIPResponse</code>
+- <code title="get /radar/entities/asns/{asn}/rel">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">rel</a>(asn, { ...params }) -> ASNRelResponse</code>
+
+### Locations
+
+Types:
+
+- <code><a href="./src/resources/radar/entities/locations.ts">LocationListResponse</a></code>
+- <code><a href="./src/resources/radar/entities/locations.ts">LocationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/entities/locations">client.radar.entities.locations.<a href="./src/resources/radar/entities/locations.ts">list</a>({ ...params }) -> LocationListResponse</code>
+- <code title="get /radar/entities/locations/{location}">client.radar.entities.locations.<a href="./src/resources/radar/entities/locations.ts">get</a>(location, { ...params }) -> LocationGetResponse</code>
+
+## Geolocations
+
+Types:
+
+- <code><a href="./src/resources/radar/geolocations.ts">GeolocationListResponse</a></code>
+- <code><a href="./src/resources/radar/geolocations.ts">GeolocationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/geolocations">client.radar.geolocations.<a href="./src/resources/radar/geolocations.ts">list</a>({ ...params }) -> GeolocationListResponse</code>
+- <code title="get /radar/geolocations/{geo_id}">client.radar.geolocations.<a href="./src/resources/radar/geolocations.ts">get</a>(geoID, { ...params }) -> GeolocationGetResponse</code>
+
+## HTTP
+
+Types:
+
+- <code><a href="./src/resources/radar/http/http.ts">HTTPSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/http/http.ts">HTTPTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/http/http.ts">HTTPTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/http/summary/{dimension}">client.radar.http.<a href="./src/resources/radar/http/http.ts">summaryV2</a>(dimension, { ...params }) -> HTTPSummaryV2Response</code>
+- <code title="get /radar/http/timeseries">client.radar.http.<a href="./src/resources/radar/http/http.ts">timeseries</a>({ ...params }) -> HTTPTimeseriesResponse</code>
+- <code title="get /radar/http/timeseries_groups/{dimension}">client.radar.http.<a href="./src/resources/radar/http/http.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> HTTPTimeseriesGroupsV2Response</code>
+
+### Locations
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/locations.ts">LocationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations">client.radar.http.locations.<a href="./src/resources/radar/http/locations/locations.ts">get</a>({ ...params }) -> LocationGetResponse</code>
+
+#### BotClass
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/bot-class.ts">BotClassGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/bot_class/{bot_class}">client.radar.http.locations.botClass.<a href="./src/resources/radar/http/locations/bot-class.ts">get</a>(botClass, { ...params }) -> BotClassGetResponse</code>
+
+#### DeviceType
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/device-type.ts">DeviceTypeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/device_type/{device_type}">client.radar.http.locations.deviceType.<a href="./src/resources/radar/http/locations/device-type.ts">get</a>(deviceType, { ...params }) -> DeviceTypeGetResponse</code>
+
+#### HTTPProtocol
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/http-protocol.ts">HTTPProtocolGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/http_protocol/{http_protocol}">client.radar.http.locations.httpProtocol.<a href="./src/resources/radar/http/locations/http-protocol.ts">get</a>(httpProtocol, { ...params }) -> HTTPProtocolGetResponse</code>
+
+#### HTTPMethod
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/http-method.ts">HTTPMethodGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/http_version/{http_version}">client.radar.http.locations.httpMethod.<a href="./src/resources/radar/http/locations/http-method.ts">get</a>(httpVersion, { ...params }) -> HTTPMethodGetResponse</code>
+
+#### IPVersion
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/ip-version.ts">IPVersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/ip_version/{ip_version}">client.radar.http.locations.ipVersion.<a href="./src/resources/radar/http/locations/ip-version.ts">get</a>(ipVersion, { ...params }) -> IPVersionGetResponse</code>
+
+#### OS
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/os.ts">OSGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/os/{os}">client.radar.http.locations.os.<a href="./src/resources/radar/http/locations/os.ts">get</a>(os, { ...params }) -> OSGetResponse</code>
+
+#### TLSVersion
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/tls-version.ts">TLSVersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/tls_version/{tls_version}">client.radar.http.locations.tlsVersion.<a href="./src/resources/radar/http/locations/tls-version.ts">get</a>(tlsVersion, { ...params }) -> TLSVersionGetResponse</code>
+
+#### BrowserFamily
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/browser-family.ts">BrowserFamilyGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/browser_family/{browser_family}">client.radar.http.locations.browserFamily.<a href="./src/resources/radar/http/locations/browser-family.ts">get</a>(browserFamily, { ...params }) -> BrowserFamilyGetResponse</code>
+
+### Ases
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/ases.ts">AseGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases">client.radar.http.ases.<a href="./src/resources/radar/http/ases/ases.ts">get</a>({ ...params }) -> AseGetResponse</code>
+
+#### BotClass
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/bot-class.ts">BotClassGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/bot_class/{bot_class}">client.radar.http.ases.botClass.<a href="./src/resources/radar/http/ases/bot-class.ts">get</a>(botClass, { ...params }) -> BotClassGetResponse</code>
+
+#### DeviceType
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/device-type.ts">DeviceTypeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/device_type/{device_type}">client.radar.http.ases.deviceType.<a href="./src/resources/radar/http/ases/device-type.ts">get</a>(deviceType, { ...params }) -> DeviceTypeGetResponse</code>
+
+#### HTTPProtocol
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/http-protocol.ts">HTTPProtocolGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/http_protocol/{http_protocol}">client.radar.http.ases.httpProtocol.<a href="./src/resources/radar/http/ases/http-protocol.ts">get</a>(httpProtocol, { ...params }) -> HTTPProtocolGetResponse</code>
+
+#### HTTPMethod
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/http-method.ts">HTTPMethodGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/http_version/{http_version}">client.radar.http.ases.httpMethod.<a href="./src/resources/radar/http/ases/http-method.ts">get</a>(httpVersion, { ...params }) -> HTTPMethodGetResponse</code>
+
+#### IPVersion
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/ip-version.ts">IPVersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/ip_version/{ip_version}">client.radar.http.ases.ipVersion.<a href="./src/resources/radar/http/ases/ip-version.ts">get</a>(ipVersion, { ...params }) -> IPVersionGetResponse</code>
+
+#### OS
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/os.ts">OSGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/os/{os}">client.radar.http.ases.os.<a href="./src/resources/radar/http/ases/os.ts">get</a>(os, { ...params }) -> OSGetResponse</code>
+
+#### TLSVersion
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/tls-version.ts">TLSVersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/tls_version/{tls_version}">client.radar.http.ases.tlsVersion.<a href="./src/resources/radar/http/ases/tls-version.ts">get</a>(tlsVersion, { ...params }) -> TLSVersionGetResponse</code>
+
+#### BrowserFamily
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/browser-family.ts">BrowserFamilyGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/browser_family/{browser_family}">client.radar.http.ases.browserFamily.<a href="./src/resources/radar/http/ases/browser-family.ts">get</a>(browserFamily, { ...params }) -> BrowserFamilyGetResponse</code>
+
+### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryBotClassResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryDeviceTypeResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryHTTPProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryHTTPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryOSResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryPostQuantumResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryTLSVersionResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/summary/bot_class">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">botClass</a>({ ...params }) -> SummaryBotClassResponse</code>
+- <code title="get /radar/http/summary/device_type">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">deviceType</a>({ ...params }) -> SummaryDeviceTypeResponse</code>
+- <code title="get /radar/http/summary/http_protocol">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">httpProtocol</a>({ ...params }) -> SummaryHTTPProtocolResponse</code>
+- <code title="get /radar/http/summary/http_version">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">httpVersion</a>({ ...params }) -> SummaryHTTPVersionResponse</code>
+- <code title="get /radar/http/summary/ip_version">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/http/summary/os">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">os</a>({ ...params }) -> SummaryOSResponse</code>
+- <code title="get /radar/http/summary/post_quantum">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">postQuantum</a>({ ...params }) -> SummaryPostQuantumResponse</code>
+- <code title="get /radar/http/summary/tls_version">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">tlsVersion</a>({ ...params }) -> SummaryTLSVersionResponse</code>
+
+### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupBotClassResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupBrowserResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupBrowserFamilyResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupDeviceTypeResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupHTTPProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupHTTPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupOSResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupPostQuantumResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupTLSVersionResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/timeseries_groups/bot_class">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">botClass</a>({ ...params }) -> TimeseriesGroupBotClassResponse</code>
+- <code title="get /radar/http/timeseries_groups/browser">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">browser</a>({ ...params }) -> TimeseriesGroupBrowserResponse</code>
+- <code title="get /radar/http/timeseries_groups/browser_family">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">browserFamily</a>({ ...params }) -> TimeseriesGroupBrowserFamilyResponse</code>
+- <code title="get /radar/http/timeseries_groups/device_type">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">deviceType</a>({ ...params }) -> TimeseriesGroupDeviceTypeResponse</code>
+- <code title="get /radar/http/timeseries_groups/http_protocol">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">httpProtocol</a>({ ...params }) -> TimeseriesGroupHTTPProtocolResponse</code>
+- <code title="get /radar/http/timeseries_groups/http_version">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">httpVersion</a>({ ...params }) -> TimeseriesGroupHTTPVersionResponse</code>
+- <code title="get /radar/http/timeseries_groups/ip_version">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/http/timeseries_groups/os">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">os</a>({ ...params }) -> TimeseriesGroupOSResponse</code>
+- <code title="get /radar/http/timeseries_groups/post_quantum">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">postQuantum</a>({ ...params }) -> TimeseriesGroupPostQuantumResponse</code>
+- <code title="get /radar/http/timeseries_groups/tls_version">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">tlsVersion</a>({ ...params }) -> TimeseriesGroupTLSVersionResponse</code>
+
+### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/http/top.ts">TopBrowserResponse</a></code>
+- <code><a href="./src/resources/radar/http/top.ts">TopBrowserFamilyResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/browser">client.radar.http.top.<a href="./src/resources/radar/http/top.ts">browser</a>({ ...params }) -> TopBrowserResponse</code>
+- <code title="get /radar/http/top/browser_family">client.radar.http.top.<a href="./src/resources/radar/http/top.ts">browserFamily</a>({ ...params }) -> TopBrowserFamilyResponse</code>
+
+## Quality
+
+### IQI
+
+Types:
+
+- <code><a href="./src/resources/radar/quality/iqi.ts">IQISummaryResponse</a></code>
+- <code><a href="./src/resources/radar/quality/iqi.ts">IQITimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/quality/iqi/summary">client.radar.quality.iqi.<a href="./src/resources/radar/quality/iqi.ts">summary</a>({ ...params }) -> IQISummaryResponse</code>
+- <code title="get /radar/quality/iqi/timeseries_groups">client.radar.quality.iqi.<a href="./src/resources/radar/quality/iqi.ts">timeseriesGroups</a>({ ...params }) -> IQITimeseriesGroupsResponse</code>
+
+### Speed
+
+Types:
+
+- <code><a href="./src/resources/radar/quality/speed/speed.ts">SpeedHistogramResponse</a></code>
+- <code><a href="./src/resources/radar/quality/speed/speed.ts">SpeedSummaryResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/quality/speed/histogram">client.radar.quality.speed.<a href="./src/resources/radar/quality/speed/speed.ts">histogram</a>({ ...params }) -> SpeedHistogramResponse</code>
+- <code title="get /radar/quality/speed/summary">client.radar.quality.speed.<a href="./src/resources/radar/quality/speed/speed.ts">summary</a>({ ...params }) -> SpeedSummaryResponse</code>
+
+#### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/quality/speed/top.ts">TopAsesResponse</a></code>
+- <code><a href="./src/resources/radar/quality/speed/top.ts">TopLocationsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/quality/speed/top/ases">client.radar.quality.speed.top.<a href="./src/resources/radar/quality/speed/top.ts">ases</a>({ ...params }) -> TopAsesResponse</code>
+- <code title="get /radar/quality/speed/top/locations">client.radar.quality.speed.top.<a href="./src/resources/radar/quality/speed/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
+
+## Ranking
+
+Types:
+
+- <code><a href="./src/resources/radar/ranking/ranking.ts">RankingTimeseriesGroupsResponse</a></code>
+- <code><a href="./src/resources/radar/ranking/ranking.ts">RankingTopResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ranking/timeseries_groups">client.radar.ranking.<a href="./src/resources/radar/ranking/ranking.ts">timeseriesGroups</a>({ ...params }) -> RankingTimeseriesGroupsResponse</code>
+- <code title="get /radar/ranking/top">client.radar.ranking.<a href="./src/resources/radar/ranking/ranking.ts">top</a>({ ...params }) -> RankingTopResponse</code>
+
+### Domain
+
+Types:
+
+- <code><a href="./src/resources/radar/ranking/domain.ts">DomainGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ranking/domain/{domain}">client.radar.ranking.domain.<a href="./src/resources/radar/ranking/domain.ts">get</a>(domain, { ...params }) -> DomainGetResponse</code>
+
+### InternetServices
+
+Types:
+
+- <code><a href="./src/resources/radar/ranking/internet-services.ts">InternetServiceCategoriesResponse</a></code>
+- <code><a href="./src/resources/radar/ranking/internet-services.ts">InternetServiceTimeseriesGroupsResponse</a></code>
+- <code><a href="./src/resources/radar/ranking/internet-services.ts">InternetServiceTopResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ranking/internet_services/categories">client.radar.ranking.internetServices.<a href="./src/resources/radar/ranking/internet-services.ts">categories</a>({ ...params }) -> InternetServiceCategoriesResponse</code>
+- <code title="get /radar/ranking/internet_services/timeseries_groups">client.radar.ranking.internetServices.<a href="./src/resources/radar/ranking/internet-services.ts">timeseriesGroups</a>({ ...params }) -> InternetServiceTimeseriesGroupsResponse</code>
+- <code title="get /radar/ranking/internet_services/top">client.radar.ranking.internetServices.<a href="./src/resources/radar/ranking/internet-services.ts">top</a>({ ...params }) -> InternetServiceTopResponse</code>
+
+## TrafficAnomalies
+
+Types:
+
+- <code><a href="./src/resources/radar/traffic-anomalies/traffic-anomalies.ts">TrafficAnomalyGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/traffic_anomalies">client.radar.trafficAnomalies.<a href="./src/resources/radar/traffic-anomalies/traffic-anomalies.ts">get</a>({ ...params }) -> TrafficAnomalyGetResponse</code>
+
+### Locations
+
+Types:
+
+- <code><a href="./src/resources/radar/traffic-anomalies/locations.ts">LocationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/traffic_anomalies/locations">client.radar.trafficAnomalies.locations.<a href="./src/resources/radar/traffic-anomalies/locations.ts">get</a>({ ...params }) -> LocationGetResponse</code>
+
+## TCPResetsTimeouts
+
+Types:
+
+- <code><a href="./src/resources/radar/tcp-resets-timeouts.ts">TCPResetsTimeoutSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/tcp-resets-timeouts.ts">TCPResetsTimeoutTimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/tcp_resets_timeouts/summary">client.radar.tcpResetsTimeouts.<a href="./src/resources/radar/tcp-resets-timeouts.ts">summary</a>({ ...params }) -> TCPResetsTimeoutSummaryResponse</code>
+- <code title="get /radar/tcp_resets_timeouts/timeseries_groups">client.radar.tcpResetsTimeouts.<a href="./src/resources/radar/tcp-resets-timeouts.ts">timeseriesGroups</a>({ ...params }) -> TCPResetsTimeoutTimeseriesGroupsResponse</code>
+
+## RobotsTXT
+
+### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/robots-txt/top/top.ts">TopDomainCategoriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/robots_txt/top/domain_categories">client.radar.robotsTXT.top.<a href="./src/resources/radar/robots-txt/top/top.ts">domainCategories</a>({ ...params }) -> TopDomainCategoriesResponse</code>
+
+#### UserAgents
+
+Types:
+
+- <code><a href="./src/resources/radar/robots-txt/top/user-agents.ts">UserAgentDirectiveResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/robots_txt/top/user_agents/directive">client.radar.robotsTXT.top.userAgents.<a href="./src/resources/radar/robots-txt/top/user-agents.ts">directive</a>({ ...params }) -> UserAgentDirectiveResponse</code>
+
+## LeakedCredentials
+
+Types:
+
+- <code><a href="./src/resources/radar/leaked-credentials/leaked-credentials.ts">LeakedCredentialSummaryV2Response</a></code>
+- <code><a href="./src/resources/radar/leaked-credentials/leaked-credentials.ts">LeakedCredentialTimeseriesGroupsV2Response</a></code>
+
+Methods:
+
+- <code title="get /radar/leaked_credential_checks/summary/{dimension}">client.radar.leakedCredentials.<a href="./src/resources/radar/leaked-credentials/leaked-credentials.ts">summaryV2</a>(dimension, { ...params }) -> LeakedCredentialSummaryV2Response</code>
+- <code title="get /radar/leaked_credential_checks/timeseries_groups/{dimension}">client.radar.leakedCredentials.<a href="./src/resources/radar/leaked-credentials/leaked-credentials.ts">timeseriesGroupsV2</a>(dimension, { ...params }) -> LeakedCredentialTimeseriesGroupsV2Response</code>
+
+### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/leaked-credentials/summary.ts">SummaryBotClassResponse</a></code>
+- <code><a href="./src/resources/radar/leaked-credentials/summary.ts">SummaryCompromisedResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/leaked_credential_checks/summary/bot_class">client.radar.leakedCredentials.summary.<a href="./src/resources/radar/leaked-credentials/summary.ts">botClass</a>({ ...params }) -> SummaryBotClassResponse</code>
+- <code title="get /radar/leaked_credential_checks/summary/compromised">client.radar.leakedCredentials.summary.<a href="./src/resources/radar/leaked-credentials/summary.ts">compromised</a>({ ...params }) -> SummaryCompromisedResponse</code>
+
+### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/leaked-credentials/timeseries-groups.ts">TimeseriesGroupBotClassResponse</a></code>
+- <code><a href="./src/resources/radar/leaked-credentials/timeseries-groups.ts">TimeseriesGroupCompromisedResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/leaked_credential_checks/timeseries_groups/bot_class">client.radar.leakedCredentials.timeseriesGroups.<a href="./src/resources/radar/leaked-credentials/timeseries-groups.ts">botClass</a>({ ...params }) -> TimeseriesGroupBotClassResponse</code>
+- <code title="get /radar/leaked_credential_checks/timeseries_groups/compromised">client.radar.leakedCredentials.timeseriesGroups.<a href="./src/resources/radar/leaked-credentials/timeseries-groups.ts">compromised</a>({ ...params }) -> TimeseriesGroupCompromisedResponse</code>
+
+# BotManagement
+
+Types:
+
+- <code><a href="./src/resources/bot-management.ts">BotFightModeConfiguration</a></code>
+- <code><a href="./src/resources/bot-management.ts">SubscriptionConfiguration</a></code>
+- <code><a href="./src/resources/bot-management.ts">SuperBotFightModeDefinitelyConfiguration</a></code>
+- <code><a href="./src/resources/bot-management.ts">SuperBotFightModeLikelyConfiguration</a></code>
+- <code><a href="./src/resources/bot-management.ts">BotManagementUpdateResponse</a></code>
+- <code><a href="./src/resources/bot-management.ts">BotManagementGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/bot_management">client.botManagement.<a href="./src/resources/bot-management.ts">update</a>({ ...params }) -> BotManagementUpdateResponse</code>
+- <code title="get /zones/{zone_id}/bot_management">client.botManagement.<a href="./src/resources/bot-management.ts">get</a>({ ...params }) -> BotManagementGetResponse</code>
+
+# Fraud
+
+Types:
+
+- <code><a href="./src/resources/fraud.ts">FraudSettings</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/fraud_detection/settings">client.fraud.<a href="./src/resources/fraud.ts">update</a>({ ...params }) -> FraudSettings</code>
+- <code title="get /zones/{zone_id}/fraud_detection/settings">client.fraud.<a href="./src/resources/fraud.ts">get</a>({ ...params }) -> FraudSettings</code>
+
+# OriginPostQuantumEncryption
+
+Types:
+
+- <code><a href="./src/resources/origin-post-quantum-encryption.ts">OriginPostQuantumEncryptionUpdateResponse</a></code>
+- <code><a href="./src/resources/origin-post-quantum-encryption.ts">OriginPostQuantumEncryptionGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">update</a>({ ...params }) -> OriginPostQuantumEncryptionUpdateResponse</code>
+- <code title="get /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">get</a>({ ...params }) -> OriginPostQuantumEncryptionGetResponse</code>
+
+# Zaraz
+
+Types:
+
+- <code><a href="./src/resources/zaraz/zaraz.ts">ButtonTextTranslation</a></code>
+- <code><a href="./src/resources/zaraz/zaraz.ts">NeoEvent</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/settings/zaraz/workflow">client.zaraz.<a href="./src/resources/zaraz/zaraz.ts">update</a>({ ...params }) -> Workflow</code>
+
+## Config
+
+Types:
+
+- <code><a href="./src/resources/zaraz/config.ts">Configuration</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/settings/zaraz/config">client.zaraz.config.<a href="./src/resources/zaraz/config.ts">update</a>({ ...params }) -> Configuration</code>
+- <code title="get /zones/{zone_id}/settings/zaraz/config">client.zaraz.config.<a href="./src/resources/zaraz/config.ts">get</a>({ ...params }) -> Configuration</code>
+
+## Default
+
+Methods:
+
+- <code title="get /zones/{zone_id}/settings/zaraz/default">client.zaraz.default.<a href="./src/resources/zaraz/default.ts">get</a>({ ...params }) -> Configuration</code>
+
+## Export
+
+Methods:
+
+- <code title="get /zones/{zone_id}/settings/zaraz/export">client.zaraz.export.<a href="./src/resources/zaraz/export.ts">get</a>({ ...params }) -> Configuration</code>
+
+## History
+
+Types:
+
+- <code><a href="./src/resources/zaraz/history/history.ts">HistoryListResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/settings/zaraz/history">client.zaraz.history.<a href="./src/resources/zaraz/history/history.ts">update</a>({ ...params }) -> Configuration</code>
+- <code title="get /zones/{zone_id}/settings/zaraz/history">client.zaraz.history.<a href="./src/resources/zaraz/history/history.ts">list</a>({ ...params }) -> HistoryListResponsesSinglePage</code>
+
+### Configs
+
+Types:
+
+- <code><a href="./src/resources/zaraz/history/configs.ts">ConfigGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/settings/zaraz/history/configs">client.zaraz.history.configs.<a href="./src/resources/zaraz/history/configs.ts">get</a>({ ...params }) -> ConfigGetResponse</code>
+
+## Publish
+
+Types:
+
+- <code><a href="./src/resources/zaraz/publish.ts">PublishCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/settings/zaraz/publish">client.zaraz.publish.<a href="./src/resources/zaraz/publish.ts">create</a>({ ...params }) -> PublishCreateResponse</code>
+
+## Workflow
+
+Types:
+
+- <code><a href="./src/resources/zaraz/workflow.ts">Workflow</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/settings/zaraz/workflow">client.zaraz.workflow.<a href="./src/resources/zaraz/workflow.ts">get</a>({ ...params }) -> Workflow</code>
+
+# Speed
+
+Types:
+
+- <code><a href="./src/resources/speed/speed.ts">LabeledRegion</a></code>
+- <code><a href="./src/resources/speed/speed.ts">LighthouseReport</a></code>
+- <code><a href="./src/resources/speed/speed.ts">Trend</a></code>
+
+## Schedule
+
+Types:
+
+- <code><a href="./src/resources/speed/schedule.ts">Schedule</a></code>
+- <code><a href="./src/resources/speed/schedule.ts">ScheduleCreateResponse</a></code>
+- <code><a href="./src/resources/speed/schedule.ts">ScheduleDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/speed_api/schedule/{url}">client.speed.schedule.<a href="./src/resources/speed/schedule.ts">create</a>(url, { ...params }) -> ScheduleCreateResponse</code>
+- <code title="delete /zones/{zone_id}/speed_api/schedule/{url}">client.speed.schedule.<a href="./src/resources/speed/schedule.ts">delete</a>(url, { ...params }) -> ScheduleDeleteResponse</code>
+- <code title="get /zones/{zone_id}/speed_api/schedule/{url}">client.speed.schedule.<a href="./src/resources/speed/schedule.ts">get</a>(url, { ...params }) -> Schedule</code>
+
+## Availabilities
+
+Types:
+
+- <code><a href="./src/resources/speed/availabilities.ts">Availability</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/speed_api/availabilities">client.speed.availabilities.<a href="./src/resources/speed/availabilities.ts">list</a>({ ...params }) -> Availability</code>
+
+## Pages
+
+Types:
+
+- <code><a href="./src/resources/speed/pages/pages.ts">PageListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/speed_api/pages">client.speed.pages.<a href="./src/resources/speed/pages/pages.ts">list</a>({ ...params }) -> PageListResponsesSinglePage</code>
+- <code title="get /zones/{zone_id}/speed_api/pages/{url}/trend">client.speed.pages.<a href="./src/resources/speed/pages/pages.ts">trend</a>(url, { ...params }) -> Trend</code>
+
+### Tests
+
+Types:
+
+- <code><a href="./src/resources/speed/pages/tests.ts">Test</a></code>
+- <code><a href="./src/resources/speed/pages/tests.ts">TestDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">create</a>(url, { ...params }) -> Test</code>
+- <code title="get /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">list</a>(url, { ...params }) -> TestsV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">delete</a>(url, { ...params }) -> TestDeleteResponse</code>
+- <code title="get /zones/{zone_id}/speed_api/pages/{url}/tests/{test_id}">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">get</a>(testID, { ...params }) -> Test</code>
+
+# DCVDelegation
+
+Types:
+
+- <code><a href="./src/resources/dcv-delegation.ts">DCVDelegationUUID</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/dcv_delegation/uuid">client.dcvDelegation.<a href="./src/resources/dcv-delegation.ts">get</a>({ ...params }) -> DCVDelegationUUID</code>
+
+# Hostnames
+
+## Settings
+
+### TLS
+
+Types:
+
+- <code><a href="./src/resources/hostnames/settings/tls.ts">Setting</a></code>
+- <code><a href="./src/resources/hostnames/settings/tls.ts">SettingValue</a></code>
+- <code><a href="./src/resources/hostnames/settings/tls.ts">TLSDeleteResponse</a></code>
+- <code><a href="./src/resources/hostnames/settings/tls.ts">TLSGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}">client.hostnames.settings.tls.<a href="./src/resources/hostnames/settings/tls.ts">update</a>(hostname, { ...params }) -> Setting</code>
+- <code title="delete /zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}">client.hostnames.settings.tls.<a href="./src/resources/hostnames/settings/tls.ts">delete</a>(hostname, { ...params }) -> TLSDeleteResponse</code>
+- <code title="get /zones/{zone_id}/hostnames/settings/{setting_id}">client.hostnames.settings.tls.<a href="./src/resources/hostnames/settings/tls.ts">get</a>(settingID, { ...params }) -> TLSGetResponsesSinglePage</code>
+
+# Snippets
+
+Types:
+
+- <code><a href="./src/resources/snippets/snippets.ts">SnippetUpdateResponse</a></code>
+- <code><a href="./src/resources/snippets/snippets.ts">SnippetListResponse</a></code>
+- <code><a href="./src/resources/snippets/snippets.ts">SnippetDeleteResponse</a></code>
+- <code><a href="./src/resources/snippets/snippets.ts">SnippetGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">update</a>(snippetName, { ...params }) -> SnippetUpdateResponse</code>
+- <code title="get /zones/{zone_id}/snippets">client.snippets.<a href="./src/resources/snippets/snippets.ts">list</a>({ ...params }) -> SnippetListResponsesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">delete</a>(snippetName, { ...params }) -> SnippetDeleteResponse | null</code>
+- <code title="get /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">get</a>(snippetName, { ...params }) -> SnippetGetResponse</code>
+
+## Content
+
+Methods:
+
+- <code title="get /zones/{zone_id}/snippets/{snippet_name}/content">client.snippets.content.<a href="./src/resources/snippets/content.ts">get</a>(snippetName, { ...params }) -> Response</code>
+
+## Rules
+
+Types:
+
+- <code><a href="./src/resources/snippets/rules.ts">RuleUpdateResponse</a></code>
+- <code><a href="./src/resources/snippets/rules.ts">RuleListResponse</a></code>
+- <code><a href="./src/resources/snippets/rules.ts">RuleDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">update</a>({ ...params }) -> RuleUpdateResponsesSinglePage</code>
+- <code title="get /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">list</a>({ ...params }) -> RuleListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">delete</a>({ ...params }) -> RuleDeleteResponsesSinglePage</code>
+
+# RealtimeKit
+
+## Apps
+
+Types:
+
+- <code><a href="./src/resources/realtime-kit/apps.ts">AppGetResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/apps.ts">AppPostResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/realtime/kit/apps">client.realtimeKit.apps.<a href="./src/resources/realtime-kit/apps.ts">get</a>({ ...params }) -> AppGetResponse</code>
+- <code title="post /accounts/{account_id}/realtime/kit/apps">client.realtimeKit.apps.<a href="./src/resources/realtime-kit/apps.ts">post</a>({ ...params }) -> AppPostResponse</code>
+
+## Meetings
+
+Types:
+
+- <code><a href="./src/resources/realtime-kit/meetings.ts">MeetingCreateResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/meetings.ts">MeetingAddParticipantResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/meetings.ts">MeetingDeleteMeetingParticipantResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/meetings.ts">MeetingEditParticipantResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/meetings.ts">MeetingGetResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/meetings.ts">MeetingGetMeetingByIDResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/meetings.ts">MeetingGetMeetingParticipantResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/meetings.ts">MeetingGetMeetingParticipantsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/meetings.ts">MeetingRefreshParticipantTokenResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/meetings.ts">MeetingReplaceMeetingByIDResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/meetings.ts">MeetingUpdateMeetingByIDResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/meetings">client.realtimeKit.meetings.<a href="./src/resources/realtime-kit/meetings.ts">create</a>(appID, { ...params }) -> MeetingCreateResponse</code>
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/participants">client.realtimeKit.meetings.<a href="./src/resources/realtime-kit/meetings.ts">addParticipant</a>(meetingID, { ...params }) -> MeetingAddParticipantResponse</code>
+- <code title="delete /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/participants/{participant_id}">client.realtimeKit.meetings.<a href="./src/resources/realtime-kit/meetings.ts">deleteMeetingParticipant</a>(participantID, { ...params }) -> MeetingDeleteMeetingParticipantResponse</code>
+- <code title="patch /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/participants/{participant_id}">client.realtimeKit.meetings.<a href="./src/resources/realtime-kit/meetings.ts">editParticipant</a>(participantID, { ...params }) -> MeetingEditParticipantResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/meetings">client.realtimeKit.meetings.<a href="./src/resources/realtime-kit/meetings.ts">get</a>(appID, { ...params }) -> MeetingGetResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}">client.realtimeKit.meetings.<a href="./src/resources/realtime-kit/meetings.ts">getMeetingByID</a>(meetingID, { ...params }) -> MeetingGetMeetingByIDResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/participants/{participant_id}">client.realtimeKit.meetings.<a href="./src/resources/realtime-kit/meetings.ts">getMeetingParticipant</a>(participantID, { ...params }) -> MeetingGetMeetingParticipantResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/participants">client.realtimeKit.meetings.<a href="./src/resources/realtime-kit/meetings.ts">getMeetingParticipants</a>(meetingID, { ...params }) -> MeetingGetMeetingParticipantsResponse</code>
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/participants/{participant_id}/token">client.realtimeKit.meetings.<a href="./src/resources/realtime-kit/meetings.ts">refreshParticipantToken</a>(participantID, { ...params }) -> MeetingRefreshParticipantTokenResponse</code>
+- <code title="put /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}">client.realtimeKit.meetings.<a href="./src/resources/realtime-kit/meetings.ts">replaceMeetingByID</a>(meetingID, { ...params }) -> MeetingReplaceMeetingByIDResponse</code>
+- <code title="patch /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}">client.realtimeKit.meetings.<a href="./src/resources/realtime-kit/meetings.ts">updateMeetingByID</a>(meetingID, { ...params }) -> MeetingUpdateMeetingByIDResponse</code>
+
+## Presets
+
+Types:
+
+- <code><a href="./src/resources/realtime-kit/presets.ts">PresetCreateResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/presets.ts">PresetUpdateResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/presets.ts">PresetDeleteResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/presets.ts">PresetGetResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/presets.ts">PresetGetPresetByIDResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/presets">client.realtimeKit.presets.<a href="./src/resources/realtime-kit/presets.ts">create</a>(appID, { ...params }) -> PresetCreateResponse</code>
+- <code title="patch /accounts/{account_id}/realtime/kit/{app_id}/presets/{preset_id}">client.realtimeKit.presets.<a href="./src/resources/realtime-kit/presets.ts">update</a>(presetID, { ...params }) -> PresetUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/realtime/kit/{app_id}/presets/{preset_id}">client.realtimeKit.presets.<a href="./src/resources/realtime-kit/presets.ts">delete</a>(presetID, { ...params }) -> PresetDeleteResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/presets">client.realtimeKit.presets.<a href="./src/resources/realtime-kit/presets.ts">get</a>(appID, { ...params }) -> PresetGetResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/presets/{preset_id}">client.realtimeKit.presets.<a href="./src/resources/realtime-kit/presets.ts">getPresetByID</a>(presetID, { ...params }) -> PresetGetPresetByIDResponse</code>
+
+## Sessions
+
+Types:
+
+- <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGetParticipantDataFromPeerIDResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGetSessionChatResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGetSessionDetailsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGetSessionParticipantDetailsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGetSessionParticipantsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGetSessionSummaryResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGetSessionTranscriptsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGetSessionsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/sessions/{session_id}/summary">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">generateSummaryOfTranscripts</a>(sessionID, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/sessions/peer-report/{peer_id}">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">getParticipantDataFromPeerID</a>(peerID, { ...params }) -> SessionGetParticipantDataFromPeerIDResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/sessions/{session_id}/chat">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">getSessionChat</a>(sessionID, { ...params }) -> SessionGetSessionChatResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/sessions/{session_id}">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">getSessionDetails</a>(sessionID, { ...params }) -> SessionGetSessionDetailsResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/sessions/{session_id}/participants/{participant_id}">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">getSessionParticipantDetails</a>(participantID, { ...params }) -> SessionGetSessionParticipantDetailsResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/sessions/{session_id}/participants">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">getSessionParticipants</a>(sessionID, { ...params }) -> SessionGetSessionParticipantsResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/sessions/{session_id}/summary">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">getSessionSummary</a>(sessionID, { ...params }) -> SessionGetSessionSummaryResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/sessions/{session_id}/transcript">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">getSessionTranscripts</a>(sessionID, { ...params }) -> SessionGetSessionTranscriptsResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/sessions">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">getSessions</a>(appID, { ...params }) -> SessionGetSessionsResponse</code>
+
+## Recordings
+
+Types:
+
+- <code><a href="./src/resources/realtime-kit/recordings.ts">RecordingGetActiveRecordingsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/recordings.ts">RecordingGetOneRecordingResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/recordings.ts">RecordingGetRecordingsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/recordings.ts">RecordingPauseResumeStopRecordingResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/recordings.ts">RecordingStartRecordingsResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/recordings/active-recording/{meeting_id}">client.realtimeKit.recordings.<a href="./src/resources/realtime-kit/recordings.ts">getActiveRecordings</a>(meetingID, { ...params }) -> RecordingGetActiveRecordingsResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/recordings/{recording_id}">client.realtimeKit.recordings.<a href="./src/resources/realtime-kit/recordings.ts">getOneRecording</a>(recordingID, { ...params }) -> RecordingGetOneRecordingResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/recordings">client.realtimeKit.recordings.<a href="./src/resources/realtime-kit/recordings.ts">getRecordings</a>(appID, { ...params }) -> RecordingGetRecordingsResponse</code>
+- <code title="put /accounts/{account_id}/realtime/kit/{app_id}/recordings/{recording_id}">client.realtimeKit.recordings.<a href="./src/resources/realtime-kit/recordings.ts">pauseResumeStopRecording</a>(recordingID, { ...params }) -> RecordingPauseResumeStopRecordingResponse</code>
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/recordings">client.realtimeKit.recordings.<a href="./src/resources/realtime-kit/recordings.ts">startRecordings</a>(appID, { ...params }) -> RecordingStartRecordingsResponse</code>
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/recordings/track">client.realtimeKit.recordings.<a href="./src/resources/realtime-kit/recordings.ts">startTrackRecording</a>(appID, { ...params }) -> void</code>
+
+## Webhooks
+
+Types:
+
+- <code><a href="./src/resources/realtime-kit/webhooks.ts">WebhookCreateWebhookResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/webhooks.ts">WebhookDeleteWebhookResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/webhooks.ts">WebhookEditWebhookResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/webhooks.ts">WebhookGetWebhookByIDResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/webhooks.ts">WebhookGetWebhooksResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/webhooks.ts">WebhookReplaceWebhookResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/webhooks">client.realtimeKit.webhooks.<a href="./src/resources/realtime-kit/webhooks.ts">createWebhook</a>(appID, { ...params }) -> WebhookCreateWebhookResponse</code>
+- <code title="delete /accounts/{account_id}/realtime/kit/{app_id}/webhooks/{webhook_id}">client.realtimeKit.webhooks.<a href="./src/resources/realtime-kit/webhooks.ts">deleteWebhook</a>(webhookID, { ...params }) -> WebhookDeleteWebhookResponse</code>
+- <code title="patch /accounts/{account_id}/realtime/kit/{app_id}/webhooks/{webhook_id}">client.realtimeKit.webhooks.<a href="./src/resources/realtime-kit/webhooks.ts">editWebhook</a>(webhookID, { ...params }) -> WebhookEditWebhookResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/webhooks/{webhook_id}">client.realtimeKit.webhooks.<a href="./src/resources/realtime-kit/webhooks.ts">getWebhookByID</a>(webhookID, { ...params }) -> WebhookGetWebhookByIDResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/webhooks">client.realtimeKit.webhooks.<a href="./src/resources/realtime-kit/webhooks.ts">getWebhooks</a>(appID, { ...params }) -> WebhookGetWebhooksResponse</code>
+- <code title="put /accounts/{account_id}/realtime/kit/{app_id}/webhooks/{webhook_id}">client.realtimeKit.webhooks.<a href="./src/resources/realtime-kit/webhooks.ts">replaceWebhook</a>(webhookID, { ...params }) -> WebhookReplaceWebhookResponse</code>
+
+## ActiveSession
+
+Types:
+
+- <code><a href="./src/resources/realtime-kit/active-session.ts">ActiveSessionCreatePollResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/active-session.ts">ActiveSessionGetActiveSessionResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/active-session.ts">ActiveSessionKickAllParticipantsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/active-session.ts">ActiveSessionKickParticipantsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/active-session/poll">client.realtimeKit.activeSession.<a href="./src/resources/realtime-kit/active-session.ts">createPoll</a>(meetingID, { ...params }) -> ActiveSessionCreatePollResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/active-session">client.realtimeKit.activeSession.<a href="./src/resources/realtime-kit/active-session.ts">getActiveSession</a>(meetingID, { ...params }) -> ActiveSessionGetActiveSessionResponse</code>
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/active-session/kick-all">client.realtimeKit.activeSession.<a href="./src/resources/realtime-kit/active-session.ts">kickAllParticipants</a>(meetingID, { ...params }) -> ActiveSessionKickAllParticipantsResponse</code>
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/active-session/kick">client.realtimeKit.activeSession.<a href="./src/resources/realtime-kit/active-session.ts">kickParticipants</a>(meetingID, { ...params }) -> ActiveSessionKickParticipantsResponse</code>
+
+## Livestreams
+
+Types:
+
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamCreateIndependentLivestreamResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetActiveLivestreamsForLivestreamIDResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetAllLivestreamsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamAnalyticsCompleteResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamSessionDetailsForSessionIDResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamSessionForLivestreamIDResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetMeetingActiveLivestreamsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetOrgAnalyticsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamStartLivestreamingAMeetingResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamStopLivestreamingAMeetingResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/livestreams">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">createIndependentLivestream</a>(appID, { ...params }) -> LivestreamCreateIndependentLivestreamResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams/{livestream_id}/active-livestream-session">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getActiveLivestreamsForLivestreamID</a>(livestreamID, { ...params }) -> LivestreamGetActiveLivestreamsForLivestreamIDResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getAllLivestreams</a>(appID, { ...params }) -> LivestreamGetAllLivestreamsResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/analytics/livestreams/overall">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamAnalyticsComplete</a>(appID, { ...params }) -> LivestreamGetLivestreamAnalyticsCompleteResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams/sessions/{livestream-session-id}">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamSessionDetailsForSessionID</a>(livestreamSessionID, { ...params }) -> LivestreamGetLivestreamSessionDetailsForSessionIDResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams/{livestream_id}">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamSessionForLivestreamID</a>(livestreamID, { ...params }) -> LivestreamGetLivestreamSessionForLivestreamIDResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/active-livestream">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getMeetingActiveLivestreams</a>(meetingID, { ...params }) -> LivestreamGetMeetingActiveLivestreamsResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/analytics/daywise">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getOrgAnalytics</a>(appID, { ...params }) -> LivestreamGetOrgAnalyticsResponse</code>
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/livestreams">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">startLivestreamingAMeeting</a>(meetingID, { ...params }) -> LivestreamStartLivestreamingAMeetingResponse</code>
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/active-livestream/stop">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">stopLivestreamingAMeeting</a>(meetingID, { ...params }) -> LivestreamStopLivestreamingAMeetingResponse</code>
+
+## Analytics
+
+Types:
+
+- <code><a href="./src/resources/realtime-kit/analytics.ts">AnalyticsGetOrgAnalyticsResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/analytics/daywise">client.realtimeKit.analytics.<a href="./src/resources/realtime-kit/analytics.ts">getOrgAnalytics</a>(appID, { ...params }) -> AnalyticsGetOrgAnalyticsResponse</code>
+
+# Calls
+
+## SFU
+
+Types:
+
+- <code><a href="./src/resources/calls/sfu.ts">SFUCreateResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SFUUpdateResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SFUListResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SFUDeleteResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SFUGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/calls/apps">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">create</a>({ ...params }) -> SFUCreateResponse</code>
+- <code title="put /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">update</a>(appID, { ...params }) -> SFUUpdateResponse</code>
+- <code title="get /accounts/{account_id}/calls/apps">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">list</a>({ ...params }) -> SFUListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">delete</a>(appID, { ...params }) -> SFUDeleteResponse</code>
+- <code title="get /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">get</a>(appID, { ...params }) -> SFUGetResponse</code>
+
+## TURN
+
+Types:
+
+- <code><a href="./src/resources/calls/turn.ts">TURNCreateResponse</a></code>
+- <code><a href="./src/resources/calls/turn.ts">TURNUpdateResponse</a></code>
+- <code><a href="./src/resources/calls/turn.ts">TURNListResponse</a></code>
+- <code><a href="./src/resources/calls/turn.ts">TURNDeleteResponse</a></code>
+- <code><a href="./src/resources/calls/turn.ts">TURNGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/calls/turn_keys">client.calls.turn.<a href="./src/resources/calls/turn.ts">create</a>({ ...params }) -> TURNCreateResponse</code>
+- <code title="put /accounts/{account_id}/calls/turn_keys/{key_id}">client.calls.turn.<a href="./src/resources/calls/turn.ts">update</a>(keyID, { ...params }) -> TURNUpdateResponse</code>
+- <code title="get /accounts/{account_id}/calls/turn_keys">client.calls.turn.<a href="./src/resources/calls/turn.ts">list</a>({ ...params }) -> TURNListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/calls/turn_keys/{key_id}">client.calls.turn.<a href="./src/resources/calls/turn.ts">delete</a>(keyID, { ...params }) -> TURNDeleteResponse</code>
+- <code title="get /accounts/{account_id}/calls/turn_keys/{key_id}">client.calls.turn.<a href="./src/resources/calls/turn.ts">get</a>(keyID, { ...params }) -> TURNGetResponse</code>
+
+# CloudforceOne
+
+## Scans
+
+### Results
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/scans/results.ts">ScanResult</a></code>
+- <code><a href="./src/resources/cloudforce-one/scans/results.ts">ResultGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/scans/results/{config_id}">client.cloudforceOne.scans.results.<a href="./src/resources/cloudforce-one/scans/results.ts">get</a>(configID, { ...params }) -> ResultGetResponse</code>
+
+### Config
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/scans/config.ts">ConfigEditResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">create</a>({ ...params }) -> ConfigCreateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/scans/config">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">list</a>({ ...params }) -> ConfigListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/scans/config/{config_id}">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">delete</a>(configID, { ...params }) -> ConfigDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/cloudforce-one/scans/config/{config_id}">client.cloudforceOne.scans.config.<a href="./src/resources/cloudforce-one/scans/config.ts">edit</a>(configID, { ...params }) -> ConfigEditResponse</code>
+
+## BinaryStorage
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/binary-storage.ts">BinaryStorageCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/binary">client.cloudforceOne.binaryStorage.<a href="./src/resources/cloudforce-one/binary-storage.ts">create</a>({ ...params }) -> BinaryStorageCreateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/binary/{hash}">client.cloudforceOne.binaryStorage.<a href="./src/resources/cloudforce-one/binary-storage.ts">get</a>(hash, { ...params }) -> void</code>
+
+## Requests
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/requests/requests.ts">Item</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/requests.ts">ListItem</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/requests.ts">Quota</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/requests.ts">RequestConstants</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/requests.ts">RequestTypes</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/requests.ts">RequestDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/requests.ts">RequestTypesResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/requests/new">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">create</a>({ ...params }) -> Item</code>
+- <code title="put /accounts/{account_id}/cloudforce-one/requests/{request_id}">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">update</a>(requestID, { ...params }) -> Item</code>
+- <code title="post /accounts/{account_id}/cloudforce-one/requests">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">list</a>({ ...params }) -> ListItemsSinglePage</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/requests/{request_id}">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">delete</a>(requestID, { ...params }) -> RequestDeleteResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/requests/constants">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">constants</a>({ ...params }) -> RequestConstants</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/requests/{request_id}">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">get</a>(requestID, { ...params }) -> Item</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/requests/quota">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">quota</a>({ ...params }) -> Quota</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/requests/types">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">types</a>({ ...params }) -> RequestTypesResponsesSinglePage</code>
+
+### Message
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/requests/message.ts">Message</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/message.ts">MessageDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/requests/{request_id}/message/new">client.cloudforceOne.requests.message.<a href="./src/resources/cloudforce-one/requests/message.ts">create</a>(requestID, { ...params }) -> Message</code>
+- <code title="put /accounts/{account_id}/cloudforce-one/requests/{request_id}/message/{message_id}">client.cloudforceOne.requests.message.<a href="./src/resources/cloudforce-one/requests/message.ts">update</a>(messageID, { ...params }) -> Message</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/requests/{request_id}/message/{message_id}">client.cloudforceOne.requests.message.<a href="./src/resources/cloudforce-one/requests/message.ts">delete</a>(messageID, { ...params }) -> MessageDeleteResponse</code>
+- <code title="post /accounts/{account_id}/cloudforce-one/requests/{request_id}/message">client.cloudforceOne.requests.message.<a href="./src/resources/cloudforce-one/requests/message.ts">get</a>(requestID, { ...params }) -> MessagesSinglePage</code>
+
+### Priority
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/requests/priority.ts">Label</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/priority.ts">Priority</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityEdit</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/requests/priority/new">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">create</a>({ ...params }) -> Priority</code>
+- <code title="put /accounts/{account_id}/cloudforce-one/requests/priority/{priority_id}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">update</a>(priorityID, { ...params }) -> Item</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/requests/priority/{priority_id}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">delete</a>(priorityID, { ...params }) -> PriorityDeleteResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/requests/priority/{priority_id}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">get</a>(priorityID, { ...params }) -> Item</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/requests/priority/quota">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">quota</a>({ ...params }) -> Quota</code>
+
+### Assets
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetUpdateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/requests/{request_id}/asset">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">create</a>(requestID, { ...params }) -> AssetCreateResponsesSinglePage</code>
+- <code title="put /accounts/{account_id}/cloudforce-one/requests/{request_id}/asset/{asset_id}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">update</a>(assetID, { ...params }) -> AssetUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/requests/{request_id}/asset/{asset_id}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">delete</a>(assetID, { ...params }) -> AssetDeleteResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/requests/{request_id}/asset/{asset_id}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">get</a>(assetID, { ...params }) -> AssetGetResponsesSinglePage</code>
+
+## ThreatEvents
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">ThreatEventCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">ThreatEventListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">ThreatEventDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">ThreatEventBulkCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">ThreatEventEditResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">ThreatEventGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/events/create">client.cloudforceOne.threatEvents.<a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">create</a>({ ...params }) -> ThreatEventCreateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/events">client.cloudforceOne.threatEvents.<a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">list</a>({ ...params }) -> ThreatEventListResponse</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/events/{event_id}">client.cloudforceOne.threatEvents.<a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">delete</a>(eventID, { ...params }) -> ThreatEventDeleteResponse</code>
+- <code title="post /accounts/{account_id}/cloudforce-one/events/create/bulk">client.cloudforceOne.threatEvents.<a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">bulkCreate</a>({ ...params }) -> ThreatEventBulkCreateResponse</code>
+- <code title="patch /accounts/{account_id}/cloudforce-one/events/{event_id}">client.cloudforceOne.threatEvents.<a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">edit</a>(eventID, { ...params }) -> ThreatEventEditResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/events/{event_id}">client.cloudforceOne.threatEvents.<a href="./src/resources/cloudforce-one/threat-events/threat-events.ts">get</a>(eventID, { ...params }) -> ThreatEventGetResponse</code>
+
+### Attackers
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/attackers.ts">AttackerListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/events/attackers">client.cloudforceOne.threatEvents.attackers.<a href="./src/resources/cloudforce-one/threat-events/attackers.ts">list</a>({ ...params }) -> AttackerListResponse</code>
+
+### Categories
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/categories.ts">CategoryCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/categories.ts">CategoryListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/categories.ts">CategoryDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/categories.ts">CategoryEditResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/categories.ts">CategoryGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/events/categories/create">client.cloudforceOne.threatEvents.categories.<a href="./src/resources/cloudforce-one/threat-events/categories.ts">create</a>({ ...params }) -> CategoryCreateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/events/categories">client.cloudforceOne.threatEvents.categories.<a href="./src/resources/cloudforce-one/threat-events/categories.ts">list</a>({ ...params }) -> CategoryListResponse</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/events/categories/{category_id}">client.cloudforceOne.threatEvents.categories.<a href="./src/resources/cloudforce-one/threat-events/categories.ts">delete</a>(categoryID, { ...params }) -> CategoryDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/cloudforce-one/events/categories/{category_id}">client.cloudforceOne.threatEvents.categories.<a href="./src/resources/cloudforce-one/threat-events/categories.ts">edit</a>(categoryID, { ...params }) -> CategoryEditResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/events/categories/{category_id}">client.cloudforceOne.threatEvents.categories.<a href="./src/resources/cloudforce-one/threat-events/categories.ts">get</a>(categoryID, { ...params }) -> CategoryGetResponse</code>
+
+### Countries
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/countries.ts">CountryListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/events/countries">client.cloudforceOne.threatEvents.countries.<a href="./src/resources/cloudforce-one/threat-events/countries.ts">list</a>({ ...params }) -> CountryListResponse</code>
+
+### Crons
+
+### Datasets
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">DatasetCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">DatasetListResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">DatasetEditResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">DatasetGetResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">DatasetRawResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/events/dataset/create">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">create</a>({ ...params }) -> DatasetCreateResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/events/dataset">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">list</a>({ ...params }) -> DatasetListResponse</code>
+- <code title="patch /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">edit</a>(datasetID, { ...params }) -> DatasetEditResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">get</a>(datasetID, { ...params }) -> DatasetGetResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/events/raw/{dataset_id}/{event_id}">client.cloudforceOne.threatEvents.datasets.<a href="./src/resources/cloudforce-one/threat-events/datasets/datasets.ts">raw</a>(eventID, { ...params }) -> DatasetRawResponse</code>
+
+#### Health
+
+### IndicatorTypes
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/indicator-types.ts">IndicatorTypeListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/events/indicatorTypes">client.cloudforceOne.threatEvents.indicatorTypes.<a href="./src/resources/cloudforce-one/threat-events/indicator-types.ts">list</a>({ ...params }) -> IndicatorTypeListResponse</code>
+
+### Raw
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/raw.ts">RawEditResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/raw.ts">RawGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/cloudforce-one/events/{event_id}/raw/{raw_id}">client.cloudforceOne.threatEvents.raw.<a href="./src/resources/cloudforce-one/threat-events/raw.ts">edit</a>(rawID, { ...params }) -> RawEditResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/events/{event_id}/raw/{raw_id}">client.cloudforceOne.threatEvents.raw.<a href="./src/resources/cloudforce-one/threat-events/raw.ts">get</a>(rawID, { ...params }) -> RawGetResponse</code>
+
+### Relate
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/relate.ts">RelateDeleteResponse</a></code>
+
+Methods:
+
+- <code title="delete /accounts/{account_id}/cloudforce-one/events/relate/{event_id}">client.cloudforceOne.threatEvents.relate.<a href="./src/resources/cloudforce-one/threat-events/relate.ts">delete</a>(eventID, { ...params }) -> RelateDeleteResponse</code>
+
+### Tags
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/tags.ts">TagCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/events/tags/create">client.cloudforceOne.threatEvents.tags.<a href="./src/resources/cloudforce-one/threat-events/tags.ts">create</a>({ ...params }) -> TagCreateResponse</code>
+
+### EventTags
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/event-tags.ts">EventTagCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/threat-events/event-tags.ts">EventTagDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/events/event_tag/{event_id}/create">client.cloudforceOne.threatEvents.eventTags.<a href="./src/resources/cloudforce-one/threat-events/event-tags.ts">create</a>(eventID, { ...params }) -> EventTagCreateResponse</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/events/event_tag/{event_id}">client.cloudforceOne.threatEvents.eventTags.<a href="./src/resources/cloudforce-one/threat-events/event-tags.ts">delete</a>(eventID, { ...params }) -> EventTagDeleteResponse</code>
+
+### TargetIndustries
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/threat-events/target-industries.ts">TargetIndustryListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/events/targetIndustries">client.cloudforceOne.threatEvents.targetIndustries.<a href="./src/resources/cloudforce-one/threat-events/target-industries.ts">list</a>({ ...params }) -> TargetIndustryListResponse</code>
+
+### Insights
+
+# AIGateway
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayUpdateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/gateways">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">create</a>({ ...params }) -> AIGatewayCreateResponse</code>
+- <code title="put /accounts/{account_id}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">update</a>(id, { ...params }) -> AIGatewayUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">list</a>({ ...params }) -> AIGatewayListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">delete</a>(id, { ...params }) -> AIGatewayDeleteResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">get</a>(id, { ...params }) -> AIGatewayGetResponse</code>
+
+## EvaluationTypes
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/evaluation-types.ts">EvaluationTypeListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-gateway/evaluation-types">client.aiGateway.evaluationTypes.<a href="./src/resources/ai-gateway/evaluation-types.ts">list</a>({ ...params }) -> EvaluationTypeListResponsesV4PagePaginationArray</code>
+
+## Logs
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogEditResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogGetResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogRequestResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogResponseResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">list</a>(gatewayID, { ...params }) -> LogListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">delete</a>(gatewayID, { ...params }) -> LogDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs/{id}">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">edit</a>(id, { ...params }) -> LogEditResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs/{id}">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">get</a>(id, { ...params }) -> LogGetResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs/{id}/request">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">request</a>(id, { ...params }) -> unknown</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs/{id}/response">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">response</a>(id, { ...params }) -> unknown</code>
+
+## Datasets
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/datasets.ts">DatasetCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/datasets.ts">DatasetUpdateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/datasets.ts">DatasetListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/datasets.ts">DatasetDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/datasets.ts">DatasetGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets">client.aiGateway.datasets.<a href="./src/resources/ai-gateway/datasets.ts">create</a>(gatewayID, { ...params }) -> DatasetCreateResponse</code>
+- <code title="put /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets/{id}">client.aiGateway.datasets.<a href="./src/resources/ai-gateway/datasets.ts">update</a>(id, { ...params }) -> DatasetUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets">client.aiGateway.datasets.<a href="./src/resources/ai-gateway/datasets.ts">list</a>(gatewayID, { ...params }) -> DatasetListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets/{id}">client.aiGateway.datasets.<a href="./src/resources/ai-gateway/datasets.ts">delete</a>(id, { ...params }) -> DatasetDeleteResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets/{id}">client.aiGateway.datasets.<a href="./src/resources/ai-gateway/datasets.ts">get</a>(id, { ...params }) -> DatasetGetResponse</code>
+
+## Evaluations
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/evaluations.ts">EvaluationCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/evaluations.ts">EvaluationListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/evaluations.ts">EvaluationDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/evaluations.ts">EvaluationGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">create</a>(gatewayID, { ...params }) -> EvaluationCreateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">list</a>(gatewayID, { ...params }) -> EvaluationListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations/{id}">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">delete</a>(id, { ...params }) -> EvaluationDeleteResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations/{id}">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">get</a>(id, { ...params }) -> EvaluationGetResponse</code>
+
+## DynamicRouting
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingUpdateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingCreateDeploymentResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingCreateVersionResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingGetResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingGetVersionResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingListDeploymentsResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/dynamic-routing.ts">DynamicRoutingListVersionsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">create</a>(gatewayID, { ...params }) -> DynamicRoutingCreateResponse</code>
+- <code title="patch /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">update</a>(id, { ...params }) -> DynamicRoutingUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">list</a>(gatewayID, { ...params }) -> DynamicRoutingListResponse</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">delete</a>(id, { ...params }) -> DynamicRoutingDeleteResponse</code>
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/deployments">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">createDeployment</a>(id, { ...params }) -> DynamicRoutingCreateDeploymentResponse</code>
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">createVersion</a>(id, { ...params }) -> DynamicRoutingCreateVersionResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">get</a>(id, { ...params }) -> DynamicRoutingGetResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions/{version_id}">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">getVersion</a>(versionID, { ...params }) -> DynamicRoutingGetVersionResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/deployments">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">listDeployments</a>(id, { ...params }) -> DynamicRoutingListDeploymentsResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions">client.aiGateway.dynamicRouting.<a href="./src/resources/ai-gateway/dynamic-routing.ts">listVersions</a>(id, { ...params }) -> DynamicRoutingListVersionsResponse</code>
+
+## ProviderConfigs
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/provider-configs.ts">ProviderConfigCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/provider-configs.ts">ProviderConfigListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/provider_configs">client.aiGateway.providerConfigs.<a href="./src/resources/ai-gateway/provider-configs.ts">create</a>(gatewayID, { ...params }) -> ProviderConfigCreateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/provider_configs">client.aiGateway.providerConfigs.<a href="./src/resources/ai-gateway/provider-configs.ts">list</a>(gatewayID, { ...params }) -> ProviderConfigListResponsesV4PagePaginationArray</code>
+
+## URLs
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/urls.ts">URLGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/url/{provider}">client.aiGateway.urls.<a href="./src/resources/ai-gateway/urls.ts">get</a>(provider, { ...params }) -> URLGetResponse</code>
+
+# IAM
+
+## PermissionGroups
+
+Types:
+
+- <code><a href="./src/resources/iam/permission-groups.ts">PermissionGroupListResponse</a></code>
+- <code><a href="./src/resources/iam/permission-groups.ts">PermissionGroupGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/iam/permission_groups">client.iam.permissionGroups.<a href="./src/resources/iam/permission-groups.ts">list</a>({ ...params }) -> PermissionGroupListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/iam/permission_groups/{permission_group_id}">client.iam.permissionGroups.<a href="./src/resources/iam/permission-groups.ts">get</a>(permissionGroupID, { ...params }) -> PermissionGroupGetResponse</code>
+
+## ResourceGroups
+
+Types:
+
+- <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupCreateResponse</a></code>
+- <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupUpdateResponse</a></code>
+- <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupListResponse</a></code>
+- <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupDeleteResponse</a></code>
+- <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/iam/resource_groups">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">create</a>({ ...params }) -> ResourceGroupCreateResponse</code>
+- <code title="put /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">update</a>(resourceGroupID, { ...params }) -> ResourceGroupUpdateResponse</code>
+- <code title="get /accounts/{account_id}/iam/resource_groups">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">list</a>({ ...params }) -> ResourceGroupListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">delete</a>(resourceGroupID, { ...params }) -> ResourceGroupDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">get</a>(resourceGroupID, { ...params }) -> ResourceGroupGetResponse</code>
+
+## UserGroups
+
+Types:
+
+- <code><a href="./src/resources/iam/user-groups/user-groups.ts">UserGroupCreateResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/user-groups.ts">UserGroupUpdateResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/user-groups.ts">UserGroupListResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/user-groups.ts">UserGroupDeleteResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/user-groups.ts">UserGroupGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/iam/user_groups">client.iam.userGroups.<a href="./src/resources/iam/user-groups/user-groups.ts">create</a>({ ...params }) -> UserGroupCreateResponse</code>
+- <code title="put /accounts/{account_id}/iam/user_groups/{user_group_id}">client.iam.userGroups.<a href="./src/resources/iam/user-groups/user-groups.ts">update</a>(userGroupID, { ...params }) -> UserGroupUpdateResponse</code>
+- <code title="get /accounts/{account_id}/iam/user_groups">client.iam.userGroups.<a href="./src/resources/iam/user-groups/user-groups.ts">list</a>({ ...params }) -> UserGroupListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/iam/user_groups/{user_group_id}">client.iam.userGroups.<a href="./src/resources/iam/user-groups/user-groups.ts">delete</a>(userGroupID, { ...params }) -> UserGroupDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/iam/user_groups/{user_group_id}">client.iam.userGroups.<a href="./src/resources/iam/user-groups/user-groups.ts">get</a>(userGroupID, { ...params }) -> UserGroupGetResponse</code>
+
+### Members
+
+Types:
+
+- <code><a href="./src/resources/iam/user-groups/members.ts">MemberCreateResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/members.ts">MemberUpdateResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/members.ts">MemberListResponse</a></code>
+- <code><a href="./src/resources/iam/user-groups/members.ts">MemberDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/iam/user_groups/{user_group_id}/members">client.iam.userGroups.members.<a href="./src/resources/iam/user-groups/members.ts">create</a>(userGroupID, [ ...body ]) -> MemberCreateResponse</code>
+- <code title="put /accounts/{account_id}/iam/user_groups/{user_group_id}/members">client.iam.userGroups.members.<a href="./src/resources/iam/user-groups/members.ts">update</a>(userGroupID, [ ...body ]) -> MemberUpdateResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/iam/user_groups/{user_group_id}/members">client.iam.userGroups.members.<a href="./src/resources/iam/user-groups/members.ts">list</a>(userGroupID, { ...params }) -> MemberListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/iam/user_groups/{user_group_id}/members/{member_id}">client.iam.userGroups.members.<a href="./src/resources/iam/user-groups/members.ts">delete</a>(memberID, { ...params }) -> MemberDeleteResponse</code>
+
+## SSO
+
+Types:
+
+- <code><a href="./src/resources/iam/sso.ts">SSOCreateResponse</a></code>
+- <code><a href="./src/resources/iam/sso.ts">SSOUpdateResponse</a></code>
+- <code><a href="./src/resources/iam/sso.ts">SSOListResponse</a></code>
+- <code><a href="./src/resources/iam/sso.ts">SSODeleteResponse</a></code>
+- <code><a href="./src/resources/iam/sso.ts">SSOBeginVerificationResponse</a></code>
+- <code><a href="./src/resources/iam/sso.ts">SSOGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/sso_connectors">client.iam.sso.<a href="./src/resources/iam/sso.ts">create</a>({ ...params }) -> SSOCreateResponse</code>
+- <code title="patch /accounts/{account_id}/sso_connectors/{sso_connector_id}">client.iam.sso.<a href="./src/resources/iam/sso.ts">update</a>(ssoConnectorID, { ...params }) -> SSOUpdateResponse</code>
+- <code title="get /accounts/{account_id}/sso_connectors">client.iam.sso.<a href="./src/resources/iam/sso.ts">list</a>({ ...params }) -> SSOListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/sso_connectors/{sso_connector_id}">client.iam.sso.<a href="./src/resources/iam/sso.ts">delete</a>(ssoConnectorID, { ...params }) -> SSODeleteResponse | null</code>
+- <code title="post /accounts/{account_id}/sso_connectors/{sso_connector_id}/begin_verification">client.iam.sso.<a href="./src/resources/iam/sso.ts">beginVerification</a>(ssoConnectorID, { ...params }) -> SSOBeginVerificationResponse</code>
+- <code title="get /accounts/{account_id}/sso_connectors/{sso_connector_id}">client.iam.sso.<a href="./src/resources/iam/sso.ts">get</a>(ssoConnectorID, { ...params }) -> SSOGetResponse</code>
+
+# CloudConnector
+
+## Rules
+
+Types:
+
+- <code><a href="./src/resources/cloud-connector/rules.ts">RuleUpdateResponse</a></code>
+- <code><a href="./src/resources/cloud-connector/rules.ts">RuleListResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/cloud_connector/rules">client.cloudConnector.rules.<a href="./src/resources/cloud-connector/rules.ts">update</a>([ ...rules ]) -> RuleUpdateResponsesSinglePage</code>
+- <code title="get /zones/{zone_id}/cloud_connector/rules">client.cloudConnector.rules.<a href="./src/resources/cloud-connector/rules.ts">list</a>({ ...params }) -> RuleListResponsesSinglePage</code>
+
+# BotnetFeed
+
+## ASN
+
+Types:
+
+- <code><a href="./src/resources/botnet-feed/asn.ts">ASNDayReportResponse</a></code>
+- <code><a href="./src/resources/botnet-feed/asn.ts">ASNFullReportResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/botnet_feed/asn/{asn_id}/day_report">client.botnetFeed.asn.<a href="./src/resources/botnet-feed/asn.ts">dayReport</a>(asnID, { ...params }) -> ASNDayReportResponse</code>
+- <code title="get /accounts/{account_id}/botnet_feed/asn/{asn_id}/full_report">client.botnetFeed.asn.<a href="./src/resources/botnet-feed/asn.ts">fullReport</a>(asnID, { ...params }) -> ASNFullReportResponse</code>
+
+## Configs
+
+### ASN
+
+Types:
+
+- <code><a href="./src/resources/botnet-feed/configs/asn.ts">ASNDeleteResponse</a></code>
+- <code><a href="./src/resources/botnet-feed/configs/asn.ts">ASNGetResponse</a></code>
+
+Methods:
+
+- <code title="delete /accounts/{account_id}/botnet_feed/configs/asn/{asn_id}">client.botnetFeed.configs.asn.<a href="./src/resources/botnet-feed/configs/asn.ts">delete</a>(asnID, { ...params }) -> ASNDeleteResponse</code>
+- <code title="get /accounts/{account_id}/botnet_feed/configs/asn">client.botnetFeed.configs.asn.<a href="./src/resources/botnet-feed/configs/asn.ts">get</a>({ ...params }) -> ASNGetResponse</code>
+
+# SecurityTXT
+
+Types:
+
+- <code><a href="./src/resources/security-txt.ts">SecurityTXTUpdateResponse</a></code>
+- <code><a href="./src/resources/security-txt.ts">SecurityTXTDeleteResponse</a></code>
+- <code><a href="./src/resources/security-txt.ts">SecurityTXTGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/security-center/securitytxt">client.securityTXT.<a href="./src/resources/security-txt.ts">update</a>({ ...params }) -> SecurityTXTUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/security-center/securitytxt">client.securityTXT.<a href="./src/resources/security-txt.ts">delete</a>({ ...params }) -> SecurityTXTDeleteResponse</code>
+- <code title="get /zones/{zone_id}/security-center/securitytxt">client.securityTXT.<a href="./src/resources/security-txt.ts">get</a>({ ...params }) -> SecurityTXTGetResponse</code>
+
+# Workflows
+
+Types:
+
+- <code><a href="./src/resources/workflows/workflows.ts">WorkflowUpdateResponse</a></code>
+- <code><a href="./src/resources/workflows/workflows.ts">WorkflowListResponse</a></code>
+- <code><a href="./src/resources/workflows/workflows.ts">WorkflowDeleteResponse</a></code>
+- <code><a href="./src/resources/workflows/workflows.ts">WorkflowGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workflows/{workflow_name}">client.workflows.<a href="./src/resources/workflows/workflows.ts">update</a>(workflowName, { ...params }) -> WorkflowUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workflows">client.workflows.<a href="./src/resources/workflows/workflows.ts">list</a>({ ...params }) -> WorkflowListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/workflows/{workflow_name}">client.workflows.<a href="./src/resources/workflows/workflows.ts">delete</a>(workflowName, { ...params }) -> WorkflowDeleteResponse</code>
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}">client.workflows.<a href="./src/resources/workflows/workflows.ts">get</a>(workflowName, { ...params }) -> WorkflowGetResponse</code>
+
+## Instances
+
+Types:
+
+- <code><a href="./src/resources/workflows/instances/instances.ts">InstanceCreateResponse</a></code>
+- <code><a href="./src/resources/workflows/instances/instances.ts">InstanceListResponse</a></code>
+- <code><a href="./src/resources/workflows/instances/instances.ts">InstanceBulkResponse</a></code>
+- <code><a href="./src/resources/workflows/instances/instances.ts">InstanceGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workflows/{workflow_name}/instances">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">create</a>(workflowName, { ...params }) -> InstanceCreateResponse</code>
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}/instances">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">list</a>(workflowName, { ...params }) -> InstanceListResponsesV4PagePaginationArray</code>
+- <code title="post /accounts/{account_id}/workflows/{workflow_name}/instances/batch">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">bulk</a>(workflowName, [ ...body ]) -> InstanceBulkResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">get</a>(instanceID, { ...params }) -> InstanceGetResponse</code>
+
+### Status
+
+Types:
+
+- <code><a href="./src/resources/workflows/instances/status.ts">StatusEditResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}/status">client.workflows.instances.status.<a href="./src/resources/workflows/instances/status.ts">edit</a>(instanceID, { ...params }) -> StatusEditResponse</code>
+
+### Events
+
+Types:
+
+- <code><a href="./src/resources/workflows/instances/events.ts">EventCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}/events/{event_type}">client.workflows.instances.events.<a href="./src/resources/workflows/instances/events.ts">create</a>(eventType, { ...params }) -> EventCreateResponse</code>
+
+## Versions
+
+Types:
+
+- <code><a href="./src/resources/workflows/versions.ts">VersionListResponse</a></code>
+- <code><a href="./src/resources/workflows/versions.ts">VersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}/versions">client.workflows.versions.<a href="./src/resources/workflows/versions.ts">list</a>(workflowName, { ...params }) -> VersionListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}/versions/{version_id}">client.workflows.versions.<a href="./src/resources/workflows/versions.ts">get</a>(versionID, { ...params }) -> VersionGetResponse</code>
+
+# ResourceSharing
+
+Types:
+
+- <code><a href="./src/resources/resource-sharing/resource-sharing.ts">ResourceSharingCreateResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resource-sharing.ts">ResourceSharingUpdateResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resource-sharing.ts">ResourceSharingListResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resource-sharing.ts">ResourceSharingDeleteResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resource-sharing.ts">ResourceSharingGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/shares">client.resourceSharing.<a href="./src/resources/resource-sharing/resource-sharing.ts">create</a>({ ...params }) -> ResourceSharingCreateResponse</code>
+- <code title="put /accounts/{account_id}/shares/{share_id}">client.resourceSharing.<a href="./src/resources/resource-sharing/resource-sharing.ts">update</a>(shareID, { ...params }) -> ResourceSharingUpdateResponse</code>
+- <code title="get /accounts/{account_id}/shares">client.resourceSharing.<a href="./src/resources/resource-sharing/resource-sharing.ts">list</a>({ ...params }) -> ResourceSharingListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/shares/{share_id}">client.resourceSharing.<a href="./src/resources/resource-sharing/resource-sharing.ts">delete</a>(shareID, { ...params }) -> ResourceSharingDeleteResponse</code>
+- <code title="get /accounts/{account_id}/shares/{share_id}">client.resourceSharing.<a href="./src/resources/resource-sharing/resource-sharing.ts">get</a>(shareID, { ...params }) -> ResourceSharingGetResponse</code>
+
+## Recipients
+
+Types:
+
+- <code><a href="./src/resources/resource-sharing/recipients.ts">RecipientCreateResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/recipients.ts">RecipientListResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/recipients.ts">RecipientDeleteResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/recipients.ts">RecipientGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/shares/{share_id}/recipients">client.resourceSharing.recipients.<a href="./src/resources/resource-sharing/recipients.ts">create</a>(shareID, { ...params }) -> RecipientCreateResponse</code>
+- <code title="get /accounts/{account_id}/shares/{share_id}/recipients">client.resourceSharing.recipients.<a href="./src/resources/resource-sharing/recipients.ts">list</a>(shareID, { ...params }) -> RecipientListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/shares/{share_id}/recipients/{recipient_id}">client.resourceSharing.recipients.<a href="./src/resources/resource-sharing/recipients.ts">delete</a>(recipientID, { ...params }) -> RecipientDeleteResponse</code>
+- <code title="get /accounts/{account_id}/shares/{share_id}/recipients/{recipient_id}">client.resourceSharing.recipients.<a href="./src/resources/resource-sharing/recipients.ts">get</a>(recipientID, { ...params }) -> RecipientGetResponse</code>
+
+## Resources
+
+Types:
+
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceCreateResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceUpdateResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceListResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceDeleteResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/shares/{share_id}/resources">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">create</a>(shareID, { ...params }) -> ResourceCreateResponse</code>
+- <code title="put /accounts/{account_id}/shares/{share_id}/resources/{resource_id}">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">update</a>(resourceID, { ...params }) -> ResourceUpdateResponse</code>
+- <code title="get /accounts/{account_id}/shares/{share_id}/resources">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">list</a>(shareID, { ...params }) -> ResourceListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/shares/{share_id}/resources/{resource_id}">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">delete</a>(resourceID, { ...params }) -> ResourceDeleteResponse</code>
+- <code title="get /accounts/{account_id}/shares/{share_id}/resources/{resource_id}">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">get</a>(resourceID, { ...params }) -> ResourceGetResponse</code>
+
+# LeakedCredentialChecks
+
+Types:
+
+- <code><a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">LeakedCredentialCheckCreateResponse</a></code>
+- <code><a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">LeakedCredentialCheckGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/leaked-credential-checks">client.leakedCredentialChecks.<a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">create</a>({ ...params }) -> LeakedCredentialCheckCreateResponse</code>
+- <code title="get /zones/{zone_id}/leaked-credential-checks">client.leakedCredentialChecks.<a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">get</a>({ ...params }) -> LeakedCredentialCheckGetResponse</code>
+
+## Detections
+
+Types:
+
+- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionCreateResponse</a></code>
+- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionUpdateResponse</a></code>
+- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionListResponse</a></code>
+- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionDeleteResponse</a></code>
+- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/leaked-credential-checks/detections">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">create</a>({ ...params }) -> DetectionCreateResponse</code>
+- <code title="put /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">update</a>(detectionID, { ...params }) -> DetectionUpdateResponse</code>
+- <code title="get /zones/{zone_id}/leaked-credential-checks/detections">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">list</a>({ ...params }) -> DetectionListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">delete</a>(detectionID, { ...params }) -> DetectionDeleteResponse</code>
+- <code title="get /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">get</a>(detectionID, { ...params }) -> DetectionGetResponse</code>
+
+# ContentScanning
+
+Types:
+
+- <code><a href="./src/resources/content-scanning/content-scanning.ts">ContentScanningCreateResponse</a></code>
+- <code><a href="./src/resources/content-scanning/content-scanning.ts">ContentScanningUpdateResponse</a></code>
+- <code><a href="./src/resources/content-scanning/content-scanning.ts">ContentScanningDisableResponse</a></code>
+- <code><a href="./src/resources/content-scanning/content-scanning.ts">ContentScanningEnableResponse</a></code>
+- <code><a href="./src/resources/content-scanning/content-scanning.ts">ContentScanningGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/content-upload-scan/settings">client.contentScanning.<a href="./src/resources/content-scanning/content-scanning.ts">create</a>({ ...params }) -> ContentScanningCreateResponse</code>
+- <code title="put /zones/{zone_id}/content-upload-scan/settings">client.contentScanning.<a href="./src/resources/content-scanning/content-scanning.ts">update</a>({ ...params }) -> ContentScanningUpdateResponse</code>
+- <code title="post /zones/{zone_id}/content-upload-scan/disable">client.contentScanning.<a href="./src/resources/content-scanning/content-scanning.ts">disable</a>({ ...params }) -> ContentScanningDisableResponse</code>
+- <code title="post /zones/{zone_id}/content-upload-scan/enable">client.contentScanning.<a href="./src/resources/content-scanning/content-scanning.ts">enable</a>({ ...params }) -> ContentScanningEnableResponse</code>
+- <code title="get /zones/{zone_id}/content-upload-scan/settings">client.contentScanning.<a href="./src/resources/content-scanning/content-scanning.ts">get</a>({ ...params }) -> ContentScanningGetResponse</code>
+
+## Payloads
+
+Types:
+
+- <code><a href="./src/resources/content-scanning/payloads.ts">PayloadCreateResponse</a></code>
+- <code><a href="./src/resources/content-scanning/payloads.ts">PayloadListResponse</a></code>
+- <code><a href="./src/resources/content-scanning/payloads.ts">PayloadDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/content-upload-scan/payloads">client.contentScanning.payloads.<a href="./src/resources/content-scanning/payloads.ts">create</a>([ ...body ]) -> PayloadCreateResponsesSinglePage</code>
+- <code title="get /zones/{zone_id}/content-upload-scan/payloads">client.contentScanning.payloads.<a href="./src/resources/content-scanning/payloads.ts">list</a>({ ...params }) -> PayloadListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/content-upload-scan/payloads/{expression_id}">client.contentScanning.payloads.<a href="./src/resources/content-scanning/payloads.ts">delete</a>(expressionID, { ...params }) -> PayloadDeleteResponsesSinglePage</code>
+
+## Settings
+
+Types:
+
+- <code><a href="./src/resources/content-scanning/settings.ts">SettingGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/content-upload-scan/settings">client.contentScanning.settings.<a href="./src/resources/content-scanning/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
+
+# AbuseReports
+
+Types:
+
+- <code><a href="./src/resources/abuse-reports/abuse-reports.ts">AbuseReportCreateResponse</a></code>
+- <code><a href="./src/resources/abuse-reports/abuse-reports.ts">AbuseReportListResponse</a></code>
+- <code><a href="./src/resources/abuse-reports/abuse-reports.ts">AbuseReportGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/abuse-reports/{report_param}">client.abuseReports.<a href="./src/resources/abuse-reports/abuse-reports.ts">create</a>(reportParam, { ...params }) -> AbuseReportCreateResponse</code>
+- <code title="get /accounts/{account_id}/abuse-reports">client.abuseReports.<a href="./src/resources/abuse-reports/abuse-reports.ts">list</a>({ ...params }) -> AbuseReportListResponsesV4PagePagination</code>
+- <code title="get /accounts/{account_id}/abuse-reports/{report_param}">client.abuseReports.<a href="./src/resources/abuse-reports/abuse-reports.ts">get</a>(reportParam, { ...params }) -> AbuseReportGetResponse</code>
+
+## Mitigations
+
+Types:
+
+- <code><a href="./src/resources/abuse-reports/mitigations.ts">MitigationListResponse</a></code>
+- <code><a href="./src/resources/abuse-reports/mitigations.ts">MitigationReviewResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/abuse-reports/{report_id}/mitigations">client.abuseReports.mitigations.<a href="./src/resources/abuse-reports/mitigations.ts">list</a>(reportID, { ...params }) -> MitigationListResponsesV4PagePagination</code>
+- <code title="post /accounts/{account_id}/abuse-reports/{report_id}/mitigations/appeal">client.abuseReports.mitigations.<a href="./src/resources/abuse-reports/mitigations.ts">review</a>(reportID, { ...params }) -> MitigationReviewResponsesSinglePage</code>
+
+# AI
+
+Types:
+
+- <code><a href="./src/resources/ai/ai.ts">AIRunResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai/run/{model_name}">client.ai.<a href="./src/resources/ai/ai.ts">run</a>(modelName, { ...params }) -> AIRunResponse</code>
+
+## Finetunes
+
+Types:
+
+- <code><a href="./src/resources/ai/finetunes/finetunes.ts">FinetuneCreateResponse</a></code>
+- <code><a href="./src/resources/ai/finetunes/finetunes.ts">FinetuneListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai/finetunes">client.ai.finetunes.<a href="./src/resources/ai/finetunes/finetunes.ts">create</a>({ ...params }) -> FinetuneCreateResponse</code>
+- <code title="get /accounts/{account_id}/ai/finetunes">client.ai.finetunes.<a href="./src/resources/ai/finetunes/finetunes.ts">list</a>({ ...params }) -> FinetuneListResponse</code>
+
+### Assets
+
+Types:
+
+- <code><a href="./src/resources/ai/finetunes/assets.ts">AssetCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai/finetunes/{finetune_id}/finetune-assets">client.ai.finetunes.assets.<a href="./src/resources/ai/finetunes/assets.ts">create</a>(finetuneID, { ...params }) -> AssetCreateResponse</code>
+
+### Public
+
+Types:
+
+- <code><a href="./src/resources/ai/finetunes/public.ts">PublicListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai/finetunes/public">client.ai.finetunes.public.<a href="./src/resources/ai/finetunes/public.ts">list</a>({ ...params }) -> PublicListResponsesSinglePage</code>
+
+## Authors
+
+Types:
+
+- <code><a href="./src/resources/ai/authors.ts">AuthorListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai/authors/search">client.ai.authors.<a href="./src/resources/ai/authors.ts">list</a>({ ...params }) -> AuthorListResponsesSinglePage</code>
+
+## Tasks
+
+Types:
+
+- <code><a href="./src/resources/ai/tasks.ts">TaskListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai/tasks/search">client.ai.tasks.<a href="./src/resources/ai/tasks.ts">list</a>({ ...params }) -> TaskListResponsesSinglePage</code>
+
+## Models
+
+Types:
+
+- <code><a href="./src/resources/ai/models/models.ts">ModelListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai/models/search">client.ai.models.<a href="./src/resources/ai/models/models.ts">list</a>({ ...params }) -> ModelListResponsesV4PagePaginationArray</code>
+
+### Schema
+
+Types:
+
+- <code><a href="./src/resources/ai/models/schema.ts">SchemaGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai/models/schema">client.ai.models.schema.<a href="./src/resources/ai/models/schema.ts">get</a>({ ...params }) -> SchemaGetResponse</code>
+
+## ToMarkdown
+
+Types:
+
+- <code><a href="./src/resources/ai/to-markdown.ts">ToMarkdownSupportedResponse</a></code>
+- <code><a href="./src/resources/ai/to-markdown.ts">ToMarkdownTransformResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai/tomarkdown/supported">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">supported</a>({ ...params }) -> ToMarkdownSupportedResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/ai/tomarkdown">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">transform</a>(file, { ...params }) -> ToMarkdownTransformResponsesSinglePage</code>
+
+# AISearch
+
+## Instances
+
+Types:
+
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceCreateResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceUpdateResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceListResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceDeleteResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceChatCompletionsResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceReadResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceSearchResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/instances.ts">InstanceStatsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-search/instances">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">create</a>({ ...params }) -> InstanceCreateResponse</code>
+- <code title="put /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">update</a>(id, { ...params }) -> InstanceUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/instances">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">list</a>({ ...params }) -> InstanceListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">delete</a>(id, { ...params }) -> InstanceDeleteResponse</code>
+- <code title="post /accounts/{account_id}/ai-search/instances/{id}/chat/completions">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">chatCompletions</a>(id, { ...params }) -> InstanceChatCompletionsResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">read</a>(id, { ...params }) -> InstanceReadResponse</code>
+- <code title="post /accounts/{account_id}/ai-search/instances/{id}/search">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">search</a>(id, { ...params }) -> InstanceSearchResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/stats">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">stats</a>(id, { ...params }) -> InstanceStatsResponse</code>
+
+### Items
+
+Types:
+
+- <code><a href="./src/resources/aisearch/instances/items.ts">ItemListResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/items.ts">ItemGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/items">client.aiSearch.instances.items.<a href="./src/resources/aisearch/instances/items.ts">list</a>(id, { ...params }) -> ItemListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/items/{item_id}">client.aiSearch.instances.items.<a href="./src/resources/aisearch/instances/items.ts">get</a>(itemID, { ...params }) -> ItemGetResponse</code>
+
+### Jobs
+
+Types:
+
+- <code><a href="./src/resources/aisearch/instances/jobs.ts">JobCreateResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/jobs.ts">JobListResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/jobs.ts">JobGetResponse</a></code>
+- <code><a href="./src/resources/aisearch/instances/jobs.ts">JobLogsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-search/instances/{id}/jobs">client.aiSearch.instances.jobs.<a href="./src/resources/aisearch/instances/jobs.ts">create</a>(id, { ...params }) -> JobCreateResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/jobs">client.aiSearch.instances.jobs.<a href="./src/resources/aisearch/instances/jobs.ts">list</a>(id, { ...params }) -> JobListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/jobs/{job_id}">client.aiSearch.instances.jobs.<a href="./src/resources/aisearch/instances/jobs.ts">get</a>(jobID, { ...params }) -> JobGetResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/instances/{id}/jobs/{job_id}/logs">client.aiSearch.instances.jobs.<a href="./src/resources/aisearch/instances/jobs.ts">logs</a>(jobID, { ...params }) -> JobLogsResponse</code>
+
+## Tokens
+
+Types:
+
+- <code><a href="./src/resources/aisearch/tokens.ts">TokenCreateResponse</a></code>
+- <code><a href="./src/resources/aisearch/tokens.ts">TokenUpdateResponse</a></code>
+- <code><a href="./src/resources/aisearch/tokens.ts">TokenListResponse</a></code>
+- <code><a href="./src/resources/aisearch/tokens.ts">TokenDeleteResponse</a></code>
+- <code><a href="./src/resources/aisearch/tokens.ts">TokenReadResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-search/tokens">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
+- <code title="delete /accounts/{account_id}/ai-search/tokens/{id}">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">update</a>(id, { ...params }) -> TokenUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/tokens">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">list</a>({ ...params }) -> TokenListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-search/tokens/{id}">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">delete</a>(id, { ...params }) -> TokenDeleteResponse</code>
+- <code title="delete /accounts/{account_id}/ai-search/tokens/{id}">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">read</a>(id, { ...params }) -> TokenReadResponse</code>
+
+# SecurityCenter
+
+## Insights
+
+Types:
+
+- <code><a href="./src/resources/security-center/insights/insights.ts">InsightListResponse</a></code>
+- <code><a href="./src/resources/security-center/insights/insights.ts">InsightDismissResponse</a></code>
+
+Methods:
+
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/security-center/insights">client.securityCenter.insights.<a href="./src/resources/security-center/insights/insights.ts">list</a>({ ...params }) -> InsightListResponsesV4PagePagination</code>
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/security-center/insights/{issue_id}/dismiss">client.securityCenter.insights.<a href="./src/resources/security-center/insights/insights.ts">dismiss</a>(issueID, { ...params }) -> InsightDismissResponse</code>
+
+### Class
+
+Types:
+
+- <code><a href="./src/resources/security-center/insights/class.ts">ClassGetResponse</a></code>
+
+Methods:
+
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/security-center/insights/class">client.securityCenter.insights.class.<a href="./src/resources/security-center/insights/class.ts">get</a>({ ...params }) -> ClassGetResponse</code>
+
+### Severity
+
+Types:
+
+- <code><a href="./src/resources/security-center/insights/severity.ts">SeverityGetResponse</a></code>
+
+Methods:
+
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/security-center/insights/severity">client.securityCenter.insights.severity.<a href="./src/resources/security-center/insights/severity.ts">get</a>({ ...params }) -> SeverityGetResponse</code>
+
+### Type
+
+Types:
+
+- <code><a href="./src/resources/security-center/insights/type.ts">TypeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/security-center/insights/type">client.securityCenter.insights.type.<a href="./src/resources/security-center/insights/type.ts">get</a>({ ...params }) -> TypeGetResponse</code>
+
+# BrowserRendering
+
+## Content
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/content.ts">ContentCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/content">client.browserRendering.content.<a href="./src/resources/browser-rendering/content.ts">create</a>({ ...params }) -> ContentCreateResponse</code>
+
+## PDF
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/pdf">client.browserRendering.pdf.<a href="./src/resources/browser-rendering/pdf.ts">create</a>({ ...params }) -> Response</code>
+
+## Scrape
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/scrape.ts">ScrapeCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/scrape">client.browserRendering.scrape.<a href="./src/resources/browser-rendering/scrape.ts">create</a>({ ...params }) -> ScrapeCreateResponse</code>
+
+## Screenshot
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/screenshot.ts">ScreenshotCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/screenshot">client.browserRendering.screenshot.<a href="./src/resources/browser-rendering/screenshot.ts">create</a>({ ...params }) -> ScreenshotCreateResponse</code>
+
+## Snapshot
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/snapshot.ts">SnapshotCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/snapshot">client.browserRendering.snapshot.<a href="./src/resources/browser-rendering/snapshot.ts">create</a>({ ...params }) -> SnapshotCreateResponse</code>
+
+## Json
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/json.ts">JsonCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/json">client.browserRendering.json.<a href="./src/resources/browser-rendering/json.ts">create</a>({ ...params }) -> JsonCreateResponse</code>
+
+## Links
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/links.ts">LinkCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/links">client.browserRendering.links.<a href="./src/resources/browser-rendering/links.ts">create</a>({ ...params }) -> LinkCreateResponse</code>
+
+## Markdown
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/markdown.ts">MarkdownCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/markdown">client.browserRendering.markdown.<a href="./src/resources/browser-rendering/markdown.ts">create</a>({ ...params }) -> MarkdownCreateResponse</code>
+
+# CustomPages
+
+Types:
+
+- <code><a href="./src/resources/custom-pages.ts">CustomPageUpdateResponse</a></code>
+- <code><a href="./src/resources/custom-pages.ts">CustomPageListResponse</a></code>
+- <code><a href="./src/resources/custom-pages.ts">CustomPageGetResponse</a></code>
+
+Methods:
+
+- <code title="put /{accounts_or_zones}/{account_or_zone_id}/custom_pages/{identifier}">client.customPages.<a href="./src/resources/custom-pages.ts">update</a>(identifier, { ...params }) -> CustomPageUpdateResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/custom_pages">client.customPages.<a href="./src/resources/custom-pages.ts">list</a>({ ...params }) -> CustomPageListResponsesSinglePage</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/custom_pages/{identifier}">client.customPages.<a href="./src/resources/custom-pages.ts">get</a>(identifier, { ...params }) -> CustomPageGetResponse</code>
+
+# SecretsStore
+
+## Stores
+
+Types:
+
+- <code><a href="./src/resources/secrets-store/stores/stores.ts">StoreCreateResponse</a></code>
+- <code><a href="./src/resources/secrets-store/stores/stores.ts">StoreListResponse</a></code>
+- <code><a href="./src/resources/secrets-store/stores/stores.ts">StoreDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/secrets_store/stores">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">create</a>([ ...body ]) -> StoreCreateResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/secrets_store/stores">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">list</a>({ ...params }) -> StoreListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/secrets_store/stores/{store_id}">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">delete</a>(storeID, { ...params }) -> StoreDeleteResponse</code>
+
+### Secrets
+
+Types:
+
+- <code><a href="./src/resources/secrets-store/stores/secrets.ts">SecretCreateResponse</a></code>
+- <code><a href="./src/resources/secrets-store/stores/secrets.ts">SecretListResponse</a></code>
+- <code><a href="./src/resources/secrets-store/stores/secrets.ts">SecretDeleteResponse</a></code>
+- <code><a href="./src/resources/secrets-store/stores/secrets.ts">SecretBulkDeleteResponse</a></code>
+- <code><a href="./src/resources/secrets-store/stores/secrets.ts">SecretDuplicateResponse</a></code>
+- <code><a href="./src/resources/secrets-store/stores/secrets.ts">SecretEditResponse</a></code>
+- <code><a href="./src/resources/secrets-store/stores/secrets.ts">SecretGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/secrets_store/stores/{store_id}/secrets">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">create</a>(storeID, [ ...body ]) -> SecretCreateResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/secrets_store/stores/{store_id}/secrets">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">list</a>(storeID, { ...params }) -> SecretListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">delete</a>(secretID, { ...params }) -> SecretDeleteResponse</code>
+- <code title="delete /accounts/{account_id}/secrets_store/stores/{store_id}/secrets">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">bulkDelete</a>(storeID, { ...params }) -> SecretBulkDeleteResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}/duplicate">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">duplicate</a>(secretID, { ...params }) -> SecretDuplicateResponse</code>
+- <code title="patch /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">edit</a>(secretID, { ...params }) -> SecretEditResponse</code>
+- <code title="get /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">get</a>(secretID, { ...params }) -> SecretGetResponse</code>
+
+## Quota
+
+Types:
+
+- <code><a href="./src/resources/secrets-store/quota.ts">QuotaGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/secrets_store/quota">client.secretsStore.quota.<a href="./src/resources/secrets-store/quota.ts">get</a>({ ...params }) -> QuotaGetResponse</code>
+
+# Pipelines
+
+Types:
+
+- <code><a href="./src/resources/pipelines/pipelines.ts">PipelineCreateResponse</a></code>
+- <code><a href="./src/resources/pipelines/pipelines.ts">PipelineUpdateResponse</a></code>
+- <code><a href="./src/resources/pipelines/pipelines.ts">PipelineListResponse</a></code>
+- <code><a href="./src/resources/pipelines/pipelines.ts">PipelineCreateV1Response</a></code>
+- <code><a href="./src/resources/pipelines/pipelines.ts">PipelineGetResponse</a></code>
+- <code><a href="./src/resources/pipelines/pipelines.ts">PipelineGetV1Response</a></code>
+- <code><a href="./src/resources/pipelines/pipelines.ts">PipelineListV1Response</a></code>
+- <code><a href="./src/resources/pipelines/pipelines.ts">PipelineValidateSqlResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pipelines">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">create</a>({ ...params }) -> PipelineCreateResponse</code>
+- <code title="put /accounts/{account_id}/pipelines/{pipeline_name}">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">update</a>(pipelineName, { ...params }) -> PipelineUpdateResponse</code>
+- <code title="get /accounts/{account_id}/pipelines">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">list</a>({ ...params }) -> PipelineListResponse</code>
+- <code title="delete /accounts/{account_id}/pipelines/{pipeline_name}">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">delete</a>(pipelineName, { ...params }) -> void</code>
+- <code title="post /accounts/{account_id}/pipelines/v1/pipelines">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">createV1</a>({ ...params }) -> PipelineCreateV1Response</code>
+- <code title="delete /accounts/{account_id}/pipelines/v1/pipelines/{pipeline_id}">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">deleteV1</a>(pipelineID, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/pipelines/{pipeline_name}">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">get</a>(pipelineName, { ...params }) -> PipelineGetResponse</code>
+- <code title="get /accounts/{account_id}/pipelines/v1/pipelines/{pipeline_id}">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">getV1</a>(pipelineID, { ...params }) -> PipelineGetV1Response</code>
+- <code title="get /accounts/{account_id}/pipelines/v1/pipelines">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">listV1</a>({ ...params }) -> PipelineListV1ResponsesV4PagePaginationArray</code>
+- <code title="post /accounts/{account_id}/pipelines/v1/validate_sql">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">validateSql</a>({ ...params }) -> PipelineValidateSqlResponse</code>
+
+## Sinks
+
+Types:
+
+- <code><a href="./src/resources/pipelines/sinks.ts">SinkCreateResponse</a></code>
+- <code><a href="./src/resources/pipelines/sinks.ts">SinkListResponse</a></code>
+- <code><a href="./src/resources/pipelines/sinks.ts">SinkGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pipelines/v1/sinks">client.pipelines.sinks.<a href="./src/resources/pipelines/sinks.ts">create</a>({ ...params }) -> SinkCreateResponse</code>
+- <code title="get /accounts/{account_id}/pipelines/v1/sinks">client.pipelines.sinks.<a href="./src/resources/pipelines/sinks.ts">list</a>({ ...params }) -> SinkListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/pipelines/v1/sinks/{sink_id}">client.pipelines.sinks.<a href="./src/resources/pipelines/sinks.ts">delete</a>(sinkID, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/pipelines/v1/sinks/{sink_id}">client.pipelines.sinks.<a href="./src/resources/pipelines/sinks.ts">get</a>(sinkID, { ...params }) -> SinkGetResponse</code>
+
+## Streams
+
+Types:
+
+- <code><a href="./src/resources/pipelines/streams.ts">StreamCreateResponse</a></code>
+- <code><a href="./src/resources/pipelines/streams.ts">StreamUpdateResponse</a></code>
+- <code><a href="./src/resources/pipelines/streams.ts">StreamListResponse</a></code>
+- <code><a href="./src/resources/pipelines/streams.ts">StreamGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pipelines/v1/streams">client.pipelines.streams.<a href="./src/resources/pipelines/streams.ts">create</a>({ ...params }) -> StreamCreateResponse</code>
+- <code title="patch /accounts/{account_id}/pipelines/v1/streams/{stream_id}">client.pipelines.streams.<a href="./src/resources/pipelines/streams.ts">update</a>(streamID, { ...params }) -> StreamUpdateResponse</code>
+- <code title="get /accounts/{account_id}/pipelines/v1/streams">client.pipelines.streams.<a href="./src/resources/pipelines/streams.ts">list</a>({ ...params }) -> StreamListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/pipelines/v1/streams/{stream_id}">client.pipelines.streams.<a href="./src/resources/pipelines/streams.ts">delete</a>(streamID, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/pipelines/v1/streams/{stream_id}">client.pipelines.streams.<a href="./src/resources/pipelines/streams.ts">get</a>(streamID, { ...params }) -> StreamGetResponse</code>
+
+# SchemaValidation
+
+## Schemas
+
+Types:
+
+- <code><a href="./src/resources/schema-validation/schemas.ts">PublicSchema</a></code>
+- <code><a href="./src/resources/schema-validation/schemas.ts">SchemaDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/schema_validation/schemas">client.schemaValidation.schemas.<a href="./src/resources/schema-validation/schemas.ts">create</a>({ ...params }) -> PublicSchema</code>
+- <code title="get /zones/{zone_id}/schema_validation/schemas">client.schemaValidation.schemas.<a href="./src/resources/schema-validation/schemas.ts">list</a>({ ...params }) -> PublicSchemasV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/schema_validation/schemas/{schema_id}">client.schemaValidation.schemas.<a href="./src/resources/schema-validation/schemas.ts">delete</a>(schemaID, { ...params }) -> SchemaDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/schema_validation/schemas/{schema_id}">client.schemaValidation.schemas.<a href="./src/resources/schema-validation/schemas.ts">edit</a>(schemaID, { ...params }) -> PublicSchema</code>
+- <code title="get /zones/{zone_id}/schema_validation/schemas/{schema_id}">client.schemaValidation.schemas.<a href="./src/resources/schema-validation/schemas.ts">get</a>(schemaID, { ...params }) -> PublicSchema</code>
+
+## Settings
+
+Types:
+
+- <code><a href="./src/resources/schema-validation/settings/settings.ts">SettingUpdateResponse</a></code>
+- <code><a href="./src/resources/schema-validation/settings/settings.ts">SettingEditResponse</a></code>
+- <code><a href="./src/resources/schema-validation/settings/settings.ts">SettingGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/schema_validation/settings">client.schemaValidation.settings.<a href="./src/resources/schema-validation/settings/settings.ts">update</a>({ ...params }) -> SettingUpdateResponse</code>
+- <code title="patch /zones/{zone_id}/schema_validation/settings">client.schemaValidation.settings.<a href="./src/resources/schema-validation/settings/settings.ts">edit</a>({ ...params }) -> SettingEditResponse</code>
+- <code title="get /zones/{zone_id}/schema_validation/settings">client.schemaValidation.settings.<a href="./src/resources/schema-validation/settings/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
+
+### Operations
+
+Types:
+
+- <code><a href="./src/resources/schema-validation/settings/operations.ts">OperationUpdateResponse</a></code>
+- <code><a href="./src/resources/schema-validation/settings/operations.ts">OperationListResponse</a></code>
+- <code><a href="./src/resources/schema-validation/settings/operations.ts">OperationDeleteResponse</a></code>
+- <code><a href="./src/resources/schema-validation/settings/operations.ts">OperationBulkEditResponse</a></code>
+- <code><a href="./src/resources/schema-validation/settings/operations.ts">OperationGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/schema_validation/settings/operations/{operation_id}">client.schemaValidation.settings.operations.<a href="./src/resources/schema-validation/settings/operations.ts">update</a>(operationID, { ...params }) -> OperationUpdateResponse</code>
+- <code title="get /zones/{zone_id}/schema_validation/settings/operations">client.schemaValidation.settings.operations.<a href="./src/resources/schema-validation/settings/operations.ts">list</a>({ ...params }) -> OperationListResponsesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/schema_validation/settings/operations/{operation_id}">client.schemaValidation.settings.operations.<a href="./src/resources/schema-validation/settings/operations.ts">delete</a>(operationID, { ...params }) -> OperationDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/schema_validation/settings/operations">client.schemaValidation.settings.operations.<a href="./src/resources/schema-validation/settings/operations.ts">bulkEdit</a>({ ...params }) -> OperationBulkEditResponse</code>
+- <code title="get /zones/{zone_id}/schema_validation/settings/operations/{operation_id}">client.schemaValidation.settings.operations.<a href="./src/resources/schema-validation/settings/operations.ts">get</a>(operationID, { ...params }) -> OperationGetResponse</code>
+
+# TokenValidation
+
+## Configuration
+
+Types:
+
+- <code><a href="./src/resources/token-validation/configuration/configuration.ts">TokenConfig</a></code>
+- <code><a href="./src/resources/token-validation/configuration/configuration.ts">ConfigurationDeleteResponse</a></code>
+- <code><a href="./src/resources/token-validation/configuration/configuration.ts">ConfigurationEditResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/token_validation/config">client.tokenValidation.configuration.<a href="./src/resources/token-validation/configuration/configuration.ts">create</a>({ ...params }) -> TokenConfig</code>
+- <code title="get /zones/{zone_id}/token_validation/config">client.tokenValidation.configuration.<a href="./src/resources/token-validation/configuration/configuration.ts">list</a>({ ...params }) -> TokenConfigsV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/token_validation/config/{config_id}">client.tokenValidation.configuration.<a href="./src/resources/token-validation/configuration/configuration.ts">delete</a>(configID, { ...params }) -> ConfigurationDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/token_validation/config/{config_id}">client.tokenValidation.configuration.<a href="./src/resources/token-validation/configuration/configuration.ts">edit</a>(configID, { ...params }) -> ConfigurationEditResponse</code>
+- <code title="get /zones/{zone_id}/token_validation/config/{config_id}">client.tokenValidation.configuration.<a href="./src/resources/token-validation/configuration/configuration.ts">get</a>(configID, { ...params }) -> TokenConfig</code>
+
+### Credentials
+
+Types:
+
+- <code><a href="./src/resources/token-validation/configuration/credentials.ts">CredentialUpdateResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/token_validation/config/{config_id}/credentials">client.tokenValidation.configuration.credentials.<a href="./src/resources/token-validation/configuration/credentials.ts">update</a>(configID, { ...params }) -> CredentialUpdateResponse</code>
+
+## Rules
+
+Types:
+
+- <code><a href="./src/resources/token-validation/rules.ts">TokenValidationRule</a></code>
+- <code><a href="./src/resources/token-validation/rules.ts">RuleDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/token_validation/rules">client.tokenValidation.rules.<a href="./src/resources/token-validation/rules.ts">create</a>({ ...params }) -> TokenValidationRule</code>
+- <code title="get /zones/{zone_id}/token_validation/rules">client.tokenValidation.rules.<a href="./src/resources/token-validation/rules.ts">list</a>({ ...params }) -> TokenValidationRulesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/token_validation/rules/{rule_id}">client.tokenValidation.rules.<a href="./src/resources/token-validation/rules.ts">delete</a>(ruleID, { ...params }) -> RuleDeleteResponse</code>
+- <code title="post /zones/{zone_id}/token_validation/rules/bulk">client.tokenValidation.rules.<a href="./src/resources/token-validation/rules.ts">bulkCreate</a>([ ...body ]) -> TokenValidationRulesSinglePage</code>
+- <code title="patch /zones/{zone_id}/token_validation/rules/bulk">client.tokenValidation.rules.<a href="./src/resources/token-validation/rules.ts">bulkEdit</a>([ ...body ]) -> TokenValidationRulesSinglePage</code>
+- <code title="patch /zones/{zone_id}/token_validation/rules/{rule_id}">client.tokenValidation.rules.<a href="./src/resources/token-validation/rules.ts">edit</a>(ruleID, { ...params }) -> TokenValidationRule</code>
+- <code title="get /zones/{zone_id}/token_validation/rules/{rule_id}">client.tokenValidation.rules.<a href="./src/resources/token-validation/rules.ts">get</a>(ruleID, { ...params }) -> TokenValidationRule</code>

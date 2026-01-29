@@ -1,0 +1,2411 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../core/pagination';
+import { type Uploadable } from '../../../core/uploads';
+import { RequestOptions } from '../../../internal/request-options';
+import { multipartFormRequestOptions } from '../../../internal/uploads';
+import { path } from '../../../internal/utils/path';
+
+export class Versions extends APIResource {
+  /**
+   * Upload a Worker Version without deploying to Cloudflare's network. You can find
+   * more about the multipart metadata on our docs:
+   * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.
+   *
+   * @example
+   * ```ts
+   * const version =
+   *   await client.workers.scripts.versions.create(
+   *     'this-is_my_script-01',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       metadata: { main_module: 'worker.js' },
+   *     },
+   *   );
+   * ```
+   */
+  create(
+    scriptName: string,
+    params: VersionCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<VersionCreateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(
+        path`/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
+        multipartFormRequestOptions({ body, ...options }, this._client),
+      ) as APIPromise<{ result: VersionCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List of Worker Versions. The first version in the list is the latest version.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const versionListResponse of client.workers.scripts.versions.list(
+   *   'this-is_my_script-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    scriptName: string,
+    params: VersionListParams,
+    options?: RequestOptions,
+  ): PagePromise<VersionListResponsesV4PagePagination, VersionListResponse> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
+      V4PagePagination<VersionListResponse>,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Get Version Detail
+   *
+   * @example
+   * ```ts
+   * const version = await client.workers.scripts.versions.get(
+   *   'bcf48806-b317-4351-9ee7-36e7d557d4de',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     script_name: 'this-is_my_script-01',
+   *   },
+   * );
+   * ```
+   */
+  get(versionID: string, params: VersionGetParams, options?: RequestOptions): APIPromise<VersionGetResponse> {
+    const { account_id, script_name } = params;
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/workers/scripts/${script_name}/versions/${versionID}`,
+        options,
+      ) as APIPromise<{ result: VersionGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type VersionListResponsesV4PagePagination = V4PagePagination<VersionListResponse>;
+
+export interface VersionCreateResponse {
+  resources: VersionCreateResponse.Resources;
+
+  /**
+   * Unique identifier for the version.
+   */
+  id?: string;
+
+  metadata?: VersionCreateResponse.Metadata;
+
+  /**
+   * Sequential version number.
+   */
+  number?: number;
+
+  /**
+   * Time in milliseconds spent on
+   * [Worker startup](https://developers.cloudflare.com/workers/platform/limits/#worker-startup-time).
+   */
+  startup_time_ms?: number;
+}
+
+export namespace VersionCreateResponse {
+  export interface Resources {
+    /**
+     * List of bindings attached to a Worker. You can find more about bindings on our
+     * docs:
+     * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
+     */
+    bindings?: Array<
+      | Resources.WorkersBindingKindAI
+      | Resources.WorkersBindingKindAnalyticsEngine
+      | Resources.WorkersBindingKindAssets
+      | Resources.WorkersBindingKindBrowser
+      | Resources.WorkersBindingKindD1
+      | Resources.WorkersBindingKindDataBlob
+      | Resources.WorkersBindingKindDispatchNamespace
+      | Resources.WorkersBindingKindDurableObjectNamespace
+      | Resources.WorkersBindingKindHyperdrive
+      | Resources.WorkersBindingKindInherit
+      | Resources.WorkersBindingKindImages
+      | Resources.WorkersBindingKindJson
+      | Resources.WorkersBindingKindKVNamespace
+      | Resources.WorkersBindingKindMTLSCertificate
+      | Resources.WorkersBindingKindPlainText
+      | Resources.WorkersBindingKindPipelines
+      | Resources.WorkersBindingKindQueue
+      | Resources.WorkersBindingKindR2Bucket
+      | Resources.WorkersBindingKindSecretText
+      | Resources.WorkersBindingKindSendEmail
+      | Resources.WorkersBindingKindService
+      | Resources.WorkersBindingKindTextBlob
+      | Resources.WorkersBindingKindVectorize
+      | Resources.WorkersBindingKindVersionMetadata
+      | Resources.WorkersBindingKindSecretsStoreSecret
+      | Resources.WorkersBindingKindSecretKey
+      | Resources.WorkersBindingKindWorkflow
+      | Resources.WorkersBindingKindWasmModule
+    >;
+
+    script?: Resources.Script;
+
+    /**
+     * Runtime configuration for the Worker.
+     */
+    script_runtime?: Resources.ScriptRuntime;
+  }
+
+  export namespace Resources {
+    export interface WorkersBindingKindAI {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ai';
+    }
+
+    export interface WorkersBindingKindAnalyticsEngine {
+      /**
+       * The name of the dataset to bind to.
+       */
+      dataset: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'analytics_engine';
+    }
+
+    export interface WorkersBindingKindAssets {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'assets';
+    }
+
+    export interface WorkersBindingKindBrowser {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'browser';
+    }
+
+    export interface WorkersBindingKindD1 {
+      /**
+       * Identifier of the D1 database to bind to.
+       */
+      id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'd1';
+    }
+
+    export interface WorkersBindingKindDataBlob {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the data content. Only accepted for
+       * `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'data_blob';
+    }
+
+    export interface WorkersBindingKindDispatchNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the dispatch namespace.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'dispatch_namespace';
+
+      /**
+       * Outbound worker.
+       */
+      outbound?: WorkersBindingKindDispatchNamespace.Outbound;
+    }
+
+    export namespace WorkersBindingKindDispatchNamespace {
+      /**
+       * Outbound worker.
+       */
+      export interface Outbound {
+        /**
+         * Pass information from the Dispatch Worker to the Outbound Worker through the
+         * parameters.
+         */
+        params?: Array<string>;
+
+        /**
+         * Outbound worker.
+         */
+        worker?: Outbound.Worker;
+      }
+
+      export namespace Outbound {
+        /**
+         * Outbound worker.
+         */
+        export interface Worker {
+          /**
+           * Environment of the outbound worker.
+           */
+          environment?: string;
+
+          /**
+           * Name of the outbound worker.
+           */
+          service?: string;
+        }
+      }
+    }
+
+    export interface WorkersBindingKindDurableObjectNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'durable_object_namespace';
+
+      /**
+       * The exported class name of the Durable Object.
+       */
+      class_name?: string;
+
+      /**
+       * The environment of the script_name to bind to.
+       */
+      environment?: string;
+
+      /**
+       * Namespace identifier tag.
+       */
+      namespace_id?: string;
+
+      /**
+       * The script where the Durable Object is defined, if it is external to this
+       * Worker.
+       */
+      script_name?: string;
+    }
+
+    export interface WorkersBindingKindHyperdrive {
+      /**
+       * Identifier of the Hyperdrive connection to bind to.
+       */
+      id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'hyperdrive';
+    }
+
+    export interface WorkersBindingKindInherit {
+      /**
+       * The name of the inherited binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'inherit';
+
+      /**
+       * The old name of the inherited binding. If set, the binding will be renamed from
+       * `old_name` to `name` in the new version. If not set, the binding will keep the
+       * same name between versions.
+       */
+      old_name?: string;
+
+      /**
+       * Identifier for the version to inherit the binding from, which can be the version
+       * ID or the literal "latest" to inherit from the latest version. Defaults to
+       * inheriting the binding from the latest version.
+       */
+      version_id?: string;
+    }
+
+    export interface WorkersBindingKindImages {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'images';
+    }
+
+    export interface WorkersBindingKindJson {
+      /**
+       * JSON data to use.
+       */
+      json: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'json';
+    }
+
+    export interface WorkersBindingKindKVNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Namespace identifier tag.
+       */
+      namespace_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'kv_namespace';
+    }
+
+    export interface WorkersBindingKindMTLSCertificate {
+      /**
+       * Identifier of the certificate to bind to.
+       */
+      certificate_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'mtls_certificate';
+    }
+
+    export interface WorkersBindingKindPlainText {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The text value to use.
+       */
+      text: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'plain_text';
+    }
+
+    export interface WorkersBindingKindPipelines {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the Pipeline to bind to.
+       */
+      pipeline: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'pipelines';
+    }
+
+    export interface WorkersBindingKindQueue {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the Queue to bind to.
+       */
+      queue_name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'queue';
+    }
+
+    export interface WorkersBindingKindR2Bucket {
+      /**
+       * R2 bucket to bind to.
+       */
+      bucket_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'r2_bucket';
+
+      /**
+       * The
+       * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
+       * of the R2 bucket.
+       */
+      jurisdiction?: 'eu' | 'fedramp';
+    }
+
+    export interface WorkersBindingKindSecretText {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secret_text';
+    }
+
+    export interface WorkersBindingKindSendEmail {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'send_email';
+
+      /**
+       * List of allowed destination addresses.
+       */
+      allowed_destination_addresses?: Array<string>;
+
+      /**
+       * List of allowed sender addresses.
+       */
+      allowed_sender_addresses?: Array<string>;
+
+      /**
+       * Destination address for the email.
+       */
+      destination_address?: string;
+    }
+
+    export interface WorkersBindingKindService {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of Worker to bind to.
+       */
+      service: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'service';
+
+      /**
+       * Optional environment if the Worker utilizes one.
+       */
+      environment?: string;
+    }
+
+    export interface WorkersBindingKindTextBlob {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the text content. Only accepted for
+       * `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'text_blob';
+    }
+
+    export interface WorkersBindingKindVectorize {
+      /**
+       * Name of the Vectorize index to bind to.
+       */
+      index_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vectorize';
+    }
+
+    export interface WorkersBindingKindVersionMetadata {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'version_metadata';
+    }
+
+    export interface WorkersBindingKindSecretsStoreSecret {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the secret in the store.
+       */
+      secret_name: string;
+
+      /**
+       * ID of the store containing the secret.
+       */
+      store_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secrets_store_secret';
+    }
+
+    export interface WorkersBindingKindSecretKey {
+      /**
+       * Algorithm-specific key parameters.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
+       */
+      algorithm: unknown;
+
+      /**
+       * Data format of the key.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
+       */
+      format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secret_key';
+
+      /**
+       * Allowed operations with the key.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
+       */
+      usages: Array<
+        'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
+      >;
+    }
+
+    export interface WorkersBindingKindWorkflow {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'workflow';
+
+      /**
+       * Name of the Workflow to bind to.
+       */
+      workflow_name: string;
+
+      /**
+       * Class name of the Workflow. Should only be provided if the Workflow belongs to
+       * this script.
+       */
+      class_name?: string;
+
+      /**
+       * Script name that contains the Workflow. If not provided, defaults to this script
+       * name.
+       */
+      script_name?: string;
+    }
+
+    export interface WorkersBindingKindWasmModule {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the WebAssembly module content. Only accepted
+       * for `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'wasm_module';
+    }
+
+    export interface Script {
+      /**
+       * Hashed script content
+       */
+      etag?: string;
+
+      /**
+       * The names of handlers exported as part of the default export.
+       */
+      handlers?: Array<string>;
+
+      /**
+       * The client most recently used to deploy this Worker.
+       */
+      last_deployed_from?: string;
+
+      /**
+       * Named exports, such as Durable Object class implementations and named
+       * entrypoints.
+       */
+      named_handlers?: Array<Script.NamedHandler>;
+    }
+
+    export namespace Script {
+      export interface NamedHandler {
+        /**
+         * The names of handlers exported as part of the named export.
+         */
+        handlers?: Array<string>;
+
+        /**
+         * The name of the exported class or entrypoint.
+         */
+        name?: string;
+      }
+    }
+
+    /**
+     * Runtime configuration for the Worker.
+     */
+    export interface ScriptRuntime {
+      /**
+       * Date indicating targeted support in the Workers runtime. Backwards incompatible
+       * fixes to the runtime following this date will not affect this Worker.
+       */
+      compatibility_date?: string;
+
+      /**
+       * Flags that enable or disable certain features in the Workers runtime.
+       */
+      compatibility_flags?: Array<string>;
+
+      /**
+       * Resource limits for the Worker.
+       */
+      limits?: ScriptRuntime.Limits;
+
+      /**
+       * The tag of the Durable Object migration that was most recently applied for this
+       * Worker.
+       */
+      migration_tag?: string;
+
+      /**
+       * Usage model for the Worker invocations.
+       */
+      usage_model?: 'bundled' | 'unbound' | 'standard';
+    }
+
+    export namespace ScriptRuntime {
+      /**
+       * Resource limits for the Worker.
+       */
+      export interface Limits {
+        /**
+         * The amount of CPU time this Worker can use in milliseconds.
+         */
+        cpu_ms?: number;
+      }
+    }
+  }
+
+  export interface Metadata {
+    /**
+     * Email of the user who created the version.
+     */
+    author_email?: string;
+
+    /**
+     * Identifier of the user who created the version.
+     */
+    author_id?: string;
+
+    /**
+     * When the version was created.
+     */
+    created_on?: string;
+
+    /**
+     * Whether the version can be previewed.
+     */
+    hasPreview?: boolean;
+
+    /**
+     * When the version was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The source of the version upload.
+     */
+    source?:
+      | 'unknown'
+      | 'api'
+      | 'wrangler'
+      | 'terraform'
+      | 'dash'
+      | 'dash_template'
+      | 'integration'
+      | 'quick_editor'
+      | 'playground'
+      | 'workersci';
+  }
+}
+
+export interface VersionListResponse {
+  /**
+   * Unique identifier for the version.
+   */
+  id?: string;
+
+  metadata?: VersionListResponse.Metadata;
+
+  /**
+   * Sequential version number.
+   */
+  number?: number;
+}
+
+export namespace VersionListResponse {
+  export interface Metadata {
+    /**
+     * Email of the user who created the version.
+     */
+    author_email?: string;
+
+    /**
+     * Identifier of the user who created the version.
+     */
+    author_id?: string;
+
+    /**
+     * When the version was created.
+     */
+    created_on?: string;
+
+    /**
+     * Whether the version can be previewed.
+     */
+    hasPreview?: boolean;
+
+    /**
+     * When the version was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The source of the version upload.
+     */
+    source?:
+      | 'unknown'
+      | 'api'
+      | 'wrangler'
+      | 'terraform'
+      | 'dash'
+      | 'dash_template'
+      | 'integration'
+      | 'quick_editor'
+      | 'playground'
+      | 'workersci';
+  }
+}
+
+export interface VersionGetResponse {
+  resources: VersionGetResponse.Resources;
+
+  /**
+   * Unique identifier for the version.
+   */
+  id?: string;
+
+  metadata?: VersionGetResponse.Metadata;
+
+  /**
+   * Sequential version number.
+   */
+  number?: number;
+}
+
+export namespace VersionGetResponse {
+  export interface Resources {
+    /**
+     * List of bindings attached to a Worker. You can find more about bindings on our
+     * docs:
+     * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
+     */
+    bindings?: Array<
+      | Resources.WorkersBindingKindAI
+      | Resources.WorkersBindingKindAnalyticsEngine
+      | Resources.WorkersBindingKindAssets
+      | Resources.WorkersBindingKindBrowser
+      | Resources.WorkersBindingKindD1
+      | Resources.WorkersBindingKindDataBlob
+      | Resources.WorkersBindingKindDispatchNamespace
+      | Resources.WorkersBindingKindDurableObjectNamespace
+      | Resources.WorkersBindingKindHyperdrive
+      | Resources.WorkersBindingKindInherit
+      | Resources.WorkersBindingKindImages
+      | Resources.WorkersBindingKindJson
+      | Resources.WorkersBindingKindKVNamespace
+      | Resources.WorkersBindingKindMTLSCertificate
+      | Resources.WorkersBindingKindPlainText
+      | Resources.WorkersBindingKindPipelines
+      | Resources.WorkersBindingKindQueue
+      | Resources.WorkersBindingKindR2Bucket
+      | Resources.WorkersBindingKindSecretText
+      | Resources.WorkersBindingKindSendEmail
+      | Resources.WorkersBindingKindService
+      | Resources.WorkersBindingKindTextBlob
+      | Resources.WorkersBindingKindVectorize
+      | Resources.WorkersBindingKindVersionMetadata
+      | Resources.WorkersBindingKindSecretsStoreSecret
+      | Resources.WorkersBindingKindSecretKey
+      | Resources.WorkersBindingKindWorkflow
+      | Resources.WorkersBindingKindWasmModule
+    >;
+
+    script?: Resources.Script;
+
+    /**
+     * Runtime configuration for the Worker.
+     */
+    script_runtime?: Resources.ScriptRuntime;
+  }
+
+  export namespace Resources {
+    export interface WorkersBindingKindAI {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ai';
+    }
+
+    export interface WorkersBindingKindAnalyticsEngine {
+      /**
+       * The name of the dataset to bind to.
+       */
+      dataset: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'analytics_engine';
+    }
+
+    export interface WorkersBindingKindAssets {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'assets';
+    }
+
+    export interface WorkersBindingKindBrowser {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'browser';
+    }
+
+    export interface WorkersBindingKindD1 {
+      /**
+       * Identifier of the D1 database to bind to.
+       */
+      id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'd1';
+    }
+
+    export interface WorkersBindingKindDataBlob {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the data content. Only accepted for
+       * `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'data_blob';
+    }
+
+    export interface WorkersBindingKindDispatchNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the dispatch namespace.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'dispatch_namespace';
+
+      /**
+       * Outbound worker.
+       */
+      outbound?: WorkersBindingKindDispatchNamespace.Outbound;
+    }
+
+    export namespace WorkersBindingKindDispatchNamespace {
+      /**
+       * Outbound worker.
+       */
+      export interface Outbound {
+        /**
+         * Pass information from the Dispatch Worker to the Outbound Worker through the
+         * parameters.
+         */
+        params?: Array<string>;
+
+        /**
+         * Outbound worker.
+         */
+        worker?: Outbound.Worker;
+      }
+
+      export namespace Outbound {
+        /**
+         * Outbound worker.
+         */
+        export interface Worker {
+          /**
+           * Environment of the outbound worker.
+           */
+          environment?: string;
+
+          /**
+           * Name of the outbound worker.
+           */
+          service?: string;
+        }
+      }
+    }
+
+    export interface WorkersBindingKindDurableObjectNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'durable_object_namespace';
+
+      /**
+       * The exported class name of the Durable Object.
+       */
+      class_name?: string;
+
+      /**
+       * The environment of the script_name to bind to.
+       */
+      environment?: string;
+
+      /**
+       * Namespace identifier tag.
+       */
+      namespace_id?: string;
+
+      /**
+       * The script where the Durable Object is defined, if it is external to this
+       * Worker.
+       */
+      script_name?: string;
+    }
+
+    export interface WorkersBindingKindHyperdrive {
+      /**
+       * Identifier of the Hyperdrive connection to bind to.
+       */
+      id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'hyperdrive';
+    }
+
+    export interface WorkersBindingKindInherit {
+      /**
+       * The name of the inherited binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'inherit';
+
+      /**
+       * The old name of the inherited binding. If set, the binding will be renamed from
+       * `old_name` to `name` in the new version. If not set, the binding will keep the
+       * same name between versions.
+       */
+      old_name?: string;
+
+      /**
+       * Identifier for the version to inherit the binding from, which can be the version
+       * ID or the literal "latest" to inherit from the latest version. Defaults to
+       * inheriting the binding from the latest version.
+       */
+      version_id?: string;
+    }
+
+    export interface WorkersBindingKindImages {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'images';
+    }
+
+    export interface WorkersBindingKindJson {
+      /**
+       * JSON data to use.
+       */
+      json: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'json';
+    }
+
+    export interface WorkersBindingKindKVNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Namespace identifier tag.
+       */
+      namespace_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'kv_namespace';
+    }
+
+    export interface WorkersBindingKindMTLSCertificate {
+      /**
+       * Identifier of the certificate to bind to.
+       */
+      certificate_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'mtls_certificate';
+    }
+
+    export interface WorkersBindingKindPlainText {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The text value to use.
+       */
+      text: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'plain_text';
+    }
+
+    export interface WorkersBindingKindPipelines {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the Pipeline to bind to.
+       */
+      pipeline: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'pipelines';
+    }
+
+    export interface WorkersBindingKindQueue {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the Queue to bind to.
+       */
+      queue_name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'queue';
+    }
+
+    export interface WorkersBindingKindR2Bucket {
+      /**
+       * R2 bucket to bind to.
+       */
+      bucket_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'r2_bucket';
+
+      /**
+       * The
+       * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
+       * of the R2 bucket.
+       */
+      jurisdiction?: 'eu' | 'fedramp';
+    }
+
+    export interface WorkersBindingKindSecretText {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secret_text';
+    }
+
+    export interface WorkersBindingKindSendEmail {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'send_email';
+
+      /**
+       * List of allowed destination addresses.
+       */
+      allowed_destination_addresses?: Array<string>;
+
+      /**
+       * List of allowed sender addresses.
+       */
+      allowed_sender_addresses?: Array<string>;
+
+      /**
+       * Destination address for the email.
+       */
+      destination_address?: string;
+    }
+
+    export interface WorkersBindingKindService {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of Worker to bind to.
+       */
+      service: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'service';
+
+      /**
+       * Optional environment if the Worker utilizes one.
+       */
+      environment?: string;
+    }
+
+    export interface WorkersBindingKindTextBlob {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the text content. Only accepted for
+       * `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'text_blob';
+    }
+
+    export interface WorkersBindingKindVectorize {
+      /**
+       * Name of the Vectorize index to bind to.
+       */
+      index_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vectorize';
+    }
+
+    export interface WorkersBindingKindVersionMetadata {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'version_metadata';
+    }
+
+    export interface WorkersBindingKindSecretsStoreSecret {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the secret in the store.
+       */
+      secret_name: string;
+
+      /**
+       * ID of the store containing the secret.
+       */
+      store_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secrets_store_secret';
+    }
+
+    export interface WorkersBindingKindSecretKey {
+      /**
+       * Algorithm-specific key parameters.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
+       */
+      algorithm: unknown;
+
+      /**
+       * Data format of the key.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
+       */
+      format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secret_key';
+
+      /**
+       * Allowed operations with the key.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
+       */
+      usages: Array<
+        'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
+      >;
+    }
+
+    export interface WorkersBindingKindWorkflow {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'workflow';
+
+      /**
+       * Name of the Workflow to bind to.
+       */
+      workflow_name: string;
+
+      /**
+       * Class name of the Workflow. Should only be provided if the Workflow belongs to
+       * this script.
+       */
+      class_name?: string;
+
+      /**
+       * Script name that contains the Workflow. If not provided, defaults to this script
+       * name.
+       */
+      script_name?: string;
+    }
+
+    export interface WorkersBindingKindWasmModule {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the WebAssembly module content. Only accepted
+       * for `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'wasm_module';
+    }
+
+    export interface Script {
+      /**
+       * Hashed script content
+       */
+      etag?: string;
+
+      /**
+       * The names of handlers exported as part of the default export.
+       */
+      handlers?: Array<string>;
+
+      /**
+       * The client most recently used to deploy this Worker.
+       */
+      last_deployed_from?: string;
+
+      /**
+       * Named exports, such as Durable Object class implementations and named
+       * entrypoints.
+       */
+      named_handlers?: Array<Script.NamedHandler>;
+    }
+
+    export namespace Script {
+      export interface NamedHandler {
+        /**
+         * The names of handlers exported as part of the named export.
+         */
+        handlers?: Array<string>;
+
+        /**
+         * The name of the exported class or entrypoint.
+         */
+        name?: string;
+      }
+    }
+
+    /**
+     * Runtime configuration for the Worker.
+     */
+    export interface ScriptRuntime {
+      /**
+       * Date indicating targeted support in the Workers runtime. Backwards incompatible
+       * fixes to the runtime following this date will not affect this Worker.
+       */
+      compatibility_date?: string;
+
+      /**
+       * Flags that enable or disable certain features in the Workers runtime.
+       */
+      compatibility_flags?: Array<string>;
+
+      /**
+       * Resource limits for the Worker.
+       */
+      limits?: ScriptRuntime.Limits;
+
+      /**
+       * The tag of the Durable Object migration that was most recently applied for this
+       * Worker.
+       */
+      migration_tag?: string;
+
+      /**
+       * Usage model for the Worker invocations.
+       */
+      usage_model?: 'bundled' | 'unbound' | 'standard';
+    }
+
+    export namespace ScriptRuntime {
+      /**
+       * Resource limits for the Worker.
+       */
+      export interface Limits {
+        /**
+         * The amount of CPU time this Worker can use in milliseconds.
+         */
+        cpu_ms?: number;
+      }
+    }
+  }
+
+  export interface Metadata {
+    /**
+     * Email of the user who created the version.
+     */
+    author_email?: string;
+
+    /**
+     * Identifier of the user who created the version.
+     */
+    author_id?: string;
+
+    /**
+     * When the version was created.
+     */
+    created_on?: string;
+
+    /**
+     * Whether the version can be previewed.
+     */
+    hasPreview?: boolean;
+
+    /**
+     * When the version was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The source of the version upload.
+     */
+    source?:
+      | 'unknown'
+      | 'api'
+      | 'wrangler'
+      | 'terraform'
+      | 'dash'
+      | 'dash_template'
+      | 'integration'
+      | 'quick_editor'
+      | 'playground'
+      | 'workersci';
+  }
+}
+
+export interface VersionCreateParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: JSON-encoded metadata about the uploaded parts and Worker
+   * configuration.
+   */
+  metadata: VersionCreateParams.Metadata;
+
+  /**
+   * Body param: An array of modules (often JavaScript files) comprising a Worker
+   * script. At least one module must be present and referenced in the metadata as
+   * `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are:
+   * `application/javascript+module`, `text/javascript+module`,
+   * `application/javascript`, `text/javascript`, `text/x-python`,
+   * `text/x-python-requirement`, `application/wasm`, `text/plain`,
+   * `application/octet-stream`, `application/source-map`.
+   */
+  files?: Array<Uploadable>;
+}
+
+export namespace VersionCreateParams {
+  /**
+   * JSON-encoded metadata about the uploaded parts and Worker configuration.
+   */
+  export interface Metadata {
+    /**
+     * Name of the uploaded file that contains the main module (e.g. the file exporting
+     * a `fetch` handler). Indicates a `module syntax` Worker, which is required for
+     * Version Upload.
+     */
+    main_module: string;
+
+    annotations?: Metadata.Annotations;
+
+    /**
+     * List of bindings attached to a Worker. You can find more about bindings on our
+     * docs:
+     * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
+     */
+    bindings?: Array<
+      | Metadata.WorkersBindingKindAI
+      | Metadata.WorkersBindingKindAnalyticsEngine
+      | Metadata.WorkersBindingKindAssets
+      | Metadata.WorkersBindingKindBrowser
+      | Metadata.WorkersBindingKindD1
+      | Metadata.WorkersBindingKindDataBlob
+      | Metadata.WorkersBindingKindDispatchNamespace
+      | Metadata.WorkersBindingKindDurableObjectNamespace
+      | Metadata.WorkersBindingKindHyperdrive
+      | Metadata.WorkersBindingKindInherit
+      | Metadata.WorkersBindingKindImages
+      | Metadata.WorkersBindingKindJson
+      | Metadata.WorkersBindingKindKVNamespace
+      | Metadata.WorkersBindingKindMTLSCertificate
+      | Metadata.WorkersBindingKindPlainText
+      | Metadata.WorkersBindingKindPipelines
+      | Metadata.WorkersBindingKindQueue
+      | Metadata.WorkersBindingKindR2Bucket
+      | Metadata.WorkersBindingKindSecretText
+      | Metadata.WorkersBindingKindSendEmail
+      | Metadata.WorkersBindingKindService
+      | Metadata.WorkersBindingKindTextBlob
+      | Metadata.WorkersBindingKindVectorize
+      | Metadata.WorkersBindingKindVersionMetadata
+      | Metadata.WorkersBindingKindSecretsStoreSecret
+      | Metadata.WorkersBindingKindSecretKey
+      | Metadata.WorkersBindingKindWorkflow
+      | Metadata.WorkersBindingKindWasmModule
+    >;
+
+    /**
+     * Date indicating targeted support in the Workers runtime. Backwards incompatible
+     * fixes to the runtime following this date will not affect this Worker.
+     */
+    compatibility_date?: string;
+
+    /**
+     * Flags that enable or disable certain features in the Workers runtime. Used to
+     * enable upcoming features or opt in or out of specific changes not included in a
+     * `compatibility_date`.
+     */
+    compatibility_flags?: Array<string>;
+
+    /**
+     * List of binding types to keep from previous_upload.
+     */
+    keep_bindings?: Array<string>;
+
+    /**
+     * Usage model for the Worker invocations.
+     */
+    usage_model?: 'standard' | 'bundled' | 'unbound';
+  }
+
+  export namespace Metadata {
+    export interface Annotations {
+      /**
+       * Associated alias for a version.
+       */
+      'workers/alias'?: string;
+
+      /**
+       * Human-readable message about the version. Truncated to 100 bytes.
+       */
+      'workers/message'?: string;
+
+      /**
+       * User-provided identifier for the version.
+       */
+      'workers/tag'?: string;
+    }
+
+    export interface WorkersBindingKindAI {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ai';
+    }
+
+    export interface WorkersBindingKindAnalyticsEngine {
+      /**
+       * The name of the dataset to bind to.
+       */
+      dataset: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'analytics_engine';
+    }
+
+    export interface WorkersBindingKindAssets {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'assets';
+    }
+
+    export interface WorkersBindingKindBrowser {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'browser';
+    }
+
+    export interface WorkersBindingKindD1 {
+      /**
+       * Identifier of the D1 database to bind to.
+       */
+      id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'd1';
+    }
+
+    export interface WorkersBindingKindDataBlob {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the data content. Only accepted for
+       * `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'data_blob';
+    }
+
+    export interface WorkersBindingKindDispatchNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the dispatch namespace.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'dispatch_namespace';
+
+      /**
+       * Outbound worker.
+       */
+      outbound?: WorkersBindingKindDispatchNamespace.Outbound;
+    }
+
+    export namespace WorkersBindingKindDispatchNamespace {
+      /**
+       * Outbound worker.
+       */
+      export interface Outbound {
+        /**
+         * Pass information from the Dispatch Worker to the Outbound Worker through the
+         * parameters.
+         */
+        params?: Array<string>;
+
+        /**
+         * Outbound worker.
+         */
+        worker?: Outbound.Worker;
+      }
+
+      export namespace Outbound {
+        /**
+         * Outbound worker.
+         */
+        export interface Worker {
+          /**
+           * Environment of the outbound worker.
+           */
+          environment?: string;
+
+          /**
+           * Name of the outbound worker.
+           */
+          service?: string;
+        }
+      }
+    }
+
+    export interface WorkersBindingKindDurableObjectNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'durable_object_namespace';
+
+      /**
+       * The exported class name of the Durable Object.
+       */
+      class_name?: string;
+
+      /**
+       * The environment of the script_name to bind to.
+       */
+      environment?: string;
+
+      /**
+       * Namespace identifier tag.
+       */
+      namespace_id?: string;
+
+      /**
+       * The script where the Durable Object is defined, if it is external to this
+       * Worker.
+       */
+      script_name?: string;
+    }
+
+    export interface WorkersBindingKindHyperdrive {
+      /**
+       * Identifier of the Hyperdrive connection to bind to.
+       */
+      id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'hyperdrive';
+    }
+
+    export interface WorkersBindingKindInherit {
+      /**
+       * The name of the inherited binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'inherit';
+
+      /**
+       * The old name of the inherited binding. If set, the binding will be renamed from
+       * `old_name` to `name` in the new version. If not set, the binding will keep the
+       * same name between versions.
+       */
+      old_name?: string;
+
+      /**
+       * Identifier for the version to inherit the binding from, which can be the version
+       * ID or the literal "latest" to inherit from the latest version. Defaults to
+       * inheriting the binding from the latest version.
+       */
+      version_id?: string;
+    }
+
+    export interface WorkersBindingKindImages {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'images';
+    }
+
+    export interface WorkersBindingKindJson {
+      /**
+       * JSON data to use.
+       */
+      json: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'json';
+    }
+
+    export interface WorkersBindingKindKVNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Namespace identifier tag.
+       */
+      namespace_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'kv_namespace';
+    }
+
+    export interface WorkersBindingKindMTLSCertificate {
+      /**
+       * Identifier of the certificate to bind to.
+       */
+      certificate_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'mtls_certificate';
+    }
+
+    export interface WorkersBindingKindPlainText {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The text value to use.
+       */
+      text: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'plain_text';
+    }
+
+    export interface WorkersBindingKindPipelines {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the Pipeline to bind to.
+       */
+      pipeline: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'pipelines';
+    }
+
+    export interface WorkersBindingKindQueue {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the Queue to bind to.
+       */
+      queue_name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'queue';
+    }
+
+    export interface WorkersBindingKindR2Bucket {
+      /**
+       * R2 bucket to bind to.
+       */
+      bucket_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'r2_bucket';
+
+      /**
+       * The
+       * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
+       * of the R2 bucket.
+       */
+      jurisdiction?: 'eu' | 'fedramp';
+    }
+
+    export interface WorkersBindingKindSecretText {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The secret value to use.
+       */
+      text: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secret_text';
+    }
+
+    export interface WorkersBindingKindSendEmail {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'send_email';
+
+      /**
+       * List of allowed destination addresses.
+       */
+      allowed_destination_addresses?: Array<string>;
+
+      /**
+       * List of allowed sender addresses.
+       */
+      allowed_sender_addresses?: Array<string>;
+
+      /**
+       * Destination address for the email.
+       */
+      destination_address?: string;
+    }
+
+    export interface WorkersBindingKindService {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of Worker to bind to.
+       */
+      service: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'service';
+
+      /**
+       * Optional environment if the Worker utilizes one.
+       */
+      environment?: string;
+    }
+
+    export interface WorkersBindingKindTextBlob {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the text content. Only accepted for
+       * `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'text_blob';
+    }
+
+    export interface WorkersBindingKindVectorize {
+      /**
+       * Name of the Vectorize index to bind to.
+       */
+      index_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vectorize';
+    }
+
+    export interface WorkersBindingKindVersionMetadata {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'version_metadata';
+    }
+
+    export interface WorkersBindingKindSecretsStoreSecret {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Name of the secret in the store.
+       */
+      secret_name: string;
+
+      /**
+       * ID of the store containing the secret.
+       */
+      store_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secrets_store_secret';
+    }
+
+    export interface WorkersBindingKindSecretKey {
+      /**
+       * Algorithm-specific key parameters.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
+       */
+      algorithm: unknown;
+
+      /**
+       * Data format of the key.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
+       */
+      format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'secret_key';
+
+      /**
+       * Allowed operations with the key.
+       * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
+       */
+      usages: Array<
+        'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
+      >;
+
+      /**
+       * Base64-encoded key data. Required if `format` is "raw", "pkcs8", or "spki".
+       */
+      key_base64?: string;
+
+      /**
+       * Key data in
+       * [JSON Web Key](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#json_web_key)
+       * format. Required if `format` is "jwk".
+       */
+      key_jwk?: unknown;
+    }
+
+    export interface WorkersBindingKindWorkflow {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'workflow';
+
+      /**
+       * Name of the Workflow to bind to.
+       */
+      workflow_name: string;
+
+      /**
+       * Class name of the Workflow. Should only be provided if the Workflow belongs to
+       * this script.
+       */
+      class_name?: string;
+
+      /**
+       * Script name that contains the Workflow. If not provided, defaults to this script
+       * name.
+       */
+      script_name?: string;
+    }
+
+    export interface WorkersBindingKindWasmModule {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The name of the file containing the WebAssembly module content. Only accepted
+       * for `service worker syntax` Workers.
+       */
+      part: string;
+
+      /**
+       * @deprecated The kind of resource that the binding provides.
+       */
+      type: 'wasm_module';
+    }
+  }
+}
+
+export interface VersionListParams extends V4PagePaginationParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Only return versions that can be used in a deployment. Ignores
+   * pagination.
+   */
+  deployable?: boolean;
+}
+
+export interface VersionGetParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Name of the script.
+   */
+  script_name: string;
+}
+
+export declare namespace Versions {
+  export {
+    type VersionCreateResponse as VersionCreateResponse,
+    type VersionListResponse as VersionListResponse,
+    type VersionGetResponse as VersionGetResponse,
+    type VersionListResponsesV4PagePagination as VersionListResponsesV4PagePagination,
+    type VersionCreateParams as VersionCreateParams,
+    type VersionListParams as VersionListParams,
+    type VersionGetParams as VersionGetParams,
+  };
+}

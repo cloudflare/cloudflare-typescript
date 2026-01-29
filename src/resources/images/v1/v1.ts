@@ -1,0 +1,332 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../core/resource';
+import * as BlobsAPI from './blobs';
+import { BlobGetParams, Blobs } from './blobs';
+import * as KeysAPI from './keys';
+import {
+  Key,
+  KeyDeleteParams,
+  KeyDeleteResponse,
+  KeyListParams,
+  KeyListResponse,
+  KeyUpdateParams,
+  KeyUpdateResponse,
+  Keys,
+} from './keys';
+import * as StatsAPI from './stats';
+import { Stat, StatGetParams, Stats } from './stats';
+import * as VariantsAPI from './variants';
+import {
+  Variant,
+  VariantCreateParams,
+  VariantCreateResponse,
+  VariantDeleteParams,
+  VariantDeleteResponse,
+  VariantEditParams,
+  VariantEditResponse,
+  VariantGetParams,
+  VariantGetResponse,
+  VariantListParams,
+  Variants,
+} from './variants';
+import { APIPromise } from '../../../core/api-promise';
+import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../core/pagination';
+import { type Uploadable } from '../../../core/uploads';
+import { RequestOptions } from '../../../internal/request-options';
+import { multipartFormRequestOptions } from '../../../internal/uploads';
+import { path } from '../../../internal/utils/path';
+
+export class V1 extends APIResource {
+  keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
+  stats: StatsAPI.Stats = new StatsAPI.Stats(this._client);
+  variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
+  blobs: BlobsAPI.Blobs = new BlobsAPI.Blobs(this._client);
+
+  /**
+   * Upload an image with up to 10 Megabytes using a single HTTP POST
+   * (multipart/form-data) request. An image can be uploaded by sending an image file
+   * or passing an accessible to an API url.
+   *
+   * @example
+   * ```ts
+   * const image = await client.images.v1.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  create(params: V1CreateParams, options?: RequestOptions): APIPromise<Image> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(
+        path`/accounts/${account_id}/images/v1`,
+        multipartFormRequestOptions({ body, ...options }, this._client),
+      ) as APIPromise<{ result: Image }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List up to 100 images with one request. Use the optional parameters below to get
+   * a specific range of images.
+   *
+   * @deprecated
+   */
+  list(
+    params: V1ListParams,
+    options?: RequestOptions,
+  ): PagePromise<V1ListResponsesV4PagePagination, V1ListResponse> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/images/v1`,
+      V4PagePagination<V1ListResponse>,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Delete an image on Cloudflare Images. On success, all copies of the image are
+   * deleted and purged from cache.
+   *
+   * @example
+   * ```ts
+   * const v1 = await client.images.v1.delete('image_id', {
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  delete(imageID: string, params: V1DeleteParams, options?: RequestOptions): APIPromise<V1DeleteResponse> {
+    const { account_id } = params;
+    return (
+      this._client.delete(path`/accounts/${account_id}/images/v1/${imageID}`, options) as APIPromise<{
+        result: V1DeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Update image access control. On access control change, all copies of the image
+   * are purged from cache.
+   *
+   * @example
+   * ```ts
+   * const image = await client.images.v1.edit('image_id', {
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  edit(imageID: string, params: V1EditParams, options?: RequestOptions): APIPromise<Image> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(path`/accounts/${account_id}/images/v1/${imageID}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: Image }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetch details for a single image.
+   *
+   * @example
+   * ```ts
+   * const image = await client.images.v1.get('image_id', {
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  get(imageID: string, params: V1GetParams, options?: RequestOptions): APIPromise<Image> {
+    const { account_id } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/images/v1/${imageID}`, options) as APIPromise<{
+        result: Image;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type V1ListResponsesV4PagePagination = V4PagePagination<V1ListResponse>;
+
+export interface Image {
+  /**
+   * Image unique identifier.
+   */
+  id?: string;
+
+  /**
+   * Can set the creator field with an internal user ID.
+   */
+  creator?: string | null;
+
+  /**
+   * Image file name.
+   */
+  filename?: string;
+
+  /**
+   * User modifiable key-value store. Can be used for keeping references to another
+   * system of record for managing images. Metadata must not exceed 1024 bytes.
+   */
+  meta?: unknown;
+
+  /**
+   * Indicates whether the image can be a accessed only using it's UID. If set to
+   * true, a signed token needs to be generated with a signing key to view the image.
+   */
+  requireSignedURLs?: boolean;
+
+  /**
+   * When the media item was uploaded.
+   */
+  uploaded?: string;
+
+  /**
+   * Object specifying available variants for an image.
+   */
+  variants?: Array<string>;
+}
+
+export interface V1ListResponse {
+  images?: Array<Image>;
+}
+
+export type V1DeleteResponse = unknown | string;
+
+export interface V1CreateParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: An optional custom unique identifier for your image.
+   */
+  id?: string;
+
+  /**
+   * Body param: Can set the creator field with an internal user ID.
+   */
+  creator?: string;
+
+  /**
+   * Body param: An image binary data. Only needed when type is uploading a file.
+   */
+  file?: Uploadable;
+
+  /**
+   * Body param: User modifiable key-value store. Can use used for keeping references
+   * to another system of record for managing images.
+   */
+  metadata?: unknown;
+
+  /**
+   * Body param: Indicates whether the image requires a signature token for the
+   * access.
+   */
+  requireSignedURLs?: boolean;
+
+  /**
+   * Body param: A URL to fetch an image from origin. Only needed when type is
+   * uploading from a URL.
+   */
+  url?: string;
+}
+
+export interface V1ListParams extends V4PagePaginationParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Internal user ID set within the creator field. Setting to empty
+   * string "" will return images where creator field is not set
+   */
+  creator?: string | null;
+}
+
+export interface V1DeleteParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
+
+export interface V1EditParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Can set the creator field with an internal user ID.
+   */
+  creator?: string;
+
+  /**
+   * Body param: User modifiable key-value store. Can be used for keeping references
+   * to another system of record for managing images. No change if not specified.
+   */
+  metadata?: unknown;
+
+  /**
+   * Body param: Indicates whether the image can be accessed using only its UID. If
+   * set to `true`, a signed token needs to be generated with a signing key to view
+   * the image. Returns a new UID on a change. No change if not specified.
+   */
+  requireSignedURLs?: boolean;
+}
+
+export interface V1GetParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
+
+V1.Keys = Keys;
+V1.Stats = Stats;
+V1.Variants = Variants;
+V1.Blobs = Blobs;
+
+export declare namespace V1 {
+  export {
+    type Image as Image,
+    type V1ListResponse as V1ListResponse,
+    type V1DeleteResponse as V1DeleteResponse,
+    type V1ListResponsesV4PagePagination as V1ListResponsesV4PagePagination,
+    type V1CreateParams as V1CreateParams,
+    type V1ListParams as V1ListParams,
+    type V1DeleteParams as V1DeleteParams,
+    type V1EditParams as V1EditParams,
+    type V1GetParams as V1GetParams,
+  };
+
+  export {
+    Keys as Keys,
+    type Key as Key,
+    type KeyUpdateResponse as KeyUpdateResponse,
+    type KeyListResponse as KeyListResponse,
+    type KeyDeleteResponse as KeyDeleteResponse,
+    type KeyUpdateParams as KeyUpdateParams,
+    type KeyListParams as KeyListParams,
+    type KeyDeleteParams as KeyDeleteParams,
+  };
+
+  export { Stats as Stats, type Stat as Stat, type StatGetParams as StatGetParams };
+
+  export {
+    Variants as Variants,
+    type Variant as Variant,
+    type VariantCreateResponse as VariantCreateResponse,
+    type VariantDeleteResponse as VariantDeleteResponse,
+    type VariantEditResponse as VariantEditResponse,
+    type VariantGetResponse as VariantGetResponse,
+    type VariantCreateParams as VariantCreateParams,
+    type VariantListParams as VariantListParams,
+    type VariantDeleteParams as VariantDeleteParams,
+    type VariantEditParams as VariantEditParams,
+    type VariantGetParams as VariantGetParams,
+  };
+
+  export { Blobs as Blobs, type BlobGetParams as BlobGetParams };
+}
