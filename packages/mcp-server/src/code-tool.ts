@@ -19,7 +19,7 @@ async function run(client) {
     type: 'full',
   });
 
-  console.log(zone.errors);
+  console.log(zone.id);
 }
 \`\`\`
 

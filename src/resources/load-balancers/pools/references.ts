@@ -1,0 +1,62 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../core/resource';
+import { PagePromise, SinglePage } from '../../../core/pagination';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
+
+export class References extends APIResource {
+  /**
+   * Get the list of resources that reference the provided pool.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const referenceGetResponse of client.loadBalancers.pools.references.get(
+   *   '17b5962d775c646f3f9725cbc7a53df4',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  get(
+    poolID: string,
+    params: ReferenceGetParams,
+    options?: RequestOptions,
+  ): PagePromise<ReferenceGetResponsesSinglePage, ReferenceGetResponse> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/load_balancers/pools/${poolID}/references`,
+      SinglePage<ReferenceGetResponse>,
+      options,
+    );
+  }
+}
+
+export type ReferenceGetResponsesSinglePage = SinglePage<ReferenceGetResponse>;
+
+export interface ReferenceGetResponse {
+  reference_type?: '*' | 'referral' | 'referrer';
+
+  resource_id?: string;
+
+  resource_name?: string;
+
+  resource_type?: string;
+}
+
+export interface ReferenceGetParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
+export declare namespace References {
+  export {
+    type ReferenceGetResponse as ReferenceGetResponse,
+    type ReferenceGetResponsesSinglePage as ReferenceGetResponsesSinglePage,
+    type ReferenceGetParams as ReferenceGetParams,
+  };
+}

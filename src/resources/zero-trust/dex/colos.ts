@@ -1,0 +1,73 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../core/resource';
+import { PagePromise, SinglePage } from '../../../core/pagination';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
+
+export class Colos extends APIResource {
+  /**
+   * List Cloudflare colos that account's devices were connected to during a time
+   * period, sorted by usage starting from the most used colo. Colos without traffic
+   * are also returned and sorted alphabetically.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const coloListResponse of client.zeroTrust.dex.colos.list(
+   *   {
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     from: '2023-08-20T20:45:00Z',
+   *     to: '2023-08-24T20:45:00Z',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    params: ColoListParams,
+    options?: RequestOptions,
+  ): PagePromise<ColoListResponsesSinglePage, ColoListResponse> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(path`/accounts/${account_id}/dex/colos`, SinglePage<ColoListResponse>, {
+      query,
+      ...options,
+    });
+  }
+}
+
+export type ColoListResponsesSinglePage = SinglePage<ColoListResponse>;
+
+export type ColoListResponse = unknown;
+
+export interface ColoListParams {
+  /**
+   * Path param: unique identifier linked to an account in the API request path.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Start time for connection period in ISO (RFC3339 - ISO 8601) format
+   */
+  from: string;
+
+  /**
+   * Query param: End time for connection period in ISO (RFC3339 - ISO 8601) format
+   */
+  to: string;
+
+  /**
+   * Query param: Type of usage that colos should be sorted by. If unspecified,
+   * returns all Cloudflare colos sorted alphabetically.
+   */
+  sortBy?: 'fleet-status-usage' | 'application-tests-usage';
+}
+
+export declare namespace Colos {
+  export {
+    type ColoListResponse as ColoListResponse,
+    type ColoListResponsesSinglePage as ColoListResponsesSinglePage,
+    type ColoListParams as ColoListParams,
+  };
+}

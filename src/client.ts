@@ -32,22 +32,108 @@ import {
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import {
-  AccountListParams,
-  AccountListResponse,
-  AccountListResponsesV4PagePaginationArray,
-  Accounts,
-} from './resources/accounts';
-import {
-  ZoneCreateParams,
-  ZoneCreateResponse,
-  ZoneEditParams,
-  ZoneEditResponse,
-  ZoneGetParams,
-  ZoneGetResponse,
-  Zones,
-} from './resources/zones';
+import { AuditLogs } from './resources/audit-logs';
+import { BotManagement } from './resources/bot-management';
+import { ClientCertificates } from './resources/client-certificates';
+import { CustomNameservers } from './resources/custom-nameservers';
+import { CustomPages } from './resources/custom-pages';
+import { DCVDelegation } from './resources/dcv-delegation';
+import { Filters } from './resources/filters';
+import { Fraud } from './resources/fraud';
+import { IPs } from './resources/ips';
+import { KeylessCertificates } from './resources/keyless-certificates';
+import { ManagedTransforms } from './resources/managed-transforms';
+import { Memberships } from './resources/memberships';
+import { OriginCACertificates } from './resources/origin-ca-certificates';
+import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption';
+import { PageRules } from './resources/page-rules';
+import { RateLimits } from './resources/rate-limits';
+import { SecurityTXT } from './resources/security-txt';
+import { URLNormalization } from './resources/url-normalization';
+import { AbuseReports } from './resources/abuse-reports/abuse-reports';
+import { Accounts } from './resources/accounts/accounts';
+import { ACM } from './resources/acm/acm';
+import { Addressing } from './resources/addressing/addressing';
+import { AIGateway } from './resources/ai-gateway/ai-gateway';
+import { AI } from './resources/ai/ai';
+import { AISearch } from './resources/aisearch/aisearch';
+import { Alerting } from './resources/alerting/alerting';
+import { APIGateway } from './resources/api-gateway/api-gateway';
+import { Argo } from './resources/argo/argo';
+import { Billing } from './resources/billing/billing';
+import { BotnetFeed } from './resources/botnet-feed/botnet-feed';
+import { BrandProtection } from './resources/brand-protection/brand-protection';
+import { BrowserRendering } from './resources/browser-rendering/browser-rendering';
+import { Cache } from './resources/cache/cache';
+import { Calls } from './resources/calls/calls';
+import { CertificateAuthorities } from './resources/certificate-authorities/certificate-authorities';
+import { CloudConnector } from './resources/cloud-connector/cloud-connector';
+import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
+import { Connectivity } from './resources/connectivity/connectivity';
+import { ContentScanning } from './resources/content-scanning/content-scanning';
+import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
+import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
+import { D1Resource } from './resources/d1/d1';
+import { Diagnostics } from './resources/diagnostics/diagnostics';
+import { DNSFirewall } from './resources/dns-firewall/dns-firewall';
 import { DNS } from './resources/dns/dns';
+import { DurableObjects } from './resources/durable-objects/durable-objects';
+import { EmailRouting } from './resources/email-routing/email-routing';
+import { EmailSecurity } from './resources/email-security/email-security';
+import { Firewall } from './resources/firewall/firewall';
+import { Healthchecks } from './resources/healthchecks/healthchecks';
+import { Hostnames } from './resources/hostnames/hostnames';
+import { HyperdriveResource } from './resources/hyperdrive/hyperdrive';
+import { IAM } from './resources/iam/iam';
+import { Images } from './resources/images/images';
+import { Intel } from './resources/intel/intel';
+import { KV } from './resources/kv/kv';
+import { LeakedCredentialChecks } from './resources/leaked-credential-checks/leaked-credential-checks';
+import { LoadBalancers } from './resources/load-balancers/load-balancers';
+import { Logpush } from './resources/logpush/logpush';
+import { Logs } from './resources/logs/logs';
+import { MagicCloudNetworking } from './resources/magic-cloud-networking/magic-cloud-networking';
+import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/magic-network-monitoring';
+import { MagicTransit } from './resources/magic-transit/magic-transit';
+import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
+import { NetworkInterconnects } from './resources/network-interconnects/network-interconnects';
+import { Organizations } from './resources/organizations/organizations';
+import { OriginTLSClientAuth } from './resources/origin-tls-client-auth/origin-tls-client-auth';
+import { PageShield } from './resources/page-shield/page-shield';
+import { Pages } from './resources/pages/pages';
+import { Pipelines } from './resources/pipelines/pipelines';
+import { Queues } from './resources/queues/queues';
+import { R2DataCatalog } from './resources/r2-data-catalog/r2-data-catalog';
+import { R2 } from './resources/r2/r2';
+import { Radar } from './resources/radar/radar';
+import { RealtimeKit } from './resources/realtime-kit/realtime-kit';
+import { Registrar } from './resources/registrar/registrar';
+import { RequestTracers } from './resources/request-tracers/request-tracers';
+import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
+import { Rules } from './resources/rules/rules';
+import { Rulesets } from './resources/rulesets/rulesets';
+import { RUM } from './resources/rum/rum';
+import { SchemaValidation } from './resources/schema-validation/schema-validation';
+import { SecretsStore } from './resources/secrets-store/secrets-store';
+import { SecurityCenter } from './resources/security-center/security-center';
+import { Snippets } from './resources/snippets/snippets';
+import { Spectrum } from './resources/spectrum/spectrum';
+import { Speed } from './resources/speed/speed';
+import { SSL } from './resources/ssl/ssl';
+import { Stream } from './resources/stream/stream';
+import { TokenValidation } from './resources/token-validation/token-validation';
+import { Turnstile } from './resources/turnstile/turnstile';
+import { URLScanner } from './resources/url-scanner/url-scanner';
+import { User } from './resources/user/user';
+import { Vectorize } from './resources/vectorize/vectorize';
+import { WaitingRooms } from './resources/waiting-rooms/waiting-rooms';
+import { Web3 } from './resources/web3/web3';
+import { WorkersForPlatforms } from './resources/workers-for-platforms/workers-for-platforms';
+import { Workers } from './resources/workers/workers';
+import { Workflows } from './resources/workflows/workflows';
+import { Zaraz } from './resources/zaraz/zaraz';
+import { ZeroTrust } from './resources/zero-trust/zero-trust';
+import { Zones } from './resources/zones/zones';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -840,14 +926,212 @@ export class Cloudflare {
 
   static toFile = Uploads.toFile;
 
-  dns: API.DNS = new API.DNS(this);
-  zones: API.Zones = new API.Zones(this);
   accounts: API.Accounts = new API.Accounts(this);
+  organizations: API.Organizations = new API.Organizations(this);
+  originCACertificates: API.OriginCACertificates = new API.OriginCACertificates(this);
+  ips: API.IPs = new API.IPs(this);
+  memberships: API.Memberships = new API.Memberships(this);
+  user: API.User = new API.User(this);
+  zones: API.Zones = new API.Zones(this);
+  loadBalancers: API.LoadBalancers = new API.LoadBalancers(this);
+  cache: API.Cache = new API.Cache(this);
+  ssl: API.SSL = new API.SSL(this);
+  acm: API.ACM = new API.ACM(this);
+  argo: API.Argo = new API.Argo(this);
+  certificateAuthorities: API.CertificateAuthorities = new API.CertificateAuthorities(this);
+  clientCertificates: API.ClientCertificates = new API.ClientCertificates(this);
+  customCertificates: API.CustomCertificates = new API.CustomCertificates(this);
+  customHostnames: API.CustomHostnames = new API.CustomHostnames(this);
+  customNameservers: API.CustomNameservers = new API.CustomNameservers(this);
+  dnsFirewall: API.DNSFirewall = new API.DNSFirewall(this);
+  dns: API.DNS = new API.DNS(this);
+  emailSecurity: API.EmailSecurity = new API.EmailSecurity(this);
+  emailRouting: API.EmailRouting = new API.EmailRouting(this);
+  filters: API.Filters = new API.Filters(this);
+  firewall: API.Firewall = new API.Firewall(this);
+  healthchecks: API.Healthchecks = new API.Healthchecks(this);
+  keylessCertificates: API.KeylessCertificates = new API.KeylessCertificates(this);
+  logpush: API.Logpush = new API.Logpush(this);
+  logs: API.Logs = new API.Logs(this);
+  originTLSClientAuth: API.OriginTLSClientAuth = new API.OriginTLSClientAuth(this);
+  pageRules: API.PageRules = new API.PageRules(this);
+  rateLimits: API.RateLimits = new API.RateLimits(this);
+  waitingRooms: API.WaitingRooms = new API.WaitingRooms(this);
+  web3: API.Web3 = new API.Web3(this);
+  workers: API.Workers = new API.Workers(this);
+  kv: API.KV = new API.KV(this);
+  durableObjects: API.DurableObjects = new API.DurableObjects(this);
+  queues: API.Queues = new API.Queues(this);
+  apiGateway: API.APIGateway = new API.APIGateway(this);
+  managedTransforms: API.ManagedTransforms = new API.ManagedTransforms(this);
+  pageShield: API.PageShield = new API.PageShield(this);
+  rulesets: API.Rulesets = new API.Rulesets(this);
+  urlNormalization: API.URLNormalization = new API.URLNormalization(this);
+  spectrum: API.Spectrum = new API.Spectrum(this);
+  addressing: API.Addressing = new API.Addressing(this);
+  auditLogs: API.AuditLogs = new API.AuditLogs(this);
+  billing: API.Billing = new API.Billing(this);
+  brandProtection: API.BrandProtection = new API.BrandProtection(this);
+  diagnostics: API.Diagnostics = new API.Diagnostics(this);
+  images: API.Images = new API.Images(this);
+  intel: API.Intel = new API.Intel(this);
+  magicTransit: API.MagicTransit = new API.MagicTransit(this);
+  magicNetworkMonitoring: API.MagicNetworkMonitoring = new API.MagicNetworkMonitoring(this);
+  magicCloudNetworking: API.MagicCloudNetworking = new API.MagicCloudNetworking(this);
+  networkInterconnects: API.NetworkInterconnects = new API.NetworkInterconnects(this);
+  mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
+  pages: API.Pages = new API.Pages(this);
+  registrar: API.Registrar = new API.Registrar(this);
+  requestTracers: API.RequestTracers = new API.RequestTracers(this);
+  rules: API.Rules = new API.Rules(this);
+  stream: API.Stream = new API.Stream(this);
+  alerting: API.Alerting = new API.Alerting(this);
+  d1: API.D1Resource = new API.D1Resource(this);
+  r2: API.R2 = new API.R2(this);
+  r2DataCatalog: API.R2DataCatalog = new API.R2DataCatalog(this);
+  workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
+  zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
+  turnstile: API.Turnstile = new API.Turnstile(this);
+  connectivity: API.Connectivity = new API.Connectivity(this);
+  hyperdrive: API.HyperdriveResource = new API.HyperdriveResource(this);
+  rum: API.RUM = new API.RUM(this);
+  vectorize: API.Vectorize = new API.Vectorize(this);
+  urlScanner: API.URLScanner = new API.URLScanner(this);
+  radar: API.Radar = new API.Radar(this);
+  botManagement: API.BotManagement = new API.BotManagement(this);
+  fraud: API.Fraud = new API.Fraud(this);
+  originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
+  zaraz: API.Zaraz = new API.Zaraz(this);
+  speed: API.Speed = new API.Speed(this);
+  dcvDelegation: API.DCVDelegation = new API.DCVDelegation(this);
+  hostnames: API.Hostnames = new API.Hostnames(this);
+  snippets: API.Snippets = new API.Snippets(this);
+  realtimeKit: API.RealtimeKit = new API.RealtimeKit(this);
+  calls: API.Calls = new API.Calls(this);
+  cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
+  aiGateway: API.AIGateway = new API.AIGateway(this);
+  iam: API.IAM = new API.IAM(this);
+  cloudConnector: API.CloudConnector = new API.CloudConnector(this);
+  botnetFeed: API.BotnetFeed = new API.BotnetFeed(this);
+  securityTXT: API.SecurityTXT = new API.SecurityTXT(this);
+  workflows: API.Workflows = new API.Workflows(this);
+  resourceSharing: API.ResourceSharing = new API.ResourceSharing(this);
+  leakedCredentialChecks: API.LeakedCredentialChecks = new API.LeakedCredentialChecks(this);
+  contentScanning: API.ContentScanning = new API.ContentScanning(this);
+  abuseReports: API.AbuseReports = new API.AbuseReports(this);
+  ai: API.AI = new API.AI(this);
+  aiSearch: API.AISearch = new API.AISearch(this);
+  securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
+  browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
+  customPages: API.CustomPages = new API.CustomPages(this);
+  secretsStore: API.SecretsStore = new API.SecretsStore(this);
+  pipelines: API.Pipelines = new API.Pipelines(this);
+  schemaValidation: API.SchemaValidation = new API.SchemaValidation(this);
+  tokenValidation: API.TokenValidation = new API.TokenValidation(this);
 }
 
-Cloudflare.DNS = DNS;
-Cloudflare.Zones = Zones;
 Cloudflare.Accounts = Accounts;
+Cloudflare.Organizations = Organizations;
+Cloudflare.OriginCACertificates = OriginCACertificates;
+Cloudflare.IPs = IPs;
+Cloudflare.Memberships = Memberships;
+Cloudflare.User = User;
+Cloudflare.Zones = Zones;
+Cloudflare.LoadBalancers = LoadBalancers;
+Cloudflare.Cache = Cache;
+Cloudflare.SSL = SSL;
+Cloudflare.ACM = ACM;
+Cloudflare.Argo = Argo;
+Cloudflare.CertificateAuthorities = CertificateAuthorities;
+Cloudflare.ClientCertificates = ClientCertificates;
+Cloudflare.CustomCertificates = CustomCertificates;
+Cloudflare.CustomHostnames = CustomHostnames;
+Cloudflare.CustomNameservers = CustomNameservers;
+Cloudflare.DNSFirewall = DNSFirewall;
+Cloudflare.DNS = DNS;
+Cloudflare.EmailSecurity = EmailSecurity;
+Cloudflare.EmailRouting = EmailRouting;
+Cloudflare.Filters = Filters;
+Cloudflare.Firewall = Firewall;
+Cloudflare.Healthchecks = Healthchecks;
+Cloudflare.KeylessCertificates = KeylessCertificates;
+Cloudflare.Logpush = Logpush;
+Cloudflare.Logs = Logs;
+Cloudflare.OriginTLSClientAuth = OriginTLSClientAuth;
+Cloudflare.PageRules = PageRules;
+Cloudflare.RateLimits = RateLimits;
+Cloudflare.WaitingRooms = WaitingRooms;
+Cloudflare.Web3 = Web3;
+Cloudflare.Workers = Workers;
+Cloudflare.KV = KV;
+Cloudflare.DurableObjects = DurableObjects;
+Cloudflare.Queues = Queues;
+Cloudflare.APIGateway = APIGateway;
+Cloudflare.ManagedTransforms = ManagedTransforms;
+Cloudflare.PageShield = PageShield;
+Cloudflare.Rulesets = Rulesets;
+Cloudflare.URLNormalization = URLNormalization;
+Cloudflare.Spectrum = Spectrum;
+Cloudflare.Addressing = Addressing;
+Cloudflare.AuditLogs = AuditLogs;
+Cloudflare.Billing = Billing;
+Cloudflare.BrandProtection = BrandProtection;
+Cloudflare.Diagnostics = Diagnostics;
+Cloudflare.Images = Images;
+Cloudflare.Intel = Intel;
+Cloudflare.MagicTransit = MagicTransit;
+Cloudflare.MagicNetworkMonitoring = MagicNetworkMonitoring;
+Cloudflare.MagicCloudNetworking = MagicCloudNetworking;
+Cloudflare.NetworkInterconnects = NetworkInterconnects;
+Cloudflare.MTLSCertificates = MTLSCertificates;
+Cloudflare.Pages = Pages;
+Cloudflare.Registrar = Registrar;
+Cloudflare.RequestTracers = RequestTracers;
+Cloudflare.Rules = Rules;
+Cloudflare.Stream = Stream;
+Cloudflare.Alerting = Alerting;
+Cloudflare.D1Resource = D1Resource;
+Cloudflare.R2 = R2;
+Cloudflare.R2DataCatalog = R2DataCatalog;
+Cloudflare.WorkersForPlatforms = WorkersForPlatforms;
+Cloudflare.ZeroTrust = ZeroTrust;
+Cloudflare.Turnstile = Turnstile;
+Cloudflare.Connectivity = Connectivity;
+Cloudflare.HyperdriveResource = HyperdriveResource;
+Cloudflare.RUM = RUM;
+Cloudflare.Vectorize = Vectorize;
+Cloudflare.URLScanner = URLScanner;
+Cloudflare.Radar = Radar;
+Cloudflare.BotManagement = BotManagement;
+Cloudflare.Fraud = Fraud;
+Cloudflare.OriginPostQuantumEncryption = OriginPostQuantumEncryption;
+Cloudflare.Zaraz = Zaraz;
+Cloudflare.Speed = Speed;
+Cloudflare.DCVDelegation = DCVDelegation;
+Cloudflare.Hostnames = Hostnames;
+Cloudflare.Snippets = Snippets;
+Cloudflare.RealtimeKit = RealtimeKit;
+Cloudflare.Calls = Calls;
+Cloudflare.CloudforceOne = CloudforceOne;
+Cloudflare.AIGateway = AIGateway;
+Cloudflare.IAM = IAM;
+Cloudflare.CloudConnector = CloudConnector;
+Cloudflare.BotnetFeed = BotnetFeed;
+Cloudflare.SecurityTXT = SecurityTXT;
+Cloudflare.Workflows = Workflows;
+Cloudflare.ResourceSharing = ResourceSharing;
+Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
+Cloudflare.ContentScanning = ContentScanning;
+Cloudflare.AbuseReports = AbuseReports;
+Cloudflare.AI = AI;
+Cloudflare.AISearch = AISearch;
+Cloudflare.SecurityCenter = SecurityCenter;
+Cloudflare.BrowserRendering = BrowserRendering;
+Cloudflare.CustomPages = CustomPages;
+Cloudflare.SecretsStore = SecretsStore;
+Cloudflare.Pipelines = Pipelines;
+Cloudflare.SchemaValidation = SchemaValidation;
+Cloudflare.TokenValidation = TokenValidation;
 
 export declare namespace Cloudflare {
   export type RequestOptions = Opts.RequestOptions;
@@ -885,22 +1169,232 @@ export declare namespace Cloudflare {
   export import SinglePage = Pagination.SinglePage;
   export { type SinglePageResponse as SinglePageResponse };
 
+  export { Accounts as Accounts };
+
+  export { Organizations as Organizations };
+
+  export { OriginCACertificates as OriginCACertificates };
+
+  export { IPs as IPs };
+
+  export { Memberships as Memberships };
+
+  export { User as User };
+
+  export { Zones as Zones };
+
+  export { LoadBalancers as LoadBalancers };
+
+  export { Cache as Cache };
+
+  export { SSL as SSL };
+
+  export { ACM as ACM };
+
+  export { Argo as Argo };
+
+  export { CertificateAuthorities as CertificateAuthorities };
+
+  export { ClientCertificates as ClientCertificates };
+
+  export { CustomCertificates as CustomCertificates };
+
+  export { CustomHostnames as CustomHostnames };
+
+  export { CustomNameservers as CustomNameservers };
+
+  export { DNSFirewall as DNSFirewall };
+
   export { DNS as DNS };
 
-  export {
-    Zones as Zones,
-    type ZoneCreateResponse as ZoneCreateResponse,
-    type ZoneEditResponse as ZoneEditResponse,
-    type ZoneGetResponse as ZoneGetResponse,
-    type ZoneCreateParams as ZoneCreateParams,
-    type ZoneEditParams as ZoneEditParams,
-    type ZoneGetParams as ZoneGetParams,
-  };
+  export { EmailSecurity as EmailSecurity };
 
-  export {
-    Accounts as Accounts,
-    type AccountListResponse as AccountListResponse,
-    type AccountListResponsesV4PagePaginationArray as AccountListResponsesV4PagePaginationArray,
-    type AccountListParams as AccountListParams,
-  };
+  export { EmailRouting as EmailRouting };
+
+  export { Filters as Filters };
+
+  export { Firewall as Firewall };
+
+  export { Healthchecks as Healthchecks };
+
+  export { KeylessCertificates as KeylessCertificates };
+
+  export { Logpush as Logpush };
+
+  export { Logs as Logs };
+
+  export { OriginTLSClientAuth as OriginTLSClientAuth };
+
+  export { PageRules as PageRules };
+
+  export { RateLimits as RateLimits };
+
+  export { WaitingRooms as WaitingRooms };
+
+  export { Web3 as Web3 };
+
+  export { Workers as Workers };
+
+  export { KV as KV };
+
+  export { DurableObjects as DurableObjects };
+
+  export { Queues as Queues };
+
+  export { APIGateway as APIGateway };
+
+  export { ManagedTransforms as ManagedTransforms };
+
+  export { PageShield as PageShield };
+
+  export { Rulesets as Rulesets };
+
+  export { URLNormalization as URLNormalization };
+
+  export { Spectrum as Spectrum };
+
+  export { Addressing as Addressing };
+
+  export { AuditLogs as AuditLogs };
+
+  export { Billing as Billing };
+
+  export { BrandProtection as BrandProtection };
+
+  export { Diagnostics as Diagnostics };
+
+  export { Images as Images };
+
+  export { Intel as Intel };
+
+  export { MagicTransit as MagicTransit };
+
+  export { MagicNetworkMonitoring as MagicNetworkMonitoring };
+
+  export { MagicCloudNetworking as MagicCloudNetworking };
+
+  export { NetworkInterconnects as NetworkInterconnects };
+
+  export { MTLSCertificates as MTLSCertificates };
+
+  export { Pages as Pages };
+
+  export { Registrar as Registrar };
+
+  export { RequestTracers as RequestTracers };
+
+  export { Rules as Rules };
+
+  export { Stream as Stream };
+
+  export { Alerting as Alerting };
+
+  export { D1Resource as D1Resource };
+
+  export { R2 as R2 };
+
+  export { R2DataCatalog as R2DataCatalog };
+
+  export { WorkersForPlatforms as WorkersForPlatforms };
+
+  export { ZeroTrust as ZeroTrust };
+
+  export { Turnstile as Turnstile };
+
+  export { Connectivity as Connectivity };
+
+  export { HyperdriveResource as HyperdriveResource };
+
+  export { RUM as RUM };
+
+  export { Vectorize as Vectorize };
+
+  export { URLScanner as URLScanner };
+
+  export { Radar as Radar };
+
+  export { BotManagement as BotManagement };
+
+  export { Fraud as Fraud };
+
+  export { OriginPostQuantumEncryption as OriginPostQuantumEncryption };
+
+  export { Zaraz as Zaraz };
+
+  export { Speed as Speed };
+
+  export { DCVDelegation as DCVDelegation };
+
+  export { Hostnames as Hostnames };
+
+  export { Snippets as Snippets };
+
+  export { RealtimeKit as RealtimeKit };
+
+  export { Calls as Calls };
+
+  export { CloudforceOne as CloudforceOne };
+
+  export { AIGateway as AIGateway };
+
+  export { IAM as IAM };
+
+  export { CloudConnector as CloudConnector };
+
+  export { BotnetFeed as BotnetFeed };
+
+  export { SecurityTXT as SecurityTXT };
+
+  export { Workflows as Workflows };
+
+  export { ResourceSharing as ResourceSharing };
+
+  export { LeakedCredentialChecks as LeakedCredentialChecks };
+
+  export { ContentScanning as ContentScanning };
+
+  export { AbuseReports as AbuseReports };
+
+  export { AI as AI };
+
+  export { AISearch as AISearch };
+
+  export { SecurityCenter as SecurityCenter };
+
+  export { BrowserRendering as BrowserRendering };
+
+  export { CustomPages as CustomPages };
+
+  export { SecretsStore as SecretsStore };
+
+  export { Pipelines as Pipelines };
+
+  export { SchemaValidation as SchemaValidation };
+
+  export { TokenValidation as TokenValidation };
+
+  export type ASN = API.ASN;
+  export type AuditLog = API.AuditLog;
+  export type CertificateCA = API.CertificateCA;
+  export type CertificateRequestType = API.CertificateRequestType;
+  export type CloudflareTunnel = API.CloudflareTunnel;
+  export type ErrorData = API.ErrorData;
+  export type Identifier = API.Identifier;
+  export type LoadBalancerPreview = API.LoadBalancerPreview;
+  export type Member = API.Member;
+  export type PaginationInfo = API.PaginationInfo;
+  export type Permission = API.Permission;
+  export type PermissionGrant = API.PermissionGrant;
+  export type RatePlan = API.RatePlan;
+  export type ResponseInfo = API.ResponseInfo;
+  export type Result = API.Result;
+  export type Role = API.Role;
+  export type SortDirection = API.SortDirection;
+  export type Subscription = API.Subscription;
+  export type SubscriptionComponent = API.SubscriptionComponent;
+  export type SubscriptionZone = API.SubscriptionZone;
+  export type Token = API.Token;
+  export type TokenConditionCIDRList = API.TokenConditionCIDRList;
+  export type TokenPolicy = API.TokenPolicy;
+  export type TokenValue = API.TokenValue;
 }

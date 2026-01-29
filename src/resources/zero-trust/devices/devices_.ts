@@ -1,0 +1,560 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { CursorPagination, type CursorPaginationParams, PagePromise } from '../../../core/pagination';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
+
+export class Devices extends APIResource {
+  /**
+   * Lists WARP devices.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const deviceListResponse of client.zeroTrust.devices.devices.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    params: DeviceListParams,
+    options?: RequestOptions,
+  ): PagePromise<DeviceListResponsesCursorPagination, DeviceListResponse> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/devices/physical-devices`,
+      CursorPagination<DeviceListResponse>,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Deletes a WARP device.
+   *
+   * @example
+   * ```ts
+   * const device =
+   *   await client.zeroTrust.devices.devices.delete(
+   *     'device_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  delete(
+    deviceID: string,
+    params: DeviceDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<DeviceDeleteResponse | null> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        path`/accounts/${account_id}/devices/physical-devices/${deviceID}`,
+        options,
+      ) as APIPromise<{ result: DeviceDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches a single WARP device.
+   *
+   * @example
+   * ```ts
+   * const device = await client.zeroTrust.devices.devices.get(
+   *   'device_id',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
+   */
+  get(deviceID: string, params: DeviceGetParams, options?: RequestOptions): APIPromise<DeviceGetResponse> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/devices/physical-devices/${deviceID}`, {
+        query,
+        ...options,
+      }) as APIPromise<{ result: DeviceGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Revokes all WARP registrations associated with the specified device.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.devices.devices.revoke(
+   *     'device_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  revoke(
+    deviceID: string,
+    params: DeviceRevokeParams,
+    options?: RequestOptions,
+  ): APIPromise<DeviceRevokeResponse | null> {
+    const { account_id } = params;
+    return (
+      this._client.post(
+        path`/accounts/${account_id}/devices/physical-devices/${deviceID}/revoke`,
+        options,
+      ) as APIPromise<{ result: DeviceRevokeResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type DeviceListResponsesCursorPagination = CursorPagination<DeviceListResponse>;
+
+/**
+ * A WARP Device.
+ */
+export interface DeviceListResponse {
+  /**
+   * The unique ID of the device.
+   */
+  id: string;
+
+  /**
+   * The number of active registrations for the device. Active registrations are
+   * those which haven't been revoked or deleted.
+   */
+  active_registrations: number;
+
+  /**
+   * The RFC3339 timestamp when the device was created.
+   */
+  created_at: string;
+
+  /**
+   * The RFC3339 timestamp when the device was last seen.
+   */
+  last_seen_at: string | null;
+
+  /**
+   * The name of the device.
+   */
+  name: string;
+
+  /**
+   * The RFC3339 timestamp when the device was last updated.
+   */
+  updated_at: string;
+
+  /**
+   * Version of the WARP client.
+   */
+  client_version?: string | null;
+
+  /**
+   * The RFC3339 timestamp when the device was deleted.
+   */
+  deleted_at?: string | null;
+
+  /**
+   * The device operating system.
+   */
+  device_type?: string | null;
+
+  /**
+   * A string that uniquely identifies the hardware or virtual machine (VM).
+   */
+  hardware_id?: string | null;
+
+  /**
+   * The last seen registration for the device.
+   */
+  last_seen_registration?: DeviceListResponse.LastSeenRegistration | null;
+
+  /**
+   * The last user to use the WARP device.
+   */
+  last_seen_user?: DeviceListResponse.LastSeenUser | null;
+
+  /**
+   * The device MAC address.
+   */
+  mac_address?: string | null;
+
+  /**
+   * The device manufacturer.
+   */
+  manufacturer?: string | null;
+
+  /**
+   * The model name of the device.
+   */
+  model?: string | null;
+
+  /**
+   * The device operating system version number.
+   */
+  os_version?: string | null;
+
+  /**
+   * Additional operating system version details. For Windows, the UBR (Update Build
+   * Revision). For Mac or iOS, the Product Version Extra. For Linux, the
+   * distribution name and version.
+   */
+  os_version_extra?: string | null;
+
+  /**
+   * @deprecated **Deprecated**: IP information is provided by DEX - see
+   * https://developers.cloudflare.com/api/resources/zero_trust/subresources/dex/subresources/fleet_status/subresources/devices/methods/list/
+   */
+  public_ip?: string | null;
+
+  /**
+   * The device serial number.
+   */
+  serial_number?: string | null;
+}
+
+export namespace DeviceListResponse {
+  /**
+   * The last seen registration for the device.
+   */
+  export interface LastSeenRegistration {
+    /**
+     * A summary of the device profile evaluated for the registration.
+     */
+    policy?: LastSeenRegistration.Policy | null;
+  }
+
+  export namespace LastSeenRegistration {
+    /**
+     * A summary of the device profile evaluated for the registration.
+     */
+    export interface Policy {
+      /**
+       * The ID of the device settings profile.
+       */
+      id: string;
+
+      /**
+       * Whether the device settings profile is the default profile for the account.
+       */
+      default: boolean;
+
+      /**
+       * Whether the device settings profile was deleted.
+       */
+      deleted: boolean;
+
+      /**
+       * The name of the device settings profile.
+       */
+      name: string;
+
+      /**
+       * The RFC3339 timestamp of when the device settings profile last changed for the
+       * registration.
+       */
+      updated_at: string;
+    }
+  }
+
+  /**
+   * The last user to use the WARP device.
+   */
+  export interface LastSeenUser {
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * The contact email address of the user.
+     */
+    email?: string;
+
+    /**
+     * The enrolled device user's name.
+     */
+    name?: string;
+  }
+}
+
+export type DeviceDeleteResponse = unknown;
+
+/**
+ * A WARP Device.
+ */
+export interface DeviceGetResponse {
+  /**
+   * The unique ID of the device.
+   */
+  id: string;
+
+  /**
+   * The number of active registrations for the device. Active registrations are
+   * those which haven't been revoked or deleted.
+   */
+  active_registrations: number;
+
+  /**
+   * The RFC3339 timestamp when the device was created.
+   */
+  created_at: string;
+
+  /**
+   * The RFC3339 timestamp when the device was last seen.
+   */
+  last_seen_at: string | null;
+
+  /**
+   * The name of the device.
+   */
+  name: string;
+
+  /**
+   * The RFC3339 timestamp when the device was last updated.
+   */
+  updated_at: string;
+
+  /**
+   * Version of the WARP client.
+   */
+  client_version?: string | null;
+
+  /**
+   * The RFC3339 timestamp when the device was deleted.
+   */
+  deleted_at?: string | null;
+
+  /**
+   * The device operating system.
+   */
+  device_type?: string | null;
+
+  /**
+   * A string that uniquely identifies the hardware or virtual machine (VM).
+   */
+  hardware_id?: string | null;
+
+  /**
+   * The last seen registration for the device.
+   */
+  last_seen_registration?: DeviceGetResponse.LastSeenRegistration | null;
+
+  /**
+   * The last user to use the WARP device.
+   */
+  last_seen_user?: DeviceGetResponse.LastSeenUser | null;
+
+  /**
+   * The device MAC address.
+   */
+  mac_address?: string | null;
+
+  /**
+   * The device manufacturer.
+   */
+  manufacturer?: string | null;
+
+  /**
+   * The model name of the device.
+   */
+  model?: string | null;
+
+  /**
+   * The device operating system version number.
+   */
+  os_version?: string | null;
+
+  /**
+   * Additional operating system version details. For Windows, the UBR (Update Build
+   * Revision). For Mac or iOS, the Product Version Extra. For Linux, the
+   * distribution name and version.
+   */
+  os_version_extra?: string | null;
+
+  /**
+   * @deprecated **Deprecated**: IP information is provided by DEX - see
+   * https://developers.cloudflare.com/api/resources/zero_trust/subresources/dex/subresources/fleet_status/subresources/devices/methods/list/
+   */
+  public_ip?: string | null;
+
+  /**
+   * The device serial number.
+   */
+  serial_number?: string | null;
+}
+
+export namespace DeviceGetResponse {
+  /**
+   * The last seen registration for the device.
+   */
+  export interface LastSeenRegistration {
+    /**
+     * A summary of the device profile evaluated for the registration.
+     */
+    policy?: LastSeenRegistration.Policy | null;
+  }
+
+  export namespace LastSeenRegistration {
+    /**
+     * A summary of the device profile evaluated for the registration.
+     */
+    export interface Policy {
+      /**
+       * The ID of the device settings profile.
+       */
+      id: string;
+
+      /**
+       * Whether the device settings profile is the default profile for the account.
+       */
+      default: boolean;
+
+      /**
+       * Whether the device settings profile was deleted.
+       */
+      deleted: boolean;
+
+      /**
+       * The name of the device settings profile.
+       */
+      name: string;
+
+      /**
+       * The RFC3339 timestamp of when the device settings profile last changed for the
+       * registration.
+       */
+      updated_at: string;
+    }
+  }
+
+  /**
+   * The last user to use the WARP device.
+   */
+  export interface LastSeenUser {
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * The contact email address of the user.
+     */
+    email?: string;
+
+    /**
+     * The enrolled device user's name.
+     */
+    name?: string;
+  }
+}
+
+export type DeviceRevokeResponse = unknown;
+
+export interface DeviceListParams extends CursorPaginationParams {
+  /**
+   * Path param
+   */
+  account_id: string;
+
+  /**
+   * Query param: Filter by a one or more device IDs.
+   */
+  id?: Array<string>;
+
+  /**
+   * Query param: Include or exclude devices with active registrations. The default
+   * is "only" - return only devices with active registrations.
+   */
+  active_registrations?: 'include' | 'only' | 'exclude';
+
+  /**
+   * Query param: Comma-separated list of additional information that should be
+   * included in the device response. Supported values are:
+   * "last_seen_registration.policy".
+   */
+  include?: string;
+
+  /**
+   * Query param
+   */
+  last_seen_user?: DeviceListParams.LastSeenUser;
+
+  /**
+   * Query param: Search by device details.
+   */
+  search?: string;
+
+  /**
+   * Query param: Filter by the last_seen timestamp - returns only devices last seen
+   * after this timestamp.
+   */
+  seen_after?: string;
+
+  /**
+   * Query param: Filter by the last_seen timestamp - returns only devices last seen
+   * before this timestamp.
+   */
+  seen_before?: string;
+
+  /**
+   * Query param: The device field to order results by.
+   */
+  sort_by?:
+    | 'name'
+    | 'id'
+    | 'client_version'
+    | 'last_seen_user.email'
+    | 'last_seen_at'
+    | 'active_registrations'
+    | 'created_at';
+
+  /**
+   * Query param: Sort direction.
+   */
+  sort_order?: 'asc' | 'desc';
+}
+
+export namespace DeviceListParams {
+  export interface LastSeenUser {
+    /**
+     * Filter by the last seen user's email.
+     */
+    email?: string;
+  }
+}
+
+export interface DeviceDeleteParams {
+  account_id: string;
+}
+
+export interface DeviceGetParams {
+  /**
+   * Path param
+   */
+  account_id: string;
+
+  /**
+   * Query param: Comma-separated list of additional information that should be
+   * included in the device response. Supported values are:
+   * "last_seen_registration.policy".
+   */
+  include?: string;
+}
+
+export interface DeviceRevokeParams {
+  account_id: string;
+}
+
+export declare namespace Devices {
+  export {
+    type DeviceListResponse as DeviceListResponse,
+    type DeviceDeleteResponse as DeviceDeleteResponse,
+    type DeviceGetResponse as DeviceGetResponse,
+    type DeviceRevokeResponse as DeviceRevokeResponse,
+    type DeviceListResponsesCursorPagination as DeviceListResponsesCursorPagination,
+    type DeviceListParams as DeviceListParams,
+    type DeviceDeleteParams as DeviceDeleteParams,
+    type DeviceGetParams as DeviceGetParams,
+    type DeviceRevokeParams as DeviceRevokeParams,
+  };
+}
