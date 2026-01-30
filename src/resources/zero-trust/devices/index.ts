@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  DEXTestListResponsesSinglePage,
+  DEXTestListResponsesV4PagePaginationArray,
   DEXTests,
   type SchemaData,
   type SchemaHTTP,

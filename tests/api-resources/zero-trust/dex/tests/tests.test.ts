@@ -28,6 +28,7 @@ describe('resource tests', () => {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       colo: 'colo',
       deviceId: ['string'],
+      kind: 'http',
       page: 1,
       per_page: 1,
       testName: 'testName',

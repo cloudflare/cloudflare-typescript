@@ -22,7 +22,7 @@ import {
   DEXTestGetResponse,
   DEXTestListParams,
   DEXTestListResponse,
-  DEXTestListResponsesSinglePage,
+  DEXTestListResponsesV4PagePaginationArray,
   DEXTestUpdateParams,
   DEXTestUpdateResponse,
   DEXTests,
@@ -441,7 +441,7 @@ Devices.Resilience = Resilience;
 Devices.Registrations = Registrations;
 Devices.RegistrationListResponsesCursorPagination = RegistrationListResponsesCursorPagination;
 Devices.DEXTests = DEXTests;
-Devices.DEXTestListResponsesSinglePage = DEXTestListResponsesSinglePage;
+Devices.DEXTestListResponsesV4PagePaginationArray = DEXTestListResponsesV4PagePaginationArray;
 Devices.Networks = Networks;
 Devices.DeviceNetworksSinglePage = DeviceNetworksSinglePage;
 Devices.FleetStatus = FleetStatus;
@@ -501,7 +501,7 @@ export declare namespace Devices {
     type DEXTestListResponse as DEXTestListResponse,
     type DEXTestDeleteResponse as DEXTestDeleteResponse,
     type DEXTestGetResponse as DEXTestGetResponse,
-    DEXTestListResponsesSinglePage as DEXTestListResponsesSinglePage,
+    DEXTestListResponsesV4PagePaginationArray as DEXTestListResponsesV4PagePaginationArray,
     type DEXTestCreateParams as DEXTestCreateParams,
     type DEXTestUpdateParams as DEXTestUpdateParams,
     type DEXTestListParams as DEXTestListParams,
