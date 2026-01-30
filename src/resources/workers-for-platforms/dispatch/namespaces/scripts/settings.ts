@@ -87,6 +87,7 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindPlainText
     | SettingEditResponse.WorkersBindingKindPipelines
     | SettingEditResponse.WorkersBindingKindQueue
+    | SettingEditResponse.WorkersBindingKindRatelimit
     | SettingEditResponse.WorkersBindingKindR2Bucket
     | SettingEditResponse.WorkersBindingKindSecretText
     | SettingEditResponse.WorkersBindingKindSendEmail
@@ -493,6 +494,45 @@ export namespace SettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'queue';
+  }
+
+  export interface WorkersBindingKindRatelimit {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the rate limit namespace to bind to.
+     */
+    namespace_id: string;
+
+    /**
+     * The rate limit configuration.
+     */
+    simple: WorkersBindingKindRatelimit.Simple;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ratelimit';
+  }
+
+  export namespace WorkersBindingKindRatelimit {
+    /**
+     * The rate limit configuration.
+     */
+    export interface Simple {
+      /**
+       * The limit (requests per period).
+       */
+      limit: number;
+
+      /**
+       * The period in seconds.
+       */
+      period: number;
+    }
   }
 
   export interface WorkersBindingKindR2Bucket {
@@ -918,6 +958,7 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindPlainText
     | SettingGetResponse.WorkersBindingKindPipelines
     | SettingGetResponse.WorkersBindingKindQueue
+    | SettingGetResponse.WorkersBindingKindRatelimit
     | SettingGetResponse.WorkersBindingKindR2Bucket
     | SettingGetResponse.WorkersBindingKindSecretText
     | SettingGetResponse.WorkersBindingKindSendEmail
@@ -1324,6 +1365,45 @@ export namespace SettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'queue';
+  }
+
+  export interface WorkersBindingKindRatelimit {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the rate limit namespace to bind to.
+     */
+    namespace_id: string;
+
+    /**
+     * The rate limit configuration.
+     */
+    simple: WorkersBindingKindRatelimit.Simple;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ratelimit';
+  }
+
+  export namespace WorkersBindingKindRatelimit {
+    /**
+     * The rate limit configuration.
+     */
+    export interface Simple {
+      /**
+       * The limit (requests per period).
+       */
+      limit: number;
+
+      /**
+       * The period in seconds.
+       */
+      period: number;
+    }
   }
 
   export interface WorkersBindingKindR2Bucket {
@@ -1762,6 +1842,7 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindPlainText
       | Settings.WorkersBindingKindPipelines
       | Settings.WorkersBindingKindQueue
+      | Settings.WorkersBindingKindRatelimit
       | Settings.WorkersBindingKindR2Bucket
       | Settings.WorkersBindingKindSecretText
       | Settings.WorkersBindingKindSendEmail
@@ -2173,6 +2254,45 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'queue';
+    }
+
+    export interface WorkersBindingKindRatelimit {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Identifier of the rate limit namespace to bind to.
+       */
+      namespace_id: string;
+
+      /**
+       * The rate limit configuration.
+       */
+      simple: WorkersBindingKindRatelimit.Simple;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ratelimit';
+    }
+
+    export namespace WorkersBindingKindRatelimit {
+      /**
+       * The rate limit configuration.
+       */
+      export interface Simple {
+        /**
+         * The limit (requests per period).
+         */
+        limit: number;
+
+        /**
+         * The period in seconds.
+         */
+        period: number;
+      }
     }
 
     export interface WorkersBindingKindR2Bucket {

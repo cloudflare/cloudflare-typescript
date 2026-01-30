@@ -623,6 +623,7 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindPlainText
       | Metadata.WorkersBindingKindPipelines
       | Metadata.WorkersBindingKindQueue
+      | Metadata.WorkersBindingKindRatelimit
       | Metadata.WorkersBindingKindR2Bucket
       | Metadata.WorkersBindingKindSecretText
       | Metadata.WorkersBindingKindSendEmail
@@ -1117,6 +1118,45 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'queue';
+    }
+
+    export interface WorkersBindingKindRatelimit {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Identifier of the rate limit namespace to bind to.
+       */
+      namespace_id: string;
+
+      /**
+       * The rate limit configuration.
+       */
+      simple: WorkersBindingKindRatelimit.Simple;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ratelimit';
+    }
+
+    export namespace WorkersBindingKindRatelimit {
+      /**
+       * The rate limit configuration.
+       */
+      export interface Simple {
+        /**
+         * The limit (requests per period).
+         */
+        limit: number;
+
+        /**
+         * The period in seconds.
+         */
+        period: number;
+      }
     }
 
     export interface WorkersBindingKindR2Bucket {

@@ -36,7 +36,7 @@ export class Move extends APIResource {
   }
 
   /**
-   * Move multiple messages
+   * Maximum batch size: 100 messages per request
    *
    * @example
    * ```ts
