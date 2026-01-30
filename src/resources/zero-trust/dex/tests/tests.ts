@@ -313,6 +313,11 @@ export interface TestListParams extends V4PagePaginationParams {
   deviceId?: Array<string>;
 
   /**
+   * Query param: Filter by test type
+   */
+  kind?: 'http' | 'traceroute';
+
+  /**
    * Query param: Optionally filter results by test name
    */
   testName?: string;
