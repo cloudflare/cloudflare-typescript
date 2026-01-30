@@ -14,7 +14,7 @@ export {
   type DEXTestListParams,
   type DEXTestDeleteParams,
   type DEXTestGetParams,
-  type DEXTestListResponsesSinglePage,
+  type DEXTestListResponsesV4PagePaginationArray,
 } from './dex-tests';
 export {
   Devices,
