@@ -300,6 +300,8 @@ export interface InstanceCreateResponse {
 
   created_by?: string;
 
+  custom_metadata?: Array<InstanceCreateResponse.CustomMetadata>;
+
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
@@ -412,6 +414,12 @@ export interface InstanceCreateResponse {
 }
 
 export namespace InstanceCreateResponse {
+  export interface CustomMetadata {
+    data_type: 'text' | 'number' | 'boolean';
+
+    field_name: string;
+  }
+
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
@@ -584,6 +592,8 @@ export interface InstanceUpdateResponse {
 
   created_by?: string;
 
+  custom_metadata?: Array<InstanceUpdateResponse.CustomMetadata>;
+
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
@@ -696,6 +706,12 @@ export interface InstanceUpdateResponse {
 }
 
 export namespace InstanceUpdateResponse {
+  export interface CustomMetadata {
+    data_type: 'text' | 'number' | 'boolean';
+
+    field_name: string;
+  }
+
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
@@ -868,6 +884,8 @@ export interface InstanceListResponse {
 
   created_by?: string;
 
+  custom_metadata?: Array<InstanceListResponse.CustomMetadata>;
+
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
@@ -980,6 +998,12 @@ export interface InstanceListResponse {
 }
 
 export namespace InstanceListResponse {
+  export interface CustomMetadata {
+    data_type: 'text' | 'number' | 'boolean';
+
+    field_name: string;
+  }
+
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
@@ -1152,6 +1176,8 @@ export interface InstanceDeleteResponse {
 
   created_by?: string;
 
+  custom_metadata?: Array<InstanceDeleteResponse.CustomMetadata>;
+
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
@@ -1264,6 +1290,12 @@ export interface InstanceDeleteResponse {
 }
 
 export namespace InstanceDeleteResponse {
+  export interface CustomMetadata {
+    data_type: 'text' | 'number' | 'boolean';
+
+    field_name: string;
+  }
+
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
@@ -1502,6 +1534,8 @@ export interface InstanceReadResponse {
 
   created_by?: string;
 
+  custom_metadata?: Array<InstanceReadResponse.CustomMetadata>;
+
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
@@ -1614,6 +1648,12 @@ export interface InstanceReadResponse {
 }
 
 export namespace InstanceReadResponse {
+  export interface CustomMetadata {
+    data_type: 'text' | 'number' | 'boolean';
+
+    field_name: string;
+  }
+
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
@@ -1857,6 +1897,11 @@ export interface InstanceCreateParams {
   /**
    * Body param
    */
+  custom_metadata?: Array<InstanceCreateParams.CustomMetadata>;
+
+  /**
+   * Body param
+   */
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
@@ -1950,6 +1995,12 @@ export interface InstanceCreateParams {
 }
 
 export namespace InstanceCreateParams {
+  export interface CustomMetadata {
+    data_type: 'text' | 'number' | 'boolean';
+
+    field_name: string;
+  }
+
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
@@ -2128,6 +2179,11 @@ export interface InstanceUpdateParams {
   /**
    * Body param
    */
+  custom_metadata?: Array<InstanceUpdateParams.CustomMetadata>;
+
+  /**
+   * Body param
+   */
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
     | '@cf/baai/bge-m3'
@@ -2277,6 +2333,12 @@ export interface InstanceUpdateParams {
 }
 
 export namespace InstanceUpdateParams {
+  export interface CustomMetadata {
+    data_type: 'text' | 'number' | 'boolean';
+
+    field_name: string;
+  }
+
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
