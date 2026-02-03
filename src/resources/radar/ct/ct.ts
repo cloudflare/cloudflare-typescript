@@ -15,7 +15,7 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Ct extends APIResource {
+export class CT extends APIResource {
   authorities: AuthoritiesAPI.Authorities = new AuthoritiesAPI.Authorities(this._client);
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
 
@@ -44,12 +44,12 @@ export class Ct extends APIResource {
       | 'SIGNATURE_ALGORITHM'
       | 'TLD'
       | 'VALIDATION_LEVEL',
-    query: CtSummaryParams | null | undefined = {},
+    query: CTSummaryParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CtSummaryResponse> {
+  ): APIPromise<CTSummaryResponse> {
     return (
       this._client.get(path`/radar/ct/summary/${dimension}`, { query, ...options }) as APIPromise<{
-        result: CtSummaryResponse;
+        result: CTSummaryResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -63,12 +63,12 @@ export class Ct extends APIResource {
    * ```
    */
   timeseries(
-    query: CtTimeseriesParams | null | undefined = {},
+    query: CTTimeseriesParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CtTimeseriesResponse> {
+  ): APIPromise<CTTimeseriesResponse> {
     return (
       this._client.get('/radar/ct/timeseries', { query, ...options }) as APIPromise<{
-        result: CtTimeseriesResponse;
+        result: CTTimeseriesResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -100,35 +100,35 @@ export class Ct extends APIResource {
       | 'SIGNATURE_ALGORITHM'
       | 'TLD'
       | 'VALIDATION_LEVEL',
-    query: CtTimeseriesGroupsParams | null | undefined = {},
+    query: CTTimeseriesGroupsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CtTimeseriesGroupsResponse> {
+  ): APIPromise<CTTimeseriesGroupsResponse> {
     return (
       this._client.get(path`/radar/ct/timeseries_groups/${dimension}`, { query, ...options }) as APIPromise<{
-        result: CtTimeseriesGroupsResponse;
+        result: CTTimeseriesGroupsResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface CtSummaryResponse {
+export interface CTSummaryResponse {
   /**
    * Metadata for the results.
    */
-  meta: CtSummaryResponse.Meta;
+  meta: CTSummaryResponse.Meta;
 
   summary_0:
     | { [key: string]: string }
-    | CtSummaryResponse.UnionMember1
-    | CtSummaryResponse.UnionMember2
-    | CtSummaryResponse.UnionMember3
-    | CtSummaryResponse.UnionMember4
-    | CtSummaryResponse.UnionMember5
-    | CtSummaryResponse.UnionMember6
-    | CtSummaryResponse.UnionMember7;
+    | CTSummaryResponse.UnionMember1
+    | CTSummaryResponse.UnionMember2
+    | CTSummaryResponse.UnionMember3
+    | CTSummaryResponse.UnionMember4
+    | CTSummaryResponse.UnionMember5
+    | CTSummaryResponse.UnionMember6
+    | CTSummaryResponse.UnionMember7;
 }
 
-export namespace CtSummaryResponse {
+export namespace CTSummaryResponse {
   /**
    * Metadata for the results.
    */
@@ -303,19 +303,19 @@ export namespace CtSummaryResponse {
   }
 }
 
-export interface CtTimeseriesResponse {
+export interface CTTimeseriesResponse {
   /**
    * Metadata for the results.
    */
-  meta: CtTimeseriesResponse.Meta;
+  meta: CTTimeseriesResponse.Meta;
 
   [k: string]:
-    | CtTimeseriesResponse.unnamed_schema_ref_75bae70cf28e6bcef364b9840db3bdeb
-    | CtTimeseriesResponse.Meta
+    | CTTimeseriesResponse.unnamed_schema_ref_75bae70cf28e6bcef364b9840db3bdeb
+    | CTTimeseriesResponse.Meta
     | undefined;
 }
 
-export namespace CtTimeseriesResponse {
+export namespace CTTimeseriesResponse {
   /**
    * Metadata for the results.
    */
@@ -447,24 +447,24 @@ export namespace CtTimeseriesResponse {
   }
 }
 
-export interface CtTimeseriesGroupsResponse {
+export interface CTTimeseriesGroupsResponse {
   /**
    * Metadata for the results.
    */
-  meta: CtTimeseriesGroupsResponse.Meta;
+  meta: CTTimeseriesGroupsResponse.Meta;
 
   serie_0:
-    | CtTimeseriesGroupsResponse.UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55
-    | CtTimeseriesGroupsResponse.UnionMember1
-    | CtTimeseriesGroupsResponse.UnionMember2
-    | CtTimeseriesGroupsResponse.UnionMember3
-    | CtTimeseriesGroupsResponse.UnionMember4
-    | CtTimeseriesGroupsResponse.UnionMember5
-    | CtTimeseriesGroupsResponse.UnionMember6
-    | CtTimeseriesGroupsResponse.UnionMember7;
+    | CTTimeseriesGroupsResponse.UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55
+    | CTTimeseriesGroupsResponse.UnionMember1
+    | CTTimeseriesGroupsResponse.UnionMember2
+    | CTTimeseriesGroupsResponse.UnionMember3
+    | CTTimeseriesGroupsResponse.UnionMember4
+    | CTTimeseriesGroupsResponse.UnionMember5
+    | CTTimeseriesGroupsResponse.UnionMember6
+    | CTTimeseriesGroupsResponse.UnionMember7;
 }
 
-export namespace CtTimeseriesGroupsResponse {
+export namespace CTTimeseriesGroupsResponse {
   /**
    * Metadata for the results.
    */
@@ -652,7 +652,7 @@ export namespace CtTimeseriesGroupsResponse {
   }
 }
 
-export interface CtSummaryParams {
+export interface CTSummaryParams {
   /**
    * Filters results by certificate authority.
    */
@@ -795,7 +795,7 @@ export interface CtSummaryParams {
   validationLevel?: Array<'DOMAIN' | 'ORGANIZATION' | 'EXTENDED'>;
 }
 
-export interface CtTimeseriesParams {
+export interface CTTimeseriesParams {
   /**
    * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
    * Refer to
@@ -932,7 +932,7 @@ export interface CtTimeseriesParams {
   validationLevel?: Array<'DOMAIN' | 'ORGANIZATION' | 'EXTENDED'>;
 }
 
-export interface CtTimeseriesGroupsParams {
+export interface CTTimeseriesGroupsParams {
   /**
    * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
    * Refer to
@@ -1082,17 +1082,17 @@ export interface CtTimeseriesGroupsParams {
   validationLevel?: Array<'DOMAIN' | 'ORGANIZATION' | 'EXTENDED'>;
 }
 
-Ct.Authorities = Authorities;
-Ct.Logs = Logs;
+CT.Authorities = Authorities;
+CT.Logs = Logs;
 
-export declare namespace Ct {
+export declare namespace CT {
   export {
-    type CtSummaryResponse as CtSummaryResponse,
-    type CtTimeseriesResponse as CtTimeseriesResponse,
-    type CtTimeseriesGroupsResponse as CtTimeseriesGroupsResponse,
-    type CtSummaryParams as CtSummaryParams,
-    type CtTimeseriesParams as CtTimeseriesParams,
-    type CtTimeseriesGroupsParams as CtTimeseriesGroupsParams,
+    type CTSummaryResponse as CTSummaryResponse,
+    type CTTimeseriesResponse as CTTimeseriesResponse,
+    type CTTimeseriesGroupsResponse as CTTimeseriesGroupsResponse,
+    type CTSummaryParams as CTSummaryParams,
+    type CTTimeseriesParams as CTTimeseriesParams,
+    type CTTimeseriesGroupsParams as CTTimeseriesGroupsParams,
   };
 
   export {

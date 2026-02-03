@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Netflows,
-  type NetflowSummaryResponse,
-  type NetflowSummaryV2Response,
-  type NetflowTimeseriesResponse,
-  type NetflowTimeseriesGroupsResponse,
-  type NetflowSummaryParams,
-  type NetflowSummaryV2Params,
-  type NetflowTimeseriesParams,
-  type NetflowTimeseriesGroupsParams,
+  NetFlows,
+  type NetFlowsSummaryResponse,
+  type NetFlowsSummaryV2Response,
+  type NetFlowsTimeseriesResponse,
+  type NetFlowsTimeseriesGroupsResponse,
+  type NetFlowsSummaryParams,
+  type NetFlowsSummaryV2Params,
+  type NetFlowsTimeseriesParams,
+  type NetFlowsTimeseriesGroupsParams,
 } from './netflows';
 export {
   Top,
