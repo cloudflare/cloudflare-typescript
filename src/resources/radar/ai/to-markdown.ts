@@ -2,8 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import { PagePromise, SinglePage } from '../../../core/pagination';
-import { buildHeaders } from '../../../internal/headers';
+import { type Uploadable } from '../../../core/uploads';
 import { RequestOptions } from '../../../internal/request-options';
+import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
 export class ToMarkdown extends APIResource {
@@ -13,20 +14,14 @@ export class ToMarkdown extends APIResource {
    * @deprecated Use [AI > To Markdown](https://developers.cloudflare.com/api/resources/ai/subresources/to_markdown/) instead.
    */
   create(
-    body: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
     params: ToMarkdownCreateParams,
     options?: RequestOptions,
   ): PagePromise<ToMarkdownCreateResponsesSinglePage, ToMarkdownCreateResponse> {
-    const { account_id } = params;
+    const { account_id, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai/tomarkdown`,
       SinglePage<ToMarkdownCreateResponse>,
-      {
-        body: body,
-        method: 'post',
-        ...options,
-        headers: buildHeaders([{ 'Content-Type': 'application/octet-stream' }, options?.headers]),
-      },
+      multipartFormRequestOptions({ body, method: 'post', ...options }, this._client),
     );
   }
 }
@@ -50,6 +45,11 @@ export interface ToMarkdownCreateParams {
    * Path param
    */
   account_id: string;
+
+  /**
+   * Body param
+   */
+  files: Array<Uploadable>;
 }
 
 export declare namespace ToMarkdown {

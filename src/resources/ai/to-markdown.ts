@@ -2,8 +2,9 @@
 
 import { APIResource } from '../../core/resource';
 import { PagePromise, SinglePage } from '../../core/pagination';
-import { buildHeaders } from '../../internal/headers';
+import { type Uploadable } from '../../core/uploads';
 import { RequestOptions } from '../../internal/request-options';
+import { multipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
 
 export class ToMarkdown extends APIResource {
@@ -26,20 +27,14 @@ export class ToMarkdown extends APIResource {
    * Convert Files into Markdown
    */
   transform(
-    file: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
     params: ToMarkdownTransformParams,
     options?: RequestOptions,
   ): PagePromise<ToMarkdownTransformResponsesSinglePage, ToMarkdownTransformResponse> {
-    const { account_id } = params;
+    const { account_id, file } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai/tomarkdown`,
       SinglePage<ToMarkdownTransformResponse>,
-      {
-        body: file,
-        method: 'post',
-        ...options,
-        headers: buildHeaders([{ 'Content-Type': 'application/octet-stream' }, options?.headers]),
-      },
+      multipartFormRequestOptions({ body: file, method: 'post', ...options }, this._client),
     );
   }
 }
@@ -75,6 +70,17 @@ export interface ToMarkdownTransformParams {
    * Path param
    */
   account_id: string;
+
+  /**
+   * Body param
+   */
+  file: ToMarkdownTransformParams.File;
+}
+
+export namespace ToMarkdownTransformParams {
+  export interface File {
+    files: Array<Uploadable>;
+  }
 }
 
 export declare namespace ToMarkdown {

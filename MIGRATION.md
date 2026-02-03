@@ -1197,7 +1197,6 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.vectorize.indexes.insert()`
 - `client.vectorize.indexes.upsert()`
 - `client.urlScanner.scans.bulkCreate()`
-- `client.radar.ai.toMarkdown.create()`
 - `client.zaraz.update()`
 - `client.zaraz.history.update()`
 - `client.zaraz.publish.create()`
