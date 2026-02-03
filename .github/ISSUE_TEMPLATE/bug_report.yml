@@ -5,10 +5,10 @@ body:
   - type: checkboxes
     id: non_api
     attributes:
-      label: Confirm this is a Typescript library issue and not an underlying Cloudflare API issue
+      label: Confirm this is a TypeScript library issue and not an underlying Cloudflare API issue
       description: Issues with the underlying Cloudflare API should be reported via [Cloudflare Support](https://developers.cloudflare.com/support/contacting-cloudflare-support)
       options:
-        - label: This is an issue with the Typescript library
+        - label: This is an issue with the TypeScript library
           required: true
   - type: textarea
     id: what-happened
@@ -34,7 +34,7 @@ body:
     attributes:
       label: Code snippets
       description: If applicable, add code snippets to help explain your problem.
-      render: Typescript
+      render: TypeScript
     validations:
       required: false
   - type: input
