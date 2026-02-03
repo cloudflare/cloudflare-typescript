@@ -27,10 +27,10 @@ describe('resource toMarkdown', () => {
   });
 
   test('transform: only required params', async () => {
-    const responsePromise = client.ai.toMarkdown.transform(
-      await toFile(Buffer.from('# my file contents'), 'README.md'),
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
+    const responsePromise = client.ai.toMarkdown.transform({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      file: { files: [await toFile(Buffer.from('# my file contents'), 'README.md')] },
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -41,9 +41,9 @@ describe('resource toMarkdown', () => {
   });
 
   test('transform: required and optional params', async () => {
-    const response = await client.ai.toMarkdown.transform(
-      await toFile(Buffer.from('# my file contents'), 'README.md'),
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
+    const response = await client.ai.toMarkdown.transform({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      file: { files: [await toFile(Buffer.from('# my file contents'), 'README.md')] },
+    });
   });
 });

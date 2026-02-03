@@ -6645,7 +6645,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/ai/tomarkdown">client.radar.ai.toMarkdown.<a href="./src/resources/radar/ai/to-markdown.ts">create</a>(body, { ...params }) -> ToMarkdownCreateResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/ai/tomarkdown">client.radar.ai.toMarkdown.<a href="./src/resources/radar/ai/to-markdown.ts">create</a>({ ...params }) -> ToMarkdownCreateResponsesSinglePage</code>
 
 ### Inference
 
@@ -9244,7 +9244,7 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/ai/tomarkdown/supported">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">supported</a>({ ...params }) -> ToMarkdownSupportedResponsesSinglePage</code>
-- <code title="post /accounts/{account_id}/ai/tomarkdown">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">transform</a>(file, { ...params }) -> ToMarkdownTransformResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/ai/tomarkdown">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">transform</a>({ ...params }) -> ToMarkdownTransformResponsesSinglePage</code>
 
 # AISearch
 
