@@ -581,6 +581,8 @@ TEST_PATHS=(
 	tests/api-resources/radar/bgp/hijacks/events.test.ts
 	tests/api-resources/radar/bgp/routes.test.ts
 	tests/api-resources/radar/bgp/ips.test.ts
+	tests/api-resources/radar/bgp/rpki/rpki.test.ts
+	tests/api-resources/radar/bgp/rpki/aspa.test.ts
 	tests/api-resources/radar/bots/bots.test.ts
 	tests/api-resources/radar/bots/web-crawlers.test.ts
 	tests/api-resources/radar/datasets.test.ts

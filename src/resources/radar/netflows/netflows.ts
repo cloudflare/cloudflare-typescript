@@ -7,7 +7,7 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Netflows extends APIResource {
+export class NetFlows extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
@@ -17,12 +17,12 @@ export class Netflows extends APIResource {
    * @deprecated Use [Get Network Traffic Distribution By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/netflows/methods/summary_v2/) instead.
    */
   summary(
-    query: NetflowSummaryParams | null | undefined = {},
+    query: NetFlowsSummaryParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<NetflowSummaryResponse> {
+  ): APIPromise<NetFlowsSummaryResponse> {
     return (
       this._client.get('/radar/netflows/summary', { query, ...options }) as APIPromise<{
-        result: NetflowSummaryResponse;
+        result: NetFlowsSummaryResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -33,19 +33,19 @@ export class Netflows extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.radar.netflows.summaryV2(
+   * const response = await client.radar.netFlows.summaryV2(
    *   'ADM1',
    * );
    * ```
    */
   summaryV2(
     dimension: 'ADM1' | 'PRODUCT',
-    query: NetflowSummaryV2Params | null | undefined = {},
+    query: NetFlowsSummaryV2Params | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<NetflowSummaryV2Response> {
+  ): APIPromise<NetFlowsSummaryV2Response> {
     return (
       this._client.get(path`/radar/netflows/summary/${dimension}`, { query, ...options }) as APIPromise<{
-        result: NetflowSummaryV2Response;
+        result: NetFlowsSummaryV2Response;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -55,16 +55,16 @@ export class Netflows extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.radar.netflows.timeseries();
+   * const response = await client.radar.netFlows.timeseries();
    * ```
    */
   timeseries(
-    query: NetflowTimeseriesParams | null | undefined = {},
+    query: NetFlowsTimeseriesParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<NetflowTimeseriesResponse> {
+  ): APIPromise<NetFlowsTimeseriesResponse> {
     return (
       this._client.get('/radar/netflows/timeseries', { query, ...options }) as APIPromise<{
-        result: NetflowTimeseriesResponse;
+        result: NetFlowsTimeseriesResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -76,33 +76,33 @@ export class Netflows extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.radar.netflows.timeseriesGroups('ADM1');
+   *   await client.radar.netFlows.timeseriesGroups('ADM1');
    * ```
    */
   timeseriesGroups(
     dimension: 'ADM1' | 'PRODUCT',
-    query: NetflowTimeseriesGroupsParams | null | undefined = {},
+    query: NetFlowsTimeseriesGroupsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<NetflowTimeseriesGroupsResponse> {
+  ): APIPromise<NetFlowsTimeseriesGroupsResponse> {
     return (
       this._client.get(path`/radar/netflows/timeseries_groups/${dimension}`, {
         query,
         ...options,
-      }) as APIPromise<{ result: NetflowTimeseriesGroupsResponse }>
+      }) as APIPromise<{ result: NetFlowsTimeseriesGroupsResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface NetflowSummaryResponse {
+export interface NetFlowsSummaryResponse {
   /**
    * Metadata for the results.
    */
-  meta: NetflowSummaryResponse.Meta;
+  meta: NetFlowsSummaryResponse.Meta;
 
-  summary_0: NetflowSummaryResponse.Summary0;
+  summary_0: NetFlowsSummaryResponse.Summary0;
 }
 
-export namespace NetflowSummaryResponse {
+export namespace NetFlowsSummaryResponse {
   /**
    * Metadata for the results.
    */
@@ -233,16 +233,16 @@ export namespace NetflowSummaryResponse {
   }
 }
 
-export interface NetflowSummaryV2Response {
+export interface NetFlowsSummaryV2Response {
   /**
    * Metadata for the results.
    */
-  meta: NetflowSummaryV2Response.Meta;
+  meta: NetFlowsSummaryV2Response.Meta;
 
   summary_0: { [key: string]: string };
 }
 
-export namespace NetflowSummaryV2Response {
+export namespace NetFlowsSummaryV2Response {
   /**
    * Metadata for the results.
    */
@@ -361,16 +361,16 @@ export namespace NetflowSummaryV2Response {
   }
 }
 
-export interface NetflowTimeseriesResponse {
+export interface NetFlowsTimeseriesResponse {
   /**
    * Metadata for the results.
    */
-  meta: NetflowTimeseriesResponse.Meta;
+  meta: NetFlowsTimeseriesResponse.Meta;
 
-  serie_0: NetflowTimeseriesResponse.Serie0;
+  serie_0: NetFlowsTimeseriesResponse.Serie0;
 }
 
-export namespace NetflowTimeseriesResponse {
+export namespace NetFlowsTimeseriesResponse {
   /**
    * Metadata for the results.
    */
@@ -502,16 +502,16 @@ export namespace NetflowTimeseriesResponse {
   }
 }
 
-export interface NetflowTimeseriesGroupsResponse {
+export interface NetFlowsTimeseriesGroupsResponse {
   /**
    * Metadata for the results.
    */
-  meta: NetflowTimeseriesGroupsResponse.Meta;
+  meta: NetFlowsTimeseriesGroupsResponse.Meta;
 
-  serie_0: NetflowTimeseriesGroupsResponse.Serie0;
+  serie_0: NetFlowsTimeseriesGroupsResponse.Serie0;
 }
 
-export namespace NetflowTimeseriesGroupsResponse {
+export namespace NetFlowsTimeseriesGroupsResponse {
   /**
    * Metadata for the results.
    */
@@ -643,7 +643,7 @@ export namespace NetflowTimeseriesGroupsResponse {
   }
 }
 
-export interface NetflowSummaryParams {
+export interface NetFlowsSummaryParams {
   /**
    * Filters results by Autonomous System. Specify one or more Autonomous System
    * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
@@ -702,7 +702,7 @@ export interface NetflowSummaryParams {
   name?: Array<string>;
 }
 
-export interface NetflowSummaryV2Params {
+export interface NetFlowsSummaryV2Params {
   /**
    * Filters results by Autonomous System. Specify one or more Autonomous System
    * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
@@ -773,7 +773,7 @@ export interface NetflowSummaryV2Params {
   product?: Array<'HTTP' | 'ALL'>;
 }
 
-export interface NetflowTimeseriesParams {
+export interface NetFlowsTimeseriesParams {
   /**
    * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
    * Refer to
@@ -850,7 +850,7 @@ export interface NetflowTimeseriesParams {
   product?: Array<'HTTP' | 'ALL'>;
 }
 
-export interface NetflowTimeseriesGroupsParams {
+export interface NetFlowsTimeseriesGroupsParams {
   /**
    * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
    * Refer to
@@ -934,18 +934,18 @@ export interface NetflowTimeseriesGroupsParams {
   product?: Array<'HTTP' | 'ALL'>;
 }
 
-Netflows.Top = Top;
+NetFlows.Top = Top;
 
-export declare namespace Netflows {
+export declare namespace NetFlows {
   export {
-    type NetflowSummaryResponse as NetflowSummaryResponse,
-    type NetflowSummaryV2Response as NetflowSummaryV2Response,
-    type NetflowTimeseriesResponse as NetflowTimeseriesResponse,
-    type NetflowTimeseriesGroupsResponse as NetflowTimeseriesGroupsResponse,
-    type NetflowSummaryParams as NetflowSummaryParams,
-    type NetflowSummaryV2Params as NetflowSummaryV2Params,
-    type NetflowTimeseriesParams as NetflowTimeseriesParams,
-    type NetflowTimeseriesGroupsParams as NetflowTimeseriesGroupsParams,
+    type NetFlowsSummaryResponse as NetFlowsSummaryResponse,
+    type NetFlowsSummaryV2Response as NetFlowsSummaryV2Response,
+    type NetFlowsTimeseriesResponse as NetFlowsTimeseriesResponse,
+    type NetFlowsTimeseriesGroupsResponse as NetFlowsTimeseriesGroupsResponse,
+    type NetFlowsSummaryParams as NetFlowsSummaryParams,
+    type NetFlowsSummaryV2Params as NetFlowsSummaryV2Params,
+    type NetFlowsTimeseriesParams as NetFlowsTimeseriesParams,
+    type NetFlowsTimeseriesGroupsParams as NetFlowsTimeseriesGroupsParams,
   };
 
   export {

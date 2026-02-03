@@ -10,7 +10,7 @@ import { Spoof, SpoofGetParams, SpoofGetResponse } from './spoof';
 import { APIPromise } from '../../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../../internal/request-options';
 
-export class Tlds extends APIResource {
+export class TLDs extends APIResource {
   malicious: MaliciousAPI.Malicious = new MaliciousAPI.Malicious(this._client);
   spam: SpamAPI.Spam = new SpamAPI.Spam(this._client);
   spoof: SpoofAPI.Spoof = new SpoofAPI.Spoof(this._client);
@@ -24,25 +24,25 @@ export class Tlds extends APIResource {
    *   await client.radar.email.security.top.tlds.get();
    * ```
    */
-  get(query: TldGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<TldGetResponse> {
+  get(query: TLDGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<TLDGetResponse> {
     return (
       this._client.get('/radar/email/security/top/tlds', { query, ...options }) as APIPromise<{
-        result: TldGetResponse;
+        result: TLDGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TldGetResponse {
+export interface TLDGetResponse {
   /**
    * Metadata for the results.
    */
-  meta: TldGetResponse.Meta;
+  meta: TLDGetResponse.Meta;
 
-  top_0: Array<TldGetResponse.Top0>;
+  top_0: Array<TLDGetResponse.Top0>;
 }
 
-export namespace TldGetResponse {
+export namespace TLDGetResponse {
   /**
    * Metadata for the results.
    */
@@ -170,7 +170,7 @@ export namespace TldGetResponse {
   }
 }
 
-export interface TldGetParams {
+export interface TLDGetParams {
   /**
    * Filters results by ARC (Authenticated Received Chain) validation.
    */
@@ -235,12 +235,12 @@ export interface TldGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
-Tlds.Malicious = Malicious;
-Tlds.Spam = Spam;
-Tlds.Spoof = Spoof;
+TLDs.Malicious = Malicious;
+TLDs.Spam = Spam;
+TLDs.Spoof = Spoof;
 
-export declare namespace Tlds {
-  export { type TldGetResponse as TldGetResponse, type TldGetParams as TldGetParams };
+export declare namespace TLDs {
+  export { type TLDGetResponse as TLDGetResponse, type TLDGetParams as TLDGetParams };
 
   export {
     Malicious as Malicious,
