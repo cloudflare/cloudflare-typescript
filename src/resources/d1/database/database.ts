@@ -912,7 +912,7 @@ export declare namespace DatabaseQueryParams {
     /**
      * Body param
      */
-    batch?: Array<MultipleQueries.Batch>;
+    batch: Array<MultipleQueries.Batch>;
   }
 
   export namespace MultipleQueries {
@@ -961,7 +961,7 @@ export declare namespace DatabaseRawParams {
     /**
      * Body param
      */
-    batch?: Array<MultipleQueries.Batch>;
+    batch: Array<MultipleQueries.Batch>;
   }
 
   export namespace MultipleQueries {
