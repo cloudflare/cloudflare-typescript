@@ -4,8 +4,10 @@ export { ACM } from './acm';
 export {
   TotalTLS,
   type CertificateAuthority,
-  type TotalTLSCreateResponse,
+  type TotalTLSUpdateResponse,
+  type TotalTLSEditResponse,
   type TotalTLSGetResponse,
-  type TotalTLSCreateParams,
+  type TotalTLSUpdateParams,
+  type TotalTLSEditParams,
   type TotalTLSGetParams,
 } from './total-tls';
