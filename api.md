@@ -763,12 +763,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/acm/total-tls.ts">CertificateAuthority</a></code>
-- <code><a href="./src/resources/acm/total-tls.ts">TotalTLSCreateResponse</a></code>
+- <code><a href="./src/resources/acm/total-tls.ts">TotalTLSUpdateResponse</a></code>
+- <code><a href="./src/resources/acm/total-tls.ts">TotalTLSEditResponse</a></code>
 - <code><a href="./src/resources/acm/total-tls.ts">TotalTLSGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/acm/total_tls">client.acm.totalTLS.<a href="./src/resources/acm/total-tls.ts">create</a>({ ...params }) -> TotalTLSCreateResponse</code>
+- <code title="post /zones/{zone_id}/acm/total_tls">client.acm.totalTLS.<a href="./src/resources/acm/total-tls.ts">update</a>({ ...params }) -> TotalTLSUpdateResponse</code>
+- <code title="post /zones/{zone_id}/acm/total_tls">client.acm.totalTLS.<a href="./src/resources/acm/total-tls.ts">edit</a>({ ...params }) -> TotalTLSEditResponse</code>
 - <code title="get /zones/{zone_id}/acm/total_tls">client.acm.totalTLS.<a href="./src/resources/acm/total-tls.ts">get</a>({ ...params }) -> TotalTLSGetResponse</code>
 
 # Argo

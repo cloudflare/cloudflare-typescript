@@ -5,10 +5,12 @@ import * as TotalTLSAPI from './total-tls';
 import {
   CertificateAuthority,
   TotalTLS,
-  TotalTLSCreateParams,
-  TotalTLSCreateResponse,
+  TotalTLSEditParams,
+  TotalTLSEditResponse,
   TotalTLSGetParams,
   TotalTLSGetResponse,
+  TotalTLSUpdateParams,
+  TotalTLSUpdateResponse,
 } from './total-tls';
 
 export class ACM extends APIResource {
@@ -21,9 +23,11 @@ export declare namespace ACM {
   export {
     TotalTLS as TotalTLS,
     type CertificateAuthority as CertificateAuthority,
-    type TotalTLSCreateResponse as TotalTLSCreateResponse,
+    type TotalTLSUpdateResponse as TotalTLSUpdateResponse,
+    type TotalTLSEditResponse as TotalTLSEditResponse,
     type TotalTLSGetResponse as TotalTLSGetResponse,
-    type TotalTLSCreateParams as TotalTLSCreateParams,
+    type TotalTLSUpdateParams as TotalTLSUpdateParams,
+    type TotalTLSEditParams as TotalTLSEditParams,
     type TotalTLSGetParams as TotalTLSGetParams,
   };
 }
