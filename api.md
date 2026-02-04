@@ -9313,10 +9313,10 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/ai-search/tokens">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
-- <code title="delete /accounts/{account_id}/ai-search/tokens/{id}">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">update</a>(id, { ...params }) -> TokenUpdateResponse</code>
+- <code title="put /accounts/{account_id}/ai-search/tokens/{id}">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">update</a>(id, { ...params }) -> TokenUpdateResponse</code>
 - <code title="get /accounts/{account_id}/ai-search/tokens">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">list</a>({ ...params }) -> TokenListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/ai-search/tokens/{id}">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">delete</a>(id, { ...params }) -> TokenDeleteResponse</code>
-- <code title="delete /accounts/{account_id}/ai-search/tokens/{id}">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">read</a>(id, { ...params }) -> TokenReadResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/tokens/{id}">client.aiSearch.tokens.<a href="./src/resources/aisearch/tokens.ts">read</a>(id, { ...params }) -> TokenReadResponse</code>
 
 # SecurityCenter
 
