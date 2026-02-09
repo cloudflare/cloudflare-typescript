@@ -2,19 +2,13 @@
 
 export {
   Deployments,
-  type DeploymentCreateResponse,
-  type DeploymentListResponse,
   type DeploymentDeleteResponse,
-  type DeploymentGetResponse,
-  type DeploymentRetryResponse,
-  type DeploymentRollbackResponse,
   type DeploymentCreateParams,
   type DeploymentListParams,
   type DeploymentDeleteParams,
   type DeploymentGetParams,
   type DeploymentRetryParams,
   type DeploymentRollbackParams,
-  type DeploymentListResponsesV4PagePaginationArray,
 } from './deployments/index';
 export {
   Domains,
@@ -35,11 +29,7 @@ export {
   type Deployment,
   type Project,
   type Stage,
-  type ProjectCreateResponse,
-  type ProjectListResponse,
   type ProjectDeleteResponse,
-  type ProjectEditResponse,
-  type ProjectGetResponse,
   type ProjectPurgeBuildCacheResponse,
   type ProjectCreateParams,
   type ProjectListParams,
@@ -47,5 +37,6 @@ export {
   type ProjectEditParams,
   type ProjectGetParams,
   type ProjectPurgeBuildCacheParams,
-  type ProjectListResponsesV4PagePaginationArray,
+  type DeploymentsV4PagePaginationArray,
+  type ProjectsV4PagePaginationArray,
 } from './projects';
