@@ -811,6 +811,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.networks.virtualNetworks.delete()`
 - `client.zeroTrust.networks.virtualNetworks.edit()`
 - `client.zeroTrust.networks.virtualNetworks.get()`
+- `client.zeroTrust.networks.subnets.warp.delete()`
+- `client.zeroTrust.networks.subnets.warp.edit()`
+- `client.zeroTrust.networks.subnets.warp.get()`
 - `client.zeroTrust.networks.subnets.cloudflareSource.update()`
 - `client.zeroTrust.networks.hostnameRoutes.delete()`
 - `client.zeroTrust.networks.hostnameRoutes.edit()`

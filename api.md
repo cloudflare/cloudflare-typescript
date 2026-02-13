@@ -6360,6 +6360,22 @@ Methods:
 
 - <code title="get /accounts/{account_id}/zerotrust/subnets">client.zeroTrust.networks.subnets.<a href="./src/resources/zero-trust/networks/subnets/subnets.ts">list</a>({ ...params }) -> SubnetListResponsesV4PagePaginationArray</code>
 
+#### WARP
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/networks/subnets/warp.ts">WARPCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/networks/subnets/warp.ts">WARPDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/networks/subnets/warp.ts">WARPEditResponse</a></code>
+- <code><a href="./src/resources/zero-trust/networks/subnets/warp.ts">WARPGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/zerotrust/subnets/warp">client.zeroTrust.networks.subnets.warp.<a href="./src/resources/zero-trust/networks/subnets/warp.ts">create</a>({ ...params }) -> WARPCreateResponse</code>
+- <code title="delete /accounts/{account_id}/zerotrust/subnets/warp/{subnet_id}">client.zeroTrust.networks.subnets.warp.<a href="./src/resources/zero-trust/networks/subnets/warp.ts">delete</a>(subnetID, { ...params }) -> WARPDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/zerotrust/subnets/warp/{subnet_id}">client.zeroTrust.networks.subnets.warp.<a href="./src/resources/zero-trust/networks/subnets/warp.ts">edit</a>(subnetID, { ...params }) -> WARPEditResponse</code>
+- <code title="get /accounts/{account_id}/zerotrust/subnets/warp/{subnet_id}">client.zeroTrust.networks.subnets.warp.<a href="./src/resources/zero-trust/networks/subnets/warp.ts">get</a>(subnetID, { ...params }) -> WARPGetResponse</code>
+
 #### CloudflareSource
 
 Types:
