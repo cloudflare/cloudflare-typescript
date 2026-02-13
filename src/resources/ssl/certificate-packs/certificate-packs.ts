@@ -4,7 +4,11 @@ import { APIResource } from '../../../core/resource';
 import * as QuotaAPI from './quota';
 import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
 import { APIPromise } from '../../../core/api-promise';
-import { PagePromise, SinglePage } from '../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -60,11 +64,11 @@ export class CertificatePacks extends APIResource {
   list(
     params: CertificatePackListParams,
     options?: RequestOptions,
-  ): PagePromise<CertificatePackListResponsesSinglePage, CertificatePackListResponse> {
+  ): PagePromise<CertificatePackListResponsesV4PagePaginationArray, CertificatePackListResponse> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/ssl/certificate_packs`,
-      SinglePage<CertificatePackListResponse>,
+      V4PagePaginationArray<CertificatePackListResponse>,
       { query, ...options },
     );
   }
@@ -149,7 +153,8 @@ export class CertificatePacks extends APIResource {
   }
 }
 
-export type CertificatePackListResponsesSinglePage = SinglePage<CertificatePackListResponse>;
+export type CertificatePackListResponsesV4PagePaginationArray =
+  V4PagePaginationArray<CertificatePackListResponse>;
 
 export type Host = string;
 
@@ -1301,11 +1306,16 @@ export interface CertificatePackCreateParams {
   cloudflare_branding?: boolean;
 }
 
-export interface CertificatePackListParams {
+export interface CertificatePackListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
   zone_id: string;
+
+  /**
+   * Query param: Specify the deployment environment for the certificate packs.
+   */
+  deploy?: 'staging' | 'production';
 
   /**
    * Query param: Include Certificate Packs of all statuses, not just active ones.
@@ -1353,7 +1363,7 @@ export declare namespace CertificatePacks {
     type CertificatePackDeleteResponse as CertificatePackDeleteResponse,
     type CertificatePackEditResponse as CertificatePackEditResponse,
     type CertificatePackGetResponse as CertificatePackGetResponse,
-    type CertificatePackListResponsesSinglePage as CertificatePackListResponsesSinglePage,
+    type CertificatePackListResponsesV4PagePaginationArray as CertificatePackListResponsesV4PagePaginationArray,
     type CertificatePackCreateParams as CertificatePackCreateParams,
     type CertificatePackListParams as CertificatePackListParams,
     type CertificatePackDeleteParams as CertificatePackDeleteParams,

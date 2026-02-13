@@ -17,7 +17,7 @@ export {
   type CertificatePackDeleteParams,
   type CertificatePackEditParams,
   type CertificatePackGetParams,
-  type CertificatePackListResponsesSinglePage,
+  type CertificatePackListResponsesV4PagePaginationArray,
 } from './certificate-packs/index';
 export {
   Recommendations,
