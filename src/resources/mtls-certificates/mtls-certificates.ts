@@ -17,7 +17,10 @@ export class MTLSCertificates extends APIResource {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
 
   /**
-   * Upload a certificate that you want to use with mTLS-enabled Cloudflare services.
+   * Upload a certificate that you want to use with mTLS-enabled Cloudflare services,
+   * such as Bring Your Own CA (BYO-CA) for mTLS. To create certificates issued by
+   * the Cloudflare managed CA, use the
+   * [Create Client Certificate endpoint](/api/resources/client_certificates/methods/create/).
    *
    * @example
    * ```ts
@@ -43,7 +46,10 @@ export class MTLSCertificates extends APIResource {
   }
 
   /**
-   * Lists all mTLS certificates.
+   * Lists all mTLS certificates uploaded to your account, such as Bring Your Own CA
+   * (BYO-CA) for mTLS. To list certificates issued by the Cloudflare managed CA, use
+   * the
+   * [List Client Certificates endpoint](/api/resources/client_certificates/methods/list/).
    *
    * @example
    * ```ts
@@ -95,7 +101,9 @@ export class MTLSCertificates extends APIResource {
   }
 
   /**
-   * Fetches a single mTLS certificate.
+   * Fetches a single mTLS certificate uploaded to your account. To get a certificate
+   * issued by the Cloudflare managed CA, use the
+   * [Client Certificate Details endpoint](/api/resources/client_certificates/methods/get/).
    *
    * @example
    * ```ts
