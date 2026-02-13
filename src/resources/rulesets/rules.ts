@@ -5831,6 +5831,11 @@ export namespace SetConfigRule {
     bic?: boolean;
 
     /**
+     * Whether to enable content conversion (e.g., HTML to Markdown).
+     */
+    content_converter?: boolean;
+
+    /**
      * @deprecated Cloudflare Apps are deprected.
      */
     disable_apps?: true;
@@ -6077,6 +6082,11 @@ export namespace SetConfigRuleParam {
      * Whether to enable Browser Integrity Check (BIC).
      */
     bic?: boolean;
+
+    /**
+     * Whether to enable content conversion (e.g., HTML to Markdown).
+     */
+    content_converter?: boolean;
 
     /**
      * @deprecated Cloudflare Apps are deprected.
@@ -11371,6 +11381,11 @@ export declare namespace RuleCreateParams {
       bic?: boolean;
 
       /**
+       * Whether to enable content conversion (e.g., HTML to Markdown).
+       */
+      content_converter?: boolean;
+
+      /**
        * @deprecated Cloudflare Apps are deprected.
        */
       disable_apps?: true;
@@ -15662,6 +15677,11 @@ export declare namespace RuleEditParams {
        * Whether to enable Browser Integrity Check (BIC).
        */
       bic?: boolean;
+
+      /**
+       * Whether to enable content conversion (e.g., HTML to Markdown).
+       */
+      content_converter?: boolean;
 
       /**
        * @deprecated Cloudflare Apps are deprected.

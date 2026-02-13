@@ -89,7 +89,7 @@ export interface SubnetListResponse {
   /**
    * The type of subnet.
    */
-  subnet_type?: 'cloudflare_source';
+  subnet_type?: 'cloudflare_source' | 'warp';
 }
 
 export interface SubnetListParams extends V4PagePaginationArrayParams {

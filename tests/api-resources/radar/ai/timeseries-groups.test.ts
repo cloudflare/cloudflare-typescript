@@ -27,6 +27,7 @@ describe('resource timeseriesGroups', () => {
         'USER_AGENT',
         {
           asn: ['string'],
+          contentType: ['HTML'],
           continent: ['string'],
           crawlPurpose: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -37,6 +38,7 @@ describe('resource timeseriesGroups', () => {
           limitPerGroup: 10,
           location: ['string'],
           name: ['main_series'],
+          userAgent: ['string'],
           vertical: ['string'],
         },
         { path: '/_stainless_unknown_path' },
@@ -62,6 +64,7 @@ describe('resource timeseriesGroups', () => {
         {
           aggInterval: '1h',
           asn: ['string'],
+          contentType: ['HTML'],
           continent: ['string'],
           crawlPurpose: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -99,6 +102,7 @@ describe('resource timeseriesGroups', () => {
         {
           aggInterval: '1h',
           asn: ['string'],
+          contentType: ['HTML'],
           continent: ['string'],
           crawlPurpose: ['string'],
           dateEnd: ['2019-12-27T18:11:19.117Z'],
@@ -109,7 +113,8 @@ describe('resource timeseriesGroups', () => {
           limitPerGroup: 10,
           location: ['string'],
           name: ['main_series'],
-          normalization: 'MIN0_MAX',
+          normalization: 'PERCENTAGE',
+          userAgent: ['string'],
           vertical: ['string'],
         },
         { path: '/_stainless_unknown_path' },

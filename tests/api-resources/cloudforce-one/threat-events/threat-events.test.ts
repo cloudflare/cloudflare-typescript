@@ -91,25 +91,6 @@ describe('resource threatEvents', () => {
   });
 
   // TODO: HTTP 401 from prism
-  test.skip('delete: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.delete('event_id', {
-      account_id: 'account_id',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: HTTP 401 from prism
-  test.skip('delete: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.delete('event_id', { account_id: 'account_id' });
-  });
-
-  // TODO: HTTP 401 from prism
   test.skip('bulkCreate: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.bulkCreate({
       account_id: 'account_id',

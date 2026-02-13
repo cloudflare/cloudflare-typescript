@@ -147,6 +147,9 @@ export interface PredefinedCreateResponse {
 
   name: string;
 
+  /**
+   * @deprecated
+   */
   profile_id?: string | null;
 
   variant?: PredefinedCreateResponse.Variant;
@@ -184,6 +187,9 @@ export interface PredefinedUpdateResponse {
 
   name: string;
 
+  /**
+   * @deprecated
+   */
   profile_id?: string | null;
 
   variant?: PredefinedUpdateResponse.Variant;
@@ -226,6 +232,9 @@ export namespace PredefinedListResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -236,6 +245,11 @@ export namespace PredefinedListResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
@@ -252,6 +266,9 @@ export namespace PredefinedListResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
@@ -377,6 +394,9 @@ export namespace PredefinedGetResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -387,6 +407,11 @@ export namespace PredefinedGetResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember0.Profile>;
@@ -416,6 +441,9 @@ export namespace PredefinedGetResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember1.Profile>;

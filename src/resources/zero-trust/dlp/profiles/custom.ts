@@ -148,7 +148,19 @@ export interface CustomProfile {
    */
   description?: string | null;
 
+  /**
+   * @deprecated
+   */
   entries?: Array<
+    | CustomProfile.CustomEntry
+    | CustomProfile.PredefinedEntry
+    | CustomProfile.IntegrationEntry
+    | CustomProfile.ExactDataEntry
+    | CustomProfile.DocumentFingerprintEntry
+    | CustomProfile.WordListEntry
+  >;
+
+  shared_entries?: Array<
     | CustomProfile.CustomEntry
     | CustomProfile.PredefinedEntry
     | CustomProfile.IntegrationEntry
@@ -164,6 +176,9 @@ export namespace CustomProfile {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -174,6 +189,11 @@ export namespace CustomProfile {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
   }
 
@@ -188,6 +208,147 @@ export namespace CustomProfile {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
+    profile_id?: string | null;
+
+    variant?: PredefinedEntry.Variant;
+  }
+
+  export namespace PredefinedEntry {
+    export interface Confidence {
+      /**
+       * Indicates whether this entry has AI remote service validation.
+       */
+      ai_context_available: boolean;
+
+      /**
+       * Indicates whether this entry has any form of validation that is not an AI remote
+       * service.
+       */
+      available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
+
+      description?: string | null;
+    }
+  }
+
+  export interface IntegrationEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'integration';
+
+    updated_at: string;
+
+    profile_id?: string | null;
+  }
+
+  export interface ExactDataEntry {
+    id: string;
+
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    secret: boolean;
+
+    type: 'exact_data';
+
+    updated_at: string;
+  }
+
+  export interface DocumentFingerprintEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'document_fingerprint';
+
+    updated_at: string;
+  }
+
+  export interface WordListEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'word_list';
+
+    updated_at: string;
+
+    word_list: unknown;
+
+    profile_id?: string | null;
+  }
+
+  export interface CustomEntry {
+    id: string;
+
+    created_at: string;
+
+    /**
+     * @deprecated
+     */
+    enabled: boolean;
+
+    name: string;
+
+    pattern: CustomAPI.Pattern;
+
+    type: 'custom';
+
+    updated_at: string;
+
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
+    profile_id?: string | null;
+  }
+
+  export interface PredefinedEntry {
+    id: string;
+
+    confidence: PredefinedEntry.Confidence;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'predefined';
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     variant?: PredefinedEntry.Variant;
@@ -356,7 +517,19 @@ export namespace CustomCreateResponse {
      */
     description?: string | null;
 
+    /**
+     * @deprecated
+     */
     entries?: Array<
+      | Custom.CustomEntry
+      | Custom.PredefinedEntry
+      | Custom.IntegrationEntry
+      | Custom.ExactDataEntry
+      | Custom.DocumentFingerprintEntry
+      | Custom.WordListEntry
+    >;
+
+    shared_entries?: Array<
       | Custom.CustomEntry
       | Custom.PredefinedEntry
       | Custom.IntegrationEntry
@@ -372,6 +545,9 @@ export namespace CustomCreateResponse {
 
       created_at: string;
 
+      /**
+       * @deprecated
+       */
       enabled: boolean;
 
       name: string;
@@ -382,6 +558,11 @@ export namespace CustomCreateResponse {
 
       updated_at: string;
 
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
     }
 
@@ -396,6 +577,147 @@ export namespace CustomCreateResponse {
 
       type: 'predefined';
 
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+
+      variant?: PredefinedEntry.Variant;
+    }
+
+    export namespace PredefinedEntry {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry has AI remote service validation.
+         */
+        ai_context_available: boolean;
+
+        /**
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service.
+         */
+        available: boolean;
+      }
+
+      export interface Variant {
+        topic_type: 'Intent' | 'Content';
+
+        type: 'PromptTopic';
+
+        description?: string | null;
+      }
+    }
+
+    export interface IntegrationEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactDataEntry {
+      id: string;
+
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface DocumentFingerprintEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_fingerprint';
+
+      updated_at: string;
+    }
+
+    export interface WordListEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
+    }
+
+    export interface CustomEntry {
+      id: string;
+
+      created_at: string;
+
+      /**
+       * @deprecated
+       */
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+    }
+
+    export interface PredefinedEntry {
+      id: string;
+
+      confidence: PredefinedEntry.Confidence;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
 
       variant?: PredefinedEntry.Variant;
@@ -503,6 +825,9 @@ export namespace CustomCreateResponse {
 
     allowed_match_count: number;
 
+    /**
+     * @deprecated
+     */
     entries: Array<
       | Predefined.CustomEntry
       | Predefined.PredefinedEntry
@@ -543,6 +868,9 @@ export namespace CustomCreateResponse {
 
       created_at: string;
 
+      /**
+       * @deprecated
+       */
       enabled: boolean;
 
       name: string;
@@ -553,6 +881,11 @@ export namespace CustomCreateResponse {
 
       updated_at: string;
 
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
     }
 
@@ -567,6 +900,9 @@ export namespace CustomCreateResponse {
 
       type: 'predefined';
 
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
 
       variant?: PredefinedEntry.Variant;
@@ -671,6 +1007,9 @@ export namespace CustomCreateResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     entries: Array<
       | Integration.CustomEntry
       | Integration.PredefinedEntry
@@ -681,6 +1020,15 @@ export namespace CustomCreateResponse {
     >;
 
     name: string;
+
+    shared_entries: Array<
+      | Integration.CustomEntry
+      | Integration.PredefinedEntry
+      | Integration.IntegrationEntry
+      | Integration.ExactDataEntry
+      | Integration.DocumentFingerprintEntry
+      | Integration.WordListEntry
+    >;
 
     type: 'integration';
 
@@ -698,6 +1046,9 @@ export namespace CustomCreateResponse {
 
       created_at: string;
 
+      /**
+       * @deprecated
+       */
       enabled: boolean;
 
       name: string;
@@ -708,6 +1059,11 @@ export namespace CustomCreateResponse {
 
       updated_at: string;
 
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
     }
 
@@ -722,6 +1078,147 @@ export namespace CustomCreateResponse {
 
       type: 'predefined';
 
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+
+      variant?: PredefinedEntry.Variant;
+    }
+
+    export namespace PredefinedEntry {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry has AI remote service validation.
+         */
+        ai_context_available: boolean;
+
+        /**
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service.
+         */
+        available: boolean;
+      }
+
+      export interface Variant {
+        topic_type: 'Intent' | 'Content';
+
+        type: 'PromptTopic';
+
+        description?: string | null;
+      }
+    }
+
+    export interface IntegrationEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactDataEntry {
+      id: string;
+
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface DocumentFingerprintEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_fingerprint';
+
+      updated_at: string;
+    }
+
+    export interface WordListEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
+    }
+
+    export interface CustomEntry {
+      id: string;
+
+      created_at: string;
+
+      /**
+       * @deprecated
+       */
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+    }
+
+    export interface PredefinedEntry {
+      id: string;
+
+      confidence: PredefinedEntry.Confidence;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
 
       variant?: PredefinedEntry.Variant;
@@ -873,7 +1370,19 @@ export namespace CustomUpdateResponse {
      */
     description?: string | null;
 
+    /**
+     * @deprecated
+     */
     entries?: Array<
+      | Custom.CustomEntry
+      | Custom.PredefinedEntry
+      | Custom.IntegrationEntry
+      | Custom.ExactDataEntry
+      | Custom.DocumentFingerprintEntry
+      | Custom.WordListEntry
+    >;
+
+    shared_entries?: Array<
       | Custom.CustomEntry
       | Custom.PredefinedEntry
       | Custom.IntegrationEntry
@@ -889,6 +1398,9 @@ export namespace CustomUpdateResponse {
 
       created_at: string;
 
+      /**
+       * @deprecated
+       */
       enabled: boolean;
 
       name: string;
@@ -899,6 +1411,11 @@ export namespace CustomUpdateResponse {
 
       updated_at: string;
 
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
     }
 
@@ -913,6 +1430,147 @@ export namespace CustomUpdateResponse {
 
       type: 'predefined';
 
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+
+      variant?: PredefinedEntry.Variant;
+    }
+
+    export namespace PredefinedEntry {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry has AI remote service validation.
+         */
+        ai_context_available: boolean;
+
+        /**
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service.
+         */
+        available: boolean;
+      }
+
+      export interface Variant {
+        topic_type: 'Intent' | 'Content';
+
+        type: 'PromptTopic';
+
+        description?: string | null;
+      }
+    }
+
+    export interface IntegrationEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactDataEntry {
+      id: string;
+
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface DocumentFingerprintEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_fingerprint';
+
+      updated_at: string;
+    }
+
+    export interface WordListEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
+    }
+
+    export interface CustomEntry {
+      id: string;
+
+      created_at: string;
+
+      /**
+       * @deprecated
+       */
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+    }
+
+    export interface PredefinedEntry {
+      id: string;
+
+      confidence: PredefinedEntry.Confidence;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
 
       variant?: PredefinedEntry.Variant;
@@ -1020,6 +1678,9 @@ export namespace CustomUpdateResponse {
 
     allowed_match_count: number;
 
+    /**
+     * @deprecated
+     */
     entries: Array<
       | Predefined.CustomEntry
       | Predefined.PredefinedEntry
@@ -1060,6 +1721,9 @@ export namespace CustomUpdateResponse {
 
       created_at: string;
 
+      /**
+       * @deprecated
+       */
       enabled: boolean;
 
       name: string;
@@ -1070,6 +1734,11 @@ export namespace CustomUpdateResponse {
 
       updated_at: string;
 
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
     }
 
@@ -1084,6 +1753,9 @@ export namespace CustomUpdateResponse {
 
       type: 'predefined';
 
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
 
       variant?: PredefinedEntry.Variant;
@@ -1188,6 +1860,9 @@ export namespace CustomUpdateResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     entries: Array<
       | Integration.CustomEntry
       | Integration.PredefinedEntry
@@ -1198,6 +1873,15 @@ export namespace CustomUpdateResponse {
     >;
 
     name: string;
+
+    shared_entries: Array<
+      | Integration.CustomEntry
+      | Integration.PredefinedEntry
+      | Integration.IntegrationEntry
+      | Integration.ExactDataEntry
+      | Integration.DocumentFingerprintEntry
+      | Integration.WordListEntry
+    >;
 
     type: 'integration';
 
@@ -1215,6 +1899,9 @@ export namespace CustomUpdateResponse {
 
       created_at: string;
 
+      /**
+       * @deprecated
+       */
       enabled: boolean;
 
       name: string;
@@ -1225,6 +1912,11 @@ export namespace CustomUpdateResponse {
 
       updated_at: string;
 
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
     }
 
@@ -1239,6 +1931,147 @@ export namespace CustomUpdateResponse {
 
       type: 'predefined';
 
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+
+      variant?: PredefinedEntry.Variant;
+    }
+
+    export namespace PredefinedEntry {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry has AI remote service validation.
+         */
+        ai_context_available: boolean;
+
+        /**
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service.
+         */
+        available: boolean;
+      }
+
+      export interface Variant {
+        topic_type: 'Intent' | 'Content';
+
+        type: 'PromptTopic';
+
+        description?: string | null;
+      }
+    }
+
+    export interface IntegrationEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactDataEntry {
+      id: string;
+
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface DocumentFingerprintEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_fingerprint';
+
+      updated_at: string;
+    }
+
+    export interface WordListEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
+    }
+
+    export interface CustomEntry {
+      id: string;
+
+      created_at: string;
+
+      /**
+       * @deprecated
+       */
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+    }
+
+    export interface PredefinedEntry {
+      id: string;
+
+      confidence: PredefinedEntry.Confidence;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
 
       variant?: PredefinedEntry.Variant;
@@ -1392,7 +2225,19 @@ export namespace CustomGetResponse {
      */
     description?: string | null;
 
+    /**
+     * @deprecated
+     */
     entries?: Array<
+      | Custom.CustomEntry
+      | Custom.PredefinedEntry
+      | Custom.IntegrationEntry
+      | Custom.ExactDataEntry
+      | Custom.DocumentFingerprintEntry
+      | Custom.WordListEntry
+    >;
+
+    shared_entries?: Array<
       | Custom.CustomEntry
       | Custom.PredefinedEntry
       | Custom.IntegrationEntry
@@ -1408,6 +2253,9 @@ export namespace CustomGetResponse {
 
       created_at: string;
 
+      /**
+       * @deprecated
+       */
       enabled: boolean;
 
       name: string;
@@ -1418,6 +2266,11 @@ export namespace CustomGetResponse {
 
       updated_at: string;
 
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
     }
 
@@ -1432,6 +2285,147 @@ export namespace CustomGetResponse {
 
       type: 'predefined';
 
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+
+      variant?: PredefinedEntry.Variant;
+    }
+
+    export namespace PredefinedEntry {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry has AI remote service validation.
+         */
+        ai_context_available: boolean;
+
+        /**
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service.
+         */
+        available: boolean;
+      }
+
+      export interface Variant {
+        topic_type: 'Intent' | 'Content';
+
+        type: 'PromptTopic';
+
+        description?: string | null;
+      }
+    }
+
+    export interface IntegrationEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactDataEntry {
+      id: string;
+
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface DocumentFingerprintEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_fingerprint';
+
+      updated_at: string;
+    }
+
+    export interface WordListEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
+    }
+
+    export interface CustomEntry {
+      id: string;
+
+      created_at: string;
+
+      /**
+       * @deprecated
+       */
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+    }
+
+    export interface PredefinedEntry {
+      id: string;
+
+      confidence: PredefinedEntry.Confidence;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
 
       variant?: PredefinedEntry.Variant;
@@ -1539,6 +2533,9 @@ export namespace CustomGetResponse {
 
     allowed_match_count: number;
 
+    /**
+     * @deprecated
+     */
     entries: Array<
       | Predefined.CustomEntry
       | Predefined.PredefinedEntry
@@ -1579,6 +2576,9 @@ export namespace CustomGetResponse {
 
       created_at: string;
 
+      /**
+       * @deprecated
+       */
       enabled: boolean;
 
       name: string;
@@ -1589,6 +2589,11 @@ export namespace CustomGetResponse {
 
       updated_at: string;
 
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
     }
 
@@ -1603,6 +2608,9 @@ export namespace CustomGetResponse {
 
       type: 'predefined';
 
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
 
       variant?: PredefinedEntry.Variant;
@@ -1707,6 +2715,9 @@ export namespace CustomGetResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     entries: Array<
       | Integration.CustomEntry
       | Integration.PredefinedEntry
@@ -1717,6 +2728,15 @@ export namespace CustomGetResponse {
     >;
 
     name: string;
+
+    shared_entries: Array<
+      | Integration.CustomEntry
+      | Integration.PredefinedEntry
+      | Integration.IntegrationEntry
+      | Integration.ExactDataEntry
+      | Integration.DocumentFingerprintEntry
+      | Integration.WordListEntry
+    >;
 
     type: 'integration';
 
@@ -1734,6 +2754,9 @@ export namespace CustomGetResponse {
 
       created_at: string;
 
+      /**
+       * @deprecated
+       */
       enabled: boolean;
 
       name: string;
@@ -1744,6 +2767,11 @@ export namespace CustomGetResponse {
 
       updated_at: string;
 
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
     }
 
@@ -1758,6 +2786,147 @@ export namespace CustomGetResponse {
 
       type: 'predefined';
 
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+
+      variant?: PredefinedEntry.Variant;
+    }
+
+    export namespace PredefinedEntry {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry has AI remote service validation.
+         */
+        ai_context_available: boolean;
+
+        /**
+         * Indicates whether this entry has any form of validation that is not an AI remote
+         * service.
+         */
+        available: boolean;
+      }
+
+      export interface Variant {
+        topic_type: 'Intent' | 'Content';
+
+        type: 'PromptTopic';
+
+        description?: string | null;
+      }
+    }
+
+    export interface IntegrationEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactDataEntry {
+      id: string;
+
+      /**
+       * Only applies to custom word lists. Determines if the words should be matched in
+       * a case-sensitive manner Cannot be set to false if secret is true
+       */
+      case_sensitive: boolean;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface DocumentFingerprintEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'document_fingerprint';
+
+      updated_at: string;
+    }
+
+    export interface WordListEntry {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
+    }
+
+    export interface CustomEntry {
+      id: string;
+
+      created_at: string;
+
+      /**
+       * @deprecated
+       */
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      description?: string | null;
+
+      /**
+       * @deprecated
+       */
+      profile_id?: string | null;
+    }
+
+    export interface PredefinedEntry {
+      id: string;
+
+      confidence: PredefinedEntry.Confidence;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      /**
+       * @deprecated
+       */
       profile_id?: string | null;
 
       variant?: PredefinedEntry.Variant;
@@ -1920,6 +3089,8 @@ export namespace CustomCreateParams {
     name: string;
 
     pattern: CustomAPI.PatternParam;
+
+    description?: string | null;
   }
 
   export interface DLPNewWordListEntry {
@@ -2000,6 +3171,8 @@ export namespace CustomUpdateParams {
     name: string;
 
     pattern: CustomAPI.PatternParam;
+
+    description?: string | null;
   }
 
   export interface DLPNewCustomEntry {
@@ -2008,6 +3181,8 @@ export namespace CustomUpdateParams {
     name: string;
 
     pattern: CustomAPI.PatternParam;
+
+    description?: string | null;
   }
 
   export interface SharedEntry {

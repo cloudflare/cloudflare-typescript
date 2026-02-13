@@ -31,7 +31,7 @@ export class WebCrawlers extends APIResource {
   }
 
   /**
-   * Retrieves the distribution of HTTP requests from crawlers, grouped by chosen the
+   * Retrieves the distribution of HTTP requests from crawlers, grouped by the
    * specified dimension over time.
    *
    * @example

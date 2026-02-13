@@ -2,14 +2,17 @@
 
 export {
   Consumers,
-  type Consumer,
+  type ConsumerCreateResponse,
+  type ConsumerUpdateResponse,
+  type ConsumerListResponse,
   type ConsumerDeleteResponse,
+  type ConsumerGetResponse,
   type ConsumerCreateParams,
   type ConsumerUpdateParams,
   type ConsumerListParams,
   type ConsumerDeleteParams,
   type ConsumerGetParams,
-  type ConsumersSinglePage,
+  type ConsumerListResponsesSinglePage,
 } from './consumers';
 export {
   Messages,

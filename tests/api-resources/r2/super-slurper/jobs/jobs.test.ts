@@ -29,6 +29,7 @@ describe('resource jobs', () => {
         secret: { accessKeyId: 'accessKeyId', secretAccessKey: 'secretAccessKey' },
         vendor: 's3',
         endpoint: 'endpoint',
+        keys: ['string'],
         pathPrefix: 'pathPrefix',
         region: 'region',
       },

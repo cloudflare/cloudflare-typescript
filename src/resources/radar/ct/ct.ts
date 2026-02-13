@@ -74,8 +74,8 @@ export class CT extends APIResource {
   }
 
   /**
-   * Retrieves the distribution of certificates grouped by chosen the specified
-   * dimension over time.
+   * Retrieves the distribution of certificates grouped by the specified dimension
+   * over time.
    *
    * @example
    * ```ts

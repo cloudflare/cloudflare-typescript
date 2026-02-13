@@ -370,6 +370,8 @@ export namespace JobCreateParams {
 
     endpoint?: string | null;
 
+    keys?: Array<string> | null;
+
     pathPrefix?: string | null;
 
     region?: string | null;
@@ -390,6 +392,8 @@ export namespace JobCreateParams {
 
     vendor: 'gcs';
 
+    keys?: Array<string> | null;
+
     pathPrefix?: string | null;
   }
 
@@ -409,6 +413,8 @@ export namespace JobCreateParams {
     vendor: SippyAPI.ProviderParam;
 
     jurisdiction?: 'default' | 'eu' | 'fedramp';
+
+    keys?: Array<string> | null;
 
     pathPrefix?: string | null;
   }

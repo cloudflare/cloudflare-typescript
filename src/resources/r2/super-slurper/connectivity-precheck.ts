@@ -111,6 +111,11 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Body param
      */
+    keys?: Array<string> | null;
+
+    /**
+     * Body param
+     */
     pathPrefix?: string | null;
 
     /**
@@ -151,6 +156,11 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Body param
      */
+    keys?: Array<string> | null;
+
+    /**
+     * Body param
+     */
     pathPrefix?: string | null;
   }
 
@@ -187,6 +197,11 @@ export declare namespace ConnectivityPrecheckSourceParams {
      * Body param
      */
     jurisdiction?: 'default' | 'eu' | 'fedramp';
+
+    /**
+     * Body param
+     */
+    keys?: Array<string> | null;
 
     /**
      * Body param
