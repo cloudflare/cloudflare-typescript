@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as HostnamesAPI from './hostnames';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -163,6 +162,11 @@ export interface Certificate {
     | 'deletion_timed_out';
 
   /**
+   * The time when the certificate was updated.
+   */
+  updated_at?: string;
+
+  /**
    * The time when the certificate was uploaded.
    */
   uploaded_on?: string;
@@ -212,21 +216,21 @@ export interface HostnameCertificateCreateResponse {
     | 'deletion_timed_out';
 
   /**
+   * The time when the certificate was updated.
+   */
+  updated_at?: string;
+
+  /**
    * The time when the certificate was uploaded.
    */
   uploaded_on?: string;
 }
 
-export interface HostnameCertificateListResponse extends HostnamesAPI.AuthenticatedOriginPull {
+export interface HostnameCertificateListResponse {
   /**
    * Identifier.
    */
   id?: string;
-
-  /**
-   * Identifier.
-   */
-  cert_id?: string;
 
   /**
    * The hostname certificate.
@@ -234,21 +238,46 @@ export interface HostnameCertificateListResponse extends HostnamesAPI.Authentica
   certificate?: string;
 
   /**
-   * Indicates whether hostname-level authenticated origin pulls is enabled. A null
-   * value voids the association.
+   * The date when the certificate expires.
    */
-  enabled?: boolean | null;
+  expires_on?: string;
 
   /**
-   * The hostname on the origin for which the client certificate uploaded will be
-   * used.
+   * The certificate authority that issued the certificate.
    */
-  hostname?: string;
+  issuer?: string;
 
   /**
-   * The hostname certificate's private key.
+   * The serial number on the uploaded certificate.
    */
-  private_key?: string;
+  serial_number?: string;
+
+  /**
+   * The type of hash used for the certificate.
+   */
+  signature?: string;
+
+  /**
+   * Status of the certificate or the association.
+   */
+  status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deleted'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * The time when the certificate was updated.
+   */
+  updated_at?: string;
+
+  /**
+   * The time when the certificate was uploaded.
+   */
+  uploaded_on?: string;
 }
 
 export interface HostnameCertificateDeleteResponse {
@@ -293,6 +322,11 @@ export interface HostnameCertificateDeleteResponse {
     | 'deleted'
     | 'deployment_timed_out'
     | 'deletion_timed_out';
+
+  /**
+   * The time when the certificate was updated.
+   */
+  updated_at?: string;
 
   /**
    * The time when the certificate was uploaded.
@@ -342,6 +376,11 @@ export interface HostnameCertificateGetResponse {
     | 'deleted'
     | 'deployment_timed_out'
     | 'deletion_timed_out';
+
+  /**
+   * The time when the certificate was updated.
+   */
+  updated_at?: string;
 
   /**
    * The time when the certificate was uploaded.
