@@ -9,8 +9,5 @@ export {
   type RuleUpdateParams,
   type RuleListParams,
   type RuleDeleteParams,
-  type RuleUpdateResponsesSinglePage,
-  type RuleListResponsesSinglePage,
-  type RuleDeleteResponsesSinglePage,
 } from './rules';
 export { Snippets } from './snippets';

@@ -638,12 +638,26 @@ export declare namespace AIRunParams {
       /**
        * The content of the message as a string.
        */
-      content: string;
+      content: string | Array<Message.UnionMember1>;
 
       /**
        * The role of the message sender (e.g., 'user', 'assistant', 'system', 'tool').
        */
       role: string;
+    }
+
+    export namespace Message {
+      export interface UnionMember1 {
+        /**
+         * Text content
+         */
+        text?: string;
+
+        /**
+         * Type of the content (text)
+         */
+        type?: string;
+      }
     }
 
     export interface Function {

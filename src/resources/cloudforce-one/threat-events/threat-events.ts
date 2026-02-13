@@ -130,30 +130,6 @@ export class ThreatEvents extends APIResource {
    *
    * @example
    * ```ts
-   * const threatEvent =
-   *   await client.cloudforceOne.threatEvents.delete(
-   *     'event_id',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
-   */
-  delete(
-    eventID: string,
-    params: ThreatEventDeleteParams,
-    options?: RequestOptions,
-  ): APIPromise<ThreatEventDeleteResponse> {
-    const { account_id } = params;
-    return this._client.delete(path`/accounts/${account_id}/cloudforce-one/events/${eventID}`, options);
-  }
-
-  /**
-   * The `datasetId` parameter must be defined. To list existing datasets (and their
-   * IDs) in your account, use the
-   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
-   * endpoint.
-   *
-   * @example
-   * ```ts
    * const response =
    *   await client.cloudforceOne.threatEvents.bulkCreate({
    *     account_id: 'account_id',
@@ -331,10 +307,6 @@ export namespace ThreatEventListResponse {
 
     releasabilityId?: string;
   }
-}
-
-export interface ThreatEventDeleteResponse {
-  uuid: string;
 }
 
 /**
@@ -706,13 +678,6 @@ export namespace ThreatEventListParams {
   }
 }
 
-export interface ThreatEventDeleteParams {
-  /**
-   * Account ID.
-   */
-  account_id: string;
-}
-
 export interface ThreatEventBulkCreateParams {
   /**
    * Path param: Account ID.
@@ -909,13 +874,11 @@ export declare namespace ThreatEvents {
   export {
     type ThreatEventCreateResponse as ThreatEventCreateResponse,
     type ThreatEventListResponse as ThreatEventListResponse,
-    type ThreatEventDeleteResponse as ThreatEventDeleteResponse,
     type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,
     type ThreatEventEditResponse as ThreatEventEditResponse,
     type ThreatEventGetResponse as ThreatEventGetResponse,
     type ThreatEventCreateParams as ThreatEventCreateParams,
     type ThreatEventListParams as ThreatEventListParams,
-    type ThreatEventDeleteParams as ThreatEventDeleteParams,
     type ThreatEventBulkCreateParams as ThreatEventBulkCreateParams,
     type ThreatEventEditParams as ThreatEventEditParams,
     type ThreatEventGetParams as ThreatEventGetParams,

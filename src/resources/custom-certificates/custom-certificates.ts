@@ -204,17 +204,15 @@ export interface CustomCertificate {
   modified_on?: string;
 
   /**
-   * Specify the policy that determines the region where your private key will be
-   * held locally. HTTPS connections to any excluded data center will still be fully
-   * encrypted, but will incur some latency while Keyless SSL is used to complete the
-   * handshake with the nearest allowed data center. Any combination of countries,
-   * specified by their two letter country code
-   * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-   * can be chosen, such as 'country: IN', as well as 'region: EU' which refers to
-   * the EU region. If there are too few data centers satisfying the policy, it will
-   * be rejected.
+   * The policy restrictions returned by the API. This field is returned in responses
+   * when a policy has been set. The API accepts the "policy" field in requests but
+   * returns this field as "policy_restrictions" in responses.
+   *
+   * Specifies the region(s) where your private key can be held locally for optimal
+   * TLS performance. Format is a boolean expression, for example: "(country: US) or
+   * (region: EU)"
    */
-  policy?: string;
+  policy_restrictions?: string;
 
   /**
    * The order/priority in which the certificate will be used in a request. The
@@ -304,6 +302,11 @@ export interface CustomCertificateCreateParams {
   bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
   /**
+   * Body param: The environment to deploy the certificate to, defaults to production
+   */
+  deploy?: 'staging' | 'production';
+
+  /**
    * Body param: Specify the region where your private key can be held locally for
    * optimal TLS performance. HTTPS connections to any excluded data center will
    * still be fully encrypted, but will incur some latency while Keyless SSL is used
@@ -323,7 +326,9 @@ export interface CustomCertificateCreateParams {
    * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
    * can be chosen, such as 'country: IN', as well as 'region: EU' which refers to
    * the EU region. If there are too few data centers satisfying the policy, it will
-   * be rejected.
+   * be rejected. Note: The API accepts this field as either "policy" or
+   * "policy_restrictions" in requests. Responses return this field as
+   * "policy_restrictions". example: "(country: US) or (region: EU)"
    */
   policy?: string;
 
@@ -358,74 +363,60 @@ export interface CustomCertificateDeleteParams {
   zone_id: string;
 }
 
-export type CustomCertificateEditParams =
-  | CustomCertificateEditParams.Variant0
-  | CustomCertificateEditParams.Variant1;
+export interface CustomCertificateEditParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id: string;
 
-export declare namespace CustomCertificateEditParams {
-  export interface Variant0 {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
+  /**
+   * Body param: A ubiquitous bundle has the highest probability of being verified
+   * everywhere, even by clients using outdated or unusual trust stores. An optimal
+   * bundle uses the shortest chain and newest intermediates. And the force bundle
+   * verifies the chain, but does not otherwise modify it.
+   */
+  bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
-    /**
-     * Body param: A ubiquitous bundle has the highest probability of being verified
-     * everywhere, even by clients using outdated or unusual trust stores. An optimal
-     * bundle uses the shortest chain and newest intermediates. And the force bundle
-     * verifies the chain, but does not otherwise modify it.
-     */
-    bundle_method?: CustomHostnamesAPI.BundleMethodParam;
-  }
+  /**
+   * Body param: The zone's SSL certificate or certificate and the intermediate(s).
+   */
+  certificate?: string;
 
-  export interface Variant1 {
-    /**
-     * Path param: Identifier.
-     */
-    zone_id: string;
+  /**
+   * Body param: The environment to deploy the certificate to, defaults to production
+   */
+  deploy?: 'staging' | 'production';
 
-    /**
-     * Body param: The zone's SSL certificate or certificate and the intermediate(s).
-     */
-    certificate: string;
+  /**
+   * Body param: Specify the region where your private key can be held locally for
+   * optimal TLS performance. HTTPS connections to any excluded data center will
+   * still be fully encrypted, but will incur some latency while Keyless SSL is used
+   * to complete the handshake with the nearest allowed data center. Options allow
+   * distribution to only to U.S. data centers, only to E.U. data centers, or only to
+   * highest security data centers. Default distribution is to all Cloudflare
+   * datacenters, for optimal performance.
+   */
+  geo_restrictions?: GeoRestrictionsParam;
 
-    /**
-     * Body param: The zone's private key.
-     */
-    private_key: string;
+  /**
+   * Body param: Specify the policy that determines the region where your private key
+   * will be held locally. HTTPS connections to any excluded data center will still
+   * be fully encrypted, but will incur some latency while Keyless SSL is used to
+   * complete the handshake with the nearest allowed data center. Any combination of
+   * countries, specified by their two letter country code
+   * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+   * can be chosen, such as 'country: IN', as well as 'region: EU' which refers to
+   * the EU region. If there are too few data centers satisfying the policy, it will
+   * be rejected. Note: The API accepts this field as either "policy" or
+   * "policy_restrictions" in requests. Responses return this field as
+   * "policy_restrictions". example: "(country: US) or (region: EU)"
+   */
+  policy?: string;
 
-    /**
-     * Body param: A ubiquitous bundle has the highest probability of being verified
-     * everywhere, even by clients using outdated or unusual trust stores. An optimal
-     * bundle uses the shortest chain and newest intermediates. And the force bundle
-     * verifies the chain, but does not otherwise modify it.
-     */
-    bundle_method?: CustomHostnamesAPI.BundleMethodParam;
-
-    /**
-     * Body param: Specify the region where your private key can be held locally for
-     * optimal TLS performance. HTTPS connections to any excluded data center will
-     * still be fully encrypted, but will incur some latency while Keyless SSL is used
-     * to complete the handshake with the nearest allowed data center. Options allow
-     * distribution to only to U.S. data centers, only to E.U. data centers, or only to
-     * highest security data centers. Default distribution is to all Cloudflare
-     * datacenters, for optimal performance.
-     */
-    geo_restrictions?: GeoRestrictionsParam;
-
-    /**
-     * Body param: Specify the policy that determines the region where your private key
-     * will be held locally. HTTPS connections to any excluded data center will still
-     * be fully encrypted, but will incur some latency while Keyless SSL is used to
-     * complete the handshake with the nearest allowed data center. Any combination of
-     * countries, specified by their two letter country code
-     * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-     * can be chosen, such as 'country: IN', as well as 'region: EU' which refers to
-     * the EU region. If there are too few data centers satisfying the policy, it will
-     * be rejected.
-     */
-    policy?: string;
-  }
+  /**
+   * Body param: The zone's private key.
+   */
+  private_key?: string;
 }
 
 export interface CustomCertificateGetParams {

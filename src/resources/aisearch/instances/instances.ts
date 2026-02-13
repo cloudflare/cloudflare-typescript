@@ -242,13 +242,7 @@ export interface InstanceCreateResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
-
-  internal_id: string;
 
   modified_at: string;
 
@@ -258,10 +252,11 @@ export interface InstanceCreateResponse {
 
   vectorize_name: string;
 
-  ai_gateway_id?: string;
+  ai_gateway_id?: string | null;
 
   ai_search_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -292,13 +287,11 @@ export interface InstanceCreateResponse {
 
   cache_threshold?: 'super_strict_match' | 'close_enough' | 'flexible_friend' | 'anything_goes';
 
-  chunk?: boolean;
-
   chunk_overlap?: number;
 
   chunk_size?: number;
 
-  created_by?: string;
+  created_by?: string | null;
 
   custom_metadata?: Array<InstanceCreateResponse.CustomMetadata>;
 
@@ -314,21 +307,19 @@ export interface InstanceCreateResponse {
 
   enable?: boolean;
 
-  engine_version?: number;
-
   hybrid_search_enabled?: boolean;
 
-  last_activity?: string;
+  last_activity?: string | null;
 
   max_num_results?: number;
 
   metadata?: InstanceCreateResponse.Metadata;
 
-  modified_by?: string;
+  modified_by?: string | null;
 
   paused?: boolean;
 
-  public_endpoint_id?: string;
+  public_endpoint_id?: string | null;
 
   public_endpoint_params?: InstanceCreateResponse.PublicEndpointParams;
 
@@ -338,6 +329,7 @@ export interface InstanceCreateResponse {
 
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -372,45 +364,7 @@ export interface InstanceCreateResponse {
 
   status?: string;
 
-  summarization?: boolean;
-
-  summarization_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | '';
-
-  system_prompt_ai_search?: string;
-
-  system_prompt_index_summarization?: string;
-
-  system_prompt_rewrite_query?: string;
-
   token_id?: string;
-
-  vectorize_active_namespace?: string;
 }
 
 export namespace InstanceCreateResponse {
@@ -449,6 +403,8 @@ export namespace InstanceCreateResponse {
     }
 
     export interface Mcp {
+      description?: string;
+
       /**
        * Disable MCP endpoint for this public endpoint
        */
@@ -534,13 +490,7 @@ export interface InstanceUpdateResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
-
-  internal_id: string;
 
   modified_at: string;
 
@@ -550,10 +500,11 @@ export interface InstanceUpdateResponse {
 
   vectorize_name: string;
 
-  ai_gateway_id?: string;
+  ai_gateway_id?: string | null;
 
   ai_search_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -584,13 +535,11 @@ export interface InstanceUpdateResponse {
 
   cache_threshold?: 'super_strict_match' | 'close_enough' | 'flexible_friend' | 'anything_goes';
 
-  chunk?: boolean;
-
   chunk_overlap?: number;
 
   chunk_size?: number;
 
-  created_by?: string;
+  created_by?: string | null;
 
   custom_metadata?: Array<InstanceUpdateResponse.CustomMetadata>;
 
@@ -606,21 +555,19 @@ export interface InstanceUpdateResponse {
 
   enable?: boolean;
 
-  engine_version?: number;
-
   hybrid_search_enabled?: boolean;
 
-  last_activity?: string;
+  last_activity?: string | null;
 
   max_num_results?: number;
 
   metadata?: InstanceUpdateResponse.Metadata;
 
-  modified_by?: string;
+  modified_by?: string | null;
 
   paused?: boolean;
 
-  public_endpoint_id?: string;
+  public_endpoint_id?: string | null;
 
   public_endpoint_params?: InstanceUpdateResponse.PublicEndpointParams;
 
@@ -630,6 +577,7 @@ export interface InstanceUpdateResponse {
 
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -664,45 +612,7 @@ export interface InstanceUpdateResponse {
 
   status?: string;
 
-  summarization?: boolean;
-
-  summarization_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | '';
-
-  system_prompt_ai_search?: string;
-
-  system_prompt_index_summarization?: string;
-
-  system_prompt_rewrite_query?: string;
-
   token_id?: string;
-
-  vectorize_active_namespace?: string;
 }
 
 export namespace InstanceUpdateResponse {
@@ -741,6 +651,8 @@ export namespace InstanceUpdateResponse {
     }
 
     export interface Mcp {
+      description?: string;
+
       /**
        * Disable MCP endpoint for this public endpoint
        */
@@ -826,13 +738,7 @@ export interface InstanceListResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
-
-  internal_id: string;
 
   modified_at: string;
 
@@ -842,10 +748,11 @@ export interface InstanceListResponse {
 
   vectorize_name: string;
 
-  ai_gateway_id?: string;
+  ai_gateway_id?: string | null;
 
   ai_search_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -876,13 +783,11 @@ export interface InstanceListResponse {
 
   cache_threshold?: 'super_strict_match' | 'close_enough' | 'flexible_friend' | 'anything_goes';
 
-  chunk?: boolean;
-
   chunk_overlap?: number;
 
   chunk_size?: number;
 
-  created_by?: string;
+  created_by?: string | null;
 
   custom_metadata?: Array<InstanceListResponse.CustomMetadata>;
 
@@ -898,21 +803,19 @@ export interface InstanceListResponse {
 
   enable?: boolean;
 
-  engine_version?: number;
-
   hybrid_search_enabled?: boolean;
 
-  last_activity?: string;
+  last_activity?: string | null;
 
   max_num_results?: number;
 
   metadata?: InstanceListResponse.Metadata;
 
-  modified_by?: string;
+  modified_by?: string | null;
 
   paused?: boolean;
 
-  public_endpoint_id?: string;
+  public_endpoint_id?: string | null;
 
   public_endpoint_params?: InstanceListResponse.PublicEndpointParams;
 
@@ -922,6 +825,7 @@ export interface InstanceListResponse {
 
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -956,45 +860,7 @@ export interface InstanceListResponse {
 
   status?: string;
 
-  summarization?: boolean;
-
-  summarization_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | '';
-
-  system_prompt_ai_search?: string;
-
-  system_prompt_index_summarization?: string;
-
-  system_prompt_rewrite_query?: string;
-
   token_id?: string;
-
-  vectorize_active_namespace?: string;
 }
 
 export namespace InstanceListResponse {
@@ -1033,6 +899,8 @@ export namespace InstanceListResponse {
     }
 
     export interface Mcp {
+      description?: string;
+
       /**
        * Disable MCP endpoint for this public endpoint
        */
@@ -1118,13 +986,7 @@ export interface InstanceDeleteResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
-
-  internal_id: string;
 
   modified_at: string;
 
@@ -1134,10 +996,11 @@ export interface InstanceDeleteResponse {
 
   vectorize_name: string;
 
-  ai_gateway_id?: string;
+  ai_gateway_id?: string | null;
 
   ai_search_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -1168,13 +1031,11 @@ export interface InstanceDeleteResponse {
 
   cache_threshold?: 'super_strict_match' | 'close_enough' | 'flexible_friend' | 'anything_goes';
 
-  chunk?: boolean;
-
   chunk_overlap?: number;
 
   chunk_size?: number;
 
-  created_by?: string;
+  created_by?: string | null;
 
   custom_metadata?: Array<InstanceDeleteResponse.CustomMetadata>;
 
@@ -1190,21 +1051,19 @@ export interface InstanceDeleteResponse {
 
   enable?: boolean;
 
-  engine_version?: number;
-
   hybrid_search_enabled?: boolean;
 
-  last_activity?: string;
+  last_activity?: string | null;
 
   max_num_results?: number;
 
   metadata?: InstanceDeleteResponse.Metadata;
 
-  modified_by?: string;
+  modified_by?: string | null;
 
   paused?: boolean;
 
-  public_endpoint_id?: string;
+  public_endpoint_id?: string | null;
 
   public_endpoint_params?: InstanceDeleteResponse.PublicEndpointParams;
 
@@ -1214,6 +1073,7 @@ export interface InstanceDeleteResponse {
 
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -1248,45 +1108,7 @@ export interface InstanceDeleteResponse {
 
   status?: string;
 
-  summarization?: boolean;
-
-  summarization_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | '';
-
-  system_prompt_ai_search?: string;
-
-  system_prompt_index_summarization?: string;
-
-  system_prompt_rewrite_query?: string;
-
   token_id?: string;
-
-  vectorize_active_namespace?: string;
 }
 
 export namespace InstanceDeleteResponse {
@@ -1325,6 +1147,8 @@ export namespace InstanceDeleteResponse {
     }
 
     export interface Mcp {
+      description?: string;
+
       /**
        * Disable MCP endpoint for this public endpoint
        */
@@ -1476,13 +1300,7 @@ export interface InstanceReadResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
-
-  internal_id: string;
 
   modified_at: string;
 
@@ -1492,10 +1310,11 @@ export interface InstanceReadResponse {
 
   vectorize_name: string;
 
-  ai_gateway_id?: string;
+  ai_gateway_id?: string | null;
 
   ai_search_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -1526,13 +1345,11 @@ export interface InstanceReadResponse {
 
   cache_threshold?: 'super_strict_match' | 'close_enough' | 'flexible_friend' | 'anything_goes';
 
-  chunk?: boolean;
-
   chunk_overlap?: number;
 
   chunk_size?: number;
 
-  created_by?: string;
+  created_by?: string | null;
 
   custom_metadata?: Array<InstanceReadResponse.CustomMetadata>;
 
@@ -1548,21 +1365,19 @@ export interface InstanceReadResponse {
 
   enable?: boolean;
 
-  engine_version?: number;
-
   hybrid_search_enabled?: boolean;
 
-  last_activity?: string;
+  last_activity?: string | null;
 
   max_num_results?: number;
 
   metadata?: InstanceReadResponse.Metadata;
 
-  modified_by?: string;
+  modified_by?: string | null;
 
   paused?: boolean;
 
-  public_endpoint_id?: string;
+  public_endpoint_id?: string | null;
 
   public_endpoint_params?: InstanceReadResponse.PublicEndpointParams;
 
@@ -1572,6 +1387,7 @@ export interface InstanceReadResponse {
 
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -1606,45 +1422,7 @@ export interface InstanceReadResponse {
 
   status?: string;
 
-  summarization?: boolean;
-
-  summarization_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | '';
-
-  system_prompt_ai_search?: string;
-
-  system_prompt_index_summarization?: string;
-
-  system_prompt_rewrite_query?: string;
-
   token_id?: string;
-
-  vectorize_active_namespace?: string;
 }
 
 export namespace InstanceReadResponse {
@@ -1683,6 +1461,8 @@ export namespace InstanceReadResponse {
     }
 
     export interface Mcp {
+      description?: string;
+
       /**
        * Disable MCP endpoint for this public endpoint
        */
@@ -1846,13 +1626,14 @@ export interface InstanceCreateParams {
   /**
    * Body param
    */
-  ai_gateway_id?: string;
+  ai_gateway_id?: string | null;
 
   /**
    * Body param
    */
   ai_search_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -1947,6 +1728,7 @@ export interface InstanceCreateParams {
    */
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -2030,6 +1812,8 @@ export namespace InstanceCreateParams {
     }
 
     export interface Mcp {
+      description?: string;
+
       /**
        * Disable MCP endpoint for this public endpoint
        */
@@ -2118,13 +1902,14 @@ export interface InstanceUpdateParams {
   /**
    * Body param
    */
-  ai_gateway_id?: string;
+  ai_gateway_id?: string | null;
 
   /**
    * Body param
    */
   ai_search_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -2234,6 +2019,7 @@ export interface InstanceUpdateParams {
    */
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -2285,6 +2071,7 @@ export interface InstanceUpdateParams {
    */
   summarization_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -2314,17 +2101,17 @@ export interface InstanceUpdateParams {
   /**
    * Body param
    */
-  system_prompt_ai_search?: string;
+  system_prompt_ai_search?: string | null;
 
   /**
    * Body param
    */
-  system_prompt_index_summarization?: string;
+  system_prompt_index_summarization?: string | null;
 
   /**
    * Body param
    */
-  system_prompt_rewrite_query?: string;
+  system_prompt_rewrite_query?: string | null;
 
   /**
    * Body param
@@ -2368,6 +2155,8 @@ export namespace InstanceUpdateParams {
     }
 
     export interface Mcp {
+      description?: string;
+
       /**
        * Disable MCP endpoint for this public endpoint
        */
@@ -2484,6 +2273,7 @@ export interface InstanceChatCompletionsParams {
    */
   model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+    | '@cf/zai-org/glm-4.7-flash'
     | '@cf/meta/llama-3.1-8b-instruct-fast'
     | '@cf/meta/llama-3.1-8b-instruct-fp8'
     | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -2541,6 +2331,7 @@ export namespace InstanceChatCompletionsParams {
 
       model?:
         | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+        | '@cf/zai-org/glm-4.7-flash'
         | '@cf/meta/llama-3.1-8b-instruct-fast'
         | '@cf/meta/llama-3.1-8b-instruct-fp8'
         | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -2581,39 +2372,15 @@ export namespace InstanceChatCompletionsParams {
     export interface Retrieval {
       context_expansion?: number;
 
-      filters?: Retrieval.UnionMember0 | Retrieval.UnionMember1;
+      filters?: { [key: string]: unknown };
 
       match_threshold?: number;
 
       max_num_results?: number;
 
       retrieval_type?: 'vector' | 'keyword' | 'hybrid';
-    }
 
-    export namespace Retrieval {
-      export interface UnionMember0 {
-        key: string;
-
-        type: 'eq' | 'ne' | 'gt' | 'gte' | 'lt' | 'lte';
-
-        value: string | number | boolean;
-      }
-
-      export interface UnionMember1 {
-        filters: Array<UnionMember1.Filter>;
-
-        type: 'and' | 'or';
-      }
-
-      export namespace UnionMember1 {
-        export interface Filter {
-          key: string;
-
-          type: 'eq' | 'ne' | 'gt' | 'gte' | 'lt' | 'lte';
-
-          value: string | number | boolean;
-        }
-      }
+      return_on_failure?: boolean;
     }
   }
 }
@@ -2662,6 +2429,7 @@ export namespace InstanceSearchParams {
 
       model?:
         | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
+        | '@cf/zai-org/glm-4.7-flash'
         | '@cf/meta/llama-3.1-8b-instruct-fast'
         | '@cf/meta/llama-3.1-8b-instruct-fp8'
         | '@cf/meta/llama-4-scout-17b-16e-instruct'
@@ -2702,39 +2470,15 @@ export namespace InstanceSearchParams {
     export interface Retrieval {
       context_expansion?: number;
 
-      filters?: Retrieval.UnionMember0 | Retrieval.UnionMember1;
+      filters?: { [key: string]: unknown };
 
       match_threshold?: number;
 
       max_num_results?: number;
 
       retrieval_type?: 'vector' | 'keyword' | 'hybrid';
-    }
 
-    export namespace Retrieval {
-      export interface UnionMember0 {
-        key: string;
-
-        type: 'eq' | 'ne' | 'gt' | 'gte' | 'lt' | 'lte';
-
-        value: string | number | boolean;
-      }
-
-      export interface UnionMember1 {
-        filters: Array<UnionMember1.Filter>;
-
-        type: 'and' | 'or';
-      }
-
-      export namespace UnionMember1 {
-        export interface Filter {
-          key: string;
-
-          type: 'eq' | 'ne' | 'gt' | 'gte' | 'lt' | 'lte';
-
-          value: string | number | boolean;
-        }
-      }
+      return_on_failure?: boolean;
     }
   }
 }

@@ -31,6 +31,7 @@ describe('resource custom', () => {
       enabled: true,
       name: 'name',
       pattern: { regex: 'regex', validation: 'luhn' },
+      description: 'description',
       profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
@@ -64,6 +65,7 @@ describe('resource custom', () => {
         enabled: true,
         name: 'name',
         pattern: { regex: 'regex', validation: 'luhn' },
+        description: 'description',
       },
     );
   });

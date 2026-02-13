@@ -180,6 +180,9 @@ export namespace IntegrationListResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -190,6 +193,11 @@ export namespace IntegrationListResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
@@ -206,6 +214,9 @@ export namespace IntegrationListResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
@@ -331,6 +342,9 @@ export namespace IntegrationGetResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -341,6 +355,11 @@ export namespace IntegrationGetResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember0.Profile>;
@@ -370,6 +389,9 @@ export namespace IntegrationGetResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember1.Profile>;

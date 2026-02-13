@@ -19,7 +19,29 @@ export class Schema extends APIResource {
   }
 }
 
-export type SchemaGetResponse = unknown;
+export interface SchemaGetResponse {
+  input: SchemaGetResponse.Input;
+
+  output: SchemaGetResponse.Output;
+}
+
+export namespace SchemaGetResponse {
+  export interface Input {
+    additionalProperties: boolean;
+
+    description: string;
+
+    type: string;
+  }
+
+  export interface Output {
+    additionalProperties: boolean;
+
+    description: string;
+
+    type: string;
+  }
+}
 
 export interface SchemaGetParams {
   /**

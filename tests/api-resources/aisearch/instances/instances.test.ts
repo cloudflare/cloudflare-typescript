@@ -45,7 +45,7 @@ describe('resource instances', () => {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
         enabled: true,
-        mcp: { disabled: true },
+        mcp: { description: 'description', disabled: true },
         rate_limit: {
           period_ms: 60000,
           requests: 1,
@@ -115,7 +115,7 @@ describe('resource instances', () => {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
         enabled: true,
-        mcp: { disabled: true },
+        mcp: { description: 'description', disabled: true },
         rate_limit: {
           period_ms: 60000,
           requests: 1,
@@ -229,14 +229,11 @@ describe('resource instances', () => {
         },
         retrieval: {
           context_expansion: 0,
-          filters: {
-            key: 'key',
-            type: 'eq',
-            value: 'string',
-          },
+          filters: { foo: 'bar' },
           match_threshold: 0,
           max_num_results: 1,
           retrieval_type: 'vector',
+          return_on_failure: true,
         },
       },
       model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
@@ -294,14 +291,11 @@ describe('resource instances', () => {
         },
         retrieval: {
           context_expansion: 0,
-          filters: {
-            key: 'key',
-            type: 'eq',
-            value: 'string',
-          },
+          filters: { foo: 'bar' },
           match_threshold: 0,
           max_num_results: 1,
           retrieval_type: 'vector',
+          return_on_failure: true,
         },
       },
     });
