@@ -694,6 +694,8 @@ export namespace ScanGetResponse {
 
       wappa: Processors.Wappa;
 
+      robotsTxt?: Processors.RobotsTXT;
+
       urlCategories?: Processors.URLCategories;
     }
 
@@ -824,6 +826,48 @@ export namespace ScanGetResponse {
             pattern: string;
 
             patternType: string;
+          }
+        }
+      }
+
+      export interface RobotsTXT {
+        data: Array<RobotsTXT.Data>;
+      }
+
+      export namespace RobotsTXT {
+        export interface Data {
+          rules: Data.Rules;
+
+          sitemaps: Array<string>;
+
+          hash?: string;
+        }
+
+        export namespace Data {
+          export interface Rules {
+            '*': Rules._;
+          }
+
+          export namespace Rules {
+            export interface _ {
+              allow: Array<string>;
+
+              disallow: Array<string>;
+
+              contentSignal?: _.ContentSignal;
+
+              crawlDelay?: number;
+            }
+
+            export namespace _ {
+              export interface ContentSignal {
+                'ai-input'?: string;
+
+                'ai-train'?: string;
+
+                search?: string;
+              }
+            }
           }
         }
       }
