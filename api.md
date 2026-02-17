@@ -2311,18 +2311,6 @@ Methods:
 
 ### Telemetry
 
-Types:
-
-- <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryKeysResponse</a></code>
-- <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryQueryResponse</a></code>
-- <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryValuesResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/workers/observability/telemetry/keys">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">keys</a>({ ...params }) -> TelemetryKeysResponsesSinglePage</code>
-- <code title="post /accounts/{account_id}/workers/observability/telemetry/query">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">query</a>({ ...params }) -> TelemetryQueryResponse</code>
-- <code title="post /accounts/{account_id}/workers/observability/telemetry/values">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">values</a>({ ...params }) -> TelemetryValuesResponsesSinglePage</code>
-
 # KV
 
 ## Namespaces
