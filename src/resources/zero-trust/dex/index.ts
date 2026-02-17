@@ -26,6 +26,20 @@ export {
 } from './fleet-status/index';
 export { HTTPTests, type HTTPDetails, type HTTPTestGetParams } from './http-tests/index';
 export {
+  Rules,
+  type RuleCreateResponse,
+  type RuleUpdateResponse,
+  type RuleListResponse,
+  type RuleDeleteResponse,
+  type RuleGetResponse,
+  type RuleCreateParams,
+  type RuleUpdateParams,
+  type RuleListParams,
+  type RuleDeleteParams,
+  type RuleGetParams,
+  type RuleListResponsesV4PagePagination,
+} from './rules';
+export {
   Tests,
   type AggregateTimePeriod,
   type TestListParams,
