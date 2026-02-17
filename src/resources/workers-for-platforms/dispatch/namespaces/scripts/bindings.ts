@@ -194,7 +194,7 @@ export namespace BindingGetResponse {
        * Pass information from the Dispatch Worker to the Outbound Worker through the
        * parameters.
        */
-      params?: Array<string>;
+      params?: Array<Outbound.Param>;
 
       /**
        * Outbound worker.
@@ -203,10 +203,22 @@ export namespace BindingGetResponse {
     }
 
     export namespace Outbound {
+      export interface Param {
+        /**
+         * Name of the parameter.
+         */
+        name: string;
+      }
+
       /**
        * Outbound worker.
        */
       export interface Worker {
+        /**
+         * Entrypoint to invoke on the outbound worker.
+         */
+        entrypoint?: string;
+
         /**
          * Environment of the outbound worker.
          */
@@ -312,7 +324,7 @@ export namespace BindingGetResponse {
     /**
      * JSON data to use.
      */
-    json: string;
+    json: unknown;
 
     /**
      * A JavaScript variable name for the binding.
