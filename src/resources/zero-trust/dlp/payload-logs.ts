@@ -48,14 +48,42 @@ export class PayloadLogs extends APIResource {
 }
 
 export interface PayloadLogUpdateResponse {
+  /**
+   * Masking level for payload logs.
+   *
+   * - `full`: The entire payload is masked.
+   * - `partial`: Only partial payload content is masked.
+   * - `clear`: No masking is applied to the payload content.
+   * - `default`: DLP uses its default masking behavior.
+   */
+  masking_level: 'full' | 'partial' | 'clear' | 'default';
+
   updated_at: string;
 
+  /**
+   * Base64-encoded public key for encrypting payload logs. Null when payload logging
+   * is disabled.
+   */
   public_key?: string | null;
 }
 
 export interface PayloadLogGetResponse {
+  /**
+   * Masking level for payload logs.
+   *
+   * - `full`: The entire payload is masked.
+   * - `partial`: Only partial payload content is masked.
+   * - `clear`: No masking is applied to the payload content.
+   * - `default`: DLP uses its default masking behavior.
+   */
+  masking_level: 'full' | 'partial' | 'clear' | 'default';
+
   updated_at: string;
 
+  /**
+   * Base64-encoded public key for encrypting payload logs. Null when payload logging
+   * is disabled.
+   */
   public_key?: string | null;
 }
 
@@ -66,7 +94,29 @@ export interface PayloadLogUpdateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Masking level for payload logs.
+   *
+   * - `full`: The entire payload is masked.
+   * - `partial`: Only partial payload content is masked.
+   * - `clear`: No masking is applied to the payload content.
+   * - `default`: DLP uses its default masking behavior.
+   */
+  masking_level?: 'full' | 'partial' | 'clear' | 'default';
+
+  /**
+   * Body param: Base64-encoded public key for encrypting payload logs.
+   *
+   * - Set to null or empty string to disable payload logging.
+   * - Set to a non-empty base64 string to enable payload logging with the given key.
+   *
+   * For customers with configurable payload masking feature rolled out:
+   *
+   * - If the field is missing, the existing setting will be kept. Note that this is
+   *   different from setting to null or empty string.
+   *
+   * For all other customers:
+   *
+   * - If the field is missing, the existing setting will be cleared.
    */
   public_key?: string | null;
 }
