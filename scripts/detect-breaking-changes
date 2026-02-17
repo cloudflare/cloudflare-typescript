@@ -485,6 +485,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/dex/traceroute-test-results/traceroute-test-results.test.ts
 	tests/api-resources/zero-trust/dex/traceroute-test-results/network-path.test.ts
 	tests/api-resources/zero-trust/dex/traceroute-tests.test.ts
+	tests/api-resources/zero-trust/dex/rules.test.ts
 	tests/api-resources/zero-trust/tunnels/tunnels.test.ts
 	tests/api-resources/zero-trust/tunnels/cloudflared/cloudflared.test.ts
 	tests/api-resources/zero-trust/tunnels/cloudflared/configurations.test.ts

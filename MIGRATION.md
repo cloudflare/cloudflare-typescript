@@ -739,6 +739,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.dex.tracerouteTests.get()`
 - `client.zeroTrust.dex.tracerouteTests.networkPath()`
 - `client.zeroTrust.dex.tracerouteTests.percentiles()`
+- `client.zeroTrust.dex.rules.update()`
+- `client.zeroTrust.dex.rules.delete()`
+- `client.zeroTrust.dex.rules.get()`
 - `client.zeroTrust.tunnels.cloudflared.delete()`
 - `client.zeroTrust.tunnels.cloudflared.edit()`
 - `client.zeroTrust.tunnels.cloudflared.get()`

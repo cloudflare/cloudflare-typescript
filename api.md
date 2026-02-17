@@ -5747,6 +5747,24 @@ Methods:
 - <code title="get /accounts/{account_id}/dex/traceroute-tests/{test_id}/network-path">client.zeroTrust.dex.tracerouteTests.<a href="./src/resources/zero-trust/dex/traceroute-tests.ts">networkPath</a>(testID, { ...params }) -> NetworkPathResponse</code>
 - <code title="get /accounts/{account_id}/dex/traceroute-tests/{test_id}/percentiles">client.zeroTrust.dex.tracerouteTests.<a href="./src/resources/zero-trust/dex/traceroute-tests.ts">percentiles</a>(testID, { ...params }) -> TracerouteTestPercentilesResponse</code>
 
+### Rules
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/rules.ts">RuleCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dex/rules.ts">RuleUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dex/rules.ts">RuleListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dex/rules.ts">RuleDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dex/rules.ts">RuleGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dex/rules">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">create</a>({ ...params }) -> RuleCreateResponse</code>
+- <code title="patch /accounts/{account_id}/dex/rules/{rule_id}">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">update</a>(ruleID, { ...params }) -> RuleUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dex/rules">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">list</a>({ ...params }) -> RuleListResponsesV4PagePagination</code>
+- <code title="delete /accounts/{account_id}/dex/rules/{rule_id}">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">delete</a>(ruleID, { ...params }) -> RuleDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dex/rules/{rule_id}">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">get</a>(ruleID, { ...params }) -> RuleGetResponse</code>
+
 ## Tunnels
 
 Types:
