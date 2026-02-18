@@ -162,11 +162,6 @@ export interface Certificate {
     | 'deletion_timed_out';
 
   /**
-   * The time when the certificate was updated.
-   */
-  updated_at?: string;
-
-  /**
    * The time when the certificate was uploaded.
    */
   uploaded_on?: string;
@@ -214,11 +209,6 @@ export interface HostnameCertificateCreateResponse {
     | 'deleted'
     | 'deployment_timed_out'
     | 'deletion_timed_out';
-
-  /**
-   * The time when the certificate was updated.
-   */
-  updated_at?: string;
 
   /**
    * The time when the certificate was uploaded.
@@ -270,11 +260,6 @@ export interface HostnameCertificateListResponse {
     | 'deletion_timed_out';
 
   /**
-   * The time when the certificate was updated.
-   */
-  updated_at?: string;
-
-  /**
    * The time when the certificate was uploaded.
    */
   uploaded_on?: string;
@@ -324,11 +309,6 @@ export interface HostnameCertificateDeleteResponse {
     | 'deletion_timed_out';
 
   /**
-   * The time when the certificate was updated.
-   */
-  updated_at?: string;
-
-  /**
    * The time when the certificate was uploaded.
    */
   uploaded_on?: string;
@@ -376,11 +356,6 @@ export interface HostnameCertificateGetResponse {
     | 'deleted'
     | 'deployment_timed_out'
     | 'deletion_timed_out';
-
-  /**
-   * The time when the certificate was updated.
-   */
-  updated_at?: string;
 
   /**
    * The time when the certificate was uploaded.
