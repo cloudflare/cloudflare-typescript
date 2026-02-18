@@ -326,7 +326,7 @@ export interface FilterOptions {
   /**
    * If set true, disable notifications for this type of resource (pool or origin).
    */
-  disable?: boolean;
+  disable?: boolean | null;
 
   /**
    * If present, send notifications only for this health status (e.g. false for only
@@ -343,7 +343,7 @@ export interface FilterOptionsParam {
   /**
    * If set true, disable notifications for this type of resource (pool or origin).
    */
-  disable?: boolean;
+  disable?: boolean | null;
 
   /**
    * If present, send notifications only for this health status (e.g. false for only
