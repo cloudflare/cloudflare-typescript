@@ -308,6 +308,8 @@ export interface InstanceCreateResponse {
 
   enable?: boolean;
 
+  fusion_method?: 'max' | 'rrf';
+
   hybrid_search_enabled?: boolean;
 
   last_activity?: string | null;
@@ -362,7 +364,7 @@ export interface InstanceCreateResponse {
 
   score_threshold?: number;
 
-  source_params?: InstanceCreateResponse.SourceParams;
+  source_params?: InstanceCreateResponse.SourceParams | null;
 
   status?: string;
 
@@ -558,6 +560,8 @@ export interface InstanceUpdateResponse {
 
   enable?: boolean;
 
+  fusion_method?: 'max' | 'rrf';
+
   hybrid_search_enabled?: boolean;
 
   last_activity?: string | null;
@@ -612,7 +616,7 @@ export interface InstanceUpdateResponse {
 
   score_threshold?: number;
 
-  source_params?: InstanceUpdateResponse.SourceParams;
+  source_params?: InstanceUpdateResponse.SourceParams | null;
 
   status?: string;
 
@@ -808,6 +812,8 @@ export interface InstanceListResponse {
 
   enable?: boolean;
 
+  fusion_method?: 'max' | 'rrf';
+
   hybrid_search_enabled?: boolean;
 
   last_activity?: string | null;
@@ -862,7 +868,7 @@ export interface InstanceListResponse {
 
   score_threshold?: number;
 
-  source_params?: InstanceListResponse.SourceParams;
+  source_params?: InstanceListResponse.SourceParams | null;
 
   status?: string;
 
@@ -1058,6 +1064,8 @@ export interface InstanceDeleteResponse {
 
   enable?: boolean;
 
+  fusion_method?: 'max' | 'rrf';
+
   hybrid_search_enabled?: boolean;
 
   last_activity?: string | null;
@@ -1112,7 +1120,7 @@ export interface InstanceDeleteResponse {
 
   score_threshold?: number;
 
-  source_params?: InstanceDeleteResponse.SourceParams;
+  source_params?: InstanceDeleteResponse.SourceParams | null;
 
   status?: string;
 
@@ -1295,6 +1303,8 @@ export namespace InstanceChatCompletionsResponse {
 
       keyword_score?: number;
 
+      reranking_score?: number;
+
       vector_rank?: number;
 
       vector_score?: number;
@@ -1374,6 +1384,8 @@ export interface InstanceReadResponse {
 
   enable?: boolean;
 
+  fusion_method?: 'max' | 'rrf';
+
   hybrid_search_enabled?: boolean;
 
   last_activity?: string | null;
@@ -1428,7 +1440,7 @@ export interface InstanceReadResponse {
 
   score_threshold?: number;
 
-  source_params?: InstanceReadResponse.SourceParams;
+  source_params?: InstanceReadResponse.SourceParams | null;
 
   status?: string;
 
@@ -1587,6 +1599,8 @@ export namespace InstanceSearchResponse {
 
       keyword_score?: number;
 
+      reranking_score?: number;
+
       vector_rank?: number;
 
       vector_score?: number;
@@ -1707,6 +1721,11 @@ export interface InstanceCreateParams {
   /**
    * Body param
    */
+  fusion_method?: 'max' | 'rrf';
+
+  /**
+   * Body param
+   */
   hybrid_search_enabled?: boolean;
 
   /**
@@ -1780,7 +1799,7 @@ export interface InstanceCreateParams {
   /**
    * Body param
    */
-  source_params?: InstanceCreateParams.SourceParams;
+  source_params?: InstanceCreateParams.SourceParams | null;
 
   /**
    * Body param
@@ -1995,6 +2014,11 @@ export interface InstanceUpdateParams {
   /**
    * Body param
    */
+  fusion_method?: 'max' | 'rrf';
+
+  /**
+   * Body param
+   */
   hybrid_search_enabled?: boolean;
 
   /**
@@ -2073,7 +2097,7 @@ export interface InstanceUpdateParams {
   /**
    * Body param
    */
-  source_params?: InstanceUpdateParams.SourceParams;
+  source_params?: InstanceUpdateParams.SourceParams | null;
 
   /**
    * Body param
@@ -2391,6 +2415,8 @@ export namespace InstanceChatCompletionsParams {
 
       filters?: { [key: string]: unknown };
 
+      fusion_method?: 'max' | 'rrf';
+
       match_threshold?: number;
 
       max_num_results?: number;
@@ -2489,6 +2515,8 @@ export namespace InstanceSearchParams {
       context_expansion?: number;
 
       filters?: { [key: string]: unknown };
+
+      fusion_method?: 'max' | 'rrf';
 
       match_threshold?: number;
 

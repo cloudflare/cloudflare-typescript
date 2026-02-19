@@ -133,7 +133,7 @@ export interface Policy {
   /**
    * The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * A description for the policy
@@ -166,7 +166,7 @@ export interface PolicyCreateResponse {
   /**
    * The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * A description for the policy
@@ -199,7 +199,7 @@ export interface PolicyUpdateResponse {
   /**
    * The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * A description for the policy
@@ -232,7 +232,7 @@ export interface PolicyListResponse {
   /**
    * The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * A description for the policy
@@ -265,7 +265,7 @@ export interface PolicyGetResponse {
   /**
    * The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * A description for the policy
@@ -298,7 +298,7 @@ export interface PolicyCreateParams {
   /**
    * Body param: The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * Body param: A description for the policy
@@ -331,7 +331,7 @@ export interface PolicyUpdateParams {
   /**
    * Body param: The action to take if the expression matches
    */
-  action?: 'allow' | 'log';
+  action?: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * Body param: A description for the policy

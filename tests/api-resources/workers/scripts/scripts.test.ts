@@ -29,6 +29,7 @@ describe('resource scripts', () => {
     const response = await client.workers.scripts.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       metadata: {
+        annotations: { 'workers/message': 'Fixed bug.', 'workers/tag': 'v1.0.1' },
         assets: {
           config: {
             _headers: '/dashboard/*\nX-Frame-Options: DENY\n\n/static/*\nAccess-Control-Allow-Origin: *',
