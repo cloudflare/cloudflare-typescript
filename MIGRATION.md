@@ -804,6 +804,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.gateway.certificates.activate()`
 - `client.zeroTrust.gateway.certificates.deactivate()`
 - `client.zeroTrust.gateway.certificates.get()`
+- `client.zeroTrust.gateway.pacfiles.update()`
+- `client.zeroTrust.gateway.pacfiles.delete()`
+- `client.zeroTrust.gateway.pacfiles.get()`
 - `client.zeroTrust.networks.routes.delete()`
 - `client.zeroTrust.networks.routes.edit()`
 - `client.zeroTrust.networks.routes.get()`

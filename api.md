@@ -6310,6 +6310,24 @@ Methods:
 - <code title="post /accounts/{account_id}/gateway/certificates/{certificate_id}/deactivate">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">deactivate</a>(certificateID, { ...params }) -> CertificateDeactivateResponse</code>
 - <code title="get /accounts/{account_id}/gateway/certificates/{certificate_id}">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">get</a>(certificateID, { ...params }) -> CertificateGetResponse</code>
 
+### Pacfiles
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/pacfiles.ts">PacfileCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/pacfiles.ts">PacfileUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/pacfiles.ts">PacfileListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/pacfiles.ts">PacfileDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/pacfiles.ts">PacfileGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/gateway/pacfiles">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">create</a>({ ...params }) -> PacfileCreateResponse</code>
+- <code title="put /accounts/{account_id}/gateway/pacfiles/{pacfile_id}">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">update</a>(pacfileID, { ...params }) -> PacfileUpdateResponse</code>
+- <code title="get /accounts/{account_id}/gateway/pacfiles">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">list</a>({ ...params }) -> PacfileListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/gateway/pacfiles/{pacfile_id}">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">delete</a>(pacfileID, { ...params }) -> PacfileDeleteResponse</code>
+- <code title="get /accounts/{account_id}/gateway/pacfiles/{pacfile_id}">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">get</a>(pacfileID, { ...params }) -> PacfileGetResponse</code>
+
 ## Networks
 
 ### Routes

@@ -527,6 +527,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/gateway/proxy-endpoints.test.ts
 	tests/api-resources/zero-trust/gateway/rules.test.ts
 	tests/api-resources/zero-trust/gateway/certificates.test.ts
+	tests/api-resources/zero-trust/gateway/pacfiles.test.ts
 	tests/api-resources/zero-trust/networks/networks.test.ts
 	tests/api-resources/zero-trust/networks/routes/routes.test.ts
 	tests/api-resources/zero-trust/networks/routes/ips.test.ts
