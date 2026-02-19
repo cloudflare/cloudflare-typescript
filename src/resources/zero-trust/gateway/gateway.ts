@@ -51,6 +51,21 @@ import {
 } from './locations';
 import * as LoggingAPI from './logging';
 import { Logging, LoggingGetParams, LoggingSetting, LoggingUpdateParams } from './logging';
+import * as PacfilesAPI from './pacfiles';
+import {
+  PacfileCreateParams,
+  PacfileCreateResponse,
+  PacfileDeleteParams,
+  PacfileDeleteResponse,
+  PacfileGetParams,
+  PacfileGetResponse,
+  PacfileListParams,
+  PacfileListResponse,
+  PacfileListResponsesSinglePage,
+  PacfileUpdateParams,
+  PacfileUpdateResponse,
+  Pacfiles,
+} from './pacfiles';
 import * as ProxyEndpointsAPI from './proxy-endpoints';
 import {
   GatewayIPs,
@@ -137,6 +152,7 @@ export class Gateway extends APIResource {
   proxyEndpoints: ProxyEndpointsAPI.ProxyEndpoints = new ProxyEndpointsAPI.ProxyEndpoints(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
+  pacfiles: PacfilesAPI.Pacfiles = new PacfilesAPI.Pacfiles(this._client);
 
   /**
    * Create a Zero Trust account for an existing Cloudflare account.
@@ -229,6 +245,7 @@ Gateway.Logging = Logging;
 Gateway.ProxyEndpoints = ProxyEndpoints;
 Gateway.Rules = Rules;
 Gateway.Certificates = Certificates;
+Gateway.Pacfiles = Pacfiles;
 
 export declare namespace Gateway {
   export {
@@ -370,5 +387,20 @@ export declare namespace Gateway {
     type CertificateActivateParams as CertificateActivateParams,
     type CertificateDeactivateParams as CertificateDeactivateParams,
     type CertificateGetParams as CertificateGetParams,
+  };
+
+  export {
+    Pacfiles as Pacfiles,
+    type PacfileCreateResponse as PacfileCreateResponse,
+    type PacfileUpdateResponse as PacfileUpdateResponse,
+    type PacfileListResponse as PacfileListResponse,
+    type PacfileDeleteResponse as PacfileDeleteResponse,
+    type PacfileGetResponse as PacfileGetResponse,
+    type PacfileListResponsesSinglePage as PacfileListResponsesSinglePage,
+    type PacfileCreateParams as PacfileCreateParams,
+    type PacfileUpdateParams as PacfileUpdateParams,
+    type PacfileListParams as PacfileListParams,
+    type PacfileDeleteParams as PacfileDeleteParams,
+    type PacfileGetParams as PacfileGetParams,
   };
 }

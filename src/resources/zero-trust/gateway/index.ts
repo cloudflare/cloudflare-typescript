@@ -87,6 +87,20 @@ export {
 } from './locations';
 export { Logging, type LoggingSetting, type LoggingUpdateParams, type LoggingGetParams } from './logging';
 export {
+  Pacfiles,
+  type PacfileCreateResponse,
+  type PacfileUpdateResponse,
+  type PacfileListResponse,
+  type PacfileDeleteResponse,
+  type PacfileGetResponse,
+  type PacfileCreateParams,
+  type PacfileUpdateParams,
+  type PacfileListParams,
+  type PacfileDeleteParams,
+  type PacfileGetParams,
+  type PacfileListResponsesSinglePage,
+} from './pacfiles';
+export {
   ProxyEndpoints,
   type GatewayIPs,
   type ProxyEndpoint,
