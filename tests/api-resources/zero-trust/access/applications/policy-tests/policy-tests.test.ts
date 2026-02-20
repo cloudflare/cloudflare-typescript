@@ -45,6 +45,11 @@ describe('resource policyTests', () => {
           approval_required: true,
           exclude: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
           isolation_required: false,
+          mfa_config: {
+            allowed_authenticators: ['totp', 'biometrics', 'security_key'],
+            mfa_bypass: false,
+            session_duration: '24h',
+          },
           purpose_justification_prompt: 'Please enter a justification for entering this protected domain.',
           purpose_justification_required: true,
           require: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],

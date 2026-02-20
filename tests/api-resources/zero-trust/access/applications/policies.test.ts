@@ -60,6 +60,11 @@ describe('resource policies', () => {
         ],
         approval_required: true,
         isolation_required: false,
+        mfa_config: {
+          allowed_authenticators: ['totp', 'biometrics', 'security_key'],
+          mfa_bypass: false,
+          session_duration: '24h',
+        },
         precedence: 0,
         purpose_justification_prompt: 'Please enter a justification for entering this protected domain.',
         purpose_justification_required: true,

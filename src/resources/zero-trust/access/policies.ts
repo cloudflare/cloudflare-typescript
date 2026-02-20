@@ -335,6 +335,11 @@ export interface PolicyCreateResponse {
   isolation_required?: boolean;
 
   /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyCreateResponse.MfaConfig;
+
+  /**
    * The name of the Access policy.
    */
   name?: string;
@@ -365,6 +370,30 @@ export interface PolicyCreateResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyCreateResponse {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to bypass MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_bypass?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyUpdateResponse {
@@ -417,6 +446,11 @@ export interface PolicyUpdateResponse {
   isolation_required?: boolean;
 
   /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyUpdateResponse.MfaConfig;
+
+  /**
    * The name of the Access policy.
    */
   name?: string;
@@ -447,6 +481,30 @@ export interface PolicyUpdateResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyUpdateResponse {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to bypass MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_bypass?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyListResponse {
@@ -499,6 +557,11 @@ export interface PolicyListResponse {
   isolation_required?: boolean;
 
   /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyListResponse.MfaConfig;
+
+  /**
    * The name of the Access policy.
    */
   name?: string;
@@ -529,6 +592,30 @@ export interface PolicyListResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyListResponse {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to bypass MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_bypass?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyDeleteResponse {
@@ -588,6 +675,11 @@ export interface PolicyGetResponse {
   isolation_required?: boolean;
 
   /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyGetResponse.MfaConfig;
+
+  /**
    * The name of the Access policy.
    */
   name?: string;
@@ -618,6 +710,30 @@ export interface PolicyGetResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyGetResponse {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to bypass MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_bypass?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyCreateParams {
@@ -668,6 +784,11 @@ export interface PolicyCreateParams {
   isolation_required?: boolean;
 
   /**
+   * Body param: Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyCreateParams.MfaConfig;
+
+  /**
    * Body param: A custom message that will appear on the purpose justification
    * screen.
    */
@@ -691,6 +812,30 @@ export interface PolicyCreateParams {
    * (or µs), ms, s, m, h.
    */
   session_duration?: string;
+}
+
+export namespace PolicyCreateParams {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to bypass MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_bypass?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyUpdateParams {
@@ -741,6 +886,11 @@ export interface PolicyUpdateParams {
   isolation_required?: boolean;
 
   /**
+   * Body param: Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyUpdateParams.MfaConfig;
+
+  /**
    * Body param: A custom message that will appear on the purpose justification
    * screen.
    */
@@ -764,6 +914,30 @@ export interface PolicyUpdateParams {
    * (or µs), ms, s, m, h.
    */
   session_duration?: string;
+}
+
+export namespace PolicyUpdateParams {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to bypass MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_bypass?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyListParams extends V4PagePaginationArrayParams {
