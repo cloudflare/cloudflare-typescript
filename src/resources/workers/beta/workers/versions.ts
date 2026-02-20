@@ -566,7 +566,7 @@ export namespace Version {
     /**
      * JSON data to use.
      */
-    json: string;
+    json: string | Record<string, unknown> | unknown[] | number | boolean | null;
 
     /**
      * A JavaScript variable name for the binding.
@@ -1502,7 +1502,7 @@ export namespace VersionCreateParams {
     /**
      * JSON data to use.
      */
-    json: string;
+    json: string | Record<string, unknown> | unknown[] | number | boolean | null;
 
     /**
      * A JavaScript variable name for the binding.
