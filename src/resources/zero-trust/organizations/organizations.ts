@@ -270,6 +270,24 @@ export interface Organization {
   login_design?: LoginDesign;
 
   /**
+   * Configures multi-factor authentication (MFA) settings for an organization.
+   */
+  mfa_config?: Organization.MfaConfig;
+
+  /**
+   * Indicates if this organization can enforce multi-factor authentication (MFA)
+   * requirements at the application and policy level.
+   */
+  mfa_configuration_allowed?: boolean;
+
+  /**
+   * Determines whether global MFA settings apply to applications by default. The
+   * organization must have MFA enabled with at least one authentication method and a
+   * session duration configured.
+   */
+  mfa_required_for_all_apps?: boolean;
+
+  /**
    * The name of your Zero Trust organization.
    */
   name?: string;
@@ -314,6 +332,22 @@ export namespace Organization {
      * The uid of the custom page to use when a user is denied access.
      */
     identity_denied?: string;
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings for an organization.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
   }
 }
 
@@ -386,6 +420,25 @@ export interface OrganizationCreateParams {
   login_design?: LoginDesignParam;
 
   /**
+   * Body param: Configures multi-factor authentication (MFA) settings for an
+   * organization.
+   */
+  mfa_config?: OrganizationCreateParams.MfaConfig;
+
+  /**
+   * Body param: Indicates if this organization can enforce multi-factor
+   * authentication (MFA) requirements at the application and policy level.
+   */
+  mfa_configuration_allowed?: boolean;
+
+  /**
+   * Body param: Determines whether global MFA settings apply to applications by
+   * default. The organization must have MFA enabled with at least one authentication
+   * method and a session duration configured.
+   */
+  mfa_required_for_all_apps?: boolean;
+
+  /**
    * Body param: The amount of time that tokens issued for applications will be
    * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
    * (or µs), ms, s, m, h.
@@ -412,6 +465,24 @@ export interface OrganizationCreateParams {
    * valid. Must be in the format `30m` or `2h45m`. Valid time units are: m, h.
    */
   warp_auth_session_duration?: string;
+}
+
+export namespace OrganizationCreateParams {
+  /**
+   * Configures multi-factor authentication (MFA) settings for an organization.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface OrganizationUpdateParams {
@@ -481,6 +552,25 @@ export interface OrganizationUpdateParams {
   login_design?: LoginDesignParam;
 
   /**
+   * Body param: Configures multi-factor authentication (MFA) settings for an
+   * organization.
+   */
+  mfa_config?: OrganizationUpdateParams.MfaConfig;
+
+  /**
+   * Body param: Indicates if this organization can enforce multi-factor
+   * authentication (MFA) requirements at the application and policy level.
+   */
+  mfa_configuration_allowed?: boolean;
+
+  /**
+   * Body param: Determines whether global MFA settings apply to applications by
+   * default. The organization must have MFA enabled with at least one authentication
+   * method and a session duration configured.
+   */
+  mfa_required_for_all_apps?: boolean;
+
+  /**
    * Body param: The name of your Zero Trust organization.
    */
   name?: string;
@@ -526,6 +616,22 @@ export namespace OrganizationUpdateParams {
      * The uid of the custom page to use when a user is denied access.
      */
     identity_denied?: string;
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings for an organization.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
   }
 }
 
