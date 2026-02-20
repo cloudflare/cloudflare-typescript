@@ -1050,12 +1050,43 @@ export declare namespace AIRunParams {
       /**
        * The content of the message as a string.
        */
-      content: string;
+      content: string | Array<Message.UnionMember1>;
 
       /**
        * The role of the message sender (e.g., 'user', 'assistant', 'system', 'tool').
        */
       role: string;
+    }
+
+    export namespace Message {
+      export interface UnionMember1 {
+        /**
+         * Type of the content part (e.g. 'text', 'image_url').
+         */
+        type: string;
+
+        /**
+         * Image URL object (when type is 'image_url').
+         */
+        image_url?: UnionMember1.ImageURL;
+
+        /**
+         * Text content (when type is 'text').
+         */
+        text?: string;
+      }
+
+      export namespace UnionMember1 {
+        /**
+         * Image URL object (when type is 'image_url').
+         */
+        export interface ImageURL {
+          /**
+           * Image URI with data (e.g. data:image/jpeg;base64,/9j/...).
+           */
+          url: string;
+        }
+      }
     }
   }
 
