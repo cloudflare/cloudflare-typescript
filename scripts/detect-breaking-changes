@@ -194,6 +194,8 @@ TEST_PATHS=(
 	tests/api-resources/workers/account-settings.test.ts
 	tests/api-resources/workers/domains.test.ts
 	tests/api-resources/workers/subdomains.test.ts
+	tests/api-resources/workers/observability/observability.test.ts
+	tests/api-resources/workers/observability/telemetry.test.ts
 	tests/api-resources/kv/kv.test.ts
 	tests/api-resources/kv/namespaces/namespaces.test.ts
 	tests/api-resources/kv/namespaces/keys.test.ts
