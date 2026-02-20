@@ -1131,17 +1131,17 @@ export interface TelemetryKeysParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   datasets?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   filters?: Array<TelemetryKeysParams.Filter>;
 
   /**
-   * Body param:
+   * Body param
    */
   from?: number;
 
@@ -1151,7 +1151,7 @@ export interface TelemetryKeysParams {
   keyNeedle?: TelemetryKeysParams.KeyNeedle;
 
   /**
-   * Body param:
+   * Body param
    */
   limit?: number;
 
@@ -1161,7 +1161,7 @@ export interface TelemetryKeysParams {
   needle?: TelemetryKeysParams.Needle;
 
   /**
-   * Body param:
+   * Body param
    */
   to?: number;
 }
@@ -1511,32 +1511,32 @@ export interface TelemetryValuesParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   datasets: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   key: string;
 
   /**
-   * Body param:
+   * Body param
    */
   timeframe: TelemetryValuesParams.Timeframe;
 
   /**
-   * Body param:
+   * Body param
    */
   type: 'string' | 'boolean' | 'number';
 
   /**
-   * Body param:
+   * Body param
    */
   filters?: Array<TelemetryValuesParams.Filter>;
 
   /**
-   * Body param:
+   * Body param
    */
   limit?: number;
 

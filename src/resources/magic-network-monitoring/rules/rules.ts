@@ -229,7 +229,7 @@ export interface MagicNetworkMonitoringRule {
 
 export interface RuleCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -269,14 +269,14 @@ export interface RuleCreateParams {
   packet_threshold?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   prefixes?: Array<string>;
 }
 
 export interface RuleUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -321,7 +321,7 @@ export interface RuleUpdateParams {
   packet_threshold?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   prefixes?: Array<string>;
 }
@@ -336,7 +336,7 @@ export interface RuleDeleteParams {
 
 export interface RuleEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -376,7 +376,7 @@ export interface RuleEditParams {
   packet_threshold?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   prefixes?: Array<string>;
 }

@@ -92,7 +92,11 @@ describe('resource applications', () => {
       scim_config: {
         idp_uid: 'idp_uid',
         remote_uri: 'remote_uri',
-        authentication: { password: 'password', scheme: 'httpbasic', user: 'user' },
+        authentication: {
+          password: 'password',
+          scheme: 'httpbasic',
+          user: 'user',
+        },
         deactivate_on_delete: true,
         enabled: true,
         mappings: [
@@ -100,7 +104,11 @@ describe('resource applications', () => {
             schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
-            operations: { create: true, delete: true, update: true },
+            operations: {
+              create: true,
+              delete: true,
+              update: true,
+            },
             strictness: 'strict',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
@@ -112,6 +120,7 @@ describe('resource applications', () => {
       session_duration: '24h',
       skip_interstitial: true,
       tags: ['engineers'],
+      use_clientless_isolation_app_launcher_url: false,
     });
   });
 
@@ -197,7 +206,11 @@ describe('resource applications', () => {
       scim_config: {
         idp_uid: 'idp_uid',
         remote_uri: 'remote_uri',
-        authentication: { password: 'password', scheme: 'httpbasic', user: 'user' },
+        authentication: {
+          password: 'password',
+          scheme: 'httpbasic',
+          user: 'user',
+        },
         deactivate_on_delete: true,
         enabled: true,
         mappings: [
@@ -205,7 +218,11 @@ describe('resource applications', () => {
             schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
-            operations: { create: true, delete: true, update: true },
+            operations: {
+              create: true,
+              delete: true,
+              update: true,
+            },
             strictness: 'strict',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
@@ -217,6 +234,7 @@ describe('resource applications', () => {
       session_duration: '24h',
       skip_interstitial: true,
       tags: ['engineers'],
+      use_clientless_isolation_app_launcher_url: false,
     });
   });
 

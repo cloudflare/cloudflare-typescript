@@ -558,7 +558,7 @@ export interface DNSFirewallCreateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   upstream_ips: Array<UpstreamIPsParam>;
 
@@ -721,7 +721,7 @@ export interface DNSFirewallEditParams {
   retries?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   upstream_ips?: Array<UpstreamIPsParam>;
 }

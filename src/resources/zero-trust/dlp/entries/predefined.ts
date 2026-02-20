@@ -591,17 +591,17 @@ export namespace PredefinedGetResponse {
 
 export interface PredefinedCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   entry_id: string;
 
@@ -614,12 +614,12 @@ export interface PredefinedCreateParams {
 
 export interface PredefinedUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 }

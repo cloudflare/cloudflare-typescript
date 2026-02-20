@@ -184,7 +184,7 @@ export interface StoreCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<StoreCreateParams.Body>;
 }

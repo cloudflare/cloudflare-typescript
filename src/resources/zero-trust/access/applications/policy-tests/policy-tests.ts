@@ -133,7 +133,7 @@ export interface PolicyTestCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   policies?: Array<PolicyTestCreateParams.UnionMember0 | string>;
 }

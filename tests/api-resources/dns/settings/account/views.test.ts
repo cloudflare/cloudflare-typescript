@@ -53,7 +53,12 @@ describe('resource views', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
       match: 'any',
-      name: { contains: 'view', endswith: 'ew', exact: 'my view', startswith: 'my' },
+      name: {
+        contains: 'view',
+        endswith: 'ew',
+        exact: 'my view',
+        startswith: 'my',
+      },
       order: 'name',
       page: 1,
       per_page: 5,

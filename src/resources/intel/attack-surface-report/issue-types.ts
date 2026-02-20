@@ -6,7 +6,7 @@ import { SinglePage } from '../../../pagination';
 
 export class IssueTypes extends APIResource {
   /**
-   * Get Security Center Issues Types
+   * Retrieves Security Center Issues Types
    *
    * @example
    * ```ts

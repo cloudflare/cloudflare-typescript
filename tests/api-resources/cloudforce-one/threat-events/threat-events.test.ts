@@ -36,7 +36,11 @@ describe('resource threatEvents', () => {
       category: 'Domain Resolution',
       date: '2022-04-01T00:00:00Z',
       event: 'An attacker registered the domain domain.com',
-      raw: { data: { foo: 'bar' }, source: 'example.com', tlp: 'amber' },
+      raw: {
+        data: { foo: 'bar' },
+        source: 'example.com',
+        tlp: 'amber',
+      },
       tlp: 'amber',
       accountId: 123456,
       attacker: 'Flying Yeti',
@@ -49,7 +53,6 @@ describe('resource threatEvents', () => {
       tags: ['malware'],
       targetCountry: 'US',
       targetIndustry: 'Agriculture',
-      uuid: '12345678-1234-1234-1234-1234567890ab',
     });
   });
 
@@ -69,6 +72,8 @@ describe('resource threatEvents', () => {
   test.skip('list: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.list({
       account_id: 'account_id',
+      cursor:
+        'eyJ2ZXJzaW9uIjoxLCJwb3NpdGlvbiI6eyJkYXRlIjoiMjAyNC0wMS0xMlQxMDowMDowMFoiLCJ1dWlkIjoiYWJjMTIzIn19',
       datasetId: ['string'],
       forceRefresh: true,
       format: 'json',
@@ -76,7 +81,13 @@ describe('resource threatEvents', () => {
       orderBy: 'orderBy',
       page: 0,
       pageSize: 0,
-      search: [{ field: 'attackerCountry', op: 'equals', value: 'usa' }],
+      search: [
+        {
+          field: 'attackerCountry',
+          op: 'equals',
+          value: 'usa',
+        },
+      ],
     });
   });
 
@@ -132,7 +143,11 @@ describe('resource threatEvents', () => {
           category: 'Domain Resolution',
           date: '2022-04-01T00:00:00Z',
           event: 'An attacker registered the domain domain.com',
-          raw: { data: { foo: 'bar' }, source: 'example.com', tlp: 'amber' },
+          raw: {
+            data: { foo: 'bar' },
+            source: 'example.com',
+            tlp: 'amber',
+          },
           tlp: 'amber',
           accountId: 123456,
           attacker: 'Flying Yeti',
@@ -145,11 +160,10 @@ describe('resource threatEvents', () => {
           tags: ['malware'],
           targetCountry: 'US',
           targetIndustry: 'Agriculture',
-          uuid: '12345678-1234-1234-1234-1234567890ab',
         },
       ],
       datasetId: 'durableObjectName',
-      preserveUuid: true,
+      includeCreatedEvents: true,
     });
   });
 
@@ -179,7 +193,11 @@ describe('resource threatEvents', () => {
       indicator: 'domain2.com',
       indicatorType: 'domain',
       insight: 'new insight',
-      raw: { data: { foo: 'bar' }, source: 'example.com', tlp: 'amber' },
+      raw: {
+        data: { foo: 'bar' },
+        source: 'example.com',
+        tlp: 'amber',
+      },
       targetCountry: 'US',
       targetIndustry: 'Insurance',
       tlp: 'amber',

@@ -458,7 +458,7 @@ export interface ServiceCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   host:
     | ServiceCreateParams.InfraIPv4Host
@@ -467,22 +467,22 @@ export interface ServiceCreateParams {
     | ServiceCreateParams.InfraHostnameHost;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   type: 'http';
 
   /**
-   * Body param:
+   * Body param
    */
   http_port?: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   https_port?: number | null;
 }
@@ -543,12 +543,12 @@ export namespace ServiceCreateParams {
 
 export interface ServiceUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   host:
     | ServiceUpdateParams.InfraIPv4Host
@@ -557,22 +557,22 @@ export interface ServiceUpdateParams {
     | ServiceUpdateParams.InfraHostnameHost;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   type: 'http';
 
   /**
-   * Body param:
+   * Body param
    */
   http_port?: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   https_port?: number | null;
 }
@@ -638,7 +638,7 @@ export interface ServiceListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   type?: 'http' | null;
 }

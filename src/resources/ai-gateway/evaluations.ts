@@ -500,39 +500,39 @@ export namespace EvaluationGetResponse {
 
 export interface EvaluationCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dataset_ids: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   evaluation_type_ids: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 }
 
 export interface EvaluationListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   name?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   processed?: boolean;
 

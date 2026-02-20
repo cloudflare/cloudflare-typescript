@@ -103,7 +103,7 @@ export declare namespace ScrapeCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     elements: Array<Variant0.Element>;
 
@@ -184,7 +184,7 @@ export declare namespace ScrapeCreateParams {
     cookies?: Array<Variant0.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -225,17 +225,17 @@ export declare namespace ScrapeCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -373,7 +373,7 @@ export declare namespace ScrapeCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     elements: Array<Variant1.Element>;
 
@@ -453,7 +453,7 @@ export declare namespace ScrapeCreateParams {
     cookies?: Array<Variant1.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -494,17 +494,17 @@ export declare namespace ScrapeCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 

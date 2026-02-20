@@ -141,7 +141,7 @@ export interface EmailRoutingDisableParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
@@ -153,7 +153,7 @@ export interface EmailRoutingEnableParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }

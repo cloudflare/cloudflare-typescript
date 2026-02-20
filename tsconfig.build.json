@@ -6,7 +6,7 @@
     "rootDir": "./dist/src",
     "paths": {
       "cloudflare/*": ["./dist/src/*"],
-      "cloudflare": ["./dist/src/index.ts"]
+      "cloudflare": ["./dist/src/index.ts"],
     },
     "noEmit": false,
     "declaration": true,

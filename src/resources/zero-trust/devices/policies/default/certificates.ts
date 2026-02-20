@@ -60,7 +60,7 @@ export class Certificates extends APIResource {
 
 export interface CertificateEditParams {
   /**
-   * Path param:
+   * Path param
    */
   zone_id: string;
 

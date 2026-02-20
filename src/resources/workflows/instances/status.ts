@@ -42,7 +42,7 @@ export interface StatusEditResponse {
 
 export interface StatusEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

@@ -30,7 +30,13 @@ describe('resource logs', () => {
       direction: 'asc',
       end_date: '2019-12-27T18:11:19.117Z',
       feedback: 0,
-      filters: [{ key: 'id', operator: 'eq', value: ['string'] }],
+      filters: [
+        {
+          key: 'id',
+          operator: 'eq',
+          value: ['string'],
+        },
+      ],
       max_cost: 0,
       max_duration: 0,
       max_tokens_in: 0,
@@ -73,7 +79,13 @@ describe('resource logs', () => {
   test('delete: required and optional params', async () => {
     const response = await client.aiGateway.logs.delete('my-gateway', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
-      filters: [{ key: 'id', operator: 'eq', value: ['string'] }],
+      filters: [
+        {
+          key: 'id',
+          operator: 'eq',
+          value: ['string'],
+        },
+      ],
       limit: 1,
       order_by: 'created_at',
       order_by_direction: 'asc',

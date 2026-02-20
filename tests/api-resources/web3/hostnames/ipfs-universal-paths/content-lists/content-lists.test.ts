@@ -13,7 +13,11 @@ describe('resource contentLists', () => {
   test('update: only required params', async () => {
     const responsePromise = client.web3.hostnames.ipfsUniversalPaths.contentLists.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', action: 'block', entries: [{}] },
+      {
+        zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        action: 'block',
+        entries: [{}],
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

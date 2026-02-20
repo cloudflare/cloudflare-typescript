@@ -228,22 +228,22 @@ export interface BlockSenderCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   is_regex: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern: string;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
   /**
-   * Body param:
+   * Body param
    */
   comments?: string | null;
 }
@@ -265,12 +265,12 @@ export interface BlockSenderListParams extends V4PagePaginationArrayParams {
   order?: 'pattern' | 'created_at';
 
   /**
-   * Query param:
+   * Query param
    */
   pattern?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -296,22 +296,22 @@ export interface BlockSenderEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   comments?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   is_regex?: boolean | null;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN' | null;
 }

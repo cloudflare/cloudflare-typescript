@@ -142,7 +142,7 @@ export interface DeviceSettings {
 
 export interface SettingUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -207,7 +207,7 @@ export interface SettingDeleteParams {
 
 export interface SettingEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

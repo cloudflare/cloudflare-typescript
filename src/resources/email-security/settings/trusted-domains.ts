@@ -317,7 +317,7 @@ export declare namespace TrustedDomainCreateParams {
     is_recent: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     is_regex: boolean;
 
@@ -329,12 +329,12 @@ export declare namespace TrustedDomainCreateParams {
     is_similarity: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     pattern: string;
 
     /**
-     * Body param:
+     * Body param
      */
     comments?: string | null;
   }
@@ -346,7 +346,7 @@ export declare namespace TrustedDomainCreateParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     body: Array<Variant1.Body>;
   }
@@ -386,12 +386,12 @@ export interface TrustedDomainListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param:
+   * Query param
    */
   is_recent?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   is_similarity?: boolean;
 
@@ -401,7 +401,7 @@ export interface TrustedDomainListParams extends V4PagePaginationArrayParams {
   order?: 'pattern' | 'created_at';
 
   /**
-   * Query param:
+   * Query param
    */
   pattern?: string;
 
@@ -427,7 +427,7 @@ export interface TrustedDomainEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   comments?: string;
 
@@ -438,7 +438,7 @@ export interface TrustedDomainEditParams {
   is_recent?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   is_regex?: boolean;
 
@@ -450,7 +450,7 @@ export interface TrustedDomainEditParams {
   is_similarity?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern?: string;
 }

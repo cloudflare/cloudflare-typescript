@@ -8777,12 +8777,12 @@ export namespace OnRampPlanResponse {
 
 export interface OnRampCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE';
 
@@ -8793,37 +8793,37 @@ export interface OnRampCreateParams {
   dynamic_routing: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   install_routes_in_cloud: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   install_routes_in_magic_wan: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   type: 'OnrampTypeSingle' | 'OnrampTypeHub';
 
   /**
-   * Body param:
+   * Body param
    */
   adopted_hub_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   attached_hubs?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   attached_vpcs?: Array<string>;
 
@@ -8834,101 +8834,101 @@ export interface OnRampCreateParams {
   cloud_asn?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   hub_provider_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   manage_hub_to_hub_attachments?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   manage_vpc_to_hub_attachments?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   region?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   vpc?: string;
 
   /**
-   * Header param:
+   * Header param
    */
   forwarded?: string;
 }
 
 export interface OnRampUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   attached_hubs?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   attached_vpcs?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   install_routes_in_cloud?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   install_routes_in_magic_wan?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   manage_hub_to_hub_attachments?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   manage_vpc_to_hub_attachments?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   vpc?: string;
 }
 
 export interface OnRampListParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   desc?: boolean;
 
@@ -8938,29 +8938,29 @@ export interface OnRampListParams {
   order_by?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   status?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   vpcs?: boolean;
 }
 
 export interface OnRampDeleteParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   destroy?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   force?: boolean;
 }
@@ -8971,52 +8971,52 @@ export interface OnRampApplyParams {
 
 export interface OnRampEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   attached_hubs?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   attached_vpcs?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   install_routes_in_cloud?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   install_routes_in_magic_wan?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   manage_hub_to_hub_attachments?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   manage_vpc_to_hub_attachments?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   vpc?: string;
 }
@@ -9027,27 +9027,27 @@ export interface OnRampExportParams {
 
 export interface OnRampGetParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   planned_resources?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   post_apply_resources?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   status?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   vpcs?: boolean;
 }

@@ -150,7 +150,7 @@ export class Custom extends APIResource {
 
 export interface CustomCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -261,7 +261,7 @@ export interface CustomCreateParams {
   sccm_vpn_boundary_support?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   service_mode_v2?: CustomCreateParams.ServiceModeV2;
 
@@ -306,7 +306,7 @@ export interface CustomDeleteParams {
 
 export interface CustomEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -417,7 +417,7 @@ export interface CustomEditParams {
   sccm_vpn_boundary_support?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   service_mode_v2?: CustomEditParams.ServiceModeV2;
 

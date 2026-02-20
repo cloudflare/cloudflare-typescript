@@ -301,12 +301,12 @@ export interface ACLCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_1: ACLConfigurationParam;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_2: ACLConfigurationParam;
 
@@ -329,7 +329,7 @@ export interface ACLCreateParams {
   forward_locally?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   protocols?: Array<AllowedProtocolParam>;
 
@@ -362,12 +362,12 @@ export interface ACLUpdateParams {
   forward_locally?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_1?: ACLConfigurationParam;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_2?: ACLConfigurationParam;
 
@@ -377,7 +377,7 @@ export interface ACLUpdateParams {
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   protocols?: Array<AllowedProtocolParam>;
 
@@ -424,12 +424,12 @@ export interface ACLEditParams {
   forward_locally?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_1?: ACLConfigurationParam;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_2?: ACLConfigurationParam;
 
@@ -439,7 +439,7 @@ export interface ACLEditParams {
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   protocols?: Array<AllowedProtocolParam>;
 

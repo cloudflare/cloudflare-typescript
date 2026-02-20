@@ -154,8 +154,9 @@ TEST_PATHS=(
 	tests/api-resources/logs/received/received.test.ts
 	tests/api-resources/logs/received/fields.test.ts
 	tests/api-resources/origin-tls-client-auth/origin-tls-client-auth.test.ts
-	tests/api-resources/origin-tls-client-auth/hostnames/hostnames.test.ts
-	tests/api-resources/origin-tls-client-auth/hostnames/certificates.test.ts
+	tests/api-resources/origin-tls-client-auth/zone-certificates.test.ts
+	tests/api-resources/origin-tls-client-auth/hostnames.test.ts
+	tests/api-resources/origin-tls-client-auth/hostname-certificates.test.ts
 	tests/api-resources/origin-tls-client-auth/settings.test.ts
 	tests/api-resources/page-rules.test.ts
 	tests/api-resources/rate-limits.test.ts
@@ -283,7 +284,6 @@ TEST_PATHS=(
 	tests/api-resources/intel/domains/bulks.test.ts
 	tests/api-resources/intel/domain-history.test.ts
 	tests/api-resources/intel/ips.test.ts
-	tests/api-resources/intel/ip-lists.test.ts
 	tests/api-resources/intel/miscategorizations.test.ts
 	tests/api-resources/intel/whois.test.ts
 	tests/api-resources/intel/indicator-feeds/indicator-feeds.test.ts
@@ -664,6 +664,7 @@ TEST_PATHS=(
 	tests/api-resources/radar/leaked-credentials/summary.test.ts
 	tests/api-resources/radar/leaked-credentials/timeseries-groups.test.ts
 	tests/api-resources/bot-management.test.ts
+	tests/api-resources/fraud.test.ts
 	tests/api-resources/origin-post-quantum-encryption.test.ts
 	tests/api-resources/zaraz/zaraz.test.ts
 	tests/api-resources/zaraz/config.test.ts
@@ -723,6 +724,8 @@ TEST_PATHS=(
 	tests/api-resources/ai-gateway/logs.test.ts
 	tests/api-resources/ai-gateway/datasets.test.ts
 	tests/api-resources/ai-gateway/evaluations.test.ts
+	tests/api-resources/ai-gateway/dynamic-routing.test.ts
+	tests/api-resources/ai-gateway/provider-configs.test.ts
 	tests/api-resources/ai-gateway/urls.test.ts
 	tests/api-resources/iam/iam.test.ts
 	tests/api-resources/iam/permission-groups.test.ts

@@ -115,12 +115,12 @@ export declare namespace LinkCreateParams {
     cookies?: Array<Variant0.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     excludeExternalLinks?: boolean;
 
@@ -161,17 +161,17 @@ export declare namespace LinkCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -181,7 +181,7 @@ export declare namespace LinkCreateParams {
     viewport?: Variant0.Viewport;
 
     /**
-     * Body param:
+     * Body param
      */
     visibleLinksOnly?: boolean;
 
@@ -385,12 +385,12 @@ export declare namespace LinkCreateParams {
     cookies?: Array<Variant1.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     excludeExternalLinks?: boolean;
 
@@ -431,17 +431,17 @@ export declare namespace LinkCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -451,7 +451,7 @@ export declare namespace LinkCreateParams {
     viewport?: Variant1.Viewport;
 
     /**
-     * Body param:
+     * Body param
      */
     visibleLinksOnly?: boolean;
 

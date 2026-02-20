@@ -41,7 +41,7 @@ export interface PublicListResponse {
 
 export interface PublicListParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

@@ -1160,7 +1160,7 @@ export interface PostureDeleteResponse {
 
 export interface PostureCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -1227,7 +1227,7 @@ export interface PostureCreateParams {
 
 export interface PostureUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

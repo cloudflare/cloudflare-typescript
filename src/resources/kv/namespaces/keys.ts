@@ -214,7 +214,7 @@ export interface KeyBulkDeleteParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<string>;
 }
@@ -248,7 +248,7 @@ export interface KeyBulkUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<KeyBulkUpdateParams.Body>;
 }

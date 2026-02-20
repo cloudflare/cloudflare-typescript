@@ -205,24 +205,24 @@ export namespace WorkflowGetResponse {
 
 export interface WorkflowUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   class_name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   script_name: string;
 }
 
 export interface WorkflowListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

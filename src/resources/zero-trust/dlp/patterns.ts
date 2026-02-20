@@ -44,7 +44,7 @@ export interface PatternValidateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   regex: string;
 

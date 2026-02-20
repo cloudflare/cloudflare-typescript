@@ -37,7 +37,11 @@ describe('resource integrations', () => {
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.riskScoring.integrations.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id', active: true, tenant_url: 'https://example.com' },
+      {
+        account_id: 'account_id',
+        active: true,
+        tenant_url: 'https://example.com',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

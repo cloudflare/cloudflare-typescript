@@ -34,6 +34,8 @@ describe('resource organizations', () => {
       account_id: 'account_id',
       allow_authenticate_via_warp: true,
       auto_redirect_to_identity: true,
+      deny_unmatched_requests: true,
+      deny_unmatched_requests_exempted_zone_names: ['example.com'],
       is_ui_read_only: true,
       login_design: {
         background_color: '#c5ed1b',

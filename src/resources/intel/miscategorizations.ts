@@ -86,7 +86,7 @@ export interface MiscategorizationCreateParams {
   content_removes?: Array<number>;
 
   /**
-   * Body param:
+   * Body param
    */
   indicator_type?: 'domain' | 'ipv4' | 'ipv6' | 'url';
 

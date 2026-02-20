@@ -249,6 +249,23 @@ export interface Organization {
   custom_pages?: Organization.CustomPages;
 
   /**
+   * Determines whether to deny all requests to Cloudflare-protected resources that
+   * lack an associated Access application. If enabled, you must explicitly configure
+   * an Access application and policy to allow traffic to your Cloudflare-protected
+   * resources. For domains you want to be public across all subdomains, add the
+   * domain to the `deny_unmatched_requests_exempted_zone_names` array.
+   */
+  deny_unmatched_requests?: boolean;
+
+  /**
+   * Contains zone names to exempt from the `deny_unmatched_requests` feature.
+   * Requests to a subdomain in an exempted zone will block unauthenticated traffic
+   * by default if there is a configured Access application and policy that matches
+   * the request.
+   */
+  deny_unmatched_requests_exempted_zone_names?: Array<string>;
+
+  /**
    * Lock all settings as Read-Only in the Dashboard, regardless of user permission.
    * Updates may only be made via the API or Terraform for this account when enabled.
    */
@@ -343,6 +360,24 @@ export interface OrganizationCreateParams {
   auto_redirect_to_identity?: boolean;
 
   /**
+   * Body param: Determines whether to deny all requests to Cloudflare-protected
+   * resources that lack an associated Access application. If enabled, you must
+   * explicitly configure an Access application and policy to allow traffic to your
+   * Cloudflare-protected resources. For domains you want to be public across all
+   * subdomains, add the domain to the `deny_unmatched_requests_exempted_zone_names`
+   * array.
+   */
+  deny_unmatched_requests?: boolean;
+
+  /**
+   * Body param: Contains zone names to exempt from the `deny_unmatched_requests`
+   * feature. Requests to a subdomain in an exempted zone will block unauthenticated
+   * traffic by default if there is a configured Access application and policy that
+   * matches the request.
+   */
+  deny_unmatched_requests_exempted_zone_names?: Array<string>;
+
+  /**
    * Body param: Lock all settings as Read-Only in the Dashboard, regardless of user
    * permission. Updates may only be made via the API or Terraform for this account
    * when enabled.
@@ -350,7 +385,7 @@ export interface OrganizationCreateParams {
   is_ui_read_only?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   login_design?: LoginDesignParam;
 
@@ -415,9 +450,27 @@ export interface OrganizationUpdateParams {
   auto_redirect_to_identity?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   custom_pages?: OrganizationUpdateParams.CustomPages;
+
+  /**
+   * Body param: Determines whether to deny all requests to Cloudflare-protected
+   * resources that lack an associated Access application. If enabled, you must
+   * explicitly configure an Access application and policy to allow traffic to your
+   * Cloudflare-protected resources. For domains you want to be public across all
+   * subdomains, add the domain to the `deny_unmatched_requests_exempted_zone_names`
+   * array.
+   */
+  deny_unmatched_requests?: boolean;
+
+  /**
+   * Body param: Contains zone names to exempt from the `deny_unmatched_requests`
+   * feature. Requests to a subdomain in an exempted zone will block unauthenticated
+   * traffic by default if there is a configured Access application and policy that
+   * matches the request.
+   */
+  deny_unmatched_requests_exempted_zone_names?: Array<string>;
 
   /**
    * Body param: Lock all settings as Read-Only in the Dashboard, regardless of user
@@ -427,7 +480,7 @@ export interface OrganizationUpdateParams {
   is_ui_read_only?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   login_design?: LoginDesignParam;
 

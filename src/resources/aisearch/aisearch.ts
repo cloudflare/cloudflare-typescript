@@ -18,6 +18,8 @@ import {
 } from './tokens';
 import * as InstancesAPI from './instances/instances';
 import {
+  InstanceChatCompletionsParams,
+  InstanceChatCompletionsResponse,
   InstanceCreateParams,
   InstanceCreateResponse,
   InstanceDeleteParams,
@@ -27,6 +29,8 @@ import {
   InstanceListResponsesV4PagePaginationArray,
   InstanceReadParams,
   InstanceReadResponse,
+  InstanceSearchParams,
+  InstanceSearchResponse,
   InstanceStatsParams,
   InstanceStatsResponse,
   InstanceUpdateParams,
@@ -51,14 +55,18 @@ export declare namespace AISearch {
     type InstanceUpdateResponse as InstanceUpdateResponse,
     type InstanceListResponse as InstanceListResponse,
     type InstanceDeleteResponse as InstanceDeleteResponse,
+    type InstanceChatCompletionsResponse as InstanceChatCompletionsResponse,
     type InstanceReadResponse as InstanceReadResponse,
+    type InstanceSearchResponse as InstanceSearchResponse,
     type InstanceStatsResponse as InstanceStatsResponse,
     InstanceListResponsesV4PagePaginationArray as InstanceListResponsesV4PagePaginationArray,
     type InstanceCreateParams as InstanceCreateParams,
     type InstanceUpdateParams as InstanceUpdateParams,
     type InstanceListParams as InstanceListParams,
     type InstanceDeleteParams as InstanceDeleteParams,
+    type InstanceChatCompletionsParams as InstanceChatCompletionsParams,
     type InstanceReadParams as InstanceReadParams,
+    type InstanceSearchParams as InstanceSearchParams,
     type InstanceStatsParams as InstanceStatsParams,
   };
 

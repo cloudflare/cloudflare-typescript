@@ -269,27 +269,27 @@ export interface TokenReadResponse {
 
 export interface TokenCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   cf_api_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   cf_api_key: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   legacy?: boolean;
 }
@@ -300,7 +300,7 @@ export interface TokenUpdateParams {
 
 export interface TokenListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 }

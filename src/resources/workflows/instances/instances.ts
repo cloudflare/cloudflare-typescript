@@ -230,12 +230,18 @@ export namespace InstanceGetResponse {
     export interface Config {
       retries: Config.Retries;
 
-      timeout: unknown | number;
+      /**
+       * Specifies the timeout duration.
+       */
+      timeout: string | number;
     }
 
     export namespace Config {
       export interface Retries {
-        delay: unknown | number;
+        /**
+         * Specifies the delay duration.
+         */
+        delay: string | number;
 
         limit: number;
 
@@ -309,22 +315,22 @@ export namespace InstanceGetResponse {
 
 export interface InstanceCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   instance_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   instance_retention?: InstanceCreateParams.InstanceRetention;
 
   /**
-   * Body param:
+   * Body param
    */
   params?: unknown;
 }
@@ -332,12 +338,12 @@ export interface InstanceCreateParams {
 export namespace InstanceCreateParams {
   export interface InstanceRetention {
     /**
-     * Duration in milliseconds or as a string like '5 minutes'
+     * Specifies the duration in milliseconds or as a string like '5 minutes'.
      */
     error_retention?: number | string;
 
     /**
-     * Duration in milliseconds or as a string like '5 minutes'
+     * Specifies the duration in milliseconds or as a string like '5 minutes'.
      */
     success_retention?: number | string;
   }
@@ -345,7 +351,7 @@ export namespace InstanceCreateParams {
 
 export interface InstanceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -371,7 +377,7 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param:
+   * Query param
    */
   status?:
     | 'queued'
@@ -386,12 +392,12 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
 
 export interface InstanceBulkParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body?: Array<InstanceBulkParams.Body>;
 }
@@ -408,12 +414,12 @@ export namespace InstanceBulkParams {
   export namespace Body {
     export interface InstanceRetention {
       /**
-       * Duration in milliseconds or as a string like '5 minutes'
+       * Specifies the duration in milliseconds or as a string like '5 minutes'.
        */
       error_retention?: number | string;
 
       /**
-       * Duration in milliseconds or as a string like '5 minutes'
+       * Specifies the duration in milliseconds or as a string like '5 minutes'.
        */
       success_retention?: number | string;
     }

@@ -2503,7 +2503,7 @@ export interface MeetingGetMeetingByIDParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   name?: string;
 }

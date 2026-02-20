@@ -31,9 +31,18 @@ describe('resource custom', () => {
       ai_context_enabled: true,
       allowed_match_count: 5,
       confidence_threshold: 'confidence_threshold',
-      context_awareness: { enabled: true, skip: { files: true } },
+      context_awareness: {
+        enabled: true,
+        skip: { files: true },
+      },
       description: 'description',
-      entries: [{ enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } }],
+      entries: [
+        {
+          enabled: true,
+          name: 'name',
+          pattern: { regex: 'regex', validation: 'luhn' },
+        },
+      ],
       ocr_enabled: true,
       shared_entries: [{ enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }],
     });
@@ -62,7 +71,10 @@ describe('resource custom', () => {
         ai_context_enabled: true,
         allowed_match_count: 0,
         confidence_threshold: 'confidence_threshold',
-        context_awareness: { enabled: true, skip: { files: true } },
+        context_awareness: {
+          enabled: true,
+          skip: { files: true },
+        },
         description: 'description',
         entries: [
           {

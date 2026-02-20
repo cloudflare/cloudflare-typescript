@@ -548,49 +548,49 @@ export namespace CustomGetResponse {
 
 export interface CustomCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern: ProfilesCustomAPI.PatternParam;
 
   /**
-   * Body param:
+   * Body param
    */
   profile_id?: string;
 }
 
 export interface CustomUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern: ProfilesCustomAPI.PatternParam;
 }

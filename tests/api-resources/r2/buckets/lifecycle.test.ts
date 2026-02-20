@@ -36,7 +36,10 @@ describe('resource lifecycle', () => {
           abortMultipartUploadsTransition: { condition: { maxAge: 0, type: 'Age' } },
           deleteObjectsTransition: { condition: { maxAge: 0, type: 'Age' } },
           storageClassTransitions: [
-            { condition: { maxAge: 0, type: 'Age' }, storageClass: 'InfrequentAccess' },
+            {
+              condition: { maxAge: 0, type: 'Age' },
+              storageClass: 'InfrequentAccess',
+            },
           ],
         },
       ],

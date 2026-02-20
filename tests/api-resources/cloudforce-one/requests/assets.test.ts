@@ -13,7 +13,11 @@ describe('resource assets', () => {
   test('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.requests.assets.create(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', page: 0, per_page: 10 },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        page: 0,
+        per_page: 10,
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +31,11 @@ describe('resource assets', () => {
   test('create: required and optional params', async () => {
     const response = await client.cloudforceOne.requests.assets.create(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', page: 0, per_page: 10 },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        page: 0,
+        per_page: 10,
+      },
     );
   });
 

@@ -253,62 +253,62 @@ export interface AuditListParams extends CursorPaginationAfterParams {
   since: string;
 
   /**
-   * Query param:
+   * Query param
    */
   id?: AuditListParams.ID;
 
   /**
-   * Query param:
+   * Query param
    */
   account_name?: AuditListParams.AccountName;
 
   /**
-   * Query param:
+   * Query param
    */
   action_result?: AuditListParams.ActionResult;
 
   /**
-   * Query param:
+   * Query param
    */
   action_type?: AuditListParams.ActionType;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_context?: AuditListParams.ActorContext;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_email?: AuditListParams.ActorEmail;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_id?: AuditListParams.ActorID;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_ip_address?: AuditListParams.ActorIPAddress;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_token_id?: AuditListParams.ActorTokenID;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_token_name?: AuditListParams.ActorTokenName;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_type?: AuditListParams.ActorType;
 
   /**
-   * Query param:
+   * Query param
    */
   audit_log_id?: AuditListParams.AuditLogID;
 
@@ -325,52 +325,52 @@ export interface AuditListParams extends CursorPaginationAfterParams {
   limit?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   raw_cf_ray_id?: AuditListParams.RawCfRayID;
 
   /**
-   * Query param:
+   * Query param
    */
   raw_method?: AuditListParams.RawMethod;
 
   /**
-   * Query param:
+   * Query param
    */
   raw_status_code?: AuditListParams.RawStatusCode;
 
   /**
-   * Query param:
+   * Query param
    */
   raw_uri?: AuditListParams.RawURI;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_id?: AuditListParams.ResourceID;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_product?: AuditListParams.ResourceProduct;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_scope?: AuditListParams.ResourceScope;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_type?: AuditListParams.ResourceType;
 
   /**
-   * Query param:
+   * Query param
    */
   zone_id?: AuditListParams.ZoneID;
 
   /**
-   * Query param:
+   * Query param
    */
   zone_name?: AuditListParams.ZoneName;
 }

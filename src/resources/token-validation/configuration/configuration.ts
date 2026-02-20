@@ -314,27 +314,27 @@ export interface ConfigurationCreateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   credentials: ConfigurationCreateParams.Credentials;
 
   /**
-   * Body param:
+   * Body param
    */
   description: string;
 
   /**
-   * Body param:
+   * Body param
    */
   title: string;
 
   /**
-   * Body param:
+   * Body param
    */
   token_sources: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   token_type: 'JWT';
 }
@@ -472,17 +472,17 @@ export interface ConfigurationEditParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   title?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   token_sources?: Array<string>;
 }

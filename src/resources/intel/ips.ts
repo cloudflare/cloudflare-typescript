@@ -76,12 +76,12 @@ export interface IPGetParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   ipv4?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   ipv6?: string;
 }

@@ -171,12 +171,12 @@ export interface MessageAckParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   acks?: Array<MessageAckParams.Ack>;
 
   /**
-   * Body param:
+   * Body param
    */
   retries?: Array<MessageAckParams.Retry>;
 }
@@ -218,7 +218,7 @@ export interface MessageBulkPushParams {
   delay_seconds?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   messages?: Array<MessageBulkPushParams.MqQueueMessageText | MessageBulkPushParams.MqQueueMessageJson>;
 }
@@ -277,12 +277,12 @@ export declare namespace MessagePushParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     body?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     content_type?: 'text';
 
@@ -300,12 +300,12 @@ export declare namespace MessagePushParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     body?: unknown;
 
     /**
-     * Body param:
+     * Body param
      */
     content_type?: 'json';
 

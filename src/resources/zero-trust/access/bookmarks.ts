@@ -132,24 +132,24 @@ export interface BookmarkDeleteResponse {
 
 export interface BookmarkCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
 
 export interface BookmarkUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }

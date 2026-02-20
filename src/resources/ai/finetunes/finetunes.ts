@@ -71,27 +71,27 @@ export interface FinetuneListResponse {
 
 export interface FinetuneCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   model: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   public?: boolean;
 }

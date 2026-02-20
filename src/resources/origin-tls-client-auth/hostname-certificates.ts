@@ -1,19 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as HostnamesAPI from './hostnames';
-import { SinglePage } from '../../../pagination';
+import { SinglePage } from '../../pagination';
 
-export class Certificates extends APIResource {
+export class HostnameCertificates extends APIResource {
   /**
    * Upload a certificate to be used for client authentication on a hostname. 10
    * hostname certificates per zone are allowed.
    *
    * @example
    * ```ts
-   * const certificate =
-   *   await client.originTLSClientAuth.hostnames.certificates.create(
+   * const hostnameCertificate =
+   *   await client.originTLSClientAuth.hostnameCertificates.create(
    *     {
    *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       certificate:
@@ -25,15 +25,15 @@ export class Certificates extends APIResource {
    * ```
    */
   create(
-    params: CertificateCreateParams,
+    params: HostnameCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateCreateResponse> {
+  ): Core.APIPromise<HostnameCertificateCreateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: CertificateCreateResponse }>
+      }) as Core.APIPromise<{ result: HostnameCertificateCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -43,7 +43,7 @@ export class Certificates extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const certificateListResponse of client.originTLSClientAuth.hostnames.certificates.list(
+   * for await (const hostnameCertificateListResponse of client.originTLSClientAuth.hostnameCertificates.list(
    *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
@@ -51,13 +51,13 @@ export class Certificates extends APIResource {
    * ```
    */
   list(
-    params: CertificateListParams,
+    params: HostnameCertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<CertificateListResponsesSinglePage, CertificateListResponse> {
+  ): Core.PagePromise<HostnameCertificateListResponsesSinglePage, HostnameCertificateListResponse> {
     const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`,
-      CertificateListResponsesSinglePage,
+      HostnameCertificateListResponsesSinglePage,
       options,
     );
   }
@@ -67,8 +67,8 @@ export class Certificates extends APIResource {
    *
    * @example
    * ```ts
-   * const certificate =
-   *   await client.originTLSClientAuth.hostnames.certificates.delete(
+   * const hostnameCertificate =
+   *   await client.originTLSClientAuth.hostnameCertificates.delete(
    *     '023e105f4ecef8ad9ca31a8372d0c353',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
@@ -76,15 +76,15 @@ export class Certificates extends APIResource {
    */
   delete(
     certificateId: string,
-    params: CertificateDeleteParams,
+    params: HostnameCertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateDeleteResponse> {
+  ): Core.APIPromise<HostnameCertificateDeleteResponse> {
     const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
         options,
-      ) as Core.APIPromise<{ result: CertificateDeleteResponse }>
+      ) as Core.APIPromise<{ result: HostnameCertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -93,8 +93,8 @@ export class Certificates extends APIResource {
    *
    * @example
    * ```ts
-   * const certificate =
-   *   await client.originTLSClientAuth.hostnames.certificates.get(
+   * const hostnameCertificate =
+   *   await client.originTLSClientAuth.hostnameCertificates.get(
    *     '023e105f4ecef8ad9ca31a8372d0c353',
    *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
@@ -102,20 +102,20 @@ export class Certificates extends APIResource {
    */
   get(
     certificateId: string,
-    params: CertificateGetParams,
+    params: HostnameCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateGetResponse> {
+  ): Core.APIPromise<HostnameCertificateGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
         options,
-      ) as Core.APIPromise<{ result: CertificateGetResponse }>
+      ) as Core.APIPromise<{ result: HostnameCertificateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class CertificateListResponsesSinglePage extends SinglePage<CertificateListResponse> {}
+export class HostnameCertificateListResponsesSinglePage extends SinglePage<HostnameCertificateListResponse> {}
 
 export interface Certificate {
   /**
@@ -166,7 +166,7 @@ export interface Certificate {
   uploaded_on?: string;
 }
 
-export interface CertificateCreateResponse {
+export interface HostnameCertificateCreateResponse {
   /**
    * Identifier.
    */
@@ -215,7 +215,7 @@ export interface CertificateCreateResponse {
   uploaded_on?: string;
 }
 
-export interface CertificateListResponse extends HostnamesAPI.AuthenticatedOriginPull {
+export interface HostnameCertificateListResponse extends HostnamesAPI.AuthenticatedOriginPull {
   /**
    * Identifier.
    */
@@ -249,7 +249,7 @@ export interface CertificateListResponse extends HostnamesAPI.AuthenticatedOrigi
   private_key?: string;
 }
 
-export interface CertificateDeleteResponse {
+export interface HostnameCertificateDeleteResponse {
   /**
    * Identifier.
    */
@@ -298,7 +298,7 @@ export interface CertificateDeleteResponse {
   uploaded_on?: string;
 }
 
-export interface CertificateGetResponse {
+export interface HostnameCertificateGetResponse {
   /**
    * Identifier.
    */
@@ -347,7 +347,7 @@ export interface CertificateGetResponse {
   uploaded_on?: string;
 }
 
-export interface CertificateCreateParams {
+export interface HostnameCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
@@ -364,40 +364,40 @@ export interface CertificateCreateParams {
   private_key: string;
 }
 
-export interface CertificateListParams {
+export interface HostnameCertificateListParams {
   /**
    * Identifier.
    */
   zone_id: string;
 }
 
-export interface CertificateDeleteParams {
+export interface HostnameCertificateDeleteParams {
   /**
    * Identifier.
    */
   zone_id: string;
 }
 
-export interface CertificateGetParams {
+export interface HostnameCertificateGetParams {
   /**
    * Identifier.
    */
   zone_id: string;
 }
 
-Certificates.CertificateListResponsesSinglePage = CertificateListResponsesSinglePage;
+HostnameCertificates.HostnameCertificateListResponsesSinglePage = HostnameCertificateListResponsesSinglePage;
 
-export declare namespace Certificates {
+export declare namespace HostnameCertificates {
   export {
     type Certificate as Certificate,
-    type CertificateCreateResponse as CertificateCreateResponse,
-    type CertificateListResponse as CertificateListResponse,
-    type CertificateDeleteResponse as CertificateDeleteResponse,
-    type CertificateGetResponse as CertificateGetResponse,
-    CertificateListResponsesSinglePage as CertificateListResponsesSinglePage,
-    type CertificateCreateParams as CertificateCreateParams,
-    type CertificateListParams as CertificateListParams,
-    type CertificateDeleteParams as CertificateDeleteParams,
-    type CertificateGetParams as CertificateGetParams,
+    type HostnameCertificateCreateResponse as HostnameCertificateCreateResponse,
+    type HostnameCertificateListResponse as HostnameCertificateListResponse,
+    type HostnameCertificateDeleteResponse as HostnameCertificateDeleteResponse,
+    type HostnameCertificateGetResponse as HostnameCertificateGetResponse,
+    HostnameCertificateListResponsesSinglePage as HostnameCertificateListResponsesSinglePage,
+    type HostnameCertificateCreateParams as HostnameCertificateCreateParams,
+    type HostnameCertificateListParams as HostnameCertificateListParams,
+    type HostnameCertificateDeleteParams as HostnameCertificateDeleteParams,
+    type HostnameCertificateGetParams as HostnameCertificateGetParams,
   };
 }

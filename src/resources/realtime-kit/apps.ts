@@ -83,12 +83,12 @@ export interface AppGetParams {
 
 export interface AppPostParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 }

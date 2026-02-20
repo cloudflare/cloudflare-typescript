@@ -41,7 +41,11 @@ describe('resource pipelines', () => {
     const response = await client.pipelines.create({
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
       destination: {
-        batch: { max_bytes: 1000, max_duration_s: 0.25, max_rows: 100 },
+        batch: {
+          max_bytes: 1000,
+          max_duration_s: 0.25,
+          max_rows: 100,
+        },
         compression: { type: 'gzip' },
         credentials: {
           access_key_id: '<access key id>',
@@ -58,14 +62,27 @@ describe('resource pipelines', () => {
         type: 'r2',
       },
       name: 'sample_pipeline',
-      source: [{ format: 'json', type: 'type', authentication: true, cors: { origins: ['*'] } }],
+      source: [
+        {
+          format: 'json',
+          type: 'type',
+          authentication: true,
+          cors: { origins: ['*'] },
+        },
+      ],
     });
   });
 
   test('update: only required params', async () => {
     const responsePromise = client.pipelines.update('sample_pipeline', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
-      destination: { batch: {}, compression: {}, format: 'json', path: { bucket: 'bucket' }, type: 'r2' },
+      destination: {
+        batch: {},
+        compression: {},
+        format: 'json',
+        path: { bucket: 'bucket' },
+        type: 'r2',
+      },
       name: 'sample_pipeline',
       source: [{ format: 'json', type: 'type' }],
     });
@@ -82,7 +99,11 @@ describe('resource pipelines', () => {
     const response = await client.pipelines.update('sample_pipeline', {
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
       destination: {
-        batch: { max_bytes: 1000, max_duration_s: 0.25, max_rows: 100 },
+        batch: {
+          max_bytes: 1000,
+          max_duration_s: 0.25,
+          max_rows: 100,
+        },
         compression: { type: 'gzip' },
         format: 'json',
         path: {
@@ -99,7 +120,14 @@ describe('resource pipelines', () => {
         },
       },
       name: 'sample_pipeline',
-      source: [{ format: 'json', type: 'type', authentication: true, cors: { origins: ['*'] } }],
+      source: [
+        {
+          format: 'json',
+          type: 'type',
+          authentication: true,
+          cors: { origins: ['*'] },
+        },
+      ],
     });
   });
 

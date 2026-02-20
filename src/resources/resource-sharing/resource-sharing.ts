@@ -829,12 +829,12 @@ export interface ResourceSharingCreateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   recipients: Array<ResourceSharingCreateParams.Recipient>;
 
   /**
-   * Body param:
+   * Body param
    */
   resources: Array<ResourceSharingCreateParams.Resource>;
 }

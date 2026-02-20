@@ -454,7 +454,7 @@ export type DeviceRevokeResponse = unknown;
 
 export interface DeviceListParams extends CursorPaginationParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -477,7 +477,7 @@ export interface DeviceListParams extends CursorPaginationParams {
   include?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   last_seen_user?: DeviceListParams.LastSeenUser;
 
@@ -531,7 +531,7 @@ export interface DeviceDeleteParams {
 
 export interface DeviceGetParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

@@ -26,17 +26,17 @@ export interface AssetCreateResponse {
 
 export interface AssetCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   file?: Core.Uploadable;
 
   /**
-   * Body param:
+   * Body param
    */
   file_name?: string;
 }

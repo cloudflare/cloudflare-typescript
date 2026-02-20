@@ -52,7 +52,7 @@ export interface SettingUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   default_asn?: number | null;
 }

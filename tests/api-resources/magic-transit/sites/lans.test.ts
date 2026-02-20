@@ -13,7 +13,6 @@ describe('resource lans', () => {
   test('create: only required params', async () => {
     const responsePromise = client.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      physport: 1,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,12 +26,17 @@ describe('resource lans', () => {
   test('create: required and optional params', async () => {
     const response = await client.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      physport: 1,
+      bond_id: 2,
       ha_link: true,
       name: 'name',
       nat: { static_prefix: '192.0.2.0/24' },
+      physport: 1,
       routed_subnets: [
-        { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
+        {
+          next_hop: '192.0.2.1',
+          prefix: '192.0.2.0/24',
+          nat: { static_prefix: '192.0.2.0/24' },
+        },
       ],
       static_addressing: {
         address: '192.0.2.0/24',
@@ -72,11 +76,16 @@ describe('resource lans', () => {
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        bond_id: 2,
         name: 'name',
         nat: { static_prefix: '192.0.2.0/24' },
         physport: 1,
         routed_subnets: [
-          { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
+          {
+            next_hop: '192.0.2.1',
+            prefix: '192.0.2.0/24',
+            nat: { static_prefix: '192.0.2.0/24' },
+          },
         ],
         static_addressing: {
           address: '192.0.2.0/24',
@@ -159,11 +168,16 @@ describe('resource lans', () => {
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        bond_id: 2,
         name: 'name',
         nat: { static_prefix: '192.0.2.0/24' },
         physport: 1,
         routed_subnets: [
-          { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
+          {
+            next_hop: '192.0.2.1',
+            prefix: '192.0.2.0/24',
+            nat: { static_prefix: '192.0.2.0/24' },
+          },
         ],
         static_addressing: {
           address: '192.0.2.0/24',

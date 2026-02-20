@@ -8,7 +8,7 @@ import { CloudflareError } from '../../../error';
 
 export class Class extends APIResource {
   /**
-   * Get Security Center Insight Counts by Class
+   * Retrieves Security Center Insight Counts by Class
    */
   get(params?: ClassGetParams, options?: Core.RequestOptions): Core.APIPromise<ClassGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<ClassGetResponse>;
@@ -69,57 +69,57 @@ export interface ClassGetParams {
   zone_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   dismissed?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_class?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_class~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_type?: Array<IssuesAPI.IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_type~neq'?: Array<IssuesAPI.IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   product?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'product~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   severity?: Array<IssuesAPI.SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'severity~neq'?: Array<IssuesAPI.SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   subject?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'subject~neq'?: Array<string>;
 }

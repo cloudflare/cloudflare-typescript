@@ -97,7 +97,7 @@ export interface GatewaySettings {
 
 export interface AuditSSHSettingUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

@@ -260,17 +260,17 @@ export interface EventListParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   from: number;
 
   /**
-   * Query param:
+   * Query param
    */
   to: number;
 
   /**
-   * Query param:
+   * Query param
    */
   cursor?: string;
 
@@ -280,7 +280,7 @@ export interface EventListParams {
   k?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: number;
 }

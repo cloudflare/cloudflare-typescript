@@ -260,17 +260,17 @@ export interface WANCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   physport: number;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   priority?: number;
 
@@ -293,17 +293,17 @@ export interface WANUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   physport?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   priority?: number;
 
@@ -340,17 +340,17 @@ export interface WANEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   physport?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   priority?: number;
 

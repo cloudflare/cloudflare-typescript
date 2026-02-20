@@ -210,7 +210,7 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   exclude_prefix?: string;
 
@@ -221,7 +221,7 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
   existed_at?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   include_prefix?: string;
 
@@ -256,12 +256,12 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
   uuid?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   was_active_at?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   was_inactive_at?: string;
 }

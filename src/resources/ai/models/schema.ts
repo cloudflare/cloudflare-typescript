@@ -21,7 +21,7 @@ export type SchemaGetResponse = unknown;
 
 export interface SchemaGetParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

@@ -201,7 +201,7 @@ export interface AccountUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }

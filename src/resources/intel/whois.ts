@@ -227,7 +227,7 @@ export interface WhoisGetParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   domain?: string;
 }

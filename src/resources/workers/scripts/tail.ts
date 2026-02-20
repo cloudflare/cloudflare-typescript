@@ -194,7 +194,7 @@ export interface TailCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }

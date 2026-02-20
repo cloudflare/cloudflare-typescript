@@ -81,7 +81,7 @@ export interface GlobalWARPOverrideGetResponse {
 
 export interface GlobalWARPOverrideCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

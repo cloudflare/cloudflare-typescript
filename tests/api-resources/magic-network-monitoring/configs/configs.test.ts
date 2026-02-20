@@ -32,7 +32,11 @@ describe('resource configs', () => {
       name: "cloudflare user's account",
       router_ips: ['203.0.113.1'],
       warp_devices: [
-        { id: '5360368d-b351-4791-abe1-93550dabd351', name: 'My warp device', router_ip: '203.0.113.1' },
+        {
+          id: '5360368d-b351-4791-abe1-93550dabd351',
+          name: 'My warp device',
+          router_ip: '203.0.113.1',
+        },
       ],
     });
   });
@@ -59,7 +63,11 @@ describe('resource configs', () => {
       name: "cloudflare user's account",
       router_ips: ['203.0.113.1'],
       warp_devices: [
-        { id: '5360368d-b351-4791-abe1-93550dabd351', name: 'My warp device', router_ip: '203.0.113.1' },
+        {
+          id: '5360368d-b351-4791-abe1-93550dabd351',
+          name: 'My warp device',
+          router_ip: '203.0.113.1',
+        },
       ],
     });
   });
@@ -103,7 +111,11 @@ describe('resource configs', () => {
       name: "cloudflare user's account",
       router_ips: ['203.0.113.1'],
       warp_devices: [
-        { id: '5360368d-b351-4791-abe1-93550dabd351', name: 'My warp device', router_ip: '203.0.113.1' },
+        {
+          id: '5360368d-b351-4791-abe1-93550dabd351',
+          name: 'My warp device',
+          router_ip: '203.0.113.1',
+        },
       ],
     });
   });

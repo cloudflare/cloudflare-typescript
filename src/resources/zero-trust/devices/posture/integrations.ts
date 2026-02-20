@@ -209,7 +209,7 @@ export type IntegrationDeleteResponse = unknown | string;
 
 export interface IntegrationCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -414,7 +414,7 @@ export interface IntegrationDeleteParams {
 
 export interface IntegrationEditParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

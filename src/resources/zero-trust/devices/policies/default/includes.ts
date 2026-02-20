@@ -62,12 +62,12 @@ export class Includes extends APIResource {
 
 export interface IncludeUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<PoliciesAPI.SplitTunnelIncludeParam>;
 }

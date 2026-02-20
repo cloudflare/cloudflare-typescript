@@ -14,7 +14,13 @@ describe('resource datasets', () => {
     const responsePromise = client.aiGateway.datasets.create('my-gateway', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
       enable: true,
-      filters: [{ key: 'created_at', operator: 'eq', value: ['string'] }],
+      filters: [
+        {
+          key: 'created_at',
+          operator: 'eq',
+          value: ['string'],
+        },
+      ],
       name: 'name',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +36,13 @@ describe('resource datasets', () => {
     const response = await client.aiGateway.datasets.create('my-gateway', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
       enable: true,
-      filters: [{ key: 'created_at', operator: 'eq', value: ['string'] }],
+      filters: [
+        {
+          key: 'created_at',
+          operator: 'eq',
+          value: ['string'],
+        },
+      ],
       name: 'name',
     });
   });
@@ -39,7 +51,13 @@ describe('resource datasets', () => {
     const responsePromise = client.aiGateway.datasets.update('my-gateway', 'id', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
       enable: true,
-      filters: [{ key: 'created_at', operator: 'eq', value: ['string'] }],
+      filters: [
+        {
+          key: 'created_at',
+          operator: 'eq',
+          value: ['string'],
+        },
+      ],
       name: 'name',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -55,7 +73,13 @@ describe('resource datasets', () => {
     const response = await client.aiGateway.datasets.update('my-gateway', 'id', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
       enable: true,
-      filters: [{ key: 'created_at', operator: 'eq', value: ['string'] }],
+      filters: [
+        {
+          key: 'created_at',
+          operator: 'eq',
+          value: ['string'],
+        },
+      ],
       name: 'name',
     });
   });

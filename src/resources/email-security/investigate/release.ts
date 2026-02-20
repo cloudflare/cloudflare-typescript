@@ -37,6 +37,8 @@ export class Release extends APIResource {
 export class ReleaseBulkResponsesSinglePage extends SinglePage<ReleaseBulkResponse> {}
 
 export interface ReleaseBulkResponse {
+  id: string;
+
   /**
    * The identifier of the message.
    */

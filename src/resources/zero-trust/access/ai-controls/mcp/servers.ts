@@ -188,6 +188,8 @@ export interface ServerCreateResponse {
 
   error?: string;
 
+  last_successful_sync?: string;
+
   last_synced?: string;
 
   modified_at?: string;
@@ -220,6 +222,8 @@ export interface ServerUpdateResponse {
   description?: string | null;
 
   error?: string;
+
+  last_successful_sync?: string;
 
   last_synced?: string;
 
@@ -254,6 +258,8 @@ export interface ServerListResponse {
 
   error?: string;
 
+  last_successful_sync?: string;
+
   last_synced?: string;
 
   modified_at?: string;
@@ -286,6 +292,8 @@ export interface ServerDeleteResponse {
   description?: string | null;
 
   error?: string;
+
+  last_successful_sync?: string;
 
   last_synced?: string;
 
@@ -320,6 +328,8 @@ export interface ServerReadResponse {
 
   error?: string;
 
+  last_successful_sync?: string;
+
   last_synced?: string;
 
   modified_at?: string;
@@ -333,7 +343,7 @@ export type ServerSyncResponse = unknown;
 
 export interface ServerCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
@@ -343,56 +353,56 @@ export interface ServerCreateParams {
   id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
   /**
-   * Body param:
+   * Body param
    */
   hostname: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_credentials?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string | null;
 }
 
 export interface ServerUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_credentials?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 }
 
 export interface ServerListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 

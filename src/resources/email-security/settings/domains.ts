@@ -439,22 +439,22 @@ export interface DomainEditParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   ip_restrictions: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   allowed_delivery_modes?: Array<'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN'>;
 
   /**
-   * Body param:
+   * Body param
    */
   domain?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   drop_dispositions?: Array<
     | 'MALICIOUS'
@@ -470,37 +470,37 @@ export interface DomainEditParams {
   >;
 
   /**
-   * Body param:
+   * Body param
    */
   folder?: 'AllItems' | 'Inbox';
 
   /**
-   * Body param:
+   * Body param
    */
   integration_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   lookback_hops?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   regions?: Array<'GLOBAL' | 'AU' | 'DE' | 'IN' | 'US'>;
 
   /**
-   * Body param:
+   * Body param
    */
   require_tls_inbound?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   require_tls_outbound?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   transport?: string;
 }

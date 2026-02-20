@@ -7,13 +7,17 @@ export {
   type InstanceUpdateResponse,
   type InstanceListResponse,
   type InstanceDeleteResponse,
+  type InstanceChatCompletionsResponse,
   type InstanceReadResponse,
+  type InstanceSearchResponse,
   type InstanceStatsResponse,
   type InstanceCreateParams,
   type InstanceUpdateParams,
   type InstanceListParams,
   type InstanceDeleteParams,
+  type InstanceChatCompletionsParams,
   type InstanceReadParams,
+  type InstanceSearchParams,
   type InstanceStatsParams,
 } from './instances';
 export {

@@ -314,7 +314,7 @@ export interface WidgetCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   domains: Array<WidgetDomainParam>;
 
@@ -387,7 +387,7 @@ export interface WidgetUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   domains: Array<WidgetDomainParam>;
 

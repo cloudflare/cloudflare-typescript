@@ -48,7 +48,7 @@ export interface ManagementCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   resources: Array<'logs'>;
 }

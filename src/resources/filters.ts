@@ -211,7 +211,7 @@ export interface FilterCreateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<FirewallFilterParam>;
 }
@@ -291,7 +291,7 @@ export interface FilterBulkDeleteParams {
   zone_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   id: Array<string>;
 }
@@ -303,7 +303,7 @@ export interface FilterBulkUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<FilterBulkUpdateParams.Body>;
 }

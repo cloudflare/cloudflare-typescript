@@ -77,12 +77,12 @@ export interface DNSListParams extends V4PagePaginationParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   ipv4?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   start_end_params?: DNSListParams.StartEndParams;
 }

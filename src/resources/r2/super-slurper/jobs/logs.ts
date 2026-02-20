@@ -64,17 +64,17 @@ export interface LogListResponse {
 
 export interface LogListParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   offset?: number;
 }

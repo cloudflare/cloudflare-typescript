@@ -5,7 +5,7 @@ import * as Core from '../core';
 
 export class SecurityTXT extends APIResource {
   /**
-   * Update security.txt
+   * Updates security.txt
    *
    * @example
    * ```ts
@@ -23,7 +23,7 @@ export class SecurityTXT extends APIResource {
   }
 
   /**
-   * Delete security.txt
+   * Deletes security.txt
    *
    * @example
    * ```ts
@@ -41,7 +41,7 @@ export class SecurityTXT extends APIResource {
   }
 
   /**
-   * Get security.txt
+   * Retrieves security.txt
    *
    * @example
    * ```ts
@@ -177,47 +177,47 @@ export interface SecurityTXTUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   acknowledgments?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   canonical?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   contact?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   encryption?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   expires?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   hiring?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   policy?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   preferredLanguages?: string;
 }

@@ -395,22 +395,22 @@ export namespace DatasetGetResponse {
 
 export interface DatasetCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enable: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   filters: Array<DatasetCreateParams.Filter>;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 }
@@ -440,22 +440,22 @@ export namespace DatasetCreateParams {
 
 export interface DatasetUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enable: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   filters: Array<DatasetUpdateParams.Filter>;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 }
@@ -485,17 +485,17 @@ export namespace DatasetUpdateParams {
 
 export interface DatasetListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
   account_id: string;
 
   /**
-   * Query param:
+   * Query param
    */
   enable?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   name?: string;
 

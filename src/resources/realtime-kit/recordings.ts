@@ -1184,12 +1184,12 @@ export interface RecordingGetRecordingsParams {
   search?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   sort_by?: 'invokedTime';
 
   /**
-   * Query param:
+   * Query param
    */
   sort_order?: 'ASC' | 'DESC';
 
@@ -1212,7 +1212,7 @@ export interface RecordingPauseResumeStopRecordingParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   action: 'stop' | 'pause' | 'resume';
 }
@@ -1264,17 +1264,17 @@ export interface RecordingStartRecordingsParams {
   meeting_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   realtimekit_bucket_config?: RecordingStartRecordingsParams.RealtimekitBucketConfig;
 
   /**
-   * Body param:
+   * Body param
    */
   rtmp_out_config?: RecordingStartRecordingsParams.RtmpOutConfig;
 
   /**
-   * Body param:
+   * Body param
    */
   storage_config?: RecordingStartRecordingsParams.StorageConfig | null;
 
@@ -1284,7 +1284,7 @@ export interface RecordingStartRecordingsParams {
   url?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   video_config?: RecordingStartRecordingsParams.VideoConfig;
 }
@@ -1485,7 +1485,7 @@ export interface RecordingStartTrackRecordingParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   layers: { [key: string]: RecordingStartTrackRecordingParams.Layers };
 

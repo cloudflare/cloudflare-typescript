@@ -166,7 +166,7 @@ export interface SchemaValidationEditParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   settings_multiple_request: SettingsMultipleRequestParam;
 }
