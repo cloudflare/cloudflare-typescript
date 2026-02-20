@@ -1618,7 +1618,7 @@ export namespace ScriptUpdateParams {
       /**
        * JSON data to use.
        */
-      json: string;
+      json: string | Record<string, unknown> | unknown[] | number | boolean | null;
 
       /**
        * A JavaScript variable name for the binding.

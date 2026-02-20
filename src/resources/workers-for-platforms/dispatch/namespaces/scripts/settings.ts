@@ -394,7 +394,7 @@ export namespace SettingEditResponse {
     /**
      * JSON data to use.
      */
-    json: string;
+    json: string | Record<string, unknown> | unknown[] | number | boolean | null;
 
     /**
      * A JavaScript variable name for the binding.
@@ -1151,7 +1151,7 @@ export namespace SettingGetResponse {
     /**
      * JSON data to use.
      */
-    json: string;
+    json: string | Record<string, unknown> | unknown[] | number | boolean | null;
 
     /**
      * A JavaScript variable name for the binding.
@@ -1922,7 +1922,7 @@ export namespace SettingEditParams {
       /**
        * JSON data to use.
        */
-      json: string;
+      json: string | Record<string, unknown> | unknown[] | number | boolean | null;
 
       /**
        * A JavaScript variable name for the binding.
