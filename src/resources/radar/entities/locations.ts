@@ -59,6 +59,8 @@ export namespace LocationListResponse {
   export interface Location {
     alpha2: string;
 
+    continent: string;
+
     /**
      * A numeric string.
      */
@@ -70,6 +72,10 @@ export namespace LocationListResponse {
     longitude: string;
 
     name: string;
+
+    region: string;
+
+    subregion: string;
   }
 }
 
@@ -82,6 +88,8 @@ export namespace LocationGetResponse {
     alpha2: string;
 
     confidenceLevel: number;
+
+    continent: string;
 
     /**
      * A numeric string.
@@ -103,6 +111,11 @@ export namespace LocationGetResponse {
 
 export interface LocationListParams {
   /**
+   * Filters results by continent code.
+   */
+  continent?: 'AF' | 'AS' | 'EU' | 'NA' | 'OC' | 'SA';
+
+  /**
    * Format in which results will be returned.
    */
   format?: 'JSON' | 'CSV';
@@ -122,6 +135,16 @@ export interface LocationListParams {
    * Skips the specified number of objects before fetching the results.
    */
   offset?: number;
+
+  /**
+   * Filters results by region.
+   */
+  region?: string;
+
+  /**
+   * Filters results by subregion.
+   */
+  subregion?: string;
 }
 
 export interface LocationGetParams {
