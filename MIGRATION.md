@@ -1367,6 +1367,8 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.netFlows.timeseriesGroups()`
 - `client.radar.netFlows.top.ases()`
 - `client.radar.netFlows.top.locations()`
+- `client.radar.postQuantum.origin.summary()`
+- `client.radar.postQuantum.origin.timeseriesGroups()`
 - `client.radar.verifiedBots.top.bots()`
 - `client.radar.verifiedBots.top.categories()`
 - `client.radar.as112.summaryV2()`
@@ -1473,6 +1475,7 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.attacks.layer7.top.ases.origin()`
 - `client.radar.entities.asns.list()`
 - `client.radar.entities.asns.asSet()`
+- `client.radar.entities.asns.botnetThreatFeed()`
 - `client.radar.entities.asns.get()`
 - `client.radar.entities.asns.rel()`
 - `client.radar.entities.locations.list()`

@@ -88,6 +88,7 @@ export {
   type NetFlowsTimeseriesParams,
   type NetFlowsTimeseriesGroupsParams,
 } from './netflows/index';
+export { PostQuantum } from './post-quantum/index';
 export { Quality } from './quality/index';
 export { Radar } from './radar';
 export {

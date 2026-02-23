@@ -7087,6 +7087,30 @@ Methods:
 - <code title="get /radar/netflows/top/ases">client.radar.netFlows.top.<a href="./src/resources/radar/netflows/top.ts">ases</a>({ ...params }) -> TopAsesResponse</code>
 - <code title="get /radar/netflows/top/locations">client.radar.netFlows.top.<a href="./src/resources/radar/netflows/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
 
+## PostQuantum
+
+### Origin
+
+Types:
+
+- <code><a href="./src/resources/radar/post-quantum/origin.ts">OriginSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/post-quantum/origin.ts">OriginTimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/post_quantum/origin/summary/{dimension}">client.radar.postQuantum.origin.<a href="./src/resources/radar/post-quantum/origin.ts">summary</a>(dimension, { ...params }) -> OriginSummaryResponse</code>
+- <code title="get /radar/post_quantum/origin/timeseries_groups/{dimension}">client.radar.postQuantum.origin.<a href="./src/resources/radar/post-quantum/origin.ts">timeseriesGroups</a>(dimension, { ...params }) -> OriginTimeseriesGroupsResponse</code>
+
+### TLS
+
+Types:
+
+- <code><a href="./src/resources/radar/post-quantum/tls.ts">TLSSupportResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/post_quantum/tls/support">client.radar.postQuantum.tls.<a href="./src/resources/radar/post-quantum/tls.ts">support</a>({ ...params }) -> TLSSupportResponse</code>
+
 ## Search
 
 Types:
@@ -7542,6 +7566,7 @@ Types:
 
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNListResponse</a></code>
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNAsSetResponse</a></code>
+- <code><a href="./src/resources/radar/entities/asns.ts">ASNBotnetThreatFeedResponse</a></code>
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNGetResponse</a></code>
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNIPResponse</a></code>
 - <code><a href="./src/resources/radar/entities/asns.ts">ASNRelResponse</a></code>
@@ -7550,6 +7575,7 @@ Methods:
 
 - <code title="get /radar/entities/asns">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">list</a>({ ...params }) -> ASNListResponse</code>
 - <code title="get /radar/entities/asns/{asn}/as_set">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">asSet</a>(asn, { ...params }) -> ASNAsSetResponse</code>
+- <code title="get /radar/entities/asns/botnet_threat_feed">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">botnetThreatFeed</a>({ ...params }) -> ASNBotnetThreatFeedResponse</code>
 - <code title="get /radar/entities/asns/{asn}">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">get</a>(asn, { ...params }) -> ASNGetResponse</code>
 - <code title="get /radar/entities/asns/ip">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">ip</a>({ ...params }) -> ASNIPResponse</code>
 - <code title="get /radar/entities/asns/{asn}/rel">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">rel</a>(asn, { ...params }) -> ASNRelResponse</code>
