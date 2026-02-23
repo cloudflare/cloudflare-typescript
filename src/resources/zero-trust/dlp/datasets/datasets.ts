@@ -2,14 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as UploadAPI from './upload';
-import {
-  NewVersion,
-  Upload as UploadAPIUpload,
-  UploadCreateParams,
-  UploadCreateResponse,
-  UploadEditParams,
-  UploadEditResponse,
-} from './upload';
+import { NewVersion, Upload as UploadAPIUpload, UploadCreateParams, UploadEditParams } from './upload';
 import * as VersionsAPI from './versions/versions';
 import {
   VersionCreateParams,
@@ -32,17 +25,18 @@ export class Datasets extends APIResource {
    *
    * @example
    * ```ts
-   * const dataset = await client.zeroTrust.dlp.datasets.create({
-   *   account_id: 'account_id',
-   *   name: 'name',
-   * });
+   * const datasetCreation =
+   *   await client.zeroTrust.dlp.datasets.create({
+   *     account_id: 'account_id',
+   *     name: 'name',
+   *   });
    * ```
    */
-  create(params: DatasetCreateParams, options?: RequestOptions): APIPromise<DatasetCreateResponse> {
+  create(params: DatasetCreateParams, options?: RequestOptions): APIPromise<DatasetCreation> {
     const { account_id, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/datasets`, { body, ...options }) as APIPromise<{
-        result: DatasetCreateResponse;
+        result: DatasetCreation;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -58,17 +52,13 @@ export class Datasets extends APIResource {
    * );
    * ```
    */
-  update(
-    datasetID: string,
-    params: DatasetUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<DatasetUpdateResponse> {
+  update(datasetID: string, params: DatasetUpdateParams, options?: RequestOptions): APIPromise<Dataset> {
     const { account_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/dlp/datasets/${datasetID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: DatasetUpdateResponse }>
+      }) as APIPromise<{ result: Dataset }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -120,11 +110,11 @@ export class Datasets extends APIResource {
    * );
    * ```
    */
-  get(datasetID: string, params: DatasetGetParams, options?: RequestOptions): APIPromise<DatasetGetResponse> {
+  get(datasetID: string, params: DatasetGetParams, options?: RequestOptions): APIPromise<Dataset> {
     const { account_id } = params;
     return (
       this._client.get(path`/accounts/${account_id}/dlp/datasets/${datasetID}`, options) as APIPromise<{
-        result: DatasetGetResponse;
+        result: Dataset;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -209,137 +199,6 @@ export interface DatasetCreation {
    * This is not present in Custom Wordlists.
    */
   secret?: string;
-}
-
-export interface DatasetCreateResponse {
-  dataset: Dataset;
-
-  /**
-   * Encoding version to use for dataset.
-   */
-  encoding_version: number;
-
-  max_cells: number;
-
-  /**
-   * The version to use when uploading the dataset.
-   */
-  version: number;
-
-  /**
-   * The secret to use for Exact Data Match datasets.
-   *
-   * This is not present in Custom Wordlists.
-   */
-  secret?: string;
-}
-
-export interface DatasetUpdateResponse {
-  id: string;
-
-  columns: Array<DatasetUpdateResponse.Column>;
-
-  created_at: string;
-
-  encoding_version: number;
-
-  name: string;
-
-  num_cells: number;
-
-  secret: boolean;
-
-  status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-  /**
-   * Stores when the dataset was last updated.
-   *
-   * This includes name or description changes as well as uploads.
-   */
-  updated_at: string;
-
-  uploads: Array<DatasetUpdateResponse.Upload>;
-
-  case_sensitive?: boolean;
-
-  /**
-   * The description of the dataset.
-   */
-  description?: string | null;
-}
-
-export namespace DatasetUpdateResponse {
-  export interface Column {
-    entry_id: string;
-
-    header_name: string;
-
-    num_cells: number;
-
-    upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export interface Upload {
-    num_cells: number;
-
-    status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-    version: number;
-  }
-}
-
-export interface DatasetGetResponse {
-  id: string;
-
-  columns: Array<DatasetGetResponse.Column>;
-
-  created_at: string;
-
-  encoding_version: number;
-
-  name: string;
-
-  num_cells: number;
-
-  secret: boolean;
-
-  status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-  /**
-   * Stores when the dataset was last updated.
-   *
-   * This includes name or description changes as well as uploads.
-   */
-  updated_at: string;
-
-  uploads: Array<DatasetGetResponse.Upload>;
-
-  case_sensitive?: boolean;
-
-  /**
-   * The description of the dataset.
-   */
-  description?: string | null;
-}
-
-export namespace DatasetGetResponse {
-  export interface Column {
-    entry_id: string;
-
-    header_name: string;
-
-    num_cells: number;
-
-    upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export interface Upload {
-    num_cells: number;
-
-    status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-    version: number;
-  }
 }
 
 export interface DatasetCreateParams {
@@ -429,9 +288,6 @@ export declare namespace Datasets {
     type Dataset as Dataset,
     type DatasetArray as DatasetArray,
     type DatasetCreation as DatasetCreation,
-    type DatasetCreateResponse as DatasetCreateResponse,
-    type DatasetUpdateResponse as DatasetUpdateResponse,
-    type DatasetGetResponse as DatasetGetResponse,
     type DatasetsSinglePage as DatasetsSinglePage,
     type DatasetCreateParams as DatasetCreateParams,
     type DatasetUpdateParams as DatasetUpdateParams,
@@ -443,8 +299,6 @@ export declare namespace Datasets {
   export {
     UploadAPIUpload as Upload,
     type NewVersion as NewVersion,
-    type UploadCreateResponse as UploadCreateResponse,
-    type UploadEditResponse as UploadEditResponse,
     type UploadCreateParams as UploadCreateParams,
     type UploadEditParams as UploadEditParams,
   };
