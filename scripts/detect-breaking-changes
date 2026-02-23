@@ -595,6 +595,9 @@ TEST_PATHS=(
 	tests/api-resources/radar/dns/timeseries-groups.test.ts
 	tests/api-resources/radar/netflows/netflows.test.ts
 	tests/api-resources/radar/netflows/top.test.ts
+	tests/api-resources/radar/post-quantum/post-quantum.test.ts
+	tests/api-resources/radar/post-quantum/origin.test.ts
+	tests/api-resources/radar/post-quantum/tls.test.ts
 	tests/api-resources/radar/search.test.ts
 	tests/api-resources/radar/verified-bots/verified-bots.test.ts
 	tests/api-resources/radar/verified-bots/top.test.ts

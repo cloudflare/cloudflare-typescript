@@ -114,6 +114,8 @@ import {
   NetFlowsTimeseriesParams,
   NetFlowsTimeseriesResponse,
 } from './netflows/netflows';
+import * as PostQuantumAPI from './post-quantum/post-quantum';
+import { PostQuantum } from './post-quantum/post-quantum';
 import * as QualityAPI from './quality/quality';
 import { Quality } from './quality/quality';
 import * as RankingAPI from './ranking/ranking';
@@ -144,6 +146,7 @@ export class Radar extends APIResource {
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
   netFlows: NetFlowsAPI.NetFlows = new NetFlowsAPI.NetFlows(this._client);
+  postQuantum: PostQuantumAPI.PostQuantum = new PostQuantumAPI.PostQuantum(this._client);
   search: SearchAPI.Search = new SearchAPI.Search(this._client);
   verifiedBots: VerifiedBotsAPI.VerifiedBots = new VerifiedBotsAPI.VerifiedBots(this._client);
   as112: AS112API.AS112 = new AS112API.AS112(this._client);
@@ -174,6 +177,7 @@ Radar.Bots = Bots;
 Radar.Datasets = Datasets;
 Radar.DNS = DNS;
 Radar.NetFlows = NetFlows;
+Radar.PostQuantum = PostQuantum;
 Radar.Search = Search;
 Radar.VerifiedBots = VerifiedBots;
 Radar.AS112 = AS112;
@@ -258,6 +262,8 @@ export declare namespace Radar {
     type NetFlowsTimeseriesParams as NetFlowsTimeseriesParams,
     type NetFlowsTimeseriesGroupsParams as NetFlowsTimeseriesGroupsParams,
   };
+
+  export { PostQuantum as PostQuantum };
 
   export {
     Search as Search,
