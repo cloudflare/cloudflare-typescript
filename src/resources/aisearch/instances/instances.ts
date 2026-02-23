@@ -330,6 +330,8 @@ export interface InstanceCreateResponse {
 
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
 
+  retrieval_options?: InstanceCreateResponse.RetrievalOptions | null;
+
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
     | '@cf/zai-org/glm-4.7-flash'
@@ -429,6 +431,15 @@ export namespace InstanceCreateResponse {
        */
       disabled?: boolean;
     }
+  }
+
+  export interface RetrievalOptions {
+    /**
+     * Controls how keyword search terms are matched. exact_match requires all terms to
+     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
+     * exact_match.
+     */
+    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
   }
 
   export interface SourceParams {
@@ -582,6 +593,8 @@ export interface InstanceUpdateResponse {
 
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
 
+  retrieval_options?: InstanceUpdateResponse.RetrievalOptions | null;
+
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
     | '@cf/zai-org/glm-4.7-flash'
@@ -681,6 +694,15 @@ export namespace InstanceUpdateResponse {
        */
       disabled?: boolean;
     }
+  }
+
+  export interface RetrievalOptions {
+    /**
+     * Controls how keyword search terms are matched. exact_match requires all terms to
+     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
+     * exact_match.
+     */
+    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
   }
 
   export interface SourceParams {
@@ -834,6 +856,8 @@ export interface InstanceListResponse {
 
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
 
+  retrieval_options?: InstanceListResponse.RetrievalOptions | null;
+
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
     | '@cf/zai-org/glm-4.7-flash'
@@ -933,6 +957,15 @@ export namespace InstanceListResponse {
        */
       disabled?: boolean;
     }
+  }
+
+  export interface RetrievalOptions {
+    /**
+     * Controls how keyword search terms are matched. exact_match requires all terms to
+     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
+     * exact_match.
+     */
+    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
   }
 
   export interface SourceParams {
@@ -1086,6 +1119,8 @@ export interface InstanceDeleteResponse {
 
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
 
+  retrieval_options?: InstanceDeleteResponse.RetrievalOptions | null;
+
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
     | '@cf/zai-org/glm-4.7-flash'
@@ -1185,6 +1220,15 @@ export namespace InstanceDeleteResponse {
        */
       disabled?: boolean;
     }
+  }
+
+  export interface RetrievalOptions {
+    /**
+     * Controls how keyword search terms are matched. exact_match requires all terms to
+     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
+     * exact_match.
+     */
+    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
   }
 
   export interface SourceParams {
@@ -1406,6 +1450,8 @@ export interface InstanceReadResponse {
 
   reranking_model?: '@cf/baai/bge-reranker-base' | '';
 
+  retrieval_options?: InstanceReadResponse.RetrievalOptions | null;
+
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
     | '@cf/zai-org/glm-4.7-flash'
@@ -1505,6 +1551,15 @@ export namespace InstanceReadResponse {
        */
       disabled?: boolean;
     }
+  }
+
+  export interface RetrievalOptions {
+    /**
+     * Controls how keyword search terms are matched. exact_match requires all terms to
+     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
+     * exact_match.
+     */
+    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
   }
 
   export interface SourceParams {
@@ -1756,6 +1811,11 @@ export interface InstanceCreateParams {
   /**
    * Body param
    */
+  retrieval_options?: InstanceCreateParams.RetrievalOptions | null;
+
+  /**
+   * Body param
+   */
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
     | '@cf/zai-org/glm-4.7-flash'
@@ -1865,6 +1925,15 @@ export namespace InstanceCreateParams {
        */
       disabled?: boolean;
     }
+  }
+
+  export interface RetrievalOptions {
+    /**
+     * Controls how keyword search terms are matched. exact_match requires all terms to
+     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
+     * exact_match.
+     */
+    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
   }
 
   export interface SourceParams {
@@ -2054,6 +2123,11 @@ export interface InstanceUpdateParams {
   /**
    * Body param
    */
+  retrieval_options?: InstanceUpdateParams.RetrievalOptions | null;
+
+  /**
+   * Body param
+   */
   rewrite_model?:
     | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
     | '@cf/zai-org/glm-4.7-flash'
@@ -2216,6 +2290,15 @@ export namespace InstanceUpdateParams {
        */
       disabled?: boolean;
     }
+  }
+
+  export interface RetrievalOptions {
+    /**
+     * Controls how keyword search terms are matched. exact_match requires all terms to
+     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
+     * exact_match.
+     */
+    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
   }
 
   export interface SourceParams {
@@ -2417,6 +2500,13 @@ export namespace InstanceChatCompletionsParams {
 
       fusion_method?: 'max' | 'rrf';
 
+      /**
+       * Controls how keyword search terms are matched. exact_match requires all terms to
+       * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
+       * exact_match.
+       */
+      keyword_match_mode?: 'exact_match' | 'fuzzy_match';
+
       match_threshold?: number;
 
       max_num_results?: number;
@@ -2517,6 +2607,13 @@ export namespace InstanceSearchParams {
       filters?: { [key: string]: unknown };
 
       fusion_method?: 'max' | 'rrf';
+
+      /**
+       * Controls how keyword search terms are matched. exact_match requires all terms to
+       * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
+       * exact_match.
+       */
+      keyword_match_mode?: 'exact_match' | 'fuzzy_match';
 
       match_threshold?: number;
 

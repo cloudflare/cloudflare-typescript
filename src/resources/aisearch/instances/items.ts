@@ -66,31 +66,55 @@ export class Items extends APIResource {
 export type ItemListResponsesV4PagePaginationArray = V4PagePaginationArray<ItemListResponse>;
 
 export interface ItemListResponse {
-  id: string;
+  id: number;
+
+  checksum: string;
+
+  chunks_count: number | null;
+
+  created_at: string;
+
+  file_size: number | null;
 
   key: string;
+
+  last_seen_at: string;
+
+  namespace: string;
+
+  next_action: 'INDEX' | 'DELETE' | null;
 
   status: 'queued' | 'running' | 'completed' | 'error' | 'skipped';
 
   error?: string;
 
-  last_seen_at?: string;
-
-  next_action?: string;
+  public_id?: string;
 }
 
 export interface ItemGetResponse {
-  id: string;
+  id: number;
+
+  checksum: string;
+
+  chunks_count: number | null;
+
+  created_at: string;
+
+  file_size: number | null;
 
   key: string;
+
+  last_seen_at: string;
+
+  namespace: string;
+
+  next_action: 'INDEX' | 'DELETE' | null;
 
   status: 'queued' | 'running' | 'completed' | 'error' | 'skipped';
 
   error?: string;
 
-  last_seen_at?: string;
-
-  next_action?: string;
+  public_id?: string;
 }
 
 export interface ItemListParams extends V4PagePaginationArrayParams {
