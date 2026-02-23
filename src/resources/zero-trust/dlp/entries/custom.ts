@@ -185,15 +185,15 @@ export interface CustomUpdateResponse {
 }
 
 export type CustomListResponse =
-  | CustomListResponse.CustomEntry
-  | CustomListResponse.PredefinedEntry
-  | CustomListResponse.IntegrationEntry
-  | CustomListResponse.ExactDataEntry
-  | CustomListResponse.DocumentFingerprintEntry
-  | CustomListResponse.WordListEntry;
+  | CustomListResponse.UnionMember0
+  | CustomListResponse.UnionMember1
+  | CustomListResponse.UnionMember2
+  | CustomListResponse.UnionMember3
+  | CustomListResponse.UnionMember4
+  | CustomListResponse.UnionMember5;
 
 export namespace CustomListResponse {
-  export interface CustomEntry {
+  export interface UnionMember0 {
     id: string;
 
     created_at: string;
@@ -221,10 +221,10 @@ export namespace CustomListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface PredefinedEntry {
+  export interface UnionMember1 {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: UnionMember1.Confidence;
 
     enabled: boolean;
 
@@ -239,10 +239,10 @@ export namespace CustomListResponse {
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
-    variant?: PredefinedEntry.Variant;
+    variant?: UnionMember1.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace UnionMember1 {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -265,7 +265,7 @@ export namespace CustomListResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface UnionMember2 {
     id: string;
 
     created_at: string;
@@ -283,7 +283,7 @@ export namespace CustomListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface ExactDataEntry {
+  export interface UnionMember3 {
     id: string;
 
     /**
@@ -307,7 +307,7 @@ export namespace CustomListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface UnionMember4 {
     id: string;
 
     created_at: string;
@@ -323,7 +323,7 @@ export namespace CustomListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface WordListEntry {
+  export interface UnionMember5 {
     id: string;
 
     created_at: string;
