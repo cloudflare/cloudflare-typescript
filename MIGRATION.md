@@ -719,6 +719,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.access.bookmarks.update()`
 - `client.zeroTrust.access.bookmarks.delete()`
 - `client.zeroTrust.access.bookmarks.get()`
+- `client.zeroTrust.access.users.update()`
+- `client.zeroTrust.access.users.delete()`
+- `client.zeroTrust.access.users.get()`
 - `client.zeroTrust.access.users.activeSessions.list()`
 - `client.zeroTrust.access.users.activeSessions.get()`
 - `client.zeroTrust.access.users.lastSeenIdentity.get()`

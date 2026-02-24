@@ -153,8 +153,16 @@ export {
 export {
   Users,
   type AccessUser,
+  type UserCreateResponse,
+  type UserUpdateResponse,
   type UserListResponse,
+  type UserDeleteResponse,
+  type UserGetResponse,
+  type UserCreateParams,
+  type UserUpdateParams,
   type UserListParams,
+  type UserDeleteParams,
+  type UserGetParams,
   type AccessUsersV4PagePaginationArray,
   type UserListResponsesV4PagePaginationArray,
 } from './users/index';

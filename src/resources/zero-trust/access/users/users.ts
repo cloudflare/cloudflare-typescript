@@ -19,6 +19,7 @@ import {
 } from './failed-logins';
 import * as LastSeenIdentityAPI from './last-seen-identity';
 import { Identity, LastSeenIdentity, LastSeenIdentityGetParams } from './last-seen-identity';
+import { APIPromise } from '../../../../core/api-promise';
 import {
   PagePromise,
   V4PagePaginationArray,
@@ -33,6 +34,52 @@ export class Users extends APIResource {
     this._client,
   );
   failedLogins: FailedLoginsAPI.FailedLogins = new FailedLoginsAPI.FailedLogins(this._client);
+
+  /**
+   * Creates a new user.
+   *
+   * @example
+   * ```ts
+   * const user = await client.zeroTrust.access.users.create({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   email: 'jdoe@example.com',
+   * });
+   * ```
+   */
+  create(params: UserCreateParams, options?: RequestOptions): APIPromise<UserCreateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/access/users`, { body, ...options }) as APIPromise<{
+        result: UserCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates a specific user's name for an account. Requires the user's current email
+   * as confirmation (email cannot be changed).
+   *
+   * @example
+   * ```ts
+   * const user = await client.zeroTrust.access.users.update(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     email: 'jdoe@example.com',
+   *     name: 'Jane Doe',
+   *   },
+   * );
+   * ```
+   */
+  update(userID: string, params: UserUpdateParams, options?: RequestOptions): APIPromise<UserUpdateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(path`/accounts/${account_id}/access/users/${userID}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: UserUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 
   /**
    * Gets a list of users for an account.
@@ -57,6 +104,51 @@ export class Users extends APIResource {
       V4PagePaginationArray<UserListResponse>,
       { query, ...options },
     );
+  }
+
+  /**
+   * Deletes a specific user for an account. This will also revoke any active seats
+   * and tokens for the user.
+   *
+   * @example
+   * ```ts
+   * const user = await client.zeroTrust.access.users.delete(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  delete(
+    userID: string,
+    params: UserDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<UserDeleteResponse | null> {
+    const { account_id } = params;
+    return (
+      this._client.delete(path`/accounts/${account_id}/access/users/${userID}`, options) as APIPromise<{
+        result: UserDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Gets a specific user for an account.
+   *
+   * @example
+   * ```ts
+   * const user = await client.zeroTrust.access.users.get(
+   *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  get(userID: string, params: UserGetParams, options?: RequestOptions): APIPromise<UserGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/access/users/${userID}`, options) as APIPromise<{
+        result: UserGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -133,6 +225,108 @@ export namespace AccessUser {
   }
 }
 
+export interface UserCreateResponse {
+  /**
+   * UUID.
+   */
+  id?: string;
+
+  /**
+   * True if the user has authenticated with Cloudflare Access.
+   */
+  access_seat?: boolean;
+
+  /**
+   * The number of active devices registered to the user.
+   */
+  active_device_count?: number;
+
+  created_at?: string;
+
+  /**
+   * The email of the user.
+   */
+  email?: string;
+
+  /**
+   * True if the user has logged into the WARP client.
+   */
+  gateway_seat?: boolean;
+
+  /**
+   * The time at which the user last successfully logged in.
+   */
+  last_successful_login?: string;
+
+  /**
+   * The name of the user.
+   */
+  name?: string;
+
+  /**
+   * The unique API identifier for the Zero Trust seat.
+   */
+  seat_uid?: string;
+
+  /**
+   * The unique API identifier for the user.
+   */
+  uid?: string;
+
+  updated_at?: string;
+}
+
+export interface UserUpdateResponse {
+  /**
+   * UUID.
+   */
+  id?: string;
+
+  /**
+   * True if the user has authenticated with Cloudflare Access.
+   */
+  access_seat?: boolean;
+
+  /**
+   * The number of active devices registered to the user.
+   */
+  active_device_count?: number;
+
+  created_at?: string;
+
+  /**
+   * The email of the user.
+   */
+  email?: string;
+
+  /**
+   * True if the user has logged into the WARP client.
+   */
+  gateway_seat?: boolean;
+
+  /**
+   * The time at which the user last successfully logged in.
+   */
+  last_successful_login?: string;
+
+  /**
+   * The name of the user.
+   */
+  name?: string;
+
+  /**
+   * The unique API identifier for the Zero Trust seat.
+   */
+  seat_uid?: string;
+
+  /**
+   * The unique API identifier for the user.
+   */
+  uid?: string;
+
+  updated_at?: string;
+}
+
 export interface UserListResponse {
   /**
    * UUID.
@@ -184,6 +378,93 @@ export interface UserListResponse {
   updated_at?: string;
 }
 
+export type UserDeleteResponse = unknown;
+
+export interface UserGetResponse {
+  /**
+   * UUID.
+   */
+  id?: string;
+
+  /**
+   * True if the user has authenticated with Cloudflare Access.
+   */
+  access_seat?: boolean;
+
+  /**
+   * The number of active devices registered to the user.
+   */
+  active_device_count?: number;
+
+  created_at?: string;
+
+  /**
+   * The email of the user.
+   */
+  email?: string;
+
+  /**
+   * True if the user has logged into the WARP client.
+   */
+  gateway_seat?: boolean;
+
+  /**
+   * The time at which the user last successfully logged in.
+   */
+  last_successful_login?: string;
+
+  /**
+   * The name of the user.
+   */
+  name?: string;
+
+  /**
+   * The unique API identifier for the Zero Trust seat.
+   */
+  seat_uid?: string;
+
+  /**
+   * The unique API identifier for the user.
+   */
+  uid?: string;
+
+  updated_at?: string;
+}
+
+export interface UserCreateParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: The email of the user.
+   */
+  email: string;
+
+  /**
+   * Body param: The name of the user.
+   */
+  name?: string;
+}
+
+export interface UserUpdateParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: The email of the user.
+   */
+  email: string;
+
+  /**
+   * Body param: The name of the user.
+   */
+  name: string;
+}
+
 export interface UserListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
@@ -206,6 +487,20 @@ export interface UserListParams extends V4PagePaginationArrayParams {
   search?: string;
 }
 
+export interface UserDeleteParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
+export interface UserGetParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
 Users.ActiveSessions = ActiveSessions;
 Users.LastSeenIdentity = LastSeenIdentity;
 Users.FailedLogins = FailedLogins;
@@ -213,9 +508,17 @@ Users.FailedLogins = FailedLogins;
 export declare namespace Users {
   export {
     type AccessUser as AccessUser,
+    type UserCreateResponse as UserCreateResponse,
+    type UserUpdateResponse as UserUpdateResponse,
     type UserListResponse as UserListResponse,
+    type UserDeleteResponse as UserDeleteResponse,
+    type UserGetResponse as UserGetResponse,
     type UserListResponsesV4PagePaginationArray as UserListResponsesV4PagePaginationArray,
+    type UserCreateParams as UserCreateParams,
+    type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
+    type UserDeleteParams as UserDeleteParams,
+    type UserGetParams as UserGetParams,
   };
 
   export {

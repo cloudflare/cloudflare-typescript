@@ -5513,11 +5513,19 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/users/users.ts">AccessUser</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">UserCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">UserUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/users/users.ts">UserListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">UserDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">UserGetResponse</a></code>
 
 Methods:
 
+- <code title="post /accounts/{account_id}/access/users">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">create</a>({ ...params }) -> UserCreateResponse</code>
+- <code title="put /accounts/{account_id}/access/users/{user_id}">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">update</a>(userID, { ...params }) -> UserUpdateResponse</code>
 - <code title="get /accounts/{account_id}/access/users">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">list</a>({ ...params }) -> UserListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/access/users/{user_id}">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">delete</a>(userID, { ...params }) -> UserDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/access/users/{user_id}">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">get</a>(userID, { ...params }) -> UserGetResponse</code>
 
 #### ActiveSessions
 
