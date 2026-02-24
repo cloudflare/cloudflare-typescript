@@ -39,7 +39,8 @@ export class ZoneCertificates extends APIResource {
   }
 
   /**
-   * List Certificates
+   * Lists all client certificates configured for zone-level authenticated origin
+   * pulls.
    *
    * @example
    * ```ts
@@ -64,7 +65,7 @@ export class ZoneCertificates extends APIResource {
   }
 
   /**
-   * Delete Certificate
+   * Removes a client certificate used for zone-level authenticated origin pulls.
    *
    * @example
    * ```ts
@@ -90,7 +91,8 @@ export class ZoneCertificates extends APIResource {
   }
 
   /**
-   * Get Certificate Details
+   * Retrieves details for a specific client certificate used in zone-level
+   * authenticated origin pulls.
    *
    * @example
    * ```ts

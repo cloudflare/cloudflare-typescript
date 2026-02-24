@@ -40,7 +40,8 @@ export class Hostnames extends APIResource {
   }
 
   /**
-   * Get the Hostname Status for Client Authentication
+   * Retrieves the client certificate authentication status for a specific hostname,
+   * showing whether authenticated origin pulls are enabled.
    *
    * @example
    * ```ts
