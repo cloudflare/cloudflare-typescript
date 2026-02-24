@@ -124,7 +124,9 @@ export class CustomCertificates extends APIResource {
   }
 
   /**
-   * SSL Configuration Details
+   * Retrieves details for a specific custom SSL certificate, including certificate
+   * metadata, bundle method, geographic restrictions, and associated keyless server
+   * configuration.
    *
    * @example
    * ```ts

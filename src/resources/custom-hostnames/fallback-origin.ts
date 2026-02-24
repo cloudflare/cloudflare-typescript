@@ -7,7 +7,8 @@ import { path } from '../../internal/utils/path';
 
 export class FallbackOrigin extends APIResource {
   /**
-   * Update Fallback Origin for Custom Hostnames
+   * Updates the fallback origin configuration for custom hostnames on a zone. Sets
+   * the default origin server for custom hostname traffic.
    *
    * @example
    * ```ts
@@ -32,7 +33,8 @@ export class FallbackOrigin extends APIResource {
   }
 
   /**
-   * Delete Fallback Origin for Custom Hostnames
+   * Removes the fallback origin configuration for custom hostnames on a zone. Custom
+   * hostnames without specific origins will no longer have a fallback.
    *
    * @example
    * ```ts
@@ -55,7 +57,9 @@ export class FallbackOrigin extends APIResource {
   }
 
   /**
-   * Get Fallback Origin for Custom Hostnames
+   * Retrieves the current fallback origin configuration for custom hostnames on a
+   * zone. The fallback origin handles traffic when specific custom hostname origins
+   * are unavailable.
    *
    * @example
    * ```ts

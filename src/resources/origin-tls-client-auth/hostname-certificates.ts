@@ -39,7 +39,8 @@ export class HostnameCertificates extends APIResource {
   }
 
   /**
-   * List Certificates
+   * Lists all client certificates configured for per-hostname authenticated origin
+   * pulls on the zone.
    *
    * @example
    * ```ts
@@ -64,7 +65,11 @@ export class HostnameCertificates extends APIResource {
   }
 
   /**
-   * Delete Hostname Client Certificate
+   * Removes a client certificate used for authenticated origin pulls on a specific
+   * hostname. Note: Before deleting the certificate, you must first invalidate the
+   * hostname for client authentication by sending a PUT request with `enabled` set
+   * to null. After invalidating the association, the certificate can be safely
+   * deleted.
    *
    * @example
    * ```ts
