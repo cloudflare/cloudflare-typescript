@@ -8,7 +8,7 @@ import { path } from '../../internal/utils/path';
 
 export class Tokens extends APIResource {
   /**
-   * Create new tokens.
+   * Create a new tokens.
    *
    * @example
    * ```ts

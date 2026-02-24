@@ -98,7 +98,7 @@ export namespace MaintenanceConfigUpdateResponse {
     state: 'enabled' | 'disabled';
 
     /**
-     * Sets the target file size for compaction in megabytes.
+     * Sets the target file size for compaction in megabytes. Defaults to "128".
      */
     target_size_mb: '64' | '128' | '256' | '512';
   }
@@ -111,12 +111,12 @@ export namespace MaintenanceConfigUpdateResponse {
      * Specifies the maximum age for snapshots. The system deletes snapshots older than
      * this age. Format: <number><unit> where unit is d (days), h (hours), m (minutes),
      * or s (seconds). Examples: "7d" (7 days), "48h" (48 hours), "2880m" (2,880
-     * minutes).
+     * minutes). Defaults to "7d".
      */
     max_snapshot_age: string;
 
     /**
-     * Specifies the minimum number of snapshots to retain.
+     * Specifies the minimum number of snapshots to retain. Defaults to 100.
      */
     min_snapshots_to_keep: number;
 
@@ -169,7 +169,7 @@ export namespace MaintenanceConfigGetResponse {
       state: 'enabled' | 'disabled';
 
       /**
-       * Sets the target file size for compaction in megabytes.
+       * Sets the target file size for compaction in megabytes. Defaults to "128".
        */
       target_size_mb: '64' | '128' | '256' | '512';
     }
@@ -182,12 +182,12 @@ export namespace MaintenanceConfigGetResponse {
        * Specifies the maximum age for snapshots. The system deletes snapshots older than
        * this age. Format: <number><unit> where unit is d (days), h (hours), m (minutes),
        * or s (seconds). Examples: "7d" (7 days), "48h" (48 hours), "2880m" (2,880
-       * minutes).
+       * minutes). Defaults to "7d".
        */
       max_snapshot_age: string;
 
       /**
-       * Specifies the minimum number of snapshots to retain.
+       * Specifies the minimum number of snapshots to retain. Defaults to 100.
        */
       min_snapshots_to_keep: number;
 

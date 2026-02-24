@@ -12,7 +12,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Items extends APIResource {
   /**
-   * Items List.
+   * Lists indexed items in an AI Search instance.
    *
    * @example
    * ```ts
@@ -39,7 +39,7 @@ export class Items extends APIResource {
   }
 
   /**
-   * Get Item.
+   * Retrieves a specific indexed item from an AI Search instance.
    *
    * @example
    * ```ts
