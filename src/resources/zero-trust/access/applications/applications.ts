@@ -1450,6 +1450,12 @@ export interface ApplicationPolicy {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: ApplicationPolicy.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -1514,6 +1520,34 @@ export interface ApplicationPolicy {
 }
 
 export namespace ApplicationPolicy {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.Rdp;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface Rdp {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
   /**
    * Configures multi-factor authentication (MFA) settings.
    */
@@ -2983,6 +3017,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -3053,6 +3093,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -3259,6 +3327,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -3329,6 +3403,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -3837,6 +3939,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -3907,6 +4015,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -4415,6 +4551,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -4485,6 +4627,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -4778,6 +4948,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -4848,6 +5024,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -4956,6 +5160,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -5026,6 +5236,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -5134,6 +5372,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -5204,6 +5448,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -5312,6 +5584,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -5382,6 +5660,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -5469,6 +5775,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -5539,6 +5851,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -6078,6 +6418,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -6148,6 +6494,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -6548,6 +6922,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -6618,6 +6998,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -7024,6 +7432,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -7094,6 +7508,34 @@ export namespace ApplicationCreateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -7605,6 +8047,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -7675,6 +8123,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -7881,6 +8357,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -7951,6 +8433,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -8459,6 +8969,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -8529,6 +9045,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -9037,6 +9581,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -9107,6 +9657,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -9400,6 +9978,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -9470,6 +10054,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -9578,6 +10190,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -9648,6 +10266,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -9756,6 +10402,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -9826,6 +10478,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -9934,6 +10614,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -10004,6 +10690,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -10091,6 +10805,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -10161,6 +10881,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -10700,6 +11448,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -10770,6 +11524,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -11170,6 +11952,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -11240,6 +12028,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -11646,6 +12462,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -11716,6 +12538,34 @@ export namespace ApplicationUpdateResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -12227,6 +13077,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -12297,6 +13153,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -12503,6 +13387,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -12573,6 +13463,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -13081,6 +13999,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -13151,6 +14075,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -13659,6 +14611,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -13729,6 +14687,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -14022,6 +15008,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -14092,6 +15084,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -14200,6 +15220,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -14270,6 +15296,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -14378,6 +15432,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -14448,6 +15508,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -14556,6 +15644,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -14626,6 +15720,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -14713,6 +15835,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -14783,6 +15911,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -15322,6 +16478,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -15392,6 +16554,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -15792,6 +16982,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -15862,6 +17058,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -16268,6 +17492,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -16338,6 +17568,34 @@ export namespace ApplicationListResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -16856,6 +18114,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -16926,6 +18190,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -17132,6 +18424,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -17202,6 +18500,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -17710,6 +19036,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -17780,6 +19112,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -18288,6 +19648,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -18358,6 +19724,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -18651,6 +20045,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -18721,6 +20121,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -18829,6 +20257,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -18899,6 +20333,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -19007,6 +20469,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -19077,6 +20545,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -19185,6 +20681,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -19255,6 +20757,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -19342,6 +20872,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -19412,6 +20948,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -19951,6 +21515,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -20021,6 +21591,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -20421,6 +22019,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -20491,6 +22095,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -20897,6 +22529,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -20967,6 +22605,34 @@ export namespace ApplicationGetResponse {
     }
 
     export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -21510,6 +23176,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -21546,6 +23218,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -21780,6 +23480,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -21816,6 +23522,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -22354,6 +24088,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -22390,6 +24130,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -22928,6 +24696,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -22964,6 +24738,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -23274,6 +25076,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -23310,6 +25118,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -23436,6 +25272,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -23472,6 +25314,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -23598,6 +25468,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -23634,6 +25510,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -23771,6 +25675,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -23807,6 +25717,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -23918,6 +25856,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -23954,6 +25898,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -24525,6 +26497,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -24561,6 +26539,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -24987,6 +26993,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -25023,6 +27035,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -25457,6 +27497,12 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -25493,6 +27539,34 @@ export declare namespace ApplicationCreateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -26034,6 +28108,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -26070,6 +28150,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -26304,6 +28412,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -26340,6 +28454,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -26878,6 +29020,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -26914,6 +29062,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -27452,6 +29628,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -27488,6 +29670,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -27798,6 +30008,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -27834,6 +30050,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -27960,6 +30204,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -27996,6 +30246,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -28122,6 +30400,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -28158,6 +30442,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -28295,6 +30607,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -28331,6 +30649,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -28442,6 +30788,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -28478,6 +30830,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -29049,6 +31429,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -29085,6 +31471,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -29511,6 +31925,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -29547,6 +31967,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
@@ -29981,6 +32429,12 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
@@ -30017,6 +32471,34 @@ export declare namespace ApplicationUpdateParams {
     }
 
     export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.Rdp;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface Rdp {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
       /**
        * Configures multi-factor authentication (MFA) settings.
        */
