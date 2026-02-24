@@ -44,6 +44,12 @@ describe('resource policies', () => {
         },
       ],
       approval_required: true,
+      connection_rules: {
+        rdp: {
+          allowed_clipboard_local_to_remote_formats: ['text'],
+          allowed_clipboard_remote_to_local_formats: ['text'],
+        },
+      },
       exclude: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
       isolation_required: false,
       mfa_config: {
@@ -93,6 +99,12 @@ describe('resource policies', () => {
         },
       ],
       approval_required: true,
+      connection_rules: {
+        rdp: {
+          allowed_clipboard_local_to_remote_formats: ['text'],
+          allowed_clipboard_remote_to_local_formats: ['text'],
+        },
+      },
       exclude: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
       isolation_required: false,
       mfa_config: {
