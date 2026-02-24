@@ -12,7 +12,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Jobs extends APIResource {
   /**
-   * Create new job
+   * Creates a new indexing job for an AI Search instance.
    *
    * @example
    * ```ts
@@ -32,7 +32,7 @@ export class Jobs extends APIResource {
   }
 
   /**
-   * List Jobs
+   * Lists indexing jobs for an AI Search instance.
    *
    * @example
    * ```ts
@@ -59,7 +59,7 @@ export class Jobs extends APIResource {
   }
 
   /**
-   * Get a Job Details
+   * Retrieves details for a specific AI Search indexing job.
    *
    * @example
    * ```ts
@@ -83,7 +83,7 @@ export class Jobs extends APIResource {
   }
 
   /**
-   * List Job Logs
+   * Lists log entries for an AI Search indexing job.
    *
    * @example
    * ```ts
