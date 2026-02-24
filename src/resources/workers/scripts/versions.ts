@@ -31,11 +31,11 @@ export class Versions extends APIResource {
     params: VersionCreateParams,
     options?: RequestOptions,
   ): APIPromise<VersionCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, bindings_inherit, ...body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
-        multipartFormRequestOptions({ body, ...options }, this._client),
+        multipartFormRequestOptions({ query: { bindings_inherit }, body, ...options }, this._client),
       ) as APIPromise<{ result: VersionCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -1785,6 +1785,13 @@ export interface VersionCreateParams {
    * configuration.
    */
   metadata: VersionCreateParams.Metadata;
+
+  /**
+   * Query param: When set to "strict", the upload will fail if any `inherit` type
+   * bindings cannot be resolved against the previous version of the Worker. Without
+   * this, unresolvable inherit bindings are silently dropped.
+   */
+  bindings_inherit?: 'strict';
 
   /**
    * Body param: An array of modules (often JavaScript files) comprising a Worker

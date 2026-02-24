@@ -99,6 +99,7 @@ describe('resource scripts', () => {
           ],
           usage_model: 'standard',
         },
+        bindings_inherit: 'strict',
         files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
       },
     );
