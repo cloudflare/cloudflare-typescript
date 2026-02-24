@@ -8,7 +8,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Snapshots extends APIResource {
   /**
-   * Update indicator feed data
+   * Retrieves the raw data entries in a custom threat indicator feed.
    *
    * @example
    * ```ts

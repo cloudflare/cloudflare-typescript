@@ -27,7 +27,7 @@ export class IndicatorFeeds extends APIResource {
   downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
 
   /**
-   * Create new indicator feed
+   * Creates a new custom threat indicator feed for sharing threat intelligence data.
    *
    * @example
    * ```ts
@@ -51,7 +51,7 @@ export class IndicatorFeeds extends APIResource {
   }
 
   /**
-   * Update indicator feed metadata
+   * Retrieves the raw data entries in a custom threat indicator feed.
    *
    * @example
    * ```ts
@@ -76,7 +76,7 @@ export class IndicatorFeeds extends APIResource {
   }
 
   /**
-   * Get indicator feeds owned by this account
+   * Retrieves details for a specific custom threat indicator feed.
    *
    * @example
    * ```ts
@@ -101,7 +101,7 @@ export class IndicatorFeeds extends APIResource {
   }
 
   /**
-   * Get indicator feed data
+   * Retrieves the raw data entries in a custom threat indicator feed.
    *
    * @example
    * ```ts
@@ -120,7 +120,7 @@ export class IndicatorFeeds extends APIResource {
   }
 
   /**
-   * Get indicator feed metadata
+   * Retrieves the raw data entries in a custom threat indicator feed.
    *
    * @example
    * ```ts
