@@ -8,7 +8,8 @@ import { path } from '../../internal/utils/path';
 
 export class Recipients extends APIResource {
   /**
-   * Create a new share recipient
+   * Adds a recipient to a resource share, granting them access to the shared
+   * resources.
    *
    * @example
    * ```ts

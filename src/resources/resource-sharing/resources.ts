@@ -8,7 +8,7 @@ import { path } from '../../internal/utils/path';
 
 export class Resources extends APIResource {
   /**
-   * Create a new share resource
+   * Adds a resource to an existing share, making it available to share recipients.
    *
    * @example
    * ```ts

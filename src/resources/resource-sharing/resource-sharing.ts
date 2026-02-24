@@ -39,7 +39,8 @@ export class ResourceSharing extends APIResource {
   resources: ResourcesAPI.Resources = new ResourcesAPI.Resources(this._client);
 
   /**
-   * Create a new share
+   * Creates a new resource share for sharing Cloudflare resources with other
+   * accounts or organizations.
    *
    * @example
    * ```ts
