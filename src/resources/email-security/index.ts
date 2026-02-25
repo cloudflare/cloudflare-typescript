@@ -9,6 +9,7 @@ export {
   type InvestigateGetParams,
   type InvestigateListResponsesV4PagePaginationArray,
 } from './investigate/index';
+export { Phishguard } from './phishguard/index';
 export { Settings } from './settings/index';
 export {
   Submissions,
