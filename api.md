@@ -2466,19 +2466,16 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/queues/consumers.ts">ConsumerCreateResponse</a></code>
-- <code><a href="./src/resources/queues/consumers.ts">ConsumerUpdateResponse</a></code>
-- <code><a href="./src/resources/queues/consumers.ts">ConsumerListResponse</a></code>
+- <code><a href="./src/resources/queues/consumers.ts">Consumer</a></code>
 - <code><a href="./src/resources/queues/consumers.ts">ConsumerDeleteResponse</a></code>
-- <code><a href="./src/resources/queues/consumers.ts">ConsumerGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">create</a>(queueID, { ...params }) -> ConsumerCreateResponse</code>
-- <code title="put /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">update</a>(consumerID, { ...params }) -> ConsumerUpdateResponse</code>
-- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">list</a>(queueID, { ...params }) -> ConsumerListResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">create</a>(queueID, { ...params }) -> Consumer</code>
+- <code title="put /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">update</a>(consumerID, { ...params }) -> Consumer</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">list</a>(queueID, { ...params }) -> ConsumersSinglePage</code>
 - <code title="delete /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">delete</a>(consumerID, { ...params }) -> ConsumerDeleteResponse</code>
-- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">get</a>(consumerID, { ...params }) -> ConsumerGetResponse</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">get</a>(consumerID, { ...params }) -> Consumer</code>
 
 ## Subscriptions
 

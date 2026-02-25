@@ -23,17 +23,13 @@ export class Consumers extends APIResource {
    * );
    * ```
    */
-  create(
-    queueID: string,
-    params: ConsumerCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<ConsumerCreateResponse> {
+  create(queueID: string, params: ConsumerCreateParams, options?: RequestOptions): APIPromise<Consumer> {
     const { account_id, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/queues/${queueID}/consumers`, {
         body,
         ...options,
-      }) as APIPromise<{ result: ConsumerCreateResponse }>
+      }) as APIPromise<{ result: Consumer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -53,17 +49,13 @@ export class Consumers extends APIResource {
    * );
    * ```
    */
-  update(
-    consumerID: string,
-    params: ConsumerUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<ConsumerUpdateResponse> {
+  update(consumerID: string, params: ConsumerUpdateParams, options?: RequestOptions): APIPromise<Consumer> {
     const { account_id, queue_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/queues/${queue_id}/consumers/${consumerID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: ConsumerUpdateResponse }>
+      }) as APIPromise<{ result: Consumer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -73,7 +65,7 @@ export class Consumers extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const consumerListResponse of client.queues.consumers.list(
+   * for await (const consumer of client.queues.consumers.list(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
@@ -85,11 +77,11 @@ export class Consumers extends APIResource {
     queueID: string,
     params: ConsumerListParams,
     options?: RequestOptions,
-  ): PagePromise<ConsumerListResponsesSinglePage, ConsumerListResponse> {
+  ): PagePromise<ConsumersSinglePage, Consumer> {
     const { account_id } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/queues/${queueID}/consumers`,
-      SinglePage<ConsumerListResponse>,
+      SinglePage<Consumer>,
       options,
     );
   }
@@ -134,255 +126,25 @@ export class Consumers extends APIResource {
    * );
    * ```
    */
-  get(
-    consumerID: string,
-    params: ConsumerGetParams,
-    options?: RequestOptions,
-  ): APIPromise<ConsumerGetResponse> {
+  get(consumerID: string, params: ConsumerGetParams, options?: RequestOptions): APIPromise<Consumer> {
     const { account_id, queue_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/queues/${queue_id}/consumers/${consumerID}`,
         options,
-      ) as APIPromise<{ result: ConsumerGetResponse }>
+      ) as APIPromise<{ result: Consumer }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type ConsumerListResponsesSinglePage = SinglePage<ConsumerListResponse>;
+export type ConsumersSinglePage = SinglePage<Consumer>;
 
 /**
  * Response body representing a consumer
  */
-export type ConsumerCreateResponse =
-  | ConsumerCreateResponse.MqWorkerConsumerResponse
-  | ConsumerCreateResponse.MqHTTPConsumerResponse;
+export type Consumer = Consumer.MqWorkerConsumerResponse | Consumer.MqHTTPConsumerResponse;
 
-export namespace ConsumerCreateResponse {
-  export interface MqWorkerConsumerResponse {
-    /**
-     * A Resource identifier.
-     */
-    consumer_id?: string;
-
-    created_on?: string;
-
-    /**
-     * Name of the dead letter queue, or empty string if not configured
-     */
-    dead_letter_queue?: string;
-
-    queue_name?: string;
-
-    /**
-     * Name of a Worker
-     */
-    script_name?: string;
-
-    settings?: MqWorkerConsumerResponse.Settings;
-
-    type?: 'worker';
-  }
-
-  export namespace MqWorkerConsumerResponse {
-    export interface Settings {
-      /**
-       * The maximum number of messages to include in a batch.
-       */
-      batch_size?: number;
-
-      /**
-       * Maximum number of concurrent consumers that may consume from this Queue. Set to
-       * `null` to automatically opt in to the platform's maximum (recommended).
-       */
-      max_concurrency?: number;
-
-      /**
-       * The maximum number of retries
-       */
-      max_retries?: number;
-
-      /**
-       * The number of milliseconds to wait for a batch to fill up before attempting to
-       * deliver it
-       */
-      max_wait_time_ms?: number;
-
-      /**
-       * The number of seconds to delay before making the message available for another
-       * attempt.
-       */
-      retry_delay?: number;
-    }
-  }
-
-  export interface MqHTTPConsumerResponse {
-    /**
-     * A Resource identifier.
-     */
-    consumer_id?: string;
-
-    created_on?: string;
-
-    /**
-     * Name of the dead letter queue, or empty string if not configured
-     */
-    dead_letter_queue?: string;
-
-    queue_name?: string;
-
-    settings?: MqHTTPConsumerResponse.Settings;
-
-    type?: 'http_pull';
-  }
-
-  export namespace MqHTTPConsumerResponse {
-    export interface Settings {
-      /**
-       * The maximum number of messages to include in a batch.
-       */
-      batch_size?: number;
-
-      /**
-       * The maximum number of retries
-       */
-      max_retries?: number;
-
-      /**
-       * The number of seconds to delay before making the message available for another
-       * attempt.
-       */
-      retry_delay?: number;
-
-      /**
-       * The number of milliseconds that a message is exclusively leased. After the
-       * timeout, the message becomes available for another attempt.
-       */
-      visibility_timeout_ms?: number;
-    }
-  }
-}
-
-/**
- * Response body representing a consumer
- */
-export type ConsumerUpdateResponse =
-  | ConsumerUpdateResponse.MqWorkerConsumerResponse
-  | ConsumerUpdateResponse.MqHTTPConsumerResponse;
-
-export namespace ConsumerUpdateResponse {
-  export interface MqWorkerConsumerResponse {
-    /**
-     * A Resource identifier.
-     */
-    consumer_id?: string;
-
-    created_on?: string;
-
-    /**
-     * Name of the dead letter queue, or empty string if not configured
-     */
-    dead_letter_queue?: string;
-
-    queue_name?: string;
-
-    /**
-     * Name of a Worker
-     */
-    script_name?: string;
-
-    settings?: MqWorkerConsumerResponse.Settings;
-
-    type?: 'worker';
-  }
-
-  export namespace MqWorkerConsumerResponse {
-    export interface Settings {
-      /**
-       * The maximum number of messages to include in a batch.
-       */
-      batch_size?: number;
-
-      /**
-       * Maximum number of concurrent consumers that may consume from this Queue. Set to
-       * `null` to automatically opt in to the platform's maximum (recommended).
-       */
-      max_concurrency?: number;
-
-      /**
-       * The maximum number of retries
-       */
-      max_retries?: number;
-
-      /**
-       * The number of milliseconds to wait for a batch to fill up before attempting to
-       * deliver it
-       */
-      max_wait_time_ms?: number;
-
-      /**
-       * The number of seconds to delay before making the message available for another
-       * attempt.
-       */
-      retry_delay?: number;
-    }
-  }
-
-  export interface MqHTTPConsumerResponse {
-    /**
-     * A Resource identifier.
-     */
-    consumer_id?: string;
-
-    created_on?: string;
-
-    /**
-     * Name of the dead letter queue, or empty string if not configured
-     */
-    dead_letter_queue?: string;
-
-    queue_name?: string;
-
-    settings?: MqHTTPConsumerResponse.Settings;
-
-    type?: 'http_pull';
-  }
-
-  export namespace MqHTTPConsumerResponse {
-    export interface Settings {
-      /**
-       * The maximum number of messages to include in a batch.
-       */
-      batch_size?: number;
-
-      /**
-       * The maximum number of retries
-       */
-      max_retries?: number;
-
-      /**
-       * The number of seconds to delay before making the message available for another
-       * attempt.
-       */
-      retry_delay?: number;
-
-      /**
-       * The number of milliseconds that a message is exclusively leased. After the
-       * timeout, the message becomes available for another attempt.
-       */
-      visibility_timeout_ms?: number;
-    }
-  }
-}
-
-/**
- * Response body representing a consumer
- */
-export type ConsumerListResponse =
-  | ConsumerListResponse.MqWorkerConsumerResponse
-  | ConsumerListResponse.MqHTTPConsumerResponse;
-
-export namespace ConsumerListResponse {
+export namespace Consumer {
   export interface MqWorkerConsumerResponse {
     /**
      * A Resource identifier.
@@ -496,118 +258,6 @@ export interface ConsumerDeleteResponse {
    * Indicates if the API call was successful or not.
    */
   success?: true;
-}
-
-/**
- * Response body representing a consumer
- */
-export type ConsumerGetResponse =
-  | ConsumerGetResponse.MqWorkerConsumerResponse
-  | ConsumerGetResponse.MqHTTPConsumerResponse;
-
-export namespace ConsumerGetResponse {
-  export interface MqWorkerConsumerResponse {
-    /**
-     * A Resource identifier.
-     */
-    consumer_id?: string;
-
-    created_on?: string;
-
-    /**
-     * Name of the dead letter queue, or empty string if not configured
-     */
-    dead_letter_queue?: string;
-
-    queue_name?: string;
-
-    /**
-     * Name of a Worker
-     */
-    script_name?: string;
-
-    settings?: MqWorkerConsumerResponse.Settings;
-
-    type?: 'worker';
-  }
-
-  export namespace MqWorkerConsumerResponse {
-    export interface Settings {
-      /**
-       * The maximum number of messages to include in a batch.
-       */
-      batch_size?: number;
-
-      /**
-       * Maximum number of concurrent consumers that may consume from this Queue. Set to
-       * `null` to automatically opt in to the platform's maximum (recommended).
-       */
-      max_concurrency?: number;
-
-      /**
-       * The maximum number of retries
-       */
-      max_retries?: number;
-
-      /**
-       * The number of milliseconds to wait for a batch to fill up before attempting to
-       * deliver it
-       */
-      max_wait_time_ms?: number;
-
-      /**
-       * The number of seconds to delay before making the message available for another
-       * attempt.
-       */
-      retry_delay?: number;
-    }
-  }
-
-  export interface MqHTTPConsumerResponse {
-    /**
-     * A Resource identifier.
-     */
-    consumer_id?: string;
-
-    created_on?: string;
-
-    /**
-     * Name of the dead letter queue, or empty string if not configured
-     */
-    dead_letter_queue?: string;
-
-    queue_name?: string;
-
-    settings?: MqHTTPConsumerResponse.Settings;
-
-    type?: 'http_pull';
-  }
-
-  export namespace MqHTTPConsumerResponse {
-    export interface Settings {
-      /**
-       * The maximum number of messages to include in a batch.
-       */
-      batch_size?: number;
-
-      /**
-       * The maximum number of retries
-       */
-      max_retries?: number;
-
-      /**
-       * The number of seconds to delay before making the message available for another
-       * attempt.
-       */
-      retry_delay?: number;
-
-      /**
-       * The number of milliseconds that a message is exclusively leased. After the
-       * timeout, the message becomes available for another attempt.
-       */
-      visibility_timeout_ms?: number;
-    }
-  }
 }
 
 export type ConsumerCreateParams =
@@ -879,12 +529,9 @@ export interface ConsumerGetParams {
 
 export declare namespace Consumers {
   export {
-    type ConsumerCreateResponse as ConsumerCreateResponse,
-    type ConsumerUpdateResponse as ConsumerUpdateResponse,
-    type ConsumerListResponse as ConsumerListResponse,
+    type Consumer as Consumer,
     type ConsumerDeleteResponse as ConsumerDeleteResponse,
-    type ConsumerGetResponse as ConsumerGetResponse,
-    type ConsumerListResponsesSinglePage as ConsumerListResponsesSinglePage,
+    type ConsumersSinglePage as ConsumersSinglePage,
     type ConsumerCreateParams as ConsumerCreateParams,
     type ConsumerUpdateParams as ConsumerUpdateParams,
     type ConsumerListParams as ConsumerListParams,
