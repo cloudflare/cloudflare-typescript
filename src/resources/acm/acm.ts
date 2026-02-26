@@ -1,6 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as CustomTrustStoreAPI from './custom-trust-store';
+import {
+  CustomTrustStore,
+  CustomTrustStoreCreateParams,
+  CustomTrustStoreDeleteParams,
+  CustomTrustStoreDeleteResponse,
+  CustomTrustStoreGetParams,
+  CustomTrustStoreListParams,
+  CustomTrustStoresV4PagePaginationArray,
+} from './custom-trust-store';
 import * as TotalTLSAPI from './total-tls';
 import {
   CertificateAuthority,
@@ -15,6 +25,9 @@ import {
 
 export class ACM extends APIResource {
   totalTLS: TotalTLSAPI.TotalTLS = new TotalTLSAPI.TotalTLS(this._client);
+  customTrustStore: CustomTrustStoreAPI.CustomTrustStore = new CustomTrustStoreAPI.CustomTrustStore(
+    this._client,
+  );
 }
 
 ACM.TotalTLS = TotalTLS;
@@ -29,5 +42,15 @@ export declare namespace ACM {
     type TotalTLSUpdateParams as TotalTLSUpdateParams,
     type TotalTLSEditParams as TotalTLSEditParams,
     type TotalTLSGetParams as TotalTLSGetParams,
+  };
+
+  export {
+    type CustomTrustStore as CustomTrustStore,
+    type CustomTrustStoreDeleteResponse as CustomTrustStoreDeleteResponse,
+    type CustomTrustStoresV4PagePaginationArray as CustomTrustStoresV4PagePaginationArray,
+    type CustomTrustStoreCreateParams as CustomTrustStoreCreateParams,
+    type CustomTrustStoreListParams as CustomTrustStoreListParams,
+    type CustomTrustStoreDeleteParams as CustomTrustStoreDeleteParams,
+    type CustomTrustStoreGetParams as CustomTrustStoreGetParams,
   };
 }
