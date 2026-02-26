@@ -66,6 +66,7 @@ TEST_PATHS=(
 	tests/api-resources/ssl/verification.test.ts
 	tests/api-resources/acm/acm.test.ts
 	tests/api-resources/acm/total-tls.test.ts
+	tests/api-resources/acm/custom-trust-store.test.ts
 	tests/api-resources/argo/argo.test.ts
 	tests/api-resources/argo/smart-routing.test.ts
 	tests/api-resources/argo/tiered-caching.test.ts

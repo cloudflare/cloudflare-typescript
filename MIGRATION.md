@@ -96,6 +96,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.ssl.certificatePacks.edit()`
 - `client.ssl.certificatePacks.get()`
 - `client.ssl.verification.edit()`
+- `client.acm.customTrustStore.delete()`
+- `client.acm.customTrustStore.get()`
 - `client.clientCertificates.delete()`
 - `client.clientCertificates.edit()`
 - `client.clientCertificates.get()`
