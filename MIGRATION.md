@@ -294,6 +294,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.workers.scripts.scriptAndVersionSettings.get()`
 - `client.workers.domains.delete()`
 - `client.workers.domains.get()`
+- `client.workers.observability.destinations.update()`
+- `client.workers.observability.destinations.delete()`
 - `client.kv.namespaces.update()`
 - `client.kv.namespaces.delete()`
 - `client.kv.namespaces.bulkDelete()`
