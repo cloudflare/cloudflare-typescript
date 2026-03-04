@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import { APIPromise } from '../../../../core/api-promise';
+import { V4PagePaginationArray } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -21,7 +22,7 @@ export class WARP extends APIResource {
    *
    * @example
    * ```ts
-   * const warp =
+   * const subnet =
    *   await client.zeroTrust.networks.subnets.warp.create({
    *     account_id: '699d98642c564d2e855e9661899b7252',
    *     name: 'IPv4 Cloudflare Source IPs',
@@ -29,13 +30,13 @@ export class WARP extends APIResource {
    *   });
    * ```
    */
-  create(params: WARPCreateParams, options?: RequestOptions): APIPromise<WARPCreateResponse> {
+  create(params: WARPCreateParams, options?: RequestOptions): APIPromise<Subnet> {
     const { account_id, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/zerotrust/subnets/warp`, {
         body,
         ...options,
-      }) as APIPromise<{ result: WARPCreateResponse }>
+      }) as APIPromise<{ result: Subnet }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,20 +78,20 @@ export class WARP extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
+   * const subnet =
    *   await client.zeroTrust.networks.subnets.warp.edit(
    *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
    *     { account_id: '699d98642c564d2e855e9661899b7252' },
    *   );
    * ```
    */
-  edit(subnetID: string, params: WARPEditParams, options?: RequestOptions): APIPromise<WARPEditResponse> {
+  edit(subnetID: string, params: WARPEditParams, options?: RequestOptions): APIPromise<Subnet> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/zerotrust/subnets/warp/${subnetID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: WARPEditResponse }>
+      }) as APIPromise<{ result: Subnet }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -99,25 +100,27 @@ export class WARP extends APIResource {
    *
    * @example
    * ```ts
-   * const warp =
+   * const subnet =
    *   await client.zeroTrust.networks.subnets.warp.get(
    *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
    *     { account_id: '699d98642c564d2e855e9661899b7252' },
    *   );
    * ```
    */
-  get(subnetID: string, params: WARPGetParams, options?: RequestOptions): APIPromise<WARPGetResponse> {
+  get(subnetID: string, params: WARPGetParams, options?: RequestOptions): APIPromise<Subnet> {
     const { account_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/zerotrust/subnets/warp/${subnetID}`,
         options,
-      ) as APIPromise<{ result: WARPGetResponse }>
+      ) as APIPromise<{ result: Subnet }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface WARPCreateResponse {
+export type SubnetsV4PagePaginationArray = V4PagePaginationArray<Subnet>;
+
+export interface Subnet {
   /**
    * The UUID of the subnet.
    */
@@ -162,94 +165,6 @@ export interface WARPCreateResponse {
 }
 
 export interface WARPDeleteResponse {
-  /**
-   * The UUID of the subnet.
-   */
-  id?: string;
-
-  /**
-   * An optional description of the subnet.
-   */
-  comment?: string;
-
-  /**
-   * Timestamp of when the resource was created.
-   */
-  created_at?: string;
-
-  /**
-   * Timestamp of when the resource was deleted. If `null`, the resource has not been
-   * deleted.
-   */
-  deleted_at?: string;
-
-  /**
-   * If `true`, this is the default subnet for the account. There can only be one
-   * default subnet per account.
-   */
-  is_default_network?: boolean;
-
-  /**
-   * A user-friendly name for the subnet.
-   */
-  name?: string;
-
-  /**
-   * The private IPv4 or IPv6 range defining the subnet, in CIDR notation.
-   */
-  network?: string;
-
-  /**
-   * The type of subnet.
-   */
-  subnet_type?: 'cloudflare_source' | 'warp';
-}
-
-export interface WARPEditResponse {
-  /**
-   * The UUID of the subnet.
-   */
-  id?: string;
-
-  /**
-   * An optional description of the subnet.
-   */
-  comment?: string;
-
-  /**
-   * Timestamp of when the resource was created.
-   */
-  created_at?: string;
-
-  /**
-   * Timestamp of when the resource was deleted. If `null`, the resource has not been
-   * deleted.
-   */
-  deleted_at?: string;
-
-  /**
-   * If `true`, this is the default subnet for the account. There can only be one
-   * default subnet per account.
-   */
-  is_default_network?: boolean;
-
-  /**
-   * A user-friendly name for the subnet.
-   */
-  name?: string;
-
-  /**
-   * The private IPv4 or IPv6 range defining the subnet, in CIDR notation.
-   */
-  network?: string;
-
-  /**
-   * The type of subnet.
-   */
-  subnet_type?: 'cloudflare_source' | 'warp';
-}
-
-export interface WARPGetResponse {
   /**
    * The UUID of the subnet.
    */
@@ -367,10 +282,8 @@ export interface WARPGetParams {
 
 export declare namespace WARP {
   export {
-    type WARPCreateResponse as WARPCreateResponse,
+    type Subnet as Subnet,
     type WARPDeleteResponse as WARPDeleteResponse,
-    type WARPEditResponse as WARPEditResponse,
-    type WARPGetResponse as WARPGetResponse,
     type WARPCreateParams as WARPCreateParams,
     type WARPDeleteParams as WARPDeleteParams,
     type WARPEditParams as WARPEditParams,

@@ -23,12 +23,7 @@ export {
   type RouteGetParams,
   type TeamnetsV4PagePaginationArray,
 } from './routes/index';
-export {
-  Subnets,
-  type SubnetListResponse,
-  type SubnetListParams,
-  type SubnetListResponsesV4PagePaginationArray,
-} from './subnets/index';
+export { Subnets, type SubnetListParams } from './subnets/index';
 export {
   VirtualNetworks,
   type VirtualNetwork,

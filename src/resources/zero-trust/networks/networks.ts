@@ -37,12 +37,7 @@ import {
   TeamnetsV4PagePaginationArray,
 } from './routes/routes';
 import * as SubnetsAPI from './subnets/subnets';
-import {
-  SubnetListParams,
-  SubnetListResponse,
-  SubnetListResponsesV4PagePaginationArray,
-  Subnets,
-} from './subnets/subnets';
+import { SubnetListParams, Subnets } from './subnets/subnets';
 
 export class Networks extends APIResource {
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
@@ -81,12 +76,7 @@ export declare namespace Networks {
     type VirtualNetworkGetParams as VirtualNetworkGetParams,
   };
 
-  export {
-    Subnets as Subnets,
-    type SubnetListResponse as SubnetListResponse,
-    type SubnetListResponsesV4PagePaginationArray as SubnetListResponsesV4PagePaginationArray,
-    type SubnetListParams as SubnetListParams,
-  };
+  export { Subnets as Subnets, type SubnetListParams as SubnetListParams };
 
   export {
     HostnameRoutes as HostnameRoutes,
