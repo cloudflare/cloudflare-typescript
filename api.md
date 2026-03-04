@@ -2349,6 +2349,22 @@ Methods:
 - <code title="post /accounts/{account_id}/workers/observability/telemetry/query">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">query</a>({ ...params }) -> TelemetryQueryResponse</code>
 - <code title="post /accounts/{account_id}/workers/observability/telemetry/values">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">values</a>({ ...params }) -> TelemetryValuesResponsesSinglePage</code>
 
+### Destinations
+
+Types:
+
+- <code><a href="./src/resources/workers/observability/destinations.ts">DestinationCreateResponse</a></code>
+- <code><a href="./src/resources/workers/observability/destinations.ts">DestinationUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/observability/destinations.ts">DestinationListResponse</a></code>
+- <code><a href="./src/resources/workers/observability/destinations.ts">DestinationDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/observability/destinations">client.workers.observability.destinations.<a href="./src/resources/workers/observability/destinations.ts">create</a>({ ...params }) -> DestinationCreateResponse</code>
+- <code title="patch /accounts/{account_id}/workers/observability/destinations/{slug}">client.workers.observability.destinations.<a href="./src/resources/workers/observability/destinations.ts">update</a>(slug, { ...params }) -> DestinationUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workers/observability/destinations">client.workers.observability.destinations.<a href="./src/resources/workers/observability/destinations.ts">list</a>({ ...params }) -> DestinationListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/workers/observability/destinations/{slug}">client.workers.observability.destinations.<a href="./src/resources/workers/observability/destinations.ts">delete</a>(slug, { ...params }) -> DestinationDeleteResponse</code>
+
 # KV
 
 ## Namespaces
