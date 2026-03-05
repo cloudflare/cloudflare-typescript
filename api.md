@@ -4940,6 +4940,21 @@ Methods:
 - <code title="delete /accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">delete</a>(dexTestID, { ...params }) -> DEXTestDeleteResponse</code>
 - <code title="get /accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">get</a>(dexTestID, { ...params }) -> DEXTestGetResponse</code>
 
+### IPProfiles
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/ip-profiles.ts">IPProfile</a></code>
+- <code><a href="./src/resources/zero-trust/devices/ip-profiles.ts">IPProfileDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/ip-profiles">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">create</a>({ ...params }) -> IPProfile</code>
+- <code title="patch /accounts/{account_id}/devices/ip-profiles/{profile_id}">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">update</a>(profileID, { ...params }) -> IPProfile</code>
+- <code title="get /accounts/{account_id}/devices/ip-profiles">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">list</a>({ ...params }) -> IPProfilesSinglePage</code>
+- <code title="delete /accounts/{account_id}/devices/ip-profiles/{profile_id}">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">delete</a>(profileID, { ...params }) -> IPProfileDeleteResponse</code>
+- <code title="get /accounts/{account_id}/devices/ip-profiles/{profile_id}">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">get</a>(profileID, { ...params }) -> IPProfile</code>
+
 ### Networks
 
 Types:

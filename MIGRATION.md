@@ -637,6 +637,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.devices.dexTests.update()`
 - `client.zeroTrust.devices.dexTests.delete()`
 - `client.zeroTrust.devices.dexTests.get()`
+- `client.zeroTrust.devices.ipProfiles.update()`
+- `client.zeroTrust.devices.ipProfiles.delete()`
+- `client.zeroTrust.devices.ipProfiles.get()`
 - `client.zeroTrust.devices.networks.update()`
 - `client.zeroTrust.devices.networks.delete()`
 - `client.zeroTrust.devices.networks.get()`
