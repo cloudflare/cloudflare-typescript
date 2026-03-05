@@ -95,6 +95,8 @@ describe('resource instances', () => {
     const response = await client.workflows.instances.get('x', {
       account_id: 'account_id',
       workflow_name: 'x',
+      order: 'asc',
+      simple: 'true',
     });
   });
 });

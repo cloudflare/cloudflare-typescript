@@ -18,7 +18,6 @@ import {
   V4PagePaginationArray,
   type V4PagePaginationArrayParams,
 } from '../../../../core/pagination';
-import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -143,7 +142,6 @@ export class Workers extends APIResource {
       this._client.patch(path`/accounts/${account_id}/workers/workers/${workerID}`, {
         body,
         ...options,
-        headers: buildHeaders([{ 'Content-Type': 'application/merge-patch+json' }, options?.headers]),
       }) as APIPromise<{ result: Worker }>
     )._thenUnwrap((obj) => obj.result);
   }

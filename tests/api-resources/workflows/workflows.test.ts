@@ -29,6 +29,7 @@ describe('resource workflows', () => {
       account_id: 'account_id',
       class_name: 'x',
       script_name: 'x',
+      limits: { steps: 1 },
     });
   });
 

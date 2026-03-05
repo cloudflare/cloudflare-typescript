@@ -9390,12 +9390,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/aisearch/instances/items.ts">ItemListResponse</a></code>
-- <code><a href="./src/resources/aisearch/instances/items.ts">ItemGetResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/ai-search/instances/{id}/items">client.aiSearch.instances.items.<a href="./src/resources/aisearch/instances/items.ts">list</a>(id, { ...params }) -> ItemListResponsesV4PagePaginationArray</code>
-- <code title="get /accounts/{account_id}/ai-search/instances/{id}/items/{item_id}">client.aiSearch.instances.items.<a href="./src/resources/aisearch/instances/items.ts">get</a>(itemID, { ...params }) -> ItemGetResponse</code>
 
 ### Jobs
 

@@ -13,8 +13,6 @@ describe('resource instances', () => {
     const responsePromise = client.aiSearch.instances.create({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       id: 'my-ai-search',
-      source: 'source',
-      type: 'r2',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,10 +27,10 @@ describe('resource instances', () => {
     const response = await client.aiSearch.instances.create({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       id: 'my-ai-search',
-      source: 'source',
-      type: 'r2',
       ai_gateway_id: 'ai_gateway_id',
       ai_search_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+      cache: true,
+      cache_threshold: 'super_strict_match',
       chunk: true,
       chunk_overlap: 0,
       chunk_size: 64,
@@ -56,10 +54,14 @@ describe('resource instances', () => {
       },
       reranking: true,
       reranking_model: '@cf/baai/bge-reranker-base',
-      retrieval_options: { keyword_match_mode: 'exact_match' },
+      retrieval_options: {
+        boost_by: [{ field: 'timestamp', direction: 'desc' }],
+        keyword_match_mode: 'exact_match',
+      },
       rewrite_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
       rewrite_query: true,
       score_threshold: 0,
+      source: 'source',
       source_params: {
         exclude_items: ['/admin/**', '/private/**', '**\\temp\\**'],
         include_items: ['/blog/**', '/docs/**/*.html', '**\\blog\\**.html'],
@@ -67,6 +69,7 @@ describe('resource instances', () => {
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
           parse_options: {
+            content_selector: [{ path: '**/blog/**', selector: 'article .post-body' }],
             include_headers: { foo: 'string' },
             include_images: true,
             specific_sitemaps: ['https://example.com/sitemap.xml', 'https://example.com/blog-sitemap.xml'],
@@ -81,6 +84,7 @@ describe('resource instances', () => {
         },
       },
       token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      type: 'r2',
     });
   });
 
@@ -128,7 +132,10 @@ describe('resource instances', () => {
       },
       reranking: true,
       reranking_model: '@cf/baai/bge-reranker-base',
-      retrieval_options: { keyword_match_mode: 'exact_match' },
+      retrieval_options: {
+        boost_by: [{ field: 'timestamp', direction: 'desc' }],
+        keyword_match_mode: 'exact_match',
+      },
       rewrite_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
       rewrite_query: true,
       score_threshold: 0,
@@ -139,6 +146,7 @@ describe('resource instances', () => {
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
           parse_options: {
+            content_selector: [{ path: '**/blog/**', selector: 'article .post-body' }],
             include_headers: { foo: 'string' },
             include_images: true,
             specific_sitemaps: ['https://example.com/sitemap.xml', 'https://example.com/blog-sitemap.xml'],
@@ -177,6 +185,8 @@ describe('resource instances', () => {
   test('list: required and optional params', async () => {
     const response = await client.aiSearch.instances.list({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      order_by: 'created_at',
+      order_by_direction: 'asc',
       page: 1,
       per_page: 1,
       search: 'search',
@@ -232,6 +242,7 @@ describe('resource instances', () => {
           model: '@cf/baai/bge-reranker-base',
         },
         retrieval: {
+          boost_by: [{ field: 'timestamp', direction: 'desc' }],
           context_expansion: 0,
           filters: { foo: 'bar' },
           fusion_method: 'max',
@@ -296,6 +307,7 @@ describe('resource instances', () => {
           model: '@cf/baai/bge-reranker-base',
         },
         retrieval: {
+          boost_by: [{ field: 'timestamp', direction: 'desc' }],
           context_expansion: 0,
           filters: { foo: 'bar' },
           fusion_method: 'max',

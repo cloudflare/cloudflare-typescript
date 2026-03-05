@@ -57,7 +57,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Retrieve information about all operations on a zone
+   * Lists all API operations tracked by API Shield for a zone with pagination.
+   * Returns operation details including method, path, and feature configurations.
    *
    * @example
    * ```ts
@@ -82,7 +83,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Delete an operation
+   * Removes a single API operation from API Shield endpoint management. The
+   * operation will no longer be tracked or protected by API Shield rules.
    *
    * @example
    * ```ts
@@ -140,7 +142,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Delete multiple operations
+   * Bulk removes multiple API operations from API Shield endpoint management in a
+   * single request. Efficient for cleaning up unused endpoints.
    *
    * @example
    * ```ts
@@ -159,7 +162,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Retrieve information about an operation
+   * Gets detailed information about a specific API operation in API Shield,
+   * including its schema validation settings and traffic statistics.
    *
    * @example
    * ```ts

@@ -578,7 +578,7 @@ export declare namespace AbuseReportCreateParams {
      * Body param: Notification type based on the abuse type. NOTE: Copyright (DMCA)
      * and Trademark reports cannot be anonymous.
      */
-    owner_notification: 'send' | 'send-anon' | 'none';
+    owner_notification: 'send' | 'send-anon';
 
     /**
      * Body param: A list of valid URLs separated by ‘\n’ (new line character). The

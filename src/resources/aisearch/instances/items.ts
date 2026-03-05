@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
   V4PagePaginationArray,
@@ -37,61 +36,11 @@ export class Items extends APIResource {
       { query, ...options },
     );
   }
-
-  /**
-   * Retrieves a specific indexed item from an AI Search instance.
-   *
-   * @example
-   * ```ts
-   * const item = await client.aiSearch.instances.items.get(
-   *   'item_id',
-   *   {
-   *     account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *     id: 'my-ai-search',
-   *   },
-   * );
-   * ```
-   */
-  get(itemID: string, params: ItemGetParams, options?: RequestOptions): APIPromise<ItemGetResponse> {
-    const { account_id, id } = params;
-    return (
-      this._client.get(
-        path`/accounts/${account_id}/ai-search/instances/${id}/items/${itemID}`,
-        options,
-      ) as APIPromise<{ result: ItemGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export type ItemListResponsesV4PagePaginationArray = V4PagePaginationArray<ItemListResponse>;
 
 export interface ItemListResponse {
-  id: number;
-
-  checksum: string;
-
-  chunks_count: number | null;
-
-  created_at: string;
-
-  file_size: number | null;
-
-  key: string;
-
-  last_seen_at: string;
-
-  namespace: string;
-
-  next_action: 'INDEX' | 'DELETE' | null;
-
-  status: 'queued' | 'running' | 'completed' | 'error' | 'skipped';
-
-  error?: string;
-
-  public_id?: string;
-}
-
-export interface ItemGetResponse {
   id: number;
 
   checksum: string;
@@ -134,21 +83,10 @@ export interface ItemListParams extends V4PagePaginationArrayParams {
   status?: 'queued' | 'running' | 'completed' | 'error' | 'skipped';
 }
 
-export interface ItemGetParams {
-  account_id: string;
-
-  /**
-   * Use your AI Search ID.
-   */
-  id: string;
-}
-
 export declare namespace Items {
   export {
     type ItemListResponse as ItemListResponse,
-    type ItemGetResponse as ItemGetResponse,
     type ItemListResponsesV4PagePaginationArray as ItemListResponsesV4PagePaginationArray,
     type ItemListParams as ItemListParams,
-    type ItemGetParams as ItemGetParams,
   };
 }

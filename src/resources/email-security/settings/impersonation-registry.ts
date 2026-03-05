@@ -12,7 +12,7 @@ import { path } from '../../../internal/utils/path';
 
 export class ImpersonationRegistry extends APIResource {
   /**
-   * Create an entry in impersonation registry
+   * Creates a display name entry for email security impersonation protection.
    *
    * @example
    * ```ts
@@ -66,7 +66,7 @@ export class ImpersonationRegistry extends APIResource {
   }
 
   /**
-   * Delete an entry from impersonation registry
+   * Removes a display name from impersonation protection monitoring.
    *
    * @example
    * ```ts
@@ -92,7 +92,7 @@ export class ImpersonationRegistry extends APIResource {
   }
 
   /**
-   * Update an entry in impersonation registry
+   * Updates a display name entry used for impersonation protection.
    *
    * @example
    * ```ts
@@ -118,7 +118,7 @@ export class ImpersonationRegistry extends APIResource {
   }
 
   /**
-   * Get an entry in impersonation registry
+   * Retrieves a display name entry used for impersonation protection.
    *
    * @example
    * ```ts

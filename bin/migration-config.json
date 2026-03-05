@@ -7023,43 +7023,6 @@
       ]
     },
     {
-      "base": "aiSearch.instances.items",
-      "name": "get",
-      "params": [
-        {
-          "type": "param",
-          "key": "item_id",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": false
-        },
-        {
-          "type": "options"
-        }
-      ],
-      "oldParams": [
-        {
-          "type": "param",
-          "key": "id",
-          "location": "path"
-        },
-        {
-          "type": "param",
-          "key": "item_id",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": false
-        },
-        {
-          "type": "options"
-        }
-      ]
-    },
-    {
       "base": "aiSearch.instances.jobs",
       "name": "get",
       "params": [

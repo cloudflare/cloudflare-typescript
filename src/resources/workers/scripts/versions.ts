@@ -68,7 +68,7 @@ export class Versions extends APIResource {
   }
 
   /**
-   * Get Version Detail
+   * Retrieves detailed information about a specific version of a Workers script.
    *
    * @example
    * ```ts

@@ -48,6 +48,8 @@ export class PayloadLogs extends APIResource {
 }
 
 export interface PayloadLogUpdateResponse {
+  updated_at: string;
+
   /**
    * Masking level for payload logs.
    *
@@ -56,9 +58,7 @@ export interface PayloadLogUpdateResponse {
    * - `clear`: No masking is applied to the payload content.
    * - `default`: DLP uses its default masking behavior.
    */
-  masking_level: 'full' | 'partial' | 'clear' | 'default';
-
-  updated_at: string;
+  masking_level?: 'full' | 'partial' | 'clear' | 'default';
 
   /**
    * Base64-encoded public key for encrypting payload logs. Null when payload logging
@@ -68,6 +68,8 @@ export interface PayloadLogUpdateResponse {
 }
 
 export interface PayloadLogGetResponse {
+  updated_at: string;
+
   /**
    * Masking level for payload logs.
    *
@@ -76,9 +78,7 @@ export interface PayloadLogGetResponse {
    * - `clear`: No masking is applied to the payload content.
    * - `default`: DLP uses its default masking behavior.
    */
-  masking_level: 'full' | 'partial' | 'clear' | 'default';
-
-  updated_at: string;
+  masking_level?: 'full' | 'partial' | 'clear' | 'default';
 
   /**
    * Base64-encoded public key for encrypting payload logs. Null when payload logging

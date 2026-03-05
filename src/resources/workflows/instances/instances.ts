@@ -20,7 +20,7 @@ export class Instances extends APIResource {
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
 
   /**
-   * Create a new workflow instance
+   * Creates a new instance of a workflow, starting its execution.
    */
   create(
     workflowName: string,
@@ -37,7 +37,7 @@ export class Instances extends APIResource {
   }
 
   /**
-   * List of workflow instances
+   * Lists all instances of a workflow with their execution status.
    */
   list(
     workflowName: string,
@@ -53,7 +53,7 @@ export class Instances extends APIResource {
   }
 
   /**
-   * Batch create new Workflow instances
+   * Creates multiple workflow instances in a single batch operation.
    */
   bulk(
     workflowName: string,
@@ -69,19 +69,19 @@ export class Instances extends APIResource {
   }
 
   /**
-   * Get logs and status from instance
+   * Retrieves logs and execution status for a specific workflow instance.
    */
   get(
     instanceID: string,
     params: InstanceGetParams,
     options?: RequestOptions,
   ): APIPromise<InstanceGetResponse> {
-    const { account_id, workflow_name } = params;
+    const { account_id, workflow_name, ...query } = params;
     return (
-      this._client.get(
-        path`/accounts/${account_id}/workflows/${workflow_name}/instances/${instanceID}`,
-        options,
-      ) as APIPromise<{ result: InstanceGetResponse }>
+      this._client.get(path`/accounts/${account_id}/workflows/${workflow_name}/instances/${instanceID}`, {
+        query,
+        ...options,
+      }) as APIPromise<{ result: InstanceGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -174,6 +174,8 @@ export interface InstanceGetResponse {
     | 'complete'
     | 'waitingForPause'
     | 'waiting';
+
+  step_count: number;
 
   steps: Array<
     | InstanceGetResponse.UnionMember0
@@ -433,9 +435,27 @@ export namespace InstanceBulkParams {
 }
 
 export interface InstanceGetParams {
+  /**
+   * Path param
+   */
   account_id: string;
 
+  /**
+   * Path param
+   */
   workflow_name: string;
+
+  /**
+   * Query param: Step ordering: "asc" (default, oldest first) or "desc" (newest
+   * first).
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Query param: When true, omits step details and returns only metadata with
+   * step_count.
+   */
+  simple?: 'true' | 'false';
 }
 
 Instances.Status = Status;

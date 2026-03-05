@@ -23,10 +23,10 @@ export class ScheduleResource extends APIResource {
     params: ScheduleCreateParams,
     options?: RequestOptions,
   ): APIPromise<ScheduleCreateResponse> {
-    const { zone_id, region } = params;
+    const { zone_id, frequency, region } = params;
     return (
       this._client.post(path`/zones/${zone_id}/speed_api/schedule/${url}`, {
-        query: { region },
+        query: { frequency, region },
         ...options,
       }) as APIPromise<{ result: ScheduleCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -141,6 +141,12 @@ export interface ScheduleCreateParams {
    * Path param: Identifier.
    */
   zone_id: string;
+
+  /**
+   * Query param: The frequency of the scheduled test. Defaults to WEEKLY for free
+   * plans, DAILY for paid plans.
+   */
+  frequency?: 'DAILY' | 'WEEKLY';
 
   /**
    * Query param: A test region.

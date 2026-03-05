@@ -23,9 +23,7 @@ export {
 export {
   Items,
   type ItemListResponse,
-  type ItemGetResponse,
   type ItemListParams,
-  type ItemGetParams,
   type ItemListResponsesV4PagePaginationArray,
 } from './items';
 export {

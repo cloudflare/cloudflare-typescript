@@ -7,7 +7,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Move extends APIResource {
   /**
-   * Move a message
+   * Moves a single email message to a different folder or changes its quarantine
+   * status.
    *
    * @example
    * ```ts

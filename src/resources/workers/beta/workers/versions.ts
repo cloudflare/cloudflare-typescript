@@ -134,6 +134,12 @@ export interface Version {
   number: number;
 
   /**
+   * All routable URLs that always point to this version. Does not include alias
+   * URLs, since aliases can be updated to point to a different version.
+   */
+  urls: Array<string>;
+
+  /**
    * Metadata about the version.
    */
   annotations?: Version.Annotations;

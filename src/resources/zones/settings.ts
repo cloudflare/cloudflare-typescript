@@ -1589,6 +1589,7 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesPrivacyPass
   | ProxyReadTimeout
   | PseudoIPV4
+  | SettingEditResponse.ZonesRedirectsForAITraining
   | SettingEditResponse.ZonesReplaceInsecureJS
   | SettingEditResponse.ZonesSchemasResponseBuffering
   | SettingEditResponse.ZonesSchemasRocketLoader
@@ -2224,6 +2225,34 @@ export namespace SettingEditResponse {
   }
 
   /**
+   * When enabled, Cloudflare will redirect verified AI training crawlers to
+   * canonical URLs found in the HTML response, ensuring AI models train on
+   * authoritative content.
+   */
+  export interface ZonesRedirectsForAITraining {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'redirects_for_ai_training';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
    * Automatically replace insecure JavaScript libraries with safer and faster
    * alternatives provided under cdnjs and powered by Cloudflare. Currently supports
    * the following libraries: Polyfill under polyfill.io.
@@ -2661,6 +2690,7 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesPrivacyPass
   | ProxyReadTimeout
   | PseudoIPV4
+  | SettingGetResponse.ZonesRedirectsForAITraining
   | SettingGetResponse.ZonesReplaceInsecureJS
   | SettingGetResponse.ZonesSchemasResponseBuffering
   | SettingGetResponse.ZonesSchemasRocketLoader
@@ -3282,6 +3312,34 @@ export namespace SettingGetResponse {
      * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
      */
     value: 'on' | 'off';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * When enabled, Cloudflare will redirect verified AI training crawlers to
+   * canonical URLs found in the HTML response, ensuring AI models train on
+   * authoritative content.
+   */
+  export interface ZonesRedirectsForAITraining {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'redirects_for_ai_training';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
 
     /**
      * Whether or not this setting can be modified for this zone (based on your

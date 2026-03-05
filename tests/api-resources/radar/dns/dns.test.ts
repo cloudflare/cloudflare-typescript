@@ -10,7 +10,7 @@ const client = new Cloudflare({
 
 describe('resource dns', () => {
   test('summaryV2', async () => {
-    const responsePromise = client.radar.dns.summaryV2('IP_VERSION');
+    const responsePromise = client.radar.dns.summaryV2('AS');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +24,7 @@ describe('resource dns', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.dns.summaryV2(
-        'IP_VERSION',
+        'AS',
         {
           asn: ['string'],
           cacheHit: [true],
@@ -97,7 +97,7 @@ describe('resource dns', () => {
   });
 
   test('timeseriesGroupsV2', async () => {
-    const responsePromise = client.radar.dns.timeseriesGroupsV2('IP_VERSION');
+    const responsePromise = client.radar.dns.timeseriesGroupsV2('AS');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -111,7 +111,7 @@ describe('resource dns', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.dns.timeseriesGroupsV2(
-        'IP_VERSION',
+        'AS',
         {
           aggInterval: '1h',
           asn: ['string'],

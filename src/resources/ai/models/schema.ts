@@ -7,7 +7,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Schema extends APIResource {
   /**
-   * Get Model Schema
+   * Retrieves the input and output JSON schema definition for a Workers AI model.
    */
   get(params: SchemaGetParams, options?: RequestOptions): APIPromise<SchemaGetResponse> {
     const { account_id, ...query } = params;

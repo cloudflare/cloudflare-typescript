@@ -272,6 +272,16 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
    * Path param
    */
   account_id: string;
+
+  /**
+   * Query param: Order By Column Name
+   */
+  order_by?: 'created_at';
+
+  /**
+   * Query param: Order By Direction
+   */
+  order_by_direction?: 'asc' | 'desc';
 }
 
 export interface TokenDeleteParams {

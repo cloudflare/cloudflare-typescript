@@ -7,7 +7,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Status extends APIResource {
   /**
-   * Change status of instance
+   * Changes the execution status of a workflow instance (e.g., pause, resume,
+   * terminate).
    */
   edit(
     instanceID: string,

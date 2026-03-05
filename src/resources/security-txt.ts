@@ -163,7 +163,7 @@ export interface SecurityTXTGetResponse {
 
   policy?: Array<string>;
 
-  preferredLanguages?: string;
+  preferred_languages?: string;
 }
 
 export interface SecurityTXTUpdateParams {
@@ -215,7 +215,7 @@ export interface SecurityTXTUpdateParams {
   /**
    * Body param
    */
-  preferredLanguages?: string;
+  preferred_languages?: string;
 }
 
 export interface SecurityTXTDeleteParams {
