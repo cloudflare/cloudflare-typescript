@@ -418,6 +418,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/devices/resilience/global-warp-override.test.ts
 	tests/api-resources/zero-trust/devices/registrations.test.ts
 	tests/api-resources/zero-trust/devices/dex-tests.test.ts
+	tests/api-resources/zero-trust/devices/ip-profiles.test.ts
 	tests/api-resources/zero-trust/devices/networks.test.ts
 	tests/api-resources/zero-trust/devices/fleet-status.test.ts
 	tests/api-resources/zero-trust/devices/policies/policies.test.ts

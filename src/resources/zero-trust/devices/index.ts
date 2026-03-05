@@ -26,6 +26,17 @@ export {
 } from './devices';
 export { FleetStatus, type FleetStatusGetResponse, type FleetStatusGetParams } from './fleet-status';
 export {
+  IPProfiles,
+  type IPProfile,
+  type IPProfileDeleteResponse,
+  type IPProfileCreateParams,
+  type IPProfileUpdateParams,
+  type IPProfileListParams,
+  type IPProfileDeleteParams,
+  type IPProfileGetParams,
+  type IPProfilesSinglePage,
+} from './ip-profiles';
+export {
   Networks,
   type DeviceNetwork,
   type NetworkCreateParams,
