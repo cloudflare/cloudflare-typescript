@@ -1052,6 +1052,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.resourceSharing.resources.list()`
 - `client.resourceSharing.resources.delete()`
 - `client.resourceSharing.resources.get()`
+- `client.resourceTagging.values.list()`
 - `client.leakedCredentialChecks.detections.update()`
 - `client.leakedCredentialChecks.detections.delete()`
 - `client.leakedCredentialChecks.detections.get()`

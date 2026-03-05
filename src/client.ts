@@ -110,6 +110,7 @@ import { RealtimeKit } from './resources/realtime-kit/realtime-kit';
 import { Registrar } from './resources/registrar/registrar';
 import { RequestTracers } from './resources/request-tracers/request-tracers';
 import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
+import { ResourceTagging } from './resources/resource-tagging/resource-tagging';
 import { Rules } from './resources/rules/rules';
 import { Rulesets } from './resources/rulesets/rulesets';
 import { RUM } from './resources/rum/rum';
@@ -1016,6 +1017,7 @@ export class Cloudflare {
   securityTXT: API.SecurityTXT = new API.SecurityTXT(this);
   workflows: API.Workflows = new API.Workflows(this);
   resourceSharing: API.ResourceSharing = new API.ResourceSharing(this);
+  resourceTagging: API.ResourceTagging = new API.ResourceTagging(this);
   leakedCredentialChecks: API.LeakedCredentialChecks = new API.LeakedCredentialChecks(this);
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
@@ -1120,6 +1122,7 @@ Cloudflare.BotnetFeed = BotnetFeed;
 Cloudflare.SecurityTXT = SecurityTXT;
 Cloudflare.Workflows = Workflows;
 Cloudflare.ResourceSharing = ResourceSharing;
+Cloudflare.ResourceTagging = ResourceTagging;
 Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AbuseReports = AbuseReports;
@@ -1348,6 +1351,8 @@ export declare namespace Cloudflare {
   export { Workflows as Workflows };
 
   export { ResourceSharing as ResourceSharing };
+
+  export { ResourceTagging as ResourceTagging };
 
   export { LeakedCredentialChecks as LeakedCredentialChecks };
 

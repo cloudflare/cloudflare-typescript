@@ -78,6 +78,7 @@ export { RealtimeKit } from './realtime-kit/realtime-kit';
 export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
 export { ResourceSharing } from './resource-sharing/resource-sharing';
+export { ResourceTagging } from './resource-tagging/resource-tagging';
 export { Rules } from './rules/rules';
 export { Rulesets } from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';
