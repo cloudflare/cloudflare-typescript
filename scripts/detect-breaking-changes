@@ -761,6 +761,11 @@ TEST_PATHS=(
 	tests/api-resources/resource-sharing/resource-sharing.test.ts
 	tests/api-resources/resource-sharing/recipients.test.ts
 	tests/api-resources/resource-sharing/resources.test.ts
+	tests/api-resources/resource-tagging/resource-tagging.test.ts
+	tests/api-resources/resource-tagging/account-tags.test.ts
+	tests/api-resources/resource-tagging/zone-tags.test.ts
+	tests/api-resources/resource-tagging/keys.test.ts
+	tests/api-resources/resource-tagging/values.test.ts
 	tests/api-resources/leaked-credential-checks/leaked-credential-checks.test.ts
 	tests/api-resources/leaked-credential-checks/detections.test.ts
 	tests/api-resources/content-scanning/content-scanning.test.ts
