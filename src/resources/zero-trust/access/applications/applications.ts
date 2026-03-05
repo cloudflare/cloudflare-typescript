@@ -1558,10 +1558,10 @@ export namespace ApplicationPolicy {
     allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * Indicates whether to bypass MFA for this resource. This option is available at
+     * Indicates whether to disable MFA for this resource. This option is available at
      * the application and policy level.
      */
-    mfa_bypass?: boolean;
+    mfa_disabled?: boolean;
 
     /**
      * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -2917,10 +2917,10 @@ export namespace ApplicationCreateResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -3131,10 +3131,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -3441,10 +3441,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -3839,10 +3839,10 @@ export namespace ApplicationCreateResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -4053,10 +4053,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -4451,10 +4451,10 @@ export namespace ApplicationCreateResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -4665,10 +4665,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -5062,10 +5062,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -5274,10 +5274,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -5486,10 +5486,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -5698,10 +5698,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -5889,10 +5889,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -6318,10 +6318,10 @@ export namespace ApplicationCreateResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -6532,10 +6532,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -7036,10 +7036,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -7546,10 +7546,10 @@ export namespace ApplicationCreateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -7947,10 +7947,10 @@ export namespace ApplicationUpdateResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -8161,10 +8161,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -8471,10 +8471,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -8869,10 +8869,10 @@ export namespace ApplicationUpdateResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -9083,10 +9083,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -9481,10 +9481,10 @@ export namespace ApplicationUpdateResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -9695,10 +9695,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -10092,10 +10092,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -10304,10 +10304,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -10516,10 +10516,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -10728,10 +10728,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -10919,10 +10919,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -11348,10 +11348,10 @@ export namespace ApplicationUpdateResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -11562,10 +11562,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -12066,10 +12066,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -12576,10 +12576,10 @@ export namespace ApplicationUpdateResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -12977,10 +12977,10 @@ export namespace ApplicationListResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -13191,10 +13191,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -13501,10 +13501,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -13899,10 +13899,10 @@ export namespace ApplicationListResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -14113,10 +14113,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -14511,10 +14511,10 @@ export namespace ApplicationListResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -14725,10 +14725,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -15122,10 +15122,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -15334,10 +15334,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -15546,10 +15546,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -15758,10 +15758,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -15949,10 +15949,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -16378,10 +16378,10 @@ export namespace ApplicationListResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -16592,10 +16592,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -17096,10 +17096,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -17606,10 +17606,10 @@ export namespace ApplicationListResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -18014,10 +18014,10 @@ export namespace ApplicationGetResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -18228,10 +18228,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -18538,10 +18538,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -18936,10 +18936,10 @@ export namespace ApplicationGetResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -19150,10 +19150,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -19548,10 +19548,10 @@ export namespace ApplicationGetResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -19762,10 +19762,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -20159,10 +20159,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -20371,10 +20371,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -20583,10 +20583,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -20795,10 +20795,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -20986,10 +20986,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -21415,10 +21415,10 @@ export namespace ApplicationGetResponse {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -21629,10 +21629,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -22133,10 +22133,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -22643,10 +22643,10 @@ export namespace ApplicationGetResponse {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -23059,10 +23059,10 @@ export declare namespace ApplicationCreateParams {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -23256,10 +23256,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -23560,10 +23560,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -23971,10 +23971,10 @@ export declare namespace ApplicationCreateParams {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -24168,10 +24168,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -24579,10 +24579,10 @@ export declare namespace ApplicationCreateParams {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -24776,10 +24776,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -25156,10 +25156,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -25352,10 +25352,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -25548,10 +25548,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -25755,10 +25755,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -25936,10 +25936,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -26380,10 +26380,10 @@ export declare namespace ApplicationCreateParams {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -26577,10 +26577,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -27073,10 +27073,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -27577,10 +27577,10 @@ export declare namespace ApplicationCreateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -27991,10 +27991,10 @@ export declare namespace ApplicationUpdateParams {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -28188,10 +28188,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -28492,10 +28492,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -28903,10 +28903,10 @@ export declare namespace ApplicationUpdateParams {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -29100,10 +29100,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -29511,10 +29511,10 @@ export declare namespace ApplicationUpdateParams {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -29708,10 +29708,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -30088,10 +30088,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -30284,10 +30284,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -30480,10 +30480,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -30687,10 +30687,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -30868,10 +30868,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -31312,10 +31312,10 @@ export declare namespace ApplicationUpdateParams {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -31509,10 +31509,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -32005,10 +32005,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -32509,10 +32509,10 @@ export declare namespace ApplicationUpdateParams {
         allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
         /**
-         * Indicates whether to bypass MFA for this resource. This option is available at
+         * Indicates whether to disable MFA for this resource. This option is available at
          * the application and policy level.
          */
-        mfa_bypass?: boolean;
+        mfa_disabled?: boolean;
 
         /**
          * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).

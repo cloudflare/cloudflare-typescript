@@ -68,7 +68,7 @@ describe('resource policies', () => {
         isolation_required: false,
         mfa_config: {
           allowed_authenticators: ['totp', 'biometrics', 'security_key'],
-          mfa_bypass: false,
+          mfa_disabled: false,
           session_duration: '24h',
         },
         precedence: 0,

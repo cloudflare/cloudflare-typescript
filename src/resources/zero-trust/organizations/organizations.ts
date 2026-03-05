@@ -275,12 +275,6 @@ export interface Organization {
   mfa_config?: Organization.MfaConfig;
 
   /**
-   * Indicates if this organization can enforce multi-factor authentication (MFA)
-   * requirements at the application and policy level.
-   */
-  mfa_configuration_allowed?: boolean;
-
-  /**
    * Determines whether global MFA settings apply to applications by default. The
    * organization must have MFA enabled with at least one authentication method and a
    * session duration configured.
@@ -426,12 +420,6 @@ export interface OrganizationCreateParams {
   mfa_config?: OrganizationCreateParams.MfaConfig;
 
   /**
-   * Body param: Indicates if this organization can enforce multi-factor
-   * authentication (MFA) requirements at the application and policy level.
-   */
-  mfa_configuration_allowed?: boolean;
-
-  /**
    * Body param: Determines whether global MFA settings apply to applications by
    * default. The organization must have MFA enabled with at least one authentication
    * method and a session duration configured.
@@ -556,12 +544,6 @@ export interface OrganizationUpdateParams {
    * organization.
    */
   mfa_config?: OrganizationUpdateParams.MfaConfig;
-
-  /**
-   * Body param: Indicates if this organization can enforce multi-factor
-   * authentication (MFA) requirements at the application and policy level.
-   */
-  mfa_configuration_allowed?: boolean;
 
   /**
    * Body param: Determines whether global MFA settings apply to applications by

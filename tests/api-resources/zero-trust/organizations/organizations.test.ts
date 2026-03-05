@@ -44,7 +44,6 @@ describe('resource organizations', () => {
         text_color: '#c5ed1b',
       },
       mfa_config: { allowed_authenticators: ['totp', 'biometrics', 'security_key'], session_duration: '24h' },
-      mfa_configuration_allowed: true,
       mfa_required_for_all_apps: false,
       session_duration: '24h',
       ui_read_only_toggle_reason: 'Temporarily turn off the UI read only lock to make a change via the UI',

@@ -299,7 +299,8 @@ export type AccessRule =
   | SAMLGroupRule
   | AccessRule.AccessOIDCClaimRule
   | ServiceTokenRule
-  | AccessRule.AccessLinkedAppTokenRule;
+  | AccessRule.AccessLinkedAppTokenRule
+  | AccessRule.AccessUserRiskScoreRule;
 
 export namespace AccessRule {
   /**
@@ -402,6 +403,23 @@ export namespace AccessRule {
       app_uid: string;
     }
   }
+
+  /**
+   * Matches a user's risk score.
+   */
+  export interface AccessUserRiskScoreRule {
+    user_risk_score: AccessUserRiskScoreRule.UserRiskScore;
+  }
+
+  export namespace AccessUserRiskScoreRule {
+    export interface UserRiskScore {
+      /**
+       * A list of risk score levels to match. Values can be low, medium, high, or
+       * unscored.
+       */
+      user_risk_score: Array<'low' | 'medium' | 'high' | 'unscored'>;
+    }
+  }
 }
 
 /**
@@ -431,7 +449,8 @@ export type AccessRuleParam =
   | SAMLGroupRuleParam
   | AccessRuleParam.AccessOIDCClaimRule
   | ServiceTokenRuleParam
-  | AccessRuleParam.AccessLinkedAppTokenRule;
+  | AccessRuleParam.AccessLinkedAppTokenRule
+  | AccessRuleParam.AccessUserRiskScoreRule;
 
 export namespace AccessRuleParam {
   /**
@@ -532,6 +551,23 @@ export namespace AccessRuleParam {
        * The ID of an Access OIDC SaaS application
        */
       app_uid: string;
+    }
+  }
+
+  /**
+   * Matches a user's risk score.
+   */
+  export interface AccessUserRiskScoreRule {
+    user_risk_score: AccessUserRiskScoreRule.UserRiskScore;
+  }
+
+  export namespace AccessUserRiskScoreRule {
+    export interface UserRiskScore {
+      /**
+       * A list of risk score levels to match. Values can be low, medium, high, or
+       * unscored.
+       */
+      user_risk_score: Array<'low' | 'medium' | 'high' | 'unscored'>;
     }
   }
 }
@@ -1323,10 +1359,10 @@ export namespace PolicyCreateResponse {
     allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * Indicates whether to bypass MFA for this resource. This option is available at
+     * Indicates whether to disable MFA for this resource. This option is available at
      * the application and policy level.
      */
-    mfa_bypass?: boolean;
+    mfa_disabled?: boolean;
 
     /**
      * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -1467,10 +1503,10 @@ export namespace PolicyUpdateResponse {
     allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * Indicates whether to bypass MFA for this resource. This option is available at
+     * Indicates whether to disable MFA for this resource. This option is available at
      * the application and policy level.
      */
-    mfa_bypass?: boolean;
+    mfa_disabled?: boolean;
 
     /**
      * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -1611,10 +1647,10 @@ export namespace PolicyListResponse {
     allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * Indicates whether to bypass MFA for this resource. This option is available at
+     * Indicates whether to disable MFA for this resource. This option is available at
      * the application and policy level.
      */
-    mfa_bypass?: boolean;
+    mfa_disabled?: boolean;
 
     /**
      * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -1762,10 +1798,10 @@ export namespace PolicyGetResponse {
     allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * Indicates whether to bypass MFA for this resource. This option is available at
+     * Indicates whether to disable MFA for this resource. This option is available at
      * the application and policy level.
      */
-    mfa_bypass?: boolean;
+    mfa_disabled?: boolean;
 
     /**
      * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -1882,10 +1918,10 @@ export namespace PolicyCreateParams {
     allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * Indicates whether to bypass MFA for this resource. This option is available at
+     * Indicates whether to disable MFA for this resource. This option is available at
      * the application and policy level.
      */
-    mfa_bypass?: boolean;
+    mfa_disabled?: boolean;
 
     /**
      * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
@@ -2007,10 +2043,10 @@ export namespace PolicyUpdateParams {
     allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * Indicates whether to bypass MFA for this resource. This option is available at
+     * Indicates whether to disable MFA for this resource. This option is available at
      * the application and policy level.
      */
-    mfa_bypass?: boolean;
+    mfa_disabled?: boolean;
 
     /**
      * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
