@@ -73,6 +73,8 @@ describe('resource tokens', () => {
   test('list: required and optional params', async () => {
     const response = await client.aiSearch.tokens.list({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      order_by: 'created_at',
+      order_by_direction: 'asc',
       page: 1,
       per_page: 1,
     });

@@ -39,6 +39,8 @@ export interface SubmissionListResponse {
 
   submission_id: string;
 
+  customer_status?: 'escalated' | 'reviewed' | 'unreviewed';
+
   original_disposition?:
     | 'MALICIOUS'
     | 'MALICIOUS-BEC'
@@ -96,6 +98,11 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
    * Path param: Account Identifier
    */
   account_id: string;
+
+  /**
+   * Query param
+   */
+  customer_status?: 'escalated' | 'reviewed' | 'unreviewed';
 
   /**
    * Query param: The end of the search date range. Defaults to `now` if not

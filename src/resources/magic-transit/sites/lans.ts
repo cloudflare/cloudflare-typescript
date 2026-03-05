@@ -233,6 +233,16 @@ export interface LAN {
    */
   ha_link?: boolean;
 
+  /**
+   * mark true to use this LAN for source-based breakout traffic
+   */
+  is_breakout?: boolean;
+
+  /**
+   * mark true to use this LAN for source-based prioritized traffic
+   */
+  is_prioritized?: boolean;
+
   name?: string;
 
   nat?: Nat;
@@ -371,6 +381,16 @@ export interface LANCreateParams {
   ha_link?: boolean;
 
   /**
+   * Body param: mark true to use this LAN for source-based breakout traffic
+   */
+  is_breakout?: boolean;
+
+  /**
+   * Body param: mark true to use this LAN for source-based prioritized traffic
+   */
+  is_prioritized?: boolean;
+
+  /**
    * Body param
    */
   name?: string;
@@ -419,6 +439,16 @@ export interface LANUpdateParams {
    * Body param
    */
   bond_id?: number;
+
+  /**
+   * Body param: mark true to use this LAN for source-based breakout traffic
+   */
+  is_breakout?: boolean;
+
+  /**
+   * Body param: mark true to use this LAN for source-based prioritized traffic
+   */
+  is_prioritized?: boolean;
 
   /**
    * Body param
@@ -488,6 +518,16 @@ export interface LANEditParams {
    * Body param
    */
   bond_id?: number;
+
+  /**
+   * Body param: mark true to use this LAN for source-based breakout traffic
+   */
+  is_breakout?: boolean;
+
+  /**
+   * Body param: mark true to use this LAN for source-based prioritized traffic
+   */
+  is_prioritized?: boolean;
 
   /**
    * Body param

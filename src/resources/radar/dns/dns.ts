@@ -67,18 +67,18 @@ export class DNS extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.radar.dns.summaryV2(
-   *   'IP_VERSION',
-   * );
+   * const response = await client.radar.dns.summaryV2('AS');
    * ```
    */
   summaryV2(
     dimension:
-      | 'IP_VERSION'
+      | 'AS'
       | 'CACHE_HIT'
       | 'DNSSEC'
       | 'DNSSEC_AWARE'
       | 'DNSSEC_E2E'
+      | 'IP_VERSION'
+      | 'LOCATION'
       | 'MATCHING_ANSWER'
       | 'PROTOCOL'
       | 'QUERY_TYPE'
@@ -121,17 +121,19 @@ export class DNS extends APIResource {
    * @example
    * ```ts
    * const response = await client.radar.dns.timeseriesGroupsV2(
-   *   'IP_VERSION',
+   *   'AS',
    * );
    * ```
    */
   timeseriesGroupsV2(
     dimension:
-      | 'IP_VERSION'
+      | 'AS'
       | 'CACHE_HIT'
       | 'DNSSEC'
       | 'DNSSEC_AWARE'
       | 'DNSSEC_E2E'
+      | 'IP_VERSION'
+      | 'LOCATION'
       | 'MATCHING_ANSWER'
       | 'PROTOCOL'
       | 'QUERY_TYPE'

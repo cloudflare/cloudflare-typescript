@@ -378,6 +378,12 @@ export interface DatabaseListResponse {
   created_at?: string;
 
   /**
+   * Specify the location to restrict the D1 database to run and store data. If this
+   * option is present, the location hint is ignored.
+   */
+  jurisdiction?: 'eu' | 'fedramp' | null;
+
+  /**
    * D1 database name.
    */
   name?: string;

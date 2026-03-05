@@ -156,6 +156,12 @@ export interface AppCreateResponse {
   name?: string;
 
   /**
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
+   */
+  source_subnets?: Array<string>;
+
+  /**
    * Category of the app.
    */
   type?: string;
@@ -185,6 +191,12 @@ export interface AppUpdateResponse {
    * Display name for the app.
    */
   name?: string;
+
+  /**
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
+   */
+  source_subnets?: Array<string>;
 
   /**
    * Category of the app.
@@ -224,6 +236,12 @@ export namespace AppListResponse {
     name?: string;
 
     /**
+     * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+     * unsupported)
+     */
+    source_subnets?: Array<string>;
+
+    /**
      * Category of the app.
      */
     type?: string;
@@ -253,6 +271,12 @@ export namespace AppListResponse {
      * Display name for the app.
      */
     name?: string;
+
+    /**
+     * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+     * unsupported)
+     */
+    source_subnets?: Array<string>;
 
     /**
      * Category of the app.
@@ -287,6 +311,12 @@ export interface AppDeleteResponse {
   name?: string;
 
   /**
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
+   */
+  source_subnets?: Array<string>;
+
+  /**
    * Category of the app.
    */
   type?: string;
@@ -316,6 +346,12 @@ export interface AppEditResponse {
    * Display name for the app.
    */
   name?: string;
+
+  /**
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
+   */
+  source_subnets?: Array<string>;
 
   /**
    * Category of the app.
@@ -349,6 +385,12 @@ export interface AppCreateParams {
    * currently unsupported)
    */
   ip_subnets?: Array<string>;
+
+  /**
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
+   */
+  source_subnets?: Array<string>;
 }
 
 export interface AppUpdateParams {
@@ -372,6 +414,12 @@ export interface AppUpdateParams {
    * Body param: Display name for the app.
    */
   name?: string;
+
+  /**
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
+   */
+  source_subnets?: Array<string>;
 
   /**
    * Body param: Category of the app.
@@ -414,6 +462,12 @@ export interface AppEditParams {
    * Body param: Display name for the app.
    */
   name?: string;
+
+  /**
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
+   */
+  source_subnets?: Array<string>;
 
   /**
    * Body param: Category of the app.

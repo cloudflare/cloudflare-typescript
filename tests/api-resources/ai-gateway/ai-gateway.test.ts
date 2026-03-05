@@ -40,11 +40,11 @@ describe('resource aiGateway', () => {
       rate_limiting_limit: 0,
       rate_limiting_technique: 'fixed',
       authentication: true,
-      is_default: true,
       log_management: 10000,
       log_management_strategy: 'STOP_INSERTING',
       logpush: true,
       logpush_public_key: 'xxxxxxxxxxxxxxxx',
+      workers_ai_billing_mode: 'postpaid',
       zdr: true,
     });
   });
@@ -83,7 +83,6 @@ describe('resource aiGateway', () => {
         enabled: true,
         profiles: ['string'],
       },
-      is_default: true,
       log_management: 10000,
       log_management_strategy: 'STOP_INSERTING',
       logpush: true,
@@ -93,10 +92,12 @@ describe('resource aiGateway', () => {
           authorization: 'authorization',
           headers: { foo: 'string' },
           url: 'url',
+          content_type: 'json',
         },
       ],
       store_id: 'store_id',
       stripe: { authorization: 'authorization', usage_events: [{ payload: 'payload' }] },
+      workers_ai_billing_mode: 'postpaid',
       zdr: true,
     });
   });

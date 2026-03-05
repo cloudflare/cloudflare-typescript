@@ -7,7 +7,7 @@ import { path } from '../../internal/utils/path';
 
 export class URLs extends APIResource {
   /**
-   * Get Gateway URL
+   * Retrieves the endpoint URL for an AI Gateway.
    *
    * @example
    * ```ts

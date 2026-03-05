@@ -31,25 +31,4 @@ describe('resource items', () => {
       status: 'queued',
     });
   });
-
-  test('get: only required params', async () => {
-    const responsePromise = client.aiSearch.instances.items.get('item_id', {
-      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      id: 'my-ai-search',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('get: required and optional params', async () => {
-    const response = await client.aiSearch.instances.items.get('item_id', {
-      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      id: 'my-ai-search',
-    });
-  });
 });

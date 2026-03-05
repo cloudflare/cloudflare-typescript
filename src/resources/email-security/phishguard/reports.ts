@@ -7,7 +7,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Reports extends APIResource {
   /**
-   * Get `PhishGuard` reports
+   * Retrieves `PhishGuard` reports showing phishing attempts and suspicious email
+   * patterns detected.
    *
    * @example
    * ```ts

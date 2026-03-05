@@ -7,7 +7,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Trace extends APIResource {
   /**
-   * Get email trace
+   * Gets the delivery trace for an email message, showing its path through email
+   * security processing.
    *
    * @example
    * ```ts

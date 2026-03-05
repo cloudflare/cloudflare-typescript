@@ -11,7 +11,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Hosts extends APIResource {
   /**
-   * Retrieve schema hosts in a zone
+   * Lists all unique hosts found in uploaded OpenAPI schemas for the zone. Useful
+   * for understanding which domains have schema coverage.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */

@@ -31,6 +31,7 @@ describe('resource investigate', () => {
       detections_only: true,
       domain: 'domain',
       end: '2019-12-27T18:11:19.117Z',
+      exact_subject: 'exact_subject',
       final_disposition: 'MALICIOUS',
       message_action: 'PREVIEW',
       message_id: 'message_id',

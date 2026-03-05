@@ -34,7 +34,7 @@ export class Workflows extends APIResource {
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 
   /**
-   * Create/modify Workflow
+   * Creates a new workflow or updates an existing workflow definition.
    */
   update(
     workflowName: string,
@@ -51,7 +51,7 @@ export class Workflows extends APIResource {
   }
 
   /**
-   * List all Workflows
+   * Lists all workflows configured for the account.
    */
   list(
     params: WorkflowListParams,
@@ -83,7 +83,7 @@ export class Workflows extends APIResource {
   }
 
   /**
-   * Get Workflow details
+   * Retrieves configuration and metadata for a specific workflow.
    */
   get(
     workflowName: string,
@@ -220,6 +220,17 @@ export interface WorkflowUpdateParams {
    * Body param
    */
   script_name: string;
+
+  /**
+   * Body param
+   */
+  limits?: WorkflowUpdateParams.Limits;
+}
+
+export namespace WorkflowUpdateParams {
+  export interface Limits {
+    steps?: number;
+  }
 }
 
 export interface WorkflowListParams extends V4PagePaginationArrayParams {

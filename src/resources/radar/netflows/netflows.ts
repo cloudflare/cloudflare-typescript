@@ -39,7 +39,7 @@ export class NetFlows extends APIResource {
    * ```
    */
   summaryV2(
-    dimension: 'ADM1' | 'PRODUCT',
+    dimension: 'ADM1' | 'AS' | 'LOCATION' | 'PRODUCT',
     query: NetFlowsSummaryV2Params | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<NetFlowsSummaryV2Response> {
@@ -80,7 +80,7 @@ export class NetFlows extends APIResource {
    * ```
    */
   timeseriesGroups(
-    dimension: 'ADM1' | 'PRODUCT',
+    dimension: 'ADM1' | 'AS' | 'LOCATION' | 'PRODUCT',
     query: NetFlowsTimeseriesGroupsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<NetFlowsTimeseriesGroupsResponse> {

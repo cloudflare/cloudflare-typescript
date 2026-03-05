@@ -7,7 +7,8 @@ import { path } from '../../internal/utils/path';
 
 export class Configurations extends APIResource {
   /**
-   * Update configuration properties
+   * Updates API Shield configuration settings for a zone. Can modify validation
+   * strictness, enforcement mode, and other global settings.
    *
    * @example
    * ```ts
@@ -32,7 +33,8 @@ export class Configurations extends APIResource {
   }
 
   /**
-   * Retrieve information about specific configuration properties
+   * Gets the current API Shield configuration settings for a zone, including
+   * validation behavior and enforcement mode.
    *
    * @example
    * ```ts

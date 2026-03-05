@@ -63,7 +63,8 @@ export class Domains extends APIResource {
   }
 
   /**
-   * Unprotect multiple email domains
+   * Bulk removes multiple domains from email security configuration in a single
+   * request.
    *
    * @example
    * ```ts
@@ -88,7 +89,7 @@ export class Domains extends APIResource {
   }
 
   /**
-   * Update an email domain
+   * Updates configuration for a domain in email security.
    *
    * @example
    * ```ts
@@ -110,7 +111,7 @@ export class Domains extends APIResource {
   }
 
   /**
-   * Get an email domain
+   * Gets configuration details for a specific domain in email security.
    *
    * @example
    * ```ts

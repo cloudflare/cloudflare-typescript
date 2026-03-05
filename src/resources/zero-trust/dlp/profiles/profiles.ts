@@ -153,6 +153,16 @@ export namespace Profile {
     context_awareness?: ProfilesAPI.ContextAwareness;
 
     /**
+     * Data classes associated with this profile.
+     */
+    data_classes?: Array<string>;
+
+    /**
+     * Data tags associated with this profile.
+     */
+    data_tags?: Array<string>;
+
+    /**
      * The description of the profile.
      */
     description?: string | null;
@@ -168,6 +178,11 @@ export namespace Profile {
       | CustomProfile.DocumentFingerprintEntry
       | CustomProfile.WordListEntry
     >;
+
+    /**
+     * Sensitivity levels associated with this profile as (group_id, level_id) tuples.
+     */
+    sensitivity_levels?: Array<Array<string>>;
 
     shared_entries?: Array<
       | CustomProfile.CustomEntry
