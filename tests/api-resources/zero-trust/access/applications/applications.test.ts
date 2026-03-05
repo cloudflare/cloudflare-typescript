@@ -84,7 +84,7 @@ describe('resource applications', () => {
       logo_url: 'https://www.cloudflare.com/img/logo-web-badges/cf-logo-on-white-bg.svg',
       mfa_config: {
         allowed_authenticators: ['totp', 'biometrics', 'security_key'],
-        mfa_bypass: false,
+        mfa_disabled: false,
         session_duration: '24h',
       },
       name: 'Admin Site',
@@ -213,7 +213,7 @@ describe('resource applications', () => {
       logo_url: 'https://www.cloudflare.com/img/logo-web-badges/cf-logo-on-white-bg.svg',
       mfa_config: {
         allowed_authenticators: ['totp', 'biometrics', 'security_key'],
-        mfa_bypass: false,
+        mfa_disabled: false,
         session_duration: '24h',
       },
       name: 'Admin Site',

@@ -254,10 +254,10 @@ export namespace PolicyTestCreateParams {
       allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
       /**
-       * Indicates whether to bypass MFA for this resource. This option is available at
+       * Indicates whether to disable MFA for this resource. This option is available at
        * the application and policy level.
        */
-      mfa_bypass?: boolean;
+      mfa_disabled?: boolean;
 
       /**
        * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
