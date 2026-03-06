@@ -190,6 +190,7 @@ export interface Version {
     | Version.WorkersBindingKindSecretKey
     | Version.WorkersBindingKindWorkflow
     | Version.WorkersBindingKindWasmModule
+    | Version.WorkersBindingKindVPCService
   >;
 
   /**
@@ -510,6 +511,11 @@ export namespace Version {
     class_name?: string;
 
     /**
+     * The dispatch namespace the Durable Object script belongs to.
+     */
+    dispatch_namespace?: string;
+
+    /**
      * The environment of the script_name to bind to.
      */
     environment?: string;
@@ -743,7 +749,7 @@ export namespace Version {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -800,6 +806,11 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'service';
+
+    /**
+     * Entrypoint to invoke on the target Worker.
+     */
+    entrypoint?: string;
 
     /**
      * Optional environment if the Worker utilizes one.
@@ -953,6 +964,23 @@ export namespace Version {
      * @deprecated The kind of resource that the binding provides.
      */
     type: 'wasm_module';
+  }
+
+  export interface WorkersBindingKindVPCService {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the VPC service to bind to.
+     */
+    service_id: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_service';
   }
 
   /**
@@ -1193,6 +1221,7 @@ export interface VersionCreateParams {
     | VersionCreateParams.WorkersBindingKindSecretKey
     | VersionCreateParams.WorkersBindingKindWorkflow
     | VersionCreateParams.WorkersBindingKindWasmModule
+    | VersionCreateParams.WorkersBindingKindVPCService
   >;
 
   /**
@@ -1498,6 +1527,11 @@ export namespace VersionCreateParams {
     class_name?: string;
 
     /**
+     * The dispatch namespace the Durable Object script belongs to.
+     */
+    dispatch_namespace?: string;
+
+    /**
      * The environment of the script_name to bind to.
      */
     environment?: string;
@@ -1731,7 +1765,7 @@ export namespace VersionCreateParams {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -1793,6 +1827,11 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'service';
+
+    /**
+     * Entrypoint to invoke on the target Worker.
+     */
+    entrypoint?: string;
 
     /**
      * Optional environment if the Worker utilizes one.
@@ -1958,6 +1997,23 @@ export namespace VersionCreateParams {
      * @deprecated The kind of resource that the binding provides.
      */
     type: 'wasm_module';
+  }
+
+  export interface WorkersBindingKindVPCService {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the VPC service to bind to.
+     */
+    service_id: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_service';
   }
 
   /**

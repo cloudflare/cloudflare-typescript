@@ -93,6 +93,8 @@ describe('resource workers', () => {
   test('list: required and optional params', async () => {
     const response = await client.workers.beta.workers.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      order: 'asc',
+      order_by: 'deployed_on',
       page: 1,
       per_page: 1,
     });

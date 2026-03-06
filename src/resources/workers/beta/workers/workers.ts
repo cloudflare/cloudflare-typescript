@@ -219,6 +219,12 @@ export interface Worker {
    * When the Worker was most recently updated.
    */
   updated_on: string;
+
+  /**
+   * When the Worker's most recent deployment was created. `null` if the Worker has
+   * never been deployed.
+   */
+  deployed_on?: string | null;
 }
 
 export namespace Worker {
@@ -688,6 +694,16 @@ export interface WorkerListParams extends V4PagePaginationArrayParams {
    * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: Sort direction.
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Query param: Property to sort results by.
+   */
+  order_by?: 'deployed_on' | 'updated_on' | 'created_on' | 'name';
 }
 
 export interface WorkerDeleteParams {
