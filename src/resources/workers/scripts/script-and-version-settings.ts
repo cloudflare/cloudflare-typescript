@@ -64,6 +64,13 @@ export class ScriptAndVersionSettings extends APIResource {
 
 export interface ScriptAndVersionSettingEditResponse {
   /**
+   * Annotations for the Worker version. Annotations are not inherited across
+   * settings updates; omitting this field means the new version will have no
+   * annotations.
+   */
+  annotations?: ScriptAndVersionSettingEditResponse.Annotations;
+
+  /**
    * List of bindings attached to a Worker. You can find more about bindings on our
    * docs:
    * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
@@ -98,6 +105,7 @@ export interface ScriptAndVersionSettingEditResponse {
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindSecretKey
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindWorkflow
     | ScriptAndVersionSettingEditResponse.WorkersBindingKindWasmModule
+    | ScriptAndVersionSettingEditResponse.WorkersBindingKindVPCService
   >;
 
   /**
@@ -160,6 +168,29 @@ export interface ScriptAndVersionSettingEditResponse {
 }
 
 export namespace ScriptAndVersionSettingEditResponse {
+  /**
+   * Annotations for the Worker version. Annotations are not inherited across
+   * settings updates; omitting this field means the new version will have no
+   * annotations.
+   */
+  export interface Annotations {
+    /**
+     * Human-readable message about the version.
+     */
+    'workers/message'?: string;
+
+    /**
+     * User-provided identifier for the version.
+     */
+    'workers/tag'?: string;
+
+    /**
+     * Operation that triggered the creation of the version. This is read-only and set
+     * by the server.
+     */
+    'workers/triggered_by'?: string;
+  }
+
   export interface WorkersBindingKindAI {
     /**
      * A JavaScript variable name for the binding.
@@ -332,6 +363,11 @@ export namespace ScriptAndVersionSettingEditResponse {
      * The exported class name of the Durable Object.
      */
     class_name?: string;
+
+    /**
+     * The dispatch namespace the Durable Object script belongs to.
+     */
+    dispatch_namespace?: string;
 
     /**
      * The environment of the script_name to bind to.
@@ -567,7 +603,7 @@ export namespace ScriptAndVersionSettingEditResponse {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -624,6 +660,11 @@ export namespace ScriptAndVersionSettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'service';
+
+    /**
+     * Entrypoint to invoke on the target Worker.
+     */
+    entrypoint?: string;
 
     /**
      * Optional environment if the Worker utilizes one.
@@ -777,6 +818,23 @@ export namespace ScriptAndVersionSettingEditResponse {
      * @deprecated The kind of resource that the binding provides.
      */
     type: 'wasm_module';
+  }
+
+  export interface WorkersBindingKindVPCService {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the VPC service to bind to.
+     */
+    service_id: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_service';
   }
 
   /**
@@ -947,6 +1005,13 @@ export namespace ScriptAndVersionSettingEditResponse {
 
 export interface ScriptAndVersionSettingGetResponse {
   /**
+   * Annotations for the Worker version. Annotations are not inherited across
+   * settings updates; omitting this field means the new version will have no
+   * annotations.
+   */
+  annotations?: ScriptAndVersionSettingGetResponse.Annotations;
+
+  /**
    * List of bindings attached to a Worker. You can find more about bindings on our
    * docs:
    * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
@@ -981,6 +1046,7 @@ export interface ScriptAndVersionSettingGetResponse {
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindSecretKey
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindWorkflow
     | ScriptAndVersionSettingGetResponse.WorkersBindingKindWasmModule
+    | ScriptAndVersionSettingGetResponse.WorkersBindingKindVPCService
   >;
 
   /**
@@ -1043,6 +1109,29 @@ export interface ScriptAndVersionSettingGetResponse {
 }
 
 export namespace ScriptAndVersionSettingGetResponse {
+  /**
+   * Annotations for the Worker version. Annotations are not inherited across
+   * settings updates; omitting this field means the new version will have no
+   * annotations.
+   */
+  export interface Annotations {
+    /**
+     * Human-readable message about the version.
+     */
+    'workers/message'?: string;
+
+    /**
+     * User-provided identifier for the version.
+     */
+    'workers/tag'?: string;
+
+    /**
+     * Operation that triggered the creation of the version. This is read-only and set
+     * by the server.
+     */
+    'workers/triggered_by'?: string;
+  }
+
   export interface WorkersBindingKindAI {
     /**
      * A JavaScript variable name for the binding.
@@ -1215,6 +1304,11 @@ export namespace ScriptAndVersionSettingGetResponse {
      * The exported class name of the Durable Object.
      */
     class_name?: string;
+
+    /**
+     * The dispatch namespace the Durable Object script belongs to.
+     */
+    dispatch_namespace?: string;
 
     /**
      * The environment of the script_name to bind to.
@@ -1450,7 +1544,7 @@ export namespace ScriptAndVersionSettingGetResponse {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -1507,6 +1601,11 @@ export namespace ScriptAndVersionSettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'service';
+
+    /**
+     * Entrypoint to invoke on the target Worker.
+     */
+    entrypoint?: string;
 
     /**
      * Optional environment if the Worker utilizes one.
@@ -1660,6 +1759,23 @@ export namespace ScriptAndVersionSettingGetResponse {
      * @deprecated The kind of resource that the binding provides.
      */
     type: 'wasm_module';
+  }
+
+  export interface WorkersBindingKindVPCService {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the VPC service to bind to.
+     */
+    service_id: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_service';
   }
 
   /**
@@ -1843,6 +1959,13 @@ export interface ScriptAndVersionSettingEditParams {
 export namespace ScriptAndVersionSettingEditParams {
   export interface Settings {
     /**
+     * Annotations for the Worker version. Annotations are not inherited across
+     * settings updates; omitting this field means the new version will have no
+     * annotations.
+     */
+    annotations?: Settings.Annotations;
+
+    /**
      * List of bindings attached to a Worker. You can find more about bindings on our
      * docs:
      * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
@@ -1877,6 +2000,7 @@ export namespace ScriptAndVersionSettingEditParams {
       | Settings.WorkersBindingKindSecretKey
       | Settings.WorkersBindingKindWorkflow
       | Settings.WorkersBindingKindWasmModule
+      | Settings.WorkersBindingKindVPCService
     >;
 
     /**
@@ -1944,6 +2068,23 @@ export namespace ScriptAndVersionSettingEditParams {
   }
 
   export namespace Settings {
+    /**
+     * Annotations for the Worker version. Annotations are not inherited across
+     * settings updates; omitting this field means the new version will have no
+     * annotations.
+     */
+    export interface Annotations {
+      /**
+       * Human-readable message about the version.
+       */
+      'workers/message'?: string;
+
+      /**
+       * User-provided identifier for the version.
+       */
+      'workers/tag'?: string;
+    }
+
     export interface WorkersBindingKindAI {
       /**
        * A JavaScript variable name for the binding.
@@ -2116,6 +2257,11 @@ export namespace ScriptAndVersionSettingEditParams {
        * The exported class name of the Durable Object.
        */
       class_name?: string;
+
+      /**
+       * The dispatch namespace the Durable Object script belongs to.
+       */
+      dispatch_namespace?: string;
 
       /**
        * The environment of the script_name to bind to.
@@ -2351,7 +2497,7 @@ export namespace ScriptAndVersionSettingEditParams {
        * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
        * of the R2 bucket.
        */
-      jurisdiction?: 'eu' | 'fedramp';
+      jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
     }
 
     export interface WorkersBindingKindSecretText {
@@ -2413,6 +2559,11 @@ export namespace ScriptAndVersionSettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'service';
+
+      /**
+       * Entrypoint to invoke on the target Worker.
+       */
+      entrypoint?: string;
 
       /**
        * Optional environment if the Worker utilizes one.
@@ -2578,6 +2729,23 @@ export namespace ScriptAndVersionSettingEditParams {
        * @deprecated The kind of resource that the binding provides.
        */
       type: 'wasm_module';
+    }
+
+    export interface WorkersBindingKindVPCService {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Identifier of the VPC service to bind to.
+       */
+      service_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vpc_service';
     }
 
     /**
