@@ -784,7 +784,6 @@ TEST_PATHS=(
 	tests/api-resources/ai/to-markdown.test.ts
 	tests/api-resources/aisearch/aisearch.test.ts
 	tests/api-resources/aisearch/instances/instances.test.ts
-	tests/api-resources/aisearch/instances/items.test.ts
 	tests/api-resources/aisearch/instances/jobs.test.ts
 	tests/api-resources/aisearch/tokens.test.ts
 	tests/api-resources/security-center/security-center.test.ts

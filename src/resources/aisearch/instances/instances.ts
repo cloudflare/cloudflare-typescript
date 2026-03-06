@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ItemsAPI from './items';
-import { ItemListParams, ItemListResponse, ItemListResponsesV4PagePaginationArray, Items } from './items';
+import { Items } from './items';
 import * as JobsAPI from './jobs';
 import {
   JobCreateParams,
@@ -486,14 +486,28 @@ export namespace InstanceCreateResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      crawl_options?: WebCrawler.CrawlOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss';
+      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
 
       store_options?: WebCrawler.StoreOptions;
     }
 
     export namespace WebCrawler {
+      export interface CrawlOptions {
+        depth?: number;
+
+        include_external_links?: boolean;
+
+        include_subdomains?: boolean;
+
+        max_age?: number;
+
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -799,14 +813,28 @@ export namespace InstanceUpdateResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      crawl_options?: WebCrawler.CrawlOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss';
+      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
 
       store_options?: WebCrawler.StoreOptions;
     }
 
     export namespace WebCrawler {
+      export interface CrawlOptions {
+        depth?: number;
+
+        include_external_links?: boolean;
+
+        include_subdomains?: boolean;
+
+        max_age?: number;
+
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -1112,14 +1140,28 @@ export namespace InstanceListResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      crawl_options?: WebCrawler.CrawlOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss';
+      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
 
       store_options?: WebCrawler.StoreOptions;
     }
 
     export namespace WebCrawler {
+      export interface CrawlOptions {
+        depth?: number;
+
+        include_external_links?: boolean;
+
+        include_subdomains?: boolean;
+
+        max_age?: number;
+
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -1425,14 +1467,28 @@ export namespace InstanceDeleteResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      crawl_options?: WebCrawler.CrawlOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss';
+      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
 
       store_options?: WebCrawler.StoreOptions;
     }
 
     export namespace WebCrawler {
+      export interface CrawlOptions {
+        depth?: number;
+
+        include_external_links?: boolean;
+
+        include_subdomains?: boolean;
+
+        max_age?: number;
+
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -1806,14 +1862,28 @@ export namespace InstanceReadResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      crawl_options?: WebCrawler.CrawlOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss';
+      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
 
       store_options?: WebCrawler.StoreOptions;
     }
 
     export namespace WebCrawler {
+      export interface CrawlOptions {
+        depth?: number;
+
+        include_external_links?: boolean;
+
+        include_subdomains?: boolean;
+
+        max_age?: number;
+
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -2240,14 +2310,28 @@ export namespace InstanceCreateParams {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      crawl_options?: WebCrawler.CrawlOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss';
+      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
 
       store_options?: WebCrawler.StoreOptions;
     }
 
     export namespace WebCrawler {
+      export interface CrawlOptions {
+        depth?: number;
+
+        include_external_links?: boolean;
+
+        include_subdomains?: boolean;
+
+        max_age?: number;
+
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -2655,14 +2739,28 @@ export namespace InstanceUpdateParams {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      crawl_options?: WebCrawler.CrawlOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss';
+      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
 
       store_options?: WebCrawler.StoreOptions;
     }
 
     export namespace WebCrawler {
+      export interface CrawlOptions {
+        depth?: number;
+
+        include_external_links?: boolean;
+
+        include_subdomains?: boolean;
+
+        max_age?: number;
+
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -3071,12 +3169,7 @@ export declare namespace Instances {
     type InstanceStatsParams as InstanceStatsParams,
   };
 
-  export {
-    Items as Items,
-    type ItemListResponse as ItemListResponse,
-    type ItemListResponsesV4PagePaginationArray as ItemListResponsesV4PagePaginationArray,
-    type ItemListParams as ItemListParams,
-  };
+  export { Items as Items };
 
   export {
     Jobs as Jobs,

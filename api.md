@@ -9443,14 +9443,6 @@ Methods:
 
 ### Items
 
-Types:
-
-- <code><a href="./src/resources/aisearch/instances/items.ts">ItemListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/ai-search/instances/{id}/items">client.aiSearch.instances.items.<a href="./src/resources/aisearch/instances/items.ts">list</a>(id, { ...params }) -> ItemListResponsesV4PagePaginationArray</code>
-
 ### Jobs
 
 Types:
