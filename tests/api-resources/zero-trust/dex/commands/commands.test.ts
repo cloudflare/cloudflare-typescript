@@ -44,6 +44,7 @@ describe('resource commands', () => {
             'test-all-routes': true,
             'time-limit-min': 1,
           },
+          registration_id: 'registration_id',
         },
       ],
     });
