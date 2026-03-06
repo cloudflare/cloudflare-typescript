@@ -264,6 +264,7 @@ TEST_PATHS=(
 	tests/api-resources/audit-logs.test.ts
 	tests/api-resources/billing/billing.test.ts
 	tests/api-resources/billing/profiles.test.ts
+	tests/api-resources/billing/usage.test.ts
 	tests/api-resources/brand-protection/brand-protection.test.ts
 	tests/api-resources/brand-protection/queries.test.ts
 	tests/api-resources/brand-protection/matches.test.ts
