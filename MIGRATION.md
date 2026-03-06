@@ -1069,7 +1069,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.aiSearch.instances.read()`
 - `client.aiSearch.instances.search()`
 - `client.aiSearch.instances.stats()`
-- `client.aiSearch.instances.items.list()`
 - `client.aiSearch.instances.jobs.create()`
 - `client.aiSearch.instances.jobs.list()`
 - `client.aiSearch.instances.jobs.get()`
