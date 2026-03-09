@@ -2100,6 +2100,11 @@ export namespace CustomHostnameCreateParams {
     custom_certificate?: string;
 
     /**
+     * The identifier for the Custom CSR that was used.
+     */
+    custom_csr_id?: string;
+
+    /**
      * The key for a custom uploaded certificate.
      */
     custom_key?: string;
@@ -2280,6 +2285,11 @@ export namespace CustomHostnameEditParams {
      * If a custom uploaded certificate is used.
      */
     custom_certificate?: string;
+
+    /**
+     * The identifier for the Custom CSR that was used.
+     */
+    custom_csr_id?: string;
 
     /**
      * The key for a custom uploaded certificate.
