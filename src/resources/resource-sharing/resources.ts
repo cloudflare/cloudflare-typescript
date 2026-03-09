@@ -195,7 +195,6 @@ export interface ResourceCreateResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -248,7 +247,6 @@ export interface ResourceUpdateResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -301,7 +299,6 @@ export interface ResourceListResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -354,7 +351,6 @@ export interface ResourceDeleteResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -407,7 +403,6 @@ export interface ResourceGetResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -450,7 +445,6 @@ export interface ResourceCreateParams {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -485,7 +479,6 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
    */
   resource_type?:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
