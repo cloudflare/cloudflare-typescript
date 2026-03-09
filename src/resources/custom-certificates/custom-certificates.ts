@@ -176,6 +176,11 @@ export interface CustomCertificate {
   bundle_method?: CustomHostnamesAPI.BundleMethod;
 
   /**
+   * The identifier for the Custom CSR that was used.
+   */
+  custom_csr_id?: string;
+
+  /**
    * When the certificate from the authority expires.
    */
   expires_on?: string;
@@ -304,6 +309,11 @@ export interface CustomCertificateCreateParams {
   bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
   /**
+   * Body param: The identifier for the Custom CSR that was used.
+   */
+  custom_csr_id?: string;
+
+  /**
    * Body param: The environment to deploy the certificate to, defaults to production
    */
   deploy?: 'staging' | 'production';
@@ -383,6 +393,11 @@ export interface CustomCertificateEditParams {
    * Body param: The zone's SSL certificate or certificate and the intermediate(s).
    */
   certificate?: string;
+
+  /**
+   * Body param: The identifier for the Custom CSR that was used.
+   */
+  custom_csr_id?: string;
 
   /**
    * Body param: The environment to deploy the certificate to, defaults to production
