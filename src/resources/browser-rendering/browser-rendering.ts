@@ -3,6 +3,8 @@
 import { APIResource } from '../../core/resource';
 import * as ContentAPI from './content';
 import { Content, ContentCreateParams, ContentCreateResponse } from './content';
+import * as CrawlAPI from './crawl';
+import { Crawl } from './crawl';
 import * as JsonAPI from './json';
 import { Json, JsonCreateParams, JsonCreateResponse } from './json';
 import * as LinksAPI from './links';
@@ -27,6 +29,7 @@ export class BrowserRendering extends APIResource {
   json: JsonAPI.Json = new JsonAPI.Json(this._client);
   links: LinksAPI.Links = new LinksAPI.Links(this._client);
   markdown: MarkdownAPI.Markdown = new MarkdownAPI.Markdown(this._client);
+  crawl: CrawlAPI.Crawl = new CrawlAPI.Crawl(this._client);
 }
 
 BrowserRendering.Content = Content;
@@ -37,6 +40,7 @@ BrowserRendering.Snapshot = Snapshot;
 BrowserRendering.Json = Json;
 BrowserRendering.Links = Links;
 BrowserRendering.Markdown = Markdown;
+BrowserRendering.Crawl = Crawl;
 
 export declare namespace BrowserRendering {
   export {
@@ -82,4 +86,6 @@ export declare namespace BrowserRendering {
     type MarkdownCreateResponse as MarkdownCreateResponse,
     type MarkdownCreateParams as MarkdownCreateParams,
   };
+
+  export { Crawl as Crawl };
 }
