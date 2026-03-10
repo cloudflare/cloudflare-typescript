@@ -680,6 +680,8 @@ TEST_PATHS=(
 	tests/api-resources/bot-management.test.ts
 	tests/api-resources/fraud.test.ts
 	tests/api-resources/origin-post-quantum-encryption.test.ts
+	tests/api-resources/google-tag-gateway/google-tag-gateway.test.ts
+	tests/api-resources/google-tag-gateway/config.test.ts
 	tests/api-resources/zaraz/zaraz.test.ts
 	tests/api-resources/zaraz/config.test.ts
 	tests/api-resources/zaraz/default.test.ts
