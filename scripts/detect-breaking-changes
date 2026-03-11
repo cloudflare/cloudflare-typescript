@@ -803,6 +803,7 @@ TEST_PATHS=(
 	tests/api-resources/browser-rendering/json.test.ts
 	tests/api-resources/browser-rendering/links.test.ts
 	tests/api-resources/browser-rendering/markdown.test.ts
+	tests/api-resources/browser-rendering/crawl.test.ts
 	tests/api-resources/custom-pages.test.ts
 	tests/api-resources/secrets-store/secrets-store.test.ts
 	tests/api-resources/secrets-store/stores/stores.test.ts

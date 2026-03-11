@@ -4,7 +4,15 @@ import { APIResource } from '../../core/resource';
 import * as ContentAPI from './content';
 import { Content, ContentCreateParams, ContentCreateResponse } from './content';
 import * as CrawlAPI from './crawl';
-import { Crawl } from './crawl';
+import {
+  Crawl,
+  CrawlCreateParams,
+  CrawlCreateResponse,
+  CrawlDeleteParams,
+  CrawlDeleteResponse,
+  CrawlGetParams,
+  CrawlGetResponse,
+} from './crawl';
 import * as JsonAPI from './json';
 import { Json, JsonCreateParams, JsonCreateResponse } from './json';
 import * as LinksAPI from './links';
@@ -87,5 +95,13 @@ export declare namespace BrowserRendering {
     type MarkdownCreateParams as MarkdownCreateParams,
   };
 
-  export { Crawl as Crawl };
+  export {
+    Crawl as Crawl,
+    type CrawlCreateResponse as CrawlCreateResponse,
+    type CrawlDeleteResponse as CrawlDeleteResponse,
+    type CrawlGetResponse as CrawlGetResponse,
+    type CrawlCreateParams as CrawlCreateParams,
+    type CrawlDeleteParams as CrawlDeleteParams,
+    type CrawlGetParams as CrawlGetParams,
+  };
 }
