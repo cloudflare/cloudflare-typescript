@@ -1081,6 +1081,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.securityCenter.insights.class.get()`
 - `client.securityCenter.insights.severity.get()`
 - `client.securityCenter.insights.type.get()`
+- `client.browserRendering.crawl.delete()`
+- `client.browserRendering.crawl.get()`
 - `client.customPages.update()`
 - `client.customPages.list()`
 - `client.customPages.get()`
