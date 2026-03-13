@@ -3174,6 +3174,16 @@ Methods:
 - <code title="get /accounts/{account_id}/brand-protection/logo-matches/download">client.brandProtection.logoMatches.<a href="./src/resources/brand-protection/logo-matches.ts">download</a>({ ...params }) -> LogoMatchDownloadResponse</code>
 - <code title="get /accounts/{account_id}/brand-protection/logo-matches">client.brandProtection.logoMatches.<a href="./src/resources/brand-protection/logo-matches.ts">get</a>({ ...params }) -> LogoMatchGetResponse</code>
 
+## V2
+
+### Queries
+
+### Matches
+
+### Logos
+
+### LogoMatches
+
 # Diagnostics
 
 ## Traceroutes
