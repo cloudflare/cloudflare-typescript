@@ -377,11 +377,6 @@ export declare namespace CrawlCreateParams {
     source?: 'sitemaps' | 'links' | 'all';
 
     /**
-     * Body param
-     */
-    userAgent?: string;
-
-    /**
      * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
      */
     viewport?: Variant0.Viewport;
@@ -646,11 +641,6 @@ export declare namespace CrawlCreateParams {
      * sitemap and scraped links (default).
      */
     source?: 'sitemaps' | 'links' | 'all';
-
-    /**
-     * Body param
-     */
-    userAgent?: string;
   }
 
   export namespace Variant1 {
