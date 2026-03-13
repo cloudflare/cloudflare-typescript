@@ -74,12 +74,16 @@ describe('resource customHostnames', () => {
     const response = await client.customHostnames.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
+      certificate_authority: 'google',
       direction: 'desc',
-      hostname: 'app.example.com',
+      hostname: { contain: 'example.com' },
+      hostname_status: 'provisioned',
       order: 'ssl',
       page: 1,
       per_page: 5,
       ssl: 0,
+      ssl_status: 'active',
+      wildcard: false,
     });
   });
 
