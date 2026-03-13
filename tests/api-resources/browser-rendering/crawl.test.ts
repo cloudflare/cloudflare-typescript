@@ -92,7 +92,6 @@ describe('resource crawl', () => {
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
       source: 'sitemaps',
-      userAgent: 'userAgent',
       viewport: {
         height: 0,
         width: 0,
