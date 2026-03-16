@@ -9,7 +9,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Type extends APIResource {
   /**
-   * Retrieves Security Center Insight Counts by Type
+   * Retrieves Security Center insight counts aggregated by insight type.
    */
   get(params: TypeGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<TypeGetResponse> {
     const { account_id, zone_id, ...query } = params ?? {};
