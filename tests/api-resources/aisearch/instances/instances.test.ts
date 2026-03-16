@@ -245,6 +245,7 @@ describe('resource instances', () => {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       messages: [{ content: 'content', role: 'system' }],
       ai_search_options: {
+        cache: { cache_threshold: 'super_strict_match', enabled: true },
         query_rewrite: {
           enabled: true,
           model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
@@ -310,6 +311,7 @@ describe('resource instances', () => {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       messages: [{ content: 'content', role: 'system' }],
       ai_search_options: {
+        cache: { cache_threshold: 'super_strict_match', enabled: true },
         query_rewrite: {
           enabled: true,
           model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
