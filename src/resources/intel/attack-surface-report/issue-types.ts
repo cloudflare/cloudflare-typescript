@@ -7,7 +7,8 @@ import { path } from '../../../internal/utils/path';
 
 export class IssueTypes extends APIResource {
   /**
-   * Retrieves Security Center Issues Types
+   * Lists all available issue types in Security Center, describing categories of
+   * security issues.
    *
    * @example
    * ```ts

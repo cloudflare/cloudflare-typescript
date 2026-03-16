@@ -9,7 +9,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Issues extends APIResource {
   /**
-   * Retrieves Security Center Issues
+   * Lists all Security Center issues for the account, showing active security
+   * problems requiring attention.
    *
    * @deprecated
    */
@@ -26,7 +27,7 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Retrieves Security Center Issue Counts by Class
+   * Retrieves Security Center issue counts aggregated by classification class.
    *
    * @deprecated
    */
@@ -41,7 +42,8 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Archives Security Center Insight
+   * Deprecated endpoint for archiving Security Center insights. Use the newer
+   * archive-security-center-insight endpoint instead.
    *
    * @deprecated
    */
@@ -58,7 +60,7 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Retrieves Security Center Issue Counts by Severity
+   * Retrieves Security Center issue counts aggregated by severity level.
    *
    * @deprecated
    */
@@ -73,7 +75,7 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Retrieves Security Center Issue Counts by Type
+   * Retrieves Security Center issue counts aggregated by issue type.
    *
    * @deprecated
    */

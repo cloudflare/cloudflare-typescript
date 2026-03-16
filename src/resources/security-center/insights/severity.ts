@@ -9,7 +9,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Severity extends APIResource {
   /**
-   * Retrieves Security Center Insight Counts by Severity
+   * Retrieves Security Center insight counts aggregated by severity level (critical,
+   * high, medium, low).
    */
   get(
     params: SeverityGetParams | null | undefined = {},
