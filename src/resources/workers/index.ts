@@ -11,12 +11,15 @@ export { Assets } from './assets/index';
 export { Beta } from './beta/index';
 export {
   Domains,
-  type Domain,
+  type DomainUpdateResponse,
+  type DomainListResponse,
+  type DomainDeleteResponse,
+  type DomainGetResponse,
   type DomainUpdateParams,
   type DomainListParams,
   type DomainDeleteParams,
   type DomainGetParams,
-  type DomainsSinglePage,
+  type DomainListResponsesSinglePage,
 } from './domains';
 export { Observability } from './observability/index';
 export {

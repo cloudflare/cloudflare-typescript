@@ -2311,14 +2311,17 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/workers/domains.ts">Domain</a></code>
+- <code><a href="./src/resources/workers/domains.ts">DomainUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/domains.ts">DomainListResponse</a></code>
+- <code><a href="./src/resources/workers/domains.ts">DomainDeleteResponse</a></code>
+- <code><a href="./src/resources/workers/domains.ts">DomainGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/workers/domains">client.workers.domains.<a href="./src/resources/workers/domains.ts">update</a>({ ...params }) -> Domain</code>
-- <code title="get /accounts/{account_id}/workers/domains">client.workers.domains.<a href="./src/resources/workers/domains.ts">list</a>({ ...params }) -> DomainsSinglePage</code>
-- <code title="delete /accounts/{account_id}/workers/domains/{domain_id}">client.workers.domains.<a href="./src/resources/workers/domains.ts">delete</a>(domainID, { ...params }) -> void</code>
-- <code title="get /accounts/{account_id}/workers/domains/{domain_id}">client.workers.domains.<a href="./src/resources/workers/domains.ts">get</a>(domainID, { ...params }) -> Domain</code>
+- <code title="put /accounts/{account_id}/workers/domains">client.workers.domains.<a href="./src/resources/workers/domains.ts">update</a>({ ...params }) -> DomainUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workers/domains">client.workers.domains.<a href="./src/resources/workers/domains.ts">list</a>({ ...params }) -> DomainListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/workers/domains/{domain_id}">client.workers.domains.<a href="./src/resources/workers/domains.ts">delete</a>(domainID, { ...params }) -> DomainDeleteResponse</code>
+- <code title="get /accounts/{account_id}/workers/domains/{domain_id}">client.workers.domains.<a href="./src/resources/workers/domains.ts">get</a>(domainID, { ...params }) -> DomainGetResponse</code>
 
 ## Subdomains
 

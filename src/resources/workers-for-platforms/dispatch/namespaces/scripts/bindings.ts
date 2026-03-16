@@ -57,6 +57,7 @@ export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindImages
   | BindingGetResponse.WorkersBindingKindJson
   | BindingGetResponse.WorkersBindingKindKVNamespace
+  | BindingGetResponse.WorkersBindingKindMedia
   | BindingGetResponse.WorkersBindingKindMTLSCertificate
   | BindingGetResponse.WorkersBindingKindPlainText
   | BindingGetResponse.WorkersBindingKindPipelines
@@ -358,6 +359,18 @@ export namespace BindingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'kv_namespace';
+  }
+
+  export interface WorkersBindingKindMedia {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'media';
   }
 
   export interface WorkersBindingKindMTLSCertificate {

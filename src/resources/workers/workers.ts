@@ -11,13 +11,16 @@ import {
 } from './account-settings';
 import * as DomainsAPI from './domains';
 import {
-  Domain,
   DomainDeleteParams,
+  DomainDeleteResponse,
   DomainGetParams,
+  DomainGetResponse,
   DomainListParams,
+  DomainListResponse,
+  DomainListResponsesSinglePage,
   DomainUpdateParams,
+  DomainUpdateResponse,
   Domains,
-  DomainsSinglePage,
 } from './domains';
 import * as RoutesAPI from './routes';
 import {
@@ -285,8 +288,11 @@ export declare namespace Workers {
 
   export {
     Domains as Domains,
-    type Domain as Domain,
-    type DomainsSinglePage as DomainsSinglePage,
+    type DomainUpdateResponse as DomainUpdateResponse,
+    type DomainListResponse as DomainListResponse,
+    type DomainDeleteResponse as DomainDeleteResponse,
+    type DomainGetResponse as DomainGetResponse,
+    type DomainListResponsesSinglePage as DomainListResponsesSinglePage,
     type DomainUpdateParams as DomainUpdateParams,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
