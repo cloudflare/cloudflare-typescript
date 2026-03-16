@@ -729,6 +729,12 @@ export interface WARPConnectorCreateParams {
    * Body param: A user-friendly name for a tunnel.
    */
   name: string;
+
+  /**
+   * Body param: Indicates that the tunnel will be created to be highly available. If
+   * omitted, defaults to false.
+   */
+  ha?: boolean;
 }
 
 export interface WARPConnectorListParams extends V4PagePaginationArrayParams {
