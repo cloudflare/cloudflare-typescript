@@ -174,6 +174,7 @@ export interface Version {
     | Version.WorkersBindingKindImages
     | Version.WorkersBindingKindJson
     | Version.WorkersBindingKindKVNamespace
+    | Version.WorkersBindingKindMedia
     | Version.WorkersBindingKindMTLSCertificate
     | Version.WorkersBindingKindPlainText
     | Version.WorkersBindingKindPipelines
@@ -619,6 +620,18 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'kv_namespace';
+  }
+
+  export interface WorkersBindingKindMedia {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'media';
   }
 
   export interface WorkersBindingKindMTLSCertificate {
@@ -1205,6 +1218,7 @@ export interface VersionCreateParams {
     | VersionCreateParams.WorkersBindingKindImages
     | VersionCreateParams.WorkersBindingKindJson
     | VersionCreateParams.WorkersBindingKindKVNamespace
+    | VersionCreateParams.WorkersBindingKindMedia
     | VersionCreateParams.WorkersBindingKindMTLSCertificate
     | VersionCreateParams.WorkersBindingKindPlainText
     | VersionCreateParams.WorkersBindingKindPipelines
@@ -1635,6 +1649,18 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'kv_namespace';
+  }
+
+  export interface WorkersBindingKindMedia {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'media';
   }
 
   export interface WorkersBindingKindMTLSCertificate {
