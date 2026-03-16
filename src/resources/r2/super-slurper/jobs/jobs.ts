@@ -13,7 +13,8 @@ export class Jobs extends APIResource {
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
 
   /**
-   * Create a job
+   * Creates a new R2 Super Slurper migration job to transfer objects from a source
+   * bucket (e.g. S3, GCS, R2) to R2.
    *
    * @example
    * ```ts
@@ -32,7 +33,7 @@ export class Jobs extends APIResource {
   }
 
   /**
-   * List jobs
+   * Lists all R2 Super Slurper migration jobs for the account with their status.
    *
    * @example
    * ```ts
@@ -56,7 +57,8 @@ export class Jobs extends APIResource {
   }
 
   /**
-   * Abort a job
+   * Cancels a specific R2 Super Slurper migration job. Any objects in the middle of
+   * a transfer will finish, but no new objects will start transferring.
    *
    * @example
    * ```ts
@@ -76,7 +78,9 @@ export class Jobs extends APIResource {
   }
 
   /**
-   * Abort all jobs
+   * Cancels all running R2 Super Slurper migration jobs for the account. Any objects
+   * in the middle of a transfer will finish, but no new objects will start
+   * transferring.
    *
    * @example
    * ```ts
@@ -95,7 +99,8 @@ export class Jobs extends APIResource {
   }
 
   /**
-   * Get job details
+   * Retrieves detailed status and configuration for a specific R2 Super Slurper
+   * migration job.
    *
    * @example
    * ```ts
@@ -115,7 +120,8 @@ export class Jobs extends APIResource {
   }
 
   /**
-   * Pause a job
+   * Pauses a running R2 Super Slurper migration job. The job can be resumed later to
+   * continue transferring.
    *
    * @example
    * ```ts
@@ -135,7 +141,7 @@ export class Jobs extends APIResource {
   }
 
   /**
-   * Get job progress
+   * Retrieves current progress metrics for an R2 Super Slurper migration job
    *
    * @example
    * ```ts
@@ -159,7 +165,8 @@ export class Jobs extends APIResource {
   }
 
   /**
-   * Resume a job
+   * Resumes a paused R2 Super Slurper migration job, continuing the transfer from
+   * where it stopped.
    *
    * @example
    * ```ts
