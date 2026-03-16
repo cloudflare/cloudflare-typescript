@@ -896,6 +896,11 @@ export interface PipelineGetV1Response {
    * List of streams and sinks used by this pipeline.
    */
   tables: Array<PipelineGetV1Response.Table>;
+
+  /**
+   * Indicates the reason for the failure of the Pipeline.
+   */
+  failure_reason?: string;
 }
 
 export namespace PipelineGetV1Response {
