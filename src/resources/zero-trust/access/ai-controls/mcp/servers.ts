@@ -12,7 +12,7 @@ import { path } from '../../../../../internal/utils/path';
 
 export class Servers extends APIResource {
   /**
-   * Create a new MCP Server
+   * Creates a new MCP portal for managing AI tool access through Cloudflare Access.
    *
    * @example
    * ```ts
@@ -22,7 +22,7 @@ export class Servers extends APIResource {
    *       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
    *       id: 'my-mcp-server',
    *       auth_type: 'unauthenticated',
-   *       hostname: 'https://exmaple.com/mcp',
+   *       hostname: 'https://example.com/mcp',
    *       name: 'My MCP Server',
    *     },
    *   );
@@ -39,7 +39,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Update a MCP Server
+   * Updates an MCP portal configuration.
    *
    * @example
    * ```ts
@@ -61,7 +61,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * List MCP Servers
+   * Lists all MCP portals configured for the account.
    *
    * @example
    * ```ts
@@ -86,7 +86,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Delete a MCP Server
+   * Deletes an MCP portal from the account.
    *
    * @example
    * ```ts
@@ -108,7 +108,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Read the details of a MCP Server
+   * Retrieves gateway configuration for MCP portals.
    *
    * @example
    * ```ts
@@ -130,7 +130,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Sync MCP Server Capabilities
+   * Syncs an MCP server's tool catalog with the portal.
    *
    * @example
    * ```ts
