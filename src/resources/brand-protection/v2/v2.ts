@@ -2,13 +2,21 @@
 
 import { APIResource } from '../../../core/resource';
 import * as LogoMatchesAPI from './logo-matches';
-import { LogoMatches } from './logo-matches';
+import { LogoMatchGetParams, LogoMatchGetResponse, LogoMatches } from './logo-matches';
 import * as LogosAPI from './logos';
-import { Logos } from './logos';
+import {
+  LogoCreateParams,
+  LogoCreateResponse,
+  LogoDeleteParams,
+  LogoDeleteResponse,
+  LogoGetParams,
+  LogoGetResponse,
+  Logos,
+} from './logos';
 import * as MatchesAPI from './matches';
-import { Matches } from './matches';
+import { MatchGetParams, MatchGetResponse, Matches } from './matches';
 import * as QueriesAPI from './queries';
-import { Queries } from './queries';
+import { Queries, QueryGetParams, QueryGetResponse } from './queries';
 
 export class V2 extends APIResource {
   queries: QueriesAPI.Queries = new QueriesAPI.Queries(this._client);
@@ -23,11 +31,31 @@ V2.Logos = Logos;
 V2.LogoMatches = LogoMatches;
 
 export declare namespace V2 {
-  export { Queries as Queries };
+  export {
+    Queries as Queries,
+    type QueryGetResponse as QueryGetResponse,
+    type QueryGetParams as QueryGetParams,
+  };
 
-  export { Matches as Matches };
+  export {
+    Matches as Matches,
+    type MatchGetResponse as MatchGetResponse,
+    type MatchGetParams as MatchGetParams,
+  };
 
-  export { Logos as Logos };
+  export {
+    Logos as Logos,
+    type LogoCreateResponse as LogoCreateResponse,
+    type LogoDeleteResponse as LogoDeleteResponse,
+    type LogoGetResponse as LogoGetResponse,
+    type LogoCreateParams as LogoCreateParams,
+    type LogoDeleteParams as LogoDeleteParams,
+    type LogoGetParams as LogoGetParams,
+  };
 
-  export { LogoMatches as LogoMatches };
+  export {
+    LogoMatches as LogoMatches,
+    type LogoMatchGetResponse as LogoMatchGetResponse,
+    type LogoMatchGetParams as LogoMatchGetParams,
+  };
 }

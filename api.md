@@ -3181,11 +3181,47 @@ Methods:
 
 ### Queries
 
+Types:
+
+- <code><a href="./src/resources/brand-protection/v2/queries.ts">QueryGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/brand-protection/domain/queries">client.brandProtection.v2.queries.<a href="./src/resources/brand-protection/v2/queries.ts">get</a>({ ...params }) -> QueryGetResponse</code>
+
 ### Matches
+
+Types:
+
+- <code><a href="./src/resources/brand-protection/v2/matches.ts">MatchGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/brand-protection/domain/matches">client.brandProtection.v2.matches.<a href="./src/resources/brand-protection/v2/matches.ts">get</a>({ ...params }) -> MatchGetResponse</code>
 
 ### Logos
 
+Types:
+
+- <code><a href="./src/resources/brand-protection/v2/logos.ts">LogoCreateResponse</a></code>
+- <code><a href="./src/resources/brand-protection/v2/logos.ts">LogoDeleteResponse</a></code>
+- <code><a href="./src/resources/brand-protection/v2/logos.ts">LogoGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/cloudforce-one/v2/brand-protection/logo/queries">client.brandProtection.v2.logos.<a href="./src/resources/brand-protection/v2/logos.ts">create</a>({ ...params }) -> LogoCreateResponse</code>
+- <code title="delete /accounts/{account_id}/cloudforce-one/v2/brand-protection/logo/queries/{query_id}">client.brandProtection.v2.logos.<a href="./src/resources/brand-protection/v2/logos.ts">delete</a>(queryID, { ...params }) -> LogoDeleteResponse</code>
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/brand-protection/logo/queries">client.brandProtection.v2.logos.<a href="./src/resources/brand-protection/v2/logos.ts">get</a>({ ...params }) -> LogoGetResponse</code>
+
 ### LogoMatches
+
+Types:
+
+- <code><a href="./src/resources/brand-protection/v2/logo-matches.ts">LogoMatchGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/cloudforce-one/v2/brand-protection/logo/matches">client.brandProtection.v2.logoMatches.<a href="./src/resources/brand-protection/v2/logo-matches.ts">get</a>({ ...params }) -> LogoMatchGetResponse</code>
 
 # Diagnostics
 

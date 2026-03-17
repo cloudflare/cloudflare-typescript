@@ -149,7 +149,10 @@ describe('resource threatEvents', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('edit: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.edit('event_id', { account_id: 'account_id' });
+    const responsePromise = client.cloudforceOne.threatEvents.edit('event_id', {
+      account_id: 'account_id',
+      datasetId: '9b769969-a211-466c-8ac3-cb91266a066a',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -163,11 +166,11 @@ describe('resource threatEvents', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.edit('event_id', {
       account_id: 'account_id',
+      datasetId: '9b769969-a211-466c-8ac3-cb91266a066a',
       attacker: 'Flying Yeti',
       attackerCountry: 'CN',
       category: 'Domain Resolution',
       createdAt: '2025-12-19T00:00:00Z',
-      datasetId: '9b769969-a211-466c-8ac3-cb91266a066a',
       date: '2022-04-01T00:00:00Z',
       event: 'An attacker registered the domain domain.com',
       indicator: 'domain2.com',

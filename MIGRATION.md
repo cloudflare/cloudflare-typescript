@@ -392,6 +392,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.addressing.prefixes.delegations.list()`
 - `client.addressing.prefixes.delegations.delete()`
 - `client.brandProtection.logos.delete()`
+- `client.brandProtection.v2.logos.delete()`
 - `client.diagnostics.endpointHealthchecks.update()`
 - `client.diagnostics.endpointHealthchecks.delete()`
 - `client.diagnostics.endpointHealthchecks.get()`

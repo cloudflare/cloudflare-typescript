@@ -9,7 +9,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Assets extends APIResource {
   /**
-   * Upload a Finetune Asset
+   * Uploads training data assets for a Workers AI fine-tuning job.
    */
   create(
     finetuneID: string,
