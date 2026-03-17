@@ -1,5 +1,86 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
-export class LogoMatches extends APIResource {}
+export class LogoMatches extends APIResource {
+  /**
+   * Get paginated list of logo matches for a specific brand protection logo query
+   */
+  get(params: LogoMatchGetParams, options?: RequestOptions): APIPromise<LogoMatchGetResponse> {
+    const { account_id, ...query } = params;
+    return this._client.get(path`/accounts/${account_id}/cloudforce-one/v2/brand-protection/logo/matches`, {
+      query,
+      ...options,
+    });
+  }
+}
+
+export interface LogoMatchGetResponse {
+  matches: Array<LogoMatchGetResponse.Match>;
+
+  total: number;
+}
+
+export namespace LogoMatchGetResponse {
+  export interface Match {
+    id: number;
+
+    matched_at: string | null;
+
+    query_id: number;
+
+    similarity_score: number;
+
+    url_scan_id: string | null;
+
+    content_type?: string;
+
+    domain?: string | null;
+
+    image_data?: string;
+  }
+}
+
+export interface LogoMatchGetParams {
+  /**
+   * Path param
+   */
+  account_id: string;
+
+  /**
+   * Query param
+   */
+  query_id: string;
+
+  /**
+   * Query param
+   */
+  download?: string;
+
+  /**
+   * Query param
+   */
+  limit?: string;
+
+  /**
+   * Query param
+   */
+  offset?: string;
+
+  /**
+   * Query param: Sort order. Options: 'asc' (ascending) or 'desc' (descending)
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Query param: Column to sort by. Options: 'tag' or 'date'
+   */
+  orderBy?: 'tag' | 'date';
+}
+
+export declare namespace LogoMatches {
+  export { type LogoMatchGetResponse as LogoMatchGetResponse, type LogoMatchGetParams as LogoMatchGetParams };
+}

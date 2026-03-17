@@ -166,6 +166,7 @@ export class ThreatEvents extends APIResource {
    * const response =
    *   await client.cloudforceOne.threatEvents.edit('event_id', {
    *     account_id: 'account_id',
+   *     datasetId: '9b769969-a211-466c-8ac3-cb91266a066a',
    *   });
    * ```
    */
@@ -770,6 +771,11 @@ export interface ThreatEventEditParams {
   account_id: string;
 
   /**
+   * Body param: Dataset ID containing the event to update.
+   */
+  datasetId: string;
+
+  /**
    * Body param
    */
   attacker?: string | null;
@@ -788,11 +794,6 @@ export interface ThreatEventEditParams {
    * Body param
    */
   createdAt?: string;
-
-  /**
-   * Body param
-   */
-  datasetId?: string;
 
   /**
    * Body param

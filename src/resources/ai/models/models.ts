@@ -15,7 +15,7 @@ export class Models extends APIResource {
   schema: SchemaAPI.Schema = new SchemaAPI.Schema(this._client);
 
   /**
-   * Model Search
+   * Searches Workers AI models by name or description.
    */
   list(
     params: ModelListParams,

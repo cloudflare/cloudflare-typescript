@@ -7,7 +7,7 @@ import { path } from '../../internal/utils/path';
 
 export class Tasks extends APIResource {
   /**
-   * Task Search
+   * Searches Workers AI models by task type (e.g., text-generation, embeddings).
    */
   list(
     params: TaskListParams,
