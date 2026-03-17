@@ -87,6 +87,12 @@ describe('resource scripts', () => {
               head_sampling_rate: 0.1,
               persist: true,
             },
+            traces: {
+              destinations: ['cloudflare'],
+              enabled: true,
+              head_sampling_rate: 0.1,
+              persist: true,
+            },
           },
           placement: { mode: 'smart' },
           tags: ['string'],

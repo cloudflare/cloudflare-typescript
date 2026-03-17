@@ -246,6 +246,11 @@ export namespace Worker {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces;
   }
 
   export namespace Observability {
@@ -253,6 +258,11 @@ export namespace Worker {
      * Log settings for the Worker.
      */
     export interface Logs {
+      /**
+       * A list of destinations where logs will be exported to.
+       */
+      destinations?: Array<string>;
+
       /**
        * Whether logs are enabled for the Worker.
        */
@@ -269,6 +279,36 @@ export namespace Worker {
        * are enabled for the Worker.
        */
       invocation_logs?: boolean;
+
+      /**
+       * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
+       */
+      persist?: boolean;
     }
   }
 
@@ -531,6 +571,11 @@ export namespace WorkerCreateParams {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces;
   }
 
   export namespace Observability {
@@ -538,6 +583,11 @@ export namespace WorkerCreateParams {
      * Log settings for the Worker.
      */
     export interface Logs {
+      /**
+       * A list of destinations where logs will be exported to.
+       */
+      destinations?: Array<string>;
+
       /**
        * Whether logs are enabled for the Worker.
        */
@@ -554,6 +604,36 @@ export namespace WorkerCreateParams {
        * are enabled for the Worker.
        */
       invocation_logs?: boolean;
+
+      /**
+       * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
+       */
+      persist?: boolean;
     }
   }
 
@@ -638,6 +718,11 @@ export namespace WorkerUpdateParams {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces;
   }
 
   export namespace Observability {
@@ -645,6 +730,11 @@ export namespace WorkerUpdateParams {
      * Log settings for the Worker.
      */
     export interface Logs {
+      /**
+       * A list of destinations where logs will be exported to.
+       */
+      destinations?: Array<string>;
+
       /**
        * Whether logs are enabled for the Worker.
        */
@@ -661,6 +751,36 @@ export namespace WorkerUpdateParams {
        * are enabled for the Worker.
        */
       invocation_logs?: boolean;
+
+      /**
+       * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
+       */
+      persist?: boolean;
     }
   }
 
@@ -769,6 +889,11 @@ export namespace WorkerEditParams {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces;
   }
 
   export namespace Observability {
@@ -776,6 +901,11 @@ export namespace WorkerEditParams {
      * Log settings for the Worker.
      */
     export interface Logs {
+      /**
+       * A list of destinations where logs will be exported to.
+       */
+      destinations?: Array<string>;
+
       /**
        * Whether logs are enabled for the Worker.
        */
@@ -792,6 +922,36 @@ export namespace WorkerEditParams {
        * are enabled for the Worker.
        */
       invocation_logs?: boolean;
+
+      /**
+       * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
+       */
+      persist?: boolean;
     }
   }
 
