@@ -24,8 +24,6 @@ describe('resource usage', () => {
     const response = await client.billing.usage.paygo({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       from: '2025-02-01',
-      last_month_period_start: 6,
-      last_year_period_start: 2025,
       to: '2025-03-01',
     });
   });

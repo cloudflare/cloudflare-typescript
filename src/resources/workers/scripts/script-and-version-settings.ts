@@ -879,6 +879,11 @@ export namespace ScriptAndVersionSettingEditResponse {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces | null;
   }
 
   export namespace Observability {
@@ -910,6 +915,31 @@ export namespace ScriptAndVersionSettingEditResponse {
 
       /**
        * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
        */
       persist?: boolean;
     }
@@ -1833,6 +1863,11 @@ export namespace ScriptAndVersionSettingGetResponse {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces | null;
   }
 
   export namespace Observability {
@@ -1864,6 +1899,31 @@ export namespace ScriptAndVersionSettingGetResponse {
 
       /**
        * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
        */
       persist?: boolean;
     }
@@ -2834,6 +2894,11 @@ export namespace ScriptAndVersionSettingEditParams {
        * Log settings for the Worker.
        */
       logs?: Observability.Logs | null;
+
+      /**
+       * Trace settings for the Worker.
+       */
+      traces?: Observability.Traces | null;
     }
 
     export namespace Observability {
@@ -2865,6 +2930,31 @@ export namespace ScriptAndVersionSettingEditParams {
 
         /**
          * Whether log persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+      }
+
+      /**
+       * Trace settings for the Worker.
+       */
+      export interface Traces {
+        /**
+         * A list of destinations where traces will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether traces are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+         */
+        head_sampling_rate?: number | null;
+
+        /**
+         * Whether trace persistence is enabled for the Worker.
          */
         persist?: boolean;
       }

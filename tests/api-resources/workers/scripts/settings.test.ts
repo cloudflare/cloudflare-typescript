@@ -36,6 +36,12 @@ describe('resource settings', () => {
           head_sampling_rate: 0.1,
           persist: true,
         },
+        traces: {
+          destinations: ['cloudflare'],
+          enabled: true,
+          head_sampling_rate: 0.1,
+          persist: true,
+        },
       },
       tags: ['my-team', 'my-public-api'],
       tail_consumers: [
