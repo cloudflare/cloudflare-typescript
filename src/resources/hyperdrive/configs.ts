@@ -212,6 +212,10 @@ export interface ConfigCreateParams {
   /**
    * Body param: The (soft) maximum number of connections the Hyperdrive is allowed
    * to make to the origin database.
+   *
+   * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
+   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * if you need a higher limit.
    */
   origin_connection_limit?: number;
 }
@@ -369,6 +373,10 @@ export interface ConfigUpdateParams {
   /**
    * Body param: The (soft) maximum number of connections the Hyperdrive is allowed
    * to make to the origin database.
+   *
+   * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
+   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * if you need a higher limit.
    */
   origin_connection_limit?: number;
 }
@@ -541,6 +549,10 @@ export interface ConfigEditParams {
   /**
    * Body param: The (soft) maximum number of connections the Hyperdrive is allowed
    * to make to the origin database.
+   *
+   * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
+   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * if you need a higher limit.
    */
   origin_connection_limit?: number;
 }
