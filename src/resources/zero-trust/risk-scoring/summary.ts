@@ -7,7 +7,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Summary extends APIResource {
   /**
-   * Get risk score info for all users in the account
+   * Gets an aggregate summary of risk scores across the account, including
+   * distribution and trends.
    *
    * @example
    * ```ts

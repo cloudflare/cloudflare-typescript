@@ -7,7 +7,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Limits extends APIResource {
   /**
-   * Fetch limits associated with DLP for account
+   * Retrieves current DLP usage limits and quotas for the account, including dataset
+   * limits and scan quotas.
    *
    * @example
    * ```ts
