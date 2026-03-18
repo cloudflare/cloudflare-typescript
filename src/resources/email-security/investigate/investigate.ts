@@ -124,6 +124,9 @@ export interface InvestigateListResponse {
 
   properties: InvestigateListResponse.Properties;
 
+  /**
+   * @deprecated Deprecated, use `scanned_at` instead
+   */
   ts: string;
 
   alert_id?: string | null;
@@ -177,6 +180,13 @@ export interface InvestigateListResponse {
 
   replyto?: string | null;
 
+  scanned_at?: string;
+
+  sent_at?: string;
+
+  /**
+   * @deprecated Deprecated, use `sent_at` instead
+   */
   sent_date?: string | null;
 
   subject?: string | null;
@@ -281,6 +291,9 @@ export interface InvestigateGetResponse {
 
   properties: InvestigateGetResponse.Properties;
 
+  /**
+   * @deprecated Deprecated, use `scanned_at` instead
+   */
   ts: string;
 
   alert_id?: string | null;
@@ -334,6 +347,13 @@ export interface InvestigateGetResponse {
 
   replyto?: string | null;
 
+  scanned_at?: string;
+
+  sent_at?: string;
+
+  /**
+   * @deprecated Deprecated, use `sent_at` instead
+   */
   sent_date?: string | null;
 
   subject?: string | null;
@@ -531,6 +551,11 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
    * within the subject.
    */
   subject?: string;
+
+  /**
+   * Query param: Search for submissions instead of original messages
+   */
+  submissions?: boolean;
 }
 
 export interface InvestigateGetParams {
