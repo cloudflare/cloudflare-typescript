@@ -151,9 +151,19 @@ export namespace LatestListResponse {
      */
     cpu_time_user_ms?: number;
 
+    /**
+     * Number of network operations applied during state transition
+     */
+    delta?: number;
+
     dhcp_leases?: Array<Item.DHCPLease>;
 
     disks?: Array<Item.Disk>;
+
+    /**
+     * Simulated number of network operations applied during state transition
+     */
+    epsilon?: number;
 
     /**
      * Name of high availability state
