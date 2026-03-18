@@ -18,7 +18,6 @@ describe('resource aiGateway', () => {
       collect_logs: true,
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
-      rate_limiting_technique: 'fixed',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -38,12 +37,12 @@ describe('resource aiGateway', () => {
       collect_logs: true,
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
-      rate_limiting_technique: 'fixed',
       authentication: true,
       log_management: 10000,
       log_management_strategy: 'STOP_INSERTING',
       logpush: true,
       logpush_public_key: 'xxxxxxxxxxxxxxxx',
+      rate_limiting_technique: 'fixed',
       workers_ai_billing_mode: 'postpaid',
       zdr: true,
     });
@@ -57,7 +56,6 @@ describe('resource aiGateway', () => {
       collect_logs: true,
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
-      rate_limiting_technique: 'fixed',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -76,7 +74,6 @@ describe('resource aiGateway', () => {
       collect_logs: true,
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
-      rate_limiting_technique: 'fixed',
       authentication: true,
       dlp: {
         action: 'BLOCK',
@@ -95,6 +92,7 @@ describe('resource aiGateway', () => {
           content_type: 'json',
         },
       ],
+      rate_limiting_technique: 'fixed',
       store_id: 'store_id',
       stripe: { authorization: 'authorization', usage_events: [{ payload: 'payload' }] },
       workers_ai_billing_mode: 'postpaid',
