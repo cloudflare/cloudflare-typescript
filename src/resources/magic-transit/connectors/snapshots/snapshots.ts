@@ -200,9 +200,19 @@ export interface SnapshotGetResponse {
    */
   cpu_time_user_ms?: number;
 
+  /**
+   * Number of network operations applied during state transition
+   */
+  delta?: number;
+
   dhcp_leases?: Array<SnapshotGetResponse.DHCPLease>;
 
   disks?: Array<SnapshotGetResponse.Disk>;
+
+  /**
+   * Simulated number of network operations applied during state transition
+   */
+  epsilon?: number;
 
   /**
    * Name of high availability state
