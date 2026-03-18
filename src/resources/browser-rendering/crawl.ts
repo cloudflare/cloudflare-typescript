@@ -271,6 +271,13 @@ export declare namespace CrawlCreateParams {
     cookies?: Array<Variant0.Cookie>;
 
     /**
+     * Body param: List of crawl purposes to respect Content-Signal directives in
+     * robots.txt. Allowed values: 'search', 'ai-input', 'ai-train'. Learn more:
+     * https://contentsignals.org/. Default: ['search', 'ai-input', 'ai-train'].
+     */
+    crawlPurposes?: Array<'search' | 'ai-input' | 'ai-train'>;
+
+    /**
      * Body param: Maximum number of levels deep the crawler will traverse from the
      * starting URL.
      */
@@ -591,6 +598,13 @@ export declare namespace CrawlCreateParams {
      * Query param: Cache TTL default is 5s. Set to 0 to disable.
      */
     cacheTTL?: number;
+
+    /**
+     * Body param: List of crawl purposes to respect Content-Signal directives in
+     * robots.txt. Allowed values: 'search', 'ai-input', 'ai-train'. Learn more:
+     * https://contentsignals.org/. Default: ['search', 'ai-input', 'ai-train'].
+     */
+    crawlPurposes?: Array<'search' | 'ai-input' | 'ai-train'>;
 
     /**
      * Body param: Maximum number of levels deep the crawler will traverse from the
