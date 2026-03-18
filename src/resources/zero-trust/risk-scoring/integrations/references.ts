@@ -7,7 +7,7 @@ import { path } from '../../../../internal/utils/path';
 
 export class References extends APIResource {
   /**
-   * Get risk score integration by reference id.
+   * Retrieves a Zero Trust risk score integration using its external reference ID.
    *
    * @example
    * ```ts

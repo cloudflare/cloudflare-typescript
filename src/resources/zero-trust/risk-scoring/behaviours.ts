@@ -7,7 +7,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Behaviours extends APIResource {
   /**
-   * Update configuration for risk behaviors
+   * Updates risk score behavior configurations, defining weights and thresholds for
+   * risk calculation.
    *
    * @example
    * ```ts
@@ -31,7 +32,8 @@ export class Behaviours extends APIResource {
   }
 
   /**
-   * Get all behaviors and associated configuration
+   * Retrieves configured risk score behaviors that define how user actions affect
+   * their overall risk score.
    *
    * @example
    * ```ts

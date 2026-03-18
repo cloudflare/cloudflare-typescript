@@ -21,7 +21,9 @@ export class Datasets extends APIResource {
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 
   /**
-   * Create a new dataset
+   * Creates a new DLP (Data Loss Prevention) dataset for storing custom detection
+   * patterns. Datasets can contain exact match data, word lists, or EDM (Exact Data
+   * Match) configurations.
    *
    * @example
    * ```ts
@@ -42,7 +44,8 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Update details about a dataset
+   * Updates the configuration of an existing DLP dataset, such as its name,
+   * description, or detection settings.
    *
    * @example
    * ```ts
@@ -63,7 +66,8 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Fetch all datasets
+   * Lists all DLP datasets configured for the account, including custom word lists
+   * and EDM datasets.
    *
    * @example
    * ```ts
