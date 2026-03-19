@@ -111,6 +111,8 @@ export interface TelemetryQueryResponse {
    */
   statistics: TelemetryQueryResponse.Statistics;
 
+  agents?: Array<TelemetryQueryResponse.Agent>;
+
   calculations?: Array<TelemetryQueryResponse.Calculation>;
 
   compare?: Array<TelemetryQueryResponse.Compare>;
@@ -118,8 +120,6 @@ export interface TelemetryQueryResponse {
   events?: TelemetryQueryResponse.Events;
 
   invocations?: { [key: string]: Array<TelemetryQueryResponse.Invocation> };
-
-  patterns?: Array<TelemetryQueryResponse.Pattern>;
 
   traces?: Array<TelemetryQueryResponse.Trace>;
 }
@@ -135,11 +135,6 @@ export namespace TelemetryQueryResponse {
 
     dry: boolean;
 
-    /**
-     * @deprecated
-     */
-    environmentId: string;
-
     granularity: number;
 
     query: Run.Query;
@@ -152,11 +147,6 @@ export namespace TelemetryQueryResponse {
     timeframe: Run.Timeframe;
 
     userId: string;
-
-    /**
-     * @deprecated
-     */
-    workspaceId: string;
 
     created?: string;
 
@@ -221,9 +211,10 @@ export namespace TelemetryQueryResponse {
         filterCombination?: 'and' | 'or' | 'AND' | 'OR';
 
         /**
-         * Configure the Filters to apply to the query.
+         * Configure the Filters to apply to the query. Supports nested groups via kind:
+         * 'group'. Maximum nesting depth is 4.
          */
-        filters?: Array<Parameters.Filter>;
+        filters?: Array<Parameters.UnionMember0 | Parameters.WorkersObservabilityFilterLeaf>;
 
         /**
          * Define how to group the results of the query.
@@ -295,12 +286,35 @@ export namespace TelemetryQueryResponse {
 
           alias?: string;
 
+          /**
+           * The key to use for the calculation. This key must exist in the logs. Use the
+           * observability_keys response to confirm. Do not guess keys.
+           */
           key?: string;
 
           keyType?: 'string' | 'number' | 'boolean';
         }
 
-        export interface Filter {
+        export interface UnionMember0 {
+          filterCombination: 'and' | 'or' | 'AND' | 'OR';
+
+          filters: Array<unknown>;
+
+          kind: 'group';
+        }
+
+        /**
+         * Filtering best practices: use observability_keys and observability_values to
+         * confirm available fields and values. If searching for errors, filter for
+         * $metadata.error exists.
+         */
+        export interface WorkersObservabilityFilterLeaf {
+          /**
+           * Filter field name. IMPORTANT: do not guess keys. Always use verified keys from
+           * previous query results or the observability_keys response. Preferred keys:
+           * $metadata.service, $metadata.origin, $metadata.trigger, $metadata.message,
+           * $metadata.error.
+           */
           key: string;
 
           operation:
@@ -335,6 +349,16 @@ export namespace TelemetryQueryResponse {
 
           type: 'string' | 'number' | 'boolean';
 
+          kind?: 'filter';
+
+          /**
+           * Filter comparison value. IMPORTANT: must match actual values in your logs.
+           * Verify using previous query results or the /values endpoint. Ensure value type
+           * matches the field type. String comparisons are case-sensitive unless using
+           * specific operations. Regex uses ClickHouse RE2 syntax (no
+           * lookaheads/lookbehinds); examples: ^5\d{2}$ for HTTP 5xx, \bERROR\b for word
+           * boundary.
+           */
           value?: string | number | boolean;
         }
 
@@ -356,11 +380,15 @@ export namespace TelemetryQueryResponse {
          * Define an expression to search using full-text search.
          */
         export interface Needle {
-          value: string | number | boolean;
+          value: Needle.Value;
 
           isRegex?: boolean;
 
           matchCase?: boolean;
+        }
+
+        export namespace Needle {
+          export interface Value {}
         }
 
         /**
@@ -446,6 +474,24 @@ export namespace TelemetryQueryResponse {
     abr_level?: number;
   }
 
+  export interface Agent {
+    agentClass: string;
+
+    eventTypeCounts: { [key: string]: number };
+
+    firstEventMs: number;
+
+    hasErrors: boolean;
+
+    lastEventMs: number;
+
+    namespace: string;
+
+    service: string;
+
+    totalEvents: number;
+  }
+
   export interface Calculation {
     aggregates: Array<Calculation.Aggregate>;
 
@@ -487,17 +533,17 @@ export namespace TelemetryQueryResponse {
       export interface Data {
         count: number;
 
-        firstSeen: string;
-
         interval: number;
-
-        lastSeen: string;
 
         sampleInterval: number;
 
         value: number;
 
+        firstSeen?: string;
+
         groups?: Array<Data.Group>;
+
+        lastSeen?: string;
       }
 
       export namespace Data {
@@ -551,17 +597,17 @@ export namespace TelemetryQueryResponse {
       export interface Data {
         count: number;
 
-        firstSeen: string;
-
         interval: number;
-
-        lastSeen: string;
 
         sampleInterval: number;
 
         value: number;
 
+        firstSeen?: string;
+
         groups?: Array<Data.Group>;
+
+        lastSeen?: string;
       }
 
       export namespace Data {
@@ -612,6 +658,9 @@ export namespace TelemetryQueryResponse {
 
     export namespace Event {
       export interface Metadata {
+        /**
+         * Unique event ID. Use as the cursor for offset-based pagination.
+         */
         id: string;
 
         account?: string;
@@ -696,19 +745,7 @@ export namespace TelemetryQueryResponse {
 
         entrypoint?: string;
 
-        event?: {
-          [key: string]:
-            | string
-            | number
-            | boolean
-            | {
-                [key: string]:
-                  | string
-                  | number
-                  | boolean
-                  | { [key: string]: Array<string | number | boolean> | string | number | boolean };
-              };
-        };
+        event?: { [key: string]: unknown };
 
         executionModel?: 'durableObject' | 'stateless';
 
@@ -760,7 +797,7 @@ export namespace TelemetryQueryResponse {
 
         entrypoint?: string;
 
-        event?: { [key: string]: string | number | boolean };
+        event?: { [key: string]: unknown };
 
         executionModel?: 'durableObject' | 'stateless';
 
@@ -828,17 +865,17 @@ export namespace TelemetryQueryResponse {
           /**
            * @deprecated
            */
-          _firstSeen: string;
-
-          /**
-           * @deprecated
-           */
           _interval: number;
 
           /**
            * @deprecated
            */
-          _lastSeen: string;
+          _firstSeen?: string;
+
+          /**
+           * @deprecated
+           */
+          _lastSeen?: string;
 
           /**
            * @deprecated
@@ -876,6 +913,9 @@ export namespace TelemetryQueryResponse {
 
   export namespace Invocation {
     export interface Metadata {
+      /**
+       * Unique event ID. Use as the cursor for offset-based pagination.
+       */
       id: string;
 
       account?: string;
@@ -960,19 +1000,7 @@ export namespace TelemetryQueryResponse {
 
       entrypoint?: string;
 
-      event?: {
-        [key: string]:
-          | string
-          | number
-          | boolean
-          | {
-              [key: string]:
-                | string
-                | number
-                | boolean
-                | { [key: string]: Array<string | number | boolean> | string | number | boolean };
-            };
-      };
+      event?: { [key: string]: unknown };
 
       executionModel?: 'durableObject' | 'stateless';
 
@@ -1024,7 +1052,7 @@ export namespace TelemetryQueryResponse {
 
       entrypoint?: string;
 
-      event?: { [key: string]: string | number | boolean };
+      event?: { [key: string]: unknown };
 
       executionModel?: 'durableObject' | 'stateless';
 
@@ -1048,46 +1076,6 @@ export namespace TelemetryQueryResponse {
         message?: string;
 
         tag?: string;
-      }
-    }
-  }
-
-  export interface Pattern {
-    count: number;
-
-    pattern: string;
-
-    series: Array<Pattern.Series>;
-
-    service: string;
-  }
-
-  export namespace Pattern {
-    export interface Series {
-      data: Series.Data;
-
-      time: string;
-    }
-
-    export namespace Series {
-      export interface Data {
-        count: number;
-
-        interval: number;
-
-        sampleInterval: number;
-
-        value: number;
-
-        groups?: Array<Data.Group>;
-      }
-
-      export namespace Data {
-        export interface Group {
-          key: string;
-
-          value: string | number | boolean;
-        }
       }
     }
   }
@@ -1130,14 +1118,15 @@ export interface TelemetryKeysParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Leave this empty to use the default datasets
    */
   datasets?: Array<string>;
 
   /**
-   * Body param
+   * Body param: Apply filters to narrow key discovery. Supports nested groups via
+   * kind: 'group'. Maximum nesting depth is 4.
    */
-  filters?: Array<TelemetryKeysParams.Filter>;
+  filters?: Array<TelemetryKeysParams.UnionMember0 | TelemetryKeysParams.WorkersObservabilityFilterLeaf>;
 
   /**
    * Body param
@@ -1145,12 +1134,14 @@ export interface TelemetryKeysParams {
   from?: number;
 
   /**
-   * Body param: Search for a specific substring in the keys.
+   * Body param: If the user suggests a key, use this to narrow down the list of keys
+   * returned. Make sure matchCase is false to avoid case sensitivity issues.
    */
   keyNeedle?: TelemetryKeysParams.KeyNeedle;
 
   /**
-   * Body param
+   * Body param: Advanced usage: set limit=1000+ to retrieve comprehensive key
+   * options without needing additional filtering.
    */
   limit?: number;
 
@@ -1166,7 +1157,26 @@ export interface TelemetryKeysParams {
 }
 
 export namespace TelemetryKeysParams {
-  export interface Filter {
+  export interface UnionMember0 {
+    filterCombination: 'and' | 'or' | 'AND' | 'OR';
+
+    filters: Array<unknown>;
+
+    kind: 'group';
+  }
+
+  /**
+   * Filtering best practices: use observability_keys and observability_values to
+   * confirm available fields and values. If searching for errors, filter for
+   * $metadata.error exists.
+   */
+  export interface WorkersObservabilityFilterLeaf {
+    /**
+     * Filter field name. IMPORTANT: do not guess keys. Always use verified keys from
+     * previous query results or the observability_keys response. Preferred keys:
+     * $metadata.service, $metadata.origin, $metadata.trigger, $metadata.message,
+     * $metadata.error.
+     */
     key: string;
 
     operation:
@@ -1201,11 +1211,22 @@ export namespace TelemetryKeysParams {
 
     type: 'string' | 'number' | 'boolean';
 
+    kind?: 'filter';
+
+    /**
+     * Filter comparison value. IMPORTANT: must match actual values in your logs.
+     * Verify using previous query results or the /values endpoint. Ensure value type
+     * matches the field type. String comparisons are case-sensitive unless using
+     * specific operations. Regex uses ClickHouse RE2 syntax (no
+     * lookaheads/lookbehinds); examples: ^5\d{2}$ for HTTP 5xx, \bERROR\b for word
+     * boundary.
+     */
     value?: string | number | boolean;
   }
 
   /**
-   * Search for a specific substring in the keys.
+   * If the user suggests a key, use this to narrow down the list of keys returned.
+   * Make sure matchCase is false to avoid case sensitivity issues.
    */
   export interface KeyNeedle {
     value: string | number | boolean;
@@ -1239,7 +1260,9 @@ export interface TelemetryQueryParams {
   queryId: string;
 
   /**
-   * Body param: Time range for the query execution
+   * Body param: Timeframe for your query using Unix timestamps in milliseconds.
+   * Provide from/to epoch ms; narrower timeframes provide faster responses and more
+   * specific results.
    */
   timeframe: TelemetryQueryParams.Timeframe;
 
@@ -1260,8 +1283,8 @@ export interface TelemetryQueryParams {
   dry?: boolean;
 
   /**
-   * Body param: Time granularity for aggregating results (in milliseconds). Controls
-   * the bucketing of time-series data
+   * Body param: This is only used when the view is calculations. Leaving it empty
+   * lets Workers Observability detect the correct granularity.
    */
   granularity?: number;
 
@@ -1272,18 +1295,20 @@ export interface TelemetryQueryParams {
   ignoreSeries?: boolean;
 
   /**
-   * Body param: Maximum number of events to return.
+   * Body param: Use this limit to cap the number of events returned when the view is
+   * events.
    */
   limit?: number;
 
   /**
-   * Body param: Cursor for pagination to retrieve the next set of results
+   * Body param: Cursor pagination for event/trace/invocation views. Pass the last
+   * item's $metadata.id as the next offset.
    */
   offset?: string;
 
   /**
-   * Body param: Number of events to skip for pagination. Used in conjunction with
-   * offset
+   * Body param: Numeric offset for pattern results (top-N list). Use with limit to
+   * page pattern groups; not used by cursor pagination.
    */
   offsetBy?: number;
 
@@ -1298,19 +1323,18 @@ export interface TelemetryQueryParams {
   parameters?: TelemetryQueryParams.Parameters;
 
   /**
-   * Body param: Type of pattern to search for when using pattern-based views
+   * Body param: Examples by view type. Events: show errors for a worker in the last
+   * 30 minutes. Calculations: p99 of wall time or count by status code. Invocations:
+   * find a specific request that resulted in a 500.
    */
-  patternType?: 'message' | 'error';
-
-  /**
-   * Body param: View type for presenting the query results.
-   */
-  view?: 'traces' | 'events' | 'calculations' | 'invocations' | 'requests' | 'patterns';
+  view?: 'traces' | 'events' | 'calculations' | 'invocations' | 'requests' | 'agents';
 }
 
 export namespace TelemetryQueryParams {
   /**
-   * Time range for the query execution
+   * Timeframe for your query using Unix timestamps in milliseconds. Provide from/to
+   * epoch ms; narrower timeframes provide faster responses and more specific
+   * results.
    */
   export interface Timeframe {
     /**
@@ -1344,9 +1368,10 @@ export namespace TelemetryQueryParams {
     filterCombination?: 'and' | 'or' | 'AND' | 'OR';
 
     /**
-     * Configure the Filters to apply to the query.
+     * Configure the Filters to apply to the query. Supports nested groups via kind:
+     * 'group'. Maximum nesting depth is 4.
      */
-    filters?: Array<Parameters.Filter>;
+    filters?: Array<Parameters.UnionMember0 | Parameters.WorkersObservabilityFilterLeaf>;
 
     /**
      * Define how to group the results of the query.
@@ -1418,12 +1443,35 @@ export namespace TelemetryQueryParams {
 
       alias?: string;
 
+      /**
+       * The key to use for the calculation. This key must exist in the logs. Use the
+       * observability_keys response to confirm. Do not guess keys.
+       */
       key?: string;
 
       keyType?: 'string' | 'number' | 'boolean';
     }
 
-    export interface Filter {
+    export interface UnionMember0 {
+      filterCombination: 'and' | 'or' | 'AND' | 'OR';
+
+      filters: Array<unknown>;
+
+      kind: 'group';
+    }
+
+    /**
+     * Filtering best practices: use observability_keys and observability_values to
+     * confirm available fields and values. If searching for errors, filter for
+     * $metadata.error exists.
+     */
+    export interface WorkersObservabilityFilterLeaf {
+      /**
+       * Filter field name. IMPORTANT: do not guess keys. Always use verified keys from
+       * previous query results or the observability_keys response. Preferred keys:
+       * $metadata.service, $metadata.origin, $metadata.trigger, $metadata.message,
+       * $metadata.error.
+       */
       key: string;
 
       operation:
@@ -1458,6 +1506,16 @@ export namespace TelemetryQueryParams {
 
       type: 'string' | 'number' | 'boolean';
 
+      kind?: 'filter';
+
+      /**
+       * Filter comparison value. IMPORTANT: must match actual values in your logs.
+       * Verify using previous query results or the /values endpoint. Ensure value type
+       * matches the field type. String comparisons are case-sensitive unless using
+       * specific operations. Regex uses ClickHouse RE2 syntax (no
+       * lookaheads/lookbehinds); examples: ^5\d{2}$ for HTTP 5xx, \bERROR\b for word
+       * boundary.
+       */
       value?: string | number | boolean;
     }
 
@@ -1510,7 +1568,7 @@ export interface TelemetryValuesParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Leave this empty to use the default datasets
    */
   datasets: Array<string>;
 
@@ -1530,9 +1588,10 @@ export interface TelemetryValuesParams {
   type: 'string' | 'boolean' | 'number';
 
   /**
-   * Body param
+   * Body param: Apply filters before listing values. Supports nested groups via
+   * kind: 'group'. Maximum nesting depth is 4.
    */
-  filters?: Array<TelemetryValuesParams.Filter>;
+  filters?: Array<TelemetryValuesParams.UnionMember0 | TelemetryValuesParams.WorkersObservabilityFilterLeaf>;
 
   /**
    * Body param
@@ -1552,7 +1611,26 @@ export namespace TelemetryValuesParams {
     to: number;
   }
 
-  export interface Filter {
+  export interface UnionMember0 {
+    filterCombination: 'and' | 'or' | 'AND' | 'OR';
+
+    filters: Array<unknown>;
+
+    kind: 'group';
+  }
+
+  /**
+   * Filtering best practices: use observability_keys and observability_values to
+   * confirm available fields and values. If searching for errors, filter for
+   * $metadata.error exists.
+   */
+  export interface WorkersObservabilityFilterLeaf {
+    /**
+     * Filter field name. IMPORTANT: do not guess keys. Always use verified keys from
+     * previous query results or the observability_keys response. Preferred keys:
+     * $metadata.service, $metadata.origin, $metadata.trigger, $metadata.message,
+     * $metadata.error.
+     */
     key: string;
 
     operation:
@@ -1587,6 +1665,16 @@ export namespace TelemetryValuesParams {
 
     type: 'string' | 'number' | 'boolean';
 
+    kind?: 'filter';
+
+    /**
+     * Filter comparison value. IMPORTANT: must match actual values in your logs.
+     * Verify using previous query results or the /values endpoint. Ensure value type
+     * matches the field type. String comparisons are case-sensitive unless using
+     * specific operations. Regex uses ClickHouse RE2 syntax (no
+     * lookaheads/lookbehinds); examples: ^5\d{2}$ for HTTP 5xx, \bERROR\b for word
+     * boundary.
+     */
     value?: string | number | boolean;
   }
 

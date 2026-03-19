@@ -26,10 +26,9 @@ describe('resource telemetry', () => {
       datasets: ['string'],
       filters: [
         {
-          key: 'key',
-          operation: 'includes',
-          type: 'string',
-          value: 'string',
+          filterCombination: 'and',
+          filters: [{}],
+          kind: 'group',
         },
       ],
       from: 0,
@@ -90,10 +89,9 @@ describe('resource telemetry', () => {
         filterCombination: 'and',
         filters: [
           {
-            key: 'key',
-            operation: 'includes',
-            type: 'string',
-            value: 'string',
+            filterCombination: 'and',
+            filters: [{}],
+            kind: 'group',
           },
         ],
         groupBys: [{ type: 'string', value: 'value' }],
@@ -112,7 +110,6 @@ describe('resource telemetry', () => {
         },
         orderBy: { value: 'value', order: 'asc' },
       },
-      patternType: 'message',
       view: 'traces',
     });
   });
@@ -143,10 +140,9 @@ describe('resource telemetry', () => {
       type: 'string',
       filters: [
         {
-          key: 'key',
-          operation: 'includes',
-          type: 'string',
-          value: 'string',
+          filterCombination: 'and',
+          filters: [{}],
+          kind: 'group',
         },
       ],
       limit: 0,
