@@ -9,7 +9,7 @@ jobs:
   detect_breaking_changes:
     runs-on: 'ubuntu-latest'
     name: detect-breaking-changes
-    if: github.repository == 'stainless-sdks/cloudflare-typescript'
+    if: github.repository == 'cloudflare/cloudflare-typescript'
     steps:
       - name: Calculate fetch-depth
         run: |

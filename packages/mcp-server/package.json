@@ -8,10 +8,10 @@
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stainless-sdks/cloudflare-typescript.git",
+    "url": "git+https://github.com/cloudflare/cloudflare-typescript.git",
     "directory": "packages/mcp-server"
   },
-  "homepage": "https://github.com/stainless-sdks/cloudflare-typescript/tree/main/packages/mcp-server#readme",
+  "homepage": "https://github.com/cloudflare/cloudflare-typescript/tree/main/packages/mcp-server#readme",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "private": false,

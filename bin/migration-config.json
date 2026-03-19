@@ -1,6 +1,6 @@
 {
   "pkg": "cloudflare",
-  "githubRepo": "https://github.com/stainless-sdks/cloudflare-typescript",
+  "githubRepo": "https://github.com/cloudflare/cloudflare-typescript",
   "clientClass": "Cloudflare",
   "methods": [
     {
