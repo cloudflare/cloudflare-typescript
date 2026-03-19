@@ -457,9 +457,9 @@ export interface OutputOptions {
 
   /**
    * String to specify the format for timestamps, such as `unixnano`, `unix`,
-   * `rfc3339` or `rfc3339nano`.
+   * `rfc3339`, `rfc3339ms` or `rfc3339ns`.
    */
-  timestamp_format?: 'unixnano' | 'unix' | 'rfc3339' | 'rfc3339nano';
+  timestamp_format?: 'unixnano' | 'unix' | 'rfc3339' | 'rfc3339ms' | 'rfc3339ns';
 }
 
 /**
@@ -533,9 +533,9 @@ export interface OutputOptionsParam {
 
   /**
    * String to specify the format for timestamps, such as `unixnano`, `unix`,
-   * `rfc3339` or `rfc3339nano`.
+   * `rfc3339`, `rfc3339ms` or `rfc3339ns`.
    */
-  timestamp_format?: 'unixnano' | 'unix' | 'rfc3339' | 'rfc3339nano';
+  timestamp_format?: 'unixnano' | 'unix' | 'rfc3339' | 'rfc3339ms' | 'rfc3339ns';
 }
 
 export interface JobDeleteResponse {
