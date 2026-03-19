@@ -41,6 +41,23 @@ export interface SubmissionListResponse {
 
   customer_status?: 'escalated' | 'reviewed' | 'unreviewed';
 
+  escalated_as?:
+    | 'MALICIOUS'
+    | 'MALICIOUS-BEC'
+    | 'SUSPICIOUS'
+    | 'SPOOF'
+    | 'SPAM'
+    | 'BULK'
+    | 'ENCRYPTED'
+    | 'EXTERNAL'
+    | 'UNKNOWN'
+    | 'NONE'
+    | null;
+
+  escalated_at?: string | null;
+
+  escalated_by?: string | null;
+
   original_disposition?:
     | 'MALICIOUS'
     | 'MALICIOUS-BEC'
