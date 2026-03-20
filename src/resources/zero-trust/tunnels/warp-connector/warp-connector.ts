@@ -1,6 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as ConnectionsAPI from './connections';
+import {
+  ConnectionGetParams,
+  ConnectionGetResponse,
+  ConnectionGetResponsesSinglePage,
+  Connections,
+} from './connections';
+import * as ConnectorsAPI from './connectors';
+import { Connectors } from './connectors';
+import * as FailoverAPI from './failover';
+import { Failover } from './failover';
 import * as TokenAPI from './token';
 import { Token, TokenGetParams, TokenGetResponse } from './token';
 import { APIPromise } from '../../../../core/api-promise';
@@ -14,6 +25,9 @@ import { path } from '../../../../internal/utils/path';
 
 export class WARPConnector extends APIResource {
   token: TokenAPI.Token = new TokenAPI.Token(this._client);
+  connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
+  connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
+  failover: FailoverAPI.Failover = new FailoverAPI.Failover(this._client);
 
   /**
    * Creates a new Warp Connector Tunnel in an account.
@@ -828,6 +842,9 @@ export interface WARPConnectorGetParams {
 }
 
 WARPConnector.Token = Token;
+WARPConnector.Connections = Connections;
+WARPConnector.Connectors = Connectors;
+WARPConnector.Failover = Failover;
 
 export declare namespace WARPConnector {
   export {
@@ -845,4 +862,15 @@ export declare namespace WARPConnector {
   };
 
   export { Token as Token, type TokenGetResponse as TokenGetResponse, type TokenGetParams as TokenGetParams };
+
+  export {
+    Connections as Connections,
+    type ConnectionGetResponse as ConnectionGetResponse,
+    type ConnectionGetResponsesSinglePage as ConnectionGetResponsesSinglePage,
+    type ConnectionGetParams as ConnectionGetParams,
+  };
+
+  export { Connectors as Connectors };
+
+  export { Failover as Failover };
 }

@@ -5997,6 +5997,20 @@ Methods:
 
 - <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}/token">client.zeroTrust.tunnels.warpConnector.token.<a href="./src/resources/zero-trust/tunnels/warp-connector/token.ts">get</a>(tunnelID, { ...params }) -> TokenGetResponse</code>
 
+#### Connections
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/connections.ts">ConnectionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}/connections">client.zeroTrust.tunnels.warpConnector.connections.<a href="./src/resources/zero-trust/tunnels/warp-connector/connections.ts">get</a>(tunnelID, { ...params }) -> ConnectionGetResponsesSinglePage</code>
+
+#### Connectors
+
+#### Failover
+
 ## ConnectivitySettings
 
 Types:

@@ -508,6 +508,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/tunnels/cloudflared/management.test.ts
 	tests/api-resources/zero-trust/tunnels/warp-connector/warp-connector.test.ts
 	tests/api-resources/zero-trust/tunnels/warp-connector/token.test.ts
+	tests/api-resources/zero-trust/tunnels/warp-connector/connections.test.ts
 	tests/api-resources/zero-trust/connectivity-settings.test.ts
 	tests/api-resources/zero-trust/dlp/dlp.test.ts
 	tests/api-resources/zero-trust/dlp/datasets/datasets.test.ts

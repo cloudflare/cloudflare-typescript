@@ -767,6 +767,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.tunnels.warpConnector.edit()`
 - `client.zeroTrust.tunnels.warpConnector.get()`
 - `client.zeroTrust.tunnels.warpConnector.token.get()`
+- `client.zeroTrust.tunnels.warpConnector.connections.get()`
 - `client.zeroTrust.dlp.datasets.update()`
 - `client.zeroTrust.dlp.datasets.delete()`
 - `client.zeroTrust.dlp.datasets.get()`
