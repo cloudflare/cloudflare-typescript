@@ -7,7 +7,8 @@ import { path } from '../../internal/utils/path';
 
 export class Whois extends APIResource {
   /**
-   * Get WHOIS Record
+   * Retrieves WHOIS registration data for a domain, including registrant and
+   * nameserver information.
    *
    * @example
    * ```ts
