@@ -35,11 +35,14 @@ export class Submissions extends APIResource {
 export type SubmissionListResponsesV4PagePaginationArray = V4PagePaginationArray<SubmissionListResponse>;
 
 export interface SubmissionListResponse {
+  /**
+   * @deprecated deprecated as of 2026-04-01, use `requested_at` instead.
+   */
   requested_ts: string;
 
   submission_id: string;
 
-  customer_status?: 'escalated' | 'reviewed' | 'unreviewed';
+  customer_status?: 'escalated' | 'reviewed' | 'unreviewed' | null;
 
   escalated_as?:
     | 'MALICIOUS'
@@ -58,6 +61,8 @@ export interface SubmissionListResponse {
 
   escalated_by?: string | null;
 
+  escalated_submission_id?: string | null;
+
   original_disposition?:
     | 'MALICIOUS'
     | 'MALICIOUS-BEC'
@@ -73,6 +78,8 @@ export interface SubmissionListResponse {
 
   original_edf_hash?: string | null;
 
+  original_postfix_id?: string | null;
+
   outcome?: string | null;
 
   outcome_disposition?:
@@ -87,6 +94,8 @@ export interface SubmissionListResponse {
     | 'UNKNOWN'
     | 'NONE'
     | null;
+
+  requested_at?: string | null;
 
   requested_by?: string | null;
 
