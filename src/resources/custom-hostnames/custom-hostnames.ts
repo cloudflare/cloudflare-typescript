@@ -2197,6 +2197,11 @@ export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
   certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
 
   /**
+   * Query param: Filter by custom origin server name.
+   */
+  custom_origin_server?: string;
+
+  /**
    * Query param: Direction to order hostnames.
    */
   direction?: 'asc' | 'desc';
