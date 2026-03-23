@@ -9,9 +9,9 @@ import {
   Connections,
 } from './connections';
 import * as ConnectorsAPI from './connectors';
-import { Connectors } from './connectors';
+import { ConnectorGetParams, ConnectorGetResponse, Connectors } from './connectors';
 import * as FailoverAPI from './failover';
-import { Failover } from './failover';
+import { Failover, FailoverUpdateParams, FailoverUpdateResponse } from './failover';
 import * as TokenAPI from './token';
 import { Token, TokenGetParams, TokenGetResponse } from './token';
 import { APIPromise } from '../../../../core/api-promise';
@@ -870,7 +870,15 @@ export declare namespace WARPConnector {
     type ConnectionGetParams as ConnectionGetParams,
   };
 
-  export { Connectors as Connectors };
+  export {
+    Connectors as Connectors,
+    type ConnectorGetResponse as ConnectorGetResponse,
+    type ConnectorGetParams as ConnectorGetParams,
+  };
 
-  export { Failover as Failover };
+  export {
+    Failover as Failover,
+    type FailoverUpdateResponse as FailoverUpdateResponse,
+    type FailoverUpdateParams as FailoverUpdateParams,
+  };
 }

@@ -6043,7 +6043,23 @@ Methods:
 
 #### Connectors
 
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/connectors.ts">ConnectorGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}/connectors/{connector_id}">client.zeroTrust.tunnels.warpConnector.connectors.<a href="./src/resources/zero-trust/tunnels/warp-connector/connectors.ts">get</a>(connectorID, { ...params }) -> ConnectorGetResponse</code>
+
 #### Failover
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/failover.ts">FailoverUpdateResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/warp_connector/{tunnel_id}/failover">client.zeroTrust.tunnels.warpConnector.failover.<a href="./src/resources/zero-trust/tunnels/warp-connector/failover.ts">update</a>(tunnelID, { ...params }) -> FailoverUpdateResponse | null</code>
 
 ## ConnectivitySettings
 
