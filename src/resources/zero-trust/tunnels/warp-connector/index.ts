@@ -6,8 +6,8 @@ export {
   type ConnectionGetParams,
   type ConnectionGetResponsesSinglePage,
 } from './connections';
-export { Connectors } from './connectors';
-export { Failover } from './failover';
+export { Connectors, type ConnectorGetResponse, type ConnectorGetParams } from './connectors';
+export { Failover, type FailoverUpdateResponse, type FailoverUpdateParams } from './failover';
 export { Token, type TokenGetResponse, type TokenGetParams } from './token';
 export {
   WARPConnector,

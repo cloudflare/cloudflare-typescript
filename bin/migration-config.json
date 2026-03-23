@@ -3966,6 +3966,43 @@
       ]
     },
     {
+      "base": "zeroTrust.tunnels.warpConnector.connectors",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "connector_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "tunnel_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "connector_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "zeroTrust.dlp.datasets.upload",
       "name": "edit",
       "params": [
