@@ -160,6 +160,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.emailRouting.rules.get()`
 - `client.emailRouting.addresses.delete()`
 - `client.emailRouting.addresses.get()`
+- `client.emailSending.subdomains.delete()`
+- `client.emailSending.subdomains.get()`
+- `client.emailSending.subdomains.dns.get()`
 - `client.filters.update()`
 - `client.filters.delete()`
 - `client.filters.get()`
