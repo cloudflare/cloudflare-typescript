@@ -37,6 +37,7 @@ export { Diagnostics } from './diagnostics/diagnostics';
 export { DurableObjects } from './durable-objects/durable-objects';
 export { EmailRouting } from './email-routing/email-routing';
 export { EmailSecurity } from './email-security/email-security';
+export { EmailSending } from './email-sending/email-sending';
 export { Filters } from './filters';
 export { Firewall } from './firewall/firewall';
 export { Fraud } from './fraud';

@@ -126,6 +126,9 @@ TEST_PATHS=(
 	tests/api-resources/email-routing/rules/rules.test.ts
 	tests/api-resources/email-routing/rules/catch-alls.test.ts
 	tests/api-resources/email-routing/addresses.test.ts
+	tests/api-resources/email-sending/email-sending.test.ts
+	tests/api-resources/email-sending/subdomains/subdomains.test.ts
+	tests/api-resources/email-sending/subdomains/dns.test.ts
 	tests/api-resources/filters.test.ts
 	tests/api-resources/firewall/firewall.test.ts
 	tests/api-resources/firewall/lockdowns.test.ts

@@ -80,6 +80,7 @@ import { DNS } from './resources/dns/dns';
 import { DurableObjects } from './resources/durable-objects/durable-objects';
 import { EmailRouting } from './resources/email-routing/email-routing';
 import { EmailSecurity } from './resources/email-security/email-security';
+import { EmailSending } from './resources/email-sending/email-sending';
 import { Firewall } from './resources/firewall/firewall';
 import { GoogleTagGateway } from './resources/google-tag-gateway/google-tag-gateway';
 import { Healthchecks } from './resources/healthchecks/healthchecks';
@@ -949,6 +950,7 @@ export class Cloudflare {
   dns: API.DNS = new API.DNS(this);
   emailSecurity: API.EmailSecurity = new API.EmailSecurity(this);
   emailRouting: API.EmailRouting = new API.EmailRouting(this);
+  emailSending: API.EmailSending = new API.EmailSending(this);
   filters: API.Filters = new API.Filters(this);
   firewall: API.Firewall = new API.Firewall(this);
   healthchecks: API.Healthchecks = new API.Healthchecks(this);
@@ -1055,6 +1057,7 @@ Cloudflare.DNSFirewall = DNSFirewall;
 Cloudflare.DNS = DNS;
 Cloudflare.EmailSecurity = EmailSecurity;
 Cloudflare.EmailRouting = EmailRouting;
+Cloudflare.EmailSending = EmailSending;
 Cloudflare.Filters = Filters;
 Cloudflare.Firewall = Firewall;
 Cloudflare.Healthchecks = Healthchecks;
@@ -1216,6 +1219,8 @@ export declare namespace Cloudflare {
   export { EmailSecurity as EmailSecurity };
 
   export { EmailRouting as EmailRouting };
+
+  export { EmailSending as EmailSending };
 
   export { Filters as Filters };
 
