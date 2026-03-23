@@ -223,6 +223,8 @@ export interface ThreatEventCreateResponse {
 
   mitreAttack: Array<string>;
 
+  mitreCapec: Array<string>;
+
   numReferenced: number;
 
   numReferences: number;
@@ -279,6 +281,8 @@ export namespace ThreatEventListResponse {
     killChain: number;
 
     mitreAttack: Array<string>;
+
+    mitreCapec: Array<string>;
 
     numReferenced: number;
 
@@ -407,6 +411,8 @@ export interface ThreatEventEditResponse {
 
   mitreAttack: Array<string>;
 
+  mitreCapec: Array<string>;
+
   numReferenced: number;
 
   numReferences: number;
@@ -460,6 +466,8 @@ export interface ThreatEventGetResponse {
   killChain: number;
 
   mitreAttack: Array<string>;
+
+  mitreCapec: Array<string>;
 
   numReferenced: number;
 
@@ -659,8 +667,17 @@ export interface ThreatEventListParams {
 
 export namespace ThreatEventListParams {
   export interface Search {
+    /**
+     * Event field to search on. Allowed: attacker, attackerCountry, category,
+     * createdAt, date, event, indicator, indicatorType, killChain, mitreAttack, tags,
+     * targetCountry, targetIndustry, tlp, uuid.
+     */
     field?: string;
 
+    /**
+     * Search operator. Use 'in' for bulk lookup of up to 100 values at once, e.g.
+     * {field:'tags', op:'in', value:['malware','apt']}.
+     */
     op?:
       | 'equals'
       | 'not'
@@ -675,6 +692,10 @@ export namespace ThreatEventListParams {
       | 'in'
       | 'find';
 
+    /**
+     * Search value. String or number for most operators. Array for 'in' operator (max
+     * 100 items).
+     */
     value?: string | number | Array<string | number>;
   }
 }

@@ -4909,6 +4909,12 @@ export namespace SetCacheSettingsRule {
     serve_stale?: ActionParameters.ServeStale;
 
     /**
+     * Configuration for shared dictionary compression. When set, Cloudflare injects
+     * Use-As-Dictionary headers on matching cacheable responses.
+     */
+    shared_dictionary?: ActionParameters.SharedDictionary;
+
+    /**
      * Whether to strip ETag headers from the origin response before caching.
      */
     strip_etags?: boolean;
@@ -5209,6 +5215,18 @@ export namespace SetCacheSettingsRule {
        * content from the origin.
        */
       disable_stale_while_updating?: boolean;
+    }
+
+    /**
+     * Configuration for shared dictionary compression. When set, Cloudflare injects
+     * Use-As-Dictionary headers on matching cacheable responses.
+     */
+    export interface SharedDictionary {
+      /**
+       * URL pattern for the Use-As-Dictionary match field. This pattern specifies which
+       * URLs can use this response as a dictionary.
+       */
+      match_pattern: string;
     }
   }
 
@@ -5403,6 +5421,12 @@ export namespace SetCacheSettingsRuleParam {
     serve_stale?: ActionParameters.ServeStale;
 
     /**
+     * Configuration for shared dictionary compression. When set, Cloudflare injects
+     * Use-As-Dictionary headers on matching cacheable responses.
+     */
+    shared_dictionary?: ActionParameters.SharedDictionary;
+
+    /**
      * Whether to strip ETag headers from the origin response before caching.
      */
     strip_etags?: boolean;
@@ -5703,6 +5727,18 @@ export namespace SetCacheSettingsRuleParam {
        * content from the origin.
        */
       disable_stale_while_updating?: boolean;
+    }
+
+    /**
+     * Configuration for shared dictionary compression. When set, Cloudflare injects
+     * Use-As-Dictionary headers on matching cacheable responses.
+     */
+    export interface SharedDictionary {
+      /**
+       * URL pattern for the Use-As-Dictionary match field. This pattern specifies which
+       * URLs can use this response as a dictionary.
+       */
+      match_pattern: string;
     }
   }
 
@@ -14221,6 +14257,12 @@ export declare namespace RuleCreateParams {
       serve_stale?: ActionParameters.ServeStale;
 
       /**
+       * Configuration for shared dictionary compression. When set, Cloudflare injects
+       * Use-As-Dictionary headers on matching cacheable responses.
+       */
+      shared_dictionary?: ActionParameters.SharedDictionary;
+
+      /**
        * Whether to strip ETag headers from the origin response before caching.
        */
       strip_etags?: boolean;
@@ -14521,6 +14563,18 @@ export declare namespace RuleCreateParams {
          * content from the origin.
          */
         disable_stale_while_updating?: boolean;
+      }
+
+      /**
+       * Configuration for shared dictionary compression. When set, Cloudflare injects
+       * Use-As-Dictionary headers on matching cacheable responses.
+       */
+      export interface SharedDictionary {
+        /**
+         * URL pattern for the Use-As-Dictionary match field. This pattern specifies which
+         * URLs can use this response as a dictionary.
+         */
+        match_pattern: string;
       }
     }
 
@@ -19482,6 +19536,12 @@ export declare namespace RuleEditParams {
       serve_stale?: ActionParameters.ServeStale;
 
       /**
+       * Configuration for shared dictionary compression. When set, Cloudflare injects
+       * Use-As-Dictionary headers on matching cacheable responses.
+       */
+      shared_dictionary?: ActionParameters.SharedDictionary;
+
+      /**
        * Whether to strip ETag headers from the origin response before caching.
        */
       strip_etags?: boolean;
@@ -19782,6 +19842,18 @@ export declare namespace RuleEditParams {
          * content from the origin.
          */
         disable_stale_while_updating?: boolean;
+      }
+
+      /**
+       * Configuration for shared dictionary compression. When set, Cloudflare injects
+       * Use-As-Dictionary headers on matching cacheable responses.
+       */
+      export interface SharedDictionary {
+        /**
+         * URL pattern for the Use-As-Dictionary match field. This pattern specifies which
+         * URLs can use this response as a dictionary.
+         */
+        match_pattern: string;
       }
     }
 

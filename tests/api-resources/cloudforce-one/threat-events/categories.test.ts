@@ -32,6 +32,7 @@ describe('resource categories', () => {
       killChain: 0,
       name: 'name',
       mitreAttack: ['T1234'],
+      mitreCapec: ['123'],
       shortname: 'shortname',
     });
   });
@@ -102,6 +103,7 @@ describe('resource categories', () => {
         account_id: 'account_id',
         killChain: 0,
         mitreAttack: ['T1234'],
+        mitreCapec: ['123'],
         name: 'name',
         shortname: 'shortname',
       },
