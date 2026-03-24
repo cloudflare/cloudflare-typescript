@@ -121,7 +121,6 @@ export class DynamicRouting extends APIResource {
    *     {
    *       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
    *       gateway_id: '54442216',
-   *       comment: 'Route Deployment Comment',
    *       version_id: '54442216',
    *     },
    *   );
@@ -152,7 +151,6 @@ export class DynamicRouting extends APIResource {
    *     {
    *       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
    *       gateway_id: '54442216',
-   *       comment: 'Route Version Comment',
    *       elements: [
    *         {
    *           id: 'id',
@@ -321,8 +319,6 @@ export namespace DynamicRoutingCreateResponse {
     deployment_id: string;
 
     version_id: string;
-
-    comment?: string | null;
   }
 
   export interface UnionMember0 {
@@ -489,8 +485,6 @@ export namespace DynamicRoutingCreateResponse {
     data: string;
 
     version_id: string;
-
-    comment?: string | null;
   }
 }
 
@@ -535,8 +529,6 @@ export namespace DynamicRoutingUpdateResponse {
       deployment_id: string;
 
       version_id: string;
-
-      comment?: string | null;
     }
 
     export interface UnionMember0 {
@@ -703,8 +695,6 @@ export namespace DynamicRoutingUpdateResponse {
       data: string;
 
       version_id: string;
-
-      comment?: string | null;
     }
   }
 }
@@ -763,8 +753,6 @@ export namespace DynamicRoutingListResponse {
         deployment_id: string;
 
         version_id: string;
-
-        comment?: string | null;
       }
 
       export interface UnionMember0 {
@@ -931,8 +919,6 @@ export namespace DynamicRoutingListResponse {
         data: string;
 
         version_id: string;
-
-        comment?: string | null;
       }
     }
   }
@@ -1507,8 +1493,6 @@ export namespace DynamicRoutingGetResponse {
     deployment_id: string;
 
     version_id: string;
-
-    comment?: string | null;
   }
 
   export interface UnionMember0 {
@@ -1675,8 +1659,6 @@ export namespace DynamicRoutingGetResponse {
     data: string;
 
     version_id: string;
-
-    comment?: string | null;
   }
 }
 
@@ -1705,8 +1687,6 @@ export interface DynamicRoutingGetVersionResponse {
   name: string;
 
   version_id: string;
-
-  comment?: string | null;
 }
 
 export namespace DynamicRoutingGetVersionResponse {
@@ -1893,8 +1873,6 @@ export namespace DynamicRoutingListDeploymentsResponse {
       deployment_id: string;
 
       version_id: string;
-
-      comment?: string | null;
     }
   }
 }
@@ -1927,8 +1905,6 @@ export namespace DynamicRoutingListVersionsResponse {
       data: string;
 
       version_id: string;
-
-      comment?: string | null;
     }
   }
 }
@@ -2156,11 +2132,6 @@ export interface DynamicRoutingCreateDeploymentParams {
   /**
    * Body param
    */
-  comment: string;
-
-  /**
-   * Body param
-   */
   version_id: string;
 }
 
@@ -2174,11 +2145,6 @@ export interface DynamicRoutingCreateVersionParams {
    * Path param
    */
   gateway_id: string;
-
-  /**
-   * Body param
-   */
-  comment: string;
 
   /**
    * Body param

@@ -111,7 +111,6 @@ describe('resource dynamicRouting', () => {
     const responsePromise = client.aiGateway.dynamicRouting.createDeployment('54442216', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       gateway_id: '54442216',
-      comment: 'Route Deployment Comment',
       version_id: '54442216',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -127,7 +126,6 @@ describe('resource dynamicRouting', () => {
     const response = await client.aiGateway.dynamicRouting.createDeployment('54442216', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       gateway_id: '54442216',
-      comment: 'Route Deployment Comment',
       version_id: '54442216',
     });
   });
@@ -136,7 +134,6 @@ describe('resource dynamicRouting', () => {
     const responsePromise = client.aiGateway.dynamicRouting.createVersion('54442216', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       gateway_id: '54442216',
-      comment: 'Route Version Comment',
       elements: [
         {
           id: 'id',
@@ -158,7 +155,6 @@ describe('resource dynamicRouting', () => {
     const response = await client.aiGateway.dynamicRouting.createVersion('54442216', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       gateway_id: '54442216',
-      comment: 'Route Version Comment',
       elements: [
         {
           id: 'id',
