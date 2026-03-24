@@ -489,7 +489,7 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: The message actions the search filters by.
    */
-  message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED';
+  message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | 'SUBMITTED';
 
   /**
    * Query param
