@@ -2599,6 +2599,70 @@ Methods:
 - <code title="patch /zones/{zone_id}/api_gateway/discovery/operations">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">bulkEdit</a>({ ...params }) -> OperationBulkEditResponse</code>
 - <code title="patch /zones/{zone_id}/api_gateway/discovery/operations/{operation_id}">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">edit</a>(operationID, { ...params }) -> OperationEditResponse</code>
 
+## Labels
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/labels/labels.ts">LabelListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/labels">client.apiGateway.labels.<a href="./src/resources/api-gateway/labels/labels.ts">list</a>({ ...params }) -> LabelListResponsesV4PagePaginationArray</code>
+
+### User
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserUpdateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserDeleteResponse</a></code>
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserBulkCreateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserBulkDeleteResponse</a></code>
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserEditResponse</a></code>
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/labels/user/{name}">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">update</a>(name, { ...params }) -> UserUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/api_gateway/labels/user/{name}">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">delete</a>(name, { ...params }) -> UserDeleteResponse</code>
+- <code title="post /zones/{zone_id}/api_gateway/labels/user">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">bulkCreate</a>([ ...body ]) -> UserBulkCreateResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/api_gateway/labels/user">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">bulkDelete</a>({ ...params }) -> UserBulkDeleteResponsesSinglePage</code>
+- <code title="patch /zones/{zone_id}/api_gateway/labels/user/{name}">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">edit</a>(name, { ...params }) -> UserEditResponse</code>
+- <code title="get /zones/{zone_id}/api_gateway/labels/user/{name}">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">get</a>(name, { ...params }) -> UserGetResponse</code>
+
+#### Resources
+
+##### Operation
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/labels/user/resources/operation.ts">OperationUpdateResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/labels/user/{name}/resources/operation">client.apiGateway.labels.user.resources.operation.<a href="./src/resources/api-gateway/labels/user/resources/operation.ts">update</a>(name, { ...params }) -> OperationUpdateResponse</code>
+
+### Managed
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/labels/managed/managed.ts">ManagedGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/labels/managed/{name}">client.apiGateway.labels.managed.<a href="./src/resources/api-gateway/labels/managed/managed.ts">get</a>(name, { ...params }) -> ManagedGetResponse</code>
+
+#### Resources
+
+##### Operation
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/labels/managed/resources/operation.ts">OperationUpdateResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/labels/managed/{name}/resources/operation">client.apiGateway.labels.managed.resources.operation.<a href="./src/resources/api-gateway/labels/managed/resources/operation.ts">update</a>(name, { ...params }) -> OperationUpdateResponse</code>
+
 ## Operations
 
 Types:
@@ -2619,6 +2683,26 @@ Methods:
 - <code title="post /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">bulkCreate</a>([ ...body ]) -> OperationBulkCreateResponsesSinglePage</code>
 - <code title="delete /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">bulkDelete</a>({ ...params }) -> OperationBulkDeleteResponse</code>
 - <code title="get /zones/{zone_id}/api_gateway/operations/{operation_id}">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">get</a>(operationID, { ...params }) -> OperationGetResponse</code>
+
+### Labels
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelCreateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelUpdateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelDeleteResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelBulkCreateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelBulkDeleteResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelBulkUpdateResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/api_gateway/operations/{operation_id}/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">create</a>(operationID, { ...params }) -> LabelCreateResponse</code>
+- <code title="put /zones/{zone_id}/api_gateway/operations/{operation_id}/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">update</a>(operationID, { ...params }) -> LabelUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/api_gateway/operations/{operation_id}/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">delete</a>(operationID, { ...params }) -> LabelDeleteResponse</code>
+- <code title="post /zones/{zone_id}/api_gateway/operations/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">bulkCreate</a>({ ...params }) -> LabelBulkCreateResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/api_gateway/operations/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">bulkDelete</a>({ ...params }) -> LabelBulkDeleteResponsesSinglePage</code>
+- <code title="put /zones/{zone_id}/api_gateway/operations/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">bulkUpdate</a>({ ...params }) -> LabelBulkUpdateResponsesSinglePage</code>
 
 ### SchemaValidation
 

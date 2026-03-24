@@ -16,6 +16,12 @@ export {
 } from './discovery/index';
 export { ExpressionTemplate } from './expression-template/index';
 export {
+  Labels,
+  type LabelListResponse,
+  type LabelListParams,
+  type LabelListResponsesV4PagePaginationArray,
+} from './labels/index';
+export {
   Operations,
   type APIShield,
   type OperationCreateResponse,

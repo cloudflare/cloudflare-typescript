@@ -333,8 +333,18 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.subscriptions.delete()`
 - `client.queues.subscriptions.get()`
 - `client.apiGateway.discovery.operations.edit()`
+- `client.apiGateway.labels.user.update()`
+- `client.apiGateway.labels.user.delete()`
+- `client.apiGateway.labels.user.edit()`
+- `client.apiGateway.labels.user.get()`
+- `client.apiGateway.labels.user.resources.operation.update()`
+- `client.apiGateway.labels.managed.get()`
+- `client.apiGateway.labels.managed.resources.operation.update()`
 - `client.apiGateway.operations.delete()`
 - `client.apiGateway.operations.get()`
+- `client.apiGateway.operations.labels.create()`
+- `client.apiGateway.operations.labels.update()`
+- `client.apiGateway.operations.labels.delete()`
 - `client.apiGateway.operations.schemaValidation.update()`
 - `client.apiGateway.operations.schemaValidation.get()`
 - `client.apiGateway.userSchemas.delete()`
@@ -1185,6 +1195,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.kv.namespaces.keys.bulkDelete()`
 - `client.kv.namespaces.keys.bulkUpdate()`
 - `client.apiGateway.discovery.operations.bulkEdit()`
+- `client.apiGateway.labels.user.bulkCreate()`
 - `client.apiGateway.operations.bulkCreate()`
 - `client.apiGateway.operations.schemaValidation.edit()`
 - `client.addressing.addressMaps.accounts.update()`
