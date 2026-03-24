@@ -220,7 +220,15 @@ TEST_PATHS=(
 	tests/api-resources/api-gateway/configurations.test.ts
 	tests/api-resources/api-gateway/discovery/discovery.test.ts
 	tests/api-resources/api-gateway/discovery/operations.test.ts
+	tests/api-resources/api-gateway/labels/labels.test.ts
+	tests/api-resources/api-gateway/labels/user/user.test.ts
+	tests/api-resources/api-gateway/labels/user/resources/resources.test.ts
+	tests/api-resources/api-gateway/labels/user/resources/operation.test.ts
+	tests/api-resources/api-gateway/labels/managed/managed.test.ts
+	tests/api-resources/api-gateway/labels/managed/resources/resources.test.ts
+	tests/api-resources/api-gateway/labels/managed/resources/operation.test.ts
 	tests/api-resources/api-gateway/operations/operations.test.ts
+	tests/api-resources/api-gateway/operations/labels.test.ts
 	tests/api-resources/api-gateway/operations/schema-validation.test.ts
 	tests/api-resources/api-gateway/schemas.test.ts
 	tests/api-resources/api-gateway/settings/settings.test.ts

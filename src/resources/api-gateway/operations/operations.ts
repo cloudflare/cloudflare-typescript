@@ -1,6 +1,25 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as LabelsAPI from './labels';
+import {
+  LabelBulkCreateParams,
+  LabelBulkCreateResponse,
+  LabelBulkCreateResponsesSinglePage,
+  LabelBulkDeleteParams,
+  LabelBulkDeleteResponse,
+  LabelBulkDeleteResponsesSinglePage,
+  LabelBulkUpdateParams,
+  LabelBulkUpdateResponse,
+  LabelBulkUpdateResponsesSinglePage,
+  LabelCreateParams,
+  LabelCreateResponse,
+  LabelDeleteParams,
+  LabelDeleteResponse,
+  LabelUpdateParams,
+  LabelUpdateResponse,
+  Labels,
+} from './labels';
 import * as SchemaValidationAPI from './schema-validation';
 import {
   SchemaValidation,
@@ -23,6 +42,7 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Operations extends APIResource {
+  labels: LabelsAPI.Labels = new LabelsAPI.Labels(this._client);
   schemaValidation: SchemaValidationAPI.SchemaValidation = new SchemaValidationAPI.SchemaValidation(
     this._client,
   );
@@ -1473,6 +1493,7 @@ export interface OperationGetParams {
   feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info'>;
 }
 
+Operations.Labels = Labels;
 Operations.SchemaValidation = SchemaValidation;
 
 export declare namespace Operations {
@@ -1492,6 +1513,25 @@ export declare namespace Operations {
     type OperationBulkCreateParams as OperationBulkCreateParams,
     type OperationBulkDeleteParams as OperationBulkDeleteParams,
     type OperationGetParams as OperationGetParams,
+  };
+
+  export {
+    Labels as Labels,
+    type LabelCreateResponse as LabelCreateResponse,
+    type LabelUpdateResponse as LabelUpdateResponse,
+    type LabelDeleteResponse as LabelDeleteResponse,
+    type LabelBulkCreateResponse as LabelBulkCreateResponse,
+    type LabelBulkDeleteResponse as LabelBulkDeleteResponse,
+    type LabelBulkUpdateResponse as LabelBulkUpdateResponse,
+    type LabelBulkCreateResponsesSinglePage as LabelBulkCreateResponsesSinglePage,
+    type LabelBulkDeleteResponsesSinglePage as LabelBulkDeleteResponsesSinglePage,
+    type LabelBulkUpdateResponsesSinglePage as LabelBulkUpdateResponsesSinglePage,
+    type LabelCreateParams as LabelCreateParams,
+    type LabelUpdateParams as LabelUpdateParams,
+    type LabelDeleteParams as LabelDeleteParams,
+    type LabelBulkCreateParams as LabelBulkCreateParams,
+    type LabelBulkDeleteParams as LabelBulkDeleteParams,
+    type LabelBulkUpdateParams as LabelBulkUpdateParams,
   };
 
   export {
