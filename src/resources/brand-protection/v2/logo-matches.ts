@@ -76,9 +76,10 @@ export interface LogoMatchGetParams {
   order?: 'asc' | 'desc';
 
   /**
-   * Query param: Column to sort by. Options: 'tag' or 'date'
+   * Query param: Column to sort by. Options: 'matchedAt', 'domain', or
+   * 'similarityScore'
    */
-  orderBy?: 'tag' | 'date';
+  orderBy?: 'matchedAt' | 'domain' | 'similarityScore';
 }
 
 export declare namespace LogoMatches {
