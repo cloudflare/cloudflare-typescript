@@ -157,40 +157,29 @@ export namespace TelemetryQueryResponse {
 
   export namespace Run {
     export interface Query {
-      /**
-       * ID of the query
-       */
       id: string;
 
+      /**
+       * If the query wasn't explcitly saved
+       */
+      adhoc: boolean;
+
       created: string;
+
+      createdBy: string;
 
       description: string | null;
 
       /**
-       * ID of your environment
-       */
-      environmentId: string;
-
-      /**
-       * Flag for alerts automatically created
-       */
-      generated: boolean | null;
-
-      /**
        * Query name
        */
-      name: string | null;
+      name: string;
 
       parameters: Query.Parameters;
 
       updated: string;
 
-      userId: string;
-
-      /**
-       * ID of your workspace
-       */
-      workspaceId: string;
+      updatedBy: string;
     }
 
     export namespace Query {
@@ -212,7 +201,7 @@ export namespace TelemetryQueryResponse {
 
         /**
          * Configure the Filters to apply to the query. Supports nested groups via kind:
-         * 'group'. Maximum nesting depth is 4.
+         * 'group'.
          */
         filters?: Array<Parameters.UnionMember0 | Parameters.WorkersObservabilityFilterLeaf>;
 
@@ -286,10 +275,6 @@ export namespace TelemetryQueryResponse {
 
           alias?: string;
 
-          /**
-           * The key to use for the calculation. This key must exist in the logs. Use the
-           * observability_keys response to confirm. Do not guess keys.
-           */
           key?: string;
 
           keyType?: 'string' | 'number' | 'boolean';
@@ -735,6 +720,7 @@ export namespace TelemetryQueryResponse {
           | 'tail'
           | 'rpc'
           | 'websocket'
+          | 'workflow'
           | 'unknown';
 
         requestId: string;
@@ -779,6 +765,7 @@ export namespace TelemetryQueryResponse {
           | 'tail'
           | 'rpc'
           | 'websocket'
+          | 'workflow'
           | 'unknown';
 
         outcome: string;
@@ -990,6 +977,7 @@ export namespace TelemetryQueryResponse {
         | 'tail'
         | 'rpc'
         | 'websocket'
+        | 'workflow'
         | 'unknown';
 
       requestId: string;
@@ -1034,6 +1022,7 @@ export namespace TelemetryQueryResponse {
         | 'tail'
         | 'rpc'
         | 'websocket'
+        | 'workflow'
         | 'unknown';
 
       outcome: string;

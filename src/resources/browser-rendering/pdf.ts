@@ -224,6 +224,9 @@ export declare namespace PDFCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -589,6 +592,9 @@ export declare namespace PDFCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
