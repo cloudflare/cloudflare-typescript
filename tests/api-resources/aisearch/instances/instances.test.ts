@@ -38,6 +38,7 @@ describe('resource instances', () => {
       embedding_model: '@cf/qwen/qwen3-embedding-0.6b',
       fusion_method: 'max',
       hybrid_search_enabled: true,
+      indexing_options: { keyword_tokenizer: 'porter' },
       max_num_results: 1,
       metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
       public_endpoint_params: {
@@ -122,6 +123,7 @@ describe('resource instances', () => {
       embedding_model: '@cf/qwen/qwen3-embedding-0.6b',
       fusion_method: 'max',
       hybrid_search_enabled: true,
+      indexing_options: { keyword_tokenizer: 'porter' },
       max_num_results: 1,
       metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
       paused: true,
@@ -199,6 +201,7 @@ describe('resource instances', () => {
   test('list: required and optional params', async () => {
     const response = await client.aiSearch.instances.list({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      namespace: 'x',
       order_by: 'created_at',
       order_by_direction: 'asc',
       page: 1,

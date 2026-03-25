@@ -195,7 +195,7 @@ export interface JobGetParams {
   account_id: string;
 
   /**
-   * Use your AI Search ID.
+   * AI Search instance ID. Lowercase alphanumeric, hyphens, and underscores.
    */
   id: string;
 }
@@ -207,7 +207,8 @@ export interface JobLogsParams {
   account_id: string;
 
   /**
-   * Path param: Use your AI Search ID.
+   * Path param: AI Search instance ID. Lowercase alphanumeric, hyphens, and
+   * underscores.
    */
   id: string;
 
