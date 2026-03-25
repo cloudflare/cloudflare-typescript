@@ -32,7 +32,7 @@ export class Content extends APIResource {
 }
 
 /**
- * HTML content
+ * HTML content.
  */
 export type ContentCreateResponse = string;
 
@@ -220,6 +220,9 @@ export declare namespace ContentCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -481,6 +484,9 @@ export declare namespace ContentCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;

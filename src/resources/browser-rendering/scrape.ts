@@ -39,7 +39,7 @@ export namespace ScrapeCreateResponse {
     results: ScrapeCreateResponseItem.Results;
 
     /**
-     * Selector
+     * Selector.
      */
     selector: string;
   }
@@ -49,32 +49,32 @@ export namespace ScrapeCreateResponse {
       attributes: Array<Results.Attribute>;
 
       /**
-       * Element height
+       * Element height.
        */
       height: number;
 
       /**
-       * Html content
+       * HTML content.
        */
       html: string;
 
       /**
-       * Element left
+       * Element left.
        */
       left: number;
 
       /**
-       * Text content
+       * Text content.
        */
       text: string;
 
       /**
-       * Element top
+       * Element top.
        */
       top: number;
 
       /**
-       * Element width
+       * Element width.
        */
       width: number;
     }
@@ -82,12 +82,12 @@ export namespace ScrapeCreateResponse {
     export namespace Results {
       export interface Attribute {
         /**
-         * Attribute name
+         * Attribute name.
          */
         name: string;
 
         /**
-         * Attribute value
+         * Attribute value.
          */
         value: string;
       }
@@ -289,6 +289,9 @@ export declare namespace ScrapeCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -558,6 +561,9 @@ export declare namespace ScrapeCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;

@@ -226,6 +226,9 @@ export declare namespace LinkCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -496,6 +499,9 @@ export declare namespace LinkCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;

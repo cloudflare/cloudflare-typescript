@@ -234,6 +234,9 @@ export declare namespace JsonCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -271,7 +274,7 @@ export declare namespace JsonCreateParams {
 
       /**
        * AI model to use for the request. Must be formed as `<provider>/<model_name>`,
-       * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`
+       * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
        */
       model: string;
     }
@@ -299,7 +302,7 @@ export declare namespace JsonCreateParams {
 
       /**
        * Schema for the response format. More information here:
-       * https://developers.cloudflare.com/workers-ai/json-mode/
+       * https://developers.cloudflare.com/workers-ai/json-mode/.
        */
       json_schema?: { [key: string]: string | number | boolean | unknown | Array<string> } | null;
     }
@@ -534,6 +537,9 @@ export declare namespace JsonCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -571,7 +577,7 @@ export declare namespace JsonCreateParams {
 
       /**
        * AI model to use for the request. Must be formed as `<provider>/<model_name>`,
-       * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`
+       * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
        */
       model: string;
     }
@@ -599,7 +605,7 @@ export declare namespace JsonCreateParams {
 
       /**
        * Schema for the response format. More information here:
-       * https://developers.cloudflare.com/workers-ai/json-mode/
+       * https://developers.cloudflare.com/workers-ai/json-mode/.
        */
       json_schema?: { [key: string]: string | number | boolean | unknown | Array<string> } | null;
     }

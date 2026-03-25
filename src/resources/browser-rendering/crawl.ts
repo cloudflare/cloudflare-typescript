@@ -77,18 +77,18 @@ export class Crawl extends APIResource {
 }
 
 /**
- * Crawl job id
+ * Crawl job ID.
  */
 export type CrawlCreateResponse = string;
 
 export interface CrawlDeleteResponse {
   /**
-   * The ID of the cancelled job
+   * The ID of the cancelled job.
    */
   job_id: string;
 
   /**
-   * Cancellation confirmation message
+   * Cancellation confirmation message.
    */
   message: string;
 }
@@ -427,6 +427,9 @@ export declare namespace CrawlCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -499,7 +502,7 @@ export declare namespace CrawlCreateParams {
 
         /**
          * AI model to use for the request. Must be formed as `<provider>/<model_name>`,
-         * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`
+         * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
          */
         model: string;
       }
@@ -509,7 +512,7 @@ export declare namespace CrawlCreateParams {
 
         /**
          * Schema for the response format. More information here:
-         * https://developers.cloudflare.com/workers-ai/json-mode/
+         * https://developers.cloudflare.com/workers-ai/json-mode/.
          */
         json_schema?: { [key: string]: string | number | boolean | unknown | Array<string> } | null;
       }
@@ -683,7 +686,7 @@ export declare namespace CrawlCreateParams {
 
         /**
          * AI model to use for the request. Must be formed as `<provider>/<model_name>`,
-         * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`
+         * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
          */
         model: string;
       }
@@ -693,7 +696,7 @@ export declare namespace CrawlCreateParams {
 
         /**
          * Schema for the response format. More information here:
-         * https://developers.cloudflare.com/workers-ai/json-mode/
+         * https://developers.cloudflare.com/workers-ai/json-mode/.
          */
         json_schema?: { [key: string]: string | number | boolean | unknown | Array<string> } | null;
       }
