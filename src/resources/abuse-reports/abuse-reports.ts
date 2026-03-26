@@ -1003,6 +1003,11 @@ export declare namespace AbuseReportCreateParams {
     company?: string;
 
     /**
+     * Body param: ICANN-mandated fields for registrar WHOIS data disclosure requests.
+     */
+    reg_who_request?: AbuseReportsRegistrarWhoisReport.RegWhoRequest;
+
+    /**
      * Body param: Text containing 2 characters
      */
     reported_country?: string;
@@ -1023,6 +1028,64 @@ export declare namespace AbuseReportCreateParams {
      * Body param: Text not exceeding 255 characters
      */
     title?: string;
+  }
+
+  export namespace AbuseReportsRegistrarWhoisReport {
+    /**
+     * ICANN-mandated fields for registrar WHOIS data disclosure requests.
+     */
+    export interface RegWhoRequest {
+      /**
+       * Optional authorization statement or power of attorney per ICANN 10.2.1.3.
+       */
+      reg_who_authorization_statement?: string;
+
+      /**
+       * Affirmation that the request is made in good faith per ICANN 10.2.4.
+       */
+      reg_who_good_faith_affirmation?: boolean;
+
+      /**
+       * Agreement to process data lawfully per ICANN 10.2.5.
+       */
+      reg_who_lawful_processing_agreement?: boolean;
+
+      /**
+       * Legal rights and rationale for the request per ICANN 10.2.3.
+       */
+      reg_who_legal_basis?: string;
+
+      /**
+       * The type of WHOIS data request per ICANN procedure.
+       */
+      reg_who_request_type?: 'disclosure' | 'invalid_whois';
+
+      /**
+       * The specific WHOIS data elements being requested per ICANN 10.2.2.
+       */
+      reg_who_requested_data_elements?: Array<
+        | 'registrant_name'
+        | 'registrant_organization'
+        | 'registrant_email'
+        | 'registrant_phone'
+        | 'registrant_address'
+        | 'admin_name'
+        | 'admin_organization'
+        | 'admin_email'
+        | 'admin_phone'
+        | 'admin_address'
+        | 'tech_name'
+        | 'tech_organization'
+        | 'tech_email'
+        | 'tech_phone'
+        | 'tech_address'
+      >;
+
+      /**
+       * The nature of the requestor per ICANN 10.2.1.2.
+       */
+      reg_who_requestor_type?: 'government' | 'corporation' | 'individual';
+    }
   }
 
   export interface AbuseReportsNcseiReport {
