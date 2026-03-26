@@ -298,6 +298,8 @@ export interface InstanceCreateResponse {
 
   enable?: boolean;
 
+  engine_version?: number;
+
   fusion_method?: 'max' | 'rrf';
 
   hybrid_search_enabled?: boolean;
@@ -361,7 +363,7 @@ export interface InstanceCreateResponse {
 
   score_threshold?: number;
 
-  source?: string;
+  source?: string | null;
 
   source_params?: InstanceCreateResponse.SourceParams | null;
 
@@ -369,7 +371,7 @@ export interface InstanceCreateResponse {
 
   token_id?: string;
 
-  type?: 'r2' | 'web-crawler';
+  type?: 'r2' | 'web-crawler' | null;
 }
 
 export namespace InstanceCreateResponse {
@@ -452,11 +454,13 @@ export namespace InstanceCreateResponse {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls how keyword search terms are matched. exact_match requires all terms to
-     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
-     * exact_match.
+     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * candidates to documents containing all query terms; 'or' includes any document
+     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
+     * 'or' respectively.
      */
-    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
+    keyword_match_mode?: 'and' | 'or';
   }
 
   export namespace RetrievalOptions {
@@ -641,6 +645,8 @@ export interface InstanceUpdateResponse {
 
   enable?: boolean;
 
+  engine_version?: number;
+
   fusion_method?: 'max' | 'rrf';
 
   hybrid_search_enabled?: boolean;
@@ -704,7 +710,7 @@ export interface InstanceUpdateResponse {
 
   score_threshold?: number;
 
-  source?: string;
+  source?: string | null;
 
   source_params?: InstanceUpdateResponse.SourceParams | null;
 
@@ -712,7 +718,7 @@ export interface InstanceUpdateResponse {
 
   token_id?: string;
 
-  type?: 'r2' | 'web-crawler';
+  type?: 'r2' | 'web-crawler' | null;
 }
 
 export namespace InstanceUpdateResponse {
@@ -795,11 +801,13 @@ export namespace InstanceUpdateResponse {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls how keyword search terms are matched. exact_match requires all terms to
-     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
-     * exact_match.
+     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * candidates to documents containing all query terms; 'or' includes any document
+     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
+     * 'or' respectively.
      */
-    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
+    keyword_match_mode?: 'and' | 'or';
   }
 
   export namespace RetrievalOptions {
@@ -984,6 +992,8 @@ export interface InstanceListResponse {
 
   enable?: boolean;
 
+  engine_version?: number;
+
   fusion_method?: 'max' | 'rrf';
 
   hybrid_search_enabled?: boolean;
@@ -1047,7 +1057,7 @@ export interface InstanceListResponse {
 
   score_threshold?: number;
 
-  source?: string;
+  source?: string | null;
 
   source_params?: InstanceListResponse.SourceParams | null;
 
@@ -1055,7 +1065,7 @@ export interface InstanceListResponse {
 
   token_id?: string;
 
-  type?: 'r2' | 'web-crawler';
+  type?: 'r2' | 'web-crawler' | null;
 }
 
 export namespace InstanceListResponse {
@@ -1138,11 +1148,13 @@ export namespace InstanceListResponse {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls how keyword search terms are matched. exact_match requires all terms to
-     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
-     * exact_match.
+     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * candidates to documents containing all query terms; 'or' includes any document
+     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
+     * 'or' respectively.
      */
-    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
+    keyword_match_mode?: 'and' | 'or';
   }
 
   export namespace RetrievalOptions {
@@ -1327,6 +1339,8 @@ export interface InstanceDeleteResponse {
 
   enable?: boolean;
 
+  engine_version?: number;
+
   fusion_method?: 'max' | 'rrf';
 
   hybrid_search_enabled?: boolean;
@@ -1390,7 +1404,7 @@ export interface InstanceDeleteResponse {
 
   score_threshold?: number;
 
-  source?: string;
+  source?: string | null;
 
   source_params?: InstanceDeleteResponse.SourceParams | null;
 
@@ -1398,7 +1412,7 @@ export interface InstanceDeleteResponse {
 
   token_id?: string;
 
-  type?: 'r2' | 'web-crawler';
+  type?: 'r2' | 'web-crawler' | null;
 }
 
 export namespace InstanceDeleteResponse {
@@ -1481,11 +1495,13 @@ export namespace InstanceDeleteResponse {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls how keyword search terms are matched. exact_match requires all terms to
-     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
-     * exact_match.
+     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * candidates to documents containing all query terms; 'or' includes any document
+     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
+     * 'or' respectively.
      */
-    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
+    keyword_match_mode?: 'and' | 'or';
   }
 
   export namespace RetrievalOptions {
@@ -1740,6 +1756,8 @@ export interface InstanceReadResponse {
 
   enable?: boolean;
 
+  engine_version?: number;
+
   fusion_method?: 'max' | 'rrf';
 
   hybrid_search_enabled?: boolean;
@@ -1803,7 +1821,7 @@ export interface InstanceReadResponse {
 
   score_threshold?: number;
 
-  source?: string;
+  source?: string | null;
 
   source_params?: InstanceReadResponse.SourceParams | null;
 
@@ -1811,7 +1829,7 @@ export interface InstanceReadResponse {
 
   token_id?: string;
 
-  type?: 'r2' | 'web-crawler';
+  type?: 'r2' | 'web-crawler' | null;
 }
 
 export namespace InstanceReadResponse {
@@ -1894,11 +1912,13 @@ export namespace InstanceReadResponse {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls how keyword search terms are matched. exact_match requires all terms to
-     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
-     * exact_match.
+     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * candidates to documents containing all query terms; 'or' includes any document
+     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
+     * 'or' respectively.
      */
-    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
+    keyword_match_mode?: 'and' | 'or';
   }
 
   export namespace RetrievalOptions {
@@ -2268,7 +2288,7 @@ export interface InstanceCreateParams {
   /**
    * Body param
    */
-  source?: string;
+  source?: string | null;
 
   /**
    * Body param
@@ -2283,7 +2303,7 @@ export interface InstanceCreateParams {
   /**
    * Body param
    */
-  type?: 'r2' | 'web-crawler';
+  type?: 'r2' | 'web-crawler' | null;
 }
 
 export namespace InstanceCreateParams {
@@ -2366,11 +2386,13 @@ export namespace InstanceCreateParams {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls how keyword search terms are matched. exact_match requires all terms to
-     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
-     * exact_match.
+     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * candidates to documents containing all query terms; 'or' includes any document
+     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
+     * 'or' respectively.
      */
-    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
+    keyword_match_mode?: 'and' | 'or';
   }
 
   export namespace RetrievalOptions {
@@ -2815,11 +2837,13 @@ export namespace InstanceUpdateParams {
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
     /**
-     * Controls how keyword search terms are matched. exact_match requires all terms to
-     * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
-     * exact_match.
+     * Controls which documents are candidates for BM25 scoring. 'and' restricts
+     * candidates to documents containing all query terms; 'or' includes any document
+     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
+     * 'or' respectively.
      */
-    keyword_match_mode?: 'exact_match' | 'fuzzy_match';
+    keyword_match_mode?: 'and' | 'or';
   }
 
   export namespace RetrievalOptions {
@@ -3109,11 +3133,13 @@ export namespace InstanceChatCompletionsParams {
       fusion_method?: 'max' | 'rrf';
 
       /**
-       * Controls how keyword search terms are matched. exact_match requires all terms to
-       * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
-       * exact_match.
+       * Controls which documents are candidates for BM25 scoring. 'and' restricts
+       * candidates to documents containing all query terms; 'or' includes any document
+       * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+       * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
+       * 'or' respectively.
        */
-      keyword_match_mode?: 'exact_match' | 'fuzzy_match';
+      keyword_match_mode?: 'and' | 'or';
 
       match_threshold?: number;
 
@@ -3252,11 +3278,13 @@ export namespace InstanceSearchParams {
       fusion_method?: 'max' | 'rrf';
 
       /**
-       * Controls how keyword search terms are matched. exact_match requires all terms to
-       * appear (AND); fuzzy_match returns results containing any term (OR). Defaults to
-       * exact_match.
+       * Controls which documents are candidates for BM25 scoring. 'and' restricts
+       * candidates to documents containing all query terms; 'or' includes any document
+       * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+       * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
+       * 'or' respectively.
        */
-      keyword_match_mode?: 'exact_match' | 'fuzzy_match';
+      keyword_match_mode?: 'and' | 'or';
 
       match_threshold?: number;
 
