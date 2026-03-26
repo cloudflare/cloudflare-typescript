@@ -3015,8 +3015,9 @@ export interface MXRecord {
   content?: string;
 
   /**
-   * Required for MX, SRV and URI records; unused by other record types. Records with
-   * lower priorities are preferred.
+   * Required for MX and URI records; ignored for other record types (but may still
+   * be returned by the API). Records with lower priorities are preferred. This field
+   * is to be deprecated in favor of the priority field within the data map.
    */
   priority?: number;
 
@@ -3090,8 +3091,9 @@ export interface MXRecordParam {
   content?: string;
 
   /**
-   * Required for MX, SRV and URI records; unused by other record types. Records with
-   * lower priorities are preferred.
+   * Required for MX and URI records; ignored for other record types (but may still
+   * be returned by the API). Records with lower priorities are preferred. This field
+   * is to be deprecated in favor of the priority field within the data map.
    */
   priority?: number;
 
@@ -4855,8 +4857,9 @@ export namespace SRVRecord {
     port?: number;
 
     /**
-     * Required for MX, SRV and URI records; unused by other record types. Records with
-     * lower priorities are preferred.
+     * Required for MX and URI records; ignored for other record types (but may still
+     * be returned by the API). Records with lower priorities are preferred. This field
+     * is to be deprecated in favor of the priority field within the data map.
      */
     priority?: number;
 
@@ -4950,8 +4953,9 @@ export namespace SRVRecordParam {
     port?: number;
 
     /**
-     * Required for MX, SRV and URI records; unused by other record types. Records with
-     * lower priorities are preferred.
+     * Required for MX and URI records; ignored for other record types (but may still
+     * be returned by the API). Records with lower priorities are preferred. This field
+     * is to be deprecated in favor of the priority field within the data map.
      */
     priority?: number;
 
@@ -5744,8 +5748,9 @@ export interface URIRecord {
   data?: URIRecord.Data;
 
   /**
-   * Required for MX, SRV and URI records; unused by other record types. Records with
-   * lower priorities are preferred.
+   * Required for MX and URI records; ignored for other record types (but may still
+   * be returned by the API). Records with lower priorities are preferred. This field
+   * is to be deprecated in favor of the priority field within the data map.
    */
   priority?: number;
 
@@ -5834,8 +5839,9 @@ export interface URIRecordParam {
   data?: URIRecordParam.Data;
 
   /**
-   * Required for MX, SRV and URI records; unused by other record types. Records with
-   * lower priorities are preferred.
+   * Required for MX and URI records; ignored for other record types (but may still
+   * be returned by the API). Records with lower priorities are preferred. This field
+   * is to be deprecated in favor of the priority field within the data map.
    */
   priority?: number;
 
@@ -6293,8 +6299,10 @@ export declare namespace RecordCreateParams {
     content?: string;
 
     /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
+     * Body param: Required for MX and URI records; ignored for other record types (but
+     * may still be returned by the API). Records with lower priorities are preferred.
+     * This field is to be deprecated in favor of the priority field within the data
+     * map.
      */
     priority?: number;
 
@@ -7548,8 +7556,9 @@ export declare namespace RecordCreateParams {
       port?: number;
 
       /**
-       * Required for MX, SRV and URI records; unused by other record types. Records with
-       * lower priorities are preferred.
+       * Required for MX and URI records; ignored for other record types (but may still
+       * be returned by the API). Records with lower priorities are preferred. This field
+       * is to be deprecated in favor of the priority field within the data map.
        */
       priority?: number;
 
@@ -7911,8 +7920,10 @@ export declare namespace RecordCreateParams {
     data?: URIRecord.Data;
 
     /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
+     * Body param: Required for MX and URI records; ignored for other record types (but
+     * may still be returned by the API). Records with lower priorities are preferred.
+     * This field is to be deprecated in favor of the priority field within the data
+     * map.
      */
     priority?: number;
 
@@ -8275,8 +8286,10 @@ export declare namespace RecordUpdateParams {
     content?: string;
 
     /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
+     * Body param: Required for MX and URI records; ignored for other record types (but
+     * may still be returned by the API). Records with lower priorities are preferred.
+     * This field is to be deprecated in favor of the priority field within the data
+     * map.
      */
     priority?: number;
 
@@ -9530,8 +9543,9 @@ export declare namespace RecordUpdateParams {
       port?: number;
 
       /**
-       * Required for MX, SRV and URI records; unused by other record types. Records with
-       * lower priorities are preferred.
+       * Required for MX and URI records; ignored for other record types (but may still
+       * be returned by the API). Records with lower priorities are preferred. This field
+       * is to be deprecated in favor of the priority field within the data map.
        */
       priority?: number;
 
@@ -9893,8 +9907,10 @@ export declare namespace RecordUpdateParams {
     data?: URIRecord.Data;
 
     /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
+     * Body param: Required for MX and URI records; ignored for other record types (but
+     * may still be returned by the API). Records with lower priorities are preferred.
+     * This field is to be deprecated in favor of the priority field within the data
+     * map.
      */
     priority?: number;
 
@@ -10606,8 +10622,10 @@ export declare namespace RecordEditParams {
     content?: string;
 
     /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
+     * Body param: Required for MX and URI records; ignored for other record types (but
+     * may still be returned by the API). Records with lower priorities are preferred.
+     * This field is to be deprecated in favor of the priority field within the data
+     * map.
      */
     priority?: number;
 
@@ -11861,8 +11879,9 @@ export declare namespace RecordEditParams {
       port?: number;
 
       /**
-       * Required for MX, SRV and URI records; unused by other record types. Records with
-       * lower priorities are preferred.
+       * Required for MX and URI records; ignored for other record types (but may still
+       * be returned by the API). Records with lower priorities are preferred. This field
+       * is to be deprecated in favor of the priority field within the data map.
        */
       priority?: number;
 
@@ -12224,8 +12243,10 @@ export declare namespace RecordEditParams {
     data?: URIRecord.Data;
 
     /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
+     * Body param: Required for MX and URI records; ignored for other record types (but
+     * may still be returned by the API). Records with lower priorities are preferred.
+     * This field is to be deprecated in favor of the priority field within the data
+     * map.
      */
     priority?: number;
 
