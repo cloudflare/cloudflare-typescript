@@ -157,6 +157,7 @@ export namespace VersionCreateResponse {
       | Resources.WorkersBindingKindWorkflow
       | Resources.WorkersBindingKindWasmModule
       | Resources.WorkersBindingKindVPCService
+      | Resources.WorkersBindingKindVPCNetwork
     >;
 
     script?: Resources.Script;
@@ -868,6 +869,29 @@ export namespace VersionCreateResponse {
        * The kind of resource that the binding provides.
        */
       type: 'vpc_service';
+    }
+
+    export interface WorkersBindingKindVPCNetwork {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vpc_network';
+
+      /**
+       * Identifier of the network to bind to. Only "cf1:network" is currently supported.
+       * Mutually exclusive with tunnel_id.
+       */
+      network_id?: string;
+
+      /**
+       * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
+       */
+      tunnel_id?: string;
     }
 
     export interface Script {
@@ -1110,6 +1134,7 @@ export namespace VersionGetResponse {
       | Resources.WorkersBindingKindWorkflow
       | Resources.WorkersBindingKindWasmModule
       | Resources.WorkersBindingKindVPCService
+      | Resources.WorkersBindingKindVPCNetwork
     >;
 
     script?: Resources.Script;
@@ -1823,6 +1848,29 @@ export namespace VersionGetResponse {
       type: 'vpc_service';
     }
 
+    export interface WorkersBindingKindVPCNetwork {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vpc_network';
+
+      /**
+       * Identifier of the network to bind to. Only "cf1:network" is currently supported.
+       * Mutually exclusive with tunnel_id.
+       */
+      network_id?: string;
+
+      /**
+       * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
+       */
+      tunnel_id?: string;
+    }
+
     export interface Script {
       /**
        * Hashed script content
@@ -2032,6 +2080,7 @@ export namespace VersionCreateParams {
       | Metadata.WorkersBindingKindWorkflow
       | Metadata.WorkersBindingKindWasmModule
       | Metadata.WorkersBindingKindVPCService
+      | Metadata.WorkersBindingKindVPCNetwork
     >;
 
     /**
@@ -2793,6 +2842,29 @@ export namespace VersionCreateParams {
        * The kind of resource that the binding provides.
        */
       type: 'vpc_service';
+    }
+
+    export interface WorkersBindingKindVPCNetwork {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vpc_network';
+
+      /**
+       * Identifier of the network to bind to. Only "cf1:network" is currently supported.
+       * Mutually exclusive with tunnel_id.
+       */
+      network_id?: string;
+
+      /**
+       * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
+       */
+      tunnel_id?: string;
     }
   }
 }
