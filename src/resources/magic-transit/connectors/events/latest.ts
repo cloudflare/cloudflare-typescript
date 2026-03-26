@@ -71,6 +71,11 @@ export namespace LatestListResponse {
      * Time the Event was recorded (seconds since the Unix epoch)
      */
     t: number;
+
+    /**
+     * Version
+     */
+    v?: string;
   }
 
   export namespace Item {
