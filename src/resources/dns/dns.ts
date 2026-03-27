@@ -66,12 +66,15 @@ import * as AnalyticsAPI from './analytics/analytics';
 import { Analytics } from './analytics/analytics';
 import * as SettingsAPI from './settings/settings';
 import { Settings } from './settings/settings';
+import * as UsageAPI from './usage/usage';
+import { Usage } from './usage/usage';
 import * as ZoneTransfersAPI from './zone-transfers/zone-transfers';
 import { ZoneTransfers } from './zone-transfers/zone-transfers';
 
 export class DNS extends APIResource {
   dnssec: DNSSECAPI.DNSSECResource = new DNSSECAPI.DNSSECResource(this._client);
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
+  usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   zoneTransfers: ZoneTransfersAPI.ZoneTransfers = new ZoneTransfersAPI.ZoneTransfers(this._client);
@@ -79,6 +82,7 @@ export class DNS extends APIResource {
 
 DNS.DNSSECResource = DNSSECResource;
 DNS.Records = Records;
+DNS.Usage = Usage;
 DNS.Settings = Settings;
 DNS.Analytics = Analytics;
 DNS.ZoneTransfers = ZoneTransfers;
@@ -144,6 +148,8 @@ export declare namespace DNS {
     type RecordScanReviewParams as RecordScanReviewParams,
     type RecordScanTriggerParams as RecordScanTriggerParams,
   };
+
+  export { Usage as Usage };
 
   export { Settings as Settings };
 
