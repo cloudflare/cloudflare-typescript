@@ -10,7 +10,7 @@ const client = new Cloudflare({
 
 describe('resource matches', () => {
   test('get: only required params', async () => {
-    const responsePromise = client.brandProtection.v2.matches.get({ account_id: 'x', query_id: 'x' });
+    const responsePromise = client.brandProtection.v2.matches.get({ account_id: 'x', query_id: ['string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,8 @@ describe('resource matches', () => {
   test('get: required and optional params', async () => {
     const response = await client.brandProtection.v2.matches.get({
       account_id: 'x',
-      query_id: 'x',
+      query_id: ['string'],
+      domain_search: 'domain_search',
       include_dismissed: 'include_dismissed',
       include_domain_id: 'include_domain_id',
       limit: 'limit',

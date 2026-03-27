@@ -7,7 +7,9 @@ import { path } from '../../../internal/utils/path';
 
 export class Matches extends APIResource {
   /**
-   * Get paginated list of domain matches for a specific brand protection query
+   * Get paginated list of domain matches for one or more brand protection queries.
+   * When multiple query_ids are provided (comma-separated), matches are deduplicated
+   * across queries and each match includes a matched_queries array.
    */
   get(params: MatchGetParams, options?: RequestOptions): APIPromise<MatchGetResponse> {
     const { account_id, ...query } = params;
@@ -39,6 +41,18 @@ export namespace MatchGetResponse {
     scan_submission_id: number | null;
 
     source: string | null;
+
+    /**
+     * All underlying match row IDs for this domain. Only present when multiple
+     * query_ids are requested.
+     */
+    match_ids?: Array<number>;
+
+    /**
+     * List of query IDs that produced this match. Only present when multiple query_ids
+     * are requested.
+     */
+    matched_queries?: Array<number>;
   }
 
   export namespace Match {
@@ -55,9 +69,16 @@ export interface MatchGetParams {
   account_id: string;
 
   /**
-   * Query param
+   * Query param: Query ID or comma-separated list of Query IDs. When multiple IDs
+   * are provided, matches are deduplicated across queries and each match includes
+   * matched_queries and match_ids arrays.
    */
-  query_id: string;
+  query_id: Array<string>;
+
+  /**
+   * Query param: Filter matches by domain name (substring match)
+   */
+  domain_search?: string;
 
   /**
    * Query param
