@@ -544,6 +544,11 @@ export namespace LatestListResponse {
     netdevs?: Array<Item.Netdev>;
 
     /**
+     * Platform identifier
+     */
+    platform?: string;
+
+    /**
      * Number of ICMP Address Mask Reply messages received
      */
     snmp_icmp_in_addr_mask_reps?: number;
