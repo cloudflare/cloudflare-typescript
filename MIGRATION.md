@@ -1103,6 +1103,11 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.customPages.update()`
 - `client.customPages.list()`
 - `client.customPages.get()`
+- `client.customPages.assets.create()`
+- `client.customPages.assets.update()`
+- `client.customPages.assets.list()`
+- `client.customPages.assets.delete()`
+- `client.customPages.assets.get()`
 - `client.secretsStore.stores.delete()`
 - `client.secretsStore.stores.secrets.create()`
 - `client.secretsStore.stores.secrets.list()`
@@ -1580,6 +1585,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.securityCenter.insights.type.get()`
 - `client.customPages.list()`
 - `client.customPages.get()`
+- `client.customPages.assets.list()`
+- `client.customPages.assets.delete()`
+- `client.customPages.assets.get()`
 
 </details>
 
