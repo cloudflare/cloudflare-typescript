@@ -171,9 +171,9 @@ export interface CustomProfile {
   >;
 
   /**
-   * Sensitivity levels associated with this profile as (group_id, level_id) tuples.
+   * Sensitivity levels associated with this profile.
    */
-  sensitivity_levels?: Array<Array<string>>;
+  sensitivity_levels?: Array<CustomProfile.SensitivityLevel>;
 
   shared_entries?: Array<
     | CustomProfile.CustomEntry
@@ -322,6 +322,15 @@ export namespace CustomProfile {
     word_list: unknown;
 
     profile_id?: string | null;
+  }
+
+  /**
+   * A reference pairing a sensitivity group with a specific level within that group.
+   */
+  export interface SensitivityLevel {
+    group_id: string;
+
+    level_id: string;
   }
 
   export interface CustomEntry {
@@ -542,10 +551,9 @@ export interface CustomCreateParams {
   ocr_enabled?: boolean;
 
   /**
-   * Body param: Sensitivity levels to associate with the profile as (group_id,
-   * level_id) tuples.
+   * Body param: Sensitivity levels to associate with the profile.
    */
-  sensitivity_levels?: Array<Array<string>>;
+  sensitivity_levels?: Array<CustomCreateParams.SensitivityLevel>;
 
   /**
    * Body param: Entries from other profiles (e.g. pre-defined Cloudflare profiles,
@@ -571,6 +579,15 @@ export namespace CustomCreateParams {
     name: string;
 
     words: Array<string>;
+  }
+
+  /**
+   * A reference pairing a sensitivity group with a specific level within that group.
+   */
+  export interface SensitivityLevel {
+    group_id: string;
+
+    level_id: string;
   }
 
   export interface SharedEntry {
@@ -644,7 +661,7 @@ export interface CustomUpdateParams {
    * Body param: Sensitivity levels to associate with the profile. If omitted,
    * existing associations are unchanged.
    */
-  sensitivity_levels?: Array<Array<string>> | null;
+  sensitivity_levels?: Array<CustomUpdateParams.SensitivityLevel> | null;
 
   /**
    * Body param: Other entries, e.g. predefined or integration.
@@ -673,6 +690,15 @@ export namespace CustomUpdateParams {
     pattern: CustomAPI.PatternParam;
 
     description?: string | null;
+  }
+
+  /**
+   * A reference pairing a sensitivity group with a specific level within that group.
+   */
+  export interface SensitivityLevel {
+    group_id: string;
+
+    level_id: string;
   }
 
   export interface SharedEntry {
