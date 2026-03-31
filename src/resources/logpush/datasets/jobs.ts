@@ -44,6 +44,7 @@ export class Jobs extends APIResource {
       | 'http_requests'
       | 'ipsec_logs'
       | 'magic_ids_detections'
+      | 'mcp_portal_logs'
       | 'nel_reports'
       | 'network_analytics_logs'
       | 'page_shield_events'

@@ -222,6 +222,12 @@ export interface Version {
   main_module?: string;
 
   /**
+   * Durable Object migration tag. Set when the version is deployed. Omitted if the
+   * version has not been deployed or the Worker does not use Durable Objects.
+   */
+  migration_tag?: string;
+
+  /**
    * Migrations for Durable Objects associated with the version. Migrations are
    * applied when the version is deployed.
    */
