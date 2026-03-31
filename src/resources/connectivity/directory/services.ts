@@ -57,8 +57,8 @@ export class Services extends APIResource {
    *           tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da',
    *         },
    *       },
-   *       name: 'web-app',
-   *       type: 'http',
+   *       name: 'postgres-db',
+   *       type: 'tcp',
    *     },
    *   );
    * ```
@@ -146,486 +146,1282 @@ export class Services extends APIResource {
 
 export type ServiceListResponsesV4PagePaginationArray = V4PagePaginationArray<ServiceListResponse>;
 
-export interface ServiceCreateResponse {
-  host:
-    | ServiceCreateResponse.InfraIPv4Host
-    | ServiceCreateResponse.InfraIPv6Host
-    | ServiceCreateResponse.InfraDualStackHost
-    | ServiceCreateResponse.InfraHostnameHost;
-
-  name: string;
-
-  type: 'http';
-
-  created_at?: string;
-
-  http_port?: number | null;
-
-  https_port?: number | null;
-
-  service_id?: string;
-
-  updated_at?: string;
-}
+export type ServiceCreateResponse =
+  | ServiceCreateResponse.InfraHTTPServiceConfig
+  | ServiceCreateResponse.InfraTCPServiceConfig;
 
 export namespace ServiceCreateResponse {
-  export interface InfraIPv4Host {
-    ipv4: string;
+  export interface InfraHTTPServiceConfig {
+    host:
+      | InfraHTTPServiceConfig.InfraIPv4Host
+      | InfraHTTPServiceConfig.InfraIPv6Host
+      | InfraHTTPServiceConfig.InfraDualStackHost
+      | InfraHTTPServiceConfig.InfraHostnameHost;
 
-    network: InfraIPv4Host.Network;
+    name: string;
+
+    type: 'tcp' | 'http';
+
+    created_at?: string;
+
+    http_port?: number | null;
+
+    https_port?: number | null;
+
+    service_id?: string;
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
+
+    updated_at?: string;
   }
 
-  export namespace InfraIPv4Host {
-    export interface Network {
-      tunnel_id: string;
+  export namespace InfraHTTPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
+    }
+
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraIPv6Host {
+      ipv6: string;
+
+      network: InfraIPv6Host.Network;
+    }
+
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraDualStackHost {
+      ipv4: string;
+
+      ipv6: string;
+
+      network: InfraDualStackHost.Network;
+    }
+
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraHostnameHost {
+      hostname: string;
+
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
+
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
+
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
     }
   }
 
-  export interface InfraIPv6Host {
-    ipv6: string;
+  export interface InfraTCPServiceConfig {
+    host:
+      | InfraTCPServiceConfig.InfraIPv4Host
+      | InfraTCPServiceConfig.InfraIPv6Host
+      | InfraTCPServiceConfig.InfraDualStackHost
+      | InfraTCPServiceConfig.InfraHostnameHost;
 
-    network: InfraIPv6Host.Network;
+    name: string;
+
+    type: 'tcp' | 'http';
+
+    app_protocol?: 'postgresql' | 'mysql' | null;
+
+    created_at?: string;
+
+    service_id?: string;
+
+    tcp_port?: number | null;
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
+
+    updated_at?: string;
   }
 
-  export namespace InfraIPv6Host {
-    export interface Network {
-      tunnel_id: string;
+  export namespace InfraTCPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
     }
-  }
 
-  export interface InfraDualStackHost {
-    ipv4: string;
-
-    ipv6: string;
-
-    network: InfraDualStackHost.Network;
-  }
-
-  export namespace InfraDualStackHost {
-    export interface Network {
-      tunnel_id: string;
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
     }
-  }
 
-  export interface InfraHostnameHost {
-    hostname: string;
+    export interface InfraIPv6Host {
+      ipv6: string;
 
-    resolver_network: InfraHostnameHost.ResolverNetwork;
-  }
+      network: InfraIPv6Host.Network;
+    }
 
-  export namespace InfraHostnameHost {
-    export interface ResolverNetwork {
-      tunnel_id: string;
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
 
-      resolver_ips?: Array<string> | null;
+    export interface InfraDualStackHost {
+      ipv4: string;
+
+      ipv6: string;
+
+      network: InfraDualStackHost.Network;
+    }
+
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraHostnameHost {
+      hostname: string;
+
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
+
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
+
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
     }
   }
 }
 
-export interface ServiceUpdateResponse {
-  host:
-    | ServiceUpdateResponse.InfraIPv4Host
-    | ServiceUpdateResponse.InfraIPv6Host
-    | ServiceUpdateResponse.InfraDualStackHost
-    | ServiceUpdateResponse.InfraHostnameHost;
-
-  name: string;
-
-  type: 'http';
-
-  created_at?: string;
-
-  http_port?: number | null;
-
-  https_port?: number | null;
-
-  service_id?: string;
-
-  updated_at?: string;
-}
+export type ServiceUpdateResponse =
+  | ServiceUpdateResponse.InfraHTTPServiceConfig
+  | ServiceUpdateResponse.InfraTCPServiceConfig;
 
 export namespace ServiceUpdateResponse {
-  export interface InfraIPv4Host {
-    ipv4: string;
+  export interface InfraHTTPServiceConfig {
+    host:
+      | InfraHTTPServiceConfig.InfraIPv4Host
+      | InfraHTTPServiceConfig.InfraIPv6Host
+      | InfraHTTPServiceConfig.InfraDualStackHost
+      | InfraHTTPServiceConfig.InfraHostnameHost;
 
-    network: InfraIPv4Host.Network;
+    name: string;
+
+    type: 'tcp' | 'http';
+
+    created_at?: string;
+
+    http_port?: number | null;
+
+    https_port?: number | null;
+
+    service_id?: string;
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
+
+    updated_at?: string;
   }
 
-  export namespace InfraIPv4Host {
-    export interface Network {
-      tunnel_id: string;
+  export namespace InfraHTTPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
+    }
+
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraIPv6Host {
+      ipv6: string;
+
+      network: InfraIPv6Host.Network;
+    }
+
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraDualStackHost {
+      ipv4: string;
+
+      ipv6: string;
+
+      network: InfraDualStackHost.Network;
+    }
+
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraHostnameHost {
+      hostname: string;
+
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
+
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
+
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
     }
   }
 
-  export interface InfraIPv6Host {
-    ipv6: string;
+  export interface InfraTCPServiceConfig {
+    host:
+      | InfraTCPServiceConfig.InfraIPv4Host
+      | InfraTCPServiceConfig.InfraIPv6Host
+      | InfraTCPServiceConfig.InfraDualStackHost
+      | InfraTCPServiceConfig.InfraHostnameHost;
 
-    network: InfraIPv6Host.Network;
+    name: string;
+
+    type: 'tcp' | 'http';
+
+    app_protocol?: 'postgresql' | 'mysql' | null;
+
+    created_at?: string;
+
+    service_id?: string;
+
+    tcp_port?: number | null;
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
+
+    updated_at?: string;
   }
 
-  export namespace InfraIPv6Host {
-    export interface Network {
-      tunnel_id: string;
+  export namespace InfraTCPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
     }
-  }
 
-  export interface InfraDualStackHost {
-    ipv4: string;
-
-    ipv6: string;
-
-    network: InfraDualStackHost.Network;
-  }
-
-  export namespace InfraDualStackHost {
-    export interface Network {
-      tunnel_id: string;
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
     }
-  }
 
-  export interface InfraHostnameHost {
-    hostname: string;
+    export interface InfraIPv6Host {
+      ipv6: string;
 
-    resolver_network: InfraHostnameHost.ResolverNetwork;
-  }
+      network: InfraIPv6Host.Network;
+    }
 
-  export namespace InfraHostnameHost {
-    export interface ResolverNetwork {
-      tunnel_id: string;
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
 
-      resolver_ips?: Array<string> | null;
+    export interface InfraDualStackHost {
+      ipv4: string;
+
+      ipv6: string;
+
+      network: InfraDualStackHost.Network;
+    }
+
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraHostnameHost {
+      hostname: string;
+
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
+
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
+
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
     }
   }
 }
 
-export interface ServiceListResponse {
-  host:
-    | ServiceListResponse.InfraIPv4Host
-    | ServiceListResponse.InfraIPv6Host
-    | ServiceListResponse.InfraDualStackHost
-    | ServiceListResponse.InfraHostnameHost;
-
-  name: string;
-
-  type: 'http';
-
-  created_at?: string;
-
-  http_port?: number | null;
-
-  https_port?: number | null;
-
-  service_id?: string;
-
-  updated_at?: string;
-}
+export type ServiceListResponse =
+  | ServiceListResponse.InfraHTTPServiceConfig
+  | ServiceListResponse.InfraTCPServiceConfig;
 
 export namespace ServiceListResponse {
-  export interface InfraIPv4Host {
-    ipv4: string;
+  export interface InfraHTTPServiceConfig {
+    host:
+      | InfraHTTPServiceConfig.InfraIPv4Host
+      | InfraHTTPServiceConfig.InfraIPv6Host
+      | InfraHTTPServiceConfig.InfraDualStackHost
+      | InfraHTTPServiceConfig.InfraHostnameHost;
 
-    network: InfraIPv4Host.Network;
+    name: string;
+
+    type: 'tcp' | 'http';
+
+    created_at?: string;
+
+    http_port?: number | null;
+
+    https_port?: number | null;
+
+    service_id?: string;
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
+
+    updated_at?: string;
   }
 
-  export namespace InfraIPv4Host {
-    export interface Network {
-      tunnel_id: string;
+  export namespace InfraHTTPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
+    }
+
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraIPv6Host {
+      ipv6: string;
+
+      network: InfraIPv6Host.Network;
+    }
+
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraDualStackHost {
+      ipv4: string;
+
+      ipv6: string;
+
+      network: InfraDualStackHost.Network;
+    }
+
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraHostnameHost {
+      hostname: string;
+
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
+
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
+
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
     }
   }
 
-  export interface InfraIPv6Host {
-    ipv6: string;
+  export interface InfraTCPServiceConfig {
+    host:
+      | InfraTCPServiceConfig.InfraIPv4Host
+      | InfraTCPServiceConfig.InfraIPv6Host
+      | InfraTCPServiceConfig.InfraDualStackHost
+      | InfraTCPServiceConfig.InfraHostnameHost;
 
-    network: InfraIPv6Host.Network;
+    name: string;
+
+    type: 'tcp' | 'http';
+
+    app_protocol?: 'postgresql' | 'mysql' | null;
+
+    created_at?: string;
+
+    service_id?: string;
+
+    tcp_port?: number | null;
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
+
+    updated_at?: string;
   }
 
-  export namespace InfraIPv6Host {
-    export interface Network {
-      tunnel_id: string;
+  export namespace InfraTCPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
     }
-  }
 
-  export interface InfraDualStackHost {
-    ipv4: string;
-
-    ipv6: string;
-
-    network: InfraDualStackHost.Network;
-  }
-
-  export namespace InfraDualStackHost {
-    export interface Network {
-      tunnel_id: string;
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
     }
-  }
 
-  export interface InfraHostnameHost {
-    hostname: string;
+    export interface InfraIPv6Host {
+      ipv6: string;
 
-    resolver_network: InfraHostnameHost.ResolverNetwork;
-  }
+      network: InfraIPv6Host.Network;
+    }
 
-  export namespace InfraHostnameHost {
-    export interface ResolverNetwork {
-      tunnel_id: string;
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
 
-      resolver_ips?: Array<string> | null;
+    export interface InfraDualStackHost {
+      ipv4: string;
+
+      ipv6: string;
+
+      network: InfraDualStackHost.Network;
+    }
+
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraHostnameHost {
+      hostname: string;
+
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
+
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
+
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
     }
   }
 }
 
-export interface ServiceGetResponse {
-  host:
-    | ServiceGetResponse.InfraIPv4Host
-    | ServiceGetResponse.InfraIPv6Host
-    | ServiceGetResponse.InfraDualStackHost
-    | ServiceGetResponse.InfraHostnameHost;
-
-  name: string;
-
-  type: 'http';
-
-  created_at?: string;
-
-  http_port?: number | null;
-
-  https_port?: number | null;
-
-  service_id?: string;
-
-  updated_at?: string;
-}
+export type ServiceGetResponse =
+  | ServiceGetResponse.InfraHTTPServiceConfig
+  | ServiceGetResponse.InfraTCPServiceConfig;
 
 export namespace ServiceGetResponse {
-  export interface InfraIPv4Host {
-    ipv4: string;
+  export interface InfraHTTPServiceConfig {
+    host:
+      | InfraHTTPServiceConfig.InfraIPv4Host
+      | InfraHTTPServiceConfig.InfraIPv6Host
+      | InfraHTTPServiceConfig.InfraDualStackHost
+      | InfraHTTPServiceConfig.InfraHostnameHost;
 
-    network: InfraIPv4Host.Network;
+    name: string;
+
+    type: 'tcp' | 'http';
+
+    created_at?: string;
+
+    http_port?: number | null;
+
+    https_port?: number | null;
+
+    service_id?: string;
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
+
+    updated_at?: string;
   }
 
-  export namespace InfraIPv4Host {
-    export interface Network {
-      tunnel_id: string;
+  export namespace InfraHTTPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
+    }
+
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraIPv6Host {
+      ipv6: string;
+
+      network: InfraIPv6Host.Network;
+    }
+
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraDualStackHost {
+      ipv4: string;
+
+      ipv6: string;
+
+      network: InfraDualStackHost.Network;
+    }
+
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraHostnameHost {
+      hostname: string;
+
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
+
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
+
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
     }
   }
 
-  export interface InfraIPv6Host {
-    ipv6: string;
+  export interface InfraTCPServiceConfig {
+    host:
+      | InfraTCPServiceConfig.InfraIPv4Host
+      | InfraTCPServiceConfig.InfraIPv6Host
+      | InfraTCPServiceConfig.InfraDualStackHost
+      | InfraTCPServiceConfig.InfraHostnameHost;
 
-    network: InfraIPv6Host.Network;
+    name: string;
+
+    type: 'tcp' | 'http';
+
+    app_protocol?: 'postgresql' | 'mysql' | null;
+
+    created_at?: string;
+
+    service_id?: string;
+
+    tcp_port?: number | null;
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
+
+    updated_at?: string;
   }
 
-  export namespace InfraIPv6Host {
-    export interface Network {
-      tunnel_id: string;
+  export namespace InfraTCPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
     }
-  }
 
-  export interface InfraDualStackHost {
-    ipv4: string;
-
-    ipv6: string;
-
-    network: InfraDualStackHost.Network;
-  }
-
-  export namespace InfraDualStackHost {
-    export interface Network {
-      tunnel_id: string;
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
     }
-  }
 
-  export interface InfraHostnameHost {
-    hostname: string;
+    export interface InfraIPv6Host {
+      ipv6: string;
 
-    resolver_network: InfraHostnameHost.ResolverNetwork;
-  }
+      network: InfraIPv6Host.Network;
+    }
 
-  export namespace InfraHostnameHost {
-    export interface ResolverNetwork {
-      tunnel_id: string;
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
 
-      resolver_ips?: Array<string> | null;
+    export interface InfraDualStackHost {
+      ipv4: string;
+
+      ipv6: string;
+
+      network: InfraDualStackHost.Network;
+    }
+
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraHostnameHost {
+      hostname: string;
+
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
+
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
+
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
     }
   }
 }
 
-export interface ServiceCreateParams {
-  /**
-   * Path param: Account identifier
-   */
-  account_id: string;
+export type ServiceCreateParams =
+  | ServiceCreateParams.InfraHTTPServiceConfig
+  | ServiceCreateParams.InfraTCPServiceConfig;
 
-  /**
-   * Body param
-   */
-  host:
-    | ServiceCreateParams.InfraIPv4Host
-    | ServiceCreateParams.InfraIPv6Host
-    | ServiceCreateParams.InfraDualStackHost
-    | ServiceCreateParams.InfraHostnameHost;
+export declare namespace ServiceCreateParams {
+  export interface InfraHTTPServiceConfig {
+    /**
+     * Path param: Account identifier
+     */
+    account_id: string;
 
-  /**
-   * Body param
-   */
-  name: string;
+    /**
+     * Body param
+     */
+    host:
+      | InfraHTTPServiceConfig.InfraIPv4Host
+      | InfraHTTPServiceConfig.InfraIPv6Host
+      | InfraHTTPServiceConfig.InfraDualStackHost
+      | InfraHTTPServiceConfig.InfraHostnameHost;
 
-  /**
-   * Body param
-   */
-  type: 'http';
+    /**
+     * Body param
+     */
+    name: string;
 
-  /**
-   * Body param
-   */
-  http_port?: number | null;
+    /**
+     * Body param
+     */
+    type: 'tcp' | 'http';
 
-  /**
-   * Body param
-   */
-  https_port?: number | null;
+    /**
+     * Body param
+     */
+    http_port?: number | null;
+
+    /**
+     * Body param
+     */
+    https_port?: number | null;
+
+    /**
+     * Body param: TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
+  }
+
+  export namespace InfraHTTPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
+    }
+
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraIPv6Host {
+      ipv6: string;
+
+      network: InfraIPv6Host.Network;
+    }
+
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraDualStackHost {
+      ipv4: string;
+
+      ipv6: string;
+
+      network: InfraDualStackHost.Network;
+    }
+
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraHostnameHost {
+      hostname: string;
+
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
+
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
+
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
+    }
+  }
+
+  export interface InfraTCPServiceConfig {
+    /**
+     * Path param: Account identifier
+     */
+    account_id: string;
+
+    /**
+     * Body param
+     */
+    host:
+      | InfraTCPServiceConfig.InfraIPv4Host
+      | InfraTCPServiceConfig.InfraIPv6Host
+      | InfraTCPServiceConfig.InfraDualStackHost
+      | InfraTCPServiceConfig.InfraHostnameHost;
+
+    /**
+     * Body param
+     */
+    name: string;
+
+    /**
+     * Body param
+     */
+    type: 'tcp' | 'http';
+
+    /**
+     * Body param
+     */
+    app_protocol?: 'postgresql' | 'mysql' | null;
+
+    /**
+     * Body param
+     */
+    tcp_port?: number | null;
+
+    /**
+     * Body param: TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
+  }
+
+  export namespace InfraTCPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
+    }
+
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraIPv6Host {
+      ipv6: string;
+
+      network: InfraIPv6Host.Network;
+    }
+
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraDualStackHost {
+      ipv4: string;
+
+      ipv6: string;
+
+      network: InfraDualStackHost.Network;
+    }
+
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraHostnameHost {
+      hostname: string;
+
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
+
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
+
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
+    }
+  }
 }
 
-export namespace ServiceCreateParams {
-  export interface InfraIPv4Host {
-    ipv4: string;
+export type ServiceUpdateParams =
+  | ServiceUpdateParams.InfraHTTPServiceConfig
+  | ServiceUpdateParams.InfraTCPServiceConfig;
 
-    network: InfraIPv4Host.Network;
+export declare namespace ServiceUpdateParams {
+  export interface InfraHTTPServiceConfig {
+    /**
+     * Path param
+     */
+    account_id: string;
+
+    /**
+     * Body param
+     */
+    host:
+      | InfraHTTPServiceConfig.InfraIPv4Host
+      | InfraHTTPServiceConfig.InfraIPv6Host
+      | InfraHTTPServiceConfig.InfraDualStackHost
+      | InfraHTTPServiceConfig.InfraHostnameHost;
+
+    /**
+     * Body param
+     */
+    name: string;
+
+    /**
+     * Body param
+     */
+    type: 'tcp' | 'http';
+
+    /**
+     * Body param
+     */
+    http_port?: number | null;
+
+    /**
+     * Body param
+     */
+    https_port?: number | null;
+
+    /**
+     * Body param: TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraHTTPServiceConfig.TLSSettings | null;
   }
 
-  export namespace InfraIPv4Host {
-    export interface Network {
-      tunnel_id: string;
+  export namespace InfraHTTPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
+    }
+
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraIPv6Host {
+      ipv6: string;
+
+      network: InfraIPv6Host.Network;
+    }
+
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraDualStackHost {
+      ipv4: string;
+
+      ipv6: string;
+
+      network: InfraDualStackHost.Network;
+    }
+
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
+    }
+
+    export interface InfraHostnameHost {
+      hostname: string;
+
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
+
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
+
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
     }
   }
 
-  export interface InfraIPv6Host {
-    ipv6: string;
+  export interface InfraTCPServiceConfig {
+    /**
+     * Path param
+     */
+    account_id: string;
 
-    network: InfraIPv6Host.Network;
+    /**
+     * Body param
+     */
+    host:
+      | InfraTCPServiceConfig.InfraIPv4Host
+      | InfraTCPServiceConfig.InfraIPv6Host
+      | InfraTCPServiceConfig.InfraDualStackHost
+      | InfraTCPServiceConfig.InfraHostnameHost;
+
+    /**
+     * Body param
+     */
+    name: string;
+
+    /**
+     * Body param
+     */
+    type: 'tcp' | 'http';
+
+    /**
+     * Body param
+     */
+    app_protocol?: 'postgresql' | 'mysql' | null;
+
+    /**
+     * Body param
+     */
+    tcp_port?: number | null;
+
+    /**
+     * Body param: TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    tls_settings?: InfraTCPServiceConfig.TLSSettings | null;
   }
 
-  export namespace InfraIPv6Host {
-    export interface Network {
-      tunnel_id: string;
+  export namespace InfraTCPServiceConfig {
+    export interface InfraIPv4Host {
+      ipv4: string;
+
+      network: InfraIPv4Host.Network;
     }
-  }
 
-  export interface InfraDualStackHost {
-    ipv4: string;
-
-    ipv6: string;
-
-    network: InfraDualStackHost.Network;
-  }
-
-  export namespace InfraDualStackHost {
-    export interface Network {
-      tunnel_id: string;
+    export namespace InfraIPv4Host {
+      export interface Network {
+        tunnel_id: string;
+      }
     }
-  }
 
-  export interface InfraHostnameHost {
-    hostname: string;
+    export interface InfraIPv6Host {
+      ipv6: string;
 
-    resolver_network: InfraHostnameHost.ResolverNetwork;
-  }
-
-  export namespace InfraHostnameHost {
-    export interface ResolverNetwork {
-      tunnel_id: string;
-
-      resolver_ips?: Array<string> | null;
+      network: InfraIPv6Host.Network;
     }
-  }
-}
 
-export interface ServiceUpdateParams {
-  /**
-   * Path param
-   */
-  account_id: string;
-
-  /**
-   * Body param
-   */
-  host:
-    | ServiceUpdateParams.InfraIPv4Host
-    | ServiceUpdateParams.InfraIPv6Host
-    | ServiceUpdateParams.InfraDualStackHost
-    | ServiceUpdateParams.InfraHostnameHost;
-
-  /**
-   * Body param
-   */
-  name: string;
-
-  /**
-   * Body param
-   */
-  type: 'http';
-
-  /**
-   * Body param
-   */
-  http_port?: number | null;
-
-  /**
-   * Body param
-   */
-  https_port?: number | null;
-}
-
-export namespace ServiceUpdateParams {
-  export interface InfraIPv4Host {
-    ipv4: string;
-
-    network: InfraIPv4Host.Network;
-  }
-
-  export namespace InfraIPv4Host {
-    export interface Network {
-      tunnel_id: string;
+    export namespace InfraIPv6Host {
+      export interface Network {
+        tunnel_id: string;
+      }
     }
-  }
 
-  export interface InfraIPv6Host {
-    ipv6: string;
+    export interface InfraDualStackHost {
+      ipv4: string;
 
-    network: InfraIPv6Host.Network;
-  }
+      ipv6: string;
 
-  export namespace InfraIPv6Host {
-    export interface Network {
-      tunnel_id: string;
+      network: InfraDualStackHost.Network;
     }
-  }
 
-  export interface InfraDualStackHost {
-    ipv4: string;
-
-    ipv6: string;
-
-    network: InfraDualStackHost.Network;
-  }
-
-  export namespace InfraDualStackHost {
-    export interface Network {
-      tunnel_id: string;
+    export namespace InfraDualStackHost {
+      export interface Network {
+        tunnel_id: string;
+      }
     }
-  }
 
-  export interface InfraHostnameHost {
-    hostname: string;
+    export interface InfraHostnameHost {
+      hostname: string;
 
-    resolver_network: InfraHostnameHost.ResolverNetwork;
-  }
+      resolver_network: InfraHostnameHost.ResolverNetwork;
+    }
 
-  export namespace InfraHostnameHost {
-    export interface ResolverNetwork {
-      tunnel_id: string;
+    export namespace InfraHostnameHost {
+      export interface ResolverNetwork {
+        tunnel_id: string;
 
-      resolver_ips?: Array<string> | null;
+        resolver_ips?: Array<string> | null;
+      }
+    }
+
+    /**
+     * TLS settings for a connectivity service.
+     *
+     * If omitted, the default mode (`verify_full`) is used.
+     */
+    export interface TLSSettings {
+      /**
+       * TLS certificate verification mode for the connection to the origin.
+       *
+       * - `"verify_full"` — verify certificate chain and hostname (default)
+       * - `"verify_ca"` — verify certificate chain only, skip hostname check
+       * - `"disabled"` — do not verify the server certificate at all
+       */
+      cert_verification_mode: string;
     }
   }
 }
@@ -639,7 +1435,7 @@ export interface ServiceListParams extends V4PagePaginationArrayParams {
   /**
    * Query param
    */
-  type?: 'http' | null;
+  type?: 'tcp' | 'http' | null;
 }
 
 export interface ServiceDeleteParams {
