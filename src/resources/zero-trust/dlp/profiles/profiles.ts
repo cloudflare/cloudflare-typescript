@@ -180,9 +180,9 @@ export namespace Profile {
     >;
 
     /**
-     * Sensitivity levels associated with this profile as (group_id, level_id) tuples.
+     * Sensitivity levels associated with this profile.
      */
-    sensitivity_levels?: Array<Array<string>>;
+    sensitivity_levels?: Array<CustomProfile.SensitivityLevel>;
 
     shared_entries?: Array<
       | CustomProfile.CustomEntry
@@ -331,6 +331,15 @@ export namespace Profile {
       word_list: unknown;
 
       profile_id?: string | null;
+    }
+
+    /**
+     * A reference pairing a sensitivity group with a specific level within that group.
+     */
+    export interface SensitivityLevel {
+      group_id: string;
+
+      level_id: string;
     }
 
     export interface CustomEntry {
