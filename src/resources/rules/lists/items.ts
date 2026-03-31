@@ -160,6 +160,12 @@ export interface ListCursor {
   before?: string;
 }
 
+export interface ListCursorParam {
+  after?: string;
+
+  before?: string;
+}
+
 export interface ListItem {
   /**
    * The unique operation ID of the asynchronous action.

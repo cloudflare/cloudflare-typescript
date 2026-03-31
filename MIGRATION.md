@@ -68,6 +68,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.accounts.tokens.value.update()`
 - `client.zones.settings.edit()`
 - `client.zones.settings.get()`
+- `client.zones.environments.delete()`
+- `client.zones.environments.rollback()`
 - `client.zones.plans.get()`
 - `client.loadBalancers.update()`
 - `client.loadBalancers.delete()`

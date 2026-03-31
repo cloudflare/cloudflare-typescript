@@ -16,6 +16,22 @@ import {
   CustomNameserverUpdateResponsesSinglePage,
   CustomNameservers,
 } from './custom-nameservers';
+import * as EnvironmentsAPI from './environments';
+import {
+  EnvironmentCreateParams,
+  EnvironmentCreateResponse,
+  EnvironmentDeleteParams,
+  EnvironmentDeleteResponse,
+  EnvironmentEditParams,
+  EnvironmentEditResponse,
+  EnvironmentListParams,
+  EnvironmentListResponse,
+  EnvironmentRollbackParams,
+  EnvironmentRollbackResponse,
+  EnvironmentUpdateParams,
+  EnvironmentUpdateResponse,
+  Environments,
+} from './environments';
 import * as HoldsAPI from './holds';
 import { HoldCreateParams, HoldDeleteParams, HoldEditParams, HoldGetParams, Holds, ZoneHold } from './holds';
 import * as PlansAPI from './plans';
@@ -109,6 +125,7 @@ import { path } from '../../internal/utils/path';
 export class Zones extends APIResource {
   activationCheck: ActivationCheckAPI.ActivationCheck = new ActivationCheckAPI.ActivationCheck(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  environments: EnvironmentsAPI.Environments = new EnvironmentsAPI.Environments(this._client);
   customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
     this._client,
   );
@@ -650,6 +667,7 @@ export interface ZoneGetParams {
 
 Zones.ActivationCheck = ActivationCheck;
 Zones.Settings = Settings;
+Zones.Environments = Environments;
 Zones.CustomNameservers = CustomNameservers;
 Zones.Holds = Holds;
 Zones.Subscriptions = Subscriptions;
@@ -731,6 +749,22 @@ export declare namespace Zones {
     type SettingGetResponse as SettingGetResponse,
     type SettingEditParams as SettingEditParams,
     type SettingGetParams as SettingGetParams,
+  };
+
+  export {
+    Environments as Environments,
+    type EnvironmentCreateResponse as EnvironmentCreateResponse,
+    type EnvironmentUpdateResponse as EnvironmentUpdateResponse,
+    type EnvironmentListResponse as EnvironmentListResponse,
+    type EnvironmentDeleteResponse as EnvironmentDeleteResponse,
+    type EnvironmentEditResponse as EnvironmentEditResponse,
+    type EnvironmentRollbackResponse as EnvironmentRollbackResponse,
+    type EnvironmentCreateParams as EnvironmentCreateParams,
+    type EnvironmentUpdateParams as EnvironmentUpdateParams,
+    type EnvironmentListParams as EnvironmentListParams,
+    type EnvironmentDeleteParams as EnvironmentDeleteParams,
+    type EnvironmentEditParams as EnvironmentEditParams,
+    type EnvironmentRollbackParams as EnvironmentRollbackParams,
   };
 
   export {

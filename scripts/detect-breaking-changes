@@ -35,6 +35,7 @@ TEST_PATHS=(
 	tests/api-resources/zones/zones.test.ts
 	tests/api-resources/zones/activation-check.test.ts
 	tests/api-resources/zones/settings.test.ts
+	tests/api-resources/zones/environments.test.ts
 	tests/api-resources/zones/custom-nameservers.test.ts
 	tests/api-resources/zones/holds.test.ts
 	tests/api-resources/zones/subscriptions.test.ts
