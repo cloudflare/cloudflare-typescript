@@ -391,6 +391,26 @@ Methods:
 - <code title="patch /zones/{zone_id}/settings/{setting_id}">client.zones.settings.<a href="./src/resources/zones/settings.ts">edit</a>(settingID, { ...params }) -> SettingEditResponse</code>
 - <code title="get /zones/{zone_id}/settings/{setting_id}">client.zones.settings.<a href="./src/resources/zones/settings.ts">get</a>(settingID, { ...params }) -> SettingGetResponse</code>
 
+## Environments
+
+Types:
+
+- <code><a href="./src/resources/zones/environments.ts">EnvironmentCreateResponse</a></code>
+- <code><a href="./src/resources/zones/environments.ts">EnvironmentUpdateResponse</a></code>
+- <code><a href="./src/resources/zones/environments.ts">EnvironmentListResponse</a></code>
+- <code><a href="./src/resources/zones/environments.ts">EnvironmentDeleteResponse</a></code>
+- <code><a href="./src/resources/zones/environments.ts">EnvironmentEditResponse</a></code>
+- <code><a href="./src/resources/zones/environments.ts">EnvironmentRollbackResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/environments">client.zones.environments.<a href="./src/resources/zones/environments.ts">create</a>({ ...params }) -> EnvironmentCreateResponse</code>
+- <code title="put /zones/{zone_id}/environments">client.zones.environments.<a href="./src/resources/zones/environments.ts">update</a>({ ...params }) -> EnvironmentUpdateResponse</code>
+- <code title="get /zones/{zone_id}/environments">client.zones.environments.<a href="./src/resources/zones/environments.ts">list</a>({ ...params }) -> EnvironmentListResponse</code>
+- <code title="delete /zones/{zone_id}/environments/{environment_id}">client.zones.environments.<a href="./src/resources/zones/environments.ts">delete</a>(environmentID, { ...params }) -> EnvironmentDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/environments">client.zones.environments.<a href="./src/resources/zones/environments.ts">edit</a>({ ...params }) -> EnvironmentEditResponse</code>
+- <code title="post /zones/{zone_id}/environments/{environment_id}/rollback">client.zones.environments.<a href="./src/resources/zones/environments.ts">rollback</a>(environmentID, { ...params }) -> EnvironmentRollbackResponse</code>
+
 ## CustomNameservers
 
 Types:
