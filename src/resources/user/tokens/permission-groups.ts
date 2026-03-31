@@ -6,7 +6,7 @@ import { RequestOptions } from '../../../internal/request-options';
 
 export class PermissionGroups extends APIResource {
   /**
-   * Find all available permission groups for API Tokens
+   * Find all available permission groups for API Tokens.
    *
    * @example
    * ```ts
