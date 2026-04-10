@@ -28,17 +28,19 @@ export namespace LogoMatchGetResponse {
   export interface Match {
     id: number;
 
+    domain: string | null;
+
     matched_at: string | null;
 
     query_id: number;
+
+    registrar: string | null;
 
     similarity_score: number;
 
     url_scan_id: string | null;
 
     content_type?: string;
-
-    domain?: string | null;
 
     image_data?: string;
   }
@@ -76,10 +78,10 @@ export interface LogoMatchGetParams {
   order?: 'asc' | 'desc';
 
   /**
-   * Query param: Column to sort by. Options: 'matchedAt', 'domain', or
-   * 'similarityScore'
+   * Query param: Column to sort by. Options: 'matchedAt', 'domain',
+   * 'similarityScore', or 'registrar'
    */
-  orderBy?: 'matchedAt' | 'domain' | 'similarityScore';
+  orderBy?: 'matchedAt' | 'domain' | 'similarityScore' | 'registrar';
 }
 
 export declare namespace LogoMatches {

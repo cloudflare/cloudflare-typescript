@@ -3,7 +3,6 @@
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
-import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -84,19 +83,24 @@ export class Streams extends APIResource {
    *
    * @example
    * ```ts
-   * await client.pipelines.streams.delete(
+   * const stream = await client.pipelines.streams.delete(
    *   '033e105f4ecef8ad9ca31a8372d0c353',
    *   { account_id: '0123105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
-  delete(streamID: string, params: StreamDeleteParams, options?: RequestOptions): APIPromise<void> {
+  delete(
+    streamID: string,
+    params: StreamDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<StreamDeleteResponse> {
     const { account_id, force } = params;
-    return this._client.delete(path`/accounts/${account_id}/pipelines/v1/streams/${streamID}`, {
-      query: { force },
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return (
+      this._client.delete(path`/accounts/${account_id}/pipelines/v1/streams/${streamID}`, {
+        query: { force },
+        ...options,
+      }) as APIPromise<{ result: StreamDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -690,6 +694,8 @@ export namespace StreamListResponse {
   }
 }
 
+export type StreamDeleteResponse = unknown;
+
 export interface StreamGetResponse {
   /**
    * Indicates a unique identifier for this stream.
@@ -1259,6 +1265,7 @@ export declare namespace Streams {
     type StreamCreateResponse as StreamCreateResponse,
     type StreamUpdateResponse as StreamUpdateResponse,
     type StreamListResponse as StreamListResponse,
+    type StreamDeleteResponse as StreamDeleteResponse,
     type StreamGetResponse as StreamGetResponse,
     type StreamListResponsesV4PagePaginationArray as StreamListResponsesV4PagePaginationArray,
     type StreamCreateParams as StreamCreateParams,

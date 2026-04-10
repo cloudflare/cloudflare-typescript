@@ -18,7 +18,6 @@ export {
   type SecretGetParams,
   type SecretCreateResponsesSinglePage,
   type SecretListResponsesV4PagePaginationArray,
-  type SecretBulkDeleteResponsesSinglePage,
 } from './secrets';
 export {
   Stores,
@@ -28,6 +27,5 @@ export {
   type StoreCreateParams,
   type StoreListParams,
   type StoreDeleteParams,
-  type StoreCreateResponsesSinglePage,
   type StoreListResponsesV4PagePaginationArray,
 } from './stores';

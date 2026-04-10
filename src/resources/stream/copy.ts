@@ -15,7 +15,6 @@ export class Copy extends APIResource {
    * ```ts
    * const video = await client.stream.copy.create({
    *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   url: 'https://example.com/myvideo.mp4',
    * });
    * ```
    */
@@ -41,14 +40,6 @@ export interface CopyCreateParams {
   account_id: string;
 
   /**
-   * Body param: A video's URL. The server must be publicly routable and support
-   * `HTTP HEAD` requests and `HTTP GET` range requests. The server should respond to
-   * `HTTP HEAD` requests with a `content-range` header that includes the size of the
-   * file.
-   */
-  url: string;
-
-  /**
    * Body param: Lists the origins allowed to display the video. Enter allowed origin
    * domains in an array and use `*` for wildcard subdomains. Empty arrays allow the
    * video to be viewed on any origin.
@@ -61,10 +52,23 @@ export interface CopyCreateParams {
   creator?: string;
 
   /**
+   * Body param: A video's URL. The server must be publicly routable and support
+   * `HTTP HEAD` requests and `HTTP GET` range requests. The server should respond to
+   * `HTTP HEAD` requests with a `content-range` header that includes the size of the
+   * file. This is the preferred field over `url`.
+   */
+  input?: string;
+
+  /**
    * Body param: A user modifiable key-value store used to reference other systems of
    * record for managing videos.
    */
   meta?: unknown;
+
+  /**
+   * Body param: A video's name. Used for legacy compatibility.
+   */
+  name?: string;
 
   /**
    * Body param: Indicates whether the video can be a accessed using the UID. When
@@ -89,6 +93,14 @@ export interface CopyCreateParams {
    * video.
    */
   thumbnailTimestampPct?: number;
+
+  /**
+   * Body param: A video's URL. The server must be publicly routable and support
+   * `HTTP HEAD` requests and `HTTP GET` range requests. The server should respond to
+   * `HTTP HEAD` requests with a `content-range` header that includes the size of the
+   * file. This field is deprecated in favor of `input`.
+   */
+  url?: string;
 
   /**
    * Body param

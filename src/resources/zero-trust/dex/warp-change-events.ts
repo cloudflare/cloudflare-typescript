@@ -65,6 +65,11 @@ export namespace WARPChangeEventGetResponse {
     hostname?: string;
 
     /**
+     * API Resource UUID tag.
+     */
+    registration_id?: string;
+
+    /**
      * The serial number of the machine the event is from
      */
     serial_number?: string;
@@ -102,6 +107,11 @@ export namespace WARPChangeEventGetResponse {
      * The hostname of the machine the event is from
      */
     hostname?: string;
+
+    /**
+     * API Resource UUID tag.
+     */
+    registration_id?: string;
 
     /**
      * The serial number of the machine the event is from

@@ -15,7 +15,6 @@ export {
   type MoveBulkResponse,
   type MoveCreateParams,
   type MoveBulkParams,
-  type MoveCreateResponsesSinglePage,
   type MoveBulkResponsesSinglePage,
 } from './move';
 export {

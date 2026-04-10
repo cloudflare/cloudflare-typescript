@@ -94,13 +94,13 @@ export class Secrets extends APIResource {
     secretID: string,
     params: SecretDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<SecretDeleteResponse> {
+  ): APIPromise<SecretDeleteResponse | null> {
     const { account_id, store_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/secrets_store/stores/${store_id}/secrets/${secretID}`,
         options,
-      ) as APIPromise<{ result: SecretDeleteResponse }>
+      ) as APIPromise<{ result: SecretDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -109,26 +109,25 @@ export class Secrets extends APIResource {
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const secretBulkDeleteResponse of client.secretsStore.stores.secrets.bulkDelete(
-   *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
+   * const response =
+   *   await client.secretsStore.stores.secrets.bulkDelete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
    * ```
    */
   bulkDelete(
     storeID: string,
     params: SecretBulkDeleteParams,
     options?: RequestOptions,
-  ): PagePromise<SecretBulkDeleteResponsesSinglePage, SecretBulkDeleteResponse> {
+  ): APIPromise<SecretBulkDeleteResponse | null> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/secrets_store/stores/${storeID}/secrets`,
-      SinglePage<SecretBulkDeleteResponse>,
-      { method: 'delete', ...options },
-    );
+    return (
+      this._client.delete(
+        path`/accounts/${account_id}/secrets_store/stores/${storeID}/secrets`,
+        options,
+      ) as APIPromise<{ result: SecretBulkDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -216,8 +215,6 @@ export type SecretCreateResponsesSinglePage = SinglePage<SecretCreateResponse>;
 
 export type SecretListResponsesV4PagePaginationArray = V4PagePaginationArray<SecretListResponse>;
 
-export type SecretBulkDeleteResponsesSinglePage = SinglePage<SecretBulkDeleteResponse>;
-
 export interface SecretCreateResponse {
   /**
    * Secret identifier tag.
@@ -250,6 +247,11 @@ export interface SecretCreateResponse {
    * Freeform text describing the secret
    */
   comment?: string;
+
+  /**
+   * The list of services that can use this secret.
+   */
+  scopes?: Array<string>;
 }
 
 export interface SecretListResponse {
@@ -284,75 +286,22 @@ export interface SecretListResponse {
    * Freeform text describing the secret
    */
   comment?: string;
+
+  /**
+   * The list of services that can use this secret.
+   */
+  scopes?: Array<string>;
 }
 
-export interface SecretDeleteResponse {
-  /**
-   * Secret identifier tag.
-   */
-  id: string;
+/**
+ * Result is null for delete operations.
+ */
+export type SecretDeleteResponse = unknown;
 
-  /**
-   * Whenthe secret was created.
-   */
-  created: string;
-
-  /**
-   * When the secret was modified.
-   */
-  modified: string;
-
-  /**
-   * The name of the secret
-   */
-  name: string;
-
-  status: 'pending' | 'active' | 'deleted';
-
-  /**
-   * Store Identifier
-   */
-  store_id: string;
-
-  /**
-   * Freeform text describing the secret
-   */
-  comment?: string;
-}
-
-export interface SecretBulkDeleteResponse {
-  /**
-   * Secret identifier tag.
-   */
-  id: string;
-
-  /**
-   * Whenthe secret was created.
-   */
-  created: string;
-
-  /**
-   * When the secret was modified.
-   */
-  modified: string;
-
-  /**
-   * The name of the secret
-   */
-  name: string;
-
-  status: 'pending' | 'active' | 'deleted';
-
-  /**
-   * Store Identifier
-   */
-  store_id: string;
-
-  /**
-   * Freeform text describing the secret
-   */
-  comment?: string;
-}
+/**
+ * Result is null for delete operations.
+ */
+export type SecretBulkDeleteResponse = unknown;
 
 export interface SecretDuplicateResponse {
   /**
@@ -386,6 +335,11 @@ export interface SecretDuplicateResponse {
    * Freeform text describing the secret
    */
   comment?: string;
+
+  /**
+   * The list of services that can use this secret.
+   */
+  scopes?: Array<string>;
 }
 
 export interface SecretEditResponse {
@@ -420,6 +374,11 @@ export interface SecretEditResponse {
    * Freeform text describing the secret
    */
   comment?: string;
+
+  /**
+   * The list of services that can use this secret.
+   */
+  scopes?: Array<string>;
 }
 
 export interface SecretGetResponse {
@@ -454,6 +413,11 @@ export interface SecretGetResponse {
    * Freeform text describing the secret
    */
   comment?: string;
+
+  /**
+   * The list of services that can use this secret.
+   */
+  scopes?: Array<string>;
 }
 
 export interface SecretCreateParams {
@@ -587,6 +551,12 @@ export interface SecretEditParams {
    * Body param: The list of services that can use this secret.
    */
   scopes?: Array<string>;
+
+  /**
+   * Body param: The value of the secret. Note that this is 'write only' - no API
+   * reponse will provide this value, it is only used to create/modify secrets.
+   */
+  value?: string;
 }
 
 export interface SecretGetParams {
@@ -612,7 +582,6 @@ export declare namespace Secrets {
     type SecretGetResponse as SecretGetResponse,
     type SecretCreateResponsesSinglePage as SecretCreateResponsesSinglePage,
     type SecretListResponsesV4PagePaginationArray as SecretListResponsesV4PagePaginationArray,
-    type SecretBulkDeleteResponsesSinglePage as SecretBulkDeleteResponsesSinglePage,
     type SecretCreateParams as SecretCreateParams,
     type SecretListParams as SecretListParams,
     type SecretDeleteParams as SecretDeleteParams,

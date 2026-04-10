@@ -7,7 +7,6 @@ import * as StoresAPI from './stores/stores';
 import {
   StoreCreateParams,
   StoreCreateResponse,
-  StoreCreateResponsesSinglePage,
   StoreDeleteParams,
   StoreDeleteResponse,
   StoreListParams,
@@ -30,7 +29,6 @@ export declare namespace SecretsStore {
     type StoreCreateResponse as StoreCreateResponse,
     type StoreListResponse as StoreListResponse,
     type StoreDeleteResponse as StoreDeleteResponse,
-    type StoreCreateResponsesSinglePage as StoreCreateResponsesSinglePage,
     type StoreListResponsesV4PagePaginationArray as StoreListResponsesV4PagePaginationArray,
     type StoreCreateParams as StoreCreateParams,
     type StoreListParams as StoreListParams,

@@ -12,7 +12,7 @@ describe('resource stores', () => {
   test('create: only required params', async () => {
     const responsePromise = client.secretsStore.stores.create({
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
-      body: [{ name: 'service_x_keys' }],
+      name: 'service_x_keys',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,7 +26,7 @@ describe('resource stores', () => {
   test('create: required and optional params', async () => {
     const response = await client.secretsStore.stores.create({
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
-      body: [{ name: 'service_x_keys' }],
+      name: 'service_x_keys',
     });
   });
 

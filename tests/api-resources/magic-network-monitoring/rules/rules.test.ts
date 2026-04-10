@@ -12,8 +12,10 @@ describe('resource rules', () => {
   test('create: only required params', async () => {
     const responsePromise = client.magicNetworkMonitoring.rules.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      duration: '1m',
+      automatic_advertisement: true,
       name: 'my_rule_1',
+      prefixes: ['203.0.113.1/32'],
+      type: 'zscore',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,12 +29,16 @@ describe('resource rules', () => {
   test('create: required and optional params', async () => {
     const response = await client.magicNetworkMonitoring.rules.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      duration: '1m',
-      name: 'my_rule_1',
       automatic_advertisement: true,
-      bandwidth: 1000,
-      packet_threshold: 10000,
+      name: 'my_rule_1',
       prefixes: ['203.0.113.1/32'],
+      type: 'zscore',
+      bandwidth_threshold: 1000,
+      duration: '1m',
+      packet_threshold: 10000,
+      prefix_match: 'exact',
+      zscore_sensitivity: 'high',
+      zscore_target: 'bits',
     });
   });
 
@@ -40,8 +46,10 @@ describe('resource rules', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.magicNetworkMonitoring.rules.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      duration: '1m',
+      automatic_advertisement: true,
       name: 'my_rule_1',
+      prefixes: ['203.0.113.1/32'],
+      type: 'zscore',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -56,13 +64,16 @@ describe('resource rules', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.magicNetworkMonitoring.rules.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      duration: '1m',
-      name: 'my_rule_1',
-      id: '2890e6fa406311ed9b5a23f70f6fb8cf',
       automatic_advertisement: true,
-      bandwidth: 1000,
-      packet_threshold: 10000,
+      name: 'my_rule_1',
       prefixes: ['203.0.113.1/32'],
+      type: 'zscore',
+      bandwidth_threshold: 1000,
+      duration: '1m',
+      packet_threshold: 10000,
+      prefix_match: 'exact',
+      zscore_sensitivity: 'high',
+      zscore_target: 'bits',
     });
   });
 
@@ -107,6 +118,10 @@ describe('resource rules', () => {
   test('edit: only required params', async () => {
     const responsePromise = client.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
+      automatic_advertisement: true,
+      name: 'my_rule_1',
+      prefixes: ['203.0.113.1/32'],
+      type: 'zscore',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -121,11 +136,15 @@ describe('resource rules', () => {
     const response = await client.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
       automatic_advertisement: true,
-      bandwidth: 1000,
-      duration: '1m',
       name: 'my_rule_1',
-      packet_threshold: 10000,
       prefixes: ['203.0.113.1/32'],
+      type: 'zscore',
+      bandwidth_threshold: 1000,
+      duration: '1m',
+      packet_threshold: 10000,
+      prefix_match: 'exact',
+      zscore_sensitivity: 'high',
+      zscore_target: 'bits',
     });
   });
 

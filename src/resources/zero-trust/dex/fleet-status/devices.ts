@@ -144,6 +144,12 @@ export interface DeviceListResponse {
 
   ramUsedPctByApp?: Array<Array<DeviceListResponse.RamUsedPctByApp>> | null;
 
+  /**
+   * Device registration identifier (UUID v4). On multi-user devices, this uniquely
+   * identifies a user's registration on the device.
+   */
+  registrationId?: string | null;
+
   switchLocked?: boolean | null;
 
   wifiStrengthDbm?: number | null;
@@ -364,7 +370,9 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
    * Query param: Source:
    *
    * - `hourly` - device details aggregated hourly, up to 7 days prior
-   * - `last_seen` - device details, up to 60 minutes prior
+   * - `last_seen` - device details, up to 60 minutes prior. Time windows exceeding
+   *   60 minutes will be rejected from June 1st, 2026. Please use 'hourly' or 'raw'
+   *   instead for longer time ranges.
    * - `raw` - device details, up to 7 days prior
    */
   source?: 'last_seen' | 'hourly' | 'raw';

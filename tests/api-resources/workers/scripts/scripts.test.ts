@@ -53,7 +53,7 @@ describe('resource scripts', () => {
         compatibility_flags: ['nodejs_compat'],
         keep_assets: false,
         keep_bindings: ['string'],
-        limits: { cpu_ms: 50 },
+        limits: { cpu_ms: 50, subrequests: 1000 },
         logpush: false,
         main_module: 'worker.js',
         migrations: {

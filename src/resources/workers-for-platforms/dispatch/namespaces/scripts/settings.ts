@@ -109,6 +109,7 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindVectorize
     | SettingEditResponse.WorkersBindingKindVersionMetadata
     | SettingEditResponse.WorkersBindingKindSecretsStoreSecret
+    | SettingEditResponse.WorkersBindingKindFlagship
     | SettingEditResponse.WorkersBindingKindSecretKey
     | SettingEditResponse.WorkersBindingKindWorkflow
     | SettingEditResponse.WorkersBindingKindWasmModule
@@ -277,7 +278,7 @@ export namespace SettingEditResponse {
     /**
      * Identifier of the D1 database to bind to.
      */
-    id: string;
+    database_id: string;
 
     /**
      * A JavaScript variable name for the binding.
@@ -288,6 +289,11 @@ export namespace SettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'd1';
+
+    /**
+     * @deprecated This property has been renamed to `database_id`.
+     */
+    id?: string;
   }
 
   export interface WorkersBindingKindDataBlob {
@@ -782,6 +788,23 @@ export namespace SettingEditResponse {
     type: 'secrets_store_secret';
   }
 
+  export interface WorkersBindingKindFlagship {
+    /**
+     * ID of the Flagship app to bind to for feature flag evaluation.
+     */
+    app_id: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'flagship';
+  }
+
   export interface WorkersBindingKindSecretKey {
     /**
      * Algorithm-specific key parameters.
@@ -909,6 +932,11 @@ export namespace SettingEditResponse {
      * The amount of CPU time this Worker can use in milliseconds.
      */
     cpu_ms?: number;
+
+    /**
+     * The number of subrequests this Worker can make per request.
+     */
+    subrequests?: number;
   }
 
   /**
@@ -1138,6 +1166,7 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindVectorize
     | SettingGetResponse.WorkersBindingKindVersionMetadata
     | SettingGetResponse.WorkersBindingKindSecretsStoreSecret
+    | SettingGetResponse.WorkersBindingKindFlagship
     | SettingGetResponse.WorkersBindingKindSecretKey
     | SettingGetResponse.WorkersBindingKindWorkflow
     | SettingGetResponse.WorkersBindingKindWasmModule
@@ -1306,7 +1335,7 @@ export namespace SettingGetResponse {
     /**
      * Identifier of the D1 database to bind to.
      */
-    id: string;
+    database_id: string;
 
     /**
      * A JavaScript variable name for the binding.
@@ -1317,6 +1346,11 @@ export namespace SettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'd1';
+
+    /**
+     * @deprecated This property has been renamed to `database_id`.
+     */
+    id?: string;
   }
 
   export interface WorkersBindingKindDataBlob {
@@ -1811,6 +1845,23 @@ export namespace SettingGetResponse {
     type: 'secrets_store_secret';
   }
 
+  export interface WorkersBindingKindFlagship {
+    /**
+     * ID of the Flagship app to bind to for feature flag evaluation.
+     */
+    app_id: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'flagship';
+  }
+
   export interface WorkersBindingKindSecretKey {
     /**
      * Algorithm-specific key parameters.
@@ -1938,6 +1989,11 @@ export namespace SettingGetResponse {
      * The amount of CPU time this Worker can use in milliseconds.
      */
     cpu_ms?: number;
+
+    /**
+     * The number of subrequests this Worker can make per request.
+     */
+    subrequests?: number;
   }
 
   /**
@@ -2187,6 +2243,7 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindVectorize
       | Settings.WorkersBindingKindVersionMetadata
       | Settings.WorkersBindingKindSecretsStoreSecret
+      | Settings.WorkersBindingKindFlagship
       | Settings.WorkersBindingKindSecretKey
       | Settings.WorkersBindingKindWorkflow
       | Settings.WorkersBindingKindWasmModule
@@ -2360,7 +2417,7 @@ export namespace SettingEditParams {
       /**
        * Identifier of the D1 database to bind to.
        */
-      id: string;
+      database_id: string;
 
       /**
        * A JavaScript variable name for the binding.
@@ -2371,6 +2428,11 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'd1';
+
+      /**
+       * @deprecated This property has been renamed to `database_id`.
+       */
+      id?: string;
     }
 
     export interface WorkersBindingKindDataBlob {
@@ -2870,6 +2932,23 @@ export namespace SettingEditParams {
       type: 'secrets_store_secret';
     }
 
+    export interface WorkersBindingKindFlagship {
+      /**
+       * ID of the Flagship app to bind to for feature flag evaluation.
+       */
+      app_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'flagship';
+    }
+
     export interface WorkersBindingKindSecretKey {
       /**
        * Algorithm-specific key parameters.
@@ -3009,6 +3088,11 @@ export namespace SettingEditParams {
        * The amount of CPU time this Worker can use in milliseconds.
        */
       cpu_ms?: number;
+
+      /**
+       * The number of subrequests this Worker can make per request.
+       */
+      subrequests?: number;
     }
 
     export interface WorkersMultipleStepMigrations {

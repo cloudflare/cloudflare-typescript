@@ -48,6 +48,11 @@ export interface VersionListResponse {
 
   has_dag: boolean;
 
+  /**
+   * The programming language of the workflow implementation
+   */
+  language: 'javascript' | 'python';
+
   modified_on: string;
 
   workflow_id: string;
@@ -69,6 +74,11 @@ export interface VersionGetResponse {
   created_on: string;
 
   has_dag: boolean;
+
+  /**
+   * The programming language of the workflow implementation
+   */
+  language: 'javascript' | 'python';
 
   modified_on: string;
 

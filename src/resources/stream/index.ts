@@ -4,11 +4,11 @@ export {
   AudioTracks,
   type Audio,
   type AudioTrackDeleteResponse,
+  type AudioTrackGetResponse,
   type AudioTrackDeleteParams,
   type AudioTrackCopyParams,
   type AudioTrackEditParams,
   type AudioTrackGetParams,
-  type AudioSinglePage,
 } from './audio-tracks';
 export { Captions, type Caption, type CaptionGetParams, type CaptionsSinglePage } from './captions/index';
 export { ClipResource, type Clip, type ClipCreateParams } from './clip';

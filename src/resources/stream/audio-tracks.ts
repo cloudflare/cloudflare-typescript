@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
-import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -92,30 +91,25 @@ export class AudioTracks extends APIResource {
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const audio of client.stream.audioTracks.get(
+   * const audioTrack = await client.stream.audioTracks.get(
    *   'ea95132c15732412d22c1476fa83f27a',
    *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
+   * );
    * ```
    */
   get(
     identifier: string,
     params: AudioTrackGetParams,
     options?: RequestOptions,
-  ): PagePromise<AudioSinglePage, Audio> {
+  ): APIPromise<AudioTrackGetResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/stream/${identifier}/audio`,
-      SinglePage<Audio>,
-      options,
-    );
+    return (
+      this._client.get(path`/accounts/${account_id}/stream/${identifier}/audio`, options) as APIPromise<{
+        result: AudioTrackGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type AudioSinglePage = SinglePage<Audio>;
 
 export interface Audio {
   /**
@@ -141,6 +135,13 @@ export interface Audio {
 }
 
 export type AudioTrackDeleteResponse = string;
+
+export interface AudioTrackGetResponse {
+  /**
+   * Array of audio tracks for the video.
+   */
+  audio?: Array<Audio>;
+}
 
 export interface AudioTrackDeleteParams {
   /**
@@ -210,7 +211,7 @@ export declare namespace AudioTracks {
   export {
     type Audio as Audio,
     type AudioTrackDeleteResponse as AudioTrackDeleteResponse,
-    type AudioSinglePage as AudioSinglePage,
+    type AudioTrackGetResponse as AudioTrackGetResponse,
     type AudioTrackDeleteParams as AudioTrackDeleteParams,
     type AudioTrackCopyParams as AudioTrackCopyParams,
     type AudioTrackEditParams as AudioTrackEditParams,

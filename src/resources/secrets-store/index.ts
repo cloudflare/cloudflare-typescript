@@ -10,6 +10,5 @@ export {
   type StoreCreateParams,
   type StoreListParams,
   type StoreDeleteParams,
-  type StoreCreateResponsesSinglePage,
   type StoreListResponsesV4PagePaginationArray,
 } from './stores/index';

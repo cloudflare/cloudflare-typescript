@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -12,29 +13,29 @@ export class Move extends APIResource {
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const moveCreateResponse of client.emailSecurity.investigate.move.create(
-   *   '4Njp3P0STMz2c02Q',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     destination: 'Inbox',
-   *   },
-   * )) {
-   *   // ...
-   * }
+   * const moves =
+   *   await client.emailSecurity.investigate.move.create(
+   *     '4Njp3P0STMz2c02Q',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       destination: 'Inbox',
+   *     },
+   *   );
    * ```
    */
   create(
     postfixID: string,
     params: MoveCreateParams,
     options?: RequestOptions,
-  ): PagePromise<MoveCreateResponsesSinglePage, MoveCreateResponse> {
-    const { account_id, ...body } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/email-security/investigate/${postfixID}/move`,
-      SinglePage<MoveCreateResponse>,
-      { body, method: 'post', ...options },
-    );
+  ): APIPromise<MoveCreateResponse> {
+    const { account_id, submission, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/email-security/investigate/${postfixID}/move`, {
+        query: { submission },
+        body,
+        ...options,
+      }) as APIPromise<{ result: MoveCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -66,34 +67,36 @@ export class Move extends APIResource {
   }
 }
 
-export type MoveCreateResponsesSinglePage = SinglePage<MoveCreateResponse>;
-
 export type MoveBulkResponsesSinglePage = SinglePage<MoveBulkResponse>;
 
-export interface MoveCreateResponse {
-  /**
-   * @deprecated Deprecated, use `completed_at` instead
-   */
-  completed_timestamp: string;
+export type MoveCreateResponse = Array<MoveCreateResponse.MoveCreateResponseItem>;
 
-  /**
-   * @deprecated
-   */
-  item_count: number;
+export namespace MoveCreateResponse {
+  export interface MoveCreateResponseItem {
+    /**
+     * @deprecated Deprecated, use `completed_at` instead
+     */
+    completed_timestamp: string;
 
-  success: boolean;
+    /**
+     * @deprecated
+     */
+    item_count: number;
 
-  completed_at?: string;
+    success: boolean;
 
-  destination?: string | null;
+    completed_at?: string;
 
-  message_id?: string | null;
+    destination?: string | null;
 
-  operation?: string | null;
+    message_id?: string | null;
 
-  recipient?: string | null;
+    operation?: string | null;
 
-  status?: string | null;
+    recipient?: string | null;
+
+    status?: string | null;
+  }
 }
 
 export interface MoveBulkResponse {
@@ -137,6 +140,12 @@ export interface MoveCreateParams {
     | 'DeletedItems'
     | 'RecoverableItemsDeletions'
     | 'RecoverableItemsPurges';
+
+  /**
+   * Query param: When true, search the submissions datastore only. When false or
+   * omitted, search the regular datastore only.
+   */
+  submission?: boolean;
 }
 
 export interface MoveBulkParams {
@@ -171,7 +180,6 @@ export declare namespace Move {
   export {
     type MoveCreateResponse as MoveCreateResponse,
     type MoveBulkResponse as MoveBulkResponse,
-    type MoveCreateResponsesSinglePage as MoveCreateResponsesSinglePage,
     type MoveBulkResponsesSinglePage as MoveBulkResponsesSinglePage,
     type MoveCreateParams as MoveCreateParams,
     type MoveBulkParams as MoveBulkParams,

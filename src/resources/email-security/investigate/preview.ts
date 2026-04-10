@@ -20,9 +20,10 @@ export class Preview extends APIResource {
    * ```
    */
   create(params: PreviewCreateParams, options?: RequestOptions): APIPromise<PreviewCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, submission, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/email-security/investigate/preview`, {
+        query: { submission },
         body,
         ...options,
       }) as APIPromise<{ result: PreviewCreateResponse }>
@@ -77,6 +78,12 @@ export interface PreviewCreateParams {
    * Body param: The identifier of the message.
    */
   postfix_id: string;
+
+  /**
+   * Query param: When true, search the submissions datastore only. When false or
+   * omitted, search the regular datastore only.
+   */
+  submission?: boolean;
 }
 
 export interface PreviewGetParams {

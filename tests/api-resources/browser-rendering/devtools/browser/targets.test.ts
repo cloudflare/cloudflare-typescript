@@ -8,12 +8,12 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource watermarks', () => {
-  // TODO: investigate broken test
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.stream.watermarks.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+describe('resource targets', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.browserRendering.devtools.browser.targets.create(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,21 +23,18 @@ describe('resource watermarks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('create: required and optional params', async () => {
-    const response = await client.stream.watermarks.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'Marketing Videos',
-      opacity: 0.75,
-      padding: 0.1,
-      position: 'center',
-      scale: 0.1,
-      url: 'https://example.com',
-    });
+  test('create: required and optional params', async () => {
+    const response = await client.browserRendering.devtools.browser.targets.create(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id', url: 'https://example.com' },
+    );
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.stream.watermarks.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.browserRendering.devtools.browser.targets.list(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,12 +45,16 @@ describe('resource watermarks', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.stream.watermarks.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.browserRendering.devtools.browser.targets.list(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
   });
 
-  test('delete: only required params', async () => {
-    const responsePromise = client.stream.watermarks.delete('ea95132c15732412d22c1476fa83f27a', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  test('activate: only required params', async () => {
+    const responsePromise = client.browserRendering.devtools.browser.targets.activate('target_id', {
+      account_id: 'account_id',
+      session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,15 +65,17 @@ describe('resource watermarks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
-    const response = await client.stream.watermarks.delete('ea95132c15732412d22c1476fa83f27a', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  test('activate: required and optional params', async () => {
+    const response = await client.browserRendering.devtools.browser.targets.activate('target_id', {
+      account_id: 'account_id',
+      session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.stream.watermarks.get('ea95132c15732412d22c1476fa83f27a', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.browserRendering.devtools.browser.targets.get('target_id', {
+      account_id: 'account_id',
+      session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -84,8 +87,9 @@ describe('resource watermarks', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.stream.watermarks.get('ea95132c15732412d22c1476fa83f27a', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.browserRendering.devtools.browser.targets.get('target_id', {
+      account_id: 'account_id',
+      session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 });

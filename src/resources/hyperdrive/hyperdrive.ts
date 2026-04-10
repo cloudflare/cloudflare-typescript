@@ -20,7 +20,15 @@ export class HyperdriveResource extends APIResource {
 
 export type HyperdrivesSinglePage = SinglePage<Hyperdrive>;
 
-export type Configuration = Configuration.HyperdriveInternetOrigin | Configuration.HyperdriveOverAccessOrigin;
+/**
+ * Connect to a database through a Workers VPC Service. TLS settings (mTLS,
+ * sslmode) cannot be configured on the Hyperdrive when using a VPC Service origin;
+ * TLS must be managed on the VPC Service itself.
+ */
+export type Configuration =
+  | Configuration.HyperdriveInternetOrigin
+  | Configuration.HyperdriveOverAccessOrigin
+  | Configuration.HyperdriveVPCServiceOrigin;
 
 export namespace Configuration {
   export interface HyperdriveInternetOrigin {
@@ -78,6 +86,34 @@ export namespace Configuration {
      */
     user?: string;
   }
+
+  /**
+   * Connect to a database through a Workers VPC Service. TLS settings (mTLS,
+   * sslmode) cannot be configured on the Hyperdrive when using a VPC Service origin;
+   * TLS must be managed on the VPC Service itself.
+   */
+  export interface HyperdriveVPCServiceOrigin {
+    /**
+     * The identifier of the Workers VPC Service to connect through. Hyperdrive will
+     * egress through the specified VPC Service to reach the origin database.
+     */
+    service_id: string;
+
+    /**
+     * Set the name of your origin database.
+     */
+    database?: string;
+
+    /**
+     * Specifies the URL scheme used to connect to your origin database.
+     */
+    scheme?: 'postgres' | 'postgresql' | 'mysql';
+
+    /**
+     * Set the user of your origin database.
+     */
+    user?: string;
+  }
 }
 
 export interface Hyperdrive {
@@ -92,7 +128,10 @@ export interface Hyperdrive {
    */
   name: string;
 
-  origin: Hyperdrive.PublicDatabase | Hyperdrive.AccessProtectedDatabaseBehindCloudflareTunnel;
+  origin:
+    | Hyperdrive.PublicDatabase
+    | Hyperdrive.AccessProtectedDatabaseBehindCloudflareTunnel
+    | Hyperdrive.DatabaseReachableThroughAWorkersVPC;
 
   caching?: Hyperdrive.HyperdriveHyperdriveCachingCommon | Hyperdrive.HyperdriveHyperdriveCachingEnabled;
 
@@ -106,6 +145,10 @@ export interface Hyperdrive {
    */
   modified_on?: string;
 
+  /**
+   * mTLS configuration for the origin connection. Cannot be used with VPC Service
+   * origins; TLS must be managed on the VPC Service.
+   */
   mtls?: Hyperdrive.MTLS;
 
   /**
@@ -176,6 +219,29 @@ export namespace Hyperdrive {
     user: string;
   }
 
+  export interface DatabaseReachableThroughAWorkersVPC {
+    /**
+     * Set the name of your origin database.
+     */
+    database: string;
+
+    /**
+     * Specifies the URL scheme used to connect to your origin database.
+     */
+    scheme: 'postgres' | 'postgresql' | 'mysql';
+
+    /**
+     * The identifier of the Workers VPC Service to connect through. Hyperdrive will
+     * egress through the specified VPC Service to reach the origin database.
+     */
+    service_id: string;
+
+    /**
+     * Set the user of your origin database.
+     */
+    user: string;
+  }
+
   export interface HyperdriveHyperdriveCachingCommon {
     /**
      * Set to true to disable caching of SQL responses. Default is false.
@@ -202,6 +268,10 @@ export namespace Hyperdrive {
     stale_while_revalidate?: number;
   }
 
+  /**
+   * mTLS configuration for the origin connection. Cannot be used with VPC Service
+   * origins; TLS must be managed on the VPC Service.
+   */
   export interface MTLS {
     /**
      * Define CA certificate ID obtained after uploading CA cert.
