@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as PageAPI from './page';
 import { Page, PagePreviewParams, PagePreviewResponse } from './page';
@@ -42,8 +41,6 @@ import {
   Events,
   EventsV4PagePaginationArray,
 } from './events/events';
-import { CloudflareError } from '../../error';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class WaitingRooms extends APIResource {
   page: PageAPI.Page = new PageAPI.Page(this._client);
@@ -104,55 +101,6 @@ export class WaitingRooms extends APIResource {
         ...options,
       }) as Core.APIPromise<{ result: WaitingRoom }>
     )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists waiting rooms for account or zone.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const waitingRoom of client.waitingRooms.list({
-   *   account_id: 'account_id',
-   * })) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    params?: WaitingRoomListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom>;
-  list(options?: Core.RequestOptions): Core.PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom>;
-  list(
-    params: WaitingRoomListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id, zone_id, ...query } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return this._client.getAPIList(
-      `/${accountOrZone}/${accountOrZoneId}/waiting_rooms`,
-      WaitingRoomsV4PagePaginationArray,
-      { query, ...options },
-    );
   }
 
   /**
@@ -234,8 +182,6 @@ export class WaitingRooms extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class WaitingRoomsV4PagePaginationArray extends V4PagePaginationArray<WaitingRoom> {}
 
 export interface AdditionalRoutes {
   /**
@@ -1863,20 +1809,6 @@ export interface WaitingRoomUpdateParams {
   turnstile_mode?: 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 }
 
-export interface WaitingRoomListParams extends V4PagePaginationArrayParams {
-  /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id?: string;
-}
-
 export interface WaitingRoomDeleteParams {
   /**
    * Identifier.
@@ -2277,7 +2209,6 @@ export interface WaitingRoomGetParams {
   zone_id: string;
 }
 
-WaitingRooms.WaitingRoomsV4PagePaginationArray = WaitingRoomsV4PagePaginationArray;
 WaitingRooms.Page = Page;
 WaitingRooms.Events = Events;
 WaitingRooms.EventsV4PagePaginationArray = EventsV4PagePaginationArray;
@@ -2293,10 +2224,8 @@ export declare namespace WaitingRooms {
     type Query as Query,
     type WaitingRoom as WaitingRoom,
     type WaitingRoomDeleteResponse as WaitingRoomDeleteResponse,
-    WaitingRoomsV4PagePaginationArray as WaitingRoomsV4PagePaginationArray,
     type WaitingRoomCreateParams as WaitingRoomCreateParams,
     type WaitingRoomUpdateParams as WaitingRoomUpdateParams,
-    type WaitingRoomListParams as WaitingRoomListParams,
     type WaitingRoomDeleteParams as WaitingRoomDeleteParams,
     type WaitingRoomEditParams as WaitingRoomEditParams,
     type WaitingRoomGetParams as WaitingRoomGetParams,

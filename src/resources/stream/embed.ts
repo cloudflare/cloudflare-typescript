@@ -19,7 +19,10 @@ export class Embed extends APIResource {
    */
   get(identifier: string, params: EmbedGetParams, options?: Core.RequestOptions): Core.APIPromise<string> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/stream/${identifier}/embed`, options);
+    return this._client.get(`/accounts/${account_id}/stream/${identifier}/embed`, {
+      ...options,
+      headers: { Accept: 'text/html', ...options?.headers },
+    });
   }
 }
 

@@ -5,8 +5,9 @@ import * as Core from '../../core';
 
 export class Json extends APIResource {
   /**
-   * Gets json from a webpage from a provided URL or HTML. Pass `prompt` or `schema`
-   * in the body. Control page loading with `gotoOptions` and `waitFor*` options.
+   * Use AI to extract structured JSON from a webpage. Provide a `prompt` describing
+   * what to extract, or a `response_format` with a JSON schema for typed output.
+   * Supports both URL and raw HTML input.
    *
    * @example
    * ```ts
@@ -266,15 +267,16 @@ export declare namespace JsonCreateParams {
 
     export interface CustomAI {
       /**
-       * Authorization token for the AI model: `Bearer <token>`.
-       */
-      authorization: string;
-
-      /**
        * AI model to use for the request. Must be formed as `<provider>/<model_name>`,
        * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
        */
       model: string;
+
+      /**
+       * Authorization token for the AI model: `Bearer <token>`. Not needed for
+       * workers-ai models.
+       */
+      authorization?: string;
     }
 
     /**
@@ -300,7 +302,7 @@ export declare namespace JsonCreateParams {
 
       /**
        * Schema for the response format. More information here:
-       * https://developers.cloudflare.com/workers-ai/json-mode/.
+       * https://developers.cloudflare.com/workers-ai/json-mode/
        */
       json_schema?: { [key: string]: string | number | boolean | unknown | Array<string> } | null;
     }
@@ -569,15 +571,16 @@ export declare namespace JsonCreateParams {
 
     export interface CustomAI {
       /**
-       * Authorization token for the AI model: `Bearer <token>`.
-       */
-      authorization: string;
-
-      /**
        * AI model to use for the request. Must be formed as `<provider>/<model_name>`,
        * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
        */
       model: string;
+
+      /**
+       * Authorization token for the AI model: `Bearer <token>`. Not needed for
+       * workers-ai models.
+       */
+      authorization?: string;
     }
 
     /**
@@ -603,7 +606,7 @@ export declare namespace JsonCreateParams {
 
       /**
        * Schema for the response format. More information here:
-       * https://developers.cloudflare.com/workers-ai/json-mode/.
+       * https://developers.cloudflare.com/workers-ai/json-mode/
        */
       json_schema?: { [key: string]: string | number | boolean | unknown | Array<string> } | null;
     }

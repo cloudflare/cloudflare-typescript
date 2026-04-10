@@ -153,6 +153,11 @@ export interface DomainGetParams {
    * Query param
    */
   domain?: string;
+
+  /**
+   * Query param: Skip DNS resolution lookups for faster response.
+   */
+  skip_dns?: boolean;
 }
 
 Domains.Bulks = Bulks;

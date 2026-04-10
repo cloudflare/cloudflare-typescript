@@ -64,6 +64,7 @@ describe('resource investigate', () => {
   test('get: required and optional params', async () => {
     const response = await client.emailSecurity.investigate.get('4Njp3P0STMz2c02Q', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      submission: true,
     });
   });
 });

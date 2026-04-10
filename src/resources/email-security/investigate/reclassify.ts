@@ -25,9 +25,10 @@ export class Reclassify extends APIResource {
     params: ReclassifyCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ReclassifyCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, submission, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email-security/investigate/${postfixId}/reclassify`, {
+        query: { submission },
         body,
         ...options,
       }) as Core.APIPromise<{ result: ReclassifyCreateResponse }>
@@ -47,6 +48,12 @@ export interface ReclassifyCreateParams {
    * Body param
    */
   expected_disposition: 'NONE' | 'BULK' | 'MALICIOUS' | 'SPAM' | 'SPOOF' | 'SUSPICIOUS';
+
+  /**
+   * Query param: When true, search the submissions datastore only. When false or
+   * omitted, search the regular datastore only.
+   */
+  submission?: boolean;
 
   /**
    * Body param: Base64 encoded content of the EML file

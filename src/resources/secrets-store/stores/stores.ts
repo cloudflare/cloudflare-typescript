@@ -6,7 +6,6 @@ import * as SecretsAPI from './secrets';
 import {
   SecretBulkDeleteParams,
   SecretBulkDeleteResponse,
-  SecretBulkDeleteResponsesSinglePage,
   SecretCreateParams,
   SecretCreateResponse,
   SecretCreateResponsesSinglePage,
@@ -23,7 +22,7 @@ import {
   SecretListResponsesV4PagePaginationArray,
   Secrets,
 } from './secrets';
-import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Stores extends APIResource {
   secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
@@ -33,27 +32,20 @@ export class Stores extends APIResource {
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const storeCreateResponse of client.secretsStore.stores.create(
-   *   {
-   *     account_id: '985e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{ name: 'service_x_keys' }],
-   *   },
-   * )) {
-   *   // ...
-   * }
+   * const store = await client.secretsStore.stores.create({
+   *   account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'service_x_keys',
+   * });
    * ```
    */
-  create(
-    params: StoreCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<StoreCreateResponsesSinglePage, StoreCreateResponse> {
-    const { account_id, body } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/secrets_store/stores`,
-      StoreCreateResponsesSinglePage,
-      { body: body, method: 'post', ...options },
-    );
+  create(params: StoreCreateParams, options?: Core.RequestOptions): Core.APIPromise<StoreCreateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/secrets_store/stores`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: StoreCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -96,18 +88,16 @@ export class Stores extends APIResource {
     storeId: string,
     params: StoreDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StoreDeleteResponse> {
+  ): Core.APIPromise<StoreDeleteResponse | null> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/secrets_store/stores/${storeId}`,
         options,
-      ) as Core.APIPromise<{ result: StoreDeleteResponse }>
+      ) as Core.APIPromise<{ result: StoreDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class StoreCreateResponsesSinglePage extends SinglePage<StoreCreateResponse> {}
 
 export class StoreListResponsesV4PagePaginationArray extends V4PagePaginationArray<StoreListResponse> {}
 
@@ -131,6 +121,11 @@ export interface StoreCreateResponse {
    * The name of the store
    */
   name: string;
+
+  /**
+   * Account Identifier
+   */
+  account_id?: string;
 }
 
 export interface StoreListResponse {
@@ -153,29 +148,17 @@ export interface StoreListResponse {
    * The name of the store
    */
   name: string;
+
+  /**
+   * Account Identifier
+   */
+  account_id?: string;
 }
 
-export interface StoreDeleteResponse {
-  /**
-   * Store Identifier
-   */
-  id: string;
-
-  /**
-   * Whenthe secret was created.
-   */
-  created: string;
-
-  /**
-   * When the secret was modified.
-   */
-  modified: string;
-
-  /**
-   * The name of the store
-   */
-  name: string;
-}
+/**
+ * Result is null for delete operations.
+ */
+export type StoreDeleteResponse = unknown;
 
 export interface StoreCreateParams {
   /**
@@ -184,18 +167,9 @@ export interface StoreCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: The name of the store
    */
-  body: Array<StoreCreateParams.Body>;
-}
-
-export namespace StoreCreateParams {
-  export interface Body {
-    /**
-     * The name of the store
-     */
-    name: string;
-  }
+  name: string;
 }
 
 export interface StoreListParams extends V4PagePaginationArrayParams {
@@ -222,19 +196,16 @@ export interface StoreDeleteParams {
   account_id: string;
 }
 
-Stores.StoreCreateResponsesSinglePage = StoreCreateResponsesSinglePage;
 Stores.StoreListResponsesV4PagePaginationArray = StoreListResponsesV4PagePaginationArray;
 Stores.Secrets = Secrets;
 Stores.SecretCreateResponsesSinglePage = SecretCreateResponsesSinglePage;
 Stores.SecretListResponsesV4PagePaginationArray = SecretListResponsesV4PagePaginationArray;
-Stores.SecretBulkDeleteResponsesSinglePage = SecretBulkDeleteResponsesSinglePage;
 
 export declare namespace Stores {
   export {
     type StoreCreateResponse as StoreCreateResponse,
     type StoreListResponse as StoreListResponse,
     type StoreDeleteResponse as StoreDeleteResponse,
-    StoreCreateResponsesSinglePage as StoreCreateResponsesSinglePage,
     StoreListResponsesV4PagePaginationArray as StoreListResponsesV4PagePaginationArray,
     type StoreCreateParams as StoreCreateParams,
     type StoreListParams as StoreListParams,
@@ -252,7 +223,6 @@ export declare namespace Stores {
     type SecretGetResponse as SecretGetResponse,
     SecretCreateResponsesSinglePage as SecretCreateResponsesSinglePage,
     SecretListResponsesV4PagePaginationArray as SecretListResponsesV4PagePaginationArray,
-    SecretBulkDeleteResponsesSinglePage as SecretBulkDeleteResponsesSinglePage,
     type SecretCreateParams as SecretCreateParams,
     type SecretListParams as SecretListParams,
     type SecretDeleteParams as SecretDeleteParams,

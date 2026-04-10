@@ -245,11 +245,6 @@ TEST_PATHS=(
 	tests/api-resources/page-shield/connections.test.ts
 	tests/api-resources/page-shield/scripts.test.ts
 	tests/api-resources/page-shield/cookies.test.ts
-	tests/api-resources/rulesets/rulesets.test.ts
-	tests/api-resources/rulesets/phases/phases.test.ts
-	tests/api-resources/rulesets/phases/versions.test.ts
-	tests/api-resources/rulesets/rules.test.ts
-	tests/api-resources/rulesets/versions.test.ts
 	tests/api-resources/url-normalization.test.ts
 	tests/api-resources/spectrum/spectrum.test.ts
 	tests/api-resources/spectrum/analytics/analytics.test.ts
@@ -809,11 +804,6 @@ TEST_PATHS=(
 	tests/api-resources/aisearch/instances/instances.test.ts
 	tests/api-resources/aisearch/instances/jobs.test.ts
 	tests/api-resources/aisearch/tokens.test.ts
-	tests/api-resources/security-center/security-center.test.ts
-	tests/api-resources/security-center/insights/insights.test.ts
-	tests/api-resources/security-center/insights/class.test.ts
-	tests/api-resources/security-center/insights/severity.test.ts
-	tests/api-resources/security-center/insights/type.test.ts
 	tests/api-resources/browser-rendering/browser-rendering.test.ts
 	tests/api-resources/browser-rendering/content.test.ts
 	tests/api-resources/browser-rendering/pdf.test.ts
@@ -824,6 +814,11 @@ TEST_PATHS=(
 	tests/api-resources/browser-rendering/links.test.ts
 	tests/api-resources/browser-rendering/markdown.test.ts
 	tests/api-resources/browser-rendering/crawl.test.ts
+	tests/api-resources/browser-rendering/devtools/devtools.test.ts
+	tests/api-resources/browser-rendering/devtools/session.test.ts
+	tests/api-resources/browser-rendering/devtools/browser/browser.test.ts
+	tests/api-resources/browser-rendering/devtools/browser/page.test.ts
+	tests/api-resources/browser-rendering/devtools/browser/targets.test.ts
 	tests/api-resources/custom-pages/custom-pages.test.ts
 	tests/api-resources/custom-pages/assets.test.ts
 	tests/api-resources/secrets-store/secrets-store.test.ts

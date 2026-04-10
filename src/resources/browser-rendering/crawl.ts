@@ -498,15 +498,16 @@ export declare namespace CrawlCreateParams {
     export namespace JsonOptions {
       export interface CustomAI {
         /**
-         * Authorization token for the AI model: `Bearer <token>`.
-         */
-        authorization: string;
-
-        /**
          * AI model to use for the request. Must be formed as `<provider>/<model_name>`,
          * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
          */
         model: string;
+
+        /**
+         * Authorization token for the AI model: `Bearer <token>`. Not needed for
+         * workers-ai models.
+         */
+        authorization?: string;
       }
 
       export interface ResponseFormat {
@@ -514,7 +515,7 @@ export declare namespace CrawlCreateParams {
 
         /**
          * Schema for the response format. More information here:
-         * https://developers.cloudflare.com/workers-ai/json-mode/.
+         * https://developers.cloudflare.com/workers-ai/json-mode/
          */
         json_schema?: { [key: string]: string | number | boolean | unknown | Array<string> } | null;
       }
@@ -682,15 +683,16 @@ export declare namespace CrawlCreateParams {
     export namespace JsonOptions {
       export interface CustomAI {
         /**
-         * Authorization token for the AI model: `Bearer <token>`.
-         */
-        authorization: string;
-
-        /**
          * AI model to use for the request. Must be formed as `<provider>/<model_name>`,
          * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
          */
         model: string;
+
+        /**
+         * Authorization token for the AI model: `Bearer <token>`. Not needed for
+         * workers-ai models.
+         */
+        authorization?: string;
       }
 
       export interface ResponseFormat {
@@ -698,7 +700,7 @@ export declare namespace CrawlCreateParams {
 
         /**
          * Schema for the response format. More information here:
-         * https://developers.cloudflare.com/workers-ai/json-mode/.
+         * https://developers.cloudflare.com/workers-ai/json-mode/
          */
         json_schema?: { [key: string]: string | number | boolean | unknown | Array<string> } | null;
       }

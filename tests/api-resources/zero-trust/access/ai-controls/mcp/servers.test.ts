@@ -36,6 +36,22 @@ describe('resource servers', () => {
       name: 'My MCP Server',
       auth_credentials: 'auth_credentials',
       description: 'This is one remote mcp server',
+      updated_prompts: [
+        {
+          name: 'name',
+          alias: 'my-custom-alias',
+          description: 'description',
+          enabled: true,
+        },
+      ],
+      updated_tools: [
+        {
+          name: 'name',
+          alias: 'my-custom-alias',
+          description: 'description',
+          enabled: true,
+        },
+      ],
     });
   });
 
@@ -58,6 +74,22 @@ describe('resource servers', () => {
       auth_credentials: 'auth_credentials',
       description: 'This is one remote mcp server',
       name: 'My MCP Server',
+      updated_prompts: [
+        {
+          name: 'name',
+          alias: 'my-custom-alias',
+          description: 'description',
+          enabled: true,
+        },
+      ],
+      updated_tools: [
+        {
+          name: 'name',
+          alias: 'my-custom-alias',
+          description: 'description',
+          enabled: true,
+        },
+      ],
     });
   });
 

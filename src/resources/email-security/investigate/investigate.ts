@@ -12,7 +12,6 @@ import {
   MoveBulkResponsesSinglePage,
   MoveCreateParams,
   MoveCreateResponse,
-  MoveCreateResponsesSinglePage,
 } from './move';
 import * as PreviewAPI from './preview';
 import {
@@ -86,12 +85,12 @@ export class Investigate extends APIResource {
     params: InvestigateGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InvestigateGetResponse> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}`,
-        options,
-      ) as Core.APIPromise<{ result: InvestigateGetResponse }>
+      this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: InvestigateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -101,6 +100,9 @@ export class InvestigateListResponsesV4PagePaginationArray extends V4PagePaginat
 export interface InvestigateListResponse {
   id: string;
 
+  /**
+   * @deprecated Deprecated: use `/investigate/{id}/action_log` instead.
+   */
   action_log: unknown;
 
   client_recipients: Array<string>;
@@ -158,6 +160,9 @@ export interface InvestigateListResponse {
     | 'NONE'
     | null;
 
+  /**
+   * @deprecated Deprecated.
+   */
   findings?: Array<InvestigateListResponse.Finding> | null;
 
   from?: string | null;
@@ -268,6 +273,9 @@ export namespace InvestigateListResponse {
 export interface InvestigateGetResponse {
   id: string;
 
+  /**
+   * @deprecated Deprecated: use `/investigate/{id}/action_log` instead.
+   */
   action_log: unknown;
 
   client_recipients: Array<string>;
@@ -325,6 +333,9 @@ export interface InvestigateGetResponse {
     | 'NONE'
     | null;
 
+  /**
+   * @deprecated Deprecated.
+   */
   findings?: Array<InvestigateGetResponse.Finding> | null;
 
   from?: string | null;
@@ -554,9 +565,15 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
 
 export interface InvestigateGetParams {
   /**
-   * Account Identifier
+   * Path param: Account Identifier
    */
   account_id: string;
+
+  /**
+   * Query param: When true, search the submissions datastore only. When false or
+   * omitted, search the regular datastore only.
+   */
+  submission?: boolean;
 }
 
 Investigate.InvestigateListResponsesV4PagePaginationArray = InvestigateListResponsesV4PagePaginationArray;
@@ -565,7 +582,6 @@ Investigate.Preview = Preview;
 Investigate.Raw = Raw;
 Investigate.Trace = Trace;
 Investigate.Move = Move;
-Investigate.MoveCreateResponsesSinglePage = MoveCreateResponsesSinglePage;
 Investigate.MoveBulkResponsesSinglePage = MoveBulkResponsesSinglePage;
 Investigate.Reclassify = Reclassify;
 Investigate.Release = Release;
@@ -602,7 +618,6 @@ export declare namespace Investigate {
     Move as Move,
     type MoveCreateResponse as MoveCreateResponse,
     type MoveBulkResponse as MoveBulkResponse,
-    MoveCreateResponsesSinglePage as MoveCreateResponsesSinglePage,
     MoveBulkResponsesSinglePage as MoveBulkResponsesSinglePage,
     type MoveCreateParams as MoveCreateParams,
     type MoveBulkParams as MoveBulkParams,

@@ -72,7 +72,7 @@ describe('resource crawl', () => {
         waitUntil: 'load',
       },
       jsonOptions: {
-        custom_ai: [{ authorization: 'authorization', model: 'model' }],
+        custom_ai: [{ model: 'model', authorization: 'authorization' }],
         prompt: 'prompt',
         response_format: {
           type: 'type',

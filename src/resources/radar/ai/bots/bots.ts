@@ -21,16 +21,37 @@ export class Bots extends APIResource {
    * ```
    */
   summaryV2(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query?: BotSummaryV2Params,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotSummaryV2Response>;
   summaryV2(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotSummaryV2Response>;
   summaryV2(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query: BotSummaryV2Params | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotSummaryV2Response> {
@@ -82,16 +103,37 @@ export class Bots extends APIResource {
    * ```
    */
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query?: BotTimeseriesGroupsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query: BotTimeseriesGroupsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotTimeseriesGroupsResponse> {
@@ -610,6 +652,20 @@ export interface BotSummaryV2Params {
   name?: Array<string>;
 
   /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
+
+  /**
    * Filters results by user agent.
    */
   userAgent?: Array<string>;
@@ -715,6 +771,20 @@ export interface BotTimeseriesParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
 
   /**
    * Filters results by user agent.
@@ -828,6 +898,20 @@ export interface BotTimeseriesGroupsParams {
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
+
+  /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
 
   /**
    * Filters results by user agent.

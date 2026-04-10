@@ -31,6 +31,7 @@ describe('resource tests', () => {
       kind: 'http',
       page: 1,
       per_page: 1,
+      registration_id: 'registration_id',
       testName: 'testName',
     });
   });

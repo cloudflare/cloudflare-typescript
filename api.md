@@ -1306,7 +1306,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/email-security/investigate/{postfix_id}/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">create</a>(postfixId, { ...params }) -> MoveCreateResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/email-security/investigate/{postfix_id}/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">create</a>(postfixId, { ...params }) -> MoveCreateResponse</code>
 - <code title="post /accounts/{account_id}/email-security/investigate/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">bulk</a>({ ...params }) -> MoveBulkResponsesSinglePage</code>
 
 ### Reclassify
@@ -2012,7 +2012,6 @@ Methods:
 
 - <code title="post /zones/{zone_id}/waiting_rooms">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">create</a>({ ...params }) -> WaitingRoom</code>
 - <code title="put /zones/{zone_id}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">update</a>(waitingRoomId, { ...params }) -> WaitingRoom</code>
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/waiting_rooms">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">list</a>({ ...params }) -> WaitingRoomsV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">delete</a>(waitingRoomId, { ...params }) -> WaitingRoomDeleteResponse</code>
 - <code title="patch /zones/{zone_id}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">edit</a>(waitingRoomId, { ...params }) -> WaitingRoom</code>
 - <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">get</a>(waitingRoomId, { ...params }) -> WaitingRoom</code>
@@ -2902,42 +2901,10 @@ Types:
 - <code><a href="./src/resources/rulesets/rulesets.ts">Kind</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">Phase</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">Ruleset</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">RulesetCreateResponse</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">RulesetUpdateResponse</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">RulesetListResponse</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">RulesetGetResponse</a></code>
-
-Methods:
-
-- <code title="post /{accounts_or_zones}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">create</a>({ ...params }) -> RulesetCreateResponse</code>
-- <code title="put /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">update</a>(rulesetId, { ...params }) -> RulesetUpdateResponse</code>
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">list</a>({ ...params }) -> RulesetListResponsesCursorPagination</code>
-- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">delete</a>(rulesetId, { ...params }) -> void</code>
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">get</a>(rulesetId, { ...params }) -> RulesetGetResponse</code>
 
 ## Phases
 
-Types:
-
-- <code><a href="./src/resources/rulesets/phases/phases.ts">PhaseUpdateResponse</a></code>
-- <code><a href="./src/resources/rulesets/phases/phases.ts">PhaseGetResponse</a></code>
-
-Methods:
-
-- <code title="put /{accounts_or_zones}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint">client.rulesets.phases.<a href="./src/resources/rulesets/phases/phases.ts">update</a>(rulesetPhase, { ...params }) -> PhaseUpdateResponse</code>
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint">client.rulesets.phases.<a href="./src/resources/rulesets/phases/phases.ts">get</a>(rulesetPhase, { ...params }) -> PhaseGetResponse</code>
-
 ### Versions
-
-Types:
-
-- <code><a href="./src/resources/rulesets/phases/versions.ts">VersionListResponse</a></code>
-- <code><a href="./src/resources/rulesets/phases/versions.ts">VersionGetResponse</a></code>
-
-Methods:
-
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint/versions">client.rulesets.phases.versions.<a href="./src/resources/rulesets/phases/versions.ts">list</a>(rulesetPhase, { ...params }) -> VersionListResponsesSinglePage</code>
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint/versions/{ruleset_version}">client.rulesets.phases.versions.<a href="./src/resources/rulesets/phases/versions.ts">get</a>(rulesetPhase, rulesetVersion, { ...params }) -> VersionGetResponse</code>
 
 ## Rules
 
@@ -2961,28 +2928,8 @@ Types:
 - <code><a href="./src/resources/rulesets/rules.ts">SetCacheSettingsRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">SetConfigRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">SkipRule</a></code>
-- <code><a href="./src/resources/rulesets/rules.ts">RuleCreateResponse</a></code>
-- <code><a href="./src/resources/rulesets/rules.ts">RuleDeleteResponse</a></code>
-- <code><a href="./src/resources/rulesets/rules.ts">RuleEditResponse</a></code>
-
-Methods:
-
-- <code title="post /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/rules">client.rulesets.rules.<a href="./src/resources/rulesets/rules.ts">create</a>(rulesetId, { ...params }) -> RuleCreateResponse</code>
-- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/rules/{rule_id}">client.rulesets.rules.<a href="./src/resources/rulesets/rules.ts">delete</a>(rulesetId, ruleId, { ...params }) -> RuleDeleteResponse</code>
-- <code title="patch /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/rules/{rule_id}">client.rulesets.rules.<a href="./src/resources/rulesets/rules.ts">edit</a>(rulesetId, ruleId, { ...params }) -> RuleEditResponse</code>
 
 ## Versions
-
-Types:
-
-- <code><a href="./src/resources/rulesets/versions.ts">VersionListResponse</a></code>
-- <code><a href="./src/resources/rulesets/versions.ts">VersionGetResponse</a></code>
-
-Methods:
-
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/versions">client.rulesets.versions.<a href="./src/resources/rulesets/versions.ts">list</a>(rulesetId, { ...params }) -> VersionListResponsesSinglePage</code>
-- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}">client.rulesets.versions.<a href="./src/resources/rulesets/versions.ts">delete</a>(rulesetId, rulesetVersion, { ...params }) -> void</code>
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}">client.rulesets.versions.<a href="./src/resources/rulesets/versions.ts">get</a>(rulesetId, rulesetVersion, { ...params }) -> VersionGetResponse</code>
 
 # URLNormalization
 
@@ -4373,13 +4320,14 @@ Types:
 
 - <code><a href="./src/resources/stream/audio-tracks.ts">Audio</a></code>
 - <code><a href="./src/resources/stream/audio-tracks.ts">AudioTrackDeleteResponse</a></code>
+- <code><a href="./src/resources/stream/audio-tracks.ts">AudioTrackGetResponse</a></code>
 
 Methods:
 
 - <code title="delete /accounts/{account_id}/stream/{identifier}/audio/{audio_identifier}">client.stream.audioTracks.<a href="./src/resources/stream/audio-tracks.ts">delete</a>(identifier, audioIdentifier, { ...params }) -> AudioTrackDeleteResponse</code>
 - <code title="post /accounts/{account_id}/stream/{identifier}/audio/copy">client.stream.audioTracks.<a href="./src/resources/stream/audio-tracks.ts">copy</a>(identifier, { ...params }) -> Audio</code>
 - <code title="patch /accounts/{account_id}/stream/{identifier}/audio/{audio_identifier}">client.stream.audioTracks.<a href="./src/resources/stream/audio-tracks.ts">edit</a>(identifier, audioIdentifier, { ...params }) -> Audio</code>
-- <code title="get /accounts/{account_id}/stream/{identifier}/audio">client.stream.audioTracks.<a href="./src/resources/stream/audio-tracks.ts">get</a>(identifier, { ...params }) -> AudioSinglePage</code>
+- <code title="get /accounts/{account_id}/stream/{identifier}/audio">client.stream.audioTracks.<a href="./src/resources/stream/audio-tracks.ts">get</a>(identifier, { ...params }) -> AudioTrackGetResponse</code>
 
 ## Videos
 
@@ -4399,7 +4347,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/stream/clip">client.stream.clip.<a href="./src/resources/stream/clip.ts">create</a>({ ...params }) -> Clip</code>
+- <code title="post /accounts/{account_id}/stream/clip">client.stream.clip.<a href="./src/resources/stream/clip.ts">create</a>({ ...params }) -> Video</code>
 
 ## Copy
 
@@ -9727,45 +9675,11 @@ Methods:
 
 ## Insights
 
-Types:
-
-- <code><a href="./src/resources/security-center/insights/insights.ts">InsightListResponse</a></code>
-- <code><a href="./src/resources/security-center/insights/insights.ts">InsightDismissResponse</a></code>
-
-Methods:
-
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/security-center/insights">client.securityCenter.insights.<a href="./src/resources/security-center/insights/insights.ts">list</a>({ ...params }) -> InsightListResponsesV4PagePagination</code>
-- <code title="put /{accounts_or_zones}/{account_or_zone_id}/security-center/insights/{issue_id}/dismiss">client.securityCenter.insights.<a href="./src/resources/security-center/insights/insights.ts">dismiss</a>(issueId, { ...params }) -> InsightDismissResponse</code>
-
 ### Class
-
-Types:
-
-- <code><a href="./src/resources/security-center/insights/class.ts">ClassGetResponse</a></code>
-
-Methods:
-
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/security-center/insights/class">client.securityCenter.insights.class.<a href="./src/resources/security-center/insights/class.ts">get</a>({ ...params }) -> ClassGetResponse</code>
 
 ### Severity
 
-Types:
-
-- <code><a href="./src/resources/security-center/insights/severity.ts">SeverityGetResponse</a></code>
-
-Methods:
-
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/security-center/insights/severity">client.securityCenter.insights.severity.<a href="./src/resources/security-center/insights/severity.ts">get</a>({ ...params }) -> SeverityGetResponse</code>
-
 ### Type
-
-Types:
-
-- <code><a href="./src/resources/security-center/insights/type.ts">TypeGetResponse</a></code>
-
-Methods:
-
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/security-center/insights/type">client.securityCenter.insights.type.<a href="./src/resources/security-center/insights/type.ts">get</a>({ ...params }) -> TypeGetResponse</code>
 
 # BrowserRendering
 
@@ -9863,11 +9777,55 @@ Methods:
 
 ### Session
 
+Types:
+
+- <code><a href="./src/resources/browser-rendering/devtools/session.ts">SessionListResponse</a></code>
+- <code><a href="./src/resources/browser-rendering/devtools/session.ts">SessionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/browser-rendering/devtools/session">client.browserRendering.devtools.session.<a href="./src/resources/browser-rendering/devtools/session.ts">list</a>({ ...params }) -> SessionListResponse</code>
+- <code title="get /accounts/{account_id}/browser-rendering/devtools/session/{session_id}">client.browserRendering.devtools.session.<a href="./src/resources/browser-rendering/devtools/session.ts">get</a>(sessionId, { ...params }) -> SessionGetResponse | null</code>
+
 ### Browser
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/devtools/browser/browser.ts">BrowserCreateResponse</a></code>
+- <code><a href="./src/resources/browser-rendering/devtools/browser/browser.ts">BrowserDeleteResponse</a></code>
+- <code><a href="./src/resources/browser-rendering/devtools/browser/browser.ts">BrowserProtocolResponse</a></code>
+- <code><a href="./src/resources/browser-rendering/devtools/browser/browser.ts">BrowserVersionResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/browser-rendering/devtools/browser">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">create</a>({ ...params }) -> BrowserCreateResponse</code>
+- <code title="delete /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">delete</a>(sessionId, { ...params }) -> BrowserDeleteResponse</code>
+- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">connect</a>(sessionId, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">launch</a>({ ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/protocol">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">protocol</a>(sessionId, { ...params }) -> BrowserProtocolResponse</code>
+- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/version">client.browserRendering.devtools.browser.<a href="./src/resources/browser-rendering/devtools/browser/browser.ts">version</a>(sessionId, { ...params }) -> BrowserVersionResponse</code>
 
 #### Page
 
+Methods:
+
+- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/page/{target_id}">client.browserRendering.devtools.browser.page.<a href="./src/resources/browser-rendering/devtools/browser/page.ts">get</a>(sessionId, targetId, { ...params }) -> void</code>
+
 #### Targets
+
+Types:
+
+- <code><a href="./src/resources/browser-rendering/devtools/browser/targets.ts">TargetCreateResponse</a></code>
+- <code><a href="./src/resources/browser-rendering/devtools/browser/targets.ts">TargetListResponse</a></code>
+- <code><a href="./src/resources/browser-rendering/devtools/browser/targets.ts">TargetActivateResponse</a></code>
+- <code><a href="./src/resources/browser-rendering/devtools/browser/targets.ts">TargetGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/new">client.browserRendering.devtools.browser.targets.<a href="./src/resources/browser-rendering/devtools/browser/targets.ts">create</a>(sessionId, { ...params }) -> TargetCreateResponse</code>
+- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/list">client.browserRendering.devtools.browser.targets.<a href="./src/resources/browser-rendering/devtools/browser/targets.ts">list</a>(sessionId, { ...params }) -> TargetListResponse</code>
+- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/activate/{target_id}">client.browserRendering.devtools.browser.targets.<a href="./src/resources/browser-rendering/devtools/browser/targets.ts">activate</a>(sessionId, targetId, { ...params }) -> TargetActivateResponse</code>
+- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/list/{target_id}">client.browserRendering.devtools.browser.targets.<a href="./src/resources/browser-rendering/devtools/browser/targets.ts">get</a>(sessionId, targetId, { ...params }) -> TargetGetResponse</code>
 
 # CustomPages
 
@@ -9912,9 +9870,9 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/secrets_store/stores">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">create</a>([ ...body ]) -> StoreCreateResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/secrets_store/stores">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">create</a>({ ...params }) -> StoreCreateResponse</code>
 - <code title="get /accounts/{account_id}/secrets_store/stores">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">list</a>({ ...params }) -> StoreListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/secrets_store/stores/{store_id}">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">delete</a>(storeId, { ...params }) -> StoreDeleteResponse</code>
+- <code title="delete /accounts/{account_id}/secrets_store/stores/{store_id}">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">delete</a>(storeId, { ...params }) -> StoreDeleteResponse | null</code>
 
 ### Secrets
 
@@ -9932,8 +9890,8 @@ Methods:
 
 - <code title="post /accounts/{account_id}/secrets_store/stores/{store_id}/secrets">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">create</a>(storeId, [ ...body ]) -> SecretCreateResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/secrets_store/stores/{store_id}/secrets">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">list</a>(storeId, { ...params }) -> SecretListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">delete</a>(storeId, secretId, { ...params }) -> SecretDeleteResponse</code>
-- <code title="delete /accounts/{account_id}/secrets_store/stores/{store_id}/secrets">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">bulkDelete</a>(storeId, { ...params }) -> SecretBulkDeleteResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">delete</a>(storeId, secretId, { ...params }) -> SecretDeleteResponse | null</code>
+- <code title="delete /accounts/{account_id}/secrets_store/stores/{store_id}/secrets">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">bulkDelete</a>(storeId, { ...params }) -> SecretBulkDeleteResponse | null</code>
 - <code title="post /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}/duplicate">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">duplicate</a>(storeId, secretId, { ...params }) -> SecretDuplicateResponse</code>
 - <code title="patch /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">edit</a>(storeId, secretId, { ...params }) -> SecretEditResponse</code>
 - <code title="get /accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}">client.secretsStore.stores.secrets.<a href="./src/resources/secrets-store/stores/secrets.ts">get</a>(storeId, secretId, { ...params }) -> SecretGetResponse</code>
@@ -9956,6 +9914,7 @@ Types:
 - <code><a href="./src/resources/pipelines/pipelines.ts">PipelineUpdateResponse</a></code>
 - <code><a href="./src/resources/pipelines/pipelines.ts">PipelineListResponse</a></code>
 - <code><a href="./src/resources/pipelines/pipelines.ts">PipelineCreateV1Response</a></code>
+- <code><a href="./src/resources/pipelines/pipelines.ts">PipelineDeleteV1Response</a></code>
 - <code><a href="./src/resources/pipelines/pipelines.ts">PipelineGetResponse</a></code>
 - <code><a href="./src/resources/pipelines/pipelines.ts">PipelineGetV1Response</a></code>
 - <code><a href="./src/resources/pipelines/pipelines.ts">PipelineListV1Response</a></code>
@@ -9968,7 +9927,7 @@ Methods:
 - <code title="get /accounts/{account_id}/pipelines">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">list</a>({ ...params }) -> PipelineListResponse</code>
 - <code title="delete /accounts/{account_id}/pipelines/{pipeline_name}">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">delete</a>(pipelineName, { ...params }) -> void</code>
 - <code title="post /accounts/{account_id}/pipelines/v1/pipelines">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">createV1</a>({ ...params }) -> PipelineCreateV1Response</code>
-- <code title="delete /accounts/{account_id}/pipelines/v1/pipelines/{pipeline_id}">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">deleteV1</a>(pipelineId, { ...params }) -> void</code>
+- <code title="delete /accounts/{account_id}/pipelines/v1/pipelines/{pipeline_id}">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">deleteV1</a>(pipelineId, { ...params }) -> PipelineDeleteV1Response</code>
 - <code title="get /accounts/{account_id}/pipelines/{pipeline_name}">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">get</a>(pipelineName, { ...params }) -> PipelineGetResponse</code>
 - <code title="get /accounts/{account_id}/pipelines/v1/pipelines/{pipeline_id}">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">getV1</a>(pipelineId, { ...params }) -> PipelineGetV1Response</code>
 - <code title="get /accounts/{account_id}/pipelines/v1/pipelines">client.pipelines.<a href="./src/resources/pipelines/pipelines.ts">listV1</a>({ ...params }) -> PipelineListV1ResponsesV4PagePaginationArray</code>
@@ -9980,13 +9939,14 @@ Types:
 
 - <code><a href="./src/resources/pipelines/sinks.ts">SinkCreateResponse</a></code>
 - <code><a href="./src/resources/pipelines/sinks.ts">SinkListResponse</a></code>
+- <code><a href="./src/resources/pipelines/sinks.ts">SinkDeleteResponse</a></code>
 - <code><a href="./src/resources/pipelines/sinks.ts">SinkGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/pipelines/v1/sinks">client.pipelines.sinks.<a href="./src/resources/pipelines/sinks.ts">create</a>({ ...params }) -> SinkCreateResponse</code>
 - <code title="get /accounts/{account_id}/pipelines/v1/sinks">client.pipelines.sinks.<a href="./src/resources/pipelines/sinks.ts">list</a>({ ...params }) -> SinkListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/pipelines/v1/sinks/{sink_id}">client.pipelines.sinks.<a href="./src/resources/pipelines/sinks.ts">delete</a>(sinkId, { ...params }) -> void</code>
+- <code title="delete /accounts/{account_id}/pipelines/v1/sinks/{sink_id}">client.pipelines.sinks.<a href="./src/resources/pipelines/sinks.ts">delete</a>(sinkId, { ...params }) -> SinkDeleteResponse</code>
 - <code title="get /accounts/{account_id}/pipelines/v1/sinks/{sink_id}">client.pipelines.sinks.<a href="./src/resources/pipelines/sinks.ts">get</a>(sinkId, { ...params }) -> SinkGetResponse</code>
 
 ## Streams
@@ -9996,6 +9956,7 @@ Types:
 - <code><a href="./src/resources/pipelines/streams.ts">StreamCreateResponse</a></code>
 - <code><a href="./src/resources/pipelines/streams.ts">StreamUpdateResponse</a></code>
 - <code><a href="./src/resources/pipelines/streams.ts">StreamListResponse</a></code>
+- <code><a href="./src/resources/pipelines/streams.ts">StreamDeleteResponse</a></code>
 - <code><a href="./src/resources/pipelines/streams.ts">StreamGetResponse</a></code>
 
 Methods:
@@ -10003,7 +9964,7 @@ Methods:
 - <code title="post /accounts/{account_id}/pipelines/v1/streams">client.pipelines.streams.<a href="./src/resources/pipelines/streams.ts">create</a>({ ...params }) -> StreamCreateResponse</code>
 - <code title="patch /accounts/{account_id}/pipelines/v1/streams/{stream_id}">client.pipelines.streams.<a href="./src/resources/pipelines/streams.ts">update</a>(streamId, { ...params }) -> StreamUpdateResponse</code>
 - <code title="get /accounts/{account_id}/pipelines/v1/streams">client.pipelines.streams.<a href="./src/resources/pipelines/streams.ts">list</a>({ ...params }) -> StreamListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/pipelines/v1/streams/{stream_id}">client.pipelines.streams.<a href="./src/resources/pipelines/streams.ts">delete</a>(streamId, { ...params }) -> void</code>
+- <code title="delete /accounts/{account_id}/pipelines/v1/streams/{stream_id}">client.pipelines.streams.<a href="./src/resources/pipelines/streams.ts">delete</a>(streamId, { ...params }) -> StreamDeleteResponse</code>
 - <code title="get /accounts/{account_id}/pipelines/v1/streams/{stream_id}">client.pipelines.streams.<a href="./src/resources/pipelines/streams.ts">get</a>(streamId, { ...params }) -> StreamGetResponse</code>
 
 # SchemaValidation
