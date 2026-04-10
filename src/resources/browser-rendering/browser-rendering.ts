@@ -27,6 +27,8 @@ import * as ScreenshotAPI from './screenshot';
 import { Screenshot, ScreenshotCreateParams, ScreenshotCreateResponse } from './screenshot';
 import * as SnapshotAPI from './snapshot';
 import { Snapshot, SnapshotCreateParams, SnapshotCreateResponse } from './snapshot';
+import * as DevtoolsAPI from './devtools/devtools';
+import { Devtools } from './devtools/devtools';
 
 export class BrowserRendering extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
@@ -38,6 +40,7 @@ export class BrowserRendering extends APIResource {
   links: LinksAPI.Links = new LinksAPI.Links(this._client);
   markdown: MarkdownAPI.Markdown = new MarkdownAPI.Markdown(this._client);
   crawl: CrawlAPI.Crawl = new CrawlAPI.Crawl(this._client);
+  devtools: DevtoolsAPI.Devtools = new DevtoolsAPI.Devtools(this._client);
 }
 
 BrowserRendering.Content = Content;
@@ -49,6 +52,7 @@ BrowserRendering.Json = Json;
 BrowserRendering.Links = Links;
 BrowserRendering.Markdown = Markdown;
 BrowserRendering.Crawl = Crawl;
+BrowserRendering.Devtools = Devtools;
 
 export declare namespace BrowserRendering {
   export {
@@ -104,4 +108,6 @@ export declare namespace BrowserRendering {
     type CrawlDeleteParams as CrawlDeleteParams,
     type CrawlGetParams as CrawlGetParams,
   };
+
+  export { Devtools as Devtools };
 }
