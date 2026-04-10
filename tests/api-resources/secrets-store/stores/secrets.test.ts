@@ -161,6 +161,7 @@ describe('resource secrets', () => {
       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
       comment: 'info about my secret',
       scopes: ['workers', 'ai_gateway', 'dex', 'access'],
+      value: 'api-token-secret-123',
     });
   });
 

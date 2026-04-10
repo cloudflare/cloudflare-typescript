@@ -8,11 +8,11 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource phases', () => {
-  // TODO: investigate broken test
-  test.skip('update', async () => {
-    const responsePromise = client.rulesets.phases.update('http_request_firewall_custom', {
+describe('resource page', () => {
+  test('get: only required params', async () => {
+    const responsePromise = client.browserRendering.devtools.browser.page.get('target_id', {
       account_id: 'account_id',
+      session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -23,17 +23,10 @@ describe('resource phases', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get', async () => {
-    const responsePromise = client.rulesets.phases.get('http_request_firewall_custom', {
+  test('get: required and optional params', async () => {
+    const response = await client.browserRendering.devtools.browser.page.get('target_id', {
       account_id: 'account_id',
+      session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

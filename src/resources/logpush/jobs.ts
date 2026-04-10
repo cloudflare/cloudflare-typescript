@@ -421,12 +421,6 @@ export interface OutputOptions {
   field_names?: Array<string>;
 
   /**
-   * If set to true, subrequests will be merged into the parent request. Only
-   * supported for the `http_requests` dataset.
-   */
-  merge_subrequests?: boolean | null;
-
-  /**
    * Specifies the output type, such as `ndjson` or `csv`. This sets default values
    * for the rest of the settings, depending on the chosen output type. Some
    * formatting rules, like string quoting, are different between output types.
@@ -501,12 +495,6 @@ export interface OutputOptionsParam {
    * you are interested in.
    */
   field_names?: Array<string>;
-
-  /**
-   * If set to true, subrequests will be merged into the parent request. Only
-   * supported for the `http_requests` dataset.
-   */
-  merge_subrequests?: boolean | null;
 
   /**
    * Specifies the output type, such as `ndjson` or `csv`. This sets default values

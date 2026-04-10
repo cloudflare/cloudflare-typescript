@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -21,7 +22,10 @@ export class Embed extends APIResource {
    */
   get(identifier: string, params: EmbedGetParams, options?: RequestOptions): APIPromise<string> {
     const { account_id } = params;
-    return this._client.get(path`/accounts/${account_id}/stream/${identifier}/embed`, options);
+    return this._client.get(path`/accounts/${account_id}/stream/${identifier}/embed`, {
+      ...options,
+      headers: buildHeaders([{ Accept: 'text/html' }, options?.headers]),
+    });
   }
 }
 

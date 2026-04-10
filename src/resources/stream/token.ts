@@ -74,6 +74,11 @@ export interface TokenCreateParams {
   exp?: number;
 
   /**
+   * Body param: Optional flags for the signed token.
+   */
+  flags?: TokenCreateParams.Flags;
+
+  /**
    * Body param: The optional unix epoch timestamp that specifies the time before a
    * the token is not accepted. If this field is not set, the default is one hour
    * before issuing.
@@ -118,6 +123,16 @@ export namespace TokenCreateParams {
      * rules.
      */
     type?: 'any' | 'ip.src' | 'ip.geoip.country';
+  }
+
+  /**
+   * Optional flags for the signed token.
+   */
+  export interface Flags {
+    /**
+     * Whether to return the original video without transformations.
+     */
+    original?: boolean;
   }
 }
 

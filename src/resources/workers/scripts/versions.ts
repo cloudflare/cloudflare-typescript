@@ -153,6 +153,7 @@ export namespace VersionCreateResponse {
       | Resources.WorkersBindingKindVectorize
       | Resources.WorkersBindingKindVersionMetadata
       | Resources.WorkersBindingKindSecretsStoreSecret
+      | Resources.WorkersBindingKindFlagship
       | Resources.WorkersBindingKindSecretKey
       | Resources.WorkersBindingKindWorkflow
       | Resources.WorkersBindingKindWasmModule
@@ -270,7 +271,7 @@ export namespace VersionCreateResponse {
       /**
        * Identifier of the D1 database to bind to.
        */
-      id: string;
+      database_id: string;
 
       /**
        * A JavaScript variable name for the binding.
@@ -281,6 +282,11 @@ export namespace VersionCreateResponse {
        * The kind of resource that the binding provides.
        */
       type: 'd1';
+
+      /**
+       * @deprecated This property has been renamed to `database_id`.
+       */
+      id?: string;
     }
 
     export interface WorkersBindingKindDataBlob {
@@ -773,6 +779,23 @@ export namespace VersionCreateResponse {
        * The kind of resource that the binding provides.
        */
       type: 'secrets_store_secret';
+    }
+
+    export interface WorkersBindingKindFlagship {
+      /**
+       * ID of the Flagship app to bind to for feature flag evaluation.
+       */
+      app_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'flagship';
     }
 
     export interface WorkersBindingKindSecretKey {
@@ -1130,6 +1153,7 @@ export namespace VersionGetResponse {
       | Resources.WorkersBindingKindVectorize
       | Resources.WorkersBindingKindVersionMetadata
       | Resources.WorkersBindingKindSecretsStoreSecret
+      | Resources.WorkersBindingKindFlagship
       | Resources.WorkersBindingKindSecretKey
       | Resources.WorkersBindingKindWorkflow
       | Resources.WorkersBindingKindWasmModule
@@ -1247,7 +1271,7 @@ export namespace VersionGetResponse {
       /**
        * Identifier of the D1 database to bind to.
        */
-      id: string;
+      database_id: string;
 
       /**
        * A JavaScript variable name for the binding.
@@ -1258,6 +1282,11 @@ export namespace VersionGetResponse {
        * The kind of resource that the binding provides.
        */
       type: 'd1';
+
+      /**
+       * @deprecated This property has been renamed to `database_id`.
+       */
+      id?: string;
     }
 
     export interface WorkersBindingKindDataBlob {
@@ -1752,6 +1781,23 @@ export namespace VersionGetResponse {
       type: 'secrets_store_secret';
     }
 
+    export interface WorkersBindingKindFlagship {
+      /**
+       * ID of the Flagship app to bind to for feature flag evaluation.
+       */
+      app_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'flagship';
+    }
+
     export interface WorkersBindingKindSecretKey {
       /**
        * Algorithm-specific key parameters.
@@ -2076,6 +2122,7 @@ export namespace VersionCreateParams {
       | Metadata.WorkersBindingKindVectorize
       | Metadata.WorkersBindingKindVersionMetadata
       | Metadata.WorkersBindingKindSecretsStoreSecret
+      | Metadata.WorkersBindingKindFlagship
       | Metadata.WorkersBindingKindSecretKey
       | Metadata.WorkersBindingKindWorkflow
       | Metadata.WorkersBindingKindWasmModule
@@ -2115,12 +2162,12 @@ export namespace VersionCreateParams {
       'workers/alias'?: string;
 
       /**
-       * Human-readable message about the version. Truncated to 100 bytes.
+       * Human-readable message about the version. Truncated to 1000 bytes if longer.
        */
       'workers/message'?: string;
 
       /**
-       * User-provided identifier for the version.
+       * User-provided identifier for the version. Maximum 100 bytes.
        */
       'workers/tag'?: string;
     }
@@ -2226,7 +2273,7 @@ export namespace VersionCreateParams {
       /**
        * Identifier of the D1 database to bind to.
        */
-      id: string;
+      database_id: string;
 
       /**
        * A JavaScript variable name for the binding.
@@ -2237,6 +2284,11 @@ export namespace VersionCreateParams {
        * The kind of resource that the binding provides.
        */
       type: 'd1';
+
+      /**
+       * @deprecated This property has been renamed to `database_id`.
+       */
+      id?: string;
     }
 
     export interface WorkersBindingKindDataBlob {
@@ -2734,6 +2786,23 @@ export namespace VersionCreateParams {
        * The kind of resource that the binding provides.
        */
       type: 'secrets_store_secret';
+    }
+
+    export interface WorkersBindingKindFlagship {
+      /**
+       * ID of the Flagship app to bind to for feature flag evaluation.
+       */
+      app_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'flagship';
     }
 
     export interface WorkersBindingKindSecretKey {

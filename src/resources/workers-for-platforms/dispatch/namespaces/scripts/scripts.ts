@@ -683,6 +683,7 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindVectorize
       | Metadata.WorkersBindingKindVersionMetadata
       | Metadata.WorkersBindingKindSecretsStoreSecret
+      | Metadata.WorkersBindingKindFlagship
       | Metadata.WorkersBindingKindSecretKey
       | Metadata.WorkersBindingKindWorkflow
       | Metadata.WorkersBindingKindWasmModule
@@ -939,7 +940,7 @@ export namespace ScriptUpdateParams {
       /**
        * Identifier of the D1 database to bind to.
        */
-      id: string;
+      database_id: string;
 
       /**
        * A JavaScript variable name for the binding.
@@ -950,6 +951,11 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'd1';
+
+      /**
+       * @deprecated This property has been renamed to `database_id`.
+       */
+      id?: string;
     }
 
     export interface WorkersBindingKindDataBlob {
@@ -1449,6 +1455,23 @@ export namespace ScriptUpdateParams {
       type: 'secrets_store_secret';
     }
 
+    export interface WorkersBindingKindFlagship {
+      /**
+       * ID of the Flagship app to bind to for feature flag evaluation.
+       */
+      app_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'flagship';
+    }
+
     export interface WorkersBindingKindSecretKey {
       /**
        * Algorithm-specific key parameters.
@@ -1588,6 +1611,11 @@ export namespace ScriptUpdateParams {
        * The amount of CPU time this Worker can use in milliseconds.
        */
       cpu_ms?: number;
+
+      /**
+       * The number of subrequests this Worker can make per request.
+       */
+      subrequests?: number;
     }
 
     export interface WorkersMultipleStepMigrations {

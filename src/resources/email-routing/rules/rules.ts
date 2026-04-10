@@ -26,7 +26,8 @@ export class Rules extends APIResource {
   /**
    * Rules consist of a set of criteria for matching emails (such as an email being
    * sent to a specific custom email address) plus a set of actions to take on the
-   * email (like forwarding it to a specific destination address).
+   * email (like forwarding it to a specific destination address). Forward actions
+   * require all destination addresses to be verified.
    *
    * @example
    * ```ts
@@ -48,7 +49,8 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Update actions and matches, or enable/disable specific routing rules.
+   * Update actions and matches, or enable/disable specific routing rules. Forward
+   * actions require all destination addresses to be verified.
    *
    * @example
    * ```ts

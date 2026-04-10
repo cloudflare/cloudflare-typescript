@@ -6,6 +6,7 @@ import {
   SinkCreateParams,
   SinkCreateResponse,
   SinkDeleteParams,
+  SinkDeleteResponse,
   SinkGetParams,
   SinkGetResponse,
   SinkListParams,
@@ -18,6 +19,7 @@ import {
   StreamCreateParams,
   StreamCreateResponse,
   StreamDeleteParams,
+  StreamDeleteResponse,
   StreamGetParams,
   StreamGetResponse,
   StreamListParams,
@@ -124,18 +126,24 @@ export class Pipelines extends APIResource {
    *
    * @example
    * ```ts
-   * await client.pipelines.deleteV1(
+   * const response = await client.pipelines.deleteV1(
    *   '043e105f4ecef8ad9ca31a8372d0c353',
    *   { account_id: '0123105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
-  deleteV1(pipelineID: string, params: PipelineDeleteV1Params, options?: RequestOptions): APIPromise<void> {
+  deleteV1(
+    pipelineID: string,
+    params: PipelineDeleteV1Params,
+    options?: RequestOptions,
+  ): APIPromise<PipelineDeleteV1Response> {
     const { account_id } = params;
-    return this._client.delete(path`/accounts/${account_id}/pipelines/v1/pipelines/${pipelineID}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return (
+      this._client.delete(
+        path`/accounts/${account_id}/pipelines/v1/pipelines/${pipelineID}`,
+        options,
+      ) as APIPromise<{ result: PipelineDeleteV1Response }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -723,6 +731,8 @@ export interface PipelineCreateV1Response {
    */
   status: string;
 }
+
+export type PipelineDeleteV1Response = unknown;
 
 /**
  * @deprecated [DEPRECATED] Describes the configuration of a pipeline. Use the new
@@ -1412,6 +1422,7 @@ export declare namespace Pipelines {
     type PipelineUpdateResponse as PipelineUpdateResponse,
     type PipelineListResponse as PipelineListResponse,
     type PipelineCreateV1Response as PipelineCreateV1Response,
+    type PipelineDeleteV1Response as PipelineDeleteV1Response,
     type PipelineGetResponse as PipelineGetResponse,
     type PipelineGetV1Response as PipelineGetV1Response,
     type PipelineListV1Response as PipelineListV1Response,
@@ -1433,6 +1444,7 @@ export declare namespace Pipelines {
     Sinks as Sinks,
     type SinkCreateResponse as SinkCreateResponse,
     type SinkListResponse as SinkListResponse,
+    type SinkDeleteResponse as SinkDeleteResponse,
     type SinkGetResponse as SinkGetResponse,
     type SinkListResponsesV4PagePaginationArray as SinkListResponsesV4PagePaginationArray,
     type SinkCreateParams as SinkCreateParams,
@@ -1446,6 +1458,7 @@ export declare namespace Pipelines {
     type StreamCreateResponse as StreamCreateResponse,
     type StreamUpdateResponse as StreamUpdateResponse,
     type StreamListResponse as StreamListResponse,
+    type StreamDeleteResponse as StreamDeleteResponse,
     type StreamGetResponse as StreamGetResponse,
     type StreamListResponsesV4PagePaginationArray as StreamListResponsesV4PagePaginationArray,
     type StreamCreateParams as StreamCreateParams,

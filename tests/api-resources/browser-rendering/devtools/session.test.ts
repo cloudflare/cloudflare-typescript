@@ -8,12 +8,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource versions', () => {
-  // TODO: investigate broken test
-  test.skip('list', async () => {
-    const responsePromise = client.rulesets.phases.versions.list('http_request_firewall_custom', {
-      account_id: 'account_id',
-    });
+describe('resource session', () => {
+  test('list: only required params', async () => {
+    const responsePromise = client.browserRendering.devtools.session.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,12 +20,19 @@ describe('resource versions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: only required params', async () => {
-    const responsePromise = client.rulesets.phases.versions.get('1', {
-      ruleset_phase: 'http_request_firewall_custom',
+  test('list: required and optional params', async () => {
+    const response = await client.browserRendering.devtools.session.list({
       account_id: 'account_id',
+      limit: 1,
+      offset: 0,
     });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.browserRendering.devtools.session.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -38,11 +42,10 @@ describe('resource versions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get: required and optional params', async () => {
-    const response = await client.rulesets.phases.versions.get('1', {
-      ruleset_phase: 'http_request_firewall_custom',
-      account_id: 'account_id',
-    });
+  test('get: required and optional params', async () => {
+    const response = await client.browserRendering.devtools.session.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
   });
 });

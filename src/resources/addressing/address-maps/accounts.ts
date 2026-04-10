@@ -124,6 +124,11 @@ export namespace AccountUpdateResponse {
      * Total results available without any search parameters.
      */
     total_count?: number;
+
+    /**
+     * The number of total pages in the entire result set.
+     */
+    total_pages?: number;
   }
 }
 
@@ -193,6 +198,11 @@ export namespace AccountDeleteResponse {
      * Total results available without any search parameters.
      */
     total_count?: number;
+
+    /**
+     * The number of total pages in the entire result set.
+     */
+    total_pages?: number;
   }
 }
 

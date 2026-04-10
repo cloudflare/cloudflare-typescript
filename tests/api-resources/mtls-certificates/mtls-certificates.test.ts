@@ -49,7 +49,10 @@ describe('resource mtlsCertificates', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.mtlsCertificates.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.mtlsCertificates.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      type: ['custom'],
+    });
   });
 
   test('delete: only required params', async () => {

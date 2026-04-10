@@ -13,7 +13,6 @@ describe('resource stream', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.stream.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
       'Tus-Resumable': '1.0.0',
       'Upload-Length': 0,
     });
@@ -30,7 +29,6 @@ describe('resource stream', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.stream.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
       'Tus-Resumable': '1.0.0',
       'Upload-Length': 0,
       direct_user: true,
@@ -54,10 +52,16 @@ describe('resource stream', () => {
   test('list: required and optional params', async () => {
     const response = await client.stream.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      id: 'ea95132c15732412d22c1476fa83f27a',
+      after: '2019-12-27T18:11:19.117Z',
       asc: true,
+      before: '2019-12-27T18:11:19.117Z',
       creator: 'creator-id_abcde12345',
       end: '2014-01-02T02:20:00Z',
       include_counts: true,
+      limit: 1,
+      live_input_id: 'live_input_id',
+      name: 'name',
       search: 'puppy.mp4',
       start: '2014-01-02T02:20:00Z',
       status: 'inprogress',
@@ -107,9 +111,16 @@ describe('resource stream', () => {
       creator: 'creator-id_abcde12345',
       maxDurationSeconds: 1,
       meta: { name: 'video12345.mp4' },
+      publicDetails: {
+        channel_link: 'channel_link',
+        logo: 'logo',
+        share_link: 'share_link',
+        title: 'title',
+      },
       requireSignedURLs: true,
       scheduledDeletion: '2014-01-02T02:20:00Z',
       thumbnailTimestampPct: 0.529241,
+      uid: 'ea95132c15732412d22c1476fa83f27a',
       uploadExpiry: '2014-01-02T02:20:00Z',
     });
   });

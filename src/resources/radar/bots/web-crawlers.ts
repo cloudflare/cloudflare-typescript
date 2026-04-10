@@ -19,7 +19,15 @@ export class WebCrawlers extends APIResource {
    * ```
    */
   summary(
-    dimension: 'CLIENT_TYPE' | 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
+    dimension:
+      | 'CLIENT_TYPE'
+      | 'USER_AGENT'
+      | 'REFERER'
+      | 'CRAWL_REFER_RATIO'
+      | 'VERTICAL'
+      | 'INDUSTRY'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query: WebCrawlerSummaryParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WebCrawlerSummaryResponse> {
@@ -43,7 +51,15 @@ export class WebCrawlers extends APIResource {
    * ```
    */
   timeseriesGroups(
-    dimension: 'CLIENT_TYPE' | 'USER_AGENT' | 'REFERER' | 'CRAWL_REFER_RATIO' | 'VERTICAL' | 'INDUSTRY',
+    dimension:
+      | 'CLIENT_TYPE'
+      | 'USER_AGENT'
+      | 'REFERER'
+      | 'CRAWL_REFER_RATIO'
+      | 'VERTICAL'
+      | 'INDUSTRY'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query: WebCrawlerTimeseriesGroupsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WebCrawlerTimeseriesGroupsResponse> {
@@ -376,6 +392,20 @@ export interface WebCrawlerSummaryParams {
   name?: Array<string>;
 
   /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
+
+  /**
    * Filters results by vertical.
    */
   vertical?: Array<string>;
@@ -437,6 +467,20 @@ export interface WebCrawlerTimeseriesGroupsParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
 
   /**
    * Filters results by vertical.

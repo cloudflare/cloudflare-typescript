@@ -114,7 +114,7 @@ export interface SubdomainCreateResponse {
   /**
    * Whether Email Sending is enabled on this subdomain.
    */
-  email_sending_enabled: boolean;
+  enabled: boolean;
 
   /**
    * The subdomain domain name.
@@ -134,30 +134,24 @@ export interface SubdomainCreateResponse {
   /**
    * The DKIM selector used for email signing.
    */
-  email_sending_dkim_selector?: string;
-
-  /**
-   * The return-path domain used for bounce handling.
-   */
-  email_sending_return_path_domain?: string;
-
-  /**
-   * Whether Email Routing (receiving) is enabled on this subdomain. Read-only;
-   * included for informational purposes since both services share the subdomain row.
-   */
-  enabled?: boolean;
+  dkim_selector?: string;
 
   /**
    * The date and time the destination address was last modified.
    */
   modified?: string;
+
+  /**
+   * The return-path domain used for bounce handling.
+   */
+  return_path_domain?: string;
 }
 
 export interface SubdomainListResponse {
   /**
    * Whether Email Sending is enabled on this subdomain.
    */
-  email_sending_enabled: boolean;
+  enabled: boolean;
 
   /**
    * The subdomain domain name.
@@ -177,23 +171,17 @@ export interface SubdomainListResponse {
   /**
    * The DKIM selector used for email signing.
    */
-  email_sending_dkim_selector?: string;
-
-  /**
-   * The return-path domain used for bounce handling.
-   */
-  email_sending_return_path_domain?: string;
-
-  /**
-   * Whether Email Routing (receiving) is enabled on this subdomain. Read-only;
-   * included for informational purposes since both services share the subdomain row.
-   */
-  enabled?: boolean;
+  dkim_selector?: string;
 
   /**
    * The date and time the destination address was last modified.
    */
   modified?: string;
+
+  /**
+   * The return-path domain used for bounce handling.
+   */
+  return_path_domain?: string;
 }
 
 export interface SubdomainDeleteResponse {
@@ -245,7 +233,7 @@ export interface SubdomainGetResponse {
   /**
    * Whether Email Sending is enabled on this subdomain.
    */
-  email_sending_enabled: boolean;
+  enabled: boolean;
 
   /**
    * The subdomain domain name.
@@ -265,23 +253,17 @@ export interface SubdomainGetResponse {
   /**
    * The DKIM selector used for email signing.
    */
-  email_sending_dkim_selector?: string;
-
-  /**
-   * The return-path domain used for bounce handling.
-   */
-  email_sending_return_path_domain?: string;
-
-  /**
-   * Whether Email Routing (receiving) is enabled on this subdomain. Read-only;
-   * included for informational purposes since both services share the subdomain row.
-   */
-  enabled?: boolean;
+  dkim_selector?: string;
 
   /**
    * The date and time the destination address was last modified.
    */
   modified?: string;
+
+  /**
+   * The return-path domain used for bounce handling.
+   */
+  return_path_domain?: string;
 }
 
 export interface SubdomainCreateParams {

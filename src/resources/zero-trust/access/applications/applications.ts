@@ -22921,7 +22921,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<SelfHostedApplication.AccessAppPolicyLink | string | SelfHostedApplication.UnionMember2>;
 
@@ -23418,7 +23419,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<SaaSApplication.AccessAppPolicyLink | string | SaaSApplication.UnionMember2>;
 
@@ -23833,7 +23835,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BrowserSSHApplication.AccessAppPolicyLink | string | BrowserSSHApplication.UnionMember2>;
 
@@ -24441,7 +24444,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BrowserVNCApplication.AccessAppPolicyLink | string | BrowserVNCApplication.UnionMember2>;
 
@@ -24980,7 +24984,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       AppLauncherApplication.AccessAppPolicyLink | string | AppLauncherApplication.UnionMember2
@@ -25221,7 +25226,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
@@ -25417,7 +25423,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | BrowserIsolationPermissionsApplication.AccessAppPolicyLink
@@ -25624,7 +25631,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | GatewayIdentityProxyEndpointApplication.AccessAppPolicyLink
@@ -25805,7 +25813,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BookmarkApplication.AccessAppPolicyLink | string | BookmarkApplication.UnionMember2>;
 
@@ -26224,7 +26233,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BrowserRDPApplication.AccessAppPolicyLink | string | BrowserRDPApplication.UnionMember2>;
 
@@ -26798,7 +26808,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<McpServerApplication.AccessAppPolicyLink | string | McpServerApplication.UnionMember2>;
 
@@ -27300,7 +27311,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       McpServerPortalApplication.AccessAppPolicyLink | string | McpServerPortalApplication.UnionMember2
@@ -27853,7 +27865,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<SelfHostedApplication.AccessAppPolicyLink | string | SelfHostedApplication.UnionMember2>;
 
@@ -28350,7 +28363,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<SaaSApplication.AccessAppPolicyLink | string | SaaSApplication.UnionMember2>;
 
@@ -28765,7 +28779,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BrowserSSHApplication.AccessAppPolicyLink | string | BrowserSSHApplication.UnionMember2>;
 
@@ -29373,7 +29388,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BrowserVNCApplication.AccessAppPolicyLink | string | BrowserVNCApplication.UnionMember2>;
 
@@ -29912,7 +29928,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       AppLauncherApplication.AccessAppPolicyLink | string | AppLauncherApplication.UnionMember2
@@ -30153,7 +30170,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
@@ -30349,7 +30367,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | BrowserIsolationPermissionsApplication.AccessAppPolicyLink
@@ -30556,7 +30575,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | GatewayIdentityProxyEndpointApplication.AccessAppPolicyLink
@@ -30737,7 +30757,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BookmarkApplication.AccessAppPolicyLink | string | BookmarkApplication.UnionMember2>;
 
@@ -31156,7 +31177,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BrowserRDPApplication.AccessAppPolicyLink | string | BrowserRDPApplication.UnionMember2>;
 
@@ -31730,7 +31752,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<McpServerApplication.AccessAppPolicyLink | string | McpServerApplication.UnionMember2>;
 
@@ -32232,7 +32255,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       McpServerPortalApplication.AccessAppPolicyLink | string | McpServerPortalApplication.UnionMember2

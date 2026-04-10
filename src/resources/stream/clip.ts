@@ -12,7 +12,7 @@ export class ClipResource extends APIResource {
    *
    * @example
    * ```ts
-   * const clip = await client.stream.clip.create({
+   * const video = await client.stream.clip.create({
    *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   clippedFromVideoUID: '023e105f4ecef8ad9ca31a8372d0c353',
    *   endTimeSeconds: 0,
@@ -20,11 +20,11 @@ export class ClipResource extends APIResource {
    * });
    * ```
    */
-  create(params: ClipCreateParams, options?: RequestOptions): APIPromise<Clip> {
+  create(params: ClipCreateParams, options?: RequestOptions): APIPromise<StreamAPI.Video> {
     const { account_id, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/stream/clip`, { body, ...options }) as APIPromise<{
-        result: Clip;
+        result: StreamAPI.Video;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -166,12 +166,20 @@ export interface ClipCreateParams {
   creator?: string;
 
   /**
-   * Body param: The maximum duration in seconds for a video upload. Can be set for a
-   * video that is not yet uploaded to limit its duration. Uploads that exceed the
-   * specified duration will fail during processing. A value of `-1` means the value
-   * is unknown.
+   * Body param: A video's URL. Preferred over 'url'.
    */
-  maxDurationSeconds?: number;
+  input?: string;
+
+  /**
+   * Body param: A user modifiable key-value store used to reference other systems of
+   * record for managing videos.
+   */
+  meta?: unknown;
+
+  /**
+   * Body param: A name for the video.
+   */
+  name?: string;
 
   /**
    * Body param: Indicates whether the video can be a accessed using the UID. When
@@ -181,6 +189,14 @@ export interface ClipCreateParams {
   requireSignedURLs?: boolean;
 
   /**
+   * Body param: Indicates the date and time at which the video will be deleted. Omit
+   * the field to indicate no change, or include with a `null` value to remove an
+   * existing scheduled deletion. If specified, must be at least 30 days from upload
+   * time.
+   */
+  scheduledDeletion?: string;
+
+  /**
    * Body param: The timestamp for a thumbnail image calculated as a percentage value
    * of the video's duration. To convert from a second-wise timestamp to a
    * percentage, divide the desired timestamp by the total duration of the video. If
@@ -188,6 +204,11 @@ export interface ClipCreateParams {
    * video.
    */
   thumbnailTimestampPct?: number;
+
+  /**
+   * Body param: A video's URL (legacy field, use 'input' instead).
+   */
+  url?: string;
 
   /**
    * Body param

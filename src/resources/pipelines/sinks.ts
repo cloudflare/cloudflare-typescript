@@ -3,7 +3,6 @@
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
-import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -60,19 +59,20 @@ export class Sinks extends APIResource {
    *
    * @example
    * ```ts
-   * await client.pipelines.sinks.delete(
+   * const sink = await client.pipelines.sinks.delete(
    *   '0223105f4ecef8ad9ca31a8372d0c353',
    *   { account_id: '0123105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
-  delete(sinkID: string, params: SinkDeleteParams, options?: RequestOptions): APIPromise<void> {
+  delete(sinkID: string, params: SinkDeleteParams, options?: RequestOptions): APIPromise<SinkDeleteResponse> {
     const { account_id, force } = params;
-    return this._client.delete(path`/accounts/${account_id}/pipelines/v1/sinks/${sinkID}`, {
-      query: { force },
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return (
+      this._client.delete(path`/accounts/${account_id}/pipelines/v1/sinks/${sinkID}`, {
+        query: { force },
+        ...options,
+      }) as APIPromise<{ result: SinkDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -813,6 +813,8 @@ export namespace SinkListResponse {
     }
   }
 }
+
+export type SinkDeleteResponse = unknown;
 
 export interface SinkGetResponse {
   /**
@@ -1567,6 +1569,7 @@ export declare namespace Sinks {
   export {
     type SinkCreateResponse as SinkCreateResponse,
     type SinkListResponse as SinkListResponse,
+    type SinkDeleteResponse as SinkDeleteResponse,
     type SinkGetResponse as SinkGetResponse,
     type SinkListResponsesV4PagePaginationArray as SinkListResponsesV4PagePaginationArray,
     type SinkCreateParams as SinkCreateParams,

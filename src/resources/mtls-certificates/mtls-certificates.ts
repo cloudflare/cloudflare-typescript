@@ -65,11 +65,11 @@ export class MTLSCertificates extends APIResource {
     params: MTLSCertificateListParams,
     options?: RequestOptions,
   ): PagePromise<MTLSCertificatesSinglePage, MTLSCertificate> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/mtls_certificates`,
       SinglePage<MTLSCertificate>,
-      options,
+      { query, ...options },
     );
   }
 
@@ -172,6 +172,11 @@ export interface MTLSCertificate {
   signature?: string;
 
   /**
+   * The type of the certificate, indicating how it was created and who manages it.
+   */
+  type?: 'custom' | 'gateway_managed' | 'access_managed';
+
+  /**
    * This is the time the certificate was uploaded.
    */
   uploaded_on?: string;
@@ -219,6 +224,11 @@ export interface MTLSCertificateCreateResponse {
   signature?: string;
 
   /**
+   * The type of the certificate, indicating how it was created and who manages it.
+   */
+  type?: 'custom' | 'gateway_managed' | 'access_managed';
+
+  /**
    * This is the time the certificate was updated.
    */
   updated_at?: string;
@@ -261,9 +271,15 @@ export interface MTLSCertificateCreateParams {
 
 export interface MTLSCertificateListParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: Filters results by certificate type. Multiple types can be
+   * comma-separated.
+   */
+  type?: Array<'custom' | 'gateway_managed' | 'access_managed'>;
 }
 
 export interface MTLSCertificateDeleteParams {

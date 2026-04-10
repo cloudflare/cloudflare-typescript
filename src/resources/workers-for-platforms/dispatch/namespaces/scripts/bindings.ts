@@ -73,6 +73,7 @@ export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindVectorize
   | BindingGetResponse.WorkersBindingKindVersionMetadata
   | BindingGetResponse.WorkersBindingKindSecretsStoreSecret
+  | BindingGetResponse.WorkersBindingKindFlagship
   | BindingGetResponse.WorkersBindingKindSecretKey
   | BindingGetResponse.WorkersBindingKindWorkflow
   | BindingGetResponse.WorkersBindingKindWasmModule
@@ -181,7 +182,7 @@ export namespace BindingGetResponse {
     /**
      * Identifier of the D1 database to bind to.
      */
-    id: string;
+    database_id: string;
 
     /**
      * A JavaScript variable name for the binding.
@@ -192,6 +193,11 @@ export namespace BindingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'd1';
+
+    /**
+     * @deprecated This property has been renamed to `database_id`.
+     */
+    id?: string;
   }
 
   export interface WorkersBindingKindDataBlob {
@@ -684,6 +690,23 @@ export namespace BindingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'secrets_store_secret';
+  }
+
+  export interface WorkersBindingKindFlagship {
+    /**
+     * ID of the Flagship app to bind to for feature flag evaluation.
+     */
+    app_id: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'flagship';
   }
 
   export interface WorkersBindingKindSecretKey {

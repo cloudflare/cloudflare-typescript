@@ -124,6 +124,8 @@ export interface DefaultEditResponse {
    */
   include?: Array<PoliciesAPI.SplitTunnelInclude>;
 
+  policy_id?: string;
+
   /**
    * Determines if the operating system will register WARP's local interface IP with
    * your on-premises DNS server.
@@ -230,6 +232,8 @@ export interface DefaultGetResponse {
    * List of routes included in the WARP client's tunnel.
    */
   include?: Array<PoliciesAPI.SplitTunnelInclude>;
+
+  policy_id?: string;
 
   /**
    * Determines if the operating system will register WARP's local interface IP with

@@ -108,7 +108,10 @@ export interface MessageAckResponse {
    */
   retryCount?: number;
 
-  warnings?: Array<string>;
+  /**
+   * Map of lease IDs to warning messages encountered during acknowledgement.
+   */
+  warnings?: { [key: string]: string };
 }
 
 export interface MessageBulkPushResponse {

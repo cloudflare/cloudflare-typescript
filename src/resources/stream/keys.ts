@@ -115,6 +115,11 @@ export interface KeyGetResponse {
    * The date and time a signing key was created.
    */
   created?: string;
+
+  /**
+   * The unique identifier for the signing key.
+   */
+  key_id?: string;
 }
 
 export interface KeyCreateParams {

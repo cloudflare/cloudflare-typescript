@@ -2,20 +2,389 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as PageAPI from './page';
-import { Page } from './page';
+import { Page, PageGetParams } from './page';
 import * as TargetsAPI from './targets';
-import { Targets } from './targets';
+import {
+  TargetActivateParams,
+  TargetActivateResponse,
+  TargetCreateParams,
+  TargetCreateResponse,
+  TargetGetParams,
+  TargetGetResponse,
+  TargetListParams,
+  TargetListResponse,
+  Targets,
+} from './targets';
+import { APIPromise } from '../../../../core/api-promise';
+import { buildHeaders } from '../../../../internal/headers';
+import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
 
 export class Browser extends APIResource {
   page: PageAPI.Page = new PageAPI.Page(this._client);
   targets: TargetsAPI.Targets = new TargetsAPI.Targets(this._client);
+
+  /**
+   * Get a browser session ID.
+   *
+   * @example
+   * ```ts
+   * const browser =
+   *   await client.browserRendering.devtools.browser.create({
+   *     account_id: 'account_id',
+   *   });
+   * ```
+   */
+  create(params: BrowserCreateParams, options?: RequestOptions): APIPromise<BrowserCreateResponse> {
+    const { account_id, keep_alive, lab, recording, targets } = params;
+    return this._client.post(path`/accounts/${account_id}/browser-rendering/devtools/browser`, {
+      query: { keep_alive, lab, recording, targets },
+      ...options,
+    });
+  }
+
+  /**
+   * Closes an existing browser session.
+   *
+   * @example
+   * ```ts
+   * const browser =
+   *   await client.browserRendering.devtools.browser.delete(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  delete(
+    sessionID: string,
+    params: BrowserDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<BrowserDeleteResponse> {
+    const { account_id } = params;
+    return this._client.delete(
+      path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}`,
+      options,
+    );
+  }
+
+  /**
+   * Establishes a WebSocket connection to an existing browser session.
+   *
+   * @example
+   * ```ts
+   * await client.browserRendering.devtools.browser.connect(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
+   */
+  connect(sessionID: string, params: BrowserConnectParams, options?: RequestOptions): APIPromise<void> {
+    const { account_id, ...query } = params;
+    return this._client.get(path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}`, {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Acquires and establishes a WebSocket connection to a browser session.
+   *
+   * @example
+   * ```ts
+   * await client.browserRendering.devtools.browser.launch({
+   *   account_id: 'account_id',
+   * });
+   * ```
+   */
+  launch(params: BrowserLaunchParams, options?: RequestOptions): APIPromise<void> {
+    const { account_id, ...query } = params;
+    return this._client.get(path`/accounts/${account_id}/browser-rendering/devtools/browser`, {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Returns the complete Chrome DevTools Protocol schema including all domains,
+   * commands, events, and types. This schema describes the entire CDP API surface.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.browserRendering.devtools.browser.protocol(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  protocol(
+    sessionID: string,
+    params: BrowserProtocolParams,
+    options?: RequestOptions,
+  ): APIPromise<BrowserProtocolResponse> {
+    const { account_id } = params;
+    return this._client.get(
+      path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}/json/protocol`,
+      options,
+    );
+  }
+
+  /**
+   * Get browser version metadata.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.browserRendering.devtools.browser.version(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  version(
+    sessionID: string,
+    params: BrowserVersionParams,
+    options?: RequestOptions,
+  ): APIPromise<BrowserVersionResponse> {
+    const { account_id } = params;
+    return this._client.get(
+      path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}/json/version`,
+      options,
+    );
+  }
+}
+
+export interface BrowserCreateResponse {
+  /**
+   * Browser session ID.
+   */
+  sessionId: string;
+
+  /**
+   * WebSocket URL for the session.
+   */
+  webSocketDebuggerUrl?: string;
+}
+
+export interface BrowserDeleteResponse {
+  status: 'closing' | 'closed';
+}
+
+export interface BrowserProtocolResponse {
+  /**
+   * List of protocol domains.
+   */
+  domains: Array<BrowserProtocolResponse.Domain>;
+
+  /**
+   * Protocol version.
+   */
+  version?: BrowserProtocolResponse.Version;
+}
+
+export namespace BrowserProtocolResponse {
+  export interface Domain {
+    /**
+     * Domain name.
+     */
+    domain: string;
+
+    /**
+     * Available commands.
+     */
+    commands?: Array<{ [key: string]: unknown }>;
+
+    /**
+     * Domain dependencies.
+     */
+    dependencies?: Array<string>;
+
+    /**
+     * Available events.
+     */
+    events?: Array<{ [key: string]: unknown }>;
+
+    /**
+     * Whether this domain is experimental.
+     */
+    experimental?: boolean;
+
+    /**
+     * Type definitions.
+     */
+    types?: Array<{ [key: string]: unknown }>;
+  }
+
+  /**
+   * Protocol version.
+   */
+  export interface Version {
+    /**
+     * Major version.
+     */
+    major: string;
+
+    /**
+     * Minor version.
+     */
+    minor: string;
+  }
+}
+
+export interface BrowserVersionResponse {
+  /**
+   * Browser name and version.
+   */
+  Browser: string;
+
+  /**
+   * Chrome DevTools Protocol version.
+   */
+  'Protocol-Version': string;
+
+  /**
+   * User agent string.
+   */
+  'User-Agent': string;
+
+  /**
+   * V8 JavaScript engine version.
+   */
+  'V8-Version': string;
+
+  /**
+   * WebKit version.
+   */
+  'WebKit-Version': string;
+
+  /**
+   * WebSocket URL for debugging the browser.
+   */
+  webSocketDebuggerUrl: string;
+}
+
+export interface BrowserCreateParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Keep-alive time in milliseconds.
+   */
+  keep_alive?: number;
+
+  /**
+   * Query param: Use experimental browser.
+   */
+  lab?: boolean;
+
+  /**
+   * Query param
+   */
+  recording?: boolean;
+
+  /**
+   * Query param: Include browser targets in response.
+   */
+  targets?: boolean;
+}
+
+export interface BrowserDeleteParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
+export interface BrowserConnectParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Keep-alive time in ms (only valid when acquiring new session).
+   */
+  keep_alive?: number;
+
+  /**
+   * Query param: Use experimental browser.
+   */
+  lab?: boolean;
+
+  /**
+   * Query param
+   */
+  recording?: boolean;
+}
+
+export interface BrowserLaunchParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Keep-alive time in ms (only valid when acquiring new session).
+   */
+  keep_alive?: number;
+
+  /**
+   * Query param: Use experimental browser.
+   */
+  lab?: boolean;
+
+  /**
+   * Query param
+   */
+  recording?: boolean;
+}
+
+export interface BrowserProtocolParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
+export interface BrowserVersionParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
 }
 
 Browser.Page = Page;
 Browser.Targets = Targets;
 
 export declare namespace Browser {
-  export { Page as Page };
+  export {
+    type BrowserCreateResponse as BrowserCreateResponse,
+    type BrowserDeleteResponse as BrowserDeleteResponse,
+    type BrowserProtocolResponse as BrowserProtocolResponse,
+    type BrowserVersionResponse as BrowserVersionResponse,
+    type BrowserCreateParams as BrowserCreateParams,
+    type BrowserDeleteParams as BrowserDeleteParams,
+    type BrowserConnectParams as BrowserConnectParams,
+    type BrowserLaunchParams as BrowserLaunchParams,
+    type BrowserProtocolParams as BrowserProtocolParams,
+    type BrowserVersionParams as BrowserVersionParams,
+  };
 
-  export { Targets as Targets };
+  export { Page as Page, type PageGetParams as PageGetParams };
+
+  export {
+    Targets as Targets,
+    type TargetCreateResponse as TargetCreateResponse,
+    type TargetListResponse as TargetListResponse,
+    type TargetActivateResponse as TargetActivateResponse,
+    type TargetGetResponse as TargetGetResponse,
+    type TargetCreateParams as TargetCreateParams,
+    type TargetListParams as TargetListParams,
+    type TargetActivateParams as TargetActivateParams,
+    type TargetGetParams as TargetGetParams,
+  };
 }

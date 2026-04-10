@@ -13,7 +13,6 @@ export class Webhooks extends APIResource {
    * ```ts
    * const webhook = await client.stream.webhooks.update({
    *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   notificationUrl: 'https://example.com',
    * });
    * ```
    */
@@ -65,11 +64,51 @@ export class Webhooks extends APIResource {
   }
 }
 
-export type WebhookUpdateResponse = unknown;
+export interface WebhookUpdateResponse {
+  /**
+   * The date and time the webhook was last modified.
+   */
+  modified?: string;
+
+  /**
+   * The URL where webhooks will be sent.
+   */
+  notification_url?: string;
+
+  /**
+   * The URL where webhooks will be sent.
+   */
+  notificationUrl?: string;
+
+  /**
+   * The secret used to verify webhook signatures.
+   */
+  secret?: string;
+}
 
 export type WebhookDeleteResponse = string;
 
-export type WebhookGetResponse = unknown;
+export interface WebhookGetResponse {
+  /**
+   * The date and time the webhook was last modified.
+   */
+  modified?: string;
+
+  /**
+   * The URL where webhooks will be sent.
+   */
+  notification_url?: string;
+
+  /**
+   * The URL where webhooks will be sent.
+   */
+  notificationUrl?: string;
+
+  /**
+   * The secret used to verify webhook signatures.
+   */
+  secret?: string;
+}
 
 export interface WebhookUpdateParams {
   /**
@@ -80,7 +119,12 @@ export interface WebhookUpdateParams {
   /**
    * Body param: The URL where webhooks will be sent.
    */
-  notificationUrl: string;
+  notification_url?: string;
+
+  /**
+   * Body param: The URL where webhooks will be sent.
+   */
+  notificationUrl?: string;
 }
 
 export interface WebhookDeleteParams {

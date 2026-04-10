@@ -1161,191 +1161,6 @@
       ]
     },
     {
-      "base": "rulesets.phases.versions",
-      "name": "get",
-      "params": [
-        {
-          "type": "param",
-          "key": "ruleset_version",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": false
-        },
-        {
-          "type": "options"
-        }
-      ],
-      "oldParams": [
-        {
-          "type": "param",
-          "key": "ruleset_phase",
-          "location": "path"
-        },
-        {
-          "type": "param",
-          "key": "ruleset_version",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": true
-        },
-        {
-          "type": "options"
-        }
-      ]
-    },
-    {
-      "base": "rulesets.rules",
-      "name": "delete",
-      "params": [
-        {
-          "type": "param",
-          "key": "rule_id",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": false
-        },
-        {
-          "type": "options"
-        }
-      ],
-      "oldParams": [
-        {
-          "type": "param",
-          "key": "ruleset_id",
-          "location": "path"
-        },
-        {
-          "type": "param",
-          "key": "rule_id",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": true
-        },
-        {
-          "type": "options"
-        }
-      ]
-    },
-    {
-      "base": "rulesets.rules",
-      "name": "edit",
-      "params": [
-        {
-          "type": "param",
-          "key": "rule_id",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": false
-        },
-        {
-          "type": "options"
-        }
-      ],
-      "oldParams": [
-        {
-          "type": "param",
-          "key": "ruleset_id",
-          "location": "path"
-        },
-        {
-          "type": "param",
-          "key": "rule_id",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": false
-        },
-        {
-          "type": "options"
-        }
-      ]
-    },
-    {
-      "base": "rulesets.versions",
-      "name": "delete",
-      "params": [
-        {
-          "type": "param",
-          "key": "ruleset_version",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": false
-        },
-        {
-          "type": "options"
-        }
-      ],
-      "oldParams": [
-        {
-          "type": "param",
-          "key": "ruleset_id",
-          "location": "path"
-        },
-        {
-          "type": "param",
-          "key": "ruleset_version",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": true
-        },
-        {
-          "type": "options"
-        }
-      ]
-    },
-    {
-      "base": "rulesets.versions",
-      "name": "get",
-      "params": [
-        {
-          "type": "param",
-          "key": "ruleset_version",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": false
-        },
-        {
-          "type": "options"
-        }
-      ],
-      "oldParams": [
-        {
-          "type": "param",
-          "key": "ruleset_id",
-          "location": "path"
-        },
-        {
-          "type": "param",
-          "key": "ruleset_version",
-          "location": "path"
-        },
-        {
-          "type": "params",
-          "maybeOverload": true
-        },
-        {
-          "type": "options"
-        }
-      ]
-    },
-    {
       "base": "addressing.addressMaps.ips",
       "name": "update",
       "params": [
@@ -7122,6 +6937,117 @@
         {
           "type": "param",
           "key": "job_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "browserRendering.devtools.browser.page",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "target_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "target_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "browserRendering.devtools.browser.targets",
+      "name": "activate",
+      "params": [
+        {
+          "type": "param",
+          "key": "target_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "target_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "browserRendering.devtools.browser.targets",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "target_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "session_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "target_id",
           "location": "path"
         },
         {
