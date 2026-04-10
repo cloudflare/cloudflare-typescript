@@ -34,9 +34,13 @@ describe('resource clip', () => {
       startTimeSeconds: 0,
       allowedOrigins: ['example.com'],
       creator: 'creator-id_abcde12345',
-      maxDurationSeconds: 1,
+      input: 'https://example.com/myvideo.mp4',
+      meta: { name: 'video12345.mp4' },
+      name: 'myvideo.mp4',
       requireSignedURLs: true,
+      scheduledDeletion: '2014-01-02T02:20:00Z',
       thumbnailTimestampPct: 0.529241,
+      url: 'https://example.com/myvideo.mp4',
       watermark: { uid: 'ea95132c15732412d22c1476fa83f27a' },
     });
   });

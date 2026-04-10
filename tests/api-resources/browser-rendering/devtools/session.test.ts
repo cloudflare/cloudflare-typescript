@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource insights', () => {
-  test('list', async () => {
-    const responsePromise = client.securityCenter.insights.list({ account_id: 'account_id' });
+describe('resource session', () => {
+  test('list: only required params', async () => {
+    const responsePromise = client.browserRendering.devtools.session.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,19 @@ describe('resource insights', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('dismiss', async () => {
-    const responsePromise = client.securityCenter.insights.dismiss('issue_id', { account_id: 'account_id' });
+  test('list: required and optional params', async () => {
+    const response = await client.browserRendering.devtools.session.list({
+      account_id: 'account_id',
+      limit: 1,
+      offset: 0,
+    });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.browserRendering.devtools.session.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,5 +41,12 @@ describe('resource insights', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.browserRendering.devtools.session.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
   });
 });

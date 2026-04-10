@@ -6,7 +6,8 @@ import * as Core from '../../../core';
 export class CatchAlls extends APIResource {
   /**
    * Enable or disable catch-all routing rule, or change action to forward to
-   * specific destination address.
+   * specific destination address. Forward actions require all destination addresses
+   * to be verified.
    *
    * @example
    * ```ts

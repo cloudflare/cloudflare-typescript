@@ -43,7 +43,7 @@ describe('resource settings', () => {
           ],
           compatibility_date: '2021-01-01',
           compatibility_flags: ['nodejs_compat'],
-          limits: { cpu_ms: 50 },
+          limits: { cpu_ms: 50, subrequests: 1000 },
           logpush: false,
           migrations: {
             deleted_classes: ['string'],

@@ -81,19 +81,24 @@ export class Streams extends APIResource {
    *
    * @example
    * ```ts
-   * await client.pipelines.streams.delete(
+   * const stream = await client.pipelines.streams.delete(
    *   '033e105f4ecef8ad9ca31a8372d0c353',
    *   { account_id: '0123105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
-  delete(streamId: string, params: StreamDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+  delete(
+    streamId: string,
+    params: StreamDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<StreamDeleteResponse> {
     const { account_id, force } = params;
-    return this._client.delete(`/accounts/${account_id}/pipelines/v1/streams/${streamId}`, {
-      query: { force },
-      ...options,
-      headers: { Accept: '*/*', ...options?.headers },
-    });
+    return (
+      this._client.delete(`/accounts/${account_id}/pipelines/v1/streams/${streamId}`, {
+        query: { force },
+        ...options,
+      }) as Core.APIPromise<{ result: StreamDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -691,6 +696,8 @@ export namespace StreamListResponse {
   }
 }
 
+export type StreamDeleteResponse = unknown;
+
 export interface StreamGetResponse {
   /**
    * Indicates a unique identifier for this stream.
@@ -1262,6 +1269,7 @@ export declare namespace Streams {
     type StreamCreateResponse as StreamCreateResponse,
     type StreamUpdateResponse as StreamUpdateResponse,
     type StreamListResponse as StreamListResponse,
+    type StreamDeleteResponse as StreamDeleteResponse,
     type StreamGetResponse as StreamGetResponse,
     StreamListResponsesV4PagePaginationArray as StreamListResponsesV4PagePaginationArray,
     type StreamCreateParams as StreamCreateParams,

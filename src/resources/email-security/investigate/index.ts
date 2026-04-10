@@ -10,7 +10,6 @@ export {
   type InvestigateGetParams,
 } from './investigate';
 export {
-  MoveCreateResponsesSinglePage,
   MoveBulkResponsesSinglePage,
   Move,
   type MoveCreateResponse,

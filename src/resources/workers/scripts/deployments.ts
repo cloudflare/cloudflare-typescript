@@ -152,7 +152,7 @@ export namespace Deployment {
 
   export interface Annotations {
     /**
-     * Human-readable message about the deployment. Truncated to 100 bytes.
+     * Human-readable message about the deployment. Truncated to 1000 bytes if longer.
      */
     'workers/message'?: string;
 
@@ -250,7 +250,7 @@ export namespace DeploymentCreateParams {
 
   export interface Annotations {
     /**
-     * Human-readable message about the deployment. Truncated to 100 bytes.
+     * Human-readable message about the deployment. Truncated to 1000 bytes if longer.
      */
     'workers/message'?: string;
   }

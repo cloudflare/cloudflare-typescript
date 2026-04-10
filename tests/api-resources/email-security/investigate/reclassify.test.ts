@@ -28,6 +28,7 @@ describe('resource reclassify', () => {
     const response = await client.emailSecurity.investigate.reclassify.create('4Njp3P0STMz2c02Q', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       expected_disposition: 'NONE',
+      submission: true,
       eml_content: 'eml_content',
       escalated_submission_id: 'escalated_submission_id',
     });

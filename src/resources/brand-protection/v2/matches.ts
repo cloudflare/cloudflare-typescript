@@ -34,6 +34,8 @@ export namespace MatchGetResponse {
 
     public_scans: Match.PublicScans | null;
 
+    registrar: string | null;
+
     scan_status: string;
 
     scan_submission_id: number | null;
@@ -104,9 +106,9 @@ export interface MatchGetParams {
   order?: 'asc' | 'desc';
 
   /**
-   * Query param: Column to sort by. Options: 'domain' or 'first_seen'
+   * Query param: Column to sort by. Options: 'domain', 'first_seen', or 'registrar'
    */
-  orderBy?: 'domain' | 'first_seen';
+  orderBy?: 'domain' | 'first_seen' | 'registrar';
 }
 
 export declare namespace Matches {

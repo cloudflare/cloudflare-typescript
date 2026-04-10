@@ -34,7 +34,7 @@ describe('resource versions', () => {
         annotations: {
           'workers/alias': 'staging',
           'workers/message': 'Fixed worker code.',
-          'workers/tag': 'workers/tag',
+          'workers/tag': 'any-identifier-from-external-system',
         },
         bindings: [
           {

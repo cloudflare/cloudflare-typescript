@@ -1001,7 +1001,7 @@ export declare namespace AbuseReportCreateParams {
     company?: string;
 
     /**
-     * Body param: ICANN-mandated fields for registrar WHOIS data disclosure requests.
+     * Body param: RDP-mandated fields for registrar WHOIS data disclosure requests.
      */
     reg_who_request?: AbuseReportsRegistrarWhoisReport.RegWhoRequest;
 
@@ -1030,43 +1030,42 @@ export declare namespace AbuseReportCreateParams {
 
   export namespace AbuseReportsRegistrarWhoisReport {
     /**
-     * ICANN-mandated fields for registrar WHOIS data disclosure requests.
+     * RDP-mandated fields for registrar WHOIS data disclosure requests.
      */
     export interface RegWhoRequest {
       /**
-       * Optional authorization statement or power of attorney per ICANN 10.2.1.3.
+       * Affirmation that the request is made in good faith per RDP 10.2.4. Must be true.
        */
-      reg_who_authorization_statement?: string;
+      reg_who_good_faith_affirmation: boolean;
 
       /**
-       * Affirmation that the request is made in good faith per ICANN 10.2.4.
+       * Agreement to process data lawfully per RDP 10.2.5. Must be true.
        */
-      reg_who_good_faith_affirmation?: boolean;
+      reg_who_lawful_processing_agreement: boolean;
 
       /**
-       * Agreement to process data lawfully per ICANN 10.2.5.
+       * Legal rights and rationale for the request per RDP 10.2.3. Required for all
+       * WHOIS requests.
        */
-      reg_who_lawful_processing_agreement?: boolean;
+      reg_who_legal_basis: string;
 
       /**
-       * Legal rights and rationale for the request per ICANN 10.2.3.
+       * The type of WHOIS data request per RDP procedure.
        */
-      reg_who_legal_basis?: string;
+      reg_who_request_type: 'disclosure' | 'invalid_whois';
 
       /**
-       * The type of WHOIS data request per ICANN procedure.
+       * The specific WHOIS data elements being requested per RDP 10.2.2. Required for
+       * all WHOIS requests.
        */
-      reg_who_request_type?: 'disclosure' | 'invalid_whois';
-
-      /**
-       * The specific WHOIS data elements being requested per ICANN 10.2.2.
-       */
-      reg_who_requested_data_elements?: Array<
+      reg_who_requested_data_elements: Array<
         | 'registrant_name'
         | 'registrant_organization'
         | 'registrant_email'
         | 'registrant_phone'
         | 'registrant_address'
+        | 'registrant_address_country'
+        | 'registrant_address_postal_code'
         | 'admin_name'
         | 'admin_organization'
         | 'admin_email'
@@ -1080,7 +1079,12 @@ export declare namespace AbuseReportCreateParams {
       >;
 
       /**
-       * The nature of the requestor per ICANN 10.2.1.2.
+       * Optional authorization statement or power of attorney per RDP 10.2.1.3.
+       */
+      reg_who_authorization_statement?: string;
+
+      /**
+       * The nature of the requestor per RDP 10.2.1.2.
        */
       reg_who_requestor_type?: 'government' | 'corporation' | 'individual';
     }

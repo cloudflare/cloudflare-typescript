@@ -319,6 +319,12 @@ export interface TestListParams extends V4PagePaginationParams {
   kind?: 'http' | 'traceroute';
 
   /**
+   * Query param: Optionally filter results to a specific device registration. Must
+   * be used in combination with a single deviceId.
+   */
+  registration_id?: string;
+
+  /**
    * Query param: Optionally filter results by test name
    */
   testName?: string;

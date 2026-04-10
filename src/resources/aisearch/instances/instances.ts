@@ -253,6 +253,8 @@ export interface InstanceCreateResponse {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -349,6 +351,8 @@ export interface InstanceCreateResponse {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -379,6 +383,12 @@ export interface InstanceCreateResponse {
   source_params?: InstanceCreateResponse.SourceParams | null;
 
   status?: string;
+
+  /**
+   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
+   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   */
+  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -625,6 +635,8 @@ export interface InstanceUpdateResponse {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -721,6 +733,8 @@ export interface InstanceUpdateResponse {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -751,6 +765,12 @@ export interface InstanceUpdateResponse {
   source_params?: InstanceUpdateResponse.SourceParams | null;
 
   status?: string;
+
+  /**
+   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
+   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   */
+  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -997,6 +1017,8 @@ export interface InstanceListResponse {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -1093,6 +1115,8 @@ export interface InstanceListResponse {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -1123,6 +1147,12 @@ export interface InstanceListResponse {
   source_params?: InstanceListResponse.SourceParams | null;
 
   status?: string;
+
+  /**
+   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
+   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   */
+  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -1369,6 +1399,8 @@ export interface InstanceDeleteResponse {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -1465,6 +1497,8 @@ export interface InstanceDeleteResponse {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -1495,6 +1529,12 @@ export interface InstanceDeleteResponse {
   source_params?: InstanceDeleteResponse.SourceParams | null;
 
   status?: string;
+
+  /**
+   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
+   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   */
+  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -1811,6 +1851,8 @@ export interface InstanceReadResponse {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -1907,6 +1949,8 @@ export interface InstanceReadResponse {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -1937,6 +1981,12 @@ export interface InstanceReadResponse {
   source_params?: InstanceReadResponse.SourceParams | null;
 
   status?: string;
+
+  /**
+   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
+   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   */
+  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -2210,6 +2260,11 @@ export namespace InstanceSearchResponse {
 export interface InstanceStatsResponse {
   completed?: number;
 
+  /**
+   * Engine-specific metadata. Present only for managed (v3) instances.
+   */
+  engine?: InstanceStatsResponse.Engine;
+
   error?: number;
 
   file_embed_errors?: { [key: string]: unknown };
@@ -2225,6 +2280,45 @@ export interface InstanceStatsResponse {
   running?: number;
 
   skipped?: number;
+}
+
+export namespace InstanceStatsResponse {
+  /**
+   * Engine-specific metadata. Present only for managed (v3) instances.
+   */
+  export interface Engine {
+    /**
+     * R2 bucket storage usage in bytes.
+     */
+    r2?: Engine.R2;
+
+    /**
+     * Vectorize index metadata (dimensions, vector count).
+     */
+    vectorize?: Engine.Vectorize;
+  }
+
+  export namespace Engine {
+    /**
+     * R2 bucket storage usage in bytes.
+     */
+    export interface R2 {
+      metadataSizeBytes: number;
+
+      objectCount: number;
+
+      payloadSizeBytes: number;
+    }
+
+    /**
+     * Vectorize index metadata (dimensions, vector count).
+     */
+    export interface Vectorize {
+      dimensions: number;
+
+      vectorsCount: number;
+    }
+  }
 }
 
 export interface InstanceCreateParams {
@@ -2257,6 +2351,8 @@ export interface InstanceCreateParams {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -2382,6 +2478,8 @@ export interface InstanceCreateParams {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -2422,6 +2520,12 @@ export interface InstanceCreateParams {
    * Body param
    */
   source_params?: InstanceCreateParams.SourceParams | null;
+
+  /**
+   * Body param: Interval between automatic syncs, in seconds. Allowed values: 3600
+   * (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   */
+  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   /**
    * Body param
@@ -2676,6 +2780,8 @@ export interface InstanceUpdateParams {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -2806,6 +2912,8 @@ export interface InstanceUpdateParams {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -2860,6 +2968,8 @@ export interface InstanceUpdateParams {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -2880,6 +2990,12 @@ export interface InstanceUpdateParams {
     | 'openai/gpt-5-nano'
     | ''
     | null;
+
+  /**
+   * Body param: Interval between automatic syncs, in seconds. Allowed values: 3600
+   * (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   */
+  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   /**
    * Body param
@@ -3180,6 +3296,8 @@ export interface InstanceChatCompletionsParams {
     | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
     | '@cf/moonshotai/kimi-k2-instruct'
     | '@cf/google/gemma-3-12b-it'
+    | '@cf/google/gemma-4-26b-a4b-it'
+    | '@cf/moonshotai/kimi-k2.5'
     | 'anthropic/claude-3-7-sonnet'
     | 'anthropic/claude-sonnet-4'
     | 'anthropic/claude-opus-4'
@@ -3247,6 +3365,8 @@ export namespace InstanceChatCompletionsParams {
         | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
         | '@cf/moonshotai/kimi-k2-instruct'
         | '@cf/google/gemma-3-12b-it'
+        | '@cf/google/gemma-4-26b-a4b-it'
+        | '@cf/moonshotai/kimi-k2.5'
         | 'anthropic/claude-3-7-sonnet'
         | 'anthropic/claude-sonnet-4'
         | 'anthropic/claude-opus-4'
@@ -3392,6 +3512,8 @@ export namespace InstanceSearchParams {
         | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
         | '@cf/moonshotai/kimi-k2-instruct'
         | '@cf/google/gemma-3-12b-it'
+        | '@cf/google/gemma-4-26b-a4b-it'
+        | '@cf/moonshotai/kimi-k2.5'
         | 'anthropic/claude-3-7-sonnet'
         | 'anthropic/claude-sonnet-4'
         | 'anthropic/claude-opus-4'

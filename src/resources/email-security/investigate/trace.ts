@@ -22,12 +22,12 @@ export class Trace extends APIResource {
     params: TraceGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TraceGetResponse> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}/trace`,
-        options,
-      ) as Core.APIPromise<{ result: TraceGetResponse }>
+      this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}/trace`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TraceGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -74,9 +74,15 @@ export namespace TraceGetResponse {
 
 export interface TraceGetParams {
   /**
-   * Account Identifier
+   * Path param: Account Identifier
    */
   account_id: string;
+
+  /**
+   * Query param: When true, search the submissions datastore only. When false or
+   * omitted, search the regular datastore only.
+   */
+  submission?: boolean;
 }
 
 export declare namespace Trace {

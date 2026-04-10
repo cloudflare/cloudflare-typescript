@@ -133,6 +133,12 @@ export interface FleetStatusGetResponse {
 
   ramUsedPctByApp?: Array<Array<FleetStatusGetResponse.RamUsedPctByApp>> | null;
 
+  /**
+   * Device registration identifier (UUID v4). On multi-user devices, this uniquely
+   * identifies a user's registration on the device.
+   */
+  registrationId?: string | null;
+
   switchLocked?: boolean | null;
 
   wifiStrengthDbm?: number | null;

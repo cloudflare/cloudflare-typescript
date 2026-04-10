@@ -35,7 +35,8 @@ export interface VideoStorageUsageResponse {
   creator?: string;
 
   /**
-   * The total minutes of video content stored in the account.
+   * The total minutes of video content stored in the account. May contain decimal
+   * values.
    */
   totalStorageMinutes?: number;
 

@@ -12,16 +12,37 @@ export class TimeseriesGroups extends APIResource {
    * @deprecated Use [Radar > AI > Bots > Summary](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/bots/methods/summary_v2/) instead.
    */
   summary(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query?: TimeseriesGroupSummaryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupSummaryResponse>;
   summary(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupSummaryResponse>;
   summary(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query: TimeseriesGroupSummaryParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupSummaryResponse> {
@@ -66,16 +87,37 @@ export class TimeseriesGroups extends APIResource {
    * @deprecated Use [Radar > AI > Bots > Timeseries Groups](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/bots/methods/timeseries_groups/) instead.
    */
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query?: TimeseriesGroupTimeseriesGroupsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL' | 'CONTENT_TYPE',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query: TimeseriesGroupTimeseriesGroupsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupTimeseriesGroupsResponse> {
@@ -760,6 +802,20 @@ export interface TimeseriesGroupSummaryParams {
   name?: Array<string>;
 
   /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
+
+  /**
    * Filters results by user agent.
    */
   userAgent?: Array<string>;
@@ -865,6 +921,20 @@ export interface TimeseriesGroupTimeseriesParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
 
   /**
    * Filters results by user agent.
@@ -978,6 +1048,20 @@ export interface TimeseriesGroupTimeseriesGroupsParams {
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
+
+  /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
 
   /**
    * Filters results by user agent.

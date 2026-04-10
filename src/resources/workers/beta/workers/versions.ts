@@ -190,6 +190,7 @@ export interface Version {
     | Version.WorkersBindingKindVectorize
     | Version.WorkersBindingKindVersionMetadata
     | Version.WorkersBindingKindSecretsStoreSecret
+    | Version.WorkersBindingKindFlagship
     | Version.WorkersBindingKindSecretKey
     | Version.WorkersBindingKindWorkflow
     | Version.WorkersBindingKindWasmModule
@@ -209,6 +210,12 @@ export interface Version {
    * `compatibility_date`.
    */
   compatibility_flags?: Array<string>;
+
+  /**
+   * List of containers attached to a Worker. Containers can only be attached to
+   * Durable Object classes of this Worker script.
+   */
+  containers?: Array<Version.Container>;
 
   /**
    * Resource limits enforced at runtime.
@@ -285,12 +292,12 @@ export namespace Version {
    */
   export interface Annotations {
     /**
-     * Human-readable message about the version.
+     * Human-readable message about the version. Truncated to 1000 bytes if longer.
      */
     'workers/message'?: string;
 
     /**
-     * User-provided identifier for the version.
+     * User-provided identifier for the version. Maximum 100 bytes.
      */
     'workers/tag'?: string;
 
@@ -448,7 +455,7 @@ export namespace Version {
     /**
      * Identifier of the D1 database to bind to.
      */
-    id: string;
+    database_id: string;
 
     /**
      * A JavaScript variable name for the binding.
@@ -459,6 +466,11 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'd1';
+
+    /**
+     * @deprecated This property has been renamed to `database_id`.
+     */
+    id?: string;
   }
 
   export interface WorkersBindingKindDataBlob {
@@ -953,6 +965,23 @@ export namespace Version {
     type: 'secrets_store_secret';
   }
 
+  export interface WorkersBindingKindFlagship {
+    /**
+     * ID of the Flagship app to bind to for feature flag evaluation.
+     */
+    app_id: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'flagship';
+  }
+
   export interface WorkersBindingKindSecretKey {
     /**
      * Algorithm-specific key parameters.
@@ -1073,13 +1102,28 @@ export namespace Version {
   }
 
   /**
+   * Container configuration for a Worker.
+   */
+  export interface Container {
+    /**
+     * Select which Durable Object class should get this container attached.
+     */
+    class_name: string;
+  }
+
+  /**
    * Resource limits enforced at runtime.
    */
   export interface Limits {
     /**
      * CPU time limit in milliseconds.
      */
-    cpu_ms: number;
+    cpu_ms?: number;
+
+    /**
+     * Subrequest limit per request.
+     */
+    subrequests?: number;
   }
 
   export interface WorkersMultipleStepMigrations {}
@@ -1310,6 +1354,7 @@ export interface VersionCreateParams {
     | VersionCreateParams.WorkersBindingKindVectorize
     | VersionCreateParams.WorkersBindingKindVersionMetadata
     | VersionCreateParams.WorkersBindingKindSecretsStoreSecret
+    | VersionCreateParams.WorkersBindingKindFlagship
     | VersionCreateParams.WorkersBindingKindSecretKey
     | VersionCreateParams.WorkersBindingKindWorkflow
     | VersionCreateParams.WorkersBindingKindWasmModule
@@ -1330,6 +1375,12 @@ export interface VersionCreateParams {
    * not included in a `compatibility_date`.
    */
   compatibility_flags?: Array<string>;
+
+  /**
+   * Body param: List of containers attached to a Worker. Containers can only be
+   * attached to Durable Object classes of this Worker script.
+   */
+  containers?: Array<VersionCreateParams.Container>;
 
   /**
    * Body param: Resource limits enforced at runtime.
@@ -1389,12 +1440,12 @@ export namespace VersionCreateParams {
    */
   export interface Annotations {
     /**
-     * Human-readable message about the version.
+     * Human-readable message about the version. Truncated to 1000 bytes if longer.
      */
     'workers/message'?: string;
 
     /**
-     * User-provided identifier for the version.
+     * User-provided identifier for the version. Maximum 100 bytes.
      */
     'workers/tag'?: string;
   }
@@ -1547,7 +1598,7 @@ export namespace VersionCreateParams {
     /**
      * Identifier of the D1 database to bind to.
      */
-    id: string;
+    database_id: string;
 
     /**
      * A JavaScript variable name for the binding.
@@ -1558,6 +1609,11 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'd1';
+
+    /**
+     * @deprecated This property has been renamed to `database_id`.
+     */
+    id?: string;
   }
 
   export interface WorkersBindingKindDataBlob {
@@ -2057,6 +2113,23 @@ export namespace VersionCreateParams {
     type: 'secrets_store_secret';
   }
 
+  export interface WorkersBindingKindFlagship {
+    /**
+     * ID of the Flagship app to bind to for feature flag evaluation.
+     */
+    app_id: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'flagship';
+  }
+
   export interface WorkersBindingKindSecretKey {
     /**
      * Algorithm-specific key parameters.
@@ -2189,13 +2262,28 @@ export namespace VersionCreateParams {
   }
 
   /**
+   * Container configuration for a Worker.
+   */
+  export interface Container {
+    /**
+     * Select which Durable Object class should get this container attached.
+     */
+    class_name: string;
+  }
+
+  /**
    * Resource limits enforced at runtime.
    */
   export interface Limits {
     /**
      * CPU time limit in milliseconds.
      */
-    cpu_ms: number;
+    cpu_ms?: number;
+
+    /**
+     * Subrequest limit per request.
+     */
+    subrequests?: number;
   }
 
   export interface WorkersMultipleStepMigrations {
