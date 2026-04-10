@@ -11,6 +11,7 @@ export {
   type CrawlDeleteParams,
   type CrawlGetParams,
 } from './crawl';
+export { Devtools } from './devtools/index';
 export { Json, type JsonCreateResponse, type JsonCreateParams } from './json';
 export { Links, type LinkCreateResponse, type LinkCreateParams } from './links';
 export { Markdown, type MarkdownCreateResponse, type MarkdownCreateParams } from './markdown';

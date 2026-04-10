@@ -9859,6 +9859,16 @@ Methods:
 - <code title="delete /accounts/{account_id}/browser-rendering/crawl/{job_id}">client.browserRendering.crawl.<a href="./src/resources/browser-rendering/crawl.ts">delete</a>(jobID, { ...params }) -> CrawlDeleteResponse</code>
 - <code title="get /accounts/{account_id}/browser-rendering/crawl/{job_id}">client.browserRendering.crawl.<a href="./src/resources/browser-rendering/crawl.ts">get</a>(jobID, { ...params }) -> CrawlGetResponse</code>
 
+## Devtools
+
+### Session
+
+### Browser
+
+#### Page
+
+#### Targets
+
 # CustomPages
 
 Types:
