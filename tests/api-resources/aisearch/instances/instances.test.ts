@@ -37,10 +37,19 @@ describe('resource instances', () => {
       custom_metadata: [{ data_type: 'text', field_name: 'x' }],
       embedding_model: '@cf/qwen/qwen3-embedding-0.6b',
       fusion_method: 'max',
+      hybrid_search_enabled: true,
       index_method: { keyword: true, vector: true },
       indexing_options: { keyword_tokenizer: 'porter' },
       max_num_results: 1,
-      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
+      metadata: {
+        created_from_aisearch_wizard: true,
+        search_for_agents: {
+          hostname: 'hostname',
+          zone_id: 'zone_id',
+          zone_name: 'zone_name',
+        },
+        worker_domain: 'worker_domain',
+      },
       public_endpoint_params: {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
@@ -123,7 +132,15 @@ describe('resource instances', () => {
       index_method: { keyword: true, vector: true },
       indexing_options: { keyword_tokenizer: 'porter' },
       max_num_results: 1,
-      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
+      metadata: {
+        created_from_aisearch_wizard: true,
+        search_for_agents: {
+          hostname: 'hostname',
+          zone_id: 'zone_id',
+          zone_name: 'zone_name',
+        },
+        worker_domain: 'worker_domain',
+      },
       paused: true,
       public_endpoint_params: {
         authorized_hosts: ['string'],
@@ -294,7 +311,6 @@ describe('resource instances', () => {
   test('search: only required params', async () => {
     const responsePromise = client.aiSearch.instances.search('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      messages: [{ content: 'content', role: 'system' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -308,7 +324,6 @@ describe('resource instances', () => {
   test('search: required and optional params', async () => {
     const response = await client.aiSearch.instances.search('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      messages: [{ content: 'content', role: 'system' }],
       ai_search_options: {
         cache: { cache_threshold: 'super_strict_match', enabled: true },
         query_rewrite: {
@@ -333,6 +348,8 @@ describe('resource instances', () => {
           return_on_failure: true,
         },
       },
+      messages: [{ content: 'content', role: 'system' }],
+      query: 'x',
     });
   });
 
