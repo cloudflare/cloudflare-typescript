@@ -97,7 +97,7 @@ export class Requests extends APIResource {
   }
 
   /**
-   * List Requests
+   * Lists Cloudforce One intelligence requests with filtering and pagination.
    *
    * @example
    * ```ts
@@ -126,7 +126,7 @@ export class Requests extends APIResource {
   }
 
   /**
-   * Delete a Request
+   * Deletes a Cloudforce One intelligence request and all associated data.
    *
    * @example
    * ```ts
@@ -146,7 +146,8 @@ export class Requests extends APIResource {
   }
 
   /**
-   * Get Request Priority, Status, and TLP constants
+   * Retrieves constant values used in Cloudforce One requests, including valid
+   * statuses and types.
    *
    * @example
    * ```ts
@@ -170,7 +171,7 @@ export class Requests extends APIResource {
   }
 
   /**
-   * Get a Request
+   * Retrieves details for a specific Cloudforce One intelligence request.
    *
    * @example
    * ```ts
@@ -191,7 +192,7 @@ export class Requests extends APIResource {
   }
 
   /**
-   * Get Request Quota
+   * Retrieves quota usage for Cloudforce One standard requests.
    *
    * @example
    * ```ts
@@ -210,7 +211,7 @@ export class Requests extends APIResource {
   }
 
   /**
-   * Get Request Types
+   * Lists available request types for Cloudforce One intelligence requests.
    *
    * @example
    * ```ts
