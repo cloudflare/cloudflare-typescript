@@ -20,7 +20,7 @@ export class EmailSending extends APIResource {
   subdomains: SubdomainsAPI.Subdomains = new SubdomainsAPI.Subdomains(this._client);
 
   /**
-   * Send an email using the builder.
+   * Send an email
    *
    * @example
    * ```ts
@@ -46,7 +46,7 @@ export class EmailSending extends APIResource {
   }
 
   /**
-   * Send a raw MIME email message.
+   * Send a raw MIME email
    *
    * @example
    * ```ts

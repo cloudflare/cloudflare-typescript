@@ -5,9 +5,8 @@ import * as Core from '../../core';
 
 export class Json extends APIResource {
   /**
-   * Use AI to extract structured JSON from a webpage. Provide a `prompt` describing
-   * what to extract, or a `response_format` with a JSON schema for typed output.
-   * Supports both URL and raw HTML input.
+   * Gets json from a webpage from a provided URL or HTML. Pass `prompt` or `schema`
+   * in the body. Control page loading with `gotoOptions` and `waitFor*` options.
    *
    * @example
    * ```ts
