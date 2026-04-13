@@ -6903,6 +6903,16 @@ Methods:
 - <code title="get /accounts/{account_id}/urlscanner/v2/har/{scan_id}">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">har</a>(scanID, { ...params }) -> ScanHARResponse</code>
 - <code title="get /accounts/{account_id}/urlscanner/v2/screenshots/{scan_id}.png">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">screenshot</a>(scanID, { ...params }) -> Response</code>
 
+# VulnerabilityScanner
+
+## CredentialSets
+
+### Credentials
+
+## Scans
+
+## TargetEnvironments
+
 # Radar
 
 ## AI

@@ -129,6 +129,7 @@ import { Turnstile } from './resources/turnstile/turnstile';
 import { URLScanner } from './resources/url-scanner/url-scanner';
 import { User } from './resources/user/user';
 import { Vectorize } from './resources/vectorize/vectorize';
+import { VulnerabilityScanner } from './resources/vulnerability-scanner/vulnerability-scanner';
 import { WaitingRooms } from './resources/waiting-rooms/waiting-rooms';
 import { Web3 } from './resources/web3/web3';
 import { WorkersForPlatforms } from './resources/workers-for-platforms/workers-for-platforms';
@@ -1001,6 +1002,7 @@ export class Cloudflare {
   rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
   urlScanner: API.URLScanner = new API.URLScanner(this);
+  vulnerabilityScanner: API.VulnerabilityScanner = new API.VulnerabilityScanner(this);
   radar: API.Radar = new API.Radar(this);
   botManagement: API.BotManagement = new API.BotManagement(this);
   fraud: API.Fraud = new API.Fraud(this);
@@ -1108,6 +1110,7 @@ Cloudflare.HyperdriveResource = HyperdriveResource;
 Cloudflare.RUM = RUM;
 Cloudflare.Vectorize = Vectorize;
 Cloudflare.URLScanner = URLScanner;
+Cloudflare.VulnerabilityScanner = VulnerabilityScanner;
 Cloudflare.Radar = Radar;
 Cloudflare.BotManagement = BotManagement;
 Cloudflare.Fraud = Fraud;
@@ -1321,6 +1324,8 @@ export declare namespace Cloudflare {
   export { Vectorize as Vectorize };
 
   export { URLScanner as URLScanner };
+
+  export { VulnerabilityScanner as VulnerabilityScanner };
 
   export { Radar as Radar };
 
