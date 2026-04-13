@@ -182,10 +182,7 @@ export class Instances extends APIResource {
    * ```ts
    * const response = await client.aiSearch.instances.search(
    *   'my-ai-search',
-   *   {
-   *     account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *     messages: [{ content: 'content', role: 'system' }],
-   *   },
+   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
    * );
    * ```
    */
@@ -431,7 +428,19 @@ export namespace InstanceCreateResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    search_for_agents?: Metadata.SearchForAgents;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface SearchForAgents {
+      hostname: string;
+
+      zone_id: string;
+
+      zone_name: string;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -494,8 +503,6 @@ export namespace InstanceCreateResponse {
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
      * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
-     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
-     * 'or' respectively.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -813,7 +820,19 @@ export namespace InstanceUpdateResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    search_for_agents?: Metadata.SearchForAgents;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface SearchForAgents {
+      hostname: string;
+
+      zone_id: string;
+
+      zone_name: string;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -876,8 +895,6 @@ export namespace InstanceUpdateResponse {
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
      * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
-     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
-     * 'or' respectively.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -1195,7 +1212,19 @@ export namespace InstanceListResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    search_for_agents?: Metadata.SearchForAgents;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface SearchForAgents {
+      hostname: string;
+
+      zone_id: string;
+
+      zone_name: string;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -1258,8 +1287,6 @@ export namespace InstanceListResponse {
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
      * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
-     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
-     * 'or' respectively.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -1577,7 +1604,19 @@ export namespace InstanceDeleteResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    search_for_agents?: Metadata.SearchForAgents;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface SearchForAgents {
+      hostname: string;
+
+      zone_id: string;
+
+      zone_name: string;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -1640,8 +1679,6 @@ export namespace InstanceDeleteResponse {
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
      * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
-     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
-     * 'or' respectively.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -2029,7 +2066,19 @@ export namespace InstanceReadResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    search_for_agents?: Metadata.SearchForAgents;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface SearchForAgents {
+      hostname: string;
+
+      zone_id: string;
+
+      zone_name: string;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -2092,8 +2141,6 @@ export namespace InstanceReadResponse {
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
      * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
-     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
-     * 'or' respectively.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -2425,6 +2472,11 @@ export interface InstanceCreateParams {
   fusion_method?: 'max' | 'rrf';
 
   /**
+   * @deprecated Body param: Deprecated — use index_method instead.
+   */
+  hybrid_search_enabled?: boolean;
+
+  /**
    * Body param: Controls which storage backends are used during indexing. Defaults
    * to vector-only.
    */
@@ -2574,7 +2626,19 @@ export namespace InstanceCreateParams {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    search_for_agents?: Metadata.SearchForAgents;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface SearchForAgents {
+      hostname: string;
+
+      zone_id: string;
+
+      zone_name: string;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -2637,8 +2701,6 @@ export namespace InstanceCreateParams {
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
      * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
-     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
-     * 'or' respectively.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -3054,7 +3116,19 @@ export namespace InstanceUpdateParams {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
+    search_for_agents?: Metadata.SearchForAgents;
+
     worker_domain?: string;
+  }
+
+  export namespace Metadata {
+    export interface SearchForAgents {
+      hostname: string;
+
+      zone_id: string;
+
+      zone_name: string;
+    }
   }
 
   export interface PublicEndpointParams {
@@ -3117,8 +3191,6 @@ export namespace InstanceUpdateParams {
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
      * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
-     * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
-     * 'or' respectively.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -3417,8 +3489,6 @@ export namespace InstanceChatCompletionsParams {
        * Controls which documents are candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
        * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
-       * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
-       * 'or' respectively.
        */
       keyword_match_mode?: 'and' | 'or';
 
@@ -3465,23 +3535,21 @@ export interface InstanceSearchParams {
   /**
    * Body param
    */
-  messages: Array<InstanceSearchParams.Message>;
+  ai_search_options?: InstanceSearchParams.AISearchOptions;
 
   /**
    * Body param
    */
-  ai_search_options?: InstanceSearchParams.AISearchOptions;
+  messages?: Array<InstanceSearchParams.Message>;
+
+  /**
+   * Body param: A simple text query string. Alternative to 'messages' — provide
+   * either this or 'messages', not both.
+   */
+  query?: string;
 }
 
 export namespace InstanceSearchParams {
-  export interface Message {
-    content: string | null;
-
-    role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
-
-    [k: string]: unknown;
-  }
-
   export interface AISearchOptions {
     cache?: AISearchOptions.Cache;
 
@@ -3564,8 +3632,6 @@ export namespace InstanceSearchParams {
        * Controls which documents are candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
        * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
-       * Legacy values 'exact_match' and 'fuzzy_match' are accepted and map to 'and' and
-       * 'or' respectively.
        */
       keyword_match_mode?: 'and' | 'or';
 
@@ -3596,6 +3662,14 @@ export namespace InstanceSearchParams {
         direction?: 'asc' | 'desc' | 'exists' | 'not_exists';
       }
     }
+  }
+
+  export interface Message {
+    content: string | null;
+
+    role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
+
+    [k: string]: unknown;
   }
 }
 
