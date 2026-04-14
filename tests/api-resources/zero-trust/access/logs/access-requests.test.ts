@@ -26,15 +26,25 @@ describe('resource accessRequests', () => {
   test('list: required and optional params', async () => {
     const response = await client.zeroTrust.access.logs.accessRequests.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      allowedOp: 'eq',
+      app_typeOp: 'eq',
+      app_uidOp: 'eq',
+      country_codeOp: 'eq',
       direction: 'desc',
       email: 'user@example.com',
       email_exact: true,
+      emailOp: 'eq',
+      fields: 'fields',
+      idpOp: 'eq',
       limit: 0,
+      non_identityOp: 'eq',
       page: 0,
       per_page: 0,
+      ray_idOp: 'eq',
       since: '2020-07-01T05:20:00Z',
       until: '2020-10-01T05:20:00Z',
       user_id: 'f757c5c3-c1b2-50f7-9126-150a099b6f7e',
+      user_idOp: 'eq',
     });
   });
 });

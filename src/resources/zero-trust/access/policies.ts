@@ -305,6 +305,12 @@ export interface PolicyCreateResponse {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyCreateResponse.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -331,6 +337,11 @@ export interface PolicyCreateResponse {
    * this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyCreateResponse.MfaConfig;
 
   /**
    * The name of the Access policy.
@@ -363,6 +374,58 @@ export interface PolicyCreateResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyCreateResponse {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyUpdateResponse {
@@ -387,6 +450,12 @@ export interface PolicyUpdateResponse {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyUpdateResponse.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -413,6 +482,11 @@ export interface PolicyUpdateResponse {
    * this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyUpdateResponse.MfaConfig;
 
   /**
    * The name of the Access policy.
@@ -447,6 +521,58 @@ export interface PolicyUpdateResponse {
   updated_at?: string;
 }
 
+export namespace PolicyUpdateResponse {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
+}
+
 export interface PolicyListResponse {
   /**
    * The UUID of the policy
@@ -468,6 +594,12 @@ export interface PolicyListResponse {
    * session.
    */
   approval_required?: boolean;
+
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyListResponse.ConnectionRules;
 
   created_at?: string;
 
@@ -495,6 +627,11 @@ export interface PolicyListResponse {
    * this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyListResponse.MfaConfig;
 
   /**
    * The name of the Access policy.
@@ -527,6 +664,58 @@ export interface PolicyListResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyListResponse {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyDeleteResponse {
@@ -558,6 +747,12 @@ export interface PolicyGetResponse {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyGetResponse.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -584,6 +779,11 @@ export interface PolicyGetResponse {
    * this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyGetResponse.MfaConfig;
 
   /**
    * The name of the Access policy.
@@ -616,6 +816,58 @@ export interface PolicyGetResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyGetResponse {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyCreateParams {
@@ -653,6 +905,12 @@ export interface PolicyCreateParams {
   approval_required?: boolean;
 
   /**
+   * Body param: The rules that define how users may connect to targets secured by
+   * your application.
+   */
+  connection_rules?: PolicyCreateParams.ConnectionRules;
+
+  /**
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
@@ -664,6 +922,11 @@ export interface PolicyCreateParams {
    * order to use this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Body param: Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyCreateParams.MfaConfig;
 
   /**
    * Body param: A custom message that will appear on the purpose justification
@@ -689,6 +952,58 @@ export interface PolicyCreateParams {
    * (or µs), ms, s, m, h.
    */
   session_duration?: string;
+}
+
+export namespace PolicyCreateParams {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyUpdateParams {
@@ -726,6 +1041,12 @@ export interface PolicyUpdateParams {
   approval_required?: boolean;
 
   /**
+   * Body param: The rules that define how users may connect to targets secured by
+   * your application.
+   */
+  connection_rules?: PolicyUpdateParams.ConnectionRules;
+
+  /**
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
@@ -737,6 +1058,11 @@ export interface PolicyUpdateParams {
    * order to use this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Body param: Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyUpdateParams.MfaConfig;
 
   /**
    * Body param: A custom message that will appear on the purpose justification
@@ -762,6 +1088,58 @@ export interface PolicyUpdateParams {
    * (or µs), ms, s, m, h.
    */
   session_duration?: string;
+}
+
+export namespace PolicyUpdateParams {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyListParams extends V4PagePaginationArrayParams {

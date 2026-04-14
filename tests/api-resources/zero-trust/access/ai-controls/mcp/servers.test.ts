@@ -15,7 +15,7 @@ describe('resource servers', () => {
       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
       id: 'my-mcp-server',
       auth_type: 'unauthenticated',
-      hostname: 'https://exmaple.com/mcp',
+      hostname: 'https://example.com/mcp',
       name: 'My MCP Server',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -32,10 +32,26 @@ describe('resource servers', () => {
       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
       id: 'my-mcp-server',
       auth_type: 'unauthenticated',
-      hostname: 'https://exmaple.com/mcp',
+      hostname: 'https://example.com/mcp',
       name: 'My MCP Server',
       auth_credentials: 'auth_credentials',
       description: 'This is one remote mcp server',
+      updated_prompts: [
+        {
+          name: 'name',
+          alias: 'my-custom-alias',
+          description: 'description',
+          enabled: true,
+        },
+      ],
+      updated_tools: [
+        {
+          name: 'name',
+          alias: 'my-custom-alias',
+          description: 'description',
+          enabled: true,
+        },
+      ],
     });
   });
 
@@ -58,6 +74,22 @@ describe('resource servers', () => {
       auth_credentials: 'auth_credentials',
       description: 'This is one remote mcp server',
       name: 'My MCP Server',
+      updated_prompts: [
+        {
+          name: 'name',
+          alias: 'my-custom-alias',
+          description: 'description',
+          enabled: true,
+        },
+      ],
+      updated_tools: [
+        {
+          name: 'name',
+          alias: 'my-custom-alias',
+          description: 'description',
+          enabled: true,
+        },
+      ],
     });
   });
 

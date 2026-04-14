@@ -4,10 +4,7 @@ export {
   Custom,
   type CustomProfile,
   type Pattern,
-  type CustomCreateResponse,
-  type CustomUpdateResponse,
   type CustomDeleteResponse,
-  type CustomGetResponse,
   type CustomCreateParams,
   type CustomUpdateParams,
   type CustomDeleteParams,
@@ -16,9 +13,7 @@ export {
 export {
   Predefined,
   type PredefinedProfile,
-  type PredefinedUpdateResponse,
   type PredefinedDeleteResponse,
-  type PredefinedGetResponse,
   type PredefinedUpdateParams,
   type PredefinedDeleteParams,
   type PredefinedGetParams,
@@ -29,7 +24,6 @@ export {
   type ContextAwareness,
   type Profile,
   type SkipConfiguration,
-  type ProfileGetResponse,
   type ProfileListParams,
   type ProfileGetParams,
 } from './profiles';

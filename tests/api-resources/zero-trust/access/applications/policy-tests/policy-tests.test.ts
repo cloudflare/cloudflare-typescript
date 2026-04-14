@@ -44,8 +44,19 @@ describe('resource policyTests', () => {
             },
           ],
           approval_required: true,
+          connection_rules: {
+            rdp: {
+              allowed_clipboard_local_to_remote_formats: ['text'],
+              allowed_clipboard_remote_to_local_formats: ['text'],
+            },
+          },
           exclude: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
           isolation_required: false,
+          mfa_config: {
+            allowed_authenticators: ['totp', 'biometrics', 'security_key'],
+            mfa_disabled: false,
+            session_duration: '24h',
+          },
           purpose_justification_prompt: 'Please enter a justification for entering this protected domain.',
           purpose_justification_required: true,
           require: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],

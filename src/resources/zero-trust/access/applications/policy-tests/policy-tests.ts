@@ -169,6 +169,12 @@ export namespace PolicyTestCreateParams {
     approval_required?: boolean;
 
     /**
+     * The rules that define how users may connect to targets secured by your
+     * application.
+     */
+    connection_rules?: UnionMember0.ConnectionRules;
+
+    /**
      * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
      * meet any of the Exclude rules.
      */
@@ -180,6 +186,11 @@ export namespace PolicyTestCreateParams {
      * this feature.
      */
     isolation_required?: boolean;
+
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: UnionMember0.MfaConfig;
 
     /**
      * A custom message that will appear on the purpose justification screen.
@@ -203,6 +214,58 @@ export namespace PolicyTestCreateParams {
      * m, h.
      */
     session_duration?: string;
+  }
+
+  export namespace UnionMember0 {
+    /**
+     * The rules that define how users may connect to targets secured by your
+     * application.
+     */
+    export interface ConnectionRules {
+      /**
+       * The RDP-specific rules that define clipboard behavior for RDP connections.
+       */
+      rdp?: ConnectionRules.RDP;
+    }
+
+    export namespace ConnectionRules {
+      /**
+       * The RDP-specific rules that define clipboard behavior for RDP connections.
+       */
+      export interface RDP {
+        /**
+         * Clipboard formats allowed when copying from local machine to remote RDP session.
+         */
+        allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+        /**
+         * Clipboard formats allowed when copying from remote RDP session to local machine.
+         */
+        allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      }
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
   }
 }
 

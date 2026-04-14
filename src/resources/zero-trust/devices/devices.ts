@@ -22,7 +22,7 @@ import {
   DEXTestGetResponse,
   DEXTestListParams,
   DEXTestListResponse,
-  DEXTestListResponsesSinglePage,
+  DEXTestListResponsesV4PagePaginationArray,
   DEXTestUpdateParams,
   DEXTestUpdateResponse,
   DEXTests,
@@ -31,6 +31,18 @@ import {
 } from './dex-tests';
 import * as FleetStatusAPI from './fleet-status';
 import { FleetStatus, FleetStatusGetParams, FleetStatusGetResponse } from './fleet-status';
+import * as IPProfilesAPI from './ip-profiles';
+import {
+  IPProfile,
+  IPProfileCreateParams,
+  IPProfileDeleteParams,
+  IPProfileDeleteResponse,
+  IPProfileGetParams,
+  IPProfileListParams,
+  IPProfileUpdateParams,
+  IPProfiles,
+  IPProfilesSinglePage,
+} from './ip-profiles';
 import * as NetworksAPI from './networks';
 import {
   DeviceNetwork,
@@ -129,6 +141,7 @@ export class Devices extends APIResource {
   resilience: ResilienceAPI.Resilience = new ResilienceAPI.Resilience(this._client);
   registrations: RegistrationsAPI.Registrations = new RegistrationsAPI.Registrations(this._client);
   dexTests: DEXTestsAPI.DEXTests = new DEXTestsAPI.DEXTests(this._client);
+  ipProfiles: IPProfilesAPI.IPProfiles = new IPProfilesAPI.IPProfiles(this._client);
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
   fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
@@ -441,7 +454,9 @@ Devices.Resilience = Resilience;
 Devices.Registrations = Registrations;
 Devices.RegistrationListResponsesCursorPagination = RegistrationListResponsesCursorPagination;
 Devices.DEXTests = DEXTests;
-Devices.DEXTestListResponsesSinglePage = DEXTestListResponsesSinglePage;
+Devices.DEXTestListResponsesV4PagePaginationArray = DEXTestListResponsesV4PagePaginationArray;
+Devices.IPProfiles = IPProfiles;
+Devices.IPProfilesSinglePage = IPProfilesSinglePage;
 Devices.Networks = Networks;
 Devices.DeviceNetworksSinglePage = DeviceNetworksSinglePage;
 Devices.FleetStatus = FleetStatus;
@@ -501,12 +516,24 @@ export declare namespace Devices {
     type DEXTestListResponse as DEXTestListResponse,
     type DEXTestDeleteResponse as DEXTestDeleteResponse,
     type DEXTestGetResponse as DEXTestGetResponse,
-    DEXTestListResponsesSinglePage as DEXTestListResponsesSinglePage,
+    DEXTestListResponsesV4PagePaginationArray as DEXTestListResponsesV4PagePaginationArray,
     type DEXTestCreateParams as DEXTestCreateParams,
     type DEXTestUpdateParams as DEXTestUpdateParams,
     type DEXTestListParams as DEXTestListParams,
     type DEXTestDeleteParams as DEXTestDeleteParams,
     type DEXTestGetParams as DEXTestGetParams,
+  };
+
+  export {
+    IPProfiles as IPProfiles,
+    type IPProfile as IPProfile,
+    type IPProfileDeleteResponse as IPProfileDeleteResponse,
+    IPProfilesSinglePage as IPProfilesSinglePage,
+    type IPProfileCreateParams as IPProfileCreateParams,
+    type IPProfileUpdateParams as IPProfileUpdateParams,
+    type IPProfileListParams as IPProfileListParams,
+    type IPProfileDeleteParams as IPProfileDeleteParams,
+    type IPProfileGetParams as IPProfileGetParams,
   };
 
   export {

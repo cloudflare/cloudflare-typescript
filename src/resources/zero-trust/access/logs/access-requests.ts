@@ -39,6 +39,26 @@ export interface AccessRequestListParams {
   account_id: string;
 
   /**
+   * Query param: Operator for the `allowed` filter.
+   */
+  allowedOp?: 'eq' | 'neq';
+
+  /**
+   * Query param: Operator for the `app_type` filter.
+   */
+  app_typeOp?: 'eq' | 'neq';
+
+  /**
+   * Query param: Operator for the `app_uid` filter.
+   */
+  app_uidOp?: 'eq' | 'neq';
+
+  /**
+   * Query param: Operator for the `country_code` filter.
+   */
+  country_codeOp?: 'eq' | 'neq';
+
+  /**
    * Query param: The chronological sorting order for the logs.
    */
   direction?: 'desc' | 'asc';
@@ -58,9 +78,30 @@ export interface AccessRequestListParams {
   email_exact?: boolean;
 
   /**
+   * Query param: Operator for the `email` filter.
+   */
+  emailOp?: 'eq' | 'neq';
+
+  /**
+   * Query param: Comma-separated list of fields to include in the response. When
+   * omitted, all fields are returned.
+   */
+  fields?: string;
+
+  /**
+   * Query param: Operator for the `idp` filter.
+   */
+  idpOp?: 'eq' | 'neq';
+
+  /**
    * Query param: The maximum number of log entries to retrieve.
    */
   limit?: number;
+
+  /**
+   * Query param: Operator for the `non_identity` filter.
+   */
+  non_identityOp?: 'eq' | 'neq';
 
   /**
    * Query param: Page number of results.
@@ -71,6 +112,11 @@ export interface AccessRequestListParams {
    * Query param: Number of results per page.
    */
   per_page?: number;
+
+  /**
+   * Query param: Operator for the `ray_id` filter.
+   */
+  ray_idOp?: 'eq' | 'neq';
 
   /**
    * Query param: The earliest event timestamp to query.
@@ -86,6 +132,11 @@ export interface AccessRequestListParams {
    * Query param: Filter by user UUID.
    */
   user_id?: string;
+
+  /**
+   * Query param: Operator for the `user_id` filter.
+   */
+  user_idOp?: 'eq' | 'neq';
 }
 
 export declare namespace AccessRequests {

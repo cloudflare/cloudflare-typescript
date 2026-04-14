@@ -6,7 +6,8 @@ import { SinglePage } from '../../../../pagination';
 
 export class Rules extends APIResource {
   /**
-   * Create email scanner rule
+   * Creates a new DLP email scanning rule that defines what content patterns to
+   * detect in email messages and what actions to take.
    *
    * @example
    * ```ts
@@ -97,7 +98,8 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Delete email scanner rule
+   * Removes a DLP email scanning rule. The rule will no longer be applied to email
+   * messages.
    *
    * @example
    * ```ts
@@ -121,7 +123,8 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Update email scanner rule priorities
+   * Reorders DLP email scanning rules by updating their priority values. Higher
+   * priority rules are evaluated first.
    *
    * @example
    * ```ts
@@ -142,7 +145,8 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Get an email scanner rule
+   * Gets detailed configuration for a specific DLP email scanning rule, including
+   * detection patterns and actions.
    *
    * @example
    * ```ts

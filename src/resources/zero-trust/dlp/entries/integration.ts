@@ -168,19 +168,22 @@ export interface IntegrationUpdateResponse {
 }
 
 export type IntegrationListResponse =
-  | IntegrationListResponse.CustomEntry
-  | IntegrationListResponse.PredefinedEntry
-  | IntegrationListResponse.IntegrationEntry
-  | IntegrationListResponse.ExactDataEntry
-  | IntegrationListResponse.DocumentFingerprintEntry
-  | IntegrationListResponse.WordListEntry;
+  | IntegrationListResponse.UnionMember0
+  | IntegrationListResponse.UnionMember1
+  | IntegrationListResponse.UnionMember2
+  | IntegrationListResponse.UnionMember3
+  | IntegrationListResponse.UnionMember4
+  | IntegrationListResponse.UnionMember5;
 
 export namespace IntegrationListResponse {
-  export interface CustomEntry {
+  export interface UnionMember0 {
     id: string;
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -191,15 +194,20 @@ export namespace IntegrationListResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface PredefinedEntry {
+  export interface UnionMember1 {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: UnionMember1.Confidence;
 
     enabled: boolean;
 
@@ -207,14 +215,17 @@ export namespace IntegrationListResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
-    variant?: PredefinedEntry.Variant;
+    variant?: UnionMember1.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace UnionMember1 {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -237,7 +248,7 @@ export namespace IntegrationListResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface UnionMember2 {
     id: string;
 
     created_at: string;
@@ -255,7 +266,7 @@ export namespace IntegrationListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface ExactDataEntry {
+  export interface UnionMember3 {
     id: string;
 
     /**
@@ -279,7 +290,7 @@ export namespace IntegrationListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface UnionMember4 {
     id: string;
 
     created_at: string;
@@ -295,7 +306,7 @@ export namespace IntegrationListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface WordListEntry {
+  export interface UnionMember5 {
     id: string;
 
     created_at: string;
@@ -332,6 +343,9 @@ export namespace IntegrationGetResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -342,6 +356,11 @@ export namespace IntegrationGetResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember0.Profile>;
@@ -371,6 +390,9 @@ export namespace IntegrationGetResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember1.Profile>;

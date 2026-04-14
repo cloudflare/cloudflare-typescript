@@ -165,9 +165,17 @@ import { Logs } from './logs/logs';
 import * as UsersAPI from './users/users';
 import {
   AccessUser,
+  UserCreateParams,
+  UserCreateResponse,
+  UserDeleteParams,
+  UserDeleteResponse,
+  UserGetParams,
+  UserGetResponse,
   UserListParams,
   UserListResponse,
   UserListResponsesV4PagePaginationArray,
+  UserUpdateParams,
+  UserUpdateResponse,
   Users,
 } from './users/users';
 
@@ -336,9 +344,17 @@ export declare namespace Access {
   export {
     Users as Users,
     type AccessUser as AccessUser,
+    type UserCreateResponse as UserCreateResponse,
+    type UserUpdateResponse as UserUpdateResponse,
     type UserListResponse as UserListResponse,
+    type UserDeleteResponse as UserDeleteResponse,
+    type UserGetResponse as UserGetResponse,
     UserListResponsesV4PagePaginationArray as UserListResponsesV4PagePaginationArray,
+    type UserCreateParams as UserCreateParams,
+    type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
+    type UserDeleteParams as UserDeleteParams,
+    type UserGetParams as UserGetParams,
   };
 
   export {

@@ -104,6 +104,11 @@ export namespace CommandCreateResponse {
     device_id?: string;
 
     /**
+     * Unique identifier for the device registration
+     */
+    registration_id?: string;
+
+    /**
      * Current status of the command
      */
     status?: 'PENDING_EXEC' | 'PENDING_UPLOAD' | 'SUCCESS' | 'FAILED';
@@ -130,6 +135,11 @@ export namespace CommandListResponse {
     device_id?: string;
 
     filename?: string | null;
+
+    /**
+     * Unique identifier for the device registration
+     */
+    registration_id?: string;
 
     status?: string;
 
@@ -159,7 +169,7 @@ export namespace CommandCreateParams {
     command_type: 'pcap' | 'warp-diag';
 
     /**
-     * Unique identifier for the device
+     * Unique identifier for the physical device
      */
     device_id: string;
 
@@ -169,6 +179,12 @@ export namespace CommandCreateParams {
     user_email: string;
 
     command_args?: Command.CommandArgs;
+
+    /**
+     * Unique identifier for the device registration. Required for multi-user devices
+     * to target the correct user session.
+     */
+    registration_id?: string;
   }
 
   export namespace Command {

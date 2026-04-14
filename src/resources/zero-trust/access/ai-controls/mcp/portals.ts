@@ -6,7 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 
 export class Portals extends APIResource {
   /**
-   * Create a new MCP Portal
+   * Creates a new MCP portal for managing AI tool access through Cloudflare Access.
    *
    * @example
    * ```ts
@@ -32,7 +32,7 @@ export class Portals extends APIResource {
   }
 
   /**
-   * Update a MCP Portal
+   * Updates an MCP portal configuration.
    *
    * @example
    * ```ts
@@ -58,7 +58,7 @@ export class Portals extends APIResource {
   }
 
   /**
-   * List MCP Portals
+   * Lists all MCP portals configured for the account.
    *
    * @example
    * ```ts
@@ -83,7 +83,7 @@ export class Portals extends APIResource {
   }
 
   /**
-   * Delete a MCP Portal
+   * Deletes an MCP portal from the account.
    *
    * @example
    * ```ts
@@ -147,6 +147,13 @@ export interface PortalCreateResponse {
 
   name: string;
 
+  servers: Array<PortalCreateResponse.Server>;
+
+  /**
+   * Allow remote code execution in Dynamic Workers (beta)
+   */
+  allow_code_mode?: boolean;
+
   created_at?: string;
 
   created_by?: string;
@@ -161,6 +168,77 @@ export interface PortalCreateResponse {
    * Route outbound MCP traffic through Zero Trust Secure Web Gateway
    */
   secure_web_gateway?: boolean;
+}
+
+export namespace PortalCreateResponse {
+  export interface Server {
+    /**
+     * server id
+     */
+    id: string;
+
+    auth_type: 'oauth' | 'bearer' | 'unauthenticated';
+
+    hostname: string;
+
+    name: string;
+
+    prompts: Array<{ [key: string]: unknown }>;
+
+    tools: Array<{ [key: string]: unknown }>;
+
+    created_at?: string;
+
+    created_by?: string;
+
+    default_disabled?: boolean;
+
+    description?: string | null;
+
+    error?: string;
+
+    last_successful_sync?: string;
+
+    last_synced?: string;
+
+    modified_at?: string;
+
+    modified_by?: string;
+
+    on_behalf?: boolean;
+
+    status?: string;
+
+    updated_prompts?: Array<Server.UpdatedPrompt>;
+
+    updated_tools?: Array<Server.UpdatedTool>;
+  }
+
+  export namespace Server {
+    export interface UpdatedPrompt {
+      name: string;
+
+      description?: string;
+
+      enabled?: boolean;
+
+      portal_alias?: string;
+
+      server_alias?: string;
+    }
+
+    export interface UpdatedTool {
+      name: string;
+
+      description?: string;
+
+      enabled?: boolean;
+
+      portal_alias?: string;
+
+      server_alias?: string;
+    }
+  }
 }
 
 export interface PortalUpdateResponse {
@@ -173,6 +251,13 @@ export interface PortalUpdateResponse {
 
   name: string;
 
+  servers: Array<PortalUpdateResponse.Server>;
+
+  /**
+   * Allow remote code execution in Dynamic Workers (beta)
+   */
+  allow_code_mode?: boolean;
+
   created_at?: string;
 
   created_by?: string;
@@ -187,6 +272,77 @@ export interface PortalUpdateResponse {
    * Route outbound MCP traffic through Zero Trust Secure Web Gateway
    */
   secure_web_gateway?: boolean;
+}
+
+export namespace PortalUpdateResponse {
+  export interface Server {
+    /**
+     * server id
+     */
+    id: string;
+
+    auth_type: 'oauth' | 'bearer' | 'unauthenticated';
+
+    hostname: string;
+
+    name: string;
+
+    prompts: Array<{ [key: string]: unknown }>;
+
+    tools: Array<{ [key: string]: unknown }>;
+
+    created_at?: string;
+
+    created_by?: string;
+
+    default_disabled?: boolean;
+
+    description?: string | null;
+
+    error?: string;
+
+    last_successful_sync?: string;
+
+    last_synced?: string;
+
+    modified_at?: string;
+
+    modified_by?: string;
+
+    on_behalf?: boolean;
+
+    status?: string;
+
+    updated_prompts?: Array<Server.UpdatedPrompt>;
+
+    updated_tools?: Array<Server.UpdatedTool>;
+  }
+
+  export namespace Server {
+    export interface UpdatedPrompt {
+      name: string;
+
+      description?: string;
+
+      enabled?: boolean;
+
+      portal_alias?: string;
+
+      server_alias?: string;
+    }
+
+    export interface UpdatedTool {
+      name: string;
+
+      description?: string;
+
+      enabled?: boolean;
+
+      portal_alias?: string;
+
+      server_alias?: string;
+    }
+  }
 }
 
 export interface PortalListResponse {
@@ -199,6 +355,13 @@ export interface PortalListResponse {
 
   name: string;
 
+  servers: Array<PortalListResponse.Server>;
+
+  /**
+   * Allow remote code execution in Dynamic Workers (beta)
+   */
+  allow_code_mode?: boolean;
+
   created_at?: string;
 
   created_by?: string;
@@ -215,6 +378,77 @@ export interface PortalListResponse {
   secure_web_gateway?: boolean;
 }
 
+export namespace PortalListResponse {
+  export interface Server {
+    /**
+     * server id
+     */
+    id: string;
+
+    auth_type: 'oauth' | 'bearer' | 'unauthenticated';
+
+    hostname: string;
+
+    name: string;
+
+    prompts: Array<{ [key: string]: unknown }>;
+
+    tools: Array<{ [key: string]: unknown }>;
+
+    created_at?: string;
+
+    created_by?: string;
+
+    default_disabled?: boolean;
+
+    description?: string | null;
+
+    error?: string;
+
+    last_successful_sync?: string;
+
+    last_synced?: string;
+
+    modified_at?: string;
+
+    modified_by?: string;
+
+    on_behalf?: boolean;
+
+    status?: string;
+
+    updated_prompts?: Array<Server.UpdatedPrompt>;
+
+    updated_tools?: Array<Server.UpdatedTool>;
+  }
+
+  export namespace Server {
+    export interface UpdatedPrompt {
+      name: string;
+
+      description?: string;
+
+      enabled?: boolean;
+
+      portal_alias?: string;
+
+      server_alias?: string;
+    }
+
+    export interface UpdatedTool {
+      name: string;
+
+      description?: string;
+
+      enabled?: boolean;
+
+      portal_alias?: string;
+
+      server_alias?: string;
+    }
+  }
+}
+
 export interface PortalDeleteResponse {
   /**
    * portal id
@@ -224,6 +458,11 @@ export interface PortalDeleteResponse {
   hostname: string;
 
   name: string;
+
+  /**
+   * Allow remote code execution in Dynamic Workers (beta)
+   */
+  allow_code_mode?: boolean;
 
   created_at?: string;
 
@@ -252,6 +491,11 @@ export interface PortalReadResponse {
   name: string;
 
   servers: Array<PortalReadResponse.Server>;
+
+  /**
+   * Allow remote code execution in Dynamic Workers (beta)
+   */
+  allow_code_mode?: boolean;
 
   created_at?: string;
 
@@ -286,10 +530,6 @@ export namespace PortalReadResponse {
 
     tools: Array<{ [key: string]: unknown }>;
 
-    updated_prompts: Array<{ [key: string]: number | string }>;
-
-    updated_tools: Array<{ [key: string]: number | string }>;
-
     created_at?: string;
 
     created_by?: string;
@@ -311,6 +551,36 @@ export namespace PortalReadResponse {
     on_behalf?: boolean;
 
     status?: string;
+
+    updated_prompts?: Array<Server.UpdatedPrompt>;
+
+    updated_tools?: Array<Server.UpdatedTool>;
+  }
+
+  export namespace Server {
+    export interface UpdatedPrompt {
+      name: string;
+
+      description?: string;
+
+      enabled?: boolean;
+
+      portal_alias?: string;
+
+      server_alias?: string;
+    }
+
+    export interface UpdatedTool {
+      name: string;
+
+      description?: string;
+
+      enabled?: boolean;
+
+      portal_alias?: string;
+
+      server_alias?: string;
+    }
   }
 }
 
@@ -334,6 +604,11 @@ export interface PortalCreateParams {
    * Body param
    */
   name: string;
+
+  /**
+   * Body param: Allow remote code execution in Dynamic Workers (beta)
+   */
+  allow_code_mode?: boolean;
 
   /**
    * Body param
@@ -371,6 +646,8 @@ export namespace PortalCreateParams {
     export interface UpdatedPrompt {
       name: string;
 
+      alias?: string;
+
       description?: string;
 
       enabled?: boolean;
@@ -378,6 +655,8 @@ export namespace PortalCreateParams {
 
     export interface UpdatedTool {
       name: string;
+
+      alias?: string;
 
       description?: string;
 
@@ -391,6 +670,11 @@ export interface PortalUpdateParams {
    * Path param
    */
   account_id: string;
+
+  /**
+   * Body param: Allow remote code execution in Dynamic Workers (beta)
+   */
+  allow_code_mode?: boolean;
 
   /**
    * Body param
@@ -438,6 +722,8 @@ export namespace PortalUpdateParams {
     export interface UpdatedPrompt {
       name: string;
 
+      alias?: string;
+
       description?: string;
 
       enabled?: boolean;
@@ -445,6 +731,8 @@ export namespace PortalUpdateParams {
 
     export interface UpdatedTool {
       name: string;
+
+      alias?: string;
 
       description?: string;
 

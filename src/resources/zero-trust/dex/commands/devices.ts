@@ -78,6 +78,12 @@ export namespace DeviceListResponse {
     platform?: string;
 
     /**
+     * Device registration identifier (UUID v4). On multi-user devices, this uniquely
+     * identifies a user's registration on the device.
+     */
+    registrationId?: string;
+
+    /**
      * Network status
      */
     status?: string;

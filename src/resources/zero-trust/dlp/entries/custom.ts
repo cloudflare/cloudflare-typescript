@@ -143,6 +143,9 @@ export interface CustomCreateResponse {
 
   created_at: string;
 
+  /**
+   * @deprecated
+   */
   enabled: boolean;
 
   name: string;
@@ -151,6 +154,11 @@ export interface CustomCreateResponse {
 
   updated_at: string;
 
+  description?: string | null;
+
+  /**
+   * @deprecated
+   */
   profile_id?: string | null;
 }
 
@@ -159,6 +167,9 @@ export interface CustomUpdateResponse {
 
   created_at: string;
 
+  /**
+   * @deprecated
+   */
   enabled: boolean;
 
   name: string;
@@ -167,23 +178,31 @@ export interface CustomUpdateResponse {
 
   updated_at: string;
 
+  description?: string | null;
+
+  /**
+   * @deprecated
+   */
   profile_id?: string | null;
 }
 
 export type CustomListResponse =
-  | CustomListResponse.CustomEntry
-  | CustomListResponse.PredefinedEntry
-  | CustomListResponse.IntegrationEntry
-  | CustomListResponse.ExactDataEntry
-  | CustomListResponse.DocumentFingerprintEntry
-  | CustomListResponse.WordListEntry;
+  | CustomListResponse.UnionMember0
+  | CustomListResponse.UnionMember1
+  | CustomListResponse.UnionMember2
+  | CustomListResponse.UnionMember3
+  | CustomListResponse.UnionMember4
+  | CustomListResponse.UnionMember5;
 
 export namespace CustomListResponse {
-  export interface CustomEntry {
+  export interface UnionMember0 {
     id: string;
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -194,15 +213,20 @@ export namespace CustomListResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface PredefinedEntry {
+  export interface UnionMember1 {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: UnionMember1.Confidence;
 
     enabled: boolean;
 
@@ -210,14 +234,17 @@ export namespace CustomListResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
-    variant?: PredefinedEntry.Variant;
+    variant?: UnionMember1.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace UnionMember1 {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -240,7 +267,7 @@ export namespace CustomListResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface UnionMember2 {
     id: string;
 
     created_at: string;
@@ -258,7 +285,7 @@ export namespace CustomListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface ExactDataEntry {
+  export interface UnionMember3 {
     id: string;
 
     /**
@@ -282,7 +309,7 @@ export namespace CustomListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface UnionMember4 {
     id: string;
 
     created_at: string;
@@ -298,7 +325,7 @@ export namespace CustomListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface WordListEntry {
+  export interface UnionMember5 {
     id: string;
 
     created_at: string;
@@ -335,6 +362,9 @@ export namespace CustomGetResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -345,6 +375,11 @@ export namespace CustomGetResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember0.Profile>;
@@ -374,6 +409,9 @@ export namespace CustomGetResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember1.Profile>;
@@ -570,6 +608,11 @@ export interface CustomCreateParams {
   /**
    * Body param
    */
+  description?: string | null;
+
+  /**
+   * Body param
+   */
   profile_id?: string;
 }
 
@@ -593,6 +636,11 @@ export interface CustomUpdateParams {
    * Body param
    */
   pattern: ProfilesCustomAPI.PatternParam;
+
+  /**
+   * Body param
+   */
+  description?: string | null;
 }
 
 export interface CustomListParams {

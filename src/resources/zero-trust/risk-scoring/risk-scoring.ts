@@ -34,7 +34,8 @@ export class RiskScoring extends APIResource {
   integrations: IntegrationsAPI.Integrations = new IntegrationsAPI.Integrations(this._client);
 
   /**
-   * Get risk event/score information for a specific user
+   * Retrieves the detailed risk score breakdown for a specific user, including
+   * contributing factors.
    *
    * @example
    * ```ts
@@ -58,7 +59,7 @@ export class RiskScoring extends APIResource {
   }
 
   /**
-   * Clear the risk score for a particular user
+   * Resets risk scores for specified users, clearing their accumulated risk history.
    *
    * @example
    * ```ts

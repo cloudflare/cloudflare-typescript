@@ -6,7 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 
 export class Servers extends APIResource {
   /**
-   * Create a new MCP Server
+   * Creates a new MCP portal for managing AI tool access through Cloudflare Access.
    *
    * @example
    * ```ts
@@ -16,7 +16,7 @@ export class Servers extends APIResource {
    *       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
    *       id: 'my-mcp-server',
    *       auth_type: 'unauthenticated',
-   *       hostname: 'https://exmaple.com/mcp',
+   *       hostname: 'https://example.com/mcp',
    *       name: 'My MCP Server',
    *     },
    *   );
@@ -33,7 +33,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Update a MCP Server
+   * Updates an MCP portal configuration.
    *
    * @example
    * ```ts
@@ -59,7 +59,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * List MCP Servers
+   * Lists all MCP portals configured for the account.
    *
    * @example
    * ```ts
@@ -84,7 +84,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Delete a MCP Server
+   * Deletes an MCP portal from the account.
    *
    * @example
    * ```ts
@@ -110,7 +110,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Read the details of a MCP Server
+   * Retrieves gateway configuration for MCP portals.
    *
    * @example
    * ```ts
@@ -136,7 +136,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Sync MCP Server Capabilities
+   * Syncs an MCP server's tool catalog with the portal.
    *
    * @example
    * ```ts
@@ -197,6 +197,32 @@ export interface ServerCreateResponse {
   modified_by?: string;
 
   status?: string;
+
+  updated_prompts?: Array<ServerCreateResponse.UpdatedPrompt>;
+
+  updated_tools?: Array<ServerCreateResponse.UpdatedTool>;
+}
+
+export namespace ServerCreateResponse {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerUpdateResponse {
@@ -232,6 +258,32 @@ export interface ServerUpdateResponse {
   modified_by?: string;
 
   status?: string;
+
+  updated_prompts?: Array<ServerUpdateResponse.UpdatedPrompt>;
+
+  updated_tools?: Array<ServerUpdateResponse.UpdatedTool>;
+}
+
+export namespace ServerUpdateResponse {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerListResponse {
@@ -267,6 +319,32 @@ export interface ServerListResponse {
   modified_by?: string;
 
   status?: string;
+
+  updated_prompts?: Array<ServerListResponse.UpdatedPrompt>;
+
+  updated_tools?: Array<ServerListResponse.UpdatedTool>;
+}
+
+export namespace ServerListResponse {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerDeleteResponse {
@@ -302,6 +380,32 @@ export interface ServerDeleteResponse {
   modified_by?: string;
 
   status?: string;
+
+  updated_prompts?: Array<ServerDeleteResponse.UpdatedPrompt>;
+
+  updated_tools?: Array<ServerDeleteResponse.UpdatedTool>;
+}
+
+export namespace ServerDeleteResponse {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerReadResponse {
@@ -337,6 +441,32 @@ export interface ServerReadResponse {
   modified_by?: string;
 
   status?: string;
+
+  updated_prompts?: Array<ServerReadResponse.UpdatedPrompt>;
+
+  updated_tools?: Array<ServerReadResponse.UpdatedTool>;
+}
+
+export namespace ServerReadResponse {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export type ServerSyncResponse = unknown;
@@ -376,6 +506,38 @@ export interface ServerCreateParams {
    * Body param
    */
   description?: string | null;
+
+  /**
+   * Body param
+   */
+  updated_prompts?: Array<ServerCreateParams.UpdatedPrompt>;
+
+  /**
+   * Body param
+   */
+  updated_tools?: Array<ServerCreateParams.UpdatedTool>;
+}
+
+export namespace ServerCreateParams {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerUpdateParams {
@@ -398,6 +560,38 @@ export interface ServerUpdateParams {
    * Body param
    */
   name?: string;
+
+  /**
+   * Body param
+   */
+  updated_prompts?: Array<ServerUpdateParams.UpdatedPrompt>;
+
+  /**
+   * Body param
+   */
+  updated_tools?: Array<ServerUpdateParams.UpdatedTool>;
+}
+
+export namespace ServerUpdateParams {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerListParams extends V4PagePaginationArrayParams {

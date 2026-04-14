@@ -5,7 +5,8 @@ import * as Core from '../../../../core';
 
 export class AccountMapping extends APIResource {
   /**
-   * Create mapping
+   * Creates a mapping between a Cloudflare account and an email provider for DLP
+   * email scanning integration.
    *
    * @example
    * ```ts
@@ -33,7 +34,7 @@ export class AccountMapping extends APIResource {
   }
 
   /**
-   * Get mapping
+   * Retrieves the email provider mapping configuration for DLP email scanning.
    *
    * @example
    * ```ts

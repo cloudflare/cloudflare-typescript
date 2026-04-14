@@ -11,20 +11,20 @@ export class Custom extends APIResource {
    *
    * @example
    * ```ts
-   * const custom =
+   * const profile =
    *   await client.zeroTrust.dlp.profiles.custom.create({
    *     account_id: 'account_id',
    *     name: 'name',
    *   });
    * ```
    */
-  create(params: CustomCreateParams, options?: Core.RequestOptions): Core.APIPromise<CustomCreateResponse> {
+  create(params: CustomCreateParams, options?: Core.RequestOptions): Core.APIPromise<ProfilesAPI.Profile> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/profiles/custom`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: CustomCreateResponse }>
+      }) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -33,7 +33,7 @@ export class Custom extends APIResource {
    *
    * @example
    * ```ts
-   * const custom =
+   * const profile =
    *   await client.zeroTrust.dlp.profiles.custom.update(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 'account_id', name: 'name' },
@@ -44,13 +44,13 @@ export class Custom extends APIResource {
     profileId: string,
     params: CustomUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomUpdateResponse> {
+  ): Core.APIPromise<ProfilesAPI.Profile> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: CustomUpdateResponse }>
+      }) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -85,7 +85,7 @@ export class Custom extends APIResource {
    *
    * @example
    * ```ts
-   * const custom =
+   * const profile =
    *   await client.zeroTrust.dlp.profiles.custom.get(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 'account_id' },
@@ -96,13 +96,13 @@ export class Custom extends APIResource {
     profileId: string,
     params: CustomGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomGetResponse> {
+  ): Core.APIPromise<ProfilesAPI.Profile> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
         options,
-      ) as Core.APIPromise<{ result: CustomGetResponse }>
+      ) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -146,11 +146,38 @@ export interface CustomProfile {
   context_awareness?: ProfilesAPI.ContextAwareness;
 
   /**
+   * Data classes associated with this profile.
+   */
+  data_classes?: Array<string>;
+
+  /**
+   * Data tags associated with this profile.
+   */
+  data_tags?: Array<string>;
+
+  /**
    * The description of the profile.
    */
   description?: string | null;
 
+  /**
+   * @deprecated
+   */
   entries?: Array<
+    | CustomProfile.CustomEntry
+    | CustomProfile.PredefinedEntry
+    | CustomProfile.IntegrationEntry
+    | CustomProfile.ExactDataEntry
+    | CustomProfile.DocumentFingerprintEntry
+    | CustomProfile.WordListEntry
+  >;
+
+  /**
+   * Sensitivity levels associated with this profile.
+   */
+  sensitivity_levels?: Array<CustomProfile.SensitivityLevel>;
+
+  shared_entries?: Array<
     | CustomProfile.CustomEntry
     | CustomProfile.PredefinedEntry
     | CustomProfile.IntegrationEntry
@@ -166,6 +193,9 @@ export namespace CustomProfile {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -176,6 +206,11 @@ export namespace CustomProfile {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
   }
 
@@ -190,6 +225,156 @@ export namespace CustomProfile {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
+    profile_id?: string | null;
+
+    variant?: PredefinedEntry.Variant;
+  }
+
+  export namespace PredefinedEntry {
+    export interface Confidence {
+      /**
+       * Indicates whether this entry has AI remote service validation.
+       */
+      ai_context_available: boolean;
+
+      /**
+       * Indicates whether this entry has any form of validation that is not an AI remote
+       * service.
+       */
+      available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
+
+      description?: string | null;
+    }
+  }
+
+  export interface IntegrationEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'integration';
+
+    updated_at: string;
+
+    profile_id?: string | null;
+  }
+
+  export interface ExactDataEntry {
+    id: string;
+
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    secret: boolean;
+
+    type: 'exact_data';
+
+    updated_at: string;
+  }
+
+  export interface DocumentFingerprintEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'document_fingerprint';
+
+    updated_at: string;
+  }
+
+  export interface WordListEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'word_list';
+
+    updated_at: string;
+
+    word_list: unknown;
+
+    profile_id?: string | null;
+  }
+
+  /**
+   * A reference pairing a sensitivity group with a specific level within that group.
+   */
+  export interface SensitivityLevel {
+    group_id: string;
+
+    level_id: string;
+  }
+
+  export interface CustomEntry {
+    id: string;
+
+    created_at: string;
+
+    /**
+     * @deprecated
+     */
+    enabled: boolean;
+
+    name: string;
+
+    pattern: CustomAPI.Pattern;
+
+    type: 'custom';
+
+    updated_at: string;
+
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
+    profile_id?: string | null;
+  }
+
+  export interface PredefinedEntry {
+    id: string;
+
+    confidence: PredefinedEntry.Confidence;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'predefined';
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     variant?: PredefinedEntry.Variant;
@@ -307,1558 +492,7 @@ export interface PatternParam {
   validation?: 'luhn';
 }
 
-export type CustomCreateResponse =
-  | CustomCreateResponse.Custom
-  | CustomCreateResponse.Predefined
-  | CustomCreateResponse.Integration;
-
-export namespace CustomCreateResponse {
-  export interface Custom {
-    /**
-     * The id of the profile (uuid).
-     */
-    id: string;
-
-    /**
-     * Related DLP policies will trigger when the match count exceeds the number set.
-     */
-    allowed_match_count: number;
-
-    /**
-     * When the profile was created.
-     */
-    created_at: string;
-
-    /**
-     * The name of the profile.
-     */
-    name: string;
-
-    ocr_enabled: boolean;
-
-    type: 'custom';
-
-    /**
-     * When the profile was lasted updated.
-     */
-    updated_at: string;
-
-    ai_context_enabled?: boolean;
-
-    confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
-
-    /**
-     * @deprecated Scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    context_awareness?: ProfilesAPI.ContextAwareness;
-
-    /**
-     * The description of the profile.
-     */
-    description?: string | null;
-
-    entries?: Array<
-      | Custom.CustomEntry
-      | Custom.PredefinedEntry
-      | Custom.IntegrationEntry
-      | Custom.ExactDataEntry
-      | Custom.DocumentFingerprintEntry
-      | Custom.WordListEntry
-    >;
-  }
-
-  export namespace Custom {
-    export interface CustomEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      pattern: CustomAPI.Pattern;
-
-      type: 'custom';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface PredefinedEntry {
-      id: string;
-
-      confidence: PredefinedEntry.Confidence;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'predefined';
-
-      profile_id?: string | null;
-
-      variant?: PredefinedEntry.Variant;
-    }
-
-    export namespace PredefinedEntry {
-      export interface Confidence {
-        /**
-         * Indicates whether this entry has AI remote service validation.
-         */
-        ai_context_available: boolean;
-
-        /**
-         * Indicates whether this entry has any form of validation that is not an AI remote
-         * service.
-         */
-        available: boolean;
-      }
-
-      export interface Variant {
-        topic_type: 'Intent' | 'Content';
-
-        type: 'PromptTopic';
-
-        description?: string | null;
-      }
-    }
-
-    export interface IntegrationEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'integration';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface ExactDataEntry {
-      id: string;
-
-      /**
-       * Only applies to custom word lists. Determines if the words should be matched in
-       * a case-sensitive manner Cannot be set to false if secret is true
-       */
-      case_sensitive: boolean;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      secret: boolean;
-
-      type: 'exact_data';
-
-      updated_at: string;
-    }
-
-    export interface DocumentFingerprintEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'document_fingerprint';
-
-      updated_at: string;
-    }
-
-    export interface WordListEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'word_list';
-
-      updated_at: string;
-
-      word_list: unknown;
-
-      profile_id?: string | null;
-    }
-  }
-
-  export interface Predefined {
-    /**
-     * The id of the predefined profile (uuid).
-     */
-    id: string;
-
-    allowed_match_count: number;
-
-    entries: Array<
-      | Predefined.CustomEntry
-      | Predefined.PredefinedEntry
-      | Predefined.IntegrationEntry
-      | Predefined.ExactDataEntry
-      | Predefined.DocumentFingerprintEntry
-      | Predefined.WordListEntry
-    >;
-
-    /**
-     * The name of the predefined profile.
-     */
-    name: string;
-
-    type: 'predefined';
-
-    ai_context_enabled?: boolean;
-
-    confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
-
-    /**
-     * @deprecated Scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    context_awareness?: ProfilesAPI.ContextAwareness;
-
-    ocr_enabled?: boolean;
-
-    /**
-     * Whether this profile can be accessed by anyone.
-     */
-    open_access?: boolean;
-  }
-
-  export namespace Predefined {
-    export interface CustomEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      pattern: CustomAPI.Pattern;
-
-      type: 'custom';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface PredefinedEntry {
-      id: string;
-
-      confidence: PredefinedEntry.Confidence;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'predefined';
-
-      profile_id?: string | null;
-
-      variant?: PredefinedEntry.Variant;
-    }
-
-    export namespace PredefinedEntry {
-      export interface Confidence {
-        /**
-         * Indicates whether this entry has AI remote service validation.
-         */
-        ai_context_available: boolean;
-
-        /**
-         * Indicates whether this entry has any form of validation that is not an AI remote
-         * service.
-         */
-        available: boolean;
-      }
-
-      export interface Variant {
-        topic_type: 'Intent' | 'Content';
-
-        type: 'PromptTopic';
-
-        description?: string | null;
-      }
-    }
-
-    export interface IntegrationEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'integration';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface ExactDataEntry {
-      id: string;
-
-      /**
-       * Only applies to custom word lists. Determines if the words should be matched in
-       * a case-sensitive manner Cannot be set to false if secret is true
-       */
-      case_sensitive: boolean;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      secret: boolean;
-
-      type: 'exact_data';
-
-      updated_at: string;
-    }
-
-    export interface DocumentFingerprintEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'document_fingerprint';
-
-      updated_at: string;
-    }
-
-    export interface WordListEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'word_list';
-
-      updated_at: string;
-
-      word_list: unknown;
-
-      profile_id?: string | null;
-    }
-  }
-
-  export interface Integration {
-    id: string;
-
-    created_at: string;
-
-    entries: Array<
-      | Integration.CustomEntry
-      | Integration.PredefinedEntry
-      | Integration.IntegrationEntry
-      | Integration.ExactDataEntry
-      | Integration.DocumentFingerprintEntry
-      | Integration.WordListEntry
-    >;
-
-    name: string;
-
-    type: 'integration';
-
-    updated_at: string;
-
-    /**
-     * The description of the profile.
-     */
-    description?: string | null;
-  }
-
-  export namespace Integration {
-    export interface CustomEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      pattern: CustomAPI.Pattern;
-
-      type: 'custom';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface PredefinedEntry {
-      id: string;
-
-      confidence: PredefinedEntry.Confidence;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'predefined';
-
-      profile_id?: string | null;
-
-      variant?: PredefinedEntry.Variant;
-    }
-
-    export namespace PredefinedEntry {
-      export interface Confidence {
-        /**
-         * Indicates whether this entry has AI remote service validation.
-         */
-        ai_context_available: boolean;
-
-        /**
-         * Indicates whether this entry has any form of validation that is not an AI remote
-         * service.
-         */
-        available: boolean;
-      }
-
-      export interface Variant {
-        topic_type: 'Intent' | 'Content';
-
-        type: 'PromptTopic';
-
-        description?: string | null;
-      }
-    }
-
-    export interface IntegrationEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'integration';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface ExactDataEntry {
-      id: string;
-
-      /**
-       * Only applies to custom word lists. Determines if the words should be matched in
-       * a case-sensitive manner Cannot be set to false if secret is true
-       */
-      case_sensitive: boolean;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      secret: boolean;
-
-      type: 'exact_data';
-
-      updated_at: string;
-    }
-
-    export interface DocumentFingerprintEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'document_fingerprint';
-
-      updated_at: string;
-    }
-
-    export interface WordListEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'word_list';
-
-      updated_at: string;
-
-      word_list: unknown;
-
-      profile_id?: string | null;
-    }
-  }
-}
-
-export type CustomUpdateResponse =
-  | CustomUpdateResponse.Custom
-  | CustomUpdateResponse.Predefined
-  | CustomUpdateResponse.Integration;
-
-export namespace CustomUpdateResponse {
-  export interface Custom {
-    /**
-     * The id of the profile (uuid).
-     */
-    id: string;
-
-    /**
-     * Related DLP policies will trigger when the match count exceeds the number set.
-     */
-    allowed_match_count: number;
-
-    /**
-     * When the profile was created.
-     */
-    created_at: string;
-
-    /**
-     * The name of the profile.
-     */
-    name: string;
-
-    ocr_enabled: boolean;
-
-    type: 'custom';
-
-    /**
-     * When the profile was lasted updated.
-     */
-    updated_at: string;
-
-    ai_context_enabled?: boolean;
-
-    confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
-
-    /**
-     * @deprecated Scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    context_awareness?: ProfilesAPI.ContextAwareness;
-
-    /**
-     * The description of the profile.
-     */
-    description?: string | null;
-
-    entries?: Array<
-      | Custom.CustomEntry
-      | Custom.PredefinedEntry
-      | Custom.IntegrationEntry
-      | Custom.ExactDataEntry
-      | Custom.DocumentFingerprintEntry
-      | Custom.WordListEntry
-    >;
-  }
-
-  export namespace Custom {
-    export interface CustomEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      pattern: CustomAPI.Pattern;
-
-      type: 'custom';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface PredefinedEntry {
-      id: string;
-
-      confidence: PredefinedEntry.Confidence;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'predefined';
-
-      profile_id?: string | null;
-
-      variant?: PredefinedEntry.Variant;
-    }
-
-    export namespace PredefinedEntry {
-      export interface Confidence {
-        /**
-         * Indicates whether this entry has AI remote service validation.
-         */
-        ai_context_available: boolean;
-
-        /**
-         * Indicates whether this entry has any form of validation that is not an AI remote
-         * service.
-         */
-        available: boolean;
-      }
-
-      export interface Variant {
-        topic_type: 'Intent' | 'Content';
-
-        type: 'PromptTopic';
-
-        description?: string | null;
-      }
-    }
-
-    export interface IntegrationEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'integration';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface ExactDataEntry {
-      id: string;
-
-      /**
-       * Only applies to custom word lists. Determines if the words should be matched in
-       * a case-sensitive manner Cannot be set to false if secret is true
-       */
-      case_sensitive: boolean;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      secret: boolean;
-
-      type: 'exact_data';
-
-      updated_at: string;
-    }
-
-    export interface DocumentFingerprintEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'document_fingerprint';
-
-      updated_at: string;
-    }
-
-    export interface WordListEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'word_list';
-
-      updated_at: string;
-
-      word_list: unknown;
-
-      profile_id?: string | null;
-    }
-  }
-
-  export interface Predefined {
-    /**
-     * The id of the predefined profile (uuid).
-     */
-    id: string;
-
-    allowed_match_count: number;
-
-    entries: Array<
-      | Predefined.CustomEntry
-      | Predefined.PredefinedEntry
-      | Predefined.IntegrationEntry
-      | Predefined.ExactDataEntry
-      | Predefined.DocumentFingerprintEntry
-      | Predefined.WordListEntry
-    >;
-
-    /**
-     * The name of the predefined profile.
-     */
-    name: string;
-
-    type: 'predefined';
-
-    ai_context_enabled?: boolean;
-
-    confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
-
-    /**
-     * @deprecated Scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    context_awareness?: ProfilesAPI.ContextAwareness;
-
-    ocr_enabled?: boolean;
-
-    /**
-     * Whether this profile can be accessed by anyone.
-     */
-    open_access?: boolean;
-  }
-
-  export namespace Predefined {
-    export interface CustomEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      pattern: CustomAPI.Pattern;
-
-      type: 'custom';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface PredefinedEntry {
-      id: string;
-
-      confidence: PredefinedEntry.Confidence;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'predefined';
-
-      profile_id?: string | null;
-
-      variant?: PredefinedEntry.Variant;
-    }
-
-    export namespace PredefinedEntry {
-      export interface Confidence {
-        /**
-         * Indicates whether this entry has AI remote service validation.
-         */
-        ai_context_available: boolean;
-
-        /**
-         * Indicates whether this entry has any form of validation that is not an AI remote
-         * service.
-         */
-        available: boolean;
-      }
-
-      export interface Variant {
-        topic_type: 'Intent' | 'Content';
-
-        type: 'PromptTopic';
-
-        description?: string | null;
-      }
-    }
-
-    export interface IntegrationEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'integration';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface ExactDataEntry {
-      id: string;
-
-      /**
-       * Only applies to custom word lists. Determines if the words should be matched in
-       * a case-sensitive manner Cannot be set to false if secret is true
-       */
-      case_sensitive: boolean;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      secret: boolean;
-
-      type: 'exact_data';
-
-      updated_at: string;
-    }
-
-    export interface DocumentFingerprintEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'document_fingerprint';
-
-      updated_at: string;
-    }
-
-    export interface WordListEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'word_list';
-
-      updated_at: string;
-
-      word_list: unknown;
-
-      profile_id?: string | null;
-    }
-  }
-
-  export interface Integration {
-    id: string;
-
-    created_at: string;
-
-    entries: Array<
-      | Integration.CustomEntry
-      | Integration.PredefinedEntry
-      | Integration.IntegrationEntry
-      | Integration.ExactDataEntry
-      | Integration.DocumentFingerprintEntry
-      | Integration.WordListEntry
-    >;
-
-    name: string;
-
-    type: 'integration';
-
-    updated_at: string;
-
-    /**
-     * The description of the profile.
-     */
-    description?: string | null;
-  }
-
-  export namespace Integration {
-    export interface CustomEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      pattern: CustomAPI.Pattern;
-
-      type: 'custom';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface PredefinedEntry {
-      id: string;
-
-      confidence: PredefinedEntry.Confidence;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'predefined';
-
-      profile_id?: string | null;
-
-      variant?: PredefinedEntry.Variant;
-    }
-
-    export namespace PredefinedEntry {
-      export interface Confidence {
-        /**
-         * Indicates whether this entry has AI remote service validation.
-         */
-        ai_context_available: boolean;
-
-        /**
-         * Indicates whether this entry has any form of validation that is not an AI remote
-         * service.
-         */
-        available: boolean;
-      }
-
-      export interface Variant {
-        topic_type: 'Intent' | 'Content';
-
-        type: 'PromptTopic';
-
-        description?: string | null;
-      }
-    }
-
-    export interface IntegrationEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'integration';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface ExactDataEntry {
-      id: string;
-
-      /**
-       * Only applies to custom word lists. Determines if the words should be matched in
-       * a case-sensitive manner Cannot be set to false if secret is true
-       */
-      case_sensitive: boolean;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      secret: boolean;
-
-      type: 'exact_data';
-
-      updated_at: string;
-    }
-
-    export interface DocumentFingerprintEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'document_fingerprint';
-
-      updated_at: string;
-    }
-
-    export interface WordListEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'word_list';
-
-      updated_at: string;
-
-      word_list: unknown;
-
-      profile_id?: string | null;
-    }
-  }
-}
-
 export type CustomDeleteResponse = unknown;
-
-export type CustomGetResponse =
-  | CustomGetResponse.Custom
-  | CustomGetResponse.Predefined
-  | CustomGetResponse.Integration;
-
-export namespace CustomGetResponse {
-  export interface Custom {
-    /**
-     * The id of the profile (uuid).
-     */
-    id: string;
-
-    /**
-     * Related DLP policies will trigger when the match count exceeds the number set.
-     */
-    allowed_match_count: number;
-
-    /**
-     * When the profile was created.
-     */
-    created_at: string;
-
-    /**
-     * The name of the profile.
-     */
-    name: string;
-
-    ocr_enabled: boolean;
-
-    type: 'custom';
-
-    /**
-     * When the profile was lasted updated.
-     */
-    updated_at: string;
-
-    ai_context_enabled?: boolean;
-
-    confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
-
-    /**
-     * @deprecated Scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    context_awareness?: ProfilesAPI.ContextAwareness;
-
-    /**
-     * The description of the profile.
-     */
-    description?: string | null;
-
-    entries?: Array<
-      | Custom.CustomEntry
-      | Custom.PredefinedEntry
-      | Custom.IntegrationEntry
-      | Custom.ExactDataEntry
-      | Custom.DocumentFingerprintEntry
-      | Custom.WordListEntry
-    >;
-  }
-
-  export namespace Custom {
-    export interface CustomEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      pattern: CustomAPI.Pattern;
-
-      type: 'custom';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface PredefinedEntry {
-      id: string;
-
-      confidence: PredefinedEntry.Confidence;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'predefined';
-
-      profile_id?: string | null;
-
-      variant?: PredefinedEntry.Variant;
-    }
-
-    export namespace PredefinedEntry {
-      export interface Confidence {
-        /**
-         * Indicates whether this entry has AI remote service validation.
-         */
-        ai_context_available: boolean;
-
-        /**
-         * Indicates whether this entry has any form of validation that is not an AI remote
-         * service.
-         */
-        available: boolean;
-      }
-
-      export interface Variant {
-        topic_type: 'Intent' | 'Content';
-
-        type: 'PromptTopic';
-
-        description?: string | null;
-      }
-    }
-
-    export interface IntegrationEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'integration';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface ExactDataEntry {
-      id: string;
-
-      /**
-       * Only applies to custom word lists. Determines if the words should be matched in
-       * a case-sensitive manner Cannot be set to false if secret is true
-       */
-      case_sensitive: boolean;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      secret: boolean;
-
-      type: 'exact_data';
-
-      updated_at: string;
-    }
-
-    export interface DocumentFingerprintEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'document_fingerprint';
-
-      updated_at: string;
-    }
-
-    export interface WordListEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'word_list';
-
-      updated_at: string;
-
-      word_list: unknown;
-
-      profile_id?: string | null;
-    }
-  }
-
-  export interface Predefined {
-    /**
-     * The id of the predefined profile (uuid).
-     */
-    id: string;
-
-    allowed_match_count: number;
-
-    entries: Array<
-      | Predefined.CustomEntry
-      | Predefined.PredefinedEntry
-      | Predefined.IntegrationEntry
-      | Predefined.ExactDataEntry
-      | Predefined.DocumentFingerprintEntry
-      | Predefined.WordListEntry
-    >;
-
-    /**
-     * The name of the predefined profile.
-     */
-    name: string;
-
-    type: 'predefined';
-
-    ai_context_enabled?: boolean;
-
-    confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
-
-    /**
-     * @deprecated Scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    context_awareness?: ProfilesAPI.ContextAwareness;
-
-    ocr_enabled?: boolean;
-
-    /**
-     * Whether this profile can be accessed by anyone.
-     */
-    open_access?: boolean;
-  }
-
-  export namespace Predefined {
-    export interface CustomEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      pattern: CustomAPI.Pattern;
-
-      type: 'custom';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface PredefinedEntry {
-      id: string;
-
-      confidence: PredefinedEntry.Confidence;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'predefined';
-
-      profile_id?: string | null;
-
-      variant?: PredefinedEntry.Variant;
-    }
-
-    export namespace PredefinedEntry {
-      export interface Confidence {
-        /**
-         * Indicates whether this entry has AI remote service validation.
-         */
-        ai_context_available: boolean;
-
-        /**
-         * Indicates whether this entry has any form of validation that is not an AI remote
-         * service.
-         */
-        available: boolean;
-      }
-
-      export interface Variant {
-        topic_type: 'Intent' | 'Content';
-
-        type: 'PromptTopic';
-
-        description?: string | null;
-      }
-    }
-
-    export interface IntegrationEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'integration';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface ExactDataEntry {
-      id: string;
-
-      /**
-       * Only applies to custom word lists. Determines if the words should be matched in
-       * a case-sensitive manner Cannot be set to false if secret is true
-       */
-      case_sensitive: boolean;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      secret: boolean;
-
-      type: 'exact_data';
-
-      updated_at: string;
-    }
-
-    export interface DocumentFingerprintEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'document_fingerprint';
-
-      updated_at: string;
-    }
-
-    export interface WordListEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'word_list';
-
-      updated_at: string;
-
-      word_list: unknown;
-
-      profile_id?: string | null;
-    }
-  }
-
-  export interface Integration {
-    id: string;
-
-    created_at: string;
-
-    entries: Array<
-      | Integration.CustomEntry
-      | Integration.PredefinedEntry
-      | Integration.IntegrationEntry
-      | Integration.ExactDataEntry
-      | Integration.DocumentFingerprintEntry
-      | Integration.WordListEntry
-    >;
-
-    name: string;
-
-    type: 'integration';
-
-    updated_at: string;
-
-    /**
-     * The description of the profile.
-     */
-    description?: string | null;
-  }
-
-  export namespace Integration {
-    export interface CustomEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      pattern: CustomAPI.Pattern;
-
-      type: 'custom';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface PredefinedEntry {
-      id: string;
-
-      confidence: PredefinedEntry.Confidence;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'predefined';
-
-      profile_id?: string | null;
-
-      variant?: PredefinedEntry.Variant;
-    }
-
-    export namespace PredefinedEntry {
-      export interface Confidence {
-        /**
-         * Indicates whether this entry has AI remote service validation.
-         */
-        ai_context_available: boolean;
-
-        /**
-         * Indicates whether this entry has any form of validation that is not an AI remote
-         * service.
-         */
-        available: boolean;
-      }
-
-      export interface Variant {
-        topic_type: 'Intent' | 'Content';
-
-        type: 'PromptTopic';
-
-        description?: string | null;
-      }
-    }
-
-    export interface IntegrationEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'integration';
-
-      updated_at: string;
-
-      profile_id?: string | null;
-    }
-
-    export interface ExactDataEntry {
-      id: string;
-
-      /**
-       * Only applies to custom word lists. Determines if the words should be matched in
-       * a case-sensitive manner Cannot be set to false if secret is true
-       */
-      case_sensitive: boolean;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      secret: boolean;
-
-      type: 'exact_data';
-
-      updated_at: string;
-    }
-
-    export interface DocumentFingerprintEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'document_fingerprint';
-
-      updated_at: string;
-    }
-
-    export interface WordListEntry {
-      id: string;
-
-      created_at: string;
-
-      enabled: boolean;
-
-      name: string;
-
-      type: 'word_list';
-
-      updated_at: string;
-
-      word_list: unknown;
-
-      profile_id?: string | null;
-    }
-  }
-}
 
 export interface CustomCreateParams {
   /**
@@ -1894,6 +528,16 @@ export interface CustomCreateParams {
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
   /**
+   * Body param: Data class IDs to associate with the profile.
+   */
+  data_classes?: Array<string>;
+
+  /**
+   * Body param: Data tag IDs to associate with the profile.
+   */
+  data_tags?: Array<string>;
+
+  /**
    * Body param: The description of the profile.
    */
   description?: string | null;
@@ -1909,6 +553,11 @@ export interface CustomCreateParams {
   ocr_enabled?: boolean;
 
   /**
+   * Body param: Sensitivity levels to associate with the profile.
+   */
+  sensitivity_levels?: Array<CustomCreateParams.SensitivityLevel>;
+
+  /**
    * Body param: Entries from other profiles (e.g. pre-defined Cloudflare profiles,
    * or your Microsoft Information Protection profiles).
    */
@@ -1922,6 +571,8 @@ export namespace CustomCreateParams {
     name: string;
 
     pattern: CustomAPI.PatternParam;
+
+    description?: string | null;
   }
 
   export interface DLPNewWordListEntry {
@@ -1930,6 +581,15 @@ export namespace CustomCreateParams {
     name: string;
 
     words: Array<string>;
+  }
+
+  /**
+   * A reference pairing a sensitivity group with a specific level within that group.
+   */
+  export interface SensitivityLevel {
+    group_id: string;
+
+    level_id: string;
   }
 
   export interface SharedEntry {
@@ -1972,6 +632,18 @@ export interface CustomUpdateParams {
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
   /**
+   * Body param: Data class IDs to associate with the profile. If omitted, existing
+   * associations are unchanged.
+   */
+  data_classes?: Array<string> | null;
+
+  /**
+   * Body param: Data tag IDs to associate with the profile. If omitted, existing
+   * associations are unchanged.
+   */
+  data_tags?: Array<string> | null;
+
+  /**
    * Body param: The description of the profile.
    */
   description?: string | null;
@@ -1988,6 +660,12 @@ export interface CustomUpdateParams {
   ocr_enabled?: boolean;
 
   /**
+   * Body param: Sensitivity levels to associate with the profile. If omitted,
+   * existing associations are unchanged.
+   */
+  sensitivity_levels?: Array<CustomUpdateParams.SensitivityLevel> | null;
+
+  /**
    * Body param: Other entries, e.g. predefined or integration.
    */
   shared_entries?: Array<CustomUpdateParams.SharedEntry>;
@@ -2002,6 +680,8 @@ export namespace CustomUpdateParams {
     name: string;
 
     pattern: CustomAPI.PatternParam;
+
+    description?: string | null;
   }
 
   export interface DLPNewCustomEntry {
@@ -2010,6 +690,17 @@ export namespace CustomUpdateParams {
     name: string;
 
     pattern: CustomAPI.PatternParam;
+
+    description?: string | null;
+  }
+
+  /**
+   * A reference pairing a sensitivity group with a specific level within that group.
+   */
+  export interface SensitivityLevel {
+    group_id: string;
+
+    level_id: string;
   }
 
   export interface SharedEntry {
@@ -2031,10 +722,7 @@ export declare namespace Custom {
   export {
     type CustomProfile as CustomProfile,
     type Pattern as Pattern,
-    type CustomCreateResponse as CustomCreateResponse,
-    type CustomUpdateResponse as CustomUpdateResponse,
     type CustomDeleteResponse as CustomDeleteResponse,
-    type CustomGetResponse as CustomGetResponse,
     type CustomCreateParams as CustomCreateParams,
     type CustomUpdateParams as CustomUpdateParams,
     type CustomDeleteParams as CustomDeleteParams,

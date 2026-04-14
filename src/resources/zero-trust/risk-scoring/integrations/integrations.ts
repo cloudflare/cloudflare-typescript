@@ -10,7 +10,8 @@ export class Integrations extends APIResource {
   references: ReferencesAPI.References = new ReferencesAPI.References(this._client);
 
   /**
-   * Create new risk score integration.
+   * Creates a new Zero Trust risk score integration, connecting external risk
+   * signals to Cloudflare's risk scoring system.
    *
    * @example
    * ```ts
@@ -67,7 +68,7 @@ export class Integrations extends APIResource {
   }
 
   /**
-   * List all risk score integrations for the account.
+   * Lists all configured Zero Trust risk score integrations for the account.
    *
    * @example
    * ```ts
@@ -92,7 +93,8 @@ export class Integrations extends APIResource {
   }
 
   /**
-   * Delete a risk score integration.
+   * Removes a Zero Trust risk score integration, disconnecting the external risk
+   * signal source.
    *
    * @example
    * ```ts
