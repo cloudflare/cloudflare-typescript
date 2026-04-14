@@ -10,8 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource totalTLS', () => {
-  test('create: only required params', async () => {
-    const responsePromise = client.acm.totalTLS.create({
+  test('update: only required params', async () => {
+    const responsePromise = client.acm.totalTLS.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: true,
     });
@@ -24,8 +24,30 @@ describe('resource totalTLS', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
-    const response = await client.acm.totalTLS.create({
+  test('update: required and optional params', async () => {
+    const response = await client.acm.totalTLS.update({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      enabled: true,
+      certificate_authority: 'google',
+    });
+  });
+
+  test('edit: only required params', async () => {
+    const responsePromise = client.acm.totalTLS.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      enabled: true,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await client.acm.totalTLS.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: true,
       certificate_authority: 'google',
