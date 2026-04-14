@@ -581,6 +581,11 @@ TEST_PATHS=(
 	tests/api-resources/url-scanner/url-scanner.test.ts
 	tests/api-resources/url-scanner/responses.test.ts
 	tests/api-resources/url-scanner/scans.test.ts
+	tests/api-resources/vulnerability-scanner/vulnerability-scanner.test.ts
+	tests/api-resources/vulnerability-scanner/credential-sets/credential-sets.test.ts
+	tests/api-resources/vulnerability-scanner/credential-sets/credentials.test.ts
+	tests/api-resources/vulnerability-scanner/scans.test.ts
+	tests/api-resources/vulnerability-scanner/target-environments.test.ts
 	tests/api-resources/radar/radar.test.ts
 	tests/api-resources/radar/ai/ai.test.ts
 	tests/api-resources/radar/ai/to-markdown.test.ts
