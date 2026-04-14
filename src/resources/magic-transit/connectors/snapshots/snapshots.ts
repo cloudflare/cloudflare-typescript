@@ -200,9 +200,19 @@ export interface SnapshotGetResponse {
    */
   cpu_time_user_ms?: number;
 
+  /**
+   * Number of network operations applied during state transition
+   */
+  delta?: number;
+
   dhcp_leases?: Array<SnapshotGetResponse.DHCPLease>;
 
   disks?: Array<SnapshotGetResponse.Disk>;
+
+  /**
+   * Simulated number of network operations applied during state transition
+   */
+  epsilon?: number;
 
   /**
    * Name of high availability state
@@ -581,6 +591,11 @@ export interface SnapshotGetResponse {
   mounts?: Array<SnapshotGetResponse.Mount>;
 
   netdevs?: Array<SnapshotGetResponse.Netdev>;
+
+  /**
+   * Platform identifier
+   */
+  platform?: string;
 
   /**
    * Number of ICMP Address Mask Reply messages received
@@ -977,11 +992,6 @@ export namespace SnapshotGetResponse {
      * MAC Address of the device the IP Address was leased to
      */
     mac_address: string;
-
-    /**
-     * Connector identifier
-     */
-    connector_id?: string;
   }
 
   /**
@@ -1059,11 +1069,6 @@ export namespace SnapshotGetResponse {
     writes_merged: number;
 
     /**
-     * Connector identifier
-     */
-    connector_id?: string;
-
-    /**
      * Discards completed successfully
      */
     discards?: number;
@@ -1108,11 +1113,6 @@ export namespace SnapshotGetResponse {
      */
     operstate: string;
 
-    /**
-     * Connector identifier
-     */
-    connector_id?: string;
-
     ip_addresses?: Array<Interface.IPAddress>;
 
     /**
@@ -1135,11 +1135,6 @@ export namespace SnapshotGetResponse {
        * IP address of the network interface
        */
       ip_address: string;
-
-      /**
-       * Connector identifier
-       */
-      connector_id?: string;
     }
   }
 
@@ -1173,9 +1168,9 @@ export namespace SnapshotGetResponse {
     available_bytes?: number;
 
     /**
-     * Connector identifier
+     * Available inodes on filesystem
      */
-    connector_id?: string;
+    available_inodes?: number;
 
     /**
      * Determines whether the disk is read-only
@@ -1191,6 +1186,11 @@ export namespace SnapshotGetResponse {
      * Total disk size (bytes)
      */
     total_bytes?: number;
+
+    /**
+     * Total inodes on filesystem
+     */
+    total_inodes?: number;
   }
 
   /**
@@ -1281,11 +1281,6 @@ export namespace SnapshotGetResponse {
      * Total packets transmitted
      */
     sent_packets: number;
-
-    /**
-     * Connector identifier
-     */
-    connector_id?: string;
   }
 
   /**
@@ -1296,11 +1291,6 @@ export namespace SnapshotGetResponse {
      * Sensor identifier for the component
      */
     label: string;
-
-    /**
-     * Connector identifier
-     */
-    connector_id?: string;
 
     /**
      * Critical failure temperature of the component (degrees Celsius)
@@ -1342,11 +1332,6 @@ export namespace SnapshotGetResponse {
      * Tunnel identifier
      */
     tunnel_id: string;
-
-    /**
-     * Connector identifier
-     */
-    connector_id?: string;
 
     /**
      * MTU as measured between the two ends of the tunnel

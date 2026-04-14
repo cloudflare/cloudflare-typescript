@@ -204,6 +204,12 @@ export namespace CfInterconnectUpdateResponse {
      * The name of the interconnect. The name cannot share a name with other tunnels.
      */
     name?: string;
+
+    /**
+     * An identifier that correlates this interconnect with the corresponding V2 CNI
+     * interconnect resource.
+     */
+    virtual_port_reservation_id?: string;
   }
 
   export namespace ModifiedInterconnect {
@@ -289,6 +295,12 @@ export namespace CfInterconnectListResponse {
      * The name of the interconnect. The name cannot share a name with other tunnels.
      */
     name?: string;
+
+    /**
+     * An identifier that correlates this interconnect with the corresponding V2 CNI
+     * interconnect resource.
+     */
+    virtual_port_reservation_id?: string;
   }
 
   export namespace Interconnect {
@@ -376,6 +388,12 @@ export namespace CfInterconnectBulkUpdateResponse {
      * The name of the interconnect. The name cannot share a name with other tunnels.
      */
     name?: string;
+
+    /**
+     * An identifier that correlates this interconnect with the corresponding V2 CNI
+     * interconnect resource.
+     */
+    virtual_port_reservation_id?: string;
   }
 
   export namespace ModifiedInterconnect {
@@ -461,6 +479,12 @@ export namespace CfInterconnectGetResponse {
      * The name of the interconnect. The name cannot share a name with other tunnels.
      */
     name?: string;
+
+    /**
+     * An identifier that correlates this interconnect with the corresponding V2 CNI
+     * interconnect resource.
+     */
+    virtual_port_reservation_id?: string;
   }
 
   export namespace Interconnect {
@@ -524,6 +548,12 @@ export interface CfInterconnectUpdateParams {
    * The minimum value is 576.
    */
   mtu?: number;
+
+  /**
+   * Body param: The name of the interconnect. The name cannot share a name with
+   * other tunnels.
+   */
+  name?: string;
 
   /**
    * Header param: If true, the health check target in the request and response

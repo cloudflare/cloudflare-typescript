@@ -183,7 +183,19 @@ export interface ConnectorCreateResponse {
 
   activated: boolean;
 
+  /**
+   * Allowed days of the week for upgrades. Default is all days.
+   */
+  interrupt_window_days_of_week: Array<
+    'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
+  >;
+
   interrupt_window_duration_hours: number;
+
+  /**
+   * List of dates (YYYY-MM-DD) when upgrades are blocked.
+   */
+  interrupt_window_embargo_dates: Array<string>;
 
   interrupt_window_hour_of_day: number;
 
@@ -215,7 +227,19 @@ export interface ConnectorUpdateResponse {
 
   activated: boolean;
 
+  /**
+   * Allowed days of the week for upgrades. Default is all days.
+   */
+  interrupt_window_days_of_week: Array<
+    'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
+  >;
+
   interrupt_window_duration_hours: number;
+
+  /**
+   * List of dates (YYYY-MM-DD) when upgrades are blocked.
+   */
+  interrupt_window_embargo_dates: Array<string>;
 
   interrupt_window_hour_of_day: number;
 
@@ -247,7 +271,19 @@ export interface ConnectorListResponse {
 
   activated: boolean;
 
+  /**
+   * Allowed days of the week for upgrades. Default is all days.
+   */
+  interrupt_window_days_of_week: Array<
+    'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
+  >;
+
   interrupt_window_duration_hours: number;
+
+  /**
+   * List of dates (YYYY-MM-DD) when upgrades are blocked.
+   */
+  interrupt_window_embargo_dates: Array<string>;
 
   interrupt_window_hour_of_day: number;
 
@@ -279,7 +315,19 @@ export interface ConnectorDeleteResponse {
 
   activated: boolean;
 
+  /**
+   * Allowed days of the week for upgrades. Default is all days.
+   */
+  interrupt_window_days_of_week: Array<
+    'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
+  >;
+
   interrupt_window_duration_hours: number;
+
+  /**
+   * List of dates (YYYY-MM-DD) when upgrades are blocked.
+   */
+  interrupt_window_embargo_dates: Array<string>;
 
   interrupt_window_hour_of_day: number;
 
@@ -311,7 +359,19 @@ export interface ConnectorEditResponse {
 
   activated: boolean;
 
+  /**
+   * Allowed days of the week for upgrades. Default is all days.
+   */
+  interrupt_window_days_of_week: Array<
+    'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
+  >;
+
   interrupt_window_duration_hours: number;
+
+  /**
+   * List of dates (YYYY-MM-DD) when upgrades are blocked.
+   */
+  interrupt_window_embargo_dates: Array<string>;
 
   interrupt_window_hour_of_day: number;
 
@@ -343,7 +403,19 @@ export interface ConnectorGetResponse {
 
   activated: boolean;
 
+  /**
+   * Allowed days of the week for upgrades. Default is all days.
+   */
+  interrupt_window_days_of_week: Array<
+    'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
+  >;
+
   interrupt_window_duration_hours: number;
+
+  /**
+   * List of dates (YYYY-MM-DD) when upgrades are blocked.
+   */
+  interrupt_window_embargo_dates: Array<string>;
 
   interrupt_window_hour_of_day: number;
 
@@ -388,9 +460,21 @@ export interface ConnectorCreateParams {
   activated?: boolean;
 
   /**
+   * Body param: Allowed days of the week for upgrades. Default is all days.
+   */
+  interrupt_window_days_of_week?: Array<
+    'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
+  >;
+
+  /**
    * Body param
    */
   interrupt_window_duration_hours?: number;
+
+  /**
+   * Body param: List of dates (YYYY-MM-DD) when upgrades are blocked.
+   */
+  interrupt_window_embargo_dates?: Array<string>;
 
   /**
    * Body param
@@ -436,9 +520,21 @@ export interface ConnectorUpdateParams {
   activated?: boolean;
 
   /**
+   * Body param: Allowed days of the week for upgrades. Default is all days.
+   */
+  interrupt_window_days_of_week?: Array<
+    'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
+  >;
+
+  /**
    * Body param
    */
   interrupt_window_duration_hours?: number;
+
+  /**
+   * Body param: List of dates (YYYY-MM-DD) when upgrades are blocked.
+   */
+  interrupt_window_embargo_dates?: Array<string>;
 
   /**
    * Body param
@@ -487,9 +583,21 @@ export interface ConnectorEditParams {
   activated?: boolean;
 
   /**
+   * Body param: Allowed days of the week for upgrades. Default is all days.
+   */
+  interrupt_window_days_of_week?: Array<
+    'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
+  >;
+
+  /**
    * Body param
    */
   interrupt_window_duration_hours?: number;
+
+  /**
+   * Body param: List of dates (YYYY-MM-DD) when upgrades are blocked.
+   */
+  interrupt_window_embargo_dates?: Array<string>;
 
   /**
    * Body param

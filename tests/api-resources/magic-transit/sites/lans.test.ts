@@ -28,6 +28,8 @@ describe('resource lans', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bond_id: 2,
       ha_link: true,
+      is_breakout: true,
+      is_prioritized: true,
       name: 'name',
       nat: { static_prefix: '192.0.2.0/24' },
       physport: 1,
@@ -77,6 +79,8 @@ describe('resource lans', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         bond_id: 2,
+        is_breakout: true,
+        is_prioritized: true,
         name: 'name',
         nat: { static_prefix: '192.0.2.0/24' },
         physport: 1,
@@ -169,6 +173,8 @@ describe('resource lans', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         bond_id: 2,
+        is_breakout: true,
+        is_prioritized: true,
         name: 'name',
         nat: { static_prefix: '192.0.2.0/24' },
         physport: 1,
