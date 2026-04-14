@@ -14,7 +14,6 @@ describe('resource watermarks', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.stream.watermarks.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      file: '@/Users/rchen/Downloads/watermark.png',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,12 +28,12 @@ describe('resource watermarks', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.stream.watermarks.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      file: '@/Users/rchen/Downloads/watermark.png',
       name: 'Marketing Videos',
       opacity: 0.75,
       padding: 0.1,
       position: 'center',
       scale: 0.1,
+      url: 'https://example.com',
     });
   });
 

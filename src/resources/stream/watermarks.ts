@@ -13,7 +13,6 @@ export class Watermarks extends APIResource {
    * ```ts
    * const watermark = await client.stream.watermarks.create({
    *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   file: '@/Users/rchen/Downloads/watermark.png',
    * });
    * ```
    */
@@ -22,7 +21,7 @@ export class Watermarks extends APIResource {
     return (
       this._client.post(
         `/accounts/${account_id}/stream/watermarks`,
-        Core.multipartFormRequestOptions({ body, ...options }),
+        Core.maybeMultipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: Watermark }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -181,11 +180,6 @@ export interface WatermarkCreateParams {
   account_id: string;
 
   /**
-   * Body param: The image file to upload.
-   */
-  file: string;
-
-  /**
    * Body param: A short description of the watermark profile.
    */
   name?: string;
@@ -219,6 +213,11 @@ export interface WatermarkCreateParams {
    * entire video.
    */
   scale?: number;
+
+  /**
+   * Body param: URL of the watermark image to copy.
+   */
+  url?: string;
 }
 
 export interface WatermarkListParams {

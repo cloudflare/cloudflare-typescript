@@ -152,6 +152,11 @@ export interface LiveInput {
   deleteRecordingAfterDays?: number;
 
   /**
+   * Indicates whether the live input is enabled and can accept streams.
+   */
+  enabled?: boolean;
+
+  /**
    * A user modifiable key-value store used to reference other systems of record for
    * managing live inputs.
    */
@@ -383,6 +388,11 @@ export namespace LiveInputListResponse {
     deleteRecordingAfterDays?: number;
 
     /**
+     * Indicates whether the live input is enabled and can accept streams.
+     */
+    enabled?: boolean;
+
+    /**
      * A user modifiable key-value store used to reference other systems of record for
      * managing live inputs.
      */
@@ -419,6 +429,11 @@ export interface LiveInputCreateParams {
    * existing scheduled deletion.
    */
   deleteRecordingAfterDays?: number;
+
+  /**
+   * Body param: Indicates whether the live input is enabled and can accept streams.
+   */
+  enabled?: boolean;
 
   /**
    * Body param: A user modifiable key-value store used to reference other systems of
@@ -496,6 +511,11 @@ export interface LiveInputUpdateParams {
    * existing scheduled deletion.
    */
   deleteRecordingAfterDays?: number;
+
+  /**
+   * Body param: Indicates whether the live input is enabled and can accept streams.
+   */
+  enabled?: boolean;
 
   /**
    * Body param: A user modifiable key-value store used to reference other systems of

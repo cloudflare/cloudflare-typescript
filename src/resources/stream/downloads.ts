@@ -13,10 +13,7 @@ export class Downloads extends APIResource {
    * ```ts
    * const download = await client.stream.downloads.create(
    *   'ea95132c15732412d22c1476fa83f27a',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: {},
-   *   },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
@@ -25,12 +22,12 @@ export class Downloads extends APIResource {
     params: DownloadCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DownloadCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.post(`/accounts/${account_id}/stream/${identifier}/downloads`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: DownloadCreateResponse }>
+      this._client.post(
+        `/accounts/${account_id}/stream/${identifier}/downloads`,
+        options,
+      ) as Core.APIPromise<{ result: DownloadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -85,21 +82,62 @@ export class Downloads extends APIResource {
   }
 }
 
+/**
+ * An object with download type keys. Each key is optional and only present if that
+ * download type has been created.
+ */
 export interface DownloadCreateResponse {
   /**
-   * Indicates the progress as a percentage between 0 and 100.
+   * The audio-only download. Only present if this download type has been created.
    */
-  percentComplete?: number;
+  audio?: DownloadCreateResponse.Audio;
 
   /**
-   * The status of a generated download.
+   * The default video download. Only present if this download type has been created.
    */
-  status?: 'ready' | 'inprogress' | 'error';
+  default?: DownloadCreateResponse.Default;
+}
+
+export namespace DownloadCreateResponse {
+  /**
+   * The audio-only download. Only present if this download type has been created.
+   */
+  export interface Audio {
+    /**
+     * Indicates the progress as a percentage between 0 and 100.
+     */
+    percentComplete: number;
+
+    /**
+     * The status of a generated download.
+     */
+    status: 'ready' | 'inprogress' | 'error';
+
+    /**
+     * The URL to access the generated download.
+     */
+    url?: string;
+  }
 
   /**
-   * The URL to access the generated download.
+   * The default video download. Only present if this download type has been created.
    */
-  url?: string;
+  export interface Default {
+    /**
+     * Indicates the progress as a percentage between 0 and 100.
+     */
+    percentComplete: number;
+
+    /**
+     * The status of a generated download.
+     */
+    status: 'ready' | 'inprogress' | 'error';
+
+    /**
+     * The URL to access the generated download.
+     */
+    url?: string;
+  }
 }
 
 export type DownloadDeleteResponse = string;
@@ -128,12 +166,12 @@ export namespace DownloadGetResponse {
     /**
      * Indicates the progress as a percentage between 0 and 100.
      */
-    percentComplete?: number;
+    percentComplete: number;
 
     /**
      * The status of a generated download.
      */
-    status?: 'ready' | 'inprogress' | 'error';
+    status: 'ready' | 'inprogress' | 'error';
 
     /**
      * The URL to access the generated download.
@@ -148,12 +186,12 @@ export namespace DownloadGetResponse {
     /**
      * Indicates the progress as a percentage between 0 and 100.
      */
-    percentComplete?: number;
+    percentComplete: number;
 
     /**
      * The status of a generated download.
      */
-    status?: 'ready' | 'inprogress' | 'error';
+    status: 'ready' | 'inprogress' | 'error';
 
     /**
      * The URL to access the generated download.
@@ -164,14 +202,9 @@ export namespace DownloadGetResponse {
 
 export interface DownloadCreateParams {
   /**
-   * Path param: Identifier.
+   * Identifier.
    */
   account_id: string;
-
-  /**
-   * Body param
-   */
-  body: unknown;
 }
 
 export interface DownloadDeleteParams {
