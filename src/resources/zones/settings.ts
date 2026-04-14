@@ -796,6 +796,11 @@ export interface MinTLSVersion {
   modified_on?: string | null;
 }
 
+/**
+ * @deprecated Mirage is deprecated. This functionality is no longer supported. See
+ * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-11-03
+ * for further details.
+ */
 export interface Mirage {
   /**
    * Cloudflare Mirage reduces bandwidth used by images in mobile browsers. It can
@@ -810,6 +815,11 @@ export interface Mirage {
   value?: 'on' | 'off';
 }
 
+/**
+ * @deprecated Mirage is deprecated. This functionality is no longer supported. See
+ * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-11-03
+ * for further details.
+ */
 export interface MirageParam {
   /**
    * Cloudflare Mirage reduces bandwidth used by images in mobile browsers. It can
@@ -1552,6 +1562,7 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesSchemasCacheLevel
   | ChallengeTTL
   | SettingEditResponse.ZonesChinaNetworkEnabled
+  | SettingEditResponse.ZonesContentConverter
   | Ciphers
   | SettingEditResponse.ZonesCNAMEFlattening
   | DevelopmentMode
@@ -1580,6 +1591,7 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesPrivacyPass
   | ProxyReadTimeout
   | PseudoIPV4
+  | SettingEditResponse.ZonesRedirectsForAITraining
   | SettingEditResponse.ZonesReplaceInsecureJS
   | SettingEditResponse.ZonesSchemasResponseBuffering
   | SettingEditResponse.ZonesSchemasRocketLoader
@@ -1799,6 +1811,36 @@ export namespace SettingEditResponse {
      * Current value of the zone setting.
      */
     value: 'on' | 'off';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * When enabled and the client sends an Accept header requesting text/markdown,
+   * Cloudflare will convert HTML responses to Markdown format using the toMarkdown()
+   * service. Refer to the
+   * [developer documentation](https://developers.cloudflare.com/workers-ai/features/markdown-conversion/)
+   * for more information.
+   */
+  export interface ZonesContentConverter {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'content_converter';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2171,6 +2213,34 @@ export namespace SettingEditResponse {
      * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
      */
     value: 'on' | 'off';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * When enabled, Cloudflare will redirect verified AI training crawlers to
+   * canonical URLs found in the HTML response, ensuring AI models train on
+   * authoritative content.
+   */
+  export interface ZonesRedirectsForAITraining {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'redirects_for_ai_training';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2593,6 +2663,7 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesSchemasCacheLevel
   | ChallengeTTL
   | SettingGetResponse.ZonesChinaNetworkEnabled
+  | SettingGetResponse.ZonesContentConverter
   | Ciphers
   | SettingGetResponse.ZonesCNAMEFlattening
   | DevelopmentMode
@@ -2621,6 +2692,7 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesPrivacyPass
   | ProxyReadTimeout
   | PseudoIPV4
+  | SettingGetResponse.ZonesRedirectsForAITraining
   | SettingGetResponse.ZonesReplaceInsecureJS
   | SettingGetResponse.ZonesSchemasResponseBuffering
   | SettingGetResponse.ZonesSchemasRocketLoader
@@ -2840,6 +2912,36 @@ export namespace SettingGetResponse {
      * Current value of the zone setting.
      */
     value: 'on' | 'off';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * When enabled and the client sends an Accept header requesting text/markdown,
+   * Cloudflare will convert HTML responses to Markdown format using the toMarkdown()
+   * service. Refer to the
+   * [developer documentation](https://developers.cloudflare.com/workers-ai/features/markdown-conversion/)
+   * for more information.
+   */
+  export interface ZonesContentConverter {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'content_converter';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3212,6 +3314,34 @@ export namespace SettingGetResponse {
      * https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
      */
     value: 'on' | 'off';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * When enabled, Cloudflare will redirect verified AI training crawlers to
+   * canonical URLs found in the HTML response, ensuring AI models train on
+   * authoritative content.
+   */
+  export interface ZonesRedirectsForAITraining {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'redirects_for_ai_training';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
