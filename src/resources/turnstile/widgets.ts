@@ -23,10 +23,10 @@ export class Widgets extends APIResource {
    * ```
    */
   create(params: WidgetCreateParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
-    const { account_id, direction, order, page, per_page, ...body } = params;
+    const { account_id, direction, filter, order, page, per_page, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/challenges/widgets`, {
-        query: { direction, order, page, per_page },
+        query: { direction, filter, order, page, per_page },
         body,
         ...options,
       }) as Core.APIPromise<{ result: Widget }>
@@ -336,6 +336,20 @@ export interface WidgetCreateParams {
   direction?: 'asc' | 'desc';
 
   /**
+   * Query param: Filter widgets by field using case-insensitive substring matching.
+   * Format: `field:value`
+   *
+   * Supported fields:
+   *
+   * - `name` - Filter by widget name (e.g., `filter=name:login-form`)
+   * - `sitekey` - Filter by sitekey (e.g., `filter=sitekey:0x4AAA`)
+   *
+   * Returns 400 Bad Request if the field is unsupported or format is invalid. An
+   * empty filter value returns all results.
+   */
+  filter?: string;
+
+  /**
    * Query param: Field to order widgets by.
    */
   order?: 'id' | 'sitekey' | 'name' | 'created_on' | 'modified_on';
@@ -443,6 +457,20 @@ export interface WidgetListParams extends V4PagePaginationArrayParams {
    * Query param: Direction to order widgets.
    */
   direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Filter widgets by field using case-insensitive substring matching.
+   * Format: `field:value`
+   *
+   * Supported fields:
+   *
+   * - `name` - Filter by widget name (e.g., `filter=name:login-form`)
+   * - `sitekey` - Filter by sitekey (e.g., `filter=sitekey:0x4AAA`)
+   *
+   * Returns 400 Bad Request if the field is unsupported or format is invalid. An
+   * empty filter value returns all results.
+   */
+  filter?: string;
 
   /**
    * Query param: Field to order widgets by.
