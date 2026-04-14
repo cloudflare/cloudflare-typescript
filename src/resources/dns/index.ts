@@ -62,4 +62,5 @@ export {
   type RecordScanTriggerParams,
 } from './records';
 export { Settings } from './settings/index';
+export { Usage } from './usage/index';
 export { ZoneTransfers } from './zone-transfers/index';
