@@ -14,7 +14,7 @@ export class ClientCertificates extends APIResource {
    * const clientCertificate =
    *   await client.clientCertificates.create({
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     csr: '-----BEGIN CERTIFICATE REQUEST-----\\nMIICY....\\n-----END CERTIFICATE REQUEST-----\\n',
+   *     csr: '-----BEGIN CERTIFICATE REQUEST-----\nMIICY....\n-----END CERTIFICATE REQUEST-----',
    *     validity_days: 3650,
    *   });
    * ```
