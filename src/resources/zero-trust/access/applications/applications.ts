@@ -6019,6 +6019,12 @@ export namespace ApplicationCreateResponse {
       include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * The name of the Access policy.
        */
       name?: string;
@@ -6061,6 +6067,30 @@ export namespace ApplicationCreateResponse {
            */
           allow_email_alias?: boolean;
         }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
       }
     }
   }
@@ -11049,6 +11079,12 @@ export namespace ApplicationUpdateResponse {
       include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * The name of the Access policy.
        */
       name?: string;
@@ -11091,6 +11127,30 @@ export namespace ApplicationUpdateResponse {
            */
           allow_email_alias?: boolean;
         }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
       }
     }
   }
@@ -16079,6 +16139,12 @@ export namespace ApplicationListResponse {
       include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * The name of the Access policy.
        */
       name?: string;
@@ -16121,6 +16187,30 @@ export namespace ApplicationListResponse {
            */
           allow_email_alias?: boolean;
         }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
       }
     }
   }
@@ -21116,6 +21206,12 @@ export namespace ApplicationGetResponse {
       include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * The name of the Access policy.
        */
       name?: string;
@@ -21158,6 +21254,30 @@ export namespace ApplicationGetResponse {
            */
           allow_email_alias?: boolean;
         }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
       }
     }
   }
@@ -26081,6 +26201,12 @@ export declare namespace ApplicationCreateParams {
       exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
@@ -26116,6 +26242,30 @@ export declare namespace ApplicationCreateParams {
            */
           allow_email_alias?: boolean;
         }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
       }
     }
   }
@@ -31025,6 +31175,12 @@ export declare namespace ApplicationUpdateParams {
       exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
@@ -31060,6 +31216,30 @@ export declare namespace ApplicationUpdateParams {
            */
           allow_email_alias?: boolean;
         }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
       }
     }
   }
