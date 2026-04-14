@@ -2,6 +2,25 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as LabelsAPI from './labels';
+import {
+  LabelBulkCreateParams,
+  LabelBulkCreateResponse,
+  LabelBulkCreateResponsesSinglePage,
+  LabelBulkDeleteParams,
+  LabelBulkDeleteResponse,
+  LabelBulkDeleteResponsesSinglePage,
+  LabelBulkUpdateParams,
+  LabelBulkUpdateResponse,
+  LabelBulkUpdateResponsesSinglePage,
+  LabelCreateParams,
+  LabelCreateResponse,
+  LabelDeleteParams,
+  LabelDeleteResponse,
+  LabelUpdateParams,
+  LabelUpdateResponse,
+  Labels,
+} from './labels';
 import * as SchemaValidationAPI from './schema-validation';
 import {
   SchemaValidation,
@@ -16,6 +35,7 @@ import * as UserSchemasAPI from '../user-schemas/user-schemas';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Operations extends APIResource {
+  labels: LabelsAPI.Labels = new LabelsAPI.Labels(this._client);
   schemaValidation: SchemaValidationAPI.SchemaValidation = new SchemaValidationAPI.SchemaValidation(
     this._client,
   );
@@ -53,7 +73,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Retrieve information about all operations on a zone
+   * Lists all API operations tracked by API Shield for a zone with pagination.
+   * Returns operation details including method, path, and feature configurations.
    *
    * @example
    * ```ts
@@ -78,7 +99,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Delete an operation
+   * Removes a single API operation from API Shield endpoint management. The
+   * operation will no longer be tracked or protected by API Shield rules.
    *
    * @example
    * ```ts
@@ -136,7 +158,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Delete multiple operations
+   * Bulk removes multiple API operations from API Shield endpoint management in a
+   * single request. Efficient for cleaning up unused endpoints.
    *
    * @example
    * ```ts
@@ -155,7 +178,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Retrieve information about an operation
+   * Gets detailed information about a specific API operation in API Shield,
+   * including its schema validation settings and traffic statistics.
    *
    * @example
    * ```ts
@@ -1467,6 +1491,10 @@ export interface OperationGetParams {
 
 Operations.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
 Operations.OperationBulkCreateResponsesSinglePage = OperationBulkCreateResponsesSinglePage;
+Operations.Labels = Labels;
+Operations.LabelBulkCreateResponsesSinglePage = LabelBulkCreateResponsesSinglePage;
+Operations.LabelBulkDeleteResponsesSinglePage = LabelBulkDeleteResponsesSinglePage;
+Operations.LabelBulkUpdateResponsesSinglePage = LabelBulkUpdateResponsesSinglePage;
 Operations.SchemaValidation = SchemaValidation;
 
 export declare namespace Operations {
@@ -1486,6 +1514,25 @@ export declare namespace Operations {
     type OperationBulkCreateParams as OperationBulkCreateParams,
     type OperationBulkDeleteParams as OperationBulkDeleteParams,
     type OperationGetParams as OperationGetParams,
+  };
+
+  export {
+    Labels as Labels,
+    type LabelCreateResponse as LabelCreateResponse,
+    type LabelUpdateResponse as LabelUpdateResponse,
+    type LabelDeleteResponse as LabelDeleteResponse,
+    type LabelBulkCreateResponse as LabelBulkCreateResponse,
+    type LabelBulkDeleteResponse as LabelBulkDeleteResponse,
+    type LabelBulkUpdateResponse as LabelBulkUpdateResponse,
+    LabelBulkCreateResponsesSinglePage as LabelBulkCreateResponsesSinglePage,
+    LabelBulkDeleteResponsesSinglePage as LabelBulkDeleteResponsesSinglePage,
+    LabelBulkUpdateResponsesSinglePage as LabelBulkUpdateResponsesSinglePage,
+    type LabelCreateParams as LabelCreateParams,
+    type LabelUpdateParams as LabelUpdateParams,
+    type LabelDeleteParams as LabelDeleteParams,
+    type LabelBulkCreateParams as LabelBulkCreateParams,
+    type LabelBulkDeleteParams as LabelBulkDeleteParams,
+    type LabelBulkUpdateParams as LabelBulkUpdateParams,
   };
 
   export {

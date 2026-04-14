@@ -16,6 +16,12 @@ export {
 } from './discovery/index';
 export { ExpressionTemplate } from './expression-template/index';
 export {
+  LabelListResponsesV4PagePaginationArray,
+  Labels,
+  type LabelListResponse,
+  type LabelListParams,
+} from './labels/index';
+export {
   OldPublicSchemasV4PagePaginationArray,
   UserSchemas,
   type Message,

@@ -1,6 +1,24 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  LabelBulkCreateResponsesSinglePage,
+  LabelBulkDeleteResponsesSinglePage,
+  LabelBulkUpdateResponsesSinglePage,
+  Labels,
+  type LabelCreateResponse,
+  type LabelUpdateResponse,
+  type LabelDeleteResponse,
+  type LabelBulkCreateResponse,
+  type LabelBulkDeleteResponse,
+  type LabelBulkUpdateResponse,
+  type LabelCreateParams,
+  type LabelUpdateParams,
+  type LabelDeleteParams,
+  type LabelBulkCreateParams,
+  type LabelBulkDeleteParams,
+  type LabelBulkUpdateParams,
+} from './labels';
+export {
   OperationListResponsesV4PagePaginationArray,
   OperationBulkCreateResponsesSinglePage,
   Operations,

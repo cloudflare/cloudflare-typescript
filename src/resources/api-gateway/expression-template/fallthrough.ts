@@ -5,7 +5,8 @@ import * as Core from '../../../core';
 
 export class Fallthrough extends APIResource {
   /**
-   * Generate fallthrough WAF expression template from a set of API hosts
+   * Creates an expression template fallthrough rule for API Shield. Used for
+   * configuring default behavior when no other expression templates match.
    *
    * @example
    * ```ts

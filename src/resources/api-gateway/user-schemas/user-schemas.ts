@@ -39,7 +39,8 @@ export class UserSchemas extends APIResource {
   }
 
   /**
-   * Retrieve information about all schemas on a zone
+   * Lists all OpenAPI schemas uploaded to API Shield for the zone, including their
+   * validation status and associated operations.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
@@ -56,7 +57,8 @@ export class UserSchemas extends APIResource {
   }
 
   /**
-   * Delete a schema
+   * Permanently removes an uploaded OpenAPI schema from API Shield schema
+   * validation. Operations using this schema will lose their validation rules.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
@@ -70,7 +72,8 @@ export class UserSchemas extends APIResource {
   }
 
   /**
-   * Enable validation for a schema
+   * Activates schema validation for an uploaded OpenAPI schema. Requests to matching
+   * endpoints will be validated against the schema definitions.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
@@ -89,7 +92,8 @@ export class UserSchemas extends APIResource {
   }
 
   /**
-   * Retrieve information about a specific schema on a zone
+   * Gets detailed information about a specific uploaded OpenAPI schema, including
+   * its contents and validation configuration.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
