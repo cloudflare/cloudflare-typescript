@@ -13,7 +13,7 @@ export class Instances extends APIResource {
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
 
   /**
-   * Create a new workflow instance
+   * Creates a new instance of a workflow, starting its execution.
    */
   create(
     workflowName: string,
@@ -30,7 +30,7 @@ export class Instances extends APIResource {
   }
 
   /**
-   * List of workflow instances
+   * Lists all instances of a workflow with their execution status.
    */
   list(
     workflowName: string,
@@ -46,7 +46,7 @@ export class Instances extends APIResource {
   }
 
   /**
-   * Batch create new Workflow instances
+   * Creates multiple workflow instances in a single batch operation.
    */
   bulk(
     workflowName: string,
@@ -62,7 +62,7 @@ export class Instances extends APIResource {
   }
 
   /**
-   * Get logs and status from instance
+   * Retrieves logs and execution status for a specific workflow instance.
    */
   get(
     workflowName: string,
@@ -70,12 +70,12 @@ export class Instances extends APIResource {
     params: InstanceGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceGetResponse> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return (
-      this._client.get(
-        `/accounts/${account_id}/workflows/${workflowName}/instances/${instanceId}`,
-        options,
-      ) as Core.APIPromise<{ result: InstanceGetResponse }>
+      this._client.get(`/accounts/${account_id}/workflows/${workflowName}/instances/${instanceId}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: InstanceGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -169,6 +169,8 @@ export interface InstanceGetResponse {
     | 'waitingForPause'
     | 'waiting';
 
+  step_count: number;
+
   steps: Array<
     | InstanceGetResponse.UnionMember0
     | InstanceGetResponse.UnionMember1
@@ -199,7 +201,7 @@ export namespace InstanceGetResponse {
 
     name: string;
 
-    output: unknown;
+    output: string | null;
 
     start: string;
 
@@ -293,11 +295,11 @@ export namespace InstanceGetResponse {
 
     name: string;
 
-    output: unknown | string | number | boolean;
-
     start: string;
 
     type: 'waitForEvent';
+
+    output?: string;
   }
 
   export namespace UnionMember3 {
@@ -356,7 +358,8 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: `page` and `cursor` are mutually exclusive, use one or the other.
+   * Query param: Opaque token for cursor-based pagination. Mutually exclusive with
+   * `page`.
    */
   cursor?: string;
 
@@ -371,8 +374,7 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   date_start?: string;
 
   /**
-   * Query param: should only be used when `cursor` is used, defines a new direction
-   * for the cursor
+   * Query param: Defines the direction for cursor-based pagination.
    */
   direction?: 'asc' | 'desc';
 
@@ -427,7 +429,22 @@ export namespace InstanceBulkParams {
 }
 
 export interface InstanceGetParams {
+  /**
+   * Path param
+   */
   account_id: string;
+
+  /**
+   * Query param: Step ordering: "asc" (default, oldest first) or "desc" (newest
+   * first).
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Query param: When true, omits step details and returns only metadata with
+   * step_count.
+   */
+  simple?: 'true' | 'false';
 }
 
 Instances.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;

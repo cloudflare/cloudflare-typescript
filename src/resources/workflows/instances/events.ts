@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 
 export class Events extends APIResource {
   /**
-   * Send event to instance
+   * Sends an event to a running workflow instance to trigger state transitions.
    */
   create(
     workflowName: string,

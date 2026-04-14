@@ -6,7 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 
 export class Versions extends APIResource {
   /**
-   * List deployed Workflow versions
+   * Lists all deployed versions of a workflow.
    */
   list(
     workflowName: string,
@@ -22,7 +22,7 @@ export class Versions extends APIResource {
   }
 
   /**
-   * Get Workflow version details
+   * Retrieves details for a specific deployed workflow version.
    */
   get(
     workflowName: string,
@@ -49,9 +49,24 @@ export interface VersionListResponse {
 
   created_on: string;
 
+  has_dag: boolean;
+
+  /**
+   * The programming language of the workflow implementation
+   */
+  language: 'javascript' | 'python';
+
   modified_on: string;
 
   workflow_id: string;
+
+  limits?: VersionListResponse.Limits;
+}
+
+export namespace VersionListResponse {
+  export interface Limits {
+    steps?: number;
+  }
 }
 
 export interface VersionGetResponse {
@@ -61,9 +76,24 @@ export interface VersionGetResponse {
 
   created_on: string;
 
+  has_dag: boolean;
+
+  /**
+   * The programming language of the workflow implementation
+   */
+  language: 'javascript' | 'python';
+
   modified_on: string;
 
   workflow_id: string;
+
+  limits?: VersionGetResponse.Limits;
+}
+
+export namespace VersionGetResponse {
+  export interface Limits {
+    steps?: number;
+  }
 }
 
 export interface VersionListParams extends V4PagePaginationArrayParams {

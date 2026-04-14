@@ -5,7 +5,8 @@ import * as Core from '../../../core';
 
 export class Status extends APIResource {
   /**
-   * Change status of instance
+   * Changes the execution status of a workflow instance (e.g., pause, resume,
+   * terminate).
    */
   edit(
     workflowName: string,

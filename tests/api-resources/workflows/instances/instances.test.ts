@@ -90,6 +90,10 @@ describe('resource instances', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.workflows.instances.get('x', 'x', { account_id: 'account_id' });
+    const response = await client.workflows.instances.get('x', 'x', {
+      account_id: 'account_id',
+      order: 'asc',
+      simple: 'true',
+    });
   });
 });
