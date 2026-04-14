@@ -383,6 +383,12 @@ export interface DatabaseListResponse {
   created_at?: string;
 
   /**
+   * Specify the location to restrict the D1 database to run and store data. If this
+   * option is present, the location hint is ignored.
+   */
+  jurisdiction?: 'eu' | 'fedramp' | null;
+
+  /**
    * D1 database name.
    */
   name?: string;
@@ -917,7 +923,7 @@ export declare namespace DatabaseQueryParams {
     /**
      * Body param
      */
-    batch?: Array<MultipleQueries.Batch>;
+    batch: Array<MultipleQueries.Batch>;
   }
 
   export namespace MultipleQueries {
@@ -966,7 +972,7 @@ export declare namespace DatabaseRawParams {
     /**
      * Body param
      */
-    batch?: Array<MultipleQueries.Batch>;
+    batch: Array<MultipleQueries.Batch>;
   }
 
   export namespace MultipleQueries {
