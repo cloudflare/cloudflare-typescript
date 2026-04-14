@@ -80,7 +80,8 @@ export class OriginTLSClientAuth extends APIResource {
   }
 
   /**
-   * List Certificates
+   * Lists all client certificates configured for zone-level authenticated origin
+   * pulls.
    *
    * @deprecated Use zone_certificates.list for zone-level certificates. This method will be removed in a future major version.
    */
@@ -97,7 +98,7 @@ export class OriginTLSClientAuth extends APIResource {
   }
 
   /**
-   * Delete Certificate
+   * Removes a client certificate used for zone-level authenticated origin pulls.
    *
    * @deprecated Use zone_certificates.delete for zone-level certificates. This method will be removed in a future major version.
    */
@@ -116,7 +117,8 @@ export class OriginTLSClientAuth extends APIResource {
   }
 
   /**
-   * Get Certificate Details
+   * Retrieves details for a specific client certificate used in zone-level
+   * authenticated origin pulls.
    *
    * @deprecated Use zone_certificates.get for zone-level certificates. This method will be removed in a future major version.
    */

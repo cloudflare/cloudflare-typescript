@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as HostnamesAPI from './hostnames';
 import { SinglePage } from '../../pagination';
 
 export class HostnameCertificates extends APIResource {
@@ -38,7 +37,8 @@ export class HostnameCertificates extends APIResource {
   }
 
   /**
-   * List Certificates
+   * Lists all client certificates configured for per-hostname authenticated origin
+   * pulls on the zone.
    *
    * @example
    * ```ts
@@ -63,7 +63,11 @@ export class HostnameCertificates extends APIResource {
   }
 
   /**
-   * Delete Hostname Client Certificate
+   * Removes a client certificate used for authenticated origin pulls on a specific
+   * hostname. Note: Before deleting the certificate, you must first invalidate the
+   * hostname for client authentication by sending a PUT request with `enabled` set
+   * to null. After invalidating the association, the certificate can be safely
+   * deleted.
    *
    * @example
    * ```ts
@@ -215,16 +219,11 @@ export interface HostnameCertificateCreateResponse {
   uploaded_on?: string;
 }
 
-export interface HostnameCertificateListResponse extends HostnamesAPI.AuthenticatedOriginPull {
+export interface HostnameCertificateListResponse {
   /**
    * Identifier.
    */
   id?: string;
-
-  /**
-   * Identifier.
-   */
-  cert_id?: string;
 
   /**
    * The hostname certificate.
@@ -232,21 +231,41 @@ export interface HostnameCertificateListResponse extends HostnamesAPI.Authentica
   certificate?: string;
 
   /**
-   * Indicates whether hostname-level authenticated origin pulls is enabled. A null
-   * value voids the association.
+   * The date when the certificate expires.
    */
-  enabled?: boolean | null;
+  expires_on?: string;
 
   /**
-   * The hostname on the origin for which the client certificate uploaded will be
-   * used.
+   * The certificate authority that issued the certificate.
    */
-  hostname?: string;
+  issuer?: string;
 
   /**
-   * The hostname certificate's private key.
+   * The serial number on the uploaded certificate.
    */
-  private_key?: string;
+  serial_number?: string;
+
+  /**
+   * The type of hash used for the certificate.
+   */
+  signature?: string;
+
+  /**
+   * Status of the certificate or the association.
+   */
+  status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deleted'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * The time when the certificate was uploaded.
+   */
+  uploaded_on?: string;
 }
 
 export interface HostnameCertificateDeleteResponse {
