@@ -6,7 +6,8 @@ import { SinglePage } from '../../../pagination';
 
 export class Release extends APIResource {
   /**
-   * Release messages from quarantine
+   * Releases a quarantined email message, allowing it to be delivered to the
+   * recipient.
    *
    * @example
    * ```ts

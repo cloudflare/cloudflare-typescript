@@ -6,7 +6,8 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 
 export class BlockSenders extends APIResource {
   /**
-   * Create a blocked email sender
+   * Adds a sender pattern to the email block list, preventing messages from matching
+   * senders from being delivered.
    *
    * @example
    * ```ts
@@ -33,7 +34,7 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * List blocked email senders
+   * Lists all blocked sender entries with their patterns and block reasons.
    *
    * @example
    * ```ts
@@ -58,7 +59,8 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * Delete a blocked email sender
+   * Removes a sender from the email block list, allowing their messages to be
+   * delivered normally.
    *
    * @example
    * ```ts
@@ -84,7 +86,7 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * Update a blocked email sender
+   * Modifies a blocked sender entry, updating its pattern or block reason.
    *
    * @example
    * ```ts
@@ -110,7 +112,8 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * Get a blocked email sender
+   * Gets information about a specific blocked sender entry, including the pattern
+   * and block reason.
    *
    * @example
    * ```ts

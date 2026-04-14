@@ -34,9 +34,33 @@ export class Submissions extends APIResource {
 export class SubmissionListResponsesV4PagePaginationArray extends V4PagePaginationArray<SubmissionListResponse> {}
 
 export interface SubmissionListResponse {
+  /**
+   * @deprecated deprecated as of 2026-04-01, use `requested_at` instead.
+   */
   requested_ts: string;
 
   submission_id: string;
+
+  customer_status?: 'escalated' | 'reviewed' | 'unreviewed' | null;
+
+  escalated_as?:
+    | 'MALICIOUS'
+    | 'MALICIOUS-BEC'
+    | 'SUSPICIOUS'
+    | 'SPOOF'
+    | 'SPAM'
+    | 'BULK'
+    | 'ENCRYPTED'
+    | 'EXTERNAL'
+    | 'UNKNOWN'
+    | 'NONE'
+    | null;
+
+  escalated_at?: string | null;
+
+  escalated_by?: string | null;
+
+  escalated_submission_id?: string | null;
 
   original_disposition?:
     | 'MALICIOUS'
@@ -53,6 +77,8 @@ export interface SubmissionListResponse {
 
   original_edf_hash?: string | null;
 
+  original_postfix_id?: string | null;
+
   outcome?: string | null;
 
   outcome_disposition?:
@@ -67,6 +93,8 @@ export interface SubmissionListResponse {
     | 'UNKNOWN'
     | 'NONE'
     | null;
+
+  requested_at?: string | null;
 
   requested_by?: string | null;
 
@@ -97,7 +125,13 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: The end of the search date range. Defaults to `now`.
+   * Query param
+   */
+  customer_status?: 'escalated' | 'reviewed' | 'unreviewed';
+
+  /**
+   * Query param: The end of the search date range. Defaults to `now` if not
+   * provided.
    */
   end?: string;
 
@@ -122,8 +156,8 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
   requested_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
 
   /**
-   * Query param: The beginning of the search date range. Defaults to
-   * `now - 30 days`.
+   * Query param: The beginning of the search date range. Defaults to `now - 30 days`
+   * if not provided.
    */
   start?: string;
 

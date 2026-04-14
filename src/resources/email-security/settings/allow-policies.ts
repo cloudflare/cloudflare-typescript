@@ -6,7 +6,8 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 
 export class AllowPolicies extends APIResource {
   /**
-   * Create an email allow policy
+   * Creates a new email allow policy that permits specific senders, domains, or
+   * patterns to bypass security scanning.
    *
    * @example
    * ```ts
@@ -62,7 +63,8 @@ export class AllowPolicies extends APIResource {
   }
 
   /**
-   * Delete an email allow policy
+   * Removes an email allow policy. Previously allowed senders will be subject to
+   * normal security scanning.
    *
    * @example
    * ```ts
@@ -88,7 +90,8 @@ export class AllowPolicies extends APIResource {
   }
 
   /**
-   * Update an email allow policy
+   * Updates an existing email allow policy, modifying its matching criteria or
+   * scope.
    *
    * @example
    * ```ts
@@ -114,7 +117,8 @@ export class AllowPolicies extends APIResource {
   }
 
   /**
-   * Get an email allow policy
+   * Retrieves details for a specific email allow policy, including its matching
+   * criteria and scope.
    *
    * @example
    * ```ts

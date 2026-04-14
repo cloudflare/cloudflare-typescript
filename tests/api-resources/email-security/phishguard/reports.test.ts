@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource submissions', () => {
+describe('resource reports', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.emailSecurity.submissions.list({
+    const responsePromise = client.emailSecurity.phishguard.reports.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,20 +24,12 @@ describe('resource submissions', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.emailSecurity.submissions.list({
+    const response = await client.emailSecurity.phishguard.reports.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      customer_status: 'escalated',
       end: '2019-12-27T18:11:19.117Z',
-      original_disposition: 'MALICIOUS',
-      outcome_disposition: 'MALICIOUS',
-      page: 1,
-      per_page: 1,
-      query: 'query',
-      requested_disposition: 'MALICIOUS',
+      from_date: '2019-12-27',
       start: '2019-12-27T18:11:19.117Z',
-      status: 'status',
-      submission_id: 'submission_id',
-      type: 'TEAM',
+      to_date: '2019-12-27',
     });
   });
 });

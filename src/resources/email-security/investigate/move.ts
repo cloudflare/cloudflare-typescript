@@ -6,37 +6,38 @@ import { SinglePage } from '../../../pagination';
 
 export class Move extends APIResource {
   /**
-   * Move a message
+   * Moves a single email message to a different folder or changes its quarantine
+   * status.
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const moveCreateResponse of client.emailSecurity.investigate.move.create(
-   *   '4Njp3P0STMz2c02Q',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     destination: 'Inbox',
-   *   },
-   * )) {
-   *   // ...
-   * }
+   * const moves =
+   *   await client.emailSecurity.investigate.move.create(
+   *     '4Njp3P0STMz2c02Q',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       destination: 'Inbox',
+   *     },
+   *   );
    * ```
    */
   create(
     postfixId: string,
     params: MoveCreateParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MoveCreateResponsesSinglePage, MoveCreateResponse> {
-    const { account_id, ...body } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/email-security/investigate/${postfixId}/move`,
-      MoveCreateResponsesSinglePage,
-      { body, method: 'post', ...options },
-    );
+  ): Core.APIPromise<MoveCreateResponse> {
+    const { account_id, submission, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/email-security/investigate/${postfixId}/move`, {
+        query: { submission },
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: MoveCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Move multiple messages
+   * Maximum batch size: 1000 messages per request
    *
    * @example
    * ```ts
@@ -64,32 +65,42 @@ export class Move extends APIResource {
   }
 }
 
-export class MoveCreateResponsesSinglePage extends SinglePage<MoveCreateResponse> {}
-
 export class MoveBulkResponsesSinglePage extends SinglePage<MoveBulkResponse> {}
 
-export interface MoveCreateResponse {
-  completed_timestamp: string;
+export type MoveCreateResponse = Array<MoveCreateResponse.MoveCreateResponseItem>;
 
-  /**
-   * @deprecated
-   */
-  item_count: number;
+export namespace MoveCreateResponse {
+  export interface MoveCreateResponseItem {
+    /**
+     * @deprecated Deprecated, use `completed_at` instead
+     */
+    completed_timestamp: string;
 
-  success: boolean;
+    /**
+     * @deprecated
+     */
+    item_count: number;
 
-  destination?: string | null;
+    success: boolean;
 
-  message_id?: string | null;
+    completed_at?: string;
 
-  operation?: string | null;
+    destination?: string | null;
 
-  recipient?: string | null;
+    message_id?: string | null;
 
-  status?: string | null;
+    operation?: string | null;
+
+    recipient?: string | null;
+
+    status?: string | null;
+  }
 }
 
 export interface MoveBulkResponse {
+  /**
+   * @deprecated Deprecated, use `completed_at` instead
+   */
   completed_timestamp: string;
 
   /**
@@ -98,6 +109,8 @@ export interface MoveBulkResponse {
   item_count: number;
 
   success: boolean;
+
+  completed_at?: string;
 
   destination?: string | null;
 
@@ -125,6 +138,12 @@ export interface MoveCreateParams {
     | 'DeletedItems'
     | 'RecoverableItemsDeletions'
     | 'RecoverableItemsPurges';
+
+  /**
+   * Query param: When true, search the submissions datastore only. When false or
+   * omitted, search the regular datastore only.
+   */
+  submission?: boolean;
 }
 
 export interface MoveBulkParams {
@@ -155,14 +174,12 @@ export interface MoveBulkParams {
   postfix_ids?: Array<string>;
 }
 
-Move.MoveCreateResponsesSinglePage = MoveCreateResponsesSinglePage;
 Move.MoveBulkResponsesSinglePage = MoveBulkResponsesSinglePage;
 
 export declare namespace Move {
   export {
     type MoveCreateResponse as MoveCreateResponse,
     type MoveBulkResponse as MoveBulkResponse,
-    MoveCreateResponsesSinglePage as MoveCreateResponsesSinglePage,
     MoveBulkResponsesSinglePage as MoveBulkResponsesSinglePage,
     type MoveCreateParams as MoveCreateParams,
     type MoveBulkParams as MoveBulkParams,

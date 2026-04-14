@@ -6,7 +6,8 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 
 export class TrustedDomains extends APIResource {
   /**
-   * Create a trusted email domain
+   * Adds a domain to the trusted domains list for email security, reducing false
+   * positive detections.
    *
    * @example
    * ```ts
@@ -61,7 +62,8 @@ export class TrustedDomains extends APIResource {
   }
 
   /**
-   * Delete a trusted email domain
+   * Removes a domain from the trusted domains list, subjecting it to normal security
+   * scanning.
    *
    * @example
    * ```ts
@@ -87,7 +89,7 @@ export class TrustedDomains extends APIResource {
   }
 
   /**
-   * Update a trusted email domain
+   * Modifies a trusted domain entry's configuration.
    *
    * @example
    * ```ts
@@ -113,7 +115,7 @@ export class TrustedDomains extends APIResource {
   }
 
   /**
-   * Get a trusted email domain
+   * Gets information about a specific trusted domain entry.
    *
    * @example
    * ```ts
