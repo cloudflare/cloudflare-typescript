@@ -195,7 +195,8 @@ export interface ConfigCreateParams {
    */
   origin:
     | ConfigCreateParams.PublicDatabase
-    | ConfigCreateParams.AccessProtectedDatabaseBehindCloudflareTunnel;
+    | ConfigCreateParams.AccessProtectedDatabaseBehindCloudflareTunnel
+    | ConfigCreateParams.DatabaseReachableThroughAWorkersVPC;
 
   /**
    * Body param
@@ -205,13 +206,18 @@ export interface ConfigCreateParams {
     | ConfigCreateParams.HyperdriveHyperdriveCachingEnabled;
 
   /**
-   * Body param
+   * Body param: mTLS configuration for the origin connection. Cannot be used with
+   * VPC Service origins; TLS must be managed on the VPC Service.
    */
   mtls?: ConfigCreateParams.MTLS;
 
   /**
    * Body param: The (soft) maximum number of connections the Hyperdrive is allowed
    * to make to the origin database.
+   *
+   * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
+   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * if you need a higher limit.
    */
   origin_connection_limit?: number;
 }
@@ -291,6 +297,35 @@ export namespace ConfigCreateParams {
     user: string;
   }
 
+  export interface DatabaseReachableThroughAWorkersVPC {
+    /**
+     * Set the name of your origin database.
+     */
+    database: string;
+
+    /**
+     * Set the password needed to access your origin database. The API never returns
+     * this write-only value.
+     */
+    password: string;
+
+    /**
+     * Specifies the URL scheme used to connect to your origin database.
+     */
+    scheme: 'postgres' | 'postgresql' | 'mysql';
+
+    /**
+     * The identifier of the Workers VPC Service to connect through. Hyperdrive will
+     * egress through the specified VPC Service to reach the origin database.
+     */
+    service_id: string;
+
+    /**
+     * Set the user of your origin database.
+     */
+    user: string;
+  }
+
   export interface HyperdriveHyperdriveCachingCommon {
     /**
      * Set to true to disable caching of SQL responses. Default is false.
@@ -317,6 +352,10 @@ export namespace ConfigCreateParams {
     stale_while_revalidate?: number;
   }
 
+  /**
+   * mTLS configuration for the origin connection. Cannot be used with VPC Service
+   * origins; TLS must be managed on the VPC Service.
+   */
   export interface MTLS {
     /**
      * Define CA certificate ID obtained after uploading CA cert.
@@ -352,7 +391,8 @@ export interface ConfigUpdateParams {
    */
   origin:
     | ConfigUpdateParams.PublicDatabase
-    | ConfigUpdateParams.AccessProtectedDatabaseBehindCloudflareTunnel;
+    | ConfigUpdateParams.AccessProtectedDatabaseBehindCloudflareTunnel
+    | ConfigUpdateParams.DatabaseReachableThroughAWorkersVPC;
 
   /**
    * Body param
@@ -362,13 +402,18 @@ export interface ConfigUpdateParams {
     | ConfigUpdateParams.HyperdriveHyperdriveCachingEnabled;
 
   /**
-   * Body param
+   * Body param: mTLS configuration for the origin connection. Cannot be used with
+   * VPC Service origins; TLS must be managed on the VPC Service.
    */
   mtls?: ConfigUpdateParams.MTLS;
 
   /**
    * Body param: The (soft) maximum number of connections the Hyperdrive is allowed
    * to make to the origin database.
+   *
+   * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
+   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * if you need a higher limit.
    */
   origin_connection_limit?: number;
 }
@@ -448,6 +493,35 @@ export namespace ConfigUpdateParams {
     user: string;
   }
 
+  export interface DatabaseReachableThroughAWorkersVPC {
+    /**
+     * Set the name of your origin database.
+     */
+    database: string;
+
+    /**
+     * Set the password needed to access your origin database. The API never returns
+     * this write-only value.
+     */
+    password: string;
+
+    /**
+     * Specifies the URL scheme used to connect to your origin database.
+     */
+    scheme: 'postgres' | 'postgresql' | 'mysql';
+
+    /**
+     * The identifier of the Workers VPC Service to connect through. Hyperdrive will
+     * egress through the specified VPC Service to reach the origin database.
+     */
+    service_id: string;
+
+    /**
+     * Set the user of your origin database.
+     */
+    user: string;
+  }
+
   export interface HyperdriveHyperdriveCachingCommon {
     /**
      * Set to true to disable caching of SQL responses. Default is false.
@@ -474,6 +548,10 @@ export namespace ConfigUpdateParams {
     stale_while_revalidate?: number;
   }
 
+  /**
+   * mTLS configuration for the origin connection. Cannot be used with VPC Service
+   * origins; TLS must be managed on the VPC Service.
+   */
   export interface MTLS {
     /**
      * Define CA certificate ID obtained after uploading CA cert.
@@ -520,7 +598,8 @@ export interface ConfigEditParams {
     | ConfigEditParams.HyperdriveHyperdriveCachingEnabled;
 
   /**
-   * Body param
+   * Body param: mTLS configuration for the origin connection. Cannot be used with
+   * VPC Service origins; TLS must be managed on the VPC Service.
    */
   mtls?: ConfigEditParams.MTLS;
 
@@ -531,16 +610,23 @@ export interface ConfigEditParams {
   name?: string;
 
   /**
-   * Body param
+   * Body param: Connect to a database through a Workers VPC Service. TLS settings
+   * (mTLS, sslmode) cannot be configured on the Hyperdrive when using a VPC Service
+   * origin; TLS must be managed on the VPC Service itself.
    */
   origin?:
     | ConfigEditParams.HyperdriveHyperdriveDatabase
     | ConfigEditParams.HyperdriveInternetOrigin
-    | ConfigEditParams.HyperdriveOverAccessOrigin;
+    | ConfigEditParams.HyperdriveOverAccessOrigin
+    | ConfigEditParams.HyperdriveVPCServiceOrigin;
 
   /**
    * Body param: The (soft) maximum number of connections the Hyperdrive is allowed
    * to make to the origin database.
+   *
+   * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
+   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * if you need a higher limit.
    */
   origin_connection_limit?: number;
 }
@@ -572,6 +658,10 @@ export namespace ConfigEditParams {
     stale_while_revalidate?: number;
   }
 
+  /**
+   * mTLS configuration for the origin connection. Cannot be used with VPC Service
+   * origins; TLS must be managed on the VPC Service.
+   */
   export interface MTLS {
     /**
      * Define CA certificate ID obtained after uploading CA cert.
@@ -642,6 +732,19 @@ export namespace ConfigEditParams {
      * Defines the host (hostname or IP) of your origin database.
      */
     host: string;
+  }
+
+  /**
+   * Connect to a database through a Workers VPC Service. TLS settings (mTLS,
+   * sslmode) cannot be configured on the Hyperdrive when using a VPC Service origin;
+   * TLS must be managed on the VPC Service itself.
+   */
+  export interface HyperdriveVPCServiceOrigin {
+    /**
+     * The identifier of the Workers VPC Service to connect through. Hyperdrive will
+     * egress through the specified VPC Service to reach the origin database.
+     */
+    service_id: string;
   }
 }
 
