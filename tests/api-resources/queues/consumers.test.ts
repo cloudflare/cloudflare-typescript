@@ -10,9 +10,12 @@ const client = new Cloudflare({
 });
 
 describe('resource consumers', () => {
-  test('create: only required params', async () => {
+  // 422 status codes in prism tests
+  test.skip('create: only required params', async () => {
     const responsePromise = client.queues.consumers.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      script_name: 'my-consumer-worker',
+      type: 'worker',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -23,11 +26,13 @@ describe('resource consumers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // 422 status codes in prism tests
+  test.skip('create: required and optional params', async () => {
     const response = await client.queues.consumers.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      dead_letter_queue: 'example-queue',
       script_name: 'my-consumer-worker',
+      type: 'worker',
+      dead_letter_queue: 'example-queue',
       settings: {
         batch_size: 50,
         max_concurrency: 10,
@@ -35,15 +40,19 @@ describe('resource consumers', () => {
         max_wait_time_ms: 5000,
         retry_delay: 10,
       },
-      type: 'worker',
     });
   });
 
-  test('update: only required params', async () => {
+  // 422 status codes in prism tests
+  test.skip('update: only required params', async () => {
     const responsePromise = client.queues.consumers.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        script_name: 'my-consumer-worker',
+        type: 'worker',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -54,14 +63,16 @@ describe('resource consumers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // 422 status codes in prism tests
+  test.skip('update: required and optional params', async () => {
     const response = await client.queues.consumers.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        dead_letter_queue: 'example-queue',
         script_name: 'my-consumer-worker',
+        type: 'worker',
+        dead_letter_queue: 'example-queue',
         settings: {
           batch_size: 50,
           max_concurrency: 10,
@@ -69,7 +80,6 @@ describe('resource consumers', () => {
           max_wait_time_ms: 5000,
           retry_delay: 10,
         },
-        type: 'worker',
       },
     );
   });

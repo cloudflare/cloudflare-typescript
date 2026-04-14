@@ -13,7 +13,11 @@ export class Consumers extends APIResource {
    * ```ts
    * const consumer = await client.queues.consumers.create(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     script_name: 'my-consumer-worker',
+   *     type: 'worker',
+   *   },
    * );
    * ```
    */
@@ -39,7 +43,11 @@ export class Consumers extends APIResource {
    * const consumer = await client.queues.consumers.update(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     script_name: 'my-consumer-worker',
+   *     type: 'worker',
+   *   },
    * );
    * ```
    */
@@ -137,10 +145,13 @@ export class Consumers extends APIResource {
 
 export class ConsumersSinglePage extends SinglePage<Consumer> {}
 
-export type Consumer = Consumer.MqWorkerConsumer | Consumer.MqHTTPConsumer;
+/**
+ * Response body representing a consumer
+ */
+export type Consumer = Consumer.MqWorkerConsumerResponse | Consumer.MqHTTPConsumerResponse;
 
 export namespace Consumer {
-  export interface MqWorkerConsumer {
+  export interface MqWorkerConsumerResponse {
     /**
      * A Resource identifier.
      */
@@ -149,21 +160,23 @@ export namespace Consumer {
     created_on?: string;
 
     /**
-     * A Resource identifier.
+     * Name of the dead letter queue, or empty string if not configured
      */
-    queue_id?: string;
+    dead_letter_queue?: string;
+
+    queue_name?: string;
 
     /**
      * Name of a Worker
      */
-    script?: string;
+    script_name?: string;
 
-    settings?: MqWorkerConsumer.Settings;
+    settings?: MqWorkerConsumerResponse.Settings;
 
     type?: 'worker';
   }
 
-  export namespace MqWorkerConsumer {
+  export namespace MqWorkerConsumerResponse {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
@@ -195,7 +208,7 @@ export namespace Consumer {
     }
   }
 
-  export interface MqHTTPConsumer {
+  export interface MqHTTPConsumerResponse {
     /**
      * A Resource identifier.
      */
@@ -204,16 +217,18 @@ export namespace Consumer {
     created_on?: string;
 
     /**
-     * A Resource identifier.
+     * Name of the dead letter queue, or empty string if not configured
      */
-    queue_id?: string;
+    dead_letter_queue?: string;
 
-    settings?: MqHTTPConsumer.Settings;
+    queue_name?: string;
+
+    settings?: MqHTTPConsumerResponse.Settings;
 
     type?: 'http_pull';
   }
 
-  export namespace MqHTTPConsumer {
+  export namespace MqHTTPConsumerResponse {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
@@ -252,15 +267,25 @@ export interface ConsumerDeleteResponse {
 }
 
 export type ConsumerCreateParams =
-  | ConsumerCreateParams.MqWorkerConsumer
-  | ConsumerCreateParams.MqHTTPConsumer;
+  | ConsumerCreateParams.MqWorkerConsumerRequest
+  | ConsumerCreateParams.MqHTTPConsumerRequest;
 
 export declare namespace ConsumerCreateParams {
-  export interface MqWorkerConsumer {
+  export interface MqWorkerConsumerRequest {
     /**
      * Path param: A Resource identifier.
      */
     account_id: string;
+
+    /**
+     * Body param: Name of a Worker
+     */
+    script_name: string;
+
+    /**
+     * Body param
+     */
+    type: 'worker';
 
     /**
      * Body param
@@ -268,22 +293,12 @@ export declare namespace ConsumerCreateParams {
     dead_letter_queue?: string;
 
     /**
-     * Body param: Name of a Worker
-     */
-    script_name?: string;
-
-    /**
      * Body param
      */
-    settings?: MqWorkerConsumer.Settings;
-
-    /**
-     * Body param
-     */
-    type?: 'worker';
+    settings?: MqWorkerConsumerRequest.Settings;
   }
 
-  export namespace MqWorkerConsumer {
+  export namespace MqWorkerConsumerRequest {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
@@ -315,11 +330,16 @@ export declare namespace ConsumerCreateParams {
     }
   }
 
-  export interface MqHTTPConsumer {
+  export interface MqHTTPConsumerRequest {
     /**
      * Path param: A Resource identifier.
      */
     account_id: string;
+
+    /**
+     * Body param
+     */
+    type: 'http_pull';
 
     /**
      * Body param
@@ -329,15 +349,10 @@ export declare namespace ConsumerCreateParams {
     /**
      * Body param
      */
-    settings?: MqHTTPConsumer.Settings;
-
-    /**
-     * Body param
-     */
-    type?: 'http_pull';
+    settings?: MqHTTPConsumerRequest.Settings;
   }
 
-  export namespace MqHTTPConsumer {
+  export namespace MqHTTPConsumerRequest {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
@@ -365,15 +380,25 @@ export declare namespace ConsumerCreateParams {
 }
 
 export type ConsumerUpdateParams =
-  | ConsumerUpdateParams.MqWorkerConsumer
-  | ConsumerUpdateParams.MqHTTPConsumer;
+  | ConsumerUpdateParams.MqWorkerConsumerRequest
+  | ConsumerUpdateParams.MqHTTPConsumerRequest;
 
 export declare namespace ConsumerUpdateParams {
-  export interface MqWorkerConsumer {
+  export interface MqWorkerConsumerRequest {
     /**
      * Path param: A Resource identifier.
      */
     account_id: string;
+
+    /**
+     * Body param: Name of a Worker
+     */
+    script_name: string;
+
+    /**
+     * Body param
+     */
+    type: 'worker';
 
     /**
      * Body param
@@ -381,22 +406,12 @@ export declare namespace ConsumerUpdateParams {
     dead_letter_queue?: string;
 
     /**
-     * Body param: Name of a Worker
-     */
-    script_name?: string;
-
-    /**
      * Body param
      */
-    settings?: MqWorkerConsumer.Settings;
-
-    /**
-     * Body param
-     */
-    type?: 'worker';
+    settings?: MqWorkerConsumerRequest.Settings;
   }
 
-  export namespace MqWorkerConsumer {
+  export namespace MqWorkerConsumerRequest {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
@@ -428,11 +443,16 @@ export declare namespace ConsumerUpdateParams {
     }
   }
 
-  export interface MqHTTPConsumer {
+  export interface MqHTTPConsumerRequest {
     /**
      * Path param: A Resource identifier.
      */
     account_id: string;
+
+    /**
+     * Body param
+     */
+    type: 'http_pull';
 
     /**
      * Body param
@@ -442,15 +462,10 @@ export declare namespace ConsumerUpdateParams {
     /**
      * Body param
      */
-    settings?: MqHTTPConsumer.Settings;
-
-    /**
-     * Body param
-     */
-    type?: 'http_pull';
+    settings?: MqHTTPConsumerRequest.Settings;
   }
 
-  export namespace MqHTTPConsumer {
+  export namespace MqHTTPConsumerRequest {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
