@@ -77,7 +77,8 @@ export interface Script {
   cryptomining_score?: number | null;
 
   /**
-   * The dataflow score of the JavaScript content.
+   * @deprecated The dataflow score of the JavaScript content. This field has been
+   * deprecated in favour of js_integrity_score.
    */
   dataflow_score?: number | null;
 
@@ -115,7 +116,8 @@ export interface Script {
   malware_score?: number | null;
 
   /**
-   * The obfuscation score of the JavaScript content.
+   * @deprecated The obfuscation score of the JavaScript content. This field has been
+   * deprecated in favour of js_integrity_score.
    */
   obfuscation_score?: number | null;
 
@@ -148,7 +150,8 @@ export interface ScriptGetResponse {
   cryptomining_score?: number | null;
 
   /**
-   * The dataflow score of the JavaScript content.
+   * @deprecated The dataflow score of the JavaScript content. This field has been
+   * deprecated in favour of js_integrity_score.
    */
   dataflow_score?: number | null;
 
@@ -186,7 +189,8 @@ export interface ScriptGetResponse {
   malware_score?: number | null;
 
   /**
-   * The obfuscation score of the JavaScript content.
+   * @deprecated The obfuscation score of the JavaScript content. This field has been
+   * deprecated in favour of js_integrity_score.
    */
   obfuscation_score?: number | null;
 
@@ -208,7 +212,8 @@ export namespace ScriptGetResponse {
     cryptomining_score?: number | null;
 
     /**
-     * The dataflow score of the JavaScript content.
+     * @deprecated The dataflow score of the JavaScript content. This field has been
+     * deprecated in favour of js_integrity_score.
      */
     dataflow_score?: number | null;
 
@@ -238,7 +243,8 @@ export namespace ScriptGetResponse {
     malware_score?: number | null;
 
     /**
-     * The obfuscation score of the JavaScript content.
+     * @deprecated The obfuscation score of the JavaScript content. This field has been
+     * deprecated in favour of js_integrity_score.
      */
     obfuscation_score?: number | null;
   }
