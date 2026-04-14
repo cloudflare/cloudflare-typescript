@@ -18,8 +18,10 @@ export class Rules extends APIResource {
    * const magicNetworkMonitoringRule =
    *   await client.magicNetworkMonitoring.rules.create({
    *     account_id: '6f91088a406011ed95aed352566e8d4c',
-   *     duration: '1m',
+   *     automatic_advertisement: true,
    *     name: 'my_rule_1',
+   *     prefixes: ['203.0.113.1/32'],
+   *     type: 'zscore',
    *   });
    * ```
    */
@@ -43,8 +45,10 @@ export class Rules extends APIResource {
    * const magicNetworkMonitoringRule =
    *   await client.magicNetworkMonitoring.rules.update({
    *     account_id: '6f91088a406011ed95aed352566e8d4c',
-   *     duration: '1m',
+   *     automatic_advertisement: true,
    *     name: 'my_rule_1',
+   *     prefixes: ['203.0.113.1/32'],
+   *     type: 'zscore',
    *   });
    * ```
    */
@@ -118,7 +122,13 @@ export class Rules extends APIResource {
    * const magicNetworkMonitoringRule =
    *   await client.magicNetworkMonitoring.rules.edit(
    *     '2890e6fa406311ed9b5a23f70f6fb8cf',
-   *     { account_id: '6f91088a406011ed95aed352566e8d4c' },
+   *     {
+   *       account_id: '6f91088a406011ed95aed352566e8d4c',
+   *       automatic_advertisement: true,
+   *       name: 'my_rule_1',
+   *       prefixes: ['203.0.113.1/32'],
+   *       type: 'zscore',
+   *     },
    *   );
    * ```
    */
@@ -166,6 +176,11 @@ export class MagicNetworkMonitoringRulesSinglePage extends SinglePage<MagicNetwo
 
 export interface MagicNetworkMonitoringRule {
   /**
+   * The id of the rule. Must be unique.
+   */
+  id: string;
+
+  /**
    * Toggle on if you would like Cloudflare to automatically advertise the IP
    * Prefixes within the rule via Magic Transit when the rule is triggered. Only
    * available for users of Magic Transit.
@@ -185,11 +200,6 @@ export interface MagicNetworkMonitoringRule {
    * MNM rule type.
    */
   type: 'threshold' | 'zscore' | 'advanced_ddos';
-
-  /**
-   * The id of the rule. Must be unique.
-   */
-  id?: string;
 
   /**
    * The number of bits per second for the rule. When this value is exceeded for the
@@ -234,11 +244,11 @@ export interface RuleCreateParams {
   account_id: string;
 
   /**
-   * Body param: The amount of time that the rule threshold must be exceeded to send
-   * an alert notification. The final value must be equivalent to one of the
-   * following 8 values ["1m","5m","10m","15m","20m","30m","45m","60m"].
+   * Body param: Toggle on if you would like Cloudflare to automatically advertise
+   * the IP Prefixes within the rule via Magic Transit when the rule is triggered.
+   * Only available for users of Magic Transit.
    */
-  duration: '1m' | '5m' | '10m' | '15m' | '20m' | '30m' | '45m' | '60m';
+  automatic_advertisement: boolean | null;
 
   /**
    * Body param: The name of the rule. Must be unique. Supports characters A-Z, a-z,
@@ -248,18 +258,28 @@ export interface RuleCreateParams {
   name: string;
 
   /**
-   * Body param: Toggle on if you would like Cloudflare to automatically advertise
-   * the IP Prefixes within the rule via Magic Transit when the rule is triggered.
-   * Only available for users of Magic Transit.
+   * Body param
    */
-  automatic_advertisement?: boolean | null;
+  prefixes: Array<string>;
+
+  /**
+   * Body param: MNM rule type.
+   */
+  type: 'threshold' | 'zscore' | 'advanced_ddos';
 
   /**
    * Body param: The number of bits per second for the rule. When this value is
    * exceeded for the set duration, an alert notification is sent. Minimum of 1 and
    * no maximum.
    */
-  bandwidth?: number;
+  bandwidth_threshold?: number;
+
+  /**
+   * Body param: The amount of time that the rule threshold must be exceeded to send
+   * an alert notification. The final value must be equivalent to one of the
+   * following 8 values ["1m","5m","10m","15m","20m","30m","45m","60m"].
+   */
+  duration?: '1m' | '5m' | '10m' | '15m' | '20m' | '30m' | '45m' | '60m';
 
   /**
    * Body param: The number of packets per second for the rule. When this value is
@@ -269,9 +289,20 @@ export interface RuleCreateParams {
   packet_threshold?: number;
 
   /**
-   * Body param
+   * Body param: Prefix match type to be applied for a prefix auto advertisement when
+   * using an advanced_ddos rule.
    */
-  prefixes?: Array<string>;
+  prefix_match?: 'exact' | 'subnet' | 'supernet' | null;
+
+  /**
+   * Body param: Level of sensitivity set for zscore rules.
+   */
+  zscore_sensitivity?: 'low' | 'medium' | 'high' | null;
+
+  /**
+   * Body param: Target of the zscore rule analysis.
+   */
+  zscore_target?: 'bits' | 'packets' | null;
 }
 
 export interface RuleUpdateParams {
@@ -281,11 +312,11 @@ export interface RuleUpdateParams {
   account_id: string;
 
   /**
-   * Body param: The amount of time that the rule threshold must be exceeded to send
-   * an alert notification. The final value must be equivalent to one of the
-   * following 8 values ["1m","5m","10m","15m","20m","30m","45m","60m"].
+   * Body param: Toggle on if you would like Cloudflare to automatically advertise
+   * the IP Prefixes within the rule via Magic Transit when the rule is triggered.
+   * Only available for users of Magic Transit.
    */
-  duration: '1m' | '5m' | '10m' | '15m' | '20m' | '30m' | '45m' | '60m';
+  automatic_advertisement: boolean | null;
 
   /**
    * Body param: The name of the rule. Must be unique. Supports characters A-Z, a-z,
@@ -295,23 +326,28 @@ export interface RuleUpdateParams {
   name: string;
 
   /**
-   * Body param: The id of the rule. Must be unique.
+   * Body param
    */
-  id?: string;
+  prefixes: Array<string>;
 
   /**
-   * Body param: Toggle on if you would like Cloudflare to automatically advertise
-   * the IP Prefixes within the rule via Magic Transit when the rule is triggered.
-   * Only available for users of Magic Transit.
+   * Body param: MNM rule type.
    */
-  automatic_advertisement?: boolean | null;
+  type: 'threshold' | 'zscore' | 'advanced_ddos';
 
   /**
    * Body param: The number of bits per second for the rule. When this value is
    * exceeded for the set duration, an alert notification is sent. Minimum of 1 and
    * no maximum.
    */
-  bandwidth?: number;
+  bandwidth_threshold?: number;
+
+  /**
+   * Body param: The amount of time that the rule threshold must be exceeded to send
+   * an alert notification. The final value must be equivalent to one of the
+   * following 8 values ["1m","5m","10m","15m","20m","30m","45m","60m"].
+   */
+  duration?: '1m' | '5m' | '10m' | '15m' | '20m' | '30m' | '45m' | '60m';
 
   /**
    * Body param: The number of packets per second for the rule. When this value is
@@ -321,9 +357,20 @@ export interface RuleUpdateParams {
   packet_threshold?: number;
 
   /**
-   * Body param
+   * Body param: Prefix match type to be applied for a prefix auto advertisement when
+   * using an advanced_ddos rule.
    */
-  prefixes?: Array<string>;
+  prefix_match?: 'exact' | 'subnet' | 'supernet' | null;
+
+  /**
+   * Body param: Level of sensitivity set for zscore rules.
+   */
+  zscore_sensitivity?: 'low' | 'medium' | 'high' | null;
+
+  /**
+   * Body param: Target of the zscore rule analysis.
+   */
+  zscore_target?: 'bits' | 'packets' | null;
 }
 
 export interface RuleListParams {
@@ -345,14 +392,31 @@ export interface RuleEditParams {
    * the IP Prefixes within the rule via Magic Transit when the rule is triggered.
    * Only available for users of Magic Transit.
    */
-  automatic_advertisement?: boolean | null;
+  automatic_advertisement: boolean | null;
+
+  /**
+   * Body param: The name of the rule. Must be unique. Supports characters A-Z, a-z,
+   * 0-9, underscore (\_), dash (-), period (.), and tilde (~). You can’t have a
+   * space in the rule name. Max 256 characters.
+   */
+  name: string;
+
+  /**
+   * Body param
+   */
+  prefixes: Array<string>;
+
+  /**
+   * Body param: MNM rule type.
+   */
+  type: 'threshold' | 'zscore' | 'advanced_ddos';
 
   /**
    * Body param: The number of bits per second for the rule. When this value is
    * exceeded for the set duration, an alert notification is sent. Minimum of 1 and
    * no maximum.
    */
-  bandwidth?: number;
+  bandwidth_threshold?: number;
 
   /**
    * Body param: The amount of time that the rule threshold must be exceeded to send
@@ -362,13 +426,6 @@ export interface RuleEditParams {
   duration?: '1m' | '5m' | '10m' | '15m' | '20m' | '30m' | '45m' | '60m';
 
   /**
-   * Body param: The name of the rule. Must be unique. Supports characters A-Z, a-z,
-   * 0-9, underscore (\_), dash (-), period (.), and tilde (~). You can’t have a
-   * space in the rule name. Max 256 characters.
-   */
-  name?: string;
-
-  /**
    * Body param: The number of packets per second for the rule. When this value is
    * exceeded for the set duration, an alert notification is sent. Minimum of 1 and
    * no maximum.
@@ -376,9 +433,20 @@ export interface RuleEditParams {
   packet_threshold?: number;
 
   /**
-   * Body param
+   * Body param: Prefix match type to be applied for a prefix auto advertisement when
+   * using an advanced_ddos rule.
    */
-  prefixes?: Array<string>;
+  prefix_match?: 'exact' | 'subnet' | 'supernet' | null;
+
+  /**
+   * Body param: Level of sensitivity set for zscore rules.
+   */
+  zscore_sensitivity?: 'low' | 'medium' | 'high' | null;
+
+  /**
+   * Body param: Target of the zscore rule analysis.
+   */
+  zscore_target?: 'bits' | 'packets' | null;
 }
 
 export interface RuleGetParams {
