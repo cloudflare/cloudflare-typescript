@@ -6,7 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 
 export class Datasets extends APIResource {
   /**
-   * Create a new Dataset
+   * Creates a new AI Gateway.
    *
    * @example
    * ```ts
@@ -42,7 +42,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Update a Dataset
+   * Updates an existing AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -80,7 +80,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * List Datasets
+   * Lists all AI Gateway evaluator types configured for the account.
    *
    * @example
    * ```ts
@@ -107,7 +107,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Delete a Dataset
+   * Deletes an AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -134,7 +134,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Fetch a Dataset
+   * Retrieves details for a specific AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -165,10 +165,6 @@ export class DatasetListResponsesV4PagePaginationArray extends V4PagePaginationA
 
 export interface DatasetCreateResponse {
   id: string;
-
-  account_id: string;
-
-  account_tag: string;
 
   created_at: string;
 
@@ -212,10 +208,6 @@ export namespace DatasetCreateResponse {
 export interface DatasetUpdateResponse {
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
 
   enable: boolean;
@@ -257,10 +249,6 @@ export namespace DatasetUpdateResponse {
 
 export interface DatasetListResponse {
   id: string;
-
-  account_id: string;
-
-  account_tag: string;
 
   created_at: string;
 
@@ -304,10 +292,6 @@ export namespace DatasetListResponse {
 export interface DatasetDeleteResponse {
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
 
   enable: boolean;
@@ -349,10 +333,6 @@ export namespace DatasetDeleteResponse {
 
 export interface DatasetGetResponse {
   id: string;
-
-  account_id: string;
-
-  account_tag: string;
 
   created_at: string;
 

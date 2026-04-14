@@ -107,7 +107,6 @@ describe('resource dynamicRouting', () => {
   test('createDeployment: only required params', async () => {
     const responsePromise = client.aiGateway.dynamicRouting.createDeployment('54442216', '54442216', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
-      comment: 'Route Deployment Comment',
       version_id: '54442216',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -122,7 +121,6 @@ describe('resource dynamicRouting', () => {
   test('createDeployment: required and optional params', async () => {
     const response = await client.aiGateway.dynamicRouting.createDeployment('54442216', '54442216', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
-      comment: 'Route Deployment Comment',
       version_id: '54442216',
     });
   });
@@ -130,7 +128,6 @@ describe('resource dynamicRouting', () => {
   test('createVersion: only required params', async () => {
     const responsePromise = client.aiGateway.dynamicRouting.createVersion('54442216', '54442216', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
-      comment: 'Route Version Comment',
       elements: [
         {
           id: 'id',
@@ -151,7 +148,6 @@ describe('resource dynamicRouting', () => {
   test('createVersion: required and optional params', async () => {
     const response = await client.aiGateway.dynamicRouting.createVersion('54442216', '54442216', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
-      comment: 'Route Version Comment',
       elements: [
         {
           id: 'id',

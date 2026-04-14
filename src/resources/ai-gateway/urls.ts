@@ -5,7 +5,7 @@ import * as Core from '../../core';
 
 export class URLs extends APIResource {
   /**
-   * Get Gateway URL
+   * Retrieves the endpoint URL for an AI Gateway.
    *
    * @example
    * ```ts

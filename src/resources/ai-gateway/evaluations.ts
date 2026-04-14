@@ -6,7 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 
 export class Evaluations extends APIResource {
   /**
-   * Create a new Evaluation
+   * Creates a new AI Gateway.
    *
    * @example
    * ```ts
@@ -34,7 +34,7 @@ export class Evaluations extends APIResource {
   }
 
   /**
-   * List Evaluations
+   * Lists all AI Gateway evaluator types configured for the account.
    *
    * @example
    * ```ts
@@ -61,7 +61,7 @@ export class Evaluations extends APIResource {
   }
 
   /**
-   * Delete a Evaluation
+   * Deletes an AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -89,7 +89,7 @@ export class Evaluations extends APIResource {
   }
 
   /**
-   * Fetch a Evaluation
+   * Retrieves details for a specific AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -120,10 +120,6 @@ export class EvaluationListResponsesV4PagePaginationArray extends V4PagePaginati
 
 export interface EvaluationCreateResponse {
   id: string;
-
-  account_id: string;
-
-  account_tag: string;
 
   created_at: string;
 
@@ -216,10 +212,6 @@ export namespace EvaluationCreateResponse {
 export interface EvaluationListResponse {
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
 
   datasets: Array<EvaluationListResponse.Dataset>;
@@ -311,10 +303,6 @@ export namespace EvaluationListResponse {
 export interface EvaluationDeleteResponse {
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
 
   datasets: Array<EvaluationDeleteResponse.Dataset>;
@@ -405,10 +393,6 @@ export namespace EvaluationDeleteResponse {
 
 export interface EvaluationGetResponse {
   id: string;
-
-  account_id: string;
-
-  account_tag: string;
 
   created_at: string;
 

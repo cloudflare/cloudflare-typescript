@@ -101,7 +101,7 @@ export class AIGateway extends APIResource {
   urls: URLsAPI.URLs = new URLsAPI.URLs(this._client);
 
   /**
-   * Create a new Gateway
+   * Creates a new AI Gateway.
    *
    * @example
    * ```ts
@@ -113,7 +113,6 @@ export class AIGateway extends APIResource {
    *   collect_logs: true,
    *   rate_limiting_interval: 0,
    *   rate_limiting_limit: 0,
-   *   rate_limiting_technique: 'fixed',
    * });
    * ```
    */
@@ -131,7 +130,7 @@ export class AIGateway extends APIResource {
   }
 
   /**
-   * Update a Gateway
+   * Updates an existing AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -144,7 +143,6 @@ export class AIGateway extends APIResource {
    *     collect_logs: true,
    *     rate_limiting_interval: 0,
    *     rate_limiting_limit: 0,
-   *     rate_limiting_technique: 'fixed',
    *   },
    * );
    * ```
@@ -164,7 +162,7 @@ export class AIGateway extends APIResource {
   }
 
   /**
-   * List Gateways
+   * Lists all AI Gateway evaluator types configured for the account.
    *
    * @example
    * ```ts
@@ -189,7 +187,7 @@ export class AIGateway extends APIResource {
   }
 
   /**
-   * Delete a Gateway
+   * Deletes an AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -213,7 +211,7 @@ export class AIGateway extends APIResource {
   }
 
   /**
-   * Fetch a Gateway
+   * Retrieves details for a specific AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -244,10 +242,6 @@ export interface AIGatewayCreateResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -256,15 +250,11 @@ export interface AIGatewayCreateResponse {
 
   created_at: string;
 
-  internal_id: string;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
 
   rate_limiting_limit: number | null;
-
-  rate_limiting_technique: 'fixed' | 'sliding';
 
   authentication?: boolean;
 
@@ -282,9 +272,32 @@ export interface AIGatewayCreateResponse {
 
   otel?: Array<AIGatewayCreateResponse.Otel> | null;
 
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayCreateResponse.Stripe | null;
+
+  /**
+   * Controls how Workers AI inference calls routed through this gateway are billed.
+   * Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -324,6 +337,8 @@ export namespace AIGatewayCreateResponse {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {
@@ -345,10 +360,6 @@ export interface AIGatewayUpdateResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -357,15 +368,11 @@ export interface AIGatewayUpdateResponse {
 
   created_at: string;
 
-  internal_id: string;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
 
   rate_limiting_limit: number | null;
-
-  rate_limiting_technique: 'fixed' | 'sliding';
 
   authentication?: boolean;
 
@@ -383,9 +390,32 @@ export interface AIGatewayUpdateResponse {
 
   otel?: Array<AIGatewayUpdateResponse.Otel> | null;
 
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayUpdateResponse.Stripe | null;
+
+  /**
+   * Controls how Workers AI inference calls routed through this gateway are billed.
+   * Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -425,6 +455,8 @@ export namespace AIGatewayUpdateResponse {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {
@@ -446,10 +478,6 @@ export interface AIGatewayListResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -458,15 +486,11 @@ export interface AIGatewayListResponse {
 
   created_at: string;
 
-  internal_id: string;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
 
   rate_limiting_limit: number | null;
-
-  rate_limiting_technique: 'fixed' | 'sliding';
 
   authentication?: boolean;
 
@@ -484,9 +508,32 @@ export interface AIGatewayListResponse {
 
   otel?: Array<AIGatewayListResponse.Otel> | null;
 
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayListResponse.Stripe | null;
+
+  /**
+   * Controls how Workers AI inference calls routed through this gateway are billed.
+   * Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -526,6 +573,8 @@ export namespace AIGatewayListResponse {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {
@@ -547,10 +596,6 @@ export interface AIGatewayDeleteResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -559,15 +604,11 @@ export interface AIGatewayDeleteResponse {
 
   created_at: string;
 
-  internal_id: string;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
 
   rate_limiting_limit: number | null;
-
-  rate_limiting_technique: 'fixed' | 'sliding';
 
   authentication?: boolean;
 
@@ -585,9 +626,32 @@ export interface AIGatewayDeleteResponse {
 
   otel?: Array<AIGatewayDeleteResponse.Otel> | null;
 
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayDeleteResponse.Stripe | null;
+
+  /**
+   * Controls how Workers AI inference calls routed through this gateway are billed.
+   * Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -627,6 +691,8 @@ export namespace AIGatewayDeleteResponse {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {
@@ -648,10 +714,6 @@ export interface AIGatewayGetResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -660,15 +722,11 @@ export interface AIGatewayGetResponse {
 
   created_at: string;
 
-  internal_id: string;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
 
   rate_limiting_limit: number | null;
-
-  rate_limiting_technique: 'fixed' | 'sliding';
 
   authentication?: boolean;
 
@@ -686,9 +744,32 @@ export interface AIGatewayGetResponse {
 
   otel?: Array<AIGatewayGetResponse.Otel> | null;
 
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayGetResponse.Stripe | null;
+
+  /**
+   * Controls how Workers AI inference calls routed through this gateway are billed.
+   * Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -728,6 +809,8 @@ export namespace AIGatewayGetResponse {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {
@@ -782,17 +865,7 @@ export interface AIGatewayCreateParams {
   /**
    * Body param
    */
-  rate_limiting_technique: 'fixed' | 'sliding';
-
-  /**
-   * Body param
-   */
   authentication?: boolean;
-
-  /**
-   * Body param
-   */
-  is_default?: boolean;
 
   /**
    * Body param
@@ -813,6 +886,32 @@ export interface AIGatewayCreateParams {
    * Body param
    */
   logpush_public_key?: string | null;
+
+  /**
+   * Body param
+   */
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Body param: Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Body param: Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Body param: Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
+  /**
+   * Body param: Controls how Workers AI inference calls routed through this gateway
+   * are billed. Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   /**
    * Body param
@@ -854,22 +953,12 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param
    */
-  rate_limiting_technique: 'fixed' | 'sliding';
-
-  /**
-   * Body param
-   */
   authentication?: boolean;
 
   /**
    * Body param
    */
   dlp?: AIGatewayUpdateParams.UnionMember0 | AIGatewayUpdateParams.UnionMember1;
-
-  /**
-   * Body param
-   */
-  is_default?: boolean;
 
   /**
    * Body param
@@ -899,12 +988,38 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param
    */
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Body param: Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Body param: Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Body param: Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
+  /**
+   * Body param
+   */
   store_id?: string | null;
 
   /**
    * Body param
    */
   stripe?: AIGatewayUpdateParams.Stripe | null;
+
+  /**
+   * Body param: Controls how Workers AI inference calls routed through this gateway
+   * are billed. Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   /**
    * Body param
@@ -947,6 +1062,8 @@ export namespace AIGatewayUpdateParams {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {

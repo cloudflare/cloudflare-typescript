@@ -6,7 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 
 export class ProviderConfigs extends APIResource {
   /**
-   * Create a new Provider Configs
+   * Creates a new AI Gateway.
    *
    * @example
    * ```ts
@@ -39,7 +39,7 @@ export class ProviderConfigs extends APIResource {
   }
 
   /**
-   * List Provider Configs
+   * Lists all AI Gateway evaluator types configured for the account.
    *
    * @example
    * ```ts
@@ -71,10 +71,6 @@ export class ProviderConfigListResponsesV4PagePaginationArray extends V4PagePagi
 export interface ProviderConfigCreateResponse {
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   alias: string;
 
   default_config: boolean;
@@ -99,10 +95,6 @@ export interface ProviderConfigCreateResponse {
 
 export interface ProviderConfigListResponse {
   id: string;
-
-  account_id: string;
-
-  account_tag: string;
 
   alias: string;
 
