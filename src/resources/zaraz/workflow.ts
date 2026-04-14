@@ -25,12 +25,12 @@ export class WorkflowResource extends APIResource {
 }
 
 /**
- * Zaraz workflow
+ * Zaraz workflow.
  */
 export type Workflow = 'realtime' | 'preview';
 
 /**
- * Zaraz workflow
+ * Zaraz workflow.
  */
 export type WorkflowParam = 'realtime' | 'preview';
 

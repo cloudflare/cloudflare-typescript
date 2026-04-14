@@ -53,78 +53,78 @@ export class Zaraz extends APIResource {
 
 export interface ButtonTextTranslation {
   /**
-   * Object where keys are language codes
+   * Object where keys are language codes.
    */
   accept_all: { [key: string]: string };
 
   /**
-   * Object where keys are language codes
+   * Object where keys are language codes.
    */
   confirm_my_choices: { [key: string]: string };
 
   /**
-   * Object where keys are language codes
+   * Object where keys are language codes.
    */
   reject_all: { [key: string]: string };
 }
 
 export interface ButtonTextTranslationParam {
   /**
-   * Object where keys are language codes
+   * Object where keys are language codes.
    */
   accept_all: { [key: string]: string };
 
   /**
-   * Object where keys are language codes
+   * Object where keys are language codes.
    */
   confirm_my_choices: { [key: string]: string };
 
   /**
-   * Object where keys are language codes
+   * Object where keys are language codes.
    */
   reject_all: { [key: string]: string };
 }
 
 export interface NeoEvent {
   /**
-   * Tool event type
+   * Tool event type.
    */
   actionType: string;
 
   /**
-   * List of blocking triggers IDs
+   * List of blocking triggers IDs.
    */
   blockingTriggers: Array<string>;
 
   /**
-   * Event payload
+   * Event payload.
    */
   data: unknown;
 
   /**
-   * List of firing triggers IDs
+   * List of firing triggers IDs.
    */
   firingTriggers: Array<string>;
 }
 
 export interface NeoEventParam {
   /**
-   * Tool event type
+   * Tool event type.
    */
   actionType: string;
 
   /**
-   * List of blocking triggers IDs
+   * List of blocking triggers IDs.
    */
   blockingTriggers: Array<string>;
 
   /**
-   * Event payload
+   * Event payload.
    */
   data: unknown;
 
   /**
-   * List of firing triggers IDs
+   * List of firing triggers IDs.
    */
   firingTriggers: Array<string>;
 }
@@ -136,7 +136,7 @@ export interface ZarazUpdateParams {
   zone_id: string;
 
   /**
-   * Body param: Zaraz workflow
+   * Body param: Zaraz workflow.
    */
   workflow: WorkflowAPI.WorkflowParam;
 }

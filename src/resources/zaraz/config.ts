@@ -60,7 +60,7 @@ export class Config extends APIResource {
 }
 
 /**
- * Zaraz configuration
+ * Zaraz configuration.
  */
 export interface Configuration {
   /**
@@ -169,7 +169,7 @@ export namespace Configuration {
     hideQueryParams?: boolean;
 
     /**
-     * Removing sensitive data from User Aagent string enabled.
+     * Removing sensitive data from User Agent string enabled.
      */
     hideUserAgent?: boolean;
 
@@ -212,37 +212,37 @@ export namespace Configuration {
 
   export interface ZarazManagedComponent {
     /**
-     * List of blocking trigger IDs
+     * List of blocking trigger IDs.
      */
     blockingTriggers: Array<string>;
 
     /**
-     * Tool's internal name
+     * Tool's internal name.
      */
     component: string;
 
     /**
-     * Default fields for tool's actions
+     * Default fields for tool's actions.
      */
     defaultFields: { [key: string]: string | boolean };
 
     /**
-     * Whether tool is enabled
+     * Whether tool is enabled.
      */
     enabled: boolean;
 
     /**
-     * Tool's name defined by the user
+     * Tool's name defined by the user.
      */
     name: string;
 
     /**
-     * List of permissions granted to the component
+     * List of permissions granted to the component.
      */
     permissions: Array<string>;
 
     /**
-     * Tool's settings
+     * Tool's settings.
      */
     settings: { [key: string]: string | boolean };
 
@@ -254,7 +254,7 @@ export namespace Configuration {
     actions?: { [key: string]: ZarazAPI.NeoEvent };
 
     /**
-     * Default consent purpose ID
+     * Default consent purpose ID.
      */
     defaultPurpose?: string;
 
@@ -266,57 +266,57 @@ export namespace Configuration {
 
     /**
      * Vendor name for TCF compliant consent modal, required for Custom Managed
-     * Components and Custom HTML tool with a defaultPurpose assigned
+     * Components and Custom HTML tool with a defaultPurpose assigned.
      */
     vendorName?: string;
 
     /**
      * Vendor's Privacy Policy URL for TCF compliant consent modal, required for Custom
-     * Managed Components and Custom HTML tool with a defaultPurpose assigned
+     * Managed Components and Custom HTML tool with a defaultPurpose assigned.
      */
     vendorPolicyUrl?: string;
   }
 
   export interface Worker {
     /**
-     * List of blocking trigger IDs
+     * List of blocking trigger IDs.
      */
     blockingTriggers: Array<string>;
 
     /**
-     * Tool's internal name
+     * Tool's internal name.
      */
     component: string;
 
     /**
-     * Default fields for tool's actions
+     * Default fields for tool's actions.
      */
     defaultFields: { [key: string]: string | boolean };
 
     /**
-     * Whether tool is enabled
+     * Whether tool is enabled.
      */
     enabled: boolean;
 
     /**
-     * Tool's name defined by the user
+     * Tool's name defined by the user.
      */
     name: string;
 
     /**
-     * List of permissions granted to the component
+     * List of permissions granted to the component.
      */
     permissions: Array<string>;
 
     /**
-     * Tool's settings
+     * Tool's settings.
      */
     settings: { [key: string]: string | boolean };
 
     type: 'custom-mc';
 
     /**
-     * Cloudflare worker that acts as a managed component
+     * Cloudflare worker that acts as a managed component.
      */
     worker: Worker.Worker;
 
@@ -326,7 +326,7 @@ export namespace Configuration {
     actions?: { [key: string]: ZarazAPI.NeoEvent };
 
     /**
-     * Default consent purpose ID
+     * Default consent purpose ID.
      */
     defaultPurpose?: string;
 
@@ -338,20 +338,20 @@ export namespace Configuration {
 
     /**
      * Vendor name for TCF compliant consent modal, required for Custom Managed
-     * Components and Custom HTML tool with a defaultPurpose assigned
+     * Components and Custom HTML tool with a defaultPurpose assigned.
      */
     vendorName?: string;
 
     /**
      * Vendor's Privacy Policy URL for TCF compliant consent modal, required for Custom
-     * Managed Components and Custom HTML tool with a defaultPurpose assigned
+     * Managed Components and Custom HTML tool with a defaultPurpose assigned.
      */
     vendorPolicyUrl?: string;
   }
 
   export namespace Worker {
     /**
-     * Cloudflare worker that acts as a managed component
+     * Cloudflare worker that acts as a managed component.
      */
     export interface Worker {
       escapedWorkerName: string;
@@ -699,7 +699,7 @@ export namespace Configuration {
     consentModalIntroHTML?: string;
 
     /**
-     * Object where keys are language codes
+     * Object where keys are language codes.
      */
     consentModalIntroHTMLWithTranslations?: { [key: string]: string };
 
@@ -714,12 +714,12 @@ export namespace Configuration {
     hideModal?: boolean;
 
     /**
-     * Object where keys are purpose alpha-numeric IDs
+     * Object where keys are purpose alpha-numeric IDs.
      */
     purposes?: { [key: string]: Consent.Purposes };
 
     /**
-     * Object where keys are purpose alpha-numeric IDs
+     * Object where keys are purpose alpha-numeric IDs.
      */
     purposesWithTranslations?: { [key: string]: Consent.PurposesWithTranslations };
 
@@ -735,12 +735,12 @@ export namespace Configuration {
 
     export interface PurposesWithTranslations {
       /**
-       * Object where keys are language codes
+       * Object where keys are language codes.
        */
       description: { [key: string]: string };
 
       /**
-       * Object where keys are language codes
+       * Object where keys are language codes.
        */
       name: { [key: string]: string };
 
@@ -861,7 +861,7 @@ export namespace ConfigUpdateParams {
     hideQueryParams?: boolean;
 
     /**
-     * Removing sensitive data from User Aagent string enabled.
+     * Removing sensitive data from User Agent string enabled.
      */
     hideUserAgent?: boolean;
 
@@ -904,37 +904,37 @@ export namespace ConfigUpdateParams {
 
   export interface ZarazManagedComponent {
     /**
-     * List of blocking trigger IDs
+     * List of blocking trigger IDs.
      */
     blockingTriggers: Array<string>;
 
     /**
-     * Tool's internal name
+     * Tool's internal name.
      */
     component: string;
 
     /**
-     * Default fields for tool's actions
+     * Default fields for tool's actions.
      */
     defaultFields: { [key: string]: string | boolean };
 
     /**
-     * Whether tool is enabled
+     * Whether tool is enabled.
      */
     enabled: boolean;
 
     /**
-     * Tool's name defined by the user
+     * Tool's name defined by the user.
      */
     name: string;
 
     /**
-     * List of permissions granted to the component
+     * List of permissions granted to the component.
      */
     permissions: Array<string>;
 
     /**
-     * Tool's settings
+     * Tool's settings.
      */
     settings: { [key: string]: string | boolean };
 
@@ -946,7 +946,7 @@ export namespace ConfigUpdateParams {
     actions?: { [key: string]: ZarazAPI.NeoEventParam };
 
     /**
-     * Default consent purpose ID
+     * Default consent purpose ID.
      */
     defaultPurpose?: string;
 
@@ -958,57 +958,57 @@ export namespace ConfigUpdateParams {
 
     /**
      * Vendor name for TCF compliant consent modal, required for Custom Managed
-     * Components and Custom HTML tool with a defaultPurpose assigned
+     * Components and Custom HTML tool with a defaultPurpose assigned.
      */
     vendorName?: string;
 
     /**
      * Vendor's Privacy Policy URL for TCF compliant consent modal, required for Custom
-     * Managed Components and Custom HTML tool with a defaultPurpose assigned
+     * Managed Components and Custom HTML tool with a defaultPurpose assigned.
      */
     vendorPolicyUrl?: string;
   }
 
   export interface Worker {
     /**
-     * List of blocking trigger IDs
+     * List of blocking trigger IDs.
      */
     blockingTriggers: Array<string>;
 
     /**
-     * Tool's internal name
+     * Tool's internal name.
      */
     component: string;
 
     /**
-     * Default fields for tool's actions
+     * Default fields for tool's actions.
      */
     defaultFields: { [key: string]: string | boolean };
 
     /**
-     * Whether tool is enabled
+     * Whether tool is enabled.
      */
     enabled: boolean;
 
     /**
-     * Tool's name defined by the user
+     * Tool's name defined by the user.
      */
     name: string;
 
     /**
-     * List of permissions granted to the component
+     * List of permissions granted to the component.
      */
     permissions: Array<string>;
 
     /**
-     * Tool's settings
+     * Tool's settings.
      */
     settings: { [key: string]: string | boolean };
 
     type: 'custom-mc';
 
     /**
-     * Cloudflare worker that acts as a managed component
+     * Cloudflare worker that acts as a managed component.
      */
     worker: Worker.Worker;
 
@@ -1018,7 +1018,7 @@ export namespace ConfigUpdateParams {
     actions?: { [key: string]: ZarazAPI.NeoEventParam };
 
     /**
-     * Default consent purpose ID
+     * Default consent purpose ID.
      */
     defaultPurpose?: string;
 
@@ -1030,20 +1030,20 @@ export namespace ConfigUpdateParams {
 
     /**
      * Vendor name for TCF compliant consent modal, required for Custom Managed
-     * Components and Custom HTML tool with a defaultPurpose assigned
+     * Components and Custom HTML tool with a defaultPurpose assigned.
      */
     vendorName?: string;
 
     /**
      * Vendor's Privacy Policy URL for TCF compliant consent modal, required for Custom
-     * Managed Components and Custom HTML tool with a defaultPurpose assigned
+     * Managed Components and Custom HTML tool with a defaultPurpose assigned.
      */
     vendorPolicyUrl?: string;
   }
 
   export namespace Worker {
     /**
-     * Cloudflare worker that acts as a managed component
+     * Cloudflare worker that acts as a managed component.
      */
     export interface Worker {
       escapedWorkerName: string;
@@ -1391,7 +1391,7 @@ export namespace ConfigUpdateParams {
     consentModalIntroHTML?: string;
 
     /**
-     * Object where keys are language codes
+     * Object where keys are language codes.
      */
     consentModalIntroHTMLWithTranslations?: { [key: string]: string };
 
@@ -1406,12 +1406,12 @@ export namespace ConfigUpdateParams {
     hideModal?: boolean;
 
     /**
-     * Object where keys are purpose alpha-numeric IDs
+     * Object where keys are purpose alpha-numeric IDs.
      */
     purposes?: { [key: string]: Consent.Purposes };
 
     /**
-     * Object where keys are purpose alpha-numeric IDs
+     * Object where keys are purpose alpha-numeric IDs.
      */
     purposesWithTranslations?: { [key: string]: Consent.PurposesWithTranslations };
 
@@ -1427,12 +1427,12 @@ export namespace ConfigUpdateParams {
 
     export interface PurposesWithTranslations {
       /**
-       * Object where keys are language codes
+       * Object where keys are language codes.
        */
       description: { [key: string]: string };
 
       /**
-       * Object where keys are language codes
+       * Object where keys are language codes.
        */
       name: { [key: string]: string };
 

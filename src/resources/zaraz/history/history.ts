@@ -64,27 +64,27 @@ export class HistoryListResponsesSinglePage extends SinglePage<HistoryListRespon
 
 export interface HistoryListResponse {
   /**
-   * ID of the configuration
+   * ID of the configuration.
    */
   id: number;
 
   /**
-   * Date and time the configuration was created
+   * Date and time the configuration was created.
    */
   createdAt: string;
 
   /**
-   * Configuration description provided by the user who published this configuration
+   * Configuration description provided by the user who published this configuration.
    */
   description: string;
 
   /**
-   * Date and time the configuration was last updated
+   * Date and time the configuration was last updated.
    */
   updatedAt: string;
 
   /**
-   * Alpha-numeric ID of the account user who published the configuration
+   * Alpha-numeric ID of the account user who published the configuration.
    */
   userId: string;
 }
