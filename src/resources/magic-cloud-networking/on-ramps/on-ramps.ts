@@ -8787,8 +8787,8 @@ export interface OnRampCreateParams {
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE';
 
   /**
-   * Body param: if set to true, install_routes_in_cloud and
-   * install_routes_in_magic_wan should be set to false
+   * Body param: Enables BGP routing. When enabling this feature, set both
+   * install_routes_in_cloud and install_routes_in_magic_wan to false.
    */
   dynamic_routing: boolean;
 
@@ -8828,8 +8828,8 @@ export interface OnRampCreateParams {
   attached_vpcs?: Array<string>;
 
   /**
-   * Body param: the ASN to use on the cloud side. If unset or zero, the cloud's
-   * default will be used.
+   * Body param: Sets the cloud-side ASN. If unset or zero, the cloud's default ASN
+   * takes effect.
    */
   cloud_asn?: number;
 
