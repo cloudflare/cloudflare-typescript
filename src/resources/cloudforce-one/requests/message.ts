@@ -6,7 +6,7 @@ import { SinglePage } from '../../../pagination';
 
 export class MessageResource extends APIResource {
   /**
-   * Create a New Request Message
+   * Adds a message to a Cloudforce One intelligence request conversation.
    *
    * @example
    * ```ts
@@ -32,7 +32,7 @@ export class MessageResource extends APIResource {
   }
 
   /**
-   * Update a Request Message
+   * Updates a message in a Cloudforce One intelligence request thread.
    *
    * @example
    * ```ts
@@ -60,7 +60,7 @@ export class MessageResource extends APIResource {
   }
 
   /**
-   * Delete a Request Message
+   * Removes a message from a Cloudforce One intelligence request thread.
    *
    * @example
    * ```ts
@@ -86,7 +86,7 @@ export class MessageResource extends APIResource {
   }
 
   /**
-   * List Request Messages
+   * Lists messages in a Cloudforce One intelligence request conversation.
    *
    * @example
    * ```ts

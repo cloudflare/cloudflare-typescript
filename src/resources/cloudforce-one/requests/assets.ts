@@ -6,7 +6,7 @@ import { SinglePage } from '../../../pagination';
 
 export class Assets extends APIResource {
   /**
-   * List Request Assets
+   * Lists assets attached to a Cloudforce One intelligence request.
    *
    * @example
    * ```ts
@@ -37,7 +37,7 @@ export class Assets extends APIResource {
   }
 
   /**
-   * Update a Request Asset
+   * Updates an asset in a Cloudforce One intelligence request.
    *
    * @example
    * ```ts
@@ -65,7 +65,7 @@ export class Assets extends APIResource {
   }
 
   /**
-   * Delete a Request Asset
+   * Removes an asset from a Cloudforce One intelligence request.
    *
    * @example
    * ```ts
@@ -91,7 +91,7 @@ export class Assets extends APIResource {
   }
 
   /**
-   * Get a Request Asset
+   * Retrieves an asset attached to a Cloudforce One intelligence request.
    *
    * @example
    * ```ts

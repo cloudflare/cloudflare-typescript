@@ -95,7 +95,8 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Reads data for a raw event
+   * Retrieves the raw data associated with an event. Searches across all shards in
+   * the dataset.
    *
    * @example
    * ```ts
@@ -158,13 +159,13 @@ export interface DatasetGetResponse {
 }
 
 export interface DatasetRawResponse {
-  id: string;
+  id: number;
 
   accountId: number;
 
   created: string;
 
-  data: unknown;
+  data: string;
 
   source: string;
 

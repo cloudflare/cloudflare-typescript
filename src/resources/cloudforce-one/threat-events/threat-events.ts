@@ -131,30 +131,6 @@ export class ThreatEvents extends APIResource {
    *
    * @example
    * ```ts
-   * const threatEvent =
-   *   await client.cloudforceOne.threatEvents.delete(
-   *     'event_id',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
-   */
-  delete(
-    eventId: string,
-    params: ThreatEventDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ThreatEventDeleteResponse> {
-    const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/cloudforce-one/events/${eventId}`, options);
-  }
-
-  /**
-   * The `datasetId` parameter must be defined. To list existing datasets (and their
-   * IDs) in your account, use the
-   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
-   * endpoint.
-   *
-   * @example
-   * ```ts
    * const response =
    *   await client.cloudforceOne.threatEvents.bulkCreate({
    *     account_id: 'account_id',
@@ -191,6 +167,7 @@ export class ThreatEvents extends APIResource {
    * const response =
    *   await client.cloudforceOne.threatEvents.edit('event_id', {
    *     account_id: 'account_id',
+   *     datasetId: '9b769969-a211-466c-8ac3-cb91266a066a',
    *   });
    * ```
    */
@@ -246,6 +223,8 @@ export interface ThreatEventCreateResponse {
   killChain: number;
 
   mitreAttack: Array<string>;
+
+  mitreCapec: Array<string>;
 
   numReferenced: number;
 
@@ -304,6 +283,8 @@ export namespace ThreatEventListResponse {
 
     mitreAttack: Array<string>;
 
+    mitreCapec: Array<string>;
+
     numReferenced: number;
 
     numReferences: number;
@@ -332,10 +313,6 @@ export namespace ThreatEventListResponse {
 
     releasabilityId?: string;
   }
-}
-
-export interface ThreatEventDeleteResponse {
-  uuid: string;
 }
 
 /**
@@ -435,6 +412,8 @@ export interface ThreatEventEditResponse {
 
   mitreAttack: Array<string>;
 
+  mitreCapec: Array<string>;
+
   numReferenced: number;
 
   numReferences: number;
@@ -488,6 +467,8 @@ export interface ThreatEventGetResponse {
   killChain: number;
 
   mitreAttack: Array<string>;
+
+  mitreCapec: Array<string>;
 
   numReferenced: number;
 
@@ -687,8 +668,17 @@ export interface ThreatEventListParams {
 
 export namespace ThreatEventListParams {
   export interface Search {
+    /**
+     * Event field to search on. Allowed: attacker, attackerCountry, category,
+     * createdAt, date, event, indicator, indicatorType, killChain, mitreAttack, tags,
+     * targetCountry, targetIndustry, tlp, uuid.
+     */
     field?: string;
 
+    /**
+     * Search operator. Use 'in' for bulk lookup of up to 100 values at once, e.g.
+     * {field:'tags', op:'in', value:['malware','apt']}.
+     */
     op?:
       | 'equals'
       | 'not'
@@ -703,15 +693,12 @@ export namespace ThreatEventListParams {
       | 'in'
       | 'find';
 
+    /**
+     * Search value. String or number for most operators. Array for 'in' operator (max
+     * 100 items).
+     */
     value?: string | number | Array<string | number>;
   }
-}
-
-export interface ThreatEventDeleteParams {
-  /**
-   * Account ID.
-   */
-  account_id: string;
 }
 
 export interface ThreatEventBulkCreateParams {
@@ -806,6 +793,11 @@ export interface ThreatEventEditParams {
   account_id: string;
 
   /**
+   * Body param: Dataset ID containing the event to update.
+   */
+  datasetId: string;
+
+  /**
    * Body param
    */
   attacker?: string | null;
@@ -824,11 +816,6 @@ export interface ThreatEventEditParams {
    * Body param
    */
   createdAt?: string;
-
-  /**
-   * Body param
-   */
-  datasetId?: string;
 
   /**
    * Body param
@@ -910,13 +897,11 @@ export declare namespace ThreatEvents {
   export {
     type ThreatEventCreateResponse as ThreatEventCreateResponse,
     type ThreatEventListResponse as ThreatEventListResponse,
-    type ThreatEventDeleteResponse as ThreatEventDeleteResponse,
     type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,
     type ThreatEventEditResponse as ThreatEventEditResponse,
     type ThreatEventGetResponse as ThreatEventGetResponse,
     type ThreatEventCreateParams as ThreatEventCreateParams,
     type ThreatEventListParams as ThreatEventListParams,
-    type ThreatEventDeleteParams as ThreatEventDeleteParams,
     type ThreatEventBulkCreateParams as ThreatEventBulkCreateParams,
     type ThreatEventEditParams as ThreatEventEditParams,
     type ThreatEventGetParams as ThreatEventGetParams,

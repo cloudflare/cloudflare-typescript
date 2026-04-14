@@ -131,6 +131,8 @@ export interface CategoryCreateResponse {
 
   mitreAttack?: Array<string>;
 
+  mitreCapec?: Array<string>;
+
   shortname?: string;
 }
 
@@ -145,6 +147,8 @@ export namespace CategoryListResponse {
     uuid: string;
 
     mitreAttack?: Array<string>;
+
+    mitreCapec?: Array<string>;
 
     shortname?: string;
   }
@@ -163,6 +167,8 @@ export interface CategoryEditResponse {
 
   mitreAttack?: Array<string>;
 
+  mitreCapec?: Array<string>;
+
   shortname?: string;
 }
 
@@ -174,6 +180,8 @@ export interface CategoryGetResponse {
   uuid: string;
 
   mitreAttack?: Array<string>;
+
+  mitreCapec?: Array<string>;
 
   shortname?: string;
 }
@@ -198,6 +206,11 @@ export interface CategoryCreateParams {
    * Body param
    */
   mitreAttack?: Array<string>;
+
+  /**
+   * Body param
+   */
+  mitreCapec?: Array<string>;
 
   /**
    * Body param
@@ -240,6 +253,11 @@ export interface CategoryEditParams {
    * Body param
    */
   mitreAttack?: Array<string>;
+
+  /**
+   * Body param
+   */
+  mitreCapec?: Array<string>;
 
   /**
    * Body param

@@ -6,7 +6,7 @@ import * as RequestsAPI from './requests';
 
 export class PriorityResource extends APIResource {
   /**
-   * Create a New Priority Intelligence Requirement
+   * Creates a new priority intelligence request in Cloudforce One.
    *
    * @example
    * ```ts
@@ -31,7 +31,7 @@ export class PriorityResource extends APIResource {
   }
 
   /**
-   * Update a Priority Intelligence Requirement
+   * Updates a priority intelligence request in Cloudforce One.
    *
    * @example
    * ```ts
@@ -63,7 +63,7 @@ export class PriorityResource extends APIResource {
   }
 
   /**
-   * Delete a Priority Intelligence Requirement
+   * Deletes a priority intelligence request from Cloudforce One.
    *
    * @example
    * ```ts
@@ -87,7 +87,7 @@ export class PriorityResource extends APIResource {
   }
 
   /**
-   * Get a Priority Intelligence Requirement
+   * Retrieves a specific priority intelligence request from Cloudforce One.
    *
    * @example
    * ```ts
@@ -113,7 +113,7 @@ export class PriorityResource extends APIResource {
   }
 
   /**
-   * Get Priority Intelligence Requirement Quota
+   * Retrieves quota usage for Cloudforce One priority requests.
    *
    * @example
    * ```ts
