@@ -6907,11 +6907,77 @@ Methods:
 
 ## CredentialSets
 
+Types:
+
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">CredentialSetCreateResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">CredentialSetUpdateResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">CredentialSetListResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">CredentialSetDeleteResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">CredentialSetEditResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">CredentialSetGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/vuln_scanner/credential_sets">client.vulnerabilityScanner.credentialSets.<a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">create</a>({ ...params }) -> CredentialSetCreateResponse</code>
+- <code title="put /accounts/{account_id}/vuln_scanner/credential_sets/{credential_set_id}">client.vulnerabilityScanner.credentialSets.<a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">update</a>(credentialSetID, { ...params }) -> CredentialSetUpdateResponse</code>
+- <code title="get /accounts/{account_id}/vuln_scanner/credential_sets">client.vulnerabilityScanner.credentialSets.<a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">list</a>({ ...params }) -> CredentialSetListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/vuln_scanner/credential_sets/{credential_set_id}">client.vulnerabilityScanner.credentialSets.<a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">delete</a>(credentialSetID, { ...params }) -> CredentialSetDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/vuln_scanner/credential_sets/{credential_set_id}">client.vulnerabilityScanner.credentialSets.<a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">edit</a>(credentialSetID, { ...params }) -> CredentialSetEditResponse</code>
+- <code title="get /accounts/{account_id}/vuln_scanner/credential_sets/{credential_set_id}">client.vulnerabilityScanner.credentialSets.<a href="./src/resources/vulnerability-scanner/credential-sets/credential-sets.ts">get</a>(credentialSetID, { ...params }) -> CredentialSetGetResponse</code>
+
 ### Credentials
+
+Types:
+
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">CredentialCreateResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">CredentialUpdateResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">CredentialListResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">CredentialDeleteResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">CredentialEditResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">CredentialGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/vuln_scanner/credential_sets/{credential_set_id}/credentials">client.vulnerabilityScanner.credentialSets.credentials.<a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">create</a>(credentialSetID, { ...params }) -> CredentialCreateResponse</code>
+- <code title="put /accounts/{account_id}/vuln_scanner/credential_sets/{credential_set_id}/credentials/{credential_id}">client.vulnerabilityScanner.credentialSets.credentials.<a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">update</a>(credentialID, { ...params }) -> CredentialUpdateResponse</code>
+- <code title="get /accounts/{account_id}/vuln_scanner/credential_sets/{credential_set_id}/credentials">client.vulnerabilityScanner.credentialSets.credentials.<a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">list</a>(credentialSetID, { ...params }) -> CredentialListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/vuln_scanner/credential_sets/{credential_set_id}/credentials/{credential_id}">client.vulnerabilityScanner.credentialSets.credentials.<a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">delete</a>(credentialID, { ...params }) -> CredentialDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/vuln_scanner/credential_sets/{credential_set_id}/credentials/{credential_id}">client.vulnerabilityScanner.credentialSets.credentials.<a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">edit</a>(credentialID, { ...params }) -> CredentialEditResponse</code>
+- <code title="get /accounts/{account_id}/vuln_scanner/credential_sets/{credential_set_id}/credentials/{credential_id}">client.vulnerabilityScanner.credentialSets.credentials.<a href="./src/resources/vulnerability-scanner/credential-sets/credentials.ts">get</a>(credentialID, { ...params }) -> CredentialGetResponse</code>
 
 ## Scans
 
+Types:
+
+- <code><a href="./src/resources/vulnerability-scanner/scans.ts">ScanCreateResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/scans.ts">ScanListResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/scans.ts">ScanGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/vuln_scanner/scans">client.vulnerabilityScanner.scans.<a href="./src/resources/vulnerability-scanner/scans.ts">create</a>({ ...params }) -> ScanCreateResponse</code>
+- <code title="get /accounts/{account_id}/vuln_scanner/scans">client.vulnerabilityScanner.scans.<a href="./src/resources/vulnerability-scanner/scans.ts">list</a>({ ...params }) -> ScanListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/vuln_scanner/scans/{scan_id}">client.vulnerabilityScanner.scans.<a href="./src/resources/vulnerability-scanner/scans.ts">get</a>(scanID, { ...params }) -> ScanGetResponse</code>
+
 ## TargetEnvironments
+
+Types:
+
+- <code><a href="./src/resources/vulnerability-scanner/target-environments.ts">TargetEnvironmentCreateResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/target-environments.ts">TargetEnvironmentUpdateResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/target-environments.ts">TargetEnvironmentListResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/target-environments.ts">TargetEnvironmentDeleteResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/target-environments.ts">TargetEnvironmentEditResponse</a></code>
+- <code><a href="./src/resources/vulnerability-scanner/target-environments.ts">TargetEnvironmentGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/vuln_scanner/target_environments">client.vulnerabilityScanner.targetEnvironments.<a href="./src/resources/vulnerability-scanner/target-environments.ts">create</a>({ ...params }) -> TargetEnvironmentCreateResponse</code>
+- <code title="put /accounts/{account_id}/vuln_scanner/target_environments/{target_environment_id}">client.vulnerabilityScanner.targetEnvironments.<a href="./src/resources/vulnerability-scanner/target-environments.ts">update</a>(targetEnvironmentID, { ...params }) -> TargetEnvironmentUpdateResponse</code>
+- <code title="get /accounts/{account_id}/vuln_scanner/target_environments">client.vulnerabilityScanner.targetEnvironments.<a href="./src/resources/vulnerability-scanner/target-environments.ts">list</a>({ ...params }) -> TargetEnvironmentListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/vuln_scanner/target_environments/{target_environment_id}">client.vulnerabilityScanner.targetEnvironments.<a href="./src/resources/vulnerability-scanner/target-environments.ts">delete</a>(targetEnvironmentID, { ...params }) -> TargetEnvironmentDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/vuln_scanner/target_environments/{target_environment_id}">client.vulnerabilityScanner.targetEnvironments.<a href="./src/resources/vulnerability-scanner/target-environments.ts">edit</a>(targetEnvironmentID, { ...params }) -> TargetEnvironmentEditResponse</code>
+- <code title="get /accounts/{account_id}/vuln_scanner/target_environments/{target_environment_id}">client.vulnerabilityScanner.targetEnvironments.<a href="./src/resources/vulnerability-scanner/target-environments.ts">get</a>(targetEnvironmentID, { ...params }) -> TargetEnvironmentGetResponse</code>
 
 # Radar
 

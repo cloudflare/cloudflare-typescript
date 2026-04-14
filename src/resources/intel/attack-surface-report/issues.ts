@@ -137,6 +137,12 @@ export namespace IssueListResponse {
 
     dismissed?: boolean;
 
+    /**
+     * Indicates whether the insight has a large payload that requires fetching via the
+     * context endpoint.
+     */
+    has_extended_context?: boolean;
+
     issue_class?: string;
 
     issue_type?: IssuesAPI.IssueType;
@@ -151,9 +157,20 @@ export namespace IssueListResponse {
 
     since?: string;
 
+    /**
+     * The current status of the insight.
+     */
+    status?: 'active' | 'resolved';
+
     subject?: string;
 
     timestamp?: string;
+
+    /**
+     * User-defined classification for the insight. Can be 'false_positive',
+     * 'accept_risk', 'other', or null.
+     */
+    user_classification?: 'false_positive' | 'accept_risk' | 'other' | null;
   }
 
   export namespace Issue {
