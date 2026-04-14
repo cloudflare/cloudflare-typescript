@@ -6,7 +6,8 @@ import { SinglePage } from '../../../../pagination';
 
 export class Logs extends APIResource {
   /**
-   * Get job logs
+   * Gets log entries for an R2 Super Slurper migration job, showing migration status
+   * changes, errors, etc.
    *
    * @example
    * ```ts
