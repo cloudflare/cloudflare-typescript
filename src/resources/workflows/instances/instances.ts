@@ -364,7 +364,8 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: `page` and `cursor` are mutually exclusive, use one or the other.
+   * Query param: Opaque token for cursor-based pagination. Mutually exclusive with
+   * `page`.
    */
   cursor?: string;
 
@@ -379,8 +380,7 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   date_start?: string;
 
   /**
-   * Query param: should only be used when `cursor` is used, defines a new direction
-   * for the cursor
+   * Query param: Defines the direction for cursor-based pagination.
    */
   direction?: 'asc' | 'desc';
 
