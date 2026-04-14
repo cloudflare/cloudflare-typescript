@@ -24,7 +24,7 @@ export class Content extends APIResource {
 
 export interface ContentGetParams {
   /**
-   * The unique ID of the zone.
+   * Use this field to specify the unique ID of the zone.
    */
   zone_id: string;
 }

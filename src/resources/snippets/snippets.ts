@@ -8,13 +8,10 @@ import * as RulesAPI from './rules';
 import {
   RuleDeleteParams,
   RuleDeleteResponse,
-  RuleDeleteResponsesSinglePage,
   RuleListParams,
   RuleListResponse,
-  RuleListResponsesSinglePage,
   RuleUpdateParams,
   RuleUpdateResponse,
-  RuleUpdateResponsesSinglePage,
   Rules,
 } from './rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -90,78 +87,78 @@ export class Snippets extends APIResource {
 export class SnippetListResponsesV4PagePaginationArray extends V4PagePaginationArray<SnippetListResponse> {}
 
 /**
- * A result.
+ * Contain the response result.
  */
 export interface SnippetUpdateResponse {
   /**
-   * The timestamp of when the snippet was created.
+   * Indicates when the snippet was created.
    */
   created_on: string;
 
   /**
-   * The identifying name of the snippet.
+   * Identify the snippet.
    */
   snippet_name: string;
 
   /**
-   * The timestamp of when the snippet was last modified.
+   * Indicates when the snippet was last modified.
    */
   modified_on?: string;
 }
 
 /**
- * A snippet object.
+ * Define a snippet.
  */
 export interface SnippetListResponse {
   /**
-   * The timestamp of when the snippet was created.
+   * Indicates when the snippet was created.
    */
   created_on: string;
 
   /**
-   * The identifying name of the snippet.
+   * Identify the snippet.
    */
   snippet_name: string;
 
   /**
-   * The timestamp of when the snippet was last modified.
+   * Indicates when the snippet was last modified.
    */
   modified_on?: string;
 }
 
 /**
- * A result.
+ * Contain the response result.
  */
-export type SnippetDeleteResponse = string | null;
+export type SnippetDeleteResponse = unknown;
 
 /**
- * A result.
+ * Contain the response result.
  */
 export interface SnippetGetResponse {
   /**
-   * The timestamp of when the snippet was created.
+   * Indicates when the snippet was created.
    */
   created_on: string;
 
   /**
-   * The identifying name of the snippet.
+   * Identify the snippet.
    */
   snippet_name: string;
 
   /**
-   * The timestamp of when the snippet was last modified.
+   * Indicates when the snippet was last modified.
    */
   modified_on?: string;
 }
 
 export interface SnippetUpdateParams {
   /**
-   * Path param: The unique ID of the zone.
+   * Path param: Use this field to specify the unique ID of the zone.
    */
   zone_id: string;
 
   /**
-   * Body param: Metadata about the snippet.
+   * Body param: Provide metadata about the snippet.
    */
   metadata: SnippetUpdateParams.Metadata;
 
@@ -170,11 +167,11 @@ export interface SnippetUpdateParams {
 
 export namespace SnippetUpdateParams {
   /**
-   * Metadata about the snippet.
+   * Provide metadata about the snippet.
    */
   export interface Metadata {
     /**
-     * Name of the file that contains the main module of the snippet.
+     * Specify the name of the file that contains the main module of the snippet.
      */
     main_module: string;
   }
@@ -182,21 +179,21 @@ export namespace SnippetUpdateParams {
 
 export interface SnippetListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: The unique ID of the zone.
+   * Path param: Use this field to specify the unique ID of the zone.
    */
   zone_id: string;
 }
 
 export interface SnippetDeleteParams {
   /**
-   * The unique ID of the zone.
+   * Use this field to specify the unique ID of the zone.
    */
   zone_id: string;
 }
 
 export interface SnippetGetParams {
   /**
-   * The unique ID of the zone.
+   * Use this field to specify the unique ID of the zone.
    */
   zone_id: string;
 }
@@ -204,9 +201,6 @@ export interface SnippetGetParams {
 Snippets.SnippetListResponsesV4PagePaginationArray = SnippetListResponsesV4PagePaginationArray;
 Snippets.Content = Content;
 Snippets.Rules = Rules;
-Snippets.RuleUpdateResponsesSinglePage = RuleUpdateResponsesSinglePage;
-Snippets.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
-Snippets.RuleDeleteResponsesSinglePage = RuleDeleteResponsesSinglePage;
 
 export declare namespace Snippets {
   export {
@@ -228,9 +222,6 @@ export declare namespace Snippets {
     type RuleUpdateResponse as RuleUpdateResponse,
     type RuleListResponse as RuleListResponse,
     type RuleDeleteResponse as RuleDeleteResponse,
-    RuleUpdateResponsesSinglePage as RuleUpdateResponsesSinglePage,
-    RuleListResponsesSinglePage as RuleListResponsesSinglePage,
-    RuleDeleteResponsesSinglePage as RuleDeleteResponsesSinglePage,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
