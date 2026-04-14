@@ -6,7 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 
 export class Resources extends APIResource {
   /**
-   * Create a new share resource
+   * Adds a resource to an existing share, making it available to share recipients.
    *
    * @example
    * ```ts
@@ -192,7 +192,6 @@ export interface ResourceCreateResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -245,7 +244,6 @@ export interface ResourceUpdateResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -298,7 +296,6 @@ export interface ResourceListResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -351,7 +348,6 @@ export interface ResourceDeleteResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -404,7 +400,6 @@ export interface ResourceGetResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -447,7 +442,6 @@ export interface ResourceCreateParams {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -477,7 +471,6 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
    */
   resource_type?:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
