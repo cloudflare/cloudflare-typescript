@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 
 export class Permissions extends APIResource {
   /**
-   * Grant permission to indicator feed
+   * Grants access permissions for a custom threat indicator feed to other accounts.
    *
    * @example
    * ```ts
@@ -29,7 +29,7 @@ export class Permissions extends APIResource {
   }
 
   /**
-   * List indicator feed permissions
+   * Lists current access permissions for custom threat indicator feeds.
    *
    * @example
    * ```ts
@@ -50,7 +50,7 @@ export class Permissions extends APIResource {
   }
 
   /**
-   * Revoke permission to indicator feed
+   * Revokes access permissions for a custom threat indicator feed.
    *
    * @example
    * ```ts

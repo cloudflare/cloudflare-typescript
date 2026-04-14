@@ -5,7 +5,8 @@ import * as Core from '../../core';
 
 export class Whois extends APIResource {
   /**
-   * Get WHOIS Record
+   * Retrieves WHOIS registration data for a domain, including registrant and
+   * nameserver information.
    *
    * @example
    * ```ts

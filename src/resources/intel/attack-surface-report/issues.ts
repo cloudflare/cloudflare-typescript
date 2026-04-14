@@ -7,7 +7,8 @@ import { V4PagePagination, type V4PagePaginationParams } from '../../../paginati
 
 export class Issues extends APIResource {
   /**
-   * Retrieves Security Center Issues
+   * Lists all Security Center issues for the account, showing active security
+   * problems requiring attention.
    *
    * @deprecated
    */
@@ -24,7 +25,7 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Retrieves Security Center Issue Counts by Class
+   * Retrieves Security Center issue counts aggregated by classification class.
    *
    * @deprecated
    */
@@ -39,7 +40,8 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Archives Security Center Insight
+   * Deprecated endpoint for archiving Security Center insights. Use the newer
+   * archive-security-center-insight endpoint instead.
    *
    * @deprecated
    */
@@ -56,7 +58,7 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Retrieves Security Center Issue Counts by Severity
+   * Retrieves Security Center issue counts aggregated by severity level.
    *
    * @deprecated
    */
@@ -74,7 +76,7 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Retrieves Security Center Issue Counts by Type
+   * Retrieves Security Center issue counts aggregated by issue type.
    *
    * @deprecated
    */
@@ -136,6 +138,12 @@ export namespace IssueListResponse {
 
     dismissed?: boolean;
 
+    /**
+     * Indicates whether the insight has a large payload that requires fetching via the
+     * context endpoint.
+     */
+    has_extended_context?: boolean;
+
     issue_class?: string;
 
     issue_type?: IssuesAPI.IssueType;
@@ -150,9 +158,20 @@ export namespace IssueListResponse {
 
     since?: string;
 
+    /**
+     * The current status of the insight.
+     */
+    status?: 'active' | 'resolved';
+
     subject?: string;
 
     timestamp?: string;
+
+    /**
+     * User-defined classification for the insight. Can be 'false_positive',
+     * 'accept_risk', 'other', or null.
+     */
+    user_classification?: 'false_positive' | 'accept_risk' | 'other' | null;
   }
 
   export namespace Issue {
