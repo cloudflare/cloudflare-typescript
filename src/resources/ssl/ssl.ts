@@ -26,7 +26,7 @@ import {
   CertificatePackGetResponse,
   CertificatePackListParams,
   CertificatePackListResponse,
-  CertificatePackListResponsesSinglePage,
+  CertificatePackListResponsesV4PagePaginationArray,
   CertificatePacks,
   Host,
   RequestValidity,
@@ -48,7 +48,7 @@ export class SSL extends APIResource {
 
 SSL.Analyze = Analyze;
 SSL.CertificatePacks = CertificatePacks;
-SSL.CertificatePackListResponsesSinglePage = CertificatePackListResponsesSinglePage;
+SSL.CertificatePackListResponsesV4PagePaginationArray = CertificatePackListResponsesV4PagePaginationArray;
 SSL.Recommendations = Recommendations;
 SSL.Universal = Universal;
 SSL.VerificationResource = VerificationResource;
@@ -71,7 +71,7 @@ export declare namespace SSL {
     type CertificatePackDeleteResponse as CertificatePackDeleteResponse,
     type CertificatePackEditResponse as CertificatePackEditResponse,
     type CertificatePackGetResponse as CertificatePackGetResponse,
-    CertificatePackListResponsesSinglePage as CertificatePackListResponsesSinglePage,
+    CertificatePackListResponsesV4PagePaginationArray as CertificatePackListResponsesV4PagePaginationArray,
     type CertificatePackCreateParams as CertificatePackCreateParams,
     type CertificatePackListParams as CertificatePackListParams,
     type CertificatePackDeleteParams as CertificatePackDeleteParams,

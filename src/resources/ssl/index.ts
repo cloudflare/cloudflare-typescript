@@ -2,7 +2,7 @@
 
 export { Analyze, type AnalyzeCreateResponse, type AnalyzeCreateParams } from './analyze';
 export {
-  CertificatePackListResponsesSinglePage,
+  CertificatePackListResponsesV4PagePaginationArray,
   CertificatePacks,
   type Host,
   type RequestValidity,
