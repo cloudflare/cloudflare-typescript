@@ -11,3 +11,11 @@ export {
   type DomainsSinglePage,
 } from './domains';
 export { Registrar } from './registrar';
+export { RegistrationStatus, type RegistrationStatusGetParams } from './registration-status';
+export {
+  Registrations,
+  type RegistrationCreateParams,
+  type RegistrationEditParams,
+  type RegistrationGetParams,
+} from './registrations';
+export { UpdateStatus, type UpdateStatusGetParams } from './update-status';

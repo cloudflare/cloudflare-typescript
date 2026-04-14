@@ -357,6 +357,9 @@ TEST_PATHS=(
 	tests/api-resources/pages/projects/domains.test.ts
 	tests/api-resources/registrar/registrar.test.ts
 	tests/api-resources/registrar/domains.test.ts
+	tests/api-resources/registrar/registrations.test.ts
+	tests/api-resources/registrar/registration-status.test.ts
+	tests/api-resources/registrar/update-status.test.ts
 	tests/api-resources/request-tracers/request-tracers.test.ts
 	tests/api-resources/request-tracers/traces.test.ts
 	tests/api-resources/rules/rules.test.ts

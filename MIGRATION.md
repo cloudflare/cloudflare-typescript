@@ -514,6 +514,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.pages.projects.domains.get()`
 - `client.registrar.domains.update()`
 - `client.registrar.domains.get()`
+- `client.registrar.registrations.edit()`
+- `client.registrar.registrations.get()`
+- `client.registrar.registrationStatus.get()`
+- `client.registrar.updateStatus.get()`
 - `client.rules.lists.update()`
 - `client.rules.lists.delete()`
 - `client.rules.lists.get()`
