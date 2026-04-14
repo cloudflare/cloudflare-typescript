@@ -6,7 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 
 export class Operations extends APIResource {
   /**
-   * Update per-operation schema validation setting
+   * Fully updates schema validation settings for a specific API operation.
    *
    * @example
    * ```ts
@@ -35,7 +35,7 @@ export class Operations extends APIResource {
   }
 
   /**
-   * List per-operation schema validation settings
+   * Lists all per-operation schema validation settings configured for the zone.
    *
    * @example
    * ```ts
@@ -60,7 +60,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Delete per-operation schema validation setting
+   * Removes custom schema validation settings for a specific API operation,
+   * reverting to zone-level defaults.
    *
    * @example
    * ```ts
@@ -86,7 +87,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Bulk edit per-operation schema validation settings
+   * Updates schema validation settings for multiple API operations in a single
+   * request. Efficient for applying consistent validation rules across endpoints.
    *
    * @example
    * ```ts
@@ -116,7 +118,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Get per-operation schema validation setting
+   * Retrieves the schema validation settings configured for a specific API
+   * operation.
    *
    * @example
    * ```ts

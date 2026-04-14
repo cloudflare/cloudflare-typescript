@@ -22,7 +22,8 @@ export class Settings extends APIResource {
   operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
 
   /**
-   * Update global schema validation settings
+   * Fully updates global schema validation settings for a zone, replacing existing
+   * configuration.
    *
    * @example
    * ```ts
@@ -44,7 +45,8 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Edit global schema validation settings
+   * Partially updates global schema validation settings for a zone using PATCH
+   * semantics.
    *
    * @example
    * ```ts
@@ -65,7 +67,7 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Get global schema validation settings
+   * Retrieves the current global schema validation settings for a zone.
    *
    * @example
    * ```ts

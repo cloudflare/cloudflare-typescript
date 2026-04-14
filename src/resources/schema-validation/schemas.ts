@@ -6,7 +6,8 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 
 export class Schemas extends APIResource {
   /**
-   * Upload a schema
+   * Uploads a new OpenAPI schema for API Shield schema validation. The schema
+   * defines expected request/response formats for API endpoints.
    *
    * @example
    * ```ts
@@ -31,7 +32,7 @@ export class Schemas extends APIResource {
   }
 
   /**
-   * List all uploaded schemas
+   * Lists all OpenAPI schemas uploaded to API Shield with pagination support.
    *
    * @example
    * ```ts
@@ -56,7 +57,8 @@ export class Schemas extends APIResource {
   }
 
   /**
-   * Delete a schema
+   * Permanently removes an uploaded OpenAPI schema from API Shield. Operations using
+   * this schema will lose their validation rules.
    *
    * @example
    * ```ts
@@ -81,7 +83,8 @@ export class Schemas extends APIResource {
   }
 
   /**
-   * Edit details of a schema to enable validation
+   * Modifies an existing OpenAPI schema in API Shield, updating the validation rules
+   * for associated API operations.
    *
    * @example
    * ```ts
@@ -107,7 +110,8 @@ export class Schemas extends APIResource {
   }
 
   /**
-   * Get details of a schema
+   * Gets the contents and metadata of a specific OpenAPI schema uploaded to API
+   * Shield.
    *
    * @example
    * ```ts
