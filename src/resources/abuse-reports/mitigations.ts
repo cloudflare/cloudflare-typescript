@@ -73,6 +73,7 @@ export namespace MitigationListResponse {
      */
     type:
       | 'legal_block'
+      | 'misleading_interstitial'
       | 'phishing_interstitial'
       | 'network_block'
       | 'rate_limit_cache'
@@ -107,6 +108,7 @@ export interface MitigationReviewResponse {
    */
   type:
     | 'legal_block'
+    | 'misleading_interstitial'
     | 'phishing_interstitial'
     | 'network_block'
     | 'rate_limit_cache'
@@ -160,6 +162,7 @@ export interface MitigationListParams extends V4PagePaginationParams {
    */
   type?:
     | 'legal_block'
+    | 'misleading_interstitial'
     | 'phishing_interstitial'
     | 'network_block'
     | 'rate_limit_cache'
