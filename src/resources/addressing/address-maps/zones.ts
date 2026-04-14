@@ -126,6 +126,11 @@ export namespace ZoneUpdateResponse {
      * Total results available without any search parameters.
      */
     total_count?: number;
+
+    /**
+     * The number of total pages in the entire result set.
+     */
+    total_pages?: number;
   }
 }
 
@@ -195,6 +200,11 @@ export namespace ZoneDeleteResponse {
      * Total results available without any search parameters.
      */
     total_count?: number;
+
+    /**
+     * The number of total pages in the entire result set.
+     */
+    total_pages?: number;
   }
 }
 
