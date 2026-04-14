@@ -7,21 +7,6 @@ import { SinglePage } from '../../../pagination';
 export class TLS extends APIResource {
   /**
    * Update the tls setting value for the hostname.
-   *
-   * @example
-   * ```ts
-   * const setting = await client.hostnames.settings.tls.update(
-   *   'ciphers',
-   *   'app.example.com',
-   *   {
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     value: [
-   *       'ECDHE-RSA-AES128-GCM-SHA256',
-   *       'AES128-GCM-SHA256',
-   *     ],
-   *   },
-   * );
-   * ```
    */
   update(
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
@@ -40,15 +25,6 @@ export class TLS extends APIResource {
 
   /**
    * Delete the tls setting value for the hostname.
-   *
-   * @example
-   * ```ts
-   * const tls = await client.hostnames.settings.tls.delete(
-   *   'ciphers',
-   *   'app.example.com',
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
    */
   delete(
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
@@ -67,17 +43,6 @@ export class TLS extends APIResource {
 
   /**
    * List the requested TLS setting for the hostnames under this zone.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const tlsGetResponse of client.hostnames.settings.tls.get(
-   *   'ciphers',
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
    */
   get(
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
@@ -117,20 +82,44 @@ export interface Setting {
   updated_at?: string;
 
   /**
-   * The tls setting value.
+   * The TLS setting value. The type depends on the `setting_id` used in the request
+   * path:
+   *
+   * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
+   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+   * - `min_tls_version`: a string indicating the minimum TLS version — one of
+   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+   * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
+   *   (e.g., `"on"`)
    */
   value?: SettingValue;
 }
 
 /**
- * The tls setting value.
+ * The TLS setting value. The type depends on the `setting_id` used in the request
+ * path:
+ *
+ * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
+ *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+ * - `min_tls_version`: a string indicating the minimum TLS version — one of
+ *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+ * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
+ *   (e.g., `"on"`)
  */
-export type SettingValue = number | string | Array<string>;
+export type SettingValue = '1.0' | '1.1' | '1.2' | '1.3' | 'on' | 'off' | Array<string>;
 
 /**
- * The tls setting value.
+ * The TLS setting value. The type depends on the `setting_id` used in the request
+ * path:
+ *
+ * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
+ *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+ * - `min_tls_version`: a string indicating the minimum TLS version — one of
+ *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+ * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
+ *   (e.g., `"on"`)
  */
-export type SettingValueParam = number | string | Array<string>;
+export type SettingValueParam = '1.0' | '1.1' | '1.2' | '1.3' | 'on' | 'off' | Array<string>;
 
 export interface TLSDeleteResponse {
   /**
@@ -154,7 +143,15 @@ export interface TLSDeleteResponse {
   updated_at?: string;
 
   /**
-   * The tls setting value.
+   * The TLS setting value. The type depends on the `setting_id` used in the request
+   * path:
+   *
+   * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
+   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+   * - `min_tls_version`: a string indicating the minimum TLS version — one of
+   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+   * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
+   *   (e.g., `"on"`)
    */
   value?: SettingValue;
 }
@@ -181,7 +178,15 @@ export interface TLSGetResponse {
   updated_at?: string;
 
   /**
-   * The tls setting value.
+   * The TLS setting value. The type depends on the `setting_id` used in the request
+   * path:
+   *
+   * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
+   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+   * - `min_tls_version`: a string indicating the minimum TLS version — one of
+   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+   * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
+   *   (e.g., `"on"`)
    */
   value?: SettingValue;
 }
@@ -193,7 +198,15 @@ export interface TLSUpdateParams {
   zone_id: string;
 
   /**
-   * Body param: The tls setting value.
+   * Body param: The TLS setting value. The type depends on the `setting_id` used in
+   * the request path:
+   *
+   * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
+   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+   * - `min_tls_version`: a string indicating the minimum TLS version — one of
+   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+   * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
+   *   (e.g., `"on"`)
    */
   value: SettingValueParam;
 }

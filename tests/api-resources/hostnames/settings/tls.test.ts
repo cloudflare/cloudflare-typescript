@@ -13,7 +13,7 @@ describe('resource tls', () => {
   test('update: only required params', async () => {
     const responsePromise = client.hostnames.settings.tls.update('ciphers', 'app.example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      value: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-GCM-SHA256'],
+      value: '1.0',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource tls', () => {
   test('update: required and optional params', async () => {
     const response = await client.hostnames.settings.tls.update('ciphers', 'app.example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      value: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-GCM-SHA256'],
+      value: '1.0',
     });
   });
 
