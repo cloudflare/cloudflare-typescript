@@ -4028,6 +4028,154 @@
       ]
     },
     {
+      "base": "vulnerabilityScanner.credentialSets.credentials",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "credential_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "credential_set_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "credential_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "vulnerabilityScanner.credentialSets.credentials",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "credential_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "credential_set_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "credential_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "vulnerabilityScanner.credentialSets.credentials",
+      "name": "edit",
+      "params": [
+        {
+          "type": "param",
+          "key": "credential_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "credential_set_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "credential_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "vulnerabilityScanner.credentialSets.credentials",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "credential_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "credential_set_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "credential_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "speed.pages.tests",
       "name": "get",
       "params": [
