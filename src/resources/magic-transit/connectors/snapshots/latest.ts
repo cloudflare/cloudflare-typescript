@@ -1117,6 +1117,11 @@ export namespace LatestListResponse {
       available_bytes?: number;
 
       /**
+       * Available inodes on filesystem
+       */
+      available_inodes?: number;
+
+      /**
        * Determines whether the disk is read-only
        */
       is_read_only?: boolean;
@@ -1130,6 +1135,11 @@ export namespace LatestListResponse {
        * Total disk size (bytes)
        */
       total_bytes?: number;
+
+      /**
+       * Total inodes on filesystem
+       */
+      total_inodes?: number;
     }
 
     /**
