@@ -6,11 +6,7 @@ import { CursorPaginationAfter, type CursorPaginationAfterParams } from '../../.
 
 export class Audit extends APIResource {
   /**
-   * Gets a list of audit logs for an account. <br /> <br /> This is the beta release
-   * of Audit Logs Version 2. Since this is a beta version, there may be gaps or
-   * missing entries in the available audit logs. Be aware of the following
-   * limitations. <br /> <ul> <li>Audit logs are available only for the past 30 days.
-   * <br /></li> <li>Error handling is not yet implemented. <br /> </li> </ul>
+   * Gets a list of audit logs for an account.
    *
    * @example
    * ```ts
@@ -142,12 +138,12 @@ export namespace AuditListResponse {
     ip_address?: string;
 
     /**
-     * Filters by the API token ID when the actor context is an api_token.
+     * The API token ID when the actor context is an api_token or oauth.
      */
     token_id?: string;
 
     /**
-     * Filters by the API token name when the actor context is an api_token.
+     * The API token name when the actor context is an api_token or oauth.
      */
     token_name?: string;
 
@@ -509,9 +505,9 @@ export namespace AuditListParams {
   export interface ResourceScope {
     /**
      * Filters out audit logs by the resource scope, specifying whether the resource is
-     * associated with an user, an account, or a zone.
+     * associated with an user, an account, a zone, or a membership.
      */
-    not?: Array<'accounts' | 'user' | 'zones'>;
+    not?: Array<'accounts' | 'user' | 'zones' | 'memberships'>;
   }
 
   export interface ResourceType {
