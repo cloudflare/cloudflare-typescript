@@ -15,7 +15,10 @@ export class MTLSCertificates extends APIResource {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
 
   /**
-   * Upload a certificate that you want to use with mTLS-enabled Cloudflare services.
+   * Upload a certificate that you want to use with mTLS-enabled Cloudflare services,
+   * such as Bring Your Own CA (BYO-CA) for mTLS. To create certificates issued by
+   * the Cloudflare managed CA, use the
+   * [Create Client Certificate endpoint](/api/resources/client_certificates/methods/create/).
    *
    * @example
    * ```ts
@@ -24,7 +27,7 @@ export class MTLSCertificates extends APIResource {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     ca: true,
    *     certificates:
-   *       '-----BEGIN CERTIFICATE-----\nMIIDmDCCAoCgAwIBAgIUKTOAZNjcXVZRj4oQt0SHsl1c1vMwDQYJKoZIhvcNAQELBQAwUTELMAkGA1UEBhMCVVMxFjAUBgNVBAgMDVNhbiBGcmFuY2lzY28xEzARBgNVBAcMCkNhbGlmb3JuaWExFTATBgNVBAoMDEV4YW1wbGUgSW5jLjAgFw0yMjExMjIxNjU5NDdaGA8yMTIyMTAyOTE2NTk0N1owUTELMAkGA1UEBhMCVVMxFjAUBgNVBAgMDVNhbiBGcmFuY2lzY28xEzARBgNVBAcMCkNhbGlmb3JuaWExFTATBgNVBAoMDEV4YW1wbGUgSW5jLjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMRcORwgJFTdcG/2GKI+cFYiOBNDKjCZUXEOvXWY42BkH9wxiMT869CO+enA1w5pIrXow6kCM1sQspHHaVmJUlotEMJxyoLFfA/8Kt1EKFyobOjuZs2SwyVyJ2sStvQuUQEosULZCNGZEqoH5g6zhMPxaxm7ZLrrsDZ9maNGVqo7EWLWHrZ57Q/5MtTrbxQL+eXjUmJ9K3kS+3uEwMdqR6Z3BluU1ivanpPc1CN2GNhdO0/hSY4YkGEnuLsqJyDd3cIiB1MxuCBJ4ZaqOd2viV1WcP3oU3dxVPm4MWyfYIldMWB14FahScxLhWdRnM9YZ/i9IFcLypXsuz7DjrJPtPUCAwEAAaNmMGQwHQYDVR0OBBYEFP5JzLUawNF+c3AXsYTEWHh7z2czMB8GA1UdIwQYMBaAFP5JzLUawNF+c3AXsYTEWHh7z2czMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEBMA0GCSqGSIb3DQEBCwUAA4IBAQBc+Be7NDhpE09y7hLPZGRPl1cSKBw4RI0XIv6rlbSTFs5EebpTGjhx/whNxwEZhB9HZ7111Oa1YlT8xkI9DshB78mjAHCKBAJ76moK8tkG0aqdYpJ4ZcJTVBB7l98Rvgc7zfTii7WemTy72deBbSeiEtXavm4EF0mWjHhQ5Nxpnp00Bqn5g1x8CyTDypgmugnep+xG+iFzNmTdsz7WI9T/7kDMXqB7M/FPWBORyS98OJqNDswCLF8bIZYwUBEe+bRHFomoShMzaC3tvim7WCb16noDkSTMlfKO4pnvKhpcVdSgwcruATV7y+W+Lvmz2OT/Gui4JhqeoTewsxndhDDE\n-----END CERTIFICATE-----',
+   *       '-----BEGIN CERTIFICATE-----\nMIIDmDCCAoCgAwIBAgIUKTOAZNjcXVZRj4oQt0SHsl1c1vMwDQYJKoZIhvcNAQEL\nBQAwUTELMAkGA1UEBhMCVVMxFjAUBgNVBAgMDVNhbiBGcmFuY2lzY28xEzARBgNV\nBAcMCkNhbGlmb3JuaWExFTATBgNVBAoMDEV4YW1wbGUgSW5jLjAgFw0yMjExMjIx\nNjU5NDdaGA8yMTIyMTAyOTE2NTk0N1owUTELMAkGA1UEBhMCVVMxFjAUBgNVBAgM\nDVNhbiBGcmFuY2lzY28xEzARBgNVBAcMCkNhbGlmb3JuaWExFTATBgNVBAoMDEV4\nYW1wbGUgSW5jLjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMRcORwg\nJFTdcG/2GKI+cFYiOBNDKjCZUXEOvXWY42BkH9wxiMT869CO+enA1w5pIrXow6kC\nM1sQspHHaVmJUlotEMJxyoLFfA/8Kt1EKFyobOjuZs2SwyVyJ2sStvQuUQEosULZ\nCNGZEqoH5g6zhMPxaxm7ZLrrsDZ9maNGVqo7EWLWHrZ57Q/5MtTrbxQL+eXjUmJ9\nK3kS+3uEwMdqR6Z3BluU1ivanpPc1CN2GNhdO0/hSY4YkGEnuLsqJyDd3cIiB1Mx\nuCBJ4ZaqOd2viV1WcP3oU3dxVPm4MWyfYIldMWB14FahScxLhWdRnM9YZ/i9IFcL\nypXsuz7DjrJPtPUCAwEAAaNmMGQwHQYDVR0OBBYEFP5JzLUawNF+c3AXsYTEWHh7\nz2czMB8GA1UdIwQYMBaAFP5JzLUawNF+c3AXsYTEWHh7z2czMA4GA1UdDwEB/wQE\nAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEBMA0GCSqGSIb3DQEBCwUAA4IBAQBc+Be7\nNDhpE09y7hLPZGRPl1cSKBw4RI0XIv6rlbSTFs5EebpTGjhx/whNxwEZhB9HZ711\n1Oa1YlT8xkI9DshB78mjAHCKBAJ76moK8tkG0aqdYpJ4ZcJTVBB7l98Rvgc7zfTi\ni7WemTy72deBbSeiEtXavm4EF0mWjHhQ5Nxpnp00Bqn5g1x8CyTDypgmugnep+xG\n+iFzNmTdsz7WI9T/7kDMXqB7M/FPWBORyS98OJqNDswCLF8bIZYwUBEe+bRHFomo\nShMzaC3tvim7WCb16noDkSTMlfKO4pnvKhpcVdSgwcruATV7y+W+Lvmz2OT/Gui4\nJhqeoTewsxndhDDE\n-----END CERTIFICATE-----',
    *   });
    * ```
    */
@@ -42,7 +45,10 @@ export class MTLSCertificates extends APIResource {
   }
 
   /**
-   * Lists all mTLS certificates.
+   * Lists all mTLS certificates uploaded to your account, such as Bring Your Own CA
+   * (BYO-CA) for mTLS. To list certificates issued by the Cloudflare managed CA, use
+   * the
+   * [List Client Certificates endpoint](/api/resources/client_certificates/methods/list/).
    *
    * @example
    * ```ts
@@ -58,12 +64,11 @@ export class MTLSCertificates extends APIResource {
     params: MTLSCertificateListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MTLSCertificatesSinglePage, MTLSCertificate> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/mtls_certificates`,
-      MTLSCertificatesSinglePage,
-      options,
-    );
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/mtls_certificates`, MTLSCertificatesSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -94,7 +99,9 @@ export class MTLSCertificates extends APIResource {
   }
 
   /**
-   * Fetches a single mTLS certificate.
+   * Fetches a single mTLS certificate uploaded to your account. To get a certificate
+   * issued by the Cloudflare managed CA, use the
+   * [Client Certificate Details endpoint](/api/resources/client_certificates/methods/get/).
    *
    * @example
    * ```ts
@@ -163,6 +170,11 @@ export interface MTLSCertificate {
   signature?: string;
 
   /**
+   * The type of the certificate, indicating how it was created and who manages it.
+   */
+  type?: 'custom' | 'gateway_managed' | 'access_managed';
+
+  /**
    * This is the time the certificate was uploaded.
    */
   uploaded_on?: string;
@@ -210,6 +222,11 @@ export interface MTLSCertificateCreateResponse {
   signature?: string;
 
   /**
+   * The type of the certificate, indicating how it was created and who manages it.
+   */
+  type?: 'custom' | 'gateway_managed' | 'access_managed';
+
+  /**
    * This is the time the certificate was updated.
    */
   updated_at?: string;
@@ -252,9 +269,15 @@ export interface MTLSCertificateCreateParams {
 
 export interface MTLSCertificateListParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: Filters results by certificate type. Multiple types can be
+   * comma-separated.
+   */
+  type?: Array<'custom' | 'gateway_managed' | 'access_managed'>;
 }
 
 export interface MTLSCertificateDeleteParams {
