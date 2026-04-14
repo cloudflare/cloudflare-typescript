@@ -22,6 +22,8 @@ import {
 } from './matches';
 import * as QueriesAPI from './queries';
 import { Queries, QueryBulkParams, QueryCreateParams, QueryDeleteParams } from './queries';
+import * as V2API from './v2/v2';
+import { V2 } from './v2/v2';
 import { SinglePage } from '../../pagination';
 
 export class BrandProtection extends APIResource {
@@ -29,6 +31,7 @@ export class BrandProtection extends APIResource {
   matches: MatchesAPI.Matches = new MatchesAPI.Matches(this._client);
   logos: LogosAPI.Logos = new LogosAPI.Logos(this._client);
   logoMatches: LogoMatchesAPI.LogoMatches = new LogoMatchesAPI.LogoMatches(this._client);
+  v2: V2API.V2 = new V2API.V2(this._client);
 
   /**
    * Return new URL submissions
@@ -242,6 +245,7 @@ BrandProtection.Queries = Queries;
 BrandProtection.Matches = Matches;
 BrandProtection.Logos = Logos;
 BrandProtection.LogoMatches = LogoMatches;
+BrandProtection.V2 = V2;
 
 export declare namespace BrandProtection {
   export {
@@ -283,4 +287,6 @@ export declare namespace BrandProtection {
     type LogoMatchDownloadParams as LogoMatchDownloadParams,
     type LogoMatchGetParams as LogoMatchGetParams,
   };
+
+  export { V2 as V2 };
 }
