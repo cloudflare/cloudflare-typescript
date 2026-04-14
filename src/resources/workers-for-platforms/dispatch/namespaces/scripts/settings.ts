@@ -63,6 +63,11 @@ export class Settings extends APIResource {
   }
 }
 
+/**
+ * Script and version settings for Workers for Platforms namespace scripts. Same as
+ * script-and-version-settings-item but without annotations, which are not
+ * supported for namespace scripts.
+ */
 export interface SettingEditResponse {
   /**
    * List of bindings attached to a Worker. You can find more about bindings on our
@@ -71,6 +76,8 @@ export interface SettingEditResponse {
    */
   bindings?: Array<
     | SettingEditResponse.WorkersBindingKindAI
+    | SettingEditResponse.WorkersBindingKindAISearch
+    | SettingEditResponse.WorkersBindingKindAISearchNamespace
     | SettingEditResponse.WorkersBindingKindAnalyticsEngine
     | SettingEditResponse.WorkersBindingKindAssets
     | SettingEditResponse.WorkersBindingKindBrowser
@@ -83,10 +90,12 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindImages
     | SettingEditResponse.WorkersBindingKindJson
     | SettingEditResponse.WorkersBindingKindKVNamespace
+    | SettingEditResponse.WorkersBindingKindMedia
     | SettingEditResponse.WorkersBindingKindMTLSCertificate
     | SettingEditResponse.WorkersBindingKindPlainText
     | SettingEditResponse.WorkersBindingKindPipelines
     | SettingEditResponse.WorkersBindingKindQueue
+    | SettingEditResponse.WorkersBindingKindRatelimit
     | SettingEditResponse.WorkersBindingKindR2Bucket
     | SettingEditResponse.WorkersBindingKindSecretText
     | SettingEditResponse.WorkersBindingKindSendEmail
@@ -95,9 +104,12 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersBindingKindVectorize
     | SettingEditResponse.WorkersBindingKindVersionMetadata
     | SettingEditResponse.WorkersBindingKindSecretsStoreSecret
+    | SettingEditResponse.WorkersBindingKindFlagship
     | SettingEditResponse.WorkersBindingKindSecretKey
     | SettingEditResponse.WorkersBindingKindWorkflow
     | SettingEditResponse.WorkersBindingKindWasmModule
+    | SettingEditResponse.WorkersBindingKindVPCService
+    | SettingEditResponse.WorkersBindingKindVPCNetwork
   >;
 
   /**
@@ -172,6 +184,50 @@ export namespace SettingEditResponse {
     type: 'ai';
   }
 
+  export interface WorkersBindingKindAISearch {
+    /**
+     * The user-chosen instance name. Must exist at deploy time. The worker can search,
+     * chat, update, and manage items/jobs on this instance.
+     */
+    instance_name: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ai_search';
+
+    /**
+     * The namespace the instance belongs to. Defaults to "default" if omitted.
+     * Customers who don't use namespaces can simply omit this field.
+     */
+    namespace?: string;
+  }
+
+  export interface WorkersBindingKindAISearchNamespace {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The user-chosen namespace name. Must exist before deploy -- Wrangler handles
+     * auto-creation on deploy failure (R2 bucket pattern). The "default" namespace is
+     * auto-created by config-api for new accounts. Grants full access (CRUD + search +
+     * chat) to all instances within the namespace.
+     */
+    namespace: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ai_search_namespace';
+  }
+
   export interface WorkersBindingKindAnalyticsEngine {
     /**
      * The name of the dataset to bind to.
@@ -217,7 +273,7 @@ export namespace SettingEditResponse {
     /**
      * Identifier of the D1 database to bind to.
      */
-    id: string;
+    database_id: string;
 
     /**
      * A JavaScript variable name for the binding.
@@ -228,6 +284,11 @@ export namespace SettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'd1';
+
+    /**
+     * @deprecated This property has been renamed to `database_id`.
+     */
+    id?: string;
   }
 
   export interface WorkersBindingKindDataBlob {
@@ -279,7 +340,7 @@ export namespace SettingEditResponse {
        * Pass information from the Dispatch Worker to the Outbound Worker through the
        * parameters.
        */
-      params?: Array<string>;
+      params?: Array<Outbound.Param>;
 
       /**
        * Outbound worker.
@@ -288,10 +349,22 @@ export namespace SettingEditResponse {
     }
 
     export namespace Outbound {
+      export interface Param {
+        /**
+         * Name of the parameter.
+         */
+        name: string;
+      }
+
       /**
        * Outbound worker.
        */
       export interface Worker {
+        /**
+         * Entrypoint to invoke on the outbound worker.
+         */
+        entrypoint?: string;
+
         /**
          * Environment of the outbound worker.
          */
@@ -320,6 +393,11 @@ export namespace SettingEditResponse {
      * The exported class name of the Durable Object.
      */
     class_name?: string;
+
+    /**
+     * The dispatch namespace the Durable Object script belongs to.
+     */
+    dispatch_namespace?: string;
 
     /**
      * The environment of the script_name to bind to.
@@ -397,7 +475,7 @@ export namespace SettingEditResponse {
     /**
      * JSON data to use.
      */
-    json: string;
+    json: unknown;
 
     /**
      * A JavaScript variable name for the binding.
@@ -425,6 +503,18 @@ export namespace SettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'kv_namespace';
+  }
+
+  export interface WorkersBindingKindMedia {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'media';
   }
 
   export interface WorkersBindingKindMTLSCertificate {
@@ -495,6 +585,45 @@ export namespace SettingEditResponse {
     type: 'queue';
   }
 
+  export interface WorkersBindingKindRatelimit {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the rate limit namespace to bind to.
+     */
+    namespace_id: string;
+
+    /**
+     * The rate limit configuration.
+     */
+    simple: WorkersBindingKindRatelimit.Simple;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ratelimit';
+  }
+
+  export namespace WorkersBindingKindRatelimit {
+    /**
+     * The rate limit configuration.
+     */
+    export interface Simple {
+      /**
+       * The limit (requests per period).
+       */
+      limit: number;
+
+      /**
+       * The period in seconds.
+       */
+      period: number;
+    }
+  }
+
   export interface WorkersBindingKindR2Bucket {
     /**
      * R2 bucket to bind to.
@@ -516,7 +645,7 @@ export namespace SettingEditResponse {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -573,6 +702,11 @@ export namespace SettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'service';
+
+    /**
+     * Entrypoint to invoke on the target Worker.
+     */
+    entrypoint?: string;
 
     /**
      * Optional environment if the Worker utilizes one.
@@ -647,6 +781,23 @@ export namespace SettingEditResponse {
      * The kind of resource that the binding provides.
      */
     type: 'secrets_store_secret';
+  }
+
+  export interface WorkersBindingKindFlagship {
+    /**
+     * ID of the Flagship app to bind to for feature flag evaluation.
+     */
+    app_id: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'flagship';
   }
 
   export interface WorkersBindingKindSecretKey {
@@ -728,6 +879,46 @@ export namespace SettingEditResponse {
     type: 'wasm_module';
   }
 
+  export interface WorkersBindingKindVPCService {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the VPC service to bind to.
+     */
+    service_id: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_service';
+  }
+
+  export interface WorkersBindingKindVPCNetwork {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_network';
+
+    /**
+     * Identifier of the network to bind to. Only "cf1:network" is currently supported.
+     * Mutually exclusive with tunnel_id.
+     */
+    network_id?: string;
+
+    /**
+     * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
+     */
+    tunnel_id?: string;
+  }
+
   /**
    * Limits to apply for this Worker.
    */
@@ -736,6 +927,11 @@ export namespace SettingEditResponse {
      * The amount of CPU time this Worker can use in milliseconds.
      */
     cpu_ms?: number;
+
+    /**
+     * The number of subrequests this Worker can make per request.
+     */
+    subrequests?: number;
   }
 
   /**
@@ -757,6 +953,11 @@ export namespace SettingEditResponse {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces | null;
   }
 
   export namespace Observability {
@@ -788,6 +989,31 @@ export namespace SettingEditResponse {
 
       /**
        * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
        */
       persist?: boolean;
     }
@@ -894,6 +1120,11 @@ export namespace SettingEditResponse {
   }
 }
 
+/**
+ * Script and version settings for Workers for Platforms namespace scripts. Same as
+ * script-and-version-settings-item but without annotations, which are not
+ * supported for namespace scripts.
+ */
 export interface SettingGetResponse {
   /**
    * List of bindings attached to a Worker. You can find more about bindings on our
@@ -902,6 +1133,8 @@ export interface SettingGetResponse {
    */
   bindings?: Array<
     | SettingGetResponse.WorkersBindingKindAI
+    | SettingGetResponse.WorkersBindingKindAISearch
+    | SettingGetResponse.WorkersBindingKindAISearchNamespace
     | SettingGetResponse.WorkersBindingKindAnalyticsEngine
     | SettingGetResponse.WorkersBindingKindAssets
     | SettingGetResponse.WorkersBindingKindBrowser
@@ -914,10 +1147,12 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindImages
     | SettingGetResponse.WorkersBindingKindJson
     | SettingGetResponse.WorkersBindingKindKVNamespace
+    | SettingGetResponse.WorkersBindingKindMedia
     | SettingGetResponse.WorkersBindingKindMTLSCertificate
     | SettingGetResponse.WorkersBindingKindPlainText
     | SettingGetResponse.WorkersBindingKindPipelines
     | SettingGetResponse.WorkersBindingKindQueue
+    | SettingGetResponse.WorkersBindingKindRatelimit
     | SettingGetResponse.WorkersBindingKindR2Bucket
     | SettingGetResponse.WorkersBindingKindSecretText
     | SettingGetResponse.WorkersBindingKindSendEmail
@@ -926,9 +1161,12 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersBindingKindVectorize
     | SettingGetResponse.WorkersBindingKindVersionMetadata
     | SettingGetResponse.WorkersBindingKindSecretsStoreSecret
+    | SettingGetResponse.WorkersBindingKindFlagship
     | SettingGetResponse.WorkersBindingKindSecretKey
     | SettingGetResponse.WorkersBindingKindWorkflow
     | SettingGetResponse.WorkersBindingKindWasmModule
+    | SettingGetResponse.WorkersBindingKindVPCService
+    | SettingGetResponse.WorkersBindingKindVPCNetwork
   >;
 
   /**
@@ -1003,6 +1241,50 @@ export namespace SettingGetResponse {
     type: 'ai';
   }
 
+  export interface WorkersBindingKindAISearch {
+    /**
+     * The user-chosen instance name. Must exist at deploy time. The worker can search,
+     * chat, update, and manage items/jobs on this instance.
+     */
+    instance_name: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ai_search';
+
+    /**
+     * The namespace the instance belongs to. Defaults to "default" if omitted.
+     * Customers who don't use namespaces can simply omit this field.
+     */
+    namespace?: string;
+  }
+
+  export interface WorkersBindingKindAISearchNamespace {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The user-chosen namespace name. Must exist before deploy -- Wrangler handles
+     * auto-creation on deploy failure (R2 bucket pattern). The "default" namespace is
+     * auto-created by config-api for new accounts. Grants full access (CRUD + search +
+     * chat) to all instances within the namespace.
+     */
+    namespace: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ai_search_namespace';
+  }
+
   export interface WorkersBindingKindAnalyticsEngine {
     /**
      * The name of the dataset to bind to.
@@ -1048,7 +1330,7 @@ export namespace SettingGetResponse {
     /**
      * Identifier of the D1 database to bind to.
      */
-    id: string;
+    database_id: string;
 
     /**
      * A JavaScript variable name for the binding.
@@ -1059,6 +1341,11 @@ export namespace SettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'd1';
+
+    /**
+     * @deprecated This property has been renamed to `database_id`.
+     */
+    id?: string;
   }
 
   export interface WorkersBindingKindDataBlob {
@@ -1110,7 +1397,7 @@ export namespace SettingGetResponse {
        * Pass information from the Dispatch Worker to the Outbound Worker through the
        * parameters.
        */
-      params?: Array<string>;
+      params?: Array<Outbound.Param>;
 
       /**
        * Outbound worker.
@@ -1119,10 +1406,22 @@ export namespace SettingGetResponse {
     }
 
     export namespace Outbound {
+      export interface Param {
+        /**
+         * Name of the parameter.
+         */
+        name: string;
+      }
+
       /**
        * Outbound worker.
        */
       export interface Worker {
+        /**
+         * Entrypoint to invoke on the outbound worker.
+         */
+        entrypoint?: string;
+
         /**
          * Environment of the outbound worker.
          */
@@ -1151,6 +1450,11 @@ export namespace SettingGetResponse {
      * The exported class name of the Durable Object.
      */
     class_name?: string;
+
+    /**
+     * The dispatch namespace the Durable Object script belongs to.
+     */
+    dispatch_namespace?: string;
 
     /**
      * The environment of the script_name to bind to.
@@ -1228,7 +1532,7 @@ export namespace SettingGetResponse {
     /**
      * JSON data to use.
      */
-    json: string;
+    json: unknown;
 
     /**
      * A JavaScript variable name for the binding.
@@ -1256,6 +1560,18 @@ export namespace SettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'kv_namespace';
+  }
+
+  export interface WorkersBindingKindMedia {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'media';
   }
 
   export interface WorkersBindingKindMTLSCertificate {
@@ -1326,6 +1642,45 @@ export namespace SettingGetResponse {
     type: 'queue';
   }
 
+  export interface WorkersBindingKindRatelimit {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the rate limit namespace to bind to.
+     */
+    namespace_id: string;
+
+    /**
+     * The rate limit configuration.
+     */
+    simple: WorkersBindingKindRatelimit.Simple;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ratelimit';
+  }
+
+  export namespace WorkersBindingKindRatelimit {
+    /**
+     * The rate limit configuration.
+     */
+    export interface Simple {
+      /**
+       * The limit (requests per period).
+       */
+      limit: number;
+
+      /**
+       * The period in seconds.
+       */
+      period: number;
+    }
+  }
+
   export interface WorkersBindingKindR2Bucket {
     /**
      * R2 bucket to bind to.
@@ -1347,7 +1702,7 @@ export namespace SettingGetResponse {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -1404,6 +1759,11 @@ export namespace SettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'service';
+
+    /**
+     * Entrypoint to invoke on the target Worker.
+     */
+    entrypoint?: string;
 
     /**
      * Optional environment if the Worker utilizes one.
@@ -1478,6 +1838,23 @@ export namespace SettingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'secrets_store_secret';
+  }
+
+  export interface WorkersBindingKindFlagship {
+    /**
+     * ID of the Flagship app to bind to for feature flag evaluation.
+     */
+    app_id: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'flagship';
   }
 
   export interface WorkersBindingKindSecretKey {
@@ -1559,6 +1936,46 @@ export namespace SettingGetResponse {
     type: 'wasm_module';
   }
 
+  export interface WorkersBindingKindVPCService {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the VPC service to bind to.
+     */
+    service_id: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_service';
+  }
+
+  export interface WorkersBindingKindVPCNetwork {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_network';
+
+    /**
+     * Identifier of the network to bind to. Only "cf1:network" is currently supported.
+     * Mutually exclusive with tunnel_id.
+     */
+    network_id?: string;
+
+    /**
+     * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
+     */
+    tunnel_id?: string;
+  }
+
   /**
    * Limits to apply for this Worker.
    */
@@ -1567,6 +1984,11 @@ export namespace SettingGetResponse {
      * The amount of CPU time this Worker can use in milliseconds.
      */
     cpu_ms?: number;
+
+    /**
+     * The number of subrequests this Worker can make per request.
+     */
+    subrequests?: number;
   }
 
   /**
@@ -1588,6 +2010,11 @@ export namespace SettingGetResponse {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces | null;
   }
 
   export namespace Observability {
@@ -1619,6 +2046,31 @@ export namespace SettingGetResponse {
 
       /**
        * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
        */
       persist?: boolean;
     }
@@ -1732,12 +2184,19 @@ export interface SettingEditParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Script and version settings for Workers for Platforms namespace
+   * scripts. Same as script-and-version-settings-item but without annotations, which
+   * are not supported for namespace scripts.
    */
   settings?: SettingEditParams.Settings;
 }
 
 export namespace SettingEditParams {
+  /**
+   * Script and version settings for Workers for Platforms namespace scripts. Same as
+   * script-and-version-settings-item but without annotations, which are not
+   * supported for namespace scripts.
+   */
   export interface Settings {
     /**
      * List of bindings attached to a Worker. You can find more about bindings on our
@@ -1746,6 +2205,8 @@ export namespace SettingEditParams {
      */
     bindings?: Array<
       | Settings.WorkersBindingKindAI
+      | Settings.WorkersBindingKindAISearch
+      | Settings.WorkersBindingKindAISearchNamespace
       | Settings.WorkersBindingKindAnalyticsEngine
       | Settings.WorkersBindingKindAssets
       | Settings.WorkersBindingKindBrowser
@@ -1758,10 +2219,12 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindImages
       | Settings.WorkersBindingKindJson
       | Settings.WorkersBindingKindKVNamespace
+      | Settings.WorkersBindingKindMedia
       | Settings.WorkersBindingKindMTLSCertificate
       | Settings.WorkersBindingKindPlainText
       | Settings.WorkersBindingKindPipelines
       | Settings.WorkersBindingKindQueue
+      | Settings.WorkersBindingKindRatelimit
       | Settings.WorkersBindingKindR2Bucket
       | Settings.WorkersBindingKindSecretText
       | Settings.WorkersBindingKindSendEmail
@@ -1770,9 +2233,12 @@ export namespace SettingEditParams {
       | Settings.WorkersBindingKindVectorize
       | Settings.WorkersBindingKindVersionMetadata
       | Settings.WorkersBindingKindSecretsStoreSecret
+      | Settings.WorkersBindingKindFlagship
       | Settings.WorkersBindingKindSecretKey
       | Settings.WorkersBindingKindWorkflow
       | Settings.WorkersBindingKindWasmModule
+      | Settings.WorkersBindingKindVPCService
+      | Settings.WorkersBindingKindVPCNetwork
     >;
 
     /**
@@ -1852,6 +2318,50 @@ export namespace SettingEditParams {
       type: 'ai';
     }
 
+    export interface WorkersBindingKindAISearch {
+      /**
+       * The user-chosen instance name. Must exist at deploy time. The worker can search,
+       * chat, update, and manage items/jobs on this instance.
+       */
+      instance_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ai_search';
+
+      /**
+       * The namespace the instance belongs to. Defaults to "default" if omitted.
+       * Customers who don't use namespaces can simply omit this field.
+       */
+      namespace?: string;
+    }
+
+    export interface WorkersBindingKindAISearchNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The user-chosen namespace name. Must exist before deploy -- Wrangler handles
+       * auto-creation on deploy failure (R2 bucket pattern). The "default" namespace is
+       * auto-created by config-api for new accounts. Grants full access (CRUD + search +
+       * chat) to all instances within the namespace.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ai_search_namespace';
+    }
+
     export interface WorkersBindingKindAnalyticsEngine {
       /**
        * The name of the dataset to bind to.
@@ -1897,7 +2407,7 @@ export namespace SettingEditParams {
       /**
        * Identifier of the D1 database to bind to.
        */
-      id: string;
+      database_id: string;
 
       /**
        * A JavaScript variable name for the binding.
@@ -1908,6 +2418,11 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'd1';
+
+      /**
+       * @deprecated This property has been renamed to `database_id`.
+       */
+      id?: string;
     }
 
     export interface WorkersBindingKindDataBlob {
@@ -1959,7 +2474,7 @@ export namespace SettingEditParams {
          * Pass information from the Dispatch Worker to the Outbound Worker through the
          * parameters.
          */
-        params?: Array<string>;
+        params?: Array<Outbound.Param>;
 
         /**
          * Outbound worker.
@@ -1968,10 +2483,22 @@ export namespace SettingEditParams {
       }
 
       export namespace Outbound {
+        export interface Param {
+          /**
+           * Name of the parameter.
+           */
+          name: string;
+        }
+
         /**
          * Outbound worker.
          */
         export interface Worker {
+          /**
+           * Entrypoint to invoke on the outbound worker.
+           */
+          entrypoint?: string;
+
           /**
            * Environment of the outbound worker.
            */
@@ -2000,6 +2527,11 @@ export namespace SettingEditParams {
        * The exported class name of the Durable Object.
        */
       class_name?: string;
+
+      /**
+       * The dispatch namespace the Durable Object script belongs to.
+       */
+      dispatch_namespace?: string;
 
       /**
        * The environment of the script_name to bind to.
@@ -2077,7 +2609,7 @@ export namespace SettingEditParams {
       /**
        * JSON data to use.
        */
-      json: string;
+      json: unknown;
 
       /**
        * A JavaScript variable name for the binding.
@@ -2105,6 +2637,18 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'kv_namespace';
+    }
+
+    export interface WorkersBindingKindMedia {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'media';
     }
 
     export interface WorkersBindingKindMTLSCertificate {
@@ -2175,6 +2719,45 @@ export namespace SettingEditParams {
       type: 'queue';
     }
 
+    export interface WorkersBindingKindRatelimit {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Identifier of the rate limit namespace to bind to.
+       */
+      namespace_id: string;
+
+      /**
+       * The rate limit configuration.
+       */
+      simple: WorkersBindingKindRatelimit.Simple;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ratelimit';
+    }
+
+    export namespace WorkersBindingKindRatelimit {
+      /**
+       * The rate limit configuration.
+       */
+      export interface Simple {
+        /**
+         * The limit (requests per period).
+         */
+        limit: number;
+
+        /**
+         * The period in seconds.
+         */
+        period: number;
+      }
+    }
+
     export interface WorkersBindingKindR2Bucket {
       /**
        * R2 bucket to bind to.
@@ -2196,7 +2779,7 @@ export namespace SettingEditParams {
        * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
        * of the R2 bucket.
        */
-      jurisdiction?: 'eu' | 'fedramp';
+      jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
     }
 
     export interface WorkersBindingKindSecretText {
@@ -2258,6 +2841,11 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'service';
+
+      /**
+       * Entrypoint to invoke on the target Worker.
+       */
+      entrypoint?: string;
 
       /**
        * Optional environment if the Worker utilizes one.
@@ -2332,6 +2920,23 @@ export namespace SettingEditParams {
        * The kind of resource that the binding provides.
        */
       type: 'secrets_store_secret';
+    }
+
+    export interface WorkersBindingKindFlagship {
+      /**
+       * ID of the Flagship app to bind to for feature flag evaluation.
+       */
+      app_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'flagship';
     }
 
     export interface WorkersBindingKindSecretKey {
@@ -2425,6 +3030,46 @@ export namespace SettingEditParams {
       type: 'wasm_module';
     }
 
+    export interface WorkersBindingKindVPCService {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Identifier of the VPC service to bind to.
+       */
+      service_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vpc_service';
+    }
+
+    export interface WorkersBindingKindVPCNetwork {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vpc_network';
+
+      /**
+       * Identifier of the network to bind to. Only "cf1:network" is currently supported.
+       * Mutually exclusive with tunnel_id.
+       */
+      network_id?: string;
+
+      /**
+       * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
+       */
+      tunnel_id?: string;
+    }
+
     /**
      * Limits to apply for this Worker.
      */
@@ -2433,6 +3078,11 @@ export namespace SettingEditParams {
        * The amount of CPU time this Worker can use in milliseconds.
        */
       cpu_ms?: number;
+
+      /**
+       * The number of subrequests this Worker can make per request.
+       */
+      subrequests?: number;
     }
 
     export interface WorkersMultipleStepMigrations {
@@ -2472,6 +3122,11 @@ export namespace SettingEditParams {
        * Log settings for the Worker.
        */
       logs?: Observability.Logs | null;
+
+      /**
+       * Trace settings for the Worker.
+       */
+      traces?: Observability.Traces | null;
     }
 
     export namespace Observability {
@@ -2503,6 +3158,31 @@ export namespace SettingEditParams {
 
         /**
          * Whether log persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+      }
+
+      /**
+       * Trace settings for the Worker.
+       */
+      export interface Traces {
+        /**
+         * A list of destinations where traces will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether traces are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+         */
+        head_sampling_rate?: number | null;
+
+        /**
+         * Whether trace persistence is enabled for the Worker.
          */
         persist?: boolean;
       }

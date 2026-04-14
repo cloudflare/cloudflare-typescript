@@ -77,11 +77,12 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, bindings_inherit, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
         Core.maybeMultipartFormRequestOptions({
+          query: { bindings_inherit },
           body,
           ...options,
           __multipartSyntax: 'json',
@@ -332,6 +333,11 @@ export namespace ScriptUpdateResponse {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces | null;
   }
 
   export namespace Observability {
@@ -363,6 +369,31 @@ export namespace ScriptUpdateResponse {
 
       /**
        * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
        */
       persist?: boolean;
     }
@@ -580,6 +611,13 @@ export interface ScriptUpdateParams {
   metadata: ScriptUpdateParams.Metadata;
 
   /**
+   * Query param: When set to "strict", the upload will fail if any `inherit` type
+   * bindings cannot be resolved against the previous version of the script. Without
+   * this, unresolvable inherit bindings are silently dropped.
+   */
+  bindings_inherit?: 'strict';
+
+  /**
    * Body param: An array of modules (often JavaScript files) comprising a Worker
    * script. At least one module must be present and referenced in the metadata as
    * `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are:
@@ -608,6 +646,8 @@ export namespace ScriptUpdateParams {
      */
     bindings?: Array<
       | Metadata.WorkersBindingKindAI
+      | Metadata.WorkersBindingKindAISearch
+      | Metadata.WorkersBindingKindAISearchNamespace
       | Metadata.WorkersBindingKindAnalyticsEngine
       | Metadata.WorkersBindingKindAssets
       | Metadata.WorkersBindingKindBrowser
@@ -620,10 +660,12 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindImages
       | Metadata.WorkersBindingKindJson
       | Metadata.WorkersBindingKindKVNamespace
+      | Metadata.WorkersBindingKindMedia
       | Metadata.WorkersBindingKindMTLSCertificate
       | Metadata.WorkersBindingKindPlainText
       | Metadata.WorkersBindingKindPipelines
       | Metadata.WorkersBindingKindQueue
+      | Metadata.WorkersBindingKindRatelimit
       | Metadata.WorkersBindingKindR2Bucket
       | Metadata.WorkersBindingKindSecretText
       | Metadata.WorkersBindingKindSendEmail
@@ -632,9 +674,12 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindVectorize
       | Metadata.WorkersBindingKindVersionMetadata
       | Metadata.WorkersBindingKindSecretsStoreSecret
+      | Metadata.WorkersBindingKindFlagship
       | Metadata.WorkersBindingKindSecretKey
       | Metadata.WorkersBindingKindWorkflow
       | Metadata.WorkersBindingKindWasmModule
+      | Metadata.WorkersBindingKindVPCService
+      | Metadata.WorkersBindingKindVPCNetwork
     >;
 
     /**
@@ -797,6 +842,50 @@ export namespace ScriptUpdateParams {
       type: 'ai';
     }
 
+    export interface WorkersBindingKindAISearch {
+      /**
+       * The user-chosen instance name. Must exist at deploy time. The worker can search,
+       * chat, update, and manage items/jobs on this instance.
+       */
+      instance_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ai_search';
+
+      /**
+       * The namespace the instance belongs to. Defaults to "default" if omitted.
+       * Customers who don't use namespaces can simply omit this field.
+       */
+      namespace?: string;
+    }
+
+    export interface WorkersBindingKindAISearchNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The user-chosen namespace name. Must exist before deploy -- Wrangler handles
+       * auto-creation on deploy failure (R2 bucket pattern). The "default" namespace is
+       * auto-created by config-api for new accounts. Grants full access (CRUD + search +
+       * chat) to all instances within the namespace.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ai_search_namespace';
+    }
+
     export interface WorkersBindingKindAnalyticsEngine {
       /**
        * The name of the dataset to bind to.
@@ -842,7 +931,7 @@ export namespace ScriptUpdateParams {
       /**
        * Identifier of the D1 database to bind to.
        */
-      id: string;
+      database_id: string;
 
       /**
        * A JavaScript variable name for the binding.
@@ -853,6 +942,11 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'd1';
+
+      /**
+       * @deprecated This property has been renamed to `database_id`.
+       */
+      id?: string;
     }
 
     export interface WorkersBindingKindDataBlob {
@@ -904,7 +998,7 @@ export namespace ScriptUpdateParams {
          * Pass information from the Dispatch Worker to the Outbound Worker through the
          * parameters.
          */
-        params?: Array<string>;
+        params?: Array<Outbound.Param>;
 
         /**
          * Outbound worker.
@@ -913,10 +1007,22 @@ export namespace ScriptUpdateParams {
       }
 
       export namespace Outbound {
+        export interface Param {
+          /**
+           * Name of the parameter.
+           */
+          name: string;
+        }
+
         /**
          * Outbound worker.
          */
         export interface Worker {
+          /**
+           * Entrypoint to invoke on the outbound worker.
+           */
+          entrypoint?: string;
+
           /**
            * Environment of the outbound worker.
            */
@@ -945,6 +1051,11 @@ export namespace ScriptUpdateParams {
        * The exported class name of the Durable Object.
        */
       class_name?: string;
+
+      /**
+       * The dispatch namespace the Durable Object script belongs to.
+       */
+      dispatch_namespace?: string;
 
       /**
        * The environment of the script_name to bind to.
@@ -1022,7 +1133,7 @@ export namespace ScriptUpdateParams {
       /**
        * JSON data to use.
        */
-      json: string;
+      json: unknown;
 
       /**
        * A JavaScript variable name for the binding.
@@ -1050,6 +1161,18 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'kv_namespace';
+    }
+
+    export interface WorkersBindingKindMedia {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'media';
     }
 
     export interface WorkersBindingKindMTLSCertificate {
@@ -1120,6 +1243,45 @@ export namespace ScriptUpdateParams {
       type: 'queue';
     }
 
+    export interface WorkersBindingKindRatelimit {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Identifier of the rate limit namespace to bind to.
+       */
+      namespace_id: string;
+
+      /**
+       * The rate limit configuration.
+       */
+      simple: WorkersBindingKindRatelimit.Simple;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ratelimit';
+    }
+
+    export namespace WorkersBindingKindRatelimit {
+      /**
+       * The rate limit configuration.
+       */
+      export interface Simple {
+        /**
+         * The limit (requests per period).
+         */
+        limit: number;
+
+        /**
+         * The period in seconds.
+         */
+        period: number;
+      }
+    }
+
     export interface WorkersBindingKindR2Bucket {
       /**
        * R2 bucket to bind to.
@@ -1141,7 +1303,7 @@ export namespace ScriptUpdateParams {
        * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
        * of the R2 bucket.
        */
-      jurisdiction?: 'eu' | 'fedramp';
+      jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
     }
 
     export interface WorkersBindingKindSecretText {
@@ -1203,6 +1365,11 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'service';
+
+      /**
+       * Entrypoint to invoke on the target Worker.
+       */
+      entrypoint?: string;
 
       /**
        * Optional environment if the Worker utilizes one.
@@ -1277,6 +1444,23 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'secrets_store_secret';
+    }
+
+    export interface WorkersBindingKindFlagship {
+      /**
+       * ID of the Flagship app to bind to for feature flag evaluation.
+       */
+      app_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'flagship';
     }
 
     export interface WorkersBindingKindSecretKey {
@@ -1370,6 +1554,46 @@ export namespace ScriptUpdateParams {
       type: 'wasm_module';
     }
 
+    export interface WorkersBindingKindVPCService {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Identifier of the VPC service to bind to.
+       */
+      service_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vpc_service';
+    }
+
+    export interface WorkersBindingKindVPCNetwork {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vpc_network';
+
+      /**
+       * Identifier of the network to bind to. Only "cf1:network" is currently supported.
+       * Mutually exclusive with tunnel_id.
+       */
+      network_id?: string;
+
+      /**
+       * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
+       */
+      tunnel_id?: string;
+    }
+
     /**
      * Limits to apply for this Worker.
      */
@@ -1378,6 +1602,11 @@ export namespace ScriptUpdateParams {
        * The amount of CPU time this Worker can use in milliseconds.
        */
       cpu_ms?: number;
+
+      /**
+       * The number of subrequests this Worker can make per request.
+       */
+      subrequests?: number;
     }
 
     export interface WorkersMultipleStepMigrations {
@@ -1417,6 +1646,11 @@ export namespace ScriptUpdateParams {
        * Log settings for the Worker.
        */
       logs?: Observability.Logs | null;
+
+      /**
+       * Trace settings for the Worker.
+       */
+      traces?: Observability.Traces | null;
     }
 
     export namespace Observability {
@@ -1448,6 +1682,31 @@ export namespace ScriptUpdateParams {
 
         /**
          * Whether log persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+      }
+
+      /**
+       * Trace settings for the Worker.
+       */
+      export interface Traces {
+        /**
+         * A list of destinations where traces will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether traces are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+         */
+        head_sampling_rate?: number | null;
+
+        /**
+         * Whether trace persistence is enabled for the Worker.
          */
         persist?: boolean;
       }
