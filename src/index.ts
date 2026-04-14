@@ -24,7 +24,6 @@ import { AuditLogs } from './resources/audit-logs';
 import { BotManagement } from './resources/bot-management';
 import { ClientCertificates } from './resources/client-certificates';
 import { CustomNameservers } from './resources/custom-nameservers';
-import { CustomPages } from './resources/custom-pages';
 import { DCVDelegation } from './resources/dcv-delegation';
 import { Filters } from './resources/filters';
 import { Fraud } from './resources/fraud';
@@ -61,6 +60,7 @@ import { Connectivity } from './resources/connectivity/connectivity';
 import { ContentScanning } from './resources/content-scanning/content-scanning';
 import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
+import { CustomPages } from './resources/custom-pages/custom-pages';
 import { D1Resource } from './resources/d1/d1';
 import { Diagnostics } from './resources/diagnostics/diagnostics';
 import { DNSFirewall } from './resources/dns-firewall/dns-firewall';
@@ -68,7 +68,9 @@ import { DNS } from './resources/dns/dns';
 import { DurableObjects } from './resources/durable-objects/durable-objects';
 import { EmailRouting } from './resources/email-routing/email-routing';
 import { EmailSecurity } from './resources/email-security/email-security';
+import { EmailSending } from './resources/email-sending/email-sending';
 import { Firewall } from './resources/firewall/firewall';
+import { GoogleTagGateway } from './resources/google-tag-gateway/google-tag-gateway';
 import { Healthchecks } from './resources/healthchecks/healthchecks';
 import { Hostnames } from './resources/hostnames/hostnames';
 import { HyperdriveResource } from './resources/hyperdrive/hyperdrive';
@@ -98,6 +100,7 @@ import { RealtimeKit } from './resources/realtime-kit/realtime-kit';
 import { Registrar } from './resources/registrar/registrar';
 import { RequestTracers } from './resources/request-tracers/request-tracers';
 import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
+import { ResourceTagging } from './resources/resource-tagging/resource-tagging';
 import { Rules } from './resources/rules/rules';
 import { Rulesets } from './resources/rulesets/rulesets';
 import { RUM } from './resources/rum/rum';
@@ -114,6 +117,7 @@ import { Turnstile } from './resources/turnstile/turnstile';
 import { URLScanner } from './resources/url-scanner/url-scanner';
 import { User } from './resources/user/user';
 import { Vectorize } from './resources/vectorize/vectorize';
+import { VulnerabilityScanner } from './resources/vulnerability-scanner/vulnerability-scanner';
 import { WaitingRooms } from './resources/waiting-rooms/waiting-rooms';
 import { Web3 } from './resources/web3/web3';
 import { WorkersForPlatforms } from './resources/workers-for-platforms/workers-for-platforms';
@@ -293,6 +297,7 @@ export class Cloudflare extends Core.APIClient {
   dns: API.DNS = new API.DNS(this);
   emailSecurity: API.EmailSecurity = new API.EmailSecurity(this);
   emailRouting: API.EmailRouting = new API.EmailRouting(this);
+  emailSending: API.EmailSending = new API.EmailSending(this);
   filters: API.Filters = new API.Filters(this);
   firewall: API.Firewall = new API.Firewall(this);
   healthchecks: API.Healthchecks = new API.Healthchecks(this);
@@ -343,10 +348,12 @@ export class Cloudflare extends Core.APIClient {
   rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
   urlScanner: API.URLScanner = new API.URLScanner(this);
+  vulnerabilityScanner: API.VulnerabilityScanner = new API.VulnerabilityScanner(this);
   radar: API.Radar = new API.Radar(this);
   botManagement: API.BotManagement = new API.BotManagement(this);
   fraud: API.Fraud = new API.Fraud(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
+  googleTagGateway: API.GoogleTagGateway = new API.GoogleTagGateway(this);
   zaraz: API.Zaraz = new API.Zaraz(this);
   speed: API.Speed = new API.Speed(this);
   dcvDelegation: API.DCVDelegation = new API.DCVDelegation(this);
@@ -362,6 +369,7 @@ export class Cloudflare extends Core.APIClient {
   securityTXT: API.SecurityTXT = new API.SecurityTXT(this);
   workflows: API.Workflows = new API.Workflows(this);
   resourceSharing: API.ResourceSharing = new API.ResourceSharing(this);
+  resourceTagging: API.ResourceTagging = new API.ResourceTagging(this);
   leakedCredentialChecks: API.LeakedCredentialChecks = new API.LeakedCredentialChecks(this);
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
@@ -537,6 +545,7 @@ Cloudflare.DNSFirewall = DNSFirewall;
 Cloudflare.DNS = DNS;
 Cloudflare.EmailSecurity = EmailSecurity;
 Cloudflare.EmailRouting = EmailRouting;
+Cloudflare.EmailSending = EmailSending;
 Cloudflare.Filters = Filters;
 Cloudflare.Firewall = Firewall;
 Cloudflare.Healthchecks = Healthchecks;
@@ -587,10 +596,12 @@ Cloudflare.HyperdriveResource = HyperdriveResource;
 Cloudflare.RUM = RUM;
 Cloudflare.Vectorize = Vectorize;
 Cloudflare.URLScanner = URLScanner;
+Cloudflare.VulnerabilityScanner = VulnerabilityScanner;
 Cloudflare.Radar = Radar;
 Cloudflare.BotManagement = BotManagement;
 Cloudflare.Fraud = Fraud;
 Cloudflare.OriginPostQuantumEncryption = OriginPostQuantumEncryption;
+Cloudflare.GoogleTagGateway = GoogleTagGateway;
 Cloudflare.Zaraz = Zaraz;
 Cloudflare.Speed = Speed;
 Cloudflare.DCVDelegation = DCVDelegation;
@@ -606,6 +617,7 @@ Cloudflare.BotnetFeed = BotnetFeed;
 Cloudflare.SecurityTXT = SecurityTXT;
 Cloudflare.Workflows = Workflows;
 Cloudflare.ResourceSharing = ResourceSharing;
+Cloudflare.ResourceTagging = ResourceTagging;
 Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AbuseReports = AbuseReports;
@@ -696,6 +708,8 @@ export declare namespace Cloudflare {
   export { EmailSecurity as EmailSecurity };
 
   export { EmailRouting as EmailRouting };
+
+  export { EmailSending as EmailSending };
 
   export { Filters as Filters };
 
@@ -797,6 +811,8 @@ export declare namespace Cloudflare {
 
   export { URLScanner as URLScanner };
 
+  export { VulnerabilityScanner as VulnerabilityScanner };
+
   export { Radar as Radar };
 
   export { BotManagement as BotManagement };
@@ -804,6 +820,8 @@ export declare namespace Cloudflare {
   export { Fraud as Fraud };
 
   export { OriginPostQuantumEncryption as OriginPostQuantumEncryption };
+
+  export { GoogleTagGateway as GoogleTagGateway };
 
   export { Zaraz as Zaraz };
 
@@ -834,6 +852,8 @@ export declare namespace Cloudflare {
   export { Workflows as Workflows };
 
   export { ResourceSharing as ResourceSharing };
+
+  export { ResourceTagging as ResourceTagging };
 
   export { LeakedCredentialChecks as LeakedCredentialChecks };
 
