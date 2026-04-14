@@ -300,6 +300,11 @@ export interface ConfigurationDeleteResponse {
 }
 
 export interface ConfigurationEditResponse {
+  /**
+   * UUID.
+   */
+  id?: string;
+
   description?: string;
 
   title?: string;
