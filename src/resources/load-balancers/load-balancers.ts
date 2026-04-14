@@ -324,7 +324,7 @@ export interface FilterOptions {
   /**
    * If set true, disable notifications for this type of resource (pool or origin).
    */
-  disable?: boolean;
+  disable?: boolean | null;
 
   /**
    * If present, send notifications only for this health status (e.g. false for only
@@ -341,7 +341,7 @@ export interface FilterOptionsParam {
   /**
    * If set true, disable notifications for this type of resource (pool or origin).
    */
-  disable?: boolean;
+  disable?: boolean | null;
 
   /**
    * If present, send notifications only for this health status (e.g. false for only
@@ -732,6 +732,15 @@ export interface Origin {
   enabled?: boolean;
 
   /**
+   * Whether to flatten CNAME records for this origin, resolving them to A/AAAA
+   * records before returning to the client. When true (the default), the director
+   * resolves CNAME addresses to their underlying A/AAAA records. When false, the
+   * origin address is returned as a raw CNAME record without resolution. This
+   * setting mirrors the DNS API record flatten_cname setting.
+   */
+  flatten_cname?: boolean;
+
+  /**
    * The request header is used to pass additional information with an HTTP request.
    * Currently supported header is 'Host'.
    */
@@ -782,6 +791,15 @@ export interface OriginParam {
    * only be disabled for the current pool.
    */
   enabled?: boolean;
+
+  /**
+   * Whether to flatten CNAME records for this origin, resolving them to A/AAAA
+   * records before returning to the client. When true (the default), the director
+   * resolves CNAME addresses to their underlying A/AAAA records. When false, the
+   * origin address is returned as a raw CNAME record without resolution. This
+   * setting mirrors the DNS API record flatten_cname setting.
+   */
+  flatten_cname?: boolean;
 
   /**
    * The request header is used to pass additional information with an HTTP request.
