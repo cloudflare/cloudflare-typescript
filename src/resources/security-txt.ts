@@ -5,7 +5,8 @@ import * as Core from '../core';
 
 export class SecurityTXT extends APIResource {
   /**
-   * Updates security.txt
+   * Updates the security.txt file configuration for a zone, which provides security
+   * researchers with vulnerability reporting information.
    *
    * @example
    * ```ts
@@ -23,7 +24,8 @@ export class SecurityTXT extends APIResource {
   }
 
   /**
-   * Deletes security.txt
+   * Removes the security.txt file configuration for a zone. The
+   * /.well-known/security.txt endpoint will no longer be served.
    *
    * @example
    * ```ts
@@ -41,7 +43,8 @@ export class SecurityTXT extends APIResource {
   }
 
   /**
-   * Retrieves security.txt
+   * Retrieves the current security.txt file configuration for a zone, used for
+   * security vulnerability reporting.
    *
    * @example
    * ```ts
@@ -167,7 +170,7 @@ export interface SecurityTXTGetResponse {
 
   policy?: Array<string>;
 
-  preferredLanguages?: string;
+  preferred_languages?: string;
 }
 
 export interface SecurityTXTUpdateParams {
@@ -219,7 +222,7 @@ export interface SecurityTXTUpdateParams {
   /**
    * Body param
    */
-  preferredLanguages?: string;
+  preferred_languages?: string;
 }
 
 export interface SecurityTXTDeleteParams {
