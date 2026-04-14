@@ -2,6 +2,16 @@
 
 export { BrowserRendering } from './browser-rendering';
 export { Content, type ContentCreateResponse, type ContentCreateParams } from './content';
+export {
+  Crawl,
+  type CrawlCreateResponse,
+  type CrawlDeleteResponse,
+  type CrawlGetResponse,
+  type CrawlCreateParams,
+  type CrawlDeleteParams,
+  type CrawlGetParams,
+} from './crawl';
+export { Devtools } from './devtools/index';
 export { Json, type JsonCreateResponse, type JsonCreateParams } from './json';
 export { Links, type LinkCreateResponse, type LinkCreateParams } from './links';
 export { Markdown, type MarkdownCreateResponse, type MarkdownCreateParams } from './markdown';

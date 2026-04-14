@@ -33,7 +33,7 @@ export class Markdown extends APIResource {
 }
 
 /**
- * Markdown
+ * Markdown content.
  */
 export type MarkdownCreateResponse = string;
 
@@ -221,6 +221,9 @@ export declare namespace MarkdownCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -482,6 +485,9 @@ export declare namespace MarkdownCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;

@@ -9,11 +9,11 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource json', () => {
+describe('resource crawl', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.browserRendering.json.create({
+    const responsePromise = client.browserRendering.crawl.create({
       account_id: 'account_id',
-      html: '<h1>Hello World!</h1>',
+      url: 'https://example.com',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,9 +25,9 @@ describe('resource json', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.browserRendering.json.create({
+    const response = await client.browserRendering.crawl.create({
       account_id: 'account_id',
-      html: '<h1>Hello World!</h1>',
+      url: 'https://example.com',
       cacheTTL: 86400,
       actionTimeout: 120000,
       addScriptTag: [
@@ -61,24 +61,39 @@ describe('resource json', () => {
           url: 'url',
         },
       ],
-      custom_ai: [{ model: 'model', authorization: 'authorization' }],
+      crawlPurposes: ['search'],
+      depth: 1,
       emulateMediaType: 'emulateMediaType',
+      formats: ['html'],
       gotoOptions: {
         referer: 'referer',
         referrerPolicy: 'referrerPolicy',
         timeout: 60000,
         waitUntil: 'load',
       },
-      prompt: 'prompt',
+      jsonOptions: {
+        custom_ai: [{ model: 'model', authorization: 'authorization' }],
+        prompt: 'prompt',
+        response_format: {
+          type: 'type',
+          json_schema: { foo: 'string' },
+        },
+      },
+      limit: 1,
+      maxAge: 0,
+      modifiedSince: 1,
+      options: {
+        excludePatterns: ['x'],
+        includeExternalLinks: true,
+        includePatterns: ['x'],
+        includeSubdomains: true,
+      },
       rejectRequestPattern: ['string'],
       rejectResourceTypes: ['document'],
-      response_format: {
-        type: 'type',
-        json_schema: { foo: 'string' },
-      },
+      render: true,
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
-      userAgent: 'userAgent',
+      source: 'sitemaps',
       viewport: {
         height: 0,
         width: 0,
@@ -94,6 +109,42 @@ describe('resource json', () => {
         visible: true,
       },
       waitForTimeout: 120000,
+    });
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.browserRendering.crawl.delete('job_id', { account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.browserRendering.crawl.delete('job_id', { account_id: 'account_id' });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.browserRendering.crawl.get('x', { account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.browserRendering.crawl.get('x', {
+      account_id: 'account_id',
+      cacheTTL: 86400,
+      cursor: 0,
+      limit: 0,
+      status: 'queued',
     });
   });
 });

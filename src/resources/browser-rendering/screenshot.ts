@@ -33,7 +33,7 @@ export class Screenshot extends APIResource {
 
 export interface ScreenshotCreateResponse {
   /**
-   * Response status
+   * Response status.
    */
   success: boolean;
 
@@ -43,12 +43,12 @@ export interface ScreenshotCreateResponse {
 export namespace ScreenshotCreateResponse {
   export interface Error {
     /**
-     * Error code
+     * Error code.
      */
     code: number;
 
     /**
-     * Error Message
+     * Error message.
      */
     message: string;
   }
@@ -254,6 +254,9 @@ export declare namespace ScreenshotCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -566,6 +569,9 @@ export declare namespace ScreenshotCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;

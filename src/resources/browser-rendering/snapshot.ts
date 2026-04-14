@@ -35,12 +35,12 @@ export class Snapshot extends APIResource {
 
 export interface SnapshotCreateResponse {
   /**
-   * HTML content
+   * HTML content.
    */
   content: string;
 
   /**
-   * Base64 encoded image
+   * Base64 encoded image.
    */
   screenshot: string;
 }
@@ -235,6 +235,9 @@ export declare namespace SnapshotCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -532,6 +535,9 @@ export declare namespace SnapshotCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
