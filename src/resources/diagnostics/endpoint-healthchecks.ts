@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class EndpointHealthchecks extends APIResource {
@@ -21,7 +22,7 @@ export class EndpointHealthchecks extends APIResource {
     params: EndpointHealthcheckCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EndpointHealthcheckCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/diagnostics/endpoint-healthchecks`, {
         body,
@@ -51,7 +52,7 @@ export class EndpointHealthchecks extends APIResource {
     params: EndpointHealthcheckUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EndpointHealthcheckUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/diagnostics/endpoint-healthchecks/${id}`, {
         body,
@@ -72,10 +73,18 @@ export class EndpointHealthchecks extends APIResource {
    * ```
    */
   list(
-    params: EndpointHealthcheckListParams,
+    params?: EndpointHealthcheckListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EndpointHealthcheckListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<EndpointHealthcheckListResponse>;
+  list(
+    params: EndpointHealthcheckListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EndpointHealthcheckListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/diagnostics/endpoint-healthchecks`,
@@ -98,10 +107,19 @@ export class EndpointHealthchecks extends APIResource {
    */
   delete(
     id: string,
-    params: EndpointHealthcheckDeleteParams,
+    params?: EndpointHealthcheckDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EndpointHealthcheckDeleteResponse>;
+  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<EndpointHealthcheckDeleteResponse>;
+  delete(
+    id: string,
+    params: EndpointHealthcheckDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EndpointHealthcheckDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/diagnostics/endpoint-healthchecks/${id}`, options);
   }
 
@@ -119,10 +137,19 @@ export class EndpointHealthchecks extends APIResource {
    */
   get(
     id: string,
-    params: EndpointHealthcheckGetParams,
+    params?: EndpointHealthcheckGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EndpointHealthcheckGetResponse>;
+  get(id: string, options?: Core.RequestOptions): Core.APIPromise<EndpointHealthcheckGetResponse>;
+  get(
+    id: string,
+    params: EndpointHealthcheckGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EndpointHealthcheckGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/diagnostics/endpoint-healthchecks/${id}`,
@@ -286,7 +313,7 @@ export interface EndpointHealthcheckCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: type of check to perform
@@ -308,7 +335,7 @@ export interface EndpointHealthcheckUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: type of check to perform
@@ -330,21 +357,21 @@ export interface EndpointHealthcheckListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface EndpointHealthcheckDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface EndpointHealthcheckGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace EndpointHealthchecks {
