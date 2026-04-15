@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as SpeedAPI from './speed';
 
@@ -15,8 +16,16 @@ export class Availabilities extends APIResource {
    * );
    * ```
    */
-  list(params: AvailabilityListParams, options?: Core.RequestOptions): Core.APIPromise<Availability> {
-    const { zone_id } = params;
+  list(params?: AvailabilityListParams, options?: Core.RequestOptions): Core.APIPromise<Availability>;
+  list(options?: Core.RequestOptions): Core.APIPromise<Availability>;
+  list(
+    params: AvailabilityListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Availability> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/speed_api/availabilities`, options) as Core.APIPromise<{
         result: Availability;
@@ -134,7 +143,7 @@ export interface AvailabilityListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Availabilities {

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -18,7 +19,7 @@ export class OwnershipResource extends APIResource {
    * ```
    */
   create(params: OwnershipCreateParams, options?: Core.RequestOptions): Core.APIPromise<Ownership> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pcaps/ownership`, { body, ...options }) as Core.APIPromise<{
         result: Ownership;
@@ -39,10 +40,19 @@ export class OwnershipResource extends APIResource {
    */
   delete(
     ownershipId: string,
-    params: OwnershipDeleteParams,
+    params?: OwnershipDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void>;
+  delete(ownershipId: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    ownershipId: string,
+    params: OwnershipDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(ownershipId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/pcaps/ownership/${ownershipId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -63,10 +73,18 @@ export class OwnershipResource extends APIResource {
    * ```
    */
   get(
-    params: OwnershipGetParams,
+    params?: OwnershipGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OwnershipsSinglePage, Ownership>;
+  get(options?: Core.RequestOptions): Core.PagePromise<OwnershipsSinglePage, Ownership>;
+  get(
+    params: OwnershipGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<OwnershipsSinglePage, Ownership> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/pcaps/ownership`, OwnershipsSinglePage, options);
   }
 
@@ -85,7 +103,7 @@ export class OwnershipResource extends APIResource {
    * ```
    */
   validate(params: OwnershipValidateParams, options?: Core.RequestOptions): Core.APIPromise<Ownership> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pcaps/ownership/validate`, {
         body,
@@ -133,7 +151,7 @@ export interface OwnershipCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The full URI for the bucket. This field only applies to `full`
@@ -146,21 +164,21 @@ export interface OwnershipDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface OwnershipGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface OwnershipValidateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The full URI for the bucket. This field only applies to `full`

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
 import * as Core from '../core';
 
 export class BotManagement extends APIResource {
@@ -80,10 +81,18 @@ export class BotManagement extends APIResource {
    * ```
    */
   update(
-    params: BotManagementUpdateParams,
+    params?: BotManagementUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BotManagementUpdateResponse>;
+  update(options?: Core.RequestOptions): Core.APIPromise<BotManagementUpdateResponse>;
+  update(
+    params: BotManagementUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotManagementUpdateResponse> {
-    const { zone_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.update({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/bot_management`, { body, ...options }) as Core.APIPromise<{
         result: BotManagementUpdateResponse;
@@ -102,10 +111,18 @@ export class BotManagement extends APIResource {
    * ```
    */
   get(
-    params: BotManagementGetParams,
+    params?: BotManagementGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BotManagementGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<BotManagementGetResponse>;
+  get(
+    params: BotManagementGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotManagementGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/bot_management`, options) as Core.APIPromise<{
         result: BotManagementGetResponse;
@@ -683,7 +700,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
@@ -724,7 +741,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
@@ -784,7 +801,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
@@ -850,7 +867,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
@@ -906,7 +923,7 @@ export interface BotManagementGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace BotManagement {

@@ -26,7 +26,7 @@ export class Audit extends APIResource {
     params: AuditListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AuditListResponsesCursorPaginationAfter, AuditListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/logs/audit`,
       AuditListResponsesCursorPaginationAfter,
@@ -232,7 +232,7 @@ export interface AuditListParams extends CursorPaginationAfterParams {
   /**
    * Path param: The unique id that identifies the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Limits the returned results to logs older than the specified date.

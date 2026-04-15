@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -24,7 +25,7 @@ export class BlockSenders extends APIResource {
     params: BlockSenderCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email-security/settings/block_senders`, {
         body,
@@ -47,10 +48,20 @@ export class BlockSenders extends APIResource {
    * ```
    */
   list(
-    params: BlockSenderListParams,
+    params?: BlockSenderListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse>;
+  list(
+    params: BlockSenderListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/settings/block_senders`,
       BlockSenderListResponsesV4PagePaginationArray,
@@ -73,10 +84,19 @@ export class BlockSenders extends APIResource {
    */
   delete(
     patternId: number,
-    params: BlockSenderDeleteParams,
+    params?: BlockSenderDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BlockSenderDeleteResponse>;
+  delete(patternId: number, options?: Core.RequestOptions): Core.APIPromise<BlockSenderDeleteResponse>;
+  delete(
+    patternId: number,
+    params: BlockSenderDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(patternId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/email-security/settings/block_senders/${patternId}`,
@@ -102,7 +122,7 @@ export class BlockSenders extends APIResource {
     params: BlockSenderEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/email-security/settings/block_senders/${patternId}`, {
         body,
@@ -126,10 +146,19 @@ export class BlockSenders extends APIResource {
    */
   get(
     patternId: number,
-    params: BlockSenderGetParams,
+    params?: BlockSenderGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BlockSenderGetResponse>;
+  get(patternId: number, options?: Core.RequestOptions): Core.APIPromise<BlockSenderGetResponse>;
+  get(
+    patternId: number,
+    params: BlockSenderGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(patternId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/email-security/settings/block_senders/${patternId}`,
@@ -228,7 +257,7 @@ export interface BlockSenderCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -255,7 +284,7 @@ export interface BlockSenderListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The sorting direction.
@@ -289,14 +318,14 @@ export interface BlockSenderDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface BlockSenderEditParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -323,7 +352,7 @@ export interface BlockSenderGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 BlockSenders.BlockSenderListResponsesV4PagePaginationArray = BlockSenderListResponsesV4PagePaginationArray;

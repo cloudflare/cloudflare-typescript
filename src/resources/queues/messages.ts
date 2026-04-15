@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 
@@ -18,10 +19,19 @@ export class Messages extends APIResource {
    */
   ack(
     queueId: string,
-    params: MessageAckParams,
+    params?: MessageAckParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessageAckResponse>;
+  ack(queueId: string, options?: Core.RequestOptions): Core.APIPromise<MessageAckResponse>;
+  ack(
+    queueId: string,
+    params: MessageAckParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MessageAckResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.ack(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/ack`, {
         body,
@@ -43,10 +53,19 @@ export class Messages extends APIResource {
    */
   bulkPush(
     queueId: string,
-    params: MessageBulkPushParams,
+    params?: MessageBulkPushParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessageBulkPushResponse>;
+  bulkPush(queueId: string, options?: Core.RequestOptions): Core.APIPromise<MessageBulkPushResponse>;
+  bulkPush(
+    queueId: string,
+    params: MessageBulkPushParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MessageBulkPushResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.bulkPush(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/batch`, {
       body,
       ...options,
@@ -66,10 +85,19 @@ export class Messages extends APIResource {
    */
   pull(
     queueId: string,
-    params: MessagePullParams,
+    params?: MessagePullParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessagePullResponse>;
+  pull(queueId: string, options?: Core.RequestOptions): Core.APIPromise<MessagePullResponse>;
+  pull(
+    queueId: string,
+    params: MessagePullParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MessagePullResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.pull(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/pull`, {
         body,
@@ -91,10 +119,19 @@ export class Messages extends APIResource {
    */
   push(
     queueId: string,
-    params: MessagePushParams,
+    params?: MessagePushParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessagePushResponse>;
+  push(queueId: string, options?: Core.RequestOptions): Core.APIPromise<MessagePushResponse>;
+  push(
+    queueId: string,
+    params: MessagePushParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MessagePushResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.push(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/queues/${queueId}/messages`, { body, ...options });
   }
 }
@@ -171,7 +208,7 @@ export interface MessageAckParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -212,7 +249,7 @@ export interface MessageBulkPushParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The number of seconds to wait for attempting to deliver this batch
@@ -256,7 +293,7 @@ export interface MessagePullParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The maximum number of messages to include in a batch.
@@ -277,7 +314,7 @@ export declare namespace MessagePushParams {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -300,7 +337,7 @@ export declare namespace MessagePushParams {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param

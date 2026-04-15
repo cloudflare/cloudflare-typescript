@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as RulesAPI from './rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
@@ -16,10 +17,22 @@ export class Rules extends APIResource {
    */
   list(
     packageId: string,
-    params: RuleListParams,
+    params?: RuleListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse>;
+  list(
+    packageId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse>;
+  list(
+    packageId: string,
+    params: RuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(packageId, {}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/firewall/waf/packages/${packageId}/rules`,
       RuleListResponsesV4PagePaginationArray,
@@ -41,7 +54,7 @@ export class Rules extends APIResource {
     params: RuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/firewall/waf/packages/${packageId}/rules/${ruleId}`, {
         body,
@@ -61,10 +74,20 @@ export class Rules extends APIResource {
   get(
     packageId: string,
     ruleId: string,
-    params: RuleGetParams,
+    params?: RuleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleGetResponse>;
+  get(packageId: string, ruleId: string, options?: Core.RequestOptions): Core.APIPromise<RuleGetResponse>;
+  get(
+    packageId: string,
+    ruleId: string,
+    params: RuleGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(packageId, ruleId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/firewall/waf/packages/${packageId}/rules/${ruleId}`,
@@ -409,7 +432,7 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier of a schema.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Defines the public description of the WAF rule.
@@ -454,7 +477,7 @@ export interface RuleEditParams {
   /**
    * Path param: Defines an identifier of a schema.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Defines the mode/action of the rule when triggered. You must use a
@@ -467,7 +490,7 @@ export interface RuleGetParams {
   /**
    * Defines an identifier of a schema.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Rules.RuleListResponsesV4PagePaginationArray = RuleListResponsesV4PagePaginationArray;

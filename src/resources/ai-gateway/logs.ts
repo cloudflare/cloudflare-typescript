@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -21,10 +22,22 @@ export class Logs extends APIResource {
    */
   list(
     gatewayId: string,
-    params: LogListParams,
+    params?: LogListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LogListResponsesV4PagePaginationArray, LogListResponse>;
+  list(
+    gatewayId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LogListResponsesV4PagePaginationArray, LogListResponse>;
+  list(
+    gatewayId: string,
+    params: LogListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogListResponsesV4PagePaginationArray, LogListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(gatewayId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs`,
       LogListResponsesV4PagePaginationArray,
@@ -45,10 +58,19 @@ export class Logs extends APIResource {
    */
   delete(
     gatewayId: string,
-    params: LogDeleteParams,
+    params?: LogDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LogDeleteResponse>;
+  delete(gatewayId: string, options?: Core.RequestOptions): Core.APIPromise<LogDeleteResponse>;
+  delete(
+    gatewayId: string,
+    params: LogDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LogDeleteResponse> {
-    const { account_id, filters, limit, order_by, order_by_direction } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(gatewayId, {}, params);
+    }
+    const { account_id = this._client.accountId, filters, limit, order_by, order_by_direction } = params;
     return this._client.delete(`/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs`, {
       query: { filters, limit, order_by, order_by_direction },
       ...options,
@@ -70,10 +92,20 @@ export class Logs extends APIResource {
   edit(
     gatewayId: string,
     id: string,
-    params: LogEditParams,
+    params?: LogEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LogEditResponse>;
+  edit(gatewayId: string, id: string, options?: Core.RequestOptions): Core.APIPromise<LogEditResponse>;
+  edit(
+    gatewayId: string,
+    id: string,
+    params: LogEditParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LogEditResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.edit(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}`, {
         body,
@@ -97,10 +129,20 @@ export class Logs extends APIResource {
   get(
     gatewayId: string,
     id: string,
-    params: LogGetParams,
+    params?: LogGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LogGetResponse>;
+  get(gatewayId: string, id: string, options?: Core.RequestOptions): Core.APIPromise<LogGetResponse>;
+  get(
+    gatewayId: string,
+    id: string,
+    params: LogGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LogGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}`,
@@ -124,10 +166,20 @@ export class Logs extends APIResource {
   request(
     gatewayId: string,
     id: string,
-    params: LogRequestParams,
+    params?: LogRequestParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<unknown>;
+  request(gatewayId: string, id: string, options?: Core.RequestOptions): Core.APIPromise<unknown>;
+  request(
+    gatewayId: string,
+    id: string,
+    params: LogRequestParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.request(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}/request`,
       options,
@@ -149,10 +201,20 @@ export class Logs extends APIResource {
   response(
     gatewayId: string,
     id: string,
-    params: LogResponseParams,
+    params?: LogResponseParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<unknown>;
+  response(gatewayId: string, id: string, options?: Core.RequestOptions): Core.APIPromise<unknown>;
+  response(
+    gatewayId: string,
+    id: string,
+    params: LogResponseParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.response(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}/response`,
       options,
@@ -268,7 +330,7 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * @deprecated Query param
@@ -438,7 +500,7 @@ export interface LogDeleteParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -509,7 +571,7 @@ export interface LogEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -528,15 +590,15 @@ export interface LogEditParams {
 }
 
 export interface LogGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LogRequestParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LogResponseParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Logs.LogListResponsesV4PagePaginationArray = LogListResponsesV4PagePaginationArray;

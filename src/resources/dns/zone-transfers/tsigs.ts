@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -20,7 +21,7 @@ export class TSIGs extends APIResource {
    * ```
    */
   create(params: TSIGCreateParams, options?: Core.RequestOptions): Core.APIPromise<TSIG> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/tsigs`, {
         body,
@@ -47,7 +48,7 @@ export class TSIGs extends APIResource {
    * ```
    */
   update(tsigId: string, params: TSIGUpdateParams, options?: Core.RequestOptions): Core.APIPromise<TSIG> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, {
         body,
@@ -69,8 +70,16 @@ export class TSIGs extends APIResource {
    * }
    * ```
    */
-  list(params: TSIGListParams, options?: Core.RequestOptions): Core.PagePromise<TSIGsSinglePage, TSIG> {
-    const { account_id } = params;
+  list(params?: TSIGListParams, options?: Core.RequestOptions): Core.PagePromise<TSIGsSinglePage, TSIG>;
+  list(options?: Core.RequestOptions): Core.PagePromise<TSIGsSinglePage, TSIG>;
+  list(
+    params: TSIGListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TSIGsSinglePage, TSIG> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/secondary_dns/tsigs`, TSIGsSinglePage, options);
   }
 
@@ -87,10 +96,19 @@ export class TSIGs extends APIResource {
    */
   delete(
     tsigId: string,
-    params: TSIGDeleteParams,
+    params?: TSIGDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TSIGDeleteResponse>;
+  delete(tsigId: string, options?: Core.RequestOptions): Core.APIPromise<TSIGDeleteResponse>;
+  delete(
+    tsigId: string,
+    params: TSIGDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TSIGDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(tsigId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`,
@@ -110,8 +128,17 @@ export class TSIGs extends APIResource {
    * );
    * ```
    */
-  get(tsigId: string, params: TSIGGetParams, options?: Core.RequestOptions): Core.APIPromise<TSIG> {
-    const { account_id } = params;
+  get(tsigId: string, params?: TSIGGetParams, options?: Core.RequestOptions): Core.APIPromise<TSIG>;
+  get(tsigId: string, options?: Core.RequestOptions): Core.APIPromise<TSIG>;
+  get(
+    tsigId: string,
+    params: TSIGGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TSIG> {
+    if (isRequestOptions(params)) {
+      return this.get(tsigId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, options) as Core.APIPromise<{
         result: TSIG;
@@ -149,7 +176,7 @@ export interface TSIGCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: TSIG algorithm.
@@ -171,7 +198,7 @@ export interface TSIGUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: TSIG algorithm.
@@ -190,15 +217,15 @@ export interface TSIGUpdateParams {
 }
 
 export interface TSIGListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TSIGDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TSIGGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 TSIGs.TSIGsSinglePage = TSIGsSinglePage;

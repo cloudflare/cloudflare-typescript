@@ -20,7 +20,11 @@ export class Ownership extends APIResource {
     params: OwnershipCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OwnershipCreateResponse | null> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -62,7 +66,11 @@ export class Ownership extends APIResource {
     params: OwnershipValidateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OwnershipValidation | null> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

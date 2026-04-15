@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import { SinglePage } from '../../../../../pagination';
 
@@ -29,7 +30,7 @@ export class Tags extends APIResource {
     params: TagUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<TagUpdateResponsesSinglePage, TagUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/tags`,
       TagUpdateResponsesSinglePage,
@@ -55,10 +56,24 @@ export class Tags extends APIResource {
   list(
     dispatchNamespace: string,
     scriptName: string,
-    params: TagListParams,
+    params?: TagListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TagListResponsesSinglePage, TagListResponse>;
+  list(
+    dispatchNamespace: string,
+    scriptName: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TagListResponsesSinglePage, TagListResponse>;
+  list(
+    dispatchNamespace: string,
+    scriptName: string,
+    params: TagListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<TagListResponsesSinglePage, TagListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(dispatchNamespace, scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/tags`,
       TagListResponsesSinglePage,
@@ -84,10 +99,26 @@ export class Tags extends APIResource {
     dispatchNamespace: string,
     scriptName: string,
     tag: string,
-    params: TagDeleteParams,
+    params?: TagDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TagDeleteResponse | null>;
+  delete(
+    dispatchNamespace: string,
+    scriptName: string,
+    tag: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TagDeleteResponse | null>;
+  delete(
+    dispatchNamespace: string,
+    scriptName: string,
+    tag: string,
+    params: TagDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TagDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(dispatchNamespace, scriptName, tag, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/tags/${tag}`,
@@ -111,7 +142,7 @@ export interface TagUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Tags associated with the Worker.
@@ -123,14 +154,14 @@ export interface TagListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TagDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Tags.TagUpdateResponsesSinglePage = TagUpdateResponsesSinglePage;

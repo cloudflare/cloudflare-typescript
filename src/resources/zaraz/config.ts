@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as ZarazAPI from './zaraz';
 
@@ -29,7 +30,7 @@ export class Config extends APIResource {
    * ```
    */
   update(params: ConfigUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/settings/zaraz/config`, { body, ...options }) as Core.APIPromise<{
         result: Configuration;
@@ -49,8 +50,16 @@ export class Config extends APIResource {
    * });
    * ```
    */
-  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
-    const { zone_id } = params;
+  get(params?: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration>;
+  get(options?: Core.RequestOptions): Core.APIPromise<Configuration>;
+  get(
+    params: ConfigGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Configuration> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/zaraz/config`, options) as Core.APIPromise<{
         result: Configuration;
@@ -753,7 +762,7 @@ export interface ConfigUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Data layer compatibility mode enabled.
@@ -1445,7 +1454,7 @@ export interface ConfigGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Config {

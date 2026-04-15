@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as MagicTransitAPI from './magic-transit';
 
@@ -25,7 +26,11 @@ export class GRETunnels extends APIResource {
     params: GRETunnelCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelCreateResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget, ...body } = params;
+    const {
+      account_id = this._client.accountId,
+      'x-magic-new-hc-target': xMagicNewHcTarget,
+      ...body
+    } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/gre_tunnels`, {
         body,
@@ -64,7 +69,11 @@ export class GRETunnels extends APIResource {
     params: GRETunnelUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelUpdateResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget, ...body } = params;
+    const {
+      account_id = this._client.accountId,
+      'x-magic-new-hc-target': xMagicNewHcTarget,
+      ...body
+    } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/gre_tunnels/${greTunnelId}`, {
         body,
@@ -90,8 +99,16 @@ export class GRETunnels extends APIResource {
    *   });
    * ```
    */
-  list(params: GRETunnelListParams, options?: Core.RequestOptions): Core.APIPromise<GRETunnelListResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+  list(params?: GRETunnelListParams, options?: Core.RequestOptions): Core.APIPromise<GRETunnelListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<GRETunnelListResponse>;
+  list(
+    params: GRETunnelListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GRETunnelListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/gre_tunnels`, {
         ...options,
@@ -120,10 +137,19 @@ export class GRETunnels extends APIResource {
    */
   delete(
     greTunnelId: string,
-    params: GRETunnelDeleteParams,
+    params?: GRETunnelDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GRETunnelDeleteResponse>;
+  delete(greTunnelId: string, options?: Core.RequestOptions): Core.APIPromise<GRETunnelDeleteResponse>;
+  delete(
+    greTunnelId: string,
+    params: GRETunnelDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelDeleteResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(greTunnelId, {}, params);
+    }
+    const { account_id = this._client.accountId, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/gre_tunnels/${greTunnelId}`, {
         ...options,
@@ -154,7 +180,7 @@ export class GRETunnels extends APIResource {
     params: GRETunnelBulkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelBulkUpdateResponse> {
-    const { account_id, body, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    const { account_id = this._client.accountId, body, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/gre_tunnels`, {
         body: body,
@@ -182,10 +208,19 @@ export class GRETunnels extends APIResource {
    */
   get(
     greTunnelId: string,
-    params: GRETunnelGetParams,
+    params?: GRETunnelGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GRETunnelGetResponse>;
+  get(greTunnelId: string, options?: Core.RequestOptions): Core.APIPromise<GRETunnelGetResponse>;
+  get(
+    greTunnelId: string,
+    params: GRETunnelGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelGetResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    if (isRequestOptions(params)) {
+      return this.get(greTunnelId, {}, params);
+    }
+    const { account_id = this._client.accountId, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/gre_tunnels/${greTunnelId}`, {
         ...options,
@@ -1386,7 +1421,7 @@ export interface GRETunnelCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The IP address assigned to the Cloudflare side of the GRE tunnel.
@@ -1553,7 +1588,7 @@ export interface GRETunnelUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The IP address assigned to the Cloudflare side of the GRE tunnel.
@@ -1680,7 +1715,7 @@ export interface GRETunnelListParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: If true, the health check target in the response body will be
@@ -1693,7 +1728,7 @@ export interface GRETunnelDeleteParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: If true, the health check target in the response body will be
@@ -1706,7 +1741,7 @@ export interface GRETunnelBulkUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -1724,7 +1759,7 @@ export interface GRETunnelGetParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: If true, the health check target in the response body will be

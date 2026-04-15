@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 import { SubscriptionsSinglePage } from '../shared';
@@ -18,10 +19,18 @@ export class Subscriptions extends APIResource {
    * ```
    */
   create(
-    params: SubscriptionCreateParams,
+    params?: SubscriptionCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.Subscription>;
+  create(options?: Core.RequestOptions): Core.APIPromise<Shared.Subscription>;
+  create(
+    params: SubscriptionCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Shared.Subscription> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/subscriptions`, { body, ...options }) as Core.APIPromise<{
         result: Shared.Subscription;
@@ -46,7 +55,7 @@ export class Subscriptions extends APIResource {
     params: SubscriptionUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Shared.Subscription> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/subscriptions/${subscriptionIdentifier}`, {
         body,
@@ -69,10 +78,22 @@ export class Subscriptions extends APIResource {
    */
   delete(
     subscriptionIdentifier: string,
-    params: SubscriptionDeleteParams,
+    params?: SubscriptionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionDeleteResponse>;
+  delete(
+    subscriptionIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionDeleteResponse>;
+  delete(
+    subscriptionIdentifier: string,
+    params: SubscriptionDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(subscriptionIdentifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/subscriptions/${subscriptionIdentifier}`,
@@ -95,10 +116,18 @@ export class Subscriptions extends APIResource {
    * ```
    */
   get(
-    params: SubscriptionGetParams,
+    params?: SubscriptionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SubscriptionsSinglePage, Shared.Subscription>;
+  get(options?: Core.RequestOptions): Core.PagePromise<SubscriptionsSinglePage, Shared.Subscription>;
+  get(
+    params: SubscriptionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SubscriptionsSinglePage, Shared.Subscription> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/subscriptions`, SubscriptionsSinglePage, options);
   }
 }
@@ -114,7 +143,7 @@ export interface SubscriptionCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: How often the subscription is renewed automatically.
@@ -131,7 +160,7 @@ export interface SubscriptionUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: How often the subscription is renewed automatically.
@@ -148,14 +177,14 @@ export interface SubscriptionDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SubscriptionGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Subscriptions {

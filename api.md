@@ -6226,6 +6226,19 @@ Methods:
 - <code title="put /accounts/{account_id}/dlp/payload_log">client.zeroTrust.dlp.payloadLogs.<a href="./src/resources/zero-trust/dlp/payload-logs.ts">update</a>({ ...params }) -> PayloadLogUpdateResponse</code>
 - <code title="get /accounts/{account_id}/dlp/payload_log">client.zeroTrust.dlp.payloadLogs.<a href="./src/resources/zero-trust/dlp/payload-logs.ts">get</a>({ ...params }) -> PayloadLogGetResponse</code>
 
+### Settings
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/settings.ts">DLPSettings</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">update</a>({ ...params }) -> DLPSettings</code>
+- <code title="delete /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">delete</a>({ ...params }) -> DLPSettings</code>
+- <code title="patch /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">edit</a>({ ...params }) -> DLPSettings</code>
+- <code title="get /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">get</a>({ ...params }) -> DLPSettings</code>
+
 ### Email
 
 #### AccountMapping
@@ -7005,6 +7018,16 @@ Methods:
 
 # Radar
 
+## AgentReadiness
+
+Types:
+
+- <code><a href="./src/resources/radar/agent-readiness.ts">AgentReadinessSummaryResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/agent_readiness/summary/{dimension}">client.radar.agentReadiness.<a href="./src/resources/radar/agent-readiness.ts">summary</a>(dimension, { ...params }) -> AgentReadinessSummaryResponse</code>
+
 ## AI
 
 ### ToMarkdown
@@ -7094,6 +7117,18 @@ Methods:
 - <code title="get /radar/ai/bots/timeseries">client.radar.ai.timeseriesGroups.<a href="./src/resources/radar/ai/timeseries-groups.ts">timeseries</a>({ ...params }) -> TimeseriesGroupTimeseriesResponse</code>
 - <code title="get /radar/ai/bots/timeseries_groups/{dimension}">client.radar.ai.timeseriesGroups.<a href="./src/resources/radar/ai/timeseries-groups.ts">timeseriesGroups</a>(dimension, { ...params }) -> TimeseriesGroupTimeseriesGroupsResponse</code>
 - <code title="get /radar/ai/bots/timeseries_groups/user_agent">client.radar.ai.timeseriesGroups.<a href="./src/resources/radar/ai/timeseries-groups.ts">userAgent</a>({ ...params }) -> TimeseriesGroupUserAgentResponse</code>
+
+### MarkdownForAgents
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/markdown-for-agents.ts">MarkdownForAgentSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/ai/markdown-for-agents.ts">MarkdownForAgentTimeseriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/markdown_for_agents/summary">client.radar.ai.markdownForAgents.<a href="./src/resources/radar/ai/markdown-for-agents.ts">summary</a>({ ...params }) -> MarkdownForAgentSummaryResponse</code>
+- <code title="get /radar/ai/markdown_for_agents/timeseries">client.radar.ai.markdownForAgents.<a href="./src/resources/radar/ai/markdown-for-agents.ts">timeseries</a>({ ...params }) -> MarkdownForAgentTimeseriesResponse</code>
 
 ## CT
 

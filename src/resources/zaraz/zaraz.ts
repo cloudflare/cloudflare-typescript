@@ -41,7 +41,7 @@ export class Zaraz extends APIResource {
    * ```
    */
   update(params: ZarazUpdateParams, options?: Core.RequestOptions): Core.APIPromise<WorkflowAPI.Workflow> {
-    const { zone_id, workflow } = params;
+    const { zone_id = this._client.zoneId, workflow } = params;
     return (
       this._client.put(`/zones/${zone_id}/settings/zaraz/workflow`, {
         body: workflow,
@@ -133,7 +133,7 @@ export interface ZarazUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Zaraz workflow.

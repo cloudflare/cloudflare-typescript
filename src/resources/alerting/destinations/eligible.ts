@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Eligible extends APIResource {
@@ -15,8 +16,16 @@ export class Eligible extends APIResource {
    *   });
    * ```
    */
-  get(params: EligibleGetParams, options?: Core.RequestOptions): Core.APIPromise<EligibleGetResponse> {
-    const { account_id } = params;
+  get(params?: EligibleGetParams, options?: Core.RequestOptions): Core.APIPromise<EligibleGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<EligibleGetResponse>;
+  get(
+    params: EligibleGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EligibleGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/alerting/v3/destinations/eligible`,
@@ -52,7 +61,7 @@ export interface EligibleGetParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Eligible {

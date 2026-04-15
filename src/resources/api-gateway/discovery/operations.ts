@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as DiscoveryAPI from './discovery';
 import { DiscoveryOperationsV4PagePaginationArray } from './discovery';
@@ -21,10 +22,20 @@ export class Operations extends APIResource {
    * ```
    */
   list(
-    params: OperationListParams,
+    params?: OperationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DiscoveryOperationsV4PagePaginationArray, DiscoveryAPI.DiscoveryOperation>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DiscoveryOperationsV4PagePaginationArray, DiscoveryAPI.DiscoveryOperation>;
+  list(
+    params: OperationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DiscoveryOperationsV4PagePaginationArray, DiscoveryAPI.DiscoveryOperation> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/discovery/operations`,
       DiscoveryOperationsV4PagePaginationArray,
@@ -51,7 +62,7 @@ export class Operations extends APIResource {
     params: OperationBulkEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationBulkEditResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/api_gateway/discovery/operations`, {
         body: body,
@@ -77,7 +88,7 @@ export class Operations extends APIResource {
     params: OperationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/api_gateway/discovery/operations/${operationId}`, {
         body,
@@ -119,7 +130,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: When `true`, only return API Discovery results that are not saved
@@ -179,7 +190,7 @@ export interface OperationBulkEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -206,7 +217,7 @@ export interface OperationEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Mark state of operation in API Discovery

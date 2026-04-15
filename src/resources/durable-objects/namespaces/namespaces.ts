@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ObjectsAPI from './objects';
 import { DurableObject, DurableObjectsCursorPaginationAfter, ObjectListParams, Objects } from './objects';
@@ -13,10 +14,18 @@ export class Namespaces extends APIResource {
    * Returns the Durable Object namespaces owned by an account.
    */
   list(
-    params: NamespaceListParams,
+    params?: NamespaceListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace>;
+  list(options?: Core.RequestOptions): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace>;
+  list(
+    params: NamespaceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/durable_objects/namespaces`,
       NamespacesV4PagePaginationArray,
@@ -43,7 +52,7 @@ export interface NamespaceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;

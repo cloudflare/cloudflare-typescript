@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -10,10 +11,22 @@ export class Versions extends APIResource {
    */
   list(
     workflowName: string,
-    params: VersionListParams,
+    params?: VersionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VersionListResponsesV4PagePaginationArray, VersionListResponse>;
+  list(
+    workflowName: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VersionListResponsesV4PagePaginationArray, VersionListResponse>;
+  list(
+    workflowName: string,
+    params: VersionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<VersionListResponsesV4PagePaginationArray, VersionListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(workflowName, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workflows/${workflowName}/versions`,
       VersionListResponsesV4PagePaginationArray,
@@ -27,10 +40,24 @@ export class Versions extends APIResource {
   get(
     workflowName: string,
     versionId: string,
-    params: VersionGetParams,
+    params?: VersionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionGetResponse>;
+  get(
+    workflowName: string,
+    versionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionGetResponse>;
+  get(
+    workflowName: string,
+    versionId: string,
+    params: VersionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(workflowName, versionId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workflows/${workflowName}/versions/${versionId}`,
@@ -100,11 +127,11 @@ export interface VersionListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface VersionGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Versions.VersionListResponsesV4PagePaginationArray = VersionListResponsesV4PagePaginationArray;

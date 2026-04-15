@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as LogoMatchesAPI from './logo-matches';
 import {
@@ -37,10 +38,18 @@ export class BrandProtection extends APIResource {
    * Return new URL submissions
    */
   submit(
-    params: BrandProtectionSubmitParams,
+    params?: BrandProtectionSubmitParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BrandProtectionSubmitResponse>;
+  submit(options?: Core.RequestOptions): Core.APIPromise<BrandProtectionSubmitResponse>;
+  submit(
+    params: BrandProtectionSubmitParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BrandProtectionSubmitResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.submit({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.post(`/accounts/${account_id}/brand-protection/submit`, options);
   }
 
@@ -48,10 +57,20 @@ export class BrandProtection extends APIResource {
    * Return submitted URLs based on ID
    */
   urlInfo(
-    params: BrandProtectionURLInfoParams,
+    params?: BrandProtectionURLInfoParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BrandProtectionURLInfoResponsesSinglePage, BrandProtectionURLInfoResponse>;
+  urlInfo(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BrandProtectionURLInfoResponsesSinglePage, BrandProtectionURLInfoResponse>;
+  urlInfo(
+    params: BrandProtectionURLInfoParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<BrandProtectionURLInfoResponsesSinglePage, BrandProtectionURLInfoResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.urlInfo({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/brand-protection/url-info`,
       BrandProtectionURLInfoResponsesSinglePage,
@@ -233,11 +252,11 @@ export interface BrandProtectionSubmitResponse {
 export type BrandProtectionURLInfoResponse = { [key: string]: unknown };
 
 export interface BrandProtectionSubmitParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface BrandProtectionURLInfoParams {
-  account_id: string;
+  account_id?: string;
 }
 
 BrandProtection.BrandProtectionURLInfoResponsesSinglePage = BrandProtectionURLInfoResponsesSinglePage;

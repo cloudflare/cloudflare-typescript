@@ -28,7 +28,7 @@ export class Devices extends APIResource {
     params: DeviceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DeviceListResponsesV4PagePaginationArray, DeviceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dex/fleet-status/devices`,
       DeviceListResponsesV4PagePaginationArray,
@@ -324,7 +324,7 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Unique identifier for account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Time range beginning in ISO format

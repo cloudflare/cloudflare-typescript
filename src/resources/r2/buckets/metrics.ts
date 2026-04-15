@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Metrics extends APIResource {
@@ -15,8 +16,16 @@ export class Metrics extends APIResource {
    * });
    * ```
    */
-  list(params: MetricListParams, options?: Core.RequestOptions): Core.APIPromise<MetricListResponse> {
-    const { account_id } = params;
+  list(params?: MetricListParams, options?: Core.RequestOptions): Core.APIPromise<MetricListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<MetricListResponse>;
+  list(
+    params: MetricListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MetricListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/metrics`, options) as Core.APIPromise<{
         result: MetricListResponse;
@@ -160,7 +169,7 @@ export interface MetricListParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Metrics {

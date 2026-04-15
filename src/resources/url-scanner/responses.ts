@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Responses extends APIResource {
@@ -16,8 +17,17 @@ export class Responses extends APIResource {
    * );
    * ```
    */
-  get(responseId: string, params: ResponseGetParams, options?: Core.RequestOptions): Core.APIPromise<string> {
-    const { account_id } = params;
+  get(responseId: string, params?: ResponseGetParams, options?: Core.RequestOptions): Core.APIPromise<string>;
+  get(responseId: string, options?: Core.RequestOptions): Core.APIPromise<string>;
+  get(
+    responseId: string,
+    params: ResponseGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<string> {
+    if (isRequestOptions(params)) {
+      return this.get(responseId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/responses/${responseId}`, {
       ...options,
       headers: { Accept: 'text/plain', ...options?.headers },
@@ -34,7 +44,7 @@ export interface ResponseGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Responses {

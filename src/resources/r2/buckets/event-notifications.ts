@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class EventNotifications extends APIResource {
@@ -26,7 +27,7 @@ export class EventNotifications extends APIResource {
     params: EventNotificationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventNotificationUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id = this._client.accountId, jurisdiction, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration/queues/${queueId}`,
@@ -58,10 +59,19 @@ export class EventNotifications extends APIResource {
    */
   list(
     bucketName: string,
-    params: EventNotificationListParams,
+    params?: EventNotificationListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EventNotificationListResponse>;
+  list(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<EventNotificationListResponse>;
+  list(
+    bucketName: string,
+    params: EventNotificationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventNotificationListResponse> {
-    const { account_id, jurisdiction } = params;
+    if (isRequestOptions(params)) {
+      return this.list(bucketName, {}, params);
+    }
+    const { account_id = this._client.accountId, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration`, {
         ...options,
@@ -92,10 +102,24 @@ export class EventNotifications extends APIResource {
   delete(
     bucketName: string,
     queueId: string,
-    params: EventNotificationDeleteParams,
+    params?: EventNotificationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EventNotificationDeleteResponse>;
+  delete(
+    bucketName: string,
+    queueId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EventNotificationDeleteResponse>;
+  delete(
+    bucketName: string,
+    queueId: string,
+    params: EventNotificationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventNotificationDeleteResponse> {
-    const { account_id, jurisdiction } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(bucketName, queueId, {}, params);
+    }
+    const { account_id = this._client.accountId, jurisdiction } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration/queues/${queueId}`,
@@ -128,10 +152,24 @@ export class EventNotifications extends APIResource {
   get(
     bucketName: string,
     queueId: string,
-    params: EventNotificationGetParams,
+    params?: EventNotificationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EventNotificationGetResponse>;
+  get(
+    bucketName: string,
+    queueId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EventNotificationGetResponse>;
+  get(
+    bucketName: string,
+    queueId: string,
+    params: EventNotificationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventNotificationGetResponse> {
-    const { account_id, jurisdiction } = params;
+    if (isRequestOptions(params)) {
+      return this.get(bucketName, queueId, {}, params);
+    }
+    const { account_id = this._client.accountId, jurisdiction } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration/queues/${queueId}`,
@@ -273,7 +311,7 @@ export interface EventNotificationUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Array of rules to drive notifications.
@@ -318,7 +356,7 @@ export interface EventNotificationListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -331,7 +369,7 @@ export interface EventNotificationDeleteParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -344,7 +382,7 @@ export interface EventNotificationGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: The bucket jurisdiction.

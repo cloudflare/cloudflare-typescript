@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Presets extends APIResource {
@@ -29,7 +30,7 @@ export class Presets extends APIResource {
     params: PresetCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PresetCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/realtime/kit/${appId}/presets`, { body, ...options });
   }
 
@@ -51,7 +52,7 @@ export class Presets extends APIResource {
     params: PresetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PresetUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.patch(`/accounts/${account_id}/realtime/kit/${appId}/presets/${presetId}`, {
       body,
       ...options,
@@ -73,10 +74,24 @@ export class Presets extends APIResource {
   delete(
     appId: string,
     presetId: string,
-    params: PresetDeleteParams,
+    params?: PresetDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PresetDeleteResponse>;
+  delete(
+    appId: string,
+    presetId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PresetDeleteResponse>;
+  delete(
+    appId: string,
+    presetId: string,
+    params: PresetDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PresetDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(appId, presetId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/realtime/kit/${appId}/presets/${presetId}`, options);
   }
 
@@ -93,10 +108,19 @@ export class Presets extends APIResource {
    */
   get(
     appId: string,
-    params: PresetGetParams,
+    params?: PresetGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PresetGetResponse>;
+  get(appId: string, options?: Core.RequestOptions): Core.APIPromise<PresetGetResponse>;
+  get(
+    appId: string,
+    params: PresetGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PresetGetResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(appId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/presets`, { query, ...options });
   }
 
@@ -116,10 +140,24 @@ export class Presets extends APIResource {
   getPresetById(
     appId: string,
     presetId: string,
-    params: PresetGetPresetByIDParams,
+    params?: PresetGetPresetByIDParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PresetGetPresetByIDResponse>;
+  getPresetById(
+    appId: string,
+    presetId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PresetGetPresetByIDResponse>;
+  getPresetById(
+    appId: string,
+    presetId: string,
+    params: PresetGetPresetByIDParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PresetGetPresetByIDResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.getPresetById(appId, presetId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/presets/${presetId}`, options);
   }
 }
@@ -1895,7 +1933,7 @@ export interface PresetCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -2318,7 +2356,7 @@ export interface PresetUpdateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -2721,14 +2759,14 @@ export interface PresetDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PresetGetParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The page number from which you want your page search results to be
@@ -2746,7 +2784,7 @@ export interface PresetGetPresetByIDParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Presets {

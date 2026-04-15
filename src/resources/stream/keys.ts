@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -19,7 +20,7 @@ export class Keys extends APIResource {
    * ```
    */
   create(params: KeyCreateParams, options?: Core.RequestOptions): Core.APIPromise<Keys> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/keys`, {
         body: body,
@@ -41,10 +42,19 @@ export class Keys extends APIResource {
    */
   delete(
     identifier: string,
-    params: KeyDeleteParams,
+    params?: KeyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeyDeleteResponse>;
+  delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<KeyDeleteResponse>;
+  delete(
+    identifier: string,
+    params: KeyDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeyDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(identifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/stream/keys/${identifier}`, options) as Core.APIPromise<{
         result: KeyDeleteResponse;
@@ -66,10 +76,18 @@ export class Keys extends APIResource {
    * ```
    */
   get(
-    params: KeyGetParams,
+    params?: KeyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<KeyGetResponsesSinglePage, KeyGetResponse>;
+  get(options?: Core.RequestOptions): Core.PagePromise<KeyGetResponsesSinglePage, KeyGetResponse>;
+  get(
+    params: KeyGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<KeyGetResponsesSinglePage, KeyGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/stream/keys`, KeyGetResponsesSinglePage, options);
   }
 }
@@ -121,7 +139,7 @@ export interface KeyCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -133,14 +151,14 @@ export interface KeyDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface KeyGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Keys.KeyGetResponsesSinglePage = KeyGetResponsesSinglePage;

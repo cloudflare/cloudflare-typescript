@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as AppTypesAPI from './app-types';
 import { AppType, AppTypeListParams, AppTypes, AppTypesSinglePage } from './app-types';
@@ -162,8 +163,16 @@ export class Gateway extends APIResource {
    * });
    * ```
    */
-  create(params: GatewayCreateParams, options?: Core.RequestOptions): Core.APIPromise<GatewayCreateResponse> {
-    const { account_id } = params;
+  create(params?: GatewayCreateParams, options?: Core.RequestOptions): Core.APIPromise<GatewayCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<GatewayCreateResponse>;
+  create(
+    params: GatewayCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GatewayCreateResponse> {
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway`, options) as Core.APIPromise<{
         result: GatewayCreateResponse;
@@ -181,8 +190,16 @@ export class Gateway extends APIResource {
    * });
    * ```
    */
-  list(params: GatewayListParams, options?: Core.RequestOptions): Core.APIPromise<GatewayListResponse> {
-    const { account_id } = params;
+  list(params?: GatewayListParams, options?: Core.RequestOptions): Core.APIPromise<GatewayListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<GatewayListResponse>;
+  list(
+    params: GatewayListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GatewayListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway`, options) as Core.APIPromise<{
         result: GatewayListResponse;
@@ -226,11 +243,11 @@ export interface GatewayListResponse {
 }
 
 export interface GatewayCreateParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface GatewayListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Gateway.AuditSSHSettings = AuditSSHSettings;

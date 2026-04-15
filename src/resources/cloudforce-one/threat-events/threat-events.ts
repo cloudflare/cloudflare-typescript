@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as AttackersAPI from './attackers';
 import { AttackerListParams, AttackerListResponse, Attackers } from './attackers';
@@ -96,7 +97,7 @@ export class ThreatEvents extends APIResource {
     params: ThreatEventCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ThreatEventCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/cloudforce-one/events/create`, { body, ...options });
   }
 
@@ -116,10 +117,18 @@ export class ThreatEvents extends APIResource {
    * ```
    */
   list(
-    params: ThreatEventListParams,
+    params?: ThreatEventListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ThreatEventListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<ThreatEventListResponse>;
+  list(
+    params: ThreatEventListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ThreatEventListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events`, { query, ...options });
   }
 
@@ -152,7 +161,7 @@ export class ThreatEvents extends APIResource {
     params: ThreatEventBulkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ThreatEventBulkCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/cloudforce-one/events/create/bulk`, {
       body,
       ...options,
@@ -176,7 +185,7 @@ export class ThreatEvents extends APIResource {
     params: ThreatEventEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ThreatEventEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.patch(`/accounts/${account_id}/cloudforce-one/events/${eventId}`, {
       body,
       ...options,
@@ -191,10 +200,19 @@ export class ThreatEvents extends APIResource {
    */
   get(
     eventId: string,
-    params: ThreatEventGetParams,
+    params?: ThreatEventGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ThreatEventGetResponse>;
+  get(eventId: string, options?: Core.RequestOptions): Core.APIPromise<ThreatEventGetResponse>;
+  get(
+    eventId: string,
+    params: ThreatEventGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ThreatEventGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(eventId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events/${eventId}`, options);
   }
 }
@@ -503,7 +521,7 @@ export interface ThreatEventCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -613,7 +631,7 @@ export interface ThreatEventListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Cursor for pagination. When provided, filters are embedded in the
@@ -705,7 +723,7 @@ export interface ThreatEventBulkCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -790,7 +808,7 @@ export interface ThreatEventEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Dataset ID containing the event to update.
@@ -877,7 +895,7 @@ export interface ThreatEventGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 ThreatEvents.Attackers = Attackers;

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -18,7 +19,7 @@ export class Sinks extends APIResource {
    * ```
    */
   create(params: SinkCreateParams, options?: Core.RequestOptions): Core.APIPromise<SinkCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pipelines/v1/sinks`, {
         body,
@@ -41,10 +42,20 @@ export class Sinks extends APIResource {
    * ```
    */
   list(
-    params: SinkListParams,
+    params?: SinkListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SinkListResponsesV4PagePaginationArray, SinkListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SinkListResponsesV4PagePaginationArray, SinkListResponse>;
+  list(
+    params: SinkListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SinkListResponsesV4PagePaginationArray, SinkListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/pipelines/v1/sinks`,
       SinkListResponsesV4PagePaginationArray,
@@ -65,10 +76,19 @@ export class Sinks extends APIResource {
    */
   delete(
     sinkId: string,
-    params: SinkDeleteParams,
+    params?: SinkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SinkDeleteResponse>;
+  delete(sinkId: string, options?: Core.RequestOptions): Core.APIPromise<SinkDeleteResponse>;
+  delete(
+    sinkId: string,
+    params: SinkDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SinkDeleteResponse> {
-    const { account_id, force } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(sinkId, {}, params);
+    }
+    const { account_id = this._client.accountId, force } = params;
     return (
       this._client.delete(`/accounts/${account_id}/pipelines/v1/sinks/${sinkId}`, {
         query: { force },
@@ -90,10 +110,19 @@ export class Sinks extends APIResource {
    */
   get(
     sinkId: string,
-    params: SinkGetParams,
+    params?: SinkGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SinkGetResponse>;
+  get(sinkId: string, options?: Core.RequestOptions): Core.APIPromise<SinkGetResponse>;
+  get(
+    sinkId: string,
+    params: SinkGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SinkGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(sinkId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/pipelines/v1/sinks/${sinkId}`, options) as Core.APIPromise<{
         result: SinkGetResponse;
@@ -1176,7 +1205,7 @@ export interface SinkCreateParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Defines the name of the Sink.
@@ -1544,7 +1573,7 @@ export interface SinkListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1556,7 +1585,7 @@ export interface SinkDeleteParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Delete sink forcefully, including deleting any dependent pipelines.
@@ -1568,7 +1597,7 @@ export interface SinkGetParams {
   /**
    * Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Sinks.SinkListResponsesV4PagePaginationArray = SinkListResponsesV4PagePaginationArray;

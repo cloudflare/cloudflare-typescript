@@ -33,7 +33,11 @@ export class Settings extends APIResource {
     params: SettingUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CertificateSettingsSinglePage, CertificateSettings> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -82,7 +86,8 @@ export class Settings extends APIResource {
     if (isRequestOptions(params)) {
       return this.get({}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

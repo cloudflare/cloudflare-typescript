@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as DetectionsAPI from './detections';
 import { DetectionGetParams, DetectionGetResponse, Detections } from './detections';
@@ -56,10 +57,20 @@ export class Investigate extends APIResource {
    * ```
    */
   list(
-    params: InvestigateListParams,
+    params?: InvestigateListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InvestigateListResponsesV4PagePaginationArray, InvestigateListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InvestigateListResponsesV4PagePaginationArray, InvestigateListResponse>;
+  list(
+    params: InvestigateListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<InvestigateListResponsesV4PagePaginationArray, InvestigateListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/investigate`,
       InvestigateListResponsesV4PagePaginationArray,
@@ -82,10 +93,19 @@ export class Investigate extends APIResource {
    */
   get(
     postfixId: string,
-    params: InvestigateGetParams,
+    params?: InvestigateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InvestigateGetResponse>;
+  get(postfixId: string, options?: Core.RequestOptions): Core.APIPromise<InvestigateGetResponse>;
+  get(
+    postfixId: string,
+    params: InvestigateGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InvestigateGetResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(postfixId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}`, {
         query,
@@ -447,7 +467,7 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Determines if the message action log is included in the response.
@@ -567,7 +587,7 @@ export interface InvestigateGetParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: When true, search the submissions datastore only. When false or

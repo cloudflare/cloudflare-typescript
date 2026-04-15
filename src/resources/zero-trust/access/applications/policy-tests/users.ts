@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../../pagination';
 
@@ -21,10 +22,22 @@ export class Users extends APIResource {
    */
   list(
     policyTestId: string,
-    params: UserListParams,
+    params?: UserListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<UserListResponsesV4PagePaginationArray, UserListResponse>;
+  list(
+    policyTestId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<UserListResponsesV4PagePaginationArray, UserListResponse>;
+  list(
+    policyTestId: string,
+    params: UserListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<UserListResponsesV4PagePaginationArray, UserListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(policyTestId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/policy-tests/${policyTestId}/users`,
       UserListResponsesV4PagePaginationArray,
@@ -61,7 +74,7 @@ export interface UserListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter users by their policy evaluation status.

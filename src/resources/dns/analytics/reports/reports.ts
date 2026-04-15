@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as BytimesAPI from './bytimes';
 import { ByTime, BytimeGetParams, Bytimes } from './bytimes';
@@ -22,8 +23,16 @@ export class Reports extends APIResource {
    * });
    * ```
    */
-  get(params: ReportGetParams, options?: Core.RequestOptions): Core.APIPromise<Report> {
-    const { zone_id, ...query } = params;
+  get(params?: ReportGetParams, options?: Core.RequestOptions): Core.APIPromise<Report>;
+  get(options?: Core.RequestOptions): Core.APIPromise<Report>;
+  get(
+    params: ReportGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Report> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/dns_analytics/report`, { query, ...options }) as Core.APIPromise<{
         result: Report;
@@ -127,7 +136,7 @@ export interface ReportGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: A comma-separated list of dimensions to group results by.

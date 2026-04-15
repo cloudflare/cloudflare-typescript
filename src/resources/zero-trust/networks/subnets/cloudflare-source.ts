@@ -22,7 +22,7 @@ export class CloudflareSource extends APIResource {
     params: CloudflareSourceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WARPAPI.Subnet> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/zerotrust/subnets/cloudflare_source/${addressFamily}`, {
         body,
@@ -36,7 +36,7 @@ export interface CloudflareSourceUpdateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An optional description of the subnet.

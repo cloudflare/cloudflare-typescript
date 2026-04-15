@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
@@ -21,7 +22,7 @@ export class Targets extends APIResource {
    * ```
    */
   create(params: TargetCreateParams, options?: Core.RequestOptions): Core.APIPromise<TargetCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/infrastructure/targets`, {
         body,
@@ -51,7 +52,7 @@ export class Targets extends APIResource {
     params: TargetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TargetUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/infrastructure/targets/${targetId}`, {
         body,
@@ -75,10 +76,20 @@ export class Targets extends APIResource {
    * ```
    */
   list(
-    params: TargetListParams,
+    params?: TargetListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TargetListResponsesV4PagePaginationArray, TargetListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TargetListResponsesV4PagePaginationArray, TargetListResponse>;
+  list(
+    params: TargetListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<TargetListResponsesV4PagePaginationArray, TargetListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/infrastructure/targets`,
       TargetListResponsesV4PagePaginationArray,
@@ -97,8 +108,17 @@ export class Targets extends APIResource {
    * );
    * ```
    */
-  delete(targetId: string, params: TargetDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { account_id } = params;
+  delete(targetId: string, params?: TargetDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(targetId: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    targetId: string,
+    params: TargetDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
+    if (isRequestOptions(params)) {
+      return this.delete(targetId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/infrastructure/targets/${targetId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -110,8 +130,16 @@ export class Targets extends APIResource {
    *
    * @deprecated
    */
-  bulkDelete(params: TargetBulkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { account_id } = params;
+  bulkDelete(params?: TargetBulkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void>;
+  bulkDelete(options?: Core.RequestOptions): Core.APIPromise<void>;
+  bulkDelete(
+    params: TargetBulkDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
+    if (isRequestOptions(params)) {
+      return this.bulkDelete({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/infrastructure/targets/batch`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -132,7 +160,7 @@ export class Targets extends APIResource {
    * ```
    */
   bulkDeleteV2(params: TargetBulkDeleteV2Params, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/infrastructure/targets/batch_delete`, {
       body,
       ...options,
@@ -165,7 +193,7 @@ export class Targets extends APIResource {
     params: TargetBulkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<TargetBulkUpdateResponsesSinglePage, TargetBulkUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/infrastructure/targets/batch`,
       TargetBulkUpdateResponsesSinglePage,
@@ -187,10 +215,19 @@ export class Targets extends APIResource {
    */
   get(
     targetId: string,
-    params: TargetGetParams,
+    params?: TargetGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TargetGetResponse>;
+  get(targetId: string, options?: Core.RequestOptions): Core.APIPromise<TargetGetResponse>;
+  get(
+    targetId: string,
+    params: TargetGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TargetGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(targetId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/infrastructure/targets/${targetId}`,
@@ -598,7 +635,7 @@ export interface TargetCreateParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A non-unique field that refers to a target. Case insensitive,
@@ -669,7 +706,7 @@ export interface TargetUpdateParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A non-unique field that refers to a target. Case insensitive,
@@ -740,7 +777,7 @@ export interface TargetListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Date and time at which the target was created after (inclusive)
@@ -844,21 +881,21 @@ export interface TargetDeleteParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TargetBulkDeleteParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TargetBulkDeleteV2Params {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of target IDs to bulk delete
@@ -870,7 +907,7 @@ export interface TargetBulkUpdateParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -949,7 +986,7 @@ export interface TargetGetParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Targets.TargetListResponsesV4PagePaginationArray = TargetListResponsesV4PagePaginationArray;
