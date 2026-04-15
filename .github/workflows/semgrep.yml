@@ -7,6 +7,8 @@ jobs:
   semgrep:
     name: semgrep/ci
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
       SEMGREP_URL: https://cloudflare.semgrep.dev
