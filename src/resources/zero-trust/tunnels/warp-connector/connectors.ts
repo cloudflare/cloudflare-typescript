@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Connectors extends APIResource {
@@ -20,10 +21,24 @@ export class Connectors extends APIResource {
   get(
     tunnelId: string,
     connectorId: string,
-    params: ConnectorGetParams,
+    params?: ConnectorGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConnectorGetResponse>;
+  get(
+    tunnelId: string,
+    connectorId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConnectorGetResponse>;
+  get(
+    tunnelId: string,
+    connectorId: string,
+    params: ConnectorGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectorGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(tunnelId, connectorId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/warp_connector/${tunnelId}/connectors/${connectorId}`,
@@ -111,7 +126,7 @@ export interface ConnectorGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Connectors {

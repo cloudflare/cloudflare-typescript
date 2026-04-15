@@ -29,7 +29,7 @@ export class TracerouteTests extends APIResource {
     params: TracerouteTestGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Traceroute> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}`, {
         query,
@@ -61,7 +61,7 @@ export class TracerouteTests extends APIResource {
     params: TracerouteTestNetworkPathParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXAPI.NetworkPathResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/network-path`, {
         query,
@@ -92,7 +92,7 @@ export class TracerouteTests extends APIResource {
     params: TracerouteTestPercentilesParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TracerouteTestPercentilesResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/percentiles`, {
         query,
@@ -287,7 +287,7 @@ export interface TracerouteTestGetParams {
   /**
    * Path param: Unique identifier linked to an account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Start time for aggregate metrics in ISO ms
@@ -321,7 +321,7 @@ export interface TracerouteTestNetworkPathParams {
   /**
    * Path param: unique identifier linked to an account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Device to filter tracroute result runs to
@@ -348,7 +348,7 @@ export interface TracerouteTestPercentilesParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format

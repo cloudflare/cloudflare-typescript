@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
 import { SinglePage } from '../../../../pagination';
@@ -22,10 +23,22 @@ export class ActiveSessions extends APIResource {
    */
   list(
     userId: string,
-    params: ActiveSessionListParams,
+    params?: ActiveSessionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ActiveSessionListResponsesSinglePage, ActiveSessionListResponse>;
+  list(
+    userId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ActiveSessionListResponsesSinglePage, ActiveSessionListResponse>;
+  list(
+    userId: string,
+    params: ActiveSessionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ActiveSessionListResponsesSinglePage, ActiveSessionListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(userId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/users/${userId}/active_sessions`,
       ActiveSessionListResponsesSinglePage,
@@ -49,10 +62,24 @@ export class ActiveSessions extends APIResource {
   get(
     userId: string,
     nonce: string,
-    params: ActiveSessionGetParams,
+    params?: ActiveSessionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ActiveSessionGetResponse>;
+  get(
+    userId: string,
+    nonce: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ActiveSessionGetResponse>;
+  get(
+    userId: string,
+    nonce: string,
+    params: ActiveSessionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ActiveSessionGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(userId, nonce, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/access/users/${userId}/active_sessions/${nonce}`,
@@ -194,14 +221,14 @@ export interface ActiveSessionListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ActiveSessionGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 ActiveSessions.ActiveSessionListResponsesSinglePage = ActiveSessionListResponsesSinglePage;

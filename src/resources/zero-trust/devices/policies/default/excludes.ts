@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
 import { SplitTunnelExcludesSinglePage } from '../policies';
@@ -26,7 +27,7 @@ export class Excludes extends APIResource {
     params: ExcludeUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/exclude`,
       SplitTunnelExcludesSinglePage,
@@ -48,10 +49,20 @@ export class Excludes extends APIResource {
    * ```
    */
   get(
-    params: ExcludeGetParams,
+    params?: ExcludeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude>;
+  get(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude>;
+  get(
+    params: ExcludeGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/exclude`,
       SplitTunnelExcludesSinglePage,
@@ -64,7 +75,7 @@ export interface ExcludeUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -73,7 +84,7 @@ export interface ExcludeUpdateParams {
 }
 
 export interface ExcludeGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Excludes {

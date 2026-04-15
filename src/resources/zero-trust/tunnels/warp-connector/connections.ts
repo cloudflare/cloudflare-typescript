@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { SinglePage } from '../../../../pagination';
 
@@ -21,10 +22,22 @@ export class Connections extends APIResource {
    */
   get(
     tunnelId: string,
-    params: ConnectionGetParams,
+    params?: ConnectionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ConnectionGetResponsesSinglePage, ConnectionGetResponse>;
+  get(
+    tunnelId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ConnectionGetResponsesSinglePage, ConnectionGetResponse>;
+  get(
+    tunnelId: string,
+    params: ConnectionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ConnectionGetResponsesSinglePage, ConnectionGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(tunnelId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/warp_connector/${tunnelId}/connections`,
       ConnectionGetResponsesSinglePage,
@@ -113,7 +126,7 @@ export interface ConnectionGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Connections.ConnectionGetResponsesSinglePage = ConnectionGetResponsesSinglePage;

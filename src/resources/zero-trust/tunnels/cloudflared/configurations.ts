@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Configurations extends APIResource {
@@ -21,7 +22,7 @@ export class Configurations extends APIResource {
     params: ConfigurationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/configurations`, {
         body,
@@ -44,10 +45,19 @@ export class Configurations extends APIResource {
    */
   get(
     tunnelId: string,
-    params: ConfigurationGetParams,
+    params?: ConfigurationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigurationGetResponse>;
+  get(tunnelId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigurationGetResponse>;
+  get(
+    tunnelId: string,
+    params: ConfigurationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(tunnelId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/cfd_tunnel/${tunnelId}/configurations`,
@@ -687,7 +697,7 @@ export interface ConfigurationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The tunnel configuration and ingress rules.
@@ -978,7 +988,7 @@ export interface ConfigurationGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Configurations {

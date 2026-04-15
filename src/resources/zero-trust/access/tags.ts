@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -15,8 +16,16 @@ export class Tags extends APIResource {
    * });
    * ```
    */
-  create(params: TagCreateParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
-    const { account_id, ...body } = params;
+  create(params?: TagCreateParams, options?: Core.RequestOptions): Core.APIPromise<Tag>;
+  create(options?: Core.RequestOptions): Core.APIPromise<Tag>;
+  create(
+    params: TagCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Tag> {
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/tags`, { body, ...options }) as Core.APIPromise<{
         result: Tag;
@@ -39,7 +48,7 @@ export class Tags extends APIResource {
    * ```
    */
   update(tagName: string, params: TagUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/access/tags/${tagName}`, {
         body,
@@ -62,10 +71,18 @@ export class Tags extends APIResource {
    * ```
    */
   list(
-    params: TagListParams,
+    params?: TagListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TagsV4PagePaginationArray, Tag>;
+  list(options?: Core.RequestOptions): Core.PagePromise<TagsV4PagePaginationArray, Tag>;
+  list(
+    params: TagListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<TagsV4PagePaginationArray, Tag> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/access/tags`, TagsV4PagePaginationArray, {
       query,
       ...options,
@@ -85,10 +102,19 @@ export class Tags extends APIResource {
    */
   delete(
     tagName: string,
-    params: TagDeleteParams,
+    params?: TagDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TagDeleteResponse>;
+  delete(tagName: string, options?: Core.RequestOptions): Core.APIPromise<TagDeleteResponse>;
+  delete(
+    tagName: string,
+    params: TagDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TagDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(tagName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/access/tags/${tagName}`, options) as Core.APIPromise<{
         result: TagDeleteResponse;
@@ -107,8 +133,17 @@ export class Tags extends APIResource {
    * );
    * ```
    */
-  get(tagName: string, params: TagGetParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
-    const { account_id } = params;
+  get(tagName: string, params?: TagGetParams, options?: Core.RequestOptions): Core.APIPromise<Tag>;
+  get(tagName: string, options?: Core.RequestOptions): Core.APIPromise<Tag>;
+  get(
+    tagName: string,
+    params: TagGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Tag> {
+    if (isRequestOptions(params)) {
+      return this.get(tagName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/access/tags/${tagName}`, options) as Core.APIPromise<{
         result: Tag;
@@ -140,7 +175,7 @@ export interface TagCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the tag
@@ -152,7 +187,7 @@ export interface TagUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the tag
@@ -164,21 +199,21 @@ export interface TagListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TagDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TagGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Tags.TagsV4PagePaginationArray = TagsV4PagePaginationArray;

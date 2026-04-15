@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ProxyEndpointsAPI from './proxy-endpoints';
 import { SinglePage } from '../../../pagination';
@@ -19,7 +20,7 @@ export class ProxyEndpoints extends APIResource {
    * ```
    */
   create(params: ProxyEndpointCreateParams, options?: Core.RequestOptions): Core.APIPromise<ProxyEndpoint> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway/proxy_endpoints`, {
         body,
@@ -42,10 +43,18 @@ export class ProxyEndpoints extends APIResource {
    * ```
    */
   list(
-    params: ProxyEndpointListParams,
+    params?: ProxyEndpointListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ProxyEndpointsSinglePage, ProxyEndpoint>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ProxyEndpointsSinglePage, ProxyEndpoint>;
+  list(
+    params: ProxyEndpointListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ProxyEndpointsSinglePage, ProxyEndpoint> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/gateway/proxy_endpoints`,
       ProxyEndpointsSinglePage,
@@ -67,10 +76,22 @@ export class ProxyEndpoints extends APIResource {
    */
   delete(
     proxyEndpointId: string,
-    params: ProxyEndpointDeleteParams,
+    params?: ProxyEndpointDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProxyEndpointDeleteResponse>;
+  delete(
+    proxyEndpointId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProxyEndpointDeleteResponse>;
+  delete(
+    proxyEndpointId: string,
+    params: ProxyEndpointDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProxyEndpointDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(proxyEndpointId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`,
@@ -96,7 +117,7 @@ export class ProxyEndpoints extends APIResource {
     params: ProxyEndpointEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProxyEndpoint> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`, {
         body,
@@ -119,10 +140,19 @@ export class ProxyEndpoints extends APIResource {
    */
   get(
     proxyEndpointId: string,
-    params: ProxyEndpointGetParams,
+    params?: ProxyEndpointGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProxyEndpoint>;
+  get(proxyEndpointId: string, options?: Core.RequestOptions): Core.APIPromise<ProxyEndpoint>;
+  get(
+    proxyEndpointId: string,
+    params: ProxyEndpointGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProxyEndpoint> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(proxyEndpointId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`,
@@ -214,7 +244,7 @@ export declare namespace ProxyEndpointCreateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Specify the name of the proxy endpoint.
@@ -231,7 +261,7 @@ export declare namespace ProxyEndpointCreateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The proxy endpoint kind
@@ -246,18 +276,18 @@ export declare namespace ProxyEndpointCreateParams {
 }
 
 export interface ProxyEndpointListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ProxyEndpointDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ProxyEndpointEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the list of CIDRs to restrict ingress connections.
@@ -271,7 +301,7 @@ export interface ProxyEndpointEditParams {
 }
 
 export interface ProxyEndpointGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 ProxyEndpoints.ProxyEndpointsSinglePage = ProxyEndpointsSinglePage;

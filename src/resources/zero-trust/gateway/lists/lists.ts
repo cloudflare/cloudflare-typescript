@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ItemsAPI from './items';
 import { ItemListParams, ItemListResponse, ItemListResponsesSinglePage, Items } from './items';
@@ -22,7 +23,7 @@ export class Lists extends APIResource {
    * ```
    */
   create(params: ListCreateParams, options?: Core.RequestOptions): Core.APIPromise<ListCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway/lists`, { body, ...options }) as Core.APIPromise<{
         result: ListCreateResponse;
@@ -51,7 +52,7 @@ export class Lists extends APIResource {
     params: ListUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GatewayList> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body,
@@ -74,10 +75,18 @@ export class Lists extends APIResource {
    * ```
    */
   list(
-    params: ListListParams,
+    params?: ListListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<GatewayListsSinglePage, GatewayList>;
+  list(options?: Core.RequestOptions): Core.PagePromise<GatewayListsSinglePage, GatewayList>;
+  list(
+    params: ListListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<GatewayListsSinglePage, GatewayList> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/gateway/lists`, GatewayListsSinglePage, {
       query,
       ...options,
@@ -97,10 +106,19 @@ export class Lists extends APIResource {
    */
   delete(
     listId: string,
-    params: ListDeleteParams,
+    params?: ListDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListDeleteResponse>;
+  delete(listId: string, options?: Core.RequestOptions): Core.APIPromise<ListDeleteResponse>;
+  delete(
+    listId: string,
+    params: ListDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(listId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{
         result: ListDeleteResponse;
@@ -121,7 +139,7 @@ export class Lists extends APIResource {
    * ```
    */
   edit(listId: string, params: ListEditParams, options?: Core.RequestOptions): Core.APIPromise<GatewayList> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body,
@@ -142,8 +160,17 @@ export class Lists extends APIResource {
    *   );
    * ```
    */
-  get(listId: string, params: ListGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewayList> {
-    const { account_id } = params;
+  get(listId: string, params?: ListGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewayList>;
+  get(listId: string, options?: Core.RequestOptions): Core.APIPromise<GatewayList>;
+  get(
+    listId: string,
+    params: ListGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GatewayList> {
+    if (isRequestOptions(params)) {
+      return this.get(listId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{
         result: GatewayList;
@@ -241,7 +268,7 @@ export interface ListCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the list name.
@@ -282,7 +309,7 @@ export interface ListUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the list name.
@@ -318,7 +345,7 @@ export interface ListListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Specify the list type.
@@ -327,14 +354,14 @@ export interface ListListParams {
 }
 
 export interface ListDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ListEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Add items to the list.
@@ -362,7 +389,7 @@ export namespace ListEditParams {
 }
 
 export interface ListGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Lists.GatewayListsSinglePage = GatewayListsSinglePage;

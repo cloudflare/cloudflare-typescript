@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -20,7 +21,7 @@ export class Pacfiles extends APIResource {
    * ```
    */
   create(params: PacfileCreateParams, options?: Core.RequestOptions): Core.APIPromise<PacfileCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway/pacfiles`, { body, ...options }) as Core.APIPromise<{
         result: PacfileCreateResponse;
@@ -51,7 +52,7 @@ export class Pacfiles extends APIResource {
     params: PacfileUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PacfileUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/pacfiles/${pacfileId}`, {
         body,
@@ -74,10 +75,18 @@ export class Pacfiles extends APIResource {
    * ```
    */
   list(
-    params: PacfileListParams,
+    params?: PacfileListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PacfileListResponsesSinglePage, PacfileListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<PacfileListResponsesSinglePage, PacfileListResponse>;
+  list(
+    params: PacfileListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PacfileListResponsesSinglePage, PacfileListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/gateway/pacfiles`,
       PacfileListResponsesSinglePage,
@@ -99,10 +108,19 @@ export class Pacfiles extends APIResource {
    */
   delete(
     pacfileId: string,
-    params: PacfileDeleteParams,
+    params?: PacfileDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PacfileDeleteResponse>;
+  delete(pacfileId: string, options?: Core.RequestOptions): Core.APIPromise<PacfileDeleteResponse>;
+  delete(
+    pacfileId: string,
+    params: PacfileDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PacfileDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(pacfileId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/gateway/pacfiles/${pacfileId}`,
@@ -124,10 +142,19 @@ export class Pacfiles extends APIResource {
    */
   get(
     pacfileId: string,
-    params: PacfileGetParams,
+    params?: PacfileGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PacfileGetResponse>;
+  get(pacfileId: string, options?: Core.RequestOptions): Core.APIPromise<PacfileGetResponse>;
+  get(
+    pacfileId: string,
+    params: PacfileGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PacfileGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(pacfileId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/pacfiles/${pacfileId}`, options) as Core.APIPromise<{
         result: PacfileGetResponse;
@@ -271,7 +298,7 @@ export interface PacfileCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Actual contents of the PAC file
@@ -299,7 +326,7 @@ export interface PacfileUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Actual contents of the PAC file
@@ -318,15 +345,15 @@ export interface PacfileUpdateParams {
 }
 
 export interface PacfileListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PacfileDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PacfileGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Pacfiles.PacfileListResponsesSinglePage = PacfileListResponsesSinglePage;

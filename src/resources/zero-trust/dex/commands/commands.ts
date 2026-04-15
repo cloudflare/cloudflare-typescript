@@ -38,7 +38,7 @@ export class Commands extends APIResource {
    * ```
    */
   create(params: CommandCreateParams, options?: Core.RequestOptions): Core.APIPromise<CommandCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dex/commands`, { body, ...options }) as Core.APIPromise<{
         result: CommandCreateResponse;
@@ -68,7 +68,7 @@ export class Commands extends APIResource {
     params: CommandListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CommandListResponsesV4PagePagination, CommandListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dex/commands`,
       CommandListResponsesV4PagePagination,
@@ -153,7 +153,7 @@ export interface CommandCreateParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of device-level commands to execute
@@ -226,7 +226,7 @@ export interface CommandListParams extends V4PagePaginationParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Optionally filter executed commands by command type
