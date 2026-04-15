@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -19,7 +20,7 @@ export class Webhooks extends APIResource {
    * ```
    */
   create(params: WebhookCreateParams, options?: Core.RequestOptions): Core.APIPromise<WebhookCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/alerting/v3/destinations/webhooks`, {
         body,
@@ -49,7 +50,7 @@ export class Webhooks extends APIResource {
     params: WebhookUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`, {
         body,
@@ -72,10 +73,18 @@ export class Webhooks extends APIResource {
    * ```
    */
   list(
-    params: WebhookListParams,
+    params?: WebhookListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WebhooksSinglePage, Webhooks>;
+  list(options?: Core.RequestOptions): Core.PagePromise<WebhooksSinglePage, Webhooks>;
+  list(
+    params: WebhookListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<WebhooksSinglePage, Webhooks> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/alerting/v3/destinations/webhooks`,
       WebhooksSinglePage,
@@ -97,10 +106,19 @@ export class Webhooks extends APIResource {
    */
   delete(
     webhookId: string,
-    params: WebhookDeleteParams,
+    params?: WebhookDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WebhookDeleteResponse>;
+  delete(webhookId: string, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse>;
+  delete(
+    webhookId: string,
+    params: WebhookDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(webhookId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
       options,
@@ -119,8 +137,17 @@ export class Webhooks extends APIResource {
    *   );
    * ```
    */
-  get(webhookId: string, params: WebhookGetParams, options?: Core.RequestOptions): Core.APIPromise<Webhooks> {
-    const { account_id } = params;
+  get(webhookId: string, params?: WebhookGetParams, options?: Core.RequestOptions): Core.APIPromise<Webhooks>;
+  get(webhookId: string, options?: Core.RequestOptions): Core.APIPromise<Webhooks>;
+  get(
+    webhookId: string,
+    params: WebhookGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Webhooks> {
+    if (isRequestOptions(params)) {
+      return this.get(webhookId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
@@ -215,7 +242,7 @@ export interface WebhookCreateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the webhook destination. This will be included in the
@@ -240,7 +267,7 @@ export interface WebhookUpdateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the webhook destination. This will be included in the
@@ -265,21 +292,21 @@ export interface WebhookListParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WebhookDeleteParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WebhookGetParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Webhooks.WebhooksSinglePage = WebhooksSinglePage;
