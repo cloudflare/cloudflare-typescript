@@ -1,6 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import * as MarkdownForAgentsAPI from './markdown-for-agents';
+import {
+  MarkdownForAgentSummaryParams,
+  MarkdownForAgentSummaryResponse,
+  MarkdownForAgentTimeseriesParams,
+  MarkdownForAgentTimeseriesResponse,
+  MarkdownForAgents,
+} from './markdown-for-agents';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
   TimeseriesGroupSummaryParams,
@@ -46,6 +54,9 @@ export class AI extends APIResource {
   timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
     this._client,
   );
+  markdownForAgents: MarkdownForAgentsAPI.MarkdownForAgents = new MarkdownForAgentsAPI.MarkdownForAgents(
+    this._client,
+  );
 }
 
 AI.ToMarkdown = ToMarkdown;
@@ -53,6 +64,7 @@ AI.ToMarkdownCreateResponsesSinglePage = ToMarkdownCreateResponsesSinglePage;
 AI.Inference = Inference;
 AI.Bots = Bots;
 AI.TimeseriesGroups = TimeseriesGroups;
+AI.MarkdownForAgents = MarkdownForAgents;
 
 export declare namespace AI {
   export {
@@ -90,5 +102,13 @@ export declare namespace AI {
     type TimeseriesGroupTimeseriesParams as TimeseriesGroupTimeseriesParams,
     type TimeseriesGroupTimeseriesGroupsParams as TimeseriesGroupTimeseriesGroupsParams,
     type TimeseriesGroupUserAgentParams as TimeseriesGroupUserAgentParams,
+  };
+
+  export {
+    MarkdownForAgents as MarkdownForAgents,
+    type MarkdownForAgentSummaryResponse as MarkdownForAgentSummaryResponse,
+    type MarkdownForAgentTimeseriesResponse as MarkdownForAgentTimeseriesResponse,
+    type MarkdownForAgentSummaryParams as MarkdownForAgentSummaryParams,
+    type MarkdownForAgentTimeseriesParams as MarkdownForAgentTimeseriesParams,
   };
 }
