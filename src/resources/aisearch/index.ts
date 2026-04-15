@@ -23,6 +23,25 @@ export {
   type InstanceListResponsesV4PagePaginationArray,
 } from './instances/index';
 export {
+  Namespaces,
+  BaseNamespaces,
+  type NamespaceCreateResponse,
+  type NamespaceUpdateResponse,
+  type NamespaceListResponse,
+  type NamespaceDeleteResponse,
+  type NamespaceChatCompletionsResponse,
+  type NamespaceReadResponse,
+  type NamespaceSearchResponse,
+  type NamespaceCreateParams,
+  type NamespaceUpdateParams,
+  type NamespaceListParams,
+  type NamespaceDeleteParams,
+  type NamespaceChatCompletionsParams,
+  type NamespaceReadParams,
+  type NamespaceSearchParams,
+  type NamespaceListResponsesV4PagePaginationArray,
+} from './namespaces/index';
+export {
   Tokens,
   BaseTokens,
   type TokenCreateResponse,

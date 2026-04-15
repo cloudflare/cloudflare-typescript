@@ -39,21 +39,64 @@ import {
   InstanceUpdateResponse,
   Instances,
 } from './instances/instances';
+import * as NamespacesAPI from './namespaces/namespaces';
+import {
+  BaseNamespaces,
+  NamespaceChatCompletionsParams,
+  NamespaceChatCompletionsResponse,
+  NamespaceCreateParams,
+  NamespaceCreateResponse,
+  NamespaceDeleteParams,
+  NamespaceDeleteResponse,
+  NamespaceListParams,
+  NamespaceListResponse,
+  NamespaceListResponsesV4PagePaginationArray,
+  NamespaceReadParams,
+  NamespaceReadResponse,
+  NamespaceSearchParams,
+  NamespaceSearchResponse,
+  NamespaceUpdateParams,
+  NamespaceUpdateResponse,
+  Namespaces,
+} from './namespaces/namespaces';
 
 export class BaseAISearch extends APIResource {
   static override readonly _key: readonly ['aiSearch'] = Object.freeze(['aiSearch'] as const);
 }
 export class AISearch extends BaseAISearch {
+  namespaces: NamespacesAPI.Namespaces = new NamespacesAPI.Namespaces(this._client);
   instances: InstancesAPI.Instances = new InstancesAPI.Instances(this._client);
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
 }
 
+AISearch.Namespaces = Namespaces;
+AISearch.BaseNamespaces = BaseNamespaces;
 AISearch.Instances = Instances;
 AISearch.BaseInstances = BaseInstances;
 AISearch.Tokens = Tokens;
 AISearch.BaseTokens = BaseTokens;
 
 export declare namespace AISearch {
+  export {
+    Namespaces as Namespaces,
+    BaseNamespaces as BaseNamespaces,
+    type NamespaceCreateResponse as NamespaceCreateResponse,
+    type NamespaceUpdateResponse as NamespaceUpdateResponse,
+    type NamespaceListResponse as NamespaceListResponse,
+    type NamespaceDeleteResponse as NamespaceDeleteResponse,
+    type NamespaceChatCompletionsResponse as NamespaceChatCompletionsResponse,
+    type NamespaceReadResponse as NamespaceReadResponse,
+    type NamespaceSearchResponse as NamespaceSearchResponse,
+    type NamespaceListResponsesV4PagePaginationArray as NamespaceListResponsesV4PagePaginationArray,
+    type NamespaceCreateParams as NamespaceCreateParams,
+    type NamespaceUpdateParams as NamespaceUpdateParams,
+    type NamespaceListParams as NamespaceListParams,
+    type NamespaceDeleteParams as NamespaceDeleteParams,
+    type NamespaceChatCompletionsParams as NamespaceChatCompletionsParams,
+    type NamespaceReadParams as NamespaceReadParams,
+    type NamespaceSearchParams as NamespaceSearchParams,
+  };
+
   export {
     Instances as Instances,
     BaseInstances as BaseInstances,

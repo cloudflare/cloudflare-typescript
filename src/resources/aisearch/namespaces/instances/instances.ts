@@ -1,6 +1,30 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../core/resource';
+import { APIResource } from '../../../../core/resource';
+import * as SippyAPI from '../../../r2/buckets/sippy';
+import * as ItemsAPI from './items';
+import {
+  BaseItems,
+  ItemChunksParams,
+  ItemChunksResponse,
+  ItemCreateOrUpdateParams,
+  ItemCreateOrUpdateResponse,
+  ItemDeleteParams,
+  ItemDeleteResponse,
+  ItemDownloadParams,
+  ItemGetParams,
+  ItemGetResponse,
+  ItemListParams,
+  ItemListResponse,
+  ItemListResponsesV4PagePaginationArray,
+  ItemLogsParams,
+  ItemLogsResponse,
+  ItemSyncParams,
+  ItemSyncResponse,
+  ItemUploadParams,
+  ItemUploadResponse,
+  Items,
+} from './items';
 import * as JobsAPI from './jobs';
 import {
   BaseJobs,
@@ -13,21 +37,23 @@ import {
   JobListResponsesV4PagePaginationArray,
   JobLogsParams,
   JobLogsResponse,
+  JobUpdateParams,
+  JobUpdateResponse,
   Jobs,
 } from './jobs';
-import * as SippyAPI from '../../r2/buckets/sippy';
-import { APIPromise } from '../../../core/api-promise';
+import { APIPromise } from '../../../../core/api-promise';
 import {
   PagePromise,
   V4PagePaginationArray,
   type V4PagePaginationArrayParams,
-} from '../../../core/pagination';
-import { RequestOptions } from '../../../internal/request-options';
-import { path } from '../../../internal/utils/path';
+} from '../../../../core/pagination';
+import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
 
 export class BaseInstances extends APIResource {
-  static override readonly _key: readonly ['aiSearch', 'instances'] = Object.freeze([
+  static override readonly _key: readonly ['aiSearch', 'namespaces', 'instances'] = Object.freeze([
     'aiSearch',
+    'namespaces',
     'instances',
   ] as const);
 
@@ -36,16 +62,24 @@ export class BaseInstances extends APIResource {
    *
    * @example
    * ```ts
-   * const instance = await client.aiSearch.instances.create({
-   *   account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *   id: 'my-ai-search',
-   * });
+   * const instance =
+   *   await client.aiSearch.namespaces.instances.create(
+   *     'my-namespace',
+   *     {
+   *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+   *       id: 'my-ai-search',
+   *     },
+   *   );
    * ```
    */
-  create(params: InstanceCreateParams, options?: RequestOptions): APIPromise<InstanceCreateResponse> {
+  create(
+    name: string,
+    params: InstanceCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<InstanceCreateResponse> {
     const { account_id = this._client.accountID, ...body } = params;
     return (
-      this._client.post(path`/accounts/${account_id}/ai-search/instances`, {
+      this._client.post(path`/accounts/${account_id}/ai-search/namespaces/${name}/instances`, {
         body,
         ...options,
       }) as APIPromise<{ result: InstanceCreateResponse }>
@@ -57,20 +91,24 @@ export class BaseInstances extends APIResource {
    *
    * @example
    * ```ts
-   * const instance = await client.aiSearch.instances.update(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
+   * const instance =
+   *   await client.aiSearch.namespaces.instances.update(
+   *     'my-ai-search',
+   *     {
+   *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+   *       name: 'my-namespace',
+   *     },
+   *   );
    * ```
    */
   update(
     id: string,
-    params: InstanceUpdateParams | null | undefined = {},
+    params: InstanceUpdateParams,
     options?: RequestOptions,
   ): APIPromise<InstanceUpdateResponse> {
-    const { account_id = this._client.accountID, ...body } = params ?? {};
+    const { account_id = this._client.accountID, name, ...body } = params;
     return (
-      this._client.put(path`/accounts/${account_id}/ai-search/instances/${id}`, {
+      this._client.put(path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}`, {
         body,
         ...options,
       }) as APIPromise<{ result: InstanceUpdateResponse }>
@@ -83,7 +121,8 @@ export class BaseInstances extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const instanceListResponse of client.aiSearch.instances.list(
+   * for await (const instanceListResponse of client.aiSearch.namespaces.instances.list(
+   *   'my-namespace',
    *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
    * )) {
    *   // ...
@@ -91,12 +130,13 @@ export class BaseInstances extends APIResource {
    * ```
    */
   list(
+    name: string,
     params: InstanceListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse> {
     const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
-      path`/accounts/${account_id}/ai-search/instances`,
+      path`/accounts/${account_id}/ai-search/namespaces/${name}/instances`,
       V4PagePaginationArray<InstanceListResponse>,
       { query, ...options },
     );
@@ -107,22 +147,27 @@ export class BaseInstances extends APIResource {
    *
    * @example
    * ```ts
-   * const instance = await client.aiSearch.instances.delete(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
+   * const instance =
+   *   await client.aiSearch.namespaces.instances.delete(
+   *     'my-ai-search',
+   *     {
+   *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+   *       name: 'my-namespace',
+   *     },
+   *   );
    * ```
    */
   delete(
     id: string,
-    params: InstanceDeleteParams | null | undefined = {},
+    params: InstanceDeleteParams,
     options?: RequestOptions,
   ): APIPromise<InstanceDeleteResponse> {
-    const { account_id = this._client.accountID } = params ?? {};
+    const { account_id = this._client.accountID, name } = params;
     return (
-      this._client.delete(path`/accounts/${account_id}/ai-search/instances/${id}`, options) as APIPromise<{
-        result: InstanceDeleteResponse;
-      }>
+      this._client.delete(
+        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}`,
+        options,
+      ) as APIPromise<{ result: InstanceDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -133,10 +178,11 @@ export class BaseInstances extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.aiSearch.instances.chatCompletions(
+   *   await client.aiSearch.namespaces.instances.chatCompletions(
    *     'my-ai-search',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+   *       name: 'my-namespace',
    *       messages: [{ content: 'content', role: 'system' }],
    *     },
    *   );
@@ -147,11 +193,11 @@ export class BaseInstances extends APIResource {
     params: InstanceChatCompletionsParams,
     options?: RequestOptions,
   ): APIPromise<InstanceChatCompletionsResponse> {
-    const { account_id = this._client.accountID, ...body } = params;
-    return this._client.post(path`/accounts/${account_id}/ai-search/instances/${id}/chat/completions`, {
-      body,
-      ...options,
-    });
+    const { account_id = this._client.accountID, name, ...body } = params;
+    return this._client.post(
+      path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/chat/completions`,
+      { body, ...options },
+    );
   }
 
   /**
@@ -159,22 +205,23 @@ export class BaseInstances extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.aiSearch.instances.read(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
+   * const response =
+   *   await client.aiSearch.namespaces.instances.read(
+   *     'my-ai-search',
+   *     {
+   *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+   *       name: 'my-namespace',
+   *     },
+   *   );
    * ```
    */
-  read(
-    id: string,
-    params: InstanceReadParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<InstanceReadResponse> {
-    const { account_id = this._client.accountID } = params ?? {};
+  read(id: string, params: InstanceReadParams, options?: RequestOptions): APIPromise<InstanceReadResponse> {
+    const { account_id = this._client.accountID, name } = params;
     return (
-      this._client.get(path`/accounts/${account_id}/ai-search/instances/${id}`, options) as APIPromise<{
-        result: InstanceReadResponse;
-      }>
+      this._client.get(
+        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}`,
+        options,
+      ) as APIPromise<{ result: InstanceReadResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -184,20 +231,24 @@ export class BaseInstances extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.aiSearch.instances.search(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
+   * const response =
+   *   await client.aiSearch.namespaces.instances.search(
+   *     'my-ai-search',
+   *     {
+   *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+   *       name: 'my-namespace',
+   *     },
+   *   );
    * ```
    */
   search(
     id: string,
-    params: InstanceSearchParams | null | undefined = {},
+    params: InstanceSearchParams,
     options?: RequestOptions,
   ): APIPromise<InstanceSearchResponse> {
-    const { account_id = this._client.accountID, ...body } = params ?? {};
+    const { account_id = this._client.accountID, name, ...body } = params;
     return (
-      this._client.post(path`/accounts/${account_id}/ai-search/instances/${id}/search`, {
+      this._client.post(path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/search`, {
         body,
         ...options,
       }) as APIPromise<{ result: InstanceSearchResponse }>
@@ -209,27 +260,33 @@ export class BaseInstances extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.aiSearch.instances.stats(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
+   * const response =
+   *   await client.aiSearch.namespaces.instances.stats(
+   *     'my-ai-search',
+   *     {
+   *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+   *       name: 'my-namespace',
+   *     },
+   *   );
    * ```
    */
   stats(
     id: string,
-    params: InstanceStatsParams | null | undefined = {},
+    params: InstanceStatsParams,
     options?: RequestOptions,
   ): APIPromise<InstanceStatsResponse> {
-    const { account_id = this._client.accountID } = params ?? {};
+    const { account_id = this._client.accountID, name } = params;
     return (
-      this._client.get(path`/accounts/${account_id}/ai-search/instances/${id}/stats`, options) as APIPromise<{
-        result: InstanceStatsResponse;
-      }>
+      this._client.get(
+        path`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/stats`,
+        options,
+      ) as APIPromise<{ result: InstanceStatsResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 export class Instances extends BaseInstances {
   jobs: JobsAPI.Jobs = new JobsAPI.Jobs(this._client);
+  items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
 }
 
 export type InstanceListResponsesV4PagePaginationArray = V4PagePaginationArray<InstanceListResponse>;
@@ -2831,6 +2888,11 @@ export interface InstanceUpdateParams {
   account_id?: string;
 
   /**
+   * Path param: Namespace name
+   */
+  name: string;
+
+  /**
    * Body param
    */
   ai_gateway_id?: string | null;
@@ -3343,6 +3405,11 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
 
 export interface InstanceDeleteParams {
   account_id?: string;
+
+  /**
+   * Namespace name
+   */
+  name: string;
 }
 
 export interface InstanceChatCompletionsParams {
@@ -3350,6 +3417,11 @@ export interface InstanceChatCompletionsParams {
    * Path param
    */
   account_id?: string;
+
+  /**
+   * Path param: Namespace name
+   */
+  name: string;
 
   /**
    * Body param
@@ -3530,6 +3602,11 @@ export namespace InstanceChatCompletionsParams {
 
 export interface InstanceReadParams {
   account_id?: string;
+
+  /**
+   * Namespace name
+   */
+  name: string;
 }
 
 export interface InstanceSearchParams {
@@ -3537,6 +3614,11 @@ export interface InstanceSearchParams {
    * Path param
    */
   account_id?: string;
+
+  /**
+   * Path param: Namespace name
+   */
+  name: string;
 
   /**
    * Body param
@@ -3681,10 +3763,17 @@ export namespace InstanceSearchParams {
 
 export interface InstanceStatsParams {
   account_id?: string;
+
+  /**
+   * Namespace name
+   */
+  name: string;
 }
 
 Instances.Jobs = Jobs;
 Instances.BaseJobs = BaseJobs;
+Instances.Items = Items;
+Instances.BaseItems = BaseItems;
 
 export declare namespace Instances {
   export {
@@ -3711,13 +3800,38 @@ export declare namespace Instances {
     Jobs as Jobs,
     BaseJobs as BaseJobs,
     type JobCreateResponse as JobCreateResponse,
+    type JobUpdateResponse as JobUpdateResponse,
     type JobListResponse as JobListResponse,
     type JobGetResponse as JobGetResponse,
     type JobLogsResponse as JobLogsResponse,
     type JobListResponsesV4PagePaginationArray as JobListResponsesV4PagePaginationArray,
     type JobCreateParams as JobCreateParams,
+    type JobUpdateParams as JobUpdateParams,
     type JobListParams as JobListParams,
     type JobGetParams as JobGetParams,
     type JobLogsParams as JobLogsParams,
+  };
+
+  export {
+    Items as Items,
+    BaseItems as BaseItems,
+    type ItemListResponse as ItemListResponse,
+    type ItemDeleteResponse as ItemDeleteResponse,
+    type ItemChunksResponse as ItemChunksResponse,
+    type ItemCreateOrUpdateResponse as ItemCreateOrUpdateResponse,
+    type ItemGetResponse as ItemGetResponse,
+    type ItemLogsResponse as ItemLogsResponse,
+    type ItemSyncResponse as ItemSyncResponse,
+    type ItemUploadResponse as ItemUploadResponse,
+    type ItemListResponsesV4PagePaginationArray as ItemListResponsesV4PagePaginationArray,
+    type ItemListParams as ItemListParams,
+    type ItemDeleteParams as ItemDeleteParams,
+    type ItemChunksParams as ItemChunksParams,
+    type ItemCreateOrUpdateParams as ItemCreateOrUpdateParams,
+    type ItemDownloadParams as ItemDownloadParams,
+    type ItemGetParams as ItemGetParams,
+    type ItemLogsParams as ItemLogsParams,
+    type ItemSyncParams as ItemSyncParams,
+    type ItemUploadParams as ItemUploadParams,
   };
 }
