@@ -528,6 +528,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/dlp/datasets/versions/entries.test.ts
 	tests/api-resources/zero-trust/dlp/patterns.test.ts
 	tests/api-resources/zero-trust/dlp/payload-logs.test.ts
+	tests/api-resources/zero-trust/dlp/settings.test.ts
 	tests/api-resources/zero-trust/dlp/email/email.test.ts
 	tests/api-resources/zero-trust/dlp/email/account-mapping.test.ts
 	tests/api-resources/zero-trust/dlp/email/rules.test.ts

@@ -6226,6 +6226,19 @@ Methods:
 - <code title="put /accounts/{account_id}/dlp/payload_log">client.zeroTrust.dlp.payloadLogs.<a href="./src/resources/zero-trust/dlp/payload-logs.ts">update</a>({ ...params }) -> PayloadLogUpdateResponse</code>
 - <code title="get /accounts/{account_id}/dlp/payload_log">client.zeroTrust.dlp.payloadLogs.<a href="./src/resources/zero-trust/dlp/payload-logs.ts">get</a>({ ...params }) -> PayloadLogGetResponse</code>
 
+### Settings
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/settings.ts">DLPSettings</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">update</a>({ ...params }) -> DLPSettings</code>
+- <code title="delete /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">delete</a>({ ...params }) -> DLPSettings</code>
+- <code title="patch /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">edit</a>({ ...params }) -> DLPSettings</code>
+- <code title="get /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">get</a>({ ...params }) -> DLPSettings</code>
+
 ### Email
 
 #### AccountMapping
