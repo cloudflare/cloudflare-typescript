@@ -17,7 +17,7 @@ export class Tags extends APIResource {
    * ```
    */
   create(params: TagCreateParams, options?: Core.RequestOptions): Core.APIPromise<TagCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/cloudforce-one/events/tags/create`, {
       body,
       ...options,
@@ -67,7 +67,7 @@ export interface TagCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
