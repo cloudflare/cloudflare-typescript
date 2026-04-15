@@ -18,7 +18,6 @@ import {
   ToMarkdown,
   ToMarkdownCreateParams,
   ToMarkdownCreateResponse,
-  ToMarkdownCreateResponsesSinglePage,
 } from './to-markdown';
 import * as BotsAPI from './bots/bots';
 import {
@@ -49,7 +48,6 @@ export class AI extends APIResource {
 }
 
 AI.ToMarkdown = ToMarkdown;
-AI.ToMarkdownCreateResponsesSinglePage = ToMarkdownCreateResponsesSinglePage;
 AI.Inference = Inference;
 AI.Bots = Bots;
 AI.TimeseriesGroups = TimeseriesGroups;
@@ -58,7 +56,6 @@ export declare namespace AI {
   export {
     ToMarkdown as ToMarkdown,
     type ToMarkdownCreateResponse as ToMarkdownCreateResponse,
-    ToMarkdownCreateResponsesSinglePage as ToMarkdownCreateResponsesSinglePage,
     type ToMarkdownCreateParams as ToMarkdownCreateParams,
   };
 

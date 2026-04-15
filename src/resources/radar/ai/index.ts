@@ -29,7 +29,6 @@ export {
   type TimeseriesGroupUserAgentParams,
 } from './timeseries-groups';
 export {
-  ToMarkdownCreateResponsesSinglePage,
   ToMarkdown,
   type ToMarkdownCreateResponse,
   type ToMarkdownCreateParams,
