@@ -2,36 +2,26 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import { SinglePage } from '../../../pagination';
-import { type BlobLike } from '../../../uploads';
 
 export class ToMarkdown extends APIResource {
   /**
-   * Convert Files into Markdown
+   * Converts uploaded files into Markdown format using Workers AI.
    *
    * @deprecated Use [AI > To Markdown](https://developers.cloudflare.com/api/resources/ai/subresources/to_markdown/) instead.
    */
   create(
-    body: string | ArrayBufferView | ArrayBuffer | BlobLike,
     params: ToMarkdownCreateParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ToMarkdownCreateResponsesSinglePage, ToMarkdownCreateResponse> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/ai/tomarkdown`,
-      ToMarkdownCreateResponsesSinglePage,
-      {
-        body: body,
-        method: 'post',
-        ...options,
-        headers: { 'Content-Type': 'application/octet-stream', ...options?.headers },
-        __binaryRequest: true,
-      },
-    );
+  ): Core.APIPromise<ToMarkdownCreateResponse[]> {
+    const { account_id = this._client.accountId, ...body } = params;
+    return (
+      this._client.post(
+        `/accounts/${account_id}/ai/tomarkdown`,
+        Core.multipartFormRequestOptions({ body, ...options }),
+      ) as Core.APIPromise<{ result: ToMarkdownCreateResponse[] }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class ToMarkdownCreateResponsesSinglePage extends SinglePage<ToMarkdownCreateResponse> {}
 
 export interface ToMarkdownCreateResponse {
   data: string;
@@ -47,17 +37,19 @@ export interface ToMarkdownCreateResponse {
 
 export interface ToMarkdownCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
-}
+  account_id?: string;
 
-ToMarkdown.ToMarkdownCreateResponsesSinglePage = ToMarkdownCreateResponsesSinglePage;
+  /**
+   * Body param
+   */
+  files: Array<Core.Uploadable>;
+}
 
 export declare namespace ToMarkdown {
   export {
     type ToMarkdownCreateResponse as ToMarkdownCreateResponse,
-    ToMarkdownCreateResponsesSinglePage as ToMarkdownCreateResponsesSinglePage,
     type ToMarkdownCreateParams as ToMarkdownCreateParams,
   };
 }

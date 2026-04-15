@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -23,10 +24,10 @@ export class Widgets extends APIResource {
    * ```
    */
   create(params: WidgetCreateParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
-    const { account_id, direction, order, page, per_page, ...body } = params;
+    const { account_id = this._client.accountId, direction, filter, order, page, per_page, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/challenges/widgets`, {
-        query: { direction, order, page, per_page },
+        query: { direction, filter, order, page, per_page },
         body,
         ...options,
       }) as Core.APIPromise<{ result: Widget }>
@@ -58,7 +59,7 @@ export class Widgets extends APIResource {
     params: WidgetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Widget> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/challenges/widgets/${sitekey}`, {
         body,
@@ -81,10 +82,20 @@ export class Widgets extends APIResource {
    * ```
    */
   list(
-    params: WidgetListParams,
+    params?: WidgetListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse>;
+  list(
+    params: WidgetListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/challenges/widgets`,
       WidgetListResponsesV4PagePaginationArray,
@@ -105,10 +116,19 @@ export class Widgets extends APIResource {
    */
   delete(
     sitekey: string,
-    params: WidgetDeleteParams,
+    params?: WidgetDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Widget>;
+  delete(sitekey: string, options?: Core.RequestOptions): Core.APIPromise<Widget>;
+  delete(
+    sitekey: string,
+    params: WidgetDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Widget> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(sitekey, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/challenges/widgets/${sitekey}`,
@@ -128,8 +148,17 @@ export class Widgets extends APIResource {
    * );
    * ```
    */
-  get(sitekey: string, params: WidgetGetParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
-    const { account_id } = params;
+  get(sitekey: string, params?: WidgetGetParams, options?: Core.RequestOptions): Core.APIPromise<Widget>;
+  get(sitekey: string, options?: Core.RequestOptions): Core.APIPromise<Widget>;
+  get(
+    sitekey: string,
+    params: WidgetGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Widget> {
+    if (isRequestOptions(params)) {
+      return this.get(sitekey, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/challenges/widgets/${sitekey}`, options) as Core.APIPromise<{
         result: Widget;
@@ -156,7 +185,7 @@ export class Widgets extends APIResource {
     params: WidgetRotateSecretParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Widget> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/challenges/widgets/${sitekey}/rotate_secret`, {
         body,
@@ -311,10 +340,10 @@ export interface WidgetCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   domains: Array<WidgetDomainParam>;
 
@@ -334,6 +363,20 @@ export interface WidgetCreateParams {
    * Query param: Direction to order widgets.
    */
   direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Filter widgets by field using case-insensitive substring matching.
+   * Format: `field:value`
+   *
+   * Supported fields:
+   *
+   * - `name` - Filter by widget name (e.g., `filter=name:login-form`)
+   * - `sitekey` - Filter by sitekey (e.g., `filter=sitekey:0x4AAA`)
+   *
+   * Returns 400 Bad Request if the field is unsupported or format is invalid. An
+   * empty filter value returns all results.
+   */
+  filter?: string;
 
   /**
    * Query param: Field to order widgets by.
@@ -384,10 +427,10 @@ export interface WidgetUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   domains: Array<WidgetDomainParam>;
 
@@ -437,12 +480,26 @@ export interface WidgetListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Direction to order widgets.
    */
   direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Filter widgets by field using case-insensitive substring matching.
+   * Format: `field:value`
+   *
+   * Supported fields:
+   *
+   * - `name` - Filter by widget name (e.g., `filter=name:login-form`)
+   * - `sitekey` - Filter by sitekey (e.g., `filter=sitekey:0x4AAA`)
+   *
+   * Returns 400 Bad Request if the field is unsupported or format is invalid. An
+   * empty filter value returns all results.
+   */
+  filter?: string;
 
   /**
    * Query param: Field to order widgets by.
@@ -454,21 +511,21 @@ export interface WidgetDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WidgetGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WidgetRotateSecretParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: If `invalidate_immediately` is set to `false`, the previous secret

@@ -26,6 +26,7 @@ describe('resource jobs', () => {
   test('create: required and optional params', async () => {
     const response = await client.aiSearch.instances.jobs.create('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      description: 'description',
     });
   });
 

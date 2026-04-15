@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../../policies';
 import * as ApplicationsAPI from '../applications';
@@ -23,10 +24,18 @@ export class PolicyTests extends APIResource {
    * ```
    */
   create(
-    params: PolicyTestCreateParams,
+    params?: PolicyTestCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyTestCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<PolicyTestCreateResponse>;
+  create(
+    params: PolicyTestCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyTestCreateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/policy-tests`, {
         body,
@@ -49,10 +58,19 @@ export class PolicyTests extends APIResource {
    */
   get(
     policyTestId: string,
-    params: PolicyTestGetParams,
+    params?: PolicyTestGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyTestGetResponse>;
+  get(policyTestId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyTestGetResponse>;
+  get(
+    policyTestId: string,
+    params: PolicyTestGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyTestGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(policyTestId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/access/policy-tests/${policyTestId}`,
@@ -130,10 +148,10 @@ export interface PolicyTestCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   policies?: Array<PolicyTestCreateParams.UnionMember0 | string>;
 }
@@ -169,6 +187,12 @@ export namespace PolicyTestCreateParams {
     approval_required?: boolean;
 
     /**
+     * The rules that define how users may connect to targets secured by your
+     * application.
+     */
+    connection_rules?: UnionMember0.ConnectionRules;
+
+    /**
      * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
      * meet any of the Exclude rules.
      */
@@ -180,6 +204,11 @@ export namespace PolicyTestCreateParams {
      * this feature.
      */
     isolation_required?: boolean;
+
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: UnionMember0.MfaConfig;
 
     /**
      * A custom message that will appear on the purpose justification screen.
@@ -204,13 +233,65 @@ export namespace PolicyTestCreateParams {
      */
     session_duration?: string;
   }
+
+  export namespace UnionMember0 {
+    /**
+     * The rules that define how users may connect to targets secured by your
+     * application.
+     */
+    export interface ConnectionRules {
+      /**
+       * The RDP-specific rules that define clipboard behavior for RDP connections.
+       */
+      rdp?: ConnectionRules.RDP;
+    }
+
+    export namespace ConnectionRules {
+      /**
+       * The RDP-specific rules that define clipboard behavior for RDP connections.
+       */
+      export interface RDP {
+        /**
+         * Clipboard formats allowed when copying from local machine to remote RDP session.
+         */
+        allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+        /**
+         * Clipboard formats allowed when copying from remote RDP session to local machine.
+         */
+        allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      }
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+  }
 }
 
 export interface PolicyTestGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 PolicyTests.Users = Users;

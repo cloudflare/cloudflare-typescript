@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as KeylessCertificatesAPI from '../keyless-certificates';
 import * as PrioritizeAPI from './prioritize';
@@ -30,7 +31,7 @@ export class CustomCertificates extends APIResource {
     params: CustomCertificateCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/custom_certificates`, { body, ...options }) as Core.APIPromise<{
         result: CustomCertificate;
@@ -54,10 +55,20 @@ export class CustomCertificates extends APIResource {
    * ```
    */
   list(
-    params: CustomCertificateListParams,
+    params?: CustomCertificateListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomCertificatesV4PagePaginationArray, CustomCertificate>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomCertificatesV4PagePaginationArray, CustomCertificate>;
+  list(
+    params: CustomCertificateListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomCertificatesV4PagePaginationArray, CustomCertificate> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/custom_certificates`,
       CustomCertificatesV4PagePaginationArray,
@@ -79,10 +90,22 @@ export class CustomCertificates extends APIResource {
    */
   delete(
     customCertificateId: string,
-    params: CustomCertificateDeleteParams,
+    params?: CustomCertificateDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomCertificateDeleteResponse>;
+  delete(
+    customCertificateId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomCertificateDeleteResponse>;
+  delete(
+    customCertificateId: string,
+    params: CustomCertificateDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCertificateDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(customCertificateId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/custom_certificates/${customCertificateId}`,
@@ -110,7 +133,7 @@ export class CustomCertificates extends APIResource {
     params: CustomCertificateEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, {
         body,
@@ -120,7 +143,9 @@ export class CustomCertificates extends APIResource {
   }
 
   /**
-   * SSL Configuration Details
+   * Retrieves details for a specific custom SSL certificate, including certificate
+   * metadata, bundle method, geographic restrictions, and associated keyless server
+   * configuration.
    *
    * @example
    * ```ts
@@ -133,10 +158,19 @@ export class CustomCertificates extends APIResource {
    */
   get(
     customCertificateId: string,
-    params: CustomCertificateGetParams,
+    params?: CustomCertificateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomCertificate>;
+  get(customCertificateId: string, options?: Core.RequestOptions): Core.APIPromise<CustomCertificate>;
+  get(
+    customCertificateId: string,
+    params: CustomCertificateGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCertificate> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(customCertificateId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/custom_certificates/${customCertificateId}`,
@@ -157,57 +191,27 @@ export interface CustomCertificate {
   id: string;
 
   /**
+   * Identifier.
+   */
+  zone_id: string;
+
+  /**
    * A ubiquitous bundle has the highest probability of being verified everywhere,
    * even by clients using outdated or unusual trust stores. An optimal bundle uses
    * the shortest chain and newest intermediates. And the force bundle verifies the
    * chain, but does not otherwise modify it.
    */
-  bundle_method: CustomHostnamesAPI.BundleMethod;
+  bundle_method?: CustomHostnamesAPI.BundleMethod;
+
+  /**
+   * The identifier for the Custom CSR that was used.
+   */
+  custom_csr_id?: string;
 
   /**
    * When the certificate from the authority expires.
    */
-  expires_on: string;
-
-  hosts: Array<string>;
-
-  /**
-   * The certificate authority that issued the certificate.
-   */
-  issuer: string;
-
-  /**
-   * When the certificate was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * The order/priority in which the certificate will be used in a request. The
-   * higher priority will break ties across overlapping 'legacy_custom' certificates,
-   * but 'legacy_custom' certificates will always supercede 'sni_custom'
-   * certificates.
-   */
-  priority: number;
-
-  /**
-   * The type of hash used for the certificate.
-   */
-  signature: string;
-
-  /**
-   * Status of the zone's custom SSL.
-   */
-  status: 'active' | 'expired' | 'deleted' | 'pending' | 'initializing';
-
-  /**
-   * When the certificate was uploaded to Cloudflare.
-   */
-  uploaded_on: string;
-
-  /**
-   * Identifier.
-   */
-  zone_id: string;
+  expires_on?: string;
 
   /**
    * Specify the region where your private key can be held locally for optimal TLS
@@ -220,20 +224,53 @@ export interface CustomCertificate {
    */
   geo_restrictions?: GeoRestrictions;
 
+  hosts?: Array<string>;
+
+  /**
+   * The certificate authority that issued the certificate.
+   */
+  issuer?: string;
+
   keyless_server?: KeylessCertificatesAPI.KeylessCertificate;
 
   /**
-   * Specify the policy that determines the region where your private key will be
-   * held locally. HTTPS connections to any excluded data center will still be fully
-   * encrypted, but will incur some latency while Keyless SSL is used to complete the
-   * handshake with the nearest allowed data center. Any combination of countries,
-   * specified by their two letter country code
-   * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-   * can be chosen, such as 'country: IN', as well as 'region: EU' which refers to
-   * the EU region. If there are too few data centers satisfying the policy, it will
-   * be rejected.
+   * When the certificate was last modified.
    */
-  policy?: string;
+  modified_on?: string;
+
+  /**
+   * The policy restrictions returned by the API. This field is returned in responses
+   * when a policy has been set. The API accepts the "policy" field in requests but
+   * returns this field as "policy_restrictions" in responses.
+   *
+   * Specifies the region(s) where your private key can be held locally for optimal
+   * TLS performance. Format is a boolean expression, for example: "(country: US) or
+   * (region: EU)"
+   */
+  policy_restrictions?: string;
+
+  /**
+   * The order/priority in which the certificate will be used in a request. The
+   * higher priority will break ties across overlapping 'legacy_custom' certificates,
+   * but 'legacy_custom' certificates will always supercede 'sni_custom'
+   * certificates.
+   */
+  priority?: number;
+
+  /**
+   * The type of hash used for the certificate.
+   */
+  signature?: string;
+
+  /**
+   * Status of the zone's custom SSL.
+   */
+  status?: 'active' | 'expired' | 'deleted' | 'pending' | 'initializing';
+
+  /**
+   * When the certificate was uploaded to Cloudflare.
+   */
+  uploaded_on?: string;
 }
 
 /**
@@ -279,7 +316,7 @@ export interface CustomCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The zone's SSL certificate or certificate and the intermediate(s).
@@ -300,6 +337,16 @@ export interface CustomCertificateCreateParams {
   bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
   /**
+   * Body param: The identifier for the Custom CSR that was used.
+   */
+  custom_csr_id?: string;
+
+  /**
+   * Body param: The environment to deploy the certificate to, defaults to production
+   */
+  deploy?: 'staging' | 'production';
+
+  /**
    * Body param: Specify the region where your private key can be held locally for
    * optimal TLS performance. HTTPS connections to any excluded data center will
    * still be fully encrypted, but will incur some latency while Keyless SSL is used
@@ -319,7 +366,9 @@ export interface CustomCertificateCreateParams {
    * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
    * can be chosen, such as 'country: IN', as well as 'region: EU' which refers to
    * the EU region. If there are too few data centers satisfying the policy, it will
-   * be rejected.
+   * be rejected. Note: The API accepts this field as either "policy" or
+   * "policy_restrictions" in requests. Responses return this field as
+   * "policy_restrictions".
    */
   policy?: string;
 
@@ -334,7 +383,7 @@ export interface CustomCertificateListParams extends V4PagePaginationArrayParams
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Whether to match all search requirements or at least one (any).
@@ -351,14 +400,14 @@ export interface CustomCertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CustomCertificateEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: A ubiquitous bundle has the highest probability of being verified
@@ -372,6 +421,16 @@ export interface CustomCertificateEditParams {
    * Body param: The zone's SSL certificate or certificate and the intermediate(s).
    */
   certificate?: string;
+
+  /**
+   * Body param: The identifier for the Custom CSR that was used.
+   */
+  custom_csr_id?: string;
+
+  /**
+   * Body param: The environment to deploy the certificate to, defaults to production
+   */
+  deploy?: 'staging' | 'production';
 
   /**
    * Body param: Specify the region where your private key can be held locally for
@@ -393,7 +452,9 @@ export interface CustomCertificateEditParams {
    * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
    * can be chosen, such as 'country: IN', as well as 'region: EU' which refers to
    * the EU region. If there are too few data centers satisfying the policy, it will
-   * be rejected.
+   * be rejected. Note: The API accepts this field as either "policy" or
+   * "policy_restrictions" in requests. Responses return this field as
+   * "policy_restrictions".
    */
   policy?: string;
 
@@ -407,7 +468,7 @@ export interface CustomCertificateGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 CustomCertificates.CustomCertificatesV4PagePaginationArray = CustomCertificatesV4PagePaginationArray;

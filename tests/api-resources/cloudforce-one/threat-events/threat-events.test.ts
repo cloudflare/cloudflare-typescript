@@ -36,7 +36,11 @@ describe('resource threatEvents', () => {
       category: 'Domain Resolution',
       date: '2022-04-01T00:00:00Z',
       event: 'An attacker registered the domain domain.com',
-      raw: { data: { foo: 'bar' }, source: 'example.com', tlp: 'amber' },
+      raw: {
+        data: { foo: 'bar' },
+        source: 'example.com',
+        tlp: 'amber',
+      },
       tlp: 'amber',
       accountId: 123456,
       attacker: 'Flying Yeti',
@@ -49,7 +53,6 @@ describe('resource threatEvents', () => {
       tags: ['malware'],
       targetCountry: 'US',
       targetIndustry: 'Agriculture',
-      uuid: '12345678-1234-1234-1234-1234567890ab',
     });
   });
 
@@ -69,6 +72,8 @@ describe('resource threatEvents', () => {
   test.skip('list: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.list({
       account_id: 'account_id',
+      cursor:
+        'eyJ2ZXJzaW9uIjoxLCJwb3NpdGlvbiI6eyJkYXRlIjoiMjAyNC0wMS0xMlQxMDowMDowMFoiLCJ1dWlkIjoiYWJjMTIzIn19',
       datasetId: ['string'],
       forceRefresh: true,
       format: 'json',
@@ -76,27 +81,14 @@ describe('resource threatEvents', () => {
       orderBy: 'orderBy',
       page: 0,
       pageSize: 0,
-      search: [{ field: 'attackerCountry', op: 'equals', value: 'usa' }],
+      search: [
+        {
+          field: 'attackerCountry',
+          op: 'equals',
+          value: 'usa',
+        },
+      ],
     });
-  });
-
-  // TODO: HTTP 401 from prism
-  test.skip('delete: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.delete('event_id', {
-      account_id: 'account_id',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: HTTP 401 from prism
-  test.skip('delete: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.delete('event_id', { account_id: 'account_id' });
   });
 
   // TODO: HTTP 401 from prism
@@ -132,7 +124,11 @@ describe('resource threatEvents', () => {
           category: 'Domain Resolution',
           date: '2022-04-01T00:00:00Z',
           event: 'An attacker registered the domain domain.com',
-          raw: { data: { foo: 'bar' }, source: 'example.com', tlp: 'amber' },
+          raw: {
+            data: { foo: 'bar' },
+            source: 'example.com',
+            tlp: 'amber',
+          },
           tlp: 'amber',
           accountId: 123456,
           attacker: 'Flying Yeti',
@@ -145,17 +141,19 @@ describe('resource threatEvents', () => {
           tags: ['malware'],
           targetCountry: 'US',
           targetIndustry: 'Agriculture',
-          uuid: '12345678-1234-1234-1234-1234567890ab',
         },
       ],
       datasetId: 'durableObjectName',
-      preserveUuid: true,
+      includeCreatedEvents: true,
     });
   });
 
   // TODO: HTTP 401 from prism
   test.skip('edit: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.edit('event_id', { account_id: 'account_id' });
+    const responsePromise = client.cloudforceOne.threatEvents.edit('event_id', {
+      account_id: 'account_id',
+      datasetId: '9b769969-a211-466c-8ac3-cb91266a066a',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -169,17 +167,21 @@ describe('resource threatEvents', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.edit('event_id', {
       account_id: 'account_id',
+      datasetId: '9b769969-a211-466c-8ac3-cb91266a066a',
       attacker: 'Flying Yeti',
       attackerCountry: 'CN',
       category: 'Domain Resolution',
       createdAt: '2025-12-19T00:00:00Z',
-      datasetId: '9b769969-a211-466c-8ac3-cb91266a066a',
       date: '2022-04-01T00:00:00Z',
       event: 'An attacker registered the domain domain.com',
       indicator: 'domain2.com',
       indicatorType: 'domain',
       insight: 'new insight',
-      raw: { data: { foo: 'bar' }, source: 'example.com', tlp: 'amber' },
+      raw: {
+        data: { foo: 'bar' },
+        source: 'example.com',
+        tlp: 'amber',
+      },
       targetCountry: 'US',
       targetIndustry: 'Insurance',
       tlp: 'amber',

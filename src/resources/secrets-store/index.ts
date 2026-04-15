@@ -3,7 +3,6 @@
 export { Quota, type QuotaGetResponse, type QuotaGetParams } from './quota';
 export { SecretsStore } from './secrets-store';
 export {
-  StoreCreateResponsesSinglePage,
   StoreListResponsesV4PagePaginationArray,
   Stores,
   type StoreCreateResponse,

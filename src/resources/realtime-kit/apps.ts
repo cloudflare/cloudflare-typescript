@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Apps extends APIResource {
@@ -14,8 +15,16 @@ export class Apps extends APIResource {
    * });
    * ```
    */
-  get(params: AppGetParams, options?: Core.RequestOptions): Core.APIPromise<AppGetResponse> {
-    const { account_id } = params;
+  get(params?: AppGetParams, options?: Core.RequestOptions): Core.APIPromise<AppGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<AppGetResponse>;
+  get(
+    params: AppGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AppGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/apps`, options);
   }
 
@@ -31,7 +40,7 @@ export class Apps extends APIResource {
    * ```
    */
   post(params: AppPostParams, options?: Core.RequestOptions): Core.APIPromise<AppPostResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/realtime/kit/apps`, { body, ...options });
   }
 }
@@ -78,17 +87,17 @@ export interface AppGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AppPostParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 }

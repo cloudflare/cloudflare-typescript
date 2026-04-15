@@ -26,7 +26,7 @@ export class ConnectivityPrecheck extends APIResource {
     params: ConnectivityPrecheckSourceParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectivityPrecheckSourceResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/slurper/source/connectivity-precheck`, {
         body,
@@ -56,7 +56,7 @@ export class ConnectivityPrecheck extends APIResource {
     params: ConnectivityPrecheckTargetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectivityPrecheckTargetResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/slurper/target/connectivity-precheck`, {
         body,
@@ -82,37 +82,42 @@ export type ConnectivityPrecheckSourceParams =
 export declare namespace ConnectivityPrecheckSourceParams {
   export interface R2SlurperS3SourceSchema {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     bucket: string;
 
     /**
-     * Body param:
+     * Body param
      */
     secret: R2SlurperS3SourceSchema.Secret;
 
     /**
-     * Body param:
+     * Body param
      */
     vendor: 's3';
 
     /**
-     * Body param:
+     * Body param
      */
     endpoint?: string | null;
 
     /**
-     * Body param:
+     * Body param
+     */
+    keys?: Array<string> | null;
+
+    /**
+     * Body param
      */
     pathPrefix?: string | null;
 
     /**
-     * Body param:
+     * Body param
      */
     region?: string | null;
   }
@@ -127,27 +132,32 @@ export declare namespace ConnectivityPrecheckSourceParams {
 
   export interface R2SlurperGcsSourceSchema {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     bucket: string;
 
     /**
-     * Body param:
+     * Body param
      */
     secret: R2SlurperGcsSourceSchema.Secret;
 
     /**
-     * Body param:
+     * Body param
      */
     vendor: 'gcs';
 
     /**
-     * Body param:
+     * Body param
+     */
+    keys?: Array<string> | null;
+
+    /**
+     * Body param
      */
     pathPrefix?: string | null;
   }
@@ -162,32 +172,37 @@ export declare namespace ConnectivityPrecheckSourceParams {
 
   export interface R2SlurperR2SourceSchema {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     bucket: string;
 
     /**
-     * Body param:
+     * Body param
      */
     secret: R2SlurperR2SourceSchema.Secret;
 
     /**
-     * Body param:
+     * Body param
      */
     vendor: SippyAPI.ProviderParam;
 
     /**
-     * Body param:
+     * Body param
      */
     jurisdiction?: 'default' | 'eu' | 'fedramp';
 
     /**
-     * Body param:
+     * Body param
+     */
+    keys?: Array<string> | null;
+
+    /**
+     * Body param
      */
     pathPrefix?: string | null;
   }
@@ -203,27 +218,27 @@ export declare namespace ConnectivityPrecheckSourceParams {
 
 export interface ConnectivityPrecheckTargetParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   bucket: string;
 
   /**
-   * Body param:
+   * Body param
    */
   secret: ConnectivityPrecheckTargetParams.Secret;
 
   /**
-   * Body param:
+   * Body param
    */
   vendor: SippyAPI.ProviderParam;
 
   /**
-   * Body param:
+   * Body param
    */
   jurisdiction?: 'default' | 'eu' | 'fedramp';
 }

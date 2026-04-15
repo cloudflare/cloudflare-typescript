@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
 import * as CustomHostnamesAPI from '../custom-hostnames';
@@ -36,7 +37,7 @@ export class Certificates extends APIResource {
     params: CertificateUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(
         `/zones/${zone_id}/custom_hostnames/${customHostnameId}/certificate_pack/${certificatePackId}/certificates/${certificateId}`,
@@ -66,10 +67,26 @@ export class Certificates extends APIResource {
     customHostnameId: string,
     certificatePackId: string,
     certificateId: string,
-    params: CertificateDeleteParams,
+    params?: CertificateDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateDeleteResponse>;
+  delete(
+    customHostnameId: string,
+    certificatePackId: string,
+    certificateId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateDeleteResponse>;
+  delete(
+    customHostnameId: string,
+    certificatePackId: string,
+    certificateId: string,
+    params: CertificateDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(customHostnameId, certificatePackId, certificateId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(
       `/zones/${zone_id}/custom_hostnames/${customHostnameId}/certificate_pack/${certificatePackId}/certificates/${certificateId}`,
       options,
@@ -87,8 +104,6 @@ export interface CertificateUpdateResponse {
    * The custom hostname that will point to your hostname via CNAME.
    */
   hostname: string;
-
-  ssl: CertificateUpdateResponse.SSL;
 
   /**
    * This is the time the hostname was created.
@@ -127,6 +142,8 @@ export interface CertificateUpdateResponse {
    */
   ownership_verification_http?: CertificateUpdateResponse.OwnershipVerificationHTTP;
 
+  ssl?: CertificateUpdateResponse.SSL;
+
   /**
    * Status of the hostname's activation.
    */
@@ -155,6 +172,43 @@ export interface CertificateUpdateResponse {
 }
 
 export namespace CertificateUpdateResponse {
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  export interface OwnershipVerification {
+    /**
+     * DNS Name for record.
+     */
+    name?: string;
+
+    /**
+     * DNS Record type.
+     */
+    type?: 'txt';
+
+    /**
+     * Content for the record.
+     */
+    value?: string;
+  }
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  export interface OwnershipVerificationHTTP {
+    /**
+     * Token to be served.
+     */
+    http_body?: string;
+
+    /**
+     * The HTTP URL that will be checked during custom hostname verification and where
+     * the customer should host the token.
+     */
+    http_url?: string;
+  }
+
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -188,6 +242,11 @@ export namespace CertificateUpdateResponse {
      * The key for a custom uploaded certificate.
      */
     custom_key?: string;
+
+    /**
+     * DCV Delegation records for domain validation.
+     */
+    dcv_delegation_records?: Array<SSL.DCVDelegationRecord>;
 
     /**
      * The time the custom certificate expires on.
@@ -273,6 +332,52 @@ export namespace CertificateUpdateResponse {
   }
 
   export namespace SSL {
+    export interface DCVDelegationRecord {
+      /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
+       * The set of email addresses that the certificate authority (CA) will use to
+       * complete domain validation.
+       */
+      emails?: Array<string>;
+
+      /**
+       * The content that the certificate authority (CA) will expect to find at the
+       * http_url during the domain validation.
+       */
+      http_body?: string;
+
+      /**
+       * The url that will be checked during domain validation.
+       */
+      http_url?: string;
+
+      /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
+       * The hostname that the certificate authority (CA) will check for a TXT record
+       * during domain validation .
+       */
+      txt_name?: string;
+
+      /**
+       * The TXT record that the certificate authority (CA) will check during domain
+       * validation.
+       */
+      txt_value?: string;
+    }
+
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -310,6 +415,16 @@ export namespace CertificateUpdateResponse {
 
     export interface ValidationRecord {
       /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
@@ -327,6 +442,11 @@ export namespace CertificateUpdateResponse {
       http_url?: string;
 
       /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
        * The hostname that the certificate authority (CA) will check for a TXT record
        * during domain validation .
        */
@@ -338,43 +458,6 @@ export namespace CertificateUpdateResponse {
        */
       txt_value?: string;
     }
-  }
-
-  /**
-   * This is a record which can be placed to activate a hostname.
-   */
-  export interface OwnershipVerification {
-    /**
-     * DNS Name for record.
-     */
-    name?: string;
-
-    /**
-     * DNS Record type.
-     */
-    type?: 'txt';
-
-    /**
-     * Content for the record.
-     */
-    value?: string;
-  }
-
-  /**
-   * This presents the token to be served by the given http url to activate a
-   * hostname.
-   */
-  export interface OwnershipVerificationHTTP {
-    /**
-     * Token to be served.
-     */
-    http_body?: string;
-
-    /**
-     * The HTTP URL that will be checked during custom hostname verification and where
-     * the customer should host the token.
-     */
-    http_url?: string;
   }
 }
 
@@ -389,7 +472,7 @@ export interface CertificateUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: If a custom uploaded certificate is used.
@@ -406,7 +489,7 @@ export interface CertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Certificates {

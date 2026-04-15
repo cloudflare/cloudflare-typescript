@@ -23,7 +23,7 @@ export class WARPChangeEvents extends APIResource {
     params: WARPChangeEventGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WARPChangeEventGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/warp-change-events`, {
         query,
@@ -66,6 +66,11 @@ export namespace WARPChangeEventGetResponse {
     hostname?: string;
 
     /**
+     * API Resource UUID tag.
+     */
+    registration_id?: string;
+
+    /**
      * The serial number of the machine the event is from
      */
     serial_number?: string;
@@ -103,6 +108,11 @@ export namespace WARPChangeEventGetResponse {
      * The hostname of the machine the event is from
      */
     hostname?: string;
+
+    /**
+     * API Resource UUID tag.
+     */
+    registration_id?: string;
 
     /**
      * The serial number of the machine the event is from
@@ -163,7 +173,7 @@ export interface WARPChangeEventGetParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format

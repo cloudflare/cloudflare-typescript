@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class UniqueDevices extends APIResource {
@@ -16,8 +17,16 @@ export class UniqueDevices extends APIResource {
    *   });
    * ```
    */
-  list(params: UniqueDeviceListParams, options?: Core.RequestOptions): Core.APIPromise<UniqueDevices> {
-    const { account_id, ...query } = params;
+  list(params?: UniqueDeviceListParams, options?: Core.RequestOptions): Core.APIPromise<UniqueDevices>;
+  list(options?: Core.RequestOptions): Core.APIPromise<UniqueDevices>;
+  list(
+    params: UniqueDeviceListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UniqueDevices> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/tests/unique-devices`, {
         query,
@@ -38,7 +47,7 @@ export interface UniqueDeviceListParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Optionally filter result stats to a specific device(s). Cannot be

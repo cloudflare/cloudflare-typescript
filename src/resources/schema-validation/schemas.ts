@@ -1,12 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Schemas extends APIResource {
   /**
-   * Upload a schema
+   * Uploads a new OpenAPI schema for API Shield schema validation. The schema
+   * defines expected request/response formats for API endpoints.
    *
    * @example
    * ```ts
@@ -21,7 +23,7 @@ export class Schemas extends APIResource {
    * ```
    */
   create(params: SchemaCreateParams, options?: Core.RequestOptions): Core.APIPromise<PublicSchema> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/schema_validation/schemas`, {
         body,
@@ -31,7 +33,7 @@ export class Schemas extends APIResource {
   }
 
   /**
-   * List all uploaded schemas
+   * Lists all OpenAPI schemas uploaded to API Shield with pagination support.
    *
    * @example
    * ```ts
@@ -44,10 +46,18 @@ export class Schemas extends APIResource {
    * ```
    */
   list(
-    params: SchemaListParams,
+    params?: SchemaListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema>;
+  list(options?: Core.RequestOptions): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema>;
+  list(
+    params: SchemaListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/schema_validation/schemas`,
       PublicSchemasV4PagePaginationArray,
@@ -56,7 +66,8 @@ export class Schemas extends APIResource {
   }
 
   /**
-   * Delete a schema
+   * Permanently removes an uploaded OpenAPI schema from API Shield. Operations using
+   * this schema will lose their validation rules.
    *
    * @example
    * ```ts
@@ -68,10 +79,19 @@ export class Schemas extends APIResource {
    */
   delete(
     schemaId: string,
-    params: SchemaDeleteParams,
+    params?: SchemaDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SchemaDeleteResponse>;
+  delete(schemaId: string, options?: Core.RequestOptions): Core.APIPromise<SchemaDeleteResponse>;
+  delete(
+    schemaId: string,
+    params: SchemaDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SchemaDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(schemaId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/schema_validation/schemas/${schemaId}`,
@@ -81,7 +101,8 @@ export class Schemas extends APIResource {
   }
 
   /**
-   * Edit details of a schema to enable validation
+   * Modifies an existing OpenAPI schema in API Shield, updating the validation rules
+   * for associated API operations.
    *
    * @example
    * ```ts
@@ -97,7 +118,7 @@ export class Schemas extends APIResource {
     params: SchemaEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PublicSchema> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/schema_validation/schemas/${schemaId}`, {
         body,
@@ -107,7 +128,8 @@ export class Schemas extends APIResource {
   }
 
   /**
-   * Get details of a schema
+   * Gets the contents and metadata of a specific OpenAPI schema uploaded to API
+   * Shield.
    *
    * @example
    * ```ts
@@ -120,10 +142,19 @@ export class Schemas extends APIResource {
    */
   get(
     schemaId: string,
-    params: SchemaGetParams,
+    params?: SchemaGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PublicSchema>;
+  get(schemaId: string, options?: Core.RequestOptions): Core.APIPromise<PublicSchema>;
+  get(
+    schemaId: string,
+    params: SchemaGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PublicSchema> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(schemaId, {}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/schema_validation/schemas/${schemaId}`, {
         query,
@@ -178,7 +209,7 @@ export interface SchemaCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The kind of the schema
@@ -205,7 +236,7 @@ export interface SchemaListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.
@@ -222,14 +253,14 @@ export interface SchemaDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SchemaEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Flag whether schema is enabled for validation.
@@ -241,7 +272,7 @@ export interface SchemaGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.

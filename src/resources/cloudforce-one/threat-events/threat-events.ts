@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as AttackersAPI from './attackers';
 import { AttackerListParams, AttackerListResponse, Attackers } from './attackers';
@@ -96,7 +97,7 @@ export class ThreatEvents extends APIResource {
     params: ThreatEventCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ThreatEventCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/cloudforce-one/events/create`, { body, ...options });
   }
 
@@ -116,35 +117,19 @@ export class ThreatEvents extends APIResource {
    * ```
    */
   list(
-    params: ThreatEventListParams,
+    params?: ThreatEventListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ThreatEventListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<ThreatEventListResponse>;
+  list(
+    params: ThreatEventListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ThreatEventListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events`, { query, ...options });
-  }
-
-  /**
-   * The `datasetId` parameter must be defined. To list existing datasets (and their
-   * IDs) in your account, use the
-   * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
-   * endpoint.
-   *
-   * @example
-   * ```ts
-   * const threatEvent =
-   *   await client.cloudforceOne.threatEvents.delete(
-   *     'event_id',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
-   */
-  delete(
-    eventId: string,
-    params: ThreatEventDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ThreatEventDeleteResponse> {
-    const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/cloudforce-one/events/${eventId}`, options);
   }
 
   /**
@@ -176,7 +161,7 @@ export class ThreatEvents extends APIResource {
     params: ThreatEventBulkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ThreatEventBulkCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/cloudforce-one/events/create/bulk`, {
       body,
       ...options,
@@ -191,6 +176,7 @@ export class ThreatEvents extends APIResource {
    * const response =
    *   await client.cloudforceOne.threatEvents.edit('event_id', {
    *     account_id: 'account_id',
+   *     datasetId: '9b769969-a211-466c-8ac3-cb91266a066a',
    *   });
    * ```
    */
@@ -199,7 +185,7 @@ export class ThreatEvents extends APIResource {
     params: ThreatEventEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ThreatEventEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.patch(`/accounts/${account_id}/cloudforce-one/events/${eventId}`, {
       body,
       ...options,
@@ -214,10 +200,19 @@ export class ThreatEvents extends APIResource {
    */
   get(
     eventId: string,
-    params: ThreatEventGetParams,
+    params?: ThreatEventGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ThreatEventGetResponse>;
+  get(eventId: string, options?: Core.RequestOptions): Core.APIPromise<ThreatEventGetResponse>;
+  get(
+    eventId: string,
+    params: ThreatEventGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ThreatEventGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(eventId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events/${eventId}`, options);
   }
 }
@@ -228,6 +223,8 @@ export interface ThreatEventCreateResponse {
   attackerCountry: string;
 
   category: string;
+
+  datasetId: string;
 
   date: string;
 
@@ -244,6 +241,8 @@ export interface ThreatEventCreateResponse {
   killChain: number;
 
   mitreAttack: Array<string>;
+
+  mitreCapec: Array<string>;
 
   numReferenced: number;
 
@@ -284,6 +283,8 @@ export namespace ThreatEventListResponse {
 
     category: string;
 
+    datasetId: string;
+
     date: string;
 
     event: string;
@@ -299,6 +300,8 @@ export namespace ThreatEventListResponse {
     killChain: number;
 
     mitreAttack: Array<string>;
+
+    mitreCapec: Array<string>;
 
     numReferenced: number;
 
@@ -330,10 +333,6 @@ export namespace ThreatEventListResponse {
   }
 }
 
-export interface ThreatEventDeleteResponse {
-  uuid: string;
-}
-
 /**
  * Detailed result of bulk event creation with auto-tag management
  */
@@ -359,14 +358,15 @@ export interface ThreatEventBulkCreateResponse {
   queuedIndicatorsCount: number;
 
   /**
-   * Number of events skipped due to duplicate UUID (only when preserveUuid=true)
-   */
-  skippedEventsCount: number;
-
-  /**
    * Correlation ID for async indicator processing
    */
   createBulkEventsRequestId?: string;
+
+  /**
+   * Array of created events with UUIDs and shard locations. Only present when
+   * includeCreatedEvents=true
+   */
+  createdEvents?: Array<ThreatEventBulkCreateResponse.CreatedEvent>;
 
   /**
    * Array of error details
@@ -375,6 +375,23 @@ export interface ThreatEventBulkCreateResponse {
 }
 
 export namespace ThreatEventBulkCreateResponse {
+  export interface CreatedEvent {
+    /**
+     * Original index in the input data array
+     */
+    eventIndex: number;
+
+    /**
+     * Dataset ID of the shard where the event was created
+     */
+    shardId: string;
+
+    /**
+     * UUID of the created event
+     */
+    uuid: string;
+  }
+
   export interface Error {
     /**
      * Error message
@@ -395,6 +412,8 @@ export interface ThreatEventEditResponse {
 
   category: string;
 
+  datasetId: string;
+
   date: string;
 
   event: string;
@@ -410,6 +429,8 @@ export interface ThreatEventEditResponse {
   killChain: number;
 
   mitreAttack: Array<string>;
+
+  mitreCapec: Array<string>;
 
   numReferenced: number;
 
@@ -447,6 +468,8 @@ export interface ThreatEventGetResponse {
 
   category: string;
 
+  datasetId: string;
+
   date: string;
 
   event: string;
@@ -462,6 +485,8 @@ export interface ThreatEventGetResponse {
   killChain: number;
 
   mitreAttack: Array<string>;
+
+  mitreCapec: Array<string>;
 
   numReferenced: number;
 
@@ -496,55 +521,55 @@ export interface ThreatEventCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   category: string;
 
   /**
-   * Body param:
+   * Body param
    */
   date: string;
 
   /**
-   * Body param:
+   * Body param
    */
   event: string;
 
   /**
-   * Body param:
+   * Body param
    */
   raw: ThreatEventCreateParams.Raw;
 
   /**
-   * Body param:
+   * Body param
    */
   tlp: string;
 
   /**
-   * Body param:
+   * Body param
    */
   accountId?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   attacker?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   attackerCountry?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   datasetId?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   indicator?: string;
 
@@ -555,35 +580,29 @@ export interface ThreatEventCreateParams {
   indicators?: Array<ThreatEventCreateParams.Indicator>;
 
   /**
-   * Body param:
+   * Body param
    */
   indicatorType?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   insight?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   tags?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   targetCountry?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   targetIndustry?: string;
-
-  /**
-   * Body param: Optional UUID for the event. Only used when preserveUuid=true in
-   * bulk create. Must be a valid UUID format.
-   */
-  uuid?: string;
 }
 
 export namespace ThreatEventCreateParams {
@@ -612,53 +631,72 @@ export interface ThreatEventListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param: Cursor for pagination. When provided, filters are embedded in the
+   * cursor so you only need to pass cursor and pageSize. Returned in the previous
+   * response's result_info.cursor field. Use cursor-based pagination for deep
+   * pagination (beyond 100,000 records) or for optimal performance.
+   */
+  cursor?: string;
+
+  /**
+   * Query param
    */
   datasetId?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   forceRefresh?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   format?: 'json' | 'stix2';
 
   /**
-   * Query param:
+   * Query param
    */
   order?: 'asc' | 'desc';
 
   /**
-   * Query param:
+   * Query param
    */
   orderBy?: string;
 
   /**
-   * Query param:
+   * Query param: Page number (1-indexed) for offset-based pagination. Limited to
+   * offset of 100,000 records. For deep pagination, use cursor-based pagination
+   * instead.
    */
   page?: number;
 
   /**
-   * Query param:
+   * Query param: Number of results per page. Maximum 25,000.
    */
   pageSize?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   search?: Array<ThreatEventListParams.Search>;
 }
 
 export namespace ThreatEventListParams {
   export interface Search {
+    /**
+     * Event field to search on. Allowed: attacker, attackerCountry, category,
+     * createdAt, date, event, indicator, indicatorType, killChain, mitreAttack, tags,
+     * targetCountry, targetIndustry, tlp, uuid.
+     */
     field?: string;
 
+    /**
+     * Search operator. Use 'in' for bulk lookup of up to 100 values at once, e.g.
+     * {field:'tags', op:'in', value:['malware','apt']}.
+     */
     op?:
       | 'equals'
       | 'not'
@@ -673,39 +711,35 @@ export namespace ThreatEventListParams {
       | 'in'
       | 'find';
 
+    /**
+     * Search value. String or number for most operators. Array for 'in' operator (max
+     * 100 items).
+     */
     value?: string | number | Array<string | number>;
   }
-}
-
-export interface ThreatEventDeleteParams {
-  /**
-   * Account ID.
-   */
-  account_id: string;
 }
 
 export interface ThreatEventBulkCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   data: Array<ThreatEventBulkCreateParams.Data>;
 
   /**
-   * Body param:
+   * Body param
    */
   datasetId: string;
 
   /**
-   * Body param: When true, use provided UUIDs from event data instead of generating
-   * new ones. Used for migration scenarios where original UUIDs must be preserved.
-   * Duplicate UUIDs will be skipped.
+   * Body param: When true, response includes array of created event UUIDs and shard
+   * IDs. Useful for tracking which events were created and where.
    */
-  preserveUuid?: boolean;
+  includeCreatedEvents?: boolean;
 }
 
 export namespace ThreatEventBulkCreateParams {
@@ -745,12 +779,6 @@ export namespace ThreatEventBulkCreateParams {
     targetCountry?: string;
 
     targetIndustry?: string;
-
-    /**
-     * Optional UUID for the event. Only used when preserveUuid=true in bulk create.
-     * Must be a valid UUID format.
-     */
-    uuid?: string;
   }
 
   export namespace Data {
@@ -780,75 +808,75 @@ export interface ThreatEventEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param: Dataset ID containing the event to update.
+   */
+  datasetId: string;
+
+  /**
+   * Body param
    */
   attacker?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   attackerCountry?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   category?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   createdAt?: string;
 
   /**
-   * Body param:
-   */
-  datasetId?: string;
-
-  /**
-   * Body param:
+   * Body param
    */
   date?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   event?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   indicator?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   indicatorType?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   insight?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   raw?: ThreatEventEditParams.Raw;
 
   /**
-   * Body param:
+   * Body param
    */
   targetCountry?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   targetIndustry?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   tlp?: string;
 }
@@ -867,7 +895,7 @@ export interface ThreatEventGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 ThreatEvents.Attackers = Attackers;
@@ -887,13 +915,11 @@ export declare namespace ThreatEvents {
   export {
     type ThreatEventCreateResponse as ThreatEventCreateResponse,
     type ThreatEventListResponse as ThreatEventListResponse,
-    type ThreatEventDeleteResponse as ThreatEventDeleteResponse,
     type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,
     type ThreatEventEditResponse as ThreatEventEditResponse,
     type ThreatEventGetResponse as ThreatEventGetResponse,
     type ThreatEventCreateParams as ThreatEventCreateParams,
     type ThreatEventListParams as ThreatEventListParams,
-    type ThreatEventDeleteParams as ThreatEventDeleteParams,
     type ThreatEventBulkCreateParams as ThreatEventBulkCreateParams,
     type ThreatEventEditParams as ThreatEventEditParams,
     type ThreatEventGetParams as ThreatEventGetParams,

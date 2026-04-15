@@ -32,6 +32,7 @@ describe('resource investigate', () => {
       detections_only: true,
       domain: 'domain',
       end: '2019-12-27T18:11:19.117Z',
+      exact_subject: 'exact_subject',
       final_disposition: 'MALICIOUS',
       message_action: 'PREVIEW',
       message_id: 'message_id',
@@ -43,6 +44,7 @@ describe('resource investigate', () => {
       sender: 'sender',
       start: '2019-12-27T18:11:19.117Z',
       subject: 'subject',
+      submissions: true,
     });
   });
 
@@ -62,6 +64,7 @@ describe('resource investigate', () => {
   test('get: required and optional params', async () => {
     const response = await client.emailSecurity.investigate.get('4Njp3P0STMz2c02Q', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      submission: true,
     });
   });
 });

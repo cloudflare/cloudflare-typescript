@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 /**
@@ -17,7 +18,7 @@ export class SchemaValidation extends APIResource {
     params: SchemaValidationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SchemaValidationUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return this._client.put(`/zones/${zone_id}/api_gateway/operations/${operationId}/schema_validation`, {
       body,
       ...options,
@@ -33,7 +34,7 @@ export class SchemaValidation extends APIResource {
     params: SchemaValidationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingsMultipleRequest> {
-    const { zone_id, settings_multiple_request } = params;
+    const { zone_id = this._client.zoneId, settings_multiple_request } = params;
     return (
       this._client.patch(`/zones/${zone_id}/api_gateway/operations/schema_validation`, {
         body: settings_multiple_request,
@@ -49,10 +50,19 @@ export class SchemaValidation extends APIResource {
    */
   get(
     operationId: string,
-    params: SchemaValidationGetParams,
+    params?: SchemaValidationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SchemaValidationGetResponse>;
+  get(operationId: string, options?: Core.RequestOptions): Core.APIPromise<SchemaValidationGetResponse>;
+  get(
+    operationId: string,
+    params: SchemaValidationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SchemaValidationGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(operationId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.get(
       `/zones/${zone_id}/api_gateway/operations/${operationId}/schema_validation`,
       options,
@@ -144,7 +154,7 @@ export interface SchemaValidationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: When set, this applies a mitigation action to this operation
@@ -163,10 +173,10 @@ export interface SchemaValidationEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   settings_multiple_request: SettingsMultipleRequestParam;
 }
@@ -175,7 +185,7 @@ export interface SchemaValidationGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace SchemaValidation {

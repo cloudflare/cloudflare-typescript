@@ -1,12 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
 export class MessageResource extends APIResource {
   /**
-   * Create a New Request Message
+   * Adds a message to a Cloudforce One intelligence request conversation.
    *
    * @example
    * ```ts
@@ -22,7 +23,7 @@ export class MessageResource extends APIResource {
     params: MessageCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Message> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/cloudforce-one/requests/${requestId}/message/new`, {
         body,
@@ -32,7 +33,7 @@ export class MessageResource extends APIResource {
   }
 
   /**
-   * Update a Request Message
+   * Updates a message in a Cloudforce One intelligence request thread.
    *
    * @example
    * ```ts
@@ -50,7 +51,7 @@ export class MessageResource extends APIResource {
     params: MessageUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Message> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/cloudforce-one/requests/${requestId}/message/${messageId}`, {
         body,
@@ -60,7 +61,7 @@ export class MessageResource extends APIResource {
   }
 
   /**
-   * Delete a Request Message
+   * Removes a message from a Cloudforce One intelligence request thread.
    *
    * @example
    * ```ts
@@ -75,10 +76,24 @@ export class MessageResource extends APIResource {
   delete(
     requestId: string,
     messageId: number,
-    params: MessageDeleteParams,
+    params?: MessageDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessageDeleteResponse>;
+  delete(
+    requestId: string,
+    messageId: number,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessageDeleteResponse>;
+  delete(
+    requestId: string,
+    messageId: number,
+    params: MessageDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MessageDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(requestId, messageId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/cloudforce-one/requests/${requestId}/message/${messageId}`,
       options,
@@ -86,7 +101,7 @@ export class MessageResource extends APIResource {
   }
 
   /**
-   * List Request Messages
+   * Lists messages in a Cloudforce One intelligence request conversation.
    *
    * @example
    * ```ts
@@ -108,7 +123,7 @@ export class MessageResource extends APIResource {
     params: MessageGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MessagesSinglePage, Message> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/cloudforce-one/requests/${requestId}/message`,
       MessagesSinglePage,
@@ -200,7 +215,7 @@ export interface MessageCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Content of message.
@@ -212,7 +227,7 @@ export interface MessageUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Content of message.
@@ -224,14 +239,14 @@ export interface MessageDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MessageGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Page number of results.

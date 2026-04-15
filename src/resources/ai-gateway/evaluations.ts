@@ -1,12 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Evaluations extends APIResource {
   /**
-   * Create a new Evaluation
+   * Creates a new AI Gateway.
    *
    * @example
    * ```ts
@@ -24,7 +25,7 @@ export class Evaluations extends APIResource {
     params: EvaluationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EvaluationCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/evaluations`, {
         body,
@@ -34,7 +35,7 @@ export class Evaluations extends APIResource {
   }
 
   /**
-   * List Evaluations
+   * Lists all AI Gateway evaluator types configured for the account.
    *
    * @example
    * ```ts
@@ -49,10 +50,22 @@ export class Evaluations extends APIResource {
    */
   list(
     gatewayId: string,
-    params: EvaluationListParams,
+    params?: EvaluationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<EvaluationListResponsesV4PagePaginationArray, EvaluationListResponse>;
+  list(
+    gatewayId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<EvaluationListResponsesV4PagePaginationArray, EvaluationListResponse>;
+  list(
+    gatewayId: string,
+    params: EvaluationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<EvaluationListResponsesV4PagePaginationArray, EvaluationListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(gatewayId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/evaluations`,
       EvaluationListResponsesV4PagePaginationArray,
@@ -61,7 +74,7 @@ export class Evaluations extends APIResource {
   }
 
   /**
-   * Delete a Evaluation
+   * Deletes an AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -76,10 +89,24 @@ export class Evaluations extends APIResource {
   delete(
     gatewayId: string,
     id: string,
-    params: EvaluationDeleteParams,
+    params?: EvaluationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EvaluationDeleteResponse>;
+  delete(
+    gatewayId: string,
+    id: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EvaluationDeleteResponse>;
+  delete(
+    gatewayId: string,
+    id: string,
+    params: EvaluationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EvaluationDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/evaluations/${id}`,
@@ -89,7 +116,7 @@ export class Evaluations extends APIResource {
   }
 
   /**
-   * Fetch a Evaluation
+   * Retrieves details for a specific AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -103,10 +130,20 @@ export class Evaluations extends APIResource {
   get(
     gatewayId: string,
     id: string,
-    params: EvaluationGetParams,
+    params?: EvaluationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EvaluationGetResponse>;
+  get(gatewayId: string, id: string, options?: Core.RequestOptions): Core.APIPromise<EvaluationGetResponse>;
+  get(
+    gatewayId: string,
+    id: string,
+    params: EvaluationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EvaluationGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/evaluations/${id}`,
@@ -120,10 +157,6 @@ export class EvaluationListResponsesV4PagePaginationArray extends V4PagePaginati
 
 export interface EvaluationCreateResponse {
   id: string;
-
-  account_id: string;
-
-  account_tag: string;
 
   created_at: string;
 
@@ -216,10 +249,6 @@ export namespace EvaluationCreateResponse {
 export interface EvaluationListResponse {
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
 
   datasets: Array<EvaluationListResponse.Dataset>;
@@ -310,10 +339,6 @@ export namespace EvaluationListResponse {
 
 export interface EvaluationDeleteResponse {
   id: string;
-
-  account_id: string;
-
-  account_tag: string;
 
   created_at: string;
 
@@ -406,10 +431,6 @@ export namespace EvaluationDeleteResponse {
 export interface EvaluationGetResponse {
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
 
   datasets: Array<EvaluationGetResponse.Dataset>;
@@ -500,39 +521,39 @@ export namespace EvaluationGetResponse {
 
 export interface EvaluationCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dataset_ids: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   evaluation_type_ids: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 }
 
 export interface EvaluationListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   name?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   processed?: boolean;
 
@@ -543,11 +564,11 @@ export interface EvaluationListParams extends V4PagePaginationArrayParams {
 }
 
 export interface EvaluationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface EvaluationGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Evaluations.EvaluationListResponsesV4PagePaginationArray = EvaluationListResponsesV4PagePaginationArray;

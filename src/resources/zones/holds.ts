@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Holds extends APIResource {
@@ -15,8 +16,16 @@ export class Holds extends APIResource {
    * });
    * ```
    */
-  create(params: HoldCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
-    const { zone_id, include_subdomains } = params;
+  create(params?: HoldCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold>;
+  create(options?: Core.RequestOptions): Core.APIPromise<ZoneHold>;
+  create(
+    params: HoldCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneHold> {
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { zone_id = this._client.zoneId, include_subdomains } = params;
     return (
       this._client.post(`/zones/${zone_id}/hold`, {
         query: { include_subdomains },
@@ -36,8 +45,16 @@ export class Holds extends APIResource {
    * });
    * ```
    */
-  delete(params: HoldDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
-    const { zone_id, hold_after } = params;
+  delete(params?: HoldDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<ZoneHold>;
+  delete(
+    params: HoldDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneHold> {
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { zone_id = this._client.zoneId, hold_after } = params;
     return (
       this._client.delete(`/zones/${zone_id}/hold`, {
         query: { hold_after },
@@ -57,8 +74,16 @@ export class Holds extends APIResource {
    * });
    * ```
    */
-  edit(params: HoldEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
-    const { zone_id, ...body } = params;
+  edit(params?: HoldEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold>;
+  edit(options?: Core.RequestOptions): Core.APIPromise<ZoneHold>;
+  edit(
+    params: HoldEditParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneHold> {
+    if (isRequestOptions(params)) {
+      return this.edit({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/hold`, { body, ...options }) as Core.APIPromise<{
         result: ZoneHold;
@@ -77,8 +102,16 @@ export class Holds extends APIResource {
    * });
    * ```
    */
-  get(params: HoldGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
-    const { zone_id } = params;
+  get(params?: HoldGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold>;
+  get(options?: Core.RequestOptions): Core.APIPromise<ZoneHold>;
+  get(
+    params: HoldGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneHold> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/hold`, options) as Core.APIPromise<{ result: ZoneHold }>
     )._thenUnwrap((obj) => obj.result);
@@ -97,7 +130,7 @@ export interface HoldCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: If provided, the zone hold will extend to block any subdomain of
@@ -112,7 +145,7 @@ export interface HoldDeleteParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: If `hold_after` is provided, the hold will be temporarily disabled,
@@ -126,7 +159,7 @@ export interface HoldEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: If `hold_after` is provided and future-dated, the hold will be
@@ -150,7 +183,7 @@ export interface HoldGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Holds {

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Embed extends APIResource {
@@ -17,9 +18,21 @@ export class Embed extends APIResource {
    * );
    * ```
    */
-  get(identifier: string, params: EmbedGetParams, options?: Core.RequestOptions): Core.APIPromise<string> {
-    const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/stream/${identifier}/embed`, options);
+  get(identifier: string, params?: EmbedGetParams, options?: Core.RequestOptions): Core.APIPromise<string>;
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<string>;
+  get(
+    identifier: string,
+    params: EmbedGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<string> {
+    if (isRequestOptions(params)) {
+      return this.get(identifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
+    return this._client.get(`/accounts/${account_id}/stream/${identifier}/embed`, {
+      ...options,
+      headers: { Accept: 'text/html', ...options?.headers },
+    });
   }
 }
 
@@ -29,7 +42,7 @@ export interface EmbedGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Embed {

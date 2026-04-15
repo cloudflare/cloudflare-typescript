@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -17,7 +18,7 @@ export class Silences extends APIResource {
    * ```
    */
   create(params: SilenceCreateParams, options?: Core.RequestOptions): Core.APIPromise<SilenceCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return this._client.post(`/accounts/${account_id}/alerting/v3/silences`, { body: body, ...options });
   }
 
@@ -41,7 +42,7 @@ export class Silences extends APIResource {
     params: SilenceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SilenceUpdateResponsesSinglePage, SilenceUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/alerting/v3/silences`,
       SilenceUpdateResponsesSinglePage,
@@ -63,10 +64,18 @@ export class Silences extends APIResource {
    * ```
    */
   list(
-    params: SilenceListParams,
+    params?: SilenceListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SilenceListResponsesSinglePage, SilenceListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<SilenceListResponsesSinglePage, SilenceListResponse>;
+  list(
+    params: SilenceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SilenceListResponsesSinglePage, SilenceListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/alerting/v3/silences`,
       SilenceListResponsesSinglePage,
@@ -87,10 +96,19 @@ export class Silences extends APIResource {
    */
   delete(
     silenceId: string,
-    params: SilenceDeleteParams,
+    params?: SilenceDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SilenceDeleteResponse>;
+  delete(silenceId: string, options?: Core.RequestOptions): Core.APIPromise<SilenceDeleteResponse>;
+  delete(
+    silenceId: string,
+    params: SilenceDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SilenceDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(silenceId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/alerting/v3/silences/${silenceId}`, options);
   }
 
@@ -107,10 +125,19 @@ export class Silences extends APIResource {
    */
   get(
     silenceId: string,
-    params: SilenceGetParams,
+    params?: SilenceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SilenceGetResponse>;
+  get(silenceId: string, options?: Core.RequestOptions): Core.APIPromise<SilenceGetResponse>;
+  get(
+    silenceId: string,
+    params: SilenceGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SilenceGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(silenceId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/alerting/v3/silences/${silenceId}`,
@@ -274,10 +301,10 @@ export interface SilenceCreateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<SilenceCreateParams.Body>;
 }
@@ -305,10 +332,10 @@ export interface SilenceUpdateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<SilenceUpdateParams.Body>;
 }
@@ -336,21 +363,21 @@ export interface SilenceListParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SilenceDeleteParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SilenceGetParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Silences.SilenceUpdateResponsesSinglePage = SilenceUpdateResponsesSinglePage;

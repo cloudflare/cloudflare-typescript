@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class NetworkPath extends APIResource {
@@ -19,10 +20,19 @@ export class NetworkPath extends APIResource {
    */
   get(
     testResultId: string,
-    params: NetworkPathGetParams,
+    params?: NetworkPathGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NetworkPathGetResponse>;
+  get(testResultId: string, options?: Core.RequestOptions): Core.APIPromise<NetworkPathGetResponse>;
+  get(
+    testResultId: string,
+    params: NetworkPathGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkPathGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(testResultId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dex/traceroute-test-results/${testResultId}/network-path`,
@@ -95,7 +105,7 @@ export interface NetworkPathGetParams {
   /**
    * unique identifier linked to an account
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace NetworkPath {

@@ -1,10 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomAPI from './custom';
 import {
-  Custom as CustomAPICustom,
+  Custom,
   CustomCreateParams,
   CustomCreateResponse,
   CustomDeleteParams,
@@ -19,7 +20,7 @@ import {
 } from './custom';
 import * as IntegrationAPI from './integration';
 import {
-  Integration as IntegrationAPIIntegration,
+  Integration,
   IntegrationCreateParams,
   IntegrationCreateResponse,
   IntegrationDeleteParams,
@@ -34,7 +35,7 @@ import {
 } from './integration';
 import * as PredefinedAPI from './predefined';
 import {
-  Predefined as PredefinedAPIPredefined,
+  Predefined,
   PredefinedCreateParams,
   PredefinedCreateResponse,
   PredefinedDeleteParams,
@@ -69,7 +70,7 @@ export class Entries extends APIResource {
    * ```
    */
   create(params: EntryCreateParams, options?: Core.RequestOptions): Core.APIPromise<EntryCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/entries`, { body, ...options }) as Core.APIPromise<{
         result: EntryCreateResponse;
@@ -98,7 +99,7 @@ export class Entries extends APIResource {
     params: EntryUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/entries/${entryId}`, {
         body,
@@ -121,10 +122,18 @@ export class Entries extends APIResource {
    * ```
    */
   list(
-    params: EntryListParams,
+    params?: EntryListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<EntryListResponsesSinglePage, EntryListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<EntryListResponsesSinglePage, EntryListResponse>;
+  list(
+    params: EntryListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<EntryListResponsesSinglePage, EntryListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dlp/entries`,
       EntryListResponsesSinglePage,
@@ -145,10 +154,19 @@ export class Entries extends APIResource {
    */
   delete(
     entryId: string,
-    params: EntryDeleteParams,
+    params?: EntryDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EntryDeleteResponse | null>;
+  delete(entryId: string, options?: Core.RequestOptions): Core.APIPromise<EntryDeleteResponse | null>;
+  delete(
+    entryId: string,
+    params: EntryDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(entryId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/dlp/entries/${entryId}`, options) as Core.APIPromise<{
         result: EntryDeleteResponse | null;
@@ -169,10 +187,19 @@ export class Entries extends APIResource {
    */
   get(
     entryId: string,
-    params: EntryGetParams,
+    params?: EntryGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EntryGetResponse>;
+  get(entryId: string, options?: Core.RequestOptions): Core.APIPromise<EntryGetResponse>;
+  get(
+    entryId: string,
+    params: EntryGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(entryId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/entries/${entryId}`, options) as Core.APIPromise<{
         result: EntryGetResponse;
@@ -188,6 +215,9 @@ export interface EntryCreateResponse {
 
   created_at: string;
 
+  /**
+   * @deprecated
+   */
   enabled: boolean;
 
   name: string;
@@ -196,160 +226,31 @@ export interface EntryCreateResponse {
 
   updated_at: string;
 
+  description?: string | null;
+
+  /**
+   * @deprecated
+   */
   profile_id?: string | null;
 }
 
 export type EntryUpdateResponse =
-  | EntryUpdateResponse.Custom
-  | EntryUpdateResponse.Predefined
-  | EntryUpdateResponse.Integration
-  | EntryUpdateResponse.ExactData
-  | EntryUpdateResponse.DocumentFingerprint
-  | EntryUpdateResponse.WordList;
+  | EntryUpdateResponse.CustomEntry
+  | EntryUpdateResponse.PredefinedEntry
+  | EntryUpdateResponse.IntegrationEntry
+  | EntryUpdateResponse.ExactDataEntry
+  | EntryUpdateResponse.DocumentFingerprintEntry
+  | EntryUpdateResponse.WordListEntry;
 
 export namespace EntryUpdateResponse {
-  export interface Custom {
-    id: string;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    pattern: ProfilesCustomAPI.Pattern;
-
-    type: 'custom';
-
-    updated_at: string;
-
-    profile_id?: string | null;
-  }
-
-  export interface Predefined {
-    id: string;
-
-    confidence: Predefined.Confidence;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'predefined';
-
-    profile_id?: string | null;
-
-    variant?: Predefined.Variant;
-  }
-
-  export namespace Predefined {
-    export interface Confidence {
-      /**
-       * Indicates whether this entry has AI remote service validation.
-       */
-      ai_context_available: boolean;
-
-      /**
-       * Indicates whether this entry has any form of validation that is not an AI remote
-       * service.
-       */
-      available: boolean;
-    }
-
-    export interface Variant {
-      topic_type: 'Intent' | 'Content';
-
-      type: 'PromptTopic';
-
-      description?: string | null;
-    }
-  }
-
-  export interface Integration {
-    id: string;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'integration';
-
-    updated_at: string;
-
-    profile_id?: string | null;
-  }
-
-  export interface ExactData {
-    id: string;
-
-    /**
-     * Only applies to custom word lists. Determines if the words should be matched in
-     * a case-sensitive manner Cannot be set to false if secret is true
-     */
-    case_sensitive: boolean;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    secret: boolean;
-
-    type: 'exact_data';
-
-    updated_at: string;
-  }
-
-  export interface DocumentFingerprint {
-    id: string;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'document_fingerprint';
-
-    updated_at: string;
-  }
-
-  export interface WordList {
-    id: string;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'word_list';
-
-    updated_at: string;
-
-    word_list: unknown;
-
-    profile_id?: string | null;
-  }
-}
-
-export type EntryListResponse =
-  | EntryListResponse.CustomEntry
-  | EntryListResponse.PredefinedEntry
-  | EntryListResponse.IntegrationEntry
-  | EntryListResponse.ExactDataEntry
-  | EntryListResponse.DocumentFingerprintEntry
-  | EntryListResponse.WordListEntry;
-
-export namespace EntryListResponse {
   export interface CustomEntry {
     id: string;
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -360,9 +261,12 @@ export namespace EntryListResponse {
 
     updated_at: string;
 
-    profile_id?: string | null;
+    description?: string | null;
 
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+    /**
+     * @deprecated
+     */
+    profile_id?: string | null;
   }
 
   export interface PredefinedEntry {
@@ -376,9 +280,10 @@ export namespace EntryListResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
     variant?: PredefinedEntry.Variant;
   }
@@ -420,11 +325,163 @@ export namespace EntryListResponse {
     updated_at: string;
 
     profile_id?: string | null;
+  }
+
+  export interface ExactDataEntry {
+    id: string;
+
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    secret: boolean;
+
+    type: 'exact_data';
+
+    updated_at: string;
+  }
+
+  export interface DocumentFingerprintEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'document_fingerprint';
+
+    updated_at: string;
+  }
+
+  export interface WordListEntry {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'word_list';
+
+    updated_at: string;
+
+    word_list: unknown;
+
+    profile_id?: string | null;
+  }
+}
+
+export type EntryListResponse =
+  | EntryListResponse.UnionMember0
+  | EntryListResponse.UnionMember1
+  | EntryListResponse.UnionMember2
+  | EntryListResponse.UnionMember3
+  | EntryListResponse.UnionMember4
+  | EntryListResponse.UnionMember5;
+
+export namespace EntryListResponse {
+  export interface UnionMember0 {
+    id: string;
+
+    created_at: string;
+
+    /**
+     * @deprecated
+     */
+    enabled: boolean;
+
+    name: string;
+
+    pattern: ProfilesCustomAPI.Pattern;
+
+    type: 'custom';
+
+    updated_at: string;
+
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
+    profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface ExactDataEntry {
+  export interface UnionMember1 {
+    id: string;
+
+    confidence: UnionMember1.Confidence;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'predefined';
+
+    /**
+     * @deprecated
+     */
+    profile_id?: string | null;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+
+    variant?: UnionMember1.Variant;
+  }
+
+  export namespace UnionMember1 {
+    export interface Confidence {
+      /**
+       * Indicates whether this entry has AI remote service validation.
+       */
+      ai_context_available: boolean;
+
+      /**
+       * Indicates whether this entry has any form of validation that is not an AI remote
+       * service.
+       */
+      available: boolean;
+    }
+
+    export interface Variant {
+      topic_type: 'Intent' | 'Content';
+
+      type: 'PromptTopic';
+
+      description?: string | null;
+    }
+  }
+
+  export interface UnionMember2 {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'integration';
+
+    updated_at: string;
+
+    profile_id?: string | null;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+  }
+
+  export interface UnionMember3 {
     id: string;
 
     /**
@@ -448,7 +505,7 @@ export namespace EntryListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface UnionMember4 {
     id: string;
 
     created_at: string;
@@ -464,7 +521,7 @@ export namespace EntryListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface WordListEntry {
+  export interface UnionMember5 {
     id: string;
 
     created_at: string;
@@ -501,6 +558,9 @@ export namespace EntryGetResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -511,6 +571,11 @@ export namespace EntryGetResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember0.Profile>;
@@ -540,6 +605,9 @@ export namespace EntryGetResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember1.Profile>;
@@ -714,27 +782,32 @@ export namespace EntryGetResponse {
 
 export interface EntryCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern: ProfilesCustomAPI.PatternParam;
 
   /**
-   * Body param:
+   * Body param
+   */
+  description?: string | null;
+
+  /**
+   * Body param
    */
   profile_id?: string;
 }
@@ -747,84 +820,89 @@ export type EntryUpdateParams =
 export declare namespace EntryUpdateParams {
   export interface Variant0 {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     name: string;
 
     /**
-     * Body param:
+     * Body param
      */
     pattern: ProfilesCustomAPI.PatternParam;
 
     /**
-     * Body param:
+     * Body param
      */
     type: 'custom';
 
     /**
-     * Body param:
+     * Body param
+     */
+    description?: string | null;
+
+    /**
+     * Body param
      */
     enabled?: boolean;
   }
 
   export interface Variant1 {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     type: 'predefined';
 
     /**
-     * Body param:
+     * Body param
      */
     enabled?: boolean;
   }
 
   export interface Variant2 {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     type: 'integration';
 
     /**
-     * Body param:
+     * Body param
      */
     enabled?: boolean;
   }
 }
 
 export interface EntryListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface EntryDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface EntryGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Entries.EntryListResponsesSinglePage = EntryListResponsesSinglePage;
-Entries.Custom = CustomAPICustom;
+Entries.Custom = Custom;
 Entries.CustomListResponsesSinglePage = CustomListResponsesSinglePage;
-Entries.Predefined = PredefinedAPIPredefined;
+Entries.Predefined = Predefined;
 Entries.PredefinedListResponsesSinglePage = PredefinedListResponsesSinglePage;
-Entries.Integration = IntegrationAPIIntegration;
+Entries.Integration = Integration;
 Entries.IntegrationListResponsesSinglePage = IntegrationListResponsesSinglePage;
 
 export declare namespace Entries {
@@ -843,7 +921,7 @@ export declare namespace Entries {
   };
 
   export {
-    CustomAPICustom as Custom,
+    Custom as Custom,
     type CustomCreateResponse as CustomCreateResponse,
     type CustomUpdateResponse as CustomUpdateResponse,
     type CustomListResponse as CustomListResponse,
@@ -858,7 +936,7 @@ export declare namespace Entries {
   };
 
   export {
-    PredefinedAPIPredefined as Predefined,
+    Predefined as Predefined,
     type PredefinedCreateResponse as PredefinedCreateResponse,
     type PredefinedUpdateResponse as PredefinedUpdateResponse,
     type PredefinedListResponse as PredefinedListResponse,
@@ -873,7 +951,7 @@ export declare namespace Entries {
   };
 
   export {
-    IntegrationAPIIntegration as Integration,
+    Integration as Integration,
     type IntegrationCreateResponse as IntegrationCreateResponse,
     type IntegrationUpdateResponse as IntegrationUpdateResponse,
     type IntegrationListResponse as IntegrationListResponse,

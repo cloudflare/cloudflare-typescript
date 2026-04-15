@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -21,10 +22,22 @@ export class Logs extends APIResource {
    */
   list(
     gatewayId: string,
-    params: LogListParams,
+    params?: LogListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LogListResponsesV4PagePaginationArray, LogListResponse>;
+  list(
+    gatewayId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LogListResponsesV4PagePaginationArray, LogListResponse>;
+  list(
+    gatewayId: string,
+    params: LogListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogListResponsesV4PagePaginationArray, LogListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(gatewayId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs`,
       LogListResponsesV4PagePaginationArray,
@@ -45,10 +58,19 @@ export class Logs extends APIResource {
    */
   delete(
     gatewayId: string,
-    params: LogDeleteParams,
+    params?: LogDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LogDeleteResponse>;
+  delete(gatewayId: string, options?: Core.RequestOptions): Core.APIPromise<LogDeleteResponse>;
+  delete(
+    gatewayId: string,
+    params: LogDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LogDeleteResponse> {
-    const { account_id, filters, limit, order_by, order_by_direction } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(gatewayId, {}, params);
+    }
+    const { account_id = this._client.accountId, filters, limit, order_by, order_by_direction } = params;
     return this._client.delete(`/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs`, {
       query: { filters, limit, order_by, order_by_direction },
       ...options,
@@ -56,7 +78,7 @@ export class Logs extends APIResource {
   }
 
   /**
-   * Patch Gateway Log
+   * Updates metadata for an AI Gateway log entry.
    *
    * @example
    * ```ts
@@ -70,10 +92,20 @@ export class Logs extends APIResource {
   edit(
     gatewayId: string,
     id: string,
-    params: LogEditParams,
+    params?: LogEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LogEditResponse>;
+  edit(gatewayId: string, id: string, options?: Core.RequestOptions): Core.APIPromise<LogEditResponse>;
+  edit(
+    gatewayId: string,
+    id: string,
+    params: LogEditParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LogEditResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.edit(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}`, {
         body,
@@ -83,7 +115,7 @@ export class Logs extends APIResource {
   }
 
   /**
-   * Get Gateway Log Detail
+   * Retrieves detailed information for a specific AI Gateway log entry.
    *
    * @example
    * ```ts
@@ -97,10 +129,20 @@ export class Logs extends APIResource {
   get(
     gatewayId: string,
     id: string,
-    params: LogGetParams,
+    params?: LogGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LogGetResponse>;
+  get(gatewayId: string, id: string, options?: Core.RequestOptions): Core.APIPromise<LogGetResponse>;
+  get(
+    gatewayId: string,
+    id: string,
+    params: LogGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LogGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}`,
@@ -110,7 +152,7 @@ export class Logs extends APIResource {
   }
 
   /**
-   * Get Gateway Log Request
+   * Retrieves the original request payload for an AI Gateway log entry.
    *
    * @example
    * ```ts
@@ -124,10 +166,20 @@ export class Logs extends APIResource {
   request(
     gatewayId: string,
     id: string,
-    params: LogRequestParams,
+    params?: LogRequestParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<unknown>;
+  request(gatewayId: string, id: string, options?: Core.RequestOptions): Core.APIPromise<unknown>;
+  request(
+    gatewayId: string,
+    id: string,
+    params: LogRequestParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.request(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}/request`,
       options,
@@ -135,7 +187,7 @@ export class Logs extends APIResource {
   }
 
   /**
-   * Get Gateway Log Response
+   * Retrieves the response payload for an AI Gateway log entry.
    *
    * @example
    * ```ts
@@ -149,10 +201,20 @@ export class Logs extends APIResource {
   response(
     gatewayId: string,
     id: string,
-    params: LogResponseParams,
+    params?: LogResponseParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<unknown>;
+  response(gatewayId: string, id: string, options?: Core.RequestOptions): Core.APIPromise<unknown>;
+  response(
+    gatewayId: string,
+    id: string,
+    params: LogResponseParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.response(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}/response`,
       options,
@@ -266,137 +328,137 @@ export type LogResponseResponse = unknown;
 
 export interface LogListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   cached?: boolean;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   end_date?: string;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   feedback?: 0 | 1;
 
   /**
-   * Query param:
+   * Query param
    */
   filters?: Array<LogListParams.Filter>;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   max_cost?: number;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   max_duration?: number;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   max_tokens_in?: number;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   max_tokens_out?: number;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   max_total_tokens?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   meta_info?: boolean;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   min_cost?: number;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   min_duration?: number;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   min_tokens_in?: number;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   min_tokens_out?: number;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   min_total_tokens?: number;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   model?: string;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   model_type?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   order_by?: 'created_at' | 'provider' | 'model' | 'model_type' | 'success' | 'cached';
 
   /**
-   * Query param:
+   * Query param
    */
   order_by_direction?: 'asc' | 'desc';
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   provider?: string;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   request_content_type?: string;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   response_content_type?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   search?: string;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   start_date?: string;
 
   /**
-   * @deprecated Query param:
+   * @deprecated Query param
    */
   success?: boolean;
 }
@@ -423,8 +485,6 @@ export namespace LogListParams {
       | 'event_id'
       | 'metadata.key'
       | 'metadata.value'
-      | 'prompts.prompt_id'
-      | 'prompts.version_id'
       | 'authentication'
       | 'wholesale'
       | 'compatibilityMode'
@@ -438,22 +498,22 @@ export namespace LogListParams {
 
 export interface LogDeleteParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   filters?: Array<LogDeleteParams.Filter>;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   order_by?:
     | 'created_at'
@@ -469,7 +529,7 @@ export interface LogDeleteParams {
     | 'feedback';
 
   /**
-   * Query param:
+   * Query param
    */
   order_by_direction?: 'asc' | 'desc';
 }
@@ -496,8 +556,6 @@ export namespace LogDeleteParams {
       | 'event_id'
       | 'metadata.key'
       | 'metadata.value'
-      | 'prompts.prompt_id'
-      | 'prompts.version_id'
       | 'authentication'
       | 'wholesale'
       | 'compatibilityMode'
@@ -511,36 +569,36 @@ export namespace LogDeleteParams {
 
 export interface LogEditParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   feedback?: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   metadata?: { [key: string]: string | number | boolean } | null;
 
   /**
-   * Body param:
+   * Body param
    */
   score?: number | null;
 }
 
 export interface LogGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LogRequestParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LogResponseParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Logs.LogListResponsesV4PagePaginationArray = LogListResponsesV4PagePaginationArray;

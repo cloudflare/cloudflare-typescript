@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -31,7 +32,7 @@ export class ServiceBindings extends APIResource {
     params: ServiceBindingCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceBinding> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`, {
         body,
@@ -61,10 +62,22 @@ export class ServiceBindings extends APIResource {
    */
   list(
     prefixId: string,
-    params: ServiceBindingListParams,
+    params?: ServiceBindingListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServiceBindingsSinglePage, ServiceBinding>;
+  list(
+    prefixId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServiceBindingsSinglePage, ServiceBinding>;
+  list(
+    prefixId: string,
+    params: ServiceBindingListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ServiceBindingsSinglePage, ServiceBinding> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(prefixId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`,
       ServiceBindingsSinglePage,
@@ -88,10 +101,24 @@ export class ServiceBindings extends APIResource {
   delete(
     prefixId: string,
     bindingId: string,
-    params: ServiceBindingDeleteParams,
+    params?: ServiceBindingDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceBindingDeleteResponse>;
+  delete(
+    prefixId: string,
+    bindingId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceBindingDeleteResponse>;
+  delete(
+    prefixId: string,
+    bindingId: string,
+    params: ServiceBindingDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceBindingDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(prefixId, bindingId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
       options,
@@ -114,10 +141,20 @@ export class ServiceBindings extends APIResource {
   get(
     prefixId: string,
     bindingId: string,
-    params: ServiceBindingGetParams,
+    params?: ServiceBindingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceBinding>;
+  get(prefixId: string, bindingId: string, options?: Core.RequestOptions): Core.APIPromise<ServiceBinding>;
+  get(
+    prefixId: string,
+    bindingId: string,
+    params: ServiceBindingGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceBinding> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(prefixId, bindingId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
@@ -219,7 +256,7 @@ export interface ServiceBindingCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: IP Prefix in Classless Inter-Domain Routing format.
@@ -237,21 +274,21 @@ export interface ServiceBindingListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServiceBindingDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServiceBindingGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 ServiceBindings.ServiceBindingsSinglePage = ServiceBindingsSinglePage;

@@ -1,207 +1,381 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
 export class Domains extends APIResource {
   /**
-   * Attaches a Worker to a zone and hostname.
+   * Attaches a domain that routes traffic to a Worker.
    *
    * @example
    * ```ts
    * const domain = await client.workers.domains.update({
-   *   account_id: '9a7806061c88ada191ed06f989cc3dac',
-   *   hostname: 'foo.example.com',
-   *   service: 'foo',
-   *   zone_id: '593c9c94de529bbbfaac7c53ced0447d',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   hostname: 'app.example.com',
+   *   service: 'my-worker',
    * });
    * ```
    */
-  update(params: DomainUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Domain> {
-    const { account_id, ...body } = params;
+  update(params: DomainUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DomainUpdateResponse> {
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/workers/domains`, { body, ...options }) as Core.APIPromise<{
-        result: Domain;
+        result: DomainUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Lists all Worker Domains for an account.
+   * Lists all domains for an account.
    *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const domain of client.workers.domains.list({
-   *   account_id: '9a7806061c88ada191ed06f989cc3dac',
-   * })) {
+   * for await (const domainListResponse of client.workers.domains.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
    *   // ...
    * }
    * ```
    */
-  list(params: DomainListParams, options?: Core.RequestOptions): Core.PagePromise<DomainsSinglePage, Domain> {
-    const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/workers/domains`, DomainsSinglePage, {
+  list(
+    params?: DomainListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse>;
+  list(
+    params: DomainListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/workers/domains`, DomainListResponsesSinglePage, {
       query,
       ...options,
     });
   }
 
   /**
-   * Detaches a Worker from a zone and hostname.
+   * Detaches a domain from a Worker. Both the Worker and all of its previews are no
+   * longer routable using this domain.
    *
    * @example
    * ```ts
-   * await client.workers.domains.delete(
+   * const domain = await client.workers.domains.delete(
    *   'dbe10b4bc17c295377eabd600e1787fd',
-   *   { account_id: '9a7806061c88ada191ed06f989cc3dac' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
-  delete(domainId: string, params: DomainDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/workers/domains/${domainId}`, {
-      ...options,
-      headers: { Accept: '*/*', ...options?.headers },
-    });
+  delete(
+    domainId: string,
+    params?: DomainDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainDeleteResponse>;
+  delete(domainId: string, options?: Core.RequestOptions): Core.APIPromise<DomainDeleteResponse>;
+  delete(
+    domainId: string,
+    params: DomainDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainDeleteResponse> {
+    if (isRequestOptions(params)) {
+      return this.delete(domainId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
+    return this._client.delete(`/accounts/${account_id}/workers/domains/${domainId}`, options);
   }
 
   /**
-   * Gets a Worker domain.
+   * Gets information about a domain.
    *
    * @example
    * ```ts
    * const domain = await client.workers.domains.get(
    *   'dbe10b4bc17c295377eabd600e1787fd',
-   *   { account_id: '9a7806061c88ada191ed06f989cc3dac' },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
-  get(domainId: string, params: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<Domain> {
-    const { account_id } = params;
+  get(
+    domainId: string,
+    params?: DomainGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainGetResponse>;
+  get(domainId: string, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse>;
+  get(
+    domainId: string,
+    params: DomainGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(domainId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/workers/domains/${domainId}`, options) as Core.APIPromise<{
-        result: Domain;
+        result: DomainGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DomainsSinglePage extends SinglePage<Domain> {}
+export class DomainListResponsesSinglePage extends SinglePage<DomainListResponse> {}
 
-export interface Domain {
+export interface DomainUpdateResponse {
   /**
-   * Identifer of the Worker Domain.
+   * Immutable ID of the domain.
    */
-  id?: string;
+  id: string;
 
   /**
-   * @deprecated Worker environment associated with the zone and hostname.
+   * ID of the TLS certificate issued for the domain.
    */
-  environment?: string;
+  cert_id: string;
 
   /**
-   * Hostname of the Worker Domain.
+   * @deprecated Worker environment associated with the domain.
    */
-  hostname?: string;
+  environment: string;
 
   /**
-   * Worker service associated with the zone and hostname.
-   */
-  service?: string;
-
-  /**
-   * Identifier of the zone.
-   */
-  zone_id?: string;
-
-  /**
-   * Name of the zone.
-   */
-  zone_name?: string;
-}
-
-export interface DomainUpdateParams {
-  /**
-   * Path param: Identifer of the account.
-   */
-  account_id: string;
-
-  /**
-   * Body param: Hostname of the Worker Domain.
+   * Hostname of the domain. Can be either the zone apex or a subdomain of the zone.
+   * Requests to this hostname will be routed to the configured Worker.
    */
   hostname: string;
 
   /**
-   * Body param: Worker service associated with the zone and hostname.
+   * Name of the Worker associated with the domain. Requests to the configured
+   * hostname will be routed to this Worker.
    */
   service: string;
 
   /**
-   * Body param: Identifier of the zone.
+   * ID of the zone containing the domain hostname.
    */
   zone_id: string;
 
   /**
-   * @deprecated Body param: Worker environment associated with the zone and
-   * hostname.
+   * Name of the zone containing the domain hostname.
    */
-  environment?: string;
+  zone_name: string;
 }
 
-export interface DomainListParams {
+export interface DomainListResponse {
   /**
-   * Path param: Identifer of the account.
+   * Immutable ID of the domain.
    */
-  account_id: string;
+  id: string;
 
   /**
-   * Query param: Worker environment associated with the zone and hostname.
+   * ID of the TLS certificate issued for the domain.
+   */
+  cert_id: string;
+
+  /**
+   * @deprecated Worker environment associated with the domain.
+   */
+  environment: string;
+
+  /**
+   * Hostname of the domain. Can be either the zone apex or a subdomain of the zone.
+   * Requests to this hostname will be routed to the configured Worker.
+   */
+  hostname: string;
+
+  /**
+   * Name of the Worker associated with the domain. Requests to the configured
+   * hostname will be routed to this Worker.
+   */
+  service: string;
+
+  /**
+   * ID of the zone containing the domain hostname.
+   */
+  zone_id: string;
+
+  /**
+   * Name of the zone containing the domain hostname.
+   */
+  zone_name: string;
+}
+
+export interface DomainDeleteResponse {
+  errors: Array<DomainDeleteResponse.Error>;
+
+  messages: Array<DomainDeleteResponse.Message>;
+
+  /**
+   * Whether the API call was successful.
+   */
+  success: true;
+}
+
+export namespace DomainDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
+export interface DomainGetResponse {
+  /**
+   * Immutable ID of the domain.
+   */
+  id: string;
+
+  /**
+   * ID of the TLS certificate issued for the domain.
+   */
+  cert_id: string;
+
+  /**
+   * @deprecated Worker environment associated with the domain.
+   */
+  environment: string;
+
+  /**
+   * Hostname of the domain. Can be either the zone apex or a subdomain of the zone.
+   * Requests to this hostname will be routed to the configured Worker.
+   */
+  hostname: string;
+
+  /**
+   * Name of the Worker associated with the domain. Requests to the configured
+   * hostname will be routed to this Worker.
+   */
+  service: string;
+
+  /**
+   * ID of the zone containing the domain hostname.
+   */
+  zone_id: string;
+
+  /**
+   * Name of the zone containing the domain hostname.
+   */
+  zone_name: string;
+}
+
+export interface DomainUpdateParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id?: string;
+
+  /**
+   * Body param: Hostname of the domain. Can be either the zone apex or a subdomain
+   * of the zone. Requests to this hostname will be routed to the configured Worker.
+   */
+  hostname: string;
+
+  /**
+   * Body param: Name of the Worker associated with the domain. Requests to the
+   * configured hostname will be routed to this Worker.
+   */
+  service: string;
+
+  /**
+   * @deprecated Body param: Worker environment associated with the domain.
    */
   environment?: string;
 
   /**
-   * Query param: Hostname of the Worker Domain.
-   */
-  hostname?: string;
-
-  /**
-   * Query param: Worker service associated with the zone and hostname.
-   */
-  service?: string;
-
-  /**
-   * Query param: Identifier of the zone.
+   * Body param: ID of the zone containing the domain hostname.
    */
   zone_id?: string;
 
   /**
-   * Query param: Name of the zone.
+   * Body param: Name of the zone containing the domain hostname.
+   */
+  zone_name?: string;
+}
+
+export interface DomainListParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id?: string;
+
+  /**
+   * Query param: Worker environment associated with the domain.
+   */
+  environment?: string;
+
+  /**
+   * Query param: Hostname of the domain.
+   */
+  hostname?: string;
+
+  /**
+   * Query param: Name of the Worker associated with the domain.
+   */
+  service?: string;
+
+  /**
+   * Query param: ID of the zone containing the domain hostname.
+   */
+  zone_id?: string;
+
+  /**
+   * Query param: Name of the zone containing the domain hostname.
    */
   zone_name?: string;
 }
 
 export interface DomainDeleteParams {
   /**
-   * Identifer of the account.
+   * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DomainGetParams {
   /**
-   * Identifer of the account.
+   * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
-Domains.DomainsSinglePage = DomainsSinglePage;
+Domains.DomainListResponsesSinglePage = DomainListResponsesSinglePage;
 
 export declare namespace Domains {
   export {
-    type Domain as Domain,
-    DomainsSinglePage as DomainsSinglePage,
+    type DomainUpdateResponse as DomainUpdateResponse,
+    type DomainListResponse as DomainListResponse,
+    type DomainDeleteResponse as DomainDeleteResponse,
+    type DomainGetResponse as DomainGetResponse,
+    DomainListResponsesSinglePage as DomainListResponsesSinglePage,
     type DomainUpdateParams as DomainUpdateParams,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,

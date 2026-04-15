@@ -8,13 +8,13 @@ export {
   type AuthorityGetParams,
 } from './authorities';
 export {
-  Ct,
-  type CtSummaryResponse,
-  type CtTimeseriesResponse,
-  type CtTimeseriesGroupsResponse,
-  type CtSummaryParams,
-  type CtTimeseriesParams,
-  type CtTimeseriesGroupsParams,
+  CT,
+  type CTSummaryResponse,
+  type CTTimeseriesResponse,
+  type CTTimeseriesGroupsResponse,
+  type CTSummaryParams,
+  type CTTimeseriesParams,
+  type CTTimeseriesGroupsParams,
 } from './ct';
 export {
   Logs,

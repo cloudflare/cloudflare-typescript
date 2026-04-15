@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as HealthAPI from './health';
 import { Health } from './health';
@@ -22,7 +23,7 @@ export class Datasets extends APIResource {
    * ```
    */
   create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/cloudforce-one/events/dataset/create`, {
       body,
       ...options,
@@ -40,8 +41,16 @@ export class Datasets extends APIResource {
    *   });
    * ```
    */
-  list(params: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse> {
-    const { account_id } = params;
+  list(params?: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>;
+  list(
+    params: DatasetListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatasetListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events/dataset`, options);
   }
 
@@ -53,7 +62,11 @@ export class Datasets extends APIResource {
    * const response =
    *   await client.cloudforceOne.threatEvents.datasets.edit(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 'account_id', isPublic: true, name: 'x' },
+   *     {
+   *       account_id: 'account_id',
+   *       isPublic: true,
+   *       name: 'x',
+   *     },
    *   );
    * ```
    */
@@ -62,7 +75,7 @@ export class Datasets extends APIResource {
     params: DatasetEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.patch(`/accounts/${account_id}/cloudforce-one/events/dataset/${datasetId}`, {
       body,
       ...options,
@@ -83,15 +96,25 @@ export class Datasets extends APIResource {
    */
   get(
     datasetId: string,
-    params: DatasetGetParams,
+    params?: DatasetGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatasetGetResponse>;
+  get(datasetId: string, options?: Core.RequestOptions): Core.APIPromise<DatasetGetResponse>;
+  get(
+    datasetId: string,
+    params: DatasetGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(datasetId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events/dataset/${datasetId}`, options);
   }
 
   /**
-   * Reads data for a raw event
+   * Retrieves the raw data associated with an event. Searches across all shards in
+   * the dataset.
    *
    * @example
    * ```ts
@@ -106,10 +129,20 @@ export class Datasets extends APIResource {
   raw(
     datasetId: string,
     eventId: string,
-    params: DatasetRawParams,
+    params?: DatasetRawParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatasetRawResponse>;
+  raw(datasetId: string, eventId: string, options?: Core.RequestOptions): Core.APIPromise<DatasetRawResponse>;
+  raw(
+    datasetId: string,
+    eventId: string,
+    params: DatasetRawParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetRawResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.raw(datasetId, eventId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/cloudforce-one/events/raw/${datasetId}/${eventId}`,
       options,
@@ -154,13 +187,13 @@ export interface DatasetGetResponse {
 }
 
 export interface DatasetRawResponse {
-  id: string;
+  id: number;
 
   accountId: number;
 
   created: string;
 
-  data: unknown;
+  data: string;
 
   source: string;
 
@@ -171,7 +204,7 @@ export interface DatasetCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: If true, then anyone can search the dataset. If false, then its
@@ -189,14 +222,14 @@ export interface DatasetListParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DatasetEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: If true, then anyone can search the dataset. If false, then its
@@ -214,14 +247,14 @@ export interface DatasetGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DatasetRawParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Datasets.Health = Health;

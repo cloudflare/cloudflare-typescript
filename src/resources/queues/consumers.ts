@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
@@ -13,7 +14,11 @@ export class Consumers extends APIResource {
    * ```ts
    * const consumer = await client.queues.consumers.create(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     script_name: 'my-consumer-worker',
+   *     type: 'worker',
+   *   },
    * );
    * ```
    */
@@ -22,7 +27,7 @@ export class Consumers extends APIResource {
     params: ConsumerCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Consumer> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues/${queueId}/consumers`, {
         body,
@@ -39,7 +44,11 @@ export class Consumers extends APIResource {
    * const consumer = await client.queues.consumers.update(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     script_name: 'my-consumer-worker',
+   *     type: 'worker',
+   *   },
    * );
    * ```
    */
@@ -49,7 +58,7 @@ export class Consumers extends APIResource {
     params: ConsumerUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Consumer> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`, {
         body,
@@ -74,10 +83,19 @@ export class Consumers extends APIResource {
    */
   list(
     queueId: string,
-    params: ConsumerListParams,
+    params?: ConsumerListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ConsumersSinglePage, Consumer>;
+  list(queueId: string, options?: Core.RequestOptions): Core.PagePromise<ConsumersSinglePage, Consumer>;
+  list(
+    queueId: string,
+    params: ConsumerListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ConsumersSinglePage, Consumer> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/queues/${queueId}/consumers`,
       ConsumersSinglePage,
@@ -100,10 +118,24 @@ export class Consumers extends APIResource {
   delete(
     queueId: string,
     consumerId: string,
-    params: ConsumerDeleteParams,
+    params?: ConsumerDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConsumerDeleteResponse>;
+  delete(
+    queueId: string,
+    consumerId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConsumerDeleteResponse>;
+  delete(
+    queueId: string,
+    consumerId: string,
+    params: ConsumerDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConsumerDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(queueId, consumerId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`, options);
   }
 
@@ -122,10 +154,20 @@ export class Consumers extends APIResource {
   get(
     queueId: string,
     consumerId: string,
-    params: ConsumerGetParams,
+    params?: ConsumerGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Consumer>;
+  get(queueId: string, consumerId: string, options?: Core.RequestOptions): Core.APIPromise<Consumer>;
+  get(
+    queueId: string,
+    consumerId: string,
+    params: ConsumerGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Consumer> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(queueId, consumerId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`,
@@ -137,10 +179,13 @@ export class Consumers extends APIResource {
 
 export class ConsumersSinglePage extends SinglePage<Consumer> {}
 
-export type Consumer = Consumer.MqWorkerConsumer | Consumer.MqHTTPConsumer;
+/**
+ * Response body representing a consumer
+ */
+export type Consumer = Consumer.MqWorkerConsumerResponse | Consumer.MqHTTPConsumerResponse;
 
 export namespace Consumer {
-  export interface MqWorkerConsumer {
+  export interface MqWorkerConsumerResponse {
     /**
      * A Resource identifier.
      */
@@ -149,21 +194,23 @@ export namespace Consumer {
     created_on?: string;
 
     /**
-     * A Resource identifier.
+     * Name of the dead letter queue, or empty string if not configured
      */
-    queue_id?: string;
+    dead_letter_queue?: string;
+
+    queue_name?: string;
 
     /**
      * Name of a Worker
      */
-    script?: string;
+    script_name?: string;
 
-    settings?: MqWorkerConsumer.Settings;
+    settings?: MqWorkerConsumerResponse.Settings;
 
     type?: 'worker';
   }
 
-  export namespace MqWorkerConsumer {
+  export namespace MqWorkerConsumerResponse {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
@@ -195,7 +242,7 @@ export namespace Consumer {
     }
   }
 
-  export interface MqHTTPConsumer {
+  export interface MqHTTPConsumerResponse {
     /**
      * A Resource identifier.
      */
@@ -204,16 +251,18 @@ export namespace Consumer {
     created_on?: string;
 
     /**
-     * A Resource identifier.
+     * Name of the dead letter queue, or empty string if not configured
      */
-    queue_id?: string;
+    dead_letter_queue?: string;
 
-    settings?: MqHTTPConsumer.Settings;
+    queue_name?: string;
+
+    settings?: MqHTTPConsumerResponse.Settings;
 
     type?: 'http_pull';
   }
 
-  export namespace MqHTTPConsumer {
+  export namespace MqHTTPConsumerResponse {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
@@ -252,38 +301,38 @@ export interface ConsumerDeleteResponse {
 }
 
 export type ConsumerCreateParams =
-  | ConsumerCreateParams.MqWorkerConsumer
-  | ConsumerCreateParams.MqHTTPConsumer;
+  | ConsumerCreateParams.MqWorkerConsumerRequest
+  | ConsumerCreateParams.MqHTTPConsumerRequest;
 
 export declare namespace ConsumerCreateParams {
-  export interface MqWorkerConsumer {
+  export interface MqWorkerConsumerRequest {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    dead_letter_queue?: string;
+    account_id?: string;
 
     /**
      * Body param: Name of a Worker
      */
-    script_name?: string;
+    script_name: string;
 
     /**
-     * Body param:
+     * Body param
      */
-    settings?: MqWorkerConsumer.Settings;
+    type: 'worker';
 
     /**
-     * Body param:
+     * Body param
      */
-    type?: 'worker';
+    dead_letter_queue?: string;
+
+    /**
+     * Body param
+     */
+    settings?: MqWorkerConsumerRequest.Settings;
   }
 
-  export namespace MqWorkerConsumer {
+  export namespace MqWorkerConsumerRequest {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
@@ -315,29 +364,29 @@ export declare namespace ConsumerCreateParams {
     }
   }
 
-  export interface MqHTTPConsumer {
+  export interface MqHTTPConsumerRequest {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
+     */
+    type: 'http_pull';
+
+    /**
+     * Body param
      */
     dead_letter_queue?: string;
 
     /**
-     * Body param:
+     * Body param
      */
-    settings?: MqHTTPConsumer.Settings;
-
-    /**
-     * Body param:
-     */
-    type?: 'http_pull';
+    settings?: MqHTTPConsumerRequest.Settings;
   }
 
-  export namespace MqHTTPConsumer {
+  export namespace MqHTTPConsumerRequest {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
@@ -365,38 +414,38 @@ export declare namespace ConsumerCreateParams {
 }
 
 export type ConsumerUpdateParams =
-  | ConsumerUpdateParams.MqWorkerConsumer
-  | ConsumerUpdateParams.MqHTTPConsumer;
+  | ConsumerUpdateParams.MqWorkerConsumerRequest
+  | ConsumerUpdateParams.MqHTTPConsumerRequest;
 
 export declare namespace ConsumerUpdateParams {
-  export interface MqWorkerConsumer {
+  export interface MqWorkerConsumerRequest {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    dead_letter_queue?: string;
+    account_id?: string;
 
     /**
      * Body param: Name of a Worker
      */
-    script_name?: string;
+    script_name: string;
 
     /**
-     * Body param:
+     * Body param
      */
-    settings?: MqWorkerConsumer.Settings;
+    type: 'worker';
 
     /**
-     * Body param:
+     * Body param
      */
-    type?: 'worker';
+    dead_letter_queue?: string;
+
+    /**
+     * Body param
+     */
+    settings?: MqWorkerConsumerRequest.Settings;
   }
 
-  export namespace MqWorkerConsumer {
+  export namespace MqWorkerConsumerRequest {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
@@ -428,29 +477,29 @@ export declare namespace ConsumerUpdateParams {
     }
   }
 
-  export interface MqHTTPConsumer {
+  export interface MqHTTPConsumerRequest {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
+     */
+    type: 'http_pull';
+
+    /**
+     * Body param
      */
     dead_letter_queue?: string;
 
     /**
-     * Body param:
+     * Body param
      */
-    settings?: MqHTTPConsumer.Settings;
-
-    /**
-     * Body param:
-     */
-    type?: 'http_pull';
+    settings?: MqHTTPConsumerRequest.Settings;
   }
 
-  export namespace MqHTTPConsumer {
+  export namespace MqHTTPConsumerRequest {
     export interface Settings {
       /**
        * The maximum number of messages to include in a batch.
@@ -481,21 +530,21 @@ export interface ConsumerListParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConsumerDeleteParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConsumerGetParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Consumers.ConsumersSinglePage = ConsumersSinglePage;

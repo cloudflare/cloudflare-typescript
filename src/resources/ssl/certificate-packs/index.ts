@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  CertificatePackListResponsesSinglePage,
+  CertificatePackListResponsesV4PagePaginationArray,
   CertificatePacks,
   type Host,
   type RequestValidity,

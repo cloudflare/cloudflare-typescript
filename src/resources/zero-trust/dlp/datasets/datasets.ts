@@ -1,16 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as UploadAPI from './upload';
-import {
-  NewVersion,
-  Upload as UploadAPIUpload,
-  UploadCreateParams,
-  UploadCreateResponse,
-  UploadEditParams,
-  UploadEditResponse,
-} from './upload';
+import { NewVersion, Upload as UploadAPIUpload, UploadCreateParams, UploadEditParams } from './upload';
 import * as VersionsAPI from './versions/versions';
 import {
   VersionCreateParams,
@@ -25,27 +19,31 @@ export class Datasets extends APIResource {
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 
   /**
-   * Create a new dataset
+   * Creates a new DLP (Data Loss Prevention) dataset for storing custom detection
+   * patterns. Datasets can contain exact match data, word lists, or EDM (Exact Data
+   * Match) configurations.
    *
    * @example
    * ```ts
-   * const dataset = await client.zeroTrust.dlp.datasets.create({
-   *   account_id: 'account_id',
-   *   name: 'name',
-   * });
+   * const datasetCreation =
+   *   await client.zeroTrust.dlp.datasets.create({
+   *     account_id: 'account_id',
+   *     name: 'name',
+   *   });
    * ```
    */
-  create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreateResponse> {
-    const { account_id, ...body } = params;
+  create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreation> {
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/datasets`, { body, ...options }) as Core.APIPromise<{
-        result: DatasetCreateResponse;
+        result: DatasetCreation;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Update details about a dataset
+   * Updates the configuration of an existing DLP dataset, such as its name,
+   * description, or detection settings.
    *
    * @example
    * ```ts
@@ -59,18 +57,19 @@ export class Datasets extends APIResource {
     datasetId: string,
     params: DatasetUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetUpdateResponse> {
-    const { account_id, ...body } = params;
+  ): Core.APIPromise<Dataset> {
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/datasets/${datasetId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DatasetUpdateResponse }>
+      }) as Core.APIPromise<{ result: Dataset }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Fetch all datasets
+   * Lists all DLP datasets configured for the account, including custom word lists
+   * and EDM datasets.
    *
    * @example
    * ```ts
@@ -83,10 +82,18 @@ export class Datasets extends APIResource {
    * ```
    */
   list(
-    params: DatasetListParams,
+    params?: DatasetListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DatasetsSinglePage, Dataset>;
+  list(options?: Core.RequestOptions): Core.PagePromise<DatasetsSinglePage, Dataset>;
+  list(
+    params: DatasetListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DatasetsSinglePage, Dataset> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/dlp/datasets`, DatasetsSinglePage, options);
   }
 
@@ -103,10 +110,19 @@ export class Datasets extends APIResource {
    */
   delete(
     datasetId: string,
-    params: DatasetDeleteParams,
+    params?: DatasetDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void>;
+  delete(datasetId: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    datasetId: string,
+    params: DatasetDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(datasetId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/dlp/datasets/${datasetId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -124,15 +140,20 @@ export class Datasets extends APIResource {
    * );
    * ```
    */
+  get(datasetId: string, params?: DatasetGetParams, options?: Core.RequestOptions): Core.APIPromise<Dataset>;
+  get(datasetId: string, options?: Core.RequestOptions): Core.APIPromise<Dataset>;
   get(
     datasetId: string,
-    params: DatasetGetParams,
+    params: DatasetGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetGetResponse> {
-    const { account_id } = params;
+  ): Core.APIPromise<Dataset> {
+    if (isRequestOptions(params)) {
+      return this.get(datasetId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/datasets/${datasetId}`, options) as Core.APIPromise<{
-        result: DatasetGetResponse;
+        result: Dataset;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -219,145 +240,14 @@ export interface DatasetCreation {
   secret?: string;
 }
 
-export interface DatasetCreateResponse {
-  dataset: Dataset;
-
-  /**
-   * Encoding version to use for dataset.
-   */
-  encoding_version: number;
-
-  max_cells: number;
-
-  /**
-   * The version to use when uploading the dataset.
-   */
-  version: number;
-
-  /**
-   * The secret to use for Exact Data Match datasets.
-   *
-   * This is not present in Custom Wordlists.
-   */
-  secret?: string;
-}
-
-export interface DatasetUpdateResponse {
-  id: string;
-
-  columns: Array<DatasetUpdateResponse.Column>;
-
-  created_at: string;
-
-  encoding_version: number;
-
-  name: string;
-
-  num_cells: number;
-
-  secret: boolean;
-
-  status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-  /**
-   * Stores when the dataset was last updated.
-   *
-   * This includes name or description changes as well as uploads.
-   */
-  updated_at: string;
-
-  uploads: Array<DatasetUpdateResponse.Upload>;
-
-  case_sensitive?: boolean;
-
-  /**
-   * The description of the dataset.
-   */
-  description?: string | null;
-}
-
-export namespace DatasetUpdateResponse {
-  export interface Column {
-    entry_id: string;
-
-    header_name: string;
-
-    num_cells: number;
-
-    upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export interface Upload {
-    num_cells: number;
-
-    status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-    version: number;
-  }
-}
-
-export interface DatasetGetResponse {
-  id: string;
-
-  columns: Array<DatasetGetResponse.Column>;
-
-  created_at: string;
-
-  encoding_version: number;
-
-  name: string;
-
-  num_cells: number;
-
-  secret: boolean;
-
-  status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-  /**
-   * Stores when the dataset was last updated.
-   *
-   * This includes name or description changes as well as uploads.
-   */
-  updated_at: string;
-
-  uploads: Array<DatasetGetResponse.Upload>;
-
-  case_sensitive?: boolean;
-
-  /**
-   * The description of the dataset.
-   */
-  description?: string | null;
-}
-
-export namespace DatasetGetResponse {
-  export interface Column {
-    entry_id: string;
-
-    header_name: string;
-
-    num_cells: number;
-
-    upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export interface Upload {
-    num_cells: number;
-
-    status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-    version: number;
-  }
-}
-
 export interface DatasetCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
@@ -394,9 +284,9 @@ export interface DatasetCreateParams {
 
 export interface DatasetUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Determines if the words should be matched in a case-sensitive
@@ -418,15 +308,15 @@ export interface DatasetUpdateParams {
 }
 
 export interface DatasetListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DatasetDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DatasetGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Datasets.DatasetsSinglePage = DatasetsSinglePage;
@@ -439,9 +329,6 @@ export declare namespace Datasets {
     type Dataset as Dataset,
     type DatasetArray as DatasetArray,
     type DatasetCreation as DatasetCreation,
-    type DatasetCreateResponse as DatasetCreateResponse,
-    type DatasetUpdateResponse as DatasetUpdateResponse,
-    type DatasetGetResponse as DatasetGetResponse,
     DatasetsSinglePage as DatasetsSinglePage,
     type DatasetCreateParams as DatasetCreateParams,
     type DatasetUpdateParams as DatasetUpdateParams,
@@ -453,8 +340,6 @@ export declare namespace Datasets {
   export {
     UploadAPIUpload as Upload,
     type NewVersion as NewVersion,
-    type UploadCreateResponse as UploadCreateResponse,
-    type UploadEditResponse as UploadEditResponse,
     type UploadCreateParams as UploadCreateParams,
     type UploadEditParams as UploadEditParams,
   };

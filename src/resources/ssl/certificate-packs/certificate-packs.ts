@@ -1,10 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as QuotaAPI from './quota';
 import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
-import { SinglePage } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class CertificatePacks extends APIResource {
   quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
@@ -33,7 +34,7 @@ export class CertificatePacks extends APIResource {
     params: CertificatePackCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/ssl/certificate_packs/order`, {
         body,
@@ -56,13 +57,23 @@ export class CertificatePacks extends APIResource {
    * ```
    */
   list(
-    params: CertificatePackListParams,
+    params?: CertificatePackListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<CertificatePackListResponsesSinglePage, CertificatePackListResponse> {
-    const { zone_id, ...query } = params;
+  ): Core.PagePromise<CertificatePackListResponsesV4PagePaginationArray, CertificatePackListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CertificatePackListResponsesV4PagePaginationArray, CertificatePackListResponse>;
+  list(
+    params: CertificatePackListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CertificatePackListResponsesV4PagePaginationArray, CertificatePackListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/ssl/certificate_packs`,
-      CertificatePackListResponsesSinglePage,
+      CertificatePackListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -81,10 +92,22 @@ export class CertificatePacks extends APIResource {
    */
   delete(
     certificatePackId: string,
-    params: CertificatePackDeleteParams,
+    params?: CertificatePackDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificatePackDeleteResponse>;
+  delete(
+    certificatePackId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificatePackDeleteResponse>;
+  delete(
+    certificatePackId: string,
+    params: CertificatePackDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(certificatePackId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
@@ -111,7 +134,7 @@ export class CertificatePacks extends APIResource {
     params: CertificatePackEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`, {
         body,
@@ -134,10 +157,19 @@ export class CertificatePacks extends APIResource {
    */
   get(
     certificatePackId: string,
-    params: CertificatePackGetParams,
+    params?: CertificatePackGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificatePackGetResponse>;
+  get(certificatePackId: string, options?: Core.RequestOptions): Core.APIPromise<CertificatePackGetResponse>;
+  get(
+    certificatePackId: string,
+    params: CertificatePackGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(certificatePackId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
@@ -147,7 +179,7 @@ export class CertificatePacks extends APIResource {
   }
 }
 
-export class CertificatePackListResponsesSinglePage extends SinglePage<CertificatePackListResponse> {}
+export class CertificatePackListResponsesV4PagePaginationArray extends V4PagePaginationArray<CertificatePackListResponse> {}
 
 export type Host = string;
 
@@ -244,6 +276,11 @@ export interface CertificatePackCreateResponse {
    * subdomain of sni.cloudflaressl.com as the Common Name if set to true.
    */
   cloudflare_branding?: boolean;
+
+  /**
+   * DCV Delegation records for domain validation.
+   */
+  dcv_delegation_records?: Array<CertificatePackCreateResponse.DCVDelegationRecord>;
 
   /**
    * Identifier of the primary certificate in a pack.
@@ -347,17 +384,20 @@ export namespace CertificatePackCreateResponse {
     }
   }
 
-  export interface ValidationError {
-    /**
-     * A domain validation error.
-     */
-    message?: string;
-  }
-
   /**
    * Certificate's required validation record.
    */
-  export interface ValidationRecord {
+  export interface DCVDelegationRecord {
+    /**
+     * The CNAME record hostname for DCV delegation.
+     */
+    cname?: string;
+
+    /**
+     * The CNAME record target value for DCV delegation.
+     */
+    cname_target?: string;
+
     /**
      * The set of email addresses that the certificate authority (CA) will use to
      * complete domain validation.
@@ -374,6 +414,67 @@ export namespace CertificatePackCreateResponse {
      * The url that will be checked during domain validation.
      */
     http_url?: string;
+
+    /**
+     * Status of the validation record.
+     */
+    status?: string;
+
+    /**
+     * The hostname that the certificate authority (CA) will check for a TXT record
+     * during domain validation .
+     */
+    txt_name?: string;
+
+    /**
+     * The TXT record that the certificate authority (CA) will check during domain
+     * validation.
+     */
+    txt_value?: string;
+  }
+
+  export interface ValidationError {
+    /**
+     * A domain validation error.
+     */
+    message?: string;
+  }
+
+  /**
+   * Certificate's required validation record.
+   */
+  export interface ValidationRecord {
+    /**
+     * The CNAME record hostname for DCV delegation.
+     */
+    cname?: string;
+
+    /**
+     * The CNAME record target value for DCV delegation.
+     */
+    cname_target?: string;
+
+    /**
+     * The set of email addresses that the certificate authority (CA) will use to
+     * complete domain validation.
+     */
+    emails?: Array<string>;
+
+    /**
+     * The content that the certificate authority (CA) will expect to find at the
+     * http_url during the domain validation.
+     */
+    http_body?: string;
+
+    /**
+     * The url that will be checked during domain validation.
+     */
+    http_url?: string;
+
+    /**
+     * Status of the validation record.
+     */
+    status?: string;
 
     /**
      * The hostname that the certificate authority (CA) will check for a TXT record
@@ -439,6 +540,11 @@ export interface CertificatePackListResponse {
    * subdomain of sni.cloudflaressl.com as the Common Name if set to true.
    */
   cloudflare_branding?: boolean;
+
+  /**
+   * DCV Delegation records for domain validation.
+   */
+  dcv_delegation_records?: Array<CertificatePackListResponse.DCVDelegationRecord>;
 
   /**
    * Identifier of the primary certificate in a pack.
@@ -542,17 +648,20 @@ export namespace CertificatePackListResponse {
     }
   }
 
-  export interface ValidationError {
-    /**
-     * A domain validation error.
-     */
-    message?: string;
-  }
-
   /**
    * Certificate's required validation record.
    */
-  export interface ValidationRecord {
+  export interface DCVDelegationRecord {
+    /**
+     * The CNAME record hostname for DCV delegation.
+     */
+    cname?: string;
+
+    /**
+     * The CNAME record target value for DCV delegation.
+     */
+    cname_target?: string;
+
     /**
      * The set of email addresses that the certificate authority (CA) will use to
      * complete domain validation.
@@ -569,6 +678,67 @@ export namespace CertificatePackListResponse {
      * The url that will be checked during domain validation.
      */
     http_url?: string;
+
+    /**
+     * Status of the validation record.
+     */
+    status?: string;
+
+    /**
+     * The hostname that the certificate authority (CA) will check for a TXT record
+     * during domain validation .
+     */
+    txt_name?: string;
+
+    /**
+     * The TXT record that the certificate authority (CA) will check during domain
+     * validation.
+     */
+    txt_value?: string;
+  }
+
+  export interface ValidationError {
+    /**
+     * A domain validation error.
+     */
+    message?: string;
+  }
+
+  /**
+   * Certificate's required validation record.
+   */
+  export interface ValidationRecord {
+    /**
+     * The CNAME record hostname for DCV delegation.
+     */
+    cname?: string;
+
+    /**
+     * The CNAME record target value for DCV delegation.
+     */
+    cname_target?: string;
+
+    /**
+     * The set of email addresses that the certificate authority (CA) will use to
+     * complete domain validation.
+     */
+    emails?: Array<string>;
+
+    /**
+     * The content that the certificate authority (CA) will expect to find at the
+     * http_url during the domain validation.
+     */
+    http_body?: string;
+
+    /**
+     * The url that will be checked during domain validation.
+     */
+    http_url?: string;
+
+    /**
+     * Status of the validation record.
+     */
+    status?: string;
 
     /**
      * The hostname that the certificate authority (CA) will check for a TXT record
@@ -641,6 +811,11 @@ export interface CertificatePackEditResponse {
    * subdomain of sni.cloudflaressl.com as the Common Name if set to true.
    */
   cloudflare_branding?: boolean;
+
+  /**
+   * DCV Delegation records for domain validation.
+   */
+  dcv_delegation_records?: Array<CertificatePackEditResponse.DCVDelegationRecord>;
 
   /**
    * Identifier of the primary certificate in a pack.
@@ -744,17 +919,20 @@ export namespace CertificatePackEditResponse {
     }
   }
 
-  export interface ValidationError {
-    /**
-     * A domain validation error.
-     */
-    message?: string;
-  }
-
   /**
    * Certificate's required validation record.
    */
-  export interface ValidationRecord {
+  export interface DCVDelegationRecord {
+    /**
+     * The CNAME record hostname for DCV delegation.
+     */
+    cname?: string;
+
+    /**
+     * The CNAME record target value for DCV delegation.
+     */
+    cname_target?: string;
+
     /**
      * The set of email addresses that the certificate authority (CA) will use to
      * complete domain validation.
@@ -771,6 +949,67 @@ export namespace CertificatePackEditResponse {
      * The url that will be checked during domain validation.
      */
     http_url?: string;
+
+    /**
+     * Status of the validation record.
+     */
+    status?: string;
+
+    /**
+     * The hostname that the certificate authority (CA) will check for a TXT record
+     * during domain validation .
+     */
+    txt_name?: string;
+
+    /**
+     * The TXT record that the certificate authority (CA) will check during domain
+     * validation.
+     */
+    txt_value?: string;
+  }
+
+  export interface ValidationError {
+    /**
+     * A domain validation error.
+     */
+    message?: string;
+  }
+
+  /**
+   * Certificate's required validation record.
+   */
+  export interface ValidationRecord {
+    /**
+     * The CNAME record hostname for DCV delegation.
+     */
+    cname?: string;
+
+    /**
+     * The CNAME record target value for DCV delegation.
+     */
+    cname_target?: string;
+
+    /**
+     * The set of email addresses that the certificate authority (CA) will use to
+     * complete domain validation.
+     */
+    emails?: Array<string>;
+
+    /**
+     * The content that the certificate authority (CA) will expect to find at the
+     * http_url during the domain validation.
+     */
+    http_body?: string;
+
+    /**
+     * The url that will be checked during domain validation.
+     */
+    http_url?: string;
+
+    /**
+     * Status of the validation record.
+     */
+    status?: string;
 
     /**
      * The hostname that the certificate authority (CA) will check for a TXT record
@@ -836,6 +1075,11 @@ export interface CertificatePackGetResponse {
    * subdomain of sni.cloudflaressl.com as the Common Name if set to true.
    */
   cloudflare_branding?: boolean;
+
+  /**
+   * DCV Delegation records for domain validation.
+   */
+  dcv_delegation_records?: Array<CertificatePackGetResponse.DCVDelegationRecord>;
 
   /**
    * Identifier of the primary certificate in a pack.
@@ -939,17 +1183,20 @@ export namespace CertificatePackGetResponse {
     }
   }
 
-  export interface ValidationError {
-    /**
-     * A domain validation error.
-     */
-    message?: string;
-  }
-
   /**
    * Certificate's required validation record.
    */
-  export interface ValidationRecord {
+  export interface DCVDelegationRecord {
+    /**
+     * The CNAME record hostname for DCV delegation.
+     */
+    cname?: string;
+
+    /**
+     * The CNAME record target value for DCV delegation.
+     */
+    cname_target?: string;
+
     /**
      * The set of email addresses that the certificate authority (CA) will use to
      * complete domain validation.
@@ -966,6 +1213,67 @@ export namespace CertificatePackGetResponse {
      * The url that will be checked during domain validation.
      */
     http_url?: string;
+
+    /**
+     * Status of the validation record.
+     */
+    status?: string;
+
+    /**
+     * The hostname that the certificate authority (CA) will check for a TXT record
+     * during domain validation .
+     */
+    txt_name?: string;
+
+    /**
+     * The TXT record that the certificate authority (CA) will check during domain
+     * validation.
+     */
+    txt_value?: string;
+  }
+
+  export interface ValidationError {
+    /**
+     * A domain validation error.
+     */
+    message?: string;
+  }
+
+  /**
+   * Certificate's required validation record.
+   */
+  export interface ValidationRecord {
+    /**
+     * The CNAME record hostname for DCV delegation.
+     */
+    cname?: string;
+
+    /**
+     * The CNAME record target value for DCV delegation.
+     */
+    cname_target?: string;
+
+    /**
+     * The set of email addresses that the certificate authority (CA) will use to
+     * complete domain validation.
+     */
+    emails?: Array<string>;
+
+    /**
+     * The content that the certificate authority (CA) will expect to find at the
+     * http_url during the domain validation.
+     */
+    http_body?: string;
+
+    /**
+     * The url that will be checked during domain validation.
+     */
+    http_url?: string;
+
+    /**
+     * Status of the validation record.
+     */
+    status?: string;
 
     /**
      * The hostname that the certificate authority (CA) will check for a TXT record
@@ -985,7 +1293,7 @@ export interface CertificatePackCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Certificate Authority selected for the order. For information on any
@@ -1023,11 +1331,16 @@ export interface CertificatePackCreateParams {
   cloudflare_branding?: boolean;
 }
 
-export interface CertificatePackListParams {
+export interface CertificatePackListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
+
+  /**
+   * Query param: Specify the deployment environment for the certificate packs.
+   */
+  deploy?: 'staging' | 'production';
 
   /**
    * Query param: Include Certificate Packs of all statuses, not just active ones.
@@ -1039,14 +1352,14 @@ export interface CertificatePackDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CertificatePackEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Whether or not to add Cloudflare Branding for the order. This will
@@ -1059,10 +1372,11 @@ export interface CertificatePackGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
-CertificatePacks.CertificatePackListResponsesSinglePage = CertificatePackListResponsesSinglePage;
+CertificatePacks.CertificatePackListResponsesV4PagePaginationArray =
+  CertificatePackListResponsesV4PagePaginationArray;
 CertificatePacks.Quota = Quota;
 
 export declare namespace CertificatePacks {
@@ -1076,7 +1390,7 @@ export declare namespace CertificatePacks {
     type CertificatePackDeleteResponse as CertificatePackDeleteResponse,
     type CertificatePackEditResponse as CertificatePackEditResponse,
     type CertificatePackGetResponse as CertificatePackGetResponse,
-    CertificatePackListResponsesSinglePage as CertificatePackListResponsesSinglePage,
+    CertificatePackListResponsesV4PagePaginationArray as CertificatePackListResponsesV4PagePaginationArray,
     type CertificatePackCreateParams as CertificatePackCreateParams,
     type CertificatePackListParams as CertificatePackListParams,
     type CertificatePackDeleteParams as CertificatePackDeleteParams,

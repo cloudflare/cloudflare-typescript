@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 
 export class Snapshots extends APIResource {
   /**
-   * Update indicator feed data
+   * Revises the raw data entries in a custom threat indicator feed.
    *
    * @example
    * ```ts
@@ -20,7 +20,7 @@ export class Snapshots extends APIResource {
     params: SnapshotUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SnapshotUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/intel/indicator-feeds/${feedId}/snapshot`,
@@ -51,7 +51,7 @@ export interface SnapshotUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The file to upload

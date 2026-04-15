@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -18,8 +19,16 @@ export class Scripts extends APIResource {
    * }
    * ```
    */
-  list(params: ScriptListParams, options?: Core.RequestOptions): Core.PagePromise<ScriptsSinglePage, Script> {
-    const { zone_id, ...query } = params;
+  list(params?: ScriptListParams, options?: Core.RequestOptions): Core.PagePromise<ScriptsSinglePage, Script>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ScriptsSinglePage, Script>;
+  list(
+    params: ScriptListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ScriptsSinglePage, Script> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(`/zones/${zone_id}/page_shield/scripts`, ScriptsSinglePage, {
       query,
       ...options,
@@ -39,10 +48,19 @@ export class Scripts extends APIResource {
    */
   get(
     scriptId: string,
-    params: ScriptGetParams,
+    params?: ScriptGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptGetResponse | null>;
+  get(scriptId: string, options?: Core.RequestOptions): Core.APIPromise<ScriptGetResponse | null>;
+  get(
+    scriptId: string,
+    params: ScriptGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptGetResponse | null> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(scriptId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/page_shield/scripts/${scriptId}`, options) as Core.APIPromise<{
         result: ScriptGetResponse | null;
@@ -77,7 +95,8 @@ export interface Script {
   cryptomining_score?: number | null;
 
   /**
-   * The dataflow score of the JavaScript content.
+   * @deprecated The dataflow score of the JavaScript content. This field has been
+   * deprecated in favour of js_integrity_score.
    */
   dataflow_score?: number | null;
 
@@ -115,7 +134,8 @@ export interface Script {
   malware_score?: number | null;
 
   /**
-   * The obfuscation score of the JavaScript content.
+   * @deprecated The obfuscation score of the JavaScript content. This field has been
+   * deprecated in favour of js_integrity_score.
    */
   obfuscation_score?: number | null;
 
@@ -148,7 +168,8 @@ export interface ScriptGetResponse {
   cryptomining_score?: number | null;
 
   /**
-   * The dataflow score of the JavaScript content.
+   * @deprecated The dataflow score of the JavaScript content. This field has been
+   * deprecated in favour of js_integrity_score.
    */
   dataflow_score?: number | null;
 
@@ -186,7 +207,8 @@ export interface ScriptGetResponse {
   malware_score?: number | null;
 
   /**
-   * The obfuscation score of the JavaScript content.
+   * @deprecated The obfuscation score of the JavaScript content. This field has been
+   * deprecated in favour of js_integrity_score.
    */
   obfuscation_score?: number | null;
 
@@ -208,7 +230,8 @@ export namespace ScriptGetResponse {
     cryptomining_score?: number | null;
 
     /**
-     * The dataflow score of the JavaScript content.
+     * @deprecated The dataflow score of the JavaScript content. This field has been
+     * deprecated in favour of js_integrity_score.
      */
     dataflow_score?: number | null;
 
@@ -238,7 +261,8 @@ export namespace ScriptGetResponse {
     malware_score?: number | null;
 
     /**
-     * The obfuscation score of the JavaScript content.
+     * @deprecated The obfuscation score of the JavaScript content. This field has been
+     * deprecated in favour of js_integrity_score.
      */
     obfuscation_score?: number | null;
   }
@@ -248,7 +272,7 @@ export interface ScriptListParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The direction used to sort returned scripts.
@@ -342,7 +366,7 @@ export interface ScriptGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Scripts.ScriptsSinglePage = ScriptsSinglePage;

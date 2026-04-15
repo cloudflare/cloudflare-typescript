@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as GroupsAPI from '../../access/groups';
 import { ZeroTrustGroupsV4PagePaginationArray } from '../../access/groups';
@@ -24,10 +25,22 @@ export class Groups extends APIResource {
    */
   list(
     identityProviderId: string,
-    params: GroupListParams,
+    params?: GroupListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustGroupsV4PagePaginationArray, GroupsAPI.ZeroTrustGroup>;
+  list(
+    identityProviderId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustGroupsV4PagePaginationArray, GroupsAPI.ZeroTrustGroup>;
+  list(
+    identityProviderId: string,
+    params: GroupListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ZeroTrustGroupsV4PagePaginationArray, GroupsAPI.ZeroTrustGroup> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(identityProviderId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/identity_providers/${identityProviderId}/scim/groups`,
       ZeroTrustGroupsV4PagePaginationArray,
@@ -40,7 +53,7 @@ export interface GroupListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The unique Cloudflare-generated Id of the SCIM Group resource; also

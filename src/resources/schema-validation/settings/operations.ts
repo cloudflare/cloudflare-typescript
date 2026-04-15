@@ -1,12 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Operations extends APIResource {
   /**
-   * Update per-operation schema validation setting
+   * Fully updates schema validation settings for a specific API operation.
    *
    * @example
    * ```ts
@@ -25,7 +26,7 @@ export class Operations extends APIResource {
     params: OperationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/schema_validation/settings/operations/${operationId}`, {
         body,
@@ -35,7 +36,7 @@ export class Operations extends APIResource {
   }
 
   /**
-   * List per-operation schema validation settings
+   * Lists all per-operation schema validation settings configured for the zone.
    *
    * @example
    * ```ts
@@ -48,10 +49,20 @@ export class Operations extends APIResource {
    * ```
    */
   list(
-    params: OperationListParams,
+    params?: OperationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse>;
+  list(
+    params: OperationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/schema_validation/settings/operations`,
       OperationListResponsesV4PagePaginationArray,
@@ -60,7 +71,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Delete per-operation schema validation setting
+   * Removes custom schema validation settings for a specific API operation,
+   * reverting to zone-level defaults.
    *
    * @example
    * ```ts
@@ -73,10 +85,19 @@ export class Operations extends APIResource {
    */
   delete(
     operationId: string,
-    params: OperationDeleteParams,
+    params?: OperationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OperationDeleteResponse>;
+  delete(operationId: string, options?: Core.RequestOptions): Core.APIPromise<OperationDeleteResponse>;
+  delete(
+    operationId: string,
+    params: OperationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(operationId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/schema_validation/settings/operations/${operationId}`,
@@ -86,7 +107,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Bulk edit per-operation schema validation settings
+   * Updates schema validation settings for multiple API operations in a single
+   * request. Efficient for applying consistent validation rules across endpoints.
    *
    * @example
    * ```ts
@@ -106,7 +128,7 @@ export class Operations extends APIResource {
     params: OperationBulkEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationBulkEditResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/schema_validation/settings/operations`, {
         body: body,
@@ -116,7 +138,8 @@ export class Operations extends APIResource {
   }
 
   /**
-   * Get per-operation schema validation setting
+   * Retrieves the schema validation settings configured for a specific API
+   * operation.
    *
    * @example
    * ```ts
@@ -129,10 +152,19 @@ export class Operations extends APIResource {
    */
   get(
     operationId: string,
-    params: OperationGetParams,
+    params?: OperationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OperationGetResponse>;
+  get(operationId: string, options?: Core.RequestOptions): Core.APIPromise<OperationGetResponse>;
+  get(
+    operationId: string,
+    params: OperationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(operationId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/schema_validation/settings/operations/${operationId}`,
@@ -238,7 +270,7 @@ export interface OperationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: When set, this applies a mitigation action to this operation
@@ -257,24 +289,24 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OperationDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OperationBulkEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: { [key: string]: OperationBulkEditParams.Body };
 }
@@ -299,7 +331,7 @@ export interface OperationGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Operations.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;

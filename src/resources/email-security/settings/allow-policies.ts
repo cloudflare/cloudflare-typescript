@@ -1,12 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class AllowPolicies extends APIResource {
   /**
-   * Create an email allow policy
+   * Creates a new email allow policy that permits specific senders, domains, or
+   * patterns to bypass security scanning.
    *
    * @example
    * ```ts
@@ -27,7 +29,7 @@ export class AllowPolicies extends APIResource {
     params: AllowPolicyCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AllowPolicyCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email-security/settings/allow_policies`, {
         body,
@@ -50,10 +52,20 @@ export class AllowPolicies extends APIResource {
    * ```
    */
   list(
-    params: AllowPolicyListParams,
+    params?: AllowPolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AllowPolicyListResponsesV4PagePaginationArray, AllowPolicyListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AllowPolicyListResponsesV4PagePaginationArray, AllowPolicyListResponse>;
+  list(
+    params: AllowPolicyListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<AllowPolicyListResponsesV4PagePaginationArray, AllowPolicyListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/settings/allow_policies`,
       AllowPolicyListResponsesV4PagePaginationArray,
@@ -62,7 +74,8 @@ export class AllowPolicies extends APIResource {
   }
 
   /**
-   * Delete an email allow policy
+   * Removes an email allow policy. Previously allowed senders will be subject to
+   * normal security scanning.
    *
    * @example
    * ```ts
@@ -75,10 +88,19 @@ export class AllowPolicies extends APIResource {
    */
   delete(
     policyId: number,
-    params: AllowPolicyDeleteParams,
+    params?: AllowPolicyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AllowPolicyDeleteResponse>;
+  delete(policyId: number, options?: Core.RequestOptions): Core.APIPromise<AllowPolicyDeleteResponse>;
+  delete(
+    policyId: number,
+    params: AllowPolicyDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AllowPolicyDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(policyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/email-security/settings/allow_policies/${policyId}`,
@@ -88,7 +110,8 @@ export class AllowPolicies extends APIResource {
   }
 
   /**
-   * Update an email allow policy
+   * Updates an existing email allow policy, modifying its matching criteria or
+   * scope.
    *
    * @example
    * ```ts
@@ -104,7 +127,7 @@ export class AllowPolicies extends APIResource {
     params: AllowPolicyEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AllowPolicyEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/email-security/settings/allow_policies/${policyId}`, {
         body,
@@ -114,7 +137,8 @@ export class AllowPolicies extends APIResource {
   }
 
   /**
-   * Get an email allow policy
+   * Retrieves details for a specific email allow policy, including its matching
+   * criteria and scope.
    *
    * @example
    * ```ts
@@ -127,10 +151,19 @@ export class AllowPolicies extends APIResource {
    */
   get(
     policyId: number,
-    params: AllowPolicyGetParams,
+    params?: AllowPolicyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AllowPolicyGetResponse>;
+  get(policyId: number, options?: Core.RequestOptions): Core.APIPromise<AllowPolicyGetResponse>;
+  get(
+    policyId: number,
+    params: AllowPolicyGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AllowPolicyGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(policyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/email-security/settings/allow_policies/${policyId}`,
@@ -381,7 +414,7 @@ export interface AllowPolicyCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Messages from this sender will be exempted from Spam, Spoof and Bulk
@@ -396,7 +429,7 @@ export interface AllowPolicyCreateParams {
   is_exempt_recipient: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   is_regex: boolean;
 
@@ -407,12 +440,12 @@ export interface AllowPolicyCreateParams {
   is_trusted_sender: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern: string;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -423,22 +456,22 @@ export interface AllowPolicyCreateParams {
   verify_sender: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   comments?: string | null;
 
   /**
-   * @deprecated Body param:
+   * @deprecated Body param
    */
   is_recipient?: boolean;
 
   /**
-   * @deprecated Body param:
+   * @deprecated Body param
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Body param:
+   * @deprecated Body param
    */
   is_spoof?: boolean;
 }
@@ -447,7 +480,7 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The sorting direction.
@@ -455,32 +488,32 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param:
+   * Query param
    */
   is_acceptable_sender?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   is_exempt_recipient?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   is_recipient?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   is_sender?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   is_spoof?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   is_trusted_sender?: boolean;
 
@@ -490,12 +523,12 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   order?: 'pattern' | 'created_at';
 
   /**
-   * Query param:
+   * Query param
    */
   pattern?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -507,7 +540,7 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   search?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   verify_sender?: boolean;
 }
@@ -516,17 +549,17 @@ export interface AllowPolicyDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AllowPolicyEditParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   comments?: string | null;
 
@@ -543,7 +576,7 @@ export interface AllowPolicyEditParams {
   is_exempt_recipient?: boolean | null;
 
   /**
-   * Body param:
+   * Body param
    */
   is_regex?: boolean | null;
 
@@ -554,12 +587,12 @@ export interface AllowPolicyEditParams {
   is_trusted_sender?: boolean | null;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN' | null;
 
@@ -574,7 +607,7 @@ export interface AllowPolicyGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 AllowPolicies.AllowPolicyListResponsesV4PagePaginationArray = AllowPolicyListResponsesV4PagePaginationArray;

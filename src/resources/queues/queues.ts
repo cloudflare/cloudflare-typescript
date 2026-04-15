@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 import * as ConsumersAPI from './consumers';
@@ -64,7 +65,7 @@ export class Queues extends APIResource {
    * ```
    */
   create(params: QueueCreateParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues`, { body, ...options }) as Core.APIPromise<{
         result: Queue;
@@ -85,8 +86,17 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  update(queueId: string, params: QueueUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
-    const { account_id, ...body } = params;
+  update(queueId: string, params?: QueueUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  update(queueId: string, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  update(
+    queueId: string,
+    params: QueueUpdateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Queue> {
+    if (isRequestOptions(params)) {
+      return this.update(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/queues/${queueId}`, { body, ...options }) as Core.APIPromise<{
         result: Queue;
@@ -107,8 +117,16 @@ export class Queues extends APIResource {
    * }
    * ```
    */
-  list(params: QueueListParams, options?: Core.RequestOptions): Core.PagePromise<QueuesSinglePage, Queue> {
-    const { account_id } = params;
+  list(params?: QueueListParams, options?: Core.RequestOptions): Core.PagePromise<QueuesSinglePage, Queue>;
+  list(options?: Core.RequestOptions): Core.PagePromise<QueuesSinglePage, Queue>;
+  list(
+    params: QueueListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<QueuesSinglePage, Queue> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/queues`, QueuesSinglePage, options);
   }
 
@@ -125,10 +143,19 @@ export class Queues extends APIResource {
    */
   delete(
     queueId: string,
-    params: QueueDeleteParams,
+    params?: QueueDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<QueueDeleteResponse>;
+  delete(queueId: string, options?: Core.RequestOptions): Core.APIPromise<QueueDeleteResponse>;
+  delete(
+    queueId: string,
+    params: QueueDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/queues/${queueId}`, options);
   }
 
@@ -143,8 +170,17 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  edit(queueId: string, params: QueueEditParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
-    const { account_id, ...body } = params;
+  edit(queueId: string, params?: QueueEditParams, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  edit(queueId: string, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  edit(
+    queueId: string,
+    params: QueueEditParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Queue> {
+    if (isRequestOptions(params)) {
+      return this.edit(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/queues/${queueId}`, {
         body,
@@ -164,8 +200,17 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  get(queueId: string, params: QueueGetParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
-    const { account_id } = params;
+  get(queueId: string, params?: QueueGetParams, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  get(queueId: string, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  get(
+    queueId: string,
+    params: QueueGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Queue> {
+    if (isRequestOptions(params)) {
+      return this.get(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/queues/${queueId}`, options) as Core.APIPromise<{
         result: Queue;
@@ -242,10 +287,10 @@ export interface QueueCreateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   queue_name: string;
 }
@@ -254,15 +299,15 @@ export interface QueueUpdateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   queue_name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   settings?: QueueUpdateParams.Settings;
 }
@@ -290,29 +335,29 @@ export interface QueueListParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface QueueDeleteParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface QueueEditParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   queue_name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   settings?: QueueEditParams.Settings;
 }
@@ -340,7 +385,7 @@ export interface QueueGetParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Queues.QueuesSinglePage = QueuesSinglePage;

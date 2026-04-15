@@ -23,7 +23,7 @@ export class Patterns extends APIResource {
     params: PatternValidateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PatternValidateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/patterns/validate`, {
         body,
@@ -41,10 +41,10 @@ export interface PatternValidateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   regex: string;
 

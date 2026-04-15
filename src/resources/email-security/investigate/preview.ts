@@ -1,11 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Preview extends APIResource {
   /**
-   * Preview for non-detection messages
+   * Generates a preview of an email message for safe viewing without executing any
+   * embedded content.
    *
    * @example
    * ```ts
@@ -17,9 +19,10 @@ export class Preview extends APIResource {
    * ```
    */
   create(params: PreviewCreateParams, options?: Core.RequestOptions): Core.APIPromise<PreviewCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, submission, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email-security/investigate/preview`, {
+        query: { submission },
         body,
         ...options,
       }) as Core.APIPromise<{ result: PreviewCreateResponse }>
@@ -41,10 +44,19 @@ export class Preview extends APIResource {
    */
   get(
     postfixId: string,
-    params: PreviewGetParams,
+    params?: PreviewGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PreviewGetResponse>;
+  get(postfixId: string, options?: Core.RequestOptions): Core.APIPromise<PreviewGetResponse>;
+  get(
+    postfixId: string,
+    params: PreviewGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PreviewGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(postfixId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/email-security/investigate/${postfixId}/preview`,
@@ -72,19 +84,25 @@ export interface PreviewCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The identifier of the message.
    */
   postfix_id: string;
+
+  /**
+   * Query param: When true, search the submissions datastore only. When false or
+   * omitted, search the regular datastore only.
+   */
+  submission?: boolean;
 }
 
 export interface PreviewGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Preview {

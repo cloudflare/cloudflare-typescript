@@ -6,11 +6,7 @@ import { CursorPaginationAfter, type CursorPaginationAfterParams } from '../../.
 
 export class Audit extends APIResource {
   /**
-   * Gets a list of audit logs for an account. <br /> <br /> This is the beta release
-   * of Audit Logs Version 2. Since this is a beta version, there may be gaps or
-   * missing entries in the available audit logs. Be aware of the following
-   * limitations. <br /> <ul> <li>Audit logs are available only for the past 30 days.
-   * <br /></li> <li>Error handling is not yet implemented. <br /> </li> </ul>
+   * Gets a list of audit logs for an account.
    *
    * @example
    * ```ts
@@ -30,7 +26,7 @@ export class Audit extends APIResource {
     params: AuditListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AuditListResponsesCursorPaginationAfter, AuditListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/logs/audit`,
       AuditListResponsesCursorPaginationAfter,
@@ -142,12 +138,12 @@ export namespace AuditListResponse {
     ip_address?: string;
 
     /**
-     * Filters by the API token ID when the actor context is an api_token.
+     * The API token ID when the actor context is an api_token or oauth.
      */
     token_id?: string;
 
     /**
-     * Filters by the API token name when the actor context is an api_token.
+     * The API token name when the actor context is an api_token or oauth.
      */
     token_name?: string;
 
@@ -236,7 +232,7 @@ export interface AuditListParams extends CursorPaginationAfterParams {
   /**
    * Path param: The unique id that identifies the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Limits the returned results to logs older than the specified date.
@@ -253,62 +249,62 @@ export interface AuditListParams extends CursorPaginationAfterParams {
   since: string;
 
   /**
-   * Query param:
+   * Query param
    */
   id?: AuditListParams.ID;
 
   /**
-   * Query param:
+   * Query param
    */
   account_name?: AuditListParams.AccountName;
 
   /**
-   * Query param:
+   * Query param
    */
   action_result?: AuditListParams.ActionResult;
 
   /**
-   * Query param:
+   * Query param
    */
   action_type?: AuditListParams.ActionType;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_context?: AuditListParams.ActorContext;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_email?: AuditListParams.ActorEmail;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_id?: AuditListParams.ActorID;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_ip_address?: AuditListParams.ActorIPAddress;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_token_id?: AuditListParams.ActorTokenID;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_token_name?: AuditListParams.ActorTokenName;
 
   /**
-   * Query param:
+   * Query param
    */
   actor_type?: AuditListParams.ActorType;
 
   /**
-   * Query param:
+   * Query param
    */
   audit_log_id?: AuditListParams.AuditLogID;
 
@@ -325,52 +321,52 @@ export interface AuditListParams extends CursorPaginationAfterParams {
   limit?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   raw_cf_ray_id?: AuditListParams.RawCfRayID;
 
   /**
-   * Query param:
+   * Query param
    */
   raw_method?: AuditListParams.RawMethod;
 
   /**
-   * Query param:
+   * Query param
    */
   raw_status_code?: AuditListParams.RawStatusCode;
 
   /**
-   * Query param:
+   * Query param
    */
   raw_uri?: AuditListParams.RawURI;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_id?: AuditListParams.ResourceID;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_product?: AuditListParams.ResourceProduct;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_scope?: AuditListParams.ResourceScope;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_type?: AuditListParams.ResourceType;
 
   /**
-   * Query param:
+   * Query param
    */
   zone_id?: AuditListParams.ZoneID;
 
   /**
-   * Query param:
+   * Query param
    */
   zone_name?: AuditListParams.ZoneName;
 }
@@ -509,9 +505,9 @@ export namespace AuditListParams {
   export interface ResourceScope {
     /**
      * Filters out audit logs by the resource scope, specifying whether the resource is
-     * associated with an user, an account, or a zone.
+     * associated with an user, an account, a zone, or a membership.
      */
-    not?: Array<'accounts' | 'user' | 'zones'>;
+    not?: Array<'accounts' | 'user' | 'zones' | 'memberships'>;
   }
 
   export interface ResourceType {

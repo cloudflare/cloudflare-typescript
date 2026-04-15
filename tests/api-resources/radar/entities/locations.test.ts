@@ -32,7 +32,15 @@ describe('resource locations', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.entities.locations.list(
-        { format: 'JSON', limit: 1, location: 'US,CA', offset: 0 },
+        {
+          continent: 'EU',
+          format: 'JSON',
+          limit: 1,
+          location: 'US,CA',
+          offset: 0,
+          region: 'Middle East',
+          subregion: 'Southern Europe',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

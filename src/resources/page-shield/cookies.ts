@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -19,10 +20,18 @@ export class Cookies extends APIResource {
    * ```
    */
   list(
-    params: CookieListParams,
+    params?: CookieListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CookieListResponsesSinglePage, CookieListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<CookieListResponsesSinglePage, CookieListResponse>;
+  list(
+    params: CookieListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CookieListResponsesSinglePage, CookieListResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(`/zones/${zone_id}/page_shield/cookies`, CookieListResponsesSinglePage, {
       query,
       ...options,
@@ -42,10 +51,19 @@ export class Cookies extends APIResource {
    */
   get(
     cookieId: string,
-    params: CookieGetParams,
+    params?: CookieGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CookieGetResponse | null>;
+  get(cookieId: string, options?: Core.RequestOptions): Core.APIPromise<CookieGetResponse | null>;
+  get(
+    cookieId: string,
+    params: CookieGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CookieGetResponse | null> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(cookieId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/page_shield/cookies/${cookieId}`, options) as Core.APIPromise<{
         result: CookieGetResponse | null;
@@ -126,7 +144,7 @@ export interface CookieListParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The direction used to sort returned cookies.'
@@ -223,7 +241,7 @@ export interface CookieGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Cookies.CookieListResponsesSinglePage = CookieListResponsesSinglePage;

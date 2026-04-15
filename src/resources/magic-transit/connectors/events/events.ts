@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as LatestAPI from './latest';
 import { Latest, LatestListParams, LatestListResponse } from './latest';
@@ -29,7 +30,7 @@ export class Events extends APIResource {
     params: EventListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/connectors/${connectorId}/telemetry/events`, {
         query,
@@ -56,10 +57,26 @@ export class Events extends APIResource {
     connectorId: string,
     eventT: number,
     eventN: number,
-    params: EventGetParams,
+    params?: EventGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EventGetResponse>;
+  get(
+    connectorId: string,
+    eventT: number,
+    eventN: number,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EventGetResponse>;
+  get(
+    connectorId: string,
+    eventT: number,
+    eventN: number,
+    params: EventGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(connectorId, eventT, eventN, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/connectors/${connectorId}/telemetry/events/${eventT}.${eventN}`,
@@ -132,6 +149,11 @@ export interface EventGetResponse {
    * Time the Event was recorded (seconds since the Unix epoch)
    */
   t: number;
+
+  /**
+   * Version
+   */
+  v?: string;
 }
 
 export namespace EventGetResponse {
@@ -257,20 +279,20 @@ export interface EventListParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   from: number;
 
   /**
-   * Query param:
+   * Query param
    */
   to: number;
 
   /**
-   * Query param:
+   * Query param
    */
   cursor?: string;
 
@@ -280,7 +302,7 @@ export interface EventListParams {
   k?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: number;
 }
@@ -289,7 +311,7 @@ export interface EventGetParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Events.Latest = Latest;

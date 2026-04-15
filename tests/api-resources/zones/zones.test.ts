@@ -11,7 +11,10 @@ const client = new Cloudflare({
 
 describe('resource zones', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.zones.create({ account: {}, name: 'example.com' });
+    const responsePromise = client.zones.create({
+      account: {},
+      name: 'example.com',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

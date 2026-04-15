@@ -28,6 +28,7 @@ describe('resource warpConnector', () => {
     const response = await client.zeroTrust.tunnels.warpConnector.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'blog',
+      ha: true,
     });
   });
 

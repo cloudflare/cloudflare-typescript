@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Schedules extends APIResource {
@@ -24,7 +25,7 @@ export class Schedules extends APIResource {
     params: ScheduleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScheduleUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/workers/scripts/${scriptName}/schedules`, {
         body: body,
@@ -46,10 +47,19 @@ export class Schedules extends APIResource {
    */
   get(
     scriptName: string,
-    params: ScheduleGetParams,
+    params?: ScheduleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScheduleGetResponse>;
+  get(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<ScheduleGetResponse>;
+  get(
+    scriptName: string,
+    params: ScheduleGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScheduleGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/schedules`,
@@ -91,10 +101,10 @@ export interface ScheduleUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<ScheduleUpdateParams.Body>;
 }
@@ -109,7 +119,7 @@ export interface ScheduleGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Schedules {

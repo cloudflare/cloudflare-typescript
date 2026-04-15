@@ -26,6 +26,7 @@ describe('resource submissions', () => {
   test('list: required and optional params', async () => {
     const response = await client.emailSecurity.submissions.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      customer_status: 'escalated',
       end: '2019-12-27T18:11:19.117Z',
       original_disposition: 'MALICIOUS',
       outcome_disposition: 'MALICIOUS',

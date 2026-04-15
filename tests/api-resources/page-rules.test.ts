@@ -15,7 +15,12 @@ describe('resource pageRules', () => {
     const responsePromise = client.pageRules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{ id: 'browser_check' }],
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
+      targets: [
+        {
+          constraint: { operator: 'matches', value: '*example.com/images/*' },
+          target: 'url',
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,7 +36,12 @@ describe('resource pageRules', () => {
     const response = await client.pageRules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{ id: 'browser_check', value: 'on' }],
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
+      targets: [
+        {
+          constraint: { operator: 'matches', value: '*example.com/images/*' },
+          target: 'url',
+        },
+      ],
       priority: 0,
       status: 'active',
     });
@@ -42,7 +52,12 @@ describe('resource pageRules', () => {
     const responsePromise = client.pageRules.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{ id: 'browser_check' }],
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
+      targets: [
+        {
+          constraint: { operator: 'matches', value: '*example.com/images/*' },
+          target: 'url',
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -58,7 +73,12 @@ describe('resource pageRules', () => {
     const response = await client.pageRules.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{ id: 'browser_check', value: 'on' }],
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
+      targets: [
+        {
+          constraint: { operator: 'matches', value: '*example.com/images/*' },
+          target: 'url',
+        },
+      ],
       priority: 0,
       status: 'active',
     });
@@ -123,7 +143,12 @@ describe('resource pageRules', () => {
       actions: [{ id: 'browser_check', value: 'on' }],
       priority: 0,
       status: 'active',
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
+      targets: [
+        {
+          constraint: { operator: 'matches', value: '*example.com/images/*' },
+          target: 'url',
+        },
+      ],
     });
   });
 

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -18,7 +19,7 @@ export class Sinks extends APIResource {
    * ```
    */
   create(params: SinkCreateParams, options?: Core.RequestOptions): Core.APIPromise<SinkCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pipelines/v1/sinks`, {
         body,
@@ -41,10 +42,20 @@ export class Sinks extends APIResource {
    * ```
    */
   list(
-    params: SinkListParams,
+    params?: SinkListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SinkListResponsesV4PagePaginationArray, SinkListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SinkListResponsesV4PagePaginationArray, SinkListResponse>;
+  list(
+    params: SinkListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SinkListResponsesV4PagePaginationArray, SinkListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/pipelines/v1/sinks`,
       SinkListResponsesV4PagePaginationArray,
@@ -57,19 +68,33 @@ export class Sinks extends APIResource {
    *
    * @example
    * ```ts
-   * await client.pipelines.sinks.delete(
+   * const sink = await client.pipelines.sinks.delete(
    *   '0223105f4ecef8ad9ca31a8372d0c353',
    *   { account_id: '0123105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
-  delete(sinkId: string, params: SinkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { account_id, force } = params;
-    return this._client.delete(`/accounts/${account_id}/pipelines/v1/sinks/${sinkId}`, {
-      query: { force },
-      ...options,
-      headers: { Accept: '*/*', ...options?.headers },
-    });
+  delete(
+    sinkId: string,
+    params?: SinkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SinkDeleteResponse>;
+  delete(sinkId: string, options?: Core.RequestOptions): Core.APIPromise<SinkDeleteResponse>;
+  delete(
+    sinkId: string,
+    params: SinkDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SinkDeleteResponse> {
+    if (isRequestOptions(params)) {
+      return this.delete(sinkId, {}, params);
+    }
+    const { account_id = this._client.accountId, force } = params;
+    return (
+      this._client.delete(`/accounts/${account_id}/pipelines/v1/sinks/${sinkId}`, {
+        query: { force },
+        ...options,
+      }) as Core.APIPromise<{ result: SinkDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -85,10 +110,19 @@ export class Sinks extends APIResource {
    */
   get(
     sinkId: string,
-    params: SinkGetParams,
+    params?: SinkGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SinkGetResponse>;
+  get(sinkId: string, options?: Core.RequestOptions): Core.APIPromise<SinkGetResponse>;
+  get(
+    sinkId: string,
+    params: SinkGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SinkGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(sinkId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/pipelines/v1/sinks/${sinkId}`, options) as Core.APIPromise<{
         result: SinkGetResponse;
@@ -489,8 +523,8 @@ export interface SinkListResponse {
    * Defines the configuration of the R2 Sink.
    */
   config?:
-    | SinkListResponse.CloudflarePipelinesR2Table
-    | SinkListResponse.CloudflarePipelinesR2DataCatalogTable;
+    | SinkListResponse.CloudflarePipelinesR2TablePublic
+    | SinkListResponse.CloudflarePipelinesR2DataCatalogTablePublic;
 
   format?: SinkListResponse.Json | SinkListResponse.Parquet;
 
@@ -498,7 +532,10 @@ export interface SinkListResponse {
 }
 
 export namespace SinkListResponse {
-  export interface CloudflarePipelinesR2Table {
+  /**
+   * R2 Sink public configuration.
+   */
+  export interface CloudflarePipelinesR2TablePublic {
     /**
      * Cloudflare Account ID for the bucket
      */
@@ -509,12 +546,10 @@ export namespace SinkListResponse {
      */
     bucket: string;
 
-    credentials: CloudflarePipelinesR2Table.Credentials;
-
     /**
      * Controls filename prefix/suffix and strategy.
      */
-    file_naming?: CloudflarePipelinesR2Table.FileNaming;
+    file_naming?: CloudflarePipelinesR2TablePublic.FileNaming;
 
     /**
      * Jurisdiction this bucket is hosted in
@@ -524,7 +559,7 @@ export namespace SinkListResponse {
     /**
      * Data-layout partitioning for sinks.
      */
-    partitioning?: CloudflarePipelinesR2Table.Partitioning;
+    partitioning?: CloudflarePipelinesR2TablePublic.Partitioning;
 
     /**
      * Subpath within the bucket to write to
@@ -534,22 +569,10 @@ export namespace SinkListResponse {
     /**
      * Rolling policy for file sinks (when & why to close a file and open a new one).
      */
-    rolling_policy?: CloudflarePipelinesR2Table.RollingPolicy;
+    rolling_policy?: CloudflarePipelinesR2TablePublic.RollingPolicy;
   }
 
-  export namespace CloudflarePipelinesR2Table {
-    export interface Credentials {
-      /**
-       * Cloudflare Account ID for the bucket
-       */
-      access_key_id: string;
-
-      /**
-       * Cloudflare Account ID for the bucket
-       */
-      secret_access_key: string;
-    }
-
+  export namespace CloudflarePipelinesR2TablePublic {
     /**
      * Controls filename prefix/suffix and strategy.
      */
@@ -602,14 +625,9 @@ export namespace SinkListResponse {
   }
 
   /**
-   * R2 Data Catalog Sink
+   * R2 Data Catalog Sink public configuration.
    */
-  export interface CloudflarePipelinesR2DataCatalogTable {
-    /**
-     * Authentication token
-     */
-    token: string;
-
+  export interface CloudflarePipelinesR2DataCatalogTablePublic {
     /**
      * Cloudflare Account ID
      */
@@ -633,10 +651,10 @@ export namespace SinkListResponse {
     /**
      * Rolling policy for file sinks (when & why to close a file and open a new one).
      */
-    rolling_policy?: CloudflarePipelinesR2DataCatalogTable.RollingPolicy;
+    rolling_policy?: CloudflarePipelinesR2DataCatalogTablePublic.RollingPolicy;
   }
 
-  export namespace CloudflarePipelinesR2DataCatalogTable {
+  export namespace CloudflarePipelinesR2DataCatalogTablePublic {
     /**
      * Rolling policy for file sinks (when & why to close a file and open a new one).
      */
@@ -831,6 +849,8 @@ export namespace SinkListResponse {
   }
 }
 
+export type SinkDeleteResponse = unknown;
+
 export interface SinkGetResponse {
   /**
    * Indicates a unique identifier for this sink.
@@ -854,7 +874,9 @@ export interface SinkGetResponse {
   /**
    * Defines the configuration of the R2 Sink.
    */
-  config?: SinkGetResponse.CloudflarePipelinesR2Table | SinkGetResponse.CloudflarePipelinesR2DataCatalogTable;
+  config?:
+    | SinkGetResponse.CloudflarePipelinesR2TablePublic
+    | SinkGetResponse.CloudflarePipelinesR2DataCatalogTablePublic;
 
   format?: SinkGetResponse.Json | SinkGetResponse.Parquet;
 
@@ -862,7 +884,10 @@ export interface SinkGetResponse {
 }
 
 export namespace SinkGetResponse {
-  export interface CloudflarePipelinesR2Table {
+  /**
+   * R2 Sink public configuration.
+   */
+  export interface CloudflarePipelinesR2TablePublic {
     /**
      * Cloudflare Account ID for the bucket
      */
@@ -873,12 +898,10 @@ export namespace SinkGetResponse {
      */
     bucket: string;
 
-    credentials: CloudflarePipelinesR2Table.Credentials;
-
     /**
      * Controls filename prefix/suffix and strategy.
      */
-    file_naming?: CloudflarePipelinesR2Table.FileNaming;
+    file_naming?: CloudflarePipelinesR2TablePublic.FileNaming;
 
     /**
      * Jurisdiction this bucket is hosted in
@@ -888,7 +911,7 @@ export namespace SinkGetResponse {
     /**
      * Data-layout partitioning for sinks.
      */
-    partitioning?: CloudflarePipelinesR2Table.Partitioning;
+    partitioning?: CloudflarePipelinesR2TablePublic.Partitioning;
 
     /**
      * Subpath within the bucket to write to
@@ -898,22 +921,10 @@ export namespace SinkGetResponse {
     /**
      * Rolling policy for file sinks (when & why to close a file and open a new one).
      */
-    rolling_policy?: CloudflarePipelinesR2Table.RollingPolicy;
+    rolling_policy?: CloudflarePipelinesR2TablePublic.RollingPolicy;
   }
 
-  export namespace CloudflarePipelinesR2Table {
-    export interface Credentials {
-      /**
-       * Cloudflare Account ID for the bucket
-       */
-      access_key_id: string;
-
-      /**
-       * Cloudflare Account ID for the bucket
-       */
-      secret_access_key: string;
-    }
-
+  export namespace CloudflarePipelinesR2TablePublic {
     /**
      * Controls filename prefix/suffix and strategy.
      */
@@ -966,14 +977,9 @@ export namespace SinkGetResponse {
   }
 
   /**
-   * R2 Data Catalog Sink
+   * R2 Data Catalog Sink public configuration.
    */
-  export interface CloudflarePipelinesR2DataCatalogTable {
-    /**
-     * Authentication token
-     */
-    token: string;
-
+  export interface CloudflarePipelinesR2DataCatalogTablePublic {
     /**
      * Cloudflare Account ID
      */
@@ -997,10 +1003,10 @@ export namespace SinkGetResponse {
     /**
      * Rolling policy for file sinks (when & why to close a file and open a new one).
      */
-    rolling_policy?: CloudflarePipelinesR2DataCatalogTable.RollingPolicy;
+    rolling_policy?: CloudflarePipelinesR2DataCatalogTablePublic.RollingPolicy;
   }
 
-  export namespace CloudflarePipelinesR2DataCatalogTable {
+  export namespace CloudflarePipelinesR2DataCatalogTablePublic {
     /**
      * Rolling policy for file sinks (when & why to close a file and open a new one).
      */
@@ -1199,7 +1205,7 @@ export interface SinkCreateParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Defines the name of the Sink.
@@ -1219,12 +1225,12 @@ export interface SinkCreateParams {
     | SinkCreateParams.CloudflarePipelinesR2DataCatalogTable;
 
   /**
-   * Body param:
+   * Body param
    */
   format?: SinkCreateParams.Json | SinkCreateParams.Parquet;
 
   /**
-   * Body param:
+   * Body param
    */
   schema?: SinkCreateParams.Schema;
 }
@@ -1567,10 +1573,10 @@ export interface SinkListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   pipeline_id?: string;
 }
@@ -1579,7 +1585,7 @@ export interface SinkDeleteParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Delete sink forcefully, including deleting any dependent pipelines.
@@ -1591,7 +1597,7 @@ export interface SinkGetParams {
   /**
    * Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Sinks.SinkListResponsesV4PagePaginationArray = SinkListResponsesV4PagePaginationArray;
@@ -1600,6 +1606,7 @@ export declare namespace Sinks {
   export {
     type SinkCreateResponse as SinkCreateResponse,
     type SinkListResponse as SinkListResponse,
+    type SinkDeleteResponse as SinkDeleteResponse,
     type SinkGetResponse as SinkGetResponse,
     SinkListResponsesV4PagePaginationArray as SinkListResponsesV4PagePaginationArray,
     type SinkCreateParams as SinkCreateParams,

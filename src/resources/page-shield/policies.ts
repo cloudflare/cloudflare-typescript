@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -25,7 +26,7 @@ export class Policies extends APIResource {
     params: PolicyCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyCreateResponse | null> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/page_shield/policies`, { body, ...options }) as Core.APIPromise<{
         result: PolicyCreateResponse | null;
@@ -49,7 +50,7 @@ export class Policies extends APIResource {
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyUpdateResponse | null> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/page_shield/policies/${policyId}`, {
         body,
@@ -72,10 +73,18 @@ export class Policies extends APIResource {
    * ```
    */
   list(
-    params: PolicyListParams,
+    params?: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse>;
+  list(
+    params: PolicyListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/page_shield/policies`,
       PolicyListResponsesSinglePage,
@@ -94,8 +103,17 @@ export class Policies extends APIResource {
    * );
    * ```
    */
-  delete(policyId: string, params: PolicyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { zone_id } = params;
+  delete(policyId: string, params?: PolicyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(policyId: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    policyId: string,
+    params: PolicyDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
+    if (isRequestOptions(params)) {
+      return this.delete(policyId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(`/zones/${zone_id}/page_shield/policies/${policyId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -115,10 +133,19 @@ export class Policies extends APIResource {
    */
   get(
     policyId: string,
-    params: PolicyGetParams,
+    params?: PolicyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyGetResponse | null>;
+  get(policyId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyGetResponse | null>;
+  get(
+    policyId: string,
+    params: PolicyGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyGetResponse | null> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(policyId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/page_shield/policies/${policyId}`, options) as Core.APIPromise<{
         result: PolicyGetResponse | null;
@@ -133,7 +160,7 @@ export interface Policy {
   /**
    * The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * A description for the policy
@@ -166,7 +193,7 @@ export interface PolicyCreateResponse {
   /**
    * The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * A description for the policy
@@ -199,7 +226,7 @@ export interface PolicyUpdateResponse {
   /**
    * The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * A description for the policy
@@ -232,7 +259,7 @@ export interface PolicyListResponse {
   /**
    * The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * A description for the policy
@@ -265,7 +292,7 @@ export interface PolicyGetResponse {
   /**
    * The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * A description for the policy
@@ -293,12 +320,12 @@ export interface PolicyCreateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The action to take if the expression matches
    */
-  action: 'allow' | 'log';
+  action: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * Body param: A description for the policy
@@ -326,12 +353,12 @@ export interface PolicyUpdateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The action to take if the expression matches
    */
-  action?: 'allow' | 'log';
+  action?: 'allow' | 'log' | 'add_reporting_directives';
 
   /**
    * Body param: A description for the policy
@@ -359,21 +386,21 @@ export interface PolicyListParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PolicyDeleteParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PolicyGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Policies.PolicyListResponsesSinglePage = PolicyListResponsesSinglePage;

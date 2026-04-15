@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Rules extends APIResource {
@@ -20,7 +21,7 @@ export class Rules extends APIResource {
     params: RuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RUMRule> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rum/v2/${rulesetId}/rule`, {
         body,
@@ -47,7 +48,7 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RUMRule> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rum/v2/${rulesetId}/rule/${ruleId}`, {
         body,
@@ -69,10 +70,19 @@ export class Rules extends APIResource {
    */
   list(
     rulesetId: string,
-    params: RuleListParams,
+    params?: RuleListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleListResponse>;
+  list(rulesetId: string, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse>;
+  list(
+    rulesetId: string,
+    params: RuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(rulesetId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/rum/v2/${rulesetId}/rules`, options) as Core.APIPromise<{
         result: RuleListResponse;
@@ -95,10 +105,24 @@ export class Rules extends APIResource {
   delete(
     rulesetId: string,
     ruleId: string,
-    params: RuleDeleteParams,
+    params?: RuleDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleDeleteResponse>;
+  delete(
+    rulesetId: string,
+    ruleId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleDeleteResponse>;
+  delete(
+    rulesetId: string,
+    ruleId: string,
+    params: RuleDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(rulesetId, ruleId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/rum/v2/${rulesetId}/rule/${ruleId}`,
@@ -123,7 +147,7 @@ export class Rules extends APIResource {
     params: RuleBulkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleBulkCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rum/v2/${rulesetId}/rules`, {
         body,
@@ -235,10 +259,10 @@ export interface RuleCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   host?: string;
 
@@ -253,7 +277,7 @@ export interface RuleCreateParams {
   is_paused?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   paths?: Array<string>;
 }
@@ -262,10 +286,10 @@ export interface RuleUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   host?: string;
 
@@ -280,7 +304,7 @@ export interface RuleUpdateParams {
   is_paused?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   paths?: Array<string>;
 }
@@ -289,21 +313,21 @@ export interface RuleListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RuleDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RuleBulkCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A list of rule identifiers to delete.

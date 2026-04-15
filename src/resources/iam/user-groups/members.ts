@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -24,7 +25,7 @@ export class Members extends APIResource {
     params: MemberCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MemberCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/iam/user_groups/${userGroupId}/members`, {
         body: body,
@@ -55,7 +56,7 @@ export class Members extends APIResource {
     params: MemberUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MemberUpdateResponsesSinglePage, MemberUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/iam/user_groups/${userGroupId}/members`,
       MemberUpdateResponsesSinglePage,
@@ -79,10 +80,22 @@ export class Members extends APIResource {
    */
   list(
     userGroupId: string,
-    params: MemberListParams,
+    params?: MemberListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MemberListResponsesV4PagePaginationArray, MemberListResponse>;
+  list(
+    userGroupId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MemberListResponsesV4PagePaginationArray, MemberListResponse>;
+  list(
+    userGroupId: string,
+    params: MemberListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<MemberListResponsesV4PagePaginationArray, MemberListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(userGroupId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/iam/user_groups/${userGroupId}/members`,
       MemberListResponsesV4PagePaginationArray,
@@ -105,10 +118,24 @@ export class Members extends APIResource {
   delete(
     userGroupId: string,
     memberId: string,
-    params: MemberDeleteParams,
+    params?: MemberDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MemberDeleteResponse>;
+  delete(
+    userGroupId: string,
+    memberId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MemberDeleteResponse>;
+  delete(
+    userGroupId: string,
+    memberId: string,
+    params: MemberDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MemberDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(userGroupId, memberId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/iam/user_groups/${userGroupId}/members/${memberId}`,
@@ -206,10 +233,10 @@ export interface MemberCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<MemberCreateParams.Body>;
 }
@@ -227,7 +254,7 @@ export interface MemberUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Set/Replace members to a user group.
@@ -248,14 +275,14 @@ export interface MemberListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MemberDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Members.MemberUpdateResponsesSinglePage = MemberUpdateResponsesSinglePage;

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -19,10 +20,18 @@ export class Sinkholes extends APIResource {
    * ```
    */
   list(
-    params: SinkholeListParams,
+    params?: SinkholeListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SinkholesSinglePage, Sinkhole>;
+  list(options?: Core.RequestOptions): Core.PagePromise<SinkholesSinglePage, Sinkhole>;
+  list(
+    params: SinkholeListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SinkholesSinglePage, Sinkhole> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/intel/sinkholes`, SinkholesSinglePage, options);
   }
 }
@@ -70,7 +79,7 @@ export interface SinkholeListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Sinkholes.SinkholesSinglePage = SinkholesSinglePage;

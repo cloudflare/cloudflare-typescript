@@ -1,12 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class BlockSenders extends APIResource {
   /**
-   * Create a blocked email sender
+   * Adds a sender pattern to the email block list, preventing messages from matching
+   * senders from being delivered.
    *
    * @example
    * ```ts
@@ -23,7 +25,7 @@ export class BlockSenders extends APIResource {
     params: BlockSenderCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email-security/settings/block_senders`, {
         body,
@@ -33,7 +35,7 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * List blocked email senders
+   * Lists all blocked sender entries with their patterns and block reasons.
    *
    * @example
    * ```ts
@@ -46,10 +48,20 @@ export class BlockSenders extends APIResource {
    * ```
    */
   list(
-    params: BlockSenderListParams,
+    params?: BlockSenderListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse>;
+  list(
+    params: BlockSenderListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/settings/block_senders`,
       BlockSenderListResponsesV4PagePaginationArray,
@@ -58,7 +70,8 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * Delete a blocked email sender
+   * Removes a sender from the email block list, allowing their messages to be
+   * delivered normally.
    *
    * @example
    * ```ts
@@ -71,10 +84,19 @@ export class BlockSenders extends APIResource {
    */
   delete(
     patternId: number,
-    params: BlockSenderDeleteParams,
+    params?: BlockSenderDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BlockSenderDeleteResponse>;
+  delete(patternId: number, options?: Core.RequestOptions): Core.APIPromise<BlockSenderDeleteResponse>;
+  delete(
+    patternId: number,
+    params: BlockSenderDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(patternId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/email-security/settings/block_senders/${patternId}`,
@@ -84,7 +106,7 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * Update a blocked email sender
+   * Modifies a blocked sender entry, updating its pattern or block reason.
    *
    * @example
    * ```ts
@@ -100,7 +122,7 @@ export class BlockSenders extends APIResource {
     params: BlockSenderEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/email-security/settings/block_senders/${patternId}`, {
         body,
@@ -110,7 +132,8 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * Get a blocked email sender
+   * Gets information about a specific blocked sender entry, including the pattern
+   * and block reason.
    *
    * @example
    * ```ts
@@ -123,10 +146,19 @@ export class BlockSenders extends APIResource {
    */
   get(
     patternId: number,
-    params: BlockSenderGetParams,
+    params?: BlockSenderGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BlockSenderGetResponse>;
+  get(patternId: number, options?: Core.RequestOptions): Core.APIPromise<BlockSenderGetResponse>;
+  get(
+    patternId: number,
+    params: BlockSenderGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(patternId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/email-security/settings/block_senders/${patternId}`,
@@ -225,25 +257,25 @@ export interface BlockSenderCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   is_regex: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern: string;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
   /**
-   * Body param:
+   * Body param
    */
   comments?: string | null;
 }
@@ -252,7 +284,7 @@ export interface BlockSenderListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The sorting direction.
@@ -265,12 +297,12 @@ export interface BlockSenderListParams extends V4PagePaginationArrayParams {
   order?: 'pattern' | 'created_at';
 
   /**
-   * Query param:
+   * Query param
    */
   pattern?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -286,32 +318,32 @@ export interface BlockSenderDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface BlockSenderEditParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   comments?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   is_regex?: boolean | null;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN' | null;
 }
@@ -320,7 +352,7 @@ export interface BlockSenderGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 BlockSenders.BlockSenderListResponsesV4PagePaginationArray = BlockSenderListResponsesV4PagePaginationArray;

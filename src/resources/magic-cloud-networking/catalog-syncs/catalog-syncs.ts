@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as PrebuiltPoliciesAPI from './prebuilt-policies';
 import {
@@ -23,7 +24,7 @@ export class CatalogSyncs extends APIResource {
     params: CatalogSyncCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CatalogSyncCreateResponse> {
-    const { account_id, forwarded, ...body } = params;
+    const { account_id = this._client.accountId, forwarded, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/cloud/catalog-syncs`, {
         body,
@@ -41,7 +42,7 @@ export class CatalogSyncs extends APIResource {
     params: CatalogSyncUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CatalogSyncUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/cloud/catalog-syncs/${syncId}`, {
         body,
@@ -54,10 +55,20 @@ export class CatalogSyncs extends APIResource {
    * List Catalog Syncs (Closed Beta).
    */
   list(
-    params: CatalogSyncListParams,
+    params?: CatalogSyncListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CatalogSyncListResponsesSinglePage, CatalogSyncListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CatalogSyncListResponsesSinglePage, CatalogSyncListResponse>;
+  list(
+    params: CatalogSyncListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CatalogSyncListResponsesSinglePage, CatalogSyncListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/magic/cloud/catalog-syncs`,
       CatalogSyncListResponsesSinglePage,
@@ -70,10 +81,19 @@ export class CatalogSyncs extends APIResource {
    */
   delete(
     syncId: string,
-    params: CatalogSyncDeleteParams,
+    params?: CatalogSyncDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CatalogSyncDeleteResponse>;
+  delete(syncId: string, options?: Core.RequestOptions): Core.APIPromise<CatalogSyncDeleteResponse>;
+  delete(
+    syncId: string,
+    params: CatalogSyncDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CatalogSyncDeleteResponse> {
-    const { account_id, delete_destination } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(syncId, {}, params);
+    }
+    const { account_id = this._client.accountId, delete_destination } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/cloud/catalog-syncs/${syncId}`, {
         query: { delete_destination },
@@ -90,7 +110,7 @@ export class CatalogSyncs extends APIResource {
     params: CatalogSyncEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CatalogSyncEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/cloud/catalog-syncs/${syncId}`, {
         body,
@@ -104,10 +124,19 @@ export class CatalogSyncs extends APIResource {
    */
   get(
     syncId: string,
-    params: CatalogSyncGetParams,
+    params?: CatalogSyncGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CatalogSyncGetResponse>;
+  get(syncId: string, options?: Core.RequestOptions): Core.APIPromise<CatalogSyncGetResponse>;
+  get(
+    syncId: string,
+    params: CatalogSyncGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CatalogSyncGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(syncId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/cloud/catalog-syncs/${syncId}`,
@@ -122,10 +151,19 @@ export class CatalogSyncs extends APIResource {
    */
   refresh(
     syncId: string,
-    params: CatalogSyncRefreshParams,
+    params?: CatalogSyncRefreshParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CatalogSyncRefreshResponse>;
+  refresh(syncId: string, options?: Core.RequestOptions): Core.APIPromise<CatalogSyncRefreshResponse>;
+  refresh(
+    syncId: string,
+    params: CatalogSyncRefreshParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CatalogSyncRefreshResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.refresh(syncId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/magic/cloud/catalog-syncs/${syncId}/refresh`,
@@ -1220,117 +1258,117 @@ export type CatalogSyncRefreshResponse = string;
 
 export interface CatalogSyncCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   destination_type: 'NONE' | 'ZERO_TRUST_LIST';
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   update_mode: 'AUTO' | 'MANUAL';
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   policy?: string;
 
   /**
-   * Header param:
+   * Header param
    */
   forwarded?: string;
 }
 
 export interface CatalogSyncUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   policy?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   update_mode?: 'AUTO' | 'MANUAL';
 }
 
 export interface CatalogSyncListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CatalogSyncDeleteParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   delete_destination?: boolean;
 }
 
 export interface CatalogSyncEditParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   policy?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   update_mode?: 'AUTO' | 'MANUAL';
 }
 
 export interface CatalogSyncGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CatalogSyncRefreshParams {
-  account_id: string;
+  account_id?: string;
 }
 
 CatalogSyncs.CatalogSyncListResponsesSinglePage = CatalogSyncListResponsesSinglePage;

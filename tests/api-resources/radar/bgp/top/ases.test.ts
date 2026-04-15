@@ -70,7 +70,11 @@ describe('resource ases', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.bgp.top.ases.prefixes(
-        { country: 'NZ', format: 'JSON', limit: 10 },
+        {
+          country: 'NZ',
+          format: 'JSON',
+          limit: 10,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

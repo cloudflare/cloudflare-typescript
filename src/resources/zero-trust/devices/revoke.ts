@@ -18,7 +18,7 @@ export class Revoke extends APIResource {
     params: RevokeCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RevokeCreateResponse | null> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/revoke`, {
         body: body,
@@ -32,9 +32,9 @@ export type RevokeCreateResponse = unknown | string;
 
 export interface RevokeCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A list of Registration IDs to revoke.

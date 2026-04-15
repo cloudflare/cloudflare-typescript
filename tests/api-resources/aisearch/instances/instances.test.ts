@@ -14,9 +14,6 @@ describe('resource instances', () => {
     const responsePromise = client.aiSearch.instances.create({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       id: 'my-ai-search',
-      source: 'source',
-      token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      type: 'r2',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,46 +28,79 @@ describe('resource instances', () => {
     const response = await client.aiSearch.instances.create({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       id: 'my-ai-search',
-      source: 'source',
-      token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      type: 'r2',
       ai_gateway_id: 'ai_gateway_id',
       ai_search_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+      cache: true,
+      cache_threshold: 'super_strict_match',
       chunk: true,
       chunk_overlap: 0,
       chunk_size: 64,
-      embedding_model: '@cf/baai/bge-m3',
+      custom_metadata: [{ data_type: 'text', field_name: 'x' }],
+      embedding_model: '@cf/qwen/qwen3-embedding-0.6b',
+      fusion_method: 'max',
       hybrid_search_enabled: true,
+      index_method: { keyword: true, vector: true },
+      indexing_options: { keyword_tokenizer: 'porter' },
       max_num_results: 1,
-      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
+      metadata: {
+        created_from_aisearch_wizard: true,
+        search_for_agents: {
+          hostname: 'hostname',
+          zone_id: 'zone_id',
+          zone_name: 'zone_name',
+        },
+        worker_domain: 'worker_domain',
+      },
       public_endpoint_params: {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
         enabled: true,
-        mcp: { disabled: true },
-        rate_limit: { period_ms: 60000, requests: 1, technique: 'fixed' },
+        mcp: { description: 'description', disabled: true },
+        rate_limit: {
+          period_ms: 60000,
+          requests: 1,
+          technique: 'fixed',
+        },
         search_endpoint: { disabled: true },
       },
       reranking: true,
       reranking_model: '@cf/baai/bge-reranker-base',
+      retrieval_options: { boost_by: [{ field: 'timestamp', direction: 'desc' }], keyword_match_mode: 'and' },
       rewrite_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
       rewrite_query: true,
       score_threshold: 0,
+      source: 'source',
       source_params: {
-        exclude_items: ['/admin/*', '/private/**', '*\\temp\\*'],
-        include_items: ['/blog/*', '/docs/**/*.html', '*\\blog\\*.html'],
+        exclude_items: ['/admin/**', '/private/**', '**\\temp\\**'],
+        include_items: ['/blog/**', '/docs/**/*.html', '**\\blog\\**.html'],
         prefix: 'prefix',
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
+          crawl_options: {
+            depth: 1,
+            include_external_links: true,
+            include_subdomains: true,
+            max_age: 0,
+            source: 'all',
+          },
           parse_options: {
+            content_selector: [{ path: '**/blog/**', selector: 'article .post-body' }],
             include_headers: { foo: 'string' },
             include_images: true,
+            specific_sitemaps: ['https://example.com/sitemap.xml', 'https://example.com/blog-sitemap.xml'],
             use_browser_rendering: true,
           },
           parse_type: 'sitemap',
-          store_options: { storage_id: 'storage_id', r2_jurisdiction: 'r2_jurisdiction', storage_type: 'r2' },
+          store_options: {
+            storage_id: 'storage_id',
+            r2_jurisdiction: 'r2_jurisdiction',
+            storage_type: 'r2',
+          },
         },
       },
+      sync_interval: 3600,
+      token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      type: 'r2',
     });
   });
 
@@ -97,41 +127,71 @@ describe('resource instances', () => {
       chunk: true,
       chunk_overlap: 0,
       chunk_size: 64,
-      embedding_model: '@cf/baai/bge-m3',
-      hybrid_search_enabled: true,
+      custom_metadata: [{ data_type: 'text', field_name: 'x' }],
+      embedding_model: '@cf/qwen/qwen3-embedding-0.6b',
+      fusion_method: 'max',
+      index_method: { keyword: true, vector: true },
+      indexing_options: { keyword_tokenizer: 'porter' },
       max_num_results: 1,
-      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
+      metadata: {
+        created_from_aisearch_wizard: true,
+        search_for_agents: {
+          hostname: 'hostname',
+          zone_id: 'zone_id',
+          zone_name: 'zone_name',
+        },
+        worker_domain: 'worker_domain',
+      },
       paused: true,
       public_endpoint_params: {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
         enabled: true,
-        mcp: { disabled: true },
-        rate_limit: { period_ms: 60000, requests: 1, technique: 'fixed' },
+        mcp: { description: 'description', disabled: true },
+        rate_limit: {
+          period_ms: 60000,
+          requests: 1,
+          technique: 'fixed',
+        },
         search_endpoint: { disabled: true },
       },
       reranking: true,
       reranking_model: '@cf/baai/bge-reranker-base',
+      retrieval_options: { boost_by: [{ field: 'timestamp', direction: 'desc' }], keyword_match_mode: 'and' },
       rewrite_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
       rewrite_query: true,
       score_threshold: 0,
       source_params: {
-        exclude_items: ['/admin/*', '/private/**', '*\\temp\\*'],
-        include_items: ['/blog/*', '/docs/**/*.html', '*\\blog\\*.html'],
+        exclude_items: ['/admin/**', '/private/**', '**\\temp\\**'],
+        include_items: ['/blog/**', '/docs/**/*.html', '**\\blog\\**.html'],
         prefix: 'prefix',
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
+          crawl_options: {
+            depth: 1,
+            include_external_links: true,
+            include_subdomains: true,
+            max_age: 0,
+            source: 'all',
+          },
           parse_options: {
+            content_selector: [{ path: '**/blog/**', selector: 'article .post-body' }],
             include_headers: { foo: 'string' },
             include_images: true,
+            specific_sitemaps: ['https://example.com/sitemap.xml', 'https://example.com/blog-sitemap.xml'],
             use_browser_rendering: true,
           },
           parse_type: 'sitemap',
-          store_options: { storage_id: 'storage_id', r2_jurisdiction: 'r2_jurisdiction', storage_type: 'r2' },
+          store_options: {
+            storage_id: 'storage_id',
+            r2_jurisdiction: 'r2_jurisdiction',
+            storage_type: 'r2',
+          },
         },
       },
       summarization: true,
       summarization_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+      sync_interval: 3600,
       system_prompt_ai_search: 'system_prompt_ai_search',
       system_prompt_index_summarization: 'system_prompt_index_summarization',
       system_prompt_rewrite_query: 'system_prompt_rewrite_query',
@@ -155,6 +215,9 @@ describe('resource instances', () => {
   test('list: required and optional params', async () => {
     const response = await client.aiSearch.instances.list({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      namespace: 'namespace',
+      order_by: 'created_at',
+      order_by_direction: 'asc',
       page: 1,
       per_page: 1,
       search: 'search',
@@ -180,6 +243,53 @@ describe('resource instances', () => {
     });
   });
 
+  test('chatCompletions: only required params', async () => {
+    const responsePromise = client.aiSearch.instances.chatCompletions('my-ai-search', {
+      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      messages: [{ content: 'content', role: 'system' }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('chatCompletions: required and optional params', async () => {
+    const response = await client.aiSearch.instances.chatCompletions('my-ai-search', {
+      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      messages: [{ content: 'content', role: 'system' }],
+      ai_search_options: {
+        cache: { cache_threshold: 'super_strict_match', enabled: true },
+        query_rewrite: {
+          enabled: true,
+          model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+          rewrite_prompt: 'rewrite_prompt',
+        },
+        reranking: {
+          enabled: true,
+          match_threshold: 0,
+          model: '@cf/baai/bge-reranker-base',
+        },
+        retrieval: {
+          boost_by: [{ field: 'timestamp', direction: 'desc' }],
+          context_expansion: 0,
+          filters: { foo: 'bar' },
+          fusion_method: 'max',
+          keyword_match_mode: 'and',
+          match_threshold: 0,
+          max_num_results: 1,
+          retrieval_type: 'vector',
+          return_on_failure: true,
+        },
+      },
+      model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+      stream: true,
+    });
+  });
+
   test('read: only required params', async () => {
     const responsePromise = client.aiSearch.instances.read('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
@@ -196,6 +306,51 @@ describe('resource instances', () => {
   test('read: required and optional params', async () => {
     const response = await client.aiSearch.instances.read('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+    });
+  });
+
+  test('search: only required params', async () => {
+    const responsePromise = client.aiSearch.instances.search('my-ai-search', {
+      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('search: required and optional params', async () => {
+    const response = await client.aiSearch.instances.search('my-ai-search', {
+      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      ai_search_options: {
+        cache: { cache_threshold: 'super_strict_match', enabled: true },
+        query_rewrite: {
+          enabled: true,
+          model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+          rewrite_prompt: 'rewrite_prompt',
+        },
+        reranking: {
+          enabled: true,
+          match_threshold: 0,
+          model: '@cf/baai/bge-reranker-base',
+        },
+        retrieval: {
+          boost_by: [{ field: 'timestamp', direction: 'desc' }],
+          context_expansion: 0,
+          filters: { foo: 'bar' },
+          fusion_method: 'max',
+          keyword_match_mode: 'and',
+          match_threshold: 0,
+          max_num_results: 1,
+          retrieval_type: 'vector',
+          return_on_failure: true,
+        },
+      },
+      messages: [{ content: 'content', role: 'system' }],
+      query: 'x',
     });
   });
 

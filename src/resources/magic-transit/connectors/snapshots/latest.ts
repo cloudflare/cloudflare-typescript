@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Latest extends APIResource {
@@ -18,10 +19,19 @@ export class Latest extends APIResource {
    */
   list(
     connectorId: string,
-    params: LatestListParams,
+    params?: LatestListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LatestListResponse>;
+  list(connectorId: string, options?: Core.RequestOptions): Core.APIPromise<LatestListResponse>;
+  list(
+    connectorId: string,
+    params: LatestListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LatestListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(connectorId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/connectors/${connectorId}/telemetry/snapshots/latest`,
@@ -149,9 +159,19 @@ export namespace LatestListResponse {
      */
     cpu_time_user_ms?: number;
 
+    /**
+     * Number of network operations applied during state transition
+     */
+    delta?: number;
+
     dhcp_leases?: Array<Item.DHCPLease>;
 
     disks?: Array<Item.Disk>;
+
+    /**
+     * Simulated number of network operations applied during state transition
+     */
+    epsilon?: number;
 
     /**
      * Name of high availability state
@@ -530,6 +550,11 @@ export namespace LatestListResponse {
     mounts?: Array<Item.Mount>;
 
     netdevs?: Array<Item.Netdev>;
+
+    /**
+     * Platform identifier
+     */
+    platform?: string;
 
     /**
      * Number of ICMP Address Mask Reply messages received
@@ -926,11 +951,6 @@ export namespace LatestListResponse {
        * MAC Address of the device the IP Address was leased to
        */
       mac_address: string;
-
-      /**
-       * Connector identifier
-       */
-      connector_id?: string;
     }
 
     /**
@@ -1008,11 +1028,6 @@ export namespace LatestListResponse {
       writes_merged: number;
 
       /**
-       * Connector identifier
-       */
-      connector_id?: string;
-
-      /**
        * Discards completed successfully
        */
       discards?: number;
@@ -1057,11 +1072,6 @@ export namespace LatestListResponse {
        */
       operstate: string;
 
-      /**
-       * Connector identifier
-       */
-      connector_id?: string;
-
       ip_addresses?: Array<Interface.IPAddress>;
 
       /**
@@ -1084,11 +1094,6 @@ export namespace LatestListResponse {
          * IP address of the network interface
          */
         ip_address: string;
-
-        /**
-         * Connector identifier
-         */
-        connector_id?: string;
       }
     }
 
@@ -1122,9 +1127,9 @@ export namespace LatestListResponse {
       available_bytes?: number;
 
       /**
-       * Connector identifier
+       * Available inodes on filesystem
        */
-      connector_id?: string;
+      available_inodes?: number;
 
       /**
        * Determines whether the disk is read-only
@@ -1140,6 +1145,11 @@ export namespace LatestListResponse {
        * Total disk size (bytes)
        */
       total_bytes?: number;
+
+      /**
+       * Total inodes on filesystem
+       */
+      total_inodes?: number;
     }
 
     /**
@@ -1230,11 +1240,6 @@ export namespace LatestListResponse {
        * Total packets transmitted
        */
       sent_packets: number;
-
-      /**
-       * Connector identifier
-       */
-      connector_id?: string;
     }
 
     /**
@@ -1245,11 +1250,6 @@ export namespace LatestListResponse {
        * Sensor identifier for the component
        */
       label: string;
-
-      /**
-       * Connector identifier
-       */
-      connector_id?: string;
 
       /**
        * Critical failure temperature of the component (degrees Celsius)
@@ -1293,14 +1293,19 @@ export namespace LatestListResponse {
       tunnel_id: string;
 
       /**
-       * Connector identifier
-       */
-      connector_id?: string;
-
-      /**
        * MTU as measured between the two ends of the tunnel
        */
       probed_mtu?: number;
+
+      /**
+       * Number of recent healthy pings for this tunnel
+       */
+      recent_healthy_pings?: number;
+
+      /**
+       * Number of recent unhealthy pings for this tunnel
+       */
+      recent_unhealthy_pings?: number;
     }
   }
 }
@@ -1309,7 +1314,7 @@ export interface LatestListParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Latest {

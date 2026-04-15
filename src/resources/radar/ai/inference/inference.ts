@@ -488,7 +488,7 @@ export interface InferenceTimeseriesGroupsV2Params {
    * Normalization method applied to the results. Refer to
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
-  normalization?: 'PERCENTAGE_CHANGE' | 'MIN0_MAX';
+  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
 }
 
 Inference.Summary = Summary;

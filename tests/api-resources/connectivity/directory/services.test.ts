@@ -14,10 +14,10 @@ describe('resource services', () => {
     const responsePromise = client.connectivity.directory.services.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       host: {
-        hostname: 'api.example.com',
-        resolver_network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' },
+        ipv4: '10.0.0.1',
+        network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' },
       },
-      name: 'web-server',
+      name: 'web-app',
       type: 'http',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -33,13 +33,14 @@ describe('resource services', () => {
     const response = await client.connectivity.directory.services.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       host: {
-        hostname: 'api.example.com',
-        resolver_network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da', resolver_ips: ['string'] },
+        ipv4: '10.0.0.1',
+        network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' },
       },
-      name: 'web-server',
+      name: 'web-app',
       type: 'http',
       http_port: 8080,
       https_port: 8443,
+      tls_settings: { cert_verification_mode: 'verify_full' },
     });
   });
 
@@ -48,7 +49,10 @@ describe('resource services', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 'account_id',
-        host: { ipv4: '10.0.0.1', network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' } },
+        host: {
+          ipv4: '10.0.0.1',
+          network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' },
+        },
         name: 'web-app',
         type: 'http',
       },
@@ -67,11 +71,15 @@ describe('resource services', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 'account_id',
-        host: { ipv4: '10.0.0.1', network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' } },
+        host: {
+          ipv4: '10.0.0.1',
+          network: { tunnel_id: '0191dce4-9ab4-7fce-b660-8e5dec5172da' },
+        },
         name: 'web-app',
         type: 'http',
         http_port: 8080,
         https_port: 8443,
+        tls_settings: { cert_verification_mode: 'verify_full' },
       },
     );
   });
@@ -94,7 +102,7 @@ describe('resource services', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
       per_page: 1,
-      type: 'http',
+      type: 'tcp',
     });
   });
 

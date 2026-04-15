@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as WorkersAPI from '../../workers';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
@@ -23,7 +24,7 @@ export class Versions extends APIResource {
     params: VersionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Version> {
-    const { account_id, deploy, ...body } = params;
+    const { account_id = this._client.accountId, deploy, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/workers/${workerId}/versions`, {
         query: { deploy },
@@ -49,10 +50,22 @@ export class Versions extends APIResource {
    */
   list(
     workerId: string,
-    params: VersionListParams,
+    params?: VersionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VersionsV4PagePaginationArray, Version>;
+  list(
+    workerId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VersionsV4PagePaginationArray, Version>;
+  list(
+    workerId: string,
+    params: VersionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<VersionsV4PagePaginationArray, Version> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(workerId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/workers/${workerId}/versions`,
       VersionsV4PagePaginationArray,
@@ -76,10 +89,24 @@ export class Versions extends APIResource {
   delete(
     workerId: string,
     versionId: string,
-    params: VersionDeleteParams,
+    params?: VersionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionDeleteResponse>;
+  delete(
+    workerId: string,
+    versionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionDeleteResponse>;
+  delete(
+    workerId: string,
+    versionId: string,
+    params: VersionDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(workerId, versionId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/workers/workers/${workerId}/versions/${versionId}`,
       options,
@@ -102,10 +129,20 @@ export class Versions extends APIResource {
   get(
     workerId: string,
     versionId: string,
-    params: VersionGetParams,
+    params?: VersionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Version>;
+  get(workerId: string, versionId: string, options?: Core.RequestOptions): Core.APIPromise<Version>;
+  get(
+    workerId: string,
+    versionId: string,
+    params: VersionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Version> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(workerId, versionId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/workers/workers/${workerId}/versions/${versionId}`, {
         query,
@@ -134,6 +171,12 @@ export interface Version {
   number: number;
 
   /**
+   * All routable URLs that always point to this version. Does not include alias
+   * URLs, since aliases can be updated to point to a different version.
+   */
+  urls: Array<string>;
+
+  /**
    * Metadata about the version.
    */
   annotations?: Version.Annotations;
@@ -156,6 +199,8 @@ export interface Version {
    */
   bindings?: Array<
     | Version.WorkersBindingKindAI
+    | Version.WorkersBindingKindAISearch
+    | Version.WorkersBindingKindAISearchNamespace
     | Version.WorkersBindingKindAnalyticsEngine
     | Version.WorkersBindingKindAssets
     | Version.WorkersBindingKindBrowser
@@ -168,10 +213,12 @@ export interface Version {
     | Version.WorkersBindingKindImages
     | Version.WorkersBindingKindJson
     | Version.WorkersBindingKindKVNamespace
+    | Version.WorkersBindingKindMedia
     | Version.WorkersBindingKindMTLSCertificate
     | Version.WorkersBindingKindPlainText
     | Version.WorkersBindingKindPipelines
     | Version.WorkersBindingKindQueue
+    | Version.WorkersBindingKindRatelimit
     | Version.WorkersBindingKindR2Bucket
     | Version.WorkersBindingKindSecretText
     | Version.WorkersBindingKindSendEmail
@@ -180,9 +227,12 @@ export interface Version {
     | Version.WorkersBindingKindVectorize
     | Version.WorkersBindingKindVersionMetadata
     | Version.WorkersBindingKindSecretsStoreSecret
+    | Version.WorkersBindingKindFlagship
     | Version.WorkersBindingKindSecretKey
     | Version.WorkersBindingKindWorkflow
     | Version.WorkersBindingKindWasmModule
+    | Version.WorkersBindingKindVPCService
+    | Version.WorkersBindingKindVPCNetwork
   >;
 
   /**
@@ -199,6 +249,12 @@ export interface Version {
   compatibility_flags?: Array<string>;
 
   /**
+   * List of containers attached to a Worker. Containers can only be attached to
+   * Durable Object classes of this Worker script.
+   */
+  containers?: Array<Version.Container>;
+
+  /**
    * Resource limits enforced at runtime.
    */
   limits?: Version.Limits;
@@ -208,6 +264,12 @@ export interface Version {
    * that exports a `fetch` handler).
    */
   main_module?: string;
+
+  /**
+   * Durable Object migration tag. Set when the version is deployed. Omitted if the
+   * version has not been deployed or the Worker does not use Durable Objects.
+   */
+  migration_tag?: string;
 
   /**
    * Migrations for Durable Objects associated with the version. Migrations are
@@ -230,9 +292,19 @@ export interface Version {
   modules?: Array<Version.Module>;
 
   /**
-   * Placement settings for the version.
+   * Configuration for
+   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   * Specify mode='smart' for Smart Placement, or one of region/hostname/host.
    */
-  placement?: Version.Placement;
+  placement?:
+    | Version.Mode
+    | Version.Region
+    | Version.Hostname
+    | Version.Host
+    | Version.UnionMember4
+    | Version.UnionMember5
+    | Version.UnionMember6
+    | Version.UnionMember7;
 
   /**
    * The client used to create the version.
@@ -257,12 +329,12 @@ export namespace Version {
    */
   export interface Annotations {
     /**
-     * Human-readable message about the version.
+     * Human-readable message about the version. Truncated to 1000 bytes if longer.
      */
     'workers/message'?: string;
 
     /**
-     * User-provided identifier for the version.
+     * User-provided identifier for the version. Maximum 100 bytes.
      */
     'workers/tag'?: string;
 
@@ -331,6 +403,50 @@ export namespace Version {
     type: 'ai';
   }
 
+  export interface WorkersBindingKindAISearch {
+    /**
+     * The user-chosen instance name. Must exist at deploy time. The worker can search,
+     * chat, update, and manage items/jobs on this instance.
+     */
+    instance_name: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ai_search';
+
+    /**
+     * The namespace the instance belongs to. Defaults to "default" if omitted.
+     * Customers who don't use namespaces can simply omit this field.
+     */
+    namespace?: string;
+  }
+
+  export interface WorkersBindingKindAISearchNamespace {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The user-chosen namespace name. Must exist before deploy -- Wrangler handles
+     * auto-creation on deploy failure (R2 bucket pattern). The "default" namespace is
+     * auto-created by config-api for new accounts. Grants full access (CRUD + search +
+     * chat) to all instances within the namespace.
+     */
+    namespace: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ai_search_namespace';
+  }
+
   export interface WorkersBindingKindAnalyticsEngine {
     /**
      * The name of the dataset to bind to.
@@ -376,7 +492,7 @@ export namespace Version {
     /**
      * Identifier of the D1 database to bind to.
      */
-    id: string;
+    database_id: string;
 
     /**
      * A JavaScript variable name for the binding.
@@ -387,6 +503,11 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'd1';
+
+    /**
+     * @deprecated This property has been renamed to `database_id`.
+     */
+    id?: string;
   }
 
   export interface WorkersBindingKindDataBlob {
@@ -438,7 +559,7 @@ export namespace Version {
        * Pass information from the Dispatch Worker to the Outbound Worker through the
        * parameters.
        */
-      params?: Array<string>;
+      params?: Array<Outbound.Param>;
 
       /**
        * Outbound worker.
@@ -447,10 +568,22 @@ export namespace Version {
     }
 
     export namespace Outbound {
+      export interface Param {
+        /**
+         * Name of the parameter.
+         */
+        name: string;
+      }
+
       /**
        * Outbound worker.
        */
       export interface Worker {
+        /**
+         * Entrypoint to invoke on the outbound worker.
+         */
+        entrypoint?: string;
+
         /**
          * Environment of the outbound worker.
          */
@@ -479,6 +612,11 @@ export namespace Version {
      * The exported class name of the Durable Object.
      */
     class_name?: string;
+
+    /**
+     * The dispatch namespace the Durable Object script belongs to.
+     */
+    dispatch_namespace?: string;
 
     /**
      * The environment of the script_name to bind to.
@@ -556,7 +694,7 @@ export namespace Version {
     /**
      * JSON data to use.
      */
-    json: string;
+    json: unknown;
 
     /**
      * A JavaScript variable name for the binding.
@@ -584,6 +722,18 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'kv_namespace';
+  }
+
+  export interface WorkersBindingKindMedia {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'media';
   }
 
   export interface WorkersBindingKindMTLSCertificate {
@@ -654,6 +804,45 @@ export namespace Version {
     type: 'queue';
   }
 
+  export interface WorkersBindingKindRatelimit {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the rate limit namespace to bind to.
+     */
+    namespace_id: string;
+
+    /**
+     * The rate limit configuration.
+     */
+    simple: WorkersBindingKindRatelimit.Simple;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ratelimit';
+  }
+
+  export namespace WorkersBindingKindRatelimit {
+    /**
+     * The rate limit configuration.
+     */
+    export interface Simple {
+      /**
+       * The limit (requests per period).
+       */
+      limit: number;
+
+      /**
+       * The period in seconds.
+       */
+      period: number;
+    }
+  }
+
   export interface WorkersBindingKindR2Bucket {
     /**
      * R2 bucket to bind to.
@@ -675,7 +864,7 @@ export namespace Version {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -732,6 +921,11 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'service';
+
+    /**
+     * Entrypoint to invoke on the target Worker.
+     */
+    entrypoint?: string;
 
     /**
      * Optional environment if the Worker utilizes one.
@@ -806,6 +1000,23 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'secrets_store_secret';
+  }
+
+  export interface WorkersBindingKindFlagship {
+    /**
+     * ID of the Flagship app to bind to for feature flag evaluation.
+     */
+    app_id: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'flagship';
   }
 
   export interface WorkersBindingKindSecretKey {
@@ -887,6 +1098,56 @@ export namespace Version {
     type: 'wasm_module';
   }
 
+  export interface WorkersBindingKindVPCService {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the VPC service to bind to.
+     */
+    service_id: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_service';
+  }
+
+  export interface WorkersBindingKindVPCNetwork {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_network';
+
+    /**
+     * Identifier of the network to bind to. Only "cf1:network" is currently supported.
+     * Mutually exclusive with tunnel_id.
+     */
+    network_id?: string;
+
+    /**
+     * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
+     */
+    tunnel_id?: string;
+  }
+
+  /**
+   * Container configuration for a Worker.
+   */
+  export interface Container {
+    /**
+     * Select which Durable Object class should get this container attached.
+     */
+    class_name: string;
+  }
+
   /**
    * Resource limits enforced at runtime.
    */
@@ -894,7 +1155,12 @@ export namespace Version {
     /**
      * CPU time limit in milliseconds.
      */
-    cpu_ms: number;
+    cpu_ms?: number;
+
+    /**
+     * Subrequest limit per request.
+     */
+    subrequests?: number;
   }
 
   export interface WorkersMultipleStepMigrations {}
@@ -916,14 +1182,104 @@ export namespace Version {
     name: string;
   }
 
-  /**
-   * Placement settings for the version.
-   */
-  export interface Placement {
+  export interface Mode {
     /**
-     * Placement mode for the version.
+     * Enables
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      */
-    mode?: 'smart';
+    mode: 'smart';
+  }
+
+  export interface Region {
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+  }
+
+  export interface Hostname {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+  }
+
+  export interface Host {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
+  }
+
+  export interface UnionMember4 {
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+  }
+
+  export interface UnionMember5 {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+  }
+
+  export interface UnionMember6 {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
+
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+  }
+
+  export interface UnionMember7 {
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * Array of placement targets (currently limited to single target).
+     */
+    target: Array<UnionMember7.Region | UnionMember7.Hostname | UnionMember7.Host>;
+  }
+
+  export namespace UnionMember7 {
+    export interface Region {
+      /**
+       * Cloud region in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface Hostname {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface Host {
+      /**
+       * TCP host:port for targeted placement.
+       */
+      host: string;
+    }
   }
 }
 
@@ -976,7 +1332,7 @@ export interface VersionCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: If true, a deployment will be created that sends 100% of traffic to
@@ -1007,6 +1363,8 @@ export interface VersionCreateParams {
    */
   bindings?: Array<
     | VersionCreateParams.WorkersBindingKindAI
+    | VersionCreateParams.WorkersBindingKindAISearch
+    | VersionCreateParams.WorkersBindingKindAISearchNamespace
     | VersionCreateParams.WorkersBindingKindAnalyticsEngine
     | VersionCreateParams.WorkersBindingKindAssets
     | VersionCreateParams.WorkersBindingKindBrowser
@@ -1019,10 +1377,12 @@ export interface VersionCreateParams {
     | VersionCreateParams.WorkersBindingKindImages
     | VersionCreateParams.WorkersBindingKindJson
     | VersionCreateParams.WorkersBindingKindKVNamespace
+    | VersionCreateParams.WorkersBindingKindMedia
     | VersionCreateParams.WorkersBindingKindMTLSCertificate
     | VersionCreateParams.WorkersBindingKindPlainText
     | VersionCreateParams.WorkersBindingKindPipelines
     | VersionCreateParams.WorkersBindingKindQueue
+    | VersionCreateParams.WorkersBindingKindRatelimit
     | VersionCreateParams.WorkersBindingKindR2Bucket
     | VersionCreateParams.WorkersBindingKindSecretText
     | VersionCreateParams.WorkersBindingKindSendEmail
@@ -1031,9 +1391,12 @@ export interface VersionCreateParams {
     | VersionCreateParams.WorkersBindingKindVectorize
     | VersionCreateParams.WorkersBindingKindVersionMetadata
     | VersionCreateParams.WorkersBindingKindSecretsStoreSecret
+    | VersionCreateParams.WorkersBindingKindFlagship
     | VersionCreateParams.WorkersBindingKindSecretKey
     | VersionCreateParams.WorkersBindingKindWorkflow
     | VersionCreateParams.WorkersBindingKindWasmModule
+    | VersionCreateParams.WorkersBindingKindVPCService
+    | VersionCreateParams.WorkersBindingKindVPCNetwork
   >;
 
   /**
@@ -1049,6 +1412,12 @@ export interface VersionCreateParams {
    * not included in a `compatibility_date`.
    */
   compatibility_flags?: Array<string>;
+
+  /**
+   * Body param: List of containers attached to a Worker. Containers can only be
+   * attached to Durable Object classes of this Worker script.
+   */
+  containers?: Array<VersionCreateParams.Container>;
 
   /**
    * Body param: Resource limits enforced at runtime.
@@ -1082,9 +1451,19 @@ export interface VersionCreateParams {
   modules?: Array<VersionCreateParams.Module>;
 
   /**
-   * Body param: Placement settings for the version.
+   * Body param: Configuration for
+   * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   * Specify mode='smart' for Smart Placement, or one of region/hostname/host.
    */
-  placement?: VersionCreateParams.Placement;
+  placement?:
+    | VersionCreateParams.Mode
+    | VersionCreateParams.Region
+    | VersionCreateParams.Hostname
+    | VersionCreateParams.Host
+    | VersionCreateParams.UnionMember4
+    | VersionCreateParams.UnionMember5
+    | VersionCreateParams.UnionMember6
+    | VersionCreateParams.UnionMember7;
 
   /**
    * @deprecated Body param: Usage model for the version.
@@ -1098,12 +1477,12 @@ export namespace VersionCreateParams {
    */
   export interface Annotations {
     /**
-     * Human-readable message about the version.
+     * Human-readable message about the version. Truncated to 1000 bytes if longer.
      */
     'workers/message'?: string;
 
     /**
-     * User-provided identifier for the version.
+     * User-provided identifier for the version. Maximum 100 bytes.
      */
     'workers/tag'?: string;
   }
@@ -1167,6 +1546,50 @@ export namespace VersionCreateParams {
     type: 'ai';
   }
 
+  export interface WorkersBindingKindAISearch {
+    /**
+     * The user-chosen instance name. Must exist at deploy time. The worker can search,
+     * chat, update, and manage items/jobs on this instance.
+     */
+    instance_name: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ai_search';
+
+    /**
+     * The namespace the instance belongs to. Defaults to "default" if omitted.
+     * Customers who don't use namespaces can simply omit this field.
+     */
+    namespace?: string;
+  }
+
+  export interface WorkersBindingKindAISearchNamespace {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The user-chosen namespace name. Must exist before deploy -- Wrangler handles
+     * auto-creation on deploy failure (R2 bucket pattern). The "default" namespace is
+     * auto-created by config-api for new accounts. Grants full access (CRUD + search +
+     * chat) to all instances within the namespace.
+     */
+    namespace: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ai_search_namespace';
+  }
+
   export interface WorkersBindingKindAnalyticsEngine {
     /**
      * The name of the dataset to bind to.
@@ -1212,7 +1635,7 @@ export namespace VersionCreateParams {
     /**
      * Identifier of the D1 database to bind to.
      */
-    id: string;
+    database_id: string;
 
     /**
      * A JavaScript variable name for the binding.
@@ -1223,6 +1646,11 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'd1';
+
+    /**
+     * @deprecated This property has been renamed to `database_id`.
+     */
+    id?: string;
   }
 
   export interface WorkersBindingKindDataBlob {
@@ -1274,7 +1702,7 @@ export namespace VersionCreateParams {
        * Pass information from the Dispatch Worker to the Outbound Worker through the
        * parameters.
        */
-      params?: Array<string>;
+      params?: Array<Outbound.Param>;
 
       /**
        * Outbound worker.
@@ -1283,10 +1711,22 @@ export namespace VersionCreateParams {
     }
 
     export namespace Outbound {
+      export interface Param {
+        /**
+         * Name of the parameter.
+         */
+        name: string;
+      }
+
       /**
        * Outbound worker.
        */
       export interface Worker {
+        /**
+         * Entrypoint to invoke on the outbound worker.
+         */
+        entrypoint?: string;
+
         /**
          * Environment of the outbound worker.
          */
@@ -1315,6 +1755,11 @@ export namespace VersionCreateParams {
      * The exported class name of the Durable Object.
      */
     class_name?: string;
+
+    /**
+     * The dispatch namespace the Durable Object script belongs to.
+     */
+    dispatch_namespace?: string;
 
     /**
      * The environment of the script_name to bind to.
@@ -1392,7 +1837,7 @@ export namespace VersionCreateParams {
     /**
      * JSON data to use.
      */
-    json: string;
+    json: unknown;
 
     /**
      * A JavaScript variable name for the binding.
@@ -1420,6 +1865,18 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'kv_namespace';
+  }
+
+  export interface WorkersBindingKindMedia {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'media';
   }
 
   export interface WorkersBindingKindMTLSCertificate {
@@ -1490,6 +1947,45 @@ export namespace VersionCreateParams {
     type: 'queue';
   }
 
+  export interface WorkersBindingKindRatelimit {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the rate limit namespace to bind to.
+     */
+    namespace_id: string;
+
+    /**
+     * The rate limit configuration.
+     */
+    simple: WorkersBindingKindRatelimit.Simple;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ratelimit';
+  }
+
+  export namespace WorkersBindingKindRatelimit {
+    /**
+     * The rate limit configuration.
+     */
+    export interface Simple {
+      /**
+       * The limit (requests per period).
+       */
+      limit: number;
+
+      /**
+       * The period in seconds.
+       */
+      period: number;
+    }
+  }
+
   export interface WorkersBindingKindR2Bucket {
     /**
      * R2 bucket to bind to.
@@ -1511,7 +2007,7 @@ export namespace VersionCreateParams {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -1573,6 +2069,11 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'service';
+
+    /**
+     * Entrypoint to invoke on the target Worker.
+     */
+    entrypoint?: string;
 
     /**
      * Optional environment if the Worker utilizes one.
@@ -1647,6 +2148,23 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'secrets_store_secret';
+  }
+
+  export interface WorkersBindingKindFlagship {
+    /**
+     * ID of the Flagship app to bind to for feature flag evaluation.
+     */
+    app_id: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'flagship';
   }
 
   export interface WorkersBindingKindSecretKey {
@@ -1740,6 +2258,56 @@ export namespace VersionCreateParams {
     type: 'wasm_module';
   }
 
+  export interface WorkersBindingKindVPCService {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the VPC service to bind to.
+     */
+    service_id: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_service';
+  }
+
+  export interface WorkersBindingKindVPCNetwork {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_network';
+
+    /**
+     * Identifier of the network to bind to. Only "cf1:network" is currently supported.
+     * Mutually exclusive with tunnel_id.
+     */
+    network_id?: string;
+
+    /**
+     * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
+     */
+    tunnel_id?: string;
+  }
+
+  /**
+   * Container configuration for a Worker.
+   */
+  export interface Container {
+    /**
+     * Select which Durable Object class should get this container attached.
+     */
+    class_name: string;
+  }
+
   /**
    * Resource limits enforced at runtime.
    */
@@ -1747,7 +2315,12 @@ export namespace VersionCreateParams {
     /**
      * CPU time limit in milliseconds.
      */
-    cpu_ms: number;
+    cpu_ms?: number;
+
+    /**
+     * Subrequest limit per request.
+     */
+    subrequests?: number;
   }
 
   export interface WorkersMultipleStepMigrations {
@@ -1785,14 +2358,104 @@ export namespace VersionCreateParams {
     name: string;
   }
 
-  /**
-   * Placement settings for the version.
-   */
-  export interface Placement {
+  export interface Mode {
     /**
-     * Placement mode for the version.
+     * Enables
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      */
-    mode?: 'smart';
+    mode: 'smart';
+  }
+
+  export interface Region {
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+  }
+
+  export interface Hostname {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+  }
+
+  export interface Host {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
+  }
+
+  export interface UnionMember4 {
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+  }
+
+  export interface UnionMember5 {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+  }
+
+  export interface UnionMember6 {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
+
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+  }
+
+  export interface UnionMember7 {
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * Array of placement targets (currently limited to single target).
+     */
+    target: Array<UnionMember7.Region | UnionMember7.Hostname | UnionMember7.Host>;
+  }
+
+  export namespace UnionMember7 {
+    export interface Region {
+      /**
+       * Cloud region in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface Hostname {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface Host {
+      /**
+       * TCP host:port for targeted placement.
+       */
+      host: string;
+    }
   }
 }
 
@@ -1800,21 +2463,21 @@ export interface VersionListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface VersionDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface VersionGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Whether to include the `modules` property of the version in the

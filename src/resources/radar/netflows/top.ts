@@ -10,7 +10,7 @@ export class Top extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.radar.netflows.top.ases();
+   * const response = await client.radar.netFlows.top.ases();
    * ```
    */
   ases(query?: TopAsesParams, options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>;
@@ -35,7 +35,7 @@ export class Top extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.radar.netflows.top.locations();
+   *   await client.radar.netFlows.top.locations();
    * ```
    */
   locations(query?: TopLocationsParams, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>;

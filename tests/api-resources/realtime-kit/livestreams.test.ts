@@ -154,7 +154,11 @@ describe('resource livestreams', () => {
     const response = await client.realtimeKit.livestreams.getLivestreamSessionForLivestreamId(
       'app_id',
       'livestream_id',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', page_no: 0, per_page: 0 },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        page_no: 0,
+        per_page: 0,
+      },
     );
   });
 

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ViewsAPI from './views';
 import {
@@ -31,8 +32,16 @@ export class Account extends APIResource {
    * });
    * ```
    */
-  edit(params: AccountEditParams, options?: Core.RequestOptions): Core.APIPromise<AccountEditResponse> {
-    const { account_id, ...body } = params;
+  edit(params?: AccountEditParams, options?: Core.RequestOptions): Core.APIPromise<AccountEditResponse>;
+  edit(options?: Core.RequestOptions): Core.APIPromise<AccountEditResponse>;
+  edit(
+    params: AccountEditParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountEditResponse> {
+    if (isRequestOptions(params)) {
+      return this.edit({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/dns_settings`, { body, ...options }) as Core.APIPromise<{
         result: AccountEditResponse;
@@ -50,8 +59,16 @@ export class Account extends APIResource {
    * });
    * ```
    */
-  get(params: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<AccountGetResponse> {
-    const { account_id } = params;
+  get(params?: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<AccountGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<AccountGetResponse>;
+  get(
+    params: AccountGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_settings`, options) as Core.APIPromise<{
         result: AccountGetResponse;
@@ -312,10 +329,10 @@ export interface AccountEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   zone_defaults?: AccountEditParams.ZoneDefaults;
 }
@@ -444,7 +461,7 @@ export interface AccountGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Account.Views = Views;

@@ -19,6 +19,13 @@ import {
 } from './discovery/discovery';
 import * as ExpressionTemplateAPI from './expression-template/expression-template';
 import { ExpressionTemplate } from './expression-template/expression-template';
+import * as LabelsAPI from './labels/labels';
+import {
+  LabelListParams,
+  LabelListResponse,
+  LabelListResponsesV4PagePaginationArray,
+  Labels,
+} from './labels/labels';
 import * as OperationsAPI from './operations/operations';
 import {
   APIShield,
@@ -58,6 +65,7 @@ import {
 export class APIGateway extends APIResource {
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
   discovery: DiscoveryAPI.Discovery = new DiscoveryAPI.Discovery(this._client);
+  labels: LabelsAPI.Labels = new LabelsAPI.Labels(this._client);
   operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
@@ -69,6 +77,8 @@ export class APIGateway extends APIResource {
 
 APIGateway.Configurations = Configurations;
 APIGateway.Discovery = Discovery;
+APIGateway.Labels = Labels;
+APIGateway.LabelListResponsesV4PagePaginationArray = LabelListResponsesV4PagePaginationArray;
 APIGateway.Operations = Operations;
 APIGateway.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
 APIGateway.OperationBulkCreateResponsesSinglePage = OperationBulkCreateResponsesSinglePage;
@@ -90,6 +100,13 @@ export declare namespace APIGateway {
     type DiscoveryOperation as DiscoveryOperation,
     type DiscoveryGetResponse as DiscoveryGetResponse,
     type DiscoveryGetParams as DiscoveryGetParams,
+  };
+
+  export {
+    Labels as Labels,
+    type LabelListResponse as LabelListResponse,
+    LabelListResponsesV4PagePaginationArray as LabelListResponsesV4PagePaginationArray,
+    type LabelListParams as LabelListParams,
   };
 
   export {

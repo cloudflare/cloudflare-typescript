@@ -21,7 +21,7 @@ export class Token extends APIResource {
     params: TokenCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TokenCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/${identifier}/token`, {
         body,
@@ -42,7 +42,7 @@ export interface TokenCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The optional ID of a Stream signing key. If present, the `pem` field
@@ -70,6 +70,11 @@ export interface TokenCreateParams {
    * time. If this field is not set, the default is one hour after issuing.
    */
   exp?: number;
+
+  /**
+   * Body param: Optional flags for the signed token.
+   */
+  flags?: TokenCreateParams.Flags;
 
   /**
    * Body param: The optional unix epoch timestamp that specifies the time before a
@@ -116,6 +121,16 @@ export namespace TokenCreateParams {
      * rules.
      */
     type?: 'any' | 'ip.src' | 'ip.geoip.country';
+  }
+
+  /**
+   * Optional flags for the signed token.
+   */
+  export interface Flags {
+    /**
+     * Whether to return the original video without transformations.
+     */
+    original?: boolean;
   }
 }
 

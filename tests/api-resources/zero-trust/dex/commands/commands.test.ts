@@ -13,7 +13,13 @@ describe('resource commands', () => {
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.dex.commands.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      commands: [{ command_type: 'pcap', device_id: 'device_id', user_email: 'user_email' }],
+      commands: [
+        {
+          command_type: 'pcap',
+          device_id: 'device_id',
+          user_email: 'user_email',
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -39,6 +45,7 @@ describe('resource commands', () => {
             'test-all-routes': true,
             'time-limit-min': 1,
           },
+          registration_id: 'registration_id',
         },
       ],
     });

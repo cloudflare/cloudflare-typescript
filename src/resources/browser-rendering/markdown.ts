@@ -21,7 +21,7 @@ export class Markdown extends APIResource {
     params: MarkdownCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MarkdownCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountId, cacheTTL, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/browser-rendering/markdown`, {
         query: { cacheTTL },
@@ -33,7 +33,7 @@ export class Markdown extends APIResource {
 }
 
 /**
- * Markdown
+ * Markdown content.
  */
 export type MarkdownCreateResponse = string;
 
@@ -44,7 +44,7 @@ export declare namespace MarkdownCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.
@@ -122,7 +122,7 @@ export declare namespace MarkdownCreateParams {
     cookies?: Array<Variant0.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -163,17 +163,17 @@ export declare namespace MarkdownCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -221,6 +221,9 @@ export declare namespace MarkdownCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -304,7 +307,7 @@ export declare namespace MarkdownCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
@@ -383,7 +386,7 @@ export declare namespace MarkdownCreateParams {
     cookies?: Array<Variant1.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -424,17 +427,17 @@ export declare namespace MarkdownCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -482,6 +485,9 @@ export declare namespace MarkdownCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;

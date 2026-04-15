@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -12,7 +13,7 @@ export class CloudIntegrations extends APIResource {
     params: CloudIntegrationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CloudIntegrationCreateResponse> {
-    const { account_id, forwarded, ...body } = params;
+    const { account_id = this._client.accountId, forwarded, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/cloud/providers`, {
         body,
@@ -30,7 +31,7 @@ export class CloudIntegrations extends APIResource {
     params: CloudIntegrationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CloudIntegrationUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/cloud/providers/${providerId}`, {
         body,
@@ -43,10 +44,20 @@ export class CloudIntegrations extends APIResource {
    * List Cloud Integrations (Closed Beta).
    */
   list(
-    params: CloudIntegrationListParams,
+    params?: CloudIntegrationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CloudIntegrationListResponsesSinglePage, CloudIntegrationListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CloudIntegrationListResponsesSinglePage, CloudIntegrationListResponse>;
+  list(
+    params: CloudIntegrationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CloudIntegrationListResponsesSinglePage, CloudIntegrationListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/magic/cloud/providers`,
       CloudIntegrationListResponsesSinglePage,
@@ -59,10 +70,19 @@ export class CloudIntegrations extends APIResource {
    */
   delete(
     providerId: string,
-    params: CloudIntegrationDeleteParams,
+    params?: CloudIntegrationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CloudIntegrationDeleteResponse>;
+  delete(providerId: string, options?: Core.RequestOptions): Core.APIPromise<CloudIntegrationDeleteResponse>;
+  delete(
+    providerId: string,
+    params: CloudIntegrationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CloudIntegrationDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(providerId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/magic/cloud/providers/${providerId}`,
@@ -76,10 +96,22 @@ export class CloudIntegrations extends APIResource {
    */
   discover(
     providerId: string,
-    params: CloudIntegrationDiscoverParams,
+    params?: CloudIntegrationDiscoverParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CloudIntegrationDiscoverResponse>;
+  discover(
+    providerId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CloudIntegrationDiscoverResponse>;
+  discover(
+    providerId: string,
+    params: CloudIntegrationDiscoverParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CloudIntegrationDiscoverResponse> {
-    const { account_id, v2 } = params;
+    if (isRequestOptions(params)) {
+      return this.discover(providerId, {}, params);
+    }
+    const { account_id = this._client.accountId, v2 } = params;
     return this._client.post(`/accounts/${account_id}/magic/cloud/providers/${providerId}/discover`, {
       query: { v2 },
       ...options,
@@ -90,10 +122,18 @@ export class CloudIntegrations extends APIResource {
    * Run discovery for all Cloud Integrations in an account (Closed Beta).
    */
   discoverAll(
-    params: CloudIntegrationDiscoverAllParams,
+    params?: CloudIntegrationDiscoverAllParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CloudIntegrationDiscoverAllResponse>;
+  discoverAll(options?: Core.RequestOptions): Core.APIPromise<CloudIntegrationDiscoverAllResponse>;
+  discoverAll(
+    params: CloudIntegrationDiscoverAllParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CloudIntegrationDiscoverAllResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.discoverAll({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.post(`/accounts/${account_id}/magic/cloud/providers/discover`, options);
   }
 
@@ -105,7 +145,7 @@ export class CloudIntegrations extends APIResource {
     params: CloudIntegrationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CloudIntegrationEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/cloud/providers/${providerId}`, {
         body,
@@ -119,10 +159,19 @@ export class CloudIntegrations extends APIResource {
    */
   get(
     providerId: string,
-    params: CloudIntegrationGetParams,
+    params?: CloudIntegrationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CloudIntegrationGetResponse>;
+  get(providerId: string, options?: Core.RequestOptions): Core.APIPromise<CloudIntegrationGetResponse>;
+  get(
+    providerId: string,
+    params: CloudIntegrationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CloudIntegrationGetResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(providerId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/cloud/providers/${providerId}`, {
         query,
@@ -136,10 +185,22 @@ export class CloudIntegrations extends APIResource {
    */
   initialSetup(
     providerId: string,
-    params: CloudIntegrationInitialSetupParams,
+    params?: CloudIntegrationInitialSetupParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CloudIntegrationInitialSetupResponse>;
+  initialSetup(
+    providerId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CloudIntegrationInitialSetupResponse>;
+  initialSetup(
+    providerId: string,
+    params: CloudIntegrationInitialSetupParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CloudIntegrationInitialSetupResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.initialSetup(providerId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/cloud/providers/${providerId}/initial_setup`,
@@ -1416,86 +1477,86 @@ export namespace CloudIntegrationInitialSetupResponse {
 
 export interface CloudIntegrationCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   cloud_type: 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
   /**
-   * Body param:
+   * Body param
    */
   friendly_name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Header param:
+   * Header param
    */
   forwarded?: string;
 }
 
 export interface CloudIntegrationUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   aws_arn?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   azure_subscription_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   azure_tenant_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   friendly_name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   gcp_project_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   gcp_service_account_email?: string;
 }
 
 export interface CloudIntegrationListParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   cloudflare?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   desc?: boolean;
 
@@ -1505,87 +1566,87 @@ export interface CloudIntegrationListParams {
   order_by?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   status?: boolean;
 }
 
 export interface CloudIntegrationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CloudIntegrationDiscoverParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   v2?: boolean;
 }
 
 export interface CloudIntegrationDiscoverAllParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CloudIntegrationEditParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   aws_arn?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   azure_subscription_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   azure_tenant_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   friendly_name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   gcp_project_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   gcp_service_account_email?: string;
 }
 
 export interface CloudIntegrationGetParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   status?: boolean;
 }
 
 export interface CloudIntegrationInitialSetupParams {
-  account_id: string;
+  account_id?: string;
 }
 
 CloudIntegrations.CloudIntegrationListResponsesSinglePage = CloudIntegrationListResponsesSinglePage;

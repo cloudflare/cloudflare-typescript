@@ -17,7 +17,7 @@ export class Json extends APIResource {
    * ```
    */
   create(params: JsonCreateParams, options?: Core.RequestOptions): Core.APIPromise<JsonCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountId, cacheTTL, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/browser-rendering/json`, {
         query: { cacheTTL },
@@ -37,7 +37,7 @@ export declare namespace JsonCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
@@ -123,7 +123,7 @@ export declare namespace JsonCreateParams {
     custom_ai?: Array<Variant0.CustomAI>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -133,7 +133,7 @@ export declare namespace JsonCreateParams {
     gotoOptions?: Variant0.GotoOptions;
 
     /**
-     * Body param:
+     * Body param
      */
     prompt?: string;
 
@@ -169,22 +169,22 @@ export declare namespace JsonCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     response_format?: Variant0.ResponseFormat;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -232,6 +232,9 @@ export declare namespace JsonCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -263,15 +266,16 @@ export declare namespace JsonCreateParams {
 
     export interface CustomAI {
       /**
-       * Authorization token for the AI model: `Bearer <token>`.
-       */
-      authorization: string;
-
-      /**
        * AI model to use for the request. Must be formed as `<provider>/<model_name>`,
-       * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`
+       * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
        */
       model: string;
+
+      /**
+       * Authorization token for the AI model: `Bearer <token>`. Not needed for
+       * workers-ai models.
+       */
+      authorization?: string;
     }
 
     /**
@@ -338,7 +342,7 @@ export declare namespace JsonCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.
@@ -423,7 +427,7 @@ export declare namespace JsonCreateParams {
     custom_ai?: Array<Variant1.CustomAI>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -433,7 +437,7 @@ export declare namespace JsonCreateParams {
     gotoOptions?: Variant1.GotoOptions;
 
     /**
-     * Body param:
+     * Body param
      */
     prompt?: string;
 
@@ -469,22 +473,22 @@ export declare namespace JsonCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     response_format?: Variant1.ResponseFormat;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -532,6 +536,9 @@ export declare namespace JsonCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -563,15 +570,16 @@ export declare namespace JsonCreateParams {
 
     export interface CustomAI {
       /**
-       * Authorization token for the AI model: `Bearer <token>`.
-       */
-      authorization: string;
-
-      /**
        * AI model to use for the request. Must be formed as `<provider>/<model_name>`,
-       * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`
+       * e.g. `workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
        */
       model: string;
+
+      /**
+       * Authorization token for the AI model: `Bearer <token>`. Not needed for
+       * workers-ai models.
+       */
+      authorization?: string;
     }
 
     /**

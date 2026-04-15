@@ -28,6 +28,7 @@ describe('resource move', () => {
     const response = await client.emailSecurity.investigate.move.create('4Njp3P0STMz2c02Q', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination: 'Inbox',
+      submission: true,
     });
   });
 
@@ -35,7 +36,6 @@ describe('resource move', () => {
     const responsePromise = client.emailSecurity.investigate.move.bulk({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination: 'Inbox',
-      postfix_ids: ['4Njp3P0STMz2c02Q'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,6 +50,7 @@ describe('resource move', () => {
     const response = await client.emailSecurity.investigate.move.bulk({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination: 'Inbox',
+      ids: ['string'],
       postfix_ids: ['4Njp3P0STMz2c02Q'],
     });
   });

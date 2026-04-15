@@ -1,11 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Whois extends APIResource {
   /**
-   * Get WHOIS Record
+   * Retrieves WHOIS registration data for a domain, including registrant and
+   * nameserver information.
    *
    * @example
    * ```ts
@@ -14,8 +16,16 @@ export class Whois extends APIResource {
    * });
    * ```
    */
-  get(params: WhoisGetParams, options?: Core.RequestOptions): Core.APIPromise<WhoisGetResponse> {
-    const { account_id, ...query } = params;
+  get(params?: WhoisGetParams, options?: Core.RequestOptions): Core.APIPromise<WhoisGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<WhoisGetResponse>;
+  get(
+    params: WhoisGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WhoisGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/whois`, { query, ...options }) as Core.APIPromise<{
         result: WhoisGetResponse;
@@ -224,10 +234,10 @@ export interface WhoisGetParams {
   /**
    * Path param: Use to uniquely identify or reference the resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   domain?: string;
 }

@@ -1,11 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Trace extends APIResource {
   /**
-   * Get email trace
+   * Gets the delivery trace for an email message, showing its path through email
+   * security processing.
    *
    * @example
    * ```ts
@@ -18,15 +20,24 @@ export class Trace extends APIResource {
    */
   get(
     postfixId: string,
-    params: TraceGetParams,
+    params?: TraceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TraceGetResponse>;
+  get(postfixId: string, options?: Core.RequestOptions): Core.APIPromise<TraceGetResponse>;
+  get(
+    postfixId: string,
+    params: TraceGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TraceGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(postfixId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}/trace`,
-        options,
-      ) as Core.APIPromise<{ result: TraceGetResponse }>
+      this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}/trace`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TraceGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -73,9 +84,15 @@ export namespace TraceGetResponse {
 
 export interface TraceGetParams {
   /**
-   * Account Identifier
+   * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
+
+  /**
+   * Query param: When true, search the submissions datastore only. When false or
+   * omitted, search the regular datastore only.
+   */
+  submission?: boolean;
 }
 
 export declare namespace Trace {

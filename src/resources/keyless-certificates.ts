@@ -1,13 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
 import * as Core from '../core';
 import * as CustomHostnamesAPI from './custom-hostnames/custom-hostnames';
 import { SinglePage } from '../pagination';
 
 export class KeylessCertificates extends APIResource {
   /**
-   * Create Keyless SSL Configuration
+   * Creates a Keyless SSL configuration that allows SSL/TLS termination without
+   * exposing private keys to Cloudflare. Keys remain on your infrastructure.
    *
    * @example
    * ```ts
@@ -15,7 +17,7 @@ export class KeylessCertificates extends APIResource {
    *   await client.keylessCertificates.create({
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     certificate:
-   *       '-----BEGIN CERTIFICATE----- MIIDtTCCAp2gAwIBAgIJAM15n7fdxhRtMA0GCSqGSIb3DQEBBQUAMEUxCzAJBgNV BAYTAlVTMRMwEQYDVQQIEwpTb21lLVN0YXRlMSEwHwYDVQQKExhJbnRlcm5ldCBX aWRnaXRzIFB0eSBMdGQwHhcNMTQwMzExMTkyMTU5WhcNMTQwNDEwMTkyMTU5WjBF MQswCQYDVQQGEwJVUzETMBEGA1UECBMKU29tZS1TdGF0ZTEhMB8GA1UEChMYSW50 ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB CgKCAQEAvq3sKsHpeduJHimOK+fvQdKsI8z8A05MZyyLp2/R/GE8FjNv+hkVY1WQ LIyTNNQH7CJecE1nbTfo8Y56S7x/rhxC6/DJ8MIulapFPnorq46KU6yRxiM0MQ3N nTJHlHA2ozZta6YBBfVfhHWl1F0IfNbXCLKvGwWWMbCx43OfW6KTkbRnE6gFWKuO fSO5h2u5TaWVuSIzBvYs7Vza6m+gtYAvKAJV2nSZ+eSEFPDo29corOy8+huEOUL8 5FAw4BFPsr1TlrlGPFitduQUHGrSL7skk1ESGza0to3bOtrodKei2s9bk5MXm7lZ qI+WZJX4Zu9+mzZhc9pCVi8r/qlXuQIDAQABo4GnMIGkMB0GA1UdDgQWBBRvavf+ sWM4IwKiH9X9w1vl6nUVRDB1BgNVHSMEbjBsgBRvavf+sWM4IwKiH9X9w1vl6nUV RKFJpEcwRTELMAkGA1UEBhMCVVMxEzARBgNVBAgTClNvbWUtU3RhdGUxITAfBgNV BAoTGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZIIJAM15n7fdxhRtMAwGA1UdEwQF MAMBAf8wDQYJKoZIhvcNAQEFBQADggEBABY2ZzBaW0dMsAAT7tPJzrVWVzQx6KU4 UEBLudIlWPlkAwTnINCWR/8eNjCCmGA4heUdHmazdpPa8RzwOmc0NT1NQqzSyktt vTqb4iHD7+8f9MqJ9/FssCfTtqr/Qst/hGH4Wmdf1EJ/6FqYAAb5iRlPgshFZxU8 uXtA8hWn6fK6eISD9HBdcAFToUvKNZ1BIDPvh9f95Ine8ar6yGd56TUNrHR8eHBs ESxz5ddVR/oWRysNJ+aGAyYqHS8S/ttmC7r4XCAHqXptkHPCGRqkAhsterYhd4I8 /cBzejUobNCjjHFbtkAL/SjxZOLW+pNkZwfeYdM8iPkD54Uua1v2tdw= -----END CERTIFICATE-----',
+   *       '-----BEGIN CERTIFICATE-----\nMIIDtTCCAp2gAwIBAgIJAM15n7fdxhRtMA0GCSqGSIb3DQEBBQUAMEUxCzAJBgNV\nBAYTAlVTMRMwEQYDVQQIEwpTb21lLVN0YXRlMSEwHwYDVQQKExhJbnRlcm5ldCBX\naWRnaXRzIFB0eSBMdGQwHhcNMTQwMzExMTkyMTU5WhcNMTQwNDEwMTkyMTU5WjBF\nMQswCQYDVQQGEwJVUzETMBEGA1UECBMKU29tZS1TdGF0ZTEhMB8GA1UEChMYSW50\nZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB\nCgKCAQEAvq3sKsHpeduJHimOK+fvQdKsI8z8A05MZyyLp2/R/GE8FjNv+hkVY1WQ\nLIyTNNQH7CJecE1nbTfo8Y56S7x/rhxC6/DJ8MIulapFPnorq46KU6yRxiM0MQ3N\nnTJHlHA2ozZta6YBBfVfhHWl1F0IfNbXCLKvGwWWMbCx43OfW6KTkbRnE6gFWKuO\nfSO5h2u5TaWVuSIzBvYs7Vza6m+gtYAvKAJV2nSZ+eSEFPDo29corOy8+huEOUL8\n5FAw4BFPsr1TlrlGPFitduQUHGrSL7skk1ESGza0to3bOtrodKei2s9bk5MXm7lZ\nqI+WZJX4Zu9+mzZhc9pCVi8r/qlXuQIDAQABo4GnMIGkMB0GA1UdDgQWBBRvavf+\nsWM4IwKiH9X9w1vl6nUVRDB1BgNVHSMEbjBsgBRvavf+sWM4IwKiH9X9w1vl6nUV\nRKFJpEcwRTELMAkGA1UEBhMCVVMxEzARBgNVBAgTClNvbWUtU3RhdGUxITAfBgNV\nBAoTGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZIIJAM15n7fdxhRtMAwGA1UdEwQF\nMAMBAf8wDQYJKoZIhvcNAQEFBQADggEBABY2ZzBaW0dMsAAT7tPJzrVWVzQx6KU4\nUEBLudIlWPlkAwTnINCWR/8eNjCCmGA4heUdHmazdpPa8RzwOmc0NT1NQqzSyktt\nvTqb4iHD7+8f9MqJ9/FssCfTtqr/Qst/hGH4Wmdf1EJ/6FqYAAb5iRlPgshFZxU8\nuXtA8hWn6fK6eISD9HBdcAFToUvKNZ1BIDPvh9f95Ine8ar6yGd56TUNrHR8eHBs\nESxz5ddVR/oWRysNJ+aGAyYqHS8S/ttmC7r4XCAHqXptkHPCGRqkAhsterYhd4I8\n/cBzejUobNCjjHFbtkAL/SjxZOLW+pNkZwfeYdM8iPkD54Uua1v2tdw=\n-----END CERTIFICATE-----',
    *     host: 'example.com',
    *     port: 24008,
    *   });
@@ -25,7 +27,7 @@ export class KeylessCertificates extends APIResource {
     params: KeylessCertificateCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeylessCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/keyless_certificates`, { body, ...options }) as Core.APIPromise<{
         result: KeylessCertificate;
@@ -47,10 +49,18 @@ export class KeylessCertificates extends APIResource {
    * ```
    */
   list(
-    params: KeylessCertificateListParams,
+    params?: KeylessCertificateListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<KeylessCertificatesSinglePage, KeylessCertificate>;
+  list(options?: Core.RequestOptions): Core.PagePromise<KeylessCertificatesSinglePage, KeylessCertificate>;
+  list(
+    params: KeylessCertificateListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<KeylessCertificatesSinglePage, KeylessCertificate> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/keyless_certificates`,
       KeylessCertificatesSinglePage,
@@ -59,7 +69,8 @@ export class KeylessCertificates extends APIResource {
   }
 
   /**
-   * Delete Keyless SSL Configuration
+   * Removes a Keyless SSL configuration. SSL connections will no longer use the
+   * keyless server for cryptographic operations.
    *
    * @example
    * ```ts
@@ -72,10 +83,22 @@ export class KeylessCertificates extends APIResource {
    */
   delete(
     keylessCertificateId: string,
-    params: KeylessCertificateDeleteParams,
+    params?: KeylessCertificateDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeylessCertificateDeleteResponse>;
+  delete(
+    keylessCertificateId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeylessCertificateDeleteResponse>;
+  delete(
+    keylessCertificateId: string,
+    params: KeylessCertificateDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeylessCertificateDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(keylessCertificateId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`,
@@ -102,7 +125,7 @@ export class KeylessCertificates extends APIResource {
     params: KeylessCertificateEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeylessCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`, {
         body,
@@ -125,10 +148,19 @@ export class KeylessCertificates extends APIResource {
    */
   get(
     keylessCertificateId: string,
-    params: KeylessCertificateGetParams,
+    params?: KeylessCertificateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeylessCertificate>;
+  get(keylessCertificateId: string, options?: Core.RequestOptions): Core.APIPromise<KeylessCertificate>;
+  get(
+    keylessCertificateId: string,
+    params: KeylessCertificateGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeylessCertificate> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(keylessCertificateId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`,
@@ -235,7 +267,7 @@ export interface KeylessCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The zone's SSL certificate or SSL certificate and intermediate(s).
@@ -276,21 +308,21 @@ export interface KeylessCertificateListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface KeylessCertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface KeylessCertificateEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * @deprecated Body param: Whether or not the Keyless SSL is on or off.
@@ -323,7 +355,7 @@ export interface KeylessCertificateGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 KeylessCertificates.KeylessCertificatesSinglePage = KeylessCertificatesSinglePage;

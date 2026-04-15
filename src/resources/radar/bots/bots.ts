@@ -123,8 +123,8 @@ export class Bots extends APIResource {
   }
 
   /**
-   * Retrieves the distribution of HTTP requests from bots, grouped by chosen the
-   * specified dimension over time.
+   * Retrieves the distribution of HTTP requests from bots, grouped by the specified
+   * dimension over time.
    *
    * @example
    * ```ts

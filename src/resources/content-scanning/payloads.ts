@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -30,7 +31,7 @@ export class Payloads extends APIResource {
     params: PayloadCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<PayloadCreateResponsesSinglePage, PayloadCreateResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/content-upload-scan/payloads`,
       PayloadCreateResponsesSinglePage,
@@ -52,10 +53,18 @@ export class Payloads extends APIResource {
    * ```
    */
   list(
-    params: PayloadListParams,
+    params?: PayloadListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PayloadListResponsesSinglePage, PayloadListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<PayloadListResponsesSinglePage, PayloadListResponse>;
+  list(
+    params: PayloadListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PayloadListResponsesSinglePage, PayloadListResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/content-upload-scan/payloads`,
       PayloadListResponsesSinglePage,
@@ -79,10 +88,22 @@ export class Payloads extends APIResource {
    */
   delete(
     expressionId: string,
-    params: PayloadDeleteParams,
+    params?: PayloadDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PayloadDeleteResponsesSinglePage, PayloadDeleteResponse>;
+  delete(
+    expressionId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PayloadDeleteResponsesSinglePage, PayloadDeleteResponse>;
+  delete(
+    expressionId: string,
+    params: PayloadDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PayloadDeleteResponsesSinglePage, PayloadDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(expressionId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/content-upload-scan/payloads/${expressionId}`,
       PayloadDeleteResponsesSinglePage,
@@ -146,10 +167,10 @@ export interface PayloadCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: Array<PayloadCreateParams.Body>;
 }
@@ -167,14 +188,14 @@ export interface PayloadListParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PayloadDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Payloads.PayloadCreateResponsesSinglePage = PayloadCreateResponsesSinglePage;

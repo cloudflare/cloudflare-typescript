@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -22,7 +23,7 @@ export class ACLs extends APIResource {
    * ```
    */
   create(siteId: string, params: ACLCreateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/acls`, {
         body,
@@ -49,7 +50,7 @@ export class ACLs extends APIResource {
     params: ACLUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACL> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`, {
         body,
@@ -74,10 +75,19 @@ export class ACLs extends APIResource {
    */
   list(
     siteId: string,
-    params: ACLListParams,
+    params?: ACLListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ACLsSinglePage, ACL>;
+  list(siteId: string, options?: Core.RequestOptions): Core.PagePromise<ACLsSinglePage, ACL>;
+  list(
+    siteId: string,
+    params: ACLListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ACLsSinglePage, ACL> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(siteId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/magic/sites/${siteId}/acls`,
       ACLsSinglePage,
@@ -100,10 +110,20 @@ export class ACLs extends APIResource {
   delete(
     siteId: string,
     aclId: string,
-    params: ACLDeleteParams,
+    params?: ACLDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ACL>;
+  delete(siteId: string, aclId: string, options?: Core.RequestOptions): Core.APIPromise<ACL>;
+  delete(
+    siteId: string,
+    aclId: string,
+    params: ACLDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACL> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(siteId, aclId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`,
@@ -130,7 +150,7 @@ export class ACLs extends APIResource {
     params: ACLEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACL> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`, {
         body,
@@ -154,10 +174,20 @@ export class ACLs extends APIResource {
   get(
     siteId: string,
     aclId: string,
-    params: ACLGetParams,
+    params?: ACLGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ACL>;
+  get(siteId: string, aclId: string, options?: Core.RequestOptions): Core.APIPromise<ACL>;
+  get(
+    siteId: string,
+    aclId: string,
+    params: ACLGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACL> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(siteId, aclId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`,
@@ -298,15 +328,15 @@ export interface ACLCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_1: ACLConfigurationParam;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_2: ACLConfigurationParam;
 
@@ -329,7 +359,7 @@ export interface ACLCreateParams {
   forward_locally?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   protocols?: Array<AllowedProtocolParam>;
 
@@ -346,7 +376,7 @@ export interface ACLUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Description for the ACL.
@@ -362,12 +392,12 @@ export interface ACLUpdateParams {
   forward_locally?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_1?: ACLConfigurationParam;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_2?: ACLConfigurationParam;
 
@@ -377,7 +407,7 @@ export interface ACLUpdateParams {
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   protocols?: Array<AllowedProtocolParam>;
 
@@ -394,21 +424,21 @@ export interface ACLListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ACLDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ACLEditParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Description for the ACL.
@@ -424,12 +454,12 @@ export interface ACLEditParams {
   forward_locally?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_1?: ACLConfigurationParam;
 
   /**
-   * Body param:
+   * Body param
    */
   lan_2?: ACLConfigurationParam;
 
@@ -439,7 +469,7 @@ export interface ACLEditParams {
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   protocols?: Array<AllowedProtocolParam>;
 
@@ -456,7 +486,7 @@ export interface ACLGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 ACLs.ACLsSinglePage = ACLsSinglePage;

@@ -40,7 +40,11 @@ export class Jobs extends APIResource {
    * ```
    */
   create(params: JobCreateParams, options?: Core.RequestOptions): Core.APIPromise<LogpushJob | null> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -100,7 +104,11 @@ export class Jobs extends APIResource {
     params: JobUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LogpushJob | null> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -150,7 +158,8 @@ export class Jobs extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -198,7 +207,8 @@ export class Jobs extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(jobId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -247,7 +257,8 @@ export class Jobs extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(jobId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -305,6 +316,7 @@ export interface LogpushJob {
     | 'http_requests'
     | 'ipsec_logs'
     | 'magic_ids_detections'
+    | 'mcp_portal_logs'
     | 'nel_reports'
     | 'network_analytics_logs'
     | 'page_shield_events'
@@ -485,10 +497,10 @@ export interface OutputOptions {
   sample_rate?: number | null;
 
   /**
-   * String to specify the format for timestamps, such as `unixnano`, `unix`, or
-   * `rfc3339`.
+   * String to specify the format for timestamps, such as `unixnano`, `unix`,
+   * `rfc3339`, `rfc3339ms` or `rfc3339ns`.
    */
-  timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
+  timestamp_format?: 'unixnano' | 'unix' | 'rfc3339' | 'rfc3339ms' | 'rfc3339ns';
 }
 
 /**
@@ -561,10 +573,10 @@ export interface OutputOptionsParam {
   sample_rate?: number | null;
 
   /**
-   * String to specify the format for timestamps, such as `unixnano`, `unix`, or
-   * `rfc3339`.
+   * String to specify the format for timestamps, such as `unixnano`, `unix`,
+   * `rfc3339`, `rfc3339ms` or `rfc3339ns`.
    */
-  timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
+  timestamp_format?: 'unixnano' | 'unix' | 'rfc3339' | 'rfc3339ms' | 'rfc3339ns';
 }
 
 export interface JobDeleteResponse {
@@ -619,6 +631,7 @@ export interface JobCreateParams {
     | 'http_requests'
     | 'ipsec_logs'
     | 'magic_ids_detections'
+    | 'mcp_portal_logs'
     | 'nel_reports'
     | 'network_analytics_logs'
     | 'page_shield_events'

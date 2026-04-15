@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as SpeedAPI from '../speed';
 import * as TestsAPI from './tests';
@@ -33,10 +34,18 @@ export class Pages extends APIResource {
    * ```
    */
   list(
-    params: PageListParams,
+    params?: PageListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PageListResponsesSinglePage, PageListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<PageListResponsesSinglePage, PageListResponse>;
+  list(
+    params: PageListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PageListResponsesSinglePage, PageListResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(`/zones/${zone_id}/speed_api/pages`, PageListResponsesSinglePage, options);
   }
 
@@ -63,7 +72,7 @@ export class Pages extends APIResource {
     params: PageTrendParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SpeedAPI.Trend> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/speed_api/pages/${url}/trend`, {
         query,
@@ -98,14 +107,14 @@ export interface PageListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PageTrendParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The type of device.
@@ -144,7 +153,7 @@ export interface PageTrendParams {
     | 'us-west1';
 
   /**
-   * Query param:
+   * Query param
    */
   start: string;
 
@@ -154,7 +163,7 @@ export interface PageTrendParams {
   tz: string;
 
   /**
-   * Query param:
+   * Query param
    */
   end?: string;
 }

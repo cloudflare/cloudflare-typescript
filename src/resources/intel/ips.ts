@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class IPs extends APIResource {
@@ -16,8 +17,16 @@ export class IPs extends APIResource {
    * });
    * ```
    */
-  get(params: IPGetParams, options?: Core.RequestOptions): Core.APIPromise<IPGetResponse | null> {
-    const { account_id, ...query } = params;
+  get(params?: IPGetParams, options?: Core.RequestOptions): Core.APIPromise<IPGetResponse | null>;
+  get(options?: Core.RequestOptions): Core.APIPromise<IPGetResponse | null>;
+  get(
+    params: IPGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPGetResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/ip`, { query, ...options }) as Core.APIPromise<{
         result: IPGetResponse | null;
@@ -73,15 +82,15 @@ export interface IPGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   ipv4?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   ipv6?: string;
 }

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as AddressesAPI from './addresses';
 import {
@@ -49,7 +50,7 @@ export class EmailRouting extends APIResource {
    * @deprecated
    */
   disable(params: EmailRoutingDisableParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/email/routing/disable`, {
         body: body,
@@ -64,7 +65,7 @@ export class EmailRouting extends APIResource {
    * @deprecated
    */
   enable(params: EmailRoutingEnableParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/email/routing/enable`, {
         body: body,
@@ -83,8 +84,16 @@ export class EmailRouting extends APIResource {
    * });
    * ```
    */
-  get(params: EmailRoutingGetParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
-    const { zone_id } = params;
+  get(params?: EmailRoutingGetParams, options?: Core.RequestOptions): Core.APIPromise<Settings>;
+  get(options?: Core.RequestOptions): Core.APIPromise<Settings>;
+  get(
+    params: EmailRoutingGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Settings> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/email/routing`, options) as Core.APIPromise<{ result: Settings }>
     )._thenUnwrap((obj) => obj.result);
@@ -138,10 +147,10 @@ export interface EmailRoutingDisableParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
@@ -150,10 +159,10 @@ export interface EmailRoutingEnableParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
@@ -162,7 +171,7 @@ export interface EmailRoutingGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 EmailRouting.DNS = DNS;

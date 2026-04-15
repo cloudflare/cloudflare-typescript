@@ -1,16 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
+import * as DatasetsAPI from './datasets';
 import { type BlobLike } from '../../../../uploads';
 
 export class Upload extends APIResource {
   /**
-   * Prepare to upload a new version of a dataset
+   * Creates a new version of a DLP dataset, allowing you to stage changes before
+   * activation. Used for single-column EDM and custom word lists.
    *
    * @example
    * ```ts
-   * const upload =
+   * const newVersion =
    *   await client.zeroTrust.dlp.datasets.upload.create(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 'account_id' },
@@ -19,15 +22,24 @@ export class Upload extends APIResource {
    */
   create(
     datasetId: string,
-    params: UploadCreateParams,
+    params?: UploadCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UploadCreateResponse> {
-    const { account_id } = params;
+  ): Core.APIPromise<NewVersion>;
+  create(datasetId: string, options?: Core.RequestOptions): Core.APIPromise<NewVersion>;
+  create(
+    datasetId: string,
+    params: UploadCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NewVersion> {
+    if (isRequestOptions(params)) {
+      return this.create(datasetId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/dlp/datasets/${datasetId}/upload`,
         options,
-      ) as Core.APIPromise<{ result: UploadCreateResponse }>
+      ) as Core.APIPromise<{ result: NewVersion }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,7 +51,7 @@ export class Upload extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
+   * const dataset =
    *   await client.zeroTrust.dlp.datasets.upload.edit(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     0,
@@ -54,15 +66,15 @@ export class Upload extends APIResource {
     dataset: string | ArrayBufferView | ArrayBuffer | BlobLike,
     params: UploadEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UploadEditResponse> {
-    const { account_id } = params;
+  ): Core.APIPromise<DatasetsAPI.Dataset> {
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/datasets/${datasetId}/upload/${version}`, {
         body: dataset,
         ...options,
         headers: { 'Content-Type': 'application/octet-stream', ...options?.headers },
         __binaryRequest: true,
-      }) as Core.APIPromise<{ result: UploadEditResponse }>
+      }) as Core.APIPromise<{ result: DatasetsAPI.Dataset }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -93,102 +105,20 @@ export namespace NewVersion {
   }
 }
 
-export interface UploadCreateResponse {
-  encoding_version: number;
-
-  max_cells: number;
-
-  version: number;
-
-  case_sensitive?: boolean;
-
-  columns?: Array<UploadCreateResponse.Column>;
-
-  secret?: string;
-}
-
-export namespace UploadCreateResponse {
-  export interface Column {
-    entry_id: string;
-
-    header_name: string;
-
-    num_cells: number;
-
-    upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-}
-
-export interface UploadEditResponse {
-  id: string;
-
-  columns: Array<UploadEditResponse.Column>;
-
-  created_at: string;
-
-  encoding_version: number;
-
-  name: string;
-
-  num_cells: number;
-
-  secret: boolean;
-
-  status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-  /**
-   * Stores when the dataset was last updated.
-   *
-   * This includes name or description changes as well as uploads.
-   */
-  updated_at: string;
-
-  uploads: Array<UploadEditResponse.Upload>;
-
-  case_sensitive?: boolean;
-
-  /**
-   * The description of the dataset.
-   */
-  description?: string | null;
-}
-
-export namespace UploadEditResponse {
-  export interface Column {
-    entry_id: string;
-
-    header_name: string;
-
-    num_cells: number;
-
-    upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export interface Upload {
-    num_cells: number;
-
-    status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-    version: number;
-  }
-}
-
 export interface UploadCreateParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface UploadEditParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Upload {
   export {
     type NewVersion as NewVersion,
-    type UploadCreateResponse as UploadCreateResponse,
-    type UploadEditResponse as UploadEditResponse,
     type UploadCreateParams as UploadCreateParams,
     type UploadEditParams as UploadEditParams,
   };

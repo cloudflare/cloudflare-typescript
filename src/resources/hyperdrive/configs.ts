@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as HyperdriveAPI from './hyperdrive';
 import { HyperdrivesSinglePage } from './hyperdrive';
@@ -29,7 +30,7 @@ export class Configs extends APIResource {
     params: ConfigCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/hyperdrive/configs`, {
         body,
@@ -65,7 +66,7 @@ export class Configs extends APIResource {
     params: ConfigUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, {
         body,
@@ -88,10 +89,18 @@ export class Configs extends APIResource {
    * ```
    */
   list(
-    params: ConfigListParams,
+    params?: ConfigListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive>;
+  list(options?: Core.RequestOptions): Core.PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive>;
+  list(
+    params: ConfigListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/hyperdrive/configs`,
       HyperdrivesSinglePage,
@@ -112,10 +121,19 @@ export class Configs extends APIResource {
    */
   delete(
     hyperdriveId: string,
-    params: ConfigDeleteParams,
+    params?: ConfigDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigDeleteResponse | null>;
+  delete(hyperdriveId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigDeleteResponse | null>;
+  delete(
+    hyperdriveId: string,
+    params: ConfigDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(hyperdriveId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`,
@@ -141,7 +159,7 @@ export class Configs extends APIResource {
     params: ConfigEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, {
         body,
@@ -163,10 +181,19 @@ export class Configs extends APIResource {
    */
   get(
     hyperdriveId: string,
-    params: ConfigGetParams,
+    params?: ConfigGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HyperdriveAPI.Hyperdrive>;
+  get(hyperdriveId: string, options?: Core.RequestOptions): Core.APIPromise<HyperdriveAPI.Hyperdrive>;
+  get(
+    hyperdriveId: string,
+    params: ConfigGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(hyperdriveId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`,
@@ -182,7 +209,7 @@ export interface ConfigCreateParams {
   /**
    * Path param: Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the Hyperdrive configuration. Used to identify the
@@ -191,27 +218,33 @@ export interface ConfigCreateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   origin:
     | ConfigCreateParams.PublicDatabase
-    | ConfigCreateParams.AccessProtectedDatabaseBehindCloudflareTunnel;
+    | ConfigCreateParams.AccessProtectedDatabaseBehindCloudflareTunnel
+    | ConfigCreateParams.DatabaseReachableThroughAWorkersVPC;
 
   /**
-   * Body param:
+   * Body param
    */
   caching?:
     | ConfigCreateParams.HyperdriveHyperdriveCachingCommon
     | ConfigCreateParams.HyperdriveHyperdriveCachingEnabled;
 
   /**
-   * Body param:
+   * Body param: mTLS configuration for the origin connection. Cannot be used with
+   * VPC Service origins; TLS must be managed on the VPC Service.
    */
   mtls?: ConfigCreateParams.MTLS;
 
   /**
    * Body param: The (soft) maximum number of connections the Hyperdrive is allowed
    * to make to the origin database.
+   *
+   * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
+   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * if you need a higher limit.
    */
   origin_connection_limit?: number;
 }
@@ -291,6 +324,35 @@ export namespace ConfigCreateParams {
     user: string;
   }
 
+  export interface DatabaseReachableThroughAWorkersVPC {
+    /**
+     * Set the name of your origin database.
+     */
+    database: string;
+
+    /**
+     * Set the password needed to access your origin database. The API never returns
+     * this write-only value.
+     */
+    password: string;
+
+    /**
+     * Specifies the URL scheme used to connect to your origin database.
+     */
+    scheme: 'postgres' | 'postgresql' | 'mysql';
+
+    /**
+     * The identifier of the Workers VPC Service to connect through. Hyperdrive will
+     * egress through the specified VPC Service to reach the origin database.
+     */
+    service_id: string;
+
+    /**
+     * Set the user of your origin database.
+     */
+    user: string;
+  }
+
   export interface HyperdriveHyperdriveCachingCommon {
     /**
      * Set to true to disable caching of SQL responses. Default is false.
@@ -317,6 +379,10 @@ export namespace ConfigCreateParams {
     stale_while_revalidate?: number;
   }
 
+  /**
+   * mTLS configuration for the origin connection. Cannot be used with VPC Service
+   * origins; TLS must be managed on the VPC Service.
+   */
   export interface MTLS {
     /**
      * Define CA certificate ID obtained after uploading CA cert.
@@ -339,7 +405,7 @@ export interface ConfigUpdateParams {
   /**
    * Path param: Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the Hyperdrive configuration. Used to identify the
@@ -348,27 +414,33 @@ export interface ConfigUpdateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   origin:
     | ConfigUpdateParams.PublicDatabase
-    | ConfigUpdateParams.AccessProtectedDatabaseBehindCloudflareTunnel;
+    | ConfigUpdateParams.AccessProtectedDatabaseBehindCloudflareTunnel
+    | ConfigUpdateParams.DatabaseReachableThroughAWorkersVPC;
 
   /**
-   * Body param:
+   * Body param
    */
   caching?:
     | ConfigUpdateParams.HyperdriveHyperdriveCachingCommon
     | ConfigUpdateParams.HyperdriveHyperdriveCachingEnabled;
 
   /**
-   * Body param:
+   * Body param: mTLS configuration for the origin connection. Cannot be used with
+   * VPC Service origins; TLS must be managed on the VPC Service.
    */
   mtls?: ConfigUpdateParams.MTLS;
 
   /**
    * Body param: The (soft) maximum number of connections the Hyperdrive is allowed
    * to make to the origin database.
+   *
+   * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
+   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * if you need a higher limit.
    */
   origin_connection_limit?: number;
 }
@@ -448,6 +520,35 @@ export namespace ConfigUpdateParams {
     user: string;
   }
 
+  export interface DatabaseReachableThroughAWorkersVPC {
+    /**
+     * Set the name of your origin database.
+     */
+    database: string;
+
+    /**
+     * Set the password needed to access your origin database. The API never returns
+     * this write-only value.
+     */
+    password: string;
+
+    /**
+     * Specifies the URL scheme used to connect to your origin database.
+     */
+    scheme: 'postgres' | 'postgresql' | 'mysql';
+
+    /**
+     * The identifier of the Workers VPC Service to connect through. Hyperdrive will
+     * egress through the specified VPC Service to reach the origin database.
+     */
+    service_id: string;
+
+    /**
+     * Set the user of your origin database.
+     */
+    user: string;
+  }
+
   export interface HyperdriveHyperdriveCachingCommon {
     /**
      * Set to true to disable caching of SQL responses. Default is false.
@@ -474,6 +575,10 @@ export namespace ConfigUpdateParams {
     stale_while_revalidate?: number;
   }
 
+  /**
+   * mTLS configuration for the origin connection. Cannot be used with VPC Service
+   * origins; TLS must be managed on the VPC Service.
+   */
   export interface MTLS {
     /**
      * Define CA certificate ID obtained after uploading CA cert.
@@ -496,31 +601,32 @@ export interface ConfigListParams {
   /**
    * Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConfigDeleteParams {
   /**
    * Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConfigEditParams {
   /**
    * Path param: Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   caching?:
     | ConfigEditParams.HyperdriveHyperdriveCachingCommon
     | ConfigEditParams.HyperdriveHyperdriveCachingEnabled;
 
   /**
-   * Body param:
+   * Body param: mTLS configuration for the origin connection. Cannot be used with
+   * VPC Service origins; TLS must be managed on the VPC Service.
    */
   mtls?: ConfigEditParams.MTLS;
 
@@ -531,16 +637,23 @@ export interface ConfigEditParams {
   name?: string;
 
   /**
-   * Body param:
+   * Body param: Connect to a database through a Workers VPC Service. TLS settings
+   * (mTLS, sslmode) cannot be configured on the Hyperdrive when using a VPC Service
+   * origin; TLS must be managed on the VPC Service itself.
    */
   origin?:
     | ConfigEditParams.HyperdriveHyperdriveDatabase
     | ConfigEditParams.HyperdriveInternetOrigin
-    | ConfigEditParams.HyperdriveOverAccessOrigin;
+    | ConfigEditParams.HyperdriveOverAccessOrigin
+    | ConfigEditParams.HyperdriveVPCServiceOrigin;
 
   /**
    * Body param: The (soft) maximum number of connections the Hyperdrive is allowed
    * to make to the origin database.
+   *
+   * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
+   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * if you need a higher limit.
    */
   origin_connection_limit?: number;
 }
@@ -572,6 +685,10 @@ export namespace ConfigEditParams {
     stale_while_revalidate?: number;
   }
 
+  /**
+   * mTLS configuration for the origin connection. Cannot be used with VPC Service
+   * origins; TLS must be managed on the VPC Service.
+   */
   export interface MTLS {
     /**
      * Define CA certificate ID obtained after uploading CA cert.
@@ -643,13 +760,26 @@ export namespace ConfigEditParams {
      */
     host: string;
   }
+
+  /**
+   * Connect to a database through a Workers VPC Service. TLS settings (mTLS,
+   * sslmode) cannot be configured on the Hyperdrive when using a VPC Service origin;
+   * TLS must be managed on the VPC Service itself.
+   */
+  export interface HyperdriveVPCServiceOrigin {
+    /**
+     * The identifier of the Workers VPC Service to connect through. Hyperdrive will
+     * egress through the specified VPC Service to reach the origin database.
+     */
+    service_id: string;
+  }
 }
 
 export interface ConfigGetParams {
   /**
    * Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Configs {

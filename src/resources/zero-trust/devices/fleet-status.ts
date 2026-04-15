@@ -25,7 +25,7 @@ export class FleetStatus extends APIResource {
     params: FleetStatusGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FleetStatusGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/dex/devices/${deviceId}/fleet-status/live`, {
       query,
       ...options,
@@ -132,6 +132,12 @@ export interface FleetStatusGetResponse {
   ramUsedPct?: number | null;
 
   ramUsedPctByApp?: Array<Array<FleetStatusGetResponse.RamUsedPctByApp>> | null;
+
+  /**
+   * Device registration identifier (UUID v4). On multi-user devices, this uniquely
+   * identifies a user's registration on the device.
+   */
+  registrationId?: string | null;
 
   switchLocked?: boolean | null;
 
@@ -312,7 +318,7 @@ export interface FleetStatusGetParams {
   /**
    * Path param: Unique identifier for account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Number of minutes before current time

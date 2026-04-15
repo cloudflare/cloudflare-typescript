@@ -28,6 +28,7 @@ describe('resource scans', () => {
     const response = await client.urlScanner.scans.create({
       account_id: 'account_id',
       url: 'https://www.example.com',
+      agentReadiness: true,
       country: 'AF',
       customagent: 'customagent',
       customHeaders: { foo: 'string' },
@@ -49,7 +50,11 @@ describe('resource scans', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.urlScanner.scans.list({ account_id: 'account_id', q: 'q', size: 100 });
+    const response = await client.urlScanner.scans.list({
+      account_id: 'account_id',
+      q: 'q',
+      size: 100,
+    });
   });
 
   test('bulkCreate: only required params', async () => {
@@ -69,6 +74,7 @@ describe('resource scans', () => {
       body: [
         {
           url: 'https://www.example.com',
+          agentReadiness: true,
           customagent: 'customagent',
           customHeaders: { foo: 'string' },
           referer: 'referer',

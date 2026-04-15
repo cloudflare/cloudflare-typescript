@@ -1,12 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Datasets extends APIResource {
   /**
-   * Create a new Dataset
+   * Creates a new AI Gateway.
    *
    * @example
    * ```ts
@@ -32,7 +33,7 @@ export class Datasets extends APIResource {
     params: DatasetCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/datasets`, {
         body,
@@ -42,7 +43,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Update a Dataset
+   * Updates an existing AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -70,7 +71,7 @@ export class Datasets extends APIResource {
     params: DatasetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/datasets/${id}`, {
         body,
@@ -80,7 +81,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * List Datasets
+   * Lists all AI Gateway evaluator types configured for the account.
    *
    * @example
    * ```ts
@@ -95,10 +96,22 @@ export class Datasets extends APIResource {
    */
   list(
     gatewayId: string,
-    params: DatasetListParams,
+    params?: DatasetListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DatasetListResponsesV4PagePaginationArray, DatasetListResponse>;
+  list(
+    gatewayId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DatasetListResponsesV4PagePaginationArray, DatasetListResponse>;
+  list(
+    gatewayId: string,
+    params: DatasetListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DatasetListResponsesV4PagePaginationArray, DatasetListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(gatewayId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/datasets`,
       DatasetListResponsesV4PagePaginationArray,
@@ -107,7 +120,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Delete a Dataset
+   * Deletes an AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -121,10 +134,24 @@ export class Datasets extends APIResource {
   delete(
     gatewayId: string,
     id: string,
-    params: DatasetDeleteParams,
+    params?: DatasetDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatasetDeleteResponse>;
+  delete(
+    gatewayId: string,
+    id: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatasetDeleteResponse>;
+  delete(
+    gatewayId: string,
+    id: string,
+    params: DatasetDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/datasets/${id}`,
@@ -134,7 +161,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Fetch a Dataset
+   * Retrieves details for a specific AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -148,10 +175,20 @@ export class Datasets extends APIResource {
   get(
     gatewayId: string,
     id: string,
-    params: DatasetGetParams,
+    params?: DatasetGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatasetGetResponse>;
+  get(gatewayId: string, id: string, options?: Core.RequestOptions): Core.APIPromise<DatasetGetResponse>;
+  get(
+    gatewayId: string,
+    id: string,
+    params: DatasetGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(gatewayId, id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/datasets/${id}`,
@@ -165,10 +202,6 @@ export class DatasetListResponsesV4PagePaginationArray extends V4PagePaginationA
 
 export interface DatasetCreateResponse {
   id: string;
-
-  account_id: string;
-
-  account_tag: string;
 
   created_at: string;
 
@@ -212,10 +245,6 @@ export namespace DatasetCreateResponse {
 export interface DatasetUpdateResponse {
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
 
   enable: boolean;
@@ -257,10 +286,6 @@ export namespace DatasetUpdateResponse {
 
 export interface DatasetListResponse {
   id: string;
-
-  account_id: string;
-
-  account_tag: string;
 
   created_at: string;
 
@@ -304,10 +329,6 @@ export namespace DatasetListResponse {
 export interface DatasetDeleteResponse {
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
 
   enable: boolean;
@@ -350,10 +371,6 @@ export namespace DatasetDeleteResponse {
 export interface DatasetGetResponse {
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   created_at: string;
 
   enable: boolean;
@@ -395,22 +412,22 @@ export namespace DatasetGetResponse {
 
 export interface DatasetCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enable: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   filters: Array<DatasetCreateParams.Filter>;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 }
@@ -440,22 +457,22 @@ export namespace DatasetCreateParams {
 
 export interface DatasetUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enable: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   filters: Array<DatasetUpdateParams.Filter>;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 }
@@ -485,17 +502,17 @@ export namespace DatasetUpdateParams {
 
 export interface DatasetListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   enable?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   name?: string;
 
@@ -506,11 +523,11 @@ export interface DatasetListParams extends V4PagePaginationArrayParams {
 }
 
 export interface DatasetDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DatasetGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Datasets.DatasetListResponsesV4PagePaginationArray = DatasetListResponsesV4PagePaginationArray;

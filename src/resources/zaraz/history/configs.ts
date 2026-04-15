@@ -17,7 +17,7 @@ export class Configs extends APIResource {
    * ```
    */
   get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigGetResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/zaraz/history/configs`, {
         query,
@@ -28,34 +28,34 @@ export class Configs extends APIResource {
 }
 
 /**
- * Object where keys are numericc onfiguration IDs
+ * Object where keys are numeric configuration IDs.
  */
 export type ConfigGetResponse = { [key: string]: ConfigGetResponse.item };
 
 export namespace ConfigGetResponse {
   export interface item {
     /**
-     * ID of the configuration
+     * ID of the configuration.
      */
     id: number;
 
     /**
-     * Zaraz configuration
+     * Zaraz configuration.
      */
     config: ConfigAPI.Configuration;
 
     /**
-     * Date and time the configuration was created
+     * Date and time the configuration was created.
      */
     createdAt: string;
 
     /**
-     * Date and time the configuration was last updated
+     * Date and time the configuration was last updated.
      */
     updatedAt: string;
 
     /**
-     * Alpha-numeric ID of the account user who published the configuration
+     * Alpha-numeric ID of the account user who published the configuration.
      */
     userId: string;
   }
@@ -65,10 +65,10 @@ export interface ConfigGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
-   * Query param: Comma separated list of Zaraz configuration IDs
+   * Query param: Comma separated list of Zaraz configuration IDs.
    */
   ids: Array<number>;
 }

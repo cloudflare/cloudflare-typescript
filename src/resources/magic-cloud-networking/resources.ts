@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 import { type Response } from '../../_shims/index';
@@ -10,10 +11,20 @@ export class Resources extends APIResource {
    * List resources in the Resource Catalog (Closed Beta).
    */
   list(
-    params: ResourceListParams,
+    params?: ResourceListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ResourceListResponsesV4PagePaginationArray, ResourceListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ResourceListResponsesV4PagePaginationArray, ResourceListResponse>;
+  list(
+    params: ResourceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ResourceListResponsesV4PagePaginationArray, ResourceListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/magic/cloud/resources`,
       ResourceListResponsesV4PagePaginationArray,
@@ -24,8 +35,16 @@ export class Resources extends APIResource {
   /**
    * Export resources in the Resource Catalog as a JSON file (Closed Beta).
    */
-  export(params: ResourceExportParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
-    const { account_id, ...query } = params;
+  export(params?: ResourceExportParams, options?: Core.RequestOptions): Core.APIPromise<Response>;
+  export(options?: Core.RequestOptions): Core.APIPromise<Response>;
+  export(
+    params: ResourceExportParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Response> {
+    if (isRequestOptions(params)) {
+      return this.export({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/magic/cloud/resources/export`, {
       query,
       ...options,
@@ -39,10 +58,19 @@ export class Resources extends APIResource {
    */
   get(
     resourceId: string,
-    params: ResourceGetParams,
+    params?: ResourceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceGetResponse>;
+  get(resourceId: string, options?: Core.RequestOptions): Core.APIPromise<ResourceGetResponse>;
+  get(
+    resourceId: string,
+    params: ResourceGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceGetResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(resourceId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/cloud/resources/${resourceId}`, {
         query,
@@ -58,7 +86,7 @@ export class Resources extends APIResource {
     params: ResourcePolicyPreviewParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourcePolicyPreviewResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/cloud/resources/policy-preview`, {
         body,
@@ -1228,22 +1256,22 @@ export type ResourcePolicyPreviewResponse = string;
 
 export interface ResourceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   cloudflare?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   desc?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   managed?: boolean;
 
@@ -1253,27 +1281,27 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
   order_by?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   provider_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   region?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_group?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_id?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_type?: Array<
     | 'aws_customer_gateway'
@@ -1336,24 +1364,24 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
   >;
 
   /**
-   * Query param:
+   * Query param
    */
   search?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   v2?: boolean;
 }
 
 export interface ResourceExportParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   desc?: boolean;
 
@@ -1363,27 +1391,27 @@ export interface ResourceExportParams {
   order_by?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   provider_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   region?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_group?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_id?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   resource_type?: Array<
     | 'aws_customer_gateway'
@@ -1446,36 +1474,36 @@ export interface ResourceExportParams {
   >;
 
   /**
-   * Query param:
+   * Query param
    */
   search?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   v2?: boolean;
 }
 
 export interface ResourceGetParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   v2?: boolean;
 }
 
 export interface ResourcePolicyPreviewParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   policy: string;
 }

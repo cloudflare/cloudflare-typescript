@@ -24,6 +24,7 @@ describe('resource payloadLogs', () => {
   test('update: required and optional params', async () => {
     const response = await client.zeroTrust.dlp.payloadLogs.update({
       account_id: 'account_id',
+      masking_level: 'full',
       public_key: 'public_key',
     });
   });

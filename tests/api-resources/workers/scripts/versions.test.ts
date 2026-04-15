@@ -34,14 +34,21 @@ describe('resource versions', () => {
         annotations: {
           'workers/alias': 'staging',
           'workers/message': 'Fixed worker code.',
-          'workers/tag': 'workers/tag',
+          'workers/tag': 'any-identifier-from-external-system',
         },
-        bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
+        bindings: [
+          {
+            name: 'MY_ENV_VAR',
+            text: 'my_data',
+            type: 'plain_text',
+          },
+        ],
         compatibility_date: '2021-01-01',
         compatibility_flags: ['nodejs_compat'],
         keep_bindings: ['string'],
         usage_model: 'standard',
       },
+      bindings_inherit: 'strict',
       files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
     });
   });

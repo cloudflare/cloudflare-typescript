@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Recordings extends APIResource {
@@ -20,10 +21,24 @@ export class Recordings extends APIResource {
   getActiveRecordings(
     appId: string,
     meetingId: string,
-    params: RecordingGetActiveRecordingsParams,
+    params?: RecordingGetActiveRecordingsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordingGetActiveRecordingsResponse>;
+  getActiveRecordings(
+    appId: string,
+    meetingId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordingGetActiveRecordingsResponse>;
+  getActiveRecordings(
+    appId: string,
+    meetingId: string,
+    params: RecordingGetActiveRecordingsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordingGetActiveRecordingsResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.getActiveRecordings(appId, meetingId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/recordings/active-recording/${meetingId}`,
       options,
@@ -46,10 +61,24 @@ export class Recordings extends APIResource {
   getOneRecording(
     appId: string,
     recordingId: string,
-    params: RecordingGetOneRecordingParams,
+    params?: RecordingGetOneRecordingParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordingGetOneRecordingResponse>;
+  getOneRecording(
+    appId: string,
+    recordingId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordingGetOneRecordingResponse>;
+  getOneRecording(
+    appId: string,
+    recordingId: string,
+    params: RecordingGetOneRecordingParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordingGetOneRecordingResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.getOneRecording(appId, recordingId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/recordings/${recordingId}`,
       options,
@@ -71,10 +100,22 @@ export class Recordings extends APIResource {
    */
   getRecordings(
     appId: string,
-    params: RecordingGetRecordingsParams,
+    params?: RecordingGetRecordingsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordingGetRecordingsResponse>;
+  getRecordings(
+    appId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordingGetRecordingsResponse>;
+  getRecordings(
+    appId: string,
+    params: RecordingGetRecordingsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordingGetRecordingsResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.getRecordings(appId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/recordings`, {
       query,
       ...options,
@@ -103,7 +144,7 @@ export class Recordings extends APIResource {
     params: RecordingPauseResumeStopRecordingParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordingPauseResumeStopRecordingResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.put(`/accounts/${account_id}/realtime/kit/${appId}/recordings/${recordingId}`, {
       body,
       ...options,
@@ -152,7 +193,7 @@ export class Recordings extends APIResource {
     params: RecordingStartRecordingsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordingStartRecordingsResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/realtime/kit/${appId}/recordings`, {
       body,
       ...options,
@@ -192,7 +233,7 @@ export class Recordings extends APIResource {
     params: RecordingStartTrackRecordingParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/realtime/kit/${appId}/recordings/track`, {
       body,
       ...options,
@@ -1132,21 +1173,21 @@ export interface RecordingGetActiveRecordingsParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RecordingGetOneRecordingParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RecordingGetRecordingsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The end time range for which you want to retrieve the meetings. The
@@ -1184,12 +1225,12 @@ export interface RecordingGetRecordingsParams {
   search?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   sort_by?: 'invokedTime';
 
   /**
-   * Query param:
+   * Query param
    */
   sort_order?: 'ASC' | 'DESC';
 
@@ -1209,10 +1250,10 @@ export interface RecordingPauseResumeStopRecordingParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   action: 'stop' | 'pause' | 'resume';
 }
@@ -1221,7 +1262,7 @@ export interface RecordingStartRecordingsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: By default, a meeting allows only one recording to run at a time.
@@ -1264,17 +1305,17 @@ export interface RecordingStartRecordingsParams {
   meeting_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   realtimekit_bucket_config?: RecordingStartRecordingsParams.RealtimekitBucketConfig;
 
   /**
-   * Body param:
+   * Body param
    */
   rtmp_out_config?: RecordingStartRecordingsParams.RtmpOutConfig;
 
   /**
-   * Body param:
+   * Body param
    */
   storage_config?: RecordingStartRecordingsParams.StorageConfig | null;
 
@@ -1284,7 +1325,7 @@ export interface RecordingStartRecordingsParams {
   url?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   video_config?: RecordingStartRecordingsParams.VideoConfig;
 }
@@ -1482,10 +1523,10 @@ export interface RecordingStartTrackRecordingParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   layers: { [key: string]: RecordingStartTrackRecordingParams.Layers };
 

@@ -134,7 +134,7 @@ export interface DatasetListParams {
 
 export interface DatasetDownloadParams {
   /**
-   * Body param:
+   * Body param
    */
   datasetId: number;
 

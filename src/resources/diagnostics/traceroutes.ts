@@ -25,7 +25,7 @@ export class Traceroutes extends APIResource {
     params: TracerouteCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<TraceroutesSinglePage, Traceroute> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.getAPIList(`/accounts/${account_id}/diagnostics/traceroute`, TraceroutesSinglePage, {
       body,
       method: 'post',
@@ -164,10 +164,10 @@ export interface TracerouteCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   targets: Array<string>;
 
@@ -178,7 +178,7 @@ export interface TracerouteCreateParams {
   colos?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   options?: TracerouteCreateParams.Options;
 }

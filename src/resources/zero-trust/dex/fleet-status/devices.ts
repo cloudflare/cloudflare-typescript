@@ -28,7 +28,7 @@ export class Devices extends APIResource {
     params: DeviceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DeviceListResponsesV4PagePaginationArray, DeviceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dex/fleet-status/devices`,
       DeviceListResponsesV4PagePaginationArray,
@@ -138,6 +138,12 @@ export interface DeviceListResponse {
   ramUsedPct?: number | null;
 
   ramUsedPctByApp?: Array<Array<DeviceListResponse.RamUsedPctByApp>> | null;
+
+  /**
+   * Device registration identifier (UUID v4). On multi-user devices, this uniquely
+   * identifies a user's registration on the device.
+   */
+  registrationId?: string | null;
 
   switchLocked?: boolean | null;
 
@@ -318,7 +324,7 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Unique identifier for account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Time range beginning in ISO format
@@ -359,7 +365,9 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
    * Query param: Source:
    *
    * - `hourly` - device details aggregated hourly, up to 7 days prior
-   * - `last_seen` - device details, up to 24 hours prior
+   * - `last_seen` - device details, up to 60 minutes prior. Time windows exceeding
+   *   60 minutes will be rejected from June 1st, 2026. Please use 'hourly' or 'raw'
+   *   instead for longer time ranges.
    * - `raw` - device details, up to 7 days prior
    */
   source?: 'last_seen' | 'hourly' | 'raw';

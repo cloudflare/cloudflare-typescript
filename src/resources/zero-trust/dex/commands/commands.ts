@@ -38,7 +38,7 @@ export class Commands extends APIResource {
    * ```
    */
   create(params: CommandCreateParams, options?: Core.RequestOptions): Core.APIPromise<CommandCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dex/commands`, { body, ...options }) as Core.APIPromise<{
         result: CommandCreateResponse;
@@ -68,7 +68,7 @@ export class Commands extends APIResource {
     params: CommandListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CommandListResponsesV4PagePagination, CommandListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dex/commands`,
       CommandListResponsesV4PagePagination,
@@ -104,6 +104,11 @@ export namespace CommandCreateResponse {
     device_id?: string;
 
     /**
+     * Unique identifier for the device registration
+     */
+    registration_id?: string;
+
+    /**
      * Current status of the command
      */
     status?: 'PENDING_EXEC' | 'PENDING_UPLOAD' | 'SUCCESS' | 'FAILED';
@@ -131,6 +136,11 @@ export namespace CommandListResponse {
 
     filename?: string | null;
 
+    /**
+     * Unique identifier for the device registration
+     */
+    registration_id?: string;
+
     status?: string;
 
     type?: string;
@@ -143,7 +153,7 @@ export interface CommandCreateParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of device-level commands to execute
@@ -159,7 +169,7 @@ export namespace CommandCreateParams {
     command_type: 'pcap' | 'warp-diag';
 
     /**
-     * Unique identifier for the device
+     * Unique identifier for the physical device
      */
     device_id: string;
 
@@ -169,6 +179,12 @@ export namespace CommandCreateParams {
     user_email: string;
 
     command_args?: Command.CommandArgs;
+
+    /**
+     * Unique identifier for the device registration. Required for multi-user devices
+     * to target the correct user session.
+     */
+    registration_id?: string;
   }
 
   export namespace Command {
@@ -210,7 +226,7 @@ export interface CommandListParams extends V4PagePaginationParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Optionally filter executed commands by command type

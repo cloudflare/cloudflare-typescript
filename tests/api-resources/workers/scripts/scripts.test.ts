@@ -30,6 +30,7 @@ describe('resource scripts', () => {
     const response = await client.workers.scripts.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       metadata: {
+        annotations: { 'workers/message': 'Fixed bug.', 'workers/tag': 'v1.0.1' },
         assets: {
           config: {
             _headers: '/dashboard/*\nX-Frame-Options: DENY\n\n/static/*\nAccess-Control-Allow-Origin: *',
@@ -41,13 +42,19 @@ describe('resource scripts', () => {
           },
           jwt: 'jwt',
         },
-        bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
+        bindings: [
+          {
+            name: 'MY_ENV_VAR',
+            text: 'my_data',
+            type: 'plain_text',
+          },
+        ],
         body_part: 'worker.js',
         compatibility_date: '2021-01-01',
         compatibility_flags: ['nodejs_compat'],
         keep_assets: false,
         keep_bindings: ['string'],
-        limits: { cpu_ms: 50 },
+        limits: { cpu_ms: 50, subrequests: 1000 },
         logpush: false,
         main_module: 'worker.js',
         migrations: {
@@ -57,7 +64,13 @@ describe('resource scripts', () => {
           new_tag: 'v2',
           old_tag: 'v1',
           renamed_classes: [{ from: 'from', to: 'to' }],
-          transferred_classes: [{ from: 'from', from_script: 'from_script', to: 'to' }],
+          transferred_classes: [
+            {
+              from: 'from',
+              from_script: 'from_script',
+              to: 'to',
+            },
+          ],
         },
         observability: {
           enabled: true,
@@ -69,14 +82,25 @@ describe('resource scripts', () => {
             head_sampling_rate: 0.1,
             persist: true,
           },
+          traces: {
+            destinations: ['cloudflare'],
+            enabled: true,
+            head_sampling_rate: 0.1,
+            persist: true,
+          },
         },
         placement: { mode: 'smart' },
         tags: ['string'],
         tail_consumers: [
-          { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
+          {
+            service: 'my-log-consumer',
+            environment: 'production',
+            namespace: 'my-namespace',
+          },
         ],
         usage_model: 'standard',
       },
+      bindings_inherit: 'strict',
       files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
     });
   });

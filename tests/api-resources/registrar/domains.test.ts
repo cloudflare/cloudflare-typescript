@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource domains', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.registrar.domains.update('cloudflare.com', {
+    const responsePromise = client.registrar.domains.update('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource domains', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.registrar.domains.update('cloudflare.com', {
+    const response = await client.registrar.domains.update('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       auto_renew: true,
       locked: false,
@@ -48,7 +48,7 @@ describe('resource domains', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.registrar.domains.get('cloudflare.com', {
+    const responsePromise = client.registrar.domains.get('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -61,7 +61,7 @@ describe('resource domains', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.registrar.domains.get('cloudflare.com', {
+    const response = await client.registrar.domains.get('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

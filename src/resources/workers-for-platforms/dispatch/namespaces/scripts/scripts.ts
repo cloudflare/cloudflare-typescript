@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
@@ -77,11 +78,12 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, bindings_inherit, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
         Core.maybeMultipartFormRequestOptions({
+          query: { bindings_inherit },
           body,
           ...options,
           __multipartSyntax: 'json',
@@ -108,10 +110,24 @@ export class Scripts extends APIResource {
   delete(
     dispatchNamespace: string,
     scriptName: string,
-    params: ScriptDeleteParams,
+    params?: ScriptDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptDeleteResponse | null>;
+  delete(
+    dispatchNamespace: string,
+    scriptName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptDeleteResponse | null>;
+  delete(
+    dispatchNamespace: string,
+    scriptName: string,
+    params: ScriptDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptDeleteResponse | null> {
-    const { account_id, force } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(dispatchNamespace, scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId, force } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
@@ -136,10 +152,20 @@ export class Scripts extends APIResource {
   get(
     dispatchNamespace: string,
     scriptName: string,
-    params: ScriptGetParams,
+    params?: ScriptGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Script>;
+  get(dispatchNamespace: string, scriptName: string, options?: Core.RequestOptions): Core.APIPromise<Script>;
+  get(
+    dispatchNamespace: string,
+    scriptName: string,
+    params: ScriptGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Script> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(dispatchNamespace, scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
@@ -257,19 +283,22 @@ export interface ScriptUpdateResponse {
   /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-   * Specify either mode for Smart Placement, or one of region/hostname/host for
-   * targeted placement.
+   * Specify mode='smart' for Smart Placement, or one of region/hostname/host.
    */
   placement?:
     | ScriptUpdateResponse.UnionMember0
     | ScriptUpdateResponse.UnionMember1
     | ScriptUpdateResponse.UnionMember2
-    | ScriptUpdateResponse.UnionMember3;
+    | ScriptUpdateResponse.UnionMember3
+    | ScriptUpdateResponse.UnionMember4
+    | ScriptUpdateResponse.UnionMember5
+    | ScriptUpdateResponse.UnionMember6
+    | ScriptUpdateResponse.UnionMember7;
 
   /**
    * @deprecated
    */
-  placement_mode?: 'smart';
+  placement_mode?: 'smart' | 'targeted';
 
   /**
    * @deprecated
@@ -329,6 +358,11 @@ export namespace ScriptUpdateResponse {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces | null;
   }
 
   export namespace Observability {
@@ -360,6 +394,31 @@ export namespace ScriptUpdateResponse {
 
       /**
        * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
        */
       persist?: boolean;
     }
@@ -441,6 +500,125 @@ export namespace ScriptUpdateResponse {
      */
     status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
   }
+
+  export interface UnionMember4 {
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * Cloud region for targeted placement in format 'provider:region'.
+     */
+    region: string;
+
+    /**
+     * The last time the script was analyzed for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    last_analyzed_at?: string;
+
+    /**
+     * Status of
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+  }
+
+  export interface UnionMember5 {
+    /**
+     * HTTP hostname for targeted placement.
+     */
+    hostname: string;
+
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * The last time the script was analyzed for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    last_analyzed_at?: string;
+
+    /**
+     * Status of
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+  }
+
+  export interface UnionMember6 {
+    /**
+     * TCP host and port for targeted placement.
+     */
+    host: string;
+
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * The last time the script was analyzed for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    last_analyzed_at?: string;
+
+    /**
+     * Status of
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+  }
+
+  export interface UnionMember7 {
+    /**
+     * Targeted placement mode.
+     */
+    mode: 'targeted';
+
+    /**
+     * Array of placement targets (currently limited to single target).
+     */
+    target: Array<UnionMember7.Region | UnionMember7.Hostname | UnionMember7.Host>;
+
+    /**
+     * The last time the script was analyzed for
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    last_analyzed_at?: string;
+
+    /**
+     * Status of
+     * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+     */
+    status?: 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+  }
+
+  export namespace UnionMember7 {
+    export interface Region {
+      /**
+       * Cloud region in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface Hostname {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+    }
+
+    export interface Host {
+      /**
+       * TCP host:port for targeted placement.
+       */
+      host: string;
+    }
+  }
 }
 
 export type ScriptDeleteResponse = unknown;
@@ -449,13 +627,20 @@ export interface ScriptUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
    * configuration.
    */
   metadata: ScriptUpdateParams.Metadata;
+
+  /**
+   * Query param: When set to "strict", the upload will fail if any `inherit` type
+   * bindings cannot be resolved against the previous version of the script. Without
+   * this, unresolvable inherit bindings are silently dropped.
+   */
+  bindings_inherit?: 'strict';
 
   /**
    * Body param: An array of modules (often JavaScript files) comprising a Worker
@@ -486,6 +671,8 @@ export namespace ScriptUpdateParams {
      */
     bindings?: Array<
       | Metadata.WorkersBindingKindAI
+      | Metadata.WorkersBindingKindAISearch
+      | Metadata.WorkersBindingKindAISearchNamespace
       | Metadata.WorkersBindingKindAnalyticsEngine
       | Metadata.WorkersBindingKindAssets
       | Metadata.WorkersBindingKindBrowser
@@ -498,10 +685,12 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindImages
       | Metadata.WorkersBindingKindJson
       | Metadata.WorkersBindingKindKVNamespace
+      | Metadata.WorkersBindingKindMedia
       | Metadata.WorkersBindingKindMTLSCertificate
       | Metadata.WorkersBindingKindPlainText
       | Metadata.WorkersBindingKindPipelines
       | Metadata.WorkersBindingKindQueue
+      | Metadata.WorkersBindingKindRatelimit
       | Metadata.WorkersBindingKindR2Bucket
       | Metadata.WorkersBindingKindSecretText
       | Metadata.WorkersBindingKindSendEmail
@@ -510,9 +699,12 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindVectorize
       | Metadata.WorkersBindingKindVersionMetadata
       | Metadata.WorkersBindingKindSecretsStoreSecret
+      | Metadata.WorkersBindingKindFlagship
       | Metadata.WorkersBindingKindSecretKey
       | Metadata.WorkersBindingKindWorkflow
       | Metadata.WorkersBindingKindWasmModule
+      | Metadata.WorkersBindingKindVPCService
+      | Metadata.WorkersBindingKindVPCNetwork
     >;
 
     /**
@@ -574,10 +766,17 @@ export namespace ScriptUpdateParams {
     /**
      * Configuration for
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-     * Specify either mode for Smart Placement, or one of region/hostname/host for
-     * targeted placement.
+     * Specify mode='smart' for Smart Placement, or one of region/hostname/host.
      */
-    placement?: Metadata.UnionMember0 | Metadata.UnionMember1 | Metadata.UnionMember2 | Metadata.UnionMember3;
+    placement?:
+      | Metadata.UnionMember0
+      | Metadata.UnionMember1
+      | Metadata.UnionMember2
+      | Metadata.UnionMember3
+      | Metadata.UnionMember4
+      | Metadata.UnionMember5
+      | Metadata.UnionMember6
+      | Metadata.UnionMember7;
 
     /**
      * List of strings to use as tags for this Worker.
@@ -668,6 +867,50 @@ export namespace ScriptUpdateParams {
       type: 'ai';
     }
 
+    export interface WorkersBindingKindAISearch {
+      /**
+       * The user-chosen instance name. Must exist at deploy time. The worker can search,
+       * chat, update, and manage items/jobs on this instance.
+       */
+      instance_name: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ai_search';
+
+      /**
+       * The namespace the instance belongs to. Defaults to "default" if omitted.
+       * Customers who don't use namespaces can simply omit this field.
+       */
+      namespace?: string;
+    }
+
+    export interface WorkersBindingKindAISearchNamespace {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The user-chosen namespace name. Must exist before deploy -- Wrangler handles
+       * auto-creation on deploy failure (R2 bucket pattern). The "default" namespace is
+       * auto-created by config-api for new accounts. Grants full access (CRUD + search +
+       * chat) to all instances within the namespace.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ai_search_namespace';
+    }
+
     export interface WorkersBindingKindAnalyticsEngine {
       /**
        * The name of the dataset to bind to.
@@ -713,7 +956,7 @@ export namespace ScriptUpdateParams {
       /**
        * Identifier of the D1 database to bind to.
        */
-      id: string;
+      database_id: string;
 
       /**
        * A JavaScript variable name for the binding.
@@ -724,6 +967,11 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'd1';
+
+      /**
+       * @deprecated This property has been renamed to `database_id`.
+       */
+      id?: string;
     }
 
     export interface WorkersBindingKindDataBlob {
@@ -775,7 +1023,7 @@ export namespace ScriptUpdateParams {
          * Pass information from the Dispatch Worker to the Outbound Worker through the
          * parameters.
          */
-        params?: Array<string>;
+        params?: Array<Outbound.Param>;
 
         /**
          * Outbound worker.
@@ -784,10 +1032,22 @@ export namespace ScriptUpdateParams {
       }
 
       export namespace Outbound {
+        export interface Param {
+          /**
+           * Name of the parameter.
+           */
+          name: string;
+        }
+
         /**
          * Outbound worker.
          */
         export interface Worker {
+          /**
+           * Entrypoint to invoke on the outbound worker.
+           */
+          entrypoint?: string;
+
           /**
            * Environment of the outbound worker.
            */
@@ -816,6 +1076,11 @@ export namespace ScriptUpdateParams {
        * The exported class name of the Durable Object.
        */
       class_name?: string;
+
+      /**
+       * The dispatch namespace the Durable Object script belongs to.
+       */
+      dispatch_namespace?: string;
 
       /**
        * The environment of the script_name to bind to.
@@ -893,7 +1158,7 @@ export namespace ScriptUpdateParams {
       /**
        * JSON data to use.
        */
-      json: string;
+      json: unknown;
 
       /**
        * A JavaScript variable name for the binding.
@@ -921,6 +1186,18 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'kv_namespace';
+    }
+
+    export interface WorkersBindingKindMedia {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'media';
     }
 
     export interface WorkersBindingKindMTLSCertificate {
@@ -991,6 +1268,45 @@ export namespace ScriptUpdateParams {
       type: 'queue';
     }
 
+    export interface WorkersBindingKindRatelimit {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Identifier of the rate limit namespace to bind to.
+       */
+      namespace_id: string;
+
+      /**
+       * The rate limit configuration.
+       */
+      simple: WorkersBindingKindRatelimit.Simple;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'ratelimit';
+    }
+
+    export namespace WorkersBindingKindRatelimit {
+      /**
+       * The rate limit configuration.
+       */
+      export interface Simple {
+        /**
+         * The limit (requests per period).
+         */
+        limit: number;
+
+        /**
+         * The period in seconds.
+         */
+        period: number;
+      }
+    }
+
     export interface WorkersBindingKindR2Bucket {
       /**
        * R2 bucket to bind to.
@@ -1012,7 +1328,7 @@ export namespace ScriptUpdateParams {
        * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
        * of the R2 bucket.
        */
-      jurisdiction?: 'eu' | 'fedramp';
+      jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
     }
 
     export interface WorkersBindingKindSecretText {
@@ -1074,6 +1390,11 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'service';
+
+      /**
+       * Entrypoint to invoke on the target Worker.
+       */
+      entrypoint?: string;
 
       /**
        * Optional environment if the Worker utilizes one.
@@ -1148,6 +1469,23 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'secrets_store_secret';
+    }
+
+    export interface WorkersBindingKindFlagship {
+      /**
+       * ID of the Flagship app to bind to for feature flag evaluation.
+       */
+      app_id: string;
+
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'flagship';
     }
 
     export interface WorkersBindingKindSecretKey {
@@ -1241,6 +1579,46 @@ export namespace ScriptUpdateParams {
       type: 'wasm_module';
     }
 
+    export interface WorkersBindingKindVPCService {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * Identifier of the VPC service to bind to.
+       */
+      service_id: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vpc_service';
+    }
+
+    export interface WorkersBindingKindVPCNetwork {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'vpc_network';
+
+      /**
+       * Identifier of the network to bind to. Only "cf1:network" is currently supported.
+       * Mutually exclusive with tunnel_id.
+       */
+      network_id?: string;
+
+      /**
+       * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
+       */
+      tunnel_id?: string;
+    }
+
     /**
      * Limits to apply for this Worker.
      */
@@ -1249,6 +1627,11 @@ export namespace ScriptUpdateParams {
        * The amount of CPU time this Worker can use in milliseconds.
        */
       cpu_ms?: number;
+
+      /**
+       * The number of subrequests this Worker can make per request.
+       */
+      subrequests?: number;
     }
 
     export interface WorkersMultipleStepMigrations {
@@ -1288,6 +1671,11 @@ export namespace ScriptUpdateParams {
        * Log settings for the Worker.
        */
       logs?: Observability.Logs | null;
+
+      /**
+       * Trace settings for the Worker.
+       */
+      traces?: Observability.Traces | null;
     }
 
     export namespace Observability {
@@ -1322,6 +1710,31 @@ export namespace ScriptUpdateParams {
          */
         persist?: boolean;
       }
+
+      /**
+       * Trace settings for the Worker.
+       */
+      export interface Traces {
+        /**
+         * A list of destinations where traces will be exported to.
+         */
+        destinations?: Array<string>;
+
+        /**
+         * Whether traces are enabled for the Worker.
+         */
+        enabled?: boolean;
+
+        /**
+         * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+         */
+        head_sampling_rate?: number | null;
+
+        /**
+         * Whether trace persistence is enabled for the Worker.
+         */
+        persist?: boolean;
+      }
     }
 
     export interface UnionMember0 {
@@ -1352,6 +1765,77 @@ export namespace ScriptUpdateParams {
        */
       host: string;
     }
+
+    export interface UnionMember4 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Cloud region for targeted placement in format 'provider:region'.
+       */
+      region: string;
+    }
+
+    export interface UnionMember5 {
+      /**
+       * HTTP hostname for targeted placement.
+       */
+      hostname: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember6 {
+      /**
+       * TCP host and port for targeted placement.
+       */
+      host: string;
+
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+    }
+
+    export interface UnionMember7 {
+      /**
+       * Targeted placement mode.
+       */
+      mode: 'targeted';
+
+      /**
+       * Array of placement targets (currently limited to single target).
+       */
+      target: Array<UnionMember7.Region | UnionMember7.Hostname | UnionMember7.Host>;
+    }
+
+    export namespace UnionMember7 {
+      export interface Region {
+        /**
+         * Cloud region in format 'provider:region'.
+         */
+        region: string;
+      }
+
+      export interface Hostname {
+        /**
+         * HTTP hostname for targeted placement.
+         */
+        hostname: string;
+      }
+
+      export interface Host {
+        /**
+         * TCP host:port for targeted placement.
+         */
+        host: string;
+      }
+    }
   }
 }
 
@@ -1359,7 +1843,7 @@ export interface ScriptDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: If set to true, delete will not be stopped by associated service
@@ -1373,7 +1857,7 @@ export interface ScriptGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Scripts.AssetUpload = AssetUpload;

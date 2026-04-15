@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomAPI from '../profiles/custom';
 import { SinglePage } from '../../../../pagination';
@@ -24,7 +25,7 @@ export class Integration extends APIResource {
     params: IntegrationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/entries/integration`, {
         body,
@@ -50,7 +51,7 @@ export class Integration extends APIResource {
     params: IntegrationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/entries/integration/${entryId}`, {
         body,
@@ -73,10 +74,20 @@ export class Integration extends APIResource {
    * ```
    */
   list(
-    params: IntegrationListParams,
+    params?: IntegrationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse>;
+  list(
+    params: IntegrationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dlp/entries`,
       IntegrationListResponsesSinglePage,
@@ -99,10 +110,19 @@ export class Integration extends APIResource {
    */
   delete(
     entryId: string,
-    params: IntegrationDeleteParams,
+    params?: IntegrationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IntegrationDeleteResponse | null>;
+  delete(entryId: string, options?: Core.RequestOptions): Core.APIPromise<IntegrationDeleteResponse | null>;
+  delete(
+    entryId: string,
+    params: IntegrationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(entryId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dlp/entries/integration/${entryId}`,
@@ -125,10 +145,19 @@ export class Integration extends APIResource {
    */
   get(
     entryId: string,
-    params: IntegrationGetParams,
+    params?: IntegrationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IntegrationGetResponse>;
+  get(entryId: string, options?: Core.RequestOptions): Core.APIPromise<IntegrationGetResponse>;
+  get(
+    entryId: string,
+    params: IntegrationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(entryId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/entries/${entryId}`, options) as Core.APIPromise<{
         result: IntegrationGetResponse;
@@ -168,19 +197,22 @@ export interface IntegrationUpdateResponse {
 }
 
 export type IntegrationListResponse =
-  | IntegrationListResponse.CustomEntry
-  | IntegrationListResponse.PredefinedEntry
-  | IntegrationListResponse.IntegrationEntry
-  | IntegrationListResponse.ExactDataEntry
-  | IntegrationListResponse.DocumentFingerprintEntry
-  | IntegrationListResponse.WordListEntry;
+  | IntegrationListResponse.UnionMember0
+  | IntegrationListResponse.UnionMember1
+  | IntegrationListResponse.UnionMember2
+  | IntegrationListResponse.UnionMember3
+  | IntegrationListResponse.UnionMember4
+  | IntegrationListResponse.UnionMember5;
 
 export namespace IntegrationListResponse {
-  export interface CustomEntry {
+  export interface UnionMember0 {
     id: string;
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -191,15 +223,20 @@ export namespace IntegrationListResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface PredefinedEntry {
+  export interface UnionMember1 {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: UnionMember1.Confidence;
 
     enabled: boolean;
 
@@ -207,14 +244,17 @@ export namespace IntegrationListResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
-    variant?: PredefinedEntry.Variant;
+    variant?: UnionMember1.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace UnionMember1 {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -237,7 +277,7 @@ export namespace IntegrationListResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface UnionMember2 {
     id: string;
 
     created_at: string;
@@ -255,7 +295,7 @@ export namespace IntegrationListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface ExactDataEntry {
+  export interface UnionMember3 {
     id: string;
 
     /**
@@ -279,7 +319,7 @@ export namespace IntegrationListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface UnionMember4 {
     id: string;
 
     created_at: string;
@@ -295,7 +335,7 @@ export namespace IntegrationListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface WordListEntry {
+  export interface UnionMember5 {
     id: string;
 
     created_at: string;
@@ -332,6 +372,9 @@ export namespace IntegrationGetResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -342,6 +385,11 @@ export namespace IntegrationGetResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember0.Profile>;
@@ -371,6 +419,9 @@ export namespace IntegrationGetResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember1.Profile>;
@@ -545,17 +596,17 @@ export namespace IntegrationGetResponse {
 
 export interface IntegrationCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   entry_id: string;
 
@@ -568,26 +619,26 @@ export interface IntegrationCreateParams {
 
 export interface IntegrationUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 }
 
 export interface IntegrationListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IntegrationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IntegrationGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Integration.IntegrationListResponsesSinglePage = IntegrationListResponsesSinglePage;

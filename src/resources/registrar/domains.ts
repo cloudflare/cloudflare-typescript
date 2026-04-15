@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -8,20 +9,14 @@ export class Domains extends APIResource {
   /**
    * Update individual domain.
    *
-   * @example
-   * ```ts
-   * const domain = await client.registrar.domains.update(
-   *   'cloudflare.com',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
+   * @deprecated This operation is deprecated and will be removed in a future release. A replacement Registrar API will be announced separately.
    */
   update(
     domainName: string,
     params: DomainUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainUpdateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/registrar/domains/${domainName}`, {
         body,
@@ -33,38 +28,41 @@ export class Domains extends APIResource {
   /**
    * List domains handled by Registrar.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const domain of client.registrar.domains.list({
-   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * })) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated This operation is deprecated and will be removed in a future release. A replacement Registrar API will be announced separately.
    */
-  list(params: DomainListParams, options?: Core.RequestOptions): Core.PagePromise<DomainsSinglePage, Domain> {
-    const { account_id } = params;
+  list(params?: DomainListParams, options?: Core.RequestOptions): Core.PagePromise<DomainsSinglePage, Domain>;
+  list(options?: Core.RequestOptions): Core.PagePromise<DomainsSinglePage, Domain>;
+  list(
+    params: DomainListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DomainsSinglePage, Domain> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/registrar/domains`, DomainsSinglePage, options);
   }
 
   /**
    * Show individual domain.
    *
-   * @example
-   * ```ts
-   * const domain = await client.registrar.domains.get(
-   *   'cloudflare.com',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
+   * @deprecated This operation is deprecated and will be removed in a future release. A replacement Registrar API will be announced separately.
    */
   get(
     domainName: string,
-    params: DomainGetParams,
+    params?: DomainGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainGetResponse | null>;
+  get(domainName: string, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse | null>;
+  get(
+    domainName: string,
+    params: DomainGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainGetResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(domainName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/registrar/domains/${domainName}`,
@@ -257,7 +255,7 @@ export interface DomainUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Auto-renew controls whether subscription is automatically renewed
@@ -280,14 +278,14 @@ export interface DomainListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DomainGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Domains.DomainsSinglePage = DomainsSinglePage;

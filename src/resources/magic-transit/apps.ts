@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -18,7 +19,7 @@ export class Apps extends APIResource {
    * ```
    */
   create(params: AppCreateParams, options?: Core.RequestOptions): Core.APIPromise<AppCreateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/apps`, { body, ...options }) as Core.APIPromise<{
         result: AppCreateResponse | null;
@@ -42,7 +43,7 @@ export class Apps extends APIResource {
     params: AppUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AppUpdateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/apps/${accountAppId}`, {
         body,
@@ -65,10 +66,18 @@ export class Apps extends APIResource {
    * ```
    */
   list(
-    params: AppListParams,
+    params?: AppListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AppListResponsesSinglePage, AppListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<AppListResponsesSinglePage, AppListResponse>;
+  list(
+    params: AppListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<AppListResponsesSinglePage, AppListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/magic/apps`, AppListResponsesSinglePage, options);
   }
 
@@ -85,10 +94,19 @@ export class Apps extends APIResource {
    */
   delete(
     accountAppId: string,
-    params: AppDeleteParams,
+    params?: AppDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AppDeleteResponse | null>;
+  delete(accountAppId: string, options?: Core.RequestOptions): Core.APIPromise<AppDeleteResponse | null>;
+  delete(
+    accountAppId: string,
+    params: AppDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AppDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(accountAppId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/apps/${accountAppId}`, options) as Core.APIPromise<{
         result: AppDeleteResponse | null;
@@ -112,7 +130,7 @@ export class Apps extends APIResource {
     params: AppEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AppEditResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/apps/${accountAppId}`, {
         body,
@@ -150,6 +168,12 @@ export interface AppCreateResponse {
   name?: string;
 
   /**
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
+   */
+  source_subnets?: Array<string>;
+
+  /**
    * Category of the app.
    */
   type?: string;
@@ -179,6 +203,12 @@ export interface AppUpdateResponse {
    * Display name for the app.
    */
   name?: string;
+
+  /**
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
+   */
+  source_subnets?: Array<string>;
 
   /**
    * Category of the app.
@@ -218,6 +248,12 @@ export namespace AppListResponse {
     name?: string;
 
     /**
+     * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+     * unsupported)
+     */
+    source_subnets?: Array<string>;
+
+    /**
      * Category of the app.
      */
     type?: string;
@@ -247,6 +283,12 @@ export namespace AppListResponse {
      * Display name for the app.
      */
     name?: string;
+
+    /**
+     * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+     * unsupported)
+     */
+    source_subnets?: Array<string>;
 
     /**
      * Category of the app.
@@ -281,6 +323,12 @@ export interface AppDeleteResponse {
   name?: string;
 
   /**
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
+   */
+  source_subnets?: Array<string>;
+
+  /**
    * Category of the app.
    */
   type?: string;
@@ -312,6 +360,12 @@ export interface AppEditResponse {
   name?: string;
 
   /**
+   * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently
+   * unsupported)
+   */
+  source_subnets?: Array<string>;
+
+  /**
    * Category of the app.
    */
   type?: string;
@@ -321,7 +375,7 @@ export interface AppCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Display name for the app.
@@ -343,13 +397,19 @@ export interface AppCreateParams {
    * currently unsupported)
    */
   ip_subnets?: Array<string>;
+
+  /**
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
+   */
+  source_subnets?: Array<string>;
 }
 
 export interface AppUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: FQDNs to associate with traffic decisions.
@@ -366,6 +426,12 @@ export interface AppUpdateParams {
    * Body param: Display name for the app.
    */
   name?: string;
+
+  /**
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
+   */
+  source_subnets?: Array<string>;
 
   /**
    * Body param: Category of the app.
@@ -377,21 +443,21 @@ export interface AppListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AppDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AppEditParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: FQDNs to associate with traffic decisions.
@@ -408,6 +474,12 @@ export interface AppEditParams {
    * Body param: Display name for the app.
    */
   name?: string;
+
+  /**
+   * Body param: IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are
+   * currently unsupported)
+   */
+  source_subnets?: Array<string>;
 
   /**
    * Body param: Category of the app.

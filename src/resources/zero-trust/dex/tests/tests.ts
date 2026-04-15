@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as TestsAPI from './tests';
 import * as DEXAPI from '../dex';
@@ -25,10 +26,18 @@ export class Tests extends APIResource {
    * ```
    */
   list(
-    params: TestListParams,
+    params?: TestListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TestsV4PagePagination, Tests>;
+  list(options?: Core.RequestOptions): Core.PagePromise<TestsV4PagePagination, Tests>;
+  list(
+    params: TestListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<TestsV4PagePagination, Tests> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/dex/tests/overview`, TestsV4PagePagination, {
       query,
       ...options,
@@ -299,7 +308,7 @@ export interface TestListParams extends V4PagePaginationParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used
@@ -312,6 +321,17 @@ export interface TestListParams extends V4PagePaginationParams {
    * used in combination with colo param.
    */
   deviceId?: Array<string>;
+
+  /**
+   * Query param: Filter by test type
+   */
+  kind?: 'http' | 'traceroute';
+
+  /**
+   * Query param: Optionally filter results to a specific device registration. Must
+   * be used in combination with a single deviceId.
+   */
+  registration_id?: string;
 
   /**
    * Query param: Optionally filter results by test name

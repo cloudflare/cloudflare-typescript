@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -27,7 +28,7 @@ export class WANs extends APIResource {
     params: WANCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<WANsSinglePage, WAN> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.getAPIList(`/accounts/${account_id}/magic/sites/${siteId}/wans`, WANsSinglePage, {
       body,
       method: 'post',
@@ -53,7 +54,7 @@ export class WANs extends APIResource {
     params: WANUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WAN> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, {
         body,
@@ -78,10 +79,19 @@ export class WANs extends APIResource {
    */
   list(
     siteId: string,
-    params: WANListParams,
+    params?: WANListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WANsSinglePage, WAN>;
+  list(siteId: string, options?: Core.RequestOptions): Core.PagePromise<WANsSinglePage, WAN>;
+  list(
+    siteId: string,
+    params: WANListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<WANsSinglePage, WAN> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(siteId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/magic/sites/${siteId}/wans`,
       WANsSinglePage,
@@ -104,10 +114,20 @@ export class WANs extends APIResource {
   delete(
     siteId: string,
     wanId: string,
-    params: WANDeleteParams,
+    params?: WANDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WAN>;
+  delete(siteId: string, wanId: string, options?: Core.RequestOptions): Core.APIPromise<WAN>;
+  delete(
+    siteId: string,
+    wanId: string,
+    params: WANDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WAN> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(siteId, wanId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`,
@@ -134,7 +154,7 @@ export class WANs extends APIResource {
     params: WANEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WAN> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, {
         body,
@@ -158,10 +178,20 @@ export class WANs extends APIResource {
   get(
     siteId: string,
     wanId: string,
-    params: WANGetParams,
+    params?: WANGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WAN>;
+  get(siteId: string, wanId: string, options?: Core.RequestOptions): Core.APIPromise<WAN>;
+  get(
+    siteId: string,
+    wanId: string,
+    params: WANGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WAN> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(siteId, wanId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`,
@@ -257,20 +287,20 @@ export interface WANCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   physport: number;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   priority?: number;
 
@@ -290,20 +320,20 @@ export interface WANUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   physport?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   priority?: number;
 
@@ -323,34 +353,34 @@ export interface WANListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WANDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WANEditParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   physport?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   priority?: number;
 
@@ -370,7 +400,7 @@ export interface WANGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 WANs.WANsSinglePage = WANsSinglePage;

@@ -32,13 +32,15 @@ describe('resource tokens', () => {
       cf_api_id: 'cf_api_id',
       cf_api_key: 'cf_api_key',
       name: 'name',
-      legacy: true,
     });
   });
 
   test('update: only required params', async () => {
     const responsePromise = client.aiSearch.tokens.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      cf_api_id: 'cf_api_id',
+      cf_api_key: 'cf_api_key',
+      name: 'name',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,6 +54,9 @@ describe('resource tokens', () => {
   test('update: required and optional params', async () => {
     const response = await client.aiSearch.tokens.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      cf_api_id: 'cf_api_id',
+      cf_api_key: 'cf_api_key',
+      name: 'name',
     });
   });
 
@@ -69,6 +74,8 @@ describe('resource tokens', () => {
   test('list: required and optional params', async () => {
     const response = await client.aiSearch.tokens.list({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      order_by: 'created_at',
+      order_by_direction: 'asc',
       page: 1,
       per_page: 1,
     });

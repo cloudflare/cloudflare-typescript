@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -27,7 +28,7 @@ export class Delegations extends APIResource {
     params: DelegationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Delegations> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`, {
         body,
@@ -52,10 +53,19 @@ export class Delegations extends APIResource {
    */
   list(
     prefixId: string,
-    params: DelegationListParams,
+    params?: DelegationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DelegationsSinglePage, Delegations>;
+  list(prefixId: string, options?: Core.RequestOptions): Core.PagePromise<DelegationsSinglePage, Delegations>;
+  list(
+    prefixId: string,
+    params: DelegationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DelegationsSinglePage, Delegations> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(prefixId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`,
       DelegationsSinglePage,
@@ -79,10 +89,24 @@ export class Delegations extends APIResource {
   delete(
     prefixId: string,
     delegationId: string,
-    params: DelegationDeleteParams,
+    params?: DelegationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DelegationDeleteResponse>;
+  delete(
+    prefixId: string,
+    delegationId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DelegationDeleteResponse>;
+  delete(
+    prefixId: string,
+    delegationId: string,
+    params: DelegationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DelegationDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(prefixId, delegationId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations/${delegationId}`,
@@ -131,7 +155,7 @@ export interface DelegationCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: IP Prefix in Classless Inter-Domain Routing format.
@@ -149,14 +173,14 @@ export interface DelegationListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DelegationDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Delegations.DelegationsSinglePage = DelegationsSinglePage;

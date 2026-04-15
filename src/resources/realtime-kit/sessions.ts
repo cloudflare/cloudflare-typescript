@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Sessions extends APIResource {
@@ -19,10 +20,24 @@ export class Sessions extends APIResource {
   generateSummaryOfTranscripts(
     appId: string,
     sessionId: string,
-    params: SessionGenerateSummaryOfTranscriptsParams,
+    params?: SessionGenerateSummaryOfTranscriptsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void>;
+  generateSummaryOfTranscripts(
+    appId: string,
+    sessionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void>;
+  generateSummaryOfTranscripts(
+    appId: string,
+    sessionId: string,
+    params: SessionGenerateSummaryOfTranscriptsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.generateSummaryOfTranscripts(appId, sessionId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.post(`/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/summary`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -46,10 +61,24 @@ export class Sessions extends APIResource {
   getParticipantDataFromPeerId(
     appId: string,
     peerId: string,
-    params: SessionGetParticipantDataFromPeerIDParams,
+    params?: SessionGetParticipantDataFromPeerIDParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetParticipantDataFromPeerIDResponse>;
+  getParticipantDataFromPeerId(
+    appId: string,
+    peerId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetParticipantDataFromPeerIDResponse>;
+  getParticipantDataFromPeerId(
+    appId: string,
+    peerId: string,
+    params: SessionGetParticipantDataFromPeerIDParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionGetParticipantDataFromPeerIDResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.getParticipantDataFromPeerId(appId, peerId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/sessions/peer-report/${peerId}`, {
       query,
       ...options,
@@ -72,10 +101,24 @@ export class Sessions extends APIResource {
   getSessionChat(
     appId: string,
     sessionId: string,
-    params: SessionGetSessionChatParams,
+    params?: SessionGetSessionChatParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionChatResponse>;
+  getSessionChat(
+    appId: string,
+    sessionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionChatResponse>;
+  getSessionChat(
+    appId: string,
+    sessionId: string,
+    params: SessionGetSessionChatParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionGetSessionChatResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.getSessionChat(appId, sessionId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/chat`,
       options,
@@ -98,10 +141,24 @@ export class Sessions extends APIResource {
   getSessionDetails(
     appId: string,
     sessionId: string,
-    params: SessionGetSessionDetailsParams,
+    params?: SessionGetSessionDetailsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionDetailsResponse>;
+  getSessionDetails(
+    appId: string,
+    sessionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionDetailsResponse>;
+  getSessionDetails(
+    appId: string,
+    sessionId: string,
+    params: SessionGetSessionDetailsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionGetSessionDetailsResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.getSessionDetails(appId, sessionId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}`, {
       query,
       ...options,
@@ -127,10 +184,26 @@ export class Sessions extends APIResource {
     appId: string,
     sessionId: string,
     participantId: string,
-    params: SessionGetSessionParticipantDetailsParams,
+    params?: SessionGetSessionParticipantDetailsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionParticipantDetailsResponse>;
+  getSessionParticipantDetails(
+    appId: string,
+    sessionId: string,
+    participantId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionParticipantDetailsResponse>;
+  getSessionParticipantDetails(
+    appId: string,
+    sessionId: string,
+    participantId: string,
+    params: SessionGetSessionParticipantDetailsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionGetSessionParticipantDetailsResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.getSessionParticipantDetails(appId, sessionId, participantId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/participants/${participantId}`,
       { query, ...options },
@@ -153,10 +226,24 @@ export class Sessions extends APIResource {
   getSessionParticipants(
     appId: string,
     sessionId: string,
-    params: SessionGetSessionParticipantsParams,
+    params?: SessionGetSessionParticipantsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionParticipantsResponse>;
+  getSessionParticipants(
+    appId: string,
+    sessionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionParticipantsResponse>;
+  getSessionParticipants(
+    appId: string,
+    sessionId: string,
+    params: SessionGetSessionParticipantsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionGetSessionParticipantsResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.getSessionParticipants(appId, sessionId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/participants`,
       { query, ...options },
@@ -180,10 +267,24 @@ export class Sessions extends APIResource {
   getSessionSummary(
     appId: string,
     sessionId: string,
-    params: SessionGetSessionSummaryParams,
+    params?: SessionGetSessionSummaryParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionSummaryResponse>;
+  getSessionSummary(
+    appId: string,
+    sessionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionSummaryResponse>;
+  getSessionSummary(
+    appId: string,
+    sessionId: string,
+    params: SessionGetSessionSummaryParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionGetSessionSummaryResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.getSessionSummary(appId, sessionId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/summary`,
       options,
@@ -206,10 +307,24 @@ export class Sessions extends APIResource {
   getSessionTranscripts(
     appId: string,
     sessionId: string,
-    params: SessionGetSessionTranscriptsParams,
+    params?: SessionGetSessionTranscriptsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionTranscriptsResponse>;
+  getSessionTranscripts(
+    appId: string,
+    sessionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionTranscriptsResponse>;
+  getSessionTranscripts(
+    appId: string,
+    sessionId: string,
+    params: SessionGetSessionTranscriptsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionGetSessionTranscriptsResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.getSessionTranscripts(appId, sessionId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/transcript`,
       options,
@@ -229,10 +344,19 @@ export class Sessions extends APIResource {
    */
   getSessions(
     appId: string,
-    params: SessionGetSessionsParams,
+    params?: SessionGetSessionsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionGetSessionsResponse>;
+  getSessions(appId: string, options?: Core.RequestOptions): Core.APIPromise<SessionGetSessionsResponse>;
+  getSessions(
+    appId: string,
+    params: SessionGetSessionsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionGetSessionsResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.getSessions(appId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/sessions`, { query, ...options });
   }
 }
@@ -1263,14 +1387,14 @@ export interface SessionGenerateSummaryOfTranscriptsParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SessionGetParticipantDataFromPeerIDParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Comma separated list of filters to apply. Note that there must be
@@ -1283,14 +1407,14 @@ export interface SessionGetSessionChatParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SessionGetSessionDetailsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: List all breakout rooms
@@ -1302,7 +1426,7 @@ export interface SessionGetSessionParticipantDetailsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Comma separated list of filters to apply. Note that there must be
@@ -1320,7 +1444,7 @@ export interface SessionGetSessionParticipantsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: if true, response includes all the peer events of participants.
@@ -1345,12 +1469,12 @@ export interface SessionGetSessionParticipantsParams {
   search?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   sort_by?: 'joinedAt' | 'duration';
 
   /**
-   * Query param:
+   * Query param
    */
   sort_order?: 'ASC' | 'DESC';
 
@@ -1366,21 +1490,21 @@ export interface SessionGetSessionSummaryParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SessionGetSessionTranscriptsParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SessionGetSessionsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: ID of the meeting that sessions should be associated with
@@ -1400,7 +1524,7 @@ export interface SessionGetSessionsParams {
   page_no?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   participants?: string;
 
@@ -1416,12 +1540,12 @@ export interface SessionGetSessionsParams {
   search?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   sort_by?: 'minutesConsumed' | 'createdAt';
 
   /**
-   * Query param:
+   * Query param
    */
   sort_order?: 'ASC' | 'DESC';
 
@@ -1432,7 +1556,7 @@ export interface SessionGetSessionsParams {
   start_time?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   status?: 'LIVE' | 'ENDED';
 }

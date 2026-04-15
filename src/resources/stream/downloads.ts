@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Downloads extends APIResource {
@@ -13,24 +14,30 @@ export class Downloads extends APIResource {
    * ```ts
    * const download = await client.stream.downloads.create(
    *   'ea95132c15732412d22c1476fa83f27a',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: {},
-   *   },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
   create(
     identifier: string,
-    params: DownloadCreateParams,
+    params?: DownloadCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DownloadCreateResponse>;
+  create(identifier: string, options?: Core.RequestOptions): Core.APIPromise<DownloadCreateResponse>;
+  create(
+    identifier: string,
+    params: DownloadCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DownloadCreateResponse> {
-    const { account_id, body } = params;
+    if (isRequestOptions(params)) {
+      return this.create(identifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
-      this._client.post(`/accounts/${account_id}/stream/${identifier}/downloads`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: DownloadCreateResponse }>
+      this._client.post(
+        `/accounts/${account_id}/stream/${identifier}/downloads`,
+        options,
+      ) as Core.APIPromise<{ result: DownloadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,10 +55,19 @@ export class Downloads extends APIResource {
    */
   delete(
     identifier: string,
-    params: DownloadDeleteParams,
+    params?: DownloadDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DownloadDeleteResponse>;
+  delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<DownloadDeleteResponse>;
+  delete(
+    identifier: string,
+    params: DownloadDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DownloadDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(identifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/stream/${identifier}/downloads`,
@@ -73,10 +89,19 @@ export class Downloads extends APIResource {
    */
   get(
     identifier: string,
-    params: DownloadGetParams,
+    params?: DownloadGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DownloadGetResponse>;
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<DownloadGetResponse>;
+  get(
+    identifier: string,
+    params: DownloadGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DownloadGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(identifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/${identifier}/downloads`, options) as Core.APIPromise<{
         result: DownloadGetResponse;
@@ -85,21 +110,62 @@ export class Downloads extends APIResource {
   }
 }
 
+/**
+ * An object with download type keys. Each key is optional and only present if that
+ * download type has been created.
+ */
 export interface DownloadCreateResponse {
   /**
-   * Indicates the progress as a percentage between 0 and 100.
+   * The audio-only download. Only present if this download type has been created.
    */
-  percentComplete?: number;
+  audio?: DownloadCreateResponse.Audio;
 
   /**
-   * The status of a generated download.
+   * The default video download. Only present if this download type has been created.
    */
-  status?: 'ready' | 'inprogress' | 'error';
+  default?: DownloadCreateResponse.Default;
+}
+
+export namespace DownloadCreateResponse {
+  /**
+   * The audio-only download. Only present if this download type has been created.
+   */
+  export interface Audio {
+    /**
+     * Indicates the progress as a percentage between 0 and 100.
+     */
+    percentComplete: number;
+
+    /**
+     * The status of a generated download.
+     */
+    status: 'ready' | 'inprogress' | 'error';
+
+    /**
+     * The URL to access the generated download.
+     */
+    url?: string;
+  }
 
   /**
-   * The URL to access the generated download.
+   * The default video download. Only present if this download type has been created.
    */
-  url?: string;
+  export interface Default {
+    /**
+     * Indicates the progress as a percentage between 0 and 100.
+     */
+    percentComplete: number;
+
+    /**
+     * The status of a generated download.
+     */
+    status: 'ready' | 'inprogress' | 'error';
+
+    /**
+     * The URL to access the generated download.
+     */
+    url?: string;
+  }
 }
 
 export type DownloadDeleteResponse = string;
@@ -128,12 +194,12 @@ export namespace DownloadGetResponse {
     /**
      * Indicates the progress as a percentage between 0 and 100.
      */
-    percentComplete?: number;
+    percentComplete: number;
 
     /**
      * The status of a generated download.
      */
-    status?: 'ready' | 'inprogress' | 'error';
+    status: 'ready' | 'inprogress' | 'error';
 
     /**
      * The URL to access the generated download.
@@ -148,12 +214,12 @@ export namespace DownloadGetResponse {
     /**
      * Indicates the progress as a percentage between 0 and 100.
      */
-    percentComplete?: number;
+    percentComplete: number;
 
     /**
      * The status of a generated download.
      */
-    status?: 'ready' | 'inprogress' | 'error';
+    status: 'ready' | 'inprogress' | 'error';
 
     /**
      * The URL to access the generated download.
@@ -164,28 +230,23 @@ export namespace DownloadGetResponse {
 
 export interface DownloadCreateParams {
   /**
-   * Path param: Identifier.
+   * Identifier.
    */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
+  account_id?: string;
 }
 
 export interface DownloadDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DownloadGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Downloads {

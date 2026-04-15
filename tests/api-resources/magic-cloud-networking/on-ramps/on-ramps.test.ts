@@ -122,7 +122,11 @@ describe('resource onRamps', () => {
   test('delete: required and optional params', async () => {
     const response = await client.magicCloudNetworking.onRamps.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id', destroy: true, force: true },
+      {
+        account_id: 'account_id',
+        destroy: true,
+        force: true,
+      },
     );
   });
 

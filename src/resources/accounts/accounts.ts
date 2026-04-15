@@ -79,7 +79,7 @@ export class Accounts extends APIResource {
    * ```
    */
   update(params: AccountUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Account> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}`, { body, ...options }) as Core.APIPromise<{
         result: Account;
@@ -126,10 +126,18 @@ export class Accounts extends APIResource {
    * ```
    */
   delete(
-    params: AccountDeleteParams,
+    params?: AccountDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountDeleteResponse | null>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<AccountDeleteResponse | null>;
+  delete(
+    params: AccountDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}`, options) as Core.APIPromise<{
         result: AccountDeleteResponse | null;
@@ -147,8 +155,16 @@ export class Accounts extends APIResource {
    * });
    * ```
    */
-  get(params: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<Account> {
-    const { account_id } = params;
+  get(params?: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<Account>;
+  get(options?: Core.RequestOptions): Core.APIPromise<Account>;
+  get(
+    params: AccountGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Account> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}`, options) as Core.APIPromise<{ result: Account }>
     )._thenUnwrap((obj) => obj.result);
@@ -260,7 +276,7 @@ export interface AccountUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Identifier
@@ -273,7 +289,7 @@ export interface AccountUpdateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   type: 'standard' | 'enterprise';
 
@@ -327,14 +343,14 @@ export interface AccountDeleteParams {
   /**
    * The account ID of the account to be deleted
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AccountGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Accounts.AccountsV4PagePaginationArray = AccountsV4PagePaginationArray;

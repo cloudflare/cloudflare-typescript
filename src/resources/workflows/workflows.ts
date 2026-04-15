@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as VersionsAPI from './versions';
 import {
@@ -32,14 +33,14 @@ export class Workflows extends APIResource {
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 
   /**
-   * Create/modify Workflow
+   * Creates a new workflow or updates an existing workflow definition.
    */
   update(
     workflowName: string,
     params: WorkflowUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WorkflowUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/workflows/${workflowName}`, {
         body,
@@ -49,13 +50,23 @@ export class Workflows extends APIResource {
   }
 
   /**
-   * List all Workflows
+   * Lists all workflows configured for the account.
    */
   list(
-    params: WorkflowListParams,
+    params?: WorkflowListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WorkflowListResponsesV4PagePaginationArray, WorkflowListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WorkflowListResponsesV4PagePaginationArray, WorkflowListResponse>;
+  list(
+    params: WorkflowListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<WorkflowListResponsesV4PagePaginationArray, WorkflowListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workflows`,
       WorkflowListResponsesV4PagePaginationArray,
@@ -69,10 +80,19 @@ export class Workflows extends APIResource {
    */
   delete(
     workflowName: string,
-    params: WorkflowDeleteParams,
+    params?: WorkflowDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WorkflowDeleteResponse>;
+  delete(workflowName: string, options?: Core.RequestOptions): Core.APIPromise<WorkflowDeleteResponse>;
+  delete(
+    workflowName: string,
+    params: WorkflowDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WorkflowDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(workflowName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/workflows/${workflowName}`, options) as Core.APIPromise<{
         result: WorkflowDeleteResponse;
@@ -81,14 +101,23 @@ export class Workflows extends APIResource {
   }
 
   /**
-   * Get Workflow details
+   * Retrieves configuration and metadata for a specific workflow.
    */
   get(
     workflowName: string,
-    params: WorkflowGetParams,
+    params?: WorkflowGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WorkflowGetResponse>;
+  get(workflowName: string, options?: Core.RequestOptions): Core.APIPromise<WorkflowGetResponse>;
+  get(
+    workflowName: string,
+    params: WorkflowGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WorkflowGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(workflowName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/workflows/${workflowName}`, options) as Core.APIPromise<{
         result: WorkflowGetResponse;
@@ -205,26 +234,37 @@ export namespace WorkflowGetResponse {
 
 export interface WorkflowUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   class_name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   script_name: string;
+
+  /**
+   * Body param
+   */
+  limits?: WorkflowUpdateParams.Limits;
+}
+
+export namespace WorkflowUpdateParams {
+  export interface Limits {
+    steps?: number;
+  }
 }
 
 export interface WorkflowListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Allows filtering workflows` name.
@@ -233,11 +273,11 @@ export interface WorkflowListParams extends V4PagePaginationArrayParams {
 }
 
 export interface WorkflowDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WorkflowGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Workflows.WorkflowListResponsesV4PagePaginationArray = WorkflowListResponsesV4PagePaginationArray;

@@ -5,10 +5,10 @@ import * as Core from '../../../core';
 
 export class Schema extends APIResource {
   /**
-   * Get Model Schema
+   * Retrieves the input and output JSON schema definition for a Workers AI model.
    */
   get(params: SchemaGetParams, options?: Core.RequestOptions): Core.APIPromise<SchemaGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/ai/models/schema`, { query, ...options }) as Core.APIPromise<{
         result: SchemaGetResponse;
@@ -17,13 +17,35 @@ export class Schema extends APIResource {
   }
 }
 
-export type SchemaGetResponse = unknown;
+export interface SchemaGetResponse {
+  input: SchemaGetResponse.Input;
+
+  output: SchemaGetResponse.Output;
+}
+
+export namespace SchemaGetResponse {
+  export interface Input {
+    additionalProperties: boolean;
+
+    description: string;
+
+    type: string;
+  }
+
+  export interface Output {
+    additionalProperties: boolean;
+
+    description: string;
+
+    type: string;
+  }
+}
 
 export interface SchemaGetParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Model Name

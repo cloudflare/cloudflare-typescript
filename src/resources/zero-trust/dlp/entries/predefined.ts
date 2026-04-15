@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomAPI from '../profiles/custom';
 import { SinglePage } from '../../../../pagination';
@@ -24,7 +25,7 @@ export class Predefined extends APIResource {
     params: PredefinedCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/entries/predefined`, {
         body,
@@ -50,7 +51,7 @@ export class Predefined extends APIResource {
     params: PredefinedUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/entries/predefined/${entryId}`, {
         body,
@@ -73,10 +74,20 @@ export class Predefined extends APIResource {
    * ```
    */
   list(
-    params: PredefinedListParams,
+    params?: PredefinedListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PredefinedListResponsesSinglePage, PredefinedListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PredefinedListResponsesSinglePage, PredefinedListResponse>;
+  list(
+    params: PredefinedListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PredefinedListResponsesSinglePage, PredefinedListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dlp/entries`,
       PredefinedListResponsesSinglePage,
@@ -99,10 +110,19 @@ export class Predefined extends APIResource {
    */
   delete(
     entryId: string,
-    params: PredefinedDeleteParams,
+    params?: PredefinedDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PredefinedDeleteResponse | null>;
+  delete(entryId: string, options?: Core.RequestOptions): Core.APIPromise<PredefinedDeleteResponse | null>;
+  delete(
+    entryId: string,
+    params: PredefinedDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(entryId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dlp/entries/predefined/${entryId}`,
@@ -125,10 +145,19 @@ export class Predefined extends APIResource {
    */
   get(
     entryId: string,
-    params: PredefinedGetParams,
+    params?: PredefinedGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PredefinedGetResponse>;
+  get(entryId: string, options?: Core.RequestOptions): Core.APIPromise<PredefinedGetResponse>;
+  get(
+    entryId: string,
+    params: PredefinedGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(entryId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/entries/${entryId}`, options) as Core.APIPromise<{
         result: PredefinedGetResponse;
@@ -148,6 +177,9 @@ export interface PredefinedCreateResponse {
 
   name: string;
 
+  /**
+   * @deprecated
+   */
   profile_id?: string | null;
 
   variant?: PredefinedCreateResponse.Variant;
@@ -185,6 +217,9 @@ export interface PredefinedUpdateResponse {
 
   name: string;
 
+  /**
+   * @deprecated
+   */
   profile_id?: string | null;
 
   variant?: PredefinedUpdateResponse.Variant;
@@ -214,19 +249,22 @@ export namespace PredefinedUpdateResponse {
 }
 
 export type PredefinedListResponse =
-  | PredefinedListResponse.CustomEntry
-  | PredefinedListResponse.PredefinedEntry
-  | PredefinedListResponse.IntegrationEntry
-  | PredefinedListResponse.ExactDataEntry
-  | PredefinedListResponse.DocumentFingerprintEntry
-  | PredefinedListResponse.WordListEntry;
+  | PredefinedListResponse.UnionMember0
+  | PredefinedListResponse.UnionMember1
+  | PredefinedListResponse.UnionMember2
+  | PredefinedListResponse.UnionMember3
+  | PredefinedListResponse.UnionMember4
+  | PredefinedListResponse.UnionMember5;
 
 export namespace PredefinedListResponse {
-  export interface CustomEntry {
+  export interface UnionMember0 {
     id: string;
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -237,15 +275,20 @@ export namespace PredefinedListResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface PredefinedEntry {
+  export interface UnionMember1 {
     id: string;
 
-    confidence: PredefinedEntry.Confidence;
+    confidence: UnionMember1.Confidence;
 
     enabled: boolean;
 
@@ -253,14 +296,17 @@ export namespace PredefinedListResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
-    variant?: PredefinedEntry.Variant;
+    variant?: UnionMember1.Variant;
   }
 
-  export namespace PredefinedEntry {
+  export namespace UnionMember1 {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -283,7 +329,7 @@ export namespace PredefinedListResponse {
     }
   }
 
-  export interface IntegrationEntry {
+  export interface UnionMember2 {
     id: string;
 
     created_at: string;
@@ -301,7 +347,7 @@ export namespace PredefinedListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface ExactDataEntry {
+  export interface UnionMember3 {
     id: string;
 
     /**
@@ -325,7 +371,7 @@ export namespace PredefinedListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface DocumentFingerprintEntry {
+  export interface UnionMember4 {
     id: string;
 
     created_at: string;
@@ -341,7 +387,7 @@ export namespace PredefinedListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface WordListEntry {
+  export interface UnionMember5 {
     id: string;
 
     created_at: string;
@@ -378,6 +424,9 @@ export namespace PredefinedGetResponse {
 
     created_at: string;
 
+    /**
+     * @deprecated
+     */
     enabled: boolean;
 
     name: string;
@@ -388,6 +437,11 @@ export namespace PredefinedGetResponse {
 
     updated_at: string;
 
+    description?: string | null;
+
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember0.Profile>;
@@ -417,6 +471,9 @@ export namespace PredefinedGetResponse {
 
     type: 'predefined';
 
+    /**
+     * @deprecated
+     */
     profile_id?: string | null;
 
     profiles?: Array<UnionMember1.Profile>;
@@ -591,17 +648,17 @@ export namespace PredefinedGetResponse {
 
 export interface PredefinedCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   entry_id: string;
 
@@ -614,26 +671,26 @@ export interface PredefinedCreateParams {
 
 export interface PredefinedUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled: boolean;
 }
 
 export interface PredefinedListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PredefinedDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PredefinedGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Predefined.PredefinedListResponsesSinglePage = PredefinedListResponsesSinglePage;

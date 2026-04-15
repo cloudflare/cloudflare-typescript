@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as DevicesDevicesAPI from './devices_';
 import {
@@ -22,7 +23,7 @@ import {
   DEXTestGetResponse,
   DEXTestListParams,
   DEXTestListResponse,
-  DEXTestListResponsesSinglePage,
+  DEXTestListResponsesV4PagePaginationArray,
   DEXTestUpdateParams,
   DEXTestUpdateResponse,
   DEXTests,
@@ -31,6 +32,18 @@ import {
 } from './dex-tests';
 import * as FleetStatusAPI from './fleet-status';
 import { FleetStatus, FleetStatusGetParams, FleetStatusGetResponse } from './fleet-status';
+import * as IPProfilesAPI from './ip-profiles';
+import {
+  IPProfile,
+  IPProfileCreateParams,
+  IPProfileDeleteParams,
+  IPProfileDeleteResponse,
+  IPProfileGetParams,
+  IPProfileListParams,
+  IPProfileUpdateParams,
+  IPProfiles,
+  IPProfilesSinglePage,
+} from './ip-profiles';
 import * as NetworksAPI from './networks';
 import {
   DeviceNetwork,
@@ -129,6 +142,7 @@ export class Devices extends APIResource {
   resilience: ResilienceAPI.Resilience = new ResilienceAPI.Resilience(this._client);
   registrations: RegistrationsAPI.Registrations = new RegistrationsAPI.Registrations(this._client);
   dexTests: DEXTestsAPI.DEXTests = new DEXTestsAPI.DEXTests(this._client);
+  ipProfiles: IPProfilesAPI.IPProfiles = new IPProfilesAPI.IPProfiles(this._client);
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
   fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
@@ -150,8 +164,16 @@ export class Devices extends APIResource {
    *
    * @deprecated
    */
-  list(params: DeviceListParams, options?: Core.RequestOptions): Core.PagePromise<DevicesSinglePage, Device> {
-    const { account_id } = params;
+  list(params?: DeviceListParams, options?: Core.RequestOptions): Core.PagePromise<DevicesSinglePage, Device>;
+  list(options?: Core.RequestOptions): Core.PagePromise<DevicesSinglePage, Device>;
+  list(
+    params: DeviceListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DevicesSinglePage, Device> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/devices`, DevicesSinglePage, options);
   }
 
@@ -169,10 +191,19 @@ export class Devices extends APIResource {
    */
   get(
     deviceId: string,
-    params: DeviceGetParams,
+    params?: DeviceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeviceGetResponse | null>;
+  get(deviceId: string, options?: Core.RequestOptions): Core.APIPromise<DeviceGetResponse | null>;
+  get(
+    deviceId: string,
+    params: DeviceGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceGetResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(deviceId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/${deviceId}`, options) as Core.APIPromise<{
         result: DeviceGetResponse | null;
@@ -427,11 +458,11 @@ export namespace DeviceGetResponse {
 }
 
 export interface DeviceListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DeviceGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Devices.DevicesSinglePage = DevicesSinglePage;
@@ -441,7 +472,9 @@ Devices.Resilience = Resilience;
 Devices.Registrations = Registrations;
 Devices.RegistrationListResponsesCursorPagination = RegistrationListResponsesCursorPagination;
 Devices.DEXTests = DEXTests;
-Devices.DEXTestListResponsesSinglePage = DEXTestListResponsesSinglePage;
+Devices.DEXTestListResponsesV4PagePaginationArray = DEXTestListResponsesV4PagePaginationArray;
+Devices.IPProfiles = IPProfiles;
+Devices.IPProfilesSinglePage = IPProfilesSinglePage;
 Devices.Networks = Networks;
 Devices.DeviceNetworksSinglePage = DeviceNetworksSinglePage;
 Devices.FleetStatus = FleetStatus;
@@ -501,12 +534,24 @@ export declare namespace Devices {
     type DEXTestListResponse as DEXTestListResponse,
     type DEXTestDeleteResponse as DEXTestDeleteResponse,
     type DEXTestGetResponse as DEXTestGetResponse,
-    DEXTestListResponsesSinglePage as DEXTestListResponsesSinglePage,
+    DEXTestListResponsesV4PagePaginationArray as DEXTestListResponsesV4PagePaginationArray,
     type DEXTestCreateParams as DEXTestCreateParams,
     type DEXTestUpdateParams as DEXTestUpdateParams,
     type DEXTestListParams as DEXTestListParams,
     type DEXTestDeleteParams as DEXTestDeleteParams,
     type DEXTestGetParams as DEXTestGetParams,
+  };
+
+  export {
+    IPProfiles as IPProfiles,
+    type IPProfile as IPProfile,
+    type IPProfileDeleteResponse as IPProfileDeleteResponse,
+    IPProfilesSinglePage as IPProfilesSinglePage,
+    type IPProfileCreateParams as IPProfileCreateParams,
+    type IPProfileUpdateParams as IPProfileUpdateParams,
+    type IPProfileListParams as IPProfileListParams,
+    type IPProfileDeleteParams as IPProfileDeleteParams,
+    type IPProfileGetParams as IPProfileGetParams,
   };
 
   export {

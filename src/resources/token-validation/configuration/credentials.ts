@@ -34,7 +34,7 @@ export class Credentials extends APIResource {
     params: CredentialUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CredentialUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return this._client.put(`/zones/${zone_id}/token_validation/config/${configId}/credentials`, {
       body,
       ...options,
@@ -165,10 +165,10 @@ export interface CredentialUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   keys: Array<
     | CredentialUpdateParams.APIShieldCredentialsJWTKeyRSA

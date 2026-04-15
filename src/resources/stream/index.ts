@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  AudioSinglePage,
   AudioTracks,
   type Audio,
   type AudioTrackDeleteResponse,
+  type AudioTrackGetResponse,
   type AudioTrackDeleteParams,
   type AudioTrackCopyParams,
   type AudioTrackEditParams,

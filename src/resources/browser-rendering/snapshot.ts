@@ -22,7 +22,7 @@ export class Snapshot extends APIResource {
     params: SnapshotCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SnapshotCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountId, cacheTTL, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/browser-rendering/snapshot`, {
         query: { cacheTTL },
@@ -35,12 +35,12 @@ export class Snapshot extends APIResource {
 
 export interface SnapshotCreateResponse {
   /**
-   * HTML content
+   * HTML content.
    */
   content: string;
 
   /**
-   * Base64 encoded image
+   * Base64 encoded image.
    */
   screenshot: string;
 }
@@ -52,7 +52,7 @@ export declare namespace SnapshotCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
@@ -131,7 +131,7 @@ export declare namespace SnapshotCreateParams {
     cookies?: Array<Variant0.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -172,22 +172,22 @@ export declare namespace SnapshotCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     screenshotOptions?: Variant0.ScreenshotOptions;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -235,6 +235,9 @@ export declare namespace SnapshotCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -350,7 +353,7 @@ export declare namespace SnapshotCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.
@@ -428,7 +431,7 @@ export declare namespace SnapshotCreateParams {
     cookies?: Array<Variant1.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -469,22 +472,22 @@ export declare namespace SnapshotCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     screenshotOptions?: Variant1.ScreenshotOptions;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -532,6 +535,9 @@ export declare namespace SnapshotCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;

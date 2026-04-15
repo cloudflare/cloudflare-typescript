@@ -7,23 +7,20 @@ export {
   type InstanceUpdateResponse,
   type InstanceListResponse,
   type InstanceDeleteResponse,
+  type InstanceChatCompletionsResponse,
   type InstanceReadResponse,
+  type InstanceSearchResponse,
   type InstanceStatsResponse,
   type InstanceCreateParams,
   type InstanceUpdateParams,
   type InstanceListParams,
   type InstanceDeleteParams,
+  type InstanceChatCompletionsParams,
   type InstanceReadParams,
+  type InstanceSearchParams,
   type InstanceStatsParams,
 } from './instances';
-export {
-  ItemListResponsesV4PagePaginationArray,
-  Items,
-  type ItemListResponse,
-  type ItemGetResponse,
-  type ItemListParams,
-  type ItemGetParams,
-} from './items';
+export { Items } from './items';
 export {
   JobListResponsesV4PagePaginationArray,
   Jobs,

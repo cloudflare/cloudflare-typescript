@@ -6,7 +6,8 @@ import { SinglePage } from '../../../pagination';
 
 export class Release extends APIResource {
   /**
-   * Release messages from quarantine
+   * Releases a quarantined email message, allowing it to be delivered to the
+   * recipient.
    *
    * @example
    * ```ts
@@ -25,7 +26,7 @@ export class Release extends APIResource {
     params: ReleaseBulkParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ReleaseBulkResponsesSinglePage, ReleaseBulkResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/investigate/release`,
       ReleaseBulkResponsesSinglePage,
@@ -37,6 +38,8 @@ export class Release extends APIResource {
 export class ReleaseBulkResponsesSinglePage extends SinglePage<ReleaseBulkResponse> {}
 
 export interface ReleaseBulkResponse {
+  id: string;
+
   /**
    * The identifier of the message.
    */
@@ -53,7 +56,7 @@ export interface ReleaseBulkParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A list of messages identfied by their `postfix_id`s that should be

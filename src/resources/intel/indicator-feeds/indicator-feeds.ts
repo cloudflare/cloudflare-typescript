@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as DownloadsAPI from './downloads';
 import { Downloads } from './downloads';
@@ -24,7 +25,7 @@ export class IndicatorFeeds extends APIResource {
   downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
 
   /**
-   * Create new indicator feed
+   * Creates a new custom threat indicator feed for sharing threat intelligence data.
    *
    * @example
    * ```ts
@@ -35,10 +36,18 @@ export class IndicatorFeeds extends APIResource {
    * ```
    */
   create(
-    params: IndicatorFeedCreateParams,
+    params?: IndicatorFeedCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndicatorFeedCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<IndicatorFeedCreateResponse>;
+  create(
+    params: IndicatorFeedCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndicatorFeedCreateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/intel/indicator-feeds`, {
         body,
@@ -48,7 +57,7 @@ export class IndicatorFeeds extends APIResource {
   }
 
   /**
-   * Update indicator feed metadata
+   * Revises details for a specific custom threat indicator feed.
    *
    * @example
    * ```ts
@@ -63,7 +72,7 @@ export class IndicatorFeeds extends APIResource {
     params: IndicatorFeedUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndicatorFeedUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/intel/indicator-feeds/${feedId}`, {
         body,
@@ -73,7 +82,7 @@ export class IndicatorFeeds extends APIResource {
   }
 
   /**
-   * Get indicator feeds owned by this account
+   * Retrieves details for all accessible custom threat indicator feeds.
    *
    * @example
    * ```ts
@@ -86,10 +95,20 @@ export class IndicatorFeeds extends APIResource {
    * ```
    */
   list(
-    params: IndicatorFeedListParams,
+    params?: IndicatorFeedListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IndicatorFeedListResponsesSinglePage, IndicatorFeedListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IndicatorFeedListResponsesSinglePage, IndicatorFeedListResponse>;
+  list(
+    params: IndicatorFeedListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<IndicatorFeedListResponsesSinglePage, IndicatorFeedListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/intel/indicator-feeds`,
       IndicatorFeedListResponsesSinglePage,
@@ -98,7 +117,7 @@ export class IndicatorFeeds extends APIResource {
   }
 
   /**
-   * Get indicator feed data
+   * Retrieves the raw data entries in a custom threat indicator feed.
    *
    * @example
    * ```ts
@@ -110,10 +129,19 @@ export class IndicatorFeeds extends APIResource {
    */
   data(
     feedId: number,
-    params: IndicatorFeedDataParams,
+    params?: IndicatorFeedDataParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<string>;
+  data(feedId: number, options?: Core.RequestOptions): Core.APIPromise<string>;
+  data(
+    feedId: number,
+    params: IndicatorFeedDataParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<string> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.data(feedId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/intel/indicator-feeds/${feedId}/data`, {
       ...options,
       headers: { Accept: 'text/csv', ...options?.headers },
@@ -121,7 +149,7 @@ export class IndicatorFeeds extends APIResource {
   }
 
   /**
-   * Get indicator feed metadata
+   * Retrieves details for a specific custom threat indicator feed.
    *
    * @example
    * ```ts
@@ -133,10 +161,19 @@ export class IndicatorFeeds extends APIResource {
    */
   get(
     feedId: number,
-    params: IndicatorFeedGetParams,
+    params?: IndicatorFeedGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndicatorFeedGetResponse>;
+  get(feedId: number, options?: Core.RequestOptions): Core.APIPromise<IndicatorFeedGetResponse>;
+  get(
+    feedId: number,
+    params: IndicatorFeedGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndicatorFeedGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(feedId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/intel/indicator-feeds/${feedId}`,
@@ -337,7 +374,7 @@ export interface IndicatorFeedCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The description of the example test
@@ -354,7 +391,7 @@ export interface IndicatorFeedUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The new description of the feed
@@ -386,21 +423,21 @@ export interface IndicatorFeedListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IndicatorFeedDataParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IndicatorFeedGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 IndicatorFeeds.IndicatorFeedListResponsesSinglePage = IndicatorFeedListResponsesSinglePage;

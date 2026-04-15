@@ -83,7 +83,7 @@ describe('resource inference', () => {
           limitPerGroup: 10,
           location: ['string'],
           name: ['main_series'],
-          normalization: 'MIN0_MAX',
+          normalization: 'PERCENTAGE',
         },
         { path: '/_stainless_unknown_path' },
       ),

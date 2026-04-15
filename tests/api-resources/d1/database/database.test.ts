@@ -132,7 +132,11 @@ describe('resource database', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       output_format: 'polling',
       current_bookmark: 'current_bookmark',
-      dump_options: { no_data: true, no_schema: true, tables: ['string'] },
+      dump_options: {
+        no_data: true,
+        no_schema: true,
+        tables: ['string'],
+      },
     });
   });
 

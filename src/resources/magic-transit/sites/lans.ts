@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -14,10 +15,7 @@ export class LANs extends APIResource {
    * // Automatically fetches more pages as needed.
    * for await (const lan of client.magicTransit.sites.lans.create(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     physport: 1,
-   *   },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
    * }
@@ -28,7 +26,7 @@ export class LANs extends APIResource {
     params: LANCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<LANsSinglePage, LAN> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.getAPIList(`/accounts/${account_id}/magic/sites/${siteId}/lans`, LANsSinglePage, {
       body,
       method: 'post',
@@ -54,7 +52,7 @@ export class LANs extends APIResource {
     params: LANUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
         body,
@@ -79,10 +77,19 @@ export class LANs extends APIResource {
    */
   list(
     siteId: string,
-    params: LANListParams,
+    params?: LANListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LANsSinglePage, LAN>;
+  list(siteId: string, options?: Core.RequestOptions): Core.PagePromise<LANsSinglePage, LAN>;
+  list(
+    siteId: string,
+    params: LANListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<LANsSinglePage, LAN> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(siteId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/magic/sites/${siteId}/lans`,
       LANsSinglePage,
@@ -105,10 +112,20 @@ export class LANs extends APIResource {
   delete(
     siteId: string,
     lanId: string,
-    params: LANDeleteParams,
+    params?: LANDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LAN>;
+  delete(siteId: string, lanId: string, options?: Core.RequestOptions): Core.APIPromise<LAN>;
+  delete(
+    siteId: string,
+    lanId: string,
+    params: LANDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(siteId, lanId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
@@ -135,7 +152,7 @@ export class LANs extends APIResource {
     params: LANEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
         body,
@@ -159,10 +176,20 @@ export class LANs extends APIResource {
   get(
     siteId: string,
     lanId: string,
-    params: LANGetParams,
+    params?: LANGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LAN>;
+  get(siteId: string, lanId: string, options?: Core.RequestOptions): Core.APIPromise<LAN>;
+  get(
+    siteId: string,
+    lanId: string,
+    params: LANGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(siteId, lanId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
@@ -242,11 +269,23 @@ export interface LAN {
    */
   id?: string;
 
+  bond_id?: number;
+
   /**
    * mark true to use this LAN for HA probing. only works for site with HA turned on.
    * only one LAN can be set as the ha_link.
    */
   ha_link?: boolean;
+
+  /**
+   * mark true to use this LAN for source-based breakout traffic
+   */
+  is_breakout?: boolean;
+
+  /**
+   * mark true to use this LAN for source-based prioritized traffic
+   */
+  is_prioritized?: boolean;
 
   name?: string;
 
@@ -372,12 +411,12 @@ export interface LANCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
-  physport: number;
+  bond_id?: number;
 
   /**
    * Body param: mark true to use this LAN for HA probing. only works for site with
@@ -386,17 +425,32 @@ export interface LANCreateParams {
   ha_link?: boolean;
 
   /**
-   * Body param:
+   * Body param: mark true to use this LAN for source-based breakout traffic
+   */
+  is_breakout?: boolean;
+
+  /**
+   * Body param: mark true to use this LAN for source-based prioritized traffic
+   */
+  is_prioritized?: boolean;
+
+  /**
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   nat?: NatParam;
 
   /**
-   * Body param:
+   * Body param
+   */
+  physport?: number;
+
+  /**
+   * Body param
    */
   routed_subnets?: Array<RoutedSubnetParam>;
 
@@ -418,25 +472,40 @@ export interface LANUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
+   */
+  bond_id?: number;
+
+  /**
+   * Body param: mark true to use this LAN for source-based breakout traffic
+   */
+  is_breakout?: boolean;
+
+  /**
+   * Body param: mark true to use this LAN for source-based prioritized traffic
+   */
+  is_prioritized?: boolean;
+
+  /**
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   nat?: NatParam;
 
   /**
-   * Body param:
+   * Body param
    */
   physport?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   routed_subnets?: Array<RoutedSubnetParam>;
 
@@ -458,39 +527,54 @@ export interface LANListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LANDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LANEditParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
+   */
+  bond_id?: number;
+
+  /**
+   * Body param: mark true to use this LAN for source-based breakout traffic
+   */
+  is_breakout?: boolean;
+
+  /**
+   * Body param: mark true to use this LAN for source-based prioritized traffic
+   */
+  is_prioritized?: boolean;
+
+  /**
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   nat?: NatParam;
 
   /**
-   * Body param:
+   * Body param
    */
   physport?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   routed_subnets?: Array<RoutedSubnetParam>;
 
@@ -512,7 +596,7 @@ export interface LANGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 LANs.LANsSinglePage = LANsSinglePage;

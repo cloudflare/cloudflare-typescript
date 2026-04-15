@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as LoadBalancersAPI from './load-balancers';
 import * as MonitorGroupsAPI from './monitor-groups';
@@ -81,7 +82,7 @@ export class LoadBalancers extends APIResource {
    * ```
    */
   create(params: LoadBalancerCreateParams, options?: Core.RequestOptions): Core.APIPromise<LoadBalancer> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/load_balancers`, { body, ...options }) as Core.APIPromise<{
         result: LoadBalancer;
@@ -114,7 +115,7 @@ export class LoadBalancers extends APIResource {
     params: LoadBalancerUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LoadBalancer> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, {
         body,
@@ -137,10 +138,18 @@ export class LoadBalancers extends APIResource {
    * ```
    */
   list(
-    params: LoadBalancerListParams,
+    params?: LoadBalancerListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LoadBalancersSinglePage, LoadBalancer>;
+  list(options?: Core.RequestOptions): Core.PagePromise<LoadBalancersSinglePage, LoadBalancer>;
+  list(
+    params: LoadBalancerListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<LoadBalancersSinglePage, LoadBalancer> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(`/zones/${zone_id}/load_balancers`, LoadBalancersSinglePage, options);
   }
 
@@ -157,10 +166,19 @@ export class LoadBalancers extends APIResource {
    */
   delete(
     loadBalancerId: string,
-    params: LoadBalancerDeleteParams,
+    params?: LoadBalancerDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LoadBalancerDeleteResponse>;
+  delete(loadBalancerId: string, options?: Core.RequestOptions): Core.APIPromise<LoadBalancerDeleteResponse>;
+  delete(
+    loadBalancerId: string,
+    params: LoadBalancerDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LoadBalancerDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(loadBalancerId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, options) as Core.APIPromise<{
         result: LoadBalancerDeleteResponse;
@@ -184,7 +202,7 @@ export class LoadBalancers extends APIResource {
     params: LoadBalancerEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LoadBalancer> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, {
         body,
@@ -206,10 +224,19 @@ export class LoadBalancers extends APIResource {
    */
   get(
     loadBalancerId: string,
-    params: LoadBalancerGetParams,
+    params?: LoadBalancerGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LoadBalancer>;
+  get(loadBalancerId: string, options?: Core.RequestOptions): Core.APIPromise<LoadBalancer>;
+  get(
+    loadBalancerId: string,
+    params: LoadBalancerGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LoadBalancer> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(loadBalancerId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, options) as Core.APIPromise<{
         result: LoadBalancer;
@@ -324,7 +351,7 @@ export interface FilterOptions {
   /**
    * If set true, disable notifications for this type of resource (pool or origin).
    */
-  disable?: boolean;
+  disable?: boolean | null;
 
   /**
    * If present, send notifications only for this health status (e.g. false for only
@@ -341,7 +368,7 @@ export interface FilterOptionsParam {
   /**
    * If set true, disable notifications for this type of resource (pool or origin).
    */
-  disable?: boolean;
+  disable?: boolean | null;
 
   /**
    * If present, send notifications only for this health status (e.g. false for only
@@ -732,6 +759,15 @@ export interface Origin {
   enabled?: boolean;
 
   /**
+   * Whether to flatten CNAME records for this origin, resolving them to A/AAAA
+   * records before returning to the client. When true (the default), the director
+   * resolves CNAME addresses to their underlying A/AAAA records. When false, the
+   * origin address is returned as a raw CNAME record without resolution. This
+   * setting mirrors the DNS API record flatten_cname setting.
+   */
+  flatten_cname?: boolean;
+
+  /**
    * The request header is used to pass additional information with an HTTP request.
    * Currently supported header is 'Host'.
    */
@@ -782,6 +818,15 @@ export interface OriginParam {
    * only be disabled for the current pool.
    */
   enabled?: boolean;
+
+  /**
+   * Whether to flatten CNAME records for this origin, resolving them to A/AAAA
+   * records before returning to the client. When true (the default), the director
+   * resolves CNAME addresses to their underlying A/AAAA records. When false, the
+   * origin address is returned as a raw CNAME record without resolution. This
+   * setting mirrors the DNS API record flatten_cname setting.
+   */
+  flatten_cname?: boolean;
 
   /**
    * The request header is used to pass additional information with an HTTP request.
@@ -1605,9 +1650,9 @@ export interface LoadBalancerDeleteResponse {
 
 export interface LoadBalancerCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: A list of pool IDs ordered by their failover priority. Pools defined
@@ -1779,9 +1824,9 @@ export interface LoadBalancerCreateParams {
 
 export interface LoadBalancerUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: A list of pool IDs ordered by their failover priority. Pools defined
@@ -1957,18 +2002,18 @@ export interface LoadBalancerUpdateParams {
 }
 
 export interface LoadBalancerListParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface LoadBalancerDeleteParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface LoadBalancerEditParams {
   /**
-   * Path param:
+   * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Controls features that modify the routing of requests to pools and
@@ -2139,7 +2184,7 @@ export interface LoadBalancerEditParams {
 }
 
 export interface LoadBalancerGetParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 LoadBalancers.LoadBalancersSinglePage = LoadBalancersSinglePage;

@@ -34,6 +34,7 @@ describe('resource apps', () => {
       type: 'Development',
       hostnames: ['auth.cloudflare.com'],
       ip_subnets: ['192.0.2.0/24'],
+      source_subnets: ['192.0.2.0/24'],
     });
   });
 
@@ -58,6 +59,7 @@ describe('resource apps', () => {
       hostnames: ['auth.cloudflare.com'],
       ip_subnets: ['1.1.1.1/32'],
       name: 'Cloudflare Dashboard',
+      source_subnets: ['1.1.1.1/32'],
       type: 'Development',
     });
   });
@@ -119,6 +121,7 @@ describe('resource apps', () => {
       hostnames: ['auth.cloudflare.com'],
       ip_subnets: ['1.1.1.1/32'],
       name: 'Cloudflare Dashboard',
+      source_subnets: ['1.1.1.1/32'],
       type: 'Development',
     });
   });

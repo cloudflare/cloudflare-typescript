@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ReferencesAPI from './references';
 import { ReferenceGetParams, ReferenceGetResponse, References } from './references';
@@ -10,7 +11,8 @@ export class Integrations extends APIResource {
   references: ReferencesAPI.References = new ReferencesAPI.References(this._client);
 
   /**
-   * Create new risk score integration.
+   * Creates a new Zero Trust risk score integration, connecting external risk
+   * signals to Cloudflare's risk scoring system.
    *
    * @example
    * ```ts
@@ -26,7 +28,7 @@ export class Integrations extends APIResource {
     params: IntegrationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/zt_risk_scoring/integrations`, {
         body,
@@ -57,7 +59,7 @@ export class Integrations extends APIResource {
     params: IntegrationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/zt_risk_scoring/integrations/${integrationId}`, {
         body,
@@ -67,7 +69,7 @@ export class Integrations extends APIResource {
   }
 
   /**
-   * List all risk score integrations for the account.
+   * Lists all configured Zero Trust risk score integrations for the account.
    *
    * @example
    * ```ts
@@ -80,10 +82,20 @@ export class Integrations extends APIResource {
    * ```
    */
   list(
-    params: IntegrationListParams,
+    params?: IntegrationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse>;
+  list(
+    params: IntegrationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/zt_risk_scoring/integrations`,
       IntegrationListResponsesSinglePage,
@@ -92,7 +104,8 @@ export class Integrations extends APIResource {
   }
 
   /**
-   * Delete a risk score integration.
+   * Removes a Zero Trust risk score integration, disconnecting the external risk
+   * signal source.
    *
    * @example
    * ```ts
@@ -105,10 +118,22 @@ export class Integrations extends APIResource {
    */
   delete(
     integrationId: string,
-    params: IntegrationDeleteParams,
+    params?: IntegrationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IntegrationDeleteResponse | null>;
+  delete(
+    integrationId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IntegrationDeleteResponse | null>;
+  delete(
+    integrationId: string,
+    params: IntegrationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(integrationId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/zt_risk_scoring/integrations/${integrationId}`,
@@ -131,10 +156,19 @@ export class Integrations extends APIResource {
    */
   get(
     integrationId: string,
-    params: IntegrationGetParams,
+    params?: IntegrationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IntegrationGetResponse>;
+  get(integrationId: string, options?: Core.RequestOptions): Core.APIPromise<IntegrationGetResponse>;
+  get(
+    integrationId: string,
+    params: IntegrationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(integrationId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/zt_risk_scoring/integrations/${integrationId}`,
@@ -322,12 +356,12 @@ export interface IntegrationGetResponse {
 
 export interface IntegrationCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   integration_type: 'Okta';
 
@@ -346,9 +380,9 @@ export interface IntegrationCreateParams {
 
 export interface IntegrationUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether this integration is enabled. If disabled, no risk changes
@@ -370,15 +404,15 @@ export interface IntegrationUpdateParams {
 }
 
 export interface IntegrationListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IntegrationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IntegrationGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Integrations.IntegrationListResponsesSinglePage = IntegrationListResponsesSinglePage;

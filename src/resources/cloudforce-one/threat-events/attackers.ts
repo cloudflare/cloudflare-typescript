@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Attackers extends APIResource {
@@ -15,8 +16,16 @@ export class Attackers extends APIResource {
    *   });
    * ```
    */
-  list(params: AttackerListParams, options?: Core.RequestOptions): Core.APIPromise<AttackerListResponse> {
-    const { account_id, ...query } = params;
+  list(params?: AttackerListParams, options?: Core.RequestOptions): Core.APIPromise<AttackerListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<AttackerListResponse>;
+  list(
+    params: AttackerListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AttackerListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events/attackers`, { query, ...options });
   }
 }
@@ -37,7 +46,7 @@ export interface AttackerListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Array of dataset IDs to query attackers from. If not provided, uses

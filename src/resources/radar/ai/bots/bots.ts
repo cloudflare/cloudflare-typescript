@@ -21,16 +21,37 @@ export class Bots extends APIResource {
    * ```
    */
   summaryV2(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query?: BotSummaryV2Params,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotSummaryV2Response>;
   summaryV2(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotSummaryV2Response>;
   summaryV2(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query: BotSummaryV2Params | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotSummaryV2Response> {
@@ -72,7 +93,7 @@ export class Bots extends APIResource {
   }
 
   /**
-   * Retrieves the distribution of HTTP requests from AI bots, grouped by chosen the
+   * Retrieves the distribution of HTTP requests from AI bots, grouped by the
    * specified dimension over time.
    *
    * @example
@@ -82,16 +103,37 @@ export class Bots extends APIResource {
    * ```
    */
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query?: BotTimeseriesGroupsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query: BotTimeseriesGroupsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotTimeseriesGroupsResponse> {
@@ -530,6 +572,28 @@ export interface BotSummaryV2Params {
   asn?: Array<string>;
 
   /**
+   * Filters results by content type category.
+   */
+  contentType?: Array<
+    | 'HTML'
+    | 'IMAGES'
+    | 'JSON'
+    | 'JAVASCRIPT'
+    | 'CSS'
+    | 'PLAIN_TEXT'
+    | 'FONTS'
+    | 'XML'
+    | 'YAML'
+    | 'VIDEO'
+    | 'AUDIO'
+    | 'MARKDOWN'
+    | 'DOCUMENTS'
+    | 'BINARY'
+    | 'SERIALIZATION'
+    | 'OTHER'
+  >;
+
+  /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
    * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
    * excludes results from EU, but includes results from NA.
@@ -586,6 +650,25 @@ export interface BotSummaryV2Params {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
+
+  /**
+   * Filters results by user agent.
+   */
+  userAgent?: Array<string>;
 
   /**
    * Filters results by vertical.
@@ -610,6 +693,28 @@ export interface BotTimeseriesParams {
   asn?: Array<string>;
 
   /**
+   * Filters results by content type category.
+   */
+  contentType?: Array<
+    | 'HTML'
+    | 'IMAGES'
+    | 'JSON'
+    | 'JAVASCRIPT'
+    | 'CSS'
+    | 'PLAIN_TEXT'
+    | 'FONTS'
+    | 'XML'
+    | 'YAML'
+    | 'VIDEO'
+    | 'AUDIO'
+    | 'MARKDOWN'
+    | 'DOCUMENTS'
+    | 'BINARY'
+    | 'SERIALIZATION'
+    | 'OTHER'
+  >;
+
+  /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
    * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
    * excludes results from EU, but includes results from NA.
@@ -666,6 +771,20 @@ export interface BotTimeseriesParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
 
   /**
    * Filters results by user agent.
@@ -693,6 +812,28 @@ export interface BotTimeseriesGroupsParams {
    * results from AS3356.
    */
   asn?: Array<string>;
+
+  /**
+   * Filters results by content type category.
+   */
+  contentType?: Array<
+    | 'HTML'
+    | 'IMAGES'
+    | 'JSON'
+    | 'JAVASCRIPT'
+    | 'CSS'
+    | 'PLAIN_TEXT'
+    | 'FONTS'
+    | 'XML'
+    | 'YAML'
+    | 'VIDEO'
+    | 'AUDIO'
+    | 'MARKDOWN'
+    | 'DOCUMENTS'
+    | 'BINARY'
+    | 'SERIALIZATION'
+    | 'OTHER'
+  >;
 
   /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
@@ -756,7 +897,26 @@ export interface BotTimeseriesGroupsParams {
    * Normalization method applied to the results. Refer to
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
-  normalization?: 'PERCENTAGE_CHANGE' | 'MIN0_MAX';
+  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
+
+  /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
+
+  /**
+   * Filters results by user agent.
+   */
+  userAgent?: Array<string>;
 
   /**
    * Filters results by vertical.

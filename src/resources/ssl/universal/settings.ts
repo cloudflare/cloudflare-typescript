@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Settings extends APIResource {
@@ -15,8 +16,16 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  edit(params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings> {
-    const { zone_id, ...body } = params;
+  edit(params?: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings>;
+  edit(options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings>;
+  edit(
+    params: SettingEditParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UniversalSSLSettings> {
+    if (isRequestOptions(params)) {
+      return this.edit({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/ssl/universal/settings`, {
         body,
@@ -36,8 +45,16 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings> {
-    const { zone_id } = params;
+  get(params?: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings>;
+  get(options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings>;
+  get(
+    params: SettingGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UniversalSSLSettings> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/ssl/universal/settings`, options) as Core.APIPromise<{
         result: UniversalSSLSettings;
@@ -81,7 +98,7 @@ export interface SettingEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Disabling Universal SSL removes any currently active Universal SSL
@@ -117,7 +134,7 @@ export interface SettingGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Settings {

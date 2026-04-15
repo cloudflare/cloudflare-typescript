@@ -1,12 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Resources extends APIResource {
   /**
-   * Create a new share resource
+   * Adds a resource to an existing share, making it available to share recipients.
    *
    * @example
    * ```ts
@@ -29,7 +30,7 @@ export class Resources extends APIResource {
     params: ResourceCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/shares/${shareId}/resources`, {
         body,
@@ -61,7 +62,7 @@ export class Resources extends APIResource {
     params: ResourceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/shares/${shareId}/resources/${resourceId}`, {
         body,
@@ -86,10 +87,22 @@ export class Resources extends APIResource {
    */
   list(
     shareId: string,
-    params: ResourceListParams,
+    params?: ResourceListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ResourceListResponsesV4PagePaginationArray, ResourceListResponse>;
+  list(
+    shareId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ResourceListResponsesV4PagePaginationArray, ResourceListResponse>;
+  list(
+    shareId: string,
+    params: ResourceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ResourceListResponsesV4PagePaginationArray, ResourceListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(shareId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/shares/${shareId}/resources`,
       ResourceListResponsesV4PagePaginationArray,
@@ -114,10 +127,24 @@ export class Resources extends APIResource {
   delete(
     shareId: string,
     resourceId: string,
-    params: ResourceDeleteParams,
+    params?: ResourceDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceDeleteResponse>;
+  delete(
+    shareId: string,
+    resourceId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceDeleteResponse>;
+  delete(
+    shareId: string,
+    resourceId: string,
+    params: ResourceDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(shareId, resourceId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/shares/${shareId}/resources/${resourceId}`,
@@ -141,10 +168,24 @@ export class Resources extends APIResource {
   get(
     shareId: string,
     resourceId: string,
-    params: ResourceGetParams,
+    params?: ResourceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceGetResponse>;
+  get(
+    shareId: string,
+    resourceId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceGetResponse>;
+  get(
+    shareId: string,
+    resourceId: string,
+    params: ResourceGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(shareId, resourceId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/shares/${shareId}/resources/${resourceId}`,
@@ -192,7 +233,6 @@ export interface ResourceCreateResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -245,7 +285,6 @@ export interface ResourceUpdateResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -298,7 +337,6 @@ export interface ResourceListResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -351,7 +389,6 @@ export interface ResourceDeleteResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -404,7 +441,6 @@ export interface ResourceGetResponse {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -425,7 +461,7 @@ export interface ResourceCreateParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Resource Metadata.
@@ -447,7 +483,6 @@ export interface ResourceCreateParams {
    */
   resource_type:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -458,7 +493,7 @@ export interface ResourceUpdateParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Resource Metadata.
@@ -470,14 +505,13 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter share resources by resource_type.
    */
   resource_type?:
     | 'custom-ruleset'
-    | 'widget'
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
@@ -493,14 +527,14 @@ export interface ResourceDeleteParams {
   /**
    * Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ResourceGetParams {
   /**
    * Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Resources.ResourceListResponsesV4PagePaginationArray = ResourceListResponsesV4PagePaginationArray;

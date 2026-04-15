@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import { SinglePage } from '../../../../../pagination';
 
@@ -24,10 +25,24 @@ export class Bindings extends APIResource {
   get(
     dispatchNamespace: string,
     scriptName: string,
-    params: BindingGetParams,
+    params?: BindingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BindingGetResponsesSinglePage, BindingGetResponse>;
+  get(
+    dispatchNamespace: string,
+    scriptName: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BindingGetResponsesSinglePage, BindingGetResponse>;
+  get(
+    dispatchNamespace: string,
+    scriptName: string,
+    params: BindingGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<BindingGetResponsesSinglePage, BindingGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(dispatchNamespace, scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/bindings`,
       BindingGetResponsesSinglePage,
@@ -43,6 +58,8 @@ export class BindingGetResponsesSinglePage extends SinglePage<BindingGetResponse
  */
 export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindAI
+  | BindingGetResponse.WorkersBindingKindAISearch
+  | BindingGetResponse.WorkersBindingKindAISearchNamespace
   | BindingGetResponse.WorkersBindingKindAnalyticsEngine
   | BindingGetResponse.WorkersBindingKindAssets
   | BindingGetResponse.WorkersBindingKindBrowser
@@ -55,10 +72,12 @@ export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindImages
   | BindingGetResponse.WorkersBindingKindJson
   | BindingGetResponse.WorkersBindingKindKVNamespace
+  | BindingGetResponse.WorkersBindingKindMedia
   | BindingGetResponse.WorkersBindingKindMTLSCertificate
   | BindingGetResponse.WorkersBindingKindPlainText
   | BindingGetResponse.WorkersBindingKindPipelines
   | BindingGetResponse.WorkersBindingKindQueue
+  | BindingGetResponse.WorkersBindingKindRatelimit
   | BindingGetResponse.WorkersBindingKindR2Bucket
   | BindingGetResponse.WorkersBindingKindSecretText
   | BindingGetResponse.WorkersBindingKindSendEmail
@@ -67,9 +86,12 @@ export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindVectorize
   | BindingGetResponse.WorkersBindingKindVersionMetadata
   | BindingGetResponse.WorkersBindingKindSecretsStoreSecret
+  | BindingGetResponse.WorkersBindingKindFlagship
   | BindingGetResponse.WorkersBindingKindSecretKey
   | BindingGetResponse.WorkersBindingKindWorkflow
-  | BindingGetResponse.WorkersBindingKindWasmModule;
+  | BindingGetResponse.WorkersBindingKindWasmModule
+  | BindingGetResponse.WorkersBindingKindVPCService
+  | BindingGetResponse.WorkersBindingKindVPCNetwork;
 
 export namespace BindingGetResponse {
   export interface WorkersBindingKindAI {
@@ -82,6 +104,50 @@ export namespace BindingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'ai';
+  }
+
+  export interface WorkersBindingKindAISearch {
+    /**
+     * The user-chosen instance name. Must exist at deploy time. The worker can search,
+     * chat, update, and manage items/jobs on this instance.
+     */
+    instance_name: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ai_search';
+
+    /**
+     * The namespace the instance belongs to. Defaults to "default" if omitted.
+     * Customers who don't use namespaces can simply omit this field.
+     */
+    namespace?: string;
+  }
+
+  export interface WorkersBindingKindAISearchNamespace {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The user-chosen namespace name. Must exist before deploy -- Wrangler handles
+     * auto-creation on deploy failure (R2 bucket pattern). The "default" namespace is
+     * auto-created by config-api for new accounts. Grants full access (CRUD + search +
+     * chat) to all instances within the namespace.
+     */
+    namespace: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ai_search_namespace';
   }
 
   export interface WorkersBindingKindAnalyticsEngine {
@@ -129,7 +195,7 @@ export namespace BindingGetResponse {
     /**
      * Identifier of the D1 database to bind to.
      */
-    id: string;
+    database_id: string;
 
     /**
      * A JavaScript variable name for the binding.
@@ -140,6 +206,11 @@ export namespace BindingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'd1';
+
+    /**
+     * @deprecated This property has been renamed to `database_id`.
+     */
+    id?: string;
   }
 
   export interface WorkersBindingKindDataBlob {
@@ -191,7 +262,7 @@ export namespace BindingGetResponse {
        * Pass information from the Dispatch Worker to the Outbound Worker through the
        * parameters.
        */
-      params?: Array<string>;
+      params?: Array<Outbound.Param>;
 
       /**
        * Outbound worker.
@@ -200,10 +271,22 @@ export namespace BindingGetResponse {
     }
 
     export namespace Outbound {
+      export interface Param {
+        /**
+         * Name of the parameter.
+         */
+        name: string;
+      }
+
       /**
        * Outbound worker.
        */
       export interface Worker {
+        /**
+         * Entrypoint to invoke on the outbound worker.
+         */
+        entrypoint?: string;
+
         /**
          * Environment of the outbound worker.
          */
@@ -232,6 +315,11 @@ export namespace BindingGetResponse {
      * The exported class name of the Durable Object.
      */
     class_name?: string;
+
+    /**
+     * The dispatch namespace the Durable Object script belongs to.
+     */
+    dispatch_namespace?: string;
 
     /**
      * The environment of the script_name to bind to.
@@ -309,7 +397,7 @@ export namespace BindingGetResponse {
     /**
      * JSON data to use.
      */
-    json: string;
+    json: unknown;
 
     /**
      * A JavaScript variable name for the binding.
@@ -337,6 +425,18 @@ export namespace BindingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'kv_namespace';
+  }
+
+  export interface WorkersBindingKindMedia {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'media';
   }
 
   export interface WorkersBindingKindMTLSCertificate {
@@ -407,6 +507,45 @@ export namespace BindingGetResponse {
     type: 'queue';
   }
 
+  export interface WorkersBindingKindRatelimit {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the rate limit namespace to bind to.
+     */
+    namespace_id: string;
+
+    /**
+     * The rate limit configuration.
+     */
+    simple: WorkersBindingKindRatelimit.Simple;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'ratelimit';
+  }
+
+  export namespace WorkersBindingKindRatelimit {
+    /**
+     * The rate limit configuration.
+     */
+    export interface Simple {
+      /**
+       * The limit (requests per period).
+       */
+      limit: number;
+
+      /**
+       * The period in seconds.
+       */
+      period: number;
+    }
+  }
+
   export interface WorkersBindingKindR2Bucket {
     /**
      * R2 bucket to bind to.
@@ -428,7 +567,7 @@ export namespace BindingGetResponse {
      * [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions)
      * of the R2 bucket.
      */
-    jurisdiction?: 'eu' | 'fedramp';
+    jurisdiction?: 'eu' | 'fedramp' | 'fedramp-high';
   }
 
   export interface WorkersBindingKindSecretText {
@@ -485,6 +624,11 @@ export namespace BindingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'service';
+
+    /**
+     * Entrypoint to invoke on the target Worker.
+     */
+    entrypoint?: string;
 
     /**
      * Optional environment if the Worker utilizes one.
@@ -559,6 +703,23 @@ export namespace BindingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'secrets_store_secret';
+  }
+
+  export interface WorkersBindingKindFlagship {
+    /**
+     * ID of the Flagship app to bind to for feature flag evaluation.
+     */
+    app_id: string;
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'flagship';
   }
 
   export interface WorkersBindingKindSecretKey {
@@ -639,13 +800,53 @@ export namespace BindingGetResponse {
      */
     type: 'wasm_module';
   }
+
+  export interface WorkersBindingKindVPCService {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Identifier of the VPC service to bind to.
+     */
+    service_id: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_service';
+  }
+
+  export interface WorkersBindingKindVPCNetwork {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'vpc_network';
+
+    /**
+     * Identifier of the network to bind to. Only "cf1:network" is currently supported.
+     * Mutually exclusive with tunnel_id.
+     */
+    network_id?: string;
+
+    /**
+     * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
+     */
+    tunnel_id?: string;
+  }
 }
 
 export interface BindingGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Bindings.BindingGetResponsesSinglePage = BindingGetResponsesSinglePage;

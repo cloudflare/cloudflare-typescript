@@ -22,7 +22,7 @@ export class Previews extends APIResource {
     params: PreviewCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PreviewCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/load_balancers/monitors/${monitorId}/preview`, {
         body,
@@ -45,7 +45,7 @@ export interface PreviewCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This

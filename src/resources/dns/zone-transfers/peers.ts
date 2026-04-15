@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -17,7 +18,7 @@ export class Peers extends APIResource {
    * ```
    */
   create(params: PeerCreateParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/peers`, {
         body,
@@ -41,7 +42,7 @@ export class Peers extends APIResource {
    * ```
    */
   update(peerId: string, params: PeerUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, {
         body,
@@ -63,8 +64,16 @@ export class Peers extends APIResource {
    * }
    * ```
    */
-  list(params: PeerListParams, options?: Core.RequestOptions): Core.PagePromise<PeersSinglePage, Peer> {
-    const { account_id } = params;
+  list(params?: PeerListParams, options?: Core.RequestOptions): Core.PagePromise<PeersSinglePage, Peer>;
+  list(options?: Core.RequestOptions): Core.PagePromise<PeersSinglePage, Peer>;
+  list(
+    params: PeerListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PeersSinglePage, Peer> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/secondary_dns/peers`, PeersSinglePage, options);
   }
 
@@ -81,10 +90,19 @@ export class Peers extends APIResource {
    */
   delete(
     peerId: string,
-    params: PeerDeleteParams,
+    params?: PeerDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PeerDeleteResponse>;
+  delete(peerId: string, options?: Core.RequestOptions): Core.APIPromise<PeerDeleteResponse>;
+  delete(
+    peerId: string,
+    params: PeerDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PeerDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(peerId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/secondary_dns/peers/${peerId}`,
@@ -104,8 +122,17 @@ export class Peers extends APIResource {
    * );
    * ```
    */
-  get(peerId: string, params: PeerGetParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
-    const { account_id } = params;
+  get(peerId: string, params?: PeerGetParams, options?: Core.RequestOptions): Core.APIPromise<Peer>;
+  get(peerId: string, options?: Core.RequestOptions): Core.APIPromise<Peer>;
+  get(
+    peerId: string,
+    params: PeerGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Peer> {
+    if (isRequestOptions(params)) {
+      return this.get(peerId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, options) as Core.APIPromise<{
         result: Peer;
@@ -157,9 +184,9 @@ export interface PeerDeleteResponse {
 
 export interface PeerCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the peer.
@@ -169,9 +196,9 @@ export interface PeerCreateParams {
 
 export interface PeerUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the peer.
@@ -206,15 +233,15 @@ export interface PeerUpdateParams {
 }
 
 export interface PeerListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PeerDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PeerGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Peers.PeersSinglePage = PeersSinglePage;

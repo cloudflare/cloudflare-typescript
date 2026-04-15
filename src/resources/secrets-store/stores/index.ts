@@ -3,7 +3,6 @@
 export {
   SecretCreateResponsesSinglePage,
   SecretListResponsesV4PagePaginationArray,
-  SecretBulkDeleteResponsesSinglePage,
   Secrets,
   type SecretCreateResponse,
   type SecretListResponse,
@@ -21,7 +20,6 @@ export {
   type SecretGetParams,
 } from './secrets';
 export {
-  StoreCreateResponsesSinglePage,
   StoreListResponsesV4PagePaginationArray,
   Stores,
   type StoreCreateResponse,

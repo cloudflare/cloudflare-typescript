@@ -18,6 +18,13 @@ export {
   type InferenceTimeseriesGroupsV2Params,
 } from './inference/index';
 export {
+  MarkdownForAgents,
+  type MarkdownForAgentSummaryResponse,
+  type MarkdownForAgentTimeseriesResponse,
+  type MarkdownForAgentSummaryParams,
+  type MarkdownForAgentTimeseriesParams,
+} from './markdown-for-agents';
+export {
   TimeseriesGroups,
   type TimeseriesGroupSummaryResponse,
   type TimeseriesGroupTimeseriesResponse,
@@ -28,9 +35,4 @@ export {
   type TimeseriesGroupTimeseriesGroupsParams,
   type TimeseriesGroupUserAgentParams,
 } from './timeseries-groups';
-export {
-  ToMarkdownCreateResponsesSinglePage,
-  ToMarkdown,
-  type ToMarkdownCreateResponse,
-  type ToMarkdownCreateParams,
-} from './to-markdown';
+export { ToMarkdown, type ToMarkdownCreateResponse, type ToMarkdownCreateParams } from './to-markdown';

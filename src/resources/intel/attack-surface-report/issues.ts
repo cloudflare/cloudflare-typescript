@@ -1,21 +1,33 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as IssuesAPI from './issues';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
 export class Issues extends APIResource {
   /**
-   * Get Security Center Issues
+   * Lists all Security Center issues for the account, showing active security
+   * problems requiring attention.
    *
    * @deprecated
    */
   list(
-    params: IssueListParams,
+    params?: IssueListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IssueListResponsesV4PagePagination, IssueListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IssueListResponsesV4PagePagination, IssueListResponse>;
+  list(
+    params: IssueListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<IssueListResponsesV4PagePagination, IssueListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/intel/attack-surface-report/issues`,
       IssueListResponsesV4PagePagination,
@@ -24,12 +36,20 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Get Security Center Issue Counts by Class
+   * Retrieves Security Center issue counts aggregated by classification class.
    *
    * @deprecated
    */
-  class(params: IssueClassParams, options?: Core.RequestOptions): Core.APIPromise<IssueClassResponse> {
-    const { account_id, ...query } = params;
+  class(params?: IssueClassParams, options?: Core.RequestOptions): Core.APIPromise<IssueClassResponse>;
+  class(options?: Core.RequestOptions): Core.APIPromise<IssueClassResponse>;
+  class(
+    params: IssueClassParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IssueClassResponse> {
+    if (isRequestOptions(params)) {
+      return this.class({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/attack-surface-report/issues/class`, {
         query,
@@ -39,7 +59,8 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Archive Security Center Insight
+   * Deprecated endpoint for archiving Security Center insights. Use the newer
+   * archive-security-center-insight endpoint instead.
    *
    * @deprecated
    */
@@ -48,7 +69,7 @@ export class Issues extends APIResource {
     params: IssueDismissParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IssueDismissResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.put(`/accounts/${account_id}/intel/attack-surface-report/${issueId}/dismiss`, {
       body,
       ...options,
@@ -56,15 +77,23 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Get Security Center Issue Counts by Severity
+   * Retrieves Security Center issue counts aggregated by severity level.
    *
    * @deprecated
    */
   severity(
-    params: IssueSeverityParams,
+    params?: IssueSeverityParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IssueSeverityResponse>;
+  severity(options?: Core.RequestOptions): Core.APIPromise<IssueSeverityResponse>;
+  severity(
+    params: IssueSeverityParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IssueSeverityResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.severity({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/attack-surface-report/issues/severity`, {
         query,
@@ -74,12 +103,20 @@ export class Issues extends APIResource {
   }
 
   /**
-   * Get Security Center Issue Counts by Type
+   * Retrieves Security Center issue counts aggregated by issue type.
    *
    * @deprecated
    */
-  type(params: IssueTypeParams, options?: Core.RequestOptions): Core.APIPromise<IssueTypeResponse> {
-    const { account_id, ...query } = params;
+  type(params?: IssueTypeParams, options?: Core.RequestOptions): Core.APIPromise<IssueTypeResponse>;
+  type(options?: Core.RequestOptions): Core.APIPromise<IssueTypeResponse>;
+  type(
+    params: IssueTypeParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IssueTypeResponse> {
+    if (isRequestOptions(params)) {
+      return this.type({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/attack-surface-report/issues/type`, {
         query,
@@ -113,19 +150,19 @@ export type SeverityQueryParamParam = 'low' | 'moderate' | 'critical';
 
 export interface IssueListResponse {
   /**
-   * Total number of results
+   * Indicates the total number of results.
    */
   count?: number;
 
   issues?: Array<IssueListResponse.Issue>;
 
   /**
-   * Current page within paginated list of results
+   * Specifies the current page within paginated list of results.
    */
   page?: number;
 
   /**
-   * Number of results per page of results
+   * Sets the number of results per page of results.
    */
   per_page?: number;
 }
@@ -135,6 +172,12 @@ export namespace IssueListResponse {
     id?: string;
 
     dismissed?: boolean;
+
+    /**
+     * Indicates whether the insight has a large payload that requires fetching via the
+     * context endpoint.
+     */
+    has_extended_context?: boolean;
 
     issue_class?: string;
 
@@ -150,15 +193,26 @@ export namespace IssueListResponse {
 
     since?: string;
 
+    /**
+     * The current status of the insight.
+     */
+    status?: 'active' | 'resolved';
+
     subject?: string;
 
     timestamp?: string;
+
+    /**
+     * User-defined classification for the insight. Can be 'false_positive',
+     * 'accept_risk', 'other', or null.
+     */
+    user_classification?: 'false_positive' | 'accept_risk' | 'other' | null;
   }
 
   export namespace Issue {
     export interface Payload {
       /**
-       * Method used to detect insight
+       * Describes the method used to detect insight.
        */
       detection_method?: string;
 
@@ -246,60 +300,60 @@ export interface IssueListParams extends V4PagePaginationParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   dismissed?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_class?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_class~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_type?: Array<IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_type~neq'?: Array<IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   product?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'product~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   severity?: Array<SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'severity~neq'?: Array<SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   subject?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'subject~neq'?: Array<string>;
 }
@@ -308,60 +362,60 @@ export interface IssueClassParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   dismissed?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_class?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_class~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_type?: Array<IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_type~neq'?: Array<IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   product?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'product~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   severity?: Array<SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'severity~neq'?: Array<SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   subject?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'subject~neq'?: Array<string>;
 }
@@ -370,10 +424,10 @@ export interface IssueDismissParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dismiss?: boolean;
 }
@@ -382,60 +436,60 @@ export interface IssueSeverityParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   dismissed?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_class?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_class~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_type?: Array<IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_type~neq'?: Array<IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   product?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'product~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   severity?: Array<SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'severity~neq'?: Array<SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   subject?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'subject~neq'?: Array<string>;
 }
@@ -444,60 +498,60 @@ export interface IssueTypeParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   dismissed?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_class?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_class~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   issue_type?: Array<IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'issue_type~neq'?: Array<IssueTypeParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   product?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'product~neq'?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   severity?: Array<SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   'severity~neq'?: Array<SeverityQueryParamParam>;
 
   /**
-   * Query param:
+   * Query param
    */
   subject?: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   'subject~neq'?: Array<string>;
 }

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { type Response as FetchResponse } from '../../_shims/index';
 
@@ -18,7 +19,7 @@ export class Scans extends APIResource {
    * ```
    */
   create(params: ScanCreateParams, options?: Core.RequestOptions): Core.APIPromise<ScanCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/urlscanner/v2/scan`, { body, ...options });
   }
 
@@ -39,8 +40,16 @@ export class Scans extends APIResource {
    * });
    * ```
    */
-  list(params: ScanListParams, options?: Core.RequestOptions): Core.APIPromise<ScanListResponse> {
-    const { account_id, ...query } = params;
+  list(params?: ScanListParams, options?: Core.RequestOptions): Core.APIPromise<ScanListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<ScanListResponse>;
+  list(
+    params: ScanListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScanListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/search`, { query, ...options });
   }
 
@@ -58,10 +67,18 @@ export class Scans extends APIResource {
    * ```
    */
   bulkCreate(
-    params: ScanBulkCreateParams,
+    params?: ScanBulkCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScanBulkCreateResponse>;
+  bulkCreate(options?: Core.RequestOptions): Core.APIPromise<ScanBulkCreateResponse>;
+  bulkCreate(
+    params?: ScanBulkCreateParams | Core.RequestOptions,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScanBulkCreateResponse> {
-    const { account_id, body } = params ?? {};
+    if (isRequestOptions(params)) {
+      return this.bulkCreate(undefined, params);
+    }
+    const { account_id = this._client.accountId, body } = params ?? {};
     return this._client.post(`/accounts/${account_id}/urlscanner/v2/bulk`, { body: body, ...options });
   }
 
@@ -77,8 +94,17 @@ export class Scans extends APIResource {
    * );
    * ```
    */
-  dom(scanId: string, params: ScanDOMParams, options?: Core.RequestOptions): Core.APIPromise<string> {
-    const { account_id } = params;
+  dom(scanId: string, params?: ScanDOMParams, options?: Core.RequestOptions): Core.APIPromise<string>;
+  dom(scanId: string, options?: Core.RequestOptions): Core.APIPromise<string>;
+  dom(
+    scanId: string,
+    params: ScanDOMParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<string> {
+    if (isRequestOptions(params)) {
+      return this.dom(scanId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/dom/${scanId}`, {
       ...options,
       headers: { Accept: 'text/plain', ...options?.headers },
@@ -98,10 +124,19 @@ export class Scans extends APIResource {
    */
   get(
     scanId: string,
-    params: ScanGetParams,
+    params?: ScanGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScanGetResponse>;
+  get(scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse>;
+  get(
+    scanId: string,
+    params: ScanGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScanGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(scanId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/result/${scanId}`, options);
   }
 
@@ -119,10 +154,19 @@ export class Scans extends APIResource {
    */
   har(
     scanId: string,
-    params: ScanHARParams,
+    params?: ScanHARParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScanHARResponse>;
+  har(scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanHARResponse>;
+  har(
+    scanId: string,
+    params: ScanHARParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScanHARResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.har(scanId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/har/${scanId}`, options);
   }
 
@@ -142,10 +186,19 @@ export class Scans extends APIResource {
    */
   screenshot(
     scanId: string,
-    params: ScanScreenshotParams,
+    params?: ScanScreenshotParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FetchResponse>;
+  screenshot(scanId: string, options?: Core.RequestOptions): Core.APIPromise<FetchResponse>;
+  screenshot(
+    scanId: string,
+    params: ScanScreenshotParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<FetchResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.screenshot(scanId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/screenshots/${scanId}.png`, {
       query,
       ...options,
@@ -707,6 +760,12 @@ export namespace ScanGetResponse {
 
       wappa: Processors.Wappa;
 
+      agentReadiness?: Processors.AgentReadiness;
+
+      phishing_v2?: Processors.PhishingV2;
+
+      robotsTxt?: Processors.RobotsTXT;
+
       urlCategories?: Processors.URLCategories;
     }
 
@@ -837,6 +896,1110 @@ export namespace ScanGetResponse {
             pattern: string;
 
             patternType: string;
+          }
+        }
+      }
+
+      export interface AgentReadiness {
+        checks: AgentReadiness.Checks;
+
+        level: number;
+
+        levelName: string;
+
+        commerceSignals?: Array<string>;
+
+        isCommerce?: boolean;
+
+        nextLevel?: AgentReadiness.NextLevel;
+      }
+
+      export namespace AgentReadiness {
+        export interface Checks {
+          botAccessControl: Checks.BotAccessControl;
+
+          commerce: Checks.Commerce;
+
+          contentAccessibility: Checks.ContentAccessibility;
+
+          discoverability: Checks.Discoverability;
+
+          discovery: Checks.Discovery;
+        }
+
+        export namespace Checks {
+          export interface BotAccessControl {
+            contentSignals: BotAccessControl.ContentSignals;
+
+            robotsTxtAiRules: BotAccessControl.RobotsTXTAIRules;
+
+            webBotAuth: BotAccessControl.WebBotAuth;
+          }
+
+          export namespace BotAccessControl {
+            export interface ContentSignals {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<ContentSignals.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace ContentSignals {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface RobotsTXTAIRules {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<RobotsTXTAIRules.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace RobotsTXTAIRules {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface WebBotAuth {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<WebBotAuth.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace WebBotAuth {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+          }
+
+          export interface Commerce {
+            ap2: Commerce.Ap2;
+
+            ucp: Commerce.Ucp;
+
+            x402: Commerce.X402;
+          }
+
+          export namespace Commerce {
+            export interface Ap2 {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<Ap2.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace Ap2 {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface Ucp {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<Ucp.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace Ucp {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface X402 {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<X402.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace X402 {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+          }
+
+          export interface ContentAccessibility {
+            markdownNegotiation: ContentAccessibility.MarkdownNegotiation;
+          }
+
+          export namespace ContentAccessibility {
+            export interface MarkdownNegotiation {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<MarkdownNegotiation.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace MarkdownNegotiation {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+          }
+
+          export interface Discoverability {
+            linkHeaders: Discoverability.LinkHeaders;
+
+            robotsTxt: Discoverability.RobotsTXT;
+
+            sitemap: Discoverability.Sitemap;
+          }
+
+          export namespace Discoverability {
+            export interface LinkHeaders {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<LinkHeaders.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace LinkHeaders {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface RobotsTXT {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<RobotsTXT.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace RobotsTXT {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface Sitemap {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<Sitemap.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace Sitemap {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+          }
+
+          export interface Discovery {
+            a2aAgentCard: Discovery.A2aAgentCard;
+
+            agentSkills: Discovery.AgentSkills;
+
+            apiCatalog: Discovery.APICatalog;
+
+            mcpServerCard: Discovery.McpServerCard;
+
+            oauthDiscovery: Discovery.OAuthDiscovery;
+
+            oauthProtectedResource: Discovery.OAuthProtectedResource;
+
+            webMcp: Discovery.WebMcp;
+          }
+
+          export namespace Discovery {
+            export interface A2aAgentCard {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<A2aAgentCard.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace A2aAgentCard {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface AgentSkills {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<AgentSkills.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace AgentSkills {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface APICatalog {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<APICatalog.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace APICatalog {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface McpServerCard {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<McpServerCard.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace McpServerCard {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface OAuthDiscovery {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<OAuthDiscovery.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace OAuthDiscovery {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface OAuthProtectedResource {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<OAuthProtectedResource.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace OAuthProtectedResource {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface WebMcp {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<WebMcp.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace WebMcp {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+          }
+        }
+
+        export interface NextLevel {
+          name: string;
+
+          requirements: Array<NextLevel.Requirement>;
+
+          target: number;
+        }
+
+        export namespace NextLevel {
+          export interface Requirement {
+            check: string;
+
+            description: string;
+
+            prompt: string;
+
+            skillUrl: string;
+
+            specUrls: Array<string>;
+          }
+        }
+      }
+
+      export interface PhishingV2 {
+        data: Array<string>;
+      }
+
+      export interface RobotsTXT {
+        data: Array<RobotsTXT.Data>;
+      }
+
+      export namespace RobotsTXT {
+        export interface Data {
+          rules: Data.Rules;
+
+          sitemaps: Array<string>;
+
+          hash?: string;
+        }
+
+        export namespace Data {
+          export interface Rules {
+            '*': Rules._;
+          }
+
+          export namespace Rules {
+            export interface _ {
+              allow: Array<string>;
+
+              disallow: Array<string>;
+
+              contentSignal?: _.ContentSignal;
+
+              crawlDelay?: number;
+            }
+
+            export namespace _ {
+              export interface ContentSignal {
+                'ai-input'?: string;
+
+                'ai-train'?: string;
+
+                search?: string;
+              }
+            }
           }
         }
       }
@@ -1323,12 +2486,17 @@ export interface ScanCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   url: string;
+
+  /**
+   * Body param: Enable agent readiness checks.
+   */
+  agentReadiness?: boolean;
 
   /**
    * Body param: Country to geo egress from
@@ -1531,7 +2699,7 @@ export interface ScanCreateParams {
     | 'ZW';
 
   /**
-   * Body param:
+   * Body param
    */
   customagent?: string;
 
@@ -1541,7 +2709,7 @@ export interface ScanCreateParams {
   customHeaders?: { [key: string]: string };
 
   /**
-   * Body param:
+   * Body param
    */
   referer?: string;
 
@@ -1564,7 +2732,7 @@ export interface ScanListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter scans
@@ -1581,7 +2749,7 @@ export interface ScanBulkCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of urls to scan (up to a 100).
@@ -1592,6 +2760,11 @@ export interface ScanBulkCreateParams {
 export namespace ScanBulkCreateParams {
   export interface Body {
     url: string;
+
+    /**
+     * Enable agent readiness checks.
+     */
+    agentReadiness?: boolean;
 
     customagent?: string;
 
@@ -1622,28 +2795,28 @@ export interface ScanDOMParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ScanGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ScanHARParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ScanScreenshotParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Target device type.

@@ -25,7 +25,7 @@ export class Management extends APIResource {
     params: ManagementCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagementCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/management`, {
         body,
@@ -45,10 +45,10 @@ export interface ManagementCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   resources: Array<'logs'>;
 }

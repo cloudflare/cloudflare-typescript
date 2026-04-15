@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Interconnects extends APIResource {
@@ -22,7 +23,7 @@ export class Interconnects extends APIResource {
     params: InterconnectCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InterconnectCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/cni/interconnects`, { body, ...options });
   }
 
@@ -38,10 +39,18 @@ export class Interconnects extends APIResource {
    * ```
    */
   list(
-    params: InterconnectListParams,
+    params?: InterconnectListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InterconnectListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<InterconnectListResponse>;
+  list(
+    params: InterconnectListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InterconnectListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cni/interconnects`, { query, ...options });
   }
 
@@ -58,10 +67,19 @@ export class Interconnects extends APIResource {
    */
   delete(
     icon: string,
-    params: InterconnectDeleteParams,
+    params?: InterconnectDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void>;
+  delete(icon: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    icon: string,
+    params: InterconnectDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(icon, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/cni/interconnects/${icon}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -82,10 +100,19 @@ export class Interconnects extends APIResource {
    */
   get(
     icon: string,
-    params: InterconnectGetParams,
+    params?: InterconnectGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InterconnectGetResponse>;
+  get(icon: string, options?: Core.RequestOptions): Core.APIPromise<InterconnectGetResponse>;
+  get(
+    icon: string,
+    params: InterconnectGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InterconnectGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(icon, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/cni/interconnects/${icon}`, options);
   }
 
@@ -100,8 +127,17 @@ export class Interconnects extends APIResource {
    * );
    * ```
    */
-  loa(icon: string, params: InterconnectLOAParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { account_id } = params;
+  loa(icon: string, params?: InterconnectLOAParams, options?: Core.RequestOptions): Core.APIPromise<void>;
+  loa(icon: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  loa(
+    icon: string,
+    params: InterconnectLOAParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
+    if (isRequestOptions(params)) {
+      return this.loa(icon, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/cni/interconnects/${icon}/loa`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -122,10 +158,19 @@ export class Interconnects extends APIResource {
    */
   status(
     icon: string,
-    params: InterconnectStatusParams,
+    params?: InterconnectStatusParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InterconnectStatusResponse>;
+  status(icon: string, options?: Core.RequestOptions): Core.APIPromise<InterconnectStatusResponse>;
+  status(
+    icon: string,
+    params: InterconnectStatusParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InterconnectStatusResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.status(icon, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/cni/interconnects/${icon}/status`, options);
   }
 }
@@ -334,25 +379,25 @@ export declare namespace InterconnectCreateParams {
     /**
      * Path param: Customer account tag
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     account: string;
 
     /**
-     * Body param:
+     * Body param
      */
     slot_id: string;
 
     /**
-     * Body param:
+     * Body param
      */
     type: string;
 
     /**
-     * Body param:
+     * Body param
      */
     speed?: string | null;
   }
@@ -361,10 +406,10 @@ export declare namespace InterconnectCreateParams {
     /**
      * Path param: Customer account tag
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     account: string;
 
@@ -391,7 +436,7 @@ export declare namespace InterconnectCreateParams {
     pairing_key: string;
 
     /**
-     * Body param:
+     * Body param
      */
     type: string;
   }
@@ -401,15 +446,15 @@ export interface InterconnectListParams {
   /**
    * Path param: Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   cursor?: number | null;
 
   /**
-   * Query param:
+   * Query param
    */
   limit?: number | null;
 
@@ -428,28 +473,28 @@ export interface InterconnectDeleteParams {
   /**
    * Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface InterconnectGetParams {
   /**
    * Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface InterconnectLOAParams {
   /**
    * Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface InterconnectStatusParams {
   /**
    * Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Interconnects {

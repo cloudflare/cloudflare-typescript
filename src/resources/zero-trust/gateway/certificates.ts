@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -17,10 +18,18 @@ export class Certificates extends APIResource {
    * ```
    */
   create(
-    params: CertificateCreateParams,
+    params?: CertificateCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<CertificateCreateResponse>;
+  create(
+    params: CertificateCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateCreateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway/certificates`, {
         body,
@@ -43,10 +52,20 @@ export class Certificates extends APIResource {
    * ```
    */
   list(
-    params: CertificateListParams,
+    params?: CertificateListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CertificateListResponsesSinglePage, CertificateListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CertificateListResponsesSinglePage, CertificateListResponse>;
+  list(
+    params: CertificateListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CertificateListResponsesSinglePage, CertificateListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/gateway/certificates`,
       CertificateListResponsesSinglePage,
@@ -69,10 +88,19 @@ export class Certificates extends APIResource {
    */
   delete(
     certificateId: string,
-    params: CertificateDeleteParams,
+    params?: CertificateDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateDeleteResponse>;
+  delete(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<CertificateDeleteResponse>;
+  delete(
+    certificateId: string,
+    params: CertificateDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(certificateId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/gateway/certificates/${certificateId}`,
@@ -101,7 +129,7 @@ export class Certificates extends APIResource {
     params: CertificateActivateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateActivateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway/certificates/${certificateId}/activate`, {
         body: body,
@@ -130,7 +158,7 @@ export class Certificates extends APIResource {
     params: CertificateDeactivateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateDeactivateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway/certificates/${certificateId}/deactivate`, {
         body: body,
@@ -153,10 +181,19 @@ export class Certificates extends APIResource {
    */
   get(
     certificateId: string,
-    params: CertificateGetParams,
+    params?: CertificateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateGetResponse>;
+  get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<CertificateGetResponse>;
+  get(
+    certificateId: string,
+    params: CertificateGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(certificateId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/gateway/certificates/${certificateId}`,
@@ -494,9 +531,9 @@ export interface CertificateGetResponse {
 
 export interface CertificateCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Sets the certificate validity period in days (range: 1-10,950 days /
@@ -509,39 +546,39 @@ export interface CertificateCreateParams {
 }
 
 export interface CertificateListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CertificateDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CertificateActivateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
 
 export interface CertificateDeactivateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: unknown;
 }
 
 export interface CertificateGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Certificates.CertificateListResponsesSinglePage = CertificateListResponsesSinglePage;

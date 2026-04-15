@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class AccountSettings extends APIResource {
@@ -16,10 +17,18 @@ export class AccountSettings extends APIResource {
    * ```
    */
   update(
-    params: AccountSettingUpdateParams,
+    params?: AccountSettingUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountSettingUpdateResponse>;
+  update(options?: Core.RequestOptions): Core.APIPromise<AccountSettingUpdateResponse>;
+  update(
+    params: AccountSettingUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountSettingUpdateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.update({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/workers/account-settings`, {
         body,
@@ -40,10 +49,18 @@ export class AccountSettings extends APIResource {
    * ```
    */
   get(
-    params: AccountSettingGetParams,
+    params?: AccountSettingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountSettingGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<AccountSettingGetResponse>;
+  get(
+    params: AccountSettingGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountSettingGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/workers/account-settings`, options) as Core.APIPromise<{
         result: AccountSettingGetResponse;
@@ -68,15 +85,15 @@ export interface AccountSettingUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   default_usage_model?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   green_compute?: boolean;
 }
@@ -85,7 +102,7 @@ export interface AccountSettingGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AccountSettings {

@@ -39,6 +39,7 @@ export class Fields extends APIResource {
       | 'http_requests'
       | 'ipsec_logs'
       | 'magic_ids_detections'
+      | 'mcp_portal_logs'
       | 'nel_reports'
       | 'network_analytics_logs'
       | 'page_shield_events'
@@ -75,6 +76,7 @@ export class Fields extends APIResource {
       | 'http_requests'
       | 'ipsec_logs'
       | 'magic_ids_detections'
+      | 'mcp_portal_logs'
       | 'nel_reports'
       | 'network_analytics_logs'
       | 'page_shield_events'
@@ -110,6 +112,7 @@ export class Fields extends APIResource {
       | 'http_requests'
       | 'ipsec_logs'
       | 'magic_ids_detections'
+      | 'mcp_portal_logs'
       | 'nel_reports'
       | 'network_analytics_logs'
       | 'page_shield_events'
@@ -128,7 +131,8 @@ export class Fields extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(datasetId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

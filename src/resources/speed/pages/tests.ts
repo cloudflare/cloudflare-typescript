@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as SpeedAPI from '../speed';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -17,8 +18,17 @@ export class Tests extends APIResource {
    * );
    * ```
    */
-  create(url: string, params: TestCreateParams, options?: Core.RequestOptions): Core.APIPromise<Test> {
-    const { zone_id, ...body } = params;
+  create(url: string, params?: TestCreateParams, options?: Core.RequestOptions): Core.APIPromise<Test>;
+  create(url: string, options?: Core.RequestOptions): Core.APIPromise<Test>;
+  create(
+    url: string,
+    params: TestCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Test> {
+    if (isRequestOptions(params)) {
+      return this.create(url, {}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/speed_api/pages/${url}/tests`, {
         body,
@@ -43,10 +53,19 @@ export class Tests extends APIResource {
    */
   list(
     url: string,
-    params: TestListParams,
+    params?: TestListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TestsV4PagePaginationArray, Test>;
+  list(url: string, options?: Core.RequestOptions): Core.PagePromise<TestsV4PagePaginationArray, Test>;
+  list(
+    url: string,
+    params: TestListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<TestsV4PagePaginationArray, Test> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(url, {}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/speed_api/pages/${url}/tests`,
       TestsV4PagePaginationArray,
@@ -68,10 +87,19 @@ export class Tests extends APIResource {
    */
   delete(
     url: string,
-    params: TestDeleteParams,
+    params?: TestDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TestDeleteResponse>;
+  delete(url: string, options?: Core.RequestOptions): Core.APIPromise<TestDeleteResponse>;
+  delete(
+    url: string,
+    params: TestDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TestDeleteResponse> {
-    const { zone_id, region } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(url, {}, params);
+    }
+    const { zone_id = this._client.zoneId, region } = params;
     return (
       this._client.delete(`/zones/${zone_id}/speed_api/pages/${url}/tests`, {
         query: { region },
@@ -95,10 +123,20 @@ export class Tests extends APIResource {
   get(
     url: string,
     testId: string,
-    params: TestGetParams,
+    params?: TestGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Test>;
+  get(url: string, testId: string, options?: Core.RequestOptions): Core.APIPromise<Test>;
+  get(
+    url: string,
+    testId: string,
+    params: TestGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Test> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(url, testId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/speed_api/pages/${url}/tests/${testId}`,
@@ -155,7 +193,7 @@ export interface TestCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: A test region.
@@ -188,7 +226,7 @@ export interface TestListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: A test region.
@@ -221,7 +259,7 @@ export interface TestDeleteParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: A test region.
@@ -254,7 +292,7 @@ export interface TestGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Tests.TestsV4PagePaginationArray = TestsV4PagePaginationArray;

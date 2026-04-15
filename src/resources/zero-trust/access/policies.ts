@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ApplicationsAPI from './applications/applications';
 import * as ApplicationsPoliciesAPI from './applications/policies';
@@ -28,7 +29,7 @@ export class Policies extends APIResource {
    * ```
    */
   create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/policies`, { body, ...options }) as Core.APIPromise<{
         result: PolicyCreateResponse;
@@ -64,7 +65,7 @@ export class Policies extends APIResource {
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/access/policies/${policyId}`, {
         body,
@@ -87,10 +88,20 @@ export class Policies extends APIResource {
    * ```
    */
   list(
-    params: PolicyListParams,
+    params?: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse>;
+  list(
+    params: PolicyListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/policies`,
       PolicyListResponsesV4PagePaginationArray,
@@ -112,10 +123,19 @@ export class Policies extends APIResource {
    */
   delete(
     policyId: string,
-    params: PolicyDeleteParams,
+    params?: PolicyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyDeleteResponse>;
+  delete(policyId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyDeleteResponse>;
+  delete(
+    policyId: string,
+    params: PolicyDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(policyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/access/policies/${policyId}`, options) as Core.APIPromise<{
         result: PolicyDeleteResponse;
@@ -136,10 +156,19 @@ export class Policies extends APIResource {
    */
   get(
     policyId: string,
-    params: PolicyGetParams,
+    params?: PolicyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyGetResponse>;
+  get(policyId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyGetResponse>;
+  get(
+    policyId: string,
+    params: PolicyGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(policyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/access/policies/${policyId}`, options) as Core.APIPromise<{
         result: PolicyGetResponse;
@@ -305,6 +334,12 @@ export interface PolicyCreateResponse {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyCreateResponse.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -331,6 +366,11 @@ export interface PolicyCreateResponse {
    * this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyCreateResponse.MfaConfig;
 
   /**
    * The name of the Access policy.
@@ -363,6 +403,58 @@ export interface PolicyCreateResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyCreateResponse {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyUpdateResponse {
@@ -387,6 +479,12 @@ export interface PolicyUpdateResponse {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyUpdateResponse.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -413,6 +511,11 @@ export interface PolicyUpdateResponse {
    * this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyUpdateResponse.MfaConfig;
 
   /**
    * The name of the Access policy.
@@ -447,6 +550,58 @@ export interface PolicyUpdateResponse {
   updated_at?: string;
 }
 
+export namespace PolicyUpdateResponse {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
+}
+
 export interface PolicyListResponse {
   /**
    * The UUID of the policy
@@ -468,6 +623,12 @@ export interface PolicyListResponse {
    * session.
    */
   approval_required?: boolean;
+
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyListResponse.ConnectionRules;
 
   created_at?: string;
 
@@ -495,6 +656,11 @@ export interface PolicyListResponse {
    * this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyListResponse.MfaConfig;
 
   /**
    * The name of the Access policy.
@@ -527,6 +693,58 @@ export interface PolicyListResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyListResponse {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyDeleteResponse {
@@ -558,6 +776,12 @@ export interface PolicyGetResponse {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyGetResponse.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -584,6 +808,11 @@ export interface PolicyGetResponse {
    * this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyGetResponse.MfaConfig;
 
   /**
    * The name of the Access policy.
@@ -618,11 +847,63 @@ export interface PolicyGetResponse {
   updated_at?: string;
 }
 
+export namespace PolicyGetResponse {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
+}
+
 export interface PolicyCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The action Access will take if a user matches this policy.
@@ -653,6 +934,12 @@ export interface PolicyCreateParams {
   approval_required?: boolean;
 
   /**
+   * Body param: The rules that define how users may connect to targets secured by
+   * your application.
+   */
+  connection_rules?: PolicyCreateParams.ConnectionRules;
+
+  /**
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
@@ -664,6 +951,11 @@ export interface PolicyCreateParams {
    * order to use this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Body param: Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyCreateParams.MfaConfig;
 
   /**
    * Body param: A custom message that will appear on the purpose justification
@@ -689,13 +981,65 @@ export interface PolicyCreateParams {
    * (or µs), ms, s, m, h.
    */
   session_duration?: string;
+}
+
+export namespace PolicyCreateParams {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 export interface PolicyUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The action Access will take if a user matches this policy.
@@ -726,6 +1070,12 @@ export interface PolicyUpdateParams {
   approval_required?: boolean;
 
   /**
+   * Body param: The rules that define how users may connect to targets secured by
+   * your application.
+   */
+  connection_rules?: PolicyUpdateParams.ConnectionRules;
+
+  /**
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
@@ -737,6 +1087,11 @@ export interface PolicyUpdateParams {
    * order to use this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Body param: Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyUpdateParams.MfaConfig;
 
   /**
    * Body param: A custom message that will appear on the purpose justification
@@ -764,25 +1119,77 @@ export interface PolicyUpdateParams {
   session_duration?: string;
 }
 
+export namespace PolicyUpdateParams {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
+}
+
 export interface PolicyListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PolicyDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PolicyGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Policies.PolicyListResponsesV4PagePaginationArray = PolicyListResponsesV4PagePaginationArray;

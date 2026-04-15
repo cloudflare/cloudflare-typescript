@@ -1,11 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class AccountMapping extends APIResource {
   /**
-   * Create mapping
+   * Creates a mapping between a Cloudflare account and an email provider for DLP
+   * email scanning integration.
    *
    * @example
    * ```ts
@@ -23,7 +25,7 @@ export class AccountMapping extends APIResource {
     params: AccountMappingCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountMappingCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/email/account_mapping`, {
         body,
@@ -33,7 +35,7 @@ export class AccountMapping extends APIResource {
   }
 
   /**
-   * Get mapping
+   * Retrieves the email provider mapping configuration for DLP email scanning.
    *
    * @example
    * ```ts
@@ -44,10 +46,18 @@ export class AccountMapping extends APIResource {
    * ```
    */
   get(
-    params: AccountMappingGetParams,
+    params?: AccountMappingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountMappingGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<AccountMappingGetResponse>;
+  get(
+    params: AccountMappingGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountMappingGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/email/account_mapping`, options) as Core.APIPromise<{
         result: AccountMappingGetResponse;
@@ -94,12 +104,12 @@ export namespace AccountMappingGetResponse {
 
 export interface AccountMappingCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_requirements: AccountMappingCreateParams.UnionMember0 | AccountMappingCreateParams.Type;
 }
@@ -117,7 +127,7 @@ export namespace AccountMappingCreateParams {
 }
 
 export interface AccountMappingGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AccountMapping {

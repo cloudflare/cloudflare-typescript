@@ -10,9 +10,12 @@ export {
 export { Assets } from './assets/index';
 export { Beta } from './beta/index';
 export {
-  DomainsSinglePage,
+  DomainListResponsesSinglePage,
   Domains,
-  type Domain,
+  type DomainUpdateResponse,
+  type DomainListResponse,
+  type DomainDeleteResponse,
+  type DomainGetResponse,
   type DomainUpdateParams,
   type DomainListParams,
   type DomainDeleteParams,

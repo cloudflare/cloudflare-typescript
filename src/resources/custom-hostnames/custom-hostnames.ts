@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as CustomHostnamesAPI from './custom-hostnames';
 import * as Shared from '../shared';
@@ -46,7 +47,7 @@ export class CustomHostnames extends APIResource {
     params: CustomHostnameCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/custom_hostnames`, { body, ...options }) as Core.APIPromise<{
         result: CustomHostnameCreateResponse;
@@ -68,10 +69,20 @@ export class CustomHostnames extends APIResource {
    * ```
    */
   list(
-    params: CustomHostnameListParams,
+    params?: CustomHostnameListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse>;
+  list(
+    params: CustomHostnameListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/custom_hostnames`,
       CustomHostnameListResponsesV4PagePaginationArray,
@@ -80,7 +91,8 @@ export class CustomHostnames extends APIResource {
   }
 
   /**
-   * Delete Custom Hostname (and any issued SSL certificates)
+   * Permanently deletes a custom hostname and revokes any SSL certificates that were
+   * issued for it. This action cannot be undone.
    *
    * @example
    * ```ts
@@ -92,10 +104,22 @@ export class CustomHostnames extends APIResource {
    */
   delete(
     customHostnameId: string,
-    params: CustomHostnameDeleteParams,
+    params?: CustomHostnameDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomHostnameDeleteResponse>;
+  delete(
+    customHostnameId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomHostnameDeleteResponse>;
+  delete(
+    customHostnameId: string,
+    params: CustomHostnameDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(customHostnameId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, options);
   }
 
@@ -121,7 +145,7 @@ export class CustomHostnames extends APIResource {
     params: CustomHostnameEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, {
         body,
@@ -131,7 +155,8 @@ export class CustomHostnames extends APIResource {
   }
 
   /**
-   * Custom Hostname Details
+   * Retrieves detailed information about a specific custom hostname, including SSL
+   * certificate status, ownership verification, and origin configuration.
    *
    * @example
    * ```ts
@@ -143,10 +168,19 @@ export class CustomHostnames extends APIResource {
    */
   get(
     customHostnameId: string,
-    params: CustomHostnameGetParams,
+    params?: CustomHostnameGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomHostnameGetResponse>;
+  get(customHostnameId: string, options?: Core.RequestOptions): Core.APIPromise<CustomHostnameGetResponse>;
+  get(
+    customHostnameId: string,
+    params: CustomHostnameGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(customHostnameId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, options) as Core.APIPromise<{
         result: CustomHostnameGetResponse;
@@ -183,8 +217,6 @@ export interface CustomHostname {
    * The custom hostname that will point to your hostname via CNAME.
    */
   hostname: string;
-
-  ssl: CustomHostname.SSL;
 
   /**
    * This is the time the hostname was created.
@@ -223,6 +255,8 @@ export interface CustomHostname {
    */
   ownership_verification_http?: CustomHostname.OwnershipVerificationHTTP;
 
+  ssl?: CustomHostname.SSL;
+
   /**
    * Status of the hostname's activation.
    */
@@ -251,6 +285,43 @@ export interface CustomHostname {
 }
 
 export namespace CustomHostname {
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  export interface OwnershipVerification {
+    /**
+     * DNS Name for record.
+     */
+    name?: string;
+
+    /**
+     * DNS Record type.
+     */
+    type?: 'txt';
+
+    /**
+     * Content for the record.
+     */
+    value?: string;
+  }
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  export interface OwnershipVerificationHTTP {
+    /**
+     * Token to be served.
+     */
+    http_body?: string;
+
+    /**
+     * The HTTP URL that will be checked during custom hostname verification and where
+     * the customer should host the token.
+     */
+    http_url?: string;
+  }
+
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -284,6 +355,11 @@ export namespace CustomHostname {
      * The key for a custom uploaded certificate.
      */
     custom_key?: string;
+
+    /**
+     * DCV Delegation records for domain validation.
+     */
+    dcv_delegation_records?: Array<SSL.DCVDelegationRecord>;
 
     /**
      * The time the custom certificate expires on.
@@ -369,6 +445,52 @@ export namespace CustomHostname {
   }
 
   export namespace SSL {
+    export interface DCVDelegationRecord {
+      /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
+       * The set of email addresses that the certificate authority (CA) will use to
+       * complete domain validation.
+       */
+      emails?: Array<string>;
+
+      /**
+       * The content that the certificate authority (CA) will expect to find at the
+       * http_url during the domain validation.
+       */
+      http_body?: string;
+
+      /**
+       * The url that will be checked during domain validation.
+       */
+      http_url?: string;
+
+      /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
+       * The hostname that the certificate authority (CA) will check for a TXT record
+       * during domain validation .
+       */
+      txt_name?: string;
+
+      /**
+       * The TXT record that the certificate authority (CA) will check during domain
+       * validation.
+       */
+      txt_value?: string;
+    }
+
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -406,6 +528,16 @@ export namespace CustomHostname {
 
     export interface ValidationRecord {
       /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
@@ -423,6 +555,11 @@ export namespace CustomHostname {
       http_url?: string;
 
       /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
        * The hostname that the certificate authority (CA) will check for a TXT record
        * during domain validation .
        */
@@ -434,43 +571,6 @@ export namespace CustomHostname {
        */
       txt_value?: string;
     }
-  }
-
-  /**
-   * This is a record which can be placed to activate a hostname.
-   */
-  export interface OwnershipVerification {
-    /**
-     * DNS Name for record.
-     */
-    name?: string;
-
-    /**
-     * DNS Record type.
-     */
-    type?: 'txt';
-
-    /**
-     * Content for the record.
-     */
-    value?: string;
-  }
-
-  /**
-   * This presents the token to be served by the given http url to activate a
-   * hostname.
-   */
-  export interface OwnershipVerificationHTTP {
-    /**
-     * Token to be served.
-     */
-    http_body?: string;
-
-    /**
-     * The HTTP URL that will be checked during custom hostname verification and where
-     * the customer should host the token.
-     */
-    http_url?: string;
   }
 }
 
@@ -506,8 +606,6 @@ export interface CustomHostnameCreateResponse {
    * The custom hostname that will point to your hostname via CNAME.
    */
   hostname: string;
-
-  ssl: CustomHostnameCreateResponse.SSL;
 
   /**
    * This is the time the hostname was created.
@@ -546,6 +644,8 @@ export interface CustomHostnameCreateResponse {
    */
   ownership_verification_http?: CustomHostnameCreateResponse.OwnershipVerificationHTTP;
 
+  ssl?: CustomHostnameCreateResponse.SSL;
+
   /**
    * Status of the hostname's activation.
    */
@@ -574,6 +674,43 @@ export interface CustomHostnameCreateResponse {
 }
 
 export namespace CustomHostnameCreateResponse {
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  export interface OwnershipVerification {
+    /**
+     * DNS Name for record.
+     */
+    name?: string;
+
+    /**
+     * DNS Record type.
+     */
+    type?: 'txt';
+
+    /**
+     * Content for the record.
+     */
+    value?: string;
+  }
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  export interface OwnershipVerificationHTTP {
+    /**
+     * Token to be served.
+     */
+    http_body?: string;
+
+    /**
+     * The HTTP URL that will be checked during custom hostname verification and where
+     * the customer should host the token.
+     */
+    http_url?: string;
+  }
+
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -607,6 +744,11 @@ export namespace CustomHostnameCreateResponse {
      * The key for a custom uploaded certificate.
      */
     custom_key?: string;
+
+    /**
+     * DCV Delegation records for domain validation.
+     */
+    dcv_delegation_records?: Array<SSL.DCVDelegationRecord>;
 
     /**
      * The time the custom certificate expires on.
@@ -692,6 +834,52 @@ export namespace CustomHostnameCreateResponse {
   }
 
   export namespace SSL {
+    export interface DCVDelegationRecord {
+      /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
+       * The set of email addresses that the certificate authority (CA) will use to
+       * complete domain validation.
+       */
+      emails?: Array<string>;
+
+      /**
+       * The content that the certificate authority (CA) will expect to find at the
+       * http_url during the domain validation.
+       */
+      http_body?: string;
+
+      /**
+       * The url that will be checked during domain validation.
+       */
+      http_url?: string;
+
+      /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
+       * The hostname that the certificate authority (CA) will check for a TXT record
+       * during domain validation .
+       */
+      txt_name?: string;
+
+      /**
+       * The TXT record that the certificate authority (CA) will check during domain
+       * validation.
+       */
+      txt_value?: string;
+    }
+
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -729,6 +917,16 @@ export namespace CustomHostnameCreateResponse {
 
     export interface ValidationRecord {
       /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
@@ -746,6 +944,11 @@ export namespace CustomHostnameCreateResponse {
       http_url?: string;
 
       /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
        * The hostname that the certificate authority (CA) will check for a TXT record
        * during domain validation .
        */
@@ -757,43 +960,6 @@ export namespace CustomHostnameCreateResponse {
        */
       txt_value?: string;
     }
-  }
-
-  /**
-   * This is a record which can be placed to activate a hostname.
-   */
-  export interface OwnershipVerification {
-    /**
-     * DNS Name for record.
-     */
-    name?: string;
-
-    /**
-     * DNS Record type.
-     */
-    type?: 'txt';
-
-    /**
-     * Content for the record.
-     */
-    value?: string;
-  }
-
-  /**
-   * This presents the token to be served by the given http url to activate a
-   * hostname.
-   */
-  export interface OwnershipVerificationHTTP {
-    /**
-     * Token to be served.
-     */
-    http_body?: string;
-
-    /**
-     * The HTTP URL that will be checked during custom hostname verification and where
-     * the customer should host the token.
-     */
-    http_url?: string;
   }
 }
 
@@ -807,8 +973,6 @@ export interface CustomHostnameListResponse {
    * The custom hostname that will point to your hostname via CNAME.
    */
   hostname: string;
-
-  ssl: CustomHostnameListResponse.SSL;
 
   /**
    * This is the time the hostname was created.
@@ -847,6 +1011,8 @@ export interface CustomHostnameListResponse {
    */
   ownership_verification_http?: CustomHostnameListResponse.OwnershipVerificationHTTP;
 
+  ssl?: CustomHostnameListResponse.SSL;
+
   /**
    * Status of the hostname's activation.
    */
@@ -875,6 +1041,43 @@ export interface CustomHostnameListResponse {
 }
 
 export namespace CustomHostnameListResponse {
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  export interface OwnershipVerification {
+    /**
+     * DNS Name for record.
+     */
+    name?: string;
+
+    /**
+     * DNS Record type.
+     */
+    type?: 'txt';
+
+    /**
+     * Content for the record.
+     */
+    value?: string;
+  }
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  export interface OwnershipVerificationHTTP {
+    /**
+     * Token to be served.
+     */
+    http_body?: string;
+
+    /**
+     * The HTTP URL that will be checked during custom hostname verification and where
+     * the customer should host the token.
+     */
+    http_url?: string;
+  }
+
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -908,6 +1111,11 @@ export namespace CustomHostnameListResponse {
      * The key for a custom uploaded certificate.
      */
     custom_key?: string;
+
+    /**
+     * DCV Delegation records for domain validation.
+     */
+    dcv_delegation_records?: Array<SSL.DCVDelegationRecord>;
 
     /**
      * The time the custom certificate expires on.
@@ -993,6 +1201,52 @@ export namespace CustomHostnameListResponse {
   }
 
   export namespace SSL {
+    export interface DCVDelegationRecord {
+      /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
+       * The set of email addresses that the certificate authority (CA) will use to
+       * complete domain validation.
+       */
+      emails?: Array<string>;
+
+      /**
+       * The content that the certificate authority (CA) will expect to find at the
+       * http_url during the domain validation.
+       */
+      http_body?: string;
+
+      /**
+       * The url that will be checked during domain validation.
+       */
+      http_url?: string;
+
+      /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
+       * The hostname that the certificate authority (CA) will check for a TXT record
+       * during domain validation .
+       */
+      txt_name?: string;
+
+      /**
+       * The TXT record that the certificate authority (CA) will check during domain
+       * validation.
+       */
+      txt_value?: string;
+    }
+
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -1030,6 +1284,16 @@ export namespace CustomHostnameListResponse {
 
     export interface ValidationRecord {
       /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
@@ -1047,6 +1311,11 @@ export namespace CustomHostnameListResponse {
       http_url?: string;
 
       /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
        * The hostname that the certificate authority (CA) will check for a TXT record
        * during domain validation .
        */
@@ -1058,43 +1327,6 @@ export namespace CustomHostnameListResponse {
        */
       txt_value?: string;
     }
-  }
-
-  /**
-   * This is a record which can be placed to activate a hostname.
-   */
-  export interface OwnershipVerification {
-    /**
-     * DNS Name for record.
-     */
-    name?: string;
-
-    /**
-     * DNS Record type.
-     */
-    type?: 'txt';
-
-    /**
-     * Content for the record.
-     */
-    value?: string;
-  }
-
-  /**
-   * This presents the token to be served by the given http url to activate a
-   * hostname.
-   */
-  export interface OwnershipVerificationHTTP {
-    /**
-     * Token to be served.
-     */
-    http_body?: string;
-
-    /**
-     * The HTTP URL that will be checked during custom hostname verification and where
-     * the customer should host the token.
-     */
-    http_url?: string;
   }
 }
 
@@ -1115,8 +1347,6 @@ export interface CustomHostnameEditResponse {
    * The custom hostname that will point to your hostname via CNAME.
    */
   hostname: string;
-
-  ssl: CustomHostnameEditResponse.SSL;
 
   /**
    * This is the time the hostname was created.
@@ -1155,6 +1385,8 @@ export interface CustomHostnameEditResponse {
    */
   ownership_verification_http?: CustomHostnameEditResponse.OwnershipVerificationHTTP;
 
+  ssl?: CustomHostnameEditResponse.SSL;
+
   /**
    * Status of the hostname's activation.
    */
@@ -1183,6 +1415,43 @@ export interface CustomHostnameEditResponse {
 }
 
 export namespace CustomHostnameEditResponse {
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  export interface OwnershipVerification {
+    /**
+     * DNS Name for record.
+     */
+    name?: string;
+
+    /**
+     * DNS Record type.
+     */
+    type?: 'txt';
+
+    /**
+     * Content for the record.
+     */
+    value?: string;
+  }
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  export interface OwnershipVerificationHTTP {
+    /**
+     * Token to be served.
+     */
+    http_body?: string;
+
+    /**
+     * The HTTP URL that will be checked during custom hostname verification and where
+     * the customer should host the token.
+     */
+    http_url?: string;
+  }
+
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -1216,6 +1485,11 @@ export namespace CustomHostnameEditResponse {
      * The key for a custom uploaded certificate.
      */
     custom_key?: string;
+
+    /**
+     * DCV Delegation records for domain validation.
+     */
+    dcv_delegation_records?: Array<SSL.DCVDelegationRecord>;
 
     /**
      * The time the custom certificate expires on.
@@ -1301,6 +1575,52 @@ export namespace CustomHostnameEditResponse {
   }
 
   export namespace SSL {
+    export interface DCVDelegationRecord {
+      /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
+       * The set of email addresses that the certificate authority (CA) will use to
+       * complete domain validation.
+       */
+      emails?: Array<string>;
+
+      /**
+       * The content that the certificate authority (CA) will expect to find at the
+       * http_url during the domain validation.
+       */
+      http_body?: string;
+
+      /**
+       * The url that will be checked during domain validation.
+       */
+      http_url?: string;
+
+      /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
+       * The hostname that the certificate authority (CA) will check for a TXT record
+       * during domain validation .
+       */
+      txt_name?: string;
+
+      /**
+       * The TXT record that the certificate authority (CA) will check during domain
+       * validation.
+       */
+      txt_value?: string;
+    }
+
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -1338,6 +1658,16 @@ export namespace CustomHostnameEditResponse {
 
     export interface ValidationRecord {
       /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
@@ -1355,6 +1685,11 @@ export namespace CustomHostnameEditResponse {
       http_url?: string;
 
       /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
        * The hostname that the certificate authority (CA) will check for a TXT record
        * during domain validation .
        */
@@ -1366,43 +1701,6 @@ export namespace CustomHostnameEditResponse {
        */
       txt_value?: string;
     }
-  }
-
-  /**
-   * This is a record which can be placed to activate a hostname.
-   */
-  export interface OwnershipVerification {
-    /**
-     * DNS Name for record.
-     */
-    name?: string;
-
-    /**
-     * DNS Record type.
-     */
-    type?: 'txt';
-
-    /**
-     * Content for the record.
-     */
-    value?: string;
-  }
-
-  /**
-   * This presents the token to be served by the given http url to activate a
-   * hostname.
-   */
-  export interface OwnershipVerificationHTTP {
-    /**
-     * Token to be served.
-     */
-    http_body?: string;
-
-    /**
-     * The HTTP URL that will be checked during custom hostname verification and where
-     * the customer should host the token.
-     */
-    http_url?: string;
   }
 }
 
@@ -1416,8 +1714,6 @@ export interface CustomHostnameGetResponse {
    * The custom hostname that will point to your hostname via CNAME.
    */
   hostname: string;
-
-  ssl: CustomHostnameGetResponse.SSL;
 
   /**
    * This is the time the hostname was created.
@@ -1456,6 +1752,8 @@ export interface CustomHostnameGetResponse {
    */
   ownership_verification_http?: CustomHostnameGetResponse.OwnershipVerificationHTTP;
 
+  ssl?: CustomHostnameGetResponse.SSL;
+
   /**
    * Status of the hostname's activation.
    */
@@ -1484,6 +1782,43 @@ export interface CustomHostnameGetResponse {
 }
 
 export namespace CustomHostnameGetResponse {
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  export interface OwnershipVerification {
+    /**
+     * DNS Name for record.
+     */
+    name?: string;
+
+    /**
+     * DNS Record type.
+     */
+    type?: 'txt';
+
+    /**
+     * Content for the record.
+     */
+    value?: string;
+  }
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  export interface OwnershipVerificationHTTP {
+    /**
+     * Token to be served.
+     */
+    http_body?: string;
+
+    /**
+     * The HTTP URL that will be checked during custom hostname verification and where
+     * the customer should host the token.
+     */
+    http_url?: string;
+  }
+
   export interface SSL {
     /**
      * Custom hostname SSL identifier tag.
@@ -1517,6 +1852,11 @@ export namespace CustomHostnameGetResponse {
      * The key for a custom uploaded certificate.
      */
     custom_key?: string;
+
+    /**
+     * DCV Delegation records for domain validation.
+     */
+    dcv_delegation_records?: Array<SSL.DCVDelegationRecord>;
 
     /**
      * The time the custom certificate expires on.
@@ -1602,6 +1942,52 @@ export namespace CustomHostnameGetResponse {
   }
 
   export namespace SSL {
+    export interface DCVDelegationRecord {
+      /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
+       * The set of email addresses that the certificate authority (CA) will use to
+       * complete domain validation.
+       */
+      emails?: Array<string>;
+
+      /**
+       * The content that the certificate authority (CA) will expect to find at the
+       * http_url during the domain validation.
+       */
+      http_body?: string;
+
+      /**
+       * The url that will be checked during domain validation.
+       */
+      http_url?: string;
+
+      /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
+       * The hostname that the certificate authority (CA) will check for a TXT record
+       * during domain validation .
+       */
+      txt_name?: string;
+
+      /**
+       * The TXT record that the certificate authority (CA) will check during domain
+       * validation.
+       */
+      txt_value?: string;
+    }
+
     export interface Settings {
       /**
        * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -1639,6 +2025,16 @@ export namespace CustomHostnameGetResponse {
 
     export interface ValidationRecord {
       /**
+       * The CNAME record hostname for DCV delegation.
+       */
+      cname?: string;
+
+      /**
+       * The CNAME record target value for DCV delegation.
+       */
+      cname_target?: string;
+
+      /**
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
@@ -1656,6 +2052,11 @@ export namespace CustomHostnameGetResponse {
       http_url?: string;
 
       /**
+       * Status of the validation record.
+       */
+      status?: string;
+
+      /**
        * The hostname that the certificate authority (CA) will check for a TXT record
        * during domain validation .
        */
@@ -1668,50 +2069,13 @@ export namespace CustomHostnameGetResponse {
       txt_value?: string;
     }
   }
-
-  /**
-   * This is a record which can be placed to activate a hostname.
-   */
-  export interface OwnershipVerification {
-    /**
-     * DNS Name for record.
-     */
-    name?: string;
-
-    /**
-     * DNS Record type.
-     */
-    type?: 'txt';
-
-    /**
-     * Content for the record.
-     */
-    value?: string;
-  }
-
-  /**
-   * This presents the token to be served by the given http url to activate a
-   * hostname.
-   */
-  export interface OwnershipVerificationHTTP {
-    /**
-     * Token to be served.
-     */
-    http_body?: string;
-
-    /**
-     * The HTTP URL that will be checked during custom hostname verification and where
-     * the customer should host the token.
-     */
-    http_url?: string;
-  }
 }
 
 export interface CustomHostnameCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The custom hostname that will point to your hostname via CNAME.
@@ -1763,6 +2127,11 @@ export namespace CustomHostnameCreateParams {
      * If a custom uploaded certificate is used.
      */
     custom_certificate?: string;
+
+    /**
+     * The identifier for the Custom CSR that was used.
+     */
+    custom_csr_id?: string;
 
     /**
      * The key for a custom uploaded certificate.
@@ -1841,7 +2210,7 @@ export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Hostname ID to match against. This ID was generated and returned
@@ -1851,15 +2220,46 @@ export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
   id?: string;
 
   /**
+   * Query param: Filter by the certificate authority that issued the SSL
+   * certificate.
+   */
+  certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
+
+  /**
+   * Query param: Filter by custom origin server name.
+   */
+  custom_origin_server?: string;
+
+  /**
    * Query param: Direction to order hostnames.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Fully qualified domain name to match against. This parameter cannot
-   * be used with the 'id' parameter.
+   * Query param
    */
-  hostname?: string;
+  hostname?: CustomHostnameListParams.Hostname;
+
+  /**
+   * Query param: Filter by the hostname's activation status.
+   */
+  hostname_status?:
+    | 'active'
+    | 'pending'
+    | 'active_redeploying'
+    | 'moved'
+    | 'pending_deletion'
+    | 'deleted'
+    | 'pending_blocked'
+    | 'pending_migration'
+    | 'pending_provisioned'
+    | 'test_pending'
+    | 'test_active'
+    | 'test_active_apex'
+    | 'test_blocked'
+    | 'test_failed'
+    | 'provisioned'
+    | 'blocked';
 
   /**
    * Query param: Field to order hostnames by.
@@ -1870,20 +2270,61 @@ export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
    * Query param: Whether to filter hostnames based on if they have SSL enabled.
    */
   ssl?: 0 | 1;
+
+  /**
+   * Query param: Filter by SSL certificate status.
+   */
+  ssl_status?:
+    | 'initializing'
+    | 'pending_validation'
+    | 'deleted'
+    | 'pending_issuance'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'pending_expiration'
+    | 'expired'
+    | 'active'
+    | 'initializing_timed_out'
+    | 'validation_timed_out'
+    | 'issuance_timed_out'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out'
+    | 'pending_cleanup'
+    | 'staging_deployment'
+    | 'staging_active'
+    | 'deactivating'
+    | 'inactive'
+    | 'backup_issued'
+    | 'holding_deployment';
+
+  /**
+   * Query param: Filter by whether the custom hostname is a wildcard hostname.
+   */
+  wildcard?: boolean;
+}
+
+export namespace CustomHostnameListParams {
+  export interface Hostname {
+    /**
+     * Filters hostnames by a substring match on the hostname value. This parameter
+     * cannot be used with the 'id' parameter.
+     */
+    contain?: string;
+  }
 }
 
 export interface CustomHostnameDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CustomHostnameEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Unique key/value metadata for this hostname. These are per-hostname
@@ -1945,6 +2386,11 @@ export namespace CustomHostnameEditParams {
      * If a custom uploaded certificate is used.
      */
     custom_certificate?: string;
+
+    /**
+     * The identifier for the Custom CSR that was used.
+     */
+    custom_csr_id?: string;
 
     /**
      * The key for a custom uploaded certificate.
@@ -2023,7 +2469,7 @@ export interface CustomHostnameGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 CustomHostnames.CustomHostnameListResponsesV4PagePaginationArray =

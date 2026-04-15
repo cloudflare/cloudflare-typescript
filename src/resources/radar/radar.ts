@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import * as AgentReadinessAPI from './agent-readiness';
+import {
+  AgentReadiness,
+  AgentReadinessSummaryParams,
+  AgentReadinessSummaryResponse,
+} from './agent-readiness';
 import * as DatasetsAPI from './datasets';
 import {
   DatasetDownloadParams,
@@ -60,15 +66,15 @@ import {
   BotTimeseriesResponse,
   Bots,
 } from './bots/bots';
-import * as CtAPI from './ct/ct';
+import * as CTAPI from './ct/ct';
 import {
-  Ct,
-  CtSummaryParams,
-  CtSummaryResponse,
-  CtTimeseriesGroupsParams,
-  CtTimeseriesGroupsResponse,
-  CtTimeseriesParams,
-  CtTimeseriesResponse,
+  CT,
+  CTSummaryParams,
+  CTSummaryResponse,
+  CTTimeseriesGroupsParams,
+  CTTimeseriesGroupsResponse,
+  CTTimeseriesParams,
+  CTTimeseriesResponse,
 } from './ct/ct';
 import * as DNSAPI from './dns/dns';
 import {
@@ -102,18 +108,20 @@ import {
   LeakedCredentialTimeseriesGroupsV2Response,
   LeakedCredentials,
 } from './leaked-credentials/leaked-credentials';
-import * as NetflowsAPI from './netflows/netflows';
+import * as NetFlowsAPI from './netflows/netflows';
 import {
-  NetflowSummaryParams,
-  NetflowSummaryResponse,
-  NetflowSummaryV2Params,
-  NetflowSummaryV2Response,
-  NetflowTimeseriesGroupsParams,
-  NetflowTimeseriesGroupsResponse,
-  NetflowTimeseriesParams,
-  NetflowTimeseriesResponse,
-  Netflows,
+  NetFlows,
+  NetFlowsSummaryParams,
+  NetFlowsSummaryResponse,
+  NetFlowsSummaryV2Params,
+  NetFlowsSummaryV2Response,
+  NetFlowsTimeseriesGroupsParams,
+  NetFlowsTimeseriesGroupsResponse,
+  NetFlowsTimeseriesParams,
+  NetFlowsTimeseriesResponse,
 } from './netflows/netflows';
+import * as PostQuantumAPI from './post-quantum/post-quantum';
+import { PostQuantum } from './post-quantum/post-quantum';
 import * as QualityAPI from './quality/quality';
 import { Quality } from './quality/quality';
 import * as RankingAPI from './ranking/ranking';
@@ -136,14 +144,16 @@ import * as VerifiedBotsAPI from './verified-bots/verified-bots';
 import { VerifiedBots } from './verified-bots/verified-bots';
 
 export class Radar extends APIResource {
+  agentReadiness: AgentReadinessAPI.AgentReadiness = new AgentReadinessAPI.AgentReadiness(this._client);
   ai: AIAPI.AI = new AIAPI.AI(this._client);
-  ct: CtAPI.Ct = new CtAPI.Ct(this._client);
+  ct: CTAPI.CT = new CTAPI.CT(this._client);
   annotations: AnnotationsAPI.Annotations = new AnnotationsAPI.Annotations(this._client);
   bgp: BGPAPI.BGP = new BGPAPI.BGP(this._client);
   bots: BotsAPI.Bots = new BotsAPI.Bots(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
-  netflows: NetflowsAPI.Netflows = new NetflowsAPI.Netflows(this._client);
+  netFlows: NetFlowsAPI.NetFlows = new NetFlowsAPI.NetFlows(this._client);
+  postQuantum: PostQuantumAPI.PostQuantum = new PostQuantumAPI.PostQuantum(this._client);
   search: SearchAPI.Search = new SearchAPI.Search(this._client);
   verifiedBots: VerifiedBotsAPI.VerifiedBots = new VerifiedBotsAPI.VerifiedBots(this._client);
   as112: AS112API.AS112 = new AS112API.AS112(this._client);
@@ -166,14 +176,16 @@ export class Radar extends APIResource {
   );
 }
 
+Radar.AgentReadiness = AgentReadiness;
 Radar.AI = AI;
-Radar.Ct = Ct;
+Radar.CT = CT;
 Radar.Annotations = Annotations;
 Radar.BGP = BGP;
 Radar.Bots = Bots;
 Radar.Datasets = Datasets;
 Radar.DNS = DNS;
-Radar.Netflows = Netflows;
+Radar.NetFlows = NetFlows;
+Radar.PostQuantum = PostQuantum;
 Radar.Search = Search;
 Radar.VerifiedBots = VerifiedBots;
 Radar.AS112 = AS112;
@@ -190,16 +202,22 @@ Radar.RobotsTXT = RobotsTXT;
 Radar.LeakedCredentials = LeakedCredentials;
 
 export declare namespace Radar {
+  export {
+    AgentReadiness as AgentReadiness,
+    type AgentReadinessSummaryResponse as AgentReadinessSummaryResponse,
+    type AgentReadinessSummaryParams as AgentReadinessSummaryParams,
+  };
+
   export { AI as AI };
 
   export {
-    Ct as Ct,
-    type CtSummaryResponse as CtSummaryResponse,
-    type CtTimeseriesResponse as CtTimeseriesResponse,
-    type CtTimeseriesGroupsResponse as CtTimeseriesGroupsResponse,
-    type CtSummaryParams as CtSummaryParams,
-    type CtTimeseriesParams as CtTimeseriesParams,
-    type CtTimeseriesGroupsParams as CtTimeseriesGroupsParams,
+    CT as CT,
+    type CTSummaryResponse as CTSummaryResponse,
+    type CTTimeseriesResponse as CTTimeseriesResponse,
+    type CTTimeseriesGroupsResponse as CTTimeseriesGroupsResponse,
+    type CTSummaryParams as CTSummaryParams,
+    type CTTimeseriesParams as CTTimeseriesParams,
+    type CTTimeseriesGroupsParams as CTTimeseriesGroupsParams,
   };
 
   export {
@@ -248,16 +266,18 @@ export declare namespace Radar {
   };
 
   export {
-    Netflows as Netflows,
-    type NetflowSummaryResponse as NetflowSummaryResponse,
-    type NetflowSummaryV2Response as NetflowSummaryV2Response,
-    type NetflowTimeseriesResponse as NetflowTimeseriesResponse,
-    type NetflowTimeseriesGroupsResponse as NetflowTimeseriesGroupsResponse,
-    type NetflowSummaryParams as NetflowSummaryParams,
-    type NetflowSummaryV2Params as NetflowSummaryV2Params,
-    type NetflowTimeseriesParams as NetflowTimeseriesParams,
-    type NetflowTimeseriesGroupsParams as NetflowTimeseriesGroupsParams,
+    NetFlows as NetFlows,
+    type NetFlowsSummaryResponse as NetFlowsSummaryResponse,
+    type NetFlowsSummaryV2Response as NetFlowsSummaryV2Response,
+    type NetFlowsTimeseriesResponse as NetFlowsTimeseriesResponse,
+    type NetFlowsTimeseriesGroupsResponse as NetFlowsTimeseriesGroupsResponse,
+    type NetFlowsSummaryParams as NetFlowsSummaryParams,
+    type NetFlowsSummaryV2Params as NetFlowsSummaryV2Params,
+    type NetFlowsTimeseriesParams as NetFlowsTimeseriesParams,
+    type NetFlowsTimeseriesGroupsParams as NetFlowsTimeseriesGroupsParams,
   };
+
+  export { PostQuantum as PostQuantum };
 
   export {
     Search as Search,

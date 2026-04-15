@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Locks extends APIResource {
@@ -20,7 +21,7 @@ export class Locks extends APIResource {
     params: LockUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LockUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id = this._client.accountId, jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/lock`, {
         body,
@@ -48,10 +49,19 @@ export class Locks extends APIResource {
    */
   get(
     bucketName: string,
-    params: LockGetParams,
+    params?: LockGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LockGetResponse>;
+  get(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<LockGetResponse>;
+  get(
+    bucketName: string,
+    params: LockGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LockGetResponse> {
-    const { account_id, jurisdiction } = params;
+    if (isRequestOptions(params)) {
+      return this.get(bucketName, {}, params);
+    }
+    const { account_id = this._client.accountId, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/lock`, {
         ...options,
@@ -131,10 +141,10 @@ export interface LockUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   rules?: Array<LockUpdateParams.Rule>;
 
@@ -204,7 +214,7 @@ export interface LockGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

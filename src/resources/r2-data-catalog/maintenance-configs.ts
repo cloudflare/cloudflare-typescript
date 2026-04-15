@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class MaintenanceConfigs extends APIResource {
@@ -33,7 +34,7 @@ export class MaintenanceConfigs extends APIResource {
     params: MaintenanceConfigUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MaintenanceConfigUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2-catalog/${bucketName}/maintenance-configs`, {
         body,
@@ -57,10 +58,19 @@ export class MaintenanceConfigs extends APIResource {
    */
   get(
     bucketName: string,
-    params: MaintenanceConfigGetParams,
+    params?: MaintenanceConfigGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MaintenanceConfigGetResponse>;
+  get(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<MaintenanceConfigGetResponse>;
+  get(
+    bucketName: string,
+    params: MaintenanceConfigGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MaintenanceConfigGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(bucketName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/r2-catalog/${bucketName}/maintenance-configs`,
@@ -96,7 +106,7 @@ export namespace MaintenanceConfigUpdateResponse {
     state: 'enabled' | 'disabled';
 
     /**
-     * Sets the target file size for compaction in megabytes.
+     * Sets the target file size for compaction in megabytes. Defaults to "128".
      */
     target_size_mb: '64' | '128' | '256' | '512';
   }
@@ -109,12 +119,12 @@ export namespace MaintenanceConfigUpdateResponse {
      * Specifies the maximum age for snapshots. The system deletes snapshots older than
      * this age. Format: <number><unit> where unit is d (days), h (hours), m (minutes),
      * or s (seconds). Examples: "7d" (7 days), "48h" (48 hours), "2880m" (2,880
-     * minutes).
+     * minutes). Defaults to "7d".
      */
     max_snapshot_age: string;
 
     /**
-     * Specifies the minimum number of snapshots to retain.
+     * Specifies the minimum number of snapshots to retain. Defaults to 100.
      */
     min_snapshots_to_keep: number;
 
@@ -167,7 +177,7 @@ export namespace MaintenanceConfigGetResponse {
       state: 'enabled' | 'disabled';
 
       /**
-       * Sets the target file size for compaction in megabytes.
+       * Sets the target file size for compaction in megabytes. Defaults to "128".
        */
       target_size_mb: '64' | '128' | '256' | '512';
     }
@@ -180,12 +190,12 @@ export namespace MaintenanceConfigGetResponse {
        * Specifies the maximum age for snapshots. The system deletes snapshots older than
        * this age. Format: <number><unit> where unit is d (days), h (hours), m (minutes),
        * or s (seconds). Examples: "7d" (7 days), "48h" (48 hours), "2880m" (2,880
-       * minutes).
+       * minutes). Defaults to "7d".
        */
       max_snapshot_age: string;
 
       /**
-       * Specifies the minimum number of snapshots to retain.
+       * Specifies the minimum number of snapshots to retain. Defaults to 100.
        */
       min_snapshots_to_keep: number;
 
@@ -201,7 +211,7 @@ export interface MaintenanceConfigUpdateParams {
   /**
    * Path param: Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Updates compaction configuration (all fields optional).
@@ -255,7 +265,7 @@ export interface MaintenanceConfigGetParams {
   /**
    * Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace MaintenanceConfigs {

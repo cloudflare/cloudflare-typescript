@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -20,7 +21,7 @@ export class Policies extends APIResource {
    * ```
    */
   create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/alerting/v3/policies`, {
         body,
@@ -45,7 +46,7 @@ export class Policies extends APIResource {
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/alerting/v3/policies/${policyId}`, {
         body,
@@ -68,10 +69,18 @@ export class Policies extends APIResource {
    * ```
    */
   list(
-    params: PolicyListParams,
+    params?: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PoliciesSinglePage, Policy>;
+  list(options?: Core.RequestOptions): Core.PagePromise<PoliciesSinglePage, Policy>;
+  list(
+    params: PolicyListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PoliciesSinglePage, Policy> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/alerting/v3/policies`,
       PoliciesSinglePage,
@@ -92,10 +101,19 @@ export class Policies extends APIResource {
    */
   delete(
     policyId: string,
-    params: PolicyDeleteParams,
+    params?: PolicyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyDeleteResponse>;
+  delete(policyId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyDeleteResponse>;
+  delete(
+    policyId: string,
+    params: PolicyDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(policyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/alerting/v3/policies/${policyId}`, options);
   }
 
@@ -110,8 +128,17 @@ export class Policies extends APIResource {
    * );
    * ```
    */
-  get(policyId: string, params: PolicyGetParams, options?: Core.RequestOptions): Core.APIPromise<Policy> {
-    const { account_id } = params;
+  get(policyId: string, params?: PolicyGetParams, options?: Core.RequestOptions): Core.APIPromise<Policy>;
+  get(policyId: string, options?: Core.RequestOptions): Core.APIPromise<Policy>;
+  get(
+    policyId: string,
+    params: PolicyGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Policy> {
+    if (isRequestOptions(params)) {
+      return this.get(policyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/alerting/v3/policies/${policyId}`,
@@ -227,6 +254,7 @@ export interface Policy {
     | 'clickhouse_alert_fw_anomaly'
     | 'clickhouse_alert_fw_ent_anomaly'
     | 'cloudforce_one_request_notification'
+    | 'cni_maintenance_notification'
     | 'custom_analytics'
     | 'custom_bot_detection_alert'
     | 'custom_ssl_certificate_event_type'
@@ -828,7 +856,7 @@ export interface PolicyCreateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Refers to which event will trigger a Notification dispatch. You can
@@ -852,6 +880,7 @@ export interface PolicyCreateParams {
     | 'clickhouse_alert_fw_anomaly'
     | 'clickhouse_alert_fw_ent_anomaly'
     | 'cloudforce_one_request_notification'
+    | 'cni_maintenance_notification'
     | 'custom_analytics'
     | 'custom_bot_detection_alert'
     | 'custom_ssl_certificate_event_type'
@@ -944,7 +973,7 @@ export interface PolicyUpdateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Optional specification of how often to re-alert from the same
@@ -974,6 +1003,7 @@ export interface PolicyUpdateParams {
     | 'clickhouse_alert_fw_anomaly'
     | 'clickhouse_alert_fw_ent_anomaly'
     | 'cloudforce_one_request_notification'
+    | 'cni_maintenance_notification'
     | 'custom_analytics'
     | 'custom_bot_detection_alert'
     | 'custom_ssl_certificate_event_type'
@@ -1060,21 +1090,21 @@ export interface PolicyListParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PolicyDeleteParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PolicyGetParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Policies.PoliciesSinglePage = PoliciesSinglePage;

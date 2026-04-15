@@ -22,7 +22,7 @@ export class Screenshot extends APIResource {
     params: ScreenshotCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScreenshotCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountId, cacheTTL, ...body } = params;
     return this._client.post(`/accounts/${account_id}/browser-rendering/screenshot`, {
       query: { cacheTTL },
       body,
@@ -33,7 +33,7 @@ export class Screenshot extends APIResource {
 
 export interface ScreenshotCreateResponse {
   /**
-   * Response status
+   * Response status.
    */
   success: boolean;
 
@@ -43,12 +43,12 @@ export interface ScreenshotCreateResponse {
 export namespace ScreenshotCreateResponse {
   export interface Error {
     /**
-     * Error code
+     * Error code.
      */
     code: number;
 
     /**
-     * Error Message
+     * Error message.
      */
     message: string;
   }
@@ -61,7 +61,7 @@ export declare namespace ScreenshotCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
@@ -140,7 +140,7 @@ export declare namespace ScreenshotCreateParams {
     cookies?: Array<Variant0.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -186,27 +186,27 @@ export declare namespace ScreenshotCreateParams {
     screenshotOptions?: Variant0.ScreenshotOptions;
 
     /**
-     * Body param:
+     * Body param
      */
     scrollPage?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     selector?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -254,6 +254,9 @@ export declare namespace ScreenshotCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -374,7 +377,7 @@ export declare namespace ScreenshotCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.
@@ -452,7 +455,7 @@ export declare namespace ScreenshotCreateParams {
     cookies?: Array<Variant1.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -498,27 +501,27 @@ export declare namespace ScreenshotCreateParams {
     screenshotOptions?: Variant1.ScreenshotOptions;
 
     /**
-     * Body param:
+     * Body param
      */
     scrollPage?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     selector?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -566,6 +569,9 @@ export declare namespace ScreenshotCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;

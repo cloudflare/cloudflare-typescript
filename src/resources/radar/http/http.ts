@@ -80,6 +80,7 @@ export class HTTP extends APIResource {
   summaryV2(
     dimension:
       | 'ADM1'
+      | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
@@ -87,6 +88,7 @@ export class HTTP extends APIResource {
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
       | 'IP_VERSION'
+      | 'LOCATION'
       | 'OS'
       | 'POST_QUANTUM'
       | 'TLS_VERSION',
@@ -96,6 +98,7 @@ export class HTTP extends APIResource {
   summaryV2(
     dimension:
       | 'ADM1'
+      | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
@@ -103,6 +106,7 @@ export class HTTP extends APIResource {
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
       | 'IP_VERSION'
+      | 'LOCATION'
       | 'OS'
       | 'POST_QUANTUM'
       | 'TLS_VERSION',
@@ -111,6 +115,7 @@ export class HTTP extends APIResource {
   summaryV2(
     dimension:
       | 'ADM1'
+      | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
@@ -118,6 +123,7 @@ export class HTTP extends APIResource {
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
       | 'IP_VERSION'
+      | 'LOCATION'
       | 'OS'
       | 'POST_QUANTUM'
       | 'TLS_VERSION',
@@ -174,6 +180,7 @@ export class HTTP extends APIResource {
   timeseriesGroupsV2(
     dimension:
       | 'ADM1'
+      | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
@@ -181,6 +188,7 @@ export class HTTP extends APIResource {
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
       | 'IP_VERSION'
+      | 'LOCATION'
       | 'OS'
       | 'POST_QUANTUM'
       | 'TLS_VERSION',
@@ -190,6 +198,7 @@ export class HTTP extends APIResource {
   timeseriesGroupsV2(
     dimension:
       | 'ADM1'
+      | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
@@ -197,6 +206,7 @@ export class HTTP extends APIResource {
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
       | 'IP_VERSION'
+      | 'LOCATION'
       | 'OS'
       | 'POST_QUANTUM'
       | 'TLS_VERSION',
@@ -205,6 +215,7 @@ export class HTTP extends APIResource {
   timeseriesGroupsV2(
     dimension:
       | 'ADM1'
+      | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
@@ -212,6 +223,7 @@ export class HTTP extends APIResource {
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
       | 'IP_VERSION'
+      | 'LOCATION'
       | 'OS'
       | 'POST_QUANTUM'
       | 'TLS_VERSION',

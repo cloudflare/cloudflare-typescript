@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as ContentAPI from './content';
 import { Content, ContentGetParams } from './content';
@@ -8,13 +9,10 @@ import * as RulesAPI from './rules';
 import {
   RuleDeleteParams,
   RuleDeleteResponse,
-  RuleDeleteResponsesSinglePage,
   RuleListParams,
   RuleListResponse,
-  RuleListResponsesSinglePage,
   RuleUpdateParams,
   RuleUpdateResponse,
-  RuleUpdateResponsesSinglePage,
   Rules,
 } from './rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -31,7 +29,7 @@ export class Snippets extends APIResource {
     params: SnippetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SnippetUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(
         `/zones/${zone_id}/snippets/${snippetName}`,
@@ -44,10 +42,20 @@ export class Snippets extends APIResource {
    * Fetches all snippets belonging to the zone.
    */
   list(
-    params: SnippetListParams,
+    params?: SnippetListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SnippetListResponsesV4PagePaginationArray, SnippetListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SnippetListResponsesV4PagePaginationArray, SnippetListResponse>;
+  list(
+    params: SnippetListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SnippetListResponsesV4PagePaginationArray, SnippetListResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(`/zones/${zone_id}/snippets`, SnippetListResponsesV4PagePaginationArray, {
       query,
       ...options,
@@ -59,10 +67,19 @@ export class Snippets extends APIResource {
    */
   delete(
     snippetName: string,
-    params: SnippetDeleteParams,
+    params?: SnippetDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SnippetDeleteResponse | null>;
+  delete(snippetName: string, options?: Core.RequestOptions): Core.APIPromise<SnippetDeleteResponse | null>;
+  delete(
+    snippetName: string,
+    params: SnippetDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SnippetDeleteResponse | null> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(snippetName, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}/snippets/${snippetName}`, options) as Core.APIPromise<{
         result: SnippetDeleteResponse | null;
@@ -75,10 +92,19 @@ export class Snippets extends APIResource {
    */
   get(
     snippetName: string,
-    params: SnippetGetParams,
+    params?: SnippetGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SnippetGetResponse>;
+  get(snippetName: string, options?: Core.RequestOptions): Core.APIPromise<SnippetGetResponse>;
+  get(
+    snippetName: string,
+    params: SnippetGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SnippetGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(snippetName, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/snippets/${snippetName}`, options) as Core.APIPromise<{
         result: SnippetGetResponse;
@@ -90,78 +116,78 @@ export class Snippets extends APIResource {
 export class SnippetListResponsesV4PagePaginationArray extends V4PagePaginationArray<SnippetListResponse> {}
 
 /**
- * A result.
+ * Contain the response result.
  */
 export interface SnippetUpdateResponse {
   /**
-   * The timestamp of when the snippet was created.
+   * Indicates when the snippet was created.
    */
   created_on: string;
 
   /**
-   * The identifying name of the snippet.
+   * Identify the snippet.
    */
   snippet_name: string;
 
   /**
-   * The timestamp of when the snippet was last modified.
+   * Indicates when the snippet was last modified.
    */
   modified_on?: string;
 }
 
 /**
- * A snippet object.
+ * Define a snippet.
  */
 export interface SnippetListResponse {
   /**
-   * The timestamp of when the snippet was created.
+   * Indicates when the snippet was created.
    */
   created_on: string;
 
   /**
-   * The identifying name of the snippet.
+   * Identify the snippet.
    */
   snippet_name: string;
 
   /**
-   * The timestamp of when the snippet was last modified.
+   * Indicates when the snippet was last modified.
    */
   modified_on?: string;
 }
 
 /**
- * A result.
+ * Contain the response result.
  */
-export type SnippetDeleteResponse = string | null;
+export type SnippetDeleteResponse = unknown;
 
 /**
- * A result.
+ * Contain the response result.
  */
 export interface SnippetGetResponse {
   /**
-   * The timestamp of when the snippet was created.
+   * Indicates when the snippet was created.
    */
   created_on: string;
 
   /**
-   * The identifying name of the snippet.
+   * Identify the snippet.
    */
   snippet_name: string;
 
   /**
-   * The timestamp of when the snippet was last modified.
+   * Indicates when the snippet was last modified.
    */
   modified_on?: string;
 }
 
 export interface SnippetUpdateParams {
   /**
-   * Path param: The unique ID of the zone.
+   * Path param: Use this field to specify the unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
-   * Body param: Metadata about the snippet.
+   * Body param: Provide metadata about the snippet.
    */
   metadata: SnippetUpdateParams.Metadata;
 
@@ -170,11 +196,11 @@ export interface SnippetUpdateParams {
 
 export namespace SnippetUpdateParams {
   /**
-   * Metadata about the snippet.
+   * Provide metadata about the snippet.
    */
   export interface Metadata {
     /**
-     * Name of the file that contains the main module of the snippet.
+     * Specify the name of the file that contains the main module of the snippet.
      */
     main_module: string;
   }
@@ -182,31 +208,28 @@ export namespace SnippetUpdateParams {
 
 export interface SnippetListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: The unique ID of the zone.
+   * Path param: Use this field to specify the unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SnippetDeleteParams {
   /**
-   * The unique ID of the zone.
+   * Use this field to specify the unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SnippetGetParams {
   /**
-   * The unique ID of the zone.
+   * Use this field to specify the unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Snippets.SnippetListResponsesV4PagePaginationArray = SnippetListResponsesV4PagePaginationArray;
 Snippets.Content = Content;
 Snippets.Rules = Rules;
-Snippets.RuleUpdateResponsesSinglePage = RuleUpdateResponsesSinglePage;
-Snippets.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
-Snippets.RuleDeleteResponsesSinglePage = RuleDeleteResponsesSinglePage;
 
 export declare namespace Snippets {
   export {
@@ -228,9 +251,6 @@ export declare namespace Snippets {
     type RuleUpdateResponse as RuleUpdateResponse,
     type RuleListResponse as RuleListResponse,
     type RuleDeleteResponse as RuleDeleteResponse,
-    RuleUpdateResponsesSinglePage as RuleUpdateResponsesSinglePage,
-    RuleListResponsesSinglePage as RuleListResponsesSinglePage,
-    RuleDeleteResponsesSinglePage as RuleDeleteResponsesSinglePage,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,

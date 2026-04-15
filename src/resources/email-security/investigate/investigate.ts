@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as DetectionsAPI from './detections';
 import { DetectionGetParams, DetectionGetResponse, Detections } from './detections';
@@ -12,7 +13,6 @@ import {
   MoveBulkResponsesSinglePage,
   MoveCreateParams,
   MoveCreateResponse,
-  MoveCreateResponsesSinglePage,
 } from './move';
 import * as PreviewAPI from './preview';
 import {
@@ -57,10 +57,20 @@ export class Investigate extends APIResource {
    * ```
    */
   list(
-    params: InvestigateListParams,
+    params?: InvestigateListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InvestigateListResponsesV4PagePaginationArray, InvestigateListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InvestigateListResponsesV4PagePaginationArray, InvestigateListResponse>;
+  list(
+    params: InvestigateListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<InvestigateListResponsesV4PagePaginationArray, InvestigateListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/investigate`,
       InvestigateListResponsesV4PagePaginationArray,
@@ -69,7 +79,8 @@ export class Investigate extends APIResource {
   }
 
   /**
-   * Get message details
+   * Retrieves detailed information about a specific email message, including
+   * headers, metadata, and security scan results.
    *
    * @example
    * ```ts
@@ -82,15 +93,24 @@ export class Investigate extends APIResource {
    */
   get(
     postfixId: string,
-    params: InvestigateGetParams,
+    params?: InvestigateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InvestigateGetResponse>;
+  get(postfixId: string, options?: Core.RequestOptions): Core.APIPromise<InvestigateGetResponse>;
+  get(
+    postfixId: string,
+    params: InvestigateGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InvestigateGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(postfixId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}`,
-        options,
-      ) as Core.APIPromise<{ result: InvestigateGetResponse }>
+      this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: InvestigateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -100,6 +120,9 @@ export class InvestigateListResponsesV4PagePaginationArray extends V4PagePaginat
 export interface InvestigateListResponse {
   id: string;
 
+  /**
+   * @deprecated Deprecated: use `/investigate/{id}/action_log` instead.
+   */
   action_log: unknown;
 
   client_recipients: Array<string>;
@@ -117,6 +140,9 @@ export interface InvestigateListResponse {
 
   properties: InvestigateListResponse.Properties;
 
+  /**
+   * @deprecated Deprecated, use `scanned_at` instead
+   */
   ts: string;
 
   alert_id?: string | null;
@@ -154,6 +180,9 @@ export interface InvestigateListResponse {
     | 'NONE'
     | null;
 
+  /**
+   * @deprecated Deprecated.
+   */
   findings?: Array<InvestigateListResponse.Finding> | null;
 
   from?: string | null;
@@ -164,10 +193,19 @@ export interface InvestigateListResponse {
 
   message_id?: string | null;
 
+  post_delivery_operations?: Array<'PREVIEW' | 'QUARANTINE_RELEASE' | 'SUBMISSION' | 'MOVE'>;
+
   postfix_id_outbound?: string | null;
 
   replyto?: string | null;
 
+  scanned_at?: string;
+
+  sent_at?: string;
+
+  /**
+   * @deprecated Deprecated, use `sent_at` instead
+   */
   sent_date?: string | null;
 
   subject?: string | null;
@@ -255,6 +293,9 @@ export namespace InvestigateListResponse {
 export interface InvestigateGetResponse {
   id: string;
 
+  /**
+   * @deprecated Deprecated: use `/investigate/{id}/action_log` instead.
+   */
   action_log: unknown;
 
   client_recipients: Array<string>;
@@ -272,6 +313,9 @@ export interface InvestigateGetResponse {
 
   properties: InvestigateGetResponse.Properties;
 
+  /**
+   * @deprecated Deprecated, use `scanned_at` instead
+   */
   ts: string;
 
   alert_id?: string | null;
@@ -309,6 +353,9 @@ export interface InvestigateGetResponse {
     | 'NONE'
     | null;
 
+  /**
+   * @deprecated Deprecated.
+   */
   findings?: Array<InvestigateGetResponse.Finding> | null;
 
   from?: string | null;
@@ -319,10 +366,19 @@ export interface InvestigateGetResponse {
 
   message_id?: string | null;
 
+  post_delivery_operations?: Array<'PREVIEW' | 'QUARANTINE_RELEASE' | 'SUBMISSION' | 'MOVE'>;
+
   postfix_id_outbound?: string | null;
 
   replyto?: string | null;
 
+  scanned_at?: string;
+
+  sent_at?: string;
+
+  /**
+   * @deprecated Deprecated, use `sent_at` instead
+   */
   sent_date?: string | null;
 
   subject?: string | null;
@@ -411,7 +467,7 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Determines if the message action log is included in the response.
@@ -419,12 +475,12 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   action_log?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   alert_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   cursor?: string;
 
@@ -434,14 +490,21 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   detections_only?: boolean;
 
   /**
-   * Query param: The sender domains the search filters by.
+   * Query param: Filter by a domain found in the email: sender domain, recipient
+   * domain, or a domain in a link.
    */
   domain?: string;
 
   /**
-   * Query param: The end of the search date range. Defaults to `now`.
+   * Query param: The end of the search date range. Defaults to `now` if not
+   * provided.
    */
   end?: string;
+
+  /**
+   * Query param: Search for messages with an exact subject match.
+   */
+  exact_subject?: string;
 
   /**
    * Query param: The dispositions the search filters by.
@@ -451,15 +514,15 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: The message actions the search filters by.
    */
-  message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED';
+  message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | 'SUBMITTED';
 
   /**
-   * Query param:
+   * Query param
    */
   message_id?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   metric?: string;
 
@@ -493,32 +556,44 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   query?: string;
 
   /**
-   * Query param:
+   * Query param: Filter by recipient. Matches either an email address or a domain.
    */
   recipient?: string;
 
   /**
-   * Query param:
+   * Query param: Filter by sender. Matches either an email address or a domain.
    */
   sender?: string;
 
   /**
-   * Query param: The beginning of the search date range. Defaults to
-   * `now - 30 days`.
+   * Query param: The beginning of the search date range. Defaults to `now - 30 days`
+   * if not provided.
    */
   start?: string;
 
   /**
-   * Query param:
+   * Query param: Search for messages containing individual keywords in any order
+   * within the subject.
    */
   subject?: string;
+
+  /**
+   * Query param: Search for submissions instead of original messages
+   */
+  submissions?: boolean;
 }
 
 export interface InvestigateGetParams {
   /**
-   * Account Identifier
+   * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
+
+  /**
+   * Query param: When true, search the submissions datastore only. When false or
+   * omitted, search the regular datastore only.
+   */
+  submission?: boolean;
 }
 
 Investigate.InvestigateListResponsesV4PagePaginationArray = InvestigateListResponsesV4PagePaginationArray;
@@ -527,7 +602,6 @@ Investigate.Preview = Preview;
 Investigate.Raw = Raw;
 Investigate.Trace = Trace;
 Investigate.Move = Move;
-Investigate.MoveCreateResponsesSinglePage = MoveCreateResponsesSinglePage;
 Investigate.MoveBulkResponsesSinglePage = MoveBulkResponsesSinglePage;
 Investigate.Reclassify = Reclassify;
 Investigate.Release = Release;
@@ -564,7 +638,6 @@ export declare namespace Investigate {
     Move as Move,
     type MoveCreateResponse as MoveCreateResponse,
     type MoveBulkResponse as MoveBulkResponse,
-    MoveCreateResponsesSinglePage as MoveCreateResponsesSinglePage,
     MoveBulkResponsesSinglePage as MoveBulkResponsesSinglePage,
     type MoveCreateParams as MoveCreateParams,
     type MoveBulkParams as MoveBulkParams,

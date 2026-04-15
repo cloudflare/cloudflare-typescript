@@ -1,11 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
 import * as Core from '../core';
 
 export class SecurityTXT extends APIResource {
   /**
-   * Update security.txt
+   * Updates the security.txt file configuration for a zone, which provides security
+   * researchers with vulnerability reporting information.
    *
    * @example
    * ```ts
@@ -15,15 +17,24 @@ export class SecurityTXT extends APIResource {
    * ```
    */
   update(
-    params: SecurityTXTUpdateParams,
+    params?: SecurityTXTUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecurityTXTUpdateResponse>;
+  update(options?: Core.RequestOptions): Core.APIPromise<SecurityTXTUpdateResponse>;
+  update(
+    params: SecurityTXTUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecurityTXTUpdateResponse> {
-    const { zone_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.update({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return this._client.put(`/zones/${zone_id}/security-center/securitytxt`, { body, ...options });
   }
 
   /**
-   * Delete security.txt
+   * Removes the security.txt file configuration for a zone. The
+   * /.well-known/security.txt endpoint will no longer be served.
    *
    * @example
    * ```ts
@@ -33,15 +44,24 @@ export class SecurityTXT extends APIResource {
    * ```
    */
   delete(
-    params: SecurityTXTDeleteParams,
+    params?: SecurityTXTDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecurityTXTDeleteResponse>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<SecurityTXTDeleteResponse>;
+  delete(
+    params: SecurityTXTDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecurityTXTDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(`/zones/${zone_id}/security-center/securitytxt`, options);
   }
 
   /**
-   * Get security.txt
+   * Retrieves the current security.txt file configuration for a zone, used for
+   * security vulnerability reporting.
    *
    * @example
    * ```ts
@@ -50,8 +70,16 @@ export class SecurityTXT extends APIResource {
    * });
    * ```
    */
-  get(params: SecurityTXTGetParams, options?: Core.RequestOptions): Core.APIPromise<SecurityTXTGetResponse> {
-    const { zone_id } = params;
+  get(params?: SecurityTXTGetParams, options?: Core.RequestOptions): Core.APIPromise<SecurityTXTGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<SecurityTXTGetResponse>;
+  get(
+    params: SecurityTXTGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecurityTXTGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/security-center/securitytxt`, options) as Core.APIPromise<{
         result: SecurityTXTGetResponse;
@@ -167,73 +195,73 @@ export interface SecurityTXTGetResponse {
 
   policy?: Array<string>;
 
-  preferredLanguages?: string;
+  preferred_languages?: string;
 }
 
 export interface SecurityTXTUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   acknowledgments?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   canonical?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   contact?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   encryption?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   expires?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   hiring?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   policy?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
-  preferredLanguages?: string;
+  preferred_languages?: string;
 }
 
 export interface SecurityTXTDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SecurityTXTGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace SecurityTXT {

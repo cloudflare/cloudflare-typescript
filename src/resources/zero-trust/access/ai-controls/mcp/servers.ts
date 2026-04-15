@@ -1,12 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../../pagination';
 
 export class Servers extends APIResource {
   /**
-   * Create a new MCP Server
+   * Creates a new MCP portal for managing AI tool access through Cloudflare Access.
    *
    * @example
    * ```ts
@@ -16,14 +17,14 @@ export class Servers extends APIResource {
    *       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
    *       id: 'my-mcp-server',
    *       auth_type: 'unauthenticated',
-   *       hostname: 'https://exmaple.com/mcp',
+   *       hostname: 'https://example.com/mcp',
    *       name: 'My MCP Server',
    *     },
    *   );
    * ```
    */
   create(params: ServerCreateParams, options?: Core.RequestOptions): Core.APIPromise<ServerCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/ai-controls/mcp/servers`, {
         body,
@@ -33,7 +34,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Update a MCP Server
+   * Updates an MCP portal configuration.
    *
    * @example
    * ```ts
@@ -46,10 +47,19 @@ export class Servers extends APIResource {
    */
   update(
     id: string,
-    params: ServerUpdateParams,
+    params?: ServerUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServerUpdateResponse>;
+  update(id: string, options?: Core.RequestOptions): Core.APIPromise<ServerUpdateResponse>;
+  update(
+    id: string,
+    params: ServerUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServerUpdateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.update(id, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/access/ai-controls/mcp/servers/${id}`, {
         body,
@@ -59,7 +69,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * List MCP Servers
+   * Lists all MCP portals configured for the account.
    *
    * @example
    * ```ts
@@ -72,10 +82,20 @@ export class Servers extends APIResource {
    * ```
    */
   list(
-    params: ServerListParams,
+    params?: ServerListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServerListResponsesV4PagePaginationArray, ServerListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServerListResponsesV4PagePaginationArray, ServerListResponse>;
+  list(
+    params: ServerListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ServerListResponsesV4PagePaginationArray, ServerListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/ai-controls/mcp/servers`,
       ServerListResponsesV4PagePaginationArray,
@@ -84,7 +104,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Delete a MCP Server
+   * Deletes an MCP portal from the account.
    *
    * @example
    * ```ts
@@ -97,10 +117,19 @@ export class Servers extends APIResource {
    */
   delete(
     id: string,
-    params: ServerDeleteParams,
+    params?: ServerDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServerDeleteResponse>;
+  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<ServerDeleteResponse>;
+  delete(
+    id: string,
+    params: ServerDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServerDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/access/ai-controls/mcp/servers/${id}`,
@@ -110,7 +139,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Read the details of a MCP Server
+   * Retrieves gateway configuration for MCP portals.
    *
    * @example
    * ```ts
@@ -123,10 +152,19 @@ export class Servers extends APIResource {
    */
   read(
     id: string,
-    params: ServerReadParams,
+    params?: ServerReadParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServerReadResponse>;
+  read(id: string, options?: Core.RequestOptions): Core.APIPromise<ServerReadResponse>;
+  read(
+    id: string,
+    params: ServerReadParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServerReadResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.read(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/access/ai-controls/mcp/servers/${id}`,
@@ -136,7 +174,7 @@ export class Servers extends APIResource {
   }
 
   /**
-   * Sync MCP Server Capabilities
+   * Syncs an MCP server's tool catalog with the portal.
    *
    * @example
    * ```ts
@@ -149,10 +187,19 @@ export class Servers extends APIResource {
    */
   sync(
     id: string,
-    params: ServerSyncParams,
+    params?: ServerSyncParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServerSyncResponse>;
+  sync(id: string, options?: Core.RequestOptions): Core.APIPromise<ServerSyncResponse>;
+  sync(
+    id: string,
+    params: ServerSyncParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServerSyncResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.sync(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/access/ai-controls/mcp/servers/${id}/sync`,
@@ -188,6 +235,8 @@ export interface ServerCreateResponse {
 
   error?: string;
 
+  last_successful_sync?: string;
+
   last_synced?: string;
 
   modified_at?: string;
@@ -195,6 +244,32 @@ export interface ServerCreateResponse {
   modified_by?: string;
 
   status?: string;
+
+  updated_prompts?: Array<ServerCreateResponse.UpdatedPrompt>;
+
+  updated_tools?: Array<ServerCreateResponse.UpdatedTool>;
+}
+
+export namespace ServerCreateResponse {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerUpdateResponse {
@@ -221,6 +296,8 @@ export interface ServerUpdateResponse {
 
   error?: string;
 
+  last_successful_sync?: string;
+
   last_synced?: string;
 
   modified_at?: string;
@@ -228,6 +305,32 @@ export interface ServerUpdateResponse {
   modified_by?: string;
 
   status?: string;
+
+  updated_prompts?: Array<ServerUpdateResponse.UpdatedPrompt>;
+
+  updated_tools?: Array<ServerUpdateResponse.UpdatedTool>;
+}
+
+export namespace ServerUpdateResponse {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerListResponse {
@@ -254,6 +357,8 @@ export interface ServerListResponse {
 
   error?: string;
 
+  last_successful_sync?: string;
+
   last_synced?: string;
 
   modified_at?: string;
@@ -261,6 +366,32 @@ export interface ServerListResponse {
   modified_by?: string;
 
   status?: string;
+
+  updated_prompts?: Array<ServerListResponse.UpdatedPrompt>;
+
+  updated_tools?: Array<ServerListResponse.UpdatedTool>;
+}
+
+export namespace ServerListResponse {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerDeleteResponse {
@@ -287,6 +418,8 @@ export interface ServerDeleteResponse {
 
   error?: string;
 
+  last_successful_sync?: string;
+
   last_synced?: string;
 
   modified_at?: string;
@@ -294,6 +427,32 @@ export interface ServerDeleteResponse {
   modified_by?: string;
 
   status?: string;
+
+  updated_prompts?: Array<ServerDeleteResponse.UpdatedPrompt>;
+
+  updated_tools?: Array<ServerDeleteResponse.UpdatedTool>;
+}
+
+export namespace ServerDeleteResponse {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerReadResponse {
@@ -320,6 +479,8 @@ export interface ServerReadResponse {
 
   error?: string;
 
+  last_successful_sync?: string;
+
   last_synced?: string;
 
   modified_at?: string;
@@ -327,15 +488,41 @@ export interface ServerReadResponse {
   modified_by?: string;
 
   status?: string;
+
+  updated_prompts?: Array<ServerReadResponse.UpdatedPrompt>;
+
+  updated_tools?: Array<ServerReadResponse.UpdatedTool>;
+}
+
+export namespace ServerReadResponse {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export type ServerSyncResponse = unknown;
 
 export interface ServerCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: server id
@@ -343,58 +530,122 @@ export interface ServerCreateParams {
   id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
   /**
-   * Body param:
+   * Body param
    */
   hostname: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_credentials?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string | null;
+
+  /**
+   * Body param
+   */
+  updated_prompts?: Array<ServerCreateParams.UpdatedPrompt>;
+
+  /**
+   * Body param
+   */
+  updated_tools?: Array<ServerCreateParams.UpdatedTool>;
+}
+
+export namespace ServerCreateParams {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_credentials?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
+
+  /**
+   * Body param
+   */
+  updated_prompts?: Array<ServerUpdateParams.UpdatedPrompt>;
+
+  /**
+   * Body param
+   */
+  updated_tools?: Array<ServerUpdateParams.UpdatedTool>;
+}
+
+export namespace ServerUpdateParams {
+  export interface UpdatedPrompt {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
+
+  export interface UpdatedTool {
+    name: string;
+
+    alias?: string;
+
+    description?: string;
+
+    enabled?: boolean;
+  }
 }
 
 export interface ServerListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Search by id, name
@@ -403,15 +654,15 @@ export interface ServerListParams extends V4PagePaginationArrayParams {
 }
 
 export interface ServerDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServerReadParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServerSyncParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Servers.ServerListResponsesV4PagePaginationArray = ServerListResponsesV4PagePaginationArray;

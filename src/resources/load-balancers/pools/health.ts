@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Health extends APIResource {
@@ -22,7 +23,7 @@ export class Health extends APIResource {
     params: HealthCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/load_balancers/pools/${poolId}/preview`, {
         body,
@@ -44,10 +45,19 @@ export class Health extends APIResource {
    */
   get(
     poolId: string,
-    params: HealthGetParams,
+    params?: HealthGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HealthGetResponse>;
+  get(poolId: string, options?: Core.RequestOptions): Core.APIPromise<HealthGetResponse>;
+  get(
+    poolId: string,
+    params: HealthGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(poolId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/load_balancers/pools/${poolId}/health`,
@@ -130,7 +140,7 @@ export interface HealthCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
@@ -236,7 +246,7 @@ export interface HealthGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Health {

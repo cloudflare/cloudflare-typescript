@@ -33,6 +33,7 @@ describe('resource pools', () => {
         {
           address: '0.0.0.0',
           enabled: true,
+          flatten_cname: true,
           header: { Host: ['example.com'] },
           name: 'app-server-1',
           port: 0,
@@ -85,6 +86,7 @@ describe('resource pools', () => {
         {
           address: '0.0.0.0',
           enabled: true,
+          flatten_cname: true,
           header: { Host: ['example.com'] },
           name: 'app-server-1',
           port: 0,
@@ -217,6 +219,7 @@ describe('resource pools', () => {
         {
           address: '0.0.0.0',
           enabled: true,
+          flatten_cname: true,
           header: { Host: ['example.com'] },
           name: 'app-server-1',
           port: 0,

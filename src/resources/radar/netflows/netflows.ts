@@ -6,7 +6,7 @@ import * as Core from '../../../core';
 import * as TopAPI from './top';
 import { Top, TopAsesParams, TopAsesResponse, TopLocationsParams, TopLocationsResponse } from './top';
 
-export class Netflows extends APIResource {
+export class NetFlows extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
@@ -16,20 +16,20 @@ export class Netflows extends APIResource {
    * @deprecated Use [Get Network Traffic Distribution By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/netflows/methods/summary_v2/) instead.
    */
   summary(
-    query?: NetflowSummaryParams,
+    query?: NetFlowsSummaryParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowSummaryResponse>;
-  summary(options?: Core.RequestOptions): Core.APIPromise<NetflowSummaryResponse>;
+  ): Core.APIPromise<NetFlowsSummaryResponse>;
+  summary(options?: Core.RequestOptions): Core.APIPromise<NetFlowsSummaryResponse>;
   summary(
-    query: NetflowSummaryParams | Core.RequestOptions = {},
+    query: NetFlowsSummaryParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowSummaryResponse> {
+  ): Core.APIPromise<NetFlowsSummaryResponse> {
     if (isRequestOptions(query)) {
       return this.summary({}, query);
     }
     return (
       this._client.get('/radar/netflows/summary', { query, ...options }) as Core.APIPromise<{
-        result: NetflowSummaryResponse;
+        result: NetFlowsSummaryResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,31 +40,31 @@ export class Netflows extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.radar.netflows.summaryV2(
+   * const response = await client.radar.netFlows.summaryV2(
    *   'ADM1',
    * );
    * ```
    */
   summaryV2(
-    dimension: 'ADM1' | 'PRODUCT',
-    query?: NetflowSummaryV2Params,
+    dimension: 'ADM1' | 'AS' | 'LOCATION' | 'PRODUCT',
+    query?: NetFlowsSummaryV2Params,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowSummaryV2Response>;
+  ): Core.APIPromise<NetFlowsSummaryV2Response>;
   summaryV2(
-    dimension: 'ADM1' | 'PRODUCT',
+    dimension: 'ADM1' | 'AS' | 'LOCATION' | 'PRODUCT',
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowSummaryV2Response>;
+  ): Core.APIPromise<NetFlowsSummaryV2Response>;
   summaryV2(
-    dimension: 'ADM1' | 'PRODUCT',
-    query: NetflowSummaryV2Params | Core.RequestOptions = {},
+    dimension: 'ADM1' | 'AS' | 'LOCATION' | 'PRODUCT',
+    query: NetFlowsSummaryV2Params | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowSummaryV2Response> {
+  ): Core.APIPromise<NetFlowsSummaryV2Response> {
     if (isRequestOptions(query)) {
       return this.summaryV2(dimension, {}, query);
     }
     return (
       this._client.get(`/radar/netflows/summary/${dimension}`, { query, ...options }) as Core.APIPromise<{
-        result: NetflowSummaryV2Response;
+        result: NetFlowsSummaryV2Response;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -74,52 +74,52 @@ export class Netflows extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.radar.netflows.timeseries();
+   * const response = await client.radar.netFlows.timeseries();
    * ```
    */
   timeseries(
-    query?: NetflowTimeseriesParams,
+    query?: NetFlowsTimeseriesParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowTimeseriesResponse>;
-  timeseries(options?: Core.RequestOptions): Core.APIPromise<NetflowTimeseriesResponse>;
+  ): Core.APIPromise<NetFlowsTimeseriesResponse>;
+  timeseries(options?: Core.RequestOptions): Core.APIPromise<NetFlowsTimeseriesResponse>;
   timeseries(
-    query: NetflowTimeseriesParams | Core.RequestOptions = {},
+    query: NetFlowsTimeseriesParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowTimeseriesResponse> {
+  ): Core.APIPromise<NetFlowsTimeseriesResponse> {
     if (isRequestOptions(query)) {
       return this.timeseries({}, query);
     }
     return (
       this._client.get('/radar/netflows/timeseries', { query, ...options }) as Core.APIPromise<{
-        result: NetflowTimeseriesResponse;
+        result: NetFlowsTimeseriesResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Retrieves the distribution of NetFlows traffic, grouped by chosen the specified
+   * Retrieves the distribution of NetFlows traffic, grouped by the specified
    * dimension over time.
    *
    * @example
    * ```ts
    * const response =
-   *   await client.radar.netflows.timeseriesGroups('ADM1');
+   *   await client.radar.netFlows.timeseriesGroups('ADM1');
    * ```
    */
   timeseriesGroups(
-    dimension: 'ADM1' | 'PRODUCT',
-    query?: NetflowTimeseriesGroupsParams,
+    dimension: 'ADM1' | 'AS' | 'LOCATION' | 'PRODUCT',
+    query?: NetFlowsTimeseriesGroupsParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowTimeseriesGroupsResponse>;
+  ): Core.APIPromise<NetFlowsTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'ADM1' | 'PRODUCT',
+    dimension: 'ADM1' | 'AS' | 'LOCATION' | 'PRODUCT',
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowTimeseriesGroupsResponse>;
+  ): Core.APIPromise<NetFlowsTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'ADM1' | 'PRODUCT',
-    query: NetflowTimeseriesGroupsParams | Core.RequestOptions = {},
+    dimension: 'ADM1' | 'AS' | 'LOCATION' | 'PRODUCT',
+    query: NetFlowsTimeseriesGroupsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowTimeseriesGroupsResponse> {
+  ): Core.APIPromise<NetFlowsTimeseriesGroupsResponse> {
     if (isRequestOptions(query)) {
       return this.timeseriesGroups(dimension, {}, query);
     }
@@ -127,21 +127,21 @@ export class Netflows extends APIResource {
       this._client.get(`/radar/netflows/timeseries_groups/${dimension}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: NetflowTimeseriesGroupsResponse }>
+      }) as Core.APIPromise<{ result: NetFlowsTimeseriesGroupsResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface NetflowSummaryResponse {
+export interface NetFlowsSummaryResponse {
   /**
    * Metadata for the results.
    */
-  meta: NetflowSummaryResponse.Meta;
+  meta: NetFlowsSummaryResponse.Meta;
 
-  summary_0: NetflowSummaryResponse.Summary0;
+  summary_0: NetFlowsSummaryResponse.Summary0;
 }
 
-export namespace NetflowSummaryResponse {
+export namespace NetFlowsSummaryResponse {
   /**
    * Metadata for the results.
    */
@@ -272,16 +272,16 @@ export namespace NetflowSummaryResponse {
   }
 }
 
-export interface NetflowSummaryV2Response {
+export interface NetFlowsSummaryV2Response {
   /**
    * Metadata for the results.
    */
-  meta: NetflowSummaryV2Response.Meta;
+  meta: NetFlowsSummaryV2Response.Meta;
 
   summary_0: { [key: string]: string };
 }
 
-export namespace NetflowSummaryV2Response {
+export namespace NetFlowsSummaryV2Response {
   /**
    * Metadata for the results.
    */
@@ -400,16 +400,16 @@ export namespace NetflowSummaryV2Response {
   }
 }
 
-export interface NetflowTimeseriesResponse {
+export interface NetFlowsTimeseriesResponse {
   /**
    * Metadata for the results.
    */
-  meta: NetflowTimeseriesResponse.Meta;
+  meta: NetFlowsTimeseriesResponse.Meta;
 
-  serie_0: NetflowTimeseriesResponse.Serie0;
+  serie_0: NetFlowsTimeseriesResponse.Serie0;
 }
 
-export namespace NetflowTimeseriesResponse {
+export namespace NetFlowsTimeseriesResponse {
   /**
    * Metadata for the results.
    */
@@ -541,16 +541,16 @@ export namespace NetflowTimeseriesResponse {
   }
 }
 
-export interface NetflowTimeseriesGroupsResponse {
+export interface NetFlowsTimeseriesGroupsResponse {
   /**
    * Metadata for the results.
    */
-  meta: NetflowTimeseriesGroupsResponse.Meta;
+  meta: NetFlowsTimeseriesGroupsResponse.Meta;
 
-  serie_0: NetflowTimeseriesGroupsResponse.Serie0;
+  serie_0: NetFlowsTimeseriesGroupsResponse.Serie0;
 }
 
-export namespace NetflowTimeseriesGroupsResponse {
+export namespace NetFlowsTimeseriesGroupsResponse {
   /**
    * Metadata for the results.
    */
@@ -682,7 +682,7 @@ export namespace NetflowTimeseriesGroupsResponse {
   }
 }
 
-export interface NetflowSummaryParams {
+export interface NetFlowsSummaryParams {
   /**
    * Filters results by Autonomous System. Specify one or more Autonomous System
    * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
@@ -741,7 +741,7 @@ export interface NetflowSummaryParams {
   name?: Array<string>;
 }
 
-export interface NetflowSummaryV2Params {
+export interface NetFlowsSummaryV2Params {
   /**
    * Filters results by Autonomous System. Specify one or more Autonomous System
    * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
@@ -812,7 +812,7 @@ export interface NetflowSummaryV2Params {
   product?: Array<'HTTP' | 'ALL'>;
 }
 
-export interface NetflowTimeseriesParams {
+export interface NetFlowsTimeseriesParams {
   /**
    * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
    * Refer to
@@ -889,7 +889,7 @@ export interface NetflowTimeseriesParams {
   product?: Array<'HTTP' | 'ALL'>;
 }
 
-export interface NetflowTimeseriesGroupsParams {
+export interface NetFlowsTimeseriesGroupsParams {
   /**
    * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
    * Refer to
@@ -973,18 +973,18 @@ export interface NetflowTimeseriesGroupsParams {
   product?: Array<'HTTP' | 'ALL'>;
 }
 
-Netflows.Top = Top;
+NetFlows.Top = Top;
 
-export declare namespace Netflows {
+export declare namespace NetFlows {
   export {
-    type NetflowSummaryResponse as NetflowSummaryResponse,
-    type NetflowSummaryV2Response as NetflowSummaryV2Response,
-    type NetflowTimeseriesResponse as NetflowTimeseriesResponse,
-    type NetflowTimeseriesGroupsResponse as NetflowTimeseriesGroupsResponse,
-    type NetflowSummaryParams as NetflowSummaryParams,
-    type NetflowSummaryV2Params as NetflowSummaryV2Params,
-    type NetflowTimeseriesParams as NetflowTimeseriesParams,
-    type NetflowTimeseriesGroupsParams as NetflowTimeseriesGroupsParams,
+    type NetFlowsSummaryResponse as NetFlowsSummaryResponse,
+    type NetFlowsSummaryV2Response as NetFlowsSummaryV2Response,
+    type NetFlowsTimeseriesResponse as NetFlowsTimeseriesResponse,
+    type NetFlowsTimeseriesGroupsResponse as NetFlowsTimeseriesGroupsResponse,
+    type NetFlowsSummaryParams as NetFlowsSummaryParams,
+    type NetFlowsSummaryV2Params as NetFlowsSummaryV2Params,
+    type NetFlowsTimeseriesParams as NetFlowsTimeseriesParams,
+    type NetFlowsTimeseriesGroupsParams as NetFlowsTimeseriesGroupsParams,
   };
 
   export {

@@ -37,7 +37,11 @@ describe('resource endpointHealthchecks', () => {
   test('update: only required params', async () => {
     const responsePromise = client.diagnostics.endpointHealthchecks.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', check_type: 'icmp', endpoint: '203.0.113.1' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        check_type: 'icmp',
+        endpoint: '203.0.113.1',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

@@ -1,12 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Recipients extends APIResource {
   /**
-   * Create a new share recipient
+   * Adds a recipient to a resource share, granting them access to the shared
+   * resources.
    *
    * @example
    * ```ts
@@ -22,7 +24,7 @@ export class Recipients extends APIResource {
     params: RecipientCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecipientCreateResponse> {
-    const { path_account_id, ...body } = params;
+    const { path_account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${path_account_id}/shares/${shareId}/recipients`, {
         body,
@@ -47,10 +49,22 @@ export class Recipients extends APIResource {
    */
   list(
     shareId: string,
-    params: RecipientListParams,
+    params?: RecipientListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RecipientListResponsesV4PagePaginationArray, RecipientListResponse>;
+  list(
+    shareId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RecipientListResponsesV4PagePaginationArray, RecipientListResponse>;
+  list(
+    shareId: string,
+    params: RecipientListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<RecipientListResponsesV4PagePaginationArray, RecipientListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(shareId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/shares/${shareId}/recipients`,
       RecipientListResponsesV4PagePaginationArray,
@@ -75,10 +89,24 @@ export class Recipients extends APIResource {
   delete(
     shareId: string,
     recipientId: string,
-    params: RecipientDeleteParams,
+    params?: RecipientDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecipientDeleteResponse>;
+  delete(
+    shareId: string,
+    recipientId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecipientDeleteResponse>;
+  delete(
+    shareId: string,
+    recipientId: string,
+    params: RecipientDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecipientDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(shareId, recipientId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/shares/${shareId}/recipients/${recipientId}`,
@@ -103,10 +131,24 @@ export class Recipients extends APIResource {
   get(
     shareId: string,
     recipientId: string,
-    params: RecipientGetParams,
+    params?: RecipientGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecipientGetResponse>;
+  get(
+    shareId: string,
+    recipientId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecipientGetResponse>;
+  get(
+    shareId: string,
+    recipientId: string,
+    params: RecipientGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecipientGetResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(shareId, recipientId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/shares/${shareId}/recipients/${recipientId}`, {
         query,
@@ -334,7 +376,7 @@ export interface RecipientCreateParams {
   /**
    * Path param: Account identifier.
    */
-  path_account_id: string;
+  path_account_id?: string;
 
   /**
    * Body param: Account identifier.
@@ -351,7 +393,7 @@ export interface RecipientListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Include resources in the response.
@@ -363,14 +405,14 @@ export interface RecipientDeleteParams {
   /**
    * Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RecipientGetParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Include resources in the response.

@@ -1,16 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as AudioTracksAPI from './audio-tracks';
 import {
   Audio,
-  AudioSinglePage,
   AudioTrackCopyParams,
   AudioTrackDeleteParams,
   AudioTrackDeleteResponse,
   AudioTrackEditParams,
   AudioTrackGetParams,
+  AudioTrackGetResponse,
   AudioTracks,
 } from './audio-tracks';
 import * as ClipAPI from './clip';
@@ -106,7 +107,6 @@ export class Stream extends APIResource {
    * ```ts
    * await client.stream.create({
    *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   body: {},
    *   'Tus-Resumable': '1.0.0',
    *   'Upload-Length': 0,
    * });
@@ -114,8 +114,7 @@ export class Stream extends APIResource {
    */
   create(params: StreamCreateParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const {
-      account_id,
-      body,
+      account_id = this._client.accountId,
       'Tus-Resumable': tusResumable,
       'Upload-Length': uploadLength,
       direct_user,
@@ -124,7 +123,6 @@ export class Stream extends APIResource {
     } = params;
     return this._client.post(`/accounts/${account_id}/stream`, {
       query: { direct_user },
-      body: body,
       ...options,
       headers: {
         Accept: '*/*',
@@ -151,8 +149,16 @@ export class Stream extends APIResource {
    * }
    * ```
    */
-  list(params: StreamListParams, options?: Core.RequestOptions): Core.PagePromise<VideosSinglePage, Video> {
-    const { account_id, ...query } = params;
+  list(params?: StreamListParams, options?: Core.RequestOptions): Core.PagePromise<VideosSinglePage, Video>;
+  list(options?: Core.RequestOptions): Core.PagePromise<VideosSinglePage, Video>;
+  list(
+    params: StreamListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VideosSinglePage, Video> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/stream`, VideosSinglePage, { query, ...options });
   }
 
@@ -169,10 +175,19 @@ export class Stream extends APIResource {
    */
   delete(
     identifier: string,
-    params: StreamDeleteParams,
+    params?: StreamDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void>;
+  delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    identifier: string,
+    params: StreamDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(identifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/stream/${identifier}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -191,7 +206,7 @@ export class Stream extends APIResource {
    * ```
    */
   edit(identifier: string, params: StreamEditParams, options?: Core.RequestOptions): Core.APIPromise<Video> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/${identifier}`, {
         body,
@@ -211,8 +226,17 @@ export class Stream extends APIResource {
    * );
    * ```
    */
-  get(identifier: string, params: StreamGetParams, options?: Core.RequestOptions): Core.APIPromise<Video> {
-    const { account_id } = params;
+  get(identifier: string, params?: StreamGetParams, options?: Core.RequestOptions): Core.APIPromise<Video>;
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<Video>;
+  get(
+    identifier: string,
+    params: StreamGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Video> {
+    if (isRequestOptions(params)) {
+      return this.get(identifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/${identifier}`, options) as Core.APIPromise<{
         result: Video;
@@ -234,6 +258,11 @@ export interface Video {
    * viewed on any origin.
    */
   allowedOrigins?: Array<AllowedOrigins>;
+
+  /**
+   * The unique identifier of the source video this video was clipped from.
+   */
+  clippedFrom?: string;
 
   /**
    * The date and time the media item was created.
@@ -268,6 +297,11 @@ export interface Video {
   maxDurationSeconds?: number;
 
   /**
+   * The maximum size in bytes for the video upload.
+   */
+  maxSizeBytes?: number;
+
+  /**
    * A user modifiable key-value store used to reference other systems of record for
    * managing videos.
    */
@@ -284,6 +318,12 @@ export interface Video {
    * The video's preview page URI. This field is omitted until encoding is complete.
    */
   preview?: string;
+
+  /**
+   * Public details for the video including title, share link, channel link, and
+   * logo.
+   */
+  publicDetails?: Video.PublicDetails;
 
   /**
    * Indicates whether the video is playable. The field is empty if the video is not
@@ -385,6 +425,22 @@ export namespace Video {
   }
 
   /**
+   * Public details for the video including title, share link, channel link, and
+   * logo.
+   */
+  export interface PublicDetails {
+    channel_link?: string | null;
+
+    logo?: string | null;
+
+    media_id?: number;
+
+    share_link?: string | null;
+
+    title?: string | null;
+  }
+
+  /**
    * Specifies a detailed status for a video. If the `state` is `inprogress` or
    * `error`, the `step` field returns `encoding` or `manifest`. If the `state` is
    * `inprogress`, `pctComplete` returns a number between 0 and 100 to indicate the
@@ -420,12 +476,7 @@ export interface StreamCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
+  account_id?: string;
 
   /**
    * Header param: Specifies the TUS protocol version. This value must be included in
@@ -464,12 +515,30 @@ export interface StreamListParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
+
+  /**
+   * Query param: Filter by video ID(s). Can be a single ID or a comma-separated list
+   * of IDs.
+   */
+  id?: string;
+
+  /**
+   * Query param: Alias for 'start'. Returns videos created after this date/time (RFC
+   * 3339 format).
+   */
+  after?: string;
 
   /**
    * Query param: Lists videos in ascending order of creation.
    */
   asc?: boolean;
+
+  /**
+   * Query param: Alias for 'end'. Returns videos created before this date/time (RFC
+   * 3339 format).
+   */
+  before?: string;
 
   /**
    * Query param: A user-defined identifier for the media creator.
@@ -486,6 +555,23 @@ export interface StreamListParams {
    * query parameters.
    */
   include_counts?: boolean;
+
+  /**
+   * Query param: Maximum number of videos to return (default 1000, max 1000).
+   */
+  limit?: number;
+
+  /**
+   * Query param: Filter by live input ID to find videos associated with a specific
+   * live stream.
+   */
+  live_input_id?: string;
+
+  /**
+   * Query param: Filter by video name/UID(s). Can be a single name or a
+   * comma-separated list.
+   */
+  name?: string;
 
   /**
    * Query param: Provides a partial word match of the `name` key in the `meta`
@@ -520,14 +606,14 @@ export interface StreamDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface StreamEditParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Lists the origins allowed to display the video. Enter allowed origin
@@ -556,6 +642,12 @@ export interface StreamEditParams {
   meta?: unknown;
 
   /**
+   * Body param: Public details for the video including title, share link, channel
+   * link, and logo.
+   */
+  publicDetails?: StreamEditParams.PublicDetails;
+
+  /**
    * Body param: Indicates whether the video can be a accessed using the UID. When
    * set to `true`, a signed token must be generated with a signing key to view the
    * video.
@@ -580,22 +672,43 @@ export interface StreamEditParams {
   thumbnailTimestampPct?: number;
 
   /**
+   * Body param: The unique identifier for the video. Can be used to verify the video
+   * being updated.
+   */
+  uid?: string;
+
+  /**
    * Body param: The date and time when the video upload URL is no longer valid for
    * direct user uploads.
    */
   uploadExpiry?: string;
 }
 
+export namespace StreamEditParams {
+  /**
+   * Public details for the video including title, share link, channel link, and
+   * logo.
+   */
+  export interface PublicDetails {
+    channel_link?: string | null;
+
+    logo?: string | null;
+
+    share_link?: string | null;
+
+    title?: string | null;
+  }
+}
+
 export interface StreamGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Stream.VideosSinglePage = VideosSinglePage;
 Stream.AudioTracks = AudioTracks;
-Stream.AudioSinglePage = AudioSinglePage;
 Stream.Videos = Videos;
 Stream.ClipResource = ClipResource;
 Stream.Copy = Copy;
@@ -627,7 +740,7 @@ export declare namespace Stream {
     AudioTracks as AudioTracks,
     type Audio as Audio,
     type AudioTrackDeleteResponse as AudioTrackDeleteResponse,
-    AudioSinglePage as AudioSinglePage,
+    type AudioTrackGetResponse as AudioTrackGetResponse,
     type AudioTrackDeleteParams as AudioTrackDeleteParams,
     type AudioTrackCopyParams as AudioTrackCopyParams,
     type AudioTrackEditParams as AudioTrackEditParams,

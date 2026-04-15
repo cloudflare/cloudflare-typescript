@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { SinglePage } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class DEXTests extends APIResource {
   /**
@@ -13,7 +14,10 @@ export class DEXTests extends APIResource {
    * const dexTest =
    *   await client.zeroTrust.devices.dexTests.create({
    *     account_id: '01a7362d577a6c3019a474fd6f485823',
-   *     data: {},
+   *     data: {
+   *       host: 'https://dash.cloudflare.com',
+   *       kind: 'http',
+   *     },
    *     enabled: true,
    *     interval: '30m',
    *     name: 'HTTP dash health check',
@@ -21,7 +25,7 @@ export class DEXTests extends APIResource {
    * ```
    */
   create(params: DEXTestCreateParams, options?: Core.RequestOptions): Core.APIPromise<DEXTestCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dex/devices/dex_tests`, {
         body,
@@ -40,7 +44,10 @@ export class DEXTests extends APIResource {
    *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *     {
    *       account_id: '01a7362d577a6c3019a474fd6f485823',
-   *       data: {},
+   *       data: {
+   *         host: 'https://dash.cloudflare.com',
+   *         kind: 'http',
+   *       },
    *       enabled: true,
    *       interval: '30m',
    *       name: 'HTTP dash health check',
@@ -53,7 +60,7 @@ export class DEXTests extends APIResource {
     params: DEXTestUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dex/devices/dex_tests/${dexTestId}`, {
         body,
@@ -76,14 +83,24 @@ export class DEXTests extends APIResource {
    * ```
    */
   list(
-    params: DEXTestListParams,
+    params?: DEXTestListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DEXTestListResponsesSinglePage, DEXTestListResponse> {
-    const { account_id } = params;
+  ): Core.PagePromise<DEXTestListResponsesV4PagePaginationArray, DEXTestListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DEXTestListResponsesV4PagePaginationArray, DEXTestListResponse>;
+  list(
+    params: DEXTestListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DEXTestListResponsesV4PagePaginationArray, DEXTestListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dex/devices/dex_tests`,
-      DEXTestListResponsesSinglePage,
-      options,
+      DEXTestListResponsesV4PagePaginationArray,
+      { query, ...options },
     );
   }
 
@@ -102,10 +119,19 @@ export class DEXTests extends APIResource {
    */
   delete(
     dexTestId: string,
-    params: DEXTestDeleteParams,
+    params?: DEXTestDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DEXTestDeleteResponse>;
+  delete(dexTestId: string, options?: Core.RequestOptions): Core.APIPromise<DEXTestDeleteResponse>;
+  delete(
+    dexTestId: string,
+    params: DEXTestDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(dexTestId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dex/devices/dex_tests/${dexTestId}`,
@@ -127,10 +153,19 @@ export class DEXTests extends APIResource {
    */
   get(
     dexTestId: string,
-    params: DEXTestGetParams,
+    params?: DEXTestGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DEXTestGetResponse>;
+  get(dexTestId: string, options?: Core.RequestOptions): Core.APIPromise<DEXTestGetResponse>;
+  get(
+    dexTestId: string,
+    params: DEXTestGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(dexTestId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dex/devices/dex_tests/${dexTestId}`,
@@ -140,7 +175,7 @@ export class DEXTests extends APIResource {
   }
 }
 
-export class DEXTestListResponsesSinglePage extends SinglePage<DEXTestListResponse> {}
+export class DEXTestListResponsesV4PagePaginationArray extends V4PagePaginationArray<DEXTestListResponse> {}
 
 /**
  * The configuration object which contains the details for the WARP client to
@@ -271,24 +306,24 @@ export namespace DEXTestCreateResponse {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
@@ -351,24 +386,24 @@ export namespace DEXTestUpdateResponse {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
@@ -431,24 +466,24 @@ export namespace DEXTestListResponse {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
@@ -516,24 +551,24 @@ export namespace DEXTestDeleteResponse {
       /**
        * The desired endpoint to test.
        */
-      host?: string;
+      host: string;
 
       /**
        * The type of test.
        */
-      kind?: string;
+      kind: 'http' | 'traceroute';
 
       /**
        * The HTTP request method type.
        */
-      method?: string;
+      method?: 'GET';
     }
 
     export interface TargetPolicy {
       /**
-       * The id of the DEX rule
+       * API Resource UUID tag.
        */
-      id?: string;
+      id: string;
 
       /**
        * Whether the DEX rule is the account default
@@ -597,24 +632,24 @@ export namespace DEXTestGetResponse {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
@@ -630,9 +665,9 @@ export namespace DEXTestGetResponse {
 
 export interface DEXTestCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The configuration object which contains the details for the WARP
@@ -666,7 +701,7 @@ export interface DEXTestCreateParams {
   target_policies?: Array<DEXTestCreateParams.TargetPolicy>;
 
   /**
-   * Body param:
+   * Body param
    */
   targeted?: boolean;
 }
@@ -680,24 +715,24 @@ export namespace DEXTestCreateParams {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
@@ -713,9 +748,9 @@ export namespace DEXTestCreateParams {
 
 export interface DEXTestUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The configuration object which contains the details for the WARP
@@ -749,7 +784,7 @@ export interface DEXTestUpdateParams {
   target_policies?: Array<DEXTestUpdateParams.TargetPolicy>;
 
   /**
-   * Body param:
+   * Body param
    */
   targeted?: boolean;
 }
@@ -763,24 +798,24 @@ export namespace DEXTestUpdateParams {
     /**
      * The desired endpoint to test.
      */
-    host?: string;
+    host: string;
 
     /**
      * The type of test.
      */
-    kind?: string;
+    kind: 'http' | 'traceroute';
 
     /**
      * The HTTP request method type.
      */
-    method?: string;
+    method?: 'GET';
   }
 
   export interface TargetPolicy {
     /**
-     * The id of the DEX rule
+     * API Resource UUID tag.
      */
-    id?: string;
+    id: string;
 
     /**
      * Whether the DEX rule is the account default
@@ -794,19 +829,32 @@ export namespace DEXTestUpdateParams {
   }
 }
 
-export interface DEXTestListParams {
-  account_id: string;
+export interface DEXTestListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param
+   */
+  account_id?: string;
+
+  /**
+   * Query param: Filter by test type
+   */
+  kind?: 'http' | 'traceroute';
+
+  /**
+   * Query param: Filter by test name
+   */
+  testName?: string;
 }
 
 export interface DEXTestDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DEXTestGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
-DEXTests.DEXTestListResponsesSinglePage = DEXTestListResponsesSinglePage;
+DEXTests.DEXTestListResponsesV4PagePaginationArray = DEXTestListResponsesV4PagePaginationArray;
 
 export declare namespace DEXTests {
   export {
@@ -817,7 +865,7 @@ export declare namespace DEXTests {
     type DEXTestListResponse as DEXTestListResponse,
     type DEXTestDeleteResponse as DEXTestDeleteResponse,
     type DEXTestGetResponse as DEXTestGetResponse,
-    DEXTestListResponsesSinglePage as DEXTestListResponsesSinglePage,
+    DEXTestListResponsesV4PagePaginationArray as DEXTestListResponsesV4PagePaginationArray,
     type DEXTestCreateParams as DEXTestCreateParams,
     type DEXTestUpdateParams as DEXTestUpdateParams,
     type DEXTestListParams as DEXTestListParams,

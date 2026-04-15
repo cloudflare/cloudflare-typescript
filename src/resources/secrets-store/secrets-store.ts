@@ -7,7 +7,6 @@ import * as StoresAPI from './stores/stores';
 import {
   StoreCreateParams,
   StoreCreateResponse,
-  StoreCreateResponsesSinglePage,
   StoreDeleteParams,
   StoreDeleteResponse,
   StoreListParams,
@@ -22,7 +21,6 @@ export class SecretsStore extends APIResource {
 }
 
 SecretsStore.Stores = Stores;
-SecretsStore.StoreCreateResponsesSinglePage = StoreCreateResponsesSinglePage;
 SecretsStore.StoreListResponsesV4PagePaginationArray = StoreListResponsesV4PagePaginationArray;
 SecretsStore.Quota = Quota;
 
@@ -32,7 +30,6 @@ export declare namespace SecretsStore {
     type StoreCreateResponse as StoreCreateResponse,
     type StoreListResponse as StoreListResponse,
     type StoreDeleteResponse as StoreDeleteResponse,
-    StoreCreateResponsesSinglePage as StoreCreateResponsesSinglePage,
     StoreListResponsesV4PagePaginationArray as StoreListResponsesV4PagePaginationArray,
     type StoreCreateParams as StoreCreateParams,
     type StoreListParams as StoreListParams,

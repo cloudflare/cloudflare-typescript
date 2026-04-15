@@ -27,7 +27,7 @@ export class Devices extends APIResource {
     params: DeviceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DeviceListResponsesV4PagePagination, DeviceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dex/commands/devices`,
       DeviceListResponsesV4PagePagination,
@@ -78,6 +78,12 @@ export namespace DeviceListResponse {
     platform?: string;
 
     /**
+     * Device registration identifier (UUID v4). On multi-user devices, this uniquely
+     * identifies a user's registration on the device.
+     */
+    registrationId?: string;
+
+    /**
      * Network status
      */
     status?: string;
@@ -98,7 +104,7 @@ export interface DeviceListParams extends V4PagePaginationParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter devices by name or email

@@ -1,11 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class References extends APIResource {
   /**
-   * Get risk score integration by reference id.
+   * Retrieves a Zero Trust risk score integration using its external reference ID.
    *
    * @example
    * ```ts
@@ -18,10 +19,19 @@ export class References extends APIResource {
    */
   get(
     referenceId: string,
-    params: ReferenceGetParams,
+    params?: ReferenceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ReferenceGetResponse>;
+  get(referenceId: string, options?: Core.RequestOptions): Core.APIPromise<ReferenceGetResponse>;
+  get(
+    referenceId: string,
+    params: ReferenceGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ReferenceGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(referenceId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/zt_risk_scoring/integrations/reference_id/${referenceId}`,
@@ -75,7 +85,7 @@ export interface ReferenceGetResponse {
 }
 
 export interface ReferenceGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace References {

@@ -25,7 +25,11 @@ export class ServiceTokens extends APIResource {
     params: ServiceTokenCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceTokenCreateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -67,7 +71,11 @@ export class ServiceTokens extends APIResource {
     params: ServiceTokenUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceToken> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -117,7 +125,11 @@ export class ServiceTokens extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id, zone_id, ...query } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...query
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -167,7 +179,8 @@ export class ServiceTokens extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(serviceTokenId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -218,7 +231,8 @@ export class ServiceTokens extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(serviceTokenId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -257,10 +271,19 @@ export class ServiceTokens extends APIResource {
    */
   refresh(
     serviceTokenId: string,
-    params: ServiceTokenRefreshParams,
+    params?: ServiceTokenRefreshParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken>;
+  refresh(serviceTokenId: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>;
+  refresh(
+    serviceTokenId: string,
+    params: ServiceTokenRefreshParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceToken> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.refresh(serviceTokenId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/access/service_tokens/${serviceTokenId}/refresh`,
@@ -283,10 +306,19 @@ export class ServiceTokens extends APIResource {
    */
   rotate(
     serviceTokenId: string,
-    params: ServiceTokenRotateParams,
+    params?: ServiceTokenRotateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceTokenRotateResponse>;
+  rotate(serviceTokenId: string, options?: Core.RequestOptions): Core.APIPromise<ServiceTokenRotateResponse>;
+  rotate(
+    serviceTokenId: string,
+    params: ServiceTokenRotateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceTokenRotateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.rotate(serviceTokenId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/service_tokens/${serviceTokenId}/rotate`, {
         body,
@@ -525,14 +557,14 @@ export interface ServiceTokenRefreshParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServiceTokenRotateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The expiration of the previous `client_secret`. If not provided, it

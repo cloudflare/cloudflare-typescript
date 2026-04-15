@@ -1,11 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Permissions extends APIResource {
   /**
-   * Grant permission to indicator feed
+   * Grants access permissions for a custom threat indicator feed to other accounts.
    *
    * @example
    * ```ts
@@ -16,10 +17,18 @@ export class Permissions extends APIResource {
    * ```
    */
   create(
-    params: PermissionCreateParams,
+    params?: PermissionCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PermissionCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<PermissionCreateResponse>;
+  create(
+    params: PermissionCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PermissionCreateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/intel/indicator-feeds/permissions/add`, {
         body,
@@ -29,7 +38,7 @@ export class Permissions extends APIResource {
   }
 
   /**
-   * List indicator feed permissions
+   * Lists current access permissions for custom threat indicator feeds.
    *
    * @example
    * ```ts
@@ -39,8 +48,16 @@ export class Permissions extends APIResource {
    *   });
    * ```
    */
-  list(params: PermissionListParams, options?: Core.RequestOptions): Core.APIPromise<PermissionListResponse> {
-    const { account_id } = params;
+  list(params?: PermissionListParams, options?: Core.RequestOptions): Core.APIPromise<PermissionListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<PermissionListResponse>;
+  list(
+    params: PermissionListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PermissionListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/intel/indicator-feeds/permissions/view`,
@@ -50,7 +67,7 @@ export class Permissions extends APIResource {
   }
 
   /**
-   * Revoke permission to indicator feed
+   * Revokes access permissions for a custom threat indicator feed.
    *
    * @example
    * ```ts
@@ -61,10 +78,18 @@ export class Permissions extends APIResource {
    * ```
    */
   delete(
-    params: PermissionDeleteParams,
+    params?: PermissionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PermissionDeleteResponse>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<PermissionDeleteResponse>;
+  delete(
+    params: PermissionDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PermissionDeleteResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/intel/indicator-feeds/permissions/remove`, {
         body,
@@ -128,7 +153,7 @@ export interface PermissionCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The Cloudflare account tag of the account to change permissions on
@@ -145,14 +170,14 @@ export interface PermissionListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PermissionDeleteParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The Cloudflare account tag of the account to change permissions on

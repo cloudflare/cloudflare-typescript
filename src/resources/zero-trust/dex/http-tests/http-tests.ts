@@ -32,7 +32,7 @@ export class HTTPTests extends APIResource {
     params: HTTPTestGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HTTPDetails> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/http-tests/${testId}`, {
         query,
@@ -198,7 +198,7 @@ export interface HTTPTestGetParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Start time for aggregate metrics in ISO ms

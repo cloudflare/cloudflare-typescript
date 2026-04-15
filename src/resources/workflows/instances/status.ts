@@ -5,7 +5,8 @@ import * as Core from '../../../core';
 
 export class Status extends APIResource {
   /**
-   * Change status of instance
+   * Changes the execution status of a workflow instance (e.g., pause, resume,
+   * terminate).
    */
   edit(
     workflowName: string,
@@ -13,7 +14,7 @@ export class Status extends APIResource {
     params: StatusEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<StatusEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/workflows/${workflowName}/instances/${instanceId}/status`, {
         body,
@@ -42,9 +43,9 @@ export interface StatusEditResponse {
 
 export interface StatusEditParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Apply action to instance.

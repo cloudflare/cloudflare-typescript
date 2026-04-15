@@ -1,11 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Configurations extends APIResource {
   /**
-   * Update configuration properties
+   * Updates API Shield configuration settings for a zone. Can modify validation
+   * strictness, enforcement mode, and other global settings.
    *
    * @example
    * ```ts
@@ -19,7 +21,7 @@ export class Configurations extends APIResource {
    * ```
    */
   update(params: ConfigurationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
-    const { zone_id, normalize, ...body } = params;
+    const { zone_id = this._client.zoneId, normalize, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/api_gateway/configuration`, {
         query: { normalize },
@@ -30,7 +32,8 @@ export class Configurations extends APIResource {
   }
 
   /**
-   * Retrieve information about specific configuration properties
+   * Gets the current API Shield configuration settings for a zone, including
+   * validation behavior and enforcement mode.
    *
    * @example
    * ```ts
@@ -40,8 +43,16 @@ export class Configurations extends APIResource {
    *   });
    * ```
    */
-  get(params: ConfigurationGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
-    const { zone_id, ...query } = params;
+  get(params?: ConfigurationGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration>;
+  get(options?: Core.RequestOptions): Core.APIPromise<Configuration>;
+  get(
+    params: ConfigurationGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Configuration> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/api_gateway/configuration`, {
         query,
@@ -99,10 +110,10 @@ export interface ConfigurationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   auth_id_characteristics: Array<
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristic
@@ -158,7 +169,7 @@ export interface ConfigurationGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Ensures that the configuration is written or retrieved in

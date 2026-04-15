@@ -19,7 +19,7 @@ export class Scrape extends APIResource {
    * ```
    */
   create(params: ScrapeCreateParams, options?: Core.RequestOptions): Core.APIPromise<ScrapeCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountId, cacheTTL, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/browser-rendering/scrape`, {
         query: { cacheTTL },
@@ -37,7 +37,7 @@ export namespace ScrapeCreateResponse {
     results: ScrapeCreateResponseItem.Results;
 
     /**
-     * Selector
+     * Selector.
      */
     selector: string;
   }
@@ -47,32 +47,32 @@ export namespace ScrapeCreateResponse {
       attributes: Array<Results.Attribute>;
 
       /**
-       * Element height
+       * Element height.
        */
       height: number;
 
       /**
-       * Html content
+       * HTML content.
        */
       html: string;
 
       /**
-       * Element left
+       * Element left.
        */
       left: number;
 
       /**
-       * Text content
+       * Text content.
        */
       text: string;
 
       /**
-       * Element top
+       * Element top.
        */
       top: number;
 
       /**
-       * Element width
+       * Element width.
        */
       width: number;
     }
@@ -80,12 +80,12 @@ export namespace ScrapeCreateResponse {
     export namespace Results {
       export interface Attribute {
         /**
-         * Attribute name
+         * Attribute name.
          */
         name: string;
 
         /**
-         * Attribute value
+         * Attribute value.
          */
         value: string;
       }
@@ -100,10 +100,10 @@ export declare namespace ScrapeCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     elements: Array<Variant0.Element>;
 
@@ -184,7 +184,7 @@ export declare namespace ScrapeCreateParams {
     cookies?: Array<Variant0.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -225,17 +225,17 @@ export declare namespace ScrapeCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -287,6 +287,9 @@ export declare namespace ScrapeCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;
@@ -370,10 +373,10 @@ export declare namespace ScrapeCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     elements: Array<Variant1.Element>;
 
@@ -453,7 +456,7 @@ export declare namespace ScrapeCreateParams {
     cookies?: Array<Variant1.Cookie>;
 
     /**
-     * Body param:
+     * Body param
      */
     emulateMediaType?: string;
 
@@ -494,17 +497,17 @@ export declare namespace ScrapeCreateParams {
     >;
 
     /**
-     * Body param:
+     * Body param
      */
     setExtraHTTPHeaders?: { [key: string]: string };
 
     /**
-     * Body param:
+     * Body param
      */
     setJavaScriptEnabled?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     userAgent?: string;
 
@@ -556,6 +559,9 @@ export declare namespace ScrapeCreateParams {
     }
 
     export interface Cookie {
+      /**
+       * Cookie name.
+       */
       name: string;
 
       value: string;

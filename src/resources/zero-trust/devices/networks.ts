@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -20,7 +21,7 @@ export class Networks extends APIResource {
    * ```
    */
   create(params: NetworkCreateParams, options?: Core.RequestOptions): Core.APIPromise<DeviceNetwork | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/networks`, { body, ...options }) as Core.APIPromise<{
         result: DeviceNetwork | null;
@@ -45,7 +46,7 @@ export class Networks extends APIResource {
     params: NetworkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceNetwork | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/networks/${networkId}`, {
         body,
@@ -68,10 +69,18 @@ export class Networks extends APIResource {
    * ```
    */
   list(
-    params: NetworkListParams,
+    params?: NetworkListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DeviceNetworksSinglePage, DeviceNetwork>;
+  list(options?: Core.RequestOptions): Core.PagePromise<DeviceNetworksSinglePage, DeviceNetwork>;
+  list(
+    params: NetworkListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DeviceNetworksSinglePage, DeviceNetwork> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/networks`,
       DeviceNetworksSinglePage,
@@ -96,10 +105,22 @@ export class Networks extends APIResource {
    */
   delete(
     networkId: string,
-    params: NetworkDeleteParams,
+    params?: NetworkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DeviceNetworksSinglePage, DeviceNetwork>;
+  delete(
+    networkId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DeviceNetworksSinglePage, DeviceNetwork>;
+  delete(
+    networkId: string,
+    params: NetworkDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DeviceNetworksSinglePage, DeviceNetwork> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(networkId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/networks/${networkId}`,
       DeviceNetworksSinglePage,
@@ -121,10 +142,19 @@ export class Networks extends APIResource {
    */
   get(
     networkId: string,
-    params: NetworkGetParams,
+    params?: NetworkGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeviceNetwork | null>;
+  get(networkId: string, options?: Core.RequestOptions): Core.APIPromise<DeviceNetwork | null>;
+  get(
+    networkId: string,
+    params: NetworkGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceNetwork | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(networkId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/networks/${networkId}`, options) as Core.APIPromise<{
         result: DeviceNetwork | null;
@@ -181,9 +211,9 @@ export namespace DeviceNetwork {
 
 export interface NetworkCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The configuration object containing information for the WARP client
@@ -225,9 +255,9 @@ export namespace NetworkCreateParams {
 
 export interface NetworkUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The configuration object containing information for the WARP client
@@ -268,15 +298,15 @@ export namespace NetworkUpdateParams {
 }
 
 export interface NetworkListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface NetworkDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface NetworkGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Networks.DeviceNetworksSinglePage = DeviceNetworksSinglePage;

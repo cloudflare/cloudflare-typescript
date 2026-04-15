@@ -1,12 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class CatchAlls extends APIResource {
   /**
    * Enable or disable catch-all routing rule, or change action to forward to
-   * specific destination address.
+   * specific destination address. Forward actions require all destination addresses
+   * to be verified.
    *
    * @example
    * ```ts
@@ -22,7 +24,7 @@ export class CatchAlls extends APIResource {
     params: CatchAllUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CatchAllUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/email/routing/rules/catch_all`, {
         body,
@@ -42,8 +44,16 @@ export class CatchAlls extends APIResource {
    *   });
    * ```
    */
-  get(params: CatchAllGetParams, options?: Core.RequestOptions): Core.APIPromise<CatchAllGetResponse> {
-    const { zone_id } = params;
+  get(params?: CatchAllGetParams, options?: Core.RequestOptions): Core.APIPromise<CatchAllGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<CatchAllGetResponse>;
+  get(
+    params: CatchAllGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CatchAllGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/email/routing/rules/catch_all`, options) as Core.APIPromise<{
         result: CatchAllGetResponse;
@@ -164,7 +174,7 @@ export interface CatchAllUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: List actions for the catch-all routing rule.
@@ -191,7 +201,7 @@ export interface CatchAllGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace CatchAlls {

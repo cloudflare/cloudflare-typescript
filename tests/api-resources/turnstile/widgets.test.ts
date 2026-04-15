@@ -33,6 +33,7 @@ describe('resource widgets', () => {
       mode: 'invisible',
       name: 'blog.cloudflare.com login form',
       direction: 'asc',
+      filter: 'name:my-widget',
       order: 'id',
       page: 1,
       per_page: 5,
@@ -89,6 +90,7 @@ describe('resource widgets', () => {
     const response = await client.turnstile.widgets.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
+      filter: 'name:my-widget',
       order: 'id',
       page: 1,
       per_page: 5,

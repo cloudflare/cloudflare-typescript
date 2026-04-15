@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as VersionsAPI from './versions';
 import {
@@ -30,7 +31,7 @@ export class Workers extends APIResource {
    * ```
    */
   create(params: WorkerCreateParams, options?: Core.RequestOptions): Core.APIPromise<Worker> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/workers`, { body, ...options }) as Core.APIPromise<{
         result: Worker;
@@ -60,7 +61,7 @@ export class Workers extends APIResource {
     params: WorkerUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Worker> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/workers/workers/${workerId}`, {
         body,
@@ -83,10 +84,18 @@ export class Workers extends APIResource {
    * ```
    */
   list(
-    params: WorkerListParams,
+    params?: WorkerListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WorkersV4PagePaginationArray, Worker>;
+  list(options?: Core.RequestOptions): Core.PagePromise<WorkersV4PagePaginationArray, Worker>;
+  list(
+    params: WorkerListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<WorkersV4PagePaginationArray, Worker> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/workers/workers`, WorkersV4PagePaginationArray, {
       query,
       ...options,
@@ -106,10 +115,19 @@ export class Workers extends APIResource {
    */
   delete(
     workerId: string,
-    params: WorkerDeleteParams,
+    params?: WorkerDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WorkerDeleteResponse>;
+  delete(workerId: string, options?: Core.RequestOptions): Core.APIPromise<WorkerDeleteResponse>;
+  delete(
+    workerId: string,
+    params: WorkerDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WorkerDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(workerId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/workers/workers/${workerId}`, options);
   }
 
@@ -134,12 +152,11 @@ export class Workers extends APIResource {
    * ```
    */
   edit(workerId: string, params: WorkerEditParams, options?: Core.RequestOptions): Core.APIPromise<Worker> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/workers/workers/${workerId}`, {
         body,
         ...options,
-        headers: { 'Content-Type': 'application/merge-patch+json', ...options?.headers },
       }) as Core.APIPromise<{ result: Worker }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -155,8 +172,17 @@ export class Workers extends APIResource {
    * );
    * ```
    */
-  get(workerId: string, params: WorkerGetParams, options?: Core.RequestOptions): Core.APIPromise<Worker> {
-    const { account_id } = params;
+  get(workerId: string, params?: WorkerGetParams, options?: Core.RequestOptions): Core.APIPromise<Worker>;
+  get(workerId: string, options?: Core.RequestOptions): Core.APIPromise<Worker>;
+  get(
+    workerId: string,
+    params: WorkerGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Worker> {
+    if (isRequestOptions(params)) {
+      return this.get(workerId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/workers/workers/${workerId}`, options) as Core.APIPromise<{
         result: Worker;
@@ -217,6 +243,12 @@ export interface Worker {
    * When the Worker was most recently updated.
    */
   updated_on: string;
+
+  /**
+   * When the Worker's most recent deployment was created. `null` if the Worker has
+   * never been deployed.
+   */
+  deployed_on?: string | null;
 }
 
 export namespace Worker {
@@ -238,6 +270,11 @@ export namespace Worker {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces;
   }
 
   export namespace Observability {
@@ -245,6 +282,11 @@ export namespace Worker {
      * Log settings for the Worker.
      */
     export interface Logs {
+      /**
+       * A list of destinations where logs will be exported to.
+       */
+      destinations?: Array<string>;
+
       /**
        * Whether logs are enabled for the Worker.
        */
@@ -261,6 +303,36 @@ export namespace Worker {
        * are enabled for the Worker.
        */
       invocation_logs?: boolean;
+
+      /**
+       * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
+       */
+      persist?: boolean;
     }
   }
 
@@ -471,7 +543,7 @@ export interface WorkerCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the Worker.
@@ -523,6 +595,11 @@ export namespace WorkerCreateParams {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces;
   }
 
   export namespace Observability {
@@ -530,6 +607,11 @@ export namespace WorkerCreateParams {
      * Log settings for the Worker.
      */
     export interface Logs {
+      /**
+       * A list of destinations where logs will be exported to.
+       */
+      destinations?: Array<string>;
+
       /**
        * Whether logs are enabled for the Worker.
        */
@@ -546,6 +628,36 @@ export namespace WorkerCreateParams {
        * are enabled for the Worker.
        */
       invocation_logs?: boolean;
+
+      /**
+       * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
+       */
+      persist?: boolean;
     }
   }
 
@@ -578,7 +690,7 @@ export interface WorkerUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the Worker.
@@ -630,6 +742,11 @@ export namespace WorkerUpdateParams {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces;
   }
 
   export namespace Observability {
@@ -637,6 +754,11 @@ export namespace WorkerUpdateParams {
      * Log settings for the Worker.
      */
     export interface Logs {
+      /**
+       * A list of destinations where logs will be exported to.
+       */
+      destinations?: Array<string>;
+
       /**
        * Whether logs are enabled for the Worker.
        */
@@ -653,6 +775,36 @@ export namespace WorkerUpdateParams {
        * are enabled for the Worker.
        */
       invocation_logs?: boolean;
+
+      /**
+       * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
+       */
+      persist?: boolean;
     }
   }
 
@@ -685,21 +837,31 @@ export interface WorkerListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
+
+  /**
+   * Query param: Sort direction.
+   */
+  order?: 'asc' | 'desc';
+
+  /**
+   * Query param: Property to sort results by.
+   */
+  order_by?: 'deployed_on' | 'updated_on' | 'created_on' | 'name';
 }
 
 export interface WorkerDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WorkerEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether logpush is enabled for the Worker.
@@ -751,6 +913,11 @@ export namespace WorkerEditParams {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces;
   }
 
   export namespace Observability {
@@ -758,6 +925,11 @@ export namespace WorkerEditParams {
      * Log settings for the Worker.
      */
     export interface Logs {
+      /**
+       * A list of destinations where logs will be exported to.
+       */
+      destinations?: Array<string>;
+
       /**
        * Whether logs are enabled for the Worker.
        */
@@ -774,6 +946,36 @@ export namespace WorkerEditParams {
        * are enabled for the Worker.
        */
       invocation_logs?: boolean;
+
+      /**
+       * Whether log persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       */
+      head_sampling_rate?: number;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
+       */
+      persist?: boolean;
     }
   }
 
@@ -806,7 +1008,7 @@ export interface WorkerGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Workers.WorkersV4PagePaginationArray = WorkersV4PagePaginationArray;

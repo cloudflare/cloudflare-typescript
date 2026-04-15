@@ -11,12 +11,7 @@ export {
   type HostnameRouteGetParams,
 } from './hostname-routes';
 export { Networks } from './networks';
-export {
-  SubnetListResponsesV4PagePaginationArray,
-  Subnets,
-  type SubnetListResponse,
-  type SubnetListParams,
-} from './subnets/index';
+export { Subnets, type SubnetListParams } from './subnets/index';
 export {
   TeamnetsV4PagePaginationArray,
   Routes,

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as ReverseDNSAPI from './reverse-dns';
 import {
@@ -38,7 +39,7 @@ export class DNSFirewall extends APIResource {
     params: DNSFirewallCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DNSFirewallCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dns_firewall`, { body, ...options }) as Core.APIPromise<{
         result: DNSFirewallCreateResponse;
@@ -60,10 +61,20 @@ export class DNSFirewall extends APIResource {
    * ```
    */
   list(
-    params: DNSFirewallListParams,
+    params?: DNSFirewallListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DNSFirewallListResponsesV4PagePaginationArray, DNSFirewallListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DNSFirewallListResponsesV4PagePaginationArray, DNSFirewallListResponse>;
+  list(
+    params: DNSFirewallListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DNSFirewallListResponsesV4PagePaginationArray, DNSFirewallListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dns_firewall`,
       DNSFirewallListResponsesV4PagePaginationArray,
@@ -84,10 +95,19 @@ export class DNSFirewall extends APIResource {
    */
   delete(
     dnsFirewallId: string,
-    params: DNSFirewallDeleteParams,
+    params?: DNSFirewallDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DNSFirewallDeleteResponse>;
+  delete(dnsFirewallId: string, options?: Core.RequestOptions): Core.APIPromise<DNSFirewallDeleteResponse>;
+  delete(
+    dnsFirewallId: string,
+    params: DNSFirewallDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DNSFirewallDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(dnsFirewallId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dns_firewall/${dnsFirewallId}`,
@@ -112,7 +132,7 @@ export class DNSFirewall extends APIResource {
     params: DNSFirewallEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DNSFirewallEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, {
         body,
@@ -134,10 +154,19 @@ export class DNSFirewall extends APIResource {
    */
   get(
     dnsFirewallId: string,
-    params: DNSFirewallGetParams,
+    params?: DNSFirewallGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DNSFirewallGetResponse>;
+  get(dnsFirewallId: string, options?: Core.RequestOptions): Core.APIPromise<DNSFirewallGetResponse>;
+  get(
+    dnsFirewallId: string,
+    params: DNSFirewallGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DNSFirewallGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(dnsFirewallId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, options) as Core.APIPromise<{
         result: DNSFirewallGetResponse;
@@ -550,7 +579,7 @@ export interface DNSFirewallCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: DNS Firewall cluster name
@@ -558,7 +587,7 @@ export interface DNSFirewallCreateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   upstream_ips: Array<UpstreamIPsParam>;
 
@@ -633,21 +662,21 @@ export interface DNSFirewallListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DNSFirewallDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DNSFirewallEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Attack mitigation settings
@@ -721,7 +750,7 @@ export interface DNSFirewallEditParams {
   retries?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   upstream_ips?: Array<UpstreamIPsParam>;
 }
@@ -730,7 +759,7 @@ export interface DNSFirewallGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 DNSFirewall.DNSFirewallListResponsesV4PagePaginationArray = DNSFirewallListResponsesV4PagePaginationArray;

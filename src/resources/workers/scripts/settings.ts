@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ScriptsAPI from './scripts';
 import * as TailAPI from './tail';
@@ -25,7 +26,7 @@ export class Settings extends APIResource {
     params: SettingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptsAPI.ScriptSetting> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`, {
         body,
@@ -50,10 +51,19 @@ export class Settings extends APIResource {
    */
   get(
     scriptName: string,
-    params: SettingGetParams,
+    params?: SettingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptsAPI.ScriptSetting>;
+  get(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<ScriptsAPI.ScriptSetting>;
+  get(
+    scriptName: string,
+    params: SettingGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptsAPI.ScriptSetting> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`,
@@ -67,7 +77,7 @@ export interface SettingEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether Logpush is turned on for the Worker.
@@ -110,6 +120,11 @@ export namespace SettingEditParams {
      * Log settings for the Worker.
      */
     logs?: Observability.Logs | null;
+
+    /**
+     * Trace settings for the Worker.
+     */
+    traces?: Observability.Traces | null;
   }
 
   export namespace Observability {
@@ -144,6 +159,31 @@ export namespace SettingEditParams {
        */
       persist?: boolean;
     }
+
+    /**
+     * Trace settings for the Worker.
+     */
+    export interface Traces {
+      /**
+       * A list of destinations where traces will be exported to.
+       */
+      destinations?: Array<string>;
+
+      /**
+       * Whether traces are enabled for the Worker.
+       */
+      enabled?: boolean;
+
+      /**
+       * The sampling rate for traces. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+       */
+      head_sampling_rate?: number | null;
+
+      /**
+       * Whether trace persistence is enabled for the Worker.
+       */
+      persist?: boolean;
+    }
   }
 }
 
@@ -151,7 +191,7 @@ export interface SettingGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Settings {

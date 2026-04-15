@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource netflows', () => {
+describe('resource netFlows', () => {
   test('summary', async () => {
-    const responsePromise = client.radar.netflows.summary();
+    const responsePromise = client.radar.netFlows.summary();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource netflows', () => {
 
   test('summary: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.radar.netflows.summary({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.radar.netFlows.summary({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -31,7 +31,7 @@ describe('resource netflows', () => {
   test('summary: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.netflows.summary(
+      client.radar.netFlows.summary(
         {
           asn: ['string'],
           continent: ['string'],
@@ -49,7 +49,7 @@ describe('resource netflows', () => {
   });
 
   test('summaryV2', async () => {
-    const responsePromise = client.radar.netflows.summaryV2('ADM1');
+    const responsePromise = client.radar.netFlows.summaryV2('ADM1');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,14 +62,14 @@ describe('resource netflows', () => {
   test('summaryV2: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.netflows.summaryV2('ADM1', { path: '/_stainless_unknown_path' }),
+      client.radar.netFlows.summaryV2('ADM1', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('summaryV2: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.netflows.summaryV2(
+      client.radar.netFlows.summaryV2(
         'ADM1',
         {
           asn: ['string'],
@@ -90,7 +90,7 @@ describe('resource netflows', () => {
   });
 
   test('timeseries', async () => {
-    const responsePromise = client.radar.netflows.timeseries();
+    const responsePromise = client.radar.netFlows.timeseries();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -102,7 +102,7 @@ describe('resource netflows', () => {
 
   test('timeseries: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.radar.netflows.timeseries({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.radar.netFlows.timeseries({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -110,7 +110,7 @@ describe('resource netflows', () => {
   test('timeseries: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.netflows.timeseries(
+      client.radar.netFlows.timeseries(
         {
           aggInterval: '1h',
           asn: ['string'],
@@ -131,7 +131,7 @@ describe('resource netflows', () => {
   });
 
   test('timeseriesGroups', async () => {
-    const responsePromise = client.radar.netflows.timeseriesGroups('ADM1');
+    const responsePromise = client.radar.netFlows.timeseriesGroups('ADM1');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -144,14 +144,14 @@ describe('resource netflows', () => {
   test('timeseriesGroups: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.netflows.timeseriesGroups('ADM1', { path: '/_stainless_unknown_path' }),
+      client.radar.netFlows.timeseriesGroups('ADM1', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('timeseriesGroups: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.netflows.timeseriesGroups(
+      client.radar.netFlows.timeseriesGroups(
         'ADM1',
         {
           aggInterval: '1h',

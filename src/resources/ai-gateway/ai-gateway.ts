@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as DatasetsAPI from './datasets';
 import {
@@ -17,6 +18,30 @@ import {
   DatasetUpdateResponse,
   Datasets,
 } from './datasets';
+import * as DynamicRoutingAPI from './dynamic-routing';
+import {
+  DynamicRouting,
+  DynamicRoutingCreateDeploymentParams,
+  DynamicRoutingCreateDeploymentResponse,
+  DynamicRoutingCreateParams,
+  DynamicRoutingCreateResponse,
+  DynamicRoutingCreateVersionParams,
+  DynamicRoutingCreateVersionResponse,
+  DynamicRoutingDeleteParams,
+  DynamicRoutingDeleteResponse,
+  DynamicRoutingGetParams,
+  DynamicRoutingGetResponse,
+  DynamicRoutingGetVersionParams,
+  DynamicRoutingGetVersionResponse,
+  DynamicRoutingListDeploymentsParams,
+  DynamicRoutingListDeploymentsResponse,
+  DynamicRoutingListParams,
+  DynamicRoutingListResponse,
+  DynamicRoutingListVersionsParams,
+  DynamicRoutingListVersionsResponse,
+  DynamicRoutingUpdateParams,
+  DynamicRoutingUpdateResponse,
+} from './dynamic-routing';
 import * as EvaluationTypesAPI from './evaluation-types';
 import {
   EvaluationTypeListParams,
@@ -54,6 +79,15 @@ import {
   LogResponseResponse,
   Logs,
 } from './logs';
+import * as ProviderConfigsAPI from './provider-configs';
+import {
+  ProviderConfigCreateParams,
+  ProviderConfigCreateResponse,
+  ProviderConfigListParams,
+  ProviderConfigListResponse,
+  ProviderConfigListResponsesV4PagePaginationArray,
+  ProviderConfigs,
+} from './provider-configs';
 import * as URLsAPI from './urls';
 import { URLGetParams, URLGetResponse, URLs } from './urls';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -63,10 +97,12 @@ export class AIGateway extends APIResource {
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   evaluations: EvaluationsAPI.Evaluations = new EvaluationsAPI.Evaluations(this._client);
+  dynamicRouting: DynamicRoutingAPI.DynamicRouting = new DynamicRoutingAPI.DynamicRouting(this._client);
+  providerConfigs: ProviderConfigsAPI.ProviderConfigs = new ProviderConfigsAPI.ProviderConfigs(this._client);
   urls: URLsAPI.URLs = new URLsAPI.URLs(this._client);
 
   /**
-   * Create a new Gateway
+   * Creates a new AI Gateway.
    *
    * @example
    * ```ts
@@ -78,7 +114,6 @@ export class AIGateway extends APIResource {
    *   collect_logs: true,
    *   rate_limiting_interval: 0,
    *   rate_limiting_limit: 0,
-   *   rate_limiting_technique: 'fixed',
    * });
    * ```
    */
@@ -86,7 +121,7 @@ export class AIGateway extends APIResource {
     params: AIGatewayCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AIGatewayCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai-gateway/gateways`, {
         body,
@@ -96,7 +131,7 @@ export class AIGateway extends APIResource {
   }
 
   /**
-   * Update a Gateway
+   * Updates an existing AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -109,7 +144,6 @@ export class AIGateway extends APIResource {
    *     collect_logs: true,
    *     rate_limiting_interval: 0,
    *     rate_limiting_limit: 0,
-   *     rate_limiting_technique: 'fixed',
    *   },
    * );
    * ```
@@ -119,7 +153,7 @@ export class AIGateway extends APIResource {
     params: AIGatewayUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AIGatewayUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/ai-gateway/gateways/${id}`, {
         body,
@@ -129,7 +163,7 @@ export class AIGateway extends APIResource {
   }
 
   /**
-   * List Gateways
+   * Lists all AI Gateway evaluator types configured for the account.
    *
    * @example
    * ```ts
@@ -142,10 +176,20 @@ export class AIGateway extends APIResource {
    * ```
    */
   list(
-    params: AIGatewayListParams,
+    params?: AIGatewayListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse>;
+  list(
+    params: AIGatewayListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai-gateway/gateways`,
       AIGatewayListResponsesV4PagePaginationArray,
@@ -154,7 +198,7 @@ export class AIGateway extends APIResource {
   }
 
   /**
-   * Delete a Gateway
+   * Deletes an AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -166,10 +210,19 @@ export class AIGateway extends APIResource {
    */
   delete(
     id: string,
-    params: AIGatewayDeleteParams,
+    params?: AIGatewayDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AIGatewayDeleteResponse>;
+  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<AIGatewayDeleteResponse>;
+  delete(
+    id: string,
+    params: AIGatewayDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AIGatewayDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/ai-gateway/gateways/${id}`, options) as Core.APIPromise<{
         result: AIGatewayDeleteResponse;
@@ -178,7 +231,7 @@ export class AIGateway extends APIResource {
   }
 
   /**
-   * Fetch a Gateway
+   * Retrieves details for a specific AI Gateway dataset.
    *
    * @example
    * ```ts
@@ -189,10 +242,19 @@ export class AIGateway extends APIResource {
    */
   get(
     id: string,
-    params: AIGatewayGetParams,
+    params?: AIGatewayGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AIGatewayGetResponse>;
+  get(id: string, options?: Core.RequestOptions): Core.APIPromise<AIGatewayGetResponse>;
+  get(
+    id: string,
+    params: AIGatewayGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AIGatewayGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/ai-gateway/gateways/${id}`, options) as Core.APIPromise<{
         result: AIGatewayGetResponse;
@@ -209,10 +271,6 @@ export interface AIGatewayCreateResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -221,15 +279,11 @@ export interface AIGatewayCreateResponse {
 
   created_at: string;
 
-  internal_id: string;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
 
   rate_limiting_limit: number | null;
-
-  rate_limiting_technique: 'fixed' | 'sliding';
 
   authentication?: boolean;
 
@@ -247,9 +301,32 @@ export interface AIGatewayCreateResponse {
 
   otel?: Array<AIGatewayCreateResponse.Otel> | null;
 
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayCreateResponse.Stripe | null;
+
+  /**
+   * Controls how Workers AI inference calls routed through this gateway are billed.
+   * Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -289,6 +366,8 @@ export namespace AIGatewayCreateResponse {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {
@@ -310,10 +389,6 @@ export interface AIGatewayUpdateResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -322,15 +397,11 @@ export interface AIGatewayUpdateResponse {
 
   created_at: string;
 
-  internal_id: string;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
 
   rate_limiting_limit: number | null;
-
-  rate_limiting_technique: 'fixed' | 'sliding';
 
   authentication?: boolean;
 
@@ -348,9 +419,32 @@ export interface AIGatewayUpdateResponse {
 
   otel?: Array<AIGatewayUpdateResponse.Otel> | null;
 
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayUpdateResponse.Stripe | null;
+
+  /**
+   * Controls how Workers AI inference calls routed through this gateway are billed.
+   * Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -390,6 +484,8 @@ export namespace AIGatewayUpdateResponse {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {
@@ -411,10 +507,6 @@ export interface AIGatewayListResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -423,15 +515,11 @@ export interface AIGatewayListResponse {
 
   created_at: string;
 
-  internal_id: string;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
 
   rate_limiting_limit: number | null;
-
-  rate_limiting_technique: 'fixed' | 'sliding';
 
   authentication?: boolean;
 
@@ -449,9 +537,32 @@ export interface AIGatewayListResponse {
 
   otel?: Array<AIGatewayListResponse.Otel> | null;
 
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayListResponse.Stripe | null;
+
+  /**
+   * Controls how Workers AI inference calls routed through this gateway are billed.
+   * Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -491,6 +602,8 @@ export namespace AIGatewayListResponse {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {
@@ -512,10 +625,6 @@ export interface AIGatewayDeleteResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -524,15 +633,11 @@ export interface AIGatewayDeleteResponse {
 
   created_at: string;
 
-  internal_id: string;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
 
   rate_limiting_limit: number | null;
-
-  rate_limiting_technique: 'fixed' | 'sliding';
 
   authentication?: boolean;
 
@@ -550,9 +655,32 @@ export interface AIGatewayDeleteResponse {
 
   otel?: Array<AIGatewayDeleteResponse.Otel> | null;
 
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayDeleteResponse.Stripe | null;
+
+  /**
+   * Controls how Workers AI inference calls routed through this gateway are billed.
+   * Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -592,6 +720,8 @@ export namespace AIGatewayDeleteResponse {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {
@@ -613,10 +743,6 @@ export interface AIGatewayGetResponse {
    */
   id: string;
 
-  account_id: string;
-
-  account_tag: string;
-
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number | null;
@@ -625,15 +751,11 @@ export interface AIGatewayGetResponse {
 
   created_at: string;
 
-  internal_id: string;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
 
   rate_limiting_limit: number | null;
-
-  rate_limiting_technique: 'fixed' | 'sliding';
 
   authentication?: boolean;
 
@@ -651,9 +773,32 @@ export interface AIGatewayGetResponse {
 
   otel?: Array<AIGatewayGetResponse.Otel> | null;
 
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayGetResponse.Stripe | null;
+
+  /**
+   * Controls how Workers AI inference calls routed through this gateway are billed.
+   * Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -693,6 +838,8 @@ export namespace AIGatewayGetResponse {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {
@@ -710,9 +857,9 @@ export namespace AIGatewayGetResponse {
 
 export interface AIGatewayCreateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: gateway id
@@ -720,159 +867,191 @@ export interface AIGatewayCreateParams {
   id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   cache_invalidate_on_update: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   cache_ttl: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   collect_logs: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   rate_limiting_interval: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   rate_limiting_limit: number | null;
 
   /**
-   * Body param:
-   */
-  rate_limiting_technique: 'fixed' | 'sliding';
-
-  /**
-   * Body param:
+   * Body param
    */
   authentication?: boolean;
 
   /**
-   * Body param:
-   */
-  is_default?: boolean;
-
-  /**
-   * Body param:
+   * Body param
    */
   log_management?: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
 
   /**
-   * Body param:
+   * Body param
    */
   logpush?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   logpush_public_key?: string | null;
 
   /**
-   * Body param:
+   * Body param
+   */
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Body param: Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Body param: Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Body param: Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
+  /**
+   * Body param: Controls how Workers AI inference calls routed through this gateway
+   * are billed. Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
+
+  /**
+   * Body param
    */
   zdr?: boolean;
 }
 
 export interface AIGatewayUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   cache_invalidate_on_update: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   cache_ttl: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   collect_logs: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   rate_limiting_interval: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   rate_limiting_limit: number | null;
 
   /**
-   * Body param:
-   */
-  rate_limiting_technique: 'fixed' | 'sliding';
-
-  /**
-   * Body param:
+   * Body param
    */
   authentication?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   dlp?: AIGatewayUpdateParams.UnionMember0 | AIGatewayUpdateParams.UnionMember1;
 
   /**
-   * Body param:
-   */
-  is_default?: boolean;
-
-  /**
-   * Body param:
+   * Body param
    */
   log_management?: number | null;
 
   /**
-   * Body param:
+   * Body param
    */
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
 
   /**
-   * Body param:
+   * Body param
    */
   logpush?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   logpush_public_key?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   otel?: Array<AIGatewayUpdateParams.Otel> | null;
 
   /**
-   * Body param:
+   * Body param
+   */
+  rate_limiting_technique?: 'fixed' | 'sliding' | null;
+
+  /**
+   * Body param: Backoff strategy for retry delays
+   */
+  retry_backoff?: 'constant' | 'linear' | 'exponential' | null;
+
+  /**
+   * Body param: Delay between retry attempts in milliseconds (0-5000)
+   */
+  retry_delay?: number | null;
+
+  /**
+   * Body param: Maximum number of retry attempts for failed requests (1-5)
+   */
+  retry_max_attempts?: number | null;
+
+  /**
+   * Body param
    */
   store_id?: string | null;
 
   /**
-   * Body param:
+   * Body param
    */
   stripe?: AIGatewayUpdateParams.Stripe | null;
 
   /**
-   * Body param:
+   * Body param: Controls how Workers AI inference calls routed through this gateway
+   * are billed. Only 'postpaid' is currently supported.
+   */
+  workers_ai_billing_mode?: 'postpaid';
+
+  /**
+   * Body param
    */
   zdr?: boolean;
 }
@@ -912,6 +1091,8 @@ export namespace AIGatewayUpdateParams {
     headers: { [key: string]: string };
 
     url: string;
+
+    content_type?: 'json' | 'protobuf';
   }
 
   export interface Stripe {
@@ -929,9 +1110,9 @@ export namespace AIGatewayUpdateParams {
 
 export interface AIGatewayListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Search by id
@@ -940,11 +1121,11 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
 }
 
 export interface AIGatewayDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AIGatewayGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 AIGateway.AIGatewayListResponsesV4PagePaginationArray = AIGatewayListResponsesV4PagePaginationArray;
@@ -956,6 +1137,9 @@ AIGateway.Datasets = Datasets;
 AIGateway.DatasetListResponsesV4PagePaginationArray = DatasetListResponsesV4PagePaginationArray;
 AIGateway.Evaluations = Evaluations;
 AIGateway.EvaluationListResponsesV4PagePaginationArray = EvaluationListResponsesV4PagePaginationArray;
+AIGateway.DynamicRouting = DynamicRouting;
+AIGateway.ProviderConfigs = ProviderConfigs;
+AIGateway.ProviderConfigListResponsesV4PagePaginationArray = ProviderConfigListResponsesV4PagePaginationArray;
 AIGateway.URLs = URLs;
 
 export declare namespace AIGateway {
@@ -1023,6 +1207,39 @@ export declare namespace AIGateway {
     type EvaluationListParams as EvaluationListParams,
     type EvaluationDeleteParams as EvaluationDeleteParams,
     type EvaluationGetParams as EvaluationGetParams,
+  };
+
+  export {
+    DynamicRouting as DynamicRouting,
+    type DynamicRoutingCreateResponse as DynamicRoutingCreateResponse,
+    type DynamicRoutingUpdateResponse as DynamicRoutingUpdateResponse,
+    type DynamicRoutingListResponse as DynamicRoutingListResponse,
+    type DynamicRoutingDeleteResponse as DynamicRoutingDeleteResponse,
+    type DynamicRoutingCreateDeploymentResponse as DynamicRoutingCreateDeploymentResponse,
+    type DynamicRoutingCreateVersionResponse as DynamicRoutingCreateVersionResponse,
+    type DynamicRoutingGetResponse as DynamicRoutingGetResponse,
+    type DynamicRoutingGetVersionResponse as DynamicRoutingGetVersionResponse,
+    type DynamicRoutingListDeploymentsResponse as DynamicRoutingListDeploymentsResponse,
+    type DynamicRoutingListVersionsResponse as DynamicRoutingListVersionsResponse,
+    type DynamicRoutingCreateParams as DynamicRoutingCreateParams,
+    type DynamicRoutingUpdateParams as DynamicRoutingUpdateParams,
+    type DynamicRoutingListParams as DynamicRoutingListParams,
+    type DynamicRoutingDeleteParams as DynamicRoutingDeleteParams,
+    type DynamicRoutingCreateDeploymentParams as DynamicRoutingCreateDeploymentParams,
+    type DynamicRoutingCreateVersionParams as DynamicRoutingCreateVersionParams,
+    type DynamicRoutingGetParams as DynamicRoutingGetParams,
+    type DynamicRoutingGetVersionParams as DynamicRoutingGetVersionParams,
+    type DynamicRoutingListDeploymentsParams as DynamicRoutingListDeploymentsParams,
+    type DynamicRoutingListVersionsParams as DynamicRoutingListVersionsParams,
+  };
+
+  export {
+    ProviderConfigs as ProviderConfigs,
+    type ProviderConfigCreateResponse as ProviderConfigCreateResponse,
+    type ProviderConfigListResponse as ProviderConfigListResponse,
+    ProviderConfigListResponsesV4PagePaginationArray as ProviderConfigListResponsesV4PagePaginationArray,
+    type ProviderConfigCreateParams as ProviderConfigCreateParams,
+    type ProviderConfigListParams as ProviderConfigListParams,
   };
 
   export { URLs as URLs, type URLGetResponse as URLGetResponse, type URLGetParams as URLGetParams };

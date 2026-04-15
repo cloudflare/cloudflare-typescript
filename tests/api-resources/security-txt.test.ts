@@ -40,7 +40,7 @@ describe('resource securityTXT', () => {
       expires: '2019-12-27T18:11:19.117Z',
       hiring: ['https://example.com/jobs.html'],
       policy: ['https://example.com/disclosure-policy.html'],
-      preferredLanguages: 'en, es, fr',
+      preferred_languages: 'en, es, fr',
     });
   });
 

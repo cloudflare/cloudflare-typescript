@@ -10,11 +10,9 @@ const client = new Cloudflare({
 });
 
 describe('resource copy', () => {
-  test('create: only required params', async () => {
-    const responsePromise = client.stream.copy.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      url: 'https://example.com/myvideo.mp4',
-    });
+  // HTTP 401 error from prism
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.stream.copy.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,16 +22,19 @@ describe('resource copy', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // HTTP 401 error from prism
+  test.skip('create: required and optional params', async () => {
     const response = await client.stream.copy.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      url: 'https://example.com/myvideo.mp4',
       allowedOrigins: ['example.com'],
       creator: 'creator-id_abcde12345',
+      input: 'https://example.com/myvideo.mp4',
       meta: { name: 'video12345.mp4' },
+      name: 'myvideo.mp4',
       requireSignedURLs: true,
       scheduledDeletion: '2014-01-02T02:20:00Z',
       thumbnailTimestampPct: 0.529241,
+      url: 'https://example.com/myvideo.mp4',
       watermark: { uid: 'ea95132c15732412d22c1476fa83f27a' },
       'Upload-Creator': 'creator-id_abcde12345',
     });

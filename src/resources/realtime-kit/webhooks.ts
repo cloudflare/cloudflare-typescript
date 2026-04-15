@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Webhooks extends APIResource {
@@ -36,7 +37,7 @@ export class Webhooks extends APIResource {
     params: WebhookCreateWebhookParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookCreateWebhookResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/realtime/kit/${appId}/webhooks`, { body, ...options });
   }
 
@@ -56,10 +57,24 @@ export class Webhooks extends APIResource {
   deleteWebhook(
     appId: string,
     webhookId: string,
-    params: WebhookDeleteWebhookParams,
+    params?: WebhookDeleteWebhookParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WebhookDeleteWebhookResponse>;
+  deleteWebhook(
+    appId: string,
+    webhookId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WebhookDeleteWebhookResponse>;
+  deleteWebhook(
+    appId: string,
+    webhookId: string,
+    params: WebhookDeleteWebhookParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookDeleteWebhookResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.deleteWebhook(appId, webhookId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/realtime/kit/${appId}/webhooks/${webhookId}`,
       options,
@@ -85,7 +100,7 @@ export class Webhooks extends APIResource {
     params: WebhookEditWebhookParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookEditWebhookResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.patch(`/accounts/${account_id}/realtime/kit/${appId}/webhooks/${webhookId}`, {
       body,
       ...options,
@@ -108,10 +123,24 @@ export class Webhooks extends APIResource {
   getWebhookById(
     appId: string,
     webhookId: string,
-    params: WebhookGetWebhookByIDParams,
+    params?: WebhookGetWebhookByIDParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WebhookGetWebhookByIDResponse>;
+  getWebhookById(
+    appId: string,
+    webhookId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WebhookGetWebhookByIDResponse>;
+  getWebhookById(
+    appId: string,
+    webhookId: string,
+    params: WebhookGetWebhookByIDParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookGetWebhookByIDResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.getWebhookById(appId, webhookId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/webhooks/${webhookId}`, options);
   }
 
@@ -128,10 +157,19 @@ export class Webhooks extends APIResource {
    */
   getWebhooks(
     appId: string,
-    params: WebhookGetWebhooksParams,
+    params?: WebhookGetWebhooksParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WebhookGetWebhooksResponse>;
+  getWebhooks(appId: string, options?: Core.RequestOptions): Core.APIPromise<WebhookGetWebhooksResponse>;
+  getWebhooks(
+    appId: string,
+    params: WebhookGetWebhooksParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookGetWebhooksResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.getWebhooks(appId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/webhooks`, options);
   }
 
@@ -169,7 +207,7 @@ export class Webhooks extends APIResource {
     params: WebhookReplaceWebhookParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookReplaceWebhookResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.put(`/accounts/${account_id}/realtime/kit/${appId}/webhooks/${webhookId}`, {
       body,
       ...options,
@@ -511,7 +549,7 @@ export interface WebhookCreateWebhookParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Events that this webhook will get triggered by
@@ -548,17 +586,17 @@ export interface WebhookDeleteWebhookParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WebhookEditWebhookParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   enabled?: boolean;
 
@@ -592,21 +630,21 @@ export interface WebhookGetWebhookByIDParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WebhookGetWebhooksParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WebhookReplaceWebhookParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Events that this webhook will get triggered by

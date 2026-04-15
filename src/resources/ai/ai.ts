@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as AuthorsAPI from './authors';
 import { AuthorListParams, AuthorListResponse, AuthorListResponsesSinglePage, Authors } from './authors';
@@ -14,7 +15,6 @@ import {
   ToMarkdownSupportedResponsesSinglePage,
   ToMarkdownTransformParams,
   ToMarkdownTransformResponse,
-  ToMarkdownTransformResponsesSinglePage,
 } from './to-markdown';
 import * as FinetunesAPI from './finetunes/finetunes';
 import {
@@ -50,8 +50,17 @@ export class AI extends APIResource {
    * Model specific inputs available in
    * [Cloudflare Docs](https://developers.cloudflare.com/workers-ai/models/).
    */
-  run(modelName: string, params: AIRunParams, options?: Core.RequestOptions): Core.APIPromise<AIRunResponse> {
-    const { account_id, ...body } = params;
+  run(modelName: string, params?: AIRunParams, options?: Core.RequestOptions): Core.APIPromise<AIRunResponse>;
+  run(modelName: string, options?: Core.RequestOptions): Core.APIPromise<AIRunResponse>;
+  run(
+    modelName: string,
+    params: AIRunParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AIRunResponse> {
+    if (isRequestOptions(params)) {
+      return this.run(modelName, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai/run/${modelName}`, {
         body,
@@ -68,11 +77,13 @@ export type AIRunResponse =
   | Array<AIRunResponse.TextClassification>
   | Core.Uploadable
   | AIRunResponse.Audio
+  | Core.Uploadable
   | AIRunResponse.TextEmbeddings
   | AIRunResponse.AutomaticSpeechRecognition
   | Array<AIRunResponse.ImageClassification>
   | Array<AIRunResponse.ObjectDetection>
-  | AIRunResponse.UnionMember7
+  | AIRunResponse.UnionMember8
+  | Core.Uploadable
   | AIRunResponse.Translation
   | AIRunResponse.Summarization
   | AIRunResponse.ImageToText
@@ -195,7 +206,7 @@ export namespace AIRunResponse {
     }
   }
 
-  export interface UnionMember7 {
+  export interface UnionMember8 {
     /**
      * The generated text response from the model
      */
@@ -204,15 +215,15 @@ export namespace AIRunResponse {
     /**
      * An array of tool calls requests made during the response generation
      */
-    tool_calls?: Array<UnionMember7.ToolCall>;
+    tool_calls?: Array<UnionMember8.ToolCall>;
 
     /**
      * Usage statistics for the inference request
      */
-    usage?: UnionMember7.Usage;
+    usage?: UnionMember8.Usage;
   }
 
-  export namespace UnionMember7 {
+  export namespace UnionMember8 {
     export interface ToolCall {
       /**
        * The arguments passed to be passed to the tool call request
@@ -295,9 +306,9 @@ export type AIRunParams =
 export declare namespace AIRunParams {
   export interface TextClassification {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The text that you want to classify
@@ -307,9 +318,9 @@ export declare namespace AIRunParams {
 
   export interface TextToImage {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: A text description of the image you want to generate
@@ -376,9 +387,9 @@ export declare namespace AIRunParams {
 
   export interface TextToSpeech {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: A text description of the audio you want to generate
@@ -394,9 +405,9 @@ export declare namespace AIRunParams {
 
   export interface TextEmbeddings {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The text to embed
@@ -406,9 +417,9 @@ export declare namespace AIRunParams {
 
   export interface AutomaticSpeechRecognition {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the audio data constrained to
@@ -430,9 +441,9 @@ export declare namespace AIRunParams {
 
   export interface ImageClassification {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the image data constrained to
@@ -443,9 +454,9 @@ export declare namespace AIRunParams {
 
   export interface ObjectDetection {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the image data constrained to
@@ -456,9 +467,9 @@ export declare namespace AIRunParams {
 
   export interface Prompt {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The input text prompt for the model to generate a response.
@@ -499,7 +510,7 @@ export declare namespace AIRunParams {
     repetition_penalty?: number;
 
     /**
-     * Body param:
+     * Body param
      */
     response_format?: Prompt.ResponseFormat;
 
@@ -545,9 +556,9 @@ export declare namespace AIRunParams {
 
   export interface Messages {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of message objects representing the conversation history.
@@ -561,7 +572,7 @@ export declare namespace AIRunParams {
     frequency_penalty?: number;
 
     /**
-     * Body param:
+     * Body param
      */
     functions?: Array<Messages.Function>;
 
@@ -587,7 +598,7 @@ export declare namespace AIRunParams {
     repetition_penalty?: number;
 
     /**
-     * Body param:
+     * Body param
      */
     response_format?: Messages.ResponseFormat;
 
@@ -633,12 +644,26 @@ export declare namespace AIRunParams {
       /**
        * The content of the message as a string.
        */
-      content: string;
+      content: string | Array<Message.UnionMember1>;
 
       /**
        * The role of the message sender (e.g., 'user', 'assistant', 'system', 'tool').
        */
       role: string;
+    }
+
+    export namespace Message {
+      export interface UnionMember1 {
+        /**
+         * Text content
+         */
+        text?: string;
+
+        /**
+         * Type of the content (text)
+         */
+        type?: string;
+      }
     }
 
     export interface Function {
@@ -779,9 +804,9 @@ export declare namespace AIRunParams {
 
   export interface Translation {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The language code to translate the text into (e.g., 'es' for
@@ -803,9 +828,9 @@ export declare namespace AIRunParams {
 
   export interface Summarization {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The text that you want the model to summarize
@@ -820,9 +845,9 @@ export declare namespace AIRunParams {
 
   export interface ImageToText {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the image data constrained to
@@ -890,9 +915,9 @@ export declare namespace AIRunParams {
 
   export interface Variant12 {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Image in base64 encoded format.
@@ -959,9 +984,9 @@ export declare namespace AIRunParams {
 
   export interface Variant13 {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Image in base64 encoded format.
@@ -1031,20 +1056,51 @@ export declare namespace AIRunParams {
       /**
        * The content of the message as a string.
        */
-      content: string;
+      content: string | Array<Message.UnionMember1>;
 
       /**
        * The role of the message sender (e.g., 'user', 'assistant', 'system', 'tool').
        */
       role: string;
     }
+
+    export namespace Message {
+      export interface UnionMember1 {
+        /**
+         * Type of the content part (e.g. 'text', 'image_url').
+         */
+        type: string;
+
+        /**
+         * Image URL object (when type is 'image_url').
+         */
+        image_url?: UnionMember1.ImageURL;
+
+        /**
+         * Text content (when type is 'text').
+         */
+        text?: string;
+      }
+
+      export namespace UnionMember1 {
+        /**
+         * Image URL object (when type is 'image_url').
+         */
+        export interface ImageURL {
+          /**
+           * Image URI with data (e.g. data:image/jpeg;base64,/9j/...).
+           */
+          url: string;
+        }
+      }
+    }
   }
 
   export interface MultimodalEmbeddings {
     /**
-     * Path param:
+     * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Image in base64 encoded format.
@@ -1052,7 +1108,7 @@ export declare namespace AIRunParams {
     image?: string;
 
     /**
-     * Body param:
+     * Body param
      */
     text?: Array<string>;
   }
@@ -1067,7 +1123,6 @@ AI.Models = Models;
 AI.ModelListResponsesV4PagePaginationArray = ModelListResponsesV4PagePaginationArray;
 AI.ToMarkdown = ToMarkdown;
 AI.ToMarkdownSupportedResponsesSinglePage = ToMarkdownSupportedResponsesSinglePage;
-AI.ToMarkdownTransformResponsesSinglePage = ToMarkdownTransformResponsesSinglePage;
 
 export declare namespace AI {
   export { type AIRunResponse as AIRunResponse, type AIRunParams as AIRunParams };
@@ -1106,7 +1161,6 @@ export declare namespace AI {
     type ToMarkdownSupportedResponse as ToMarkdownSupportedResponse,
     type ToMarkdownTransformResponse as ToMarkdownTransformResponse,
     ToMarkdownSupportedResponsesSinglePage as ToMarkdownSupportedResponsesSinglePage,
-    ToMarkdownTransformResponsesSinglePage as ToMarkdownTransformResponsesSinglePage,
     type ToMarkdownSupportedParams as ToMarkdownSupportedParams,
     type ToMarkdownTransformParams as ToMarkdownTransformParams,
   };

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class AuditSSHSettings extends APIResource {
@@ -22,7 +23,7 @@ export class AuditSSHSettings extends APIResource {
     params: AuditSSHSettingUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GatewaySettings> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/audit_ssh_settings`, {
         body,
@@ -43,8 +44,16 @@ export class AuditSSHSettings extends APIResource {
    *   });
    * ```
    */
-  get(params: AuditSSHSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewaySettings> {
-    const { account_id } = params;
+  get(params?: AuditSSHSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewaySettings>;
+  get(options?: Core.RequestOptions): Core.APIPromise<GatewaySettings>;
+  get(
+    params: AuditSSHSettingGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GatewaySettings> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/audit_ssh_settings`, options) as Core.APIPromise<{
         result: GatewaySettings;
@@ -65,10 +74,18 @@ export class AuditSSHSettings extends APIResource {
    * ```
    */
   rotateSeed(
-    params: AuditSSHSettingRotateSeedParams,
+    params?: AuditSSHSettingRotateSeedParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GatewaySettings>;
+  rotateSeed(options?: Core.RequestOptions): Core.APIPromise<GatewaySettings>;
+  rotateSeed(
+    params: AuditSSHSettingRotateSeedParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<GatewaySettings> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.rotateSeed({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/gateway/audit_ssh_settings/rotate_seed`,
@@ -97,9 +114,9 @@ export interface GatewaySettings {
 
 export interface AuditSSHSettingUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Provide the Base64-encoded HPKE public key that encrypts SSH session
@@ -110,11 +127,11 @@ export interface AuditSSHSettingUpdateParams {
 }
 
 export interface AuditSSHSettingGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AuditSSHSettingRotateSeedParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AuditSSHSettings {

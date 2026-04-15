@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as HostsAPI from './hosts';
 import { HostListParams, HostListResponse, HostListResponsesV4PagePaginationArray, Hosts } from './hosts';
@@ -29,7 +30,7 @@ export class UserSchemas extends APIResource {
     params: UserSchemaCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserSchemaCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(
         `/zones/${zone_id}/api_gateway/user_schemas`,
@@ -39,15 +40,26 @@ export class UserSchemas extends APIResource {
   }
 
   /**
-   * Retrieve information about all schemas on a zone
+   * Lists all OpenAPI schemas uploaded to API Shield for the zone, including their
+   * validation status and associated operations.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   list(
-    params: UserSchemaListParams,
+    params?: UserSchemaListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OldPublicSchemasV4PagePaginationArray, OldPublicSchema>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OldPublicSchemasV4PagePaginationArray, OldPublicSchema>;
+  list(
+    params: UserSchemaListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<OldPublicSchemasV4PagePaginationArray, OldPublicSchema> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/user_schemas`,
       OldPublicSchemasV4PagePaginationArray,
@@ -56,21 +68,32 @@ export class UserSchemas extends APIResource {
   }
 
   /**
-   * Delete a schema
+   * Permanently removes an uploaded OpenAPI schema from API Shield schema
+   * validation. Operations using this schema will lose their validation rules.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   delete(
     schemaId: string,
-    params: UserSchemaDeleteParams,
+    params?: UserSchemaDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UserSchemaDeleteResponse>;
+  delete(schemaId: string, options?: Core.RequestOptions): Core.APIPromise<UserSchemaDeleteResponse>;
+  delete(
+    schemaId: string,
+    params: UserSchemaDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserSchemaDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(schemaId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, options);
   }
 
   /**
-   * Enable validation for a schema
+   * Activates schema validation for an uploaded OpenAPI schema. Requests to matching
+   * endpoints will be validated against the schema definitions.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
@@ -79,7 +102,7 @@ export class UserSchemas extends APIResource {
     params: UserSchemaEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OldPublicSchema> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, {
         body,
@@ -89,16 +112,26 @@ export class UserSchemas extends APIResource {
   }
 
   /**
-   * Retrieve information about a specific schema on a zone
+   * Gets detailed information about a specific uploaded OpenAPI schema, including
+   * its contents and validation configuration.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   get(
     schemaId: string,
-    params: UserSchemaGetParams,
+    params?: UserSchemaGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OldPublicSchema>;
+  get(schemaId: string, options?: Core.RequestOptions): Core.APIPromise<OldPublicSchema>;
+  get(
+    schemaId: string,
+    params: UserSchemaGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<OldPublicSchema> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(schemaId, {}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, {
         query,
@@ -211,7 +244,7 @@ export interface UserSchemaCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Schema file bytes
@@ -238,7 +271,7 @@ export interface UserSchemaListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.
@@ -255,14 +288,14 @@ export interface UserSchemaDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface UserSchemaEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Flag whether schema is enabled for validation.
@@ -274,7 +307,7 @@ export interface UserSchemaGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.

@@ -1,12 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as RequestsAPI from './requests';
 
 export class PriorityResource extends APIResource {
   /**
-   * Create a New Priority Intelligence Requirement
+   * Creates a new priority intelligence request in Cloudforce One.
    *
    * @example
    * ```ts
@@ -21,7 +22,7 @@ export class PriorityResource extends APIResource {
    * ```
    */
   create(params: PriorityCreateParams, options?: Core.RequestOptions): Core.APIPromise<Priority> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/cloudforce-one/requests/priority/new`, {
         body,
@@ -31,7 +32,7 @@ export class PriorityResource extends APIResource {
   }
 
   /**
-   * Update a Priority Intelligence Requirement
+   * Updates a priority intelligence request in Cloudforce One.
    *
    * @example
    * ```ts
@@ -53,7 +54,7 @@ export class PriorityResource extends APIResource {
     params: PriorityUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RequestsAPI.Item> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/cloudforce-one/requests/priority/${priorityId}`, {
         body,
@@ -63,7 +64,7 @@ export class PriorityResource extends APIResource {
   }
 
   /**
-   * Delete a Priority Intelligence Requirement
+   * Deletes a priority intelligence request from Cloudforce One.
    *
    * @example
    * ```ts
@@ -76,10 +77,19 @@ export class PriorityResource extends APIResource {
    */
   delete(
     priorityId: string,
-    params: PriorityDeleteParams,
+    params?: PriorityDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PriorityDeleteResponse>;
+  delete(priorityId: string, options?: Core.RequestOptions): Core.APIPromise<PriorityDeleteResponse>;
+  delete(
+    priorityId: string,
+    params: PriorityDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PriorityDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(priorityId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/cloudforce-one/requests/priority/${priorityId}`,
       options,
@@ -87,7 +97,7 @@ export class PriorityResource extends APIResource {
   }
 
   /**
-   * Get a Priority Intelligence Requirement
+   * Retrieves a specific priority intelligence request from Cloudforce One.
    *
    * @example
    * ```ts
@@ -100,10 +110,19 @@ export class PriorityResource extends APIResource {
    */
   get(
     priorityId: string,
-    params: PriorityGetParams,
+    params?: PriorityGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RequestsAPI.Item>;
+  get(priorityId: string, options?: Core.RequestOptions): Core.APIPromise<RequestsAPI.Item>;
+  get(
+    priorityId: string,
+    params: PriorityGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RequestsAPI.Item> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(priorityId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/cloudforce-one/requests/priority/${priorityId}`,
@@ -113,7 +132,7 @@ export class PriorityResource extends APIResource {
   }
 
   /**
-   * Get Priority Intelligence Requirement Quota
+   * Retrieves quota usage for Cloudforce One priority requests.
    *
    * @example
    * ```ts
@@ -123,8 +142,16 @@ export class PriorityResource extends APIResource {
    *   });
    * ```
    */
-  quota(params: PriorityQuotaParams, options?: Core.RequestOptions): Core.APIPromise<RequestsAPI.Quota> {
-    const { account_id } = params;
+  quota(params?: PriorityQuotaParams, options?: Core.RequestOptions): Core.APIPromise<RequestsAPI.Quota>;
+  quota(options?: Core.RequestOptions): Core.APIPromise<RequestsAPI.Quota>;
+  quota(
+    params: PriorityQuotaParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RequestsAPI.Quota> {
+    if (isRequestOptions(params)) {
+      return this.quota({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/cloudforce-one/requests/priority/quota`,
@@ -246,7 +273,7 @@ export interface PriorityCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of labels.
@@ -273,7 +300,7 @@ export interface PriorityUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of labels.
@@ -300,21 +327,21 @@ export interface PriorityDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PriorityGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PriorityQuotaParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace PriorityResource {

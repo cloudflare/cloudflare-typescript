@@ -103,7 +103,11 @@ export class Applications extends APIResource {
     params: ApplicationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationCreateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -149,7 +153,11 @@ export class Applications extends APIResource {
     params: ApplicationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationUpdateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -201,7 +209,11 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id, zone_id, ...query } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...query
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -251,7 +263,8 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(appId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -302,7 +315,8 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(appId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -356,7 +370,8 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.revokeTokens(appId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -562,6 +577,14 @@ export namespace Application {
     skip_interstitial?: boolean;
 
     updated_at?: string;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -1023,6 +1046,14 @@ export namespace Application {
     skip_interstitial?: boolean;
 
     updated_at?: string;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -1187,6 +1218,14 @@ export namespace Application {
     skip_interstitial?: boolean;
 
     updated_at?: string;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -1464,6 +1503,12 @@ export interface ApplicationPolicy {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: ApplicationPolicy.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -1490,6 +1535,11 @@ export interface ApplicationPolicy {
    * this feature.
    */
   isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: ApplicationPolicy.MfaConfig;
 
   /**
    * The name of the Access policy.
@@ -1520,6 +1570,58 @@ export interface ApplicationPolicy {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace ApplicationPolicy {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    rdp?: ConnectionRules.RDP;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
+     */
+    export interface RDP {
+      /**
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
+       */
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+      /**
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
+       */
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+    }
+  }
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
+    /**
+     * Lists the MFA methods that users can authenticate with.
+     */
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+    /**
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
+     */
+    mfa_disabled?: boolean;
+
+    /**
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+     */
+    session_duration?: string;
+  }
 }
 
 /**
@@ -2592,7 +2694,9 @@ export type ApplicationCreateResponse =
   | ApplicationCreateResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationCreateResponse.BookmarkApplication
   | ApplicationCreateResponse.InfrastructureApplication
-  | ApplicationCreateResponse.BrowserRdpApplication;
+  | ApplicationCreateResponse.BrowserRDPApplication
+  | ApplicationCreateResponse.McpServerApplication
+  | ApplicationCreateResponse.McpServerPortalApplication;
 
 export namespace ApplicationCreateResponse {
   export interface SelfHostedApplication {
@@ -2701,9 +2805,23 @@ export namespace ApplicationCreateResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: SelfHostedApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: SelfHostedApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -2772,6 +2890,14 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -2834,6 +2960,99 @@ export namespace ApplicationCreateResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -2850,6 +3069,12 @@ export namespace ApplicationCreateResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -2877,6 +3102,11 @@ export namespace ApplicationCreateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -2913,6 +3143,58 @@ export namespace ApplicationCreateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -3098,6 +3380,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -3124,6 +3412,11 @@ export namespace ApplicationCreateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -3160,6 +3453,58 @@ export namespace ApplicationCreateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -3382,9 +3727,23 @@ export namespace ApplicationCreateResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserSSHApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserSSHApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -3453,6 +3812,14 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -3515,6 +3882,99 @@ export namespace ApplicationCreateResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -3531,6 +3991,12 @@ export namespace ApplicationCreateResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -3558,6 +4024,11 @@ export namespace ApplicationCreateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -3594,6 +4065,58 @@ export namespace ApplicationCreateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -3816,9 +4339,23 @@ export namespace ApplicationCreateResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserVNCApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserVNCApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -3887,6 +4424,14 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -3949,6 +4494,99 @@ export namespace ApplicationCreateResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -3965,6 +4603,12 @@ export namespace ApplicationCreateResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -3992,6 +4636,11 @@ export namespace ApplicationCreateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -4028,6 +4677,58 @@ export namespace ApplicationCreateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -4300,6 +5001,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -4326,6 +5033,11 @@ export namespace ApplicationCreateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -4362,6 +5074,58 @@ export namespace ApplicationCreateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -4449,6 +5213,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -4475,6 +5245,11 @@ export namespace ApplicationCreateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -4511,6 +5286,58 @@ export namespace ApplicationCreateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -4598,6 +5425,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -4624,6 +5457,11 @@ export namespace ApplicationCreateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -4660,6 +5498,58 @@ export namespace ApplicationCreateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -4747,6 +5637,12 @@ export namespace ApplicationCreateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -4773,6 +5669,11 @@ export namespace ApplicationCreateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -4810,6 +5711,58 @@ export namespace ApplicationCreateResponse {
 
       updated_at?: string;
     }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
   }
 
   export interface BookmarkApplication {
@@ -4843,6 +5796,8 @@ export namespace ApplicationCreateResponse {
      */
     name?: string;
 
+    policies?: Array<BookmarkApplication.Policy>;
+
     /**
      * The tags you want assigned to an application. Tags are used to filter
      * applications in the App Launcher dashboard.
@@ -4853,6 +5808,152 @@ export namespace ApplicationCreateResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+  }
+
+  export namespace BookmarkApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
   }
 
   export interface InfrastructureApplication {
@@ -4933,6 +6034,12 @@ export namespace ApplicationCreateResponse {
       include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * The name of the Access policy.
        */
       name?: string;
@@ -4976,17 +6083,41 @@ export namespace ApplicationCreateResponse {
           allow_email_alias?: boolean;
         }
       }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * The primary hostname and path secured by Access. This domain will be displayed
      * if the app is visible in the App Launcher.
      */
     domain: string;
 
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * The application type.
@@ -5064,9 +6195,9 @@ export namespace ApplicationCreateResponse {
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -5087,9 +6218,23 @@ export namespace ApplicationCreateResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserRDPApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -5103,7 +6248,7 @@ export namespace ApplicationCreateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<BrowserRdpApplication.Policy>;
+    policies?: Array<BrowserRDPApplication.Policy>;
 
     /**
      * Allows matching Access Service Tokens passed HTTP in a single header with this
@@ -5126,7 +6271,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated List of public domains that Access will secure. This field is
@@ -5158,9 +6303,17 @@ export namespace ApplicationCreateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -5238,6 +6391,99 @@ export namespace ApplicationCreateResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -5254,6 +6500,12 @@ export namespace ApplicationCreateResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -5281,6 +6533,11 @@ export namespace ApplicationCreateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -5317,6 +6574,1072 @@ export namespace ApplicationCreateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * When set to true, users can authenticate to this application using their WARP
+     * session. When set to false this application will always require direct IdP
+     * authentication. This setting always overrides the organization setting for WARP
+     * authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom error message shown to a user when they are denied access to the
+     * application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<
+      | McpServerApplication.PublicDestination
+      | McpServerApplication.PrivateDestination
+      | McpServerApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * Enables the HttpOnly cookie attribute, which increases security against XSS
+     * attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerApplication.OAuthConfiguration;
+
+    /**
+     * Allows options preflight requests to bypass Access authentication and go
+     * directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    policies?: Array<McpServerApplication.Policy>;
+
+    /**
+     * Sets the SameSite cookie setting, which provides increased security against CSRF
+     * attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: McpServerApplication.SCIMConfig;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerPortalApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * When set to true, users can authenticate to this application using their WARP
+     * session. When set to false this application will always require direct IdP
+     * authentication. This setting always overrides the organization setting for WARP
+     * authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom error message shown to a user when they are denied access to the
+     * application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<
+      | McpServerPortalApplication.PublicDestination
+      | McpServerPortalApplication.PrivateDestination
+      | McpServerPortalApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
+     */
+    domain?: string;
+
+    /**
+     * Enables the HttpOnly cookie attribute, which increases security against XSS
+     * attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerPortalApplication.OAuthConfiguration;
+
+    /**
+     * Allows options preflight requests to bypass Access authentication and go
+     * directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    policies?: Array<McpServerPortalApplication.Policy>;
+
+    /**
+     * Sets the SameSite cookie setting, which provides increased security against CSRF
+     * attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: McpServerPortalApplication.SCIMConfig;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerPortalApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -5431,7 +7754,9 @@ export type ApplicationUpdateResponse =
   | ApplicationUpdateResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationUpdateResponse.BookmarkApplication
   | ApplicationUpdateResponse.InfrastructureApplication
-  | ApplicationUpdateResponse.BrowserRdpApplication;
+  | ApplicationUpdateResponse.BrowserRDPApplication
+  | ApplicationUpdateResponse.McpServerApplication
+  | ApplicationUpdateResponse.McpServerPortalApplication;
 
 export namespace ApplicationUpdateResponse {
   export interface SelfHostedApplication {
@@ -5540,9 +7865,23 @@ export namespace ApplicationUpdateResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: SelfHostedApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: SelfHostedApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -5611,6 +7950,14 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -5673,6 +8020,99 @@ export namespace ApplicationUpdateResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -5689,6 +8129,12 @@ export namespace ApplicationUpdateResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -5716,6 +8162,11 @@ export namespace ApplicationUpdateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -5752,6 +8203,58 @@ export namespace ApplicationUpdateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -5937,6 +8440,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -5963,6 +8472,11 @@ export namespace ApplicationUpdateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -5999,6 +8513,58 @@ export namespace ApplicationUpdateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -6221,9 +8787,23 @@ export namespace ApplicationUpdateResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserSSHApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserSSHApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -6292,6 +8872,14 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -6354,6 +8942,99 @@ export namespace ApplicationUpdateResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -6370,6 +9051,12 @@ export namespace ApplicationUpdateResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -6397,6 +9084,11 @@ export namespace ApplicationUpdateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -6433,6 +9125,58 @@ export namespace ApplicationUpdateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -6655,9 +9399,23 @@ export namespace ApplicationUpdateResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserVNCApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserVNCApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -6726,6 +9484,14 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -6788,6 +9554,99 @@ export namespace ApplicationUpdateResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -6804,6 +9663,12 @@ export namespace ApplicationUpdateResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -6831,6 +9696,11 @@ export namespace ApplicationUpdateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -6867,6 +9737,58 @@ export namespace ApplicationUpdateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -7139,6 +10061,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -7165,6 +10093,11 @@ export namespace ApplicationUpdateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -7201,6 +10134,58 @@ export namespace ApplicationUpdateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -7288,6 +10273,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -7314,6 +10305,11 @@ export namespace ApplicationUpdateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -7350,6 +10346,58 @@ export namespace ApplicationUpdateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -7437,6 +10485,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -7463,6 +10517,11 @@ export namespace ApplicationUpdateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -7499,6 +10558,58 @@ export namespace ApplicationUpdateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -7586,6 +10697,12 @@ export namespace ApplicationUpdateResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -7612,6 +10729,11 @@ export namespace ApplicationUpdateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -7649,6 +10771,58 @@ export namespace ApplicationUpdateResponse {
 
       updated_at?: string;
     }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
   }
 
   export interface BookmarkApplication {
@@ -7682,6 +10856,8 @@ export namespace ApplicationUpdateResponse {
      */
     name?: string;
 
+    policies?: Array<BookmarkApplication.Policy>;
+
     /**
      * The tags you want assigned to an application. Tags are used to filter
      * applications in the App Launcher dashboard.
@@ -7692,6 +10868,152 @@ export namespace ApplicationUpdateResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+  }
+
+  export namespace BookmarkApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
   }
 
   export interface InfrastructureApplication {
@@ -7772,6 +11094,12 @@ export namespace ApplicationUpdateResponse {
       include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * The name of the Access policy.
        */
       name?: string;
@@ -7815,17 +11143,41 @@ export namespace ApplicationUpdateResponse {
           allow_email_alias?: boolean;
         }
       }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * The primary hostname and path secured by Access. This domain will be displayed
      * if the app is visible in the App Launcher.
      */
     domain: string;
 
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * The application type.
@@ -7903,9 +11255,9 @@ export namespace ApplicationUpdateResponse {
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -7926,9 +11278,23 @@ export namespace ApplicationUpdateResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserRDPApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -7942,7 +11308,7 @@ export namespace ApplicationUpdateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<BrowserRdpApplication.Policy>;
+    policies?: Array<BrowserRDPApplication.Policy>;
 
     /**
      * Allows matching Access Service Tokens passed HTTP in a single header with this
@@ -7965,7 +11331,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated List of public domains that Access will secure. This field is
@@ -7997,9 +11363,17 @@ export namespace ApplicationUpdateResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -8077,6 +11451,99 @@ export namespace ApplicationUpdateResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -8093,6 +11560,12 @@ export namespace ApplicationUpdateResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -8120,6 +11593,11 @@ export namespace ApplicationUpdateResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -8156,6 +11634,1072 @@ export namespace ApplicationUpdateResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * When set to true, users can authenticate to this application using their WARP
+     * session. When set to false this application will always require direct IdP
+     * authentication. This setting always overrides the organization setting for WARP
+     * authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom error message shown to a user when they are denied access to the
+     * application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<
+      | McpServerApplication.PublicDestination
+      | McpServerApplication.PrivateDestination
+      | McpServerApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * Enables the HttpOnly cookie attribute, which increases security against XSS
+     * attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerApplication.OAuthConfiguration;
+
+    /**
+     * Allows options preflight requests to bypass Access authentication and go
+     * directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    policies?: Array<McpServerApplication.Policy>;
+
+    /**
+     * Sets the SameSite cookie setting, which provides increased security against CSRF
+     * attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: McpServerApplication.SCIMConfig;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerPortalApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * When set to true, users can authenticate to this application using their WARP
+     * session. When set to false this application will always require direct IdP
+     * authentication. This setting always overrides the organization setting for WARP
+     * authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom error message shown to a user when they are denied access to the
+     * application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<
+      | McpServerPortalApplication.PublicDestination
+      | McpServerPortalApplication.PrivateDestination
+      | McpServerPortalApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
+     */
+    domain?: string;
+
+    /**
+     * Enables the HttpOnly cookie attribute, which increases security against XSS
+     * attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerPortalApplication.OAuthConfiguration;
+
+    /**
+     * Allows options preflight requests to bypass Access authentication and go
+     * directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    policies?: Array<McpServerPortalApplication.Policy>;
+
+    /**
+     * Sets the SameSite cookie setting, which provides increased security against CSRF
+     * attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: McpServerPortalApplication.SCIMConfig;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerPortalApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -8270,7 +12814,9 @@ export type ApplicationListResponse =
   | ApplicationListResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationListResponse.BookmarkApplication
   | ApplicationListResponse.InfrastructureApplication
-  | ApplicationListResponse.BrowserRdpApplication;
+  | ApplicationListResponse.BrowserRDPApplication
+  | ApplicationListResponse.McpServerApplication
+  | ApplicationListResponse.McpServerPortalApplication;
 
 export namespace ApplicationListResponse {
   export interface SelfHostedApplication {
@@ -8379,9 +12925,23 @@ export namespace ApplicationListResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: SelfHostedApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: SelfHostedApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -8450,6 +13010,14 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -8512,6 +13080,99 @@ export namespace ApplicationListResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -8528,6 +13189,12 @@ export namespace ApplicationListResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -8555,6 +13222,11 @@ export namespace ApplicationListResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -8591,6 +13263,58 @@ export namespace ApplicationListResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -8776,6 +13500,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -8802,6 +13532,11 @@ export namespace ApplicationListResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -8838,6 +13573,58 @@ export namespace ApplicationListResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -9060,9 +13847,23 @@ export namespace ApplicationListResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserSSHApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserSSHApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -9131,6 +13932,14 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -9193,6 +14002,99 @@ export namespace ApplicationListResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -9209,6 +14111,12 @@ export namespace ApplicationListResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -9236,6 +14144,11 @@ export namespace ApplicationListResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -9272,6 +14185,58 @@ export namespace ApplicationListResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -9494,9 +14459,23 @@ export namespace ApplicationListResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserVNCApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserVNCApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -9565,6 +14544,14 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -9627,6 +14614,99 @@ export namespace ApplicationListResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -9643,6 +14723,12 @@ export namespace ApplicationListResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -9670,6 +14756,11 @@ export namespace ApplicationListResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -9706,6 +14797,58 @@ export namespace ApplicationListResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -9978,6 +15121,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -10004,6 +15153,11 @@ export namespace ApplicationListResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -10040,6 +15194,58 @@ export namespace ApplicationListResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -10127,6 +15333,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -10153,6 +15365,11 @@ export namespace ApplicationListResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -10189,6 +15406,58 @@ export namespace ApplicationListResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -10276,6 +15545,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -10302,6 +15577,11 @@ export namespace ApplicationListResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -10338,6 +15618,58 @@ export namespace ApplicationListResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -10425,6 +15757,12 @@ export namespace ApplicationListResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -10451,6 +15789,11 @@ export namespace ApplicationListResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -10488,6 +15831,58 @@ export namespace ApplicationListResponse {
 
       updated_at?: string;
     }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
   }
 
   export interface BookmarkApplication {
@@ -10521,6 +15916,8 @@ export namespace ApplicationListResponse {
      */
     name?: string;
 
+    policies?: Array<BookmarkApplication.Policy>;
+
     /**
      * The tags you want assigned to an application. Tags are used to filter
      * applications in the App Launcher dashboard.
@@ -10531,6 +15928,152 @@ export namespace ApplicationListResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+  }
+
+  export namespace BookmarkApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
   }
 
   export interface InfrastructureApplication {
@@ -10611,6 +16154,12 @@ export namespace ApplicationListResponse {
       include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * The name of the Access policy.
        */
       name?: string;
@@ -10654,17 +16203,41 @@ export namespace ApplicationListResponse {
           allow_email_alias?: boolean;
         }
       }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * The primary hostname and path secured by Access. This domain will be displayed
      * if the app is visible in the App Launcher.
      */
     domain: string;
 
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * The application type.
@@ -10742,9 +16315,9 @@ export namespace ApplicationListResponse {
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -10765,9 +16338,23 @@ export namespace ApplicationListResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserRDPApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -10781,7 +16368,7 @@ export namespace ApplicationListResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<BrowserRdpApplication.Policy>;
+    policies?: Array<BrowserRDPApplication.Policy>;
 
     /**
      * Allows matching Access Service Tokens passed HTTP in a single header with this
@@ -10804,7 +16391,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated List of public domains that Access will secure. This field is
@@ -10836,9 +16423,17 @@ export namespace ApplicationListResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -10916,6 +16511,99 @@ export namespace ApplicationListResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -10932,6 +16620,12 @@ export namespace ApplicationListResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -10959,6 +16653,11 @@ export namespace ApplicationListResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -10995,6 +16694,1072 @@ export namespace ApplicationListResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * When set to true, users can authenticate to this application using their WARP
+     * session. When set to false this application will always require direct IdP
+     * authentication. This setting always overrides the organization setting for WARP
+     * authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom error message shown to a user when they are denied access to the
+     * application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<
+      | McpServerApplication.PublicDestination
+      | McpServerApplication.PrivateDestination
+      | McpServerApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * Enables the HttpOnly cookie attribute, which increases security against XSS
+     * attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerApplication.OAuthConfiguration;
+
+    /**
+     * Allows options preflight requests to bypass Access authentication and go
+     * directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    policies?: Array<McpServerApplication.Policy>;
+
+    /**
+     * Sets the SameSite cookie setting, which provides increased security against CSRF
+     * attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: McpServerApplication.SCIMConfig;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerPortalApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * When set to true, users can authenticate to this application using their WARP
+     * session. When set to false this application will always require direct IdP
+     * authentication. This setting always overrides the organization setting for WARP
+     * authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom error message shown to a user when they are denied access to the
+     * application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<
+      | McpServerPortalApplication.PublicDestination
+      | McpServerPortalApplication.PrivateDestination
+      | McpServerPortalApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
+     */
+    domain?: string;
+
+    /**
+     * Enables the HttpOnly cookie attribute, which increases security against XSS
+     * attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerPortalApplication.OAuthConfiguration;
+
+    /**
+     * Allows options preflight requests to bypass Access authentication and go
+     * directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    policies?: Array<McpServerPortalApplication.Policy>;
+
+    /**
+     * Sets the SameSite cookie setting, which provides increased security against CSRF
+     * attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: McpServerPortalApplication.SCIMConfig;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerPortalApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -11116,7 +17881,9 @@ export type ApplicationGetResponse =
   | ApplicationGetResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationGetResponse.BookmarkApplication
   | ApplicationGetResponse.InfrastructureApplication
-  | ApplicationGetResponse.BrowserRdpApplication;
+  | ApplicationGetResponse.BrowserRDPApplication
+  | ApplicationGetResponse.McpServerApplication
+  | ApplicationGetResponse.McpServerPortalApplication;
 
 export namespace ApplicationGetResponse {
   export interface SelfHostedApplication {
@@ -11225,9 +17992,23 @@ export namespace ApplicationGetResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: SelfHostedApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: SelfHostedApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -11296,6 +18077,14 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -11358,6 +18147,99 @@ export namespace ApplicationGetResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -11374,6 +18256,12 @@ export namespace ApplicationGetResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -11401,6 +18289,11 @@ export namespace ApplicationGetResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -11437,6 +18330,58 @@ export namespace ApplicationGetResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -11622,6 +18567,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -11648,6 +18599,11 @@ export namespace ApplicationGetResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -11684,6 +18640,58 @@ export namespace ApplicationGetResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -11906,9 +18914,23 @@ export namespace ApplicationGetResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserSSHApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserSSHApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -11977,6 +18999,14 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -12039,6 +19069,99 @@ export namespace ApplicationGetResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -12055,6 +19178,12 @@ export namespace ApplicationGetResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -12082,6 +19211,11 @@ export namespace ApplicationGetResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -12118,6 +19252,58 @@ export namespace ApplicationGetResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -12340,9 +19526,23 @@ export namespace ApplicationGetResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserVNCApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserVNCApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -12411,6 +19611,14 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -12473,6 +19681,99 @@ export namespace ApplicationGetResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -12489,6 +19790,12 @@ export namespace ApplicationGetResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -12516,6 +19823,11 @@ export namespace ApplicationGetResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -12552,6 +19864,58 @@ export namespace ApplicationGetResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -12824,6 +20188,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -12850,6 +20220,11 @@ export namespace ApplicationGetResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -12886,6 +20261,58 @@ export namespace ApplicationGetResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -12973,6 +20400,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -12999,6 +20432,11 @@ export namespace ApplicationGetResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -13035,6 +20473,58 @@ export namespace ApplicationGetResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -13122,6 +20612,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -13148,6 +20644,11 @@ export namespace ApplicationGetResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -13184,6 +20685,58 @@ export namespace ApplicationGetResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -13271,6 +20824,12 @@ export namespace ApplicationGetResponse {
        */
       approval_required?: boolean;
 
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
       created_at?: string;
 
       /**
@@ -13297,6 +20856,11 @@ export namespace ApplicationGetResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -13334,6 +20898,58 @@ export namespace ApplicationGetResponse {
 
       updated_at?: string;
     }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
   }
 
   export interface BookmarkApplication {
@@ -13367,6 +20983,8 @@ export namespace ApplicationGetResponse {
      */
     name?: string;
 
+    policies?: Array<BookmarkApplication.Policy>;
+
     /**
      * The tags you want assigned to an application. Tags are used to filter
      * applications in the App Launcher dashboard.
@@ -13377,6 +20995,152 @@ export namespace ApplicationGetResponse {
      * The application type.
      */
     type?: ApplicationsAPI.ApplicationType;
+  }
+
+  export namespace BookmarkApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
   }
 
   export interface InfrastructureApplication {
@@ -13457,6 +21221,12 @@ export namespace ApplicationGetResponse {
       include?: Array<ApplicationsPoliciesAPI.AccessRule>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * The name of the Access policy.
        */
       name?: string;
@@ -13500,17 +21270,41 @@ export namespace ApplicationGetResponse {
           allow_email_alias?: boolean;
         }
       }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * The primary hostname and path secured by Access. This domain will be displayed
      * if the app is visible in the App Launcher.
      */
     domain: string;
 
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * The application type.
@@ -13588,9 +21382,9 @@ export namespace ApplicationGetResponse {
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -13611,9 +21405,23 @@ export namespace ApplicationGetResponse {
     logo_url?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserRDPApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -13627,7 +21435,7 @@ export namespace ApplicationGetResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<BrowserRdpApplication.Policy>;
+    policies?: Array<BrowserRDPApplication.Policy>;
 
     /**
      * Allows matching Access Service Tokens passed HTTP in a single header with this
@@ -13650,7 +21458,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated List of public domains that Access will secure. This field is
@@ -13682,9 +21490,17 @@ export namespace ApplicationGetResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Determines if users can access this application via a clientless browser
+     * isolation URL. This allows users to access private domains without connecting to
+     * Gateway. The option requires Clientless Browser Isolation to be set up with
+     * policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -13762,6 +21578,99 @@ export namespace ApplicationGetResponse {
       type?: 'via_mcp_server_portal';
     }
 
+    /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
     export interface Policy {
       /**
        * The UUID of the policy
@@ -13778,6 +21687,12 @@ export namespace ApplicationGetResponse {
        * session.
        */
       approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
 
       created_at?: string;
 
@@ -13805,6 +21720,11 @@ export namespace ApplicationGetResponse {
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
 
       /**
        * The name of the Access policy.
@@ -13841,6 +21761,1072 @@ export namespace ApplicationGetResponse {
       session_duration?: string;
 
       updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * When set to true, users can authenticate to this application using their WARP
+     * session. When set to false this application will always require direct IdP
+     * authentication. This setting always overrides the organization setting for WARP
+     * authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom error message shown to a user when they are denied access to the
+     * application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<
+      | McpServerApplication.PublicDestination
+      | McpServerApplication.PrivateDestination
+      | McpServerApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * Enables the HttpOnly cookie attribute, which increases security against XSS
+     * attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerApplication.OAuthConfiguration;
+
+    /**
+     * Allows options preflight requests to bypass Access authentication and go
+     * directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    policies?: Array<McpServerApplication.Policy>;
+
+    /**
+     * Sets the SameSite cookie setting, which provides increased security against CSRF
+     * attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: McpServerApplication.SCIMConfig;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerPortalApplication {
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * When set to true, users can authenticate to this application using their WARP
+     * session. When set to false this application will always require direct IdP
+     * authentication. This setting always overrides the organization setting for WARP
+     * authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * The custom error message shown to a user when they are denied access to the
+     * application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<
+      | McpServerPortalApplication.PublicDestination
+      | McpServerPortalApplication.PrivateDestination
+      | McpServerPortalApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
+     */
+    domain?: string;
+
+    /**
+     * Enables the HttpOnly cookie attribute, which increases security against XSS
+     * attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerPortalApplication.OAuthConfiguration;
+
+    /**
+     * Allows options preflight requests to bypass Access authentication and go
+     * directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    policies?: Array<McpServerPortalApplication.Policy>;
+
+    /**
+     * Sets the SameSite cookie setting, which provides increased security against CSRF
+     * attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: McpServerPortalApplication.SCIMConfig;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerPortalApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: Policy.ConnectionRules;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<ApplicationsPoliciesAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace Policy {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -13955,9 +22941,11 @@ export type ApplicationCreateParams =
   | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationCreateParams.BrowserIsolationPermissionsApplication
   | ApplicationCreateParams.GatewayIdentityProxyEndpointApplication
-  | ApplicationCreateParams.AccessBookmarkProps
+  | ApplicationCreateParams.BookmarkApplication
   | ApplicationCreateParams.InfrastructureApplication
-  | ApplicationCreateParams.BrowserRdpApplication;
+  | ApplicationCreateParams.BrowserRDPApplication
+  | ApplicationCreateParams.McpServerApplication
+  | ApplicationCreateParams.McpServerPortalApplication;
 
 export declare namespace ApplicationCreateParams {
   export interface SelfHostedApplication {
@@ -14015,7 +23003,7 @@ export declare namespace ApplicationCreateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -14073,9 +23061,23 @@ export declare namespace ApplicationCreateParams {
     logo_url?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: SelfHostedApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: SelfHostedApplication.OAuthConfiguration;
 
     /**
      * Body param: Allows options preflight requests to bypass Access authentication
@@ -14092,7 +23094,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<SelfHostedApplication.AccessAppPolicyLink | string | SelfHostedApplication.UnionMember2>;
 
@@ -14150,6 +23153,14 @@ export declare namespace ApplicationCreateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -14213,6 +23224,99 @@ export declare namespace ApplicationCreateParams {
     }
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
@@ -14246,11 +23350,22 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -14274,6 +23389,58 @@ export declare namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -14425,12 +23592,13 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<SaaSApplication.AccessAppPolicyLink | string | SaaSApplication.UnionMember2>;
 
     /**
-     * Body param:
+     * Body param
      */
     saas_app?: SAMLSaaSAppParam | OIDCSaaSAppParam;
 
@@ -14487,11 +23655,22 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -14515,6 +23694,58 @@ export declare namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -14686,7 +23917,7 @@ export declare namespace ApplicationCreateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -14744,9 +23975,23 @@ export declare namespace ApplicationCreateParams {
     logo_url?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserSSHApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserSSHApplication.OAuthConfiguration;
 
     /**
      * Body param: Allows options preflight requests to bypass Access authentication
@@ -14763,7 +24008,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BrowserSSHApplication.AccessAppPolicyLink | string | BrowserSSHApplication.UnionMember2>;
 
@@ -14821,6 +24067,14 @@ export declare namespace ApplicationCreateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -14884,6 +24138,99 @@ export declare namespace ApplicationCreateParams {
     }
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
@@ -14917,11 +24264,22 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -14945,6 +24303,58 @@ export declare namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -15116,7 +24526,7 @@ export declare namespace ApplicationCreateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -15174,9 +24584,23 @@ export declare namespace ApplicationCreateParams {
     logo_url?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserVNCApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserVNCApplication.OAuthConfiguration;
 
     /**
      * Body param: Allows options preflight requests to bypass Access authentication
@@ -15193,7 +24617,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BrowserVNCApplication.AccessAppPolicyLink | string | BrowserVNCApplication.UnionMember2>;
 
@@ -15251,6 +24676,14 @@ export declare namespace ApplicationCreateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -15314,6 +24747,99 @@ export declare namespace ApplicationCreateParams {
     }
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
@@ -15347,11 +24873,22 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -15375,6 +24912,58 @@ export declare namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -15568,7 +25157,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       AppLauncherApplication.AccessAppPolicyLink | string | AppLauncherApplication.UnionMember2
@@ -15664,11 +25254,22 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -15692,6 +25293,58 @@ export declare namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -15746,7 +25399,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
@@ -15797,11 +25451,22 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -15825,6 +25490,58 @@ export declare namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -15879,7 +25596,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | BrowserIsolationPermissionsApplication.AccessAppPolicyLink
@@ -15930,11 +25648,22 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -15958,6 +25687,58 @@ export declare namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -16023,7 +25804,8 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | GatewayIdentityProxyEndpointApplication.AccessAppPolicyLink
@@ -16074,11 +25856,22 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -16103,9 +25896,61 @@ export declare namespace ApplicationCreateParams {
        */
       session_duration?: string;
     }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
   }
 
-  export interface AccessBookmarkProps {
+  export interface BookmarkApplication {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -16139,6 +25984,14 @@ export declare namespace ApplicationCreateParams {
     name?: string;
 
     /**
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
+     */
+    policies?: Array<BookmarkApplication.AccessAppPolicyLink | string | BookmarkApplication.UnionMember2>;
+
+    /**
      * Body param: The tags you want assigned to an application. Tags are used to
      * filter applications in the App Launcher dashboard.
      */
@@ -16150,9 +26003,138 @@ export declare namespace ApplicationCreateParams {
     type?: ApplicationTypeParam;
   }
 
+  export namespace BookmarkApplication {
+    /**
+     * A JSON that links a reusable policy to an application.
+     */
+    export interface AccessAppPolicyLink {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+  }
+
   export interface InfrastructureApplication {
     /**
-     * Body param:
+     * Body param
      */
     target_criteria: Array<InfrastructureApplication.TargetCriterion>;
 
@@ -16234,6 +26216,12 @@ export declare namespace ApplicationCreateParams {
       exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
@@ -16270,10 +26258,34 @@ export declare namespace ApplicationCreateParams {
           allow_email_alias?: boolean;
         }
       }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * Body param: The primary hostname and path secured by Access. This domain will be
      * displayed if the app is visible in the App Launcher.
@@ -16281,9 +26293,9 @@ export declare namespace ApplicationCreateParams {
     domain: string;
 
     /**
-     * Body param:
+     * Body param
      */
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * Body param: The application type.
@@ -16333,7 +26345,7 @@ export declare namespace ApplicationCreateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -16368,9 +26380,9 @@ export declare namespace ApplicationCreateParams {
      * ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -16391,9 +26403,23 @@ export declare namespace ApplicationCreateParams {
     logo_url?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserRDPApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Body param: Allows options preflight requests to bypass Access authentication
@@ -16410,9 +26436,10 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
-    policies?: Array<BrowserRdpApplication.AccessAppPolicyLink | string | BrowserRdpApplication.UnionMember2>;
+    policies?: Array<BrowserRDPApplication.AccessAppPolicyLink | string | BrowserRDPApplication.UnionMember2>;
 
     /**
      * Body param: Allows matching Access Service Tokens passed HTTP in a single header
@@ -16435,7 +26462,7 @@ export declare namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated Body param: List of public domains that Access will secure. This
@@ -16468,9 +26495,17 @@ export declare namespace ApplicationCreateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -16549,6 +26584,99 @@ export declare namespace ApplicationCreateParams {
     }
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
@@ -16582,11 +26710,22 @@ export declare namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -16610,6 +26749,1060 @@ export declare namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: ApplicationTypeParam;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: When set to true, users can authenticate to this application using
+     * their WARP session. When set to false this application will always require
+     * direct IdP authentication. This setting always overrides the organization
+     * setting for WARP authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<AllowedIdPsParam>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The custom error message shown to a user when they are denied access
+     * to the application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: List of destinations secured by Access. This supersedes
+     * `self_hosted_domains` to allow for more flexibility in defining different types
+     * of domains. If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
+     */
+    destinations?: Array<
+      | McpServerApplication.PublicDestination
+      | McpServerApplication.PrivateDestination
+      | McpServerApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * Body param: Enables the HttpOnly cookie attribute, which increases security
+     * against XSS attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerApplication.OAuthConfiguration;
+
+    /**
+     * Body param: Allows options preflight requests to bypass Access authentication
+     * and go directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    /**
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
+     */
+    policies?: Array<McpServerApplication.AccessAppPolicyLink | string | McpServerApplication.UnionMember2>;
+
+    /**
+     * Body param: Sets the SameSite cookie setting, which provides increased security
+     * against CSRF attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: McpServerApplication.SCIMConfig;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * A JSON that links a reusable policy to an application.
+     */
+    export interface AccessAppPolicyLink {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerPortalApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: ApplicationTypeParam;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: When set to true, users can authenticate to this application using
+     * their WARP session. When set to false this application will always require
+     * direct IdP authentication. This setting always overrides the organization
+     * setting for WARP authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<AllowedIdPsParam>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The custom error message shown to a user when they are denied access
+     * to the application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: List of destinations secured by Access. This supersedes
+     * `self_hosted_domains` to allow for more flexibility in defining different types
+     * of domains. If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
+     */
+    destinations?: Array<
+      | McpServerPortalApplication.PublicDestination
+      | McpServerPortalApplication.PrivateDestination
+      | McpServerPortalApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * Body param: The primary hostname and path secured by Access. This domain will be
+     * displayed if the app is visible in the App Launcher.
+     */
+    domain?: string;
+
+    /**
+     * Body param: Enables the HttpOnly cookie attribute, which increases security
+     * against XSS attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerPortalApplication.OAuthConfiguration;
+
+    /**
+     * Body param: Allows options preflight requests to bypass Access authentication
+     * and go directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    /**
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
+     */
+    policies?: Array<
+      McpServerPortalApplication.AccessAppPolicyLink | string | McpServerPortalApplication.UnionMember2
+    >;
+
+    /**
+     * Body param: Sets the SameSite cookie setting, which provides increased security
+     * against CSRF attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: McpServerPortalApplication.SCIMConfig;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerPortalApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * A JSON that links a reusable policy to an application.
+     */
+    export interface AccessAppPolicyLink {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -16722,9 +27915,11 @@ export type ApplicationUpdateParams =
   | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationUpdateParams.BrowserIsolationPermissionsApplication
   | ApplicationUpdateParams.GatewayIdentityProxyEndpointApplication
-  | ApplicationUpdateParams.AccessBookmarkProps
+  | ApplicationUpdateParams.BookmarkApplication
   | ApplicationUpdateParams.InfrastructureApplication
-  | ApplicationUpdateParams.BrowserRdpApplication;
+  | ApplicationUpdateParams.BrowserRDPApplication
+  | ApplicationUpdateParams.McpServerApplication
+  | ApplicationUpdateParams.McpServerPortalApplication;
 
 export declare namespace ApplicationUpdateParams {
   export interface SelfHostedApplication {
@@ -16782,7 +27977,7 @@ export declare namespace ApplicationUpdateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -16840,9 +28035,23 @@ export declare namespace ApplicationUpdateParams {
     logo_url?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: SelfHostedApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: SelfHostedApplication.OAuthConfiguration;
 
     /**
      * Body param: Allows options preflight requests to bypass Access authentication
@@ -16859,7 +28068,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<SelfHostedApplication.AccessAppPolicyLink | string | SelfHostedApplication.UnionMember2>;
 
@@ -16917,6 +28127,14 @@ export declare namespace ApplicationUpdateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace SelfHostedApplication {
@@ -16980,6 +28198,99 @@ export declare namespace ApplicationUpdateParams {
     }
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
@@ -17013,11 +28324,22 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -17041,6 +28363,58 @@ export declare namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -17192,12 +28566,13 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<SaaSApplication.AccessAppPolicyLink | string | SaaSApplication.UnionMember2>;
 
     /**
-     * Body param:
+     * Body param
      */
     saas_app?: SAMLSaaSAppParam | OIDCSaaSAppParam;
 
@@ -17254,11 +28629,22 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -17282,6 +28668,58 @@ export declare namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -17453,7 +28891,7 @@ export declare namespace ApplicationUpdateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -17511,9 +28949,23 @@ export declare namespace ApplicationUpdateParams {
     logo_url?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserSSHApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserSSHApplication.OAuthConfiguration;
 
     /**
      * Body param: Allows options preflight requests to bypass Access authentication
@@ -17530,7 +28982,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BrowserSSHApplication.AccessAppPolicyLink | string | BrowserSSHApplication.UnionMember2>;
 
@@ -17588,6 +29041,14 @@ export declare namespace ApplicationUpdateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserSSHApplication {
@@ -17651,6 +29112,99 @@ export declare namespace ApplicationUpdateParams {
     }
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
@@ -17684,11 +29238,22 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -17712,6 +29277,58 @@ export declare namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -17883,7 +29500,7 @@ export declare namespace ApplicationUpdateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -17941,9 +29558,23 @@ export declare namespace ApplicationUpdateParams {
     logo_url?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserVNCApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserVNCApplication.OAuthConfiguration;
 
     /**
      * Body param: Allows options preflight requests to bypass Access authentication
@@ -17960,7 +29591,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<BrowserVNCApplication.AccessAppPolicyLink | string | BrowserVNCApplication.UnionMember2>;
 
@@ -18018,6 +29650,14 @@ export declare namespace ApplicationUpdateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
   export namespace BrowserVNCApplication {
@@ -18081,6 +29721,99 @@ export declare namespace ApplicationUpdateParams {
     }
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
@@ -18114,11 +29847,22 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -18142,6 +29886,58 @@ export declare namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**
@@ -18335,7 +30131,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       AppLauncherApplication.AccessAppPolicyLink | string | AppLauncherApplication.UnionMember2
@@ -18431,11 +30228,22 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -18459,6 +30267,58 @@ export declare namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -18513,7 +30373,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
@@ -18564,11 +30425,22 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -18592,6 +30464,58 @@ export declare namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -18646,7 +30570,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | BrowserIsolationPermissionsApplication.AccessAppPolicyLink
@@ -18697,11 +30622,22 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -18725,6 +30661,58 @@ export declare namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
@@ -18790,7 +30778,8 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
     policies?: Array<
       | GatewayIdentityProxyEndpointApplication.AccessAppPolicyLink
@@ -18841,11 +30830,22 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -18870,9 +30870,61 @@ export declare namespace ApplicationUpdateParams {
        */
       session_duration?: string;
     }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
   }
 
-  export interface AccessBookmarkProps {
+  export interface BookmarkApplication {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -18906,6 +30958,14 @@ export declare namespace ApplicationUpdateParams {
     name?: string;
 
     /**
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
+     */
+    policies?: Array<BookmarkApplication.AccessAppPolicyLink | string | BookmarkApplication.UnionMember2>;
+
+    /**
      * Body param: The tags you want assigned to an application. Tags are used to
      * filter applications in the App Launcher dashboard.
      */
@@ -18917,9 +30977,138 @@ export declare namespace ApplicationUpdateParams {
     type?: ApplicationTypeParam;
   }
 
+  export namespace BookmarkApplication {
+    /**
+     * A JSON that links a reusable policy to an application.
+     */
+    export interface AccessAppPolicyLink {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+  }
+
   export interface InfrastructureApplication {
     /**
-     * Body param:
+     * Body param
      */
     target_criteria: Array<InfrastructureApplication.TargetCriterion>;
 
@@ -19001,6 +31190,12 @@ export declare namespace ApplicationUpdateParams {
       exclude?: Array<ApplicationsPoliciesAPI.AccessRuleParam>;
 
       /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      mfa_config?: Policy.MfaConfig;
+
+      /**
        * Rules evaluated with an AND logical operator. To match the policy, a user must
        * meet all of the Require rules.
        */
@@ -19037,10 +31232,34 @@ export declare namespace ApplicationUpdateParams {
           allow_email_alias?: boolean;
         }
       }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings for infrastructure
+       * applications.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with. For infrastructure
+         * applications, only `ssh_piv_key` is supported.
+         */
+        allowed_authenticators?: Array<'ssh_piv_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * Body param: The primary hostname and path secured by Access. This domain will be
      * displayed if the app is visible in the App Launcher.
@@ -19048,9 +31267,9 @@ export declare namespace ApplicationUpdateParams {
     domain: string;
 
     /**
-     * Body param:
+     * Body param
      */
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * Body param: The application type.
@@ -19100,7 +31319,7 @@ export declare namespace ApplicationUpdateParams {
     auto_redirect_to_identity?: boolean;
 
     /**
-     * Body param:
+     * Body param
      */
     cors_headers?: CORSHeadersParam;
 
@@ -19135,9 +31354,9 @@ export declare namespace ApplicationUpdateParams {
      * ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -19158,9 +31377,23 @@ export declare namespace ApplicationUpdateParams {
     logo_url?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings.
+     */
+    mfa_config?: BrowserRDPApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Body param: Allows options preflight requests to bypass Access authentication
@@ -19177,9 +31410,10 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: The policies that Access applies to the application, in ascending
      * order of precedence. Items can reference existing policies or create new
-     * policies exclusive to the application.
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
      */
-    policies?: Array<BrowserRdpApplication.AccessAppPolicyLink | string | BrowserRdpApplication.UnionMember2>;
+    policies?: Array<BrowserRDPApplication.AccessAppPolicyLink | string | BrowserRDPApplication.UnionMember2>;
 
     /**
      * Body param: Allows matching Access Service Tokens passed HTTP in a single header
@@ -19202,7 +31436,7 @@ export declare namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated Body param: List of public domains that Access will secure. This
@@ -19235,9 +31469,17 @@ export declare namespace ApplicationUpdateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
+
+    /**
+     * Body param: Determines if users can access this application via a clientless
+     * browser isolation URL. This allows users to access private domains without
+     * connecting to Gateway. The option requires Clientless Browser Isolation to be
+     * set up with policies that allow users of this application.
+     */
+    use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -19316,6 +31558,99 @@ export declare namespace ApplicationUpdateParams {
     }
 
     /**
+     * Configures multi-factor authentication (MFA) settings.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with.
+       */
+      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+       */
+      session_duration?: string;
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
@@ -19349,11 +31684,22 @@ export declare namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Require this application to be served in an isolated browser for users matching
        * this policy. 'Client Web Isolation' must be on for the account in order to use
        * this feature.
        */
       isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -19377,6 +31723,1060 @@ export declare namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: ApplicationTypeParam;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: When set to true, users can authenticate to this application using
+     * their WARP session. When set to false this application will always require
+     * direct IdP authentication. This setting always overrides the organization
+     * setting for WARP authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<AllowedIdPsParam>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The custom error message shown to a user when they are denied access
+     * to the application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: List of destinations secured by Access. This supersedes
+     * `self_hosted_domains` to allow for more flexibility in defining different types
+     * of domains. If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
+     */
+    destinations?: Array<
+      | McpServerApplication.PublicDestination
+      | McpServerApplication.PrivateDestination
+      | McpServerApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * Body param: Enables the HttpOnly cookie attribute, which increases security
+     * against XSS attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerApplication.OAuthConfiguration;
+
+    /**
+     * Body param: Allows options preflight requests to bypass Access authentication
+     * and go directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    /**
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
+     */
+    policies?: Array<McpServerApplication.AccessAppPolicyLink | string | McpServerApplication.UnionMember2>;
+
+    /**
+     * Body param: Sets the SameSite cookie setting, which provides increased security
+     * against CSRF attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: McpServerApplication.SCIMConfig;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * A JSON that links a reusable policy to an application.
+     */
+    export interface AccessAppPolicyLink {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+            | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
+  }
+
+  export interface McpServerPortalApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: ApplicationTypeParam;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: When set to true, users can authenticate to this application using
+     * their WARP session. When set to false this application will always require
+     * direct IdP authentication. This setting always overrides the organization
+     * setting for WARP authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<AllowedIdPsParam>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The custom error message shown to a user when they are denied access
+     * to the application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: List of destinations secured by Access. This supersedes
+     * `self_hosted_domains` to allow for more flexibility in defining different types
+     * of domains. If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
+     */
+    destinations?: Array<
+      | McpServerPortalApplication.PublicDestination
+      | McpServerPortalApplication.PrivateDestination
+      | McpServerPortalApplication.ViaMcpServerPortalDestination
+    >;
+
+    /**
+     * Body param: The primary hostname and path secured by Access. This domain will be
+     * displayed if the app is visible in the App Launcher.
+     */
+    domain?: string;
+
+    /**
+     * Body param: Enables the HttpOnly cookie attribute, which increases security
+     * against XSS attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: **Beta:** Optional configuration for managing an OAuth authorization
+     * flow controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    oauth_configuration?: McpServerPortalApplication.OAuthConfiguration;
+
+    /**
+     * Body param: Allows options preflight requests to bypass Access authentication
+     * and go directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    /**
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application. Reusable and inline policies are mutually
+     * exclusive.
+     */
+    policies?: Array<
+      McpServerPortalApplication.AccessAppPolicyLink | string | McpServerPortalApplication.UnionMember2
+    >;
+
+    /**
+     * Body param: Sets the SameSite cookie setting, which provides increased security
+     * against CSRF attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: McpServerPortalApplication.SCIMConfig;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
+     */
+    session_duration?: string;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace McpServerPortalApplication {
+    /**
+     * A public hostname that Access will secure. Public destinations support
+     * sub-domain and path. Wildcard '\*' can be used in the definition.
+     */
+    export interface PublicDestination {
+      type?: 'public';
+
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+
+    export interface PrivateDestination {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will
+       * match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+
+      /**
+       * The port range of the destination. Can be a single port or a range of ports.
+       * When omitted, all ports will match.
+       */
+      port_range?: string;
+
+      type?: 'private';
+
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+
+    /**
+     * A MCP server id configured in ai-controls. Access will secure the MCP server if
+     * accessed through a MCP portal.
+     */
+    export interface ViaMcpServerPortalDestination {
+      /**
+       * The MCP server id configured in ai-controls.
+       */
+      mcp_server_id?: string;
+
+      type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * **Beta:** Optional configuration for managing an OAuth authorization flow
+     * controlled by Access. When set, Access will act as the OAuth authorization
+     * server for this application. Only compatible with OAuth clients that support
+     * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
+     * for OAuth 2.0). This feature is currently in beta.
+     */
+    export interface OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      dynamic_client_registration?: OAuthConfiguration.DynamicClientRegistration;
+
+      /**
+       * Whether the OAuth configuration is enabled for this application. When set to
+       * `false`, Access will not handle OAuth for this application. Defaults to `true`
+       * if omitted.
+       */
+      enabled?: boolean;
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      grant?: OAuthConfiguration.Grant;
+    }
+
+    export namespace OAuthConfiguration {
+      /**
+       * Settings for OAuth dynamic client registration.
+       */
+      export interface DynamicClientRegistration {
+        /**
+         * Allows any client with redirect URIs on localhost.
+         */
+        allow_any_on_localhost?: boolean;
+
+        /**
+         * Allows any client with redirect URIs on 127.0.0.1.
+         */
+        allow_any_on_loopback?: boolean;
+
+        /**
+         * The URIs that are allowed as redirect URIs for dynamically registered clients.
+         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         */
+        allowed_uris?: Array<string>;
+
+        /**
+         * Whether dynamic client registration is enabled.
+         */
+        enabled?: boolean;
+      }
+
+      /**
+       * Settings for OAuth grant behavior.
+       */
+      export interface Grant {
+        /**
+         * The lifetime of the access token. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        access_token_lifetime?: string;
+
+        /**
+         * The duration of the OAuth session. Must be in the format `300ms` or `2h45m`.
+         * Valid time units are ns, us (or µs), ms, s, m, h.
+         */
+        session_duration?: string;
+      }
+    }
+
+    /**
+     * A JSON that links a reusable policy to an application.
+     */
+    export interface AccessAppPolicyLink {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      mfa_config?: UnionMember2.MfaConfig;
+
+      /**
+       * The order of execution for this policy. Must be unique for each policy within an
+       * app.
+       */
+      precedence?: number;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        rdp?: ConnectionRules.RDP;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The RDP-specific rules that define clipboard behavior for RDP connections.
+         */
+        export interface RDP {
+          /**
+           * Clipboard formats allowed when copying from local machine to remote RDP session.
+           */
+          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+
+          /**
+           * Clipboard formats allowed when copying from remote RDP session to local machine.
+           */
+          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+        }
+      }
+
+      /**
+       * Configures multi-factor authentication (MFA) settings.
+       */
+      export interface MfaConfig {
+        /**
+         * Lists the MFA methods that users can authenticate with.
+         */
+        allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+
+        /**
+         * Indicates whether to disable MFA for this resource. This option is available at
+         * the application and policy level.
+         */
+        mfa_disabled?: boolean;
+
+        /**
+         * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+         * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
+         */
+        session_duration?: string;
+      }
     }
 
     /**

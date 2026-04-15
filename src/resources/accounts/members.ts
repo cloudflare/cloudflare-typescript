@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 import { MembersV4PagePaginationArray } from '../shared';
@@ -20,7 +21,7 @@ export class Members extends APIResource {
    * ```
    */
   create(params: MemberCreateParams, options?: Core.RequestOptions): Core.APIPromise<Shared.Member> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/members`, { body, ...options }) as Core.APIPromise<{
         result: Shared.Member;
@@ -44,7 +45,7 @@ export class Members extends APIResource {
     params: MemberUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Shared.Member> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/members/${memberId}`, {
         body,
@@ -67,10 +68,18 @@ export class Members extends APIResource {
    * ```
    */
   list(
-    params: MemberListParams,
+    params?: MemberListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MembersV4PagePaginationArray, Shared.Member>;
+  list(options?: Core.RequestOptions): Core.PagePromise<MembersV4PagePaginationArray, Shared.Member>;
+  list(
+    params: MemberListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<MembersV4PagePaginationArray, Shared.Member> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/members`, MembersV4PagePaginationArray, {
       query,
       ...options,
@@ -90,10 +99,19 @@ export class Members extends APIResource {
    */
   delete(
     memberId: string,
-    params: MemberDeleteParams,
+    params?: MemberDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MemberDeleteResponse | null>;
+  delete(memberId: string, options?: Core.RequestOptions): Core.APIPromise<MemberDeleteResponse | null>;
+  delete(
+    memberId: string,
+    params: MemberDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MemberDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(memberId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
         result: MemberDeleteResponse | null;
@@ -114,10 +132,19 @@ export class Members extends APIResource {
    */
   get(
     memberId: string,
-    params: MemberGetParams,
+    params?: MemberGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.Member>;
+  get(memberId: string, options?: Core.RequestOptions): Core.APIPromise<Shared.Member>;
+  get(
+    memberId: string,
+    params: MemberGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Shared.Member> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(memberId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
         result: Shared.Member;
@@ -147,7 +174,7 @@ export declare namespace MemberCreateParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The contact email address of the user.
@@ -160,7 +187,9 @@ export declare namespace MemberCreateParams {
     roles: Array<string>;
 
     /**
-     * Body param:
+     * Body param: Status of the member invitation. If not provided during creation,
+     * defaults to 'pending'. Changing from 'accepted' back to 'pending' will trigger a
+     * replacement of the member resource in Terraform.
      */
     status?: 'accepted' | 'pending';
   }
@@ -169,7 +198,7 @@ export declare namespace MemberCreateParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The contact email address of the user.
@@ -182,7 +211,9 @@ export declare namespace MemberCreateParams {
     policies: Array<IAMCreateMemberWithPolicies.Policy>;
 
     /**
-     * Body param:
+     * Body param: Status of the member invitation. If not provided during creation,
+     * defaults to 'pending'. Changing from 'accepted' back to 'pending' will trigger a
+     * replacement of the member resource in Terraform.
      */
     status?: 'accepted' | 'pending';
   }
@@ -238,7 +269,7 @@ export declare namespace MemberUpdateParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Roles assigned to this member.
@@ -250,7 +281,7 @@ export declare namespace MemberUpdateParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Array of policies associated with this member.
@@ -304,7 +335,7 @@ export interface MemberListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Direction to order results.
@@ -326,14 +357,14 @@ export interface MemberDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MemberGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Members {

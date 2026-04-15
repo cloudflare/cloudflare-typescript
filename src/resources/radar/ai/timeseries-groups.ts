@@ -12,16 +12,37 @@ export class TimeseriesGroups extends APIResource {
    * @deprecated Use [Radar > AI > Bots > Summary](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/bots/methods/summary_v2/) instead.
    */
   summary(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query?: TimeseriesGroupSummaryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupSummaryResponse>;
   summary(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupSummaryResponse>;
   summary(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query: TimeseriesGroupSummaryParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupSummaryResponse> {
@@ -60,22 +81,43 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Retrieves the distribution of HTTP requests from AI bots, grouped by chosen the
+   * Retrieves the distribution of HTTP requests from AI bots, grouped by the
    * specified dimension over time.
    *
    * @deprecated Use [Radar > AI > Bots > Timeseries Groups](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/bots/methods/timeseries_groups/) instead.
    */
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query?: TimeseriesGroupTimeseriesGroupsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupTimeseriesGroupsResponse>;
   timeseriesGroups(
-    dimension: 'USER_AGENT' | 'CRAWL_PURPOSE' | 'INDUSTRY' | 'VERTICAL',
+    dimension:
+      | 'USER_AGENT'
+      | 'CRAWL_PURPOSE'
+      | 'INDUSTRY'
+      | 'VERTICAL'
+      | 'CONTENT_TYPE'
+      | 'RESPONSE_STATUS'
+      | 'RESPONSE_STATUS_CATEGORY',
     query: TimeseriesGroupTimeseriesGroupsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeseriesGroupTimeseriesGroupsResponse> {
@@ -680,6 +722,28 @@ export interface TimeseriesGroupSummaryParams {
   asn?: Array<string>;
 
   /**
+   * Filters results by content type category.
+   */
+  contentType?: Array<
+    | 'HTML'
+    | 'IMAGES'
+    | 'JSON'
+    | 'JAVASCRIPT'
+    | 'CSS'
+    | 'PLAIN_TEXT'
+    | 'FONTS'
+    | 'XML'
+    | 'YAML'
+    | 'VIDEO'
+    | 'AUDIO'
+    | 'MARKDOWN'
+    | 'DOCUMENTS'
+    | 'BINARY'
+    | 'SERIALIZATION'
+    | 'OTHER'
+  >;
+
+  /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
    * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
    * excludes results from EU, but includes results from NA.
@@ -736,6 +800,25 @@ export interface TimeseriesGroupSummaryParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
+
+  /**
+   * Filters results by user agent.
+   */
+  userAgent?: Array<string>;
 
   /**
    * Filters results by vertical.
@@ -760,6 +843,28 @@ export interface TimeseriesGroupTimeseriesParams {
   asn?: Array<string>;
 
   /**
+   * Filters results by content type category.
+   */
+  contentType?: Array<
+    | 'HTML'
+    | 'IMAGES'
+    | 'JSON'
+    | 'JAVASCRIPT'
+    | 'CSS'
+    | 'PLAIN_TEXT'
+    | 'FONTS'
+    | 'XML'
+    | 'YAML'
+    | 'VIDEO'
+    | 'AUDIO'
+    | 'MARKDOWN'
+    | 'DOCUMENTS'
+    | 'BINARY'
+    | 'SERIALIZATION'
+    | 'OTHER'
+  >;
+
+  /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
    * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
    * excludes results from EU, but includes results from NA.
@@ -816,6 +921,20 @@ export interface TimeseriesGroupTimeseriesParams {
    * Array of names used to label the series in the response.
    */
   name?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
 
   /**
    * Filters results by user agent.
@@ -843,6 +962,28 @@ export interface TimeseriesGroupTimeseriesGroupsParams {
    * results from AS3356.
    */
   asn?: Array<string>;
+
+  /**
+   * Filters results by content type category.
+   */
+  contentType?: Array<
+    | 'HTML'
+    | 'IMAGES'
+    | 'JSON'
+    | 'JAVASCRIPT'
+    | 'CSS'
+    | 'PLAIN_TEXT'
+    | 'FONTS'
+    | 'XML'
+    | 'YAML'
+    | 'VIDEO'
+    | 'AUDIO'
+    | 'MARKDOWN'
+    | 'DOCUMENTS'
+    | 'BINARY'
+    | 'SERIALIZATION'
+    | 'OTHER'
+  >;
 
   /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
@@ -906,7 +1047,26 @@ export interface TimeseriesGroupTimeseriesGroupsParams {
    * Normalization method applied to the results. Refer to
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
-  normalization?: 'PERCENTAGE_CHANGE' | 'MIN0_MAX';
+  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
+
+  /**
+   * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
+   * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
+   * are accepted.
+   */
+  responseStatus?: Array<string>;
+
+  /**
+   * Filters results by HTTP response status code category.
+   */
+  responseStatusCategory?: Array<
+    'INFORMATIONAL' | 'SUCCESS' | 'REDIRECTION' | 'CLIENT_ERROR' | 'SERVER_ERROR'
+  >;
+
+  /**
+   * Filters results by user agent.
+   */
+  userAgent?: Array<string>;
 
   /**
    * Filters results by vertical.

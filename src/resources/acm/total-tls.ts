@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class TotalTLS extends APIResource {
@@ -9,20 +10,40 @@ export class TotalTLS extends APIResource {
    *
    * @example
    * ```ts
-   * const totalTLS = await client.acm.totalTLS.create({
+   * const totalTLS = await client.acm.totalTLS.update({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   enabled: true,
    * });
    * ```
    */
-  create(
-    params: TotalTLSCreateParams,
+  update(
+    params: TotalTLSUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TotalTLSCreateResponse> {
-    const { zone_id, ...body } = params;
+  ): Core.APIPromise<TotalTLSUpdateResponse> {
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/acm/total_tls`, { body, ...options }) as Core.APIPromise<{
-        result: TotalTLSCreateResponse;
+        result: TotalTLSUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Set Total TLS Settings or disable the feature for a Zone.
+   *
+   * @example
+   * ```ts
+   * const response = await client.acm.totalTLS.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   enabled: true,
+   * });
+   * ```
+   */
+  edit(params: TotalTLSEditParams, options?: Core.RequestOptions): Core.APIPromise<TotalTLSEditResponse> {
+    const { zone_id = this._client.zoneId, ...body } = params;
+    return (
+      this._client.post(`/zones/${zone_id}/acm/total_tls`, { body, ...options }) as Core.APIPromise<{
+        result: TotalTLSEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -37,8 +58,16 @@ export class TotalTLS extends APIResource {
    * });
    * ```
    */
-  get(params: TotalTLSGetParams, options?: Core.RequestOptions): Core.APIPromise<TotalTLSGetResponse> {
-    const { zone_id } = params;
+  get(params?: TotalTLSGetParams, options?: Core.RequestOptions): Core.APIPromise<TotalTLSGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<TotalTLSGetResponse>;
+  get(
+    params: TotalTLSGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TotalTLSGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/acm/total_tls`, options) as Core.APIPromise<{
         result: TotalTLSGetResponse;
@@ -57,7 +86,25 @@ export type CertificateAuthority = 'google' | 'lets_encrypt' | 'ssl_com';
  */
 export type CertificateAuthorityParam = 'google' | 'lets_encrypt' | 'ssl_com';
 
-export interface TotalTLSCreateResponse {
+export interface TotalTLSUpdateResponse {
+  /**
+   * The Certificate Authority that Total TLS certificates will be issued through.
+   */
+  certificate_authority?: CertificateAuthority;
+
+  /**
+   * If enabled, Total TLS will order a hostname specific TLS certificate for any
+   * proxied A, AAAA, or CNAME record in your zone.
+   */
+  enabled?: boolean;
+
+  /**
+   * The validity period in days for the certificates ordered via Total TLS.
+   */
+  validity_period?: 90;
+}
+
+export interface TotalTLSEditResponse {
   /**
    * The Certificate Authority that Total TLS certificates will be issued through.
    */
@@ -93,11 +140,30 @@ export interface TotalTLSGetResponse {
   validity_period?: 90;
 }
 
-export interface TotalTLSCreateParams {
+export interface TotalTLSUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
+
+  /**
+   * Body param: If enabled, Total TLS will order a hostname specific TLS certificate
+   * for any proxied A, AAAA, or CNAME record in your zone.
+   */
+  enabled: boolean;
+
+  /**
+   * Body param: The Certificate Authority that Total TLS certificates will be issued
+   * through.
+   */
+  certificate_authority?: CertificateAuthorityParam;
+}
+
+export interface TotalTLSEditParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id?: string;
 
   /**
    * Body param: If enabled, Total TLS will order a hostname specific TLS certificate
@@ -116,15 +182,17 @@ export interface TotalTLSGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace TotalTLS {
   export {
     type CertificateAuthority as CertificateAuthority,
-    type TotalTLSCreateResponse as TotalTLSCreateResponse,
+    type TotalTLSUpdateResponse as TotalTLSUpdateResponse,
+    type TotalTLSEditResponse as TotalTLSEditResponse,
     type TotalTLSGetResponse as TotalTLSGetResponse,
-    type TotalTLSCreateParams as TotalTLSCreateParams,
+    type TotalTLSUpdateParams as TotalTLSUpdateParams,
+    type TotalTLSEditParams as TotalTLSEditParams,
     type TotalTLSGetParams as TotalTLSGetParams,
   };
 }
