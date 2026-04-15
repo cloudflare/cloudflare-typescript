@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class AddressSpaces extends APIResource {
@@ -11,7 +12,7 @@ export class AddressSpaces extends APIResource {
     params: AddressSpaceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressSpaceUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/cloud/onramps/magic_wan_address_space`, {
         body,
@@ -24,10 +25,18 @@ export class AddressSpaces extends APIResource {
    * Read the Magic WAN Address Space (Closed Beta).
    */
   list(
-    params: AddressSpaceListParams,
+    params?: AddressSpaceListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AddressSpaceListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<AddressSpaceListResponse>;
+  list(
+    params: AddressSpaceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressSpaceListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/cloud/onramps/magic_wan_address_space`,
@@ -43,7 +52,7 @@ export class AddressSpaces extends APIResource {
     params: AddressSpaceEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressSpaceEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/cloud/onramps/magic_wan_address_space`, {
         body,
@@ -69,7 +78,7 @@ export interface AddressSpaceUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -78,14 +87,14 @@ export interface AddressSpaceUpdateParams {
 }
 
 export interface AddressSpaceListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AddressSpaceEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
