@@ -14,11 +14,7 @@ import {
   TimeseriesGroups,
 } from './timeseries-groups';
 import * as ToMarkdownAPI from './to-markdown';
-import {
-  ToMarkdown,
-  ToMarkdownCreateParams,
-  ToMarkdownCreateResponse,
-} from './to-markdown';
+import { ToMarkdown, ToMarkdownCreateParams, ToMarkdownCreateResponse } from './to-markdown';
 import * as BotsAPI from './bots/bots';
 import {
   BotSummaryV2Params,
