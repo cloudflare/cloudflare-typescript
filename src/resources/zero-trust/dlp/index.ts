@@ -50,3 +50,12 @@ export {
   type ProfileGetParams,
   type ProfilesSinglePage,
 } from './profiles/index';
+export {
+  Settings,
+  BaseSettings,
+  type DLPSettings,
+  type SettingUpdateParams,
+  type SettingDeleteParams,
+  type SettingEditParams,
+  type SettingGetParams,
+} from './settings';
