@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource logoMatches', () => {
-  test('get: only required params', async () => {
+  // HTTP 401 error from prism
+  test.skip('get: only required params', async () => {
     const responsePromise = client.brandProtection.v2.logoMatches.get({ account_id: 'x', query_id: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,7 +22,8 @@ describe('resource logoMatches', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // HTTP 401 error from prism
+  test.skip('get: required and optional params', async () => {
     const response = await client.brandProtection.v2.logoMatches.get({
       account_id: 'x',
       query_id: 'x',
