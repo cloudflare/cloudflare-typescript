@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class TimeTravel extends APIResource {
@@ -20,10 +21,22 @@ export class TimeTravel extends APIResource {
    */
   getBookmark(
     databaseId: string,
-    params: TimeTravelGetBookmarkParams,
+    params?: TimeTravelGetBookmarkParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeTravelGetBookmarkResponse>;
+  getBookmark(
+    databaseId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeTravelGetBookmarkResponse>;
+  getBookmark(
+    databaseId: string,
+    params: TimeTravelGetBookmarkParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeTravelGetBookmarkResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.getBookmark(databaseId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/d1/database/${databaseId}/time_travel/bookmark`, {
         query,
@@ -47,10 +60,19 @@ export class TimeTravel extends APIResource {
    */
   restore(
     databaseId: string,
-    params: TimeTravelRestoreParams,
+    params?: TimeTravelRestoreParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeTravelRestoreResponse>;
+  restore(databaseId: string, options?: Core.RequestOptions): Core.APIPromise<TimeTravelRestoreResponse>;
+  restore(
+    databaseId: string,
+    params: TimeTravelRestoreParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TimeTravelRestoreResponse> {
-    const { account_id, bookmark, timestamp } = params;
+    if (isRequestOptions(params)) {
+      return this.restore(databaseId, {}, params);
+    }
+    const { account_id = this._client.accountId, bookmark, timestamp } = params;
     return (
       this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/time_travel/restore`, {
         query: { bookmark, timestamp },
@@ -94,7 +116,7 @@ export interface TimeTravelGetBookmarkParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: An optional ISO 8601 timestamp. If provided, returns the nearest
@@ -108,7 +130,7 @@ export interface TimeTravelRestoreParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: A bookmark to restore the database to. Required if `timestamp` is
