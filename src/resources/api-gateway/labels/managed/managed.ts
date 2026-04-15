@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ResourcesAPI from './resources/resources';
 import { Resources } from './resources/resources';
@@ -21,10 +22,19 @@ export class Managed extends APIResource {
    */
   get(
     name: string,
-    params: ManagedGetParams,
+    params?: ManagedGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ManagedGetResponse>;
+  get(name: string, options?: Core.RequestOptions): Core.APIPromise<ManagedGetResponse>;
+  get(
+    name: string,
+    params: ManagedGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagedGetResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(name, {}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/api_gateway/labels/managed/${name}`, {
         query,
@@ -70,7 +80,7 @@ export interface ManagedGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Include `mapped_resources` for each label
