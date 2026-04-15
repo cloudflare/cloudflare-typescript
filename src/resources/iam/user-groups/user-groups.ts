@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as MembersAPI from './members';
 import {
@@ -48,7 +49,7 @@ export class UserGroups extends APIResource {
     params: UserGroupCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserGroupCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/iam/user_groups`, { body, ...options }) as Core.APIPromise<{
         result: UserGroupCreateResponse;
@@ -72,7 +73,7 @@ export class UserGroups extends APIResource {
     params: UserGroupUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserGroupUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/iam/user_groups/${userGroupId}`, {
         body,
@@ -95,10 +96,20 @@ export class UserGroups extends APIResource {
    * ```
    */
   list(
-    params: UserGroupListParams,
+    params?: UserGroupListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<UserGroupListResponsesV4PagePaginationArray, UserGroupListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<UserGroupListResponsesV4PagePaginationArray, UserGroupListResponse>;
+  list(
+    params: UserGroupListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<UserGroupListResponsesV4PagePaginationArray, UserGroupListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/iam/user_groups`,
       UserGroupListResponsesV4PagePaginationArray,
@@ -119,10 +130,19 @@ export class UserGroups extends APIResource {
    */
   delete(
     userGroupId: string,
-    params: UserGroupDeleteParams,
+    params?: UserGroupDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UserGroupDeleteResponse | null>;
+  delete(userGroupId: string, options?: Core.RequestOptions): Core.APIPromise<UserGroupDeleteResponse | null>;
+  delete(
+    userGroupId: string,
+    params: UserGroupDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserGroupDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(userGroupId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/iam/user_groups/${userGroupId}`,
@@ -144,10 +164,19 @@ export class UserGroups extends APIResource {
    */
   get(
     userGroupId: string,
-    params: UserGroupGetParams,
+    params?: UserGroupGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UserGroupGetResponse>;
+  get(userGroupId: string, options?: Core.RequestOptions): Core.APIPromise<UserGroupGetResponse>;
+  get(
+    userGroupId: string,
+    params: UserGroupGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserGroupGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(userGroupId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/iam/user_groups/${userGroupId}`, options) as Core.APIPromise<{
         result: UserGroupGetResponse;
@@ -797,7 +826,7 @@ export interface UserGroupCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the User group.
@@ -856,7 +885,7 @@ export interface UserGroupUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the User group.
@@ -920,7 +949,7 @@ export interface UserGroupListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: ID of the user group to be fetched.
@@ -949,14 +978,14 @@ export interface UserGroupDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface UserGroupGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 UserGroups.UserGroupListResponsesV4PagePaginationArray = UserGroupListResponsesV4PagePaginationArray;

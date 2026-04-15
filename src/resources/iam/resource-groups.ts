@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -29,7 +30,7 @@ export class ResourceGroups extends APIResource {
     params: ResourceGroupCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceGroupCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/iam/resource_groups`, {
         body,
@@ -55,7 +56,7 @@ export class ResourceGroups extends APIResource {
     params: ResourceGroupUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceGroupUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/iam/resource_groups/${resourceGroupId}`, {
         body,
@@ -78,10 +79,20 @@ export class ResourceGroups extends APIResource {
    * ```
    */
   list(
-    params: ResourceGroupListParams,
+    params?: ResourceGroupListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ResourceGroupListResponsesSinglePage, ResourceGroupListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ResourceGroupListResponsesSinglePage, ResourceGroupListResponse>;
+  list(
+    params: ResourceGroupListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ResourceGroupListResponsesSinglePage, ResourceGroupListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/iam/resource_groups`,
       ResourceGroupListResponsesSinglePage,
@@ -103,10 +114,22 @@ export class ResourceGroups extends APIResource {
    */
   delete(
     resourceGroupId: string,
-    params: ResourceGroupDeleteParams,
+    params?: ResourceGroupDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceGroupDeleteResponse | null>;
+  delete(
+    resourceGroupId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceGroupDeleteResponse | null>;
+  delete(
+    resourceGroupId: string,
+    params: ResourceGroupDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceGroupDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(resourceGroupId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/iam/resource_groups/${resourceGroupId}`,
@@ -128,10 +151,19 @@ export class ResourceGroups extends APIResource {
    */
   get(
     resourceGroupId: string,
-    params: ResourceGroupGetParams,
+    params?: ResourceGroupGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceGroupGetResponse>;
+  get(resourceGroupId: string, options?: Core.RequestOptions): Core.APIPromise<ResourceGroupGetResponse>;
+  get(
+    resourceGroupId: string,
+    params: ResourceGroupGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceGroupGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(resourceGroupId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/iam/resource_groups/${resourceGroupId}`,
@@ -418,7 +450,7 @@ export interface ResourceGroupCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the resource group
@@ -469,7 +501,7 @@ export interface ResourceGroupUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the resource group
@@ -520,7 +552,7 @@ export interface ResourceGroupListParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: ID of the resource group to be fetched.
@@ -537,14 +569,14 @@ export interface ResourceGroupDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ResourceGroupGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 ResourceGroups.ResourceGroupListResponsesSinglePage = ResourceGroupListResponsesSinglePage;
