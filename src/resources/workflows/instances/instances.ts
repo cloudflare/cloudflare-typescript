@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as EventsAPI from './events';
 import { EventCreateParams, EventCreateResponse, Events } from './events';
@@ -17,10 +18,19 @@ export class Instances extends APIResource {
    */
   create(
     workflowName: string,
-    params: InstanceCreateParams,
+    params?: InstanceCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InstanceCreateResponse>;
+  create(workflowName: string, options?: Core.RequestOptions): Core.APIPromise<InstanceCreateResponse>;
+  create(
+    workflowName: string,
+    params: InstanceCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceCreateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.create(workflowName, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workflows/${workflowName}/instances`, {
         body,
@@ -34,10 +44,22 @@ export class Instances extends APIResource {
    */
   list(
     workflowName: string,
-    params: InstanceListParams,
+    params?: InstanceListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse>;
+  list(
+    workflowName: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse>;
+  list(
+    workflowName: string,
+    params: InstanceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(workflowName, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workflows/${workflowName}/instances`,
       InstanceListResponsesV4PagePaginationArray,
@@ -50,10 +72,22 @@ export class Instances extends APIResource {
    */
   bulk(
     workflowName: string,
-    params: InstanceBulkParams,
+    params?: InstanceBulkParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InstanceBulkResponsesSinglePage, InstanceBulkResponse>;
+  bulk(
+    workflowName: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InstanceBulkResponsesSinglePage, InstanceBulkResponse>;
+  bulk(
+    workflowName: string,
+    params?: InstanceBulkParams | Core.RequestOptions,
     options?: Core.RequestOptions,
   ): Core.PagePromise<InstanceBulkResponsesSinglePage, InstanceBulkResponse> {
-    const { account_id, body } = params ?? {};
+    if (isRequestOptions(params)) {
+      return this.bulk(workflowName, undefined, params);
+    }
+    const { account_id = this._client.accountId, body } = params ?? {};
     return this._client.getAPIList(
       `/accounts/${account_id}/workflows/${workflowName}/instances/batch`,
       InstanceBulkResponsesSinglePage,
@@ -67,10 +101,24 @@ export class Instances extends APIResource {
   get(
     workflowName: string,
     instanceId: string,
-    params: InstanceGetParams,
+    params?: InstanceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InstanceGetResponse>;
+  get(
+    workflowName: string,
+    instanceId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InstanceGetResponse>;
+  get(
+    workflowName: string,
+    instanceId: string,
+    params: InstanceGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceGetResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(workflowName, instanceId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/workflows/${workflowName}/instances/${instanceId}`, {
         query,
@@ -319,7 +367,7 @@ export interface InstanceCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -355,7 +403,7 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Opaque token for cursor-based pagination. Mutually exclusive with
@@ -396,7 +444,7 @@ export interface InstanceBulkParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -432,7 +480,7 @@ export interface InstanceGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Step ordering: "asc" (default, oldest first) or "desc" (newest
