@@ -19,7 +19,7 @@ export class Upload extends APIResource {
    * ```
    */
   create(params: UploadCreateParams, options?: Core.RequestOptions): Core.APIPromise<UploadCreateResponse> {
-    const { account_id, base64, body } = params;
+    const { account_id = this._client.accountId, base64, body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/workers/assets/upload`,
@@ -40,7 +40,7 @@ export interface UploadCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Whether the file contents are base64-encoded. Must be `true`.

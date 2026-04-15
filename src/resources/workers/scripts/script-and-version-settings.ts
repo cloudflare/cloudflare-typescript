@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as WorkersAPI from '../workers';
 import * as TailAPI from './tail';
@@ -23,7 +24,7 @@ export class ScriptAndVersionSettings extends APIResource {
     params: ScriptAndVersionSettingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptAndVersionSettingEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/workers/scripts/${scriptName}/settings`,
@@ -46,10 +47,19 @@ export class ScriptAndVersionSettings extends APIResource {
    */
   get(
     scriptName: string,
-    params: ScriptAndVersionSettingGetParams,
+    params?: ScriptAndVersionSettingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptAndVersionSettingGetResponse>;
+  get(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<ScriptAndVersionSettingGetResponse>;
+  get(
+    scriptName: string,
+    params: ScriptAndVersionSettingGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptAndVersionSettingGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/settings`,
@@ -2227,7 +2237,7 @@ export interface ScriptAndVersionSettingEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -3357,7 +3367,7 @@ export interface ScriptAndVersionSettingGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ScriptAndVersionSettings {

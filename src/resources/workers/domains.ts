@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -18,7 +19,7 @@ export class Domains extends APIResource {
    * ```
    */
   update(params: DomainUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DomainUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/workers/domains`, { body, ...options }) as Core.APIPromise<{
         result: DomainUpdateResponse;
@@ -40,10 +41,18 @@ export class Domains extends APIResource {
    * ```
    */
   list(
-    params: DomainListParams,
+    params?: DomainListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse>;
+  list(
+    params: DomainListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/workers/domains`, DomainListResponsesSinglePage, {
       query,
       ...options,
@@ -64,10 +73,19 @@ export class Domains extends APIResource {
    */
   delete(
     domainId: string,
-    params: DomainDeleteParams,
+    params?: DomainDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainDeleteResponse>;
+  delete(domainId: string, options?: Core.RequestOptions): Core.APIPromise<DomainDeleteResponse>;
+  delete(
+    domainId: string,
+    params: DomainDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(domainId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/workers/domains/${domainId}`, options);
   }
 
@@ -84,10 +102,19 @@ export class Domains extends APIResource {
    */
   get(
     domainId: string,
-    params: DomainGetParams,
+    params?: DomainGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainGetResponse>;
+  get(domainId: string, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse>;
+  get(
+    domainId: string,
+    params: DomainGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(domainId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/workers/domains/${domainId}`, options) as Core.APIPromise<{
         result: DomainGetResponse;
@@ -264,7 +291,7 @@ export interface DomainUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Hostname of the domain. Can be either the zone apex or a subdomain
@@ -298,7 +325,7 @@ export interface DomainListParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Worker environment associated with the domain.
@@ -330,14 +357,14 @@ export interface DomainDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DomainGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Domains.DomainListResponsesSinglePage = DomainListResponsesSinglePage;
